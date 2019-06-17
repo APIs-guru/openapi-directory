@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/LUIS/Runtime/stable/v2.0/LUIS-Runtime.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cognitiveservices-LUIS-Runtime
   x-tags:
@@ -44,6 +43,7 @@ paths:
       operationId: Prediction_Resolve2
       parameters:
         - description: The LUIS application ID (guid).
+          format: uuid
           in: path
           name: appId
           required: true
@@ -71,7 +71,7 @@ paths:
           in: query
           name: spellCheck
           type: boolean
-        - description: The subscription key to use when enabling bing spell check
+        - description: The subscription key to use when enabling Bing spell check
           in: query
           name: bing-spell-check-subscription-key
           type: string
@@ -139,6 +139,7 @@ paths:
       operationId: Prediction_Resolve
       parameters:
         - description: The LUIS application ID (Guid).
+          format: uuid
           in: path
           name: appId
           required: true
@@ -166,7 +167,7 @@ paths:
           in: query
           name: spellCheck
           type: boolean
-        - description: The subscription key to use when enabling bing spell check
+        - description: The subscription key to use when enabling Bing spell check
           in: query
           name: bing-spell-check-subscription-key
           type: string
@@ -272,7 +273,7 @@ definitions:
     type: object
   EntityModel:
     additionalProperties:
-      description: 'List of additional properties. E.g.: score and resolution values for pre-built LUIS entities.'
+      description: 'List of additional properties. For example, score and resolution values for pre-built LUIS entities.'
       type: object
     description: An entity extracted from the utterance.
     properties:

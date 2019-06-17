@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/expressRouteCrossConnection.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteCrossConnection
   x-tags:
@@ -576,7 +575,6 @@ paths:
             peeringName: AzurePrivatePeering
             peeringParameters:
               properties:
-                azureASN: 12076
                 ipv6PeeringConfig:
                   primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
                   secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'

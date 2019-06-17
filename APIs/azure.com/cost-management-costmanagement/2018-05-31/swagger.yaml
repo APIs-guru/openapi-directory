@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2018-05-31/costmanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -159,7 +158,8 @@ paths:
                           - gs-stms-dev
                           - 20180331
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by billingAccount Id.
@@ -294,7 +294,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.CostManagement/operations:
     get:
       description: Lists all of the available consumption REST API operations.
@@ -404,7 +405,8 @@ paths:
                           - ict_stratandplan_goldsprova_prod
                           - 20180331
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by subscription Id.
@@ -486,7 +488,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reportconfigs':
     get:
       description: Lists all report configs for a subscription.
@@ -1015,7 +1018,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reportconfigs':
     get:
       description: Lists all report configs for a resource group under a subscription.
@@ -1554,7 +1558,8 @@ paths:
                           - ScreenSharingTest-peer
                           - 20180418
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Dimension:
     allOf:

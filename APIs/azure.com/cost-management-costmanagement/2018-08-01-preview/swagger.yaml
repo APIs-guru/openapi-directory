@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -586,7 +585,8 @@ paths:
                           - gs-stms-dev
                           - 20180331
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/alerts':
     get:
       description: List all alerts for an enrollment.
@@ -914,7 +914,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/reports':
     get:
       description: Lists all reports for a billing account.
@@ -2453,7 +2454,8 @@ paths:
                           - ict_stratandplan_goldsprova_prod
                           - 20180331
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/alerts':
     get:
       description: List all alerts for a subscription.
@@ -2701,7 +2703,8 @@ paths:
                       reportId: CURHourlyWithResources
                       status: suspended
                     type: Microsoft.CostManagement/connectors
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by subscription Id.
@@ -2783,7 +2786,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reports':
     get:
       description: Lists all reports for a subscription.
@@ -3684,7 +3688,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reports':
     get:
       description: Lists all reports for a resource group under a subscription.
@@ -4401,7 +4406,8 @@ paths:
                           - ScreenSharingTest-peer
                           - 20180418
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/connectors':
     get:
       description: List all connector definitions for a resource group under a subscription.
@@ -4457,7 +4463,8 @@ paths:
                       reportId: CURHourlyWithResources
                       status: suspended
                     type: Microsoft.CostManagement/connectors
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/connectors/{connectorName}':
     delete:
       description: Delete a connector definition

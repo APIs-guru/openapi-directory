@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimproperties
   x-tags:
@@ -94,7 +93,62 @@ paths:
         '200':
           description: A Collection of the Property entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/PropertyCollection'
+            description: Paged Property list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Property details.
+                  properties:
+                    properties:
+                      allOf:
+                        - description: Property Entity Base Parameters set.
+                          properties:
+                            secret:
+                              description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                              type: boolean
+                            tags:
+                              description: Optional tags that when provided can be used to filter the property list.
+                              items:
+                                type: string
+                              maxItems: 32
+                              type: array
+                      description: Property Contract properties.
+                      properties:
+                        displayName:
+                          description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                          maxLength: 256
+                          minLength: 1
+                          pattern: '^[A-Za-z0-9-._]+$'
+                          type: string
+                        value:
+                          description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                          maxLength: 4096
+                          minLength: 1
+                          type: string
+                      required:
+                        - displayName
+                        - value
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -155,7 +209,7 @@ paths:
                         - bar
                       value: propValue
                     type: Microsoft.ApiManagement/service/properties
-      x-ms-odata: '#/definitions/PropertyContract'
+      x-ms-odata: './definitions.json#/definitions/PropertyContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}':
@@ -295,7 +349,53 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/PropertyContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Property details.
+            properties:
+              properties:
+                allOf:
+                  - description: Property Entity Base Parameters set.
+                    properties:
+                      secret:
+                        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                        type: boolean
+                      tags:
+                        description: Optional tags that when provided can be used to filter the property list.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                description: Property Contract properties.
+                properties:
+                  displayName:
+                    description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                    maxLength: 256
+                    minLength: 1
+                    pattern: '^[A-Za-z0-9-._]+$'
+                    type: string
+                  value:
+                    description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    maxLength: 4096
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+                  - value
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -467,7 +567,34 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/PropertyUpdateParameters'
+            description: Property update Parameters.
+            properties:
+              properties:
+                allOf:
+                  - description: Property Entity Base Parameters set.
+                    properties:
+                      secret:
+                        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                        type: boolean
+                      tags:
+                        description: Optional tags that when provided can be used to filter the property list.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                description: Property Contract properties.
+                properties:
+                  displayName:
+                    description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                    maxLength: 256
+                    minLength: 1
+                    pattern: '^[A-Za-z0-9-._]+$'
+                    type: string
+                  value:
+                    description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    maxLength: 4096
+                    minLength: 1
+                    type: string
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -567,7 +694,53 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/PropertyContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Property details.
+            properties:
+              properties:
+                allOf:
+                  - description: Property Entity Base Parameters set.
+                    properties:
+                      secret:
+                        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                        type: boolean
+                      tags:
+                        description: Optional tags that when provided can be used to filter the property list.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                description: Property Contract properties.
+                properties:
+                  displayName:
+                    description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                    maxLength: 256
+                    minLength: 1
+                    pattern: '^[A-Za-z0-9-._]+$'
+                    type: string
+                  value:
+                    description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    maxLength: 4096
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+                  - value
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -592,7 +765,53 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/PropertyContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Property details.
+            properties:
+              properties:
+                allOf:
+                  - description: Property Entity Base Parameters set.
+                    properties:
+                      secret:
+                        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                        type: boolean
+                      tags:
+                        description: Optional tags that when provided can be used to filter the property list.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                description: Property Contract properties.
+                properties:
+                  displayName:
+                    description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                    maxLength: 256
+                    minLength: 1
+                    pattern: '^[A-Za-z0-9-._]+$'
+                    type: string
+                  value:
+                    description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    maxLength: 4096
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+                  - value
         '201':
           description: Property was successfully created.
           headers:
@@ -600,7 +819,53 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/PropertyContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Property details.
+            properties:
+              properties:
+                allOf:
+                  - description: Property Entity Base Parameters set.
+                    properties:
+                      secret:
+                        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
+                        type: boolean
+                      tags:
+                        description: Optional tags that when provided can be used to filter the property list.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                description: Property Contract properties.
+                properties:
+                  displayName:
+                    description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
+                    maxLength: 256
+                    minLength: 1
+                    pattern: '^[A-Za-z0-9-._]+$'
+                    type: string
+                  value:
+                    description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    maxLength: 4096
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+                  - value
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -672,92 +937,4 @@ paths:
                     - bar
                   value: propValue
                 type: Microsoft.ApiManagement/service/properties
-definitions:
-  PropertyCollection:
-    description: Paged Property list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/PropertyContract'
-        type: array
-  PropertyContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Property details.
-    properties:
-      properties:
-        $ref: '#/definitions/PropertyContractProperties'
-        description: Property entity contract properties.
-        x-ms-client-flatten: true
-  PropertyContractProperties:
-    allOf:
-      - $ref: '#/definitions/PropertyEntityBaseParameters'
-    description: Property Contract properties.
-    properties:
-      displayName:
-        description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
-        maxLength: 256
-        minLength: 1
-        pattern: '^[A-Za-z0-9-._]+$'
-        type: string
-      value:
-        description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
-        maxLength: 4096
-        minLength: 1
-        type: string
-    required:
-      - displayName
-      - value
-  PropertyEntityBaseParameters:
-    description: Property Entity Base Parameters set.
-    properties:
-      secret:
-        description: Determines whether the value is a secret and should be encrypted or not. Default value is false.
-        type: boolean
-      tags:
-        description: Optional tags that when provided can be used to filter the property list.
-        items:
-          type: string
-        maxItems: 32
-        type: array
-  PropertyUpdateParameterProperties:
-    allOf:
-      - $ref: '#/definitions/PropertyEntityBaseParameters'
-    description: Property Contract properties.
-    properties:
-      displayName:
-        description: 'Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.'
-        maxLength: 256
-        minLength: 1
-        pattern: '^[A-Za-z0-9-._]+$'
-        type: string
-      value:
-        description: Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.
-        maxLength: 4096
-        minLength: 1
-        type: string
-  PropertyUpdateParameters:
-    description: Property update Parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/PropertyUpdateParameterProperties'
-        description: Property entity Update contract properties.
-        x-ms-client-flatten: true
+definitions: {}

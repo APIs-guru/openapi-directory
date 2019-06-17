@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/networkProfile.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-networkProfile
   x-tags:
@@ -253,7 +252,9 @@ paths:
             '200': {}
             '202': {}
             '204': {}
-      x-ms-long-running-operation: false
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified network profile in a specified resource group.
       operationId: NetworkProfiles_Get

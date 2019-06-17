@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement
   x-tags:
@@ -112,7 +111,8 @@ paths:
                 value:
                   - id: /policies/policy
                     policyContent: "<!--\r\n    IMPORTANT:\r\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\r\n    - Only the <forward-request> policy element can appear within the <backend> section element.\r\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\r\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\r\n    - To add a policy position the cursor at the desired insertion point and click on the round button associated with the policy.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n    - Policies are applied in the order of their appearance, from the top down.\r\n-->\r\n<policies>\r\n  <inbound />\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <outbound />\r\n</policies>"
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/policies/{policyId}':
     delete:
       description: Deletes the global policy configuration of the Api Management Service.
@@ -421,7 +421,8 @@ paths:
                   name: Wait for...
                   scope: 268435471
                   toolTip: Wait for all or any of the send request policies to complete before proceeding. Use at any scope in the inbound and outbound sections.
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /regions:
     get:
       description: Lists all azure regions in which the service exists.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-10-01/compute.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -62,7 +61,8 @@ paths:
             $ref: '#/definitions/ComputeOperationListResult'
       tags:
         - ComputeOperations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets':
     get:
       description: Lists all availability sets in a subscription.
@@ -650,7 +650,47 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachineSizes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups':
+    get:
+      description: Lists all proximity placement groups in a subscription.
+      operationId: ProximityPlacementGroups_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroupListResult'
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters: {}
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                nextLink: string
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                    location: westus
+                    name: myProximityPlacementGroup
+                    properties:
+                      availabilitySets:
+                        - id: string
+                      proximityPlacementGroupType: Standard
+                      virtualMachineScaleSets:
+                        - id: string
+                      virtualMachines:
+                        - id: string
+                    type: Microsoft.Compute/proximityPlacementGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
       description: 'Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.'
@@ -857,7 +897,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - AvailabilitySets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images':
     get:
       description: Gets the list of images under a resource group.
@@ -1429,6 +1470,238 @@ paths:
                         id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
                 type: Microsoft.Compute/images
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups':
+    get:
+      description: Lists all proximity placement groups in a resource group.
+      operationId: ProximityPlacementGroups_ListByResourceGroup
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroupListResult'
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters: {}
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                nextLink: string
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                    location: westus
+                    name: myProximityPlacementGroup
+                    properties:
+                      availabilitySets:
+                        - id: string
+                      proximityPlacementGroupType: Standard
+                      virtualMachineScaleSets:
+                        - id: string
+                      virtualMachines:
+                        - id: string
+                    type: Microsoft.Compute/proximityPlacementGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}':
+    delete:
+      description: Delete a proximity placement group.
+      operationId: ProximityPlacementGroups_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the proximity placement group.
+          in: path
+          name: proximityPlacementGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters: {}
+            proximityPlacementGroupName: myProximityPlacementGroup
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200': {}
+    get:
+      description: Retrieves information about a proximity placement group .
+      operationId: ProximityPlacementGroups_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the proximity placement group.
+          in: path
+          name: proximityPlacementGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroup'
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters: {}
+            proximityPlacementGroupName: myProximityPlacementGroup
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                location: westus
+                name: myProximityPlacementGroup
+                properties:
+                  availabilitySets:
+                    - id: string
+                  proximityPlacementGroupType: Standard
+                  virtualMachineScaleSets:
+                    - id: string
+                  virtualMachines:
+                    - id: string
+                type: Microsoft.Compute/proximityPlacementGroups
+    patch:
+      description: Update a proximity placement group.
+      operationId: ProximityPlacementGroups_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the proximity placement group.
+          in: path
+          name: proximityPlacementGroupName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Proximity Placement Group operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroupUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroup'
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters:
+              tags:
+                additionalProp1: string
+            proximityPlacementGroupName: myProximityPlacementGroup
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                location: westus
+                name: myProximityPlacementGroup
+                properties:
+                  proximityPlacementGroupType: Standard
+                type: Microsoft.Compute/proximityPlacementGroups
+    put:
+      description: Create or update a proximity placement group.
+      operationId: ProximityPlacementGroups_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the proximity placement group.
+          in: path
+          name: proximityPlacementGroupName
+          required: true
+          type: string
+        - description: Parameters supplied to the Create Proximity Placement Group operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroup'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroup'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ProximityPlacementGroup'
+      tags:
+        - ProximityPlacementGroups
+      x-ms-examples:
+        Create or Update a proximity placement group.:
+          parameters:
+            api-version: '2018-10-01'
+            parameters:
+              location: westus
+              properties:
+                proximityPlacementGroupType: Standard
+            proximityPlacementGroupName: myProximityPlacementGroup
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                location: westus
+                name: myProximityPlacementGroup
+                properties:
+                  proximityPlacementGroupType: Standard
+                type: Microsoft.Compute/proximityPlacementGroups
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup'
+                location: westus
+                name: myProximityPlacementGroup
+                properties:
+                  proximityPlacementGroupType: Standard
+                type: Microsoft.Compute/proximityPlacementGroups
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
       description: Gets a list of all VM scale sets under a resource group.
@@ -6614,7 +6887,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AdditionalCapabilities:
     description: Enables or disables a capability on the virtual machine or virtual machine scale set.
@@ -6698,7 +6972,7 @@ definitions:
         description: Whether OS image rollback feature should be disabled. Default value is false.
         type: boolean
       enableAutomaticOSUpgrade:
-        description: Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available. Default value is false.
+        description: 'Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, recommendation is to set [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) to false.'
         type: boolean
   AutomaticOSUpgradeProperties:
     description: Describes automatic OS upgrade properties on the image.
@@ -6743,6 +7017,9 @@ definitions:
         description: Update Domain count.
         format: int32
         type: integer
+      proximityPlacementGroup:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
       statuses:
         description: The resource status information.
         items:
@@ -7579,6 +7856,62 @@ definitions:
       publisher:
         description: The publisher ID.
         type: string
+  ProximityPlacementGroup:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Specifies information about the proximity placement group.
+    properties:
+      properties:
+        $ref: '#/definitions/ProximityPlacementGroupProperties'
+        description: Describes the properties of a Proximity Placement Group.
+        x-ms-client-flatten: true
+  ProximityPlacementGroupListResult:
+    description: The List Proximity Placement Group operation response.
+    properties:
+      nextLink:
+        description: The URI to fetch the next page of proximity placement groups.
+        type: string
+      value:
+        description: The list of proximity placement groups
+        items:
+          $ref: '#/definitions/ProximityPlacementGroup'
+        type: array
+    required:
+      - value
+  ProximityPlacementGroupProperties:
+    description: Describes the properties of a Proximity Placement Group.
+    properties:
+      availabilitySets:
+        description: A list of references to all availability sets in the proximity placement group.
+        items:
+          $ref: '#/definitions/SubResource'
+        readOnly: true
+        type: array
+      proximityPlacementGroupType:
+        description: 'Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**'
+        enum:
+          - Standard
+          - Ultra
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProximityPlacementGroupType
+      virtualMachineScaleSets:
+        description: A list of references to all virtual machine scale sets in the proximity placement group.
+        items:
+          $ref: '#/definitions/SubResource'
+        readOnly: true
+        type: array
+      virtualMachines:
+        description: A list of references to all virtual machines in the proximity placement group.
+        items:
+          $ref: '#/definitions/SubResource'
+        readOnly: true
+        type: array
+  ProximityPlacementGroupUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the proximity placement group.
   PurchasePlan:
     description: Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
     properties:
@@ -8417,6 +8750,9 @@ definitions:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
+      proximityPlacementGroup:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: Specifies the storage settings for the virtual machine disks.
@@ -8860,6 +9196,9 @@ definitions:
   VirtualMachineScaleSetProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
+      doNotRunExtensionsOnOverprovisionedVMs:
+        description: 'When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.'
+        type: boolean
       overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
@@ -8871,6 +9210,9 @@ definitions:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
+      proximityPlacementGroup:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
       singlePlacementGroup:
         description: 'When true this limits the scale set to a single placement group, of max size 100 virtual machines.'
         type: boolean
@@ -9406,9 +9748,6 @@ definitions:
       osProfile:
         $ref: '#/definitions/OSProfile'
         description: Specifies the operating system settings for the virtual machine.
-      protectFromScaleIn:
-        description: Specifies whether the virtual machine instance shouldn't be considered for deletion during a scale-in operation
-        type: boolean
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
@@ -9521,7 +9860,7 @@ definitions:
           $ref: '#/definitions/AdditionalUnattendContent'
         type: array
       enableAutomaticUpdates:
-        description: Indicates whether virtual machine is enabled for automatic updates.
+        description: 'Indicates whether virtual machine is enabled for automatic Windows updates. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.'
         type: boolean
       provisionVMAgent:
         description: 'Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.'

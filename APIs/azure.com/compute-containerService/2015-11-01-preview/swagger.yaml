@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-containerService
   x-tags:
@@ -70,7 +69,8 @@ paths:
             $ref: '#/definitions/ContainerServiceListResult'
       tags:
         - ContainerService
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}':
     delete:
       description: The operation to delete a container service.

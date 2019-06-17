@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/virtualNetwork.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetwork
   x-tags:
@@ -652,6 +651,83 @@ paths:
                         ipConfigurations: []
                         provisioningState: Succeeded
                         resourceNavigationLinks: []
+                        serviceEndpoints:
+                          - locations:
+                              - eastus2(stage)
+                              - usnorth(stage)
+                            provisioningState: Succeeded
+                            service: Microsoft.Storage
+                  virtualNetworkPeerings: []
+                type: Microsoft.Network/virtualNetworks
+        Create virtual network with service endpoints and service endpoint policy:
+          parameters:
+            api-version: '2018-10-01'
+            parameters:
+              location: eastus
+              properties:
+                addressSpace:
+                  addressPrefixes:
+                    - 10.0.0.0/16
+                subnets:
+                  - name: test-1
+                    properties:
+                      addressPrefix: 10.0.0.0/16
+                      serviceEndpointPolicies:
+                        - id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1
+                      serviceEndpoints:
+                        - service: Microsoft.Storage
+            resourceGroupName: vnetTest
+            subscriptionId: subid
+            virtualNetworkName: vnet1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1
+                location: eastus
+                name: vnet1
+                properties:
+                  addressSpace:
+                    addressPrefixes:
+                      - 10.0.0.0/16
+                  provisioningState: Succeeded
+                  subnets:
+                    - id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1
+                      name: test-1
+                      properties:
+                        addressPrefix: 10.0.0.0/16
+                        ipConfigurations: []
+                        provisioningState: Succeeded
+                        resourceNavigationLinks: []
+                        serviceEndpointPolicies:
+                          - id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1
+                        serviceEndpoints:
+                          - locations:
+                              - eastus2(stage)
+                              - usnorth(stage)
+                            provisioningState: Succeeded
+                            service: Microsoft.Storage
+                  virtualNetworkPeerings: []
+                type: Microsoft.Network/virtualNetworks
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1
+                location: eastus
+                name: vnet1
+                properties:
+                  addressSpace:
+                    addressPrefixes:
+                      - 10.0.0.0/16
+                  provisioningState: Succeeded
+                  subnets:
+                    - id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1
+                      name: test-1
+                      properties:
+                        addressPrefix: 10.0.0.0/16
+                        ipConfigurations: []
+                        provisioningState: Succeeded
+                        resourceNavigationLinks: []
+                        serviceEndpointPolicies:
+                          - id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1
                         serviceEndpoints:
                           - locations:
                               - eastus2(stage)

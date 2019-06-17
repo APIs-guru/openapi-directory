@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/iothub/resource-manager/Microsoft.Devices/preview/2018-12-01-preview/iothub.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: iothub
   x-tags:
@@ -2634,6 +2633,22 @@ definitions:
           $ref: '#/definitions/IotHubDescription'
         type: array
     type: object
+  IotHubLocationDescription:
+    description: Public representation of one of the locations where a resource is provisioned.
+    properties:
+      location:
+        description: Azure Geo Regions
+        type: string
+      role:
+        description: Specific Role assigned to this location
+        enum:
+          - primary
+          - secondary
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IotHubReplicaRoleType
+    type: object
   IotHubNameAvailabilityInfo:
     description: The properties indicating whether a given IoT hub name is available.
     properties:
@@ -2702,6 +2717,11 @@ definitions:
         description: The IP filter rules.
         items:
           $ref: '#/definitions/IpFilterRule'
+        type: array
+      locations:
+        description: Primary and secondary location for iot hub
+        items:
+          $ref: '#/definitions/IotHubLocationDescription'
         type: array
       messagingEndpoints:
         additionalProperties:

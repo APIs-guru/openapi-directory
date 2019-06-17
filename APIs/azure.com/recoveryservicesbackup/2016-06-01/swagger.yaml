@@ -437,7 +437,8 @@ paths:
       tags:
         - RecoveryPoints
       x-ms-odata: '#/definitions/BMSRPQueryObject'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}':
     get:
       deprecated: false
@@ -827,7 +828,8 @@ paths:
       tags:
         - ProtectionPolicies
       x-ms-odata: '#/definitions/ProtectionPolicyQueryObject'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}':
     delete:
       deprecated: false
@@ -1037,7 +1039,8 @@ paths:
       tags:
         - ProtectionContainers
       x-ms-odata: '#/definitions/BMSContainerQueryObject'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AzureBackupServerEngine:
     allOf:

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: monitor-metricDefinitions_API
   x-tags:
@@ -193,7 +192,8 @@ paths:
                     resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
                     unit: Count
       x-ms-odata: '#/definitions/MetricDefinition'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ErrorResponse:
     description: Describes the format of Error response.

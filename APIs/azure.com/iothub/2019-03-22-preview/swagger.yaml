@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/iothub/resource-manager/Microsoft.Devices/preview/2019-03-22-preview/iothub.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: iothub
   x-tags:
@@ -596,9 +595,9 @@ paths:
         - $ref: '#/parameters/api-version'
       responses:
         '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/IotHubDescription'
+          description: Long running Manual failover operation completed
+        '202':
+          description: Manual failover initiated
         default:
           description: DefaultErrorResponse
           schema:
@@ -616,66 +615,9 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: 91d12660-3dec-467a-be2a-213b5544ddc0
           responses:
-            '200':
-              body:
-                etag: AAAAAAFD6M4=
-                id: /subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub
-                location: centraluseuap
-                name: testHub
-                properties:
-                  cloudToDevice:
-                    defaultTtlAsIso8601: PT1H
-                    feedback:
-                      lockDurationAsIso8601: PT1M
-                      maxDeliveryCount: 10
-                      ttlAsIso8601: PT1H
-                    maxDeliveryCount: 10
-                  enableFileUploadNotifications: false
-                  eventHubEndpoints:
-                    events:
-                      endpoint: 'sb://iothub-ns-iot-dps-ci-245306-76aca8e13b.servicebus.windows.net/'
-                      partitionCount: 2
-                      partitionIds:
-                        - '0'
-                        - '1'
-                      path: iot-dps-cit-hub-1
-                      retentionTimeInDays: 1
-                  features: None
-                  hostName: iot-dps-cit-hub-1.azure-devices.net
-                  ipFilterRules: []
-                  messagingEndpoints:
-                    fileNotifications:
-                      lockDurationAsIso8601: PT1M
-                      maxDeliveryCount: 10
-                      ttlAsIso8601: PT1H
-                  provisioningState: Succeeded
-                  routing:
-                    endpoints:
-                      eventHubs: []
-                      serviceBusQueues: []
-                      serviceBusTopics: []
-                      storageContainers: []
-                    enrichments: []
-                    fallbackRoute:
-                      condition: 'true'
-                      endpointNames:
-                        - events
-                      isEnabled: true
-                      name: $fallback
-                      source: DeviceMessages
-                    routes: []
-                  state: Active
-                  storageEndpoints:
-                    $default:
-                      connectionString: ''
-                      containerName: ''
-                      sasTtlAsIso8601: PT1H
-                sku:
-                  capacity: 1
-                  name: S1
-                  tier: Standard
-                tags: {}
-                type: Microsoft.Devices/IotHubs
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/routing/routes/$testall':
     post:
       deprecated: false

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-12-01/networkWatcher.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-networkWatcher
   x-tags:
@@ -65,7 +64,8 @@ paths:
             $ref: '#/definitions/NetworkWatcherListResult'
       tags:
         - NetworkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers':
     get:
       description: Gets all network watchers by resource group.
@@ -85,7 +85,8 @@ paths:
             $ref: '#/definitions/NetworkWatcherListResult'
       tags:
         - NetworkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}':
     delete:
       description: Deletes the specified network watcher resource.
@@ -296,7 +297,8 @@ paths:
             $ref: '#/definitions/PacketCaptureListResult'
       tags:
         - PacketCaptures
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}':
     delete:
       description: Deletes the specified packet capture session.

@@ -56,6 +56,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
 paths:
   '/{resourceUri}/providers/microsoft.insights/diagnosticSettings':
     get:

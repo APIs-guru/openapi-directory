@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-12-01/ddosProtectionPlan.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-ddosProtectionPlan
   x-tags:
@@ -241,6 +240,75 @@ paths:
                   virtualNetworks:
                     - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
                 type: Microsoft.Network/ddosProtectionPlans
+    patch:
+      description: Update a DDoS protection plan tags
+      operationId: DdosProtectionPlans_UpdateTags
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the DDoS protection plan.
+          in: path
+          name: ddosProtectionPlanName
+          required: true
+          type: string
+        - description: Parameters supplied to the update DDoS protection plan resource tags.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            description: Tags object for patch operations.
+            properties:
+              tags:
+                additionalProperties:
+                  type: string
+                description: Resource tags.
+                type: object
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Update successful. The operation returns the resulting DDoS protection plan resource.
+          schema:
+            $ref: '#/definitions/DdosProtectionPlan'
+      tags:
+        - DdosProtectionPlans
+      x-ms-examples:
+        DDoS protection plan Update tags:
+          parameters:
+            api-version: '2018-12-01'
+            ddosProtectionPlanName: test-plan
+            parameters:
+              tags:
+                tag1: value1
+                tag2: value2
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/test-plan
+                location: westus
+                name: test-plan
+                properties:
+                  provisioningState: Succeeded
+                  resourceGuid: 00000000-0000-0000-0000-000000000000
+                  virtualNetworks: []
+                tags:
+                  tag1: value1
+                  tag2: value2
+                type: Microsoft.Network/ddosProtectionPlans
+      x-ms-long-running-operation: true
     put:
       description: Creates or updates a DDoS protection plan.
       operationId: DdosProtectionPlans_CreateOrUpdate

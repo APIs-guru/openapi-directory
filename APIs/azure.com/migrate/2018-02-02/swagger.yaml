@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/migrate/resource-manager/Microsoft.Migrate/stable/2018-02-02/migrate.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: migrate
   x-tags:
@@ -143,7 +142,8 @@ paths:
                       resource: Microsoft.Migrate/projects
                     name: Write
                     origin: 'user,system'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{locationName}/assessmentOptions':
     get:
       description: Get the available options for the properties of an assessment.
@@ -882,7 +882,8 @@ paths:
                       updatedTimestamp: '2018-02-02T10:50:05.3236679Z'
                     tags: {}
                     type: Microsoft.Migrate/projects
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/assessments':
     get:
       description: |
@@ -973,7 +974,8 @@ paths:
                       timeRange: Day
                       updatedTimestamp: '2018-02-02T09:59:21.5319568Z'
                     type: Microsoft.Migrate/projects/groups/assessments
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups':
     get:
       description: Get all groups created in the project. Returns a json array of objects of type 'group' as specified in the Models section.
@@ -1033,7 +1035,8 @@ paths:
                         - /subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/projects/project01/machines/amansing_vm1
                       updatedTimestamp: '2018-02-02T10:50:43.4356428Z'
                     type: Microsoft.Migrate/projects/groups
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}':
     delete:
       description: |
@@ -1300,7 +1303,8 @@ paths:
                       timeRange: Day
                       updatedTimestamp: '2018-02-02T09:59:21.5319568Z'
                     type: Microsoft.Migrate/projects/groups/assessments
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}':
     delete:
       description: |
@@ -1721,7 +1725,8 @@ paths:
                       suitabilityExplanation: WindowsServerVersionConditionallySupported
                       updatedTimestamp: '2018-02-04T13:17:23.5437337Z'
                     type: Microsoft.Migrate/projects/groups/assessments/assessedMachines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}':
     get:
       description: Get an assessed machine with its size & cost estimate that was evaluated in the specified assessment.
@@ -1978,7 +1983,8 @@ paths:
                       operatingSystem: Microsoft Windows Server 2008 (64-bit)
                       updatedTimestamp: '2018-02-02T10:11:25.7585427Z'
                     type: Microsoft.Migrate/projects/machines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}':
     get:
       description: Get the machine with the specified name. Returns a json object of type 'machine' defined in Models section.
@@ -2119,7 +2125,8 @@ paths:
                       updatedTimestamp: '2018-02-02T10:50:05.3236679Z'
                     tags: {}
                     type: Microsoft.Migrate/projects
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}':
     delete:
       description: Delete the project. Deleting non-existent project is a no-operation.

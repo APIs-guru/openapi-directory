@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2018-12-01-preview/costmanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -189,7 +188,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for department.
@@ -325,7 +325,8 @@ paths:
                           - Azure Prod Account
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by Department Id.
@@ -479,7 +480,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for an enrollment account.
@@ -580,7 +582,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for an enrollment account.
@@ -717,7 +720,8 @@ paths:
                           - 20181031
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by Enrollment Account Id.
@@ -871,7 +875,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for billing account.
@@ -976,7 +981,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for billing account.
@@ -1109,7 +1115,8 @@ paths:
                           - Cost Management Subscrioption
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by billingAccount Id.
@@ -1259,7 +1266,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.CostManagement/operations:
     get:
       description: Lists all of the available consumption REST API operations.
@@ -1377,7 +1385,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Lists the usage data for management group.
@@ -1504,7 +1513,8 @@ paths:
                           - Cost Management Subscrioption
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by managementGroup Id.
@@ -1654,7 +1664,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for subscriptionId.
@@ -1761,7 +1772,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId.
@@ -1835,7 +1847,8 @@ paths:
                           - 20181019
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by subscription Id.
@@ -1923,7 +1936,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by resource group Id.
@@ -2010,7 +2024,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for subscriptionId and resource group.
@@ -2104,7 +2119,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId and resource group.
@@ -2186,7 +2202,8 @@ paths:
                           - 20180418
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Dimension:
     allOf:

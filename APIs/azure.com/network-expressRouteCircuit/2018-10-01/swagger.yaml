@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/expressRouteCircuit.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteCircuit
   x-tags:
@@ -581,6 +580,68 @@ paths:
                   family: MeteredData
                   name: Standard_MeteredData
                   tier: Standard
+                type: Microsoft.Network/expressRouteCircuits
+        Create ExpressRouteCircuit on ExpressRoutePort:
+          parameters:
+            api-version: '2018-10-01'
+            circuitName: expressRouteCircuit1
+            parameters:
+              location: westus
+              properties:
+                bandwidthInGbps: 10
+                expressRoutePort:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+              sku:
+                family: MeteredData
+                name: Premium_MeteredData
+                tier: Premium
+            resourceGroupName: rg1
+            subscriptionId: subid
+            type: Microsoft.Network/expressRouteCircuits
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuit1
+                location: westus
+                name: expressRouteCircuit1
+                properties:
+                  allowClassicOperations: false
+                  authorizations: []
+                  bandwidthInGbps: 10
+                  circuitProvisioningState: Enabled
+                  expressRoutePort:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  gatewayManagerEtag: '20'
+                  peerings: []
+                  provisioningState: Succeeded
+                  serviceKey: d281f746-ee01-4d00-8b0a-edec4833772b
+                  serviceProviderProvisioningState: Provisioned
+                sku:
+                  family: MeteredData
+                  name: Premium_MeteredData
+                  tier: Premium
+                type: Microsoft.Network/expressRouteCircuits
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuit1
+                location: westus
+                name: expressRouteCircuit1
+                properties:
+                  allowClassicOperations: false
+                  authorizations: []
+                  bandwidthInGbps: 10
+                  circuitProvisioningState: Enabled
+                  expressRoutePort:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  gatewayManagerEtag: '20'
+                  peerings: []
+                  provisioningState: Succeeded
+                  serviceKey: d281f746-ee01-4d00-8b0a-edec4833772b
+                  serviceProviderProvisioningState: Provisioned
+                sku:
+                  family: MeteredData
+                  name: Premium_MeteredData
+                  tier: Premium
                 type: Microsoft.Network/expressRouteCircuits
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations':

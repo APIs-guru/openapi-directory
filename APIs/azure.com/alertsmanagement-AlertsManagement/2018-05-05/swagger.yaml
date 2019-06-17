@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: azure.local
+host: management.azure.com
 info:
   description: Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor.
   title: Azure Alerts Management Service Resource Provider
@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2018-05-05/AlertsManagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: alertsmanagement-AlertsManagement
   x-tags:
@@ -780,6 +779,8 @@ paths:
                       smartGroupState: Acknowledged
                       startDateTime: '2018-05-17T10:18:44.2020997Z'
                     type: Microsoft.AlertsManagement/smartGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}':
     get:
       description: Get information related to a specific Smart Group.
@@ -1101,7 +1102,6 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/errorResponseBody'
-    x-ms-external: true
   errorResponseBody:
     description: Details of error response.
     properties:
@@ -1119,7 +1119,6 @@ definitions:
       target:
         description: 'Target of the particular error, for example name of the property.'
         type: string
-    x-ms-external: true
   essentials:
     description: This object contains consistent fields across different monitor services.
     properties:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/dns/resource-manager/Microsoft.Network/stable/2018-05-01/dns.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: dns
   x-tags:
@@ -1891,11 +1890,11 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/A/record1
                 name: record1
                 properties:
-                  ProvisioningState: Succeeded
                   TTL: 3600
                   fqdn: record1.zone1
                   metadata:
                     key1: value1
+                  provisioningState: Succeeded
                   targetResource:
                     id: /subscriptions/726f8cd6-6459-4db4-8e6d-2cd2716904e2/resourceGroups/test/providers/Microsoft.Network/trafficManagerProfiles/testpp2
                 type: Microsoft.Network/dnsZones/A
@@ -1905,11 +1904,11 @@ paths:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/A/record1
                 name: record1
                 properties:
-                  ProvisioningState: Succeeded
                   TTL: 3600
                   fqdn: record1.zone1
                   metadata:
                     key1: value1
+                  provisioningState: Succeeded
                   targetResource:
                     id: /subscriptions/726f8cd6-6459-4db4-8e6d-2cd2716904e2/resourceGroups/test/providers/Microsoft.Network/trafficManagerProfiles/testpp2
                 type: Microsoft.Network/dnsZones/A

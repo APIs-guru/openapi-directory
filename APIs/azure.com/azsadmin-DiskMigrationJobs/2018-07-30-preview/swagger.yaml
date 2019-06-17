@@ -409,7 +409,8 @@ paths:
                             targetShare: \\SU1FileServer.mydomain.com\SU1_ObjStore_2
                       targetShare: \\SU1FileServer.mydomain.com\SU1_ObjStore_2
                     type: Microsoft.Compute.Admin/locations/diskmigrationjobs
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}':
     get:
       description: Returns the requested disk migration job.

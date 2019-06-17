@@ -170,7 +170,8 @@ paths:
                     state: Enabled
                     subscriptionId: 5ef8575a-14db-4d02-8313-b9122385722b
                     tenantId: 2b3697e6-a7a2-4cdd-a3d4-f4ef6505cd4f
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/delegatedProviders/{delegatedProvider}':
     get:
       description: Get the specified delegated provider.

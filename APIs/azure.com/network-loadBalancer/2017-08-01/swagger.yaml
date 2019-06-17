@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-08-01/loadBalancer.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-loadBalancer
   x-tags:
@@ -462,16 +461,10 @@ paths:
               properties:
                 backendAddressPools:
                   - name: be-lb
-                    properties:
-                      loadBalancingRules:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                    properties: {}
                 frontendIPConfigurations:
                   - name: fe-lb
                     properties:
-                      inboundNatRules:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
-                      loadBalancingRules:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
                       subnet:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
                 inboundNatPools: []
@@ -505,8 +498,6 @@ paths:
                   - name: probe-lb
                     properties:
                       intervalInSeconds: 15
-                      loadBalancingRules:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
                       numberOfProbes: 2
                       port: 80
                       protocol: Http
@@ -661,6 +652,416 @@ paths:
                   provisioningState: Succeeded
                 sku:
                   name: Basic
+                type: Microsoft.Network/loadBalancers
+        Create load balancer with Frontend IP in Zone 1:
+          parameters:
+            api-version: '2017-08-01'
+            loadBalancerName: lb
+            parameters:
+              location: eastus
+              properties:
+                backendAddressPools:
+                  - name: be-lb
+                    properties: {}
+                frontendIPConfigurations:
+                  - name: fe-lb
+                    properties:
+                      subnet:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                    zones:
+                      - '1'
+                inboundNatPools: []
+                inboundNatRules:
+                  - name: in-nat-rule
+                    properties:
+                      backendPort: 3389
+                      enableFloatingIP: true
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      frontendPort: 3389
+                      idleTimeoutInMinutes: 15
+                      protocol: Tcp
+                loadBalancingRules:
+                  - name: rulelb
+                    properties:
+                      backendAddressPool:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      backendPort: 80
+                      enableFloatingIP: true
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      frontendPort: 80
+                      idleTimeoutInMinutes: 15
+                      loadDistribution: Default
+                      probe:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      protocol: Tcp
+                outboundNatRules: []
+                probes:
+                  - name: probe-lb
+                    properties:
+                      intervalInSeconds: 15
+                      numberOfProbes: 2
+                      port: 80
+                      protocol: Http
+                      requestPath: healthcheck.aspx
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb
+                location: eastus
+                name: lb
+                properties:
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      name: be-lb
+                      properties:
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        provisioningState: Succeeded
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      name: fe-lb
+                      properties:
+                        inboundNatRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        privateIPAddress: 10.0.1.4
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                      zones:
+                        - '1'
+                  inboundNatPools: []
+                  inboundNatRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                      name: in-nat-rule
+                      properties:
+                        backendPort: 3389
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 3389
+                        idleTimeoutInMinutes: 15
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  loadBalancingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                      name: rulelb
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                        backendPort: 80
+                        disableOutboundSnat: false
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 80
+                        idleTimeoutInMinutes: 15
+                        loadDistribution: Default
+                        probe:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  outboundNatRules: []
+                  probes:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      name: probe-lb
+                      properties:
+                        intervalInSeconds: 15
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        numberOfProbes: 2
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestPath: healthcheck.aspx
+                  provisioningState: Succeeded
+                sku:
+                  name: Basic
+                type: Microsoft.Network/loadBalancers
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb
+                location: eastus
+                name: lb
+                properties:
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      name: be-lb
+                      properties:
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        provisioningState: Succeeded
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      name: fe-lb
+                      properties:
+                        inboundNatRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        privateIPAddress: 10.0.1.4
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                      zones:
+                        - '1'
+                  inboundNatPools: []
+                  inboundNatRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                      name: in-nat-rule
+                      properties:
+                        backendPort: 3389
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 3389
+                        idleTimeoutInMinutes: 15
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  loadBalancingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                      name: rulelb
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                        backendPort: 80
+                        disableOutboundSnat: false
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 80
+                        idleTimeoutInMinutes: 15
+                        loadDistribution: Default
+                        probe:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  outboundNatRules: []
+                  probes:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      name: probe-lb
+                      properties:
+                        intervalInSeconds: 15
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        numberOfProbes: 2
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestPath: healthcheck.aspx
+                  provisioningState: Succeeded
+                sku:
+                  name: Basic
+                type: Microsoft.Network/loadBalancers
+        Create load balancer with Standard SKU:
+          parameters:
+            api-version: '2017-08-01'
+            loadBalancerName: lb
+            parameters:
+              location: eastus
+              properties:
+                backendAddressPools:
+                  - name: be-lb
+                    properties: {}
+                frontendIPConfigurations:
+                  - name: fe-lb
+                    properties:
+                      subnet:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                inboundNatPools: []
+                inboundNatRules:
+                  - name: in-nat-rule
+                    properties:
+                      backendPort: 3389
+                      enableFloatingIP: true
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      frontendPort: 3389
+                      idleTimeoutInMinutes: 15
+                      protocol: Tcp
+                loadBalancingRules:
+                  - name: rulelb
+                    properties:
+                      backendAddressPool:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      backendPort: 80
+                      enableFloatingIP: true
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      frontendPort: 80
+                      idleTimeoutInMinutes: 15
+                      loadDistribution: Default
+                      probe:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      protocol: Tcp
+                outboundNatRules: []
+                probes:
+                  - name: probe-lb
+                    properties:
+                      intervalInSeconds: 15
+                      numberOfProbes: 2
+                      port: 80
+                      protocol: Http
+                      requestPath: healthcheck.aspx
+              sku:
+                name: Standard
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb
+                location: eastus
+                name: lb
+                properties:
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      name: be-lb
+                      properties:
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        provisioningState: Succeeded
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      name: fe-lb
+                      properties:
+                        inboundNatRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        privateIPAddress: 10.0.1.4
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                  inboundNatPools: []
+                  inboundNatRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                      name: in-nat-rule
+                      properties:
+                        backendPort: 3389
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 3389
+                        idleTimeoutInMinutes: 15
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  loadBalancingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                      name: rulelb
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                        backendPort: 80
+                        disableOutboundSnat: false
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 80
+                        idleTimeoutInMinutes: 15
+                        loadDistribution: Default
+                        probe:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  outboundNatRules: []
+                  probes:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      name: probe-lb
+                      properties:
+                        intervalInSeconds: 15
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        numberOfProbes: 2
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestPath: healthcheck.aspx
+                  provisioningState: Succeeded
+                sku:
+                  name: Standard
+                type: Microsoft.Network/loadBalancers
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb
+                location: eastus
+                name: lb
+                properties:
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                      name: be-lb
+                      properties:
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        provisioningState: Succeeded
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                      name: fe-lb
+                      properties:
+                        inboundNatRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        privateIPAddress: 10.0.1.4
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb
+                  inboundNatPools: []
+                  inboundNatRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule
+                      name: in-nat-rule
+                      properties:
+                        backendPort: 3389
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 3389
+                        idleTimeoutInMinutes: 15
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  loadBalancingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                      name: rulelb
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb
+                        backendPort: 80
+                        disableOutboundSnat: false
+                        enableFloatingIP: true
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb
+                        frontendPort: 80
+                        idleTimeoutInMinutes: 15
+                        loadDistribution: Default
+                        probe:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                        protocol: Tcp
+                        provisioningState: Succeeded
+                  outboundNatRules: []
+                  probes:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb
+                      name: probe-lb
+                      properties:
+                        intervalInSeconds: 15
+                        loadBalancingRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb
+                        numberOfProbes: 2
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestPath: healthcheck.aspx
+                  provisioningState: Succeeded
+                sku:
+                  name: Standard
                 type: Microsoft.Network/loadBalancers
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools':
@@ -2083,7 +2484,6 @@ definitions:
     required:
       - protocol
       - frontendPort
-  NetworkInterfacePropertiesFormat: {}
   OutboundNatRule:
     allOf:
       - description: Reference to another subresource.
@@ -2197,5 +2597,3 @@ definitions:
     required:
       - protocol
       - port
-  PublicIPAddressPropertiesFormat: {}
-  SubnetPropertiesFormat: {}

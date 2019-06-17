@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimreports.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimreports
   x-tags:
@@ -575,7 +574,8 @@ paths:
                     url: 'https://apimService1.azure-api.net/echo/resource'
                     userId: /users/1
       x-ms-odata: '#/definitions/RequestReportRecordContract'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription':
     get:
       description: Lists report records by subscription.

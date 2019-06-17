@@ -84,43 +84,6 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}':
-    delete:
-      description: Deletes the specified location.
-      operationId: Locations_Delete
-      parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The AzureStack location.
-          in: path
-          name: location
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - default: '2015-11-01'
-          description: Client Api Version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-        '204':
-          description: No Content
-      tags:
-        - Locations
-      x-ms-examples:
-        Deletes the specified location.:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200': {}
-            '204': {}
     get:
       description: Get the specified location.
       operationId: Locations_Get
@@ -211,7 +174,99 @@ paths:
                 latitude: ''
                 longitude: ''
                 name: local
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/operationsStatus/{operationsStatusName}':
+    get:
+      description: Get the operation status.
+      operationId: Locations_GetOperationsStatus
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The AzureStack location.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The operation status name.
+          in: path
+          name: operationsStatusName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationsStatus'
+        '202':
+          description: Accepted
+        '204':
+          description: Not Content
+        '404':
+          description: Not Found
+      tags:
+        - Locations
+      x-ms-examples:
+        Get the specified operation status.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            operationsStatusName: subname
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                endTime: '2017-08-01T00:00:00.00Z'
+                error:
+                  code: ''
+                  message: ''
+                id:
+                  location: local
+                  name: ''
+                  subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+                percentComplete: 0
+                properties: {}
+                responseContent: {}
+                retryAfter: ''
+                startTime: '2017-08-01T00:00:00.00Z'
+                status: ''
+                terminalHttpStatusCode: ''
+            '202': {}
+            '204': {}
+            '404': {}
 definitions:
+  ExtendedErrorInfo:
+    description: The extended error information.
+    properties:
+      code:
+        description: The error code.
+        type: string
+      details:
+        $ref: '#/definitions/ExtendedErrorInfoList'
+        description: The detailed error message details.
+      message:
+        description: The error message.
+        type: string
+  ExtendedErrorInfoList:
+    description: List of the extended error information.
+    properties:
+      nextLink:
+        description: URI to next page.
+        type: string
+      value:
+        description: List of the extended error information.
+        items:
+          $ref: '#/definitions/ExtendedErrorInfo'
+        type: array
   Location:
     description: Contains information about a geographical location where resource providers can be deployed.
     properties:
@@ -242,3 +297,51 @@ definitions:
         items:
           $ref: '#/definitions/Location'
         type: array
+  OperationsStatus:
+    description: A long running operation status.
+    properties:
+      endTime:
+        description: The end time of the operation.
+        format: date-time
+        type: string
+      error:
+        $ref: '#/definitions/ExtendedErrorInfo'
+        description: The operation error.
+      id:
+        $ref: '#/definitions/OperationsStatusIdentifier'
+        description: The operation status identifier.
+      percentComplete:
+        description: The completion percentage of the operation.
+        type: number
+      properties:
+        description: The internal operation properties.
+        type: object
+      responseContent:
+        description: The content of the response.
+        type: object
+      retryAfter:
+        description: The amount of time clients should wait..
+        type: string
+      startTime:
+        description: The start time of the operation.
+        format: date-time
+        type: string
+      status:
+        description: The status of the operation.
+        type: string
+      terminalHttpStatusCode:
+        description: The terminal http status code for the operation.
+        type: string
+    type: object
+  OperationsStatusIdentifier:
+    description: The admin offer identifier for the location wide SubscriptionsAdminResourceTypes.OperationsStatus resource type.
+    properties:
+      location:
+        description: The location of the operations status.
+        type: string
+      name:
+        description: The name of the operations status.
+        type: string
+      subscriptionId:
+        description: The subscription identifier..
+        type: string

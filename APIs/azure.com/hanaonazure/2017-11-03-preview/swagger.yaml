@@ -45,6 +45,22 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  HanaInstanceParameter:
+    description: Request body representing a HanaInstance
+    in: body
+    name: hanaInstanceParameter
+    required: true
+    schema:
+      $ref: '#/definitions/HanaInstance'
+    x-ms-parameter-location: method
+  MonitoringParameter:
+    description: Request body that only contains monitoring attributes
+    in: body
+    name: monitoringParameter
+    required: true
+    schema:
+      $ref: '#/definitions/MonitoringDetails'
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: Name of the resource group.
     in: path
@@ -106,7 +122,8 @@ paths:
                       provider: HanaOp2ProviderName
                       resource: HanaOp2ResourceName
                     name: HanaOp2
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/hanaInstances':
     get:
       description: Gets a list of SAP HANA instances in the specified subscription. The operations returns various properties of each SAP HANA on Azure instance.
@@ -151,8 +168,10 @@ paths:
                       osProfile:
                         computerName: myComputerName1
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
@@ -175,8 +194,11 @@ paths:
                       osProfile:
                         computerName: myComputerName2
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
+                      partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance1
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
@@ -199,8 +221,11 @@ paths:
                       osProfile:
                         computerName: myComputerName3
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
+                      partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.202
@@ -221,8 +246,10 @@ paths:
                       osProfile:
                         computerName: myComputerName4
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.203
@@ -275,8 +302,10 @@ paths:
                       osProfile:
                         computerName: myComputerName1
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
@@ -299,8 +328,11 @@ paths:
                       osProfile:
                         computerName: myComputerName2
                         osType: SUSE
+                        sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                         version: 12 SP1
+                      partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance1
                       powerState: started
+                      provisioningState: Succeeded
                       proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
@@ -310,6 +342,40 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}':
+    delete:
+      description: 'Deletes a SAP HANA instance with the specified subscription, resource group, and instance name.'
+      operationId: HanaInstances_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+      responses:
+        '200':
+          description: Deleted HanaInstance
+        '202':
+          description: Deleting HanaInstance
+        '204':
+          description: No HanaInstance to delete
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Deletes a SAP HANA instance.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Get properties of a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
     get:
       description: 'Gets properties of a SAP HANA instance for the specified subscription, resource group, and instance name.'
       operationId: HanaInstances_Get
@@ -356,8 +422,11 @@ paths:
                   osProfile:
                     computerName: myComputerName
                     osType: SUSE
+                    sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                     version: 12 SP1
+                  partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                   powerState: restarting
+                  provisioningState: Succeeded
                   proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
@@ -413,8 +482,11 @@ paths:
                   osProfile:
                     computerName: myComputerName
                     osType: SUSE
+                    sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                     version: 12 SP1
+                  partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                   powerState: started
+                  provisioningState: Succeeded
                   proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
@@ -448,14 +520,171 @@ paths:
                   osProfile:
                     computerName: myComputerName
                     osType: SUSE
+                    sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
                     version: 12 SP1
+                  partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                   powerState: started
+                  provisioningState: Succeeded
                   proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
                 tags:
                   testkey: testvalue
                 type: Microsoft.HanaOnAzure/hanaInstances
+    put:
+      description: 'Creates a SAP HANA instance for the specified subscription, resource group, and instance name.'
+      operationId: HanaInstances_Create
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+        - $ref: '#/parameters/HanaInstanceParameter'
+      responses:
+        '200':
+          description: Created HanaInstance
+          schema:
+            $ref: '#/definitions/HanaInstance'
+        '201':
+          description: Creating HanaInstance
+          schema:
+            $ref: '#/definitions/HanaInstance'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Creates a SAP HANA instance.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Get properties of a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            hanaInstanceParameter:
+              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+              location: westus
+              name: myHanaInstance
+              properties:
+                hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                hardwareProfile:
+                  hanaInstanceSize: S72
+                  hardwareType: Cisco_UCS
+                hwRevision: Rev 3
+                networkProfile:
+                  circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                  networkInterfaces:
+                    - ipAddress: 100.100.100.100
+                osProfile:
+                  computerName: myComputerName
+                  osType: SUSE
+                  sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
+                  version: 12 SP1
+                partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
+                powerState: started
+                provisioningState: Succeeded
+                proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
+                storageProfile:
+                  nfsIpAddress: 200.200.200.200
+              tags:
+                key: value
+              type: Microsoft.HanaOnAzure/hanaInstances
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                  hardwareProfile:
+                    hanaInstanceSize: S72
+                    hardwareType: Cisco_UCS
+                  hwRevision: Rev 3
+                  networkProfile:
+                    circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                    networkInterfaces:
+                      - ipAddress: 100.100.100.100
+                  osProfile:
+                    computerName: myComputerName
+                    osType: SUSE
+                    sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
+                    version: 12 SP1
+                  partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
+                  powerState: started
+                  provisioningState: Succeeded
+                  proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
+                  storageProfile:
+                    nfsIpAddress: 200.200.200.200
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/hanaInstances
+            '201':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                  hardwareProfile:
+                    hanaInstanceSize: S72
+                    hardwareType: Cisco_UCS
+                  hwRevision: Rev 3
+                  networkProfile:
+                    circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                    networkInterfaces:
+                      - ipAddress: 100.100.100.100
+                  osProfile:
+                    computerName: myComputerName
+                    osType: SUSE
+                    sshPublicKey: AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L
+                    version: 12 SP1
+                  partnerNodeId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
+                  powerState: started
+                  provisioningState: Accepted
+                  proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
+                  storageProfile:
+                    nfsIpAddress: 200.200.200.200
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/hanaInstances
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring':
+    post:
+      description: The operation to add a monitor to an SAP HANA instance.
+      operationId: HanaInstances_EnableMonitoring
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+        - $ref: '#/parameters/MonitoringParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Monitor a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            monitoringParameter:
+              hanaDbPassword: passExample
+              hanaDbSqlPort: 50
+              hanaDbUsername: SYSTEM
+              hanaHostname: hana.hostname
+              hanaSubnet: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart':
     post:
       description: The operation to restart a SAP HANA instance.
@@ -562,6 +791,9 @@ definitions:
       osProfile:
         $ref: '#/definitions/OSProfile'
         description: Specifies the operating system settings for the HANA instance.
+      partnerNodeId:
+        description: ARM ID of another HanaInstance that will share a network with this HanaInstance
+        type: string
       powerState:
         description: Resource power state
         enum:
@@ -576,6 +808,21 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: HanaInstancePowerStateEnum
+      provisioningState:
+        description: State of provisioning of the HanaInstance
+        enum:
+          - Accepted
+          - Creating
+          - Updating
+          - Failed
+          - Succeeded
+          - Deleting
+          - Migrating
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaProvisioningStatesEnum
       proximityPlacementGroup:
         description: Resource proximity placement group
         readOnly: true
@@ -618,6 +865,11 @@ definitions:
           - S768m
           - S768xm
           - S960m
+          - S224o
+          - S224m
+          - S224om
+          - S224oxm
+          - S224oxxm
         readOnly: true
         type: string
         x-ms-enum:
@@ -638,8 +890,29 @@ definitions:
     properties:
       ipAddress:
         description: Specifies the IP address of the network interface.
-        readOnly: true
         type: string
+  MonitoringDetails:
+    description: Details needed to monitor a Hana Instance
+    properties:
+      hanaDbName:
+        description: Name of the database itself.
+        type: string
+      hanaDbPassword:
+        description: Password for the HANA database to login for monitoring
+        type: string
+      hanaDbSqlPort:
+        description: The port number of the tenant DB. Used to connect to the DB.
+        type: integer
+      hanaDbUsername:
+        description: Username for the HANA database to login to for monitoring
+        type: string
+      hanaHostname:
+        description: Hostname of the HANA Instance blade.
+        type: string
+      hanaSubnet:
+        description: ARM ID of an Azure Subnet with access to the HANA instance.
+        type: string
+    type: object
   NetworkProfile:
     description: Specifies the network settings for the HANA instance disks.
     properties:
@@ -657,11 +930,13 @@ definitions:
     properties:
       computerName:
         description: Specifies the host OS name of the HANA instance.
-        readOnly: true
         type: string
       osType:
         description: This property allows you to specify the type of the OS.
         readOnly: true
+        type: string
+      sshPublicKey:
+        description: Specifies the SSH public key used to access the operating system.
         type: string
       version:
         description: Specifies version of operating system.
@@ -696,7 +971,6 @@ definitions:
         type: string
       location:
         description: Resource location
-        readOnly: true
         type: string
       name:
         description: Resource name

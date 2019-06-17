@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory-IntegrationRuntime
   x-tags:
@@ -21,6 +20,22 @@ info:
     - Microsoft
 paths: {}
 definitions:
+  EntityReference:
+    description: The entity reference.
+    properties:
+      referenceName:
+        description: The name of this referenced entity.
+        type: string
+      type:
+        description: The type of this referenced entity.
+        enum:
+          - IntegrationRuntimeReference
+          - LinkedServiceReference
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IntegrationRuntimeEntityReferenceType
+    type: object
   IntegrationRuntime:
     additionalProperties:
       type: object
@@ -135,6 +150,19 @@ definitions:
           - value
         type: object
         x-ms-discriminator-value: SecureString
+    type: object
+  IntegrationRuntimeDataProxyProperties:
+    description: Data proxy properties for a managed dedicated integration runtime.
+    properties:
+      connectVia:
+        $ref: '#/definitions/EntityReference'
+        description: The self-hosted integration runtime reference.
+      path:
+        description: The path to contain the staged data in the Blob storage.
+        type: string
+      stagingLinkedService:
+        $ref: '#/definitions/EntityReference'
+        description: The staging linked service reference.
     type: object
   IntegrationRuntimeMonitoringData:
     description: Get monitoring data response.
@@ -263,6 +291,9 @@ definitions:
       customSetupScriptProperties:
         $ref: '#/definitions/IntegrationRuntimeCustomSetupScriptProperties'
         description: Custom setup script properties for a managed dedicated integration runtime.
+      dataProxyProperties:
+        $ref: '#/definitions/IntegrationRuntimeDataProxyProperties'
+        description: Data proxy properties for a managed dedicated integration runtime.
       edition:
         description: The edition for the SSIS Integration Runtime
         enum:
@@ -783,6 +814,45 @@ definitions:
       linkedInfo:
         $ref: '#/definitions/LinkedIntegrationRuntimeType'
     type: object
+  SsisEnvironment:
+    allOf:
+      - $ref: '#/definitions/SsisObjectMetadata'
+    description: Ssis environment.
+    properties:
+      folderId:
+        description: Folder id which contains environment.
+        format: int64
+        type: integer
+      variables:
+        description: Variable in environment
+        items:
+          $ref: '#/definitions/SsisVariable'
+        type: array
+    type: object
+    x-ms-discriminator-value: Environment
+  SsisEnvironmentReference:
+    description: Ssis environment reference.
+    properties:
+      environmentFolderName:
+        description: Environment folder name.
+        type: string
+      environmentName:
+        description: Environment name.
+        type: string
+      id:
+        description: Environment reference id.
+        format: int64
+        type: integer
+      referenceType:
+        description: Reference type
+        type: string
+    type: object
+  SsisFolder:
+    allOf:
+      - $ref: '#/definitions/SsisObjectMetadata'
+    description: Ssis folder.
+    type: object
+    x-ms-discriminator-value: Folder
   SsisObjectMetadata:
     description: SSIS object metadata.
     discriminator: type
@@ -824,3 +894,119 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: SsisObjectMetadataType
+  SsisPackage:
+    allOf:
+      - $ref: '#/definitions/SsisObjectMetadata'
+    description: Ssis Package.
+    properties:
+      folderId:
+        description: Folder id which contains package.
+        format: int64
+        type: integer
+      parameters:
+        description: Parameters in package
+        items:
+          $ref: '#/definitions/SsisParameter'
+        type: array
+      projectId:
+        description: Project id which contains package.
+        format: int64
+        type: integer
+      projectVersion:
+        description: Project version which contains package.
+        format: int64
+        type: integer
+    type: object
+    x-ms-discriminator-value: Package
+  SsisParameter:
+    description: Ssis parameter.
+    properties:
+      dataType:
+        description: Parameter type.
+        type: string
+      defaultValue:
+        description: Default value of parameter.
+        type: string
+      description:
+        description: Parameter description.
+        type: string
+      designDefaultValue:
+        description: Design default value of parameter.
+        type: string
+      id:
+        description: Parameter id.
+        format: int64
+        type: integer
+      name:
+        description: Parameter name.
+        type: string
+      required:
+        description: Whether parameter is required.
+        type: boolean
+      sensitive:
+        description: Whether parameter is sensitive.
+        type: boolean
+      sensitiveDefaultValue:
+        description: Default sensitive value of parameter.
+        type: string
+      valueSet:
+        description: Parameter value set.
+        type: boolean
+      valueType:
+        description: Parameter value type.
+        type: string
+      variable:
+        description: Parameter reference variable.
+        type: string
+    type: object
+  SsisProject:
+    allOf:
+      - $ref: '#/definitions/SsisObjectMetadata'
+    description: Ssis project.
+    properties:
+      environmentRefs:
+        description: Environment reference in project
+        items:
+          $ref: '#/definitions/SsisEnvironmentReference'
+        type: array
+      folderId:
+        description: Folder id which contains project.
+        format: int64
+        type: integer
+      parameters:
+        description: Parameters in project
+        items:
+          $ref: '#/definitions/SsisParameter'
+        type: array
+      version:
+        description: Project version.
+        format: int64
+        type: integer
+    type: object
+    x-ms-discriminator-value: Project
+  SsisVariable:
+    description: Ssis variable.
+    properties:
+      dataType:
+        description: Variable type.
+        type: string
+      description:
+        description: Variable description.
+        type: string
+      id:
+        description: Variable id.
+        format: int64
+        type: integer
+      name:
+        description: Variable name.
+        type: string
+      sensitive:
+        description: Whether variable is sensitive.
+        type: boolean
+      sensitiveValue:
+        description: Variable sensitive value.
+        type: string
+      value:
+        description: Variable value.
+        type: string
+    type: object

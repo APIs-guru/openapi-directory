@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -99,6 +98,8 @@ paths:
       tags:
         - VirtualNetworkGatewayConnections
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified virtual network gateway connection by resource group.
       operationId: VirtualNetworkGatewayConnections_Get
@@ -247,6 +248,8 @@ paths:
       tags:
         - VirtualNetworkGatewayConnections
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways':
     get:
       description: Gets all the local network gateways in a resource group.
@@ -295,6 +298,8 @@ paths:
       tags:
         - LocalNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified local network gateway in a resource group.
       operationId: LocalNetworkGateways_Get
@@ -400,6 +405,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified virtual network gateway by resource group.
       operationId: VirtualNetworkGateways_Get
@@ -487,6 +494,9 @@ paths:
             type: string
       tags:
         - VirtualNetworkGateways
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes':
     post:
       description: This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.
@@ -519,6 +529,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus':
     post:
       description: The GetBgpPeerStatus operation retrieves the status of all BGP peers.
@@ -551,6 +563,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes':
     post:
       description: 'This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.'
@@ -578,6 +592,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset':
     post:
       description: Resets the primary of the virtual network gateway in the specified resource group.
@@ -610,6 +626,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
 definitions:
   BgpPeerStatus:
     properties:

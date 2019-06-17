@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/consumption/resource-manager/Microsoft.Consumption/preview/2017-12-30-preview/consumption.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: consumption
   x-tags:
@@ -179,7 +178,8 @@ paths:
                         endDate: '2018-10-31T00:00:00Z'
                         startDate: '2017-10-01T00:00:00Z'
                     type: Microsoft.Consumption/budgets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{name}':
     delete:
       description: The operation to delete a budget.
@@ -372,7 +372,8 @@ paths:
                     endDate: '2018-10-31T00:00:00Z'
                     startDate: '2017-10-01T00:00:00Z'
                 type: Microsoft.Consumption/budgets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Budget:
     allOf:

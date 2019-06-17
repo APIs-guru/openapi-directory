@@ -1011,7 +1011,8 @@ paths:
                       tier: Standard
                     tags: {}
                     type: Microsoft.HybridData/dataManagers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers':
     get:
       description: Lists all the data manager resources available under the given resource group.
@@ -1103,7 +1104,8 @@ paths:
                     tags:
                       newTag: 123abc
                     type: Microsoft.HybridData/dataManagers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}':
     delete:
       description: Deletes a data manager resource in Microsoft Azure.

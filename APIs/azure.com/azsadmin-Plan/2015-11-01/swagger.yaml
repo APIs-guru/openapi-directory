@@ -401,7 +401,7 @@ paths:
                     - /subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Subscriptions.Admin/locations/local/quotas/delegatedProviderQuota
                   subscriptionCount: 0
                 type: Microsoft.Subscriptions.Admin/plans
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/MetricDefinitions':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/metricDefinitions':
     get:
       description: Get the metric definitions of the specified plan.
       operationId: Plans_ListMetricDefinitions
@@ -536,7 +536,7 @@ paths:
               body:
                 nextLink: ''
                 value: []
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/Metrics':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/metrics':
     get:
       description: Get the metrics of the specified plan.
       operationId: Plans_ListMetrics

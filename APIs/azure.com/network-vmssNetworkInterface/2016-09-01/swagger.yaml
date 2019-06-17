@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-09-01/vmssNetworkInterface.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-vmssNetworkInterface
   x-tags:
@@ -252,5 +251,3 @@ paths:
                 x-ms-client-flatten: true
       tags:
         - NetworkInterfaces
-definitions:
-  NetworkInterfacePropertiesFormat: {}

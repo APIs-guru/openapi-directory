@@ -354,7 +354,8 @@ paths:
                       status: Unattached
                       userResourceId: /subscriptions/4496690e-348e-4dc0-addc-17395c3966ba/resourceGroups/DISKRG6ECD14E6/providers/Microsoft.Compute/Snapshots/diskrptestn9wefmbaqiu
                     type: Microsoft.Compute.Admin/locations/disks
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/disks/{DiskId}':
     get:
       description: Returns the disk.

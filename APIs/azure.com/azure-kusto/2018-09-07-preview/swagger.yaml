@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azure-kusto/resource-manager/Microsoft.Kusto/preview/2018-09-07-preview/kusto.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: azure-kusto
   x-tags:
@@ -155,7 +154,8 @@ paths:
                       name: L8
                       tier: Standard
                     type: Microsoft.Kusto/Clusters
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/checkNameAvailability':
     post:
       description: Checks that the cluster name is valid and is not already in use.
@@ -238,7 +238,8 @@ paths:
                   - capacity: 2
                     name: L16
                     tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters':
     get:
       description: Lists all Kusto clusters within a resource group.
@@ -290,7 +291,8 @@ paths:
                       name: L8
                       tier: Standard
                     type: Microsoft.Kusto/Clusters
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}':
     delete:
       description: Deletes a Kusto cluster.
@@ -566,7 +568,8 @@ paths:
                       provisioningState: Succeeded
                       softDeletePeriodInDays: 1
                     type: Microsoft.Kusto/Clusters/Databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}':
     delete:
       description: Deletes the database with the given name.
@@ -923,7 +926,8 @@ paths:
                       consumerGroup: testConsumerGroup2
                       eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns2/eventhubs/eventhubTest2
                     type: Microsoft.Kusto/Clusters/Databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/eventhubconnections/{eventHubConnectionName}':
     delete:
       description: Deletes the Event Hub connection with the given name.
@@ -1173,7 +1177,8 @@ paths:
                     name: SomeApp
                     role: Admin
                     type: App
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals':
     post:
       description: Remove Database principals permissions.
@@ -1318,7 +1323,8 @@ paths:
                     sku:
                       name: KS16
                       tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/start':
     post:
       description: Starts a Kusto cluster.

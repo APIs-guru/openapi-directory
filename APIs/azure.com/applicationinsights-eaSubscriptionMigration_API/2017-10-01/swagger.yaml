@@ -34,27 +34,24 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/providers/microsoft.insights/listMigrationdate':
     post:
       description: list date to migrate to new pricing model.
       operationId: EASubscriptionListMigrationDate_Post
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success list migrate date information for this subscription.
@@ -75,8 +72,18 @@ paths:
       description: Enterprise Agreement Customer opted to use new pricing model.
       operationId: EASubscriptionMigrateToNewPricingModel_Post
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '204':
           description: Success migrate to new pricing model for this subscription.
@@ -96,8 +103,18 @@ paths:
       description: Enterprise Agreement Customer roll back to use legacy pricing model.
       operationId: EASubscriptionRollbackToLegacyPricingModel_Post
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '204':
           description: Success roll back to legacy pricing model for this subscription.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentProactiveDetection_API
   x-tags:
@@ -36,23 +35,10 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
   ConfigurationId:
     description: The ProactiveDetection configuration ID. This is unique within a Application Insights component.
     in: path
     name: ConfigurationId
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -63,21 +49,33 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs':
     get:
       description: Gets a list of ProactiveDetection configurations of an Application Insights component.
       operationId: ProactiveDetectionConfigurations_List
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -129,9 +127,27 @@ paths:
       description: Get the ProactiveDetection configuration for this configuration id.
       operationId: ProactiveDetectionConfigurations_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ConfigurationId'
       responses:
@@ -170,9 +186,27 @@ paths:
       description: Update the ProactiveDetection configuration for this configuration id.
       operationId: ProactiveDetectionConfigurations_Update
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ConfigurationId'
         - description: Properties that need to be specified to update the ProactiveDetection configuration.

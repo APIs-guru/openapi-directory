@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/stable/2019-04-01/frontdoor.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: frontdoor
   x-tags:
@@ -146,7 +145,7 @@ paths:
             api-version: '2019-04-01'
             checkFrontDoorNameAvailabilityInput:
               name: sampleName
-              type: Microsoft.Network/FrontDoors
+              type: Microsoft.Network/frontDoors
           responses:
             '200':
               body:
@@ -191,7 +190,7 @@ paths:
             api-version: '2019-04-01'
             checkFrontDoorNameAvailabilityInput:
               name: sampleName
-              type: Microsoft.Network/FrontDoors/frontendEndpoints
+              type: Microsoft.Network/frontDoors/frontendEndpoints
             subscriptionId: subid
           responses:
             '200':
@@ -2559,7 +2558,7 @@ paths:
           parameters:
             api-version: '2019-04-01'
             customDomainProperties:
-              hostname: www.someDomain.com
+              hostName: www.someDomain.com
             frontDoorName: frontDoor1
             resourceGroupName: rg1
             subscriptionId: subid
@@ -3190,7 +3189,7 @@ definitions:
         description: 'Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #.'
         type: string
       customHost:
-        description: Host to redirect. Leave empty to use use the incoming host as the destination host.
+        description: Host to redirect. Leave empty to use the incoming host as the destination host.
         type: string
       customPath:
         description: The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path.

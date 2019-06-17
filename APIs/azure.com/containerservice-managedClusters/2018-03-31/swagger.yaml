@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2018-03-31/managedClusters.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: containerservice-managedClusters
   x-tags:
@@ -64,7 +63,8 @@ paths:
             $ref: '#/definitions/OperationListResult'
       tags:
         - managedClusters
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters':
     get:
       description: Gets a list of managed clusters in the specified subscription. The operation returns properties of each managed cluster.

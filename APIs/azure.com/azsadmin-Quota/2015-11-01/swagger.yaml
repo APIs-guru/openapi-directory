@@ -88,7 +88,8 @@ paths:
                     properties:
                       allowCustomPortalBranding: false
                     type: Microsoft.Subscriptions.Admin/locations/quotas
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/quotas/{quota}':
     get:
       description: Gets a quota by name.

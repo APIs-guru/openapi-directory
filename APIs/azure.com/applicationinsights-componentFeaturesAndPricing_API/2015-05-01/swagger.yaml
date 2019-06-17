@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentFeaturesAndPricing_API
   x-tags:
@@ -36,19 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ResourceNameParameter:
     description: The name of the Application Insights component resource.
     in: path
@@ -56,21 +42,33 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures':
     get:
       description: Returns current billing features for an Application Insights component.
       operationId: ComponentCurrentBillingFeatures_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -100,9 +98,27 @@ paths:
       description: Update current billing features for an Application Insights component.
       operationId: ComponentCurrentBillingFeatures_Update
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - description: Properties that need to be specified to update billing features for an Application Insights component.
           in: body
@@ -147,9 +163,27 @@ paths:
       description: Returns feature capabilities of the application insights component.
       operationId: ComponentFeatureCapabilities_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -187,9 +221,27 @@ paths:
       description: Returns all available features of the application insights component.
       operationId: ComponentAvailableFeatures_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -410,9 +462,27 @@ paths:
       description: Returns daily data volume cap (quota) status for an Application Insights component.
       operationId: ComponentQuotaStatus_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':

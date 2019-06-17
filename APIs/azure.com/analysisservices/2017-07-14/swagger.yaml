@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/analysisservices/resource-manager/Microsoft.AnalysisServices/stable/2017-07-14/analysisservices.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: analysisservices
   x-tags:
@@ -178,7 +177,8 @@ paths:
             $ref: '#/definitions/AnalysisServicesServers'
       tags:
         - Servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus':
     get:
       description: Lists eligible SKUs for Analysis Services resource provider.
@@ -224,7 +224,8 @@ paths:
             $ref: '#/definitions/AnalysisServicesServers'
       tags:
         - Servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}':
     delete:
       description: Deletes the specified Analysis Services server.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/imagebuilder/resource-manager/Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: imagebuilder
   x-tags:
@@ -46,7 +45,7 @@ parameters:
     description: The name of the image Template
     in: path
     name: imageTemplateName
-    pattern: '^[A-Za-z0-9-_]{1,64}$'
+    pattern: '^[A-Za-z0-9-_.]{1,64}$'
     required: true
     type: string
     x-ms-parameter-location: method
@@ -68,7 +67,7 @@ parameters:
     description: The name of the run output
     in: path
     name: runOutputName
-    pattern: '^[A-Za-z0-9-_]{1,64}$'
+    pattern: '^[A-Za-z0-9-_.]{1,64}$'
     required: true
     type: string
     x-ms-parameter-location: method
@@ -135,11 +134,11 @@ paths:
                           scriptUri: 'https://example.com/path/to/script.sh'
                           type: Shell
                       distribute:
-                        - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                        - artifactTags:
+                            tagName: value
+                          imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                           location: 1_location
                           runOutputName: image_it_pir_1
-                          tags:
-                            tagName: value
                           type: ManagedImage
                       source:
                         sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
@@ -155,11 +154,11 @@ paths:
                           scriptUri: 'https://example.com/path/to/script.sh'
                           type: Shell
                       distribute:
-                        - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/mySecondImage-eus'
+                        - artifactTags:
+                            stage: development
+                          imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/mySecondImage-eus'
                           location: eastus
                           runOutputName: eus
-                          tags:
-                            stage: development
                           type: ManagedImage
                       source:
                         offer: UbuntuServer
@@ -209,11 +208,11 @@ paths:
                           scriptUri: 'https://example.com/path/to/script.sh'
                           type: Shell
                       distribute:
-                        - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                        - artifactTags:
+                            tagName: value
+                          imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                           location: 1_location
                           runOutputName: image_it_pir_1
-                          tags:
-                            tagName: value
                           type: ManagedImage
                       source:
                         sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
@@ -234,7 +233,6 @@ paths:
                           runOutputName: singleImage
                           type: ManagedImage
                         - galleryImageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/gallery/baseimages/images/baseimage'
-                          imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/baseimage-eus'
                           replicationRegions:
                             - eastus
                             - westus
@@ -279,9 +277,11 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200': {}
             '202':
               headers:
-                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/westus/operations/85506efc-36f7-11e9-a0c2-000d3afd16e3?api-version=2018-02-01-preview'
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2019-05-01-preview'
+            '204': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -323,11 +323,11 @@ paths:
                       scriptUri: 'https://example.com/path/to/script.sh'
                       type: Shell
                   distribute:
-                    - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                       location: 1_location
                       runOutputName: image_it_pir_1
-                      tags:
-                        tagName: value
                       type: ManagedImage
                   source:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
@@ -375,6 +375,8 @@ paths:
             '200':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
+                identity:
+                  type: None
                 location: westus
                 name: myImageTemplate
                 properties:
@@ -383,11 +385,11 @@ paths:
                       scriptUri: 'https://example.com/path/to/script.sh'
                       type: Shell
                   distribute:
-                    - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                       location: 1_location
                       runOutputName: image_it_pir_1
-                      tags:
-                        tagName: value
                       type: ManagedImage
                   source:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
@@ -396,6 +398,9 @@ paths:
                 tags:
                   new-tag: new-value
                 type: Microsoft.VirtualMachineImages/imageTemplate
+            '202':
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2019-05-01-preview'
         Update the tags for an Image Template.:
           parameters:
             api-version: 2019-05-01-preview
@@ -417,11 +422,11 @@ paths:
                       scriptUri: 'https://example.com/path/to/script.sh'
                       type: Shell
                   distribute:
-                    - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                       location: 1_location
                       runOutputName: image_it_pir_1
-                      tags:
-                        tagName: value
                       type: ManagedImage
                   source:
                     sha256Checksum: 120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f
@@ -430,6 +435,9 @@ paths:
                 tags:
                   new-tag: new-value
                 type: Microsoft.VirtualMachineImages/imageTemplate
+            '202':
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2019-05-01-preview'
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -479,11 +487,11 @@ paths:
                     scriptUri: 'https://example.com/path/to/script.sh'
                     type: Shell
                 distribute:
-                  - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                  - artifactTags:
+                      tagName: value
+                    imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                     location: 1_location
                     runOutputName: image_it_pir_1
-                    tags:
-                      tagName: value
                     type: ManagedImage
                 source:
                   imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
@@ -494,6 +502,33 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
+                identity:
+                  type: UserAssigned
+                  userAssignedIdentities:
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1:
+                      clientId: 00000000-0000-0000-0000-000000000000
+                      principalId: 00000000-0000-0000-0000-000000000000
+                location: westus
+                name: myImageTemplate
+                properties:
+                  customize:
+                    - name: Shell Customizer Example
+                      scriptUri: 'https://example.com/path/to/script.sh'
+                      type: Shell
+                  distribute:
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                      location: 1_location
+                      runOutputName: image_it_pir_1
+                      type: ManagedImage
+                  source:
+                    imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
+                    type: ManagedImage
+                type: Microsoft.VirtualMachineImages/imageTemplate
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
@@ -511,11 +546,11 @@ paths:
                       scriptUri: 'https://example.com/path/to/script.sh'
                       type: Shell
                   distribute:
-                    - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                       location: 1_location
                       runOutputName: image_it_pir_1
-                      tags:
-                        tagName: value
                       type: ManagedImage
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
@@ -533,11 +568,11 @@ paths:
                     scriptUri: 'https://example.com/path/to/script.sh'
                     type: Shell
                 distribute:
-                  - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                  - artifactTags:
+                      tagName: value
+                    imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                     location: 1_location
                     runOutputName: image_it_pir_1
-                    tags:
-                      tagName: value
                     type: ManagedImage
                 source:
                   imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
@@ -548,6 +583,27 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
+                location: westus
+                name: myImageTemplate
+                properties:
+                  customize:
+                    - name: Shell Customizer Example
+                      scriptUri: 'https://example.com/path/to/script.sh'
+                      type: Shell
+                  distribute:
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                      location: 1_location
+                      runOutputName: image_it_pir_1
+                      type: ManagedImage
+                  source:
+                    imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
+                    type: ManagedImage
+                type: Microsoft.VirtualMachineImages/imageTemplate
             '201':
               body:
                 id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate'
@@ -559,11 +615,11 @@ paths:
                       scriptUri: 'https://example.com/path/to/script.sh'
                       type: Shell
                   distribute:
-                    - imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
+                    - artifactTags:
+                        tagName: value
+                      imageId: '/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1'
                       location: 1_location
                       runOutputName: image_it_pir_1
-                      tags:
-                        tagName: value
                       type: ManagedImage
                   source:
                     imageId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image
@@ -602,7 +658,8 @@ paths:
           responses:
             '202':
               headers:
-                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/westus/operations/777b2050-36f8-11e9-b8fa-000d3afd16e3?api-version=2018-02-01-preview'
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2019-05-01-preview'
+            '204': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -755,7 +812,7 @@ definitions:
         type: object
       runOutputName:
         description: The name to be used for the associated RunOutput.
-        pattern: '^[A-Za-z0-9-_]{1,64}$'
+        pattern: '^[A-Za-z0-9-_.]{1,64}$'
         type: string
       type:
         description: Type of distribution.
@@ -770,7 +827,7 @@ definitions:
     description: 'Uploads files to VMs (Linux, Windows). Corresponds to Packer file provisioner'
     properties:
       destination:
-        description: The absolute path (with existing directory structure) where the file will be uploaded to in the VM
+        description: The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM
         type: string
       sourceUri:
         description: 'The URI of the file to be uploaded for customizing the VM. It can be a github link, SAS URI for Azure Storage, etc'
@@ -922,7 +979,9 @@ definitions:
   ImageTemplateProperties:
     properties:
       buildTimeoutInMinutes:
-        description: Maximum duration to wait while building the image template. Default is 60 minutes.
+        description: Maximum duration to wait while building the image template. Omit or specify 0 to use the default (60 minutes).
+        maximum: 960
+        minimum: 0
         type: integer
       customize:
         description: 'Specifies the properties used to describe the customization steps of the image, like Image source etc'

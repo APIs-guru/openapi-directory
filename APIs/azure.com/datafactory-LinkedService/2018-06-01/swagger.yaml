@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory-LinkedService
   x-tags:
@@ -2129,6 +2128,9 @@ definitions:
       encryptedCredential:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
         type: object
+      fileSystem:
+        description: 'Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string).'
+        type: object
       hcatalogLinkedServiceName:
         description: Linked service reference type.
         properties:
@@ -2353,6 +2355,9 @@ definitions:
       stormConfiguration:
         description: Specifies the Storm configuration parameters (storm-site.xml) for the HDInsight cluster.
         type: object
+      subnetName:
+        description: 'The ARM resource ID for the subnet in the vNet. If virtualNetworkId was specified, then this property is required. Type: string (or Expression with resultType string).'
+        type: object
       tenant:
         description: 'The Tenant id/name to which the service principal belongs. Type: string (or Expression with resultType string).'
         type: object
@@ -2361,6 +2366,9 @@ definitions:
         type: object
       version:
         description: "Version of the HDInsight cluster.\_ Type: string (or Expression with resultType string)."
+        type: object
+      virtualNetworkId:
+        description: 'The ARM resource ID for the vNet to which the cluster should be joined after creation. Type: string (or Expression with resultType string).'
         type: object
       yarnConfiguration:
         description: Specifies the Yarn configuration parameters (yarn-site.xml) for the HDInsight cluster.
@@ -4187,6 +4195,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SapHanaAuthenticationType
+      connectionString:
+        description: 'SAP HANA ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.'
+        type: object
       encryptedCredential:
         description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
         type: object
@@ -4256,6 +4267,77 @@ definitions:
       - server
       - systemNumber
       - clientId
+  SapTableLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: SAP Table Linked Service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapTableLinkedServiceTypeProperties'
+        description: Properties specific to this linked service type.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapTable
+  SapTableLinkedServiceTypeProperties:
+    description: Properties specific to this linked service type.
+    properties:
+      clientId:
+        description: 'Client ID of the client on the SAP system where the table is located. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string).'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      language:
+        description: 'Language of the SAP system where the table is located. The default value is EN. Type: string (or Expression with resultType string).'
+        type: object
+      logonGroup:
+        description: 'The Logon Group for the SAP System. Type: string (or Expression with resultType string).'
+        type: object
+      messageServer:
+        description: 'The hostname of the SAP Message Server. Type: string (or Expression with resultType string).'
+        type: object
+      messageServerService:
+        description: 'The service name or port number of the Message Server. Type: string (or Expression with resultType string).'
+        type: object
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      server:
+        description: 'Host name of the SAP instance where the table is located. Type: string (or Expression with resultType string).'
+        type: object
+      sncLibraryPath:
+        description: 'External security product''s library to access the SAP server where the table is located. Type: string (or Expression with resultType string).'
+        type: object
+      sncMode:
+        description: 'SNC activation indicator to access the SAP server where the table is located. Must be either 0 (off) or 1 (on). Type: string (or Expression with resultType string).'
+        type: object
+      sncMyName:
+        description: 'Initiator''s SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string).'
+        type: object
+      sncPartnerName:
+        description: 'Communication partner''s SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string).'
+        type: object
+      sncQop:
+        description: 'SNC Quality of Protection. Allowed value include: 1, 2, 3, 8, 9. Type: string (or Expression with resultType string).'
+        type: object
+      systemId:
+        description: 'SystemID of the SAP system where the table is located. Type: string (or Expression with resultType string).'
+        type: object
+      systemNumber:
+        description: 'System number of the SAP system where the table is located. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string).'
+        type: object
+      userName:
+        description: 'Username to access the SAP server where the table is located. Type: string (or Expression with resultType string).'
+        type: object
   ScriptAction:
     description: Custom script action to run on HDI ondemand cluster once it's up.
     properties:

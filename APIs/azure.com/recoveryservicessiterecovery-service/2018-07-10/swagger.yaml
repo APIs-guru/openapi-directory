@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2018-07-10/service.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -5280,7 +5279,7 @@ paths:
             api-version: '2018-07-10'
             creationInput:
               properties:
-                PolicyId: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1
+                policyId: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1
                 providerSpecificInput: {}
                 targetProtectionContainerId: Microsoft Azure
             fabricName: cloud1
@@ -6415,9 +6414,9 @@ paths:
           parameters:
             api-version: '2018-07-10'
             jobQueryParameter:
-              affectedObjectTypes: []
+              affectedObjectTypes: ''
               endTime: '2017-05-04T14:26:51.9161395Z'
-              jobStatus: []
+              jobStatus: ''
               startTime: '2017-04-27T14:26:51.9161395Z'
             resourceGroupName: resourceGroupPS1
             resourceName: vault1
@@ -8400,6 +8399,126 @@ paths:
                 type: Microsoft.RecoveryServices/vaults/replicationVaultHealth
             '202': {}
       x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings':
+    get:
+      description: Gets the list of vault setting. This includes the Migration Hub connection settings.
+      operationId: ReplicationVaultSetting_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VaultSettingCollection'
+      summary: Gets the list of vault setting.
+      tags:
+        - ReplicationVaultSetting
+      x-ms-examples:
+        Gets the list of vault setting.:
+          parameters:
+            api-version: '2018-07-10'
+            resourceGroupName: resourceGroupPS1
+            resourceName: vault1
+            subscriptionId: c183865e-6077-46f2-a3b1-deb0f4f4650a
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - id: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationVaultSettings/default
+                    name: default
+                    properties:
+                      migrationSolutionId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.Migrate/MigrateProjects/resourceGroupPS1-MigrateProject/Solutions/Servers-Migration-ServerMigration
+                    type: Microsoft.RecoveryServices/vaults/replicationVaultSettings
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings/{vaultSettingName}':
+    get:
+      description: Gets the vault setting. This includes the Migration Hub connection settings.
+      operationId: ReplicationVaultSetting_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Vault setting name.
+          in: path
+          name: vaultSettingName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VaultSetting'
+      summary: Gets the vault setting.
+      tags:
+        - ReplicationVaultSetting
+      x-ms-examples:
+        Gets the vault setting.:
+          parameters:
+            api-version: '2018-07-10'
+            resourceGroupName: resourceGroupPS1
+            resourceName: vault1
+            subscriptionId: c183865e-6077-46f2-a3b1-deb0f4f4650a
+            vaultSettingName: default
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationVaultSettings/default
+                name: default
+                properties:
+                  migrationSolutionId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.Migrate/MigrateProjects/resourceGroupPS1-MigrateProject/Solutions/Servers-Migration-ServerMigration
+                type: Microsoft.RecoveryServices/vaults/replicationVaultSettings
+    put:
+      description: The operation to configure vault setting.
+      operationId: ReplicationVaultSetting_Create
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Vault setting name.
+          in: path
+          name: vaultSettingName
+          required: true
+          type: string
+        - description: Vault setting creation input.
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/VaultSettingCreationInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VaultSetting'
+      summary: Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.
+      tags:
+        - ReplicationVaultSetting
+      x-ms-examples:
+        Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.:
+          parameters:
+            api-version: '2018-07-10'
+            input:
+              properties:
+                migrationSolutionId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.Migrate/MigrateProjects/resourceGroupPS1-MigrateProject/Solutions/Servers-Migration-ServerMigration
+            resourceGroupName: resourceGroupPS1
+            resourceName: vault1
+            subscriptionId: c183865e-6077-46f2-a3b1-deb0f4f4650a
+            vaultSettingName: default
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationVaultSettings/default
+                name: default
+                properties:
+                  migrationSolutionId: /subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.Migrate/MigrateProjects/resourceGroupPS1-MigrateProject/Solutions/Servers-Migration-ServerMigration
+                type: Microsoft.RecoveryServices/vaults/replicationVaultSettings
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationvCenters':
     get:
       description: Lists the vCenter servers registered in the vault.
@@ -8955,6 +9074,11 @@ definitions:
       testFailoverRecoveryFabricObjectId:
         description: The test failover fabric object Id.
         type: string
+      unprotectedDisks:
+        description: The list of unprotected disks.
+        items:
+          $ref: '#/definitions/A2AUnprotectedDiskDetails'
+        type: array
       vmNics:
         description: The virtual machine nic details.
         items:
@@ -9036,6 +9160,14 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: A2A
+  A2AUnprotectedDiskDetails:
+    description: A2A unprotected disk details.
+    properties:
+      diskLunId:
+        description: The source lun Id for the data disk.
+        format: int32
+        type: integer
+    type: object
   A2AUpdateContainerMappingInput:
     allOf:
       - $ref: '#/definitions/ReplicationProviderSpecificUpdateContainerMappingInput'
@@ -15562,6 +15694,10 @@ definitions:
         description: The service endpoint.
         readOnly: true
         type: string
+      serviceResourceId:
+        description: The service resource Id.
+        readOnly: true
+        type: string
       vmwareSiteId:
         description: The ARM Id of the VMware site.
         readOnly: true
@@ -15635,6 +15771,52 @@ definitions:
         items:
           $ref: '#/definitions/HealthError'
         type: array
+    type: object
+  VaultSetting:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Vault setting.
+    properties:
+      properties:
+        $ref: '#/definitions/VaultSettingProperties'
+        description: The vault setting properties.
+    type: object
+  VaultSettingCollection:
+    description: Vault setting collection.
+    properties:
+      nextLink:
+        description: The value of next link.
+        type: string
+      value:
+        description: The list of vault setting.
+        items:
+          $ref: '#/definitions/VaultSetting'
+        type: array
+    type: object
+  VaultSettingCreationInput:
+    description: Input to create vault setting.
+    properties:
+      properties:
+        $ref: '#/definitions/VaultSettingCreationInputProperties'
+        description: Vault setting creation input properties.
+    required:
+      - properties
+    type: object
+  VaultSettingCreationInputProperties:
+    description: Input to create vault setting.
+    properties:
+      migrationSolutionId:
+        description: The migration solution Id.
+        type: string
+    required:
+      - migrationSolutionId
+    type: object
+  VaultSettingProperties:
+    description: Vault setting properties.
+    properties:
+      migrationSolutionId:
+        description: The migration solution ARM Id.
+        type: string
     type: object
   VersionDetails:
     description: Version related details.

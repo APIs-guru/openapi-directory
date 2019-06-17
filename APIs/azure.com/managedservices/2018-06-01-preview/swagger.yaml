@@ -169,8 +169,6 @@ paths:
       responses:
         '200':
           description: OK - The registration assignment is deleted.
-          schema:
-            $ref: '#/definitions/RegistrationAssignment'
         '204':
           description: No Content- The registration assignment does not exist.
         default:
@@ -186,14 +184,7 @@ paths:
             registrationAssignmentId: 26c128c2-fefa-4340-9bb1-6e081c90ada2
             scope: subscription/0afefe50-734e-4610-8a82-a144ahf49dea
           responses:
-            '200':
-              body:
-                id: /subscriptions/0afefe50-734e-4610-8c82-a144aff49dea/providers/Microsoft.ManagedServices/registrationAssignments/484a7d5f-9729-4b87-bc9b-26610985a013
-                name: 484a7d5f-9729-4b87-bc9b-26610985a013
-                properties:
-                  provisioningState: Succeeded
-                  registrationDefinitionId: /subscriptions/0afefe50-734e-4610-8c82-a144aff49dea/providers/Microsoft.ManagedServices/registrationDefinitions/26c128c2-fefa-4340-9bb1-8e081c90ada2
-                type: Microsoft.ManagedServices/registrationAssignments
+            '200': {}
             '204': {}
     get:
       description: Gets the details of specified registration assignment.
@@ -361,8 +352,6 @@ paths:
       responses:
         '200':
           description: OK - The registration definition is deleted.
-          schema:
-            $ref: '#/definitions/RegistrationDefinition'
         '204':
           description: No Content- The registration definition does not exist.
         default:
@@ -378,25 +367,7 @@ paths:
             registrationDefinitionId: 26c128c2-fefa-4340-9bb1-6e081c90ada2
             scope: subscription/0afefe50-734e-4610-8a82-a144ahf49dea
           responses:
-            '200':
-              body:
-                id: /subscriptions/0afefe50-734e-4610-8a82-a144ahf49dea/providers/Microsoft.ManagedServices/registrationDefinitions/26c128c2-fefa-4340-9bb1-6e081c90ada2
-                name: 26c128c2-fefa-4340-9bb1-6e081c90ada2
-                plan:
-                  name: addesai-plan
-                  product: test
-                  publisher: marketplace-test
-                  version: 1.0.0
-                properties:
-                  authorizations:
-                    - principalId: f98g86a2-4cc4-4e6d-ad47-b3e80a1bcdfc
-                      roleDefinitionId: acdd72a7-3385-48ef-bd42-f606fba81ae7
-                  description: Test
-                  managedByTenantId: 83ace5cd-bcc3-441a-hd86-e6a75360cecc
-                  managedByTenantName: Test Tenant
-                  provisioningState: Deleted
-                  registrationDefinitionName: DefinitionName
-                type: Microsoft.ManagedServices/registrationDefinitions
+            '200': {}
             '204': {}
     get:
       description: Gets the registration definition details.

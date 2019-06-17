@@ -165,7 +165,8 @@ paths:
                     usedCapacity: 400509059072
                   type: Microsoft.Storage.Admin/farms/shares
             '404': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/shares/{shareName}':
     get:
       description: Returns a storage share.

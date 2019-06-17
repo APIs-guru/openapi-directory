@@ -80,7 +80,8 @@ paths:
           description: An error occurred and the list of guest diagnostic settings association could not be retrieved.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettingsAssociations':
     get:
       description: Get a list of all guest diagnostic settings association in a resource group.
@@ -98,7 +99,8 @@ paths:
           description: An error occurred and the list of guest diagnostic settings association could not be retrieved.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{resourceUri}/providers/microsoft.insights/guestDiagnosticSettingsAssociation/{associationName}':
     delete:
       description: Delete guest diagnostics association settings.

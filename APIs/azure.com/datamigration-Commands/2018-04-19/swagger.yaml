@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/Commands.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datamigration-Commands
   x-tags:
@@ -198,4 +197,3 @@ definitions:
         readOnly: true
     type: object
     x-ms-discriminator-value: Migrate.Sync.Complete.Database
-  ODataError: {}

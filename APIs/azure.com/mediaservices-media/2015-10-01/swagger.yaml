@@ -226,7 +226,8 @@ paths:
                           isPrimary: true
                     tags: []
                     type: Microsoft.Media/mediaservices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}':
     delete:
       description: Deletes a Media Service.

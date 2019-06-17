@@ -100,6 +100,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  OperationsStatusParameter:
+    description: The operation status name.
+    in: path
+    name: operationsStatusName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   PlanParameter:
     description: Name of the plan.
     in: path
@@ -331,6 +338,55 @@ paths:
                       provider: Microsoft Subscriptions Administration Service
                       resource: Check Name Availability
                     name: Microsoft.Subscriptions.Admin/checkNameAvailability/action
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkIdentityHealth':
+    post:
+      description: Checks the identity health
+      operationId: CheckIdentityHealth
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IdentityHealthCheckReportDefinition'
+      tags:
+        - Subscriptions
+      x-ms-examples:
+        Check the identity health.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                directoryTenants:
+                  - applications:
+                      - appId: ''
+                        appRoleAssignments:
+                          - appRoleAssignment:
+                              client: ''
+                              resource: ''
+                              roleId: ''
+                            status: ''
+                        oAuth2PermissionGrants:
+                          - oAuth2PermissionGrant:
+                              client: ''
+                              resource: ''
+                              scope: ''
+                            status: ''
+                        servicePrincipalObjectId: ''
+                        servicePrincipalTags:
+                          - servicePrincipalTag: ''
+                            status: ''
+                        status: ''
+                    status: ''
+                    tenantId: ''
+                    tenantName: ''
+                reportEndTimeUtc: '2017-08-01T00:00:00.00Z'
+                reportStartTimeUtc: '2017-08-01T00:00:00.00Z'
+                status: ''
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability':
     post:
       description: Get the list of subscriptions.
@@ -362,7 +418,8 @@ paths:
               body:
                 message: ''
                 nameAvailable: true
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions':
     post:
       description: Move subscriptions between delegated provider offers.
@@ -528,7 +585,8 @@ paths:
                     subscriptionId: c4d75460-5ea2-486a-a87f-85506f55daa6
                     tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
       x-ms-odata: '#/definitions/Subscription'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}':
     delete:
       description: Delete the specified subscription.
@@ -714,6 +772,73 @@ paths:
             '204': {}
       x-ms-long-running-operation: true
 definitions:
+  AppRoleAssignmentDefinition:
+    description: Application role assignment definition.
+    properties:
+      client:
+        description: The client identifier. This should be the application identifier of the client application.
+        type: string
+      resource:
+        description: The resource identifier. This should be the application identifier of the resource application.
+        type: string
+      roleId:
+        description: The role identifier. This should be the ID of the AppRole exposed by the resource application.
+        type: string
+    type: object
+  AppRoleAssignmentHealthReport:
+    description: A report of the health status of an AppRoleAssignment.
+    properties:
+      appRoleAssignment:
+        $ref: '#/definitions/AppRoleAssignmentDefinition'
+        description: The permission description.
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The health status for the permission.
+    type: object
+  AppRoleAssignmentHealthReportList:
+    description: List of AppRoleAssignment health reports for the application.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: A report of the health status of an AppRoleAssignment.
+        items:
+          $ref: '#/definitions/AppRoleAssignmentHealthReport'
+        type: array
+  ApplicationHealthReport:
+    description: A report of the health status of an identity applications.
+    properties:
+      appId:
+        description: The application identifier.
+        type: string
+      appRoleAssignments:
+        $ref: '#/definitions/AppRoleAssignmentHealthReportList'
+        description: List of AppRoleAssignment health reports for the application.
+      oAuth2PermissionGrants:
+        $ref: '#/definitions/OAuth2PermissionGrantHealthReportList'
+        description: List of OAuth2PermissionGrant health reports for the application.
+      servicePrincipalObjectId:
+        description: The service principal identifier.
+        type: string
+      servicePrincipalTags:
+        $ref: '#/definitions/ServicePrincipalTagHealthReportList'
+        description: List of ServicePrincipalTag health reports for the application.
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The roll-up health status for the application
+    type: object
+  ApplicationHealthReportList:
+    description: List of the application health reports.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: A report of the health status of an identity applications.
+        items:
+          $ref: '#/definitions/ApplicationHealthReport'
+        type: array
   CheckNameAvailabilityDefinition:
     description: The check name availability action definition.
     properties:
@@ -736,6 +861,71 @@ definitions:
       reason:
         $ref: '#/definitions/NameUnavailabilityReason'
         description: The reason for the unavailability of the name.
+    type: object
+  DirectoryTenantHealthReport:
+    description: A report of the health status of a directory tenant and identity applications within.
+    properties:
+      applications:
+        $ref: '#/definitions/ApplicationHealthReportList'
+        description: List of the application health reports.
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The roll-up health status for the directory.
+      tenantId:
+        description: The tenant unique identifier.
+        type: string
+      tenantName:
+        description: The directory tenant resource name.
+        type: string
+    type: object
+  DirectoryTenantHealthReportList:
+    description: List of directory tenant health reports.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: Directory tenant health report.
+        items:
+          $ref: '#/definitions/DirectoryTenantHealthReport'
+        type: array
+  HealthStatus:
+    description: Health Status.
+    enum:
+      - Unknown
+      - Unhealthy
+      - Healthy
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: HealthStatus
+      values:
+        - description: The health status is unknown.
+          name: Unknown
+          value: Unknown
+        - description: 'The health status is unhealthy, indicating something is wrong or a sub-health status is Unhealthy or Unknown.'
+          name: Unhealthy
+          value: Unhealthy
+        - description: 'The health status is healthy, indicating nothing is wrong.'
+          name: Healthy
+          value: Healthy
+  IdentityHealthCheckReportDefinition:
+    description: The identity health check report action definition.
+    properties:
+      directoryTenants:
+        $ref: '#/definitions/DirectoryTenantHealthReportList'
+        description: List of directory tenant health reports.
+      reportEndTimeUtc:
+        description: End time of the report.
+        format: date-time
+        type: string
+      reportStartTimeUtc:
+        description: Start time of the report.
+        format: date-time
+        type: string
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The roll-up health status for the directory.
     type: object
   Metric:
     description: The resource metric set that represents the metrics for a particular resource.
@@ -932,6 +1122,40 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: NameUnavailabilityReason
+  OAuth2PermissionGrantDefinition:
+    description: Application permission grant definition.
+    properties:
+      client:
+        description: The client identifier. This should be the application identifier of the client application.
+        type: string
+      resource:
+        description: The resource identifier. This should be the application identifier of the resource application.
+        type: string
+      scope:
+        description: The scope identifier. This should be the scope value of the OAUTH2PERMISSION exposed by the resource application.
+        type: string
+    type: object
+  OAuth2PermissionGrantHealthReport:
+    description: A report of the health status of an OAuth2PermissionGrant.
+    properties:
+      oAuth2PermissionGrant:
+        $ref: '#/definitions/OAuth2PermissionGrantDefinition'
+        description: The permission description.
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The health status for the permission.
+    type: object
+  OAuth2PermissionGrantHealthReportList:
+    description: List of OAuth2PermissionGrant health reports for the application.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: A report of the health status of an OAuth2PermissionGrant.
+        items:
+          $ref: '#/definitions/OAuth2PermissionGrantHealthReport'
+        type: array
   Operation:
     description: Supported REST operation.
     properties:
@@ -1008,6 +1232,27 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: ResourceManagerType
+  ServicePrincipalTagHealthReport:
+    description: A report of the health status of a tag on an identity application service principal.
+    properties:
+      servicePrincipalTag:
+        description: The tag.
+        type: string
+      status:
+        $ref: '#/definitions/HealthStatus'
+        description: The health status for the tag.
+    type: object
+  ServicePrincipalTagHealthReportList:
+    description: List of ServicePrincipalTag health reports for the application.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: A report of the health status of a tag on an identity application service principal.
+        items:
+          $ref: '#/definitions/ServicePrincipalTagHealthReport'
+        type: array
   Subscription:
     description: List of supported operations.
     properties:

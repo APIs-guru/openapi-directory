@@ -101,7 +101,8 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - WorkspaceCollections
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources':
     post:
       description: Migrates an existing Power BI Workspace Collection to a different resource group and/or subscription.
@@ -152,7 +153,8 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - WorkspaceCollections
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}':
     delete:
       description: Delete a Power BI Workspace Collection.
@@ -363,7 +365,8 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - Workspaces
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AzureSku:
     properties:

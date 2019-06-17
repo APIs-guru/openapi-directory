@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/Dataset.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datafactory-Dataset
   x-tags:
@@ -268,7 +267,7 @@ definitions:
       - Optimal
       - Fastest
     title: Microsoft.Azure.Management.DataFactories.Models.CompressionLevel
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: DatasetCompressionLevel
@@ -860,7 +859,7 @@ definitions:
     properties:
       path:
         description: 'The path of the SAP ECC OData entity. Type: string (or Expression with resultType string).'
-        type: string
+        type: object
     required:
       - path
   ServiceNowObjectDataset:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/consumption/resource-manager/Microsoft.Consumption/stable/2019-01-01/consumption.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: consumption
   x-tags:
@@ -156,7 +155,7 @@ parameters:
     x-ms-parameter-location: method
     x-ms-skip-url-encoding: true
   scopeMarketplaceParameter:
-    description: 'The scope associated with marketplace operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope. For subscription, billing account, department, enrollment account and ManagementGroup, you can also add billing period to the scope using ''/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}''. For e.g. to specify billing period at department scope use ''/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'''
+    description: 'The scope associated with marketplace operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope. For subscription, billing account, department, enrollment account and ManagementGroup, you can also add billing period to the scope using ''/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}''. For e.g. to specify billing period at department scope use ''/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'''
     in: path
     name: scope
     required: true
@@ -172,7 +171,7 @@ parameters:
     x-ms-parameter-location: method
     x-ms-skip-url-encoding: true
   scopeUsageDetailsParameter:
-    description: 'The scope associated with usage details operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using ''/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}''. For e.g. to specify billing period at department scope use ''/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'''
+    description: 'The scope associated with usage details operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using ''/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}''. For e.g. to specify billing period at department scope use ''/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'''
     in: path
     name: scope
     required: true
@@ -953,7 +952,8 @@ paths:
                       usageDate: '2018-05-01'
                     type: Microsoft.Consumption/forecasts
       x-ms-odata: '#/definitions/Forecast'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default':
     get:
       description: 'Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.'
@@ -2936,6 +2936,9 @@ definitions:
           - Monthly
           - Quarterly
           - Annually
+          - BillingMonth
+          - BillingQuarter
+          - BillingAnnual
         type: string
         x-ms-enum:
           modelAsString: true

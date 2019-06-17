@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimusers.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimusers
   x-tags:
@@ -95,7 +94,124 @@ paths:
         '200':
           description: Lists a collection of User entities.
           schema:
-            $ref: '#/definitions/UserCollection'
+            description: Paged Users list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: User details.
+                  properties:
+                    properties:
+                      allOf:
+                        - description: User Entity Base Parameters set.
+                          properties:
+                            identities:
+                              description: Collection of user identities.
+                              items:
+                                description: User identity details.
+                                properties:
+                                  id:
+                                    description: Identifier value within provider.
+                                    type: string
+                                  provider:
+                                    description: Identity provider name.
+                                    type: string
+                              type: array
+                            note:
+                              description: Optional note about a user set by the administrator.
+                              type: string
+                            state:
+                              default: active
+                              description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                              enum:
+                                - active
+                                - blocked
+                                - pending
+                                - deleted
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: UserState
+                                values:
+                                  - description: User state is active.
+                                    value: active
+                                  - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                                    value: blocked
+                                  - description: User account is pending. Requires identity confirmation before it can be made active.
+                                    value: pending
+                                  - description: User account is closed. All identities and related entities are removed.
+                                    value: deleted
+                      description: User profile.
+                      properties:
+                        email:
+                          description: Email address.
+                          type: string
+                        firstName:
+                          description: First name.
+                          type: string
+                        groups:
+                          description: Collection of groups user is part of.
+                          items:
+                            description: Group contract Properties.
+                            properties:
+                              builtIn:
+                                description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                                readOnly: true
+                                type: boolean
+                              description:
+                                description: Group description. Can contain HTML formatting tags.
+                                maxLength: 1000
+                                type: string
+                              displayName:
+                                description: Group name.
+                                maxLength: 300
+                                minLength: 1
+                                type: string
+                              externalId:
+                                description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                                type: string
+                              type:
+                                description: Group type.
+                                enum:
+                                  - custom
+                                  - system
+                                  - external
+                                type: string
+                                x-ms-enum:
+                                  modelAsString: false
+                                  name: GroupType
+                            required:
+                              - displayName
+                          readOnly: true
+                          type: array
+                        lastName:
+                          description: Last name.
+                          type: string
+                        registrationDate:
+                          description: |
+                            Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -175,7 +291,7 @@ paths:
                       registrationDate: '2017-06-02T17:58:50.357Z'
                       state: active
                     type: Microsoft.ApiManagement/service/users
-      x-ms-odata: '#/definitions/UserContract'
+      x-ms-odata: './definitions.json#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}':
@@ -327,7 +443,115 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/UserContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: User details.
+            properties:
+              properties:
+                allOf:
+                  - description: User Entity Base Parameters set.
+                    properties:
+                      identities:
+                        description: Collection of user identities.
+                        items:
+                          description: User identity details.
+                          properties:
+                            id:
+                              description: Identifier value within provider.
+                              type: string
+                            provider:
+                              description: Identity provider name.
+                              type: string
+                        type: array
+                      note:
+                        description: Optional note about a user set by the administrator.
+                        type: string
+                      state:
+                        default: active
+                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                        enum:
+                          - active
+                          - blocked
+                          - pending
+                          - deleted
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: UserState
+                          values:
+                            - description: User state is active.
+                              value: active
+                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                              value: blocked
+                            - description: User account is pending. Requires identity confirmation before it can be made active.
+                              value: pending
+                            - description: User account is closed. All identities and related entities are removed.
+                              value: deleted
+                description: User profile.
+                properties:
+                  email:
+                    description: Email address.
+                    type: string
+                  firstName:
+                    description: First name.
+                    type: string
+                  groups:
+                    description: Collection of groups user is part of.
+                    items:
+                      description: Group contract Properties.
+                      properties:
+                        builtIn:
+                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                          readOnly: true
+                          type: boolean
+                        description:
+                          description: Group description. Can contain HTML formatting tags.
+                          maxLength: 1000
+                          type: string
+                        displayName:
+                          description: Group name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                          type: string
+                        type:
+                          description: Group type.
+                          enum:
+                            - custom
+                            - system
+                            - external
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: GroupType
+                      required:
+                        - displayName
+                    readOnly: true
+                    type: array
+                  lastName:
+                    description: Last name.
+                    type: string
+                  registrationDate:
+                    description: |
+                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -503,7 +727,68 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/UserUpdateParameters'
+            description: User update parameters.
+            properties:
+              properties:
+                allOf:
+                  - description: User Entity Base Parameters set.
+                    properties:
+                      identities:
+                        description: Collection of user identities.
+                        items:
+                          description: User identity details.
+                          properties:
+                            id:
+                              description: Identifier value within provider.
+                              type: string
+                            provider:
+                              description: Identity provider name.
+                              type: string
+                        type: array
+                      note:
+                        description: Optional note about a user set by the administrator.
+                        type: string
+                      state:
+                        default: active
+                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                        enum:
+                          - active
+                          - blocked
+                          - pending
+                          - deleted
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: UserState
+                          values:
+                            - description: User state is active.
+                              value: active
+                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                              value: blocked
+                            - description: User account is pending. Requires identity confirmation before it can be made active.
+                              value: pending
+                            - description: User account is closed. All identities and related entities are removed.
+                              value: deleted
+                description: Parameters supplied to the Update User operation.
+                properties:
+                  email:
+                    description: Email address. Must not be empty and must be unique within the service instance.
+                    maxLength: 254
+                    minLength: 1
+                    type: string
+                  firstName:
+                    description: First name.
+                    maxLength: 100
+                    minLength: 1
+                    type: string
+                  lastName:
+                    description: Last name.
+                    maxLength: 100
+                    minLength: 1
+                    type: string
+                  password:
+                    description: User Password.
+                    type: string
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -603,7 +888,86 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/UserCreateParameters'
+            description: User create details.
+            properties:
+              properties:
+                allOf:
+                  - description: User Entity Base Parameters set.
+                    properties:
+                      identities:
+                        description: Collection of user identities.
+                        items:
+                          description: User identity details.
+                          properties:
+                            id:
+                              description: Identifier value within provider.
+                              type: string
+                            provider:
+                              description: Identity provider name.
+                              type: string
+                        type: array
+                      note:
+                        description: Optional note about a user set by the administrator.
+                        type: string
+                      state:
+                        default: active
+                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                        enum:
+                          - active
+                          - blocked
+                          - pending
+                          - deleted
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: UserState
+                          values:
+                            - description: User state is active.
+                              value: active
+                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                              value: blocked
+                            - description: User account is pending. Requires identity confirmation before it can be made active.
+                              value: pending
+                            - description: User account is closed. All identities and related entities are removed.
+                              value: deleted
+                description: Parameters supplied to the Create User operation.
+                properties:
+                  confirmation:
+                    description: Determines the type of confirmation e-mail that will be sent to the newly created user.
+                    enum:
+                      - signup
+                      - invite
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Confirmation
+                      values:
+                        - description: Send an e-mail to the user confirming they have successfully signed up.
+                          value: signup
+                        - description: Send an e-mail inviting the user to sign-up and complete registration.
+                          value: invite
+                  email:
+                    description: Email address. Must not be empty and must be unique within the service instance.
+                    maxLength: 254
+                    minLength: 1
+                    type: string
+                  firstName:
+                    description: First name.
+                    maxLength: 100
+                    minLength: 1
+                    type: string
+                  lastName:
+                    description: Last name.
+                    maxLength: 100
+                    minLength: 1
+                    type: string
+                  password:
+                    description: 'User Password. If no value is provided, a default password is generated.'
+                    type: string
+                required:
+                  - email
+                  - firstName
+                  - lastName
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -628,7 +992,115 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/UserContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: User details.
+            properties:
+              properties:
+                allOf:
+                  - description: User Entity Base Parameters set.
+                    properties:
+                      identities:
+                        description: Collection of user identities.
+                        items:
+                          description: User identity details.
+                          properties:
+                            id:
+                              description: Identifier value within provider.
+                              type: string
+                            provider:
+                              description: Identity provider name.
+                              type: string
+                        type: array
+                      note:
+                        description: Optional note about a user set by the administrator.
+                        type: string
+                      state:
+                        default: active
+                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                        enum:
+                          - active
+                          - blocked
+                          - pending
+                          - deleted
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: UserState
+                          values:
+                            - description: User state is active.
+                              value: active
+                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                              value: blocked
+                            - description: User account is pending. Requires identity confirmation before it can be made active.
+                              value: pending
+                            - description: User account is closed. All identities and related entities are removed.
+                              value: deleted
+                description: User profile.
+                properties:
+                  email:
+                    description: Email address.
+                    type: string
+                  firstName:
+                    description: First name.
+                    type: string
+                  groups:
+                    description: Collection of groups user is part of.
+                    items:
+                      description: Group contract Properties.
+                      properties:
+                        builtIn:
+                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                          readOnly: true
+                          type: boolean
+                        description:
+                          description: Group description. Can contain HTML formatting tags.
+                          maxLength: 1000
+                          type: string
+                        displayName:
+                          description: Group name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                          type: string
+                        type:
+                          description: Group type.
+                          enum:
+                            - custom
+                            - system
+                            - external
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: GroupType
+                      required:
+                        - displayName
+                    readOnly: true
+                    type: array
+                  lastName:
+                    description: Last name.
+                    type: string
+                  registrationDate:
+                    description: |
+                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
         '201':
           description: User was successfully created.
           headers:
@@ -636,7 +1108,115 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/UserContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: User details.
+            properties:
+              properties:
+                allOf:
+                  - description: User Entity Base Parameters set.
+                    properties:
+                      identities:
+                        description: Collection of user identities.
+                        items:
+                          description: User identity details.
+                          properties:
+                            id:
+                              description: Identifier value within provider.
+                              type: string
+                            provider:
+                              description: Identity provider name.
+                              type: string
+                        type: array
+                      note:
+                        description: Optional note about a user set by the administrator.
+                        type: string
+                      state:
+                        default: active
+                        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+                        enum:
+                          - active
+                          - blocked
+                          - pending
+                          - deleted
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: UserState
+                          values:
+                            - description: User state is active.
+                              value: active
+                            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
+                              value: blocked
+                            - description: User account is pending. Requires identity confirmation before it can be made active.
+                              value: pending
+                            - description: User account is closed. All identities and related entities are removed.
+                              value: deleted
+                description: User profile.
+                properties:
+                  email:
+                    description: Email address.
+                    type: string
+                  firstName:
+                    description: First name.
+                    type: string
+                  groups:
+                    description: Collection of groups user is part of.
+                    items:
+                      description: Group contract Properties.
+                      properties:
+                        builtIn:
+                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                          readOnly: true
+                          type: boolean
+                        description:
+                          description: Group description. Can contain HTML formatting tags.
+                          maxLength: 1000
+                          type: string
+                        displayName:
+                          description: Group name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                          type: string
+                        type:
+                          description: Group type.
+                          enum:
+                            - custom
+                            - system
+                            - external
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: GroupType
+                      required:
+                        - displayName
+                    readOnly: true
+                    type: array
+                  lastName:
+                    description: Last name.
+                    type: string
+                  registrationDate:
+                    description: |
+                      Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -839,8 +1419,11 @@ paths:
         '200':
           description: The response body contains the single sign-on URL.
           schema:
-            $ref: '#/definitions/GenerateSsoUrlResult'
-            x-ms-client-flatten: true
+            description: Generate SSO Url operations response details.
+            properties:
+              value:
+                description: Redirect Url containing the SSO URL value.
+                type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1058,7 +1641,7 @@ paths:
                       displayName: Developers
                       type: system
                     type: Microsoft.ApiManagement/service/users/groups
-      x-ms-odata: './apimgroups.json#/definitions/GroupContract'
+      x-ms-odata: './definitions.json#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities':
@@ -1104,7 +1687,27 @@ paths:
         '200':
           description: Lists of User Identities.
           schema:
-            $ref: '#/definitions/UserIdentityCollection'
+            description: List of Users Identity list representation.
+            properties:
+              count:
+                description: Total record count number across all pages.
+                format: int64
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: User Identity values.
+                items:
+                  description: User identity details.
+                  properties:
+                    id:
+                      description: Identifier value within provider.
+                      type: string
+                    provider:
+                      description: Identity provider name.
+                      type: string
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1388,7 +1991,7 @@ paths:
                       startDate: '2016-06-20T00:00:00Z'
                       state: active
                     type: Microsoft.ApiManagement/service/users/subscriptions
-      x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
+      x-ms-odata: './definitions.json#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/token':
@@ -1425,7 +2028,26 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/UserTokenParameters'
+            description: Parameters supplied to the Get User Token operation.
+            properties:
+              expiry:
+                description: |
+                  The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              keyType:
+                default: primary
+                description: The Key to be used to generate token for user.
+                enum:
+                  - primary
+                  - secondary
+                type: string
+                x-ms-enum:
+                  modelAsString: false
+                  name: KeyType
+            required:
+              - keyType
+              - expiry
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -1440,8 +2062,11 @@ paths:
         '200':
           description: The response body contains the authorization token for the user.
           schema:
-            $ref: '#/definitions/UserTokenResult'
-            x-ms-client-flatten: true
+            description: Get User Token response details.
+            properties:
+              value:
+                description: Shared Access Authorization token for the User.
+                type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1488,264 +2113,4 @@ paths:
             '200':
               body:
                 value: 57f2af53bb17172280f44057&201705131039&***************************/tJVExvjA==
-definitions:
-  CurrentUserIdentity:
-    properties:
-      id:
-        description: API Management service user id.
-        type: string
-  GenerateSsoUrlResult:
-    description: Generate SSO Url operations response details.
-    properties:
-      value:
-        description: Redirect Url containing the SSO URL value.
-        type: string
-  UserCollection:
-    description: Paged Users list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/UserContract'
-        type: array
-  UserContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: User details.
-    properties:
-      properties:
-        $ref: '#/definitions/UserContractProperties'
-        description: User entity contract properties.
-        x-ms-client-flatten: true
-  UserContractProperties:
-    allOf:
-      - $ref: '#/definitions/UserEntityBaseParameters'
-    description: User profile.
-    properties:
-      email:
-        description: Email address.
-        type: string
-      firstName:
-        description: First name.
-        type: string
-      groups:
-        description: Collection of groups user is part of.
-        items:
-          description: Group contract Properties.
-          properties:
-            builtIn:
-              description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-              readOnly: true
-              type: boolean
-            description:
-              description: Group description. Can contain HTML formatting tags.
-              maxLength: 1000
-              type: string
-            displayName:
-              description: Group name.
-              maxLength: 300
-              minLength: 1
-              type: string
-            externalId:
-              description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
-              type: string
-            type:
-              description: Group type.
-              enum:
-                - custom
-                - system
-                - external
-              type: string
-              x-ms-enum:
-                modelAsString: false
-                name: GroupType
-          required:
-            - displayName
-        readOnly: true
-        type: array
-      lastName:
-        description: Last name.
-        type: string
-      registrationDate:
-        description: |
-          Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-  UserCreateParameterProperties:
-    allOf:
-      - $ref: '#/definitions/UserEntityBaseParameters'
-    description: Parameters supplied to the Create User operation.
-    properties:
-      confirmation:
-        description: Determines the type of confirmation e-mail that will be sent to the newly created user.
-        enum:
-          - signup
-          - invite
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Confirmation
-          values:
-            - description: Send an e-mail to the user confirming they have successfully signed up.
-              value: signup
-            - description: Send an e-mail inviting the user to sign-up and complete registration.
-              value: invite
-      email:
-        description: Email address. Must not be empty and must be unique within the service instance.
-        maxLength: 254
-        minLength: 1
-        type: string
-      firstName:
-        description: First name.
-        maxLength: 100
-        minLength: 1
-        type: string
-      lastName:
-        description: Last name.
-        maxLength: 100
-        minLength: 1
-        type: string
-      password:
-        description: 'User Password. If no value is provided, a default password is generated.'
-        type: string
-    required:
-      - email
-      - firstName
-      - lastName
-  UserCreateParameters:
-    description: User create details.
-    properties:
-      properties:
-        $ref: '#/definitions/UserCreateParameterProperties'
-        description: User entity create contract properties.
-        x-ms-client-flatten: true
-  UserEntityBaseParameters:
-    description: User Entity Base Parameters set.
-    properties:
-      identities:
-        description: Collection of user identities.
-        items:
-          $ref: '#/definitions/UserIdentityContract'
-        type: array
-      note:
-        description: Optional note about a user set by the administrator.
-        type: string
-      state:
-        default: active
-        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
-        enum:
-          - active
-          - blocked
-          - pending
-          - deleted
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: UserState
-          values:
-            - description: User state is active.
-              value: active
-            - description: User is blocked. Blocked users cannot authenticate at developer portal or call API.
-              value: blocked
-            - description: User account is pending. Requires identity confirmation before it can be made active.
-              value: pending
-            - description: User account is closed. All identities and related entities are removed.
-              value: deleted
-  UserIdentityCollection:
-    description: List of Users Identity list representation.
-    properties:
-      count:
-        description: Total record count number across all pages.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: User Identity values.
-        items:
-          $ref: '#/definitions/UserIdentityContract'
-        type: array
-  UserIdentityContract:
-    description: User identity details.
-    properties:
-      id:
-        description: Identifier value within provider.
-        type: string
-      provider:
-        description: Identity provider name.
-        type: string
-  UserTokenParameters:
-    description: Parameters supplied to the Get User Token operation.
-    properties:
-      expiry:
-        description: |
-          The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      keyType:
-        default: primary
-        description: The Key to be used to generate token for user.
-        enum:
-          - primary
-          - secondary
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: KeyType
-    required:
-      - keyType
-      - expiry
-  UserTokenResult:
-    description: Get User Token response details.
-    properties:
-      value:
-        description: Shared Access Authorization token for the User.
-        type: string
-  UserUpdateParameters:
-    description: User update parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/UserUpdateParametersProperties'
-        description: User entity update contract properties.
-        x-ms-client-flatten: true
-  UserUpdateParametersProperties:
-    allOf:
-      - $ref: '#/definitions/UserEntityBaseParameters'
-    description: Parameters supplied to the Update User operation.
-    properties:
-      email:
-        description: Email address. Must not be empty and must be unique within the service instance.
-        maxLength: 254
-        minLength: 1
-        type: string
-      firstName:
-        description: First name.
-        maxLength: 100
-        minLength: 1
-        type: string
-      lastName:
-        description: Last name.
-        maxLength: 100
-        minLength: 1
-        type: string
-      password:
-        description: User Password.
-        type: string
+definitions: {}

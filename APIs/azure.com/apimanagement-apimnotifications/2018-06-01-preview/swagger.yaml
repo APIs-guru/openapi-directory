@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimnotifications
   x-tags:
@@ -87,7 +86,59 @@ paths:
         '200':
           description: A Collection of the Notification for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/NotificationCollection'
+            description: Paged Notification list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Notification details.
+                  properties:
+                    properties:
+                      description: Notification Contract properties.
+                      properties:
+                        description:
+                          description: Description of the Notification.
+                          type: string
+                        recipients:
+                          description: Notification Parameter contract.
+                          properties:
+                            emails:
+                              description: List of Emails subscribed for the notification.
+                              items:
+                                type: string
+                              type: array
+                            users:
+                              description: List of Users subscribed for the notification.
+                              items:
+                                type: string
+                              type: array
+                        title:
+                          description: Title of the Notification.
+                          maxLength: 1000
+                          minLength: 1
+                          type: string
+                      required:
+                        - title
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -272,7 +323,50 @@ paths:
         '200':
           description: The response body contains the specified Notification.
           schema:
-            $ref: '#/definitions/NotificationContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Notification details.
+            properties:
+              properties:
+                description: Notification Contract properties.
+                properties:
+                  description:
+                    description: Description of the Notification.
+                    type: string
+                  recipients:
+                    description: Notification Parameter contract.
+                    properties:
+                      emails:
+                        description: List of Emails subscribed for the notification.
+                        items:
+                          type: string
+                        type: array
+                      users:
+                        description: List of Users subscribed for the notification.
+                        items:
+                          type: string
+                        type: array
+                  title:
+                    description: Title of the Notification.
+                    maxLength: 1000
+                    minLength: 1
+                    type: string
+                required:
+                  - title
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -399,7 +493,50 @@ paths:
         '200':
           description: Notification was successfully updated.
           schema:
-            $ref: '#/definitions/NotificationContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Notification details.
+            properties:
+              properties:
+                description: Notification Contract properties.
+                properties:
+                  description:
+                    description: Description of the Notification.
+                    type: string
+                  recipients:
+                    description: Notification Parameter contract.
+                    properties:
+                      emails:
+                        description: List of Emails subscribed for the notification.
+                        items:
+                          type: string
+                        type: array
+                      users:
+                        description: List of Users subscribed for the notification.
+                        items:
+                          type: string
+                        type: array
+                  title:
+                    description: Title of the Notification.
+                    maxLength: 1000
+                    minLength: 1
+                    type: string
+                required:
+                  - title
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -521,7 +658,39 @@ paths:
         '200':
           description: The response body contains the Recipient Email collection subscribed to the notification.
           schema:
-            $ref: '#/definitions/RecipientEmailCollection'
+            description: Paged Recipient User list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Recipient Email details.
+                  properties:
+                    properties:
+                      description: Recipient Email Contract Properties.
+                      properties:
+                        email:
+                          description: User Email subscribed to notification.
+                          type: string
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -880,11 +1049,57 @@ paths:
         '200':
           description: Recipient Email is already part of the notification list.
           schema:
-            $ref: '#/definitions/RecipientEmailContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Recipient Email details.
+            properties:
+              properties:
+                description: Recipient Email Contract Properties.
+                properties:
+                  email:
+                    description: User Email subscribed to notification.
+                    type: string
         '201':
           description: Recipient Email was successfully added to the notification list.
           schema:
-            $ref: '#/definitions/RecipientEmailContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Recipient Email details.
+            properties:
+              properties:
+                description: Recipient Email Contract Properties.
+                properties:
+                  email:
+                    description: User Email subscribed to notification.
+                    type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1006,7 +1221,39 @@ paths:
         '200':
           description: The response body contains the Recipient User collection for the notification.
           schema:
-            $ref: '#/definitions/RecipientUserCollection'
+            description: Paged Recipient User list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Recipient User details.
+                  properties:
+                    properties:
+                      description: Recipient User Contract Properties.
+                      properties:
+                        userId:
+                          description: API Management UserId subscribed to notification.
+                          type: string
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1364,11 +1611,57 @@ paths:
         '200':
           description: Recipient User is already part of the notification list.
           schema:
-            $ref: '#/definitions/RecipientUserContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Recipient User details.
+            properties:
+              properties:
+                description: Recipient User Contract Properties.
+                properties:
+                  userId:
+                    description: API Management UserId subscribed to notification.
+                    type: string
         '201':
           description: Recipient User was successfully added to the notification list.
           schema:
-            $ref: '#/definitions/RecipientUserContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Recipient User details.
+            properties:
+              properties:
+                description: Recipient User Contract Properties.
+                properties:
+                  userId:
+                    description: API Management UserId subscribed to notification.
+                    type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1424,147 +1717,4 @@ paths:
                 properties:
                   userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/576823d0a40f7e74ec07d642
                 type: Microsoft.ApiManagement/service/notifications/recipientUsers
-definitions:
-  NotificationCollection:
-    description: Paged Notification list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/NotificationContract'
-        type: array
-  NotificationContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Notification details.
-    properties:
-      properties:
-        $ref: '#/definitions/NotificationContractProperties'
-        description: Notification entity contract properties.
-        x-ms-client-flatten: true
-  NotificationContractProperties:
-    description: Notification Contract properties.
-    properties:
-      description:
-        description: Description of the Notification.
-        type: string
-      recipients:
-        $ref: '#/definitions/RecipientsContractProperties'
-        description: Recipient Parameter values.
-      title:
-        description: Title of the Notification.
-        maxLength: 1000
-        minLength: 1
-        type: string
-    required:
-      - title
-  RecipientEmailCollection:
-    description: Paged Recipient User list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/RecipientEmailContract'
-        type: array
-  RecipientEmailContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Recipient Email details.
-    properties:
-      properties:
-        $ref: '#/definitions/RecipientEmailContractProperties'
-        description: Recipient Email contract properties.
-        x-ms-client-flatten: true
-  RecipientEmailContractProperties:
-    description: Recipient Email Contract Properties.
-    properties:
-      email:
-        description: User Email subscribed to notification.
-        type: string
-  RecipientUserCollection:
-    description: Paged Recipient User list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/RecipientUserContract'
-        type: array
-  RecipientUserContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Recipient User details.
-    properties:
-      properties:
-        $ref: '#/definitions/RecipientUsersContractProperties'
-        description: Recipient User entity contract properties.
-        x-ms-client-flatten: true
-  RecipientUsersContractProperties:
-    description: Recipient User Contract Properties.
-    properties:
-      userId:
-        description: API Management UserId subscribed to notification.
-        type: string
-  RecipientsContractProperties:
-    description: Notification Parameter contract.
-    properties:
-      emails:
-        description: List of Emails subscribed for the notification.
-        items:
-          type: string
-        type: array
-      users:
-        description: List of Users subscribed for the notification.
-        items:
-          type: string
-        type: array
+definitions: {}

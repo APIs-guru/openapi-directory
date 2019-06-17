@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2017-07-01/containerService.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: containerservice-containerService
   x-tags:
@@ -47,13 +46,6 @@ parameters:
     description: The name of the resource group.
     in: path
     name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceNameParameter:
-    description: The name of the resource.
-    in: path
-    name: resourceName
     required: true
     type: string
     x-ms-parameter-location: method

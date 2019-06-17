@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-TasksCommon
   x-tags:
@@ -62,7 +61,7 @@ definitions:
       - sasUri
     type: object
   ConnectToSourceNonSqlTaskOutput:
-    description: 'Output for connect to Oracle, MySQL type source'
+    description: Output for connect to MySQL type source
     properties:
       databases:
         description: List of databases on the server
@@ -879,7 +878,7 @@ definitions:
       modelAsString: true
       name: SchemaMigrationStage
   ServerProperties:
-    description: 'Server properties for Oracle, MySQL type source'
+    description: Server properties for MySQL type source
     properties:
       serverDatabaseCount:
         description: Number of databases in the server

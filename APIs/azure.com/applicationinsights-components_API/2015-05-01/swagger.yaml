@@ -35,12 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
   ComponentPurgeIdParameter:
     description: 'In a purge status request, this is the Id of the operation the status of which is returned.'
     in: path
@@ -56,13 +50,6 @@ parameters:
     schema:
       $ref: '#/definitions/ComponentPurgeBody'
     x-ms-parameter-location: method
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ResourceNameParameter:
     description: The name of the Application Insights component resource.
     in: path
@@ -70,20 +57,24 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Insights/components':
     get:
       description: Gets a list of all Application Insights components within a subscription.
       operationId: Components_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: A list containing 0 or more Application Insights component definitions.
@@ -144,9 +135,27 @@ paths:
       description: Gets a list of Application Insights components within a resource group.
       operationId: Components_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: A list containing 0 or more Application Insights component definitions.
@@ -208,9 +217,27 @@ paths:
       description: Deletes an Application Insights component.
       operationId: Components_Delete
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -231,9 +258,27 @@ paths:
       description: Returns an Application Insights component.
       operationId: Components_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -273,9 +318,27 @@ paths:
       description: Updates an existing component's tags. To update other fields use the CreateOrUpdate method.
       operationId: Components_UpdateTags
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - description: Updated tag information to set into the component instance.
           in: body
@@ -333,9 +396,27 @@ paths:
       description: 'Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.'
       operationId: Components_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - description: Properties that need to be specified to create an Application Insights component.
           in: body
@@ -428,9 +509,27 @@ paths:
       description: Get status for an ongoing purge operation.
       operationId: Components_GetPurgeStatus
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ComponentPurgeIdParameter'
       responses:
@@ -455,9 +554,27 @@ paths:
       description: Purges data in an Application Insights component by a set of user-defined filters.
       operationId: Components_Purge
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ComponentPurgeParameter'
       responses:
@@ -614,7 +731,7 @@ definitions:
         description: 'When filtering over custom dimensions, this key will be used as the name of the custom dimension.'
         type: string
       operator:
-        description: A query operator to evaluate over the provided column and value(s).
+        description: 'A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query.'
         type: string
       value:
         description: 'the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= ''2017-09-01'') or array of values.'

@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/relay/resource-manager/Microsoft.Relay/stable/2016-07-01/relay.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: relay
   x-tags:
@@ -122,121 +121,101 @@ paths:
               body:
                 value:
                   - display:
-                      description: Checks availability of namespace under given subscription.
                       operation: Get namespace availability.
                       provider: Microsoft Azure Relay
                       resource: Non Resource Operation
                     name: Microsoft.Relay/checkNamespaceAvailability/action
                   - display:
-                      description: Registers the subscription for the Relay resource provider and enables the creation of Relay resources
                       operation: Registers the Relay Resource Provider
                       provider: Microsoft Azure Relay
                       resource: Relay and Hybridconnection Resource Provider
                     name: Microsoft.Relay/register/action
                   - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
                       operation: 'Create Or Update Namespace '
                       provider: Microsoft Azure Relay
                       resource: Namespace
                     name: Microsoft.Relay/namespaces/write
                   - display:
-                      description: Get the list of Namespace Resource Description
                       operation: Get Namespace Resource
                       provider: Microsoft Azure Relay
                       resource: Namespace
                     name: Microsoft.Relay/namespaces/read
                   - display:
-                      description: Delete Namespace Resource
                       operation: Delete Namespace
                       provider: Microsoft Azure Relay
                       resource: Namespace
                     name: Microsoft.Relay/namespaces/Delete
                   - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Namespace Authorization Rules
                       provider: Microsoft Azure Relay
                       resource: AuthorizationRules
                     name: Microsoft.Relay/namespaces/authorizationRules/write
                   - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
                       operation: Delete Namespace Authorization Rule
                       provider: Microsoft Azure Relay
                       resource: AuthorizationRules
                     name: Microsoft.Relay/namespaces/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to the Namespace
                       operation: Get Namespace Listkeys
                       provider: Microsoft Azure Relay
                       resource: AuthorizationRules
                     name: Microsoft.Relay/namespaces/authorizationRules/listkeys/action
                   - display:
-                      description: Create or Update HybridConnection properties.
                       operation: Create or Update HybridConnection
                       provider: Microsoft Azure Relay
                       resource: HybridConnection
                     name: Microsoft.Relay/namespaces/HybridConnections/write
                   - display:
-                      description: Get list of HybridConnection Resource Descriptions
                       operation: Get HybridConnection
                       provider: Microsoft Azure Relay
                       resource: HybridConnection
                     name: Microsoft.Relay/namespaces/HybridConnections/read
                   - display:
-                      description: Operation to delete HybridConnection Resource
                       operation: Delete HybridConnection
                       provider: Microsoft Azure Relay
                       resource: HybridConnection
                     name: Microsoft.Relay/namespaces/HybridConnections/Delete
                   - display:
-                      description: 'Create HybridConnection Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update HybridConnection Authorization Rule
                       provider: Microsoft Azure Relay
                       resource: HybridConnection AuthorizationRules
                     name: Microsoft.Relay/namespaces/HybridConnections/authorizationRules/write
                   - display:
-                      description: Operation to delete HybridConnection Authorization Rules
                       operation: Delete HybridConnection Authorization Rules
                       provider: Microsoft Azure Relay
                       resource: HybridConnection AuthorizationRules
                     name: Microsoft.Relay/namespaces/HybridConnections/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to HybridConnection
                       operation: List HybridConnection keys
                       provider: Microsoft Azure Relay
                       resource: HybridConnection AuthorizationRules
                     name: Microsoft.Relay/namespaces/HybridConnections/authorizationRules/listkeys/action
                   - display:
-                      description: Create or Update WcfRelay properties.
                       operation: Create or Update WcfRelay
                       provider: Microsoft Azure Relay
                       resource: WcfRelay
                     name: Microsoft.Relay/namespaces/WcfRelays/write
                   - display:
-                      description: Get list of WcfRelay Resource Descriptions
                       operation: Get WcfRelay
                       provider: Microsoft Azure Relay
                       resource: WcfRelay
                     name: Microsoft.Relay/namespaces/WcfRelays/read
                   - display:
-                      description: Operation to delete WcfRelay Resource
                       operation: Delete WcfRelay
                       provider: Microsoft Azure Relay
                       resource: WcfRelay
                     name: Microsoft.Relay/namespaces/WcfRelays/Delete
                   - display:
-                      description: 'Create WcfRelay Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update WcfRelay Authorization Rule
                       provider: Microsoft Azure Relay
                       resource: WcfRelay AuthorizationRules
                     name: Microsoft.Relay/namespaces/WcfRelays/authorizationRules/write
                   - display:
-                      description: Operation to delete WcfRelay Authorization Rules
                       operation: Delete WcfRelay Authorization Rules
                       provider: Microsoft Azure Relay
                       resource: WcfRelay AuthorizationRules
                     name: Microsoft.Relay/namespaces/WcfRelays/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to WcfRelay
                       operation: List WcfRelay keys
                       provider: Microsoft Azure Relay
                       resource: WcfRelay AuthorizationRules

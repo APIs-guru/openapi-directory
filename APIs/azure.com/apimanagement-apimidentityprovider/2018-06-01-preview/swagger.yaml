@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimidentityprovider.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimidentityprovider
   x-tags:
@@ -73,7 +72,101 @@ paths:
         '200':
           description: Lists a collection of Identity Providers.
           schema:
-            $ref: '#/definitions/IdentityProviderList'
+            description: List of all the Identity Providers configured on the service instance.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Identity Provider configuration values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Identity Provider details.
+                  properties:
+                    properties:
+                      allOf:
+                        - description: Identity Provider Base Parameter Properties.
+                          properties:
+                            allowedTenants:
+                              description: List of Allowed Tenants when configuring Azure Active Directory login.
+                              items:
+                                type: string
+                              maxItems: 32
+                              type: array
+                            authority:
+                              description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                              type: string
+                            passwordResetPolicyName:
+                              description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                              minLength: 1
+                              type: string
+                            profileEditingPolicyName:
+                              description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                              minLength: 1
+                              type: string
+                            signinPolicyName:
+                              description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                              minLength: 1
+                              type: string
+                            signupPolicyName:
+                              description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                              minLength: 1
+                              type: string
+                            type:
+                              description: Identity Provider Type identifier.
+                              enum:
+                                - facebook
+                                - google
+                                - microsoft
+                                - twitter
+                                - aad
+                                - aadB2C
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: IdentityProviderType
+                                values:
+                                  - description: Facebook as Identity provider.
+                                    value: facebook
+                                  - description: Google as Identity provider.
+                                    value: google
+                                  - description: Microsoft Live as Identity provider.
+                                    value: microsoft
+                                  - description: Twitter as Identity provider.
+                                    value: twitter
+                                  - description: Azure Active Directory as Identity provider.
+                                    value: aad
+                                  - description: Azure Active Directory B2C as Identity provider.
+                                    value: aadB2C
+                      description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+                      properties:
+                        clientId:
+                          description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                          minLength: 1
+                          type: string
+                        clientSecret:
+                          description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                          minLength: 1
+                          type: string
+                      required:
+                        - clientId
+                        - clientSecret
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -325,7 +418,92 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/IdentityProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Identity Provider details.
+            properties:
+              properties:
+                allOf:
+                  - description: Identity Provider Base Parameter Properties.
+                    properties:
+                      allowedTenants:
+                        description: List of Allowed Tenants when configuring Azure Active Directory login.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                      authority:
+                        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                        type: string
+                      passwordResetPolicyName:
+                        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      profileEditingPolicyName:
+                        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signinPolicyName:
+                        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signupPolicyName:
+                        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      type:
+                        description: Identity Provider Type identifier.
+                        enum:
+                          - facebook
+                          - google
+                          - microsoft
+                          - twitter
+                          - aad
+                          - aadB2C
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: IdentityProviderType
+                          values:
+                            - description: Facebook as Identity provider.
+                              value: facebook
+                            - description: Google as Identity provider.
+                              value: google
+                            - description: Microsoft Live as Identity provider.
+                              value: microsoft
+                            - description: Twitter as Identity provider.
+                              value: twitter
+                            - description: Azure Active Directory as Identity provider.
+                              value: aad
+                            - description: Azure Active Directory B2C as Identity provider.
+                              value: aadB2C
+                description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+                properties:
+                  clientId:
+                    description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                    minLength: 1
+                    type: string
+                  clientSecret:
+                    description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                    minLength: 1
+                    type: string
+                required:
+                  - clientId
+                  - clientSecret
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -540,7 +718,73 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/IdentityProviderUpdateParameters'
+            description: Parameters supplied to update Identity Provider
+            properties:
+              properties:
+                allOf:
+                  - description: Identity Provider Base Parameter Properties.
+                    properties:
+                      allowedTenants:
+                        description: List of Allowed Tenants when configuring Azure Active Directory login.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                      authority:
+                        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                        type: string
+                      passwordResetPolicyName:
+                        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      profileEditingPolicyName:
+                        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signinPolicyName:
+                        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signupPolicyName:
+                        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      type:
+                        description: Identity Provider Type identifier.
+                        enum:
+                          - facebook
+                          - google
+                          - microsoft
+                          - twitter
+                          - aad
+                          - aadB2C
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: IdentityProviderType
+                          values:
+                            - description: Facebook as Identity provider.
+                              value: facebook
+                            - description: Google as Identity provider.
+                              value: google
+                            - description: Microsoft Live as Identity provider.
+                              value: microsoft
+                            - description: Twitter as Identity provider.
+                              value: twitter
+                            - description: Azure Active Directory as Identity provider.
+                              value: aad
+                            - description: Azure Active Directory B2C as Identity provider.
+                              value: aadB2C
+                description: Parameters supplied to the Update Identity Provider operation.
+                properties:
+                  clientId:
+                    description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                    minLength: 1
+                    type: string
+                  clientSecret:
+                    description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                    minLength: 1
+                    type: string
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -659,7 +903,92 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/IdentityProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Identity Provider details.
+            properties:
+              properties:
+                allOf:
+                  - description: Identity Provider Base Parameter Properties.
+                    properties:
+                      allowedTenants:
+                        description: List of Allowed Tenants when configuring Azure Active Directory login.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                      authority:
+                        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                        type: string
+                      passwordResetPolicyName:
+                        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      profileEditingPolicyName:
+                        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signinPolicyName:
+                        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signupPolicyName:
+                        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      type:
+                        description: Identity Provider Type identifier.
+                        enum:
+                          - facebook
+                          - google
+                          - microsoft
+                          - twitter
+                          - aad
+                          - aadB2C
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: IdentityProviderType
+                          values:
+                            - description: Facebook as Identity provider.
+                              value: facebook
+                            - description: Google as Identity provider.
+                              value: google
+                            - description: Microsoft Live as Identity provider.
+                              value: microsoft
+                            - description: Twitter as Identity provider.
+                              value: twitter
+                            - description: Azure Active Directory as Identity provider.
+                              value: aad
+                            - description: Azure Active Directory B2C as Identity provider.
+                              value: aadB2C
+                description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+                properties:
+                  clientId:
+                    description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                    minLength: 1
+                    type: string
+                  clientSecret:
+                    description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                    minLength: 1
+                    type: string
+                required:
+                  - clientId
+                  - clientSecret
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -684,7 +1013,92 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/IdentityProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Identity Provider details.
+            properties:
+              properties:
+                allOf:
+                  - description: Identity Provider Base Parameter Properties.
+                    properties:
+                      allowedTenants:
+                        description: List of Allowed Tenants when configuring Azure Active Directory login.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                      authority:
+                        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                        type: string
+                      passwordResetPolicyName:
+                        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      profileEditingPolicyName:
+                        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signinPolicyName:
+                        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signupPolicyName:
+                        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      type:
+                        description: Identity Provider Type identifier.
+                        enum:
+                          - facebook
+                          - google
+                          - microsoft
+                          - twitter
+                          - aad
+                          - aadB2C
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: IdentityProviderType
+                          values:
+                            - description: Facebook as Identity provider.
+                              value: facebook
+                            - description: Google as Identity provider.
+                              value: google
+                            - description: Microsoft Live as Identity provider.
+                              value: microsoft
+                            - description: Twitter as Identity provider.
+                              value: twitter
+                            - description: Azure Active Directory as Identity provider.
+                              value: aad
+                            - description: Azure Active Directory B2C as Identity provider.
+                              value: aadB2C
+                description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+                properties:
+                  clientId:
+                    description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                    minLength: 1
+                    type: string
+                  clientSecret:
+                    description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                    minLength: 1
+                    type: string
+                required:
+                  - clientId
+                  - clientSecret
         '201':
           description: IdentityProvider configuration were successfully created.
           headers:
@@ -692,7 +1106,92 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/IdentityProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Identity Provider details.
+            properties:
+              properties:
+                allOf:
+                  - description: Identity Provider Base Parameter Properties.
+                    properties:
+                      allowedTenants:
+                        description: List of Allowed Tenants when configuring Azure Active Directory login.
+                        items:
+                          type: string
+                        maxItems: 32
+                        type: array
+                      authority:
+                        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+                        type: string
+                      passwordResetPolicyName:
+                        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      profileEditingPolicyName:
+                        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signinPolicyName:
+                        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      signupPolicyName:
+                        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
+                        minLength: 1
+                        type: string
+                      type:
+                        description: Identity Provider Type identifier.
+                        enum:
+                          - facebook
+                          - google
+                          - microsoft
+                          - twitter
+                          - aad
+                          - aadB2C
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: IdentityProviderType
+                          values:
+                            - description: Facebook as Identity provider.
+                              value: facebook
+                            - description: Google as Identity provider.
+                              value: google
+                            - description: Microsoft Live as Identity provider.
+                              value: microsoft
+                            - description: Twitter as Identity provider.
+                              value: twitter
+                            - description: Azure Active Directory as Identity provider.
+                              value: aad
+                            - description: Azure Active Directory B2C as Identity provider.
+                              value: aadB2C
+                description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+                properties:
+                  clientId:
+                    description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+                    minLength: 1
+                    type: string
+                  clientSecret:
+                    description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+                    minLength: 1
+                    type: string
+                required:
+                  - clientId
+                  - clientSecret
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -755,128 +1254,4 @@ paths:
                   clientSecret: facebookapplicationsecret
                   type: facebook
                 type: Microsoft.ApiManagement/service/identityProviders
-definitions:
-  IdentityProviderBaseParameters:
-    description: Identity Provider Base Parameter Properties.
-    properties:
-      allowedTenants:
-        description: List of Allowed Tenants when configuring Azure Active Directory login.
-        items:
-          type: string
-        maxItems: 32
-        type: array
-      authority:
-        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
-        type: string
-      passwordResetPolicyName:
-        description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
-        minLength: 1
-        type: string
-      profileEditingPolicyName:
-        description: Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
-        minLength: 1
-        type: string
-      signinPolicyName:
-        description: Signin Policy Name. Only applies to AAD B2C Identity Provider.
-        minLength: 1
-        type: string
-      signupPolicyName:
-        description: Signup Policy Name. Only applies to AAD B2C Identity Provider.
-        minLength: 1
-        type: string
-      type:
-        description: Identity Provider Type identifier.
-        enum:
-          - facebook
-          - google
-          - microsoft
-          - twitter
-          - aad
-          - aadB2C
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: IdentityProviderType
-          values:
-            - description: Facebook as Identity provider.
-              value: facebook
-            - description: Google as Identity provider.
-              value: google
-            - description: Microsoft Live as Identity provider.
-              value: microsoft
-            - description: Twitter as Identity provider.
-              value: twitter
-            - description: Azure Active Directory as Identity provider.
-              value: aad
-            - description: Azure Active Directory B2C as Identity provider.
-              value: aadB2C
-  IdentityProviderContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Identity Provider details.
-    properties:
-      properties:
-        $ref: '#/definitions/IdentityProviderContractProperties'
-        description: Identity Provider contract properties.
-        x-ms-client-flatten: true
-  IdentityProviderContractProperties:
-    allOf:
-      - $ref: '#/definitions/IdentityProviderBaseParameters'
-    description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
-    properties:
-      clientId:
-        description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
-        minLength: 1
-        type: string
-      clientSecret:
-        description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
-        minLength: 1
-        type: string
-    required:
-      - clientId
-      - clientSecret
-  IdentityProviderList:
-    description: List of all the Identity Providers configured on the service instance.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Identity Provider configuration values.
-        items:
-          $ref: '#/definitions/IdentityProviderContract'
-        type: array
-  IdentityProviderUpdateParameters:
-    description: Parameters supplied to update Identity Provider
-    properties:
-      properties:
-        $ref: '#/definitions/IdentityProviderUpdateProperties'
-        description: Identity Provider update properties.
-        x-ms-client-flatten: true
-  IdentityProviderUpdateProperties:
-    allOf:
-      - $ref: '#/definitions/IdentityProviderBaseParameters'
-    description: Parameters supplied to the Update Identity Provider operation.
-    properties:
-      clientId:
-        description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
-        minLength: 1
-        type: string
-      clientSecret:
-        description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
-        minLength: 1
-        type: string
+definitions: {}

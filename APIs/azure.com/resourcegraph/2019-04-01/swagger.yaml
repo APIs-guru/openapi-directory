@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resourcegraph
   x-tags:
@@ -70,7 +69,8 @@ paths:
                       provider: Microsoft Resource Graph
                       resource: Resources
                     name: Microsoft.ResourceGraph/resources/action
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.ResourceGraph/resources:
     post:
       description: Queries the resources managed by Azure Resource Manager for all subscriptions specified in the request.
@@ -308,7 +308,8 @@ paths:
           parameters:
             api-version: '2019-04-01'
             query:
-              $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
+              options:
+                $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
               query: 'where name contains ''test'' | project id, name, type, location'
               subscriptions:
                 - cfbbd179-59d2-4052-aa06-9270a38aa9d6
@@ -537,9 +538,9 @@ paths:
           parameters:
             api-version: '2019-04-01'
             query:
-              $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
               options:
                 $skip: 10
+                $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
                 $top: 2
               query: 'where name contains ''test'' | project id, name, type, location'
               subscriptions:
@@ -739,7 +740,6 @@ definitions:
         format: int32
         type: integer
       data:
-        $ref: '#/definitions/Table'
         description: A table containing the desired facets. Only present if the facet is valid.
       totalRecords:
         description: Number of total records in the facet results.
@@ -824,6 +824,15 @@ definitions:
         maximum: 1000
         minimum: 1
         type: integer
+      resultFormat:
+        description: Defines in which format query result returned.
+        enum:
+          - table
+          - objectArray
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ResultFormat
   QueryResponse:
     description: Query result.
     properties:
@@ -835,7 +844,6 @@ definitions:
         format: int64
         type: integer
       data:
-        $ref: '#/definitions/Table'
         description: Query output in tabular format.
       facets:
         description: Query facets.

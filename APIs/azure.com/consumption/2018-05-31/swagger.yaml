@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/consumption/resource-manager/Microsoft.Consumption/stable/2018-05-31/consumption.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: consumption
   x-tags:
@@ -1009,7 +1008,8 @@ paths:
                       usageDate: '2018-05-01'
                     type: Microsoft.Consumption/forecasts
       x-ms-odata: '#/definitions/Forecast'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default':
     get:
       description: 'Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.'

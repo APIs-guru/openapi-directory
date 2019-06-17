@@ -606,10 +606,10 @@ paths:
                                 - tag2Value2
                                 - tag2Value3
                     nonAzureQueries:
-                      - FunctionAlias: SavedSearch1
-                        WorkspaceId: WorkspaceId1
-                      - FunctionAlias: SavedSearch2
-                        WorkspaceId: WorkspaceId2
+                      - functionAlias: SavedSearch1
+                        workspaceId: WorkspaceId1
+                      - functionAlias: SavedSearch2
+                        workspaceId: WorkspaceId2
                   windows:
                     excludedKbNumbers:
                       - '168934'
@@ -886,10 +886,19 @@ definitions:
           - Hour
           - Week
           - Month
+          - Minute
         type: string
         x-ms-enum:
           modelAsString: true
           name: ScheduleFrequency
+          values:
+            - value: OneTime
+            - value: Day
+            - value: Hour
+            - value: Week
+            - value: Month
+            - description: The minimum allowed interval for Minute schedules is 15 minutes.
+              value: Minute
       interval:
         description: Gets or sets the interval of the schedule.
         type: integer
@@ -1018,18 +1027,6 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: OperatingSystemType
-  scheduleFrequency:
-    description: Gets or sets the frequency of the schedule.
-    enum:
-      - OneTime
-      - Day
-      - Hour
-      - Week
-      - Month
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: ScheduleFrequency
   softwareUpdateConfiguration:
     description: Software update configuration properties.
     properties:
@@ -1081,9 +1078,26 @@ definitions:
         type: string
         x-nullable: false
       frequency:
-        $ref: '#/definitions/scheduleFrequency'
-        description: execution frequency of the schedule associated with the software update configuration
+        description: Gets or sets the frequency of the schedule.
+        enum:
+          - OneTime
+          - Day
+          - Hour
+          - Week
+          - Month
+          - Minute
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ScheduleFrequency
+          values:
+            - value: OneTime
+            - value: Day
+            - value: Hour
+            - value: Week
+            - value: Month
+            - description: The minimum allowed interval for Minute schedules is 15 minutes.
+              value: Minute
       lastModifiedTime:
         description: 'Last time software update configuration was modified, which only appears in the response.'
         format: date-time

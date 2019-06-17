@@ -185,7 +185,8 @@ paths:
                       namespace: microsoft.compute/virtualmachines
                       timespan: '2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z'
                     type: microsoft.insights/metricBaselines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   BaselineMetadata:
     description: Represents a baseline metadata value.

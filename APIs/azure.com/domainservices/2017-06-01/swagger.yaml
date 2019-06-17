@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/domainservices/resource-manager/Microsoft.AAD/stable/2017-06-01/domainservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: domainservices
   x-tags:
@@ -43,6 +42,13 @@ parameters:
     description: The name of the domain service.
     in: path
     name: domainServiceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ReplicaSetNameParameter:
+    description: The name of the replica set.
+    in: path
+    name: replicaSetName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -133,7 +139,7 @@ paths:
           description: HTTP 200 (OK) if the operation was successful.
           schema:
             $ref: '#/definitions/DomainServiceListResult'
-      summary: List Domain Services in Subscription (GET Resources)
+      summary: List Domain Services in Subscription
       tags:
         - DomainServices
       x-ms-examples:
@@ -212,7 +218,7 @@ paths:
           description: HTTP 200 (OK) if the operation was successful.
           schema:
             $ref: '#/definitions/DomainServiceListResult'
-      summary: List Domain Services in Resource Group (GET Resources)
+      summary: List Domain Services in Resource Group
       tags:
         - DomainServices
       x-ms-examples:
@@ -324,7 +330,7 @@ paths:
           description: HTTP 200 (OK) if the operation was successful.
           schema:
             $ref: '#/definitions/DomainService'
-      summary: Get Domain Service (GET Resources)
+      summary: Get Domain Service
       tags:
         - DomainServices
       x-ms-examples:
@@ -669,6 +675,316 @@ paths:
                 type: Microsoft.AAD/domainServices
               description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/replicaSets':
+    get:
+      description: The List ReplicaSets in Resource Group operation lists all the domain services available under the given resource group.
+      operationId: ReplicaSets_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/DomainServiceNameParameter'
+      responses:
+        '200':
+          description: HTTP 200 (OK) if the operation was successful.
+          schema:
+            $ref: '#/definitions/ReplicaSetListResult'
+      summary: List ReplicaSets in Resource Group
+      tags:
+        - ReplicaSets
+      x-ms-examples:
+        List ReplicaSet:
+          parameters:
+            api-version: '2017-06-01'
+            domainServiceName: zdomain.zforest.com
+            resourceGroupName: sva-tt-WUS
+            subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                    id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                    location: westus
+                    name: additionalSite
+                    properties:
+                      domainControllerIpAddress:
+                        - 10.0.0.5
+                        - 10.0.0.8
+                      provisioningState: Succeeded
+                      replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                      serviceStatus: Running
+                      subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                    type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 200 (OK) if the operation was successful.
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/replicaSets/{replicaSetName}':
+    delete:
+      description: The Delete ReplicaSet operation deletes an existing ReplicaSet.
+      operationId: ReplicaSets_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/DomainServiceNameParameter'
+        - $ref: '#/parameters/ReplicaSetNameParameter'
+      responses:
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+        '204':
+          description: HTTP 204 (Not Content) if resource does not exist.
+      summary: Delete ReplicaSet (DELETE Resource)
+      tags:
+        - ReplicaSets
+      x-ms-examples:
+        Delete ReplicaSet:
+          parameters:
+            api-version: '2017-06-01'
+            domainServiceName: zdomain.zforest.com
+            replicaSetName: additionalSite
+            resourceGroupName: sva-tt-WUS
+            subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
+          responses:
+            '202':
+              description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+            '204':
+              description: HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed.
+      x-ms-long-running-operation: true
+    get:
+      description: The Get ReplicaSet operation retrieves a json representation of the ReplicaSet.
+      operationId: ReplicaSets_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/DomainServiceNameParameter'
+        - $ref: '#/parameters/ReplicaSetNameParameter'
+      responses:
+        '200':
+          description: HTTP 200 (OK) if the operation was successful.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+      summary: Get ReplicaSet
+      tags:
+        - ReplicaSets
+      x-ms-examples:
+        Get ReplicaSet:
+          parameters:
+            api-version: '2017-06-01'
+            domainServiceName: zdomain.zforest.com
+            replicaSetName: additionalSite
+            resourceGroupName: sva-tt-WUS
+            subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
+          responses:
+            '200':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  healthAlerts:
+                    - id: AADDS104
+                      issue: Microsoft is unable to reach the domain controllers for this managed domain. This may happen if a network security group (NSG) configured on your virtual network blocks access to the managed domain. Another possible reason is if there is a user defined route that blocks incoming traffic from the internet.
+                      lastDetected: '2018-09-18T17:46:39.2697888Z'
+                      name: The managed domain is experiencing a network error
+                      raised: '2018-09-18T01:55:40.7834289Z'
+                      resolutionUri: 'https://aka.ms/aadds-neterr'
+                      severity: '2'
+                  healthLastEvaluated: '2018-02-15T21:43:21Z'
+                  healthMonitors:
+                    - details: 'Last backed up on Tue, 18 Sep 2018 03:37:04 GMT'
+                      id: AADDS501
+                      name: Backup
+                    - details: 'Synchronized on Tue, 18 Sep 2018 16:47:57 GMT.'
+                      id: AADDS500
+                      name: Synchronization with Azure AD
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                tags:
+                  Owner: jicha
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 200 (OK) if the operation was successful.
+    patch:
+      description: The Update ReplicaSet operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.
+      operationId: ReplicaSets_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/DomainServiceNameParameter'
+        - $ref: '#/parameters/ReplicaSetNameParameter'
+        - description: Properties supplied to the Update a ReplicaSet operation.
+          in: body
+          name: replicaSet
+          required: true
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+      responses:
+        '200':
+          description: HTTP 200 (OK) if the operation was successful.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+      summary: Update ReplicaSet (PATCH Resource)
+      tags:
+        - ReplicaSets
+      x-ms-examples:
+        Update ReplicaSet:
+          parameters:
+            api-version: '2017-06-01'
+            domainServiceName: zdomain.zforest.com
+            replicaSet:
+              id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+              location: westus
+              name: additionalSite
+              properties:
+                subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+            replicaSetName: additionalSite
+            resourceGroupName: sva-tt-WUS
+            subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
+          responses:
+            '200':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                tags:
+                  Owner: jicha
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 200 (OK) if the operation was successful.
+            '202':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+      x-ms-long-running-operation: true
+    put:
+      description: The Create ReplicaSet operation creates a new domain service with the specified parameters.
+      operationId: ReplicaSets_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/DomainServiceNameParameter'
+        - $ref: '#/parameters/ReplicaSetNameParameter'
+        - description: Properties supplied to the Create ReplicaSet operation.
+          in: body
+          name: replicaSet
+          required: true
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+      responses:
+        '200':
+          description: HTTP 200 (OK) if the operation was successful.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+        '201':
+          description: HTTP 201 (Created) if the operation completed successfully.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+        '202':
+          description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+          schema:
+            $ref: '#/definitions/ReplicaSet'
+      summary: Create or Update ReplicaSet (PUT Resource)
+      tags:
+        - ReplicaSets
+      x-ms-examples:
+        Create ReplicaSet:
+          parameters:
+            api-version: '2017-06-01'
+            domainServiceName: zdomain.zforest.com
+            replicaSet:
+              id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+              location: westus
+              name: additionalSite
+              properties:
+                subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+            replicaSetName: additionalSite
+            resourceGroupName: sva-tt-WUS
+            subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
+          responses:
+            '200':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 200 (OK) if the operation was successful.
+            '201':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 201 (Created) if the operation completed successfully.
+            '202':
+              body:
+                etag: W/"datetime'2017-04-10T04%3A42%3A19.7067387Z'"
+                id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com/replicaSets/additionalSite
+                location: westus
+                name: additionalSite
+                properties:
+                  domainControllerIpAddress:
+                    - 10.0.0.5
+                    - 10.0.0.8
+                  provisioningState: Succeeded
+                  replicaSetId: 99083198-a39c-469f-972d-59017e7f078c
+                  serviceStatus: Running
+                  subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
+                type: Microsoft.AAD/domainServices/replicaSets
+              description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
+      x-ms-long-running-operation: true
 definitions:
   DomainSecuritySettings:
     description: Domain Security Settings
@@ -951,6 +1267,75 @@ definitions:
           $ref: '#/definitions/OperationEntity'
         type: array
     type: object
+  ReplicaSet:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Replica Set.
+    properties:
+      properties:
+        $ref: '#/definitions/ReplicaSetProperties'
+        description: ReplicaSet properties
+        x-ms-client-flatten: true
+  ReplicaSetListResult:
+    description: The response from the List ReplicaSets operation.
+    properties:
+      nextLink:
+        description: The continuation token for the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the list of ReplicaSet.
+        items:
+          $ref: '#/definitions/ReplicaSet'
+        type: array
+  ReplicaSetProperties:
+    description: Properties of the ReplicaSet.
+    properties:
+      domainControllerIpAddress:
+        description: List of Domain Controller IP Address
+        items:
+          description: Domain Controller IP Address
+          type: string
+        readOnly: true
+        type: array
+      externalAccessIpAddress:
+        description: External access ip address.
+        readOnly: true
+        type: string
+      healthAlerts:
+        description: List of Domain Health Alerts
+        items:
+          $ref: '#/definitions/HealthAlert'
+          description: Domain Health Alerts
+        readOnly: true
+        type: array
+      healthLastEvaluated:
+        description: Last domain evaluation run DateTime
+        format: date-time
+        readOnly: true
+        type: string
+      healthMonitors:
+        description: List of Domain Health Monitors
+        items:
+          $ref: '#/definitions/HealthMonitor'
+          description: Domain Health Monitors
+        readOnly: true
+        type: array
+      provisioningState:
+        description: 'the current deployment or provisioning state, which only appears in the response.'
+        readOnly: true
+        type: string
+      replicaSetId:
+        description: ReplicaSet Id
+        readOnly: true
+        type: string
+      serviceStatus:
+        description: Status of Domain Service instance
+        readOnly: true
+        type: string
+      subnetId:
+        description: The name of the virtual network that ReplicaSets will be deployed on. /virtualNetwork/vnetName/subnets/subnetName.
+        type: string
   Resource:
     description: The Resource model definition.
     properties:

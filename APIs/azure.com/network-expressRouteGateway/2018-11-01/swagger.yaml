@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-11-01/expressRouteGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteGateway
   x-tags:
@@ -290,14 +289,12 @@ paths:
             expressRouteGatewayName: gateway-2
             putExpressRouteGatewayParameters:
               location: westus
-              name: gateway-2
               properties:
                 autoScaleConfiguration:
                   bounds:
                     min: 3
                 virtualHub:
                   id: /subscriptions/subid/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName
-              type: Microsoft.Network/expressRouteGateways
             resourceGroupName: resourceGroupName
             subscriptionId: subid
           responses:

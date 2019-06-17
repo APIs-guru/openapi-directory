@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: monitor-metricDefinitions_API
   x-tags:
@@ -664,7 +663,8 @@ paths:
                       - Total
                       - Count
                     unit: Seconds
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AggregationType:
     description: the aggregation type of the metric.

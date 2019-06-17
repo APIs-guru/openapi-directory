@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-03-30/network.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network
   x-tags:
@@ -157,7 +156,8 @@ paths:
             $ref: '#/definitions/UsagesListResult'
       tags:
         - Usages
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces':
     get:
       description: The List networkInterfaces operation retrieves all the networkInterfaces in a subscription.

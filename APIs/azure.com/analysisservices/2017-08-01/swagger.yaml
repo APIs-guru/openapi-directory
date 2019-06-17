@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/analysisservices/resource-manager/Microsoft.AnalysisServices/stable/2017-08-01/analysisservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: analysisservices
   x-tags:
@@ -262,7 +261,8 @@ paths:
                     tags:
                       testKey: testValue
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus':
     get:
       description: Lists eligible SKUs for Analysis Services resource provider.
@@ -351,7 +351,8 @@ paths:
                     tags:
                       testKey: testValue
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}':
     delete:
       description: Deletes the specified Analysis Services server.
@@ -1048,7 +1049,7 @@ definitions:
     properties:
       enablePowerBIService:
         description: The indicator of enabling PBI service.
-        type: string
+        type: boolean
       firewallRules:
         description: An array of firewall rules.
         items:

@@ -117,7 +117,8 @@ paths:
                             key12: value12
                       criteria:
                         allOf:
-                          - dimensions: []
+                          - criterionType: StaticThresholdCriterion
+                            dimensions: []
                             metricName: CustomMetric_\Processor(_Total)\% Processor Time
                             name: High_CPU_80
                             operator: GreaterThan
@@ -144,7 +145,8 @@ paths:
                             key12: value12
                       criteria:
                         allOf:
-                          - dimensions: []
+                          - criterionType: StaticThresholdCriterion
+                            dimensions: []
                             metricName: CustomMetric_\Processor(_Total)\% Processor Time
                             name: Medium_CPU_50
                             operator: GreaterThan
@@ -162,7 +164,8 @@ paths:
                       'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
                     type: Microsoft.Insights/metricAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts':
     get:
       description: Retrieve alert rule definitions in a resource group.
@@ -210,7 +213,8 @@ paths:
                             key12: value12
                       criteria:
                         allOf:
-                          - dimensions: []
+                          - criterionType: StaticThresholdCriterion
+                            dimensions: []
                             metricName: CustomMetric_\Processor(_Total)\% Processor Time
                             name: High_CPU_80
                             operator: GreaterThan
@@ -237,7 +241,8 @@ paths:
                             key12: value12
                       criteria:
                         allOf:
-                          - dimensions: []
+                          - criterionType: StaticThresholdCriterion
+                            dimensions: []
                             metricName: CustomMetric_\Processor(_Total)\% Processor Time
                             name: Medium_CPU_50
                             operator: GreaterThan
@@ -255,7 +260,8 @@ paths:
                       'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
                     type: Microsoft.Insights/metricAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}':
     delete:
       description: Delete an alert rule definition.
@@ -314,6 +320,96 @@ paths:
       tags:
         - MetricAlerts
       x-ms-examples:
+        Get a dynamic alert rule for multiple resources:
+          parameters:
+            api-version: '2018-03-01'
+            resourceGroupName: gigtest
+            ruleName: MetricAlertOnMultipleResources
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/MetricAlertOnMultipleResources
+                location: global
+                properties:
+                  actions:
+                    - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                      webhookProperties:
+                        key11: value11
+                        key12: value12
+                  autoMitigate: false
+                  criteria:
+                    allOf:
+                      - alertSensitivity: Medium
+                        criterionType: DynamicThresholdCriterion
+                        dimensions: []
+                        failingPeriods:
+                          minFailingPeriodsToAlert: 4
+                          numberOfEvaluationPeriods: 4
+                        metricName: Percentage CPU
+                        metricNamespace: microsoft.compute/virtualmachines
+                        name: High_CPU_80
+                        operator: GreaterOrLessThan
+                        timeAggregation: Average
+                    odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                  description: This is the description of the rule1
+                  enabled: true
+                  evaluationFrequency: PT1M
+                  scopes:
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme1
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme2
+                  severity: 3
+                  targetResourceRegion: southcentralus
+                  targetResourceType: Microsoft.Compute/virtualMachines
+                  windowSize: PT15M
+                tags:
+                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                type: Microsoft.Insights/metricAlerts
+              headers: {}
+        Get a dynamic alert rule for single resource:
+          parameters:
+            api-version: '2018-03-01'
+            resourceGroupName: gigtest
+            ruleName: chiricutin
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin
+                location: global
+                properties:
+                  actions:
+                    - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                      webhookProperties:
+                        key11: value11
+                        key12: value12
+                  autoMitigate: false
+                  criteria:
+                    allOf:
+                      - alertSensitivity: Medium
+                        criterionType: DynamicThresholdCriterion
+                        dimensions: []
+                        failingPeriods:
+                          minFailingPeriodsToAlert: 4
+                          numberOfEvaluationPeriods: 4
+                        ignoreDataBefore: null
+                        metricName: Percentage CPU
+                        metricNamespace: microsoft.compute/virtualmachines
+                        name: High_CPU_80
+                        operator: GreaterOrLessThan
+                        timeAggregation: Average
+                    odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                  description: This is the description of the rule1
+                  enabled: true
+                  evaluationFrequency: Pt1m
+                  scopes:
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme
+                  severity: 3
+                  windowSize: Pt15m
+                tags:
+                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                type: Microsoft.Insights/metricAlerts
+              headers: {}
         Get an alert rule for multiple resources:
           parameters:
             api-version: '2018-03-01'
@@ -377,7 +473,8 @@ paths:
                   autoMitigate: false
                   criteria:
                     allOf:
-                      - dimensions: []
+                      - criterionType: StaticThresholdCriterion
+                        dimensions: []
                         metricName: \Processor(_Total)\% Processor Time
                         name: High_CPU_80
                         operator: GreaterThan
@@ -527,7 +624,8 @@ paths:
                 autoMitigate: false
                 criteria:
                   allOf:
-                    - dimensions: []
+                    - criterionType: StaticThresholdCriterion
+                      dimensions: []
                       metricName: \Processor(_Total)\% Processor Time
                       name: High_CPU_80
                       operator: GreaterThan
@@ -559,7 +657,8 @@ paths:
                   autoMitigate: false
                   criteria:
                     allOf:
-                      - dimensions: []
+                      - criterionType: StaticThresholdCriterion
+                        dimensions: []
                         metricName: \Processor(_Total)\% Processor Time
                         name: High_CPU_80
                         operator: GreaterThan
@@ -611,6 +710,166 @@ paths:
       tags:
         - MetricAlerts
       x-ms-examples:
+        Create or update a dynamic alert rule for Multiple Resources:
+          parameters:
+            api-version: '2018-03-01'
+            parameters:
+              location: global
+              properties:
+                actions:
+                  - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                    webhookProperties:
+                      key11: value11
+                      key12: value12
+                autoMitigate: false
+                criteria:
+                  allOf:
+                    - alertSensitivity: Medium
+                      criterionType: DynamicThresholdCriterion
+                      dimensions: []
+                      failingPeriods:
+                        minFailingPeriodsToAlert: 4
+                        numberOfEvaluationPeriods: 4
+                      metricName: Percentage CPU
+                      metricNamespace: microsoft.compute/virtualmachines
+                      name: High_CPU_80
+                      operator: GreaterOrLessThan
+                      timeAggregation: Average
+                  odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                description: This is the description of the rule1
+                enabled: true
+                evaluationFrequency: PT1M
+                scopes:
+                  - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme1
+                  - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme2
+                severity: 3
+                targetResourceRegion: southcentralus
+                targetResourceType: Microsoft.Compute/virtualMachines
+                windowSize: PT15M
+              tags: {}
+            resourceGroupName: gigtest
+            ruleName: MetricAlertOnMultipleResources
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/MetricAlertOnMultipleResources
+                location: global
+                properties:
+                  actions:
+                    - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                      webhookProperties:
+                        key11: value11
+                        key12: value12
+                  autoMitigate: false
+                  criteria:
+                    allOf:
+                      - alertSensitivity: Medium
+                        criterionType: DynamicThresholdCriterion
+                        dimensions: []
+                        failingPeriods:
+                          minFailingPeriodsToAlert: 4
+                          numberOfEvaluationPeriods: 4
+                        metricName: Percentage CPU
+                        metricNamespace: microsoft.compute/virtualmachines
+                        name: High_CPU_80
+                        operator: GreaterOrLessThan
+                        timeAggregation: Average
+                    odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                  description: This is the description of the rule1
+                  enabled: true
+                  evaluationFrequency: PT1M
+                  scopes:
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme1
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme2
+                  severity: 3
+                  targetResourceRegion: southcentralus
+                  targetResourceType: Microsoft.Compute/virtualMachines
+                  windowSize: PT15M
+                tags:
+                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                type: Microsoft.Insights/metricAlerts
+              headers: {}
+        Create or update a dynamic alert rule for Single Resource:
+          parameters:
+            api-version: '2018-03-01'
+            parameters:
+              location: global
+              properties:
+                actions:
+                  - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                    webhookProperties:
+                      key11: value11
+                      key12: value12
+                autoMitigate: false
+                criteria:
+                  allOf:
+                    - alertSensitivity: Medium
+                      criterionType: DynamicThresholdCriterion
+                      dimensions: []
+                      failingPeriods:
+                        minFailingPeriodsToAlert: 4
+                        numberOfEvaluationPeriods: 4
+                      ignoreDataBefore: '2019-04-04T21:00:00.000Z'
+                      metricName: Percentage CPU
+                      metricNamespace: microsoft.compute/virtualmachines
+                      name: High_CPU_80
+                      operator: GreaterOrLessThan
+                      timeAggregation: Average
+                  odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                description: This is the description of the rule1
+                enabled: true
+                evaluationFrequency: PT1M
+                scopes:
+                  - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme
+                severity: 3
+                targetResourceRegion: southcentralus
+                targetResourceType: Microsoft.Compute/virtualMachines
+                windowSize: PT15M
+              tags: {}
+            resourceGroupName: gigtest
+            ruleName: chiricutin
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin
+                location: global
+                properties:
+                  actions:
+                    - actionGroupId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2
+                      webhookProperties:
+                        key11: value11
+                        key12: value12
+                  autoMitigate: false
+                  criteria:
+                    allOf:
+                      - alertSensitivity: Medium
+                        criterionType: DynamicThresholdCriterion
+                        dimensions: []
+                        failingPeriods:
+                          minFailingPeriodsToAlert: 4
+                          numberOfEvaluationPeriods: 4
+                        ignoreDataBefore: '2019-04-04T21:00:00.000Z'
+                        metricName: Percentage CPU
+                        metricNamespace: microsoft.compute/virtualmachines
+                        name: High_CPU_80
+                        operator: GreaterOrLessThan
+                        timeAggregation: Average
+                    odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                  description: This is the description of the rule1
+                  enabled: true
+                  evaluationFrequency: PT1M
+                  scopes:
+                    - /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme
+                  severity: 3
+                  targetResourceRegion: southcentralus
+                  targetResourceType: Microsoft.Compute/virtualMachines
+                  windowSize: PT15M
+                tags:
+                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest': Resource
+                type: Microsoft.Insights/metricAlerts
+              headers: {}
         Create or update an alert rule for Multiple Resource:
           parameters:
             api-version: '2018-03-01'
@@ -699,7 +958,8 @@ paths:
                 autoMitigate: false
                 criteria:
                   allOf:
-                    - dimensions: []
+                    - criterionType: StaticThresholdCriterion
+                      dimensions: []
                       metricName: \Processor(_Total)\% Processor Time
                       name: High_CPU_80
                       operator: GreaterThan
@@ -731,7 +991,8 @@ paths:
                   autoMitigate: false
                   criteria:
                     allOf:
-                      - dimensions: []
+                      - criterionType: StaticThresholdCriterion
+                        dimensions: []
                         metricName: \Processor(_Total)\% Processor Time
                         name: High_CPU_80
                         operator: GreaterThan
@@ -994,6 +1255,55 @@ paths:
                     type: Microsoft.Insights/metricAlerts/status
               headers: {}
 definitions:
+  DynamicMetricCriteria:
+    allOf:
+      - $ref: '#/definitions/MultiMetricCriteria'
+    description: Criterion for dynamic threshold.
+    properties:
+      alertSensitivity:
+        description: The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.
+        enum:
+          - Low
+          - Medium
+          - High
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicThresholdSensitivity
+      failingPeriods:
+        $ref: '#/definitions/DynamicThresholdFailingPeriods'
+        description: The minimum number of violations required within the selected lookback time window required to raise an alert.
+        type: object
+      ignoreDataBefore:
+        description: Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)
+        format: date-time
+        type: string
+      operator:
+        description: The operator used to compare the metric value against the threshold.
+        enum:
+          - GreaterThan
+          - LessThan
+          - GreaterOrLessThan
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicThresholdOperator
+    required:
+      - operator
+      - alertSensitivity
+      - failingPeriods
+    type: object
+    x-ms-discriminator-value: DynamicThresholdCriterion
+  DynamicThresholdFailingPeriods:
+    description: The minimum number of violations required within the selected lookback time window required to raise an alert.
+    properties:
+      minFailingPeriodsToAlert:
+        description: The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods.
+        type: number
+      numberOfEvaluationPeriods:
+        description: The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points.
+        type: number
+    required:
+      - numberOfEvaluationPeriods
+      - minFailingPeriodsToAlert
   MetricAlertAction:
     description: An alert action.
     properties:
@@ -1176,20 +1486,6 @@ definitions:
       - $ref: '#/definitions/MultiMetricCriteria'
     description: Criterion to filter metrics.
     properties:
-      dimensions:
-        description: List of dimension conditions.
-        items:
-          $ref: '#/definitions/MetricDimension'
-        type: array
-      metricName:
-        description: Name of the metric.
-        type: string
-      metricNamespace:
-        description: Namespace of the metric.
-        type: string
-      name:
-        description: Name of the criteria.
-        type: string
       operator:
         description: the criteria operator.
         enum:
@@ -1206,21 +1502,8 @@ definitions:
         description: the criteria threshold value that activates the alert.
         format: double
         type: number
-      timeAggregation:
-        description: the criteria time aggregation types.
-        enum:
-          - Average
-          - Minimum
-          - Maximum
-          - Total
-        x-ms-enum:
-          modelAsString: true
-          name: AggregationType
     required:
-      - name
-      - metricName
       - operator
-      - timeAggregation
       - threshold
     type: object
     x-ms-discriminator-value: StaticThresholdCriterion
@@ -1245,18 +1528,46 @@ definitions:
   MultiMetricCriteria:
     additionalProperties:
       type: object
-    description: The types of conditions for a multi resource alert
+    description: The types of conditions for a multi resource alert.
     discriminator: criterionType
     properties:
       criterionType:
         description: ' Specifies the type of threshold criteria'
         enum:
           - StaticThresholdCriterion
+          - DynamicThresholdCriterion
         x-ms-enum:
           modelAsString: true
           name: criterionType
+      dimensions:
+        description: List of dimension conditions.
+        items:
+          $ref: '#/definitions/MetricDimension'
+        type: array
+      metricName:
+        description: Name of the metric.
+        type: string
+      metricNamespace:
+        description: Namespace of the metric.
+        type: string
+      name:
+        description: Name of the criteria.
+        type: string
+      timeAggregation:
+        description: the criteria time aggregation types.
+        enum:
+          - Average
+          - Minimum
+          - Maximum
+          - Total
+        x-ms-enum:
+          modelAsString: true
+          name: AggregationType
     required:
       - criterionType
+      - name
+      - metricName
+      - timeAggregation
     type: object
   Resource:
     description: An azure resource object

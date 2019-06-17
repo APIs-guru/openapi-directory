@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimopenidconnectproviders
   x-tags:
@@ -92,7 +91,56 @@ paths:
         '200':
           description: Lists of all the OpenId Connect Providers.
           schema:
-            $ref: '#/definitions/OpenIdConnectProviderCollection'
+            description: Paged OpenIdProviders list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: OpenId Connect Provider details.
+                  properties:
+                    properties:
+                      description: OpenID Connect Providers Contract.
+                      properties:
+                        clientId:
+                          description: Client ID of developer console which is the client application.
+                          type: string
+                        clientSecret:
+                          description: Client Secret of developer console which is the client application.
+                          type: string
+                        description:
+                          description: User-friendly description of OpenID Connect Provider.
+                          type: string
+                        displayName:
+                          description: User-friendly OpenID Connect Provider name.
+                          maxLength: 50
+                          type: string
+                        metadataEndpoint:
+                          description: Metadata endpoint URI.
+                          type: string
+                      required:
+                        - displayName
+                        - metadataEndpoint
+                        - clientId
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -145,7 +193,7 @@ paths:
                       displayName: templateoidprovider2
                       metadataEndpoint: 'https://oidprovider-template2.net'
                     type: Microsoft.ApiManagement/service/openidconnectproviders
-      x-ms-odata: '#/definitions/OpenidConnectProviderContract'
+      x-ms-odata: './definitions.json#/definitions/OpenidConnectProviderContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}':
@@ -285,7 +333,47 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/OpenidConnectProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: OpenId Connect Provider details.
+            properties:
+              properties:
+                description: OpenID Connect Providers Contract.
+                properties:
+                  clientId:
+                    description: Client ID of developer console which is the client application.
+                    type: string
+                  clientSecret:
+                    description: Client Secret of developer console which is the client application.
+                    type: string
+                  description:
+                    description: User-friendly description of OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: User-friendly OpenID Connect Provider name.
+                    maxLength: 50
+                    type: string
+                  metadataEndpoint:
+                    description: Metadata endpoint URI.
+                    type: string
+                required:
+                  - displayName
+                  - metadataEndpoint
+                  - clientId
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -456,7 +544,27 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/OpenidConnectProviderUpdateContract'
+            description: Parameters supplied to the Update OpenID Connect Provider operation.
+            properties:
+              properties:
+                description: Parameters supplied to the Update OpenID Connect Provider operation.
+                properties:
+                  clientId:
+                    description: Client ID of developer console which is the client application.
+                    type: string
+                  clientSecret:
+                    description: Client Secret of developer console which is the client application.
+                    type: string
+                  description:
+                    description: User-friendly description of OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: User-friendly OpenID Connect Provider name.
+                    maxLength: 50
+                    type: string
+                  metadataEndpoint:
+                    description: Metadata endpoint URI.
+                    type: string
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -553,7 +661,47 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/OpenidConnectProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: OpenId Connect Provider details.
+            properties:
+              properties:
+                description: OpenID Connect Providers Contract.
+                properties:
+                  clientId:
+                    description: Client ID of developer console which is the client application.
+                    type: string
+                  clientSecret:
+                    description: Client Secret of developer console which is the client application.
+                    type: string
+                  description:
+                    description: User-friendly description of OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: User-friendly OpenID Connect Provider name.
+                    maxLength: 50
+                    type: string
+                  metadataEndpoint:
+                    description: Metadata endpoint URI.
+                    type: string
+                required:
+                  - displayName
+                  - metadataEndpoint
+                  - clientId
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -578,7 +726,47 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/OpenidConnectProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: OpenId Connect Provider details.
+            properties:
+              properties:
+                description: OpenID Connect Providers Contract.
+                properties:
+                  clientId:
+                    description: Client ID of developer console which is the client application.
+                    type: string
+                  clientSecret:
+                    description: Client Secret of developer console which is the client application.
+                    type: string
+                  description:
+                    description: User-friendly description of OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: User-friendly OpenID Connect Provider name.
+                    maxLength: 50
+                    type: string
+                  metadataEndpoint:
+                    description: Metadata endpoint URI.
+                    type: string
+                required:
+                  - displayName
+                  - metadataEndpoint
+                  - clientId
         '201':
           description: OpenIdConnect Provider was successfully created.
           headers:
@@ -586,7 +774,47 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/OpenidConnectProviderContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: OpenId Connect Provider details.
+            properties:
+              properties:
+                description: OpenID Connect Providers Contract.
+                properties:
+                  clientId:
+                    description: Client ID of developer console which is the client application.
+                    type: string
+                  clientSecret:
+                    description: Client Secret of developer console which is the client application.
+                    type: string
+                  description:
+                    description: User-friendly description of OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: User-friendly OpenID Connect Provider name.
+                    maxLength: 50
+                    type: string
+                  metadataEndpoint:
+                    description: Metadata endpoint URI.
+                    type: string
+                required:
+                  - displayName
+                  - metadataEndpoint
+                  - clientId
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -650,87 +878,4 @@ paths:
                   displayName: templateoidprovider3
                   metadataEndpoint: 'https://oidprovider-template3.net'
                 type: Microsoft.ApiManagement/service/openidconnectproviders
-definitions:
-  OpenIdConnectProviderCollection:
-    description: Paged OpenIdProviders list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/OpenidConnectProviderContract'
-        type: array
-  OpenidConnectProviderContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: OpenId Connect Provider details.
-    properties:
-      properties:
-        $ref: '#/definitions/OpenidConnectProviderContractProperties'
-        description: OpenId Connect Provider contract properties.
-        x-ms-client-flatten: true
-  OpenidConnectProviderContractProperties:
-    description: OpenID Connect Providers Contract.
-    properties:
-      clientId:
-        description: Client ID of developer console which is the client application.
-        type: string
-      clientSecret:
-        description: Client Secret of developer console which is the client application.
-        type: string
-      description:
-        description: User-friendly description of OpenID Connect Provider.
-        type: string
-      displayName:
-        description: User-friendly OpenID Connect Provider name.
-        maxLength: 50
-        type: string
-      metadataEndpoint:
-        description: Metadata endpoint URI.
-        type: string
-    required:
-      - displayName
-      - metadataEndpoint
-      - clientId
-  OpenidConnectProviderUpdateContract:
-    description: Parameters supplied to the Update OpenID Connect Provider operation.
-    properties:
-      properties:
-        $ref: '#/definitions/OpenidConnectProviderUpdateContractProperties'
-        description: OpenId Connect Provider Update contract properties.
-        x-ms-client-flatten: true
-  OpenidConnectProviderUpdateContractProperties:
-    description: Parameters supplied to the Update OpenID Connect Provider operation.
-    properties:
-      clientId:
-        description: Client ID of developer console which is the client application.
-        type: string
-      clientSecret:
-        description: Client Secret of developer console which is the client application.
-        type: string
-      description:
-        description: User-friendly description of OpenID Connect Provider.
-        type: string
-      displayName:
-        description: User-friendly OpenID Connect Provider name.
-        maxLength: 50
-        type: string
-      metadataEndpoint:
-        description: Metadata endpoint URI.
-        type: string
+definitions: {}

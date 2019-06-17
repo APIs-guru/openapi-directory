@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datamigration-Tasks
   x-tags:
@@ -2694,7 +2693,6 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: Migrate.SqlServer.AzureSqlDbMI
-  ODataError: {}
   ProjectTask:
     allOf:
       - description: ARM resource.

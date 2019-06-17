@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/blueprint/resource-manager/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: blueprint-blueprintDefinition
   x-tags:
@@ -65,7 +64,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   ScopeParameter:
-    description: 'The scope of the resource. Valid scopes are: management group (format: ''/providers/Microsoft.Management/managementGroups/{managementGroup}''), subscription (format: ''/subscriptions/{subscriptionId}'').'
+    description: 'The scope of the resource. Valid scopes are: management group (format: ''/providers/Microsoft.Management/managementGroups/{managementGroup}''), subscription (format: ''/subscriptions/{subscriptionId}''). For blueprint assignments management group scope is reserved for future use.'
     in: path
     name: scope
     required: true
@@ -399,6 +398,47 @@ paths:
                       metadata:
                         description: Contains storageAccounts that collect all shoebox logs.
                         displayName: storage resource group
+                  targetScope: subscription
+                type: Microsoft.Blueprint/blueprints
+        ResourceGroupWithTags:
+          parameters:
+            api-version: 2018-11-01-preview
+            blueprint:
+              properties:
+                description: An example blueprint containing an RG with two tags.
+                resourceGroups:
+                  myRGName:
+                    location: westus
+                    metadata:
+                      displayName: My Resource Group
+                    name: myRGName
+                    tags:
+                      costcenter: '123456'
+                      nameOnlyTag: ''
+                targetScope: subscription
+            blueprintName: simpleBlueprint
+            scope: 'providers/Microsoft.Management/managementGroups/{ManagementGroupId}'
+          responses:
+            '201':
+              body:
+                id: '/providers/Microsoft.Management/managementGroups/{ManagementGroupId}/providers/Microsoft.Blueprint/blueprints/RGTaggingExample'
+                name: RGTaggingExample
+                properties:
+                  description: An example blueprint containing an RG with two tags.
+                  parameters: {}
+                  resourceGroups:
+                    myRGName:
+                      dependsOn: []
+                      location: westus
+                      metadata:
+                        displayName: My Resource Group
+                      name: myRGName
+                      tags:
+                        costcenter: '123456'
+                        tagWithNoValue: ''
+                  status:
+                    lastModified: '2019-04-29T20:52:56+00:00'
+                    timeCreated: '2019-04-29T20:52:56+00:00'
                   targetScope: subscription
                 type: Microsoft.Blueprint/blueprints
         SubscriptionBlueprint:
@@ -1817,10 +1857,11 @@ paths:
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
             scope: providers/Microsoft.Management/managementGroups/ContosoOnlineGroup
+            versionId: V2
           responses:
             '200':
               body:
-                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -1856,17 +1897,18 @@ paths:
                         type: Microsoft.Storage/storageAccounts
                     variables:
                       storageAccountName: '[concat(uniquestring(resourceGroup().id), ''standardsa'')]'
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
         MG-PolicyAssignmentArtifact:
           parameters:
             api-version: 2018-11-01-preview
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
             scope: providers/Microsoft.Management/managementGroups/ContosoOnlineGroup
+            versionId: V2
           responses:
             '200':
               body:
-                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -1877,34 +1919,36 @@ paths:
                     tagValue:
                       value: '[parameter(''costCenter'')]'
                   policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
         MG-RoleAssignmentArtifact:
           parameters:
             api-version: 2018-11-01-preview
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
             scope: providers/Microsoft.Management/managementGroups/ContosoOnlineGroup
+            versionId: V2
           responses:
             '200':
               body:
-                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                id: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:
                   displayName: enforce owners of given subscription
                   principalIds: '[parameters(''owners'')]'
                   roleDefinitionId: /providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
         Sub-ARMTemplateArtifact:
           parameters:
             api-version: 2018-11-01-preview
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
             scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -1940,17 +1984,18 @@ paths:
                         type: Microsoft.Storage/storageAccounts
                     variables:
                       storageAccountName: '[concat(uniquestring(resourceGroup().id), ''standardsa'')]'
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
         Sub-PolicyAssignmentArtifact:
           parameters:
             api-version: 2018-11-01-preview
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
             scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -1961,24 +2006,25 @@ paths:
                     tagValue:
                       value: '[parameter(''costCenter'')]'
                   policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
         Sub-RoleAssignmentArtifact:
           parameters:
             api-version: 2018-11-01-preview
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
             scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:
                   displayName: enforce owners of given subscription
                   principalIds: '[parameters(''owners'')]'
                   roleDefinitionId: /providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7
-                type: Microsoft.Blueprint/blueprints/artifacts
+                type: Microsoft.Blueprint/blueprints/versions/artifacts
 definitions:
   Artifact:
     allOf:
@@ -2099,10 +2145,12 @@ definitions:
     properties:
       lastModified:
         description: Last modified time of this blueprint definition.
+        format: date-time
         readOnly: true
         type: string
       timeCreated:
         description: Creation time of this blueprint definition.
+        format: date-time
         readOnly: true
         type: string
     type: object
@@ -2432,6 +2480,11 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: BlueprintTargetScope
+          values:
+            - description: The blueprint targets a subscription during blueprint assignment.
+              value: subscription
+            - description: The blueprint targets a management group during blueprint assignment. This is reserved for future use.
+              value: managementGroup
     type: object
     x-ms-external: true
   TemplateArtifact:

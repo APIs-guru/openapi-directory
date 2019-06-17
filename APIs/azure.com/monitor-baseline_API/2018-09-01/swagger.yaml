@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-09-01/baseline_API.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: monitor-baseline_API
   x-tags:
@@ -86,6 +85,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  MetricNamesParameter:
+    description: The names of the metrics (comma separated) to retrieve.
+    in: query
+    name: metricnames
+    required: false
+    type: string
+    x-ms-parameter-location: method
   MetricNamespaceParameter:
     description: Metric namespace to query metric definitions for.
     in: query
@@ -108,6 +114,75 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  '/{resourceUri}/providers/microsoft.insights/baseline':
+    get:
+      description: '**Gets the baseline values for a resource**.'
+      operationId: Baseline_Get
+      parameters:
+        - $ref: '#/parameters/ExtendedResourceUriParameter'
+        - $ref: '#/parameters/MetricNamesParameter'
+        - $ref: '#/parameters/TimespanParameter'
+        - $ref: '#/parameters/IntervalParameter'
+        - $ref: '#/parameters/AggregationParameter'
+        - $ref: '#/parameters/SensitivitiesParameter'
+        - $ref: '#/parameters/BaselineResultTypeParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MetricNamespaceParameter'
+        - description: 'The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric''s time series, in which a baseline is requested for.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful request to get the list of metric values.
+          schema:
+            $ref: '#/definitions/BaselineResponse'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Baseline
+      x-ms-examples:
+        Get Metric for data:
+          parameters:
+            aggregation: Average
+            api-version: '2018-09-01'
+            interval: PT1H
+            metricName: PercentageCpu
+            resourceUri: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1
+            sensitivities: 'Low,Medium'
+            timespan: '2017-04-14T02:20:00Z/2017-04-14T04:20:00Z'
+          responses:
+            '200':
+              body:
+                id: /subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Insights/baseline/PercentageCpu
+                name:
+                  value: PercentageCpu
+                properties:
+                  aggregation: Average
+                  baseline:
+                    - highThresholds:
+                        - 90.3453
+                        - 91.3453
+                      lowThresholds:
+                        - 30
+                        - 31.1
+                      sensitivity: Low
+                    - highThresholds:
+                        - 70.3453
+                        - 71.3453
+                      lowThresholds:
+                        - 50
+                        - 51.1
+                      sensitivity: Medium
+                  interval: PT1H
+                  timespan: '2017-04-14T02:20:00Z/2017-04-14T04:20:00Z'
+                  timestamps:
+                    - '2017-04-14T02:20:00Z'
+                    - '2017-04-14T03:20:00Z'
+                type: Microsoft.Insights/baseline
   '/{resourceUri}/providers/microsoft.insights/baseline/{metricName}':
     get:
       description: '**Gets the baseline values for a specific metric**.'
@@ -122,7 +197,7 @@ paths:
         - $ref: '#/parameters/BaselineResultTypeParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/MetricNamespaceParameter'
-        - description: 'The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric�s time series, in which a baseline is requested for.'
+        - description: 'The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric''s time series, in which a baseline is requested for.'
           in: query
           name: $filter
           required: false

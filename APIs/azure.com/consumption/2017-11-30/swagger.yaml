@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/consumption/resource-manager/Microsoft.Consumption/stable/2017-11-30/consumption.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: consumption
   x-tags:
@@ -152,7 +151,8 @@ paths:
                       dev: tools
                       env: newcrp
                     type: Microsoft.Consumption/reservationDetails
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{scope}/providers/Microsoft.Consumption/reservationSummaries':
     get:
       description: Lists the reservations summaries for daily or monthly grain.
@@ -304,7 +304,8 @@ paths:
                       dev: tools
                       env: newcrp
                     type: Microsoft.Consumption/reservationsummaries
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{scope}/providers/Microsoft.Consumption/usageDetails':
     get:
       description: 'Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.'

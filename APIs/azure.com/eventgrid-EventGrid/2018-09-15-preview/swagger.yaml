@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/resource-manager/Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: eventgrid-EventGrid
   x-tags:
@@ -125,7 +124,8 @@ paths:
                       resource: topics
                     name: Microsoft.EventGrid/topics/delete
                     origin: UserAndSystem
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.EventGrid/topicTypes:
     get:
       consumes: []
@@ -176,7 +176,8 @@ paths:
                       provisioningState: Succeeded
                       resourceRegionType: RegionalResource
                     type: Microsoft.EventGrid/topicTypes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}':
     get:
       consumes: []
@@ -275,7 +276,8 @@ paths:
                       displayName: Blob Deleted
                       schemaUrl: tbd
                     type: Microsoft.EventGrid/topicTypes/eventTypes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/domains':
     get:
       consumes: []
@@ -328,7 +330,8 @@ paths:
                       tag1: value1
                       tag2: value2
                     type: Microsoft.EventGrid/domains
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/eventSubscriptions':
     get:
       consumes: []
@@ -393,7 +396,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/locations/{location}/eventSubscriptions':
     get:
       consumes: []
@@ -470,7 +474,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventhub/namespaces/examplenamespace1
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/locations/{location}/topicTypes/{topicTypeName}/eventSubscriptions':
     get:
       consumes: []
@@ -553,7 +558,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventhub/namespaces/examplenamespace1
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventSubscriptions':
     get:
       consumes: []
@@ -611,7 +617,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topics':
     get:
       consumes: []
@@ -664,7 +671,8 @@ paths:
                       tag1: value1
                       tag2: value2
                     type: Microsoft.EventGrid/topics
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains':
     get:
       consumes: []
@@ -723,7 +731,8 @@ paths:
                       tag1: value1
                       tag2: value2
                     type: Microsoft.EventGrid/domains
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}':
     delete:
       consumes: []
@@ -1107,7 +1116,8 @@ paths:
                       tag1: value1
                       tag2: value2
                     type: Microsoft.EventGrid/domains
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}':
     get:
       consumes: []
@@ -1261,7 +1271,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/domains/domain1/topics/topic1
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/eventSubscriptions':
     get:
       consumes: []
@@ -1332,7 +1343,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/locations/{location}/eventSubscriptions':
     get:
       consumes: []
@@ -1415,7 +1427,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventhub/namespaces/examplenamespace1
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/locations/{location}/topicTypes/{topicTypeName}/eventSubscriptions':
     get:
       consumes: []
@@ -1504,7 +1517,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventhub/namespaces/examplenamespace1
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventSubscriptions':
     get:
       consumes: []
@@ -1568,7 +1582,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics':
     get:
       consumes: []
@@ -1627,7 +1642,8 @@ paths:
                       tag1: value1
                       tag2: value2
                     type: Microsoft.EventGrid/topics
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}':
     delete:
       consumes: []
@@ -2053,7 +2069,8 @@ paths:
                       provisioningState: Succeeded
                       topic: /subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic2
                     type: Microsoft.EventGrid/eventSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventTypes':
     get:
       consumes: []
@@ -2124,7 +2141,8 @@ paths:
                       displayName: Blob Deleted
                       schemaUrl: tbd
                     type: Microsoft.EventGrid/topicTypes/eventTypes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}':
     delete:
       consumes: []

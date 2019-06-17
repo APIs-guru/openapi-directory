@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/azureFirewall.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-azureFirewall
   x-tags:
@@ -75,7 +74,8 @@ paths:
                       applicationRuleCollections:
                         - name: apprulecoll
                           properties:
-                            action: Deny
+                            action:
+                              type: Deny
                             priority: 110
                             rules:
                               - description: Deny inbound rule
@@ -102,7 +102,8 @@ paths:
                       networkRuleCollections:
                         - name: netrulecoll
                           properties:
-                            action: Deny
+                            action:
+                              type: Deny
                             priority: 112
                             rules:
                               - description: D-NAT all outbound web traffic for inspection
@@ -169,7 +170,8 @@ paths:
                       applicationRuleCollections:
                         - name: apprulecoll
                           properties:
-                            action: Deny
+                            action:
+                              type: Deny
                             priority: 110
                             rules:
                               - description: Deny inbound rule
@@ -196,7 +198,8 @@ paths:
                       networkRuleCollections:
                         - name: netrulecoll
                           properties:
-                            action: Deny
+                            action:
+                              type: Deny
                             priority: 112
                             rules:
                               - description: D-NAT all outbound web traffic for inspection
@@ -313,7 +316,8 @@ paths:
                   applicationRuleCollections:
                     - name: apprulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 110
                         rules:
                           - description: Deny inbound rule
@@ -340,7 +344,8 @@ paths:
                   networkRuleCollections:
                     - name: netrulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 112
                         rules:
                           - description: D-NAT all outbound web traffic for inspection
@@ -411,7 +416,8 @@ paths:
                 applicationRuleCollections:
                   - name: apprulecoll
                     properties:
-                      action: Deny
+                      action:
+                        type: Deny
                       priority: 110
                       rules:
                         - description: Deny inbound rule
@@ -434,7 +440,8 @@ paths:
                 networkRuleCollections:
                   - name: netrulecoll
                     properties:
-                      action: Deny
+                      action:
+                        type: Deny
                       priority: 112
                       rules:
                         - description: D-NAT all outbound web traffic for inspection
@@ -465,7 +472,8 @@ paths:
                   applicationRuleCollections:
                     - name: apprulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 110
                         rules:
                           - description: Deny inbound rule
@@ -492,7 +500,8 @@ paths:
                   networkRuleCollections:
                     - name: netrulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 112
                         rules:
                           - description: D-NAT all outbound web traffic for inspection
@@ -522,7 +531,8 @@ paths:
                   applicationRuleCollections:
                     - name: apprulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 110
                         rules:
                           - description: Deny inbound rule
@@ -549,7 +559,8 @@ paths:
                   networkRuleCollections:
                     - name: netrulecoll
                       properties:
-                        action: Deny
+                        action:
+                          type: Deny
                         priority: 112
                         rules:
                           - description: D-NAT all outbound web traffic for inspection

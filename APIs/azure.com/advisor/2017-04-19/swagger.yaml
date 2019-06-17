@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/advisor/resource-manager/Microsoft.Advisor/stable/2017-04-19/advisor.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: advisor
   x-tags:
@@ -49,6 +48,121 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Advisor/metadata:
+    get:
+      operationId: RecommendationMetadata_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. Successfully retrieved metadata entities
+          schema:
+            $ref: '#/definitions/MetadataEntityListResult'
+      summary: Gets the list of metadata entities.
+      tags:
+        - Metadata
+      x-ms-examples:
+        GetMetadata:
+          parameters:
+            api-version: '2017-04-19'
+          responses:
+            '200':
+              body:
+                nextLink: string
+                value:
+                  - id: providers/Microsoft.Advisor/metadata/recommendationType
+                    name: recommendationType
+                    properties:
+                      applicableScenarios:
+                        - Alerts
+                      dependsOn:
+                        - category
+                        - impact
+                      displayName: Recommendation Type
+                      supportedValues:
+                        - displayName: Upgrade your SKU or add more instances to ensure fault tolerance
+                          id: 6a2b1e70-bd4c-4163-86de-5243d7ac05ee
+                        - displayName: Delete ExpressRoute circuits in the provider status of Not Provisioned
+                          id: da6630fb-4286-4996-92a3-a43f5f26dd34
+                    type: Microsoft.Advisor/metadata
+                  - id: providers/Microsoft.Advisor/metadata/recommendationCategory
+                    name: recommendationCategory
+                    properties:
+                      applicableScenarios:
+                        - Alerts
+                      dependsOn: null
+                      displayName: Category
+                      supportedValues:
+                        - displayName: Cost
+                          id: Cost
+                        - displayName: Performance
+                          id: Performance
+                    type: Microsoft.Advisor/metadata
+                  - id: providers/Microsoft.Advisor/metadata/recommendationImpact
+                    name: recommendationImpact
+                    properties:
+                      applicableScenarios: null
+                      dependsOn: null
+                      displayName: Impact
+                      supportedValues:
+                        - displayName: High
+                          id: High
+                        - displayName: Medium
+                          id: Medium
+                        - displayName: Low
+                          id: Low
+                    type: Microsoft.Advisor/metadata
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Advisor/metadata/{name}':
+    get:
+      operationId: RecommendationMetadata_Get
+      parameters:
+        - description: Name of metadata entity.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. Successfully retrieved metadata entities
+          schema:
+            $ref: '#/definitions/MetadataEntity'
+        '404':
+          description: Client sent unknown metadata name
+          schema:
+            $ref: '#/definitions/ARMErrorResponseBody'
+      summary: Gets the metadata entity.
+      tags:
+        - Metadata
+      x-ms-examples:
+        GetMetadata:
+          parameters:
+            api-version: '2017-04-19'
+            name: types
+          responses:
+            '200':
+              body:
+                id: providers/Microsoft.Advisor/metadata/recommendationType
+                name: recommendationType
+                properties:
+                  applicableScenarios:
+                    - Alerts
+                  dependsOn:
+                    - category
+                    - impact
+                  displayName: Recommendation Type
+                  supportedValues:
+                    - displayName: Upgrade your SKU or add more instances to ensure fault tolerance
+                      id: 6a2b1e70-bd4c-4163-86de-5243d7ac05ee
+                    - displayName: Delete ExpressRoute circuits in the provider status of Not Provisioned
+                      id: da6630fb-4286-4996-92a3-a43f5f26dd34
+                type: Microsoft.Advisor/metadata
+            '404':
+              body:
+                code: NotFound
+                message: Unknown metadata name
   /providers/Microsoft.Advisor/operations:
     get:
       deprecated: false
@@ -341,7 +455,8 @@ paths:
                       exclude: false
                       low_cpu_threshold: '5'
                     type: Microsoft.Advisor/configurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     put:
       deprecated: false
       operationId: Configurations_CreateInResourceGroup
@@ -613,6 +728,72 @@ definitions:
         items:
           $ref: '#/definitions/ConfigData'
         type: array
+    type: object
+  MetadataEntity:
+    description: The metadata entity contract.
+    properties:
+      id:
+        description: The resource Id of the metadata entity.
+        type: string
+      name:
+        description: The name of the metadata entity.
+        type: string
+      properties:
+        $ref: '#/definitions/MetadataEntityProperties'
+        description: The metadata entity properties.
+        x-ms-client-flatten: true
+      type:
+        description: The type of the metadata entity.
+        type: string
+    type: object
+  MetadataEntityListResult:
+    description: The list of metadata entities
+    properties:
+      nextLink:
+        description: The link used to get the next page of metadata.
+        type: string
+      value:
+        description: The list of metadata entities.
+        items:
+          $ref: '#/definitions/MetadataEntity'
+        type: array
+    type: object
+  MetadataEntityProperties:
+    description: The metadata entity properties
+    properties:
+      applicableScenarios:
+        description: The list of scenarios applicable to this metadata entity.
+        items:
+          enum:
+            - Alerts
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: Scenario
+        type: array
+      dependsOn:
+        description: The list of keys on which this entity depends on.
+        items:
+          type: string
+        type: array
+      displayName:
+        description: The display name.
+        type: string
+      supportedValues:
+        description: The list of supported values.
+        items:
+          $ref: '#/definitions/MetadataSupportedValueDetail'
+        type: array
+    type: object
+  MetadataSupportedValueDetail:
+    description: The metadata supported value detail.
+    properties:
+      displayName:
+        description: The display name.
+        type: string
+      id:
+        description: The id.
+        type: string
     type: object
   OperationDisplayInfo:
     description: The operation supported by Advisor.

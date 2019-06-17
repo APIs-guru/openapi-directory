@@ -461,6 +461,61 @@ paths:
       x-ms-pageable:
         itemName: value
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability':
+    post:
+      operationId: RecoveryServices_CheckNameAvailability
+      parameters:
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/ApiVersion'
+        - description: Location of the resource
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: Contains information about Resource type and Resource name
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityParameters'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityResultResource'
+      summary: "API to check for resource name availability.\r\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\r\nor if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago"
+      tags:
+        - RecoveryServices
+      x-ms-examples:
+        'Availability status of Resource Name when no resource with same name, type and subscription exists, nor has been deleted within last 24 hours':
+          parameters:
+            api-version: '2016-06-01'
+            input:
+              name: swaggerExample
+              type: Microsoft.RecoveryServices/Vaults
+            location: westus
+            resourceGroupName: resGroupFoo
+            subscriptionId: 77777777-b0c6-47a2-b37c-d8e65a629c18
+          responses:
+            '200':
+              body:
+                nameAvailable: true
+        'Availability status of Resource Name when resource with same name, type and subscription exists':
+          parameters:
+            api-version: '2016-06-01'
+            input:
+              name: swaggerExample2
+              type: Microsoft.RecoveryServices/Vaults
+            location: westus
+            resourceGroupName: resGroupBar
+            subscriptionId: 77777777-b0c6-47a2-b37c-d8e65a629c18
+          responses:
+            '200':
+              body:
+                message: Resource already exists with the same name.
+                nameAvailable: false
+                reason: AlreadyExists
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults':
     get:
       deprecated: false
@@ -834,6 +889,34 @@ paths:
                   integrityKey: J99wzS27fmJ+Wjot7xO5wA==
                 type: Microsoft.RecoveryServices/vaults/extendedInformation
 definitions:
+  CheckNameAvailabilityParameters:
+    description: Resource Name availability input parameters - Resource type and resource name
+    properties:
+      name:
+        description: Resource name for which availability needs to be checked
+        type: string
+      type:
+        description: 'Describes the Resource type: Microsoft.RecoveryServices/Vaults'
+        type: string
+    type: object
+  CheckNameAvailabilityResult:
+    description: Response for check name availability API. Resource provider will set availability as true | false.
+    properties:
+      message:
+        type: string
+      nameAvailable:
+        type: boolean
+      reason:
+        type: string
+    type: object
+  CheckNameAvailabilityResultResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Response for check name availability API. Resource provider will set availability as true | false.
+    properties:
+      properties:
+        $ref: '#/definitions/CheckNameAvailabilityResult'
+        description: CheckNameAvailabilityResultResource properties
   ClientDiscoveryDisplay:
     description: Localized display information of an operation.
     properties:

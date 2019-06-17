@@ -35,19 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ResourceNameParameter:
     description: The name of the Application Insights component resource.
     in: path
@@ -55,21 +42,33 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/syntheticmonitorlocations':
     get:
       description: Gets a list of web test locations available to this Application Insights component.
       operationId: webTestLocations_List
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -118,7 +117,8 @@ paths:
                   Tag: latam-br-gru-edge
                 - DisplayName: 'US : FL-Miami'
                   Tag: us-fl-mia-edge
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ApplicationInsightsComponentWebTestLocation:
     description: Properties that define a web test location available to an Application Insights Component.

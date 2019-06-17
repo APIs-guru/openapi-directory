@@ -79,7 +79,8 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Operation
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/workspaces':
     get:
       description: Lists all the available machine learning workspaces under the specified subscription.

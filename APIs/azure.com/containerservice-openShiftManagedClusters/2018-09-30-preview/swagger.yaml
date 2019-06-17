@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservice/resource-manager/Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: containerservice-openShiftManagedClusters
   x-tags:
@@ -97,6 +96,7 @@ paths:
                           - name: Azure AD
                             provider:
                               clientId: clientId
+                              customerAdminGroupId: '{customerAdminGroupId}'
                               kind: AADIdentityProvider
                               tenantId: tenantId
                       fqdn: clustername1.location1.cloudapp.azure.com
@@ -171,6 +171,7 @@ paths:
                           - name: Azure AD
                             provider:
                               clientId: clientId
+                              customerAdminGroupId: '{customerAdminGroupId}'
                               kind: AADIdentityProvider
                               tenantId: tenantId
                       fqdn: clustername1.location1.cloudapp.azure.com
@@ -293,9 +294,10 @@ paths:
                     identityProviders:
                       - name: Azure AD
                         provider:
-                          clientId: clientId
+                          clientId: '{clientId}'
+                          customerAdminGroupId: '{customerAdminGroupId}'
                           kind: AADIdentityProvider
-                          tenantId: tenantId
+                          tenantId: '{tenantId}'
                   fqdn: clustername1.location1.cloudapp.azure.com
                   masterPoolProfile:
                     count: 3
@@ -384,6 +386,7 @@ paths:
                       - name: Azure AD
                         provider:
                           clientId: clientId
+                          customerAdminGroupId: '{customerAdminGroupId}'
                           kind: AADIdentityProvider
                           tenantId: tenantId
                   fqdn: clustername1.location1.cloudapp.azure.com
@@ -467,10 +470,11 @@ paths:
                   identityProviders:
                     - name: Azure AD
                       provider:
-                        clientId: clientId
+                        clientId: '{clientId}'
+                        customerAdminGroupId: '{customerAdminGroupId}'
                         kind: AADIdentityProvider
                         secret: secret
-                        tenantId: tenantId
+                        tenantId: '{tenantId}'
                 fqdn: clustername1.location1.cloudapp.azure.com
                 masterPoolProfile:
                   count: 3
@@ -514,6 +518,7 @@ paths:
                       - name: Azure AD
                         provider:
                           clientId: clientId
+                          customerAdminGroupId: '{customerAdminGroupId}'
                           kind: AADIdentityProvider
                           tenantId: tenantId
                   fqdn: clustername1.location1.cloudapp.azure.com
@@ -556,9 +561,10 @@ paths:
                     identityProviders:
                       - name: Azure AD
                         provider:
-                          clientId: clientId
+                          clientId: '{clientId}'
+                          customerAdminGroupId: '{customerAdminGroupId}'
                           kind: AADIdentityProvider
-                          tenantId: tenantId
+                          tenantId: '{tenantId}'
                   fqdn: clustername1.location1.cloudapp.azure.com
                   masterPoolProfile:
                     count: 3
@@ -690,6 +696,9 @@ definitions:
       - properties:
           clientId:
             description: The clientId password associated with the provider.
+            type: string
+          customerAdminGroupId:
+            description: The groupId to be granted cluster admin role.
             type: string
           secret:
             description: The secret password associated with the provider.

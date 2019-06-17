@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/streamingservice.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: mediaservices-streamingservice
   x-tags:
@@ -185,7 +184,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         '204':
           description: No content. The request has been accepted but the Live Event was not found.
         default:
@@ -339,7 +338,7 @@ paths:
           schema:
             $ref: '#/definitions/LiveEvent'
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
           schema:
             $ref: '#/definitions/LiveEvent'
         default:
@@ -472,7 +471,7 @@ paths:
           schema:
             $ref: '#/definitions/LiveEvent'
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
           schema:
             $ref: '#/definitions/LiveEvent'
         default:
@@ -653,7 +652,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         '204':
           description: No content. The request has been accepted but the Live Output was not found.
         default:
@@ -751,7 +750,7 @@ paths:
           schema:
             $ref: '#/definitions/LiveOutput'
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
           schema:
             $ref: '#/definitions/LiveOutput'
         default:
@@ -828,7 +827,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -862,7 +861,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -902,7 +901,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -1014,7 +1013,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         '204':
           description: No content. The request has been accepted but the Streaming Endpoint was not found.
         default:
@@ -1141,7 +1140,7 @@ paths:
           schema:
             $ref: '#/definitions/StreamingEndpoint'
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
           schema:
             $ref: '#/definitions/StreamingEndpoint'
         default:
@@ -1243,7 +1242,7 @@ paths:
           schema:
             $ref: '#/definitions/StreamingEndpoint'
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
           schema:
             $ref: '#/definitions/StreamingEndpoint'
         default:
@@ -1385,7 +1384,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -1421,7 +1420,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -1455,7 +1454,7 @@ paths:
         '200':
           description: OK. The request has succeeded.
         '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+          description: 'Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.'
         default:
           description: The streaming error response describing why the operation failed.
           schema:
@@ -1598,9 +1597,10 @@ definitions:
           - None
           - Basic
           - Standard
+          - Premium1080p
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LiveEventEncodingType
       presetName:
         description: The encoding preset name.  This value is specified at creation time and cannot be updated.
@@ -1639,7 +1639,7 @@ definitions:
           - RTMP
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LiveEventInputProtocol
     required:
       - streamingProtocol
@@ -1741,7 +1741,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LiveEventResourceState
       streamOptions:
         description: The options to use for the LiveEvent.  This value is specified at creation time and cannot be updated.
@@ -1751,7 +1751,7 @@ definitions:
             - LowLatency
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: StreamOptionsFlag
         type: array
       vanityUrl:
@@ -1847,7 +1847,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LiveOutputResourceState
     required:
       - assetName
@@ -2009,7 +2009,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: StreamingEndpointResourceState
       scaleUnits:
         description: The number of scale units.  Use the Scale operation to adjust this value.

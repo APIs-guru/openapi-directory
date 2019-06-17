@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/stable/2017-04-01/EventHub.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: eventhub-EventHub
   x-tags:
@@ -2867,7 +2866,6 @@ paths:
                       partnerNamespace: sdk-Namespace-37
                       provisioningState: Accepted
                       role: Primary
-                      type: MetadataReplication
                     type: Microsoft.EventHub/Namespaces/DisasterRecoveryConfig
       x-ms-pageable:
         nextLinkName: nextLink
@@ -2979,7 +2977,6 @@ paths:
                   pendingReplicationOperationsCount: 0
                   provisioningState: Accepted
                   role: Secondary
-                  type: MetadataReplication
                 type: Microsoft.EventHub/Namespaces/DisasterRecoveryConfig
     put:
       description: Creates or updates a new Alias(Disaster Recovery configuration)
@@ -3029,7 +3026,6 @@ paths:
                   partnerNamespace: sdk-Namespace-37
                   provisioningState: Accepted
                   role: Primary
-                  type: MetadataReplication
                 type: Microsoft.EventHub/Namespaces/DisasterRecoveryConfig
             '201': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules':

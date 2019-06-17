@@ -64,7 +64,8 @@ paths:
             type: object
       tags:
         - Operations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts':
     get:
       description: Retrieve a list of accounts within a given subscription.
@@ -1264,7 +1265,8 @@ paths:
                     id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount11/statistics/Removing
                     startTime: '2017-03-19T02:11:49.9879197+00:00'
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/usages':
     get:
       description: Retrieve the usage for the account id.
@@ -1349,7 +1351,8 @@ paths:
                     throttleStatus: ThrottledAtSubscriptionLevel
                     unit: Count
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AutomationAccount:
     allOf:

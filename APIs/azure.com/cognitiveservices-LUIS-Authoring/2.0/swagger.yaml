@@ -49,6 +49,14 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  Endpoint:
+    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
+    in: path
+    name: Endpoint
+    required: true
+    type: string
+    x-ms-parameter-location: client
+    x-ms-skip-url-encoding: true
   ForcePath:
     default: false
     description: A flag to indicate whether to force an operation.
@@ -6580,6 +6588,10 @@ paths:
           schema:
             $ref: '#/definitions/GuidResponse'
           x-nullable: false
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Successful Create Intent Classifier request:
           parameters:
@@ -11099,7 +11111,8 @@ definitions:
       - Prebuilt Entity Extractor
       - Intent Classifier
       - Pattern.Any Entity Extractor
-      - Regular Expression Entity Extractor
+      - Closed List Entity Extractor
+      - Regex Entity Extractor
     type: string
   RegexEntity:
     description: Regular Expression Entity Extractor.
@@ -11287,42 +11300,7 @@ definitions:
         type: array
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{AzureRegion}.api.cognitive.microsoft.{AzureCloud}/luis/api/v2.0'
+  hostTemplate: '{Endpoint}/luis/api/v2.0'
   parameters:
-    - description: Supported Azure regions for Cognitive Services endpoints
-      enum:
-        - westus
-        - westeurope
-        - southeastasia
-        - eastus2
-        - westcentralus
-        - westus2
-        - eastus
-        - southcentralus
-        - northeurope
-        - eastasia
-        - australiaeast
-        - brazilsouth
-        - virginia
-      in: path
-      name: AzureRegion
-      required: true
-      type: string
-      x-ms-enum:
-        modelAsString: false
-        name: AzureRegions
-      x-ms-parameter-location: client
-      x-ms-skip-url-encoding: true
-    - description: Supported Azure Clouds for Cognitive Services endpoints
-      enum:
-        - com
-        - us
-      in: path
-      name: AzureCloud
-      required: true
-      type: string
-      x-ms-enum:
-        modelAsString: false
-        name: AzureClouds
-      x-ms-parameter-location: client
-      x-ms-skip-url-encoding: true
+    - $ref: '#/parameters/Endpoint'
+  useSchemePrefix: false

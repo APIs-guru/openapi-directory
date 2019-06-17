@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimcertificates.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimcertificates
   x-tags:
@@ -92,7 +91,51 @@ paths:
         '200':
           description: Returns a collection of Certificate entity.
           schema:
-            $ref: '#/definitions/CertificateCollection'
+            description: Paged Certificates list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Certificate details.
+                  properties:
+                    properties:
+                      description: Properties of the Certificate contract.
+                      properties:
+                        expirationDate:
+                          description: |
+                            Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                        subject:
+                          description: Subject attribute of the certificate.
+                          type: string
+                        thumbprint:
+                          description: Thumbprint of the certificate.
+                          type: string
+                      required:
+                        - subject
+                        - thumbprint
+                        - expirationDate
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -143,7 +186,7 @@ paths:
                       subject: CN=mutual-authcert
                       thumbprint: EBA************************48594A6
                     type: Microsoft.ApiManagement/service/certificates
-      x-ms-odata: '#/definitions/CertificateContract'
+      x-ms-odata: './definitions.json#/definitions/CertificateContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}':
@@ -285,7 +328,42 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/CertificateContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Certificate details.
+            properties:
+              properties:
+                description: Properties of the Certificate contract.
+                properties:
+                  expirationDate:
+                    description: |
+                      Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
+                  subject:
+                    description: Subject attribute of the certificate.
+                    type: string
+                  thumbprint:
+                    description: Thumbprint of the certificate.
+                    type: string
+                required:
+                  - subject
+                  - thumbprint
+                  - expirationDate
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -459,7 +537,20 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/CertificateCreateOrUpdateParameters'
+            description: Certificate create or update details.
+            properties:
+              properties:
+                description: Parameters supplied to the CreateOrUpdate certificate operation.
+                properties:
+                  data:
+                    description: Base 64 encoded certificate using the application/x-pkcs12 representation.
+                    type: string
+                  password:
+                    description: Password for the Certificate
+                    type: string
+                required:
+                  - data
+                  - password
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -484,7 +575,42 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/CertificateContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Certificate details.
+            properties:
+              properties:
+                description: Properties of the Certificate contract.
+                properties:
+                  expirationDate:
+                    description: |
+                      Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
+                  subject:
+                    description: Subject attribute of the certificate.
+                    type: string
+                  thumbprint:
+                    description: Thumbprint of the certificate.
+                    type: string
+                required:
+                  - subject
+                  - thumbprint
+                  - expirationDate
         '201':
           description: The new certificate was successfully added.
           headers:
@@ -492,7 +618,42 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/CertificateContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Certificate details.
+            properties:
+              properties:
+                description: Properties of the Certificate contract.
+                properties:
+                  expirationDate:
+                    description: |
+                      Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                    format: date-time
+                    type: string
+                  subject:
+                    description: Subject attribute of the certificate.
+                    type: string
+                  thumbprint:
+                    description: Thumbprint of the certificate.
+                    type: string
+                required:
+                  - subject
+                  - thumbprint
+                  - expirationDate
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -555,75 +716,4 @@ paths:
                   subject: CN=contoso.com
                   thumbprint: '*******************3'
                 type: Microsoft.ApiManagement/service/certificates
-definitions:
-  CertificateCollection:
-    description: Paged Certificates list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/CertificateContract'
-        type: array
-  CertificateContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Certificate details.
-    properties:
-      properties:
-        $ref: '#/definitions/CertificateContractProperties'
-        description: Certificate properties details.
-        x-ms-client-flatten: true
-  CertificateContractProperties:
-    description: Properties of the Certificate contract.
-    properties:
-      expirationDate:
-        description: |
-          Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      subject:
-        description: Subject attribute of the certificate.
-        type: string
-      thumbprint:
-        description: Thumbprint of the certificate.
-        type: string
-    required:
-      - subject
-      - thumbprint
-      - expirationDate
-  CertificateCreateOrUpdateParameters:
-    description: Certificate create or update details.
-    properties:
-      properties:
-        $ref: '#/definitions/CertificateCreateOrUpdateProperties'
-        description: Certificate create or update properties details.
-        x-ms-client-flatten: true
-  CertificateCreateOrUpdateProperties:
-    description: Parameters supplied to the CreateOrUpdate certificate operation.
-    properties:
-      data:
-        description: Base 64 encoded certificate using the application/x-pkcs12 representation.
-        type: string
-      password:
-        description: Password for the Certificate
-        type: string
-    required:
-      - data
-      - password
+definitions: {}

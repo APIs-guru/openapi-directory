@@ -35,23 +35,10 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
   KeyId:
     description: The API Key ID. This is unique within a Application Insights component.
     in: path
     name: keyId
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -62,21 +49,33 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/APIKeys/{keyId}':
     delete:
       description: Delete an API Key of an Application Insights component.
       operationId: APIKeys_Delete
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/KeyId'
       responses:
@@ -110,9 +109,27 @@ paths:
       description: Get the API Key for this key id.
       operationId: APIKeys_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/KeyId'
       responses:
@@ -147,9 +164,27 @@ paths:
       description: Gets a list of API keys of an Application Insights component.
       operationId: APIKeys_List
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
       responses:
         '200':
@@ -190,14 +225,33 @@ paths:
                       - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                     linkedWriteProperties: []
                     name: test2
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     post:
       description: Create an API Key of an Application Insights component.
       operationId: APIKeys_Create
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
         - $ref: '#/parameters/ResourceNameParameter'
         - description: Properties that need to be specified to create an API key of a Application Insights component.
           in: body

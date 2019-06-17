@@ -114,7 +114,8 @@ paths:
                     tags: null
                     type: ''
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles/{logProfileName}':
     delete:
       description: Deletes the log profile.

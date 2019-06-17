@@ -131,7 +131,8 @@ paths:
                     tags:
                       testKey: testValue
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/locations/{location}/checkNameAvailability':
     post:
       description: Check the name availability in the target location.
@@ -253,7 +254,8 @@ paths:
                     tags:
                       testKey: testValue
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIDedicated/capacities/{dedicatedCapacityName}':
     delete:
       description: Deletes the specified Dedicated capacity.

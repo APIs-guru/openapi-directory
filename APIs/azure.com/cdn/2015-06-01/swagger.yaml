@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cdn/resource-manager/Microsoft.Cdn/stable/2015-06-01/cdn.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cdn
   x-tags:
@@ -89,7 +88,8 @@ paths:
       summary: Lists all of the available CDN REST API operations.
       tags:
         - Operations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles':
     get:
       operationId: Profiles_ListBySubscriptionId
@@ -108,7 +108,8 @@ paths:
       summary: Lists the CDN profiles within an Azure subscription.
       tags:
         - Profiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles':
     get:
       operationId: Profiles_ListByResourceGroup
@@ -132,7 +133,8 @@ paths:
       summary: Lists the CDN profiles within a resource group.
       tags:
         - Profiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}':
     delete:
       operationId: Profiles_DeleteIfExists
@@ -297,7 +299,8 @@ paths:
       summary: Lists existing CDN endpoints within a profile.
       tags:
         - Endpoints
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}':
     delete:
       operationId: Endpoints_DeleteIfExists
@@ -487,7 +490,8 @@ paths:
       summary: Lists the existing CDN custom domains within an endpoint.
       tags:
         - CustomDomains
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}':
     delete:
       operationId: CustomDomains_DeleteIfExists
@@ -730,7 +734,8 @@ paths:
       summary: Lists the existing CDN origins within an endpoint.
       tags:
         - Origins
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins/{originName}':
     delete:
       operationId: Origins_DeleteIfExists

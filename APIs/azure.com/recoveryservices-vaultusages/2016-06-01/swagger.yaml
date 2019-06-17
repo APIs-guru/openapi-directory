@@ -199,7 +199,8 @@ paths:
                       localizedValue: Backup Engines' Disk Used
                       value: UsedDiskSize
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   NameInfo:
     description: The name of usage.

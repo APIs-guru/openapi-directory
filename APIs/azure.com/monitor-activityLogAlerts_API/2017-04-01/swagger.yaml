@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: monitor-activityLogAlerts_API
   x-tags:
@@ -129,7 +128,8 @@ paths:
                     tags: {}
                     type: Microsoft.Insights/ActivityLogAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts':
     get:
       description: Get a list of all activity log alerts in a resource group.
@@ -196,7 +196,8 @@ paths:
                     tags: {}
                     type: Microsoft.Insights/ActivityLogAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts/{activityLogAlertName}':
     delete:
       description: Delete an activity log alert.

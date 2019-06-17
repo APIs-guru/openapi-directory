@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/reservations/resource-manager/Microsoft.Capacity/preview/2019-04-01/reservations.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: reservations
   x-tags:
@@ -1397,8 +1396,8 @@ definitions:
   InstanceFlexibility:
     description: Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.
     enum:
-      - true
-      - false
+      - 'On'
+      - 'Off'
     type: string
     x-ms-enum:
       modelAsString: true

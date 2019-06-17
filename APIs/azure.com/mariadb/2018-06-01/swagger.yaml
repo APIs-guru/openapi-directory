@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mariadb/resource-manager/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: mariadb
   x-tags:
@@ -388,7 +387,8 @@ paths:
                         minBackupRetentionDays: 7
                         minStorageMB: 5120
                         vCore: 32
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers':
     get:
       description: List all the servers in a given subscription.
@@ -472,7 +472,8 @@ paths:
                       name: GP_Gen4_4
                       tier: GeneralPurpose
                     type: Microsoft.DBforMariaDB/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers':
     get:
       description: List all the servers in a given resource group.
@@ -538,7 +539,8 @@ paths:
                       name: GP_Gen4_2
                       tier: GeneralPurpose
                     type: Microsoft.DBforMariaDB/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}':
     delete:
       description: Deletes a server.
@@ -1464,7 +1466,8 @@ paths:
                       source: system-default
                       value: Barracuda
                     type: Microsoft.DBforMariaDB/servers/configurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}':
     get:
       description: Gets information about a configuration of server.
@@ -1593,7 +1596,8 @@ paths:
                       charset: utf8
                       collation: utf8_general_ci
                     type: Microsoft.DBforMariaDB/servers/databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}':
     delete:
       description: Deletes a database.
@@ -1757,7 +1761,8 @@ paths:
                       endIpAddress: 255.0.0.0
                       startIpAddress: 1.0.0.0
                     type: Microsoft.DBforMariaDB/servers/firewallRules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}':
     delete:
       description: Deletes a server firewall rule.
@@ -1918,7 +1923,8 @@ paths:
                       type: slowlog
                       url: 'https://wasd2prodwus1afse42.file.core.windows.net/833c99b2f36c47349e5554b903fe0440/serverlogs/mariadb-slow-mariadbtestsvc1-2018022823.log?sv=2015-04-05&sr=f&sig=D9Ga4N5Pa%2BPe5Bmjpvs7A0TPD%2FF7IZpk9e4KWR0jgpM%3D&se=2018-03-01T07%3A12%3A13Z&sp=r'
                     type: Microsoft.DBforMariaDB/servers/logFiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas':
     get:
       description: List all the replicas for a given server.
@@ -2021,7 +2027,8 @@ paths:
                     tags:
                       elasticServer: '1'
                     type: Microsoft.DBforMariaDB/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/restart':
     post:
       description: Restarts a server.
@@ -3059,6 +3066,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: GeoRedundantBackup
+      storageAutogrow:
+        description: Enable Storage Auto Grow.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StorageAutogrow
       storageMB:
         description: Max storage allowed for a server.
         format: int32

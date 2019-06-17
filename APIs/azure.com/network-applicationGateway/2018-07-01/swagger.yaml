@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-07-01/applicationGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-applicationGateway
   x-tags:
@@ -2422,11 +2421,13 @@ definitions:
       - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
       - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
       - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
     type: string
     x-ms-enum:
       modelAsString: true
       name: ApplicationGatewaySslCipherSuite
-  NetworkInterfaceIPConfigurationPropertiesFormat: {}
   PolicyNameEnum:
     description: Ssl predefined policy name enums.
     enum:

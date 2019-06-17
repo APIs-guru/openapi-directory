@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: mediaservices-ContentKeyPolicies
   x-tags:
@@ -79,7 +78,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: Specifies the the key by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -95,7 +94,7 @@ paths:
             $ref: '#/definitions/ApiError'
       summary: List Content Key Policies
       x-ms-examples:
-        Lists Content Key Policies ordered by last modifed.:
+        Lists Content Key Policies ordered by last modified.:
           parameters:
             $orderby: properties/lastModified
             accountName: contosomedia

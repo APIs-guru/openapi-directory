@@ -3408,6 +3408,7 @@ definitions:
         x-nullable: true
       frequency:
         $ref: '#/definitions/scheduleFrequency'
+        description: Gets or sets the frequency of the schedule.
         type: string
       interval:
         description: Gets or sets the interval of the schedule.
@@ -3458,17 +3459,9 @@ definitions:
         type: number
         x-nullable: false
       frequency:
+        $ref: '#/definitions/scheduleFrequency'
         description: Gets or sets the frequency of the schedule.
-        enum:
-          - OneTime
-          - Day
-          - Hour
-          - Week
-          - Month
         type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ScheduleFrequency
       interval:
         description: Gets or sets the interval of the schedule.
       isEnabled:
@@ -3531,7 +3524,16 @@ definitions:
       - Hour
       - Week
       - Month
+      - Minute
     type: string
     x-ms-enum:
       modelAsString: true
       name: ScheduleFrequency
+      values:
+        - value: OneTime
+        - value: Day
+        - value: Hour
+        - value: Week
+        - value: Month
+        - description: The minimum allowed interval for Minute schedules is 15 minutes.
+          value: Minute

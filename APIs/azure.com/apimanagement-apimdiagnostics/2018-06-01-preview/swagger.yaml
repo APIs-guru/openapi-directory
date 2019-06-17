@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimdiagnostics.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdiagnostics
   x-tags:
@@ -92,7 +91,145 @@ paths:
         '200':
           description: Paged Result response of diagnostics.
           schema:
-            $ref: '#/definitions/DiagnosticCollection'
+            description: Paged Diagnostic list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Diagnostic details.
+                  properties:
+                    properties:
+                      description: Diagnostic Entity Properties
+                      properties:
+                        alwaysLog:
+                          description: Specifies for what type of messages sampling settings should not apply.
+                          enum:
+                            - allErrors
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: AlwaysLog
+                            values:
+                              - description: Always log all erroneous request regardless of sampling settings.
+                                value: allErrors
+                        backend:
+                          description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                          properties:
+                            request:
+                              description: Http message diagnostic settings.
+                              properties:
+                                body:
+                                  description: Body logging settings.
+                                  properties:
+                                    bytes:
+                                      description: Number of request body bytes to log.
+                                      format: int32
+                                      maximum: 8192
+                                      type: integer
+                                headers:
+                                  description: Array of HTTP Headers to log.
+                                  items:
+                                    type: string
+                                  type: array
+                            response:
+                              description: Http message diagnostic settings.
+                              properties:
+                                body:
+                                  description: Body logging settings.
+                                  properties:
+                                    bytes:
+                                      description: Number of request body bytes to log.
+                                      format: int32
+                                      maximum: 8192
+                                      type: integer
+                                headers:
+                                  description: Array of HTTP Headers to log.
+                                  items:
+                                    type: string
+                                  type: array
+                        enableHttpCorrelationHeaders:
+                          description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                          type: boolean
+                        frontend:
+                          description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                          properties:
+                            request:
+                              description: Http message diagnostic settings.
+                              properties:
+                                body:
+                                  description: Body logging settings.
+                                  properties:
+                                    bytes:
+                                      description: Number of request body bytes to log.
+                                      format: int32
+                                      maximum: 8192
+                                      type: integer
+                                headers:
+                                  description: Array of HTTP Headers to log.
+                                  items:
+                                    type: string
+                                  type: array
+                            response:
+                              description: Http message diagnostic settings.
+                              properties:
+                                body:
+                                  description: Body logging settings.
+                                  properties:
+                                    bytes:
+                                      description: Number of request body bytes to log.
+                                      format: int32
+                                      maximum: 8192
+                                      type: integer
+                                headers:
+                                  description: Array of HTTP Headers to log.
+                                  items:
+                                    type: string
+                                  type: array
+                        loggerId:
+                          description: Resource Id of a target logger.
+                          type: string
+                        sampling:
+                          description: Sampling settings for Diagnostic.
+                          properties:
+                            percentage:
+                              description: Rate of sampling for fixed-rate sampling.
+                              format: double
+                              maximum: 100
+                              minimum: 0
+                              type: number
+                            samplingType:
+                              description: Sampling type.
+                              enum:
+                                - fixed
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: SamplingType
+                                values:
+                                  - description: Fixed-rate sampling.
+                                    value: fixed
+                      required:
+                        - loggerId
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -167,7 +304,7 @@ paths:
                         percentage: 50
                         samplingType: fixed
                     type: Microsoft.ApiManagement/service/diagnostics
-      x-ms-odata: '#/definitions/DiagnosticContract'
+      x-ms-odata: './definitions.json#/definitions/DiagnosticContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}':
@@ -309,7 +446,136 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/DiagnosticContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Diagnostic details.
+            properties:
+              properties:
+                description: Diagnostic Entity Properties
+                properties:
+                  alwaysLog:
+                    description: Specifies for what type of messages sampling settings should not apply.
+                    enum:
+                      - allErrors
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AlwaysLog
+                      values:
+                        - description: Always log all erroneous request regardless of sampling settings.
+                          value: allErrors
+                  backend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  enableHttpCorrelationHeaders:
+                    description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                    type: boolean
+                  frontend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  loggerId:
+                    description: Resource Id of a target logger.
+                    type: string
+                  sampling:
+                    description: Sampling settings for Diagnostic.
+                    properties:
+                      percentage:
+                        description: Rate of sampling for fixed-rate sampling.
+                        format: double
+                        maximum: 100
+                        minimum: 0
+                        type: number
+                      samplingType:
+                        description: Sampling type.
+                        enum:
+                          - fixed
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SamplingType
+                          values:
+                            - description: Fixed-rate sampling.
+                              value: fixed
+                required:
+                  - loggerId
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -504,7 +770,136 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DiagnosticContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Diagnostic details.
+            properties:
+              properties:
+                description: Diagnostic Entity Properties
+                properties:
+                  alwaysLog:
+                    description: Specifies for what type of messages sampling settings should not apply.
+                    enum:
+                      - allErrors
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AlwaysLog
+                      values:
+                        - description: Always log all erroneous request regardless of sampling settings.
+                          value: allErrors
+                  backend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  enableHttpCorrelationHeaders:
+                    description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                    type: boolean
+                  frontend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  loggerId:
+                    description: Resource Id of a target logger.
+                    type: string
+                  sampling:
+                    description: Sampling settings for Diagnostic.
+                    properties:
+                      percentage:
+                        description: Rate of sampling for fixed-rate sampling.
+                        format: double
+                        maximum: 100
+                        minimum: 0
+                        type: number
+                      samplingType:
+                        description: Sampling type.
+                        enum:
+                          - fixed
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SamplingType
+                          values:
+                            - description: Fixed-rate sampling.
+                              value: fixed
+                required:
+                  - loggerId
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -628,7 +1023,136 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DiagnosticContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Diagnostic details.
+            properties:
+              properties:
+                description: Diagnostic Entity Properties
+                properties:
+                  alwaysLog:
+                    description: Specifies for what type of messages sampling settings should not apply.
+                    enum:
+                      - allErrors
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AlwaysLog
+                      values:
+                        - description: Always log all erroneous request regardless of sampling settings.
+                          value: allErrors
+                  backend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  enableHttpCorrelationHeaders:
+                    description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                    type: boolean
+                  frontend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  loggerId:
+                    description: Resource Id of a target logger.
+                    type: string
+                  sampling:
+                    description: Sampling settings for Diagnostic.
+                    properties:
+                      percentage:
+                        description: Rate of sampling for fixed-rate sampling.
+                        format: double
+                        maximum: 100
+                        minimum: 0
+                        type: number
+                      samplingType:
+                        description: Sampling type.
+                        enum:
+                          - fixed
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SamplingType
+                          values:
+                            - description: Fixed-rate sampling.
+                              value: fixed
+                required:
+                  - loggerId
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -653,7 +1177,136 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/DiagnosticContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Diagnostic details.
+            properties:
+              properties:
+                description: Diagnostic Entity Properties
+                properties:
+                  alwaysLog:
+                    description: Specifies for what type of messages sampling settings should not apply.
+                    enum:
+                      - allErrors
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AlwaysLog
+                      values:
+                        - description: Always log all erroneous request regardless of sampling settings.
+                          value: allErrors
+                  backend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  enableHttpCorrelationHeaders:
+                    description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                    type: boolean
+                  frontend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  loggerId:
+                    description: Resource Id of a target logger.
+                    type: string
+                  sampling:
+                    description: Sampling settings for Diagnostic.
+                    properties:
+                      percentage:
+                        description: Rate of sampling for fixed-rate sampling.
+                        format: double
+                        maximum: 100
+                        minimum: 0
+                        type: number
+                      samplingType:
+                        description: Sampling type.
+                        enum:
+                          - fixed
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SamplingType
+                          values:
+                            - description: Fixed-rate sampling.
+                              value: fixed
+                required:
+                  - loggerId
         '201':
           description: Diagnostic was successfully created.
           headers:
@@ -661,7 +1314,136 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/DiagnosticContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Diagnostic details.
+            properties:
+              properties:
+                description: Diagnostic Entity Properties
+                properties:
+                  alwaysLog:
+                    description: Specifies for what type of messages sampling settings should not apply.
+                    enum:
+                      - allErrors
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AlwaysLog
+                      values:
+                        - description: Always log all erroneous request regardless of sampling settings.
+                          value: allErrors
+                  backend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  enableHttpCorrelationHeaders:
+                    description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
+                    type: boolean
+                  frontend:
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
+                    properties:
+                      request:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                      response:
+                        description: Http message diagnostic settings.
+                        properties:
+                          body:
+                            description: Body logging settings.
+                            properties:
+                              bytes:
+                                description: Number of request body bytes to log.
+                                format: int32
+                                maximum: 8192
+                                type: integer
+                          headers:
+                            description: Array of HTTP Headers to log.
+                            items:
+                              type: string
+                            type: array
+                  loggerId:
+                    description: Resource Id of a target logger.
+                    type: string
+                  sampling:
+                    description: Sampling settings for Diagnostic.
+                    properties:
+                      percentage:
+                        description: Rate of sampling for fixed-rate sampling.
+                        format: double
+                        maximum: 100
+                        minimum: 0
+                        type: number
+                      samplingType:
+                        description: Sampling type.
+                        enum:
+                          - fixed
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SamplingType
+                          values:
+                            - description: Fixed-rate sampling.
+                              value: fixed
+                required:
+                  - loggerId
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -797,117 +1579,4 @@ paths:
                     percentage: 50
                     samplingType: fixed
                 type: Microsoft.ApiManagement/service/diagnostics
-definitions:
-  BodyDiagnosticSettings:
-    description: Body logging settings.
-    properties:
-      bytes:
-        description: Number of request body bytes to log.
-        format: int32
-        maximum: 8192
-        type: integer
-  DiagnosticCollection:
-    description: Paged Diagnostic list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/DiagnosticContract'
-        type: array
-  DiagnosticContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Diagnostic details.
-    properties:
-      properties:
-        $ref: '#/definitions/DiagnosticContractProperties'
-        description: Diagnostic entity contract properties.
-        x-ms-client-flatten: true
-  DiagnosticContractProperties:
-    description: Diagnostic Entity Properties
-    properties:
-      alwaysLog:
-        description: Specifies for what type of messages sampling settings should not apply.
-        enum:
-          - allErrors
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: AlwaysLog
-          values:
-            - description: Always log all erroneous request regardless of sampling settings.
-              value: allErrors
-      backend:
-        $ref: '#/definitions/PipelineDiagnosticSettings'
-        description: Diagnostic settings for incoming/outgoing HTTP messages to the Backend
-      enableHttpCorrelationHeaders:
-        description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
-        type: boolean
-      frontend:
-        $ref: '#/definitions/PipelineDiagnosticSettings'
-        description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
-      loggerId:
-        description: Resource Id of a target logger.
-        type: string
-      sampling:
-        $ref: '#/definitions/SamplingSettings'
-        description: Sampling settings for Diagnostic.
-    required:
-      - loggerId
-  HttpMessageDiagnostic:
-    description: Http message diagnostic settings.
-    properties:
-      body:
-        $ref: '#/definitions/BodyDiagnosticSettings'
-        description: Body logging settings.
-      headers:
-        description: Array of HTTP Headers to log.
-        items:
-          type: string
-        type: array
-  PipelineDiagnosticSettings:
-    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
-    properties:
-      request:
-        $ref: '#/definitions/HttpMessageDiagnostic'
-        description: Diagnostic settings for request.
-      response:
-        $ref: '#/definitions/HttpMessageDiagnostic'
-        description: Diagnostic settings for response.
-  SamplingSettings:
-    description: Sampling settings for Diagnostic.
-    properties:
-      percentage:
-        description: Rate of sampling for fixed-rate sampling.
-        format: double
-        maximum: 100
-        minimum: 0
-        type: number
-      samplingType:
-        description: Sampling type.
-        enum:
-          - fixed
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SamplingType
-          values:
-            - description: Fixed-rate sampling.
-              value: fixed
+definitions: {}

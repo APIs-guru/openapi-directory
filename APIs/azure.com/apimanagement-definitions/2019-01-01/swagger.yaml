@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/definitions.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-definitions
   x-tags:
@@ -3605,11 +3604,45 @@ definitions:
     description: Schema contract Properties.
     properties:
       contentType:
-        description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+        description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. '
+        type: string
+      document:
+        description: Properties of the Schema Document.
+        type: object
+    required:
+      - contentType
+  SchemaCreateOrUpdateContract:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Schema Contract details.
+    properties:
+      properties:
+        $ref: '#/definitions/SchemaCreateOrUpdateProperties'
+        description: Properties of the Schema.
+        x-ms-client-flatten: true
+  SchemaCreateOrUpdateProperties:
+    description: API Schema create or update contract Properties.
+    properties:
+      contentType:
+        description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`.'
         type: string
       document:
         $ref: '#/definitions/SchemaDocumentProperties'
-        description: Properties of the Schema Document.
+        description: Create or update Properties of the Schema Document.
         x-ms-client-flatten: true
     required:
       - contentType

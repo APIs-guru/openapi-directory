@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/blueprint/resource-manager/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: blueprint-blueprintAssignment
   x-tags:
@@ -51,7 +50,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   ScopeParameter:
-    description: 'The scope of the resource. Valid scopes are: management group (format: ''/providers/Microsoft.Management/managementGroups/{managementGroup}''), subscription (format: ''/subscriptions/{subscriptionId}'').'
+    description: 'The scope of the resource. Valid scopes are: management group (format: ''/providers/Microsoft.Management/managementGroups/{managementGroup}''), subscription (format: ''/subscriptions/{subscriptionId}''). For blueprint assignments management group scope is reserved for future use.'
     in: path
     name: scope
     required: true
@@ -283,6 +282,29 @@ paths:
                       location: eastus
                       name: defaultRG
                 type: Microsoft.Blueprint/Assignment
+  '/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint':
+    post:
+      description: Get Blueprints service SPN objectId
+      operationId: Assignments_WhoIsBlueprint
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ScopeParameter'
+        - $ref: '#/parameters/AssignmentNameParameter'
+      responses:
+        '200':
+          description: Blueprints service SPN objectId
+          schema:
+            $ref: '#/definitions/WhoIsBlueprintContract'
+      x-ms-examples:
+        WhoIsBlueprint_Action:
+          parameters:
+            api-version: 2018-11-01-preview
+            assignmentName: assignSimpleBlueprint
+            scope: 'subscriptions/{subscriptionId}'
+          responses:
+            '200':
+              body:
+                objectId: 00000000-0000-0000-0000-000000000000
 definitions:
   Assignment:
     allOf:
@@ -316,6 +338,11 @@ definitions:
   AssignmentLockSettings:
     description: Defines how resources deployed by a blueprint assignment are locked.
     properties:
+      excludedPrincipals:
+        description: List of AAD principals excluded from blueprint locks. Up to 5 principals are permitted.
+        items:
+          type: string
+        type: array
       mode:
         description: Lock mode.
         enum:
@@ -411,10 +438,12 @@ definitions:
     properties:
       lastModified:
         description: Last modified time of this blueprint definition.
+        format: date-time
         readOnly: true
         type: string
       timeCreated:
         description: Creation time of this blueprint definition.
+        format: date-time
         readOnly: true
         type: string
     type: object
@@ -539,6 +568,12 @@ definitions:
         description: Azure Active Directory principal ID associated with this Identity.
         type: string
     type: object
+  WhoIsBlueprintContract:
+    description: Response schema for querying the Azure Blueprints service principal in the tenant.
+    properties:
+      objectId:
+        description: AAD object Id of the Azure Blueprints service principal in the tenant.
+        type: string
   keyVaultReference:
     description: Specifies the link to a Key Vault.
     properties:

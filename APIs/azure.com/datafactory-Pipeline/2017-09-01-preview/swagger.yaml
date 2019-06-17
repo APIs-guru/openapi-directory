@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/Pipeline.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datafactory-Pipeline
   x-tags:
@@ -117,8 +116,8 @@ definitions:
     description: A copy activity Azure Data Lake Store sink.
     properties:
       copyBehavior:
-        $ref: '#/definitions/CopyBehaviorType'
         description: The type of copy behavior for copy sink.
+        type: object
     type: object
   AzureDataLakeStoreSource:
     allOf:
@@ -267,7 +266,7 @@ definitions:
         enum:
           - Merge
           - Upload
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: AzureSearchIndexWriteBehaviorType
@@ -317,8 +316,8 @@ definitions:
         description: 'Blob writer overwrite files. Type: boolean (or Expression with resultType boolean).'
         type: object
       copyBehavior:
-        $ref: '#/definitions/CopyBehaviorType'
         description: The type of copy behavior for copy sink.
+        type: object
     type: object
   BlobSource:
     allOf:
@@ -353,7 +352,7 @@ definitions:
           - LOCAL_ONE
           - SERIAL
           - LOCAL_SERIAL
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: CassandraSourceReadConsistencyLevels
@@ -460,8 +459,8 @@ definitions:
         $ref: '#/definitions/StagingSettings'
         description: Specifies interim staging settings when EnableStaging is true.
       translator:
-        $ref: '#/definitions/CopyTranslator'
         description: 'Copy activity translator. If not specified, tabular translator is used.'
+        type: object
     required:
       - source
       - sink
@@ -471,7 +470,7 @@ definitions:
       - PreserveHierarchy
       - FlattenHierarchy
       - MergeFiles
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: CopyBehaviorType
@@ -525,7 +524,7 @@ definitions:
     properties:
       type:
         description: Copy translator type.
-        type: string
+        type: object
     required:
       - type
     type: object
@@ -778,7 +777,7 @@ definitions:
         description: The write behavior for the operation.
         enum:
           - Upsert
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: DynamicsSinkWriteBehavior
@@ -956,8 +955,8 @@ definitions:
     description: A copy activity file system sink.
     properties:
       copyBehavior:
-        $ref: '#/definitions/CopyBehaviorType'
         description: The type of copy behavior for copy sink.
+        type: object
     type: object
   FileSystemSource:
     allOf:
@@ -1847,7 +1846,7 @@ definitions:
     enum:
       - value
       - percentage
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: PolybaseSettingsRejectType
@@ -2024,7 +2023,7 @@ definitions:
         enum:
           - Insert
           - Upsert
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: SalesforceSinkWriteBehavior
@@ -2042,7 +2041,7 @@ definitions:
         enum:
           - Query
           - QueryAll
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: SalesforceSourceReadBehavior
@@ -2057,7 +2056,7 @@ definitions:
         enum:
           - Insert
           - Update
-        type: string
+        type: object
         x-ms-enum:
           modelAsString: true
           name: SapCloudForCustomerSinkWriteBehavior
@@ -2078,7 +2077,7 @@ definitions:
     properties:
       query:
         description: 'SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
-        type: string
+        type: object
     type: object
   ServiceNowSource:
     allOf:
@@ -2259,11 +2258,12 @@ definitions:
     enum:
       - String
       - Int
+      - Int64
       - Decimal
       - Guid
       - Boolean
       - Date
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: StoredProcedureParameterType

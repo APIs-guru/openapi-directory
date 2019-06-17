@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/maps/resource-manager/Microsoft.Maps/stable/2017-01-01-preview/maps-management.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: maps-maps-management
   x-tags:
@@ -126,6 +125,7 @@ paths:
                     name: Microsoft.Maps/accounts/regenerateKey/action
       x-ms-pageable:
         itemName: value
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Maps/accounts':
     get:
       description: Get all Maps Accounts in a Subscription
@@ -171,6 +171,7 @@ paths:
                     type: Microsoft.Maps/accounts
       x-ms-pageable:
         itemName: value
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources':
     post:
       description: Moves Maps Accounts from one ResourceGroup (or Subscription) to another
@@ -256,6 +257,7 @@ paths:
                     type: Microsoft.Maps/accounts
       x-ms-pageable:
         itemName: value
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}':
     delete:
       description: Delete a Maps Account.

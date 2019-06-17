@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/stable/2015-08-01/EventHub.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: eventhub-EventHub
   x-tags:
@@ -116,151 +115,126 @@ paths:
               body:
                 value:
                   - display:
-                      description: Checks availability of namespace under given subscription.
                       operation: Get namespace availability.
                       provider: Microsoft Azure EventHub
                       resource: Non Resource Operation
                     name: Microsoft.EventHub/checkNameAvailability/action
                   - display:
-                      description: Registers the subscription for the EventHub resource provider and enables the creation of EventHub resources
                       operation: Registers the EventHub Resource Provider
                       provider: Microsoft Azure EventHub
                       resource: EventHub Resource Provider
                     name: Microsoft.EventHub/register/action
                   - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
                       operation: 'Create Or Update Namespace '
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/write
                   - display:
-                      description: Get the list of Namespace Resource Description
                       operation: Get Namespace Resource
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/read
                   - display:
-                      description: Delete Namespace Resource
                       operation: Delete Namespace
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/Delete
                   - display:
-                      description: Get the list of Namespaces Authorization Rules description.
                       operation: Get Namespace Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/read
                   - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Namespace Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/write
                   - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
                       operation: Delete Namespace Authorization Rule
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to the Namespace
                       operation: Get Namespace Listkeys
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update EventHub properties.
                       operation: Create or Update EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/write
                   - display:
-                      description: Get list of EventHub Resource Descriptions
                       operation: Get EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/read
                   - display:
-                      description: Operation to delete EventHub Resource
                       operation: Delete EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/Delete
                   - display:
-                      description: ' Get the list of EventHub Authorization Rules'
                       operation: ' Get EventHub Authorization Rules'
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/read
                   - display:
-                      description: 'Create EventHub Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update EventHub Authorization Rule
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/write
                   - display:
-                      description: Operation to delete EventHub Authorization Rules
                       operation: Delete EventHub Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to EventHub
                       operation: List EventHub keys
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update ConsumerGroup properties.
                       operation: Create or Update ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/write
                   - display:
-                      description: Get list of ConsumerGroup Resource Descriptions
                       operation: Get ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/read
                   - display:
-                      description: Operation to delete ConsumerGroup Resource
                       operation: Delete ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/Delete
                   - display:
-                      description: Get list of Namespace metrics Resource Descriptions
                       operation: Get Namespace metrics
                       provider: Microsoft Azure EventHub
                       resource: Namespace metrics
                     name: Microsoft.EventHub/namespaces/metricDefinitions/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Get Namespace diagnostic settings
                       provider: Microsoft Azure EventHub
                       resource: Namespace diagnostic settings
                     name: Microsoft.EventHub/namespaces/diagnosticSettings/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Create or Update Namespace diagnostic settings
                       provider: Microsoft Azure EventHub
                       resource: Namespace diagnostic settings
                     name: Microsoft.EventHub/namespaces/diagnosticSettings/write
                   - display:
-                      description: Get list of Namespace logs Resource Descriptions
                       operation: Get Namespace logs
                       provider: Microsoft Azure EventHub
                       resource: Namespace logs

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement
   x-tags:
@@ -315,6 +314,25 @@ parameters:
     pattern: '^[^*#&+:<>?]+$'
     required: true
     type: string
+    x-ms-parameter-location: method
+  PolicyExportFormat:
+    default: xml
+    description: Policy Export Format.
+    enum:
+      - xml
+      - rawxml
+    in: query
+    name: format
+    required: false
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: PolicyExportFormat
+      values:
+        - description: The contents are inline and Content type is an XML document.
+          value: xml
+        - description: The contents are inline and Content type is a non XML encoded policy document.
+          value: rawxml
     x-ms-parameter-location: method
   PolicyIdParameter:
     description: The identifier of the Policy.

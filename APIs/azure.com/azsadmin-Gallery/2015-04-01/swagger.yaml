@@ -105,7 +105,8 @@ paths:
                       provider: Microsoft Gallery Administration Service
                       resource: Operation
                     name: Microsoft.Gallery.Admin/operations/read
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Operation:
     description: Represents a REST operation.

@@ -163,7 +163,8 @@ paths:
             '200':
               body: []
             '404': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Acquisition:
     allOf:

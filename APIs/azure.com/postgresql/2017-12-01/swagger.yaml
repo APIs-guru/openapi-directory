@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: postgresql
   x-tags:
@@ -361,7 +360,8 @@ paths:
                         minBackupRetentionDays: 7
                         minStorageMB: 5120
                         vCore: 32
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/servers':
     get:
       description: List all the servers in a given subscription.
@@ -467,7 +467,8 @@ paths:
                     tags:
                       ElasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers':
     get:
       description: List all the servers in a given resource group.
@@ -555,7 +556,8 @@ paths:
                     tags:
                       ElasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}':
     delete:
       description: Deletes a server.
@@ -1144,7 +1146,8 @@ paths:
                       name: GP_Gen4_16
                       tier: GeneralPurpose
                     type: Microsoft.DBforPostgreSQL/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/configurations':
     get:
       description: List all the configurations in a given server.
@@ -1972,7 +1975,8 @@ paths:
                       source: system-default
                       value: '3'
                     type: Microsoft.DBforPostgreSQL/servers/configurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/configurations/{configurationName}':
     get:
       description: Gets information about a configuration of server.
@@ -2101,7 +2105,8 @@ paths:
                       charset: UTF8
                       collation: English_United States.1252
                     type: Microsoft.DBforPostgreSQL/servers/databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases/{databaseName}':
     delete:
       description: Deletes a database.
@@ -2265,7 +2270,8 @@ paths:
                       endIpAddress: 255.0.0.0
                       startIpAddress: 1.0.0.0
                     type: Microsoft.DBforPostgreSQL/servers/firewallRules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules/{firewallRuleName}':
     delete:
       description: Deletes a server firewall rule.
@@ -2435,7 +2441,8 @@ paths:
                       type: text
                       url: 'https://wasd2stageneu1btlm4.file.core.windows.net/42679871f6cc4302b39ab9c2e3044df3/pg_log/postgresql-2017-06-22_020000.log?sv=2015-04-05&sr=f&sig=i99UWBlYfR0tKaxix8yHAOnfym4HV9Auto6BbZogyRs%3D&se=2017-06-22T03%3A21%3A09Z&sp=r'
                     type: Microsoft.DBforPostgreSQL/servers/logFiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/restart':
     post:
       description: Restarts a server.
@@ -3392,6 +3399,9 @@ definitions:
             description: The password of the administrator login.
             format: password
             type: string
+          replicationRole:
+            description: The replication role of the server.
+            type: string
           sslEnforcement:
             $ref: '#/definitions/SslEnforcement'
             description: Enable ssl enforcement or not when connect to server.
@@ -3418,6 +3428,7 @@ definitions:
       - '10'
       - '10.0'
       - '10.2'
+      - '11'
     type: string
     x-ms-enum:
       modelAsString: true
@@ -3473,6 +3484,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: GeoRedundantBackup
+      storageAutogrow:
+        description: Enable Storage Auto Grow.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StorageAutogrow
       storageMB:
         description: Max storage allowed for a server.
         format: int32

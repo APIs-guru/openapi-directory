@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/iotcentral/resource-manager/Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: iotcentral
   x-tags:
@@ -183,6 +182,54 @@ paths:
                     target: Error target
                 description: Error message returned for an unexpected response
                 headers: {}
+              headers:
+                code: '200'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/appTemplates':
+    post:
+      deprecated: false
+      description: Get all available application templates.
+      operationId: Apps_ListTemplates
+      parameters:
+        - $ref: '#/parameters/api-version'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: The body contains all the IoT Central application templates.
+          schema:
+            $ref: '#/definitions/AppTemplatesResult'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+      tags:
+        - Apps
+      x-ms-examples:
+        Apps_ListTemplates:
+          parameters:
+            api-version: '2018-09-01'
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - appTemplateName: IoT Central Application template
+                    description: Description for IoT Central Application template
+                    manifestId: iotc-default
+                    manifestVersion: 1.0.0
+                    order: 1
+                    title: IoT Central Application template
+              default:
+                body:
+                  error:
+                    code: Error code
+                    message: Error message
+                    target: Error target
+                description: Error message returned for an unexpected response
+                headers: {}
+              description: Returns the application templates details
               headers:
                 code: '200'
       x-ms-pageable:
@@ -696,11 +743,53 @@ definitions:
     required:
       - name
     type: object
+  AppTemplate:
+    description: IoT Central Application Template.
+    properties:
+      appTemplateName:
+        description: The name of the template.
+        readOnly: true
+        type: string
+      description:
+        description: The description of the template.
+        readOnly: true
+        type: string
+      manifestId:
+        description: The ID of the template.
+        readOnly: true
+        type: string
+      manifestVersion:
+        description: The version of the template.
+        readOnly: true
+        type: string
+      order:
+        description: The order of the template in the templates list.
+        readOnly: true
+        type: number
+      title:
+        description: The title of the template.
+        readOnly: true
+        type: string
+    type: object
+  AppTemplatesResult:
+    description: A list of IoT Central Application Templates with a next link.
+    properties:
+      nextLink:
+        description: The link used to get the next page of IoT Central application templates.
+        type: string
+      value:
+        description: A list of IoT Central Application Templates.
+        items:
+          $ref: '#/definitions/AppTemplate'
+        readOnly: true
+        type: array
+    type: object
   ErrorDetails:
     description: Error details.
     properties:
       error:
         $ref: '#/definitions/ErrorResponseBody'
+        description: Error response body.
         x-ms-client-flatten: true
   ErrorResponseBody:
     description: Details of error response.

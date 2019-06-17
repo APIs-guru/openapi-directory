@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimtenant.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimtenant
   x-tags:
@@ -86,7 +85,20 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/AccessInformationContract'
+            description: Tenant access information contract of the API Management service.
+            properties:
+              enabled:
+                description: Tenant access information of the API Management service.
+                type: boolean
+              id:
+                description: Identifier.
+                type: string
+              primaryKey:
+                description: Primary access key.
+                type: string
+              secondaryKey:
+                description: Secondary access key.
+                type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -245,7 +257,11 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/AccessInformationUpdateParameters'
+            description: Tenant access information update parameters of the API Management service.
+            properties:
+              enabled:
+                description: Tenant access information of the API Management service.
+                type: boolean
         - description: The identifier of the Access configuration.
           enum:
             - access
@@ -369,7 +385,20 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/AccessInformationContract'
+            description: Tenant access information contract of the API Management service.
+            properties:
+              enabled:
+                description: Tenant access information of the API Management service.
+                type: boolean
+              id:
+                description: Identifier.
+                type: string
+              primaryKey:
+                description: Primary access key.
+                type: string
+              secondaryKey:
+                description: Secondary access key.
+                type: string
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -784,7 +813,16 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DeployConfigurationParameters'
+            description: Parameters supplied to the Deploy Configuration operation.
+            properties:
+              branch:
+                description: The name of the Git branch from which the configuration is to be deployed to the configuration database.
+                type: string
+              force:
+                description: The value enforcing deleting subscriptions to products that are deleted in this update.
+                type: boolean
+            required:
+              - branch
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -810,7 +848,75 @@ paths:
         '200':
           description: Result of applying changes from Git branch to database.
           schema:
-            $ref: '#/definitions/OperationResultContract'
+            description: Operation Result.
+            properties:
+              actionLog:
+                description: This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
+                items:
+                  description: 'Log of the entity being created, updated or deleted.'
+                  properties:
+                    action:
+                      description: Action like create/update/delete.
+                      type: string
+                    objectKey:
+                      description: Identifier of the entity being created/updated/deleted.
+                      type: string
+                    objectType:
+                      description: The type of entity contract.
+                      type: string
+                readOnly: true
+                type: array
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+              id:
+                description: Operation result identifier.
+                type: string
+              resultInfo:
+                description: Optional result info.
+                type: string
+              started:
+                description: |
+                  Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              status:
+                description: Status of an async operation.
+                enum:
+                  - Started
+                  - InProgress
+                  - Succeeded
+                  - Failed
+                type: string
+                x-ms-enum:
+                  modelAsString: false
+                  name: AsyncOperationStatus
+              updated:
+                description: |
+                  Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
@@ -896,7 +1002,16 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/SaveConfigurationParameter'
+            description: Parameters supplied to the Save Tenant Configuration operation.
+            properties:
+              branch:
+                description: The name of the Git branch in which to commit the current configuration snapshot.
+                type: string
+              force:
+                description: 'The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten.'
+                type: boolean
+            required:
+              - branch
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -922,7 +1037,75 @@ paths:
         '200':
           description: Result of creating a commit in the repository.
           schema:
-            $ref: '#/definitions/OperationResultContract'
+            description: Operation Result.
+            properties:
+              actionLog:
+                description: This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
+                items:
+                  description: 'Log of the entity being created, updated or deleted.'
+                  properties:
+                    action:
+                      description: Action like create/update/delete.
+                      type: string
+                    objectKey:
+                      description: Identifier of the entity being created/updated/deleted.
+                      type: string
+                    objectType:
+                      description: The type of entity contract.
+                      type: string
+                readOnly: true
+                type: array
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+              id:
+                description: Operation result identifier.
+                type: string
+              resultInfo:
+                description: Optional result info.
+                type: string
+              started:
+                description: |
+                  Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              status:
+                description: Status of an async operation.
+                enum:
+                  - Started
+                  - InProgress
+                  - Succeeded
+                  - Failed
+                type: string
+                x-ms-enum:
+                  modelAsString: false
+                  name: AsyncOperationStatus
+              updated:
+                description: |
+                  Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
@@ -1024,7 +1207,33 @@ paths:
         '200':
           description: Sync state result.
           schema:
-            $ref: '#/definitions/TenantConfigurationSyncStateContract'
+            description: Tenant Configuration Synchronization State.
+            properties:
+              branch:
+                description: The name of Git branch.
+                type: string
+              commitId:
+                description: The latest commit Id.
+                type: string
+              configurationChangeDate:
+                description: |
+                  The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              isExport:
+                description: value indicating if last sync was save (true) or deploy (false) operation.
+                type: boolean
+              isGitEnabled:
+                description: value indicating whether Git configuration access is enabled.
+                type: boolean
+              isSynced:
+                description: value indicating if last synchronization was later than the configuration change.
+                type: boolean
+              syncDate:
+                description: |
+                  The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
       tags:
         - TenantConfigurationSyncState
       x-ms-examples:
@@ -1070,7 +1279,16 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DeployConfigurationParameters'
+            description: Parameters supplied to the Deploy Configuration operation.
+            properties:
+              branch:
+                description: The name of the Git branch from which the configuration is to be deployed to the configuration database.
+                type: string
+              force:
+                description: The value enforcing deleting subscriptions to products that are deleted in this update.
+                type: boolean
+            required:
+              - branch
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -1096,7 +1314,75 @@ paths:
         '200':
           description: Result of validating the changes in the specified Git branch.
           schema:
-            $ref: '#/definitions/OperationResultContract'
+            description: Operation Result.
+            properties:
+              actionLog:
+                description: This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
+                items:
+                  description: 'Log of the entity being created, updated or deleted.'
+                  properties:
+                    action:
+                      description: Action like create/update/delete.
+                      type: string
+                    objectKey:
+                      description: Identifier of the entity being created/updated/deleted.
+                      type: string
+                    objectType:
+                      description: The type of entity contract.
+                      type: string
+                readOnly: true
+                type: array
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+              id:
+                description: Operation result identifier.
+                type: string
+              resultInfo:
+                description: Optional result info.
+                type: string
+              started:
+                description: |
+                  Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              status:
+                description: Status of an async operation.
+                enum:
+                  - Started
+                  - InProgress
+                  - Succeeded
+                  - Failed
+                type: string
+                x-ms-enum:
+                  modelAsString: false
+                  name: AsyncOperationStatus
+              updated:
+                description: |
+                  Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
@@ -1237,147 +1523,4 @@ paths:
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5a1af64e2a6d2e0b688d751e?api-version=2018-06-01-preview'
       x-ms-long-running-operation: true
-definitions:
-  AccessInformationContract:
-    description: Tenant access information contract of the API Management service.
-    properties:
-      enabled:
-        description: Tenant access information of the API Management service.
-        type: boolean
-      id:
-        description: Identifier.
-        type: string
-      primaryKey:
-        description: Primary access key.
-        type: string
-      secondaryKey:
-        description: Secondary access key.
-        type: string
-  AccessInformationUpdateParameters:
-    description: Tenant access information update parameters of the API Management service.
-    properties:
-      enabled:
-        description: Tenant access information of the API Management service.
-        type: boolean
-  DeployConfigurationParameters:
-    description: Parameters supplied to the Deploy Configuration operation.
-    properties:
-      branch:
-        description: The name of the Git branch from which the configuration is to be deployed to the configuration database.
-        type: string
-      force:
-        description: The value enforcing deleting subscriptions to products that are deleted in this update.
-        type: boolean
-    required:
-      - branch
-  OperationResultContract:
-    description: Operation Result.
-    properties:
-      actionLog:
-        description: This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
-        items:
-          $ref: '#/definitions/OperationResultLogItemContract'
-        readOnly: true
-        type: array
-      error:
-        description: Error Body contract.
-        properties:
-          code:
-            description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-            type: string
-          details:
-            description: 'The list of invalid fields send in request, in case of validation error.'
-            items:
-              description: Error Field contract.
-              properties:
-                code:
-                  description: Property level error code.
-                  type: string
-                message:
-                  description: Human-readable representation of property-level error.
-                  type: string
-                target:
-                  description: Property name.
-                  type: string
-            type: array
-          message:
-            description: Human-readable representation of the error.
-            type: string
-      id:
-        description: Operation result identifier.
-        type: string
-      resultInfo:
-        description: Optional result info.
-        type: string
-      started:
-        description: |
-          Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      status:
-        description: Status of an async operation.
-        enum:
-          - Started
-          - InProgress
-          - Succeeded
-          - Failed
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AsyncOperationStatus
-      updated:
-        description: |
-          Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-  OperationResultLogItemContract:
-    description: 'Log of the entity being created, updated or deleted.'
-    properties:
-      action:
-        description: Action like create/update/delete.
-        type: string
-      objectKey:
-        description: Identifier of the entity being created/updated/deleted.
-        type: string
-      objectType:
-        description: The type of entity contract.
-        type: string
-  SaveConfigurationParameter:
-    description: Parameters supplied to the Save Tenant Configuration operation.
-    properties:
-      branch:
-        description: The name of the Git branch in which to commit the current configuration snapshot.
-        type: string
-      force:
-        description: 'The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten.'
-        type: boolean
-    required:
-      - branch
-  TenantConfigurationSyncStateContract:
-    description: Tenant Configuration Synchronization State.
-    properties:
-      branch:
-        description: The name of Git branch.
-        type: string
-      commitId:
-        description: The latest commit Id.
-        type: string
-      configurationChangeDate:
-        description: |
-          The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      isExport:
-        description: value indicating if last sync was save (true) or deploy (false) operation.
-        type: boolean
-      isGitEnabled:
-        description: value indicating whether Git configuration access is enabled.
-        type: boolean
-      isSynced:
-        description: value indicating if last synchronization was later than the configuration change.
-        type: boolean
-      syncDate:
-        description: |
-          The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
+definitions: {}

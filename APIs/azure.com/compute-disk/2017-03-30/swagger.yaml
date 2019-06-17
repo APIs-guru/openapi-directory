@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-03-30/disk.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-disk
   x-tags:
@@ -463,6 +462,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -487,6 +515,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -511,6 +568,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -536,6 +622,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -561,6 +676,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -584,6 +728,35 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
             '202':
               body:
                 location: West US
@@ -829,6 +1002,32 @@ paths:
             snapshotName: mySnapshot1
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                location: westus
+                name: mySnapshot
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 100
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                tags:
+                  department: Development
+                  project: Snapshots
+                type: Microsoft.Compute/snapshots
             '202':
               body:
                 location: West US
@@ -853,6 +1052,32 @@ paths:
             snapshotName: mySnapshot1
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                location: westus
+                name: mySnapshot
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 100
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                tags:
+                  department: Development
+                  project: Snapshots
+                type: Microsoft.Compute/snapshots
             '202':
               body:
                 location: West US
@@ -876,6 +1101,32 @@ paths:
             snapshotName: mySnapshot2
             subscriptionId: '{subscription-id}'
           responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                location: westus
+                name: mySnapshot
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 100
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                tags:
+                  department: Development
+                  project: Snapshots
+                type: Microsoft.Compute/snapshots
             '202':
               body:
                 location: West US
@@ -1090,7 +1341,7 @@ definitions:
           - Premium_LRS
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: StorageAccountTypes
       tier:
         default: Standard

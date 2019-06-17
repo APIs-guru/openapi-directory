@@ -375,7 +375,74 @@ paths:
                   state: Private
                   subscriptionCount: 0
                 type: Microsoft.Subscriptions.Admin/offers
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/MetricDefinitions':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link':
+    post:
+      description: Links a plan to an offer.
+      operationId: Offers_Link
+      parameters:
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The resource group the resource is located under.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of an offer.
+          in: path
+          name: offer
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/PlanLinkParameter'
+        - default: '2015-11-01'
+          description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Offer'
+      tags:
+        - Offers
+      x-ms-examples:
+        Links a plan to an offer.:
+          parameters:
+            api-version: '2015-11-01'
+            location: local
+            offer: sampleoffer1
+            planLink:
+              properties:
+                planLinkType: Addon
+                planName: sampleplan1
+            resourceGroupName: RG1
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                id: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
+                location: local
+                name: sampleoffer1
+                properties:
+                  addonPlans:
+                    - maxAcquisitionCount: 1
+                      planId: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/TestRG-66c416e8-ad7c-4686-847e-5f84772d3217/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
+                  basePlanIds:
+                    - /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/cnur5364tenantplan110
+                  displayName: sampleoffer1
+                  maxSubscriptionsPerAccount: 0
+                  name: sampleoffer1
+                  state: Public
+                  subscriptionCount: 2
+                tags: {}
+                type: Microsoft.Subscriptions.Admin/offers
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions':
     get:
       description: Get the metric definitions.
       operationId: Offers_ListMetricDefinitions
@@ -510,7 +577,7 @@ paths:
               body:
                 nextLink: ''
                 value: []
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/Metrics':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics':
     get:
       description: Get the offer metrics.
       operationId: Offers_ListMetrics
@@ -644,73 +711,6 @@ paths:
               body:
                 nextLink: ''
                 value: []
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link':
-    post:
-      description: Links a plan to an offer.
-      operationId: Offers_Link
-      parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: The resource group the resource is located under.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: Name of an offer.
-          in: path
-          name: offer
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/PlanLinkParameter'
-        - default: '2015-11-01'
-          description: Client Api Version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Offer'
-      tags:
-        - Offers
-      x-ms-examples:
-        Links a plan to an offer.:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            offer: sampleoffer1
-            planLink:
-              properties:
-                planLinkType: Addon
-                planName: sampleplan1
-            resourceGroupName: RG1
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body:
-                id: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1
-                location: local
-                name: sampleoffer1
-                properties:
-                  addonPlans:
-                    - maxAcquisitionCount: 1
-                      planId: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/TestRG-66c416e8-ad7c-4686-847e-5f84772d3217/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1
-                  basePlanIds:
-                    - /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/cnur5364tenantplan110
-                  displayName: sampleoffer1
-                  maxSubscriptionsPerAccount: 0
-                  name: sampleoffer1
-                  state: Public
-                  subscriptionCount: 2
-                tags: {}
-                type: Microsoft.Subscriptions.Admin/offers
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink':
     post:
       description: Unlink a plan from an offer.

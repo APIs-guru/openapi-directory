@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/preview/2017-08-21-preview/iotdps.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: deviceprovisioningservices-iotdps
   x-tags:
@@ -77,211 +76,176 @@ paths:
               body:
                 value:
                   - display:
-                      description: Register the subscription for the IotHub resource provider and enables the creation of IotHub resources
                       operation: Register Resource Provider
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/register/action
                   - display:
-                      description: Gets the diagnostic setting for the resource
                       operation: Get Diagnostic Setting
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/IotHubs/diagnosticSettings/read
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource
                       operation: Set Diagnostic Setting
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/IotHubs/diagnosticSettings/write
                   - display:
-                      description: Gets the available metrics for the IotHub service
                       operation: Read IotHub service metric definitions
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/IotHubs/metricDefinitions/read
                   - display:
-                      description: Gets the available log definitions for the IotHub Service
                       operation: Read IotHub service log definitions
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/IotHubs/logDefinitions/read
                   - display:
-                      description: Get All ResourceProvider Operations
                       operation: Get All ResourceProvider Operations
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/operations/Read
                   - display:
-                      description: Check If IotHub name is available
                       operation: Check If IotHub name is available
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/checkNameAvailability/Action
                   - display:
-                      description: Get subscription usage details for this provider.
                       operation: Get Subscription Usages
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/usages/Read
                   - display:
-                      description: Gets the IotHub resource(s)
                       operation: Get IotHub(s)
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/Read
                   - display:
-                      description: Create or update IotHub Resource
                       operation: Create or update IotHub Resource
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/Write
                   - display:
-                      description: Delete IotHub Resource
                       operation: Delete IotHub Resource
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/Delete
                   - display:
-                      description: Get IotHub Statistics
                       operation: Get IotHub Statistics
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/iotHubStats/Read
                   - display:
-                      description: Get valid IotHub Skus
                       operation: Get valid IotHub Skus
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/skus/Read
                   - display:
-                      description: Get all IotHub Keys
                       operation: Get all IotHub Keys
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/listkeys/Action
                   - display:
-                      description: Get IotHub Key for the given name
                       operation: Get IotHub Key for the given name
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/iotHubKeys/listkeys/Action
                   - display:
-                      description: Create EventHub Consumer Group
                       operation: Create EventHub Consumer Group
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/eventHubEndpoints/consumerGroups/Write
                   - display:
-                      description: Get EventHub Consumer Group(s)
                       operation: Get EventHub Consumer Group(s)
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/eventHubEndpoints/consumerGroups/Read
                   - display:
-                      description: Delete EventHub Consumer Group
                       operation: Delete EventHub Consumer Group
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/eventHubEndpoints/consumerGroups/Delete
                   - display:
-                      description: Export Devices
                       operation: Export Devices
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/exportDevices/Action
                   - display:
-                      description: Import Devices
                       operation: Import Devices
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/importDevices/Action
                   - display:
-                      description: Get Job(s) details submitted on given IotHub
                       operation: Get the Job(s) on IotHub
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/jobs/Read
                   - display:
-                      description: Get Quota Metrics
                       operation: Get Quota Metrics
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/quotaMetrics/Read
                   - display:
-                      description: Test a message against all existing Routes
                       operation: Routing Rule Test All
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/routing/routes/$testall/Action
                   - display:
-                      description: Test a message against a provided test Route
                       operation: Routing Rule Test Route
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/routing/routes/$testnew/Action
                   - display:
-                      description: Gets the health of all routing Endpoints for an IotHub
                       operation: Get Endpoint Health
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/iotHubs/routingEndpointsHealth/Read
                   - display:
-                      description: Gets the diagnostic setting for the resource
                       operation: Get Diagnostic Setting
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/ProvisioningServices/diagnosticSettings/read
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource
                       operation: Set Diagnostic Setting
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/ProvisioningServices/diagnosticSettings/write
                   - display:
-                      description: Gets the available metrics for the DPS service
                       operation: Read DPS service metric definitions
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/ProvisioningServices/metricDefinitions/read
                   - display:
-                      description: Gets the available log definitions for the DPS Service
                       operation: Read DPS service log definitions
                       provider: Microsoft Devices
                       resource: IotHubs
                     name: Microsoft.Devices/ProvisioningServices/logDefinitions/read
                   - display:
-                      description: Check If Provisioning Service name is available
                       operation: Check If Provisioning Service name is available
                       provider: Microsoft Devices
                       resource: ProvisioningServives
                     name: Microsoft.Devices/checkProvisioningServiceNameAvailability/Action
                   - display:
-                      description: Get Provisioning Service resource
                       operation: Get Provisioning Service resource
                       provider: Microsoft Devices
                       resource: ProvisioningServices
                     name: Microsoft.Devices/provisioningServices/Read
                   - display:
-                      description: Create Provisioning Service resource
                       operation: Create Provisioning Service resource
                       provider: Microsoft Devices
                       resource: ProvisioningServices
                     name: Microsoft.Devices/provisioningServices/Write
                   - display:
-                      description: Delete Provisioning Service resource
                       operation: Delete Provisioning Service resource
                       provider: Microsoft Devices
                       resource: ProvisioningServices
                     name: Microsoft.Devices/provisioningServices/Delete
                   - display:
-                      description: Delete Provisioning Service resource
                       operation: Delete Provisioning Service resource
                       provider: Microsoft Devices
                       resource: ProvisioningServices
                     name: Microsoft.Devices/provisioningServices/skus/Read
                   - display:
-                      description: get security related metadata
                       operation: get security related metadata
                       provider: Microsoft Devices
                       resource: ProvisioningServices

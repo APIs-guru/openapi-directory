@@ -159,7 +159,8 @@ paths:
                     type: Microsoft.Insights/scheduledQueryRules
               headers: {}
       x-ms-odata: '#/definitions/LogSearchRuleResource'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules':
     get:
       description: List the Log Search rules within a resource group.
@@ -251,7 +252,8 @@ paths:
                     type: Microsoft.Insights/scheduledQueryRules
               headers: {}
       x-ms-odata: '#/definitions/LogSearchRuleResource'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules/{ruleName}':
     delete:
       description: Deletes a Log Search rule
@@ -939,8 +941,10 @@ definitions:
     description: Specify action need to be taken when rule type is converting log to metric
     properties:
       criteria:
-        $ref: '#/definitions/Criteria'
-        description: Severity of the alert
+        description: Criteria of Metric
+        items:
+          $ref: '#/definitions/Criteria'
+        type: array
     required:
       - criteria
     type: object

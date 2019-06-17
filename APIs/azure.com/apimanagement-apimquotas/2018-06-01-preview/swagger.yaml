@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimquotas.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimquotas
   x-tags:
@@ -80,7 +79,55 @@ paths:
         '200':
           description: Lists a collection of the quota counter values.
           schema:
-            $ref: '#/definitions/QuotaCounterCollection'
+            description: Paged Quota Counter list representation.
+            properties:
+              count:
+                description: Total record count number across all pages.
+                format: int64
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Quota counter values.
+                items:
+                  description: Quota counter details.
+                  properties:
+                    counterKey:
+                      description: The Key value of the Counter. Must not be empty.
+                      minLength: 1
+                      type: string
+                    periodEndTime:
+                      description: |
+                        The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    periodKey:
+                      description: Identifier of the Period for which the counter was collected. Must not be empty.
+                      minLength: 1
+                      type: string
+                    periodStartTime:
+                      description: |
+                        The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    value:
+                      description: Quota counter value details.
+                      properties:
+                        callsCount:
+                          description: Number of times Counter was called.
+                          format: int32
+                          type: integer
+                        kbTransferred:
+                          description: Data Transferred in KiloBytes.
+                          format: double
+                          type: number
+                  required:
+                    - counterKey
+                    - periodKey
+                    - periodStartTime
+                    - periodEndTime
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -163,7 +210,16 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/QuotaCounterValueContractProperties'
+            description: Quota counter value details.
+            properties:
+              callsCount:
+                description: Number of times Counter was called.
+                format: int32
+                type: integer
+              kbTransferred:
+                description: Data Transferred in KiloBytes.
+                format: double
+                type: number
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -270,7 +326,42 @@ paths:
         '200':
           description: The response body contains the Quota counter details for the specified period.
           schema:
-            $ref: '#/definitions/QuotaCounterContract'
+            description: Quota counter details.
+            properties:
+              counterKey:
+                description: The Key value of the Counter. Must not be empty.
+                minLength: 1
+                type: string
+              periodEndTime:
+                description: |
+                  The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              periodKey:
+                description: Identifier of the Period for which the counter was collected. Must not be empty.
+                minLength: 1
+                type: string
+              periodStartTime:
+                description: |
+                  The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                format: date-time
+                type: string
+              value:
+                description: Quota counter value details.
+                properties:
+                  callsCount:
+                    description: Number of times Counter was called.
+                    format: int32
+                    type: integer
+                  kbTransferred:
+                    description: Data Transferred in KiloBytes.
+                    format: double
+                    type: number
+            required:
+              - counterKey
+              - periodKey
+              - periodStartTime
+              - periodEndTime
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -357,7 +448,16 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/QuotaCounterValueContractProperties'
+            description: Quota counter value details.
+            properties:
+              callsCount:
+                description: Number of times Counter was called.
+                format: int32
+                type: integer
+              kbTransferred:
+                description: Data Transferred in KiloBytes.
+                format: double
+                type: number
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -416,66 +516,4 @@ paths:
             subscriptionId: subid
           responses:
             '204': {}
-definitions:
-  QuotaCounterCollection:
-    description: Paged Quota Counter list representation.
-    properties:
-      count:
-        description: Total record count number across all pages.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Quota counter values.
-        items:
-          $ref: '#/definitions/QuotaCounterContract'
-        type: array
-  QuotaCounterContract:
-    description: Quota counter details.
-    properties:
-      counterKey:
-        description: The Key value of the Counter. Must not be empty.
-        minLength: 1
-        type: string
-      periodEndTime:
-        description: |
-          The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      periodKey:
-        description: Identifier of the Period for which the counter was collected. Must not be empty.
-        minLength: 1
-        type: string
-      periodStartTime:
-        description: |
-          The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      value:
-        $ref: '#/definitions/QuotaCounterValueContractProperties'
-        description: Quota Value Properties
-    required:
-      - counterKey
-      - periodKey
-      - periodStartTime
-      - periodEndTime
-  QuotaCounterValueContract:
-    description: Quota counter value details.
-    properties:
-      value:
-        $ref: '#/definitions/QuotaCounterValueContractProperties'
-        description: Quota counter Value Properties.
-        x-ms-client-flatten: true
-  QuotaCounterValueContractProperties:
-    description: Quota counter value details.
-    properties:
-      callsCount:
-        description: Number of times Counter was called.
-        format: int32
-        type: integer
-      kbTransferred:
-        description: Data Transferred in KiloBytes.
-        format: double
-        type: number
+definitions: {}

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-11-01/applicationGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-applicationGateway
   x-tags:
@@ -88,8 +87,7 @@ paths:
           responses:
             '200':
               body:
-                value:
-                  - Accept-Charset
+                - Accept-Charset
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders':
     get:
       description: Lists all available response headers.
@@ -142,8 +140,7 @@ paths:
           responses:
             '200':
               body:
-                value:
-                  - Access-Control-Allow-Origin
+                - Access-Control-Allow-Origin
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables':
     get:
       description: Lists all available server variables.
@@ -196,8 +193,7 @@ paths:
           responses:
             '200':
               body:
-                value:
-                  - request_query
+                - request_query
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default':
     get:
       description: Lists available Ssl options for configuring Ssl policy.
@@ -1650,31 +1646,19 @@ definitions:
       - minCapacity
   ApplicationGatewayAvailableRequestHeadersResult:
     description: Response for ApplicationGatewayAvailableRequestHeaders API service call.
-    properties:
-      value:
-        description: The list of supported request headers in application gateway.
-        items:
-          type: string
-        type: array
-    type: object
+    items:
+      type: string
+    type: array
   ApplicationGatewayAvailableResponseHeadersResult:
-    description: Response for ApplicationGatewayAvailableResponeHeaders API service call.
-    properties:
-      value:
-        description: The list of supported response header in application gateway.
-        items:
-          type: string
-        type: array
-    type: object
+    description: Response for ApplicationGatewayAvailableResponseHeaders API service call.
+    items:
+      type: string
+    type: array
   ApplicationGatewayAvailableServerVariablesResult:
     description: Response for ApplicationGatewayAvailableServerVariables API service call.
-    properties:
-      value:
-        description: The list of supported server variables in application gateway.
-        items:
-          type: string
-        type: array
-    type: object
+    items:
+      type: string
+    type: array
   ApplicationGatewayAvailableSslOptions:
     allOf:
       - description: Common resource representation.
@@ -3101,11 +3085,13 @@ definitions:
       - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
       - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
       - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
     type: string
     x-ms-enum:
       modelAsString: true
       name: ApplicationGatewaySslCipherSuite
-  NetworkInterfaceIPConfigurationPropertiesFormat: {}
   PolicyNameEnum:
     description: Ssl predefined policy name enums.
     enum:

@@ -98,6 +98,44 @@ paths:
                     name: Microsoft.ManagementPartner/partners/delete
       x-ms-pageable:
         nextLinkName: nextLink
+  /providers/Microsoft.ManagementPartner/partners:
+    get:
+      description: Get the management partner using the objectId and tenantId.
+      operationId: Partners_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Get the details of the `Partner`.
+          schema:
+            $ref: '#/definitions/PartnerResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get a specific `Partner`.
+      tags:
+        - Partners
+      x-ms-examples:
+        GetPartnerDetails:
+          parameters:
+            api-version: '2018-02-01'
+          responses:
+            '200':
+              body:
+                etag: 3
+                id: /providers/microsoft.managementpartner/partners
+                name: '123456'
+                properties:
+                  createdTime: '2018-01-20T01:23:40.5280496Z'
+                  objectId: aa67f786-0552-423e-8849-244ed12bf581
+                  partnerId: '123456'
+                  partnerName: Test_jefl
+                  state: Active
+                  tenantId: 1b1121dd-6900-412a-af73-e8d44f81e1c1
+                  updatedTime: '2018-01-20T01:52:57.9126052Z'
+                  version: '3'
+                type: Microsoft.ManagementPartner/partner
   '/providers/Microsoft.ManagementPartner/partners/{partnerId}':
     delete:
       description: Delete the management partner for the objectId and tenantId.
@@ -114,7 +152,7 @@ paths:
             $ref: '#/definitions/Error'
       summary: Delete a specific `Partner`.
       tags:
-        - partner
+        - Partner
       x-ms-examples:
         DeletePartnerDetails:
           parameters:
@@ -140,7 +178,7 @@ paths:
             $ref: '#/definitions/Error'
       summary: Get a specific `Partner`.
       tags:
-        - partner
+        - Partner
       x-ms-examples:
         GetPartnerDetails:
           parameters:
@@ -179,7 +217,7 @@ paths:
             $ref: '#/definitions/Error'
       summary: Update a specific `Partner`.
       tags:
-        - partner
+        - Partner
       x-ms-examples:
         PatchPartnerDetails:
           parameters:
@@ -218,7 +256,7 @@ paths:
             $ref: '#/definitions/Error'
       summary: Create a specific `Partner`.
       tags:
-        - partner
+        - Partner
       x-ms-examples:
         PutPartnerDetails:
           parameters:

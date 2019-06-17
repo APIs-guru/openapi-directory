@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-03-30/compute.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -534,7 +533,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachineSizes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus':
     get:
       description: Gets the list of Microsoft.Compute SKUs available for your Subscription.
@@ -731,7 +731,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - AvailabilitySets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images':
     get:
       description: Gets the list of images under a resource group.
@@ -5013,7 +5014,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AdditionalUnattendContent:
     description: 'Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.'
@@ -6118,7 +6120,7 @@ definitions:
       - Premium_LRS
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: StorageAccountTypes
   StorageProfile:
     description: Specifies the storage settings for the virtual machine disks.

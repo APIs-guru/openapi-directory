@@ -96,7 +96,8 @@ paths:
                     resolvedTime: '2017-09-13T22:14:28.9792776Z'
                     ruleName: myRuleName
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}':
     get:
       description: Gets an incident associated to an alert rule

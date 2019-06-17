@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2019-01-01/costmanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -91,8 +90,16 @@ parameters:
     type: string
     x-ms-parameter-location: method
     x-ms-skip-url-encoding: true
+  scopeExportsParameter:
+    description: 'The scope associated with export operations. This includes ''/subscriptions/{subscriptionId}'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope and ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope.'
+    in: path
+    name: scope
+    required: true
+    type: string
+    x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
   scopeQueryParameter:
-    description: 'The scope associated with query and export operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope and ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope..'
+    description: 'The scope associated with query operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope and ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope..'
     in: path
     name: scope
     required: true
@@ -172,6 +179,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             billingAccountId: '100'
+            scope: providers/Microsoft.Billing/billingAccounts/100
           responses:
             '200':
               body:
@@ -206,6 +214,7 @@ paths:
             $top: 5
             api-version: '2019-01-01'
             billingAccountId: '100'
+            scope: providers/Microsoft.Billing/billingAccounts/100
           responses:
             '200':
               body:
@@ -251,6 +260,7 @@ paths:
             $top: 5
             api-version: '2019-01-01'
             billingAccountId: '100'
+            scope: providers/Microsoft.Billing/billingAccounts/100
           responses:
             '200':
               body:
@@ -278,6 +288,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             departmentId: '123'
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/123
           responses:
             '200':
               body:
@@ -313,6 +324,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             departmentId: '123'
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/123
           responses:
             '200':
               body:
@@ -359,6 +371,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             departmentId: '123'
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/123
           responses:
             '200':
               body:
@@ -386,6 +399,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             enrollmentAccountId: '456'
+            scope: providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456
           responses:
             '200':
               body:
@@ -421,6 +435,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             enrollmentAccountId: '456'
+            scope: providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456
           responses:
             '200':
               body:
@@ -467,6 +482,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '100'
             enrollmentAccountId: '456'
+            scope: providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456
           responses:
             '200':
               body:
@@ -493,6 +509,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             managementGroupId: MyMgId
+            scope: providers/Microsoft.Management/managementGroups/MyMgId
           responses:
             '200':
               body:
@@ -527,6 +544,7 @@ paths:
             $top: 5
             api-version: '2019-01-01'
             managementGroupId: MyMgId
+            scope: providers/Microsoft.Management/managementGroups/MyMgId
           responses:
             '200':
               body:
@@ -572,6 +590,7 @@ paths:
             $top: 5
             api-version: '2019-01-01'
             managementGroupId: MyMgId
+            scope: providers/Microsoft.Management/managementGroups/MyMgId
           responses:
             '200':
               body:
@@ -600,6 +619,7 @@ paths:
             $top: 5
             api-version: '2019-01-01'
             resourceGroupName: system.orlando
+            scope: 'subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -640,6 +660,7 @@ paths:
             $expand: properties/data
             $top: 5
             api-version: '2019-01-01'
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -679,7 +700,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.CostManagement/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{scope}/providers/Microsoft.CostManagement/exports':
     get:
       description: Lists all exports at the given scope.
@@ -687,7 +709,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_List
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
@@ -705,6 +727,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             billingAccountId: '123456'
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}'
           responses:
             '200':
               body:
@@ -814,6 +837,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             departmentId: '1234'
+            scope: providers/Microsoft.Billing/billingAccounts/12/departments/1234
           responses:
             '200':
               body:
@@ -923,6 +947,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             departmentId: '1234'
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/1234
           responses:
             '200':
               body:
@@ -1032,6 +1057,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscription-id}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -1142,6 +1168,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscription-id}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -1255,7 +1282,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_Delete
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/exportNameParameter'
       responses:
@@ -1273,20 +1300,25 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '123456'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}'
           responses:
             '200': {}
         DepartmentDeleteExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '123456'
             departmentId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
           responses:
             '200': {}
         EnrollmentAccountDeleteExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             enrollmentAccountId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'
           responses:
             '200': {}
         ResourceGroupDeleteExport:
@@ -1294,6 +1326,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200': {}
@@ -1302,6 +1335,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200': {}
@@ -1311,7 +1345,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_Get
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/exportNameParameter'
       responses:
@@ -1331,6 +1365,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '123456'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}'
           responses:
             '200':
               body:
@@ -1385,8 +1420,10 @@ paths:
         DepartmentExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             departmentId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
           responses:
             '200':
               body:
@@ -1441,8 +1478,11 @@ paths:
         EnrollmentAccountExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             enrollmentAccountId: '1234'
             exportName: TestExport
+            id: providers/Microsoft.Billing/billingAccounts/12/enrollmentAccounts/1234/providers/Microsoft.CostManagement/exports/TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'
           responses:
             '200':
               body:
@@ -1499,6 +1539,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -1557,7 +1598,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/exportNameParameter'
         - description: Parameters supplied to the CreateOrUpdate Export operation.
@@ -1642,6 +1683,7 @@ paths:
                     from: '2018-06-01T00:00:00Z'
                     to: '2018-10-31T00:00:00Z'
                   status: Active
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}'
           responses:
             '200':
               body:
@@ -1764,6 +1806,7 @@ paths:
         DepartmentCreateOrUpdateExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             departmentId: '1234'
             exportName: TestExport
             parameters:
@@ -1821,6 +1864,7 @@ paths:
                     from: '2018-06-01T00:00:00Z'
                     to: '2018-10-31T00:00:00Z'
                   status: Active
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments'
           responses:
             '200':
               body:
@@ -1943,6 +1987,7 @@ paths:
         EnrollmentAccountCreateOrUpdateExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             enrollmentAccountId: '1234'
             exportName: TestExport
             parameters:
@@ -2000,6 +2045,7 @@ paths:
                     from: '2018-06-01T00:00:00Z'
                     to: '2018-10-31T00:00:00Z'
                   status: Active
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'
           responses:
             '200':
               body:
@@ -2179,6 +2225,7 @@ paths:
                     to: '2018-10-31T00:00:00Z'
                   status: Active
             resourceGroupName: MYDEVTESTRG
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -2359,6 +2406,7 @@ paths:
                     to: '2018-10-31T00:00:00Z'
                   status: Active
             resourceGroupName: MYDEVTESTRG
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -2486,7 +2534,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_Execute
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/exportNameParameter'
       responses:
@@ -2504,20 +2552,25 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '123456'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}'
           responses:
             '200': {}
         DepartmentExecuteExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             departmentId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
           responses:
             '200': {}
         EnrollmentAccountExecuteExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             enrollmentAccountId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'
           responses:
             '200': {}
         ResourceGroupExecuteExport:
@@ -2525,6 +2578,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200': {}
@@ -2533,6 +2587,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200': {}
@@ -2543,7 +2598,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Exports_GetExecutionHistory
       parameters:
-        - $ref: '#/parameters/scopeQueryParameter'
+        - $ref: '#/parameters/scopeExportsParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/exportNameParameter'
       responses:
@@ -2563,6 +2618,7 @@ paths:
             api-version: '2019-01-01'
             billingAccountId: '123456'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}'
           responses:
             '200':
               body:
@@ -2686,8 +2742,10 @@ paths:
         DepartmentExecutionHistoryExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             departmentId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
           responses:
             '200':
               body:
@@ -2811,8 +2869,10 @@ paths:
         EnrollmentAccountExecutionHistoryExport:
           parameters:
             api-version: '2019-01-01'
+            billingAccountId: '100'
             enrollmentAccountId: '1234'
             exportName: TestExport
+            scope: 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'
           responses:
             '200':
               body:
@@ -2938,6 +2998,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -3064,6 +3125,7 @@ paths:
             api-version: '2019-01-01'
             exportName: TestExport
             resourceGroupName: MYDEVTESTRG
+            scope: 'subscriptions/{subscriptionId}'
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -3241,6 +3303,7 @@ paths:
                 granularity: Daily
               timeframe: MonthToDate
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/70664866
           responses:
             '200':
               body:
@@ -3292,6 +3355,7 @@ paths:
                     type: Dimension
               timeframe: TheLastMonth
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/70664866
           responses:
             '200':
               body:
@@ -3348,6 +3412,7 @@ paths:
                 granularity: Daily
               timeframe: MonthToDate
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/123
           responses:
             '200':
               body:
@@ -3400,6 +3465,7 @@ paths:
                     type: Dimension
               timeframe: TheLastMonth
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/100/departments/123
           responses:
             '200':
               body:
@@ -3456,6 +3522,7 @@ paths:
                 granularity: Daily
               timeframe: MonthToDate
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456
           responses:
             '200':
               body:
@@ -3510,6 +3577,7 @@ paths:
                   - name: ResourceGroup
               timeframe: TheLastMonth
               type: Usage
+            scope: providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456
           responses:
             '200':
               body:
@@ -3570,6 +3638,7 @@ paths:
                 granularity: Daily
               timeframe: MonthToDate
               type: Usage
+            scope: providers/Microsoft.Management/managementGroups/MyMgId
           responses:
             '200':
               body:
@@ -3620,10 +3689,11 @@ paths:
                   - name: ResourceGroup
                     type: Dimension
                 sorting:
-                  - direction: Descending
-                    name: ResourceGroup
+                  - name: ResourceGroup
+                    querySortingDirection: Descending
               timeframe: TheLastMonth
               type: Usage
+            scope: providers/Microsoft.Management/managementGroups/MyMgId
           responses:
             '200':
               body:
@@ -3684,6 +3754,7 @@ paths:
               timeframe: MonthToDate
               type: Usage
             resourceGroupName: ScreenSharingTest-peer
+            scope: 'subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}'
             subscriptionId: 55312978-ba1b-415c-9304-c4b9c43c0481
           responses:
             '200':
@@ -3709,6 +3780,54 @@ paths:
                           - USD
                         - - 20.10333307059661
                           - ScreenSharingTest-peer
+                          - 20180418
+                          - USD
+                    type: microsoft.costmanagement/Query
+        ResourceGroupQueryGrouping:
+          parameters:
+            api-version: '2019-01-01'
+            parameters:
+              dataset:
+                aggregation:
+                  totalCost:
+                    function: Sum
+                    name: PreTaxCost
+                granularity: Daily
+                grouping:
+                  - name: ResourceType
+                    type: Dimension
+                sorting:
+                  - name: ResourceType
+                    querySortingDirection: Descending
+              timeframe: TheLastMonth
+              type: Usage
+            resourceGroupName: ScreenSharingTest-peer
+            scope: 'subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}'
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb
+                    name: 9af9459d-441d-4055-9ed0-83d4c4a363fb
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: ResourceType
+                          type: String
+                        - name: UsageDate
+                          type: Number
+                        - name: Currency
+                          type: String
+                      nextLink: null
+                      rows:
+                        - - 2.10333307059661
+                          - Microsoft.SqlServer
+                          - 20180417
+                          - USD
+                        - - 20.10333307059661
+                          - Microsoft.Compute
                           - 20180418
                           - USD
                     type: microsoft.costmanagement/Query
@@ -3740,9 +3859,10 @@ paths:
                 granularity: Daily
                 sorting:
                   - name: UsageDate
-                    sortingDirection: Ascending
+                    querySortingDirection: Ascending
               timeframe: MonthToDate
               type: Usage
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
@@ -3779,7 +3899,8 @@ paths:
                           - 20180429
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   CommonExportProperties:
     description: The common properties of the export.
@@ -4187,6 +4308,8 @@ definitions:
           - TheLastMonth
           - TheLastYear
           - Custom
+          - BillingMonthToDate
+          - TheLastBillingMonth
         type: string
         x-ms-enum:
           modelAsString: true

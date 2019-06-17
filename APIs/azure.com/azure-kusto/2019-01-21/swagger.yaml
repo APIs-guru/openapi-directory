@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azure-kusto/resource-manager/Microsoft.Kusto/stable/2019-01-21/kusto.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: azure-kusto
   x-tags:
@@ -153,7 +152,8 @@ paths:
                       name: L8
                       tier: Standard
                     type: Microsoft.Kusto/Clusters
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/checkNameAvailability':
     post:
       description: Checks that the cluster name is valid and is not already in use.
@@ -189,7 +189,7 @@ paths:
             api-version: '2019-01-21'
             clusterName:
               name: kuskusprod
-              type: Microsoft.Kusto/Clusters
+              type: Microsoft.Kusto/clusters
             location: wus
             subscriptionId: 12345678-1234-1234-1234-123456789098
           responses:
@@ -236,7 +236,8 @@ paths:
                   - capacity: 2
                     name: L16
                     tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters':
     get:
       description: Lists all Kusto clusters within a resource group.
@@ -286,7 +287,8 @@ paths:
                       name: L8
                       tier: Standard
                     type: Microsoft.Kusto/Clusters
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}':
     delete:
       description: Deletes a Kusto cluster.
@@ -525,7 +527,7 @@ paths:
             clusterName: kustoProd
             databaseName:
               name: kuskus
-              type: Microsoft.Kusto/Clusters/Databases
+              type: Microsoft.Kusto/clusters/databases
             resourceGroupName: kustorptest
             subscriptionId: 12345678-1234-1234-1234-123456789098
           responses:
@@ -579,7 +581,8 @@ paths:
                       provisioningState: Succeeded
                       softDeletePeriod: P1D
                     type: Microsoft.Kusto/Clusters/Databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}':
     delete:
       description: Deletes the database with the given name.
@@ -845,6 +848,51 @@ paths:
                     name: SomeApp
                     role: Admin
                     type: App
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability':
+    post:
+      description: Checks that the data connection name is valid and is not already in use.
+      operationId: DataConnections_CheckNameAvailability
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the data connection.
+          in: body
+          name: dataConnectionName
+          required: true
+          schema:
+            $ref: '#/definitions/DataConnectionCheckNameRequest'
+      responses:
+        '200':
+          description: OK -- Operation to check the Kusto resource name availability was successful.
+          schema:
+            $ref: '#/definitions/CheckNameResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - DataConnections
+      x-ms-examples:
+        KustoDatabaseCheckNameAvailability:
+          parameters:
+            api-version: '2019-01-21'
+            clusterName: kustoProd
+            dataConnectionName:
+              name: DataConnections7
+              type: Microsoft.Kusto/clusters/databases/dataConnections
+            databaseName: kustorptest
+            resourceGroupName: kustorptest
+            subscriptionId: 12345678-1234-1234-123456789098
+          responses:
+            '200':
+              body:
+                message: Name 'DataConnections7' is already taken. Please specify a different name.
+                name: DataConnections7
+                nameAvailable: false
+                reason: AlreadyExists
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidation':
     post:
       description: Checks that the data connection parameters are valid.
@@ -873,13 +921,14 @@ paths:
           parameters:
             api-version: '2019-01-21'
             clusterName: KustoClusterRPTest4
-            dataConnectionName: DataConnections8
             databaseName: KustoDatabase8
             parameters:
-              kind: EventHub
+              dataConnectionName: DataConnections8
               properties:
-                consumerGroup: testConsumerGroup1
-                eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
+                kind: EventHub
+                properties:
+                  consumerGroup: testConsumerGroup1
+                  eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
             resourceGroupName: kustorptest
             subscriptionId: 12345678-1234-1234-1234-123456789098
           responses:
@@ -936,7 +985,8 @@ paths:
                       consumerGroup: testConsumerGroup2
                       eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns2/eventhubs/eventhubTest2
                     type: Microsoft.Kusto/Clusters/Databases/DataConnections
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections/{dataConnectionName}':
     delete:
       description: Deletes the data connection with the given name.
@@ -1075,7 +1125,16 @@ paths:
                   consumerGroup: testConsumerGroup1
                   eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
                 type: Microsoft.Kusto/Clusters/Databases/DataConnections
-            '201': {}
+            '201':
+              body:
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8/DataConnections/DataConnections8
+                kind: EventHub
+                location: westus
+                name: KustoClusterRPTest4/KustoDatabase8/DataConnections8
+                properties:
+                  consumerGroup: testConsumerGroup1
+                  eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
+                type: Microsoft.Kusto/Clusters/Databases/DataConnections
             '202': {}
       x-ms-long-running-operation: true
     put:
@@ -1137,7 +1196,16 @@ paths:
                   consumerGroup: testConsumerGroup1
                   eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
                 type: Microsoft.Kusto/Clusters/Databases/DataConnections
-            '201': {}
+            '201':
+              body:
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8/DataConnections/DataConnections8
+                kind: EventHub
+                location: westus
+                name: KustoClusterRPTest4/KustoDatabase8/DataConnections8
+                properties:
+                  consumerGroup: testConsumerGroup1
+                  eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
+                type: Microsoft.Kusto/Clusters/Databases/DataConnections
             '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/listPrincipals':
@@ -1191,7 +1259,8 @@ paths:
                     name: SomeApp
                     role: Admin
                     type: App
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals':
     post:
       description: Remove Database principals permissions.
@@ -1336,7 +1405,8 @@ paths:
                     sku:
                       name: L16
                       tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/start':
     post:
       description: Starts a Kusto cluster.
@@ -1484,6 +1554,15 @@ definitions:
       nameAvailable:
         description: Specifies a Boolean value that indicates if the name is available.
         type: boolean
+      reason:
+        description: Message providing the reason why the given name is invalid.
+        enum:
+          - Invalid
+          - AlreadyExists
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: reason
     type: object
   CloudError:
     description: An error response from Kusto.
@@ -1701,6 +1780,24 @@ definitions:
         type: string
     required:
       - kind
+  DataConnectionCheckNameRequest:
+    description: The result returned from a data connections check name availability request.
+    properties:
+      name:
+        description: Data Connection name.
+        type: string
+      type:
+        description: 'The type of resource, Microsoft.Kusto/clusters/databases/dataConnections.'
+        enum:
+          - Microsoft.Kusto/clusters/databases/dataConnections
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Type
+    required:
+      - name
+      - type
+    type: object
   DataConnectionListResult:
     description: The list Kusto data connections operation response.
     properties:

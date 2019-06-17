@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimusers.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimusers
   x-tags:
@@ -700,7 +699,8 @@ paths:
                 value:
                   - id: 5a58bb09a40f7ef2e05bd3c1@contoso.com
                     provider: Basic
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/users/{uid}/subscriptions':
     get:
       description: Lists the collection of subscriptions of the specified user.

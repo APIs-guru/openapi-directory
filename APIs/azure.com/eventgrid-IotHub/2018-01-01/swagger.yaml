@@ -57,6 +57,23 @@ definitions:
         $ref: '#/definitions/DeviceTwinInfo'
         description: 'Information about the device twin, which is the cloud representation of application device metadata.'
     type: object
+  DeviceTelemetryEventProperties:
+    description: Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).
+    properties:
+      body:
+        description: The content of the message from the device.
+        type: object
+      properties:
+        additionalProperties:
+          type: string
+        description: Application properties are user-defined strings that can be added to the message. These fields are optional.
+        type: object
+      systemProperties:
+        additionalProperties:
+          type: string
+        description: System properties help identify contents and source of the messages.
+        type: object
+    type: object
   DeviceTwinInfo:
     description: 'Information about the device twin, which is the cloud representation of application device metadata.'
     properties:
@@ -147,4 +164,9 @@ definitions:
     allOf:
       - $ref: '#/definitions/DeviceConnectionStateEventProperties'
     description: Event data for Microsoft.Devices.DeviceDisconnected event.
+    properties: {}
+  IotHubDeviceTelemetryEventData:
+    allOf:
+      - $ref: '#/definitions/DeviceTelemetryEventProperties'
+    description: Event data for Microsoft.Devices.DeviceTelemetry event.
     properties: {}

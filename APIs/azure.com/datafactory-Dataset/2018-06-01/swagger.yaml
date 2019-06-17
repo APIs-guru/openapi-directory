@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory-Dataset
   x-tags:
@@ -74,6 +73,18 @@ definitions:
         type: object
     required:
       - bucketName
+  AmazonS3Location:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of amazon S3 dataset.
+    properties:
+      bucketName:
+        description: 'Specify the bucketName of amazon S3. Type: string (or Expression with resultType string)'
+        type: object
+      version:
+        description: 'Specify the version of amazon S3. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   AvroFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'
@@ -140,6 +151,24 @@ definitions:
       format:
         $ref: '#/definitions/DatasetStorageFormat'
         description: The format of the Azure Data Lake Storage Gen2 storage.
+  AzureBlobFSLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of azure blobFS dataset.
+    properties:
+      fileSystem:
+        description: 'Specify the fileSystem of azure blobFS. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AzureBlobStorageLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of azure blob dataset.
+    properties:
+      container:
+        description: 'Specify the container of azure blob. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   AzureDataExplorerDatasetTypeProperties:
     description: Azure Data Explorer (Kusto) dataset properties.
     properties:
@@ -185,6 +214,11 @@ definitions:
       format:
         $ref: '#/definitions/DatasetStorageFormat'
         description: The format of the Data Lake Store.
+  AzureDataLakeStoreLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of azure data lake store dataset.
+    type: object
   AzureMySqlTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -253,8 +287,6 @@ definitions:
       tableName:
         description: 'The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string).'
         type: object
-    required:
-      - tableName
   AzureSqlTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -272,8 +304,6 @@ definitions:
       tableName:
         description: 'The table name of the Azure SQL database. Type: string (or Expression with resultType string).'
         type: object
-    required:
-      - tableName
   AzureTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -321,7 +351,7 @@ definitions:
       - Optimal
       - Fastest
     title: Microsoft.Azure.Management.DataFactories.Models.CompressionLevel
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: DatasetCompressionLevel
@@ -506,6 +536,23 @@ definitions:
         description: The GZip compression level.
     type: object
     x-ms-discriminator-value: GZip
+  DatasetLocation:
+    additionalProperties:
+      type: object
+    description: Dataset location.
+    properties:
+      fileName:
+        description: 'Specify the file name of dataset. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'Specify the folder path of dataset. Type: string (or Expression with resultType string)'
+        type: object
+      type:
+        description: Type of dataset storage location.
+        type: string
+    required:
+      - type
+    type: object
   DatasetSchemaDataElement:
     additionalProperties:
       type: object
@@ -546,6 +593,61 @@ definitions:
         description: The ZipDeflate compression level.
     type: object
     x-ms-discriminator-value: ZipDeflate
+  DelimitedTextDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Delimited text dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DelimitedTextDatasetTypeProperties'
+        description: Delimited text dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: DelimitedText
+  DelimitedTextDatasetTypeProperties:
+    description: DelimitedText dataset properties.
+    properties:
+      columnDelimiter:
+        description: 'The column delimiter. Type: string (or Expression with resultType string).'
+        type: object
+      compressionCodec:
+        enum:
+          - bzip2
+          - gzip
+          - deflate
+          - zipDeflate
+          - snappy
+          - lz4
+        type: object
+        x-ms-enum:
+          modelAsString: true
+          name: compressionCodec
+      compressionLevel:
+        $ref: '#/definitions/CompressionLevel'
+        description: The data compression method used for DelimitedText.
+      encodingName:
+        description: 'The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string).'
+        type: object
+      escapeChar:
+        description: 'The escape character. Type: string (or Expression with resultType string).'
+        type: object
+      firstRowAsHeader:
+        description: 'When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the delimited text storage.
+      nullValue:
+        description: 'The null value string. Type: string (or Expression with resultType string).'
+        type: object
+      quoteChar:
+        description: 'The quote character. Type: string (or Expression with resultType string).'
+        type: object
+      rowDelimiter:
+        description: 'The row delimiter. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - location
   DocumentDbCollectionDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -596,7 +698,7 @@ definitions:
     properties:
       path:
         description: 'The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string).'
-        type: string
+        type: object
     required:
       - path
   DynamicsEntityDataset:
@@ -627,6 +729,11 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: EloquaObject
+  FileServerLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of file server dataset.
+    type: object
   FileShareDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -662,6 +769,11 @@ definitions:
       modifiedDatetimeStart:
         description: 'The start of file''s modified datetime. Type: string (or Expression with resultType string).'
         type: object
+  FtpServerLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of ftp server dataset.
+    type: object
   GenericDatasetTypeProperties:
     description: Properties specific to this dataset type.
     properties:
@@ -712,6 +824,11 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: HBaseObject
+  HdfsLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of HDFS.
+    type: object
   HiveObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -755,6 +872,15 @@ definitions:
       requestMethod:
         description: 'The HTTP method for the HTTP request. Type: string (or Expression with resultType string).'
         type: object
+  HttpServerLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of http server.
+    properties:
+      relativeUrl:
+        description: 'Specify the relativeUrl of http server. Type: string (or Expression with resultType string)'
+        type: object
+    type: object
   HubspotObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -814,7 +940,7 @@ definitions:
     enum:
       - setOfObjects
       - arrayOfObjects
-    type: string
+    type: object
     x-ms-enum:
       modelAsString: true
       name: JsonFormatFilePattern
@@ -978,6 +1104,35 @@ definitions:
       - $ref: '#/definitions/DatasetStorageFormat'
     description: The data stored in Optimized Row Columnar (ORC) format.
     type: object
+  ParquetDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Parquet dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/ParquetDatasetTypeProperties'
+        description: Parquet dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Parquet
+  ParquetDatasetTypeProperties:
+    description: Parquet dataset properties.
+    properties:
+      compressionCodec:
+        enum:
+          - none
+          - gzip
+          - snappy
+          - lzo
+        type: object
+        x-ms-enum:
+          modelAsString: true
+          name: compressionCodec
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the parquet storage.
+    required:
+      - location
   ParquetFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'
@@ -1151,9 +1306,29 @@ definitions:
     properties:
       path:
         description: 'The path of the SAP ECC OData entity. Type: string (or Expression with resultType string).'
-        type: string
+        type: object
     required:
       - path
+  SapHanaTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: SAP HANA Table properties.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapHanaTableDatasetTypeProperties'
+        description: SAP HANA Table properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SapHanaTable
+  SapHanaTableDatasetTypeProperties:
+    description: SAP HANA Table properties.
+    properties:
+      schema:
+        description: 'The schema name of SAP HANA. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of SAP HANA. Type: string (or Expression with resultType string).'
+        type: object
   SapOpenHubTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1181,6 +1356,27 @@ definitions:
         type: object
     required:
       - openHubDestinationName
+  SapTableResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: SAP Table Resource properties.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapTableResourceDatasetTypeProperties'
+        description: SAP Table Resource properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapTableResource
+  SapTableResourceDatasetTypeProperties:
+    description: SAP Table Resource properties.
+    properties:
+      tableName:
+        description: 'The name of the SAP Table. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
   ServiceNowObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1192,6 +1388,11 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: ServiceNowObject
+  SftpLocation:
+    allOf:
+      - $ref: '#/definitions/DatasetLocation'
+    description: The location of SFTP dataset.
+    type: object
   ShopifyObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1231,8 +1432,6 @@ definitions:
       tableName:
         description: 'The table name of the SQL Server dataset. Type: string (or Expression with resultType string).'
         type: object
-    required:
-      - tableName
   SquareObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'

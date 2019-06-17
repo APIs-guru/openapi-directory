@@ -34,20 +34,18 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
 paths:
   /providers/Microsoft.Insights/operations:
     get:
       description: Lists all of the available insights REST API operations.
       operationId: Operations_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
       responses:
         '200':
           description: OK. The request has succeeded.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/logic/resource-manager/Microsoft.Logic/stable/2016-06-01/logic.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: logic
   x-tags:
@@ -2604,7 +2603,8 @@ paths:
                       createdTime: '2017-02-24T18:45:23.4129778Z'
                       metadata: {}
                     type: Microsoft.Logic/integrationAccounts/assemblies
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies/{assemblyArtifactName}':
     delete:
       description: Delete an assembly for an integration account.
@@ -2887,7 +2887,8 @@ paths:
                           startTime: '2017-03-24T11:43:00'
                           timeZone: India Standard Time
                     type: Microsoft.Logic/integrationAccounts/batchConfigurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/batchConfigurations/{batchConfigurationName}':
     delete:
       description: Delete a batch configuration for an integration account.
@@ -3409,7 +3410,8 @@ paths:
                       enabled: true
                       updated: 1498072075
                     kid: 'https://testKeyVault.vault.azure.net/keys/testkey'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/logTrackingEvents':
     post:
       description: Logs the integration account's tracking events.
@@ -5893,6 +5895,7 @@ paths:
                     value: 8
       x-ms-pageable:
         itemName: inputs
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions':
     get:
       description: Get all of a workflow run action repetitions.
@@ -5998,7 +6001,8 @@ paths:
                       status: Succeeded
                       trackingId: f84f23eb-b331-4772-9f39-cc307fa83bc3
                     type: Microsoft.Logic/workflows/runs/actions/repetitions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}':
     get:
       description: Get a workflow run action repetition.
@@ -6138,6 +6142,7 @@ paths:
                     value: PROD
       x-ms-pageable:
         itemName: inputs
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories':
     get:
       description: List a workflow run repetition request history.

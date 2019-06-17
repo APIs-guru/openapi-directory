@@ -46,7 +46,7 @@ parameters:
     x-ms-enum:
       modelAsString: true
       name: CountType
-    x-ms-parameter-location: client
+    x-ms-parameter-location: method
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodecounts/{countType}':
     get:

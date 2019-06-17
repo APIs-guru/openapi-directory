@@ -35,12 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
-    description: Client Api Version.
-    in: query
-    name: api-version
-    required: true
-    type: string
   IncludeContentParameter:
     description: 'Flag indicating whether or not to return the content of each applicable item. If false, only return the item information.'
     in: query
@@ -113,13 +107,6 @@ parameters:
     required: false
     type: boolean
     x-ms-parameter-location: method
-  ResourceGroupNameParameter:
-    description: The name of the resource group.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ResourceNameParameter:
     description: The name of the Application Insights component resource.
     in: path
@@ -127,23 +114,35 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription ID.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}':
     get:
       description: Gets a list of Analytics Items defined within an Application Insights component.
       operationId: AnalyticsItems_List
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ItemScopePathParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
         - $ref: '#/parameters/ItemScopeParameter'
         - $ref: '#/parameters/ItemTypeParameter'
         - $ref: '#/parameters/IncludeContentParameter'
@@ -280,11 +279,29 @@ paths:
       description: Deletes a specific Analytics Items defined within an Application Insights component.
       operationId: AnalyticsItems_Delete
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ItemScopePathParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
         - $ref: '#/parameters/ItemIdParameter'
         - $ref: '#/parameters/ItemNameParameter'
       responses:
@@ -306,11 +323,29 @@ paths:
       description: Gets a specific Analytics Items defined within an Application Insights component.
       operationId: AnalyticsItems_Get
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ItemScopePathParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
         - $ref: '#/parameters/ItemIdParameter'
         - $ref: '#/parameters/ItemNameParameter'
       responses:
@@ -355,11 +390,29 @@ paths:
       description: Adds or Updates a specific Analytics Item within an Application Insights component.
       operationId: AnalyticsItems_Put
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ResourceNameParameter'
         - $ref: '#/parameters/ItemScopePathParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
         - $ref: '#/parameters/OverrideItemParameter'
         - description: Properties that need to be specified to create a new item and add it to an Application Insights component.
           in: body

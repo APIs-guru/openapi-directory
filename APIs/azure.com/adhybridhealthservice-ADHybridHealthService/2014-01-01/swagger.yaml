@@ -1428,7 +1428,8 @@ paths:
                     site: Domain-Controllers
                     status: 0
                     targetServer: SampleTargetServerName
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationstatus':
     get:
       description: 'Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.'
@@ -1549,7 +1550,8 @@ paths:
                     site: Domain-Controllers
                     status: 0
                     targetServer: SampleTargetServerName
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers':
     get:
       description: 'Gets the details of the servers, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.'
@@ -1997,7 +1999,8 @@ paths:
                       - SampleCredentialData1
                     identifier: SampleIdentifier
                     type: SampleType
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.ADHybridHealthService/configuration:
     get:
       description: Gets the details of a tenant onboarded to Azure Active Directory Connect Health.
@@ -2287,7 +2290,8 @@ paths:
                     timeLastModified: '2018-05-03T23:08:25.273Z'
                     type: SampleType
                     version: 12418
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.ADHybridHealthService/services:
     get:
       description: 'Gets the details of services, for a tenant, that are onboarded to Azure Active Directory Connect Health.'
@@ -2866,7 +2870,8 @@ paths:
                   - count: 49
                     errorBucket: All
                     truncated: false
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exporterrors/listV2':
     get:
       description: ' Gets the categorized export errors.'
@@ -2946,7 +2951,8 @@ paths:
                     timeOccurred: '2018-04-30T22:04:36.043Z'
                     type: AttributeValueMustBeUnique
                     userPrincipalName: SampleUPN
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exportstatus':
     get:
       description: Gets the export status.
@@ -3072,7 +3078,8 @@ paths:
                     serviceMemberId: null
                     shortName: AlertShortName
                     state: Active
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata':
     get:
       description: Gets the service related metrics information.
@@ -3553,7 +3560,8 @@ paths:
                     value: <value not aggregated>
                   - key: ConfigurationUploadInterval
                     value: '240'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/badpassword/details/user':
     get:
       description: Gets the bad password login attempt report for an user
@@ -3591,7 +3599,8 @@ paths:
                     totalErrorAttempts: 10
                     uniqueIpAddresses: SampleUniqueIPAddresses
                     userId: SampleUser1
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris':
     get:
       description: Gets all Risky IP report URIs for the last 7 days.
@@ -3625,7 +3634,8 @@ paths:
                     serviceId: ServiceId of the tenant.
                     status: status of the task.
                     tenantId: TenantId of the tenant.
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/generateBlobUri':
     post:
       description: Initiate the generation of a new Risky IP report. Returns the URI for the new one.
@@ -3659,7 +3669,8 @@ paths:
                     serviceId: ServiceId of the tenant.
                     status: status of the task.
                     tenantId: TenantId of the tenant.
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers':
     get:
       description: 'Gets the details of the servers, for a given service, that are onboarded to Azure Active Directory Connect Health Service.'
@@ -4107,7 +4118,8 @@ paths:
                       - SampleCredentialData1
                     identifier: SampleIdentifier
                     type: SampleType
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/data':
     delete:
       description: Deletes the data uploaded by the server to Azure Active Directory Connect Health Service.
@@ -4174,7 +4186,8 @@ paths:
                 value:
                   - key: DataFreshnessKeyName
                     value: '2015-03-06T17:41:34.305Z'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/exportstatus':
     get:
       description: Gets the export status.
@@ -4258,7 +4271,8 @@ paths:
                     passwordSyncEnabled: false
                     schemaXml: SampleSchemaXML
                     version: 12
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}':
     get:
       description: Gets the list of connectors and run profile names.
@@ -6301,7 +6315,7 @@ definitions:
     description: The blob uri pointing to Risky IP Report.
     properties:
       blobCreateDateTime:
-        description: Time at which the the new Risky IP report was requested.
+        description: Time at which the new Risky IP report was requested.
         format: date-time
         type: string
       jobCompletionTime:

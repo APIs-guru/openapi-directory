@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2016-02-01-preview/cognitiveservices.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cognitiveservices
   x-tags:
@@ -92,7 +91,8 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - CognitiveServicesAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts':
     get:
       description: Returns all the resources of a particular type belonging to a resource group
@@ -127,7 +127,8 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - CognitiveServicesAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}':
     delete:
       description: 'Deletes a Cognitive Services account from the resource group. '

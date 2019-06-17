@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources-locks
   x-tags:
@@ -483,6 +482,32 @@ paths:
       summary: Creates or updates a management lock at the resource level or any level below the resource.
       tags:
         - ManagementLocks
+  '/{scope}/providers/Microsoft.Authorization/locks':
+    get:
+      description: Gets all the management locks for a scope.
+      operationId: ManagementLocks_ListByScope
+      parameters:
+        - description: 'The scope for the lock. When providing a scope for the assignment, use ''/subscriptions/{subscriptionId}'' for subscriptions, ''/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'' for resource groups, and ''/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePathIfPresent}/{resourceType}/{resourceName}'' for resources.'
+          in: path
+          name: scope
+          required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK - Returns an array of resource locks.
+          schema:
+            $ref: '#/definitions/ManagementLockListResult'
+      tags:
+        - ManagementLocks
+      x-ms-odata: '#/definitions/ManagementLockObject'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/{scope}/providers/Microsoft.Authorization/locks/{lockName}':
     delete:
       description: Delete a management lock by scope.

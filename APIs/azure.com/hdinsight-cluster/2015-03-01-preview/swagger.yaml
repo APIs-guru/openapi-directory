@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: hdinsight-cluster
   x-tags:
@@ -987,6 +986,47 @@ paths:
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/getGatewaySettings':
+    post:
+      description: Gets the gateway settings for the specified cluster.
+      operationId: Clusters_GetGatewaySettings
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            $ref: '#/definitions/GatewaySettings'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Clusters
+      x-ms-examples:
+        Get HTTP settings:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                restAuthCredential.isEnabled: 'true'
+                restAuthCredential.password: '**********'
+                restAuthCredential.username: hadoop
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/resize':
     post:
       description: Resizes the specified HDInsight cluster to the specified size.
@@ -1093,6 +1133,56 @@ paths:
           responses:
             '200': {}
             '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/updateGatewaySettings':
+    post:
+      description: Configures the gateway settings on the specified cluster.
+      operationId: Clusters_UpdateGatewaySettings
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The cluster configurations.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateGatewaySettingsParameters'
+      responses:
+        '200':
+          description: OK response definition.
+        '202':
+          description: Accepted response definition
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Clusters
+      x-ms-examples:
+        Enable HTTP connectivity:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            parameters:
+              restAuthCredential.isEnabled: true
+              restAuthCredential.password: '**********'
+              restAuthCredential.username: hadoop
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '202':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
       x-ms-long-running-operation: true
 definitions:
   Cluster:
@@ -1437,6 +1527,24 @@ definitions:
         type: array
     required:
       - persistOnSuccess
+  GatewaySettings:
+    description: Gateway settings.
+    properties:
+      restAuthCredential.isEnabled:
+        description: Indicates whether or not the gateway settings based authorization is enabled.
+        readOnly: true
+        type: string
+        x-ms-client-name: isCredentialEnabled
+      restAuthCredential.password:
+        description: The gateway settings user password.
+        readOnly: true
+        type: string
+        x-ms-client-name: password
+      restAuthCredential.username:
+        description: The gateway settings user name.
+        readOnly: true
+        type: string
+        x-ms-client-name: userName
   HardwareProfile:
     description: The hardware profile.
     properties:
@@ -1730,6 +1838,22 @@ definitions:
           - read
           - create
           - update
+  UpdateGatewaySettingsParameters:
+    description: The update gateway settings request parameters.
+    properties:
+      restAuthCredential.isEnabled:
+        default: true
+        description: Indicates whether or not the gateway settings based authorization is enabled.
+        type: boolean
+        x-ms-client-name: isCredentialEnabled
+      restAuthCredential.password:
+        description: The gateway settings user password.
+        type: string
+        x-ms-client-name: password
+      restAuthCredential.username:
+        description: The gateway settings user name.
+        type: string
+        x-ms-client-name: userName
   VirtualNetworkProfile:
     description: The virtual network properties.
     properties:

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-08-01/networkWatcher.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-networkWatcher
   x-tags:
@@ -80,7 +79,7 @@ paths:
                     name: nw1
                     properties:
                       provisioningState: Succeeded
-                    tags: []
+                    tags: {}
                     type: Microsoft.Network/networkWatchers
                   - etag: W/"00000000-0000-0000-0000-000000000000"
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw2
@@ -88,9 +87,10 @@ paths:
                     name: nw2
                     properties:
                       provisioningState: Succeeded
-                    tags: []
+                    tags: {}
                     type: Microsoft.Network/networkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers':
     get:
       description: Gets all network watchers by resource group.
@@ -126,7 +126,7 @@ paths:
                     name: nw1
                     properties:
                       provisioningState: Succeeded
-                    tags: []
+                    tags: {}
                     type: Microsoft.Network/networkWatchers
                   - etag: W/"00000000-0000-0000-0000-000000000000"
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw2
@@ -134,9 +134,10 @@ paths:
                     name: nw2
                     properties:
                       provisioningState: Succeeded
-                    tags: []
+                    tags: {}
                     type: Microsoft.Network/networkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}':
     delete:
       description: Deletes the specified network watcher resource.
@@ -211,7 +212,7 @@ paths:
                 name: nw1
                 properties:
                   provisioningState: Succeeded
-                tags: []
+                tags: {}
                 type: Microsoft.Network/networkWatchers
     put:
       description: Creates or updates a network watcher in the specified resource group.
@@ -252,8 +253,8 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                location: eastus
+              location: eastus
+              properties: {}
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -265,7 +266,7 @@ paths:
                 name: nw1
                 properties:
                   provisioningState: Succeeded
-                tags: []
+                tags: {}
                 type: Microsoft.Network/networkWatchers
             '201':
               body:
@@ -275,7 +276,7 @@ paths:
                 name: nw1
                 properties:
                   provisioningState: Succeeded
-                tags: []
+                tags: {}
                 type: Microsoft.Network/networkWatchers
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog':
     post:
@@ -318,10 +319,9 @@ paths:
             networkWatcherName: nw1
             parameters:
               properties:
-                properties:
-                  enabled: true
-                  storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
-                targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
+                enabled: true
+                storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
+              targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -378,12 +378,11 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                destination:
-                  address: 192.168.100.4
-                  port: '3389'
-                source:
-                  resourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+              destination:
+                address: 192.168.100.4
+                port: 3389
+              source:
+                resourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -472,14 +471,13 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                direction: Outbound
-                localIPAddress: 10.2.0.4
-                localPort: '80'
-                protocol: TCP
-                remoteIPAddress: 121.10.1.1
-                remotePort: '80'
-                targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+              direction: Outbound
+              localIPAddress: 10.2.0.4
+              localPort: '80'
+              protocol: TCP
+              remoteIPAddress: 121.10.1.1
+              remotePort: '80'
+              targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -532,11 +530,10 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                destinationIPAddress: 10.0.0.10
-                sourcIPAddress: 10.0.0.5
-                targetNicResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1
-                targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+              destinationIPAddress: 10.0.0.10
+              sourceIPAddress: 10.0.0.5
+              targetNicResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1
+              targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -617,7 +614,8 @@ paths:
                       target: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
                       timeLimitInSeconds: 100
                       totalBytesPerSession: 100000
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}':
     delete:
       description: Deletes the specified packet capture session.
@@ -835,7 +833,7 @@ paths:
           responses:
             '200':
               body:
-                captureStartTime: '9/7/2016 12:35:24PM'
+                captureStartTime: '2016-01-08T03:42:33.3387305Z'
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1
                 name: pc1
                 packetCaptureError: []
@@ -843,7 +841,7 @@ paths:
                 stopReason: TimeExceeded
             '202':
               body:
-                captureStartTime: '9/7/2016 12:35:24PM'
+                captureStartTime: '2016-01-08T03:42:33.3387305Z'
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1
                 name: pc1
                 packetCaptureError: []
@@ -933,8 +931,7 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
+              targetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -991,8 +988,7 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+              targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -1071,8 +1067,7 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+              targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -1082,30 +1077,6 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1
                     securityRuleAssociations:
                       subnetAssociation:
-                        defaultSecurityRules:
-                          - id: /subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/
-                            name: AllowVnetInBound
-                            properties:
-                              access: Allow
-                              description: Allow inbound traffic from all VMs in VNET
-                              destinationAddressPrefix: VirtualNetwork
-                              destinationPortRange: '*'
-                              direction: Inbound
-                              priority: 65000
-                              protocol: '*'
-                              provisioningState: Succeeded
-                              sourceAddressPrefix: VirtualNetwork
-                              sourcePortRange: '*'
-                        effectiveSecurityRules:
-                          - access: Deny
-                            destinationAddressPrefix: '*'
-                            destinationPortRange: 0-65535
-                            direction: Outbound
-                            name: DefaultOutboundDenyAll
-                            priority: 65500
-                            protocol: All
-                            sourceAddressPrefix: '*'
-                            sourcePortRange: 0-65535
                         id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                         securityRules:
                           - etag: W/"00000000-0000-0000-0000-000000000000"
@@ -1128,30 +1099,6 @@ paths:
                   - id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1
                     securityRuleAssociations:
                       subnetAssociation:
-                        defaultSecurityRules:
-                          - id: /subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/
-                            name: AllowVnetInBound
-                            properties:
-                              access: Allow
-                              description: Allow inbound traffic from all VMs in VNET
-                              destinationAddressPrefix: VirtualNetwork
-                              destinationPortRange: '*'
-                              direction: Inbound
-                              priority: 65000
-                              protocol: '*'
-                              provisioningState: Succeeded
-                              sourceAddressPrefix: VirtualNetwork
-                              sourcePortRange: '*'
-                        effectiveSecurityRules:
-                          - access: Deny
-                            destinationAddressPrefix: '*'
-                            destinationPortRange: 0-65535
-                            direction: Outbound
-                            name: DefaultOutboundDenyAll
-                            priority: 65500
-                            protocol: All
-                            sourceAddressPrefix: '*'
-                            sourcePortRange: 0-65535
                         id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                         securityRules:
                           - etag: W/"00000000-0000-0000-0000-000000000000"
@@ -1205,8 +1152,7 @@ paths:
             api-version: '2017-08-01'
             networkWatcherName: nw1
             parameters:
-              properties:
-                targetResourceGroup: rg2
+              targetResourceGroupName: rg2
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -1267,10 +1213,9 @@ paths:
             networkWatcherName: nw1
             parameters:
               properties:
-                properties:
-                  storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
-                  storagePath: 'https://st1.blob.core.windows.net/cn1'
-                targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
+                storageId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1
+                storagePath: 'https://st1.blob.core.windows.net/cn1'
+              targetResourceId: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:

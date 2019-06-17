@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: operationalinsights-OperationalInsights
   x-tags:
@@ -1620,6 +1619,7 @@ paths:
           parameters:
             api-version: '2015-03-02'
             resourceGroupName: TestRG
+            savedSearchId: 00000000-0000-0000-0000-00000000000
             savedSearchName: SavedSearchName
             subscriptionId: 00000000-0000-0000-0000-00000000000
             workspaceName: TestWS
@@ -1650,6 +1650,7 @@ paths:
           parameters:
             api-version: '2015-03-02'
             resourceGroupName: TestRG
+            savedSearchId: 00000000-0000-0000-0000-00000000000
             savedSearchName: SavedSearchName
             subscriptionId: 00000000-0000-0000-0000-00000000000
             workspaceName: TestWS
@@ -1703,6 +1704,7 @@ paths:
                     value: Computer
                 version: 1
             resourceGroupName: TestRG
+            savedSearchId: 00000000-0000-0000-0000-00000000000
             savedSearchName: SavedSearchName
             subscriptionId: 00000000-0000-0000-0000-00000000000
             workspaceName: TestWS
@@ -1742,6 +1744,7 @@ paths:
           parameters:
             api-version: '2015-03-02'
             resourceGroupName: mms-eus
+            savedSearchId: 00000000-0000-0000-0000-00000000000
             savedSearchName: test
             subscriptionId: 00000000-0000-0000-0000-00000000000
             workspaceName: atlantisdemo
@@ -6548,7 +6551,7 @@ definitions:
         description: 'When filtering over custom dimensions, this key will be used as the name of the custom dimension.'
         type: string
       operator:
-        description: A query operator to evaluate over the provided column and value(s).
+        description: 'A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query.'
         type: string
       value:
         description: 'the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= ''2017-09-01'') or array of values.'

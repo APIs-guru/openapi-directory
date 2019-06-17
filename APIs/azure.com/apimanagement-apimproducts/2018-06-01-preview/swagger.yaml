@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimproducts
   x-tags:
@@ -102,7 +101,73 @@ paths:
         '200':
           description: A Collection of the Product entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/ProductCollection'
+            description: Paged Products list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Product details.
+                  properties:
+                    properties:
+                      allOf:
+                        - description: Product Entity Base Parameters
+                          properties:
+                            approvalRequired:
+                              description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                              type: boolean
+                            description:
+                              description: Product description. May include HTML formatting tags.
+                              maxLength: 1000
+                              minLength: 1
+                              type: string
+                            state:
+                              description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                              enum:
+                                - notPublished
+                                - published
+                              type: string
+                              x-ms-enum:
+                                modelAsString: false
+                                name: ProductState
+                            subscriptionRequired:
+                              description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                              type: boolean
+                            subscriptionsLimit:
+                              description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                              format: int32
+                              type: integer
+                            terms:
+                              description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                              type: string
+                      description: Product profile.
+                      properties:
+                        displayName:
+                          description: Product name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                      required:
+                        - displayName
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -175,7 +240,7 @@ paths:
                       subscriptionRequired: true
                       subscriptionsLimit: 1
                     type: Microsoft.ApiManagement/service/products
-      x-ms-odata: '#/definitions/ProductContract'
+      x-ms-odata: './definitions.json#/definitions/ProductContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}':
@@ -323,7 +388,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/ProductContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Product details.
+            properties:
+              properties:
+                allOf:
+                  - description: Product Entity Base Parameters
+                    properties:
+                      approvalRequired:
+                        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                        type: boolean
+                      description:
+                        description: Product description. May include HTML formatting tags.
+                        maxLength: 1000
+                        minLength: 1
+                        type: string
+                      state:
+                        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                        enum:
+                          - notPublished
+                          - published
+                        type: string
+                        x-ms-enum:
+                          modelAsString: false
+                          name: ProductState
+                      subscriptionRequired:
+                        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                        type: boolean
+                      subscriptionsLimit:
+                        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                        format: int32
+                        type: integer
+                      terms:
+                        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                        type: string
+                description: Product profile.
+                properties:
+                  displayName:
+                    description: Product name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -497,7 +619,46 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ProductUpdateParameters'
+            description: Product Update parameters.
+            properties:
+              properties:
+                allOf:
+                  - description: Product Entity Base Parameters
+                    properties:
+                      approvalRequired:
+                        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                        type: boolean
+                      description:
+                        description: Product description. May include HTML formatting tags.
+                        maxLength: 1000
+                        minLength: 1
+                        type: string
+                      state:
+                        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                        enum:
+                          - notPublished
+                          - published
+                        type: string
+                        x-ms-enum:
+                          modelAsString: false
+                          name: ProductState
+                      subscriptionRequired:
+                        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                        type: boolean
+                      subscriptionsLimit:
+                        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                        format: int32
+                        type: integer
+                      terms:
+                        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                        type: string
+                description: Parameters supplied to the Update Product operation.
+                properties:
+                  displayName:
+                    description: Product name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -595,7 +756,64 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ProductContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Product details.
+            properties:
+              properties:
+                allOf:
+                  - description: Product Entity Base Parameters
+                    properties:
+                      approvalRequired:
+                        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                        type: boolean
+                      description:
+                        description: Product description. May include HTML formatting tags.
+                        maxLength: 1000
+                        minLength: 1
+                        type: string
+                      state:
+                        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                        enum:
+                          - notPublished
+                          - published
+                        type: string
+                        x-ms-enum:
+                          modelAsString: false
+                          name: ProductState
+                      subscriptionRequired:
+                        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                        type: boolean
+                      subscriptionsLimit:
+                        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                        format: int32
+                        type: integer
+                      terms:
+                        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                        type: string
+                description: Product profile.
+                properties:
+                  displayName:
+                    description: Product name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -620,7 +838,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/ProductContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Product details.
+            properties:
+              properties:
+                allOf:
+                  - description: Product Entity Base Parameters
+                    properties:
+                      approvalRequired:
+                        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                        type: boolean
+                      description:
+                        description: Product description. May include HTML formatting tags.
+                        maxLength: 1000
+                        minLength: 1
+                        type: string
+                      state:
+                        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                        enum:
+                          - notPublished
+                          - published
+                        type: string
+                        x-ms-enum:
+                          modelAsString: false
+                          name: ProductState
+                      subscriptionRequired:
+                        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                        type: boolean
+                      subscriptionsLimit:
+                        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                        format: int32
+                        type: integer
+                      terms:
+                        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                        type: string
+                description: Product profile.
+                properties:
+                  displayName:
+                    description: Product name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         '201':
           description: Product was successfully created.
           headers:
@@ -628,7 +903,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/ProductContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Product details.
+            properties:
+              properties:
+                allOf:
+                  - description: Product Entity Base Parameters
+                    properties:
+                      approvalRequired:
+                        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
+                        type: boolean
+                      description:
+                        description: Product description. May include HTML formatting tags.
+                        maxLength: 1000
+                        minLength: 1
+                        type: string
+                      state:
+                        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
+                        enum:
+                          - notPublished
+                          - published
+                        type: string
+                        x-ms-enum:
+                          modelAsString: false
+                          name: ProductState
+                      subscriptionRequired:
+                        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
+                        type: boolean
+                      subscriptionsLimit:
+                        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
+                        format: int32
+                        type: integer
+                      terms:
+                        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
+                        type: string
+                description: Product profile.
+                properties:
+                  displayName:
+                    description: Product name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -992,7 +1324,7 @@ paths:
                         - https
                       serviceUrl: 'http://contoso/57681820a40f7eb6c49f6acd'
                     type: Microsoft.ApiManagement/service/products/apis
-      x-ms-odata: './apimapis.json#/definitions/ApiContract'
+      x-ms-odata: './definitions.json#/definitions/ApiContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}':
@@ -1841,7 +2173,7 @@ paths:
                       displayName: Guests
                       type: system
                     type: Microsoft.ApiManagement/service/products/groups
-      x-ms-odata: './apimgroups.json#/definitions/GroupContract'
+      x-ms-odata: './definitions.json#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}':
@@ -3246,7 +3578,7 @@ paths:
                       secondaryKey: 140f866def81419b9bb9732d05d24535
                       state: active
                     type: Microsoft.ApiManagement/service/products/subscriptions
-      x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
+      x-ms-odata: './definitions.json#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags':
@@ -3399,7 +3731,7 @@ paths:
                     properties:
                       displayName: tag1
                     type: Microsoft.ApiManagement/service/tags
-      x-ms-odata: './apimtags.json#/definitions/TagContract'
+      x-ms-odata: './definitions.json#/definitions/TagContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}':
@@ -3893,97 +4225,4 @@ paths:
                 properties:
                   displayName: tag1
                 type: Microsoft.ApiManagement/service/tags
-definitions:
-  ProductCollection:
-    description: Paged Products list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/ProductContract'
-        type: array
-  ProductContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Product details.
-    properties:
-      properties:
-        $ref: '#/definitions/ProductContractProperties'
-        description: Product entity contract properties.
-        x-ms-client-flatten: true
-  ProductContractProperties:
-    allOf:
-      - $ref: '#/definitions/ProductEntityBaseParameters'
-    description: Product profile.
-    properties:
-      displayName:
-        description: Product name.
-        maxLength: 300
-        minLength: 1
-        type: string
-    required:
-      - displayName
-  ProductEntityBaseParameters:
-    description: Product Entity Base Parameters
-    properties:
-      approvalRequired:
-        description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
-        type: boolean
-      description:
-        description: Product description. May include HTML formatting tags.
-        maxLength: 1000
-        minLength: 1
-        type: string
-      state:
-        description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
-        enum:
-          - notPublished
-          - published
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: ProductState
-      subscriptionRequired:
-        description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
-        type: boolean
-      subscriptionsLimit:
-        description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
-        format: int32
-        type: integer
-      terms:
-        description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
-        type: string
-  ProductUpdateParameters:
-    description: Product Update parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/ProductUpdateProperties'
-        description: Product entity Update contract properties.
-        x-ms-client-flatten: true
-  ProductUpdateProperties:
-    allOf:
-      - $ref: '#/definitions/ProductEntityBaseParameters'
-    description: Parameters supplied to the Update Product operation.
-    properties:
-      displayName:
-        description: Product name.
-        maxLength: 300
-        minLength: 1
-        type: string
+definitions: {}

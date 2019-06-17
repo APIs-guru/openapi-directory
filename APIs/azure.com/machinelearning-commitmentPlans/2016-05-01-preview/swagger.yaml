@@ -86,7 +86,8 @@ paths:
             $ref: '#/definitions/OperationEntityListResult'
       tags:
         - Operation
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/commitmentPlans':
     get:
       description: Retrieve all Azure ML commitment plans in a subscription.
@@ -122,7 +123,8 @@ paths:
             $ref: '#/definitions/SkuListResult'
       tags:
         - Skus
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans':
     get:
       description: Retrieve all Azure ML commitment plans in a resource group.

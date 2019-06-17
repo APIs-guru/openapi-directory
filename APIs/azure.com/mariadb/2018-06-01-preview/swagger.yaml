@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mariadb/resource-manager/Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: mariadb
   x-tags:
@@ -388,7 +387,8 @@ paths:
                         minBackupRetentionDays: 7
                         minStorageMB: 5120
                         vCore: 32
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers':
     get:
       description: List all the servers in a given subscription.
@@ -472,7 +472,8 @@ paths:
                       name: GP_Gen5_4
                       tier: GeneralPurpose
                     type: Microsoft.DBforMariaDB/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers':
     get:
       description: List all the servers in a given resource group.
@@ -538,7 +539,8 @@ paths:
                       name: GP_Gen5_2
                       tier: GeneralPurpose
                     type: Microsoft.DBforMariaDB/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}':
     delete:
       description: Deletes a server.
@@ -601,6 +603,9 @@ paths:
                   administratorLogin: cloudsa
                   earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
                   fullyQualifiedDomainName: mariadbtestsvc4.mariadb.database.azure.com
+                  masterServerId: ''
+                  replicaCapacity: 5
+                  replicationRole: None
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 7
@@ -835,6 +840,73 @@ paths:
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 7
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMariaDB/servers
+            '202': {}
+        Create a replica server:
+          parameters:
+            api-version: 2018-06-01-preview
+            parameters:
+              location: westus
+              properties:
+                createMode: Replica
+                sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver
+            resourceGroupName: TargetResourceGroup
+            serverName: targetserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMariaDB/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mariadb.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMariaDB/servers
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMariaDB/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mariadb.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
                     geoRedundantBackup: Enabled
                     storageMB: 128000
                   userVisibleState: Ready
@@ -1394,7 +1466,8 @@ paths:
                       source: system-default
                       value: Barracuda
                     type: Microsoft.DBforMariaDB/servers/configurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}':
     get:
       description: Gets information about a configuration of server.
@@ -1523,7 +1596,8 @@ paths:
                       charset: utf8
                       collation: utf8_general_ci
                     type: Microsoft.DBforMariaDB/servers/databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}':
     delete:
       description: Deletes a database.
@@ -1687,7 +1761,8 @@ paths:
                       endIpAddress: 255.0.0.0
                       startIpAddress: 1.0.0.0
                     type: Microsoft.DBforMariaDB/servers/firewallRules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}':
     delete:
       description: Deletes a server firewall rule.
@@ -1848,7 +1923,143 @@ paths:
                       type: slowlog
                       url: 'https://wasd2prodwus1afse42.file.core.windows.net/833c99b2f36c47349e5554b903fe0440/serverlogs/mariadb-slow-mariadbtestsvc1-2018022823.log?sv=2015-04-05&sr=f&sig=D9Ga4N5Pa%2BPe5Bmjpvs7A0TPD%2FF7IZpk9e4KWR0jgpM%3D&se=2018-03-01T07%3A12%3A13Z&sp=r'
                     type: Microsoft.DBforMariaDB/servers/logFiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas':
+    get:
+      description: List all the replicas for a given server.
+      operationId: Replicas_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerListResult'
+      tags:
+        - Replicas
+      x-ms-examples:
+        ReplicasListByServer:
+          parameters:
+            api-version: 2018-06-01-preview
+            resourceGroupName: TestGroup
+            serverName: testmaster
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testserver
+                    location: northeurope
+                    name: testserver
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver.mariadb.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMariaDB/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testserver1
+                    location: northeurope
+                    name: testserver1
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver1.mariadb.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMariaDB/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testserver2
+                    location: northeurope
+                    name: testserver2
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver2.mariadb.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMariaDB/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMariaDB/servers
+      x-ms-pageable:
+        nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/restart':
+    post:
+      description: Restarts a server.
+      operationId: Servers_Restart
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerRestart
+      x-ms-examples:
+        ServerRestart:
+          parameters:
+            api-version: 2018-06-01-preview
+            resourceGroupName: TestGroup
+            serverName: testserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}':
     get:
       description: Get a server's security alert policy.
@@ -2239,6 +2450,30 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
+  CloudError:
+    description: An error response from the Batch service.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+    x-ms-external: true
+  CloudErrorBody:
+    description: An error response from the Batch service.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        type: string
+      details:
+        description: A list of additional details about the error.
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        type: string
+      target:
+        description: 'The target of the particular error. For example, the name of the property in error.'
+        type: string
+    x-ms-external: true
   Configuration:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -2620,6 +2855,17 @@ definitions:
       fullyQualifiedDomainName:
         description: The fully qualified domain name of a server.
         type: string
+      masterServerId:
+        description: The master server id of a replica server.
+        type: string
+      replicaCapacity:
+        description: The maximum number of replicas that a master server can have.
+        format: int32
+        minimum: 0
+        type: integer
+      replicationRole:
+        description: The replication role of the server.
+        type: string
       sslEnforcement:
         $ref: '#/definitions/SslEnforcement'
         description: Enable ssl enforcement or not when connect to server.
@@ -2649,6 +2895,7 @@ definitions:
           - Default
           - PointInTimeRestore
           - GeoRestore
+          - Replica
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2691,6 +2938,17 @@ definitions:
     required:
       - sourceServerId
     x-ms-discriminator-value: GeoRestore
+  ServerPropertiesForReplica:
+    allOf:
+      - $ref: '#/definitions/ServerPropertiesForCreate'
+    description: The properties to create a new replica.
+    properties:
+      sourceServerId:
+        description: The master server id to create replica from.
+        type: string
+    required:
+      - sourceServerId
+    x-ms-discriminator-value: Replica
   ServerPropertiesForRestore:
     allOf:
       - $ref: '#/definitions/ServerPropertiesForCreate'
@@ -2726,6 +2984,9 @@ definitions:
           administratorLoginPassword:
             description: The password of the administrator login.
             format: password
+            type: string
+          replicationRole:
+            description: The replication role of the server.
             type: string
           sslEnforcement:
             $ref: '#/definitions/SslEnforcement'
@@ -2805,6 +3066,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: GeoRedundantBackup
+      storageAutogrow:
+        description: Enable Storage Auto Grow.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StorageAutogrow
       storageMB:
         description: Max storage allowed for a server.
         format: int32

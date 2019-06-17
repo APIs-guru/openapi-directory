@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: notificationhubs
   x-tags:
@@ -75,157 +74,131 @@ paths:
               body:
                 value:
                   - display:
-                      description: Registers the subscription for the NotifciationHubs resource provider and enables the creation of Namespaces and NotificationHubs
                       operation: Registers the NotificationHubs Provider
                       provider: Microsoft Azure Notification Hub
                       resource: Microsoft Azure Notification Hub
                     name: Microsoft.NotificationHubs/register/action
                   - display:
-                      description: Unregisters the subscription for the NotifciationHubs resource provider and enables the creation of Namespaces and NotificationHubs
                       operation: Unregisters the NotificationHubs Provider
                       provider: Microsoft Azure Notification Hub
                       resource: Microsoft Azure Notification Hub
                     name: Microsoft.NotificationHubs/unregister/action
                   - display:
-                      description: Returns operation results for Notification Hubs provider
                       operation: Operation results for Notification Hubs provider
                       provider: Microsoft Azure Notification Hub
                       resource: Microsoft Azure Notification Hub
                     name: Microsoft.NotificationHubs/operationResults/read
                   - display:
-                      description: Checks availability of namespace under given subscription.
                       operation: Get namespace availability.
                       provider: Microsoft Azure Notification Hub
                       resource: Microsoft Azure Notification Hub
                     name: Microsoft.NotificationHubs/CheckNamespaceAvailability/action
                   - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
                       operation: 'Create Or Update Namespace '
                       provider: Microsoft Azure Notification Hub
                       resource: Namespace
                     name: Microsoft.NotificationHubs/namespaces/write
                   - display:
-                      description: Get the list of Namespace Resource Description
                       operation: Get Namespace Resource
                       provider: Microsoft Azure NotificationHubs
                       resource: Namespace
                     name: Microsoft.NotificationHubs/namespaces/read
                   - display:
-                      description: Delete Namespace Resource
                       operation: Delete Namespace
                       provider: Microsoft Azure NotificationHubs
                       resource: Namespace
                     name: Microsoft.NotificationHubs/namespaces/Delete
                   - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Namespace Authorization Rules
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/write
                   - display:
-                      description: Get the list of Namespaces Authorization Rules description.
                       operation: Get Namespace Authorization Rules
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/action
                   - display:
-                      description: Get the list of Namespaces Authorization Rules description.
                       operation: Get Namespace Authorization Rules
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/read
                   - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
                       operation: Delete Namespace Authorization Rule
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to the Namespace
                       operation: Get Namespace Listkeys
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Checks whether or not a given NotificationHub name is available inside a Namespace
                       operation: CheckNotificationHubAvailability
                       provider: Microsoft Azure NotificationHubs
                       resource: AuthorizationRules
                     name: Microsoft.NotificationHubs/Namespaces/CheckNotificationHubAvailability/action
                   - display:
-                      description: Create or Update notificationHub properties.
                       operation: Create or Update notification hub
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/write
                   - display:
-                      description: Get notification hub resource
                       operation: Get notification hub
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/read
                   - display:
-                      description: Operation to delete notification hub resource
                       operation: Delete notification hub
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/Delete
                   - display:
-                      description: 'Create NotificationHub Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update NotificationHub Authorization Rule
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub Authorization Rule
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/write
                   - display:
-                      description: ' Get the list of NotificationHub Authorization Rules'
                       operation: ' Get NotificationHub Authorization Rules'
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/action
                   - display:
-                      description: ' Get the list of NotificationHub Authorization Rules'
                       operation: ' Get NotificationHub Authorization Rules'
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/read
                   - display:
-                      description: Operation to delete NotificationHub Authorization Rules
                       operation: Delete NotificationHub Authorization Rules
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to NotificationHub
                       operation: List NotificationHub keys
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub AuthorizationRules
                     name: Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules/regenerateKeys/action
                   - display:
-                      description: 'Get All Notification Hub PNS Credentials. This includes, WNS, MPNS, APNS, GCM and Baidu credentials'
                       operation: Resource Get Notification Hub PNS Credentials
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub PnsCredential
                     name: Microsoft.NotificationHubs/Namespaces/NotificationHubs/pnsCredentials/action
                   - display:
-                      description: Send a test push notification
                       operation: Send a test push notification
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub resource
                     name: Microsoft.NotificationHubs/Namespaces/NotificationHubs/debugSend/action
                   - display:
-                      description: Get list of Namespace metrics Resource Descriptions
                       operation: Get NotificationHub metrics
                       provider: Microsoft Azure NotificationHubs
                       resource: NotificationHub metrics

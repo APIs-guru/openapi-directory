@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-03-30/containerService.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: containerservice-containerService
   x-tags:
@@ -53,7 +52,8 @@ paths:
             $ref: '#/definitions/ContainerServiceListResult'
       tags:
         - ContainerServices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices':
     get:
       deprecated: true
@@ -74,7 +74,8 @@ paths:
             $ref: '#/definitions/ContainerServiceListResult'
       tags:
         - ContainerService
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}':
     delete:
       deprecated: true

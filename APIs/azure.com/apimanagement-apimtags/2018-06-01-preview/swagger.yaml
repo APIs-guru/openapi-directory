@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimtags.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimtags
   x-tags:
@@ -187,7 +186,7 @@ paths:
                     properties:
                       displayName: tag2
                     type: Microsoft.ApiManagement/service/tags
-      x-ms-odata: './apimtags.json#/definitions/TagContract'
+      x-ms-odata: './definitions.json#/definitions/TagContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}':
@@ -525,7 +524,18 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/TagCreateUpdateParameters'
+            description: Parameters supplied to Create/Update Tag operations.
+            properties:
+              properties:
+                description: Tag contract Properties.
+                properties:
+                  displayName:
+                    description: Tag name.
+                    maxLength: 160
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -623,7 +633,18 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/TagCreateUpdateParameters'
+            description: Parameters supplied to Create/Update Tag operations.
+            properties:
+              properties:
+                description: Tag contract Properties.
+                properties:
+                  displayName:
+                    description: Tag name.
+                    maxLength: 160
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -768,218 +789,4 @@ paths:
                 properties:
                   displayName: tag1
                 type: Microsoft.ApiManagement/service/tags
-definitions:
-  TagCollection:
-    description: Paged Tag list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          allOf:
-            - description: The Resource definition.
-              properties:
-                id:
-                  description: Resource ID.
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name.
-                  readOnly: true
-                  type: string
-                type:
-                  description: Resource type for API Management resource.
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
-          description: Tag Contract details.
-          properties:
-            properties:
-              description: Tag contract Properties.
-              properties:
-                displayName:
-                  description: Tag name.
-                  maxLength: 160
-                  minLength: 1
-                  type: string
-              required:
-                - displayName
-        type: array
-  TagContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Tag Contract details.
-    properties:
-      properties:
-        description: Tag contract Properties.
-        properties:
-          displayName:
-            description: Tag name.
-            maxLength: 160
-            minLength: 1
-            type: string
-        required:
-          - displayName
-  TagContractProperties:
-    description: Tag contract Properties.
-    properties:
-      displayName:
-        description: Tag name.
-        maxLength: 160
-        minLength: 1
-        type: string
-    required:
-      - displayName
-  TagCreateUpdateParameters:
-    description: Parameters supplied to Create/Update Tag operations.
-    properties:
-      properties:
-        $ref: '#/definitions/TagContractProperties'
-        description: Properties supplied to Create Tag operation.
-        x-ms-client-flatten: true
-  TagDescriptionBaseProperties:
-    description: Parameters supplied to the Create TagDescription operation.
-    properties:
-      description:
-        description: Description of the Tag.
-        type: string
-      externalDocsDescription:
-        description: Description of the external resources describing the tag.
-        type: string
-      externalDocsUrl:
-        description: Absolute URL of external resources describing the tag.
-        maxLength: 2000
-        type: string
-  TagDescriptionCollection:
-    description: Paged TagDescription list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          allOf:
-            - description: The Resource definition.
-              properties:
-                id:
-                  description: Resource ID.
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name.
-                  readOnly: true
-                  type: string
-                type:
-                  description: Resource type for API Management resource.
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
-          description: Contract details.
-          properties:
-            properties:
-              allOf:
-                - description: Parameters supplied to the Create TagDescription operation.
-                  properties:
-                    description:
-                      description: Description of the Tag.
-                      type: string
-                    externalDocsDescription:
-                      description: Description of the external resources describing the tag.
-                      type: string
-                    externalDocsUrl:
-                      description: Absolute URL of external resources describing the tag.
-                      maxLength: 2000
-                      type: string
-              description: TagDescription contract Properties.
-              properties:
-                displayName:
-                  description: Tag name.
-                  maxLength: 160
-                  minLength: 1
-                  type: string
-        type: array
-  TagDescriptionContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Contract details.
-    properties:
-      properties:
-        allOf:
-          - description: Parameters supplied to the Create TagDescription operation.
-            properties:
-              description:
-                description: Description of the Tag.
-                type: string
-              externalDocsDescription:
-                description: Description of the external resources describing the tag.
-                type: string
-              externalDocsUrl:
-                description: Absolute URL of external resources describing the tag.
-                maxLength: 2000
-                type: string
-        description: TagDescription contract Properties.
-        properties:
-          displayName:
-            description: Tag name.
-            maxLength: 160
-            minLength: 1
-            type: string
-  TagDescriptionContractProperties:
-    allOf:
-      - description: Parameters supplied to the Create TagDescription operation.
-        properties:
-          description:
-            description: Description of the Tag.
-            type: string
-          externalDocsDescription:
-            description: Description of the external resources describing the tag.
-            type: string
-          externalDocsUrl:
-            description: Absolute URL of external resources describing the tag.
-            maxLength: 2000
-            type: string
-    description: TagDescription contract Properties.
-    properties:
-      displayName:
-        description: Tag name.
-        maxLength: 160
-        minLength: 1
-        type: string
-  TagDescriptionCreateParameters:
-    description: Parameters supplied to the Create TagDescription operation.
-    properties:
-      properties:
-        $ref: '#/definitions/TagDescriptionBaseProperties'
-        description: Properties supplied to Create TagDescription operation.
-        x-ms-client-flatten: true
+definitions: {}

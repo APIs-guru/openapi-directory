@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Common.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-Common
   x-tags:
@@ -256,6 +255,18 @@ definitions:
         description: The human-readable description of the error
         type: string
     type: object
+  OracleConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Information for connecting to Oracle server
+    properties:
+      dataSource:
+        description: EZConnect or TNSName connection string.
+        type: string
+    required:
+      - dataSource
+    type: object
+    x-ms-discriminator-value: OracleConnectionInfo
   OrphanedUserInfo:
     description: Information of orphaned users on the SQL server database.
     properties:

@@ -103,7 +103,8 @@ paths:
                     protectedItemCount: 2
                     recoveryPlanCount: 1
                     registeredServersCount: 2
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   JobsSummary:
     description: Summary of the replication job data for this vault.

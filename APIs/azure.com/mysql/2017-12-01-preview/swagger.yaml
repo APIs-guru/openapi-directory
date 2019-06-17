@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: 'The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, log files and configurations with new business model.'
+  description: 'The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.'
   title: MySQLManagementClient
   version: 2017-12-01-preview
   x-apisguru-categories:
@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mysql/resource-manager/Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: mysql
   x-tags:
@@ -77,6 +76,15 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  SecurityAlertPolicyNameParameter:
+    description: The name of the security alert policy.
+    enum:
+      - default
+    in: path
+    name: securityAlertPolicyName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ServerNameParameter:
     description: The name of the server.
     in: path
@@ -90,6 +98,13 @@ parameters:
     name: subscriptionId
     required: true
     type: string
+  virtualNetworkRuleNameParameter:
+    description: The name of the virtual network rule.
+    in: path
+    name: virtualNetworkRuleName
+    required: true
+    type: string
+    x-ms-parameter-location: method
 paths:
   /providers/Microsoft.DBforMySQL/operations:
     get:
@@ -115,55 +130,61 @@ paths:
                   - display:
                       description: Returns the list of Performance Tiers available.
                       operation: List Performance Tiers
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Performance Tiers
                     name: Microsoft.DBforMySQL/locations/performanceTiers/read
                   - display:
-                      description: Return the list of servers or gets the properties for the specified server.
-                      operation: List/Get PostgreSQL Servers
-                      provider: Microsoft DB for PostgreSQL
-                      resource: PostgreSQL Server
-                    name: Microsoft.DBforMySQL/servers/read
-                  - display:
-                      description: Creates a server with the specified parameters or update the properties or tags for the specified server.
-                      operation: Create/Update PostgreSQL Server
-                      provider: Microsoft DB for PostgreSQL
-                      resource: PostgreSQL Server
-                    name: Microsoft.DBforMySQL/servers/write
-                  - display:
-                      description: Deletes an existing server.
-                      operation: Delete PostgreSQL Server
-                      provider: Microsoft DB for PostgreSQL
-                      resource: PostgreSQL Server
-                    name: Microsoft.DBforMySQL/servers/delete
-                  - display:
-                      description: Returns the list of Performance Tiers available.
-                      operation: List Performance Tiers
-                      provider: Microsoft DB for PostgreSQL
-                      resource: Performance Tiers
-                    name: Microsoft.DBforMySQL/performanceTiers/read
-                  - display:
                       description: Return the list of firewall rules for a server or gets the properties for the specified firewall rule.
                       operation: List/Get Firewall Rules
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Firewall Rules
                     name: Microsoft.DBforMySQL/servers/firewallRules/read
                   - display:
                       description: Creates a firewall rule with the specified parameters or update an existing rule.
                       operation: Create/Update Firewall Rule
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Firewall Rules
                     name: Microsoft.DBforMySQL/servers/firewallRules/write
                   - display:
                       description: Deletes an existing firewall rule.
                       operation: Delete Firewall Rule
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Firewall Rules
                     name: Microsoft.DBforMySQL/servers/firewallRules/delete
                   - display:
+                      description: Return the list of servers or gets the properties for the specified server.
+                      operation: List/Get MySQL Servers
+                      provider: Microsoft DB for MySQL
+                      resource: MySQL Server
+                    name: Microsoft.DBforMySQL/servers/read
+                  - display:
+                      description: Creates a server with the specified parameters or update the properties or tags for the specified server.
+                      operation: Create/Update MySQL Server
+                      provider: Microsoft DB for MySQL
+                      resource: MySQL Server
+                    name: Microsoft.DBforMySQL/servers/write
+                  - display:
+                      description: Deletes an existing server.
+                      operation: Delete MySQL Server
+                      provider: Microsoft DB for MySQL
+                      resource: MySQL Server
+                    name: Microsoft.DBforMySQL/servers/delete
+                  - display:
+                      description: Returns the list of Performance Tiers available.
+                      operation: List Performance Tiers
+                      provider: Microsoft DB for MySQL
+                      resource: Performance Tiers
+                    name: Microsoft.DBforMySQL/performanceTiers/read
+                  - display:
+                      description: Return the recoverable MySQL Server info
+                      operation: Get Recoverable MySQL Server info
+                      provider: Microsoft DB for MySQL
+                      resource: Recoverable MySQL Server
+                    name: Microsoft.DBforMySQL/servers/recoverableServers/read
+                  - display:
                       description: Return types of metrics that are available for databases
                       operation: Get database metric definitions
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Database Metric Definition
                     name: Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/metricDefinitions/read
                     properties:
@@ -174,17 +195,6 @@ paths:
                             displayName: CPU percent
                             fillGapWithZero: true
                             name: cpu_percent
-                            unit: Percent
-                          - aggregationType: Average
-                            displayDescription: Compute Unit limit
-                            displayName: Compute Unit limit
-                            name: compute_limit
-                            unit: Count
-                          - aggregationType: Average
-                            displayDescription: Compute Unit percentage
-                            displayName: Compute Unit percentage
-                            fillGapWithZero: true
-                            name: compute_consumption_percent
                             unit: Percent
                           - aggregationType: Average
                             displayDescription: Memory percent
@@ -214,6 +224,21 @@ paths:
                             name: storage_limit
                             unit: Bytes
                           - aggregationType: Average
+                            displayDescription: Server Log storage percent
+                            displayName: Server Log storage percent
+                            name: serverlog_storage_percent
+                            unit: Percent
+                          - aggregationType: Average
+                            displayDescription: Server Log storage used
+                            displayName: Server Log storage used
+                            name: serverlog_storage_usage
+                            unit: Bytes
+                          - aggregationType: Average
+                            displayDescription: Server Log storage limit
+                            displayName: Server Log storage limit
+                            name: serverlog_storage_limit
+                            unit: Bytes
+                          - aggregationType: Average
                             displayDescription: Total active connections
                             displayName: Total active connections
                             fillGapWithZero: true
@@ -225,16 +250,22 @@ paths:
                             fillGapWithZero: true
                             name: connections_failed
                             unit: Count
+                          - aggregationType: Average
+                            displayDescription: Replication lag in seconds
+                            displayName: Replication lag in seconds
+                            fillGapWithZero: true
+                            name: seconds_behind_master
+                            unit: Count
                   - display:
                       description: Gets the disagnostic setting for the resource
                       operation: Read diagnostic setting
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Database Metric Definition
                     name: Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/diagnosticSettings/read
                   - display:
                       description: Creates or updates the diagnostic setting for the resource
                       operation: Write diagnostic setting
-                      provider: Microsoft DB for PostgreSQL
+                      provider: Microsoft DB for MySQL
                       resource: Database Metric Definition
                     name: Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/diagnosticSettings/write
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability':
@@ -297,100 +328,67 @@ paths:
               body:
                 value:
                   - id: Basic
-                    maxBackupRetentionDays: 35
-                    maxStorageMB: 1048576
-                    minBackupRetentionDays: 7
-                    minStorageMB: 5120
                     serviceLevelObjectives:
                       - edition: Basic
                         hardwareGeneration: Gen4
                         id: B_Gen4_1
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 1048576
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 1
                       - edition: Basic
                         hardwareGeneration: Gen4
                         id: B_Gen4_2
-                        vCore: 2
-                      - edition: Basic
-                        hardwareGeneration: Gen5
-                        id: B_Gen5_1
-                        vCore: 1
-                      - edition: Basic
-                        hardwareGeneration: Gen5
-                        id: B_Gen5_2
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 1048576
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 2
                   - id: GeneralPurpose
-                    maxBackupRetentionDays: 35
-                    maxStorageMB: 2097152
-                    minBackupRetentionDays: 7
-                    minStorageMB: 5120
                     serviceLevelObjectives:
                       - edition: GeneralPurpose
                         hardwareGeneration: Gen4
                         id: GP_Gen4_2
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 2097152
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 2
                       - edition: GeneralPurpose
                         hardwareGeneration: Gen4
                         id: GP_Gen4_4
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 2097152
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 4
                       - edition: GeneralPurpose
                         hardwareGeneration: Gen4
                         id: GP_Gen4_8
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 2097152
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 8
                       - edition: GeneralPurpose
                         hardwareGeneration: Gen4
                         id: GP_Gen4_16
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 2097152
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 16
                       - edition: GeneralPurpose
                         hardwareGeneration: Gen4
                         id: GP_Gen4_32
+                        maxBackupRetentionDays: 35
+                        maxStorageMB: 2097152
+                        minBackupRetentionDays: 7
+                        minStorageMB: 5120
                         vCore: 32
-                      - edition: GeneralPurpose
-                        hardwareGeneration: Gen5
-                        id: GP_Gen5_2
-                        vCore: 2
-                      - edition: GeneralPurpose
-                        hardwareGeneration: Gen5
-                        id: GP_Gen5_4
-                        vCore: 4
-                      - edition: GeneralPurpose
-                        hardwareGeneration: Gen5
-                        id: GP_Gen5_8
-                        vCore: 8
-                      - edition: GeneralPurpose
-                        hardwareGeneration: Gen5
-                        id: GP_Gen5_16
-                        vCore: 16
-                      - edition: GeneralPurpose
-                        hardwareGeneration: Gen5
-                        id: GP_Gen5_32
-                        vCore: 32
-                  - id: MemoryOptimized
-                    maxBackupRetentionDays: 35
-                    maxStorageMB: 2097152
-                    minBackupRetentionDays: 7
-                    minStorageMB: 5120
-                    serviceLevelObjectives:
-                      - edition: MemoryOptimized
-                        hardwareGeneration: Gen5
-                        id: MO_Gen5_2
-                        vCore: 2
-                      - edition: MemoryOptimized
-                        hardwareGeneration: Gen5
-                        id: MO_Gen5_4
-                        vCore: 4
-                      - edition: MemoryOptimized
-                        hardwareGeneration: Gen5
-                        id: MO_Gen5_8
-                        vCore: 8
-                      - edition: MemoryOptimized
-                        hardwareGeneration: Gen5
-                        id: MO_Gen5_16
-                        vCore: 16
-                      - edition: MemoryOptimized
-                        hardwareGeneration: Gen5
-                        id: MO_Gen5_32
-                        vCore: 32
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers':
     get:
       description: List all the servers in a given subscription.
@@ -414,73 +412,68 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                    location: eastus
-                    name: testserver
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1
+                    location: westus
+                    name: mysqltestsvc1
                     properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                      administratorLogin: testuser
+                      earliestRestoreDate: '2018-02-28T23:56:02.627+00:00'
+                      fullyQualifiedDomainName: mysqltestsvc1.mysql.database.azure.com
                       sslEnforcement: Enabled
                       storageProfile:
                         backupRetentionDays: 7
-                        geoRedundantBackup: Enabled
-                        storageMB: 128000
+                        geoRedundantBackup: Disabled
+                        storageMB: 5120
                       userVisibleState: Ready
-                      version: '5.6'
+                      version: '5.7'
                     sku:
                       capacity: 2
                       family: Gen4
                       name: B_Gen4_2
-                      size: null
                       tier: Basic
-                    tags:
-                      elasticServer: '1'
                     type: Microsoft.DBforMySQL/servers
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver1
-                    location: eastus
-                    name: testserver1
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltstsvc2
+                    location: westus
+                    name: mysqltstsvc2
                     properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                      administratorLogin: testuser
+                      earliestRestoreDate: '2018-02-28T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: mysqltstsvc2.mysql.database.azure.com
                       sslEnforcement: Enabled
                       storageProfile:
                         backupRetentionDays: 7
-                        geoRedundantBackup: Enabled
-                        storageMB: 128000
+                        geoRedundantBackup: Disabled
+                        storageMB: 5120
                       userVisibleState: Ready
-                      version: '5.6'
+                      version: '5.7'
                     sku:
                       capacity: 2
                       family: Gen4
-                      name: B_Gen4_2
-                      size: null
-                      tier: Basic
-                    tags:
-                      elasticServer: '1'
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
                     type: Microsoft.DBforMySQL/servers
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver2
-                    location: eastus
-                    name: testserver2
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg1/providers/Microsoft.DBforMySQL/servers/mysqltestsvc3
+                    location: westus
+                    name: mysqltestsvc3
                     properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                      administratorLogin: testuser
+                      earliestRestoreDate: '2018-02-28T23:59:44.847+00:00'
+                      fullyQualifiedDomainName: mysqltestsvc3.mysql.database.azure.com
                       sslEnforcement: Enabled
                       storageProfile:
-                        backupRetentionDays: 7
+                        backupRetentionDays: 35
                         geoRedundantBackup: Enabled
-                        storageMB: 128000
+                        storageMB: 102400
                       userVisibleState: Ready
-                      version: '5.6'
+                      version: '5.7'
                     sku:
-                      capacity: 2
+                      capacity: 4
                       family: Gen4
-                      name: B_Gen4_2
-                      size: null
-                      tier: Basic
-                    tags:
-                      elasticServer: '1'
+                      name: GP_Gen4_4
+                      tier: GeneralPurpose
                     type: Microsoft.DBforMySQL/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers':
     get:
       description: List all the servers in a given resource group.
@@ -500,79 +493,54 @@ paths:
         ServerListByResourceGroup:
           parameters:
             api-version: 2017-12-01-preview
-            resourceGroupName: TestGroup
+            resourceGroupName: testrg
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                    location: eastus
-                    name: testserver
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1
+                    location: westus
+                    name: mysqltestsvc1
                     properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                      administratorLogin: testuser
+                      earliestRestoreDate: '2018-03-07T18:17:35.729321+00:00'
+                      fullyQualifiedDomainName: mysqltestsvc1.mysql.database.azure.com
                       sslEnforcement: Enabled
                       storageProfile:
                         backupRetentionDays: 7
-                        geoRedundantBackup: Enabled
-                        storageMB: 128000
+                        geoRedundantBackup: Disabled
+                        storageMB: 5120
                       userVisibleState: Ready
-                      version: '5.6'
+                      version: '5.7'
                     sku:
-                      capacity: 2
+                      capacity: 1
                       family: Gen4
-                      name: B_Gen4_2
-                      size: null
+                      name: B_Gen4_1
                       tier: Basic
-                    tags:
-                      elasticServer: '1'
                     type: Microsoft.DBforMySQL/servers
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver1
-                    location: eastus
-                    name: testserver1
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltstsvc2
+                    location: westus
+                    name: mysqltstsvc2
                     properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                      administratorLogin: testuser
+                      earliestRestoreDate: '2018-03-07T18:17:35.729321+00:00'
+                      fullyQualifiedDomainName: mysqltstsvc2.mysql.database.azure.com
                       sslEnforcement: Enabled
                       storageProfile:
                         backupRetentionDays: 7
-                        geoRedundantBackup: Enabled
-                        storageMB: 128000
+                        geoRedundantBackup: Disabled
+                        storageMB: 5120
                       userVisibleState: Ready
-                      version: '5.6'
+                      version: '5.7'
                     sku:
                       capacity: 2
                       family: Gen4
-                      name: B_Gen4_2
-                      size: null
-                      tier: Basic
-                    tags:
-                      elasticServer: '1'
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
                     type: Microsoft.DBforMySQL/servers
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver2
-                    location: eastus
-                    name: testserver2
-                    properties:
-                      administratorLogin: cloudsa
-                      fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
-                      sslEnforcement: Enabled
-                      storageProfile:
-                        backupRetentionDays: 7
-                        geoRedundantBackup: Enabled
-                        storageMB: 128000
-                      userVisibleState: Ready
-                      version: '5.6'
-                    sku:
-                      capacity: 2
-                      family: Gen4
-                      name: B_Gen4_2
-                      size: null
-                      tier: Basic
-                    tags:
-                      elasticServer: '1'
-                    type: Microsoft.DBforMySQL/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}':
     delete:
       description: Deletes a server.
@@ -622,34 +590,36 @@ paths:
         ServerGet:
           parameters:
             api-version: 2017-12-01-preview
-            resourceGroupName: TestGroup
-            serverName: testserver
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                location: eastus
-                name: testserver
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4
+                location: westus
+                name: mysqltestsvc4
                 properties:
                   administratorLogin: cloudsa
-                  earliestRestoreDate: '2018-01-26T23:06:03.3217581+00:00'
-                  fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: mysqltestsvc4.mysql.database.azure.com
+                  masterServerId: ''
+                  replicaCapacity: 5
+                  replicationRole: None
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 7
                     geoRedundantBackup: Enabled
                     storageMB: 128000
                   userVisibleState: Ready
-                  version: '5.6'
+                  version: '5.7'
                 sku:
                   capacity: 2
                   family: Gen4
-                  name: B_Gen4_2
-                  size: null
-                  tier: Basic
+                  name: GP_Gen4_2
+                  tier: GeneralPurpose
                 tags:
-                  elasticServer: '1'
+                  ElasticServer: '1'
                 type: Microsoft.DBforMySQL/servers
     patch:
       description: Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.
@@ -680,34 +650,35 @@ paths:
             api-version: 2017-12-01-preview
             parameters:
               properties:
-                administratorLoginPassword: newpassword
+                administratorLoginPassword: newpa$$w0rd
                 sslEnforcement: Disabled
-            resourceGroupName: TestGroup
-            serverName: testserver
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                location: eastus
-                name: testserver
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4
+                location: westus
+                name: mysqltestsvc4
                 properties:
                   administratorLogin: cloudsa
-                  fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: mysqltestsvc4.mysql.database.azure.com
                   sslEnforcement: Disabled
                   storageProfile:
                     backupRetentionDays: 7
                     geoRedundantBackup: Enabled
                     storageMB: 128000
                   userVisibleState: Ready
+                  version: '5.7'
                 sku:
                   capacity: 2
                   family: Gen4
-                  name: B_Gen4_2
-                  size: null
-                  tier: Basic
+                  name: GP_Gen4_2
+                  tier: GeneralPurpose
                 tags:
-                  elasticServer: '1'
+                  ElasticServer: '1'
                 type: Microsoft.DBforMySQL/servers
             '202': {}
       x-ms-long-running-operation: true
@@ -739,14 +710,83 @@ paths:
       tags:
         - Servers
       x-ms-examples:
-        ServerCreate:
+        Create a database as a point in time restore:
           parameters:
             api-version: 2017-12-01-preview
             parameters:
-              location: eastus
+              location: brazilsouth
+              properties:
+                createMode: PointInTimeRestore
+                restorePointInTime: '2017-12-14T00:00:37.467Z'
+                sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/servers/sourceserver
+              sku:
+                capacity: 2
+                family: Gen5
+                name: GP_Gen5_2
+                tier: GeneralPurpose
+              tags:
+                ElasticServer: '1'
+            resourceGroupName: TargetResourceGroup
+            serverName: targetserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: brazilsouth
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 7
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  elasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: brazilsouth
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 7
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '202': {}
+        Create a new server:
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              location: westus
               properties:
                 administratorLogin: cloudsa
-                administratorLoginPassword: password
+                administratorLoginPassword: pass$w0rd
                 createMode: Default
                 sslEnforcement: Enabled
                 storageProfile:
@@ -756,61 +796,196 @@ paths:
               sku:
                 capacity: 2
                 family: Gen5
-                name: B_Gen5_2
-                tier: Basic
+                name: GP_Gen5_2
+                tier: GeneralPurpose
               tags:
                 ElasticServer: '1'
-            resourceGroupName: TestGroup
-            serverName: testserver
+            resourceGroupName: testrg
+            serverName: mysqltestsvc4
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                location: eastus
-                name: testserver
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4
+                location: westus
+                name: mysqltestsvc4
                 properties:
                   administratorLogin: cloudsa
-                  earliestRestoreDate: '2018-02-07T16:47:04.027+00:00'
-                  fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: mysqltestsvc4.mysql.database.azure.com
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 7
                     geoRedundantBackup: Enabled
                     storageMB: 128000
                   userVisibleState: Ready
+                  version: '5.7'
                 sku:
                   capacity: 2
                   family: Gen5
-                  name: B_Gen5_2
-                  size: null
-                  tier: Basic
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
                 tags:
                   elasticServer: '1'
                 type: Microsoft.DBforMySQL/servers
             '201':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
-                location: eastus
-                name: testserver
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc4
+                location: westus
+                name: mysqltestsvc4
                 properties:
                   administratorLogin: cloudsa
-                  earliestRestoreDate: '2018-02-07T16:47:04.027+00:00'
-                  fullyQualifiedDomainName: testserver.test-vm1.onebox.xdb.mscds.com
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: mysqltestsvc4.mysql.database.azure.com
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 7
                     geoRedundantBackup: Enabled
                     storageMB: 128000
                   userVisibleState: Ready
+                  version: '5.7'
                 sku:
                   capacity: 2
                   family: Gen5
-                  name: B_Gen5_2
-                  size: null
-                  tier: Basic
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '202': {}
+        Create a replica server:
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              location: westus
+              properties:
+                createMode: Replica
+                sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMySQL/servers/masterserver
+            resourceGroupName: TargetResourceGroup
+            serverName: targetserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMySQL/servers/masterserver
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMySQL/servers/masterserver
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '202': {}
+        'Create a server as a geo restore ':
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              location: westus
+              properties:
+                createMode: GeoRestore
+                sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/servers/sourceserver
+              sku:
+                capacity: 2
+                family: Gen5
+                name: GP_Gen5_2
+                tier: GeneralPurpose
+              tags:
+                ElasticServer: '1'
+            resourceGroupName: TargetResourceGroup
+            serverName: targetserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
                 tags:
                   elasticServer: '1'
+                type: Microsoft.DBforMySQL/servers
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver
+                location: westus
+                name: targetserver
+                properties:
+                  administratorLogin: cloudsa
+                  earliestRestoreDate: '2018-03-14T18:02:41.577+00:00'
+                  fullyQualifiedDomainName: targetserver.mysql.database.azure.com
+                  sslEnforcement: Enabled
+                  storageProfile:
+                    backupRetentionDays: 14
+                    geoRedundantBackup: Enabled
+                    storageMB: 128000
+                  userVisibleState: Ready
+                  version: '5.7'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                tags:
+                  ElasticServer: '1'
                 type: Microsoft.DBforMySQL/servers
             '202': {}
       x-ms-long-running-operation: true
@@ -834,14 +1009,14 @@ paths:
         ConfigurationList:
           parameters:
             api-version: 2017-12-01-preview
-            resourceGroupName: TestGroup
-            serverName: mysql56cdb50
+            resourceGroupName: testrg
+            serverName: mysqltestsvc1
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/event_scheduler
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/event_scheduler
                     name: event_scheduler
                     properties:
                       allowedValues: 'ON,OFF,DISABLED'
@@ -851,7 +1026,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/div_precision_increment
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/div_precision_increment
                     name: div_precision_increment
                     properties:
                       allowedValues: 0-30
@@ -861,7 +1036,7 @@ paths:
                       source: system-default
                       value: '4'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/group_concat_max_len
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/group_concat_max_len
                     name: group_concat_max_len
                     properties:
                       allowedValues: 4-16777216
@@ -871,7 +1046,7 @@ paths:
                       source: system-default
                       value: '1024'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_adaptive_hash_index
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_adaptive_hash_index
                     name: innodb_adaptive_hash_index
                     properties:
                       allowedValues: 'ON,OFF'
@@ -881,7 +1056,7 @@ paths:
                       source: system-default
                       value: 'ON'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_lock_wait_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_lock_wait_timeout
                     name: innodb_lock_wait_timeout
                     properties:
                       allowedValues: 1-3600
@@ -891,7 +1066,7 @@ paths:
                       source: system-default
                       value: '50'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/interactive_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/interactive_timeout
                     name: interactive_timeout
                     properties:
                       allowedValues: 10-1800
@@ -901,7 +1076,7 @@ paths:
                       source: system-default
                       value: '1800'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/log_queries_not_using_indexes
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/log_queries_not_using_indexes
                     name: log_queries_not_using_indexes
                     properties:
                       allowedValues: 'ON,OFF'
@@ -911,7 +1086,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/log_throttle_queries_not_using_indexes
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/log_throttle_queries_not_using_indexes
                     name: log_throttle_queries_not_using_indexes
                     properties:
                       allowedValues: 0-4294967295
@@ -921,7 +1096,7 @@ paths:
                       source: system-default
                       value: '0'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/log_slow_admin_statements
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/log_slow_admin_statements
                     name: log_slow_admin_statements
                     properties:
                       allowedValues: 'ON,OFF'
@@ -931,7 +1106,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/log_slow_slave_statements
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/log_slow_slave_statements
                     name: log_slow_slave_statements
                     properties:
                       allowedValues: 'ON,OFF'
@@ -941,7 +1116,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/log_bin_trust_function_creators
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/log_bin_trust_function_creators
                     name: log_bin_trust_function_creators
                     properties:
                       allowedValues: 'ON,OFF'
@@ -951,7 +1126,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/long_query_time
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/long_query_time
                     name: long_query_time
                     properties:
                       allowedValues: 0-1E+100
@@ -961,7 +1136,7 @@ paths:
                       source: system-default
                       value: '10'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/min_examined_row_limit
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/min_examined_row_limit
                     name: min_examined_row_limit
                     properties:
                       allowedValues: 0-18446744073709551615
@@ -971,7 +1146,7 @@ paths:
                       source: system-default
                       value: '0'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/slow_query_log
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/slow_query_log
                     name: slow_query_log
                     properties:
                       allowedValues: 'ON,OFF'
@@ -981,7 +1156,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/sql_mode
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/sql_mode
                     name: sql_mode
                     properties:
                       allowedValues: ',ALLOW_INVALID_DATES,ANSI_QUOTES,ERROR_FOR_DIVISION_BY_ZERO,HIGH_NOT_PRECEDENCE,IGNORE_SPACE,NO_AUTO_CREATE_USER,NO_AUTO_VALUE_ON_ZERO,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_FIELD_OPTIONS,NO_KEY_OPTIONS,NO_TABLE_OPTIONS,NO_UNSIGNED_SUBTRACTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ONLY_FULL_GROUP_BY,PAD_CHAR_TO_FULL_LENGTH,PIPES_AS_CONCAT,REAL_AS_FLOAT,STRICT_ALL_TABLES,STRICT_TRANS_TABLES'
@@ -991,7 +1166,7 @@ paths:
                       source: system-default
                       value: ''
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/wait_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/wait_timeout
                     name: wait_timeout
                     properties:
                       allowedValues: 60-86400
@@ -1001,7 +1176,7 @@ paths:
                       source: system-default
                       value: '120'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/net_read_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/net_read_timeout
                     name: net_read_timeout
                     properties:
                       allowedValues: 10-3600
@@ -1011,7 +1186,7 @@ paths:
                       source: system-default
                       value: '120'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/net_write_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/net_write_timeout
                     name: net_write_timeout
                     properties:
                       allowedValues: 10-3600
@@ -1021,7 +1196,7 @@ paths:
                       source: system-default
                       value: '240'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/server_id
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/server_id
                     name: server_id
                     properties:
                       allowedValues: 1000-4294967295
@@ -1029,9 +1204,9 @@ paths:
                       defaultValue: '1000'
                       description: 'The server ID, used in replication to give each master and slave a unique identity.'
                       source: user-override
-                      value: '1880975364'
+                      value: '1381286943'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/max_allowed_packet
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/max_allowed_packet
                     name: max_allowed_packet
                     properties:
                       allowedValues: 1024-1073741824
@@ -1041,7 +1216,7 @@ paths:
                       source: system-default
                       value: '536870912'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/slave_net_timeout
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/slave_net_timeout
                     name: slave_net_timeout
                     properties:
                       allowedValues: 30-3600
@@ -1051,7 +1226,7 @@ paths:
                       source: system-default
                       value: '60'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/time_zone
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/time_zone
                     name: time_zone
                     properties:
                       allowedValues: '[+|-][0]{0,1}[0-9]:[0-5][0-9]|[+|-][1][0-2]:[0-5][0-9]|SYSTEM'
@@ -1061,7 +1236,27 @@ paths:
                       source: system-default
                       value: SYSTEM
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/character_set_server
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/binlog_group_commit_sync_delay
+                    name: binlog_group_commit_sync_delay
+                    properties:
+                      allowedValues: '0,11-1000000'
+                      dataType: Integer
+                      defaultValue: '1000'
+                      description: Controls how many microseconds the binary log commit waits before synchronizing the binary log file to disk.
+                      source: system-default
+                      value: '1000'
+                    type: Microsoft.DBforMySQL/servers/configurations
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/binlog_group_commit_sync_no_delay_count
+                    name: binlog_group_commit_sync_no_delay_count
+                    properties:
+                      allowedValues: 0-1000000
+                      dataType: Integer
+                      defaultValue: '0'
+                      description: The maximum number of transactions to wait for before aborting the current delay as specified by binlog-group-commit-sync-delay.
+                      source: system-default
+                      value: '0'
+                    type: Microsoft.DBforMySQL/servers/configurations
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/character_set_server
                     name: character_set_server
                     properties:
                       allowedValues: 'BIG5,DEC8,CP850,HP8,KOI8R,LATIN1,LATIN2,SWE7,ASCII,UJIS,SJIS,HEBREW,TIS620,EUCKR,KOI8U,GB2312,GREEK,CP1250,GBK,LATIN5,ARMSCII8,UTF8,UCS2,CP866,KEYBCS2,MACCE,MACROMAN,CP852,LATIN7,UTF8MB4,CP1251,UTF16,CP1256,CP1257,UTF32,BINARY,GEOSTD8,CP932,EUCJPMS'
@@ -1071,7 +1266,7 @@ paths:
                       source: system-default
                       value: latin1
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/join_buffer_size
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/join_buffer_size
                     name: join_buffer_size
                     properties:
                       allowedValues: 128-2097152
@@ -1081,7 +1276,7 @@ paths:
                       source: system-default
                       value: '262144'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/table_open_cache
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/table_open_cache
                     name: table_open_cache
                     properties:
                       allowedValues: 1-4000
@@ -1091,17 +1286,7 @@ paths:
                       source: system-default
                       value: '2000'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_file_per_table
-                    name: innodb_file_per_table
-                    properties:
-                      allowedValues: 'ON,OFF'
-                      dataType: Enumeration
-                      defaultValue: 'OFF'
-                      description: InnoDB stores the data and indexes for each newly created table in a separate .ibd file instead of the system tablespace.
-                      source: system-default
-                      value: 'OFF'
-                    type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/lower_case_table_names
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/lower_case_table_names
                     name: lower_case_table_names
                     properties:
                       allowedValues: '1,2'
@@ -1111,7 +1296,7 @@ paths:
                       source: system-default
                       value: '1'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/slave_compressed_protocol
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/slave_compressed_protocol
                     name: slave_compressed_protocol
                     properties:
                       allowedValues: 'ON,OFF'
@@ -1121,7 +1306,7 @@ paths:
                       source: system-default
                       value: 'OFF'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_io_capacity
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_io_capacity
                     name: innodb_io_capacity
                     properties:
                       allowedValues: 100-1500
@@ -1131,7 +1316,7 @@ paths:
                       source: system-default
                       value: '200'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_read_io_threads
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_read_io_threads
                     name: innodb_read_io_threads
                     properties:
                       allowedValues: 1-64
@@ -1141,7 +1326,7 @@ paths:
                       source: system-default
                       value: '4'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_thread_concurrency
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_thread_concurrency
                     name: innodb_thread_concurrency
                     properties:
                       allowedValues: 0-1000
@@ -1151,7 +1336,7 @@ paths:
                       source: system-default
                       value: '0'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_write_io_threads
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_write_io_threads
                     name: innodb_write_io_threads
                     properties:
                       allowedValues: 1-64
@@ -1161,17 +1346,17 @@ paths:
                       source: system-default
                       value: '4'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_additional_mem_pool_size
-                    name: innodb_additional_mem_pool_size
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_page_cleaners
+                    name: innodb_page_cleaners
                     properties:
-                      allowedValues: 5242880-52428800
+                      allowedValues: 1-64
                       dataType: Integer
-                      defaultValue: '8388608'
-                      description: he size in bytes of a memory pool InnoDB uses to store data dictionary information and other internal data structures.
+                      defaultValue: '4'
+                      description: The number of page cleaner threads that flush dirty pages from buffer pool instances.
                       source: system-default
-                      value: '8388608'
+                      value: '4'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_online_alter_log_max_size
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_online_alter_log_max_size
                     name: innodb_online_alter_log_max_size
                     properties:
                       allowedValues: 65536-2147483648
@@ -1181,7 +1366,7 @@ paths:
                       source: system-default
                       value: '134217728'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/init_connect
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/init_connect
                     name: init_connect
                     properties:
                       allowedValues: ''
@@ -1191,7 +1376,7 @@ paths:
                       source: system-default
                       value: ''
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/tx_isolation
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/tx_isolation
                     name: tx_isolation
                     properties:
                       allowedValues: 'READ-UNCOMMITTED,READ-COMMITTED,REPEATABLE-READ,SERIALIZABLE'
@@ -1201,17 +1386,17 @@ paths:
                       source: system-default
                       value: REPEATABLE-READ
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/eq_range_index_dive_limit
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/eq_range_index_dive_limit
                     name: eq_range_index_dive_limit
                     properties:
                       allowedValues: 0-4294967295
                       dataType: Integer
-                      defaultValue: '10'
+                      defaultValue: '200'
                       description: This variable indicates the number of equality ranges in an equality comparison condition when the optimizer should switch from using index dives to index statistics in estimating the number of qualifying rows.
                       source: system-default
-                      value: '10'
+                      value: '200'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_old_blocks_pct
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_old_blocks_pct
                     name: innodb_old_blocks_pct
                     properties:
                       allowedValues: 5-95
@@ -1221,7 +1406,7 @@ paths:
                       source: system-default
                       value: '37'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_old_blocks_time
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_old_blocks_time
                     name: innodb_old_blocks_time
                     properties:
                       allowedValues: 0-4294967295
@@ -1231,7 +1416,7 @@ paths:
                       source: system-default
                       value: '1000'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_read_ahead_threshold
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_read_ahead_threshold
                     name: innodb_read_ahead_threshold
                     properties:
                       allowedValues: 0-64
@@ -1241,7 +1426,7 @@ paths:
                       source: system-default
                       value: '56'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/max_length_for_sort_data
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/max_length_for_sort_data
                     name: max_length_for_sort_data
                     properties:
                       allowedValues: 4-8388608
@@ -1251,7 +1436,7 @@ paths:
                       source: system-default
                       value: '1024'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/max_connect_errors
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/max_connect_errors
                     name: max_connect_errors
                     properties:
                       allowedValues: 1-18446744073709551615
@@ -1261,7 +1446,7 @@ paths:
                       source: system-default
                       value: '100'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_thread_sleep_delay
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_thread_sleep_delay
                     name: innodb_thread_sleep_delay
                     properties:
                       allowedValues: 0-1000000
@@ -1271,17 +1456,18 @@ paths:
                       source: system-default
                       value: '10000'
                     type: Microsoft.DBforMySQL/servers/configurations
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/mysql56cdb50/configurations/innodb_file_format
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/configurations/innodb_file_format
                     name: innodb_file_format
                     properties:
                       allowedValues: 'Antelope,Barracuda'
                       dataType: Enumeration
-                      defaultValue: Antelope
+                      defaultValue: Barracuda
                       description: Indicates the InnoDB file format for file-per-table tablespaces.
                       source: system-default
-                      value: Antelope
+                      value: Barracuda
                     type: Microsoft.DBforMySQL/servers/configurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations/{configurationName}':
     get:
       description: Gets information about a configuration of server.
@@ -1303,22 +1489,22 @@ paths:
         ConfigurationGet:
           parameters:
             api-version: 2017-12-01-preview
-            configurationName: array_nulls
+            configurationName: event_scheduler
             resourceGroupName: TestGroup
             serverName: testserver
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
             '200':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/configurations/array_nulls
-                name: array_nulls
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/configurations/event_scheduler
+                name: event_scheduler
                 properties:
-                  allowedValues: 'on,off'
-                  dataType: Boolean
-                  defaultValue: 'on'
-                  description: Enable input of NULL elements in arrays.
-                  source: system-default
-                  value: 'on'
+                  allowedValues: 'ON,OFF,DISABLED'
+                  dataType: Enumeration
+                  defaultValue: 'OFF'
+                  description: Indicates the status of the Event Scheduler.
+                  source: user-override
+                  value: 'ON'
                 type: Microsoft.DBforMySQL/servers/configurations
     put:
       description: Updates a configuration of a server.
@@ -1348,7 +1534,7 @@ paths:
         ConfigurationCreateOrUpdate:
           parameters:
             api-version: 2017-12-01-preview
-            configurationName: array_nulls
+            configurationName: event_scheduler
             parameters:
               properties:
                 source: user-override
@@ -1359,15 +1545,15 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/configurations/array_nulls
-                name: array_nulls
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/configurations/event_scheduler
+                name: event_scheduler
                 properties:
-                  allowedValues: 'on,off'
-                  dataType: Boolean
-                  defaultValue: 'on'
-                  description: Enable input of NULL elements in arrays.
+                  allowedValues: 'ON,OFF,DISABLED'
+                  dataType: Enumeration
+                  defaultValue: 'OFF'
+                  description: Indicates the status of the Event Scheduler.
                   source: user-override
-                  value: 'off'
+                  value: 'ON'
                 type: Microsoft.DBforMySQL/servers/configurations
             '202': {}
       x-ms-long-running-operation: true
@@ -1391,7 +1577,7 @@ paths:
         DatabaseList:
           parameters:
             api-version: 2017-12-01-preview
-            resourceGroupName: TestGroup-preview
+            resourceGroupName: TestGroup
             serverName: testserver
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
           responses:
@@ -1410,7 +1596,8 @@ paths:
                       charset: utf8
                       collation: utf8_general_ci
                     type: Microsoft.DBforMySQL/servers/databases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}':
     delete:
       description: Deletes a database.
@@ -1574,7 +1761,8 @@ paths:
                       endIpAddress: 255.0.0.0
                       startIpAddress: 1.0.0.0
                     type: Microsoft.DBforMySQL/servers/firewallRules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}':
     delete:
       description: Deletes a server firewall rule.
@@ -1726,28 +1914,566 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/logFiles/postgresql-2017-06-22_010000.log
-                    name: postgresql-2017-06-22_010000.log
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1/logFiles/mysql-slow-mysqltestsvc1-2018022823.log
+                    name: mysql-slow-mysqltestsvc1-2018022823.log
                     properties:
                       createdTime: '0001-01-01T00:00:00+00:00'
-                      lastModifiedTime: '2017-06-22T01:59:36+00:00'
-                      name: postgresql-2017-06-22_010000.log
-                      sizeInKB: 4
-                      type: text
-                      url: 'https://wasd2stageneu1btlm4.file.core.windows.net/42679871f6cc4302b39ab9c2e3044df3/pg_log/postgresql-2017-06-22_010000.log?sv=2015-04-05&sr=f&sig=gqIQsa6VyGyUNpzYYPWLP5gM%2BeF1so9GYbHKu6Zs0DM%3D&se=2017-06-22T03%3A21%3A09Z&sp=r'
-                    type: Microsoft.DBforMySQL/servers/logFiles
-                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/logFiles/postgresql-2017-06-22_020000.log
-                    name: postgresql-2017-06-22_020000.log
-                    properties:
-                      createdTime: '0001-01-01T00:00:00+00:00'
-                      lastModifiedTime: '2017-06-22T02:19:36+00:00'
-                      name: postgresql-2017-06-22_020000.log
+                      lastModifiedTime: '2018-03-01T06:09:20+00:00'
                       sizeInKB: 1
-                      type: text
-                      url: 'https://wasd2stageneu1btlm4.file.core.windows.net/42679871f6cc4302b39ab9c2e3044df3/pg_log/postgresql-2017-06-22_020000.log?sv=2015-04-05&sr=f&sig=i99UWBlYfR0tKaxix8yHAOnfym4HV9Auto6BbZogyRs%3D&se=2017-06-22T03%3A21%3A09Z&sp=r'
+                      type: slowlog
+                      url: 'https://wasd2prodwus1afse42.file.core.windows.net/833c99b2f36c47349e5554b903fe0440/serverlogs/mysql-slow-mysqltestsvc1-2018022823.log?sv=2015-04-05&sr=f&sig=D9Ga4N5Pa%2BPe5Bmjpvs7A0TPD%2FF7IZpk9e4KWR0jgpM%3D&se=2018-03-01T07%3A12%3A13Z&sp=r'
                     type: Microsoft.DBforMySQL/servers/logFiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/replicas':
+    get:
+      description: List all the replicas for a given server.
+      operationId: Replicas_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerListResult'
+      tags:
+        - Replicas
+      x-ms-examples:
+        ReplicasListByServer:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: TestGroup
+            serverName: testmaster
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver
+                    location: northeurope
+                    name: testserver
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver.mysql.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMySQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver1
+                    location: northeurope
+                    name: testserver1
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver1.mysql.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMySQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver2
+                    location: northeurope
+                    name: testserver2
+                    properties:
+                      administratorLogin: cloudsa
+                      earliestRestoreDate: '2018-06-11T23:56:54.3+00:00'
+                      fullyQualifiedDomainName: testserver2.mysql.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testmaster
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Enabled
+                      storageProfile:
+                        backupRetentionDays: 35
+                        geoRedundantBackup: Enabled
+                        storageMB: 256000
+                      userVisibleState: Ready
+                      version: '5.6'
+                    sku:
+                      capacity: 2
+                      family: Gen4
+                      name: GP_Gen4_2
+                      tier: GeneralPurpose
+                    tags:
+                      elasticServer: '1'
+                    type: Microsoft.DBforMySQL/servers
+      x-ms-pageable:
+        nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/restart':
+    post:
+      description: Restarts a server.
+      operationId: Servers_Restart
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerRestart
+      x-ms-examples:
+        ServerRestart:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: TestGroup
+            serverName: testserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}':
+    get:
+      description: Get a server's security alert policy.
+      operationId: ServerSecurityAlertPolicies_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the security alert policy.
+          enum:
+            - Default
+          in: path
+          name: securityAlertPolicyName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SecurityAlertPolicyName
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the server threat detection policy.
+          schema:
+            $ref: '#/definitions/ServerSecurityAlertPolicy'
+        default:
+          description: Error response describing why the operation of getting security alert policies failed.
+      tags:
+        - ServerSecurityAlertPolicies
+      x-ms-examples:
+        Get a server's threat detection policy:
+          parameters:
+            api-version: 2017-03-01-preview
+            resourceGroupName: securityalert-4799
+            securityAlertPolicyName: Default
+            serverName: securityalert-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.DBforMySQL/servers/securityalert-6440/securityAlertPolicies/default
+                name: Default
+                properties:
+                  disabledAlerts:
+                    - Access_Anomaly
+                  emailAccountAdmins: true
+                  emailAddresses:
+                    - test@microsoft.com;user@microsoft.com
+                  retentionDays: 0
+                  state: Disabled
+                  storageEndpoint: 'https://mystorage.blob.core.windows.net'
+                type: Microsoft.DBforMySQL/servers/securityAlertPolicies
+    put:
+      description: Creates or updates a threat detection policy.
+      operationId: ServerSecurityAlertPolicies_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the threat detection policy.
+          enum:
+            - Default
+          in: path
+          name: securityAlertPolicyName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SecurityAlertPolicyName
+        - description: The server security alert policy.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ServerSecurityAlertPolicy'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully updated the threat detection policy.
+          schema:
+            $ref: '#/definitions/ServerSecurityAlertPolicy'
+        '202':
+          description: Created request to set the server threat detection policy.
+        default:
+          description: Error response describing why the operation of setting security alert policies failed.
+      tags:
+        - ServerSecurityAlertPolicies
+      x-ms-examples:
+        Update a server's threat detection policy with all parameters:
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              properties:
+                disabledAlerts:
+                  - Access_Anomaly
+                  - Usage_Anomaly
+                emailAccountAdmins: true
+                emailAddresses:
+                  - testSecurityAlert@microsoft.com
+                retentionDays: 5
+                state: Enabled
+                storageAccountAccessKey: sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==
+                storageEndpoint: 'https://mystorage.blob.core.windows.net'
+            resourceGroupName: securityalert-4799
+            securityAlertPolicyName: Default
+            serverName: securityalert-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.DBforMySQL/servers/securityalert-6440/securityAlertPolicies/default
+                name: Default
+                properties:
+                  disabledAlerts:
+                    - Access_Anomaly
+                    - Usage_Anomaly
+                  emailAccountAdmins: true
+                  emailAddresses:
+                    - testSecurityAlert@microsoft.com
+                  retentionDays: 5
+                  state: Enabled
+                  storageEndpoint: 'https://mystorage.blob.core.windows.net'
+                type: Microsoft.DBforMySQL/servers/securityAlertPolicies
+            '202': {}
+        Update a server's threat detection policy with minimal parameters:
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              properties:
+                emailAccountAdmins: true
+                state: Disabled
+            resourceGroupName: securityalert-4799
+            securityAlertPolicyName: Default
+            serverName: securityalert-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.DBforMySQL/servers/securityalert-6440/securityAlertPolicies/default
+                name: Default
+                properties:
+                  disabledAlerts: []
+                  emailAccountAdmins: true
+                  emailAddresses: []
+                  retentionDays: 0
+                  state: Enabled
+                  storageEndpoint: ''
+                type: Microsoft.DBforMySQL/servers/securityAlertPolicies
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules':
+    get:
+      description: Gets a list of virtual network rules in a server.
+      operationId: VirtualNetworkRules_ListByServer
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of virtual network rules.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRuleListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ResourceNotFound - The requested resource was not found.
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        List virtual network rules:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: TestGroup
+            serverName: vnet-test-svr
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+            virtualNetworkRuleName: vnet-firewall-rule
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule
+                    name: vnet-firewall-rule
+                    properties:
+                      ignoreMissingVnetServiceEndpoint: false
+                      state: Ready
+                      virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+                    type: Microsoft.DBforMySQL/servers/virtualNetworkRules
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule
+                    name: vnet-firewall-rule
+                    properties:
+                      ignoreMissingVnetServiceEndpoint: false
+                      state: Ready
+                      virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+                    type: Microsoft.DBforMySQL/servers/virtualNetworkRules
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}':
+    delete:
+      description: Deletes the virtual network rule with the given name.
+      operationId: VirtualNetworkRules_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully deleted the virtual network rule.
+        '202':
+          description: Accepted
+        '204':
+          description: The specified virtual network rule does not exist.
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 InvalidResourceId - Invalid resource identifier.
+
+             * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.
+
+             * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.
+
+             * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.
+
+             * 400 NullVirtualNetworkRequest - Virtual Network Request is Null
+
+             * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 OperationIdNotFound - The operation with Id does not exist.
+
+             * 409 OperationCancelled - The operation has been cancelled by user.
+
+             * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.
+
+             * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Delete a virtual network rule:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: TestGroup
+            serverName: vnet-test-svr
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+            virtualNetworkRuleName: vnet-firewall-rule
+          responses:
+            '200':
+              body: ''
+            '202':
+              body: ''
+            '204':
+              body: ''
+      x-ms-long-running-operation: true
+    get:
+      description: Gets a virtual network rule.
+      operationId: VirtualNetworkRules_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+      responses:
+        '200':
+          description: Successfully retrieved a specified virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ResourceNotFound - The requested resource was not found.
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Gets a virtual network rule:
+          parameters:
+            api-version: 2017-12-01-preview
+            resourceGroupName: TestGroup
+            serverName: vnet-test-svr
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+            virtualNetworkRuleName: vnet-firewall-rule
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule
+                name: vnet-firewall-rule
+                properties:
+                  ignoreMissingVnetServiceEndpoint: false
+                  state: Ready
+                  virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+                type: Microsoft.DBforMySQL/servers/virtualNetworkRules
+    put:
+      description: Creates or updates an existing virtual network rule.
+      operationId: VirtualNetworkRules_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - description: The requested virtual Network Rule Resource state.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+      responses:
+        '200':
+          description: Successfully updated a virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+        '201':
+          description: Successfully created a virtual network rule.
+          schema:
+            $ref: '#/definitions/VirtualNetworkRule'
+        '202':
+          description: Accepted
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 InvalidResourceId - Invalid resource identifier.
+
+             * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.
+
+             * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.
+
+             * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.
+
+             * 400 NullVirtualNetworkRequest - Virtual Network Request is Null
+
+             * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null
+
+             * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 VirtualNetworkRuleNotEnabled - Azure SQL Server Virtual Network Rule feature is not enabled
+
+             * 404 OperationIdNotFound - The operation with Id does not exist.
+
+             * 409 OperationCancelled - The operation has been cancelled by user.
+
+             * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.
+
+             * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.
+      tags:
+        - VirtualNetworkRules
+      x-ms-examples:
+        Create or update a virtual network rule:
+          parameters:
+            api-version: 2017-12-01-preview
+            parameters:
+              properties:
+                ignoreMissingVnetServiceEndpoint: false
+                virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+            resourceGroupName: TestGroup
+            serverName: vnet-test-svr
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+            virtualNetworkRuleName: vnet-firewall-rule
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule
+                name: vnet-firewall-rule
+                properties:
+                  ignoreMissingVnetServiceEndpoint: false
+                  virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+                type: Microsoft.DBforMySQL/servers/virtualNetworkRules
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/vnet-test-svr/virtualNetworkRules/vnet-firewall-rule
+                name: vnet-firewall-rule
+                properties:
+                  ignoreMissingVnetServiceEndpoint: false
+                  virtualNetworkSubnetId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet
+                type: Microsoft.DBforMySQL/servers/virtualNetworkRules
+            '202': {}
+      x-ms-long-running-operation: true
 definitions:
+  CloudError:
+    description: An error response from the Batch service.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+    x-ms-external: true
+  CloudErrorBody:
+    description: An error response from the Batch service.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        type: string
+      details:
+        description: A list of additional details about the error.
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        type: string
+      target:
+        description: 'The target of the particular error. For example, the name of the property in error.'
+        type: string
+    x-ms-external: true
   Configuration:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -1882,9 +2608,6 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      name:
-        description: Log file name.
-        type: string
       sizeInKB:
         description: Size of the log file.
         format: int64
@@ -1988,20 +2711,6 @@ definitions:
       id:
         description: ID of the performance tier.
         type: string
-      maxBackupRetentionDays:
-        description: Maximum Backup retention in days for the performance tier edition
-        type: integer
-      maxStorageMB:
-        description: Max storage allowed for a server.
-        format: int32
-        type: integer
-      minBackupRetentionDays:
-        description: Minimum Backup retention in days for the performance tier edition
-        type: integer
-      minStorageMB:
-        description: Max storage allowed for a server.
-        format: int32
-        type: integer
       serviceLevelObjectives:
         description: Service level objectives associated with the performance tier
         items:
@@ -2019,6 +2728,20 @@ definitions:
       id:
         description: ID for the service level objective.
         type: string
+      maxBackupRetentionDays:
+        description: Maximum Backup retention in days for the performance tier edition
+        type: integer
+      maxStorageMB:
+        description: Max storage allowed for a server.
+        format: int32
+        type: integer
+      minBackupRetentionDays:
+        description: Minimum Backup retention in days for the performance tier edition
+        type: integer
+      minStorageMB:
+        description: Max storage allowed for a server.
+        format: int32
+        type: integer
       vCore:
         description: vCore associated with the service level objective
         type: integer
@@ -2038,6 +2761,44 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  SecurityAlertPolicyProperties:
+    description: Properties of a security alert policy.
+    properties:
+      disabledAlerts:
+        description: 'Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly'
+        items:
+          type: string
+        type: array
+      emailAccountAdmins:
+        description: Specifies that the alert is sent to the account administrators.
+        type: boolean
+      emailAddresses:
+        description: Specifies an array of e-mail addresses to which the alert is sent.
+        items:
+          type: string
+        type: array
+      retentionDays:
+        description: Specifies the number of days to keep in the Threat Detection audit logs.
+        format: int32
+        type: integer
+      state:
+        description: 'Specifies the state of the policy, whether it is enabled or disabled.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ServerSecurityAlertPolicyState
+      storageAccountAccessKey:
+        description: Specifies the identifier key of the Threat Detection audit storage account.
+        type: string
+      storageEndpoint:
+        description: 'Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.'
+        type: string
+    required:
+      - state
+    type: object
   Server:
     allOf:
       - $ref: '#/definitions/TrackedResource'
@@ -2092,6 +2853,17 @@ definitions:
       fullyQualifiedDomainName:
         description: The fully qualified domain name of a server.
         type: string
+      masterServerId:
+        description: The master server id of a replica server.
+        type: string
+      replicaCapacity:
+        description: The maximum number of replicas that a master server can have.
+        format: int32
+        minimum: 0
+        type: integer
+      replicationRole:
+        description: The replication role of the server.
+        type: string
       sslEnforcement:
         $ref: '#/definitions/SslEnforcement'
         description: Enable ssl enforcement or not when connect to server.
@@ -2120,6 +2892,8 @@ definitions:
         enum:
           - Default
           - PointInTimeRestore
+          - GeoRestore
+          - Replica
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2151,10 +2925,32 @@ definitions:
       - administratorLogin
       - administratorLoginPassword
     x-ms-discriminator-value: Default
+  ServerPropertiesForGeoRestore:
+    allOf:
+      - $ref: '#/definitions/ServerPropertiesForCreate'
+    description: The properties used to create a new server by restoring to a different region from a geo replicated backup.
+    properties:
+      sourceServerId:
+        description: The source server id to restore from.
+        type: string
+    required:
+      - sourceServerId
+    x-ms-discriminator-value: GeoRestore
+  ServerPropertiesForReplica:
+    allOf:
+      - $ref: '#/definitions/ServerPropertiesForCreate'
+    description: The properties to create a new replica.
+    properties:
+      sourceServerId:
+        description: The master server id to create replica from.
+        type: string
+    required:
+      - sourceServerId
+    x-ms-discriminator-value: Replica
   ServerPropertiesForRestore:
     allOf:
       - $ref: '#/definitions/ServerPropertiesForCreate'
-    description: The properties to a new server by restoring from a backup.
+    description: The properties used to create a new server by restoring from a backup.
     properties:
       restorePointInTime:
         description: 'Restore point creation time (ISO8601 format), specifying the time to restore from.'
@@ -2167,6 +2963,16 @@ definitions:
       - sourceServerId
       - restorePointInTime
     x-ms-discriminator-value: PointInTimeRestore
+  ServerSecurityAlertPolicy:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: A server security alert policy.
+    properties:
+      properties:
+        $ref: '#/definitions/SecurityAlertPolicyProperties'
+        description: Resource properties.
+        x-ms-client-flatten: true
+    type: object
   ServerUpdateParameters:
     description: Parameters allowed to update for a server.
     properties:
@@ -2176,6 +2982,9 @@ definitions:
           administratorLoginPassword:
             description: The password of the administrator login.
             format: password
+            type: string
+          replicationRole:
+            description: The replication role of the server.
             type: string
           sslEnforcement:
             $ref: '#/definitions/SslEnforcement'
@@ -2255,6 +3064,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: GeoRedundantBackup
+      storageAutogrow:
+        description: Enable Storage Auto Grow.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StorageAutogrow
       storageMB:
         description: Max storage allowed for a server.
         format: int32
@@ -2274,3 +3092,52 @@ definitions:
         type: object
     required:
       - location
+  VirtualNetworkRule:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: A virtual network rule.
+    properties:
+      properties:
+        $ref: '#/definitions/VirtualNetworkRuleProperties'
+        description: Resource properties.
+        x-ms-client-flatten: true
+    type: object
+  VirtualNetworkRuleListResult:
+    description: A list of virtual network rules.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: Array of results.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
+        readOnly: true
+        type: array
+    type: object
+  VirtualNetworkRuleProperties:
+    description: Properties of a virtual network rule.
+    properties:
+      ignoreMissingVnetServiceEndpoint:
+        description: Create firewall rule before the virtual network has vnet service endpoint enabled.
+        type: boolean
+      state:
+        description: Virtual Network Rule State
+        enum:
+          - Initializing
+          - InProgress
+          - Ready
+          - Deleting
+          - Unknown
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualNetworkRuleState
+      virtualNetworkSubnetId:
+        description: The ARM resource id of the virtual network subnet.
+        type: string
+    required:
+      - virtualNetworkSubnetId
+    type: object

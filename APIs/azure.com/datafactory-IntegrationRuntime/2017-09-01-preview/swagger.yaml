@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/IntegrationRuntime.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datafactory-IntegrationRuntime
   x-tags:
@@ -21,6 +20,22 @@ info:
     - Microsoft
 paths: {}
 definitions:
+  EntityReference:
+    description: The entity reference.
+    properties:
+      referenceName:
+        description: The name of this referenced entity.
+        type: string
+      type:
+        description: The type of this referenced entity.
+        enum:
+          - IntegrationRuntimeReference
+          - LinkedServiceReference
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IntegrationRuntimeEntityReferenceType
+    type: object
   IntegrationRuntime:
     additionalProperties:
       type: object
@@ -136,6 +151,19 @@ definitions:
         type: object
         x-ms-discriminator-value: SecureString
     type: object
+  IntegrationRuntimeDataProxyProperties:
+    description: Data proxy properties for a managed dedicated integration runtime.
+    properties:
+      connectVia:
+        $ref: '#/definitions/EntityReference'
+        description: The self-hosted integration runtime reference.
+      path:
+        description: The path to contain the staged data in the Blob storage.
+        type: string
+      stagingLinkedService:
+        $ref: '#/definitions/EntityReference'
+        description: The staging linked service reference.
+    type: object
   IntegrationRuntimeMonitoringData:
     description: Get monitoring data response.
     properties:
@@ -248,15 +276,7 @@ definitions:
         type: string
       catalogPricingTier:
         description: 'The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/'
-        enum:
-          - Basic
-          - Standard
-          - Premium
-          - PremiumRS
         type: string
-        x-ms-enum:
-          modelAsString: true
-          name: IntegrationRuntimeSsisCatalogPricingTier
       catalogServerEndpoint:
         description: The catalog database server URL.
         type: string
@@ -272,6 +292,9 @@ definitions:
       customSetupScriptProperties:
         $ref: '#/definitions/IntegrationRuntimeCustomSetupScriptProperties'
         description: Custom setup script properties for a managed dedicated integration runtime.
+      dataProxyProperties:
+        $ref: '#/definitions/IntegrationRuntimeDataProxyProperties'
+        description: Data proxy properties for a managed dedicated integration runtime.
       edition:
         description: The edition for the SSIS Integration Runtime
         enum:

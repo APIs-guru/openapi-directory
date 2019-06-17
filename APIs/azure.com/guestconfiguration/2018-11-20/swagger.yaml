@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: guestconfiguration
   x-tags:
@@ -110,6 +109,13 @@ paths:
                     name: Microsoft.GuestConfiguration/guestConfigurationAssignments/write
                     properties: null
                   - display:
+                      description: Registers the subscription for the Microsoft.GuestConfiguration resource provider.
+                      operation: Registers the feature for Microsoft.GuestConfiguration.
+                      provider: Microsoft Guest Configuration
+                      resource: Register
+                    name: Microsoft.GuestConfiguration/register/action
+                    properties: null
+                  - display:
                       description: Get guest configuration assignment.
                       operation: Microsoft.GuestConfiguration/guestConfigurationAssignments/read
                       provider: Microsoft Guest Configuration
@@ -124,7 +130,8 @@ paths:
                     name: Microsoft.GuestConfiguration/guestConfigurationAssignments/reports/read
                     properties: null
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments':
     get:
       description: List all guest configuration assignments for a virtual machine.
@@ -215,7 +222,8 @@ paths:
                     latestReportId: /subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/myAssignment/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1
                     provisioningState: null
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}':
     delete:
       description: Delete a guest configuration assignment

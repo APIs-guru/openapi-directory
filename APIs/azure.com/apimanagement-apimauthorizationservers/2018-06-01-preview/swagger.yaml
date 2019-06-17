@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimauthorizationservers
   x-tags:
@@ -92,7 +91,175 @@ paths:
         '200':
           description: A Collection of the Authorization Server entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/AuthorizationServerCollection'
+            description: Paged OAuth2 Authorization Servers list representation.
+            properties:
+              count:
+                description: Total record count number across all pages.
+                format: int64
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: External OAuth authorization server settings.
+                  properties:
+                    properties:
+                      allOf:
+                        - description: External OAuth authorization server Update settings contract.
+                          properties:
+                            authorizationMethods:
+                              description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                              items:
+                                enum:
+                                  - HEAD
+                                  - OPTIONS
+                                  - TRACE
+                                  - GET
+                                  - POST
+                                  - PUT
+                                  - PATCH
+                                  - DELETE
+                                type: string
+                                x-ms-enum:
+                                  modelAsString: false
+                                  name: AuthorizationMethod
+                              type: array
+                            bearerTokenSendingMethods:
+                              description: 'Specifies the mechanism by which access token is passed to the API. '
+                              externalDocs:
+                                url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                              items:
+                                enum:
+                                  - authorizationHeader
+                                  - query
+                                type: string
+                                x-ms-enum:
+                                  modelAsString: true
+                                  name: BearerTokenSendingMethod
+                              type: array
+                            clientAuthenticationMethod:
+                              description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                              items:
+                                enum:
+                                  - Basic
+                                  - Body
+                                type: string
+                                x-ms-enum:
+                                  modelAsString: true
+                                  name: ClientAuthenticationMethod
+                                  values:
+                                    - description: Basic Client Authentication method.
+                                      value: Basic
+                                    - description: Body based Authentication method.
+                                      value: Body
+                              type: array
+                            clientSecret:
+                              description: Client or app secret registered with this authorization server.
+                              type: string
+                            defaultScope:
+                              description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                              externalDocs:
+                                url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                              type: string
+                            description:
+                              description: Description of the authorization server. Can contain HTML formatting tags.
+                              type: string
+                            resourceOwnerPassword:
+                              description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                              type: string
+                            resourceOwnerUsername:
+                              description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                              type: string
+                            supportState:
+                              description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                              externalDocs:
+                                url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                              type: boolean
+                            tokenBodyParameters:
+                              description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                              items:
+                                description: OAuth acquire token request body parameter (www-url-form-encoded).
+                                properties:
+                                  name:
+                                    description: body parameter name.
+                                    type: string
+                                  value:
+                                    description: body parameter value.
+                                    type: string
+                                required:
+                                  - name
+                                  - value
+                              type: array
+                            tokenEndpoint:
+                              description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                              externalDocs:
+                                url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                              type: string
+                      description: External OAuth authorization server settings Properties.
+                      properties:
+                        authorizationEndpoint:
+                          description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                          type: string
+                        clientId:
+                          description: Client or app id registered with this authorization server.
+                          type: string
+                        clientRegistrationEndpoint:
+                          description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                          type: string
+                        displayName:
+                          description: User-friendly authorization server name.
+                          maxLength: 50
+                          minLength: 1
+                          type: string
+                        grantTypes:
+                          description: 'Form of an authorization grant, which the client uses to request the access token.'
+                          externalDocs:
+                            url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                          items:
+                            enum:
+                              - authorizationCode
+                              - implicit
+                              - resourceOwnerPassword
+                              - clientCredentials
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: GrantType
+                              values:
+                                - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                                  value: authorizationCode
+                                - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                                  value: implicit
+                                - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                                  value: resourceOwnerPassword
+                                - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                                  value: clientCredentials
+                          type: array
+                      required:
+                        - displayName
+                        - clientRegistrationEndpoint
+                        - authorizationEndpoint
+                        - clientId
+                        - grantTypes
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -182,7 +349,7 @@ paths:
                       supportState: true
                       tokenEndpoint: 'https://www.contoso.com/oauth2/token'
                     type: Microsoft.ApiManagement/service/authorizationServers
-      x-ms-odata: '#/definitions/AuthorizationServerContract'
+      x-ms-odata: './definitions.json#/definitions/AuthorizationServerContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}':
@@ -324,7 +491,162 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/AuthorizationServerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: External OAuth authorization server settings.
+            properties:
+              properties:
+                allOf:
+                  - description: External OAuth authorization server Update settings contract.
+                    properties:
+                      authorizationMethods:
+                        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                        items:
+                          enum:
+                            - HEAD
+                            - OPTIONS
+                            - TRACE
+                            - GET
+                            - POST
+                            - PUT
+                            - PATCH
+                            - DELETE
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: AuthorizationMethod
+                        type: array
+                      bearerTokenSendingMethods:
+                        description: 'Specifies the mechanism by which access token is passed to the API. '
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                        items:
+                          enum:
+                            - authorizationHeader
+                            - query
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: BearerTokenSendingMethod
+                        type: array
+                      clientAuthenticationMethod:
+                        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                        items:
+                          enum:
+                            - Basic
+                            - Body
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: ClientAuthenticationMethod
+                            values:
+                              - description: Basic Client Authentication method.
+                                value: Basic
+                              - description: Body based Authentication method.
+                                value: Body
+                        type: array
+                      clientSecret:
+                        description: Client or app secret registered with this authorization server.
+                        type: string
+                      defaultScope:
+                        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                        type: string
+                      description:
+                        description: Description of the authorization server. Can contain HTML formatting tags.
+                        type: string
+                      resourceOwnerPassword:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                        type: string
+                      resourceOwnerUsername:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                        type: string
+                      supportState:
+                        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: boolean
+                      tokenBodyParameters:
+                        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                        items:
+                          description: OAuth acquire token request body parameter (www-url-form-encoded).
+                          properties:
+                            name:
+                              description: body parameter name.
+                              type: string
+                            value:
+                              description: body parameter value.
+                              type: string
+                          required:
+                            - name
+                            - value
+                        type: array
+                      tokenEndpoint:
+                        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: string
+                description: External OAuth authorization server settings Properties.
+                properties:
+                  authorizationEndpoint:
+                    description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                    type: string
+                  clientId:
+                    description: Client or app id registered with this authorization server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                    type: string
+                  displayName:
+                    description: User-friendly authorization server name.
+                    maxLength: 50
+                    minLength: 1
+                    type: string
+                  grantTypes:
+                    description: 'Form of an authorization grant, which the client uses to request the access token.'
+                    externalDocs:
+                      url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                    items:
+                      enum:
+                        - authorizationCode
+                        - implicit
+                        - resourceOwnerPassword
+                        - clientCredentials
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: GrantType
+                        values:
+                          - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                            value: authorizationCode
+                          - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                            value: implicit
+                          - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                            value: resourceOwnerPassword
+                          - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                            value: clientCredentials
+                    type: array
+                required:
+                  - displayName
+                  - clientRegistrationEndpoint
+                  - authorizationEndpoint
+                  - clientId
+                  - grantTypes
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -512,7 +834,156 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/AuthorizationServerUpdateContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: External OAuth authorization server settings.
+            properties:
+              properties:
+                allOf:
+                  - description: External OAuth authorization server Update settings contract.
+                    properties:
+                      authorizationMethods:
+                        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                        items:
+                          enum:
+                            - HEAD
+                            - OPTIONS
+                            - TRACE
+                            - GET
+                            - POST
+                            - PUT
+                            - PATCH
+                            - DELETE
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: AuthorizationMethod
+                        type: array
+                      bearerTokenSendingMethods:
+                        description: 'Specifies the mechanism by which access token is passed to the API. '
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                        items:
+                          enum:
+                            - authorizationHeader
+                            - query
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: BearerTokenSendingMethod
+                        type: array
+                      clientAuthenticationMethod:
+                        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                        items:
+                          enum:
+                            - Basic
+                            - Body
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: ClientAuthenticationMethod
+                            values:
+                              - description: Basic Client Authentication method.
+                                value: Basic
+                              - description: Body based Authentication method.
+                                value: Body
+                        type: array
+                      clientSecret:
+                        description: Client or app secret registered with this authorization server.
+                        type: string
+                      defaultScope:
+                        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                        type: string
+                      description:
+                        description: Description of the authorization server. Can contain HTML formatting tags.
+                        type: string
+                      resourceOwnerPassword:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                        type: string
+                      resourceOwnerUsername:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                        type: string
+                      supportState:
+                        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: boolean
+                      tokenBodyParameters:
+                        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                        items:
+                          description: OAuth acquire token request body parameter (www-url-form-encoded).
+                          properties:
+                            name:
+                              description: body parameter name.
+                              type: string
+                            value:
+                              description: body parameter value.
+                              type: string
+                          required:
+                            - name
+                            - value
+                        type: array
+                      tokenEndpoint:
+                        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: string
+                description: External OAuth authorization server Update settings contract.
+                properties:
+                  authorizationEndpoint:
+                    description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                    type: string
+                  clientId:
+                    description: Client or app id registered with this authorization server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                    type: string
+                  displayName:
+                    description: User-friendly authorization server name.
+                    maxLength: 50
+                    minLength: 1
+                    type: string
+                  grantTypes:
+                    description: 'Form of an authorization grant, which the client uses to request the access token.'
+                    externalDocs:
+                      url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                    items:
+                      enum:
+                        - authorizationCode
+                        - implicit
+                        - resourceOwnerPassword
+                        - clientCredentials
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: GrantType
+                        values:
+                          - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                            value: authorizationCode
+                          - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                            value: implicit
+                          - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                            value: resourceOwnerPassword
+                          - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                            value: clientCredentials
+                    type: array
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -611,7 +1082,162 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/AuthorizationServerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: External OAuth authorization server settings.
+            properties:
+              properties:
+                allOf:
+                  - description: External OAuth authorization server Update settings contract.
+                    properties:
+                      authorizationMethods:
+                        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                        items:
+                          enum:
+                            - HEAD
+                            - OPTIONS
+                            - TRACE
+                            - GET
+                            - POST
+                            - PUT
+                            - PATCH
+                            - DELETE
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: AuthorizationMethod
+                        type: array
+                      bearerTokenSendingMethods:
+                        description: 'Specifies the mechanism by which access token is passed to the API. '
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                        items:
+                          enum:
+                            - authorizationHeader
+                            - query
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: BearerTokenSendingMethod
+                        type: array
+                      clientAuthenticationMethod:
+                        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                        items:
+                          enum:
+                            - Basic
+                            - Body
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: ClientAuthenticationMethod
+                            values:
+                              - description: Basic Client Authentication method.
+                                value: Basic
+                              - description: Body based Authentication method.
+                                value: Body
+                        type: array
+                      clientSecret:
+                        description: Client or app secret registered with this authorization server.
+                        type: string
+                      defaultScope:
+                        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                        type: string
+                      description:
+                        description: Description of the authorization server. Can contain HTML formatting tags.
+                        type: string
+                      resourceOwnerPassword:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                        type: string
+                      resourceOwnerUsername:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                        type: string
+                      supportState:
+                        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: boolean
+                      tokenBodyParameters:
+                        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                        items:
+                          description: OAuth acquire token request body parameter (www-url-form-encoded).
+                          properties:
+                            name:
+                              description: body parameter name.
+                              type: string
+                            value:
+                              description: body parameter value.
+                              type: string
+                          required:
+                            - name
+                            - value
+                        type: array
+                      tokenEndpoint:
+                        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: string
+                description: External OAuth authorization server settings Properties.
+                properties:
+                  authorizationEndpoint:
+                    description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                    type: string
+                  clientId:
+                    description: Client or app id registered with this authorization server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                    type: string
+                  displayName:
+                    description: User-friendly authorization server name.
+                    maxLength: 50
+                    minLength: 1
+                    type: string
+                  grantTypes:
+                    description: 'Form of an authorization grant, which the client uses to request the access token.'
+                    externalDocs:
+                      url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                    items:
+                      enum:
+                        - authorizationCode
+                        - implicit
+                        - resourceOwnerPassword
+                        - clientCredentials
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: GrantType
+                        values:
+                          - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                            value: authorizationCode
+                          - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                            value: implicit
+                          - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                            value: resourceOwnerPassword
+                          - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                            value: clientCredentials
+                    type: array
+                required:
+                  - displayName
+                  - clientRegistrationEndpoint
+                  - authorizationEndpoint
+                  - clientId
+                  - grantTypes
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -636,7 +1262,162 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/AuthorizationServerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: External OAuth authorization server settings.
+            properties:
+              properties:
+                allOf:
+                  - description: External OAuth authorization server Update settings contract.
+                    properties:
+                      authorizationMethods:
+                        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                        items:
+                          enum:
+                            - HEAD
+                            - OPTIONS
+                            - TRACE
+                            - GET
+                            - POST
+                            - PUT
+                            - PATCH
+                            - DELETE
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: AuthorizationMethod
+                        type: array
+                      bearerTokenSendingMethods:
+                        description: 'Specifies the mechanism by which access token is passed to the API. '
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                        items:
+                          enum:
+                            - authorizationHeader
+                            - query
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: BearerTokenSendingMethod
+                        type: array
+                      clientAuthenticationMethod:
+                        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                        items:
+                          enum:
+                            - Basic
+                            - Body
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: ClientAuthenticationMethod
+                            values:
+                              - description: Basic Client Authentication method.
+                                value: Basic
+                              - description: Body based Authentication method.
+                                value: Body
+                        type: array
+                      clientSecret:
+                        description: Client or app secret registered with this authorization server.
+                        type: string
+                      defaultScope:
+                        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                        type: string
+                      description:
+                        description: Description of the authorization server. Can contain HTML formatting tags.
+                        type: string
+                      resourceOwnerPassword:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                        type: string
+                      resourceOwnerUsername:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                        type: string
+                      supportState:
+                        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: boolean
+                      tokenBodyParameters:
+                        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                        items:
+                          description: OAuth acquire token request body parameter (www-url-form-encoded).
+                          properties:
+                            name:
+                              description: body parameter name.
+                              type: string
+                            value:
+                              description: body parameter value.
+                              type: string
+                          required:
+                            - name
+                            - value
+                        type: array
+                      tokenEndpoint:
+                        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: string
+                description: External OAuth authorization server settings Properties.
+                properties:
+                  authorizationEndpoint:
+                    description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                    type: string
+                  clientId:
+                    description: Client or app id registered with this authorization server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                    type: string
+                  displayName:
+                    description: User-friendly authorization server name.
+                    maxLength: 50
+                    minLength: 1
+                    type: string
+                  grantTypes:
+                    description: 'Form of an authorization grant, which the client uses to request the access token.'
+                    externalDocs:
+                      url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                    items:
+                      enum:
+                        - authorizationCode
+                        - implicit
+                        - resourceOwnerPassword
+                        - clientCredentials
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: GrantType
+                        values:
+                          - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                            value: authorizationCode
+                          - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                            value: implicit
+                          - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                            value: resourceOwnerPassword
+                          - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                            value: clientCredentials
+                    type: array
+                required:
+                  - displayName
+                  - clientRegistrationEndpoint
+                  - authorizationEndpoint
+                  - clientId
+                  - grantTypes
         '201':
           description: Authorization server was successfully registered.
           headers:
@@ -644,7 +1425,162 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/AuthorizationServerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: External OAuth authorization server settings.
+            properties:
+              properties:
+                allOf:
+                  - description: External OAuth authorization server Update settings contract.
+                    properties:
+                      authorizationMethods:
+                        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
+                        items:
+                          enum:
+                            - HEAD
+                            - OPTIONS
+                            - TRACE
+                            - GET
+                            - POST
+                            - PUT
+                            - PATCH
+                            - DELETE
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: AuthorizationMethod
+                        type: array
+                      bearerTokenSendingMethods:
+                        description: 'Specifies the mechanism by which access token is passed to the API. '
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                        items:
+                          enum:
+                            - authorizationHeader
+                            - query
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: BearerTokenSendingMethod
+                        type: array
+                      clientAuthenticationMethod:
+                        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
+                        items:
+                          enum:
+                            - Basic
+                            - Body
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: ClientAuthenticationMethod
+                            values:
+                              - description: Basic Client Authentication method.
+                                value: Basic
+                              - description: Body based Authentication method.
+                                value: Body
+                        type: array
+                      clientSecret:
+                        description: Client or app secret registered with this authorization server.
+                        type: string
+                      defaultScope:
+                        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
+                        type: string
+                      description:
+                        description: Description of the authorization server. Can contain HTML formatting tags.
+                        type: string
+                      resourceOwnerPassword:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
+                        type: string
+                      resourceOwnerUsername:
+                        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
+                        type: string
+                      supportState:
+                        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: boolean
+                      tokenBodyParameters:
+                        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
+                        items:
+                          description: OAuth acquire token request body parameter (www-url-form-encoded).
+                          properties:
+                            name:
+                              description: body parameter name.
+                              type: string
+                            value:
+                              description: body parameter value.
+                              type: string
+                          required:
+                            - name
+                            - value
+                        type: array
+                      tokenEndpoint:
+                        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
+                        externalDocs:
+                          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
+                        type: string
+                description: External OAuth authorization server settings Properties.
+                properties:
+                  authorizationEndpoint:
+                    description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
+                    type: string
+                  clientId:
+                    description: Client or app id registered with this authorization server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
+                    type: string
+                  displayName:
+                    description: User-friendly authorization server name.
+                    maxLength: 50
+                    minLength: 1
+                    type: string
+                  grantTypes:
+                    description: 'Form of an authorization grant, which the client uses to request the access token.'
+                    externalDocs:
+                      url: 'http://tools.ietf.org/html/rfc6749#section-4'
+                    items:
+                      enum:
+                        - authorizationCode
+                        - implicit
+                        - resourceOwnerPassword
+                        - clientCredentials
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: GrantType
+                        values:
+                          - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                            value: authorizationCode
+                          - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                            value: implicit
+                          - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                            value: resourceOwnerPassword
+                          - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                            value: clientCredentials
+                    type: array
+                required:
+                  - displayName
+                  - clientRegistrationEndpoint
+                  - authorizationEndpoint
+                  - clientId
+                  - grantTypes
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -753,250 +1689,4 @@ paths:
                   supportState: true
                   tokenEndpoint: 'https://www.contoso.com/oauth2/token'
                 type: Microsoft.ApiManagement/service/authorizationServers
-definitions:
-  AuthorizationServerCollection:
-    description: Paged OAuth2 Authorization Servers list representation.
-    properties:
-      count:
-        description: Total record count number across all pages.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/AuthorizationServerContract'
-        type: array
-  AuthorizationServerContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: External OAuth authorization server settings.
-    properties:
-      properties:
-        $ref: '#/definitions/AuthorizationServerContractProperties'
-        description: Properties of the External OAuth authorization server Contract.
-        x-ms-client-flatten: true
-  AuthorizationServerContractBaseProperties:
-    description: External OAuth authorization server Update settings contract.
-    properties:
-      authorizationMethods:
-        description: HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.
-        items:
-          enum:
-            - HEAD
-            - OPTIONS
-            - TRACE
-            - GET
-            - POST
-            - PUT
-            - PATCH
-            - DELETE
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: AuthorizationMethod
-        type: array
-      bearerTokenSendingMethods:
-        description: 'Specifies the mechanism by which access token is passed to the API. '
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-4'
-        items:
-          enum:
-            - authorizationHeader
-            - query
-          type: string
-          x-ms-enum:
-            modelAsString: true
-            name: BearerTokenSendingMethod
-        type: array
-      clientAuthenticationMethod:
-        description: 'Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.'
-        items:
-          enum:
-            - Basic
-            - Body
-          type: string
-          x-ms-enum:
-            modelAsString: true
-            name: ClientAuthenticationMethod
-            values:
-              - description: Basic Client Authentication method.
-                value: Basic
-              - description: Body based Authentication method.
-                value: Body
-        type: array
-      clientSecret:
-        description: Client or app secret registered with this authorization server.
-        type: string
-      defaultScope:
-        description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-3.3'
-        type: string
-      description:
-        description: Description of the authorization server. Can contain HTML formatting tags.
-        type: string
-      resourceOwnerPassword:
-        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
-        type: string
-      resourceOwnerUsername:
-        description: Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.
-        type: string
-      supportState:
-        description: 'If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.'
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
-        type: boolean
-      tokenBodyParameters:
-        description: 'Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.'
-        items:
-          $ref: '#/definitions/TokenBodyParameterContract'
-        type: array
-      tokenEndpoint:
-        description: OAuth token endpoint. Contains absolute URI to entity being referenced.
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
-        type: string
-  AuthorizationServerContractProperties:
-    allOf:
-      - $ref: '#/definitions/AuthorizationServerContractBaseProperties'
-    description: External OAuth authorization server settings Properties.
-    properties:
-      authorizationEndpoint:
-        description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
-        type: string
-      clientId:
-        description: Client or app id registered with this authorization server.
-        type: string
-      clientRegistrationEndpoint:
-        description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
-        type: string
-      displayName:
-        description: User-friendly authorization server name.
-        maxLength: 50
-        minLength: 1
-        type: string
-      grantTypes:
-        description: 'Form of an authorization grant, which the client uses to request the access token.'
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-4'
-        items:
-          enum:
-            - authorizationCode
-            - implicit
-            - resourceOwnerPassword
-            - clientCredentials
-          type: string
-          x-ms-enum:
-            modelAsString: true
-            name: GrantType
-            values:
-              - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
-                value: authorizationCode
-              - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
-                value: implicit
-              - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
-                value: resourceOwnerPassword
-              - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
-                value: clientCredentials
-        type: array
-    required:
-      - displayName
-      - clientRegistrationEndpoint
-      - authorizationEndpoint
-      - clientId
-      - grantTypes
-  AuthorizationServerUpdateContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: External OAuth authorization server settings.
-    properties:
-      properties:
-        $ref: '#/definitions/AuthorizationServerUpdateContractProperties'
-        description: Properties of the External OAuth authorization server update Contract.
-        x-ms-client-flatten: true
-  AuthorizationServerUpdateContractProperties:
-    allOf:
-      - $ref: '#/definitions/AuthorizationServerContractBaseProperties'
-    description: External OAuth authorization server Update settings contract.
-    properties:
-      authorizationEndpoint:
-        description: 'OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.'
-        type: string
-      clientId:
-        description: Client or app id registered with this authorization server.
-        type: string
-      clientRegistrationEndpoint:
-        description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
-        type: string
-      displayName:
-        description: User-friendly authorization server name.
-        maxLength: 50
-        minLength: 1
-        type: string
-      grantTypes:
-        description: 'Form of an authorization grant, which the client uses to request the access token.'
-        externalDocs:
-          url: 'http://tools.ietf.org/html/rfc6749#section-4'
-        items:
-          enum:
-            - authorizationCode
-            - implicit
-            - resourceOwnerPassword
-            - clientCredentials
-          type: string
-          x-ms-enum:
-            modelAsString: true
-            name: GrantType
-            values:
-              - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
-                value: authorizationCode
-              - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
-                value: implicit
-              - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
-                value: resourceOwnerPassword
-              - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
-                value: clientCredentials
-        type: array
-  TokenBodyParameterContract:
-    description: OAuth acquire token request body parameter (www-url-form-encoded).
-    properties:
-      name:
-        description: body parameter name.
-        type: string
-      value:
-        description: body parameter value.
-        type: string
-    required:
-      - name
-      - value
+definitions: {}

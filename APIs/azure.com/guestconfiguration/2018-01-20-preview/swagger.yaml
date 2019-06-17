@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/preview/2018-01-20-preview/guestconfiguration.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: guestconfiguration
   x-tags:
@@ -117,7 +116,8 @@ paths:
                     name: Microsoft.GuestConfiguration/guestConfigurationAssignments/read
                     properties: null
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}':
     get:
       description: Get information about a guest configuration assignment

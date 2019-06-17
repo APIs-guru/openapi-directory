@@ -1650,7 +1650,8 @@ paths:
                               name: DataPort1
                             - macAddress: EC0D9A21A6C1
                               name: DataPort2
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AccountCredentialDetails:
     description: Credential details of the account.

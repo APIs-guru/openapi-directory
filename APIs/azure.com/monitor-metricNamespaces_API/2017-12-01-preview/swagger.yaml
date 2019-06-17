@@ -92,7 +92,8 @@ paths:
                     properties:
                       metricNamespaceName: Microsoft.DocumentDB/databaseAccounts
                     type: Microsoft.Insights/metricNamespaces
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ErrorResponse:
     description: Describes the format of Error response.

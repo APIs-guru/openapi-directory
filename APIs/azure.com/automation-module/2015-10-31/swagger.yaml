@@ -1407,7 +1407,8 @@ paths:
                   - name: Details
                     type: MyModule.AnotherCustomType
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/types/{typeName}/fields':
     get:
       description: Retrieve a list of fields of a given type identified by module name.
@@ -1489,7 +1490,8 @@ paths:
                   - name: Details
                     type: MyModule.AnotherCustomType
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/objectDataTypes/{typeName}/fields':
     get:
       description: Retrieve a list of fields of a given type across all accessible modules.
@@ -1565,7 +1567,8 @@ paths:
                   - name: Details
                     type: MyModule.AnotherCustomType
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Activity:
     description: Definition of the activity.

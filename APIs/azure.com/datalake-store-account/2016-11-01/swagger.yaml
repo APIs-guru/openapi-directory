@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datalake-store/resource-manager/Microsoft.DataLakeStore/stable/2016-11-01/account.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datalake-store-account
   x-tags:
@@ -247,6 +246,44 @@ paths:
                 message: An account named 'abc' already exists.
                 nameAvailable: false
                 reason: AlreadyExists
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/usages':
+    get:
+      description: Gets the current usage count and the limit for the resources of the location under the subscription.
+      operationId: Locations_GetUsage
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The resource location without whitespace.
+          in: path
+          name: location
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK -- current usage count and limit retrieved and returned successfully.
+          schema:
+            $ref: '#/definitions/UsageListResult'
+      tags:
+        - LocationUsage
+      x-ms-examples:
+        UsageList:
+          parameters:
+            api-version: '2016-11-01'
+            location: WestUS
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 69
+                    id: /subscriptions/0f936178-0d48-4777-a7ab-47860b604941/providers/Microsoft.DataLakeStore/locations/WestUS/usages/DataLakeStoreAccounts
+                    limit: -1
+                    name:
+                      localizedValue: Data Lake Store Accounts
+                      value: DataLakeStoreAccounts
+                    unit: Count
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts':
     get:
       description: 'Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.'
@@ -2210,6 +2247,60 @@ definitions:
         x-ms-client-flatten: true
     required:
       - name
+  Usage:
+    description: Describes the Resource Usage.
+    properties:
+      currentValue:
+        description: Gets the current count of the allocated resources in the subscription.
+        format: int32
+        readOnly: true
+        type: integer
+      id:
+        description: Resource identifier.
+        readOnly: true
+        type: string
+      limit:
+        description: Gets the maximum count of the resources that can be allocated in the subscription.
+        format: int32
+        readOnly: true
+        type: integer
+      name:
+        $ref: '#/definitions/UsageName'
+        description: Gets the name of the type of usage.
+        readOnly: true
+      unit:
+        description: Gets the unit of measurement.
+        enum:
+          - Count
+          - Bytes
+          - Seconds
+          - Percent
+          - CountsPerSecond
+          - BytesPerSecond
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: UsageUnit
+  UsageListResult:
+    description: The response from the List Usages operation.
+    properties:
+      value:
+        description: Gets or sets the list of Storage Resource Usages.
+        items:
+          $ref: '#/definitions/Usage'
+        type: array
+  UsageName:
+    description: The usage names that can be used.
+    properties:
+      localizedValue:
+        description: Gets a localized string describing the resource name.
+        readOnly: true
+        type: string
+      value:
+        description: Gets a string describing the resource name.
+        readOnly: true
+        type: string
   VirtualNetworkRule:
     allOf:
       - $ref: '#/definitions/SubResource'

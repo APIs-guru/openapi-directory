@@ -1602,7 +1602,8 @@ paths:
                       uiDefinitionUri: 'https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.docker-arm.1.1.0/UiDefinition.json'
                       version: 1.1.0
                     type: Microsoft.Gallery.Admin/galleryItems
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     post:
       operationId: GalleryItems_Create
       parameters:

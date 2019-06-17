@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: containerregistry-containerregistry_build
   x-tags:
@@ -474,6 +473,199 @@ paths:
                 - isSecret: true
                   name: mysecrettestargument
                   value: mysecrettestvalue
+              dockerFilePath: subfolder/Dockerfile
+              imageNames:
+                - 'azurerest:testtag'
+              isArchiveEnabled: true
+              isPushEnabled: true
+              noCache: true
+              platform:
+                architecture: amd64
+                os: Linux
+              sourceLocation: 'https://myaccount.blob.core.windows.net/sascontainer/source.zip?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D'
+              type: DockerBuildRequest
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab
+                name: 0accec26-d6de-4757-8e74-d080f38eaaab
+                properties:
+                  lastUpdatedTime: '2018-01-25T05:13:51.617Z'
+                  provisioningState: Succeeded
+                  runId: 0accec26-d6de-4757-8e74-d080f38eaaab
+                  status: Succeeded
+                type: Microsoft.ContainerRegistry/registries/run
+            '202': {}
+        Registries_ScheduleRun_EncodedTaskRun:
+          parameters:
+            api-version: '2018-09-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            runRequest:
+              agentConfiguration:
+                cpu: 2
+              encodedTaskContent: c3RlcHM6Cnt7IGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAncHJvZCcgfX0KICAtIHJ1bjogcHJvZCBzZXR1cAp7eyBlbHNlIGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAnc3RhZ2luZycgfX0KICAtIHJ1bjogc3RhZ2luZyBzZXR1cAp7eyBlbHNlIH19CiAgLSBydW46IGRlZmF1bHQgc2V0dXAKe3sgZW5kIH19CgogIC0gcnVuOiBidWlsZCAtdCBGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0gLgoKcHVzaDogWydGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0nXQ==
+              encodedValuesContent: ZW52aXJvbm1lbnQ6IHByb2QKdmVyc2lvbjogMQ==
+              platform:
+                os: Linux
+              type: EncodedTaskRunRequest
+              values:
+                - isSecret: false
+                  name: mytestargument
+                  value: mytestvalue
+                - isSecret: true
+                  name: mysecrettestargument
+                  value: mysecrettestvalue
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab
+                name: 0accec26-d6de-4757-8e74-d080f38eaaab
+                properties:
+                  lastUpdatedTime: '2018-01-25T05:13:51.617Z'
+                  provisioningState: Succeeded
+                  runId: 0accec26-d6de-4757-8e74-d080f38eaaab
+                  status: Succeeded
+                type: Microsoft.ContainerRegistry/registries/run
+            '202': {}
+        Registries_ScheduleRun_FileTaskRun:
+          parameters:
+            api-version: '2018-09-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            runRequest:
+              agentConfiguration:
+                cpu: 2
+              platform:
+                os: Linux
+              sourceLocation: 'https://myaccount.blob.core.windows.net/sascontainer/source.zip?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D'
+              taskFilePath: acb.yaml
+              type: FileTaskRunRequest
+              values:
+                - isSecret: false
+                  name: mytestargument
+                  value: mytestvalue
+                - isSecret: true
+                  name: mysecrettestargument
+                  value: mysecrettestvalue
+              valuesFilePath: prod-values.yaml
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab
+                name: 0accec26-d6de-4757-8e74-d080f38eaaab
+                properties:
+                  lastUpdatedTime: '2018-01-25T05:13:51.617Z'
+                  provisioningState: Succeeded
+                  runId: 0accec26-d6de-4757-8e74-d080f38eaaab
+                  status: Succeeded
+                type: Microsoft.ContainerRegistry/registries/run
+            '202': {}
+        Registries_ScheduleRun_Task:
+          parameters:
+            api-version: '2018-09-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            runRequest:
+              taskName: myTask
+              type: TaskRunRequest
+              values:
+                - isSecret: false
+                  name: mytestargument
+                  value: mytestvalue
+                - isSecret: true
+                  name: mysecrettestargument
+                  value: mysecrettestvalue
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab
+                name: 0accec26-d6de-4757-8e74-d080f38eaaab
+                properties:
+                  lastUpdatedTime: '2018-01-25T05:13:51.617Z'
+                  provisioningState: Succeeded
+                  runId: 0accec26-d6de-4757-8e74-d080f38eaaab
+                  status: Succeeded
+                type: Microsoft.ContainerRegistry/registries/run
+            '202': {}
+        Registries_ScheduleRun_Task_WithCustomCredentials:
+          parameters:
+            api-version: '2018-09-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            runRequest:
+              credentials:
+                customRegistries:
+                  myregistry.azurecr.io:
+                    password:
+                      type: Opaque
+                      value: '***'
+                    userName:
+                      type: Opaque
+                      value: reg1
+                sourceRegistry:
+                  loginMode: Default
+              platform:
+                os: Linux
+              taskFilePath: acb.yaml
+              type: FileTaskRunRequest
+              values:
+                - isSecret: false
+                  name: mytestargument
+                  value: mytestvalue
+                - isSecret: true
+                  name: mysecrettestargument
+                  value: mysecrettestvalue
+            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab
+                name: 0accec26-d6de-4757-8e74-d080f38eaaab
+                properties:
+                  lastUpdatedTime: '2018-01-25T05:13:51.617Z'
+                  provisioningState: Succeeded
+                  runId: 0accec26-d6de-4757-8e74-d080f38eaaab
+                  status: Succeeded
+                type: Microsoft.ContainerRegistry/registries/run
+            '202': {}
+        Registries_ScheduleRun_WithCustomCredentials:
+          parameters:
+            api-version: '2018-09-01'
+            registryName: myRegistry
+            resourceGroupName: myResourceGroup
+            runRequest:
+              agentConfiguration:
+                cpu: 2
+              arguments:
+                - isSecret: false
+                  name: mytestargument
+                  value: mytestvalue
+                - isSecret: true
+                  name: mysecrettestargument
+                  value: mysecrettestvalue
+              credentials:
+                customRegistries:
+                  myregistry.azurecr.io:
+                    password:
+                      type: Opaque
+                      value: '***'
+                    userName:
+                      type: Opaque
+                      value: reg1
+                  myregistry2.azurecr.io:
+                    password:
+                      type: Opaque
+                      value: '***'
+                    userName:
+                      type: Opaque
+                      value: reg2
+                sourceRegistry:
+                  loginMode: Default
               dockerFilePath: DockerFile
               imageNames:
                 - 'azurerest:testtag'
@@ -484,6 +676,7 @@ paths:
                 architecture: amd64
                 os: Linux
               sourceLocation: 'https://myaccount.blob.core.windows.net/sascontainer/source.zip?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D'
+              target: stage1
               type: DockerBuildRequest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
@@ -545,8 +738,8 @@ paths:
                           - isSecret: false
                             name: mytestargument
                             value: mytestvalue
-                        contextPath: src
-                        dockerFilePath: src/DockerFile
+                        contextPath: dockerfiles
+                        dockerFilePath: subfolder/Dockerfile
                         imageNames:
                           - 'azurerest:testtag'
                         isPushEnabled: true
@@ -564,6 +757,7 @@ paths:
                               sourceControlType: Github
                             sourceTriggerEvents:
                               - commit
+                            status: Enabled
                     tags:
                       testkey: value
                     type: Microsoft.ContainerRegistry/registries/tasks
@@ -649,8 +843,8 @@ paths:
                       - isSecret: false
                         name: mytestargument
                         value: mytestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag'
                     isPushEnabled: true
@@ -668,6 +862,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
                 type: Microsoft.ContainerRegistry/registries/tasks
@@ -713,7 +908,7 @@ paths:
                   cpu: 3
                 status: Enabled
                 step:
-                  dockerFilePath: src/DockerFile
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag1'
                   type: Docker
@@ -726,6 +921,7 @@ paths:
                           tokenType: PAT
                       sourceTriggerEvents:
                         - commit
+                      status: Enabled
               tags:
                 testkey: value
           responses:
@@ -748,8 +944,8 @@ paths:
                       - isSecret: false
                         name: mytestargument
                         value: mytestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag1'
                     isPushEnabled: true
@@ -767,6 +963,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
                 type: Microsoft.ContainerRegistry/registries/tasks
@@ -789,8 +986,8 @@ paths:
                       - isSecret: false
                         name: mytestargument
                         value: mytestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag1'
                     isPushEnabled: true
@@ -808,6 +1005,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
                 type: Microsoft.ContainerRegistry/registries/tasks
@@ -864,8 +1062,8 @@ paths:
                     - isSecret: true
                       name: mysecrettestargument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -886,6 +1084,7 @@ paths:
                         sourceControlType: Github
                       sourceTriggerEvents:
                         - commit
+                      status: Enabled
               tags:
                 testkey: value
             taskName: mytTask
@@ -909,8 +1108,8 @@ paths:
                       - isSecret: false
                         name: mytestargument
                         value: mytestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag'
                     isPushEnabled: true
@@ -928,6 +1127,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
                 type: Microsoft.ContainerRegistry/registries/tasks
@@ -950,8 +1150,8 @@ paths:
                       - isSecret: false
                         name: mytestargument
                         value: mytestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag'
                     isPushEnabled: true
@@ -969,6 +1169,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
                 type: Microsoft.ContainerRegistry/registries/tasks
@@ -1019,8 +1220,8 @@ paths:
                       - isSecret: true
                         name: mysecrettestargument
                         value: mysecrettestvalue
-                    contextPath: src
-                    dockerFilePath: src/DockerFile
+                    contextPath: dockerfiles
+                    dockerFilePath: subfolder/Dockerfile
                     imageNames:
                       - 'azurerest:testtag'
                     isPushEnabled: true
@@ -1041,6 +1242,7 @@ paths:
                           sourceControlType: Github
                         sourceTriggerEvents:
                           - commit
+                        status: Enabled
                 tags:
                   testkey: value
 definitions:
@@ -1165,6 +1367,7 @@ definitions:
         description: The name of the trigger.
         type: string
       status:
+        default: Enabled
         description: The current status of trigger.
         enum:
           - Disabled
@@ -1193,6 +1396,7 @@ definitions:
         description: The name of the trigger.
         type: string
       status:
+        default: Enabled
         description: The current status of trigger.
         enum:
           - Disabled
@@ -1933,6 +2137,7 @@ definitions:
             name: SourceTriggerEvent
         type: array
       status:
+        default: Enabled
         description: The current status of trigger.
         enum:
           - Disabled
@@ -1992,6 +2197,7 @@ definitions:
             name: SourceTriggerEvent
         type: array
       status:
+        default: Enabled
         description: The current status of trigger.
         enum:
           - Disabled

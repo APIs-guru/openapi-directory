@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimgroups.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimgroups
   x-tags:
@@ -94,7 +93,64 @@ paths:
         '200':
           description: Lists a collection of Group entities.
           schema:
-            $ref: '#/definitions/GroupCollection'
+            description: Paged Group list representation.
+            properties:
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Contract details.
+                  properties:
+                    properties:
+                      description: Group contract Properties.
+                      properties:
+                        builtIn:
+                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                          readOnly: true
+                          type: boolean
+                        description:
+                          description: Group description. Can contain HTML formatting tags.
+                          maxLength: 1000
+                          type: string
+                        displayName:
+                          description: Group name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                          type: string
+                        type:
+                          description: Group type.
+                          enum:
+                            - custom
+                            - system
+                            - external
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: GroupType
+                      required:
+                        - displayName
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -171,7 +227,7 @@ paths:
                       displayName: Guests
                       type: system
                     type: Microsoft.ApiManagement/service/groups
-      x-ms-odata: '#/definitions/GroupContract'
+      x-ms-odata: './definitions.json#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}':
@@ -313,7 +369,55 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/GroupContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Contract details.
+            properties:
+              properties:
+                description: Group contract Properties.
+                properties:
+                  builtIn:
+                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                    readOnly: true
+                    type: boolean
+                  description:
+                    description: Group description. Can contain HTML formatting tags.
+                    maxLength: 1000
+                    type: string
+                  displayName:
+                    description: Group name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                  externalId:
+                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                    type: string
+                  type:
+                    description: Group type.
+                    enum:
+                      - custom
+                      - system
+                      - external
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: GroupType
+                required:
+                  - displayName
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -486,7 +590,32 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/GroupUpdateParameters'
+            description: Parameters supplied to the Update Group operation.
+            properties:
+              properties:
+                description: Parameters supplied to the Update Group operation.
+                properties:
+                  description:
+                    description: Group description.
+                    type: string
+                  displayName:
+                    description: Group name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                  externalId:
+                    description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                    type: string
+                  type:
+                    description: Group type.
+                    enum:
+                      - custom
+                      - system
+                      - external
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: GroupType
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -584,7 +713,34 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/GroupCreateParameters'
+            description: Parameters supplied to the Create Group operation.
+            properties:
+              properties:
+                description: Parameters supplied to the Create Group operation.
+                properties:
+                  description:
+                    description: Group description.
+                    type: string
+                  displayName:
+                    description: Group name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                  externalId:
+                    description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                    type: string
+                  type:
+                    description: Group type.
+                    enum:
+                      - custom
+                      - system
+                      - external
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: GroupType
+                required:
+                  - displayName
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -609,7 +765,55 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/GroupContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Contract details.
+            properties:
+              properties:
+                description: Group contract Properties.
+                properties:
+                  builtIn:
+                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                    readOnly: true
+                    type: boolean
+                  description:
+                    description: Group description. Can contain HTML formatting tags.
+                    maxLength: 1000
+                    type: string
+                  displayName:
+                    description: Group name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                  externalId:
+                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                    type: string
+                  type:
+                    description: Group type.
+                    enum:
+                      - custom
+                      - system
+                      - external
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: GroupType
+                required:
+                  - displayName
         '201':
           description: Group was created successfully.
           headers:
@@ -617,7 +821,55 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/GroupContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Contract details.
+            properties:
+              properties:
+                description: Group contract Properties.
+                properties:
+                  builtIn:
+                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                    readOnly: true
+                    type: boolean
+                  description:
+                    description: Group description. Can contain HTML formatting tags.
+                    maxLength: 1000
+                    type: string
+                  displayName:
+                    description: Group name.
+                    maxLength: 300
+                    minLength: 1
+                    type: string
+                  externalId:
+                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
+                    type: string
+                  type:
+                    description: Group type.
+                    enum:
+                      - custom
+                      - system
+                      - external
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: GroupType
+                required:
+                  - displayName
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -950,7 +1202,7 @@ paths:
                       registrationDate: '2017-05-31T18:54:41.447Z'
                       state: active
                     type: Microsoft.ApiManagement/service/groups/users
-      x-ms-odata: './apimusers.json#/definitions/UserContract'
+      x-ms-odata: './definitions.json#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}':
@@ -1484,133 +1736,4 @@ paths:
                   registrationDate: '2017-06-01T20:46:45.437Z'
                   state: active
                 type: Microsoft.ApiManagement/service/groups/users
-definitions:
-  GroupCollection:
-    description: Paged Group list representation.
-    properties:
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/GroupContract'
-        type: array
-  GroupContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Contract details.
-    properties:
-      properties:
-        $ref: '#/definitions/GroupContractProperties'
-        description: Group entity contract properties.
-        x-ms-client-flatten: true
-  GroupContractProperties:
-    description: Group contract Properties.
-    properties:
-      builtIn:
-        description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-        readOnly: true
-        type: boolean
-      description:
-        description: Group description. Can contain HTML formatting tags.
-        maxLength: 1000
-        type: string
-      displayName:
-        description: Group name.
-        maxLength: 300
-        minLength: 1
-        type: string
-      externalId:
-        description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
-        type: string
-      type:
-        description: Group type.
-        enum:
-          - custom
-          - system
-          - external
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: GroupType
-    required:
-      - displayName
-  GroupCreateParameters:
-    description: Parameters supplied to the Create Group operation.
-    properties:
-      properties:
-        $ref: '#/definitions/GroupCreateParametersProperties'
-        description: Properties supplied to Create Group operation.
-        x-ms-client-flatten: true
-  GroupCreateParametersProperties:
-    description: Parameters supplied to the Create Group operation.
-    properties:
-      description:
-        description: Group description.
-        type: string
-      displayName:
-        description: Group name.
-        maxLength: 300
-        minLength: 1
-        type: string
-      externalId:
-        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
-        type: string
-      type:
-        description: Group type.
-        enum:
-          - custom
-          - system
-          - external
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: GroupType
-    required:
-      - displayName
-  GroupUpdateParameters:
-    description: Parameters supplied to the Update Group operation.
-    properties:
-      properties:
-        $ref: '#/definitions/GroupUpdateParametersProperties'
-        description: Group entity update contract properties.
-        x-ms-client-flatten: true
-  GroupUpdateParametersProperties:
-    description: Parameters supplied to the Update Group operation.
-    properties:
-      description:
-        description: Group description.
-        type: string
-      displayName:
-        description: Group name.
-        maxLength: 300
-        minLength: 1
-        type: string
-      externalId:
-        description: 'Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.'
-        type: string
-      type:
-        description: Group type.
-        enum:
-          - custom
-          - system
-          - external
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: GroupType
+definitions: {}

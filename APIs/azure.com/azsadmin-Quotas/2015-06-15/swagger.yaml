@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/network/Microsoft.Network.Admin/preview/2015-06-15/Quotas.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: azsadmin-Quotas
   x-tags:
@@ -107,7 +106,8 @@ paths:
                     type: Microsoft.Network.Admin/quotas
             '404': {}
       x-ms-odata: '#/definitions/Quota'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/locations/{location}/quotas/{resourceName}':
     delete:
       description: Delete a quota by name.

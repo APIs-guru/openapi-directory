@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: containerregistry-containerregistry_build
   x-tags:
@@ -499,8 +498,8 @@ paths:
                           name: mysecrettestargument
                           type: DockerBuildArgument
                           value: mysecrettestvalue
-                      contextPath: src
-                      dockerFilePath: src/DockerFile
+                      contextPath: dockerfiles
+                      dockerFilePath: subfolder/Dockerfile
                       imageNames:
                         - 'azurerest:testtag'
                       isPushEnabled: true
@@ -588,8 +587,8 @@ paths:
                       name: mysecrettestargument
                       type: DockerBuildArgument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -642,8 +641,8 @@ paths:
                     name: mysecrettestargument
                     type: DockerBuildArgument
                     value: mysecrettestvalue
-                contextPath: src
-                dockerFilePath: src/DockerFile
+                contextPath: dockerfiles
+                dockerFilePath: subfolder/Dockerfile
                 imageNames:
                   - 'azurerest:testtag'
                   - 'azurerest1:testtag1'
@@ -672,8 +671,8 @@ paths:
                       name: mysecrettestargument
                       type: DockerBuildArgument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -697,8 +696,8 @@ paths:
                       name: mysecrettestargument
                       type: DockerBuildArgument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -751,8 +750,8 @@ paths:
                     name: mysecrettestargument
                     type: DockerBuildArgument
                     value: mysecrettestvalue
-                contextPath: src
-                dockerFilePath: src/DockerFile
+                contextPath: dockerfiles
+                dockerFilePath: subfolder/Dockerfile
                 imageNames:
                   - 'azurerest:testtag'
                 isPushEnabled: true
@@ -780,8 +779,8 @@ paths:
                       name: mysecrettestargument
                       type: DockerBuildArgument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -805,8 +804,8 @@ paths:
                       name: mysecrettestargument
                       type: DockerBuildArgument
                       value: mysecrettestvalue
-                  contextPath: src
-                  dockerFilePath: src/DockerFile
+                  contextPath: dockerfiles
+                  dockerFilePath: subfolder/Dockerfile
                   imageNames:
                     - 'azurerest:testtag'
                   isPushEnabled: true
@@ -1250,7 +1249,7 @@ paths:
                   name: mysecrettestargument
                   type: DockerBuildArgument
                   value: mysecrettestvalue
-              dockerFilePath: DockerFile
+              dockerFilePath: subfolder/Dockerfile
               imageNames:
                 - 'azurerest:testtag'
               isPushEnabled: true

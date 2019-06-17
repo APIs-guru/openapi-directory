@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cognitiveservices
   x-tags:
@@ -2601,6 +2600,9 @@ definitions:
       internalId:
         description: The internal identifier.
         type: string
+      networkAcls:
+        $ref: '#/definitions/NetworkRuleSet'
+        description: A collection of rules governing the accessibility from specific network locations.
       provisioningState:
         description: Gets the status of the cognitive services account at the time the operation was called.
         enum:
@@ -2618,6 +2620,9 @@ definitions:
   CognitiveServicesAccountUpdateParameters:
     description: The parameters to provide for the account.
     properties:
+      properties:
+        description: Additional properties for Account. Only provided fields will be updated.
+        type: object
       sku:
         $ref: '#/definitions/Sku'
         description: Gets or sets the SKU of the resource.
@@ -2653,6 +2658,14 @@ definitions:
     required:
       - code
       - message
+  IpRule:
+    description: A rule governing the accessibility from a specific ip address or ip range.
+    properties:
+      value:
+        description: 'An IPv4 address range in CIDR notation, such as ''124.56.78.91'' (simple IP address) or ''124.56.78.0/24'' (all addresses that start with 124.56.78).'
+        type: string
+    required:
+      - value
   MetricName:
     description: A metric name.
     properties:
@@ -2664,6 +2677,37 @@ definitions:
         description: The name of the metric.
         readOnly: true
         type: string
+  NetworkRuleSet:
+    description: A set of rules governing the network accessibility.
+    properties:
+      bypass:
+        description: Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
+        enum:
+          - AzureServices
+          - None
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetworkRuleBypassOptions
+      defaultAction:
+        description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
+        enum:
+          - Allow
+          - Deny
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetworkRuleAction
+      ipRules:
+        description: The list of IP address rules.
+        items:
+          $ref: '#/definitions/IpRule'
+        type: array
+      virtualNetworkRules:
+        description: The list of virtual network rules.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
+        type: array
   OperationDisplayInfo:
     description: The operation supported by Cognitive Services.
     properties:
@@ -2898,3 +2942,17 @@ definitions:
           $ref: '#/definitions/Usage'
         readOnly: true
         type: array
+  VirtualNetworkRule:
+    description: A rule governing the accessibility from a specific virtual network.
+    properties:
+      id:
+        description: 'Full resource id of a vnet subnet, such as ''/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1''.'
+        type: string
+      ignoreMissingVnetServiceEndpoint:
+        description: Ignore missing vnet service endpoint or not.
+        type: boolean
+      state:
+        description: Gets the state of virtual network rule.
+        type: string
+    required:
+      - id

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resourcegraph
   x-tags:
@@ -27,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Azure Active Directory OAuth2 Flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -37,7 +36,7 @@ security:
       - user_impersonation
 parameters:
   ApiVersionParameter:
-    description: API version.
+    description: Client Api Version.
     in: query
     name: api-version
     required: true
@@ -70,7 +69,225 @@ paths:
                       provider: Microsoft Resource Graph
                       resource: Resources
                     name: Microsoft.ResourceGraph/resources/action
-      x-ms-pageable: {}
+                  - display:
+                      description: Create/Update/Retrieve a query within specified subscription and resource group.
+                      operation: CRUD operations of graph queries
+                      provider: Microsoft Resource Graph
+                      resource: Queries
+                    name: Microsoft.ResourceGraph/queries/action
+      x-ms-pageable:
+        nextLinkName: nextLink
+  /providers/Microsoft.ResourceGraph/resourceChangeDetails:
+    post:
+      description: Get resource change details.
+      operationId: ResourceChangeDetails
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The parameters for this request for resource change details.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ResourceChangeDetailsRequestParameters'
+      responses:
+        '200':
+          description: Resource change details.
+          schema:
+            $ref: '#/definitions/ResourceChangeData'
+        default:
+          description: A response indicating an error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Changes
+      x-ms-examples:
+        Basic query:
+          description: A resource change details query.
+          parameters:
+            api-version: 2018-09-01-preview
+            parameters:
+              changeId: 53dc0515-b86b-4bc2-979b-e4694ab4a556
+              resourceId: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+          responses:
+            '200':
+              body:
+                afterSnapshot:
+                  content:
+                    id: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+                    kind: Storage
+                    location: westus
+                    name: mystorageaccount
+                    properties:
+                      creationTime: '2018-07-27T18:37:21.7708872Z'
+                      encryption:
+                        keySource: Microsoft.Storage
+                        services:
+                          blob:
+                            enabled: true
+                            lastEnabledTime: '2018-07-27T18:37:21.8333895Z'
+                          file:
+                            enabled: true
+                            lastEnabledTime: '2018-07-27T18:37:21.8333895Z'
+                      networkAcls:
+                        bypass: AzureServices
+                        defaultAction: Allow
+                        ipRules: []
+                        virtualNetworkRules: []
+                      primaryEndpoints:
+                        blob: 'https://mystorageaccount.blob.core.windows.net/'
+                        file: 'https://mystorageaccount.file.core.windows.net/'
+                        queue: 'https://mystorageaccount.queue.core.windows.net/'
+                        table: 'https://mystorageaccount.table.core.windows.net/'
+                      primaryLocation: westus
+                      provisioningState: Succeeded
+                      statusOfPrimary: available
+                      supportsHttpsTrafficOnly: true
+                    sku:
+                      name: Standard_LRS
+                      tier: Standard
+                    tags: {}
+                    type: Microsoft.Storage/storageAccounts
+                  timestamp: '2018-10-31T01:54:24.42Z'
+                beforeSnapshot:
+                  content:
+                    id: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+                    kind: Storage
+                    location: westus
+                    name: mystorageaccount
+                    properties:
+                      creationTime: '2018-07-27T18:37:21.7708872Z'
+                      encryption:
+                        keySource: Microsoft.Storage
+                        services:
+                          blob:
+                            enabled: true
+                            lastEnabledTime: '2018-07-27T18:37:21.8333895Z'
+                          file:
+                            enabled: true
+                            lastEnabledTime: '2018-07-27T18:37:21.8333895Z'
+                      networkAcls:
+                        bypass: AzureServices
+                        defaultAction: Allow
+                        ipRules: []
+                        virtualNetworkRules: []
+                      primaryEndpoints:
+                        blob: 'https://mystorageaccount.blob.core.windows.net/'
+                        file: 'https://mystorageaccount.file.core.windows.net/'
+                        queue: 'https://mystorageaccount.queue.core.windows.net/'
+                        table: 'https://mystorageaccount.table.core.windows.net/'
+                      primaryLocation: westus
+                      provisioningState: Succeeded
+                      statusOfPrimary: available
+                      supportsHttpsTrafficOnly: false
+                    sku:
+                      name: Standard_LRS
+                      tier: Standard
+                    tags: {}
+                    type: Microsoft.Storage/storageAccounts
+                  timestamp: '2018-10-31T01:32:05.993Z'
+                changeId: 53dc0515-b86b-4bc2-979b-e4694ab4a556
+          title: Resource Change Details Query
+  /providers/Microsoft.ResourceGraph/resourceChanges:
+    post:
+      description: List changes to a resource for a given time interval.
+      operationId: ResourceChanges
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: the parameters for this request for changes.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ResourceChangesRequestParameters'
+      responses:
+        '200':
+          description: A list of changes associated with a resource over a specific time interval.
+          schema:
+            $ref: '#/definitions/ResourceChangeList'
+        default:
+          description: A response indicating an error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Changes
+      x-ms-examples:
+        Basic query:
+          description: A simple resource changes query.
+          parameters:
+            api-version: 2018-09-01-preview
+            parameters:
+              interval:
+                end: '2018-10-31T12:09:03.141Z'
+                start: '2018-10-30T12:09:03.141Z'
+              resourceId: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+          responses:
+            '200':
+              body:
+                changes:
+                  - afterSnapshot:
+                      timestamp: '2018-10-31T01:54:24.42Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-31T01:32:05.993Z'
+                    changeId: 2db0ad2d-f6f0-4f46-b529-5c4e8c494648
+                  - afterSnapshot:
+                      timestamp: '2018-10-30T21:12:31.337Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-30T10:30:19.68Z'
+                    changeId: 9dc352cb-b7c1-4198-9eda-e5e3ed66aec8
+          title: Basic Resource Changes Query
+        First page query:
+          description: A resource changes query requesting the first page.
+          parameters:
+            api-version: 2018-09-01-preview
+            parameters:
+              $top: 2
+              interval:
+                end: '2018-10-31T12:09:03.141Z'
+                start: '2018-10-30T12:09:03.141Z'
+              resourceId: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+          responses:
+            '200':
+              body:
+                $skipToken: ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT
+                changes:
+                  - afterSnapshot:
+                      timestamp: '2018-10-31T01:54:24.42Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-31T01:32:05.993Z'
+                    changeId: 2db0ad2d-f6f0-4f46-b529-5c4e8c494648
+                  - afterSnapshot:
+                      timestamp: '2018-10-30T21:12:31.337Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-30T10:30:19.68Z'
+                    changeId: 9dc352cb-b7c1-4198-9eda-e5e3ed66aec8
+          title: 'Resource Changes Query: First Page'
+        Next page query:
+          description: A resource changes query requesting the next page using a skip token.
+          parameters:
+            api-version: 2018-09-01-preview
+            parameters:
+              $skipToken: ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT
+              $top: 2
+              interval:
+                end: '2018-10-31T12:09:03.141Z'
+                start: '2018-10-30T12:09:03.141Z'
+              resourceId: /subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount
+          responses:
+            '200':
+              body:
+                $skipToken: kVGltZSI6ICJcL0RhdGUoMTU1MDc0NTew0KICAiJGlkIjogIjEiLA0KICAiRW5
+                changes:
+                  - afterSnapshot:
+                      timestamp: '2018-10-31T05:12:32.087Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-31T03:43:08.629Z'
+                    changeId: 55f458c4-f1c0-4963-bc6c-af275cd47702
+                  - afterSnapshot:
+                      timestamp: '2018-10-31T02:01:02.163Z'
+                    beforeSnapshot:
+                      timestamp: '2018-10-31T01:54:24.42Z'
+                    changeId: 0495b929-b86d-46cc-a972-939145feed90
+          title: 'Resource Changes Query: Next Page'
   /providers/Microsoft.ResourceGraph/resources:
     post:
       description: Queries the resources managed by Azure Resource Manager for all subscriptions specified in the request.
@@ -308,7 +525,8 @@ paths:
           parameters:
             api-version: 2018-09-01-preview
             query:
-              $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
+              options:
+                $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
               query: 'where name contains ''test'' | project id, name, type, location'
               subscriptions:
                 - cfbbd179-59d2-4052-aa06-9270a38aa9d6
@@ -537,9 +755,9 @@ paths:
           parameters:
             api-version: 2018-09-01-preview
             query:
-              $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
               options:
                 $skip: 10
+                $skipToken: eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==
                 $top: 2
               query: 'where name contains ''test'' | project id, name, type, location'
               subscriptions:
@@ -620,6 +838,21 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: ColumnDataType
+  DateTimeInterval:
+    description: 'An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.'
+    properties:
+      end:
+        description: 'A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.'
+        format: date-time
+        type: string
+      start:
+        description: 'A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.'
+        format: date-time
+        type: string
+    required:
+      - start
+      - end
+    type: object
   Error:
     description: Error details.
     properties:
@@ -778,6 +1011,9 @@ definitions:
   OperationListResult:
     description: Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.
     properties:
+      nextLink:
+        description: The link used to get the next page of results.
+        type: string
       value:
         description: List of Resource Graph operations supported by the Resource Graph resource provider.
         items:
@@ -860,6 +1096,92 @@ definitions:
       - count
       - resultTruncated
       - data
+    type: object
+  ResourceChangeData:
+    description: 'Data on a specific change, represented by a pair of before and after resource snapshots.'
+    properties:
+      afterSnapshot:
+        allOf:
+          - $ref: '#/definitions/ResourceSnapshotData'
+        description: The snapshot after the change.
+      beforeSnapshot:
+        allOf:
+          - $ref: '#/definitions/ResourceSnapshotData'
+        description: The snapshot before the change.
+      changeId:
+        description: The change ID. Valid and unique within the specified resource only.
+        type: string
+    required:
+      - changeId
+      - beforeSnapshot
+      - afterSnapshot
+    type: object
+  ResourceChangeDetailsRequestParameters:
+    description: The parameters for a specific change details request.
+    properties:
+      changeId:
+        description: Specifies the change ID.
+        type: string
+      resourceId:
+        description: Specifies the resource for a change details request.
+        type: string
+    required:
+      - resourceId
+      - changeId
+    type: object
+  ResourceChangeList:
+    description: A list of changes associated with a resource over a specific time interval.
+    properties:
+      $skipToken:
+        description: Skip token that encodes the skip information while executing the current request
+      changes:
+        description: |-
+          The pageable value returned by the operation, i.e. a list of changes to the resource.
+
+          - The list is ordered from the most recent changes to the least recent changes.
+          - This list will be empty if there were no changes during the requested interval.
+          - The `Before` snapshot timestamp value of the oldest change can be outside of the specified time interval.
+        items:
+          $ref: '#/definitions/ResourceChangeData'
+        type: array
+    type: object
+  ResourceChangesRequestParameters:
+    description: The parameters for a specific changes request.
+    properties:
+      $skipToken:
+        description: Acts as the continuation token for paged responses.
+        type: string
+      $top:
+        description: The maximum number of changes the client can accept in a paged response.
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+      interval:
+        allOf:
+          - $ref: '#/definitions/DateTimeInterval'
+        description: Specifies the date and time interval for a changes request.
+      resourceId:
+        description: Specifies the resource for a changes request.
+        type: string
+    required:
+      - resourceId
+      - interval
+    type: object
+  ResourceSnapshotData:
+    description: Data on a specific resource snapshot.
+    properties:
+      content:
+        description: The resource snapshot content (in resourceChangeDetails response only).
+        type: object
+      timestamp:
+        description: |-
+          The time when the snapshot was created.
+          The snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.
+        format: date-time
+        type: string
+    required:
+      - timestamp
     type: object
   Row:
     description: Query result row.

@@ -163,7 +163,8 @@ paths:
                       provider: Microsoft Customer Engagement Fabric
                       resource: Accounts
                     name: Microsoft.EngagementFabric/skus/read
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EngagementFabric/Accounts':
     get:
       operationId: Accounts_List
@@ -212,7 +213,8 @@ paths:
                       name: P1
                       tier: Premium
                     type: Microsoft.EngagementFabric/Accounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.EngagementFabric/skus':
     get:
       operationId: SKUs_List
@@ -276,7 +278,8 @@ paths:
                     resourceType: Microsoft.EngagementFabric/Accounts
                     restrictions: []
                     tier: Premium
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts':
     get:
       operationId: Accounts_ListByResourceGroup
@@ -327,7 +330,8 @@ paths:
                       name: P1
                       tier: Premium
                     type: Microsoft.EngagementFabric/Accounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}':
     delete:
       operationId: Accounts_Delete
@@ -539,7 +543,8 @@ paths:
                         AppId: exampleApp2
                         AppKey: ''
                     type: Microsoft.EngagementFabric/Accounts/Channels
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/Channels/{channelName}':
     delete:
       operationId: Channels_Delete
@@ -764,7 +769,8 @@ paths:
                   - name: Device
                     rank: SecondaryKey
                     value: <ExampleDeviceSecondaryKeyValue>
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/regenerateKey':
     post:
       operationId: Accounts_RegenerateKey

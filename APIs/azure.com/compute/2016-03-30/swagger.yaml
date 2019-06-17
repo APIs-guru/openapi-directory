@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2016-03-30/compute.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -375,7 +374,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachineSizes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
       description: 'Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.'
@@ -532,7 +532,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - AvailabilitySets
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
       description: Gets a list of all VM scale sets under a resource group.
@@ -1748,7 +1749,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   AdditionalUnattendContent:
     description: 'Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.'

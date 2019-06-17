@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceMySqlTask.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-ConnectToSourceMySqlTask
   x-tags:
@@ -192,7 +191,7 @@ definitions:
       output:
         description: Task output. This is ignored if submitted.
         items:
-          description: 'Output for connect to Oracle, MySQL type source'
+          description: Output for connect to MySQL type source
           properties:
             databases:
               description: List of databases on the server
@@ -205,7 +204,7 @@ definitions:
               readOnly: true
               type: string
             serverProperties:
-              description: 'Server properties for Oracle, MySQL type source'
+              description: Server properties for MySQL type source
               properties:
                 serverDatabaseCount:
                   description: Number of databases in the server
@@ -267,4 +266,3 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: ConnectToSource.MySql
-  ODataError: {}

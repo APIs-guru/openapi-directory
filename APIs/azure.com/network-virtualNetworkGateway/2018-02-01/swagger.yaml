@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-02-01/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -92,12 +91,14 @@ paths:
                       ipsecPolicies: []
                       localNetworkGateway2:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw1
+                        properties: {}
                       provisioningState: Succeeded
                       resourceGuid: 00000000-0000-0000-0000-000000000000
                       routingWeight: 0
                       usePolicyBasedTrafficSelectors: false
                       virtualNetworkGateway1:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1
+                        properties: {}
                     type: Microsoft.Network/connections
                   - etag: W/"00000000-0000-0000-0000-000000000000"
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/conn2
@@ -111,12 +112,14 @@ paths:
                       ipsecPolicies: []
                       localNetworkGateway2:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw2
+                        properties: {}
                       provisioningState: Succeeded
                       resourceGuid: 00000000-0000-0000-0000-000000000000
                       routingWeight: 0
                       usePolicyBasedTrafficSelectors: false
                       virtualNetworkGateway1:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2
+                        properties: {}
                     type: Microsoft.Network/connections
       x-ms-pageable:
         nextLinkName: nextLink
@@ -154,13 +157,12 @@ paths:
             subscriptionId: subid
             virtualNetworkGatewayConnectionName: conn1
           responses:
-            '200':
-              body: {}
-            '202':
-              body: {}
-            '204':
-              body: {}
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified virtual network gateway connection by resource group.
       operationId: VirtualNetworkGatewayConnections_Get
@@ -207,6 +209,7 @@ paths:
                   ipsecPolicies: []
                   localNetworkGateway2:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw
+                    properties: {}
                   provisioningState: Succeeded
                   resourceGuid: 00000000-0000-0000-0000-000000000000
                   routingWeight: 0
@@ -214,6 +217,7 @@ paths:
                   usePolicyBasedTrafficSelectors: false
                   virtualNetworkGateway1:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw
+                    properties: {}
                 type: Microsoft.Network/connections
     patch:
       description: Updates a virtual network gateway connection tags.
@@ -392,6 +396,7 @@ paths:
                   ipsecPolicies: []
                   localNetworkGateway2:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw
+                    properties: {}
                   provisioningState: Updating
                   resourceGuid: 00000000-0000-0000-0000-000000000000
                   routingWeight: 0
@@ -399,6 +404,7 @@ paths:
                   usePolicyBasedTrafficSelectors: false
                   virtualNetworkGateway1:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw
+                    properties: {}
                 type: Microsoft.Network/connections
             '201':
               body:
@@ -414,6 +420,7 @@ paths:
                   ipsecPolicies: []
                   localNetworkGateway2:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw
+                    properties: {}
                   provisioningState: Updating
                   resourceGuid: 00000000-0000-0000-0000-000000000000
                   routingWeight: 0
@@ -421,6 +428,7 @@ paths:
                   usePolicyBasedTrafficSelectors: false
                   virtualNetworkGateway1:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw
+                    properties: {}
                 type: Microsoft.Network/connections
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey':
@@ -457,8 +465,7 @@ paths:
           responses:
             '200':
               body:
-                properties:
-                  value: AzureAbc123
+                value: AzureAbc123
     put:
       description: The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGatewayConnections_SetSharedKey
@@ -497,16 +504,17 @@ paths:
           parameters:
             api-version: '2018-02-01'
             parameters:
-              properties:
-                value: AzureAbc123
+              value: AzureAbc123
             resourceGroupName: rg1
             subscriptionId: subid
             virtualNetworkGatewayConnectionName: connS2S
           responses:
             '200':
-              body: {}
+              body:
+                value: AzureAbc123
             '201':
-              body: {}
+              body:
+                value: AzureAbc123
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset':
     post:
@@ -545,18 +553,18 @@ paths:
           parameters:
             api-version: '2018-02-01'
             parameters:
-              properties:
-                keyLength: 128
+              keyLength: 128
             resourceGroupName: rg1
             subscriptionId: subid
             virtualNetworkGatewayConnectionName: conn1
           responses:
             '200':
               body:
-                value: <GUID>
-            '202':
-              body: {}
+                keyLength: 128
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript':
     post:
       description: Gets a xml format representation for vpn device configuration script.
@@ -592,17 +600,15 @@ paths:
           parameters:
             api-version: '2018-02-01'
             parameters:
-              properties:
-                deviceFamily: ISR
-                firmwareVersion: IOS 15.1 (Preview)
-                vendor: Cisco
+              deviceFamily: ISR
+              firmwareVersion: IOS 15.1 (Preview)
+              vendor: Cisco
             resourceGroupName: rg1
             subscriptionId: subid
-            virtualNetworkGatewayName: vpngw
+            virtualNetworkGatewayConnectionName: vpngw
           responses:
             '200':
-              body:
-                string: "! Microsoft Corporation\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Sample VPN tunnel configuration template for IOS-based devices\r\n!\r\n! This configuration template applies to Cisco VPN devices running IOS 15.1 or beyond (ISR or ASR)\r\n!\r\n\r\n\r\n\t\t\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! ACL rules\r\n!\r\n! Some VPN devices require explicit ACL rules to allow cross-premises traffic:\r\n!\r\n! 1. Allow traffic between on premises address ranges and VNet address ranges\r\n! 2. Allow IKE traffic (UDP:500) between on premises VPN devices and Azure VPN gateway\r\n! 3. Allow IPsec traffic (Proto:ESP) between on premises VPN devices and Azure VPN gateway\r\n!\r\n\t\t\r\naccess-list 101 permit ip 10.1.0.0 0.0.255.255 10.0.0.0 0.0.255.255\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Internet Key Exchange (IKE) configuration\r\n!\r\n! This section specifies the authentication, encryption, hashing, and Diffie-Hellman group parameters for IKE\r\n! main mode or phase 1\r\n!\r\n\r\ncrypto ikev2 proposal SwaggerS2S-proposal\r\n  encryption DES3\r\n  integrity  SHA384\r\n  group      DHGroup24\r\n  lifetime   3600\r\n exit\r\n\r\ncrypto ikev2 policy SwaggerS2S-policy\r\n  proposal SwaggerS2S-proposal\r\n  exit\r\n\r\ncrypto ikev2 keyring SwaggerBranch-keyring\r\n\t\t\r\n\t\tpeer 52.173.199.254\r\n\t\taddress        52.173.199.254\r\n\t\tpre-shared-key lALEHuppeopJmA94exRNiRr2QzuZ6lOsvzu5IlJUEA6LthbTc8g5MTT86MCsGNMzGkTAaLuLnEJoD1Cn4cIlr94qKZm9drsgllzWvsPNezS71stAkaW1Bb7h6GBnDlDP\r\n  exit\r\n\r\ncrypto ikev2 profile  SwaggerS2S-profile\r\n  match address  local 10.3.0.0\r\n\tmatch identity remote address 52.173.199.254 255.255.255.255\r\n\t\t\r\n  authentication remote pre-share\r\n  authentication local  pre-share\r\n  keyring        SwaggerBranch-keyring\r\n  exit\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! IPsec configuration\r\n!\r\n! This section specifies encryption, authentication, tunnel mode properties for the Phase 2 negotiation\r\n!\r\ncrypto ipsec transform-set SwaggerS2S-TransformSet DES3 DES3\r\n mode  tunnel\r\n exit\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Crypto map configuration\r\n!\r\n! This section defines a crypto profile that binds the cross-premises network traffic to the IPsec and IKE\r\n! policy profiles for this connection. Then defines the VTI (virtual tunnel interface) with the crypto\r\n! profile. A random interface number (tunnel 1) was used with a random link local address (169.254.0.1/28)\r\n! for the tunnel interface. If either selection is already used in the VPN device, please select another\r\n! interface number or address.  The only requirement is that they must not overlap with another interface\r\n! on the same VPN device.\r\n!\r\ncrypto ipsec profile SwaggerS2S-IPsecProfile\r\n  set transform-set  SwaggerS2S-TransformSet\r\n  set ikev2-profile  SwaggerS2S-profile\r\n  set pfs            None\r\n  set security-association lifetime 3600\r\n exit\r\n\r\n\r\nint tunnel 52.173.199.254\r\n  ip address 169.254.0.1 255.255.255.252\r\n  ip tcp adjust-mss 1350\r\n  tunnel source 10.3.0.0\r\n  tunnel mode ipsec ipv4\r\n  tunnel destination 52.173.199.254\r\n  tunnel protection ipsec profile SwaggerS2S-IPsecProfile\r\n  exit\r\n\r\n\tip route 10.0.0.0 255.255.0.0 tunnel 52.173.199.254 "
+              body: "! Microsoft Corporation\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Sample VPN tunnel configuration template for IOS-based devices\r\n!\r\n! This configuration template applies to Cisco VPN devices running IOS 15.1 or beyond (ISR or ASR)\r\n!\r\n\r\n\r\n\t\t\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! ACL rules\r\n!\r\n! Some VPN devices require explicit ACL rules to allow cross-premises traffic:\r\n!\r\n! 1. Allow traffic between on premises address ranges and VNet address ranges\r\n! 2. Allow IKE traffic (UDP:500) between on premises VPN devices and Azure VPN gateway\r\n! 3. Allow IPsec traffic (Proto:ESP) between on premises VPN devices and Azure VPN gateway\r\n!\r\n\t\t\r\naccess-list 101 permit ip 10.1.0.0 0.0.255.255 10.0.0.0 0.0.255.255\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Internet Key Exchange (IKE) configuration\r\n!\r\n! This section specifies the authentication, encryption, hashing, and Diffie-Hellman group parameters for IKE\r\n! main mode or phase 1\r\n!\r\n\r\ncrypto ikev2 proposal SwaggerS2S-proposal\r\n  encryption DES3\r\n  integrity  SHA384\r\n  group      DHGroup24\r\n  lifetime   3600\r\n exit\r\n\r\ncrypto ikev2 policy SwaggerS2S-policy\r\n  proposal SwaggerS2S-proposal\r\n  exit\r\n\r\ncrypto ikev2 keyring SwaggerBranch-keyring\r\n\t\t\r\n\t\tpeer 52.173.199.254\r\n\t\taddress        52.173.199.254\r\n\t\tpre-shared-key lALEHuppeopJmA94exRNiRr2QzuZ6lOsvzu5IlJUEA6LthbTc8g5MTT86MCsGNMzGkTAaLuLnEJoD1Cn4cIlr94qKZm9drsgllzWvsPNezS71stAkaW1Bb7h6GBnDlDP\r\n  exit\r\n\r\ncrypto ikev2 profile  SwaggerS2S-profile\r\n  match address  local 10.3.0.0\r\n\tmatch identity remote address 52.173.199.254 255.255.255.255\r\n\t\t\r\n  authentication remote pre-share\r\n  authentication local  pre-share\r\n  keyring        SwaggerBranch-keyring\r\n  exit\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! IPsec configuration\r\n!\r\n! This section specifies encryption, authentication, tunnel mode properties for the Phase 2 negotiation\r\n!\r\ncrypto ipsec transform-set SwaggerS2S-TransformSet DES3 DES3\r\n mode  tunnel\r\n exit\r\n\r\n! ---------------------------------------------------------------------------------------------------------------------\r\n! Crypto map configuration\r\n!\r\n! This section defines a crypto profile that binds the cross-premises network traffic to the IPsec and IKE\r\n! policy profiles for this connection. Then defines the VTI (virtual tunnel interface) with the crypto\r\n! profile. A random interface number (tunnel 1) was used with a random link local address (169.254.0.1/28)\r\n! for the tunnel interface. If either selection is already used in the VPN device, please select another\r\n! interface number or address.  The only requirement is that they must not overlap with another interface\r\n! on the same VPN device.\r\n!\r\ncrypto ipsec profile SwaggerS2S-IPsecProfile\r\n  set transform-set  SwaggerS2S-TransformSet\r\n  set ikev2-profile  SwaggerS2S-profile\r\n  set pfs            None\r\n  set security-association lifetime 3600\r\n exit\r\n\r\n\r\nint tunnel 52.173.199.254\r\n  ip address 169.254.0.1 255.255.255.252\r\n  ip tcp adjust-mss 1350\r\n  tunnel source 10.3.0.0\r\n  tunnel mode ipsec ipv4\r\n  tunnel destination 52.173.199.254\r\n  tunnel protection ipsec profile SwaggerS2S-IPsecProfile\r\n  exit\r\n\r\n\tip route 10.0.0.0 255.255.0.0 tunnel 52.173.199.254 "
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways':
     get:
       description: Gets all the local network gateways in a resource group.
@@ -693,13 +699,12 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
-            '200':
-              body: {}
-            '202':
-              body: {}
-            '204':
-              body: {}
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified local network gateway in a resource group.
       operationId: LocalNetworkGateways_Get
@@ -1024,13 +1029,12 @@ paths:
             subscriptionId: subid
             virtualNetworkGatewayName: vpngw
           responses:
-            '200':
-              body: {}
-            '202':
-              body: {}
-            '204':
-              body: {}
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
     get:
       description: Gets the specified virtual network gateway by resource group.
       operationId: VirtualNetworkGateways_Get
@@ -1403,19 +1407,25 @@ paths:
           description: VPN client package URL.
           schema:
             type: string
+        '202':
+          description: Accepted and the operation will complete asynchronously.
       tags:
         - VirtualNetworkGateways
       x-ms-examples:
         GenerateVPNClientPackage:
           parameters:
             api-version: '2018-02-01'
+            parameters: {}
             resourceGroupName: rg1
             subscriptionId: subid
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              body: {}
+              body: ''
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile':
     post:
       description: Generates VPN profile for P2S client of the virtual network gateway in the specified resource group. Used for IKEV2 and radius based authentication.
@@ -1452,15 +1462,17 @@ paths:
         GenerateVirtualNetworkGatewayVPNProfile:
           parameters:
             api-version: '2018-02-01'
+            parameters: {}
             resourceGroupName: rg1
             subscriptionId: subid
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              body: {}
-            '202':
-              body: {}
+              body: ''
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes':
     post:
       description: This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.
@@ -1496,15 +1508,17 @@ paths:
         GetVirtualNetworkGatewayAdvertisedRoutes:
           parameters:
             api-version: '2018-02-01'
+            peer: test
             resourceGroupName: rg1
             subscriptionId: subid
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
               body: {}
-            '202':
-              body: {}
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus':
     post:
       description: The GetBgpPeerStatus operation retrieves the status of all BGP peers.
@@ -1546,9 +1560,10 @@ paths:
           responses:
             '200':
               body: {}
-            '202':
-              body: {}
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes':
     post:
       description: 'This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.'
@@ -1585,9 +1600,10 @@ paths:
           responses:
             '200':
               body: {}
-            '202':
-              body: {}
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters':
     post:
       description: The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
@@ -1648,10 +1664,11 @@ paths:
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              body: {}
-            '202':
-              body: {}
+              body: ''
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset':
     post:
       description: Resets the primary of the virtual network gateway in the specified resource group.
@@ -1692,10 +1709,42 @@ paths:
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              body: {}
-            '202':
-              body: {}
+              body:
+                etag: W/"00000000-0000-0000-0000-000000000000"
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw
+                location: centralus
+                name: vpngw
+                properties:
+                  activeActive: false
+                  bgpSettings:
+                    asn: 65514
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  enableBgp: false
+                  gatewayType: Vpn
+                  ipConfigurations:
+                    - etag: W/"00000000-0000-0000-0000-000000000000"
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/gwipconfig1
+                      name: gwipconfig1
+                      properties:
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        publicIPAddress:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/gwpip
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet
+                  provisioningState: Succeeded
+                  resourceGuid: 00000000-0000-0000-0000-000000000000
+                  sku:
+                    capacity: 0
+                    name: VpnGw1
+                    tier: VpnGw1
+                  vpnType: RouteBased
+                type: Microsoft.Network/virtualNetworkGateways
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters':
     post:
       description: The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
@@ -1729,6 +1778,8 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices':
     post:
       description: Gets a xml format representation for supported vpn devices.
@@ -1762,8 +1813,7 @@ paths:
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              body:
-                string: <?xml version="1.0" encoding="utf-8"?><RpVpnDeviceList version="1.0"><Vendor name="Cisco"><DeviceFamily name="ISR"><FirmwareVersion name="IOS 15.1 (Preview)" /></DeviceFamily><DeviceFamily name="ASA (Adaptive Security Appliance)"><FirmwareVersion name="ASA_9.8.x_ActivePassive_NoBGP_NoCustomPolicies"/><FirmwareVersion name="ASA_9.8(x)_CustomPolicies" /></DeviceFamily></Vendor><Vendor name="Juniper"><DeviceFamily name="Juniper_SRX_GA"><FirmwareVersion name="Juniper_SRX_12.x_GA" /></DeviceFamily><DeviceFamily name="Juniper_SSG_GA"><FirmwareVersion name="Juniper_SSG_ScreenOS-6.2.x_GA"/></DeviceFamily><DeviceFamily name="Juniper_JSeries_GA"><FirmwareVersion name="Juniper_JSeries_JunOS12.x._GA" /></DeviceFamily></Vendor><Vendor name="Ubiquiti"><DeviceFamily name="EdgeRouter"><FirmwareVersion name="Ubiquiti_EdgeOS_1.10.x-RouteBased_VTI" /><FirmwareVersionname="Ubiquiti_EdgeOS_1.10.x-RouteBased_BGP" /></DeviceFamily></Vendor></RpVpnDeviceList>
+              body: <?xml version="1.0" encoding="utf-8"?><RpVpnDeviceList version="1.0"><Vendor name="Cisco"><DeviceFamily name="ISR"><FirmwareVersion name="IOS 15.1 (Preview)" /></DeviceFamily><DeviceFamily name="ASA (Adaptive Security Appliance)"><FirmwareVersion name="ASA_9.8.x_ActivePassive_NoBGP_NoCustomPolicies"/><FirmwareVersion name="ASA_9.8(x)_CustomPolicies" /></DeviceFamily></Vendor><Vendor name="Juniper"><DeviceFamily name="Juniper_SRX_GA"><FirmwareVersion name="Juniper_SRX_12.x_GA" /></DeviceFamily><DeviceFamily name="Juniper_SSG_GA"><FirmwareVersion name="Juniper_SSG_ScreenOS-6.2.x_GA"/></DeviceFamily><DeviceFamily name="Juniper_JSeries_GA"><FirmwareVersion name="Juniper_JSeries_JunOS12.x._GA" /></DeviceFamily></Vendor><Vendor name="Ubiquiti"><DeviceFamily name="EdgeRouter"><FirmwareVersion name="Ubiquiti_EdgeOS_1.10.x-RouteBased_VTI" /><FirmwareVersionname="Ubiquiti_EdgeOS_1.10.x-RouteBased_BGP" /></DeviceFamily></Vendor></RpVpnDeviceList>
 definitions:
   BgpPeerStatus:
     description: BGP peer status details

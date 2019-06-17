@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -217,7 +216,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for department.
@@ -353,7 +353,8 @@ paths:
                           - Azure Prod Account
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by Department Id.
@@ -507,7 +508,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for an enrollment account.
@@ -608,7 +610,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for an enrollment account.
@@ -745,7 +748,8 @@ paths:
                           - 20181031
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by Enrollment Account Id.
@@ -899,7 +903,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for billing account.
@@ -1004,7 +1009,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for billing account.
@@ -1137,7 +1143,8 @@ paths:
                           - Cost Management Subscrioption
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by billingAccount Id.
@@ -1287,7 +1294,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules':
     get:
       description: Get list all Showback Rules.
@@ -1315,20 +1323,20 @@ paths:
             '200':
               body:
                 value:
-                  - eTag: null
-                    id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showbackRules/testRule
+                  - id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showbackRules/testRule
                     name: testRule
                     properties:
-                      assignedScopes: null
                       creationTime: '2019-01-16T09:18:20.8665509Z'
-                      deprecationTime: '0001-01-01T00:00:00'
+                      deprecationTime: '2019-03-16T09:18:20.8665509Z'
                       description: This is a testRule
                       details:
-                        AHUBenefits: true
-                        markup: null
+                        benefits:
+                          - None
+                        markups: null
                         pricesheet: Pay-As-You-Go (0003P)
-                      modificationTime: '0001-01-01T00:00:00'
+                      modificationTime: '2019-01-17T09:18:20.8665509Z'
                       ruleType: CustomPrice
+                      scopes: null
                       status: NotActive
                       version: 1
                     type: Microsoft.CostManagement/showbackRules
@@ -1362,20 +1370,20 @@ paths:
           responses:
             '200':
               body:
-                eTag: null
                 id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showbackRules/testRule
                 name: testRule
                 properties:
-                  assignedScopes: null
                   creationTime: '2019-01-16T09:18:20.8665509Z'
-                  deprecationTime: '0001-01-01T00:00:00'
+                  deprecationTime: '2019-03-16T09:18:20.8665509Z'
                   description: This is a testRule
                   details:
-                    AHUBenefits: true
-                    markup: null
+                    benefits:
+                      - None
+                    markups: null
                     pricesheet: Pay-As-You-Go (0003P)
-                  modificationTime: '0001-01-01T00:00:00'
+                  modificationTime: '2019-01-17T09:18:20.8665509Z'
                   ruleType: CustomPrice
+                  scopes: null
                   status: NotActive
                   version: 1
                 type: Microsoft.CostManagement/showbackRules
@@ -1391,7 +1399,7 @@ paths:
           name: showbackRule
           required: true
           schema:
-            $ref: '#/definitions/ShowbackRuleProperties'
+            $ref: '#/definitions/ShowbackRule'
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -1410,39 +1418,39 @@ paths:
             billingAccountId: '100'
             ruleName: testRule
             showbackRule:
+              name: demo
               properties:
-                assignedScopes:
-                  - childScope: null
-                    entityId: 292105a9-680d-48cf-bdad-1d023104d69f
-                    entityType: Enrollment
                 description: Welcome to Showback demo
                 details:
-                  AHUBenefits: true
-                  markup:
-                    - filters: []
-                      percentage: 1.1
+                  benefits:
+                    - None
+                  markups:
+                    - percentage: '1.1'
                   pricesheet: Pay-As-You-Go (0003P)
-                name: demo
                 ruleType: CustomPrice
+                scopes:
+                  - childScope: null
+                    id: 292105a9-680d-48cf-bdad-1d023104d69f
+                    type: Enrollment
                 status: Active
           responses:
             '200':
               body:
-                eTag: null
                 id: providers/Microsoft.Billing/billingAccounts/71824150/providers/Microsoft.CostManagement/showbackRules/demo
                 name: demo
                 properties:
                   creationTime: '2019-01-16T09:18:20.8665509Z'
-                  deprecationTime: '0001-01-01T00:00:00'
+                  deprecationTime: '2019-03-16T09:18:20.8665509Z'
                   description: Welcome to Showback demo
                   details:
-                    AHUBenefits: true
-                    markup:
-                      - filters: []
-                        percentage: 1.1
+                    benefits:
+                      - None
+                    markups:
+                      - percentage: '1.1'
                     pricesheet: Pay-As-You-Go (0003P)
-                  modificationTime: '0001-01-01T00:00:00'
+                  modificationTime: '2019-01-17T09:18:20.8665509Z'
                   ruleType: CustomPrice
+                  scopes: null
                   status: NotActive
                   version: 999
                 type: Microsoft.CostManagement/showbackRules
@@ -1507,7 +1515,8 @@ paths:
                       status: active
                       subscriptionId: 22222222-3333-4444-1111-777777777777
                     type: Microsoft.CostManagement/cloudConnectors
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.CostManagement/cloudConnectors/{connectorName}':
     delete:
       description: Delete a cloud connector definition
@@ -1791,7 +1800,8 @@ paths:
                       displayName: MyCompany Consolidated2
                       providerBillingAccountId: '112233445566'
                     type: Microsoft.CostManagement/externalBillingAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}':
     get:
       description: Get a ExternalBillingAccount definition
@@ -1852,6 +1862,112 @@ paths:
                   displayName: MyCompany Consolidated
                   providerBillingAccountId: '123456789012'
                 type: Microsoft.CostManagement/externalBillingAccounts
+  '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/Forecast':
+    post:
+      description: Forecast the usage data for external billing account.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByExternalBillingAccount
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/externalBillingAccountNameParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        ExternalBillingAccountForecast:
+          parameters:
+            api-version: 2019-03-01-preview
+            externalBillingAccountName: aws-123456789012
+            parameters:
+              dataset:
+                filter:
+                  and:
+                    - or:
+                        - dimension:
+                            name: SubscriptionName
+                            operator: In
+                            values:
+                              - Azure Dev
+                              - Azure Prod
+                              - Azure PPE
+                        - tag:
+                            name: Environment
+                            operator: In
+                            values:
+                              - Dev
+                              - PPE
+                              - Prod
+                    - dimension:
+                        name: DepartmentName
+                        operator: In
+                        values:
+                          - Azure Dept
+                granularity: Daily
+              timePeriod:
+                from: '2018-08-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: null
+                      rows:
+                        - - 19.545363672276512
+                          - 20180831
+                          - Actual
+                          - USD
+                        - - 20.41979233490323
+                          - 20180930
+                          - Actual
+                          - USD
+                        - - 21.322216562625453
+                          - 20181031
+                          - Actual
+                          - USD
+                        - - 22.545363672276533
+                          - 20180831
+                          - Actual
+                          - USD
+                        - - 23.41979675590323
+                          - 20180930
+                          - Forecast
+                          - USD
+                        - - 24.359416562626652
+                          - 20181031
+                          - Forecast
+                          - USD
+                    type: Microsoft.CostManagement/forecast
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/externalSubscriptions':
     get:
       description: List all ExternalSubscriptions by ExternalBillingAccount definitions
@@ -1891,7 +2007,8 @@ paths:
                       providerAccountId: '654321654321'
                       providerBillingAccountId: '123456789012'
                     type: Microsoft.CostManagement/externalSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /providers/Microsoft.CostManagement/externalSubscriptions:
     get:
       description: List all ExternalSubscription definitions
@@ -1939,7 +2056,8 @@ paths:
                       providerAccountId: '110011001100'
                       providerBillingAccountId: '112233445566'
                     type: Microsoft.CostManagement/externalSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}':
     get:
       description: Get an ExternalSubscription definition
@@ -2121,7 +2239,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Lists the usage data for management group.
@@ -2248,7 +2367,8 @@ paths:
                           - Cost Management Subscrioption
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by managementGroup Id.
@@ -2398,7 +2518,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions':
     get:
       description: List all ExternalSubscription definitions for Management Group
@@ -2451,7 +2572,8 @@ paths:
                       providerAccountId: '110011001100'
                       providerBillingAccountId: '112233445566'
                     type: Microsoft.CostManagement/externalSubscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}':
     put:
       description: Updates the management group of an ExternalSubscription
@@ -2585,7 +2707,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId.
@@ -2659,7 +2782,8 @@ paths:
                           - 20181019
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by subscription Id.
@@ -2747,7 +2871,8 @@ paths:
                       usageStart: '2018-12-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by resource group Id.
@@ -2834,7 +2959,8 @@ paths:
                       usageStart: '2018-05-01T00:00:00-07:00'
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for subscriptionId and resource group.
@@ -2928,7 +3054,8 @@ paths:
                           - Forecast
                           - USD
                     type: microsoft.costmanagement/Forecast
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId and resource group.
@@ -3010,7 +3137,8 @@ paths:
                           - 20180418
                           - USD
                     type: microsoft.costmanagement/Query
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ConnectorCollectionErrorInfo:
     description: Details of any error encountered on last collection attempt
@@ -3212,62 +3340,31 @@ definitions:
           - create
           - update
     type: object
-  CostAllocation:
-    allOf:
-      - $ref: '#/definitions/ShowbackRuleProperties'
-    description: Represents cost allocation showback rule model
+  CostAllocationDetails:
+    description: Represents CostAllocation showback rule model
     properties:
-      details:
-        $ref: '#/definitions/CostAllocationProperties'
-    type: object
-    x-ms-discriminator-value: CostAllocation
-  CostAllocationProperties:
-    properties: {}
-    title: Cost allocation showback rule properties
-    type: object
-  CustomCharge:
-    allOf:
-      - $ref: '#/definitions/ShowbackRuleProperties'
-    description: Represents custom charge showback rule model
-    properties:
-      details:
-        $ref: '#/definitions/CustomChargeProperties'
-    type: object
-    x-ms-discriminator-value: CustomCharge
-  CustomChargeProperties:
-    properties:
-      ChargeValue:
-        type: string
-      EffectiveMonth:
-        format: date-time
-        type: string
-      EndMonth:
-        format: date-time
-        type: string
-      chargeType:
-        type: string
-      recurring:
-        description: Recurring of the charge.
+      policy:
+        description: Cost allocation policy.
         enum:
-          - 'true'
-          - 'false'
-        readOnly: true
+          - Proportional
+          - Evenly
+          - Fixed
         type: string
         x-ms-enum:
           modelAsString: true
-          name: CustomChargeRecurring
-    title: Custom charge showback rule properties
-    type: object
-  CustomPrice:
+          name: CostAllocationPolicy
+  CostAllocationDetailsKind:
     allOf:
       - $ref: '#/definitions/ShowbackRuleProperties'
-    description: Represents Custom price showback rule model
+    description: Represents CostAllocation showback rule model
     properties:
       details:
-        $ref: '#/definitions/CustomPriceProperties'
-    type: object
-    x-ms-discriminator-value: CustomPrice
-  CustomPriceProperties:
+        $ref: '#/definitions/CostAllocationDetails'
+        description: The CostAllocation properties to validate.
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: CostAllocation
+  CustomPriceDetails:
+    description: Represents Custom price showback rule model
     properties:
       benefits:
         description: Array of benefits.
@@ -3289,8 +3386,16 @@ definitions:
         type: array
       pricesheet:
         type: string
-    title: Custom price showback rule properties
-    type: object
+  CustomPriceDetailsKind:
+    allOf:
+      - $ref: '#/definitions/ShowbackRuleProperties'
+    description: Represents Custom price showback rule model
+    properties:
+      details:
+        $ref: '#/definitions/CustomPriceDetails'
+        description: The Custom price properties to validate.
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: CustomPrice
   Dimension:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -3860,10 +3965,8 @@ definitions:
         readOnly: true
         type: array
   ShowbackRuleProperties:
-    allOf:
-      - $ref: '#/definitions/ShowbackRulesKind'
     description: The properties of a showback rule.
-    discriminator: RuleType
+    discriminator: ruleType
     properties:
       creationTime:
         description: The time when the showback rule was created.
@@ -3883,6 +3986,15 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      ruleType:
+        description: The rule type of the showback rule solution.
+        enum:
+          - CustomPrice
+          - CostAllocation
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RuleType
       scopes:
         description: List of authorized assigned scopes.
         items:
@@ -3901,17 +4013,5 @@ definitions:
         description: The current version of showback rule.
         readOnly: true
         type: integer
-  ShowbackRulesKind:
-    description: Describes Showback rule with rule type
-    properties:
-      RuleType:
-        description: The rule type of the showback rule solution
-        enum:
-          - CustomPrice
-          - CustomChange
-          - CostAllocation
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ShowbackRulesKind
-    type: object
+    required:
+      - ruleType

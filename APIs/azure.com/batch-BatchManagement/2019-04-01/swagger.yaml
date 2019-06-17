@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/batch/resource-manager/Microsoft.Batch/stable/2019-04-01/BatchManagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: batch-BatchManagement
   x-tags:
@@ -3085,7 +3084,7 @@ definitions:
         readOnly: true
         title: The dedicated core quota for the Batch account.
         type: integer
-        x-nullable: false
+        x-nullable: true
       dedicatedCoreQuotaPerVMFamily:
         description: 'A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.'
         items:
@@ -3109,7 +3108,7 @@ definitions:
         readOnly: true
         title: The low-priority core quota for the Batch account.
         type: integer
-        x-not-returnable: false
+        x-nullable: true
       poolAllocationMode:
         $ref: '#/definitions/PoolAllocationMode'
         readOnly: true
@@ -3452,7 +3451,7 @@ definitions:
   CloudServiceConfiguration:
     properties:
       osFamily:
-        description: 'Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).'
+        description: 'Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. 6 - OS Family 6, equivalent to Windows Server 2019. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).'
         title: The Azure Guest OS family to be installed on the virtual machines in the pool.
         type: string
       osVersion:
@@ -3948,7 +3947,7 @@ definitions:
         title: The list of application licenses the Batch service will make available on each compute node in the pool.
         type: array
       applicationPackages:
-        description: 'Changes to application packages affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged.'
+        description: 'Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool.'
         items:
           $ref: '#/definitions/ApplicationPackageReference'
         title: The list of application packages to be installed on each compute node in the pool.
@@ -4009,6 +4008,7 @@ definitions:
         title: The last modified time of the pool.
         type: string
       maxTasksPerNode:
+        description: The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.
         format: int32
         title: The maximum number of tasks that can run concurrently on a single compute node in the pool.
         type: integer
@@ -4054,6 +4054,7 @@ definitions:
         title: A task specified to run on each compute node as it joins the pool.
       taskSchedulingPolicy:
         $ref: '#/definitions/TaskSchedulingPolicy'
+        description: 'If not specified, the default is spread.'
         title: How tasks are distributed across compute nodes in a pool.
       userAccounts:
         items:
@@ -4198,6 +4199,7 @@ definitions:
         title: Fixed scale settings for the pool.
     title: Scale settings for the pool
   StartTask:
+    description: 'In some cases the start task may be re-run even though the node was not rebooted. Due to this, start tasks should be idempotent and exit gracefully if the setup they''re performing has already been done. Special care should be taken to avoid start tasks which create breakaway process or install/launch services from the start task working directory, as this will block Batch from being able to re-run the start task.'
     properties:
       commandLine:
         description: 'The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using "cmd /c MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux. Required if any other properties of the startTask are specified.'

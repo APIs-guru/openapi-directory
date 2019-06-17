@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory
   x-tags:
@@ -1303,6 +1302,7 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            ifNoneMatch: 00004004-0000-0000-0000-5b28979e0000
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
@@ -1334,6 +1334,14 @@ paths:
                 x-ms-correlation-request-id: d84e59aa-718c-4b1a-951c-076ffff766c8
                 x-ms-ratelimit-remaining-subscription-reads: '14994'
                 x-ms-request-id: d84e59aa-718c-4b1a-951c-076ffff766c8
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:50 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 9db13e51-b9bb-4b29-89bf-2fb1636e7050
+                x-ms-ratelimit-remaining-subscription-reads: '11992'
+                x-ms-request-id: 9db13e51-b9bb-4b29-89bf-2fb1636e7050
     patch:
       description: Updates a factory.
       operationId: Factories_Update
@@ -1589,13 +1597,13 @@ paths:
             api-version: '2018-06-01'
             datasetName: exampleDataset
             factoryName: exampleFactoryName
-            ifNoneMatch: null
+            ifNoneMatch: 15004c4f-0000-0200-0000-5cbe090e0000
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
               body:
-                etag: 0a0068d4-0000-0000-0000-5b245bd30000
+                etag: 15004c4f-0000-0200-0000-5cbe090e0000
                 id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset
                 name: exampleDataset
                 properties:
@@ -1620,11 +1628,19 @@ paths:
                       type: TextFormat
                 type: Microsoft.DataFactory/factories/datasets
               headers:
-                Date: 'Sat, 16 Jun 2018 00:37:40 GMT'
+                Date: 'Mon, 22 Apr 2019 18:33:50 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 19ef529d-6aac-4997-a6af-87cdc02e88c5
-                x-ms-ratelimit-remaining-subscription-reads: '14993'
-                x-ms-request-id: 19ef529d-6aac-4997-a6af-87cdc02e88c5
+                x-ms-correlation-request-id: 48983fb5-612a-44c6-8158-add7ffebb32b
+                x-ms-ratelimit-remaining-subscription-reads: '11993'
+                x-ms-request-id: 48983fb5-612a-44c6-8158-add7ffebb32b
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:50 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 9db13e51-b9bb-4b29-89bf-2fb1636e7050
+                x-ms-ratelimit-remaining-subscription-reads: '11992'
+                x-ms-request-id: 9db13e51-b9bb-4b29-89bf-2fb1636e7050
     put:
       description: Creates or updates a dataset.
       operationId: Datasets_CreateOrUpdate
@@ -1842,6 +1858,50 @@ paths:
                 x-ms-correlation-request-id: 82bc20d2-4bec-496d-a1c8-3f7746fed307
                 x-ms-ratelimit-remaining-subscription-reads: '11996'
                 x-ms-request-id: 82bc20d2-4bec-496d-a1c8-3f7746fed307
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue':
+    post:
+      description: Get exposure control feature for specific factory.
+      operationId: ExposureControl_GetFeatureValueByFactory
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: The exposure control request.
+          in: body
+          name: exposureControlRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ExposureControlRequest'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/ExposureControlResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - exposureControl
+      x-ms-examples:
+        ExposureControl_GetFeatureValueByFactory:
+          parameters:
+            api-version: '2018-06-01'
+            exposureControlRequest:
+              featureName: ADFIntegrationRuntimeSharingRbac
+              featureType: Feature
+            factoryName: exampleFactoryName
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                featureName: ADFIntegrationRuntimeSharingRbac
+                value: 'False'
+              headers:
+                Date: 'Sat, 22 Dec 2018 09:46:07 GMT'
+                X-Content-Type-Options: nosniff
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken':
     post:
       description: Get GitHub Access Token.
@@ -2014,13 +2074,14 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            ifNoneMatch: 15003c4f-0000-0200-0000-5cbe090b0000
             integrationRuntimeName: exampleIntegrationRuntime
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
               body:
-                etag: 0400f1a1-0000-0000-0000-5b2188640000
+                etag: 15003c4f-0000-0200-0000-5cbe090b0000
                 id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime
                 name: exampleIntegrationRuntime
                 properties:
@@ -2028,11 +2089,19 @@ paths:
                   type: SelfHosted
                 type: Microsoft.DataFactory/factories/integrationruntimes
               headers:
-                Date: 'Wed, 13 Jun 2018 21:33:05 GMT'
+                Date: 'Mon, 22 Apr 2019 18:33:47 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: a453fdd5-2f17-4a84-b0c4-751151481ef3
-                x-ms-ratelimit-remaining-subscription-reads: '14910'
-                x-ms-request-id: a453fdd5-2f17-4a84-b0c4-751151481ef3
+                x-ms-correlation-request-id: ad824326-e577-4a47-a092-2e621c4d59d9
+                x-ms-ratelimit-remaining-subscription-reads: '11997'
+                x-ms-request-id: ad824326-e577-4a47-a092-2e621c4d59d9
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:47 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 7b3673dc-aef9-411c-8138-e6778231c474
+                x-ms-ratelimit-remaining-subscription-reads: '11996'
+                x-ms-request-id: 7b3673dc-aef9-411c-8138-e6778231c474
     patch:
       description: Updates an integration runtime.
       operationId: IntegrationRuntimes_Update
@@ -2285,225 +2354,188 @@ paths:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
             getMetadataRequest:
-              metadataPath: ssisFolders
-            integrationRuntimeName: testactivityv2
+              metadataPath: ssisFolders/2/ssisProjects/6/ssisPackages
+            integrationRuntimeName: integrationRuntime1
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
               body:
-                nextLink: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/testactivityv2/getObjectMetadata?api-version=2018-06-01&%24skipToken=https%3a%2f%2fwcu.frontend.clouddatahub.net%2fsubscriptions%2f12345678-1234-1234-1234-12345678abc%2fdatafactories%2f6C8E7C90-FD45-4010-8B7C-B5227D0F0CB7%2fintegrationruntimes%2fTESTACTIVITYV2%2fgetSsisObjectMetadata%3f%24skipToken%3dc3Npc0ZvbGRlcnNAQDIwMTgtMTEtMjlUMDM6NTk6MzIuMDQ1Mzc1MiswMDowMEBAZm9sZGVyQEAwMDAwMDAwMDAwMDAwMDAwMTAx0%26api-version%3d1.0'
                 value:
                   - description: ''
-                    id: 1
-                    name: TestFolder
-                  - description: ''
-                    id: 2
-                    name: EnvironmentFolder
-                  - description: ''
-                    id: 3
-                    name: ActivityTest
-                  - description: ''
-                    id: 4
-                    name: 这是文件夹
-                  - id: 5
-                    name: '1'
-                  - id: 6
-                    name: '2'
-                  - id: 7
-                    name: '3'
-                  - id: 8
-                    name: '4'
-                  - id: 9
-                    name: '5'
-                  - id: 10
-                    name: '6'
-                  - id: 11
-                    name: '7'
-                  - id: 12
-                    name: '8'
-                  - id: 13
-                    name: '9'
-                  - id: 14
-                    name: '10'
-                  - id: 15
-                    name: '11'
-                  - id: 16
-                    name: '12'
-                  - id: 17
-                    name: '13'
-                  - id: 18
-                    name: '14'
-                  - id: 19
-                    name: '15'
-                  - id: 20
-                    name: '16'
-                  - id: 21
-                    name: '17'
-                  - id: 22
-                    name: '18'
-                  - id: 23
-                    name: '19'
-                  - id: 24
-                    name: '20'
-                  - id: 25
-                    name: '21'
-                  - id: 26
-                    name: '22'
-                  - id: 27
-                    name: '23'
-                  - id: 28
-                    name: '24'
-                  - id: 29
-                    name: '25'
-                  - id: 30
-                    name: '26'
-                  - id: 31
-                    name: '27'
-                  - id: 32
-                    name: '28'
-                  - id: 33
-                    name: '29'
-                  - id: 34
-                    name: '30'
-                  - id: 35
-                    name: '31'
-                  - id: 36
-                    name: '32'
-                  - id: 37
-                    name: '33'
-                  - id: 38
-                    name: '34'
-                  - id: 39
-                    name: '35'
-                  - id: 40
-                    name: '36'
-                  - id: 41
-                    name: '37'
-                  - id: 42
-                    name: '38'
-                  - id: 43
-                    name: '39'
-                  - id: 44
-                    name: '40'
-                  - id: 45
-                    name: '41'
-                  - id: 46
-                    name: '42'
-                  - id: 47
-                    name: '43'
-                  - id: 48
-                    name: '44'
-                  - id: 49
-                    name: '45'
-                  - id: 50
-                    name: '46'
-                  - id: 51
-                    name: '47'
-                  - id: 52
-                    name: '48'
-                  - id: 53
-                    name: '49'
-                  - id: 54
-                    name: '50'
-                  - id: 55
-                    name: '51'
-                  - id: 56
-                    name: '52'
-                  - id: 57
-                    name: '53'
-                  - id: 58
-                    name: '54'
-                  - id: 59
-                    name: '55'
-                  - id: 60
-                    name: '56'
-                  - id: 61
-                    name: '57'
-                  - id: 62
-                    name: '58'
-                  - id: 63
-                    name: '59'
-                  - id: 64
-                    name: '60'
-                  - id: 65
-                    name: '61'
-                  - id: 66
-                    name: '62'
-                  - id: 67
-                    name: '63'
-                  - id: 68
-                    name: '64'
-                  - id: 69
-                    name: '65'
-                  - id: 70
-                    name: '66'
-                  - id: 71
-                    name: '67'
-                  - id: 72
-                    name: '68'
-                  - id: 73
-                    name: '69'
-                  - id: 74
-                    name: '70'
-                  - id: 75
-                    name: '71'
-                  - id: 76
-                    name: '72'
-                  - id: 77
-                    name: '73'
-                  - id: 78
-                    name: '74'
-                  - id: 79
-                    name: '75'
-                  - id: 80
-                    name: '76'
-                  - id: 81
-                    name: '77'
-                  - id: 82
-                    name: '78'
-                  - id: 83
-                    name: '79'
-                  - id: 84
-                    name: '80'
-                  - id: 85
-                    name: '81'
-                  - id: 86
-                    name: '82'
-                  - id: 87
-                    name: '83'
-                  - id: 88
-                    name: '84'
-                  - id: 89
-                    name: '85'
-                  - id: 90
-                    name: '86'
-                  - id: 91
-                    name: '87'
-                  - id: 92
-                    name: '88'
-                  - id: 93
-                    name: '89'
-                  - id: 94
-                    name: '90'
-                  - id: 95
-                    name: '91'
-                  - id: 96
-                    name: '92'
-                  - id: 97
-                    name: '93'
-                  - id: 98
-                    name: '94'
-                  - id: 99
-                    name: '95'
-                  - id: 100
-                    name: '96'
+                    folderId: 2
+                    id: 53
+                    name: Package.dtsx
+                    parameters:
+                      - dataType: Int32
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 278
+                        name: Parameter1
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Decimal
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 279
+                        name: Parameter10
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Double
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 280
+                        name: Parameter11
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Int16
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 281
+                        name: Parameter12
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Boolean
+                        description: ''
+                        designDefaultValue: 'False'
+                        id: 282
+                        name: Parameter2
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Int64
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 283
+                        name: Parameter3
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: SByte
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 284
+                        name: Parameter4
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Single
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 285
+                        name: Parameter5
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: UInt32
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 286
+                        name: Parameter6
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: UInt64
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 287
+                        name: Parameter7
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: Byte
+                        description: ''
+                        designDefaultValue: '0'
+                        id: 288
+                        name: Parameter8
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: DateTime
+                        description: ''
+                        designDefaultValue: '2/15/2019 3:33:59 PM'
+                        id: 289
+                        name: Parameter9
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: String
+                        description: ''
+                        designDefaultValue: Data Source=********;User ID=liubing;Initial Catalog=SSISDB;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;
+                        id: 290
+                        name: CM.SSISDB.connection.manager.ConnectionString
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: String
+                        description: ''
+                        designDefaultValue: SSISDB
+                        id: 291
+                        name: CM.SSISDB.connection.manager.InitialCatalog
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: String
+                        description: ''
+                        id: 292
+                        name: CM.SSISDB.connection.manager.Password
+                        required: false
+                        sensitive: true
+                        valueSet: false
+                        valueType: V
+                      - dataType: Boolean
+                        description: ''
+                        designDefaultValue: 'False'
+                        id: 293
+                        name: CM.SSISDB.connection.manager.RetainSameConnection
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: String
+                        description: ''
+                        designDefaultValue: '********'
+                        id: 294
+                        name: CM.SSISDB.connection.manager.ServerName
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                      - dataType: String
+                        description: ''
+                        designDefaultValue: liubing
+                        id: 295
+                        name: CM.SSISDB.connection.manager.UserName
+                        required: false
+                        sensitive: false
+                        valueSet: false
+                        valueType: V
+                    projectId: 6
+                    projectVersion: 23
               headers:
-                Date: 'Mon, 03 Dec 2018 06:24:54 GMT'
+                Date: 'Thu, 09 May 2019 09:39:51 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd
+                x-ms-correlation-request-id: 63fab708-842b-4b19-9811-5e128905e824
                 x-ms-ratelimit-remaining-subscription-writes: '1198'
-                x-ms-request-id: 0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd
+                x-ms-request-id: 63fab708-842b-4b19-9811-5e128905e824
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus':
     post:
       description: Gets detailed status information for an integration runtime.
@@ -3448,16 +3480,13 @@ paths:
               body:
                 name: exampleManagedIntegrationRuntime
                 properties:
-                  dataFactoryLocation: null
                   dataFactoryName: exampleFactoryName
-                  resourceUri: null
                   state: Started
                   type: Managed
                   typeProperties:
                     createTime: '2018-06-13T21:11:01.8695494Z'
                     nodes: []
                     otherErrors: []
-                    state: Started
               headers:
                 Date: 'Wed, 13 Jun 2018 21:33:00 GMT'
                 X-Content-Type-Options: nosniff
@@ -3506,14 +3535,23 @@ paths:
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
-              body:
-                id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleManagedIntegrationRuntime
+              body: null
               headers:
                 Date: 'Wed, 13 Jun 2018 21:33:03 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-correlation-request-id: 87f6c2c7-92f1-40e6-bb01-769f9e6ca22f
                 x-ms-ratelimit-remaining-subscription-writes: '1193'
                 x-ms-request-id: 87f6c2c7-92f1-40e6-bb01-769f9e6ca22f
+            '202':
+              body: null
+              headers:
+                Date: 'Wed, 13 Jun 2018 21:11:03 GMT'
+                Location: 'https://api-dogfood.resources.windows-int.net/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/stop/operationresults/301b9c4b1c43415594e11918e678385f?api-version=2018-06-01'
+                Retry-After: '15'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: cb03ccdd-9d7a-4ebe-a967-0edc96f33904
+                x-ms-ratelimit-remaining-subscription-writes: '1194'
+                x-ms-request-id: cb03ccdd-9d7a-4ebe-a967-0edc96f33904
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials':
     post:
@@ -3716,14 +3754,14 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
-            ifNoneMatch: null
+            ifNoneMatch: 1500474f-0000-0200-0000-5cbe090d0000
             linkedServiceName: exampleLinkedService
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
               body:
-                etag: 0a0064d4-0000-0000-0000-5b245bd00000
+                etag: 1500474f-0000-0200-0000-5cbe090d0000
                 id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/linkedservices/exampleLinkedService
                 name: exampleLinkedService
                 properties:
@@ -3733,14 +3771,22 @@ paths:
                     connectionString:
                       type: SecureString
                       value: '**********'
-                    encryptedCredential: ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRGLURPR0ZPT0QtWUFOWkhBTkctV1VfMGI2M2EyMmYtMGEzNC00NDg2LWIzMDktNzM0NTlkODUyY2Q1Ig0KfQ==
+                    encryptedCredential: ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkhWVEVTVEVYQU1QTEVTXzg5MjU1NGY0LTViNGItNDFhOS1hYWYxLTg4ZWI5ZDBjOWIzMyINCn0=
                 type: Microsoft.DataFactory/factories/linkedservices
               headers:
-                Date: 'Sat, 16 Jun 2018 00:37:36 GMT'
+                Date: 'Mon, 22 Apr 2019 18:33:48 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: b57420cc-9476-4947-b54f-50b041b614ec
-                x-ms-ratelimit-remaining-subscription-reads: '14995'
-                x-ms-request-id: b57420cc-9476-4947-b54f-50b041b614ec
+                x-ms-correlation-request-id: 99e5d0d9-55e6-45a0-8bd2-cf39210f317c
+                x-ms-ratelimit-remaining-subscription-reads: '11995'
+                x-ms-request-id: 99e5d0d9-55e6-45a0-8bd2-cf39210f317c
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:49 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 9a503b24-1b14-4242-9fab-598c81881370
+                x-ms-ratelimit-remaining-subscription-reads: '11994'
+                x-ms-request-id: 9a503b24-1b14-4242-9fab-598c81881370
     put:
       description: Creates or updates a linked service.
       operationId: LinkedServices_CreateOrUpdate
@@ -4209,14 +4255,14 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
-            ifNoneMatch: null
+            ifNoneMatch: 1500504f-0000-0200-0000-5cbe090f0000
             pipelineName: examplePipeline
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
           responses:
             '200':
               body:
-                etag: 0a006cd4-0000-0000-0000-5b245bd60000
+                etag: 1500504f-0000-0200-0000-5cbe090f0000
                 id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline
                 name: examplePipeline
                 properties:
@@ -4255,13 +4301,24 @@ paths:
                   parameters:
                     OutputBlobNameList:
                       type: Array
+                  variables:
+                    TestVariableArray:
+                      type: Array
                 type: Microsoft.DataFactory/factories/pipelines
               headers:
-                Date: 'Sat, 16 Jun 2018 00:37:43 GMT'
+                Date: 'Mon, 22 Apr 2019 18:33:51 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: e1e7bf40-37d4-4f38-92aa-4138cc1fa2fa
-                x-ms-ratelimit-remaining-subscription-reads: '14991'
-                x-ms-request-id: e1e7bf40-37d4-4f38-92aa-4138cc1fa2fa
+                x-ms-correlation-request-id: f3865c61-4888-4b91-a617-9a985d9dd0fd
+                x-ms-ratelimit-remaining-subscription-reads: '11991'
+                x-ms-request-id: f3865c61-4888-4b91-a617-9a985d9dd0fd
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:51 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 819ef646-692f-4d1b-8717-0b4fe493e2aa
+                x-ms-ratelimit-remaining-subscription-reads: '11990'
+                x-ms-request-id: 819ef646-692f-4d1b-8717-0b4fe493e2aa
     put:
       description: Creates or updates a pipeline.
       operationId: Pipelines_CreateOrUpdate
@@ -4833,18 +4890,17 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
-            ifNoneMatch: null
+            ifNoneMatch: 1500544f-0000-0200-0000-5cbe09100000
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
             triggerName: exampleTrigger
           responses:
             '200':
               body:
-                etag: 0a008dd4-0000-0000-0000-5b245c6f0000
+                etag: 1500544f-0000-0200-0000-5cbe09100000
                 id: /subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleTrigger
                 name: exampleTrigger
                 properties:
-                  description: Example description
                   pipelines:
                     - parameters:
                         OutputBlobNameList:
@@ -4856,18 +4912,26 @@ paths:
                   type: ScheduleTrigger
                   typeProperties:
                     recurrence:
-                      endTime: '2018-06-16T00:55:14.905167Z'
+                      endTime: '2019-04-22T18:48:52.5281747Z'
                       frequency: Minute
                       interval: 4
-                      startTime: '2018-06-16T00:39:14.905167Z'
+                      startTime: '2019-04-22T18:32:52.527912Z'
                       timeZone: UTC
                 type: Microsoft.DataFactory/factories/triggers
               headers:
-                Date: 'Sat, 16 Jun 2018 00:40:17 GMT'
+                Date: 'Mon, 22 Apr 2019 18:33:52 GMT'
                 X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 060364d7-7980-4def-8bc1-800552a9b53d
-                x-ms-ratelimit-remaining-subscription-reads: '14987'
-                x-ms-request-id: 060364d7-7980-4def-8bc1-800552a9b53d
+                x-ms-correlation-request-id: 8ad1759f-24c1-46a5-aef5-edd267e18870
+                x-ms-ratelimit-remaining-subscription-reads: '11989'
+                x-ms-request-id: 8ad1759f-24c1-46a5-aef5-edd267e18870
+            '304':
+              body: null
+              headers:
+                Date: 'Mon, 22 Apr 2019 18:33:52 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: ca7b5df3-83ee-42a1-88f3-e417baa37900
+                x-ms-ratelimit-remaining-subscription-reads: '11988'
+                x-ms-request-id: ca7b5df3-83ee-42a1-88f3-e417baa37900
     put:
       description: Creates or updates a trigger.
       operationId: Triggers_CreateOrUpdate
@@ -5034,7 +5098,7 @@ paths:
       tags:
         - rerunTriggers
       x-ms-examples:
-        RerunTriggers_List:
+        RerunTriggers_ListByTrigger:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
@@ -5051,11 +5115,10 @@ paths:
                       description: Example description
                       type: RerunTumblingWindowTrigger
                       typeProperties:
-                        properties:
-                          maxConcurrency: 4
-                          requestedEndTime: '2018-06-16T00:55:14.905167Z'
-                          requestedStartTime: '2018-06-16T00:39:14.905167Z'
-                    type: Microsoft.DataFactory/factories/triggers
+                        maxConcurrency: 4
+                        requestedEndTime: '2018-06-16T00:55:14.905167Z'
+                        requestedStartTime: '2018-06-16T00:39:14.905167Z'
+                    type: Microsoft.DataFactory/factories/triggers/rerunTriggers
               headers:
                 Date: 'Sat, 16 Jun 2018 00:40:20 GMT'
                 X-Content-Type-Options: nosniff
@@ -5097,15 +5160,14 @@ paths:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            rerunTriggerName: exampleRerunTrigger
             rerunTumblingWindowTriggerActionParameters:
-              properties:
-                endTime: '2018-06-16T00:55:13.8441801Z'
-                maxConcurrency: 4
-                startTime: '2018-06-16T00:39:13.8441801Z'
+              endTime: '2018-06-16T00:55:13.8441801Z'
+              maxConcurrency: 4
+              startTime: '2018-06-16T00:39:13.8441801Z'
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
             triggerName: exampleTrigger
-            triggerRerunName: exampleRerunTrigger
           responses:
             '200':
               body:
@@ -5114,11 +5176,10 @@ paths:
                 properties:
                   type: RerunTumblingWindowTrigger
                   typeProperties:
-                    properties:
-                      maxConcurrency: 4
-                      requestedEndTime: '2018-06-16T00:55:13.8441801Z'
-                      requestedStartTime: '2018-06-16T00:39:13.8441801Z'
-                type: Microsoft.DataFactory/factories/triggers
+                    maxConcurrency: 4
+                    requestedEndTime: '2018-06-16T00:55:13.8441801Z'
+                    requestedStartTime: '2018-06-16T00:39:13.8441801Z'
+                type: Microsoft.DataFactory/factories/triggers/rerunTriggers
               headers:
                 Date: 'Sat, 16 Jun 2018 00:40:14 GMT'
                 X-Content-Type-Options: nosniff
@@ -5146,14 +5207,14 @@ paths:
       tags:
         - rerunTriggers
       x-ms-examples:
-        Triggers_Cancel:
+        RerunTriggers_Cancel:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            rerunTriggerName: exampleRerunTrigger
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
             triggerName: exampleTrigger
-            triggerRerunName: exampleRerunTrigger
           responses:
             '200':
               body: null
@@ -5185,14 +5246,14 @@ paths:
       tags:
         - rerunTriggers
       x-ms-examples:
-        Triggers_Start:
+        RerunTriggers_Start:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            rerunTriggerName: exampleRerunTrigger
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
             triggerName: exampleTrigger
-            triggerRerunName: exampleRerunTrigger
           responses:
             '200':
               body: null
@@ -5224,14 +5285,14 @@ paths:
       tags:
         - rerunTriggers
       x-ms-examples:
-        Triggers_Stop:
+        RerunTriggers_Stop:
           parameters:
             api-version: '2018-06-01'
             factoryName: exampleFactoryName
+            rerunTriggerName: exampleRerunTrigger
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-1234-12345678abc
             triggerName: exampleTrigger
-            triggerRerunName: exampleRerunTrigger
           responses:
             '200':
               body: null

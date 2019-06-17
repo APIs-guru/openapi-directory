@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/migrate/resource-manager/Microsoft.Migrate/preview/2017-11-11-preview/migrate.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: migrate
   x-tags:
@@ -136,7 +135,8 @@ paths:
                       resource: Microsoft.Migrate/projects
                     name: Write
                     origin: 'user,system'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/assessments':
     get:
       description: |
@@ -231,7 +231,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups':
     get:
       description: Get all groups created in the project. Returns a json array of objects of type 'group' as specified in the Models section.
@@ -299,7 +300,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}':
     delete:
       description: |
@@ -597,7 +599,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}':
     delete:
       description: |
@@ -1014,7 +1017,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}':
     get:
       description: Get an assessed machine with its size & cost estimate that was evaluated in the specified assessment.
@@ -1279,7 +1283,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/machines/{machineName}':
     get:
       description: Get the machine with the specified name. Returns a json object of type 'machine' defined in Models section.
@@ -1426,7 +1431,8 @@ paths:
             '404': {}
             '500': {}
             '503': {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}':
     delete:
       description: Delete the project. Deleting non-existent project is a no-operation.

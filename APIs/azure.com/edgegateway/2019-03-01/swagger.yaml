@@ -921,7 +921,7 @@ paths:
               name: testedgedevice
               sku:
                 name: Edge
-                tier: standard
+                tier: Standard
               tags: {}
             accept-language:
               - en-US
@@ -3364,8 +3364,8 @@ paths:
               name: user1
               properties:
                 encryptedPassword:
-                  EncryptionCertThumbprint: blah
                   encryptionAlgorithm: None
+                  encryptionCertThumbprint: blah
                   value: Password@1
                 shareAccessRights: []
               type: Microsoft.DataBoxEdge/dataBoxEdgeDevices/users

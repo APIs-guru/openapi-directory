@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/preview/2017-03-01-preview/activityLogAlerts_API.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: monitor-activityLogAlerts_API
   x-tags:
@@ -130,7 +129,8 @@ paths:
                     tags: {}
                     type: Microsoft.Insights/ActivityLogAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts':
     get:
       deprecated: true
@@ -198,7 +198,8 @@ paths:
                     tags: {}
                     type: Microsoft.Insights/ActivityLogAlerts
               headers: {}
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts/{activityLogAlertName}':
     delete:
       deprecated: true

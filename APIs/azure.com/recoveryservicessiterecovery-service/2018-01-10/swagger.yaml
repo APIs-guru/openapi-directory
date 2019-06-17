@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2018-01-10/service.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -4986,7 +4985,7 @@ paths:
             api-version: '2018-01-10'
             creationInput:
               properties:
-                PolicyId: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1
+                policyId: /Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionprofile1
                 providerSpecificInput: {}
                 targetProtectionContainerId: Microsoft Azure
             fabricName: cloud1
@@ -6121,9 +6120,9 @@ paths:
           parameters:
             api-version: '2018-01-10'
             jobQueryParameter:
-              affectedObjectTypes: []
+              affectedObjectTypes: ''
               endTime: '2017-05-04T14:26:51.9161395Z'
-              jobStatus: []
+              jobStatus: ''
               startTime: '2017-04-27T14:26:51.9161395Z'
             resourceGroupName: resourceGroupPS1
             resourceName: vault1

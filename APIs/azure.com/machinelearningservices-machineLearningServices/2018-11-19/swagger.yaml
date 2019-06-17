@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: machinelearningservices-machineLearningServices
   x-tags:
@@ -136,7 +135,8 @@ paths:
             $ref: '#/definitions/MachineLearningServiceError'
       tags:
         - Operation
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages':
     get:
       description: Gets the current usage information as well as limits for AML resources for given subscription and location.
@@ -291,7 +291,8 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachineSizes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces':
     get:
       description: Lists all the available machine learning workspaces under the specified subscription.

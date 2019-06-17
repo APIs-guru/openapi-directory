@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement
   x-tags:
@@ -2257,7 +2256,8 @@ paths:
             $ref: '#/definitions/RegionListResult'
       tags:
         - Regions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{aggregation}':
     get:
       description: Lists report records.
@@ -3599,10 +3599,14 @@ definitions:
       clientId: demo
       clientRegistrationEndpoint: 'https://contoso.com/'
       clientSecret: demo
+      defaultScope: null
+      description: null
       grantTypes:
         - authorizationCode
       id: /authorizationServers/554be23d0fce600674232c33
       name: AAD OAuth A/S
+      resourceOwnerPassword: null
+      resourceOwnerUsername: null
       supportState: false
       tokenBodyParameters: []
       tokenEndpoint: 'https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0'

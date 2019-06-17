@@ -35,14 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  FabricLocationObjectParameter:
-    description: Fabric location object.
-    in: body
-    name: fabricObject
-    required: true
-    schema:
-      $ref: '#/definitions/FabricLocation'
-    x-ms-parameter-location: method
   FabricLocationParameter:
     description: Fabric location.
     in: path
@@ -104,52 +96,6 @@ paths:
       x-ms-odata: '#/definitions/FabricLocation'
       x-ms-pageable:
         nextLinkName: nextLink
-    put:
-      description: Creates or updates a fabric location.  This will fail if called outside deployment.
-      operationId: FabricLocations_Create
-      parameters:
-        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - description: Name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - default: '2016-05-01'
-          description: Client API Version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - $ref: '#/parameters/FabricLocationObjectParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/FabricLocation'
-      tags:
-        - FabricLocations
-      x-ms-examples:
-        Creates or updates a fabric location.  This will fail if called outside deployment.:
-          parameters:
-            api-version: '2016-05-01'
-            fabricLocation: local
-            fabricObject: {}
-            resourceGroupName: System.local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body:
-                id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local
-                location: local
-                name: local
-                properties: {}
-                tags: {}
-                type: Microsoft.Fabric.Admin/fabricLocations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{fabricLocation}':
     get:
       description: Returns the requested fabric location.

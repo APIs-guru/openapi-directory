@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimapis.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimapis
   x-tags:
@@ -1992,58 +1991,50 @@ paths:
         ApiManagementCreateApiRevisionFromExistingApi:
           parameters:
             api-version: '2019-01-01'
-            apiId: echo-api;rev=2
+            apiId: echo-api;rev=3
             parameters:
               properties:
                 apiRevisionDescription: Creating a Revision of an existing API
-                description: Existing Http Bin Api
-                displayName: httpbin
-                isCurrent: false
-                path: bin
-                protocols:
-                  - http
-                  - https
-                serviceUrl: 'http://httpbin.org'
-                sourceApiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/59793a3c4679c754636c520e
+                path: echo
+                serviceUrl: 'http://echoapi.cloudapp.net/apiv3'
+                sourceApiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/59793a3c4679c754636c520e;rev=2
-                name: 59793a3c4679c754636c520e;rev=2
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3
+                name: echo-api;rev=3
                 properties:
-                  apiRevision: '2'
+                  apiRevision: '3'
                   apiRevisionDescription: Creating a Revision of an existing API
-                  description: ''
-                  displayName: httpbin
-                  path: bin
+                  displayName: Echo API
+                  path: echo
                   protocols:
-                    - http
                     - https
-                  serviceUrl: 'http://httpbin.org'
+                  serviceUrl: 'http://echoapi.cloudapp.net/apiv3'
                   subscriptionKeyParameterNames:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
+                  subscriptionRequired: true
                 type: Microsoft.ApiManagement/service/apis
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/59793a3c4679c754636c520e;rev=2
-                name: 59793a3c4679c754636c520e;rev=2
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3
+                name: echo-api;rev=3
                 properties:
-                  apiRevision: '2'
+                  apiRevision: '3'
                   apiRevisionDescription: Creating a Revision of an existing API
-                  description: ''
-                  displayName: httpbin
-                  path: bin
+                  displayName: Echo API
+                  path: echo
                   protocols:
-                    - http
                     - https
-                  serviceUrl: 'http://httpbin.org'
+                  serviceUrl: 'http://echoapi.cloudapp.net/apiv3'
                   subscriptionKeyParameterNames:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
+                  subscriptionRequired: true
                 type: Microsoft.ApiManagement/service/apis
             '202':
               headers:
@@ -9513,6 +9504,24 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - default: xml
+          description: Policy Export Format.
+          enum:
+            - xml
+            - rawxml
+          in: query
+          name: format
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyExportFormat
+            values:
+              - description: The contents are inline and Content type is an XML document.
+                value: xml
+              - description: The contents are inline and Content type is a non XML encoded policy document.
+                value: rawxml
+          x-ms-parameter-location: method
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -11349,6 +11358,24 @@ paths:
           x-ms-enum:
             modelAsString: true
             name: PolicyIdName
+          x-ms-parameter-location: method
+        - default: xml
+          description: Policy Export Format.
+          enum:
+            - xml
+            - rawxml
+          in: query
+          name: format
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyExportFormat
+            values:
+              - description: The contents are inline and Content type is an XML document.
+                value: xml
+              - description: The contents are inline and Content type is a non XML encoded policy document.
+                value: rawxml
           x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
@@ -13225,14 +13252,11 @@ paths:
                       description: Schema contract Properties.
                       properties:
                         contentType:
-                          description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+                          description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. '
                           type: string
                         document:
-                          description: Schema Document Properties.
-                          properties:
-                            value:
-                              description: Json escaped string defining the document representing the Schema.
-                              type: string
+                          description: Properties of the Schema Document.
+                          type: object
                       required:
                         - contentType
                 readOnly: true
@@ -13473,14 +13497,11 @@ paths:
                 description: Schema contract Properties.
                 properties:
                   contentType:
-                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. '
                     type: string
                   document:
-                    description: Schema Document Properties.
-                    properties:
-                      value:
-                        description: Json escaped string defining the document representing the Schema.
-                        type: string
+                    description: Properties of the Schema Document.
+                    type: object
                 required:
                   - contentType
         default:
@@ -13692,10 +13713,10 @@ paths:
             description: Schema Contract details.
             properties:
               properties:
-                description: Schema contract Properties.
+                description: API Schema create or update contract Properties.
                 properties:
                   contentType:
-                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`.'
                     type: string
                   document:
                     description: Schema Document Properties.
@@ -13751,14 +13772,11 @@ paths:
                 description: Schema contract Properties.
                 properties:
                   contentType:
-                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. '
                     type: string
                   document:
-                    description: Schema Document Properties.
-                    properties:
-                      value:
-                        description: Json escaped string defining the document representing the Schema.
-                        type: string
+                    description: Properties of the Schema Document.
+                    type: object
                 required:
                   - contentType
         '201':
@@ -13790,14 +13808,11 @@ paths:
                 description: Schema contract Properties.
                 properties:
                   contentType:
-                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml).'
+                    description: 'Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. '
                     type: string
                   document:
-                    description: Schema Document Properties.
-                    properties:
-                      value:
-                        description: Json escaped string defining the document representing the Schema.
-                        type: string
+                    description: Properties of the Schema Document.
+                    type: object
                 required:
                   - contentType
         default:

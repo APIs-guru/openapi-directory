@@ -78,7 +78,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: Specifies the the key by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -1344,7 +1344,7 @@ definitions:
             - description: The bitrate.
               value: Bitrate
       value:
-        description: The track proprty value.
+        description: The track property value.
         type: string
     required:
       - property
@@ -1448,7 +1448,7 @@ definitions:
         format: int64
         type: integer
       forceEndTimestamp:
-        description: The indicator of forcing exsiting of end time stamp.
+        description: The indicator of forcing existing of end time stamp.
         type: boolean
       liveBackoffDuration:
         description: The relative to end right edge.

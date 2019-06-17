@@ -288,6 +288,35 @@ paths:
                     name: Microsoft.EventHub/clusters/write
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusterRegions':
+    get:
+      description: 'List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.'
+      operationId: Clusters_ListAvailableClusters
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Available clusters listed successfully.
+          schema:
+            $ref: '#/definitions/AvailableClustersList'
+        default:
+          description: Error response describing why available clusters could not be successfully listed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Event Hubs Clusters
+      x-ms-examples:
+        ListAvailableClusters:
+          parameters:
+            api-version: 2018-01-01-preview
+            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+          responses:
+            '200':
+              body:
+                value:
+                  - location: westus
+                  - location: eastus
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces':
     get:
       description: 'Lists all the available Namespaces within a subscription, irrespective of the resource groups.'
@@ -1451,6 +1480,39 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}':
+    delete:
+      description: Deletes an existing Event Hubs Cluster. This operation is idempotent.
+      operationId: Clusters_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Event Hubs Cluster successfully deleted.
+        '202':
+          description: Event Hubs Cluster delete request accepted.
+        '204':
+          description: No content.
+        default:
+          description: Event Hubs error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Event Hubs Cluster
+      x-ms-examples:
+        ClusterDelete:
+          parameters:
+            api-version: 2018-01-01-preview
+            clusterName: testCluster
+            resourceGroupName: myResourceGroup
+            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
     get:
       description: Gets the resource description of the specified Event Hubs Cluster.
       operationId: Clusters_Get
@@ -1572,6 +1634,115 @@ paths:
                 type: Microsoft.EventHub/Clusters
             '202': {}
       x-ms-long-running-operation: true
+    put:
+      description: Creates or updates an instance of an Event Hubs Cluster.
+      operationId: Clusters_Put
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Event Hubs Cluster successfully created or updated.
+          schema:
+            $ref: '#/definitions/Cluster'
+        '201':
+          description: Event Hubs Cluster create or update request accepted.
+          schema:
+            $ref: '#/definitions/Cluster'
+        '202':
+          description: Event Hubs Cluster create or update request accepted.
+        default:
+          description: Event Hubs error response detailing why the Event Hubs Cluster create or update operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Event Hubs Cluster
+      x-ms-examples:
+        ClusterPut:
+          parameters:
+            api-version: 2018-01-01-preview
+            clusterName: testCluster
+            parameters:
+              location: South Central US
+              sku:
+                capacity: 1
+                tier: Dedicated
+              tags:
+                tag1: value1
+                tag2: value2
+            resourceGroupName: myResourceGroup
+            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+          responses:
+            '200':
+              body:
+                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster
+                location: South Central US
+                name: testCluster
+                properties:
+                  created: '2017-05-24T23:23:27.877Z'
+                  metricId: SN6-008
+                  updated: '2017-05-24T23:23:27.877Z'
+                sku:
+                  capacity: 1
+                  name: Dedicated
+                tags:
+                  tag1: value1
+                  tag2: value2
+                type: Microsoft.EventHub/Clusters
+            '201':
+              body:
+                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster
+                location: South Central US
+                name: testCluster
+                properties:
+                  created: '2017-05-24T23:23:27.877Z'
+                  metricId: SN6-008
+                  updated: '2017-05-24T23:23:27.877Z'
+                sku:
+                  capacity: 1
+                  name: Dedicated
+                tags:
+                  tag1: value1
+                  tag2: value2
+                type: Microsoft.EventHub/Clusters
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces':
+    get:
+      description: List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
+      operationId: Clusters_ListNamespaces
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: List of Namespace IDs in Cluster successfully delivered.
+          schema:
+            $ref: '#/definitions/EHNamespaceIdListResult'
+        default:
+          description: Event Hubs Cluster error response detailing why this operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Event Hubs Namespace Enumeration in Cluster
+      x-ms-examples:
+        ListNamespacesInCluster:
+          parameters:
+            api-version: 2018-01-01-preview
+            clusterName: testCluster
+            resourceGroupName: myResourceGroup
+            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/Default-EventHub-SouthCentralUS/providers/Microsoft.EventHub/namespaces/rrama-int7-ns1
+                  - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/Default-EventHub-SouthCentralUS/providers/Microsoft.EventHub/namespaces/rrama-ehns2-int7
+                  - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/Default-ServiceBus-SouthCentralUS/providers/Microsoft.EventHub/namespaces/db3-rrama-foo1
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default':
     get:
       description: Get all Event Hubs Cluster settings - a collection of key/value pairs which represent the quotas and settings imposed on the cluster.
@@ -2671,6 +2842,20 @@ paths:
                   virtualNetworkSubnetId: /subscriptions/Subscription/resourceGroups/ResourceGroup/providers/Microsoft.Network/virtualNetworks/sbehvnettest/subnets/default
                 type: Microsoft.EventHub/Namespaces/VirtualNetworkRules
 definitions:
+  AvailableCluster:
+    description: Pre-provisioned and readily available Event Hubs Cluster count per region.
+    properties:
+      location:
+        description: Location fo the Available Cluster
+        type: string
+  AvailableClustersList:
+    description: The response of the List Available Clusters operation.
+    properties:
+      value:
+        description: The count of readily available and pre-provisioned Event Hubs Clusters per region.
+        items:
+          $ref: '#/definitions/AvailableCluster'
+        type: array
   Cluster:
     allOf:
       - $ref: '#/definitions/TrackedResource'
@@ -2685,6 +2870,10 @@ definitions:
             type: string
           metricId:
             description: The metric ID of the cluster resource. Provided by the service and not modifiable by the user.
+            readOnly: true
+            type: string
+          status:
+            description: Status of the Cluster resource
             readOnly: true
             type: string
           updated:
@@ -2783,6 +2972,21 @@ definitions:
       sku:
         $ref: '#/definitions/Sku'
         description: Properties of sku resource
+  EHNamespaceIdContainer:
+    description: The full ARM ID of an Event Hubs Namespace
+    properties:
+      id:
+        description: id parameter
+        type: string
+    type: object
+  EHNamespaceIdListResult:
+    description: The response of the List Namespace IDs operation
+    properties:
+      value:
+        description: Result of the List Namespace IDs operation
+        items:
+          $ref: '#/definitions/EHNamespaceIdContainer'
+        type: array
   EHNamespaceListResult:
     description: The response of the List Namespace operation
     properties:

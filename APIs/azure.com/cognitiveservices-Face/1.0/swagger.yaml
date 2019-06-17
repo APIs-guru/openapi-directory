@@ -47,6 +47,21 @@ parameters:
     required: false
     type: array
     x-ms-parameter-location: method
+  detectionModel:
+    default: detection_01
+    description: 'Name of detection model. Detection model is used to detect faces in the submitted image. A detection model name can be provided when performing Face - Detect or (Large)FaceList - Add Face or (Large)PersonGroup - Add Face. The default value is ''detection_01'', if another model is needed, please explicitly specify it.'
+    enum:
+      - detection_01
+      - detection_02
+    in: query
+    name: detectionModel
+    required: false
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DetectionModel
+    x-ms-parameter-location: method
+    x-nullable: false
   faceListId:
     description: Id referencing a particular face list.
     in: path
@@ -115,6 +130,21 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  recognitionModel:
+    default: recognition_01
+    description: 'Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is ''recognition_01'', if latest model needed, please explicitly specify the model you need.'
+    enum:
+      - recognition_01
+      - recognition_02
+    in: query
+    name: recognitionModel
+    required: false
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: RecognitionModel
+    x-ms-parameter-location: method
+    x-nullable: false
   returnFaceAttributes:
     collectionFormat: csv
     description: 'Analyze and return the one or more specified face attributes in the comma-separated string like "returnFaceAttributes=age,gender". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.'
@@ -144,6 +174,14 @@ parameters:
     required: false
     type: array
     x-ms-parameter-location: method
+  returnRecognitionModel:
+    default: false
+    description: A value indicating whether the operation should return 'recognitionModel' in response.
+    in: query
+    name: returnRecognitionModel
+    required: false
+    type: boolean
+    x-ms-parameter-location: method
   snapshotId:
     description: Id referencing a particular snapshot.
     format: uuid
@@ -171,7 +209,25 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.'
+      description: |-
+        Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />
+        * No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.
+        * Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.
+        * For optimal results when querying [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
+
+        * Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'recognition_01': | The default recognition model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). All those faceIds created before 2019 March are bonded with this recognition model. |
+          | 'recognition_02': | Recognition model released in 2019 March. 'recognition_02' is recommended since its overall accuracy is improved compared with 'recognition_01'. |
       operationId: Face_DetectWithUrl
       parameters:
         - default: true
@@ -199,6 +255,9 @@ paths:
             type: object
           x-ms-client-flatten: true
           x-ms-parameter-location: method
+        - $ref: '#/parameters/recognitionModel'
+        - $ref: '#/parameters/returnRecognitionModel'
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -217,6 +276,8 @@ paths:
             Endpoint: '{Endpoint}'
             ImageUrl: '{Image Url here}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
+            recognitionModel: recognition_01
             returnFaceAttributes:
               - age
               - gender
@@ -232,6 +293,7 @@ paths:
               - blur
               - exposure
               - noise
+            returnRecognitionModel: true
           responses:
             '200':
               body:
@@ -282,7 +344,7 @@ paths:
                           confidence: 0.03
                       invisible: false
                     headPose:
-                      pitch: 0
+                      pitch: 1.6
                       roll: 2.1
                       yaw: 3
                     makeup:
@@ -384,11 +446,15 @@ paths:
                     left: 394
                     top: 54
                     width: 78
+                  recognitionModel: recognition_01
   /facelists:
     get:
-      description: 'Retrieve information about all existing face lists. Only faceListId, name and userData will be returned.'
+      description: |
+        List face lists’ faceListId, name, userData and recognitionModel. <br /> 
+        To get face information inside faceList use [FaceList - Get](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524c)
       operationId: FaceList_List
-      parameters: []
+      parameters:
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -405,15 +471,17 @@ paths:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            returnRecognitionModel: true
           responses:
             '200':
               body:
                 - faceListId: sample_face_list
                   name: list1
-                  userData: User-provided data attached to the face list
+                  recognitionModel: recognition_01
+                  userData: User-provided data attached to the face list.
   '/facelists/{faceListId}':
     delete:
-      description: Delete an existing face list according to faceListId. Persisted face images in the face list will also be deleted.
+      description: Delete a specified face list.
       operationId: FaceList_Delete
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -435,10 +503,12 @@ paths:
             '200':
               body: ''
     get:
-      description: Retrieve a face list's information.
+      description: |
+        Retrieve a face list’s faceListId, name, userData, recognitionModel and faces in the face list.
       operationId: FaceList_Get
       parameters:
         - $ref: '#/parameters/faceListId'
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -457,6 +527,7 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
+            returnRecognitionModel: true
           responses:
             '200':
               body:
@@ -464,8 +535,9 @@ paths:
                 name: list1
                 persistedFaces:
                   - persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBD
-                    userData: User-provided data attached to the face
-                userData: User-provided data attached to the face list
+                    userData: User-provided data attached to the face.
+                recognitionModel: recognition_01
+                userData: User-provided data attached to the face list.
     patch:
       consumes:
         - application/json
@@ -503,7 +575,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Create an empty face list. Up to 64 face lists are allowed to exist in one subscription.
+      description: "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel. Up to 64 face lists are allowed in one subscription.\n<br /> Face list is a list of faces, up to 1,000 faces, and used by [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237).\n<br /> After creation, user should use [FaceList - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395250) to import the faces. No image will be stored. Only the extracted face features are stored on server until [FaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524f) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) / [LargePersonGroup](/docs/services/563879b61984550e40cbbe8d/operations/599acdee6ac60f11b48b5a9d) and [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).\n<br /> Please consider [LargeFaceList](/docs/services/563879b61984550e40cbbe8d/operations/5a157b68d2de3616c086f2cc) when the face number is large. It can support up to 1,000,000 faces.\n<br />'recognitionModel' should be specified to associate with this face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing face list will use the recognition model that's already associated with the collection. Existing face features in a face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [FaceList- Create](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524b). All those face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March. 'recognition_02' is recommended since its\_overall accuracy is improved compared with 'recognition_01'."
       operationId: FaceList_Create
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -512,7 +584,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/NameAndUserDataContract'
+            $ref: '#/definitions/MetaDataContract'
           x-ms-client-flatten: true
       produces:
         - application/json
@@ -531,7 +603,8 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: sample_list
-              userData: User-provided data attached to the face list
+              recognitionModel: recognition_01
+              userData: User-provided data attached to the face list.
             faceListId: sample_face_list
           responses:
             '200':
@@ -540,7 +613,21 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      description: |-
+        Add a face to a specified face list, up to 1,000 faces.
+        <br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395251) or [FaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524f) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [FaceList - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395250). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: FaceList_AddFaceFromUrl
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -560,6 +647,7 @@ paths:
             type: object
           x-ms-client-flatten: true
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -578,6 +666,7 @@ paths:
             Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             faceListId: sample_face_list
             targetFace:
               - 10
@@ -591,7 +680,9 @@ paths:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
   '/facelists/{faceListId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete an existing face from a face list (given by a persistedFaceId and a faceListId). Persisted image related to the face will also be deleted.
+      description: |-
+        Delete a face from a face list by specified faceListId and persistedFaceId.
+        <br /> Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.
       operationId: FaceList_DeleteFace
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -618,7 +709,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Given query face''s faceId, find the similar-looking faces from a faceId array, a face list or a large face list.'
+      description: |
+        Given query face's faceId, to search the similar-looking faces from a faceId array, a face list or a large face list. faceId array contains the faces created by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), which will expire 24 hours after creation. A "faceListId" is created by [FaceList - Create](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524b) containing persistedFaceIds that will not expire. And a "largeFaceListId" is created by [LargeFaceList - Create](/docs/services/563879b61984550e40cbbe8d/operations/5a157b68d2de3616c086f2cc) containing persistedFaceIds that will also not expire. Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
+        <br/>Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
+        <br/>The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.
       operationId: Face_FindSimilar
       parameters:
         - description: Request body for Find Similar.
@@ -659,7 +753,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Divide candidate faces into groups based on face similarity.
+      description: |
+        Divide candidate faces into groups based on face similarity.<br />
+        * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.
+        * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.
+        * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a) when you only have 2 candidate faces.
+        * The 'recognitionModel' associated with the query faces' faceIds should be the same.
       operationId: Face_Group
       parameters:
         - description: Request body for grouping.
@@ -712,7 +811,18 @@ paths:
     post:
       consumes:
         - application/json
-      description: 1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.
+      description: |
+        1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.
+        <br/> For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in [PersonGroup - Train](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395249) and [LargePersonGroup - Train](/docs/services/563879b61984550e40cbbe8d/operations/599ae2d16ac60f11b48b5aa4).
+        <br/>
+         
+        Remarks:<br />
+        * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.
+        * Each person in the person group/large person group could have more than one face, but no more than 248 faces.
+        * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.
+        * Try [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237) when you need to find similar faces from a face list/large face list instead of a person group/large person group.
+        * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.
       operationId: Face_Identify
       parameters:
         - description: Request body for identify operation.
@@ -759,9 +869,20 @@ paths:
                   faceId: 65d083d4-9447-47d1-af30-b626144bf0fb
   /largefacelists:
     get:
-      description: 'Retrieve information about all existing large face lists. Only largeFaceListId, name and userData will be returned.'
+      description: |
+        List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> 
+        To get face information inside largeFaceList use [LargeFaceList Face - Get](/docs/services/563879b61984550e40cbbe8d/operations/5a158cf2d2de3616c086f2d5)<br />
+        * Large face lists are stored in alphabetical order of largeFaceListId.
+        * "start" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
+        * "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry’s Id of the current call.
+        <br />
+        For example, total 5 large person lists: "list1", ..., "list5".
+        <br /> "start=&top=" will return all 5 lists.
+        <br /> "start=&top=2" will return "list1", "list2".
+        <br /> "start=list2&top=3" will return "list3", "list4", "list5".
       operationId: LargeFaceList_List
-      parameters: []
+      parameters:
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -778,18 +899,21 @@ paths:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            returnRecognitionModel: true
           responses:
             '200':
               body:
                 - largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
                   name: large-face-list-name1
+                  recognitionModel: recognition_01
                   userData: User-provided data attached to the large face list.
                 - largeFaceListId: c76f7f13-0ed3-4d00-8a3e-2ad3d78f6c37
                   name: large-face-list-name2
+                  recognitionModel: recognition_01
                   userData: User-provided data attached to the large face list.
   '/largefacelists/{largeFaceListId}':
     delete:
-      description: Delete an existing large face list according to faceListId. Persisted face images in the large face list will also be deleted.
+      description: Delete a specified large face list.
       operationId: LargeFaceList_Delete
       parameters:
         - $ref: '#/parameters/largeFaceListId'
@@ -811,10 +935,11 @@ paths:
             '200':
               body: ''
     get:
-      description: Retrieve a large face list's information.
+      description: 'Retrieve a large face list’s largeFaceListId, name, userData and recognitionModel.'
       operationId: LargeFaceList_Get
       parameters:
         - $ref: '#/parameters/largeFaceListId'
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -833,11 +958,13 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
+            returnRecognitionModel: true
           responses:
             '200':
               body:
                 largeFaceListId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
                 name: large-face-list-name
+                recognitionModel: recognition_01
                 userData: User-provided data attached to the large face list.
     patch:
       consumes:
@@ -876,7 +1003,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Create an empty large face list. Up to 64 large face lists are allowed to exist in one subscription.
+      description: "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.\n<br /> Large face list is a list of faces, up to 1,000,000 faces, and used by [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237).\n<br /> After creation, user should use [LargeFaceList Face - Add](/docs/services/563879b61984550e40cbbe8d/operations/5a158c10d2de3616c086f2d3) to import the faces and [LargeFaceList - Train](/docs/services/563879b61984550e40cbbe8d/operations/5a158422d2de3616c086f2d1) to make it ready for [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237). No image will be stored. Only the extracted face features are stored on server until [LargeFaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/5a1580d5d2de3616c086f2cd) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) / [LargePersonGroup](/docs/services/563879b61984550e40cbbe8d/operations/599acdee6ac60f11b48b5a9d) and [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).\n<br/>'recognitionModel' should be specified to associate with this large face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large face list will use the recognition model that's already associated with the collection. Existing face features in a large face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargeFaceList- Create](/docs/services/563879b61984550e40cbbe8d/operations/5a157b68d2de3616c086f2cc). All those large face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March. 'recognition_02' is recommended since its\_overall accuracy is improved compared with 'recognition_01'.\n\nLarge face list quota:\n* Free-tier subscription quota: 64 large face lists.\n* S0-tier subscription quota: 1,000,000 large face lists."
       operationId: LargeFaceList_Create
       parameters:
         - $ref: '#/parameters/largeFaceListId'
@@ -885,7 +1012,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/NameAndUserDataContract'
+            $ref: '#/definitions/MetaDataContract'
           x-ms-client-flatten: true
       produces:
         - application/json
@@ -904,6 +1031,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: large-face-list-name
+              recognitionModel: recognition_01
               userData: User-provided data attached to the large face list.
             largeFaceListId: sample_face_list
           responses:
@@ -957,7 +1085,25 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      description: |-
+        Add a face to a specified large face list, up to 1,000,000 faces.
+        <br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](/docs/services/563879b61984550e40cbbe8d/operations/5a158c8ad2de3616c086f2d4) or [LargeFaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/5a1580d5d2de3616c086f2cd) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [LargeFaceList - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/5a158c10d2de3616c086f2d3). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
+
+        Quota:
+        * Free-tier subscription quota: 1,000 faces per large face list.
+        * S0-tier subscription quota: 1,000,000 faces per large face list.
       operationId: LargeFaceList_AddFaceFromUrl
       parameters:
         - $ref: '#/parameters/largeFaceListId'
@@ -977,6 +1123,7 @@ paths:
             type: object
           x-ms-client-flatten: true
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -995,6 +1142,7 @@ paths:
             Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             largeFaceListId: sample_face_list
             targetFace:
               - 10
@@ -1008,7 +1156,9 @@ paths:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
   '/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete an existing face from a large face list (given by a persistedFaceId and a largeFaceListId). Persisted image related to the face will also be deleted.
+      description: |-
+        Delete a face from a large face list by specified largeFaceListId and persistedFaceId.
+        <br /> Adding/deleting faces to/from a same large face list are processed sequentially and to/from different large face lists are in parallel.
       operationId: LargeFaceList_DeleteFace
       parameters:
         - $ref: '#/parameters/largeFaceListId'
@@ -1155,7 +1305,16 @@ paths:
                 status: succeeded
   /largepersongroups:
     get:
-      description: List large person groups and their information.
+      description: |
+        List all existing large person groups’ largePersonGroupId, name, userData and recognitionModel.<br />
+        * Large person groups are stored in alphabetical order of largePersonGroupId.
+        * "start" parameter (string, optional) is a user-provided largePersonGroupId value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
+        * "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry’s Id of the current call.
+        <br />
+        For example, total 5 large person groups: "group1", ..., "group5".
+        <br /> "start=&top=" will return all 5 groups.
+        <br /> "start=&top=2" will return "group1", "group2".
+        <br /> "start=group2&top=3" will return "group3", "group4", "group5".
       operationId: LargePersonGroup_List
       parameters:
         - description: List large person groups from the least largePersonGroupId greater than the "start".
@@ -1172,6 +1331,7 @@ paths:
           name: top
           required: false
           type: integer
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -1188,6 +1348,7 @@ paths:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            returnRecognitionModel: true
             start: sample_group
             top: 2
           responses:
@@ -1195,10 +1356,12 @@ paths:
               body:
                 - largePersonGroupId: f92f6f1b-3258-4444-8fa2-c2df505cc7ac
                   name: large-person-group-name1
-                  userData: User-provided data attached to the large person group
+                  recognitionModel: recognition_01
+                  userData: User-provided data attached to the large person group.
                 - largePersonGroupId: c76f7f13-0ed3-4d00-8a3e-2ad3d78f6c37
                   name: large-person-group-name2
-                  userData: User-provided data attached to the large person group
+                  recognitionModel: recognition_01
+                  userData: User-provided data attached to the large person group.
   '/largepersongroups/{largePersonGroupId}':
     delete:
       description: Delete an existing large person group. Persisted face features of all people in the large person group will also be deleted.
@@ -1223,10 +1386,12 @@ paths:
             '200':
               body: ''
     get:
-      description: 'Retrieve the information of a large person group, including its name and userData.'
+      description: |
+        Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use [LargePersonGroup Person - List](/docs/services/563879b61984550e40cbbe8d/operations/599adda06ac60f11b48b5aa1) instead to retrieve person information under the large person group.
       operationId: LargePersonGroup_Get
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -1245,11 +1410,13 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             largePersonGroupId: abc
+            returnRecognitionModel: true
           responses:
             '200':
               body:
                 largePersonGroupId: d408cb4e-2f5f-4b4d-b99e-f0b72870e5b5
                 name: large-person-group-name
+                recognitionModel: recognition_01
                 userData: User-provided data attached to the large person group.
     patch:
       consumes:
@@ -1280,7 +1447,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: group1
-              userData: user-provided data attached to the large person group
+              userData: user-provided data attached to the large person group.
             largePersonGroupId: abc
           responses:
             '200':
@@ -1288,7 +1455,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: 'Create a new large person group with specified largePersonGroupId, name and user-provided userData.'
+      description: "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.\n<br /> A large person group is the container of the uploaded person data, including face recognition feature, and up to 1,000,000\npeople.\n<br /> After creation, use [LargePersonGroup Person - Create](/docs/services/563879b61984550e40cbbe8d/operations/599adcba3a7b9412a4d53f40) to add person into the group, and call [LargePersonGroup - Train](/docs/services/563879b61984550e40cbbe8d/operations/599ae2d16ac60f11b48b5aa4) to get this group ready for [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [LargePersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ade5c6ac60f11b48b5aa2) or [LargePersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599adc216ac60f11b48b5a9f) is called.\n<br/>'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face features in a large person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargePersonGroup - Create](/docs/services/563879b61984550e40cbbe8d/operations/599acdee6ac60f11b48b5a9d). All those large person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March. 'recognition_02' is recommended since its\_overall accuracy is improved compared with 'recognition_01'.\n\nLarge person group quota:\n* Free-tier subscription quota: 1,000 large person groups.\n* S0-tier subscription quota: 1,000,000 large person groups."
       operationId: LargePersonGroup_Create
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -1297,7 +1464,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/NameAndUserDataContract'
+            $ref: '#/definitions/MetaDataContract'
           x-ms-client-flatten: true
       responses:
         '200':
@@ -1314,6 +1481,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: large-person-group-name
+              recognitionModel: recognition_01
               userData: User-provided data attached to the large person group.
             largePersonGroupId: abc
           responses:
@@ -1366,13 +1534,13 @@ paths:
                     - fce92aed-d578-4d2e-8114-068f8af4492e
                     - b64d5e15-8257-4af2-b20a-5a750f8940e7
                   personId: 25985303-c537-4467-b41d-bdb45cd95ca1
-                  userData: User-provided data attached to the person
+                  userData: User-provided data attached to the person.
                 - name: person-name2
                   persistedFaceIds:
                     - 30ea1073-cc9e-4652-b1e3-d08fb7b95315
                     - fbd2a038-dbff-452c-8e79-2ee81b1aa84e
                   personId: 2ae4935b-9659-44c3-977f-61fac20d0538
-                  userData: User-provided data attached to the person
+                  userData: User-provided data attached to the person.
     post:
       consumes:
         - application/json
@@ -1414,7 +1582,7 @@ paths:
                 personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
   '/largepersongroups/{largePersonGroupId}/persons/{personId}':
     delete:
-      description: 'Delete an existing person from a large person group. All stored person data, and face features in the person entry will be deleted.'
+      description: 'Delete an existing person from a large person group. The persistedFaceId, userData, person name and face feature in the person entry will all be deleted.'
       operationId: LargePersonGroupPerson_Delete
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -1438,7 +1606,7 @@ paths:
             '200':
               body: ''
     get:
-      description: 'Retrieve a person''s information, including registered persisted faces, name and userData.'
+      description: 'Retrieve a person''s name and userData, and the persisted faceIds representing the registered person face feature.'
       operationId: LargePersonGroupPerson_Get
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -1471,7 +1639,7 @@ paths:
                   - fce92aed-d578-4d2e-8114-068f8af4492e
                   - b64d5e15-8257-4af2-b20a-5a750f8940e7
                 personId: 25985303-c537-4467-b41d-bdb45cd95ca1
-                userData: User-provided data attached to the person
+                userData: User-provided data attached to the person.
     patch:
       consumes:
         - application/json
@@ -1512,7 +1680,21 @@ paths:
     post:
       consumes:
         - application/json
-      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      description: |-
+        Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ae2966ac60f11b48b5aa3), [LargePersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ade5c6ac60f11b48b5aa2) or [LargePersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599adc216ac60f11b48b5a9f) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * Each person entry can hold up to 248 faces.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/599adf2a3a7b9412a4d53f42). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: LargePersonGroupPerson_AddFaceFromUrl
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -1533,6 +1715,7 @@ paths:
             type: object
           x-ms-client-flatten: true
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -1551,6 +1734,7 @@ paths:
             Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             largePersonGroupId: abc
             personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
             targetFace:
@@ -1565,7 +1749,9 @@ paths:
                 persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
   '/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete a face from a person. Relative feature for the persisted face will also be deleted.
+      description: |-
+        Delete a face from a person in a large person group by specified largePersonGroupId, personId and persistedFaceId.
+        <br /> Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
       operationId: LargePersonGroupPerson_DeleteFace
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -1750,7 +1936,16 @@ paths:
                 status: succeeded
   /persongroups:
     get:
-      description: List person groups and their information.
+      description: |
+        List person groups’ personGroupId, name, userData and recognitionModel.<br />
+        * Person groups are stored in alphabetical order of personGroupId.
+        * "start" parameter (string, optional) is a user-provided personGroupId value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
+        * "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry’s Id of the current call.
+        <br />
+        For example, total 5 person groups: "group1", ..., "group5".
+        <br /> "start=&top=" will return all 5 groups.
+        <br /> "start=&top=2" will return "group1", "group2".
+        <br /> "start=group2&top=3" will return "group3", "group4", "group5".
       operationId: PersonGroup_List
       parameters:
         - description: List person groups from the least personGroupId greater than the "start".
@@ -1767,6 +1962,7 @@ paths:
           name: top
           required: false
           type: integer
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -1783,6 +1979,7 @@ paths:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            returnRecognitionModel: true
             start: sample_group
             top: 2
           responses:
@@ -1790,10 +1987,12 @@ paths:
               body:
                 - name: group1
                   personGroupId: sample_group
-                  userData: User-provided data attached to the person group
+                  recognitionModel: recognition_01
+                  userData: User-provided data attached to the person group.
                 - name: group2
                   personGroupId: sample_group2
-                  userData: User-provided data attached to the person group
+                  recognitionModel: recognition_01
+                  userData: User-provided data attached to the person group.
   '/persongroups/{personGroupId}':
     delete:
       description: Delete an existing person group. Persisted face features of all people in the person group will also be deleted.
@@ -1818,10 +2017,11 @@ paths:
             '200':
               body: ''
     get:
-      description: 'Retrieve the information of a person group, including its name and userData.'
+      description: 'Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use [PersonGroup Person - List](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395241).'
       operationId: PersonGroup_Get
       parameters:
         - $ref: '#/parameters/personGroupId'
+        - $ref: '#/parameters/returnRecognitionModel'
       produces:
         - application/json
       responses:
@@ -1840,12 +2040,14 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
+            returnRecognitionModel: true
           responses:
             '200':
               body:
                 name: group1
                 personGroupId: sample_group
-                userData: User-provided data attached to the person group
+                recognitionModel: recognition_01
+                userData: User-provided data attached to the person group.
     patch:
       consumes:
         - application/json
@@ -1875,7 +2077,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: group1
-              userData: user-provided data attached to the person group
+              userData: user-provided data attached to the person group.
             personGroupId: abc
           responses:
             '200':
@@ -1883,7 +2085,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: 'Create a new person group with specified personGroupId, name and user-provided userData.'
+      description: "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.\n<br /> A person group is the container of the uploaded person data, including face recognition features.\n<br /> After creation, use [PersonGroup Person - Create](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c) to add persons into the group, and then call [PersonGroup - Train](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395249) to get this group ready for [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [PersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523d) or [PersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395245) is called.\n<br/>'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face features in a person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [PersonGroup - Create](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244). All those person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March. 'recognition_02' is recommended since its\_overall accuracy is improved compared with 'recognition_01'.\n\nPerson group quota:\n* Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n* S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n* to handle larger scale face identification problem, please consider using [LargePersonGroup](/docs/services/563879b61984550e40cbbe8d/operations/599acdee6ac60f11b48b5a9d)."
       operationId: PersonGroup_Create
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -1892,7 +2094,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/NameAndUserDataContract'
+            $ref: '#/definitions/MetaDataContract'
           x-ms-client-flatten: true
       responses:
         '200':
@@ -1909,7 +2111,8 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
               name: group1
-              userData: user-provided data attached to the person group
+              recognitionModel: recognition_01
+              userData: user-provided data attached to the person group.
             personGroupId: abc
           responses:
             '200':
@@ -2009,7 +2212,7 @@ paths:
                 personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
   '/persongroups/{personGroupId}/persons/{personId}':
     delete:
-      description: 'Delete an existing person from a person group. All stored person data, and face features in the person entry will be deleted.'
+      description: 'Delete an existing person from a person group. The persistedFaceId, userData, person name and face feature in the person entry will all be deleted.'
       operationId: PersonGroupPerson_Delete
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -2066,7 +2269,7 @@ paths:
                   - fce92aed-d578-4d2e-8114-068f8af4492e
                   - b64d5e15-8257-4af2-b20a-5a750f8940e7
                 personId: 25985303-c537-4467-b41d-bdb45cd95ca1
-                userData: User-provided data attached to the person
+                userData: User-provided data attached to the person.
     patch:
       consumes:
         - application/json
@@ -2107,7 +2310,21 @@ paths:
     post:
       consumes:
         - application/json
-      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      description: |-
+        Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523e), [PersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523d) or [PersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395245) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        *   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        *   Each person entry can hold up to 248 faces.
+        *   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        *   "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        *   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        *   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: PersonGroupPerson_AddFaceFromUrl
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -2128,6 +2345,7 @@ paths:
             type: object
           x-ms-client-flatten: true
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -2146,6 +2364,7 @@ paths:
             Endpoint: '{Endpoint}'
             ImageUrl: '{Image url}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             personGroupId: abc
             personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
             targetFace:
@@ -2160,7 +2379,9 @@ paths:
                 persistedFaceId: 6e04c175-219e-42a2-9d26-0e7b790e1ef4
   '/persongroups/{personGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete a face from a person. Relative feature for the persisted face will also be deleted.
+      description: |-
+        Delete a face from a person in a person group by specified personGroupId, personId and persistedFaceId.
+        <br /> Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
       operationId: PersonGroupPerson_DeleteFace
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -2220,7 +2441,15 @@ paths:
     patch:
       consumes:
         - application/json
-      description: Update a person persisted face's userData field.
+      description: |-
+        Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523e), [PersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523d) or [PersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395245) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * Each person entry can hold up to 248 faces.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
       operationId: PersonGroupPerson_UpdateFace
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -2247,7 +2476,7 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
             body:
-              userData: User-provided data attached to the face
+              userData: User-provided data attached to the face.
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
@@ -2570,7 +2799,13 @@ paths:
     post:
       consumes:
         - application/json
-      description: Verify whether two faces belong to a same person or whether one face belongs to a person.
+      description: |
+        Verify whether two faces belong to a same person or whether one face belongs to a person.
+        <br/>
+        Remarks:<br />
+        * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * For the scenarios that are sensitive to accuracy please make your own judgment.
+        * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.
       operationId: Face_VerifyFaceToFace
       parameters:
         - description: Request body for face to face verification.
@@ -2713,6 +2948,8 @@ definitions:
         $ref: '#/definitions/FaceLandmarks'
       faceRectangle:
         $ref: '#/definitions/FaceRectangle'
+      recognitionModel:
+        $ref: '#/definitions/RecognitionModel'
     required:
       - faceRectangle
     type: object
@@ -2895,7 +3132,7 @@ definitions:
     type: object
   FaceList:
     allOf:
-      - $ref: '#/definitions/NameAndUserDataContract'
+      - $ref: '#/definitions/MetaDataContract'
     description: Face list object.
     properties:
       faceListId:
@@ -3157,7 +3394,7 @@ definitions:
     type: array
   LargeFaceList:
     allOf:
-      - $ref: '#/definitions/NameAndUserDataContract'
+      - $ref: '#/definitions/MetaDataContract'
     description: Large face list object.
     properties:
       largeFaceListId:
@@ -3175,7 +3412,7 @@ definitions:
     type: array
   LargePersonGroup:
     allOf:
-      - $ref: '#/definitions/NameAndUserDataContract'
+      - $ref: '#/definitions/MetaDataContract'
     description: Large person group object.
     properties:
       largePersonGroupId:
@@ -3207,6 +3444,14 @@ definitions:
         description: A boolean value describing whether lip makeup is present on a face.
         type: boolean
         x-nullable: false
+    type: object
+  MetaDataContract:
+    allOf:
+      - $ref: '#/definitions/NameAndUserDataContract'
+    description: 'A combination of user defined name and user specified data and recognition model name for largePersonGroup/personGroup, and largeFaceList/faceList.'
+    properties:
+      recognitionModel:
+        $ref: '#/definitions/RecognitionModel'
     type: object
   NameAndUserDataContract:
     description: 'A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.'
@@ -3327,7 +3572,7 @@ definitions:
     type: object
   PersonGroup:
     allOf:
-      - $ref: '#/definitions/NameAndUserDataContract'
+      - $ref: '#/definitions/MetaDataContract'
     description: Person group object.
     properties:
       personGroupId:
@@ -3348,6 +3593,17 @@ definitions:
     items:
       $ref: '#/definitions/Person'
     type: array
+  RecognitionModel:
+    default: recognition_01
+    description: 'Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is ''recognition_01'', if latest model needed, please explicitly specify the model you need.'
+    enum:
+      - recognition_01
+      - recognition_02
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: RecognitionModel
+    x-nullable: false
   SimilarFace:
     description: Response body for find similar face operation.
     properties:
@@ -3567,7 +3823,25 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
-      description: 'Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.'
+      description: |-
+        Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />
+        * No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.
+        * Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.
+        * For optimal results when querying [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
+
+        * Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'recognition_01': | The default recognition model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). All those faceIds created before 2019 March are bonded with this recognition model. |
+          | 'recognition_02': | Recognition model released in 2019 March. 'recognition_02' is recommended since its overall accuracy is improved compared with 'recognition_01'. |
       operationId: Face_DetectWithStream
       parameters:
         - default: true
@@ -3589,6 +3863,9 @@ x-ms-paths:
             format: file
             type: object
           x-ms-parameter-location: method
+        - $ref: '#/parameters/recognitionModel'
+        - $ref: '#/parameters/returnRecognitionModel'
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -3607,6 +3884,8 @@ x-ms-paths:
             Endpoint: '{Endpoint}'
             Image: '{Image binary in base 64 format}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
+            recognitionModel: recognition_01
             returnFaceAttributes:
               - age
               - gender
@@ -3622,6 +3901,7 @@ x-ms-paths:
               - blur
               - exposure
               - noise
+            returnRecognitionModel: true
           responses:
             '200':
               body:
@@ -3672,7 +3952,7 @@ x-ms-paths:
                           confidence: 0.03
                       invisible: false
                     headPose:
-                      pitch: 0
+                      pitch: 1.6
                       roll: 2.1
                       yaw: 3
                     makeup:
@@ -3774,11 +4054,26 @@ x-ms-paths:
                     left: 394
                     top: 54
                     width: 78
+                  recognitionModel: recognition_01
   '/facelists/{faceListId}/persistedfaces?overload=stream':
     post:
       consumes:
         - application/octet-stream
-      description: 'Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      description: |-
+        Add a face to a specified face list, up to 1,000 faces.
+        <br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395251) or [FaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524f) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [FaceList - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395250). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: FaceList_AddFaceFromStream
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -3792,6 +4087,7 @@ x-ms-paths:
             format: file
             type: object
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -3810,6 +4106,7 @@ x-ms-paths:
             Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             faceListId: sample_face_list
             targetFace:
               - 10
@@ -3825,7 +4122,25 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
-      description: 'Add a face to a large face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.'
+      description: |-
+        Add a face to a specified large face list, up to 1,000,000 faces.
+        <br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](/docs/services/563879b61984550e40cbbe8d/operations/5a158c8ad2de3616c086f2d4) or [LargeFaceList - Delete](/docs/services/563879b61984550e40cbbe8d/operations/5a1580d5d2de3616c086f2cd) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [LargeFaceList - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/5a158c10d2de3616c086f2d3). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
+
+        Quota:
+        * Free-tier subscription quota: 1,000 faces per large face list.
+        * S0-tier subscription quota: 1,000,000 faces per large face list.
       operationId: LargeFaceList_AddFaceFromStream
       parameters:
         - $ref: '#/parameters/largeFaceListId'
@@ -3839,6 +4154,7 @@ x-ms-paths:
             format: file
             type: object
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -3857,6 +4173,7 @@ x-ms-paths:
             Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             largeFaceListId: sample_face_list
             targetFace:
               - 10
@@ -3872,7 +4189,21 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
-      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      description: |-
+        Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ae2966ac60f11b48b5aa3), [LargePersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ade5c6ac60f11b48b5aa2) or [LargePersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/599adc216ac60f11b48b5a9f) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        * Each person entry can hold up to 248 faces.
+        * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/599adf2a3a7b9412a4d53f42). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: LargePersonGroupPerson_AddFaceFromStream
       parameters:
         - $ref: '#/parameters/largePersonGroupId'
@@ -3887,6 +4218,7 @@ x-ms-paths:
             format: file
             type: object
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -3905,6 +4237,7 @@ x-ms-paths:
             Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             largePersonGroupId: abc
             personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
             targetFace:
@@ -3921,7 +4254,21 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
-      description: Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.
+      description: |-
+        Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523e), [PersonGroup Person - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523d) or [PersonGroup - Delete](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395245) is called.
+        <br /> Note persistedFaceId is different from faceId generated by [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).
+        *   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+        *   Each person entry can hold up to 248 faces.
+        *   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+        *   "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), there’s no guarantee to detect and add the face successfully.
+        *   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+        *   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
+        * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+        * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)
+          | Model | Recommended use-case(s) |
+          | ---------- | -------- |
+          | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |
+          | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |
       operationId: PersonGroupPerson_AddFaceFromStream
       parameters:
         - $ref: '#/parameters/personGroupId'
@@ -3936,6 +4283,7 @@ x-ms-paths:
             format: file
             type: object
           x-ms-parameter-location: method
+        - $ref: '#/parameters/detectionModel'
       produces:
         - application/json
       responses:
@@ -3954,6 +4302,7 @@ x-ms-paths:
             Endpoint: '{Endpoint}'
             Image: '{Image stream in base 64 encoded format}'
             Ocp-Apim-Subscription-Key: '{API key}'
+            detectionModel: detection_01
             personGroupId: abc
             personId: 4caa25ee-3bc6-4e88-adf8-12455ce7aab0
             targetFace:

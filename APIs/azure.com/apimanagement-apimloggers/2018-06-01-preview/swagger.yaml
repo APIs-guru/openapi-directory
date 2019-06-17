@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimloggers
   x-tags:
@@ -94,7 +93,77 @@ paths:
         '200':
           description: Lists a collection of Logger entities.
           schema:
-            $ref: '#/definitions/LoggerCollection'
+            description: Paged Logger list representation.
+            properties:
+              count:
+                description: Total record count number across all pages.
+                format: int64
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Logger values.
+                items:
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Logger details.
+                  properties:
+                    properties:
+                      description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
+                      properties:
+                        credentials:
+                          additionalProperties:
+                            type: string
+                          description: |-
+                            The name and SendRule connection string of the event hub for azureEventHub logger.
+                            Instrumentation key for applicationInsights logger.
+                          example:
+                            connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+                            name: apim
+                          type: object
+                        description:
+                          description: Logger description.
+                          maxLength: 256
+                          type: string
+                        isBuffered:
+                          description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                          type: boolean
+                        loggerType:
+                          description: Logger type.
+                          enum:
+                            - azureEventHub
+                            - applicationInsights
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: LoggerType
+                            values:
+                              - description: Azure Event Hub as log destination.
+                                value: azureEventHub
+                              - description: Azure Application Insights as log destination.
+                                value: applicationInsights
+                        resourceId:
+                          description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
+                          type: string
+                      required:
+                        - loggerType
+                        - credentials
+                type: array
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -159,7 +228,7 @@ paths:
                       loggerType: azureEventHub
                       resourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/hydraeventhub-ns
                     type: Microsoft.ApiManagement/service/loggers
-      x-ms-odata: '#/definitions/LoggerContract'
+      x-ms-odata: './definitions.json#/definitions/LoggerContract'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}':
@@ -304,7 +373,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/LoggerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Logger details.
+            properties:
+              properties:
+                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
+                properties:
+                  credentials:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The name and SendRule connection string of the event hub for azureEventHub logger.
+                      Instrumentation key for applicationInsights logger.
+                    example:
+                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+                      name: apim
+                    type: object
+                  description:
+                    description: Logger description.
+                    maxLength: 256
+                    type: string
+                  isBuffered:
+                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                    type: boolean
+                  loggerType:
+                    description: Logger type.
+                    enum:
+                      - azureEventHub
+                      - applicationInsights
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: LoggerType
+                      values:
+                        - description: Azure Event Hub as log destination.
+                          value: azureEventHub
+                        - description: Azure Application Insights as log destination.
+                          value: applicationInsights
+                  resourceId:
+                    description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
+                    type: string
+                required:
+                  - loggerType
+                  - credentials
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -477,7 +603,36 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/LoggerUpdateContract'
+            description: Logger update contract.
+            properties:
+              properties:
+                description: Parameters supplied to the Update Logger operation.
+                properties:
+                  credentials:
+                    additionalProperties:
+                      type: string
+                    description: Logger credentials.
+                    type: object
+                  description:
+                    description: Logger description.
+                    type: string
+                  isBuffered:
+                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                    type: boolean
+                  loggerType:
+                    description: Logger type.
+                    enum:
+                      - azureEventHub
+                      - applicationInsights
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: LoggerType
+                      values:
+                        - description: Azure Event Hub as log destination.
+                          value: azureEventHub
+                        - description: Azure Application Insights as log destination.
+                          value: applicationInsights
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -576,7 +731,64 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/LoggerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Logger details.
+            properties:
+              properties:
+                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
+                properties:
+                  credentials:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The name and SendRule connection string of the event hub for azureEventHub logger.
+                      Instrumentation key for applicationInsights logger.
+                    example:
+                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+                      name: apim
+                    type: object
+                  description:
+                    description: Logger description.
+                    maxLength: 256
+                    type: string
+                  isBuffered:
+                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                    type: boolean
+                  loggerType:
+                    description: Logger type.
+                    enum:
+                      - azureEventHub
+                      - applicationInsights
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: LoggerType
+                      values:
+                        - description: Azure Event Hub as log destination.
+                          value: azureEventHub
+                        - description: Azure Application Insights as log destination.
+                          value: applicationInsights
+                  resourceId:
+                    description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
+                    type: string
+                required:
+                  - loggerType
+                  - credentials
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -601,7 +813,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/LoggerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Logger details.
+            properties:
+              properties:
+                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
+                properties:
+                  credentials:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The name and SendRule connection string of the event hub for azureEventHub logger.
+                      Instrumentation key for applicationInsights logger.
+                    example:
+                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+                      name: apim
+                    type: object
+                  description:
+                    description: Logger description.
+                    maxLength: 256
+                    type: string
+                  isBuffered:
+                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                    type: boolean
+                  loggerType:
+                    description: Logger type.
+                    enum:
+                      - azureEventHub
+                      - applicationInsights
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: LoggerType
+                      values:
+                        - description: Azure Event Hub as log destination.
+                          value: azureEventHub
+                        - description: Azure Application Insights as log destination.
+                          value: applicationInsights
+                  resourceId:
+                    description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
+                    type: string
+                required:
+                  - loggerType
+                  - credentials
         '201':
           description: Logger was successfully created.
           headers:
@@ -609,7 +878,64 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/LoggerContract'
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Logger details.
+            properties:
+              properties:
+                description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
+                properties:
+                  credentials:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The name and SendRule connection string of the event hub for azureEventHub logger.
+                      Instrumentation key for applicationInsights logger.
+                    example:
+                      connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+                      name: apim
+                    type: object
+                  description:
+                    description: Logger description.
+                    maxLength: 256
+                    type: string
+                  isBuffered:
+                    description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
+                    type: boolean
+                  loggerType:
+                    description: Logger type.
+                    enum:
+                      - azureEventHub
+                      - applicationInsights
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: LoggerType
+                      values:
+                        - description: Azure Event Hub as log destination.
+                          value: azureEventHub
+                        - description: Azure Application Insights as log destination.
+                          value: applicationInsights
+                  resourceId:
+                    description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
+                    type: string
+                required:
+                  - loggerType
+                  - credentials
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -720,117 +1046,4 @@ paths:
                   loggerType: azureEventHub
                   resourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/hydraeventhub-ns
                 type: Microsoft.ApiManagement/service/loggers
-definitions:
-  LoggerCollection:
-    description: Paged Logger list representation.
-    properties:
-      count:
-        description: Total record count number across all pages.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Logger values.
-        items:
-          $ref: '#/definitions/LoggerContract'
-        type: array
-  LoggerContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Logger details.
-    properties:
-      properties:
-        $ref: '#/definitions/LoggerContractProperties'
-        description: Logger entity contract properties.
-        x-ms-client-flatten: true
-  LoggerContractProperties:
-    description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
-    properties:
-      credentials:
-        additionalProperties:
-          type: string
-        description: |-
-          The name and SendRule connection string of the event hub for azureEventHub logger.
-          Instrumentation key for applicationInsights logger.
-        example:
-          connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
-          name: apim
-        type: object
-      description:
-        description: Logger description.
-        maxLength: 256
-        type: string
-      isBuffered:
-        description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-        type: boolean
-      loggerType:
-        description: Logger type.
-        enum:
-          - azureEventHub
-          - applicationInsights
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: LoggerType
-          values:
-            - description: Azure Event Hub as log destination.
-              value: azureEventHub
-            - description: Azure Application Insights as log destination.
-              value: applicationInsights
-      resourceId:
-        description: Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).
-        type: string
-    required:
-      - loggerType
-      - credentials
-  LoggerUpdateContract:
-    description: Logger update contract.
-    properties:
-      properties:
-        $ref: '#/definitions/LoggerUpdateParameters'
-        description: Logger entity update contract properties.
-        x-ms-client-flatten: true
-  LoggerUpdateParameters:
-    description: Parameters supplied to the Update Logger operation.
-    properties:
-      credentials:
-        additionalProperties:
-          type: string
-        description: Logger credentials.
-        type: object
-      description:
-        description: Logger description.
-        type: string
-      isBuffered:
-        description: Whether records are buffered in the logger before publishing. Default is assumed to be true.
-        type: boolean
-      loggerType:
-        description: Logger type.
-        enum:
-          - azureEventHub
-          - applicationInsights
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: LoggerType
-          values:
-            - description: Azure Event Hub as log destination.
-              value: azureEventHub
-            - description: Azure Application Insights as log destination.
-              value: applicationInsights
+definitions: {}

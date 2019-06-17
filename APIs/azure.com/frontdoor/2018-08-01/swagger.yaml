@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/preview/2018-08-01-preview/frontdoor.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: frontdoor
   x-tags:
@@ -146,7 +145,7 @@ paths:
             api-version: '2018-08-01'
             checkFrontDoorNameAvailabilityInput:
               name: sampleName
-              type: Microsoft.Network/FrontDoors
+              type: Microsoft.Network/frontDoors
           responses:
             '200':
               body:
@@ -191,7 +190,7 @@ paths:
             api-version: '2018-08-01'
             checkFrontDoorNameAvailabilityInput:
               name: sampleName
-              type: Microsoft.Network/FrontDoors/frontendEndpoints
+              type: Microsoft.Network/frontDoors/frontendEndpoints
             subscriptionId: subid
           responses:
             '200':
@@ -2381,7 +2380,7 @@ paths:
           parameters:
             api-version: '2018-08-01'
             customDomainProperties:
-              hostname: www.someDomain.com
+              hostName: www.someDomain.com
             frontDoorName: frontDoor1
             resourceGroupName: rg1
             subscriptionId: subid

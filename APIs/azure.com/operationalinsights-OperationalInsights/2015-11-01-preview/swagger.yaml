@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: operationalinsights-OperationalInsights
   x-tags:
@@ -110,7 +109,8 @@ paths:
                   tags:
                     tag1: val1
                   type: Microsoft.OperationalInsights/workspaces
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces':
     get:
       description: Gets workspaces in a resource group.
@@ -149,7 +149,8 @@ paths:
                   tags:
                     tag1: val1
                   type: Microsoft.OperationalInsights/workspaces
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}':
     delete:
       description: Deletes a workspace instance.
@@ -2645,7 +2646,8 @@ paths:
                   properties:
                     resourceId: /subscriptions/00000000-0000-0000-0000-000000000005/resourceGroups/mms-eus/providers/Microsoft.Automation/automationAccounts/TestAccount2
                   type: Microsoft.OperationalInsights/workspaces/linkedServices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}':
     delete:
       description: Deletes a linked service instance.
@@ -2813,7 +2815,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys':
     post:
       description: Gets the shared keys for a workspace.
@@ -2885,7 +2888,8 @@ paths:
                     nextResetTime: '2017-10-03T00:00:00Z'
                     quotaPeriod: P1D
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   DataSource:
     allOf:
@@ -3124,7 +3128,6 @@ definitions:
           - Free
           - Standard
           - Premium
-          - Unlimited
           - PerNode
           - PerGB2018
           - Standalone

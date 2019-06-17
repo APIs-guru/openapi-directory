@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2018-03-30-preview/Assets.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: mediaservices-Assets
   x-tags:
@@ -79,7 +78,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: Specifies the the key by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -793,7 +792,7 @@ definitions:
         type: string
     type: object
   ListContainerSasInput:
-    description: The parameters to the list SAS requet.
+    description: The parameters to the list SAS request.
     properties:
       expiryTime:
         description: The SAS URL expiration time.  This must be less than 24 hours from the current time.
@@ -817,4 +816,3 @@ definitions:
             - description: 'The SAS URL will allow read, write and delete access to the container.'
               value: ReadWriteDelete
     type: object
-  ODataError: {}

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-07-01/networkWatcher.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-networkWatcher
   x-tags:
@@ -87,7 +86,8 @@ paths:
                       provisioningState: Succeeded
                     tags: {}
                     type: Microsoft.Network/networkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers':
     get:
       description: Gets all network watchers by resource group.
@@ -145,7 +145,8 @@ paths:
                       provisioningState: Succeeded
                     tags: {}
                     type: Microsoft.Network/networkWatchers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}':
     delete:
       description: Deletes the specified network watcher resource.
@@ -731,7 +732,8 @@ paths:
                         resourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm2
                       startTime: '2018-01-08T05:42:33.3387305Z'
                     type: Microsoft.Network/networkWatchers/connectionMonitors
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}':
     delete:
       description: Deletes the specified connection monitor.
@@ -1668,7 +1670,8 @@ paths:
                       target: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1
                       timeLimitInSeconds: 100
                       totalBytesPerSession: 100000
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}':
     delete:
       description: Deletes the specified packet capture session.
