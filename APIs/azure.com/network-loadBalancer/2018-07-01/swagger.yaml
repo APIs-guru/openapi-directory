@@ -2894,6 +2894,7 @@ definitions:
     required:
       - protocol
       - frontendPort
+  NetworkInterfacePropertiesFormat: {}
   OutboundRule:
     allOf:
       - description: Reference to another subresource.
@@ -3023,6 +3024,8 @@ definitions:
     required:
       - protocol
       - port
+  PublicIPAddressPropertiesFormat: {}
+  SubnetPropertiesFormat: {}
   TransportProtocol:
     description: The transport protocol for the endpoint. Possible values are 'Udp' or 'Tcp' or 'All'.
     enum:
