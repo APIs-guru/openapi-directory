@@ -856,6 +856,10 @@ paths:
           description: IdempotentParameterMismatchException
           schema:
             $ref: '#/definitions/IdempotentParameterMismatchException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -1186,7 +1190,7 @@ paths:
   /describeDeploymentJob:
     post:
       operationId: DescribeDeploymentJob
-      description: 'Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]'
+      description: Describes a deployment job.
       responses:
         '200':
           description: Success
@@ -2738,6 +2742,7 @@ definitions:
     maxItems: 5
   Boolean:
     type: boolean
+  ServiceUnavailableException: {}
   DeleteFleetResponse:
     type: object
     properties: {}
@@ -3254,6 +3259,7 @@ definitions:
       - EnvironmentSetupError
       - EtagMismatch
       - FailureThresholdBreached
+      - RobotDeploymentAborted
       - RobotDeploymentNoResponse
       - RobotAgentConnectionTimeout
       - GreengrassDeploymentFailed

@@ -636,6 +636,10 @@ paths:
           description: OperationNotSupportedException
           schema:
             $ref: '#/definitions/OperationNotSupportedException'
+        '484':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
       parameters:
         - name: body
           in: body
@@ -960,6 +964,10 @@ paths:
           description: OperationNotSupportedException
           schema:
             $ref: '#/definitions/OperationNotSupportedException'
+        '483':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
       parameters:
         - name: body
           in: body
