@@ -602,6 +602,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.BatchGetWorkflows':
+    post:
+      operationId: BatchGetWorkflows
+      description: 'Returns a list of resource metadata for a given list of workflow names. After calling the <code>ListWorkflows</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchGetWorkflowsResponse'
+        '480':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '481':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGetWorkflowsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.BatchGetWorkflows
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.BatchStopJobRun':
     post:
       operationId: BatchStopJobRun
@@ -1167,26 +1208,30 @@ paths:
           schema:
             $ref: '#/definitions/AlreadyExistsException'
         '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
-        '482':
+        '483':
           description: IdempotentParameterMismatchException
           schema:
             $ref: '#/definitions/IdempotentParameterMismatchException'
-        '483':
+        '484':
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-        '484':
+        '485':
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
-        '485':
+        '486':
           description: ResourceNumberLimitExceededException
           schema:
             $ref: '#/definitions/ResourceNumberLimitExceededException'
-        '486':
+        '487':
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
@@ -1259,6 +1304,59 @@ paths:
           type: string
           enum:
             - AWSGlue.CreateUserDefinedFunction
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.CreateWorkflow':
+    post:
+      operationId: CreateWorkflow
+      description: Creates a new workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateWorkflowResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '485':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateWorkflowRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.CreateWorkflow
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1828,6 +1926,51 @@ paths:
           type: string
           enum:
             - AWSGlue.DeleteUserDefinedFunction
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.DeleteWorkflow':
+    post:
+      operationId: DeleteWorkflow
+      description: Deletes a workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteWorkflowResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteWorkflowRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.DeleteWorkflow
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3470,6 +3613,196 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetWorkflow':
+    post:
+      operationId: GetWorkflow
+      description: Retrieves resource metadata for a workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetWorkflowResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetWorkflowRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetWorkflow
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetWorkflowRun':
+    post:
+      operationId: GetWorkflowRun
+      description: 'Retrieves the metadata for a given workflow run. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetWorkflowRunResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetWorkflowRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetWorkflowRun
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetWorkflowRunProperties':
+    post:
+      operationId: GetWorkflowRunProperties
+      description: Retrieves the workflow run properties which were set during the run.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetWorkflowRunPropertiesResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetWorkflowRunPropertiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetWorkflowRunProperties
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetWorkflowRuns':
+    post:
+      operationId: GetWorkflowRuns
+      description: Retrieves metadata for all runs of a given workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetWorkflowRunsResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetWorkflowRunsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.GetWorkflowRuns
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.ImportCatalogToGlue':
     post:
       operationId: ImportCatalogToGlue
@@ -3715,6 +4048,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.ListWorkflows':
+    post:
+      operationId: ListWorkflows
+      description: Lists names of workflows created in the account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListWorkflowsResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListWorkflowsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.ListWorkflows
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.PutDataCatalogEncryptionSettings':
     post:
       operationId: PutDataCatalogEncryptionSettings
@@ -3797,6 +4181,63 @@ paths:
           type: string
           enum:
             - AWSGlue.PutResourcePolicy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.PutWorkflowRunProperties':
+    post:
+      operationId: PutWorkflowRunProperties
+      description: 'Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutWorkflowRunPropertiesResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '484':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '485':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '486':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutWorkflowRunPropertiesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.PutWorkflowRunProperties
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -4038,6 +4479,59 @@ paths:
           type: string
           enum:
             - AWSGlue.StartTrigger
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.StartWorkflowRun':
+    post:
+      operationId: StartWorkflowRun
+      description: Starts a new run of the specified workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartWorkflowRunResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
+        '485':
+          description: ConcurrentRunsExceededException
+          schema:
+            $ref: '#/definitions/ConcurrentRunsExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartWorkflowRunRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.StartWorkflowRun
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -4818,6 +5312,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.UpdateWorkflow':
+    post:
+      operationId: UpdateWorkflow
+      description: Updates an existing workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateWorkflowResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateWorkflowRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSGlue.UpdateWorkflow
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   BatchCreatePartitionResponse:
     type: object
@@ -5039,6 +5582,26 @@ definitions:
       TriggerNames:
         $ref: '#/definitions/TriggerNameList'
         description: 'A list of trigger names, which may be the names returned from the <code>ListTriggers</code> operation.'
+  BatchGetWorkflowsResponse:
+    type: object
+    properties:
+      Workflows:
+        $ref: '#/definitions/Workflows'
+        description: A list of workflow resource metadata.
+      MissingWorkflows:
+        $ref: '#/definitions/WorkflowNames'
+        description: A list of names of workflows not found.
+  BatchGetWorkflowsRequest:
+    type: object
+    required:
+      - Names
+    properties:
+      Names:
+        $ref: '#/definitions/WorkflowNames'
+        description: 'A list of workflow names, which may be the names returned from the <code>ListWorkflows</code> operation.'
+      IncludeGraph:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies whether to include a graph when returning the workflow resource metadata.
   BatchStopJobRunResponse:
     type: object
     properties:
@@ -5296,21 +5859,21 @@ definitions:
       MaxCapacity:
         $ref: '#/definitions/NullableDouble'
         description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
-      NotificationProperty:
-        $ref: '#/definitions/NotificationProperty'
-        description: Specifies configuration properties of a job notification.
-      WorkerType:
-        $ref: '#/definitions/WorkerType'
-        description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>'
-      NumberOfWorkers:
-        $ref: '#/definitions/NullableInteger'
-        description: '<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>'
       SecurityConfiguration:
         $ref: '#/definitions/NameString'
         description: The name of the <code>SecurityConfiguration</code> structure to be used with this job.
       Tags:
         $ref: '#/definitions/TagsMap'
         description: 'The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job notification.
+      NumberOfWorkers:
+        $ref: '#/definitions/NullableInteger'
+        description: '<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>'
+      WorkerType:
+        $ref: '#/definitions/NameString'
+        description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>'
   ConcurrentModificationException: {}
   CreatePartitionResponse:
     type: object
@@ -5410,6 +5973,9 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: The name of the trigger.
+      WorkflowName:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow associated with the trigger.
       Type:
         $ref: '#/definitions/TriggerType'
         description: The type of the new trigger.
@@ -5449,6 +6015,29 @@ definitions:
       FunctionInput:
         $ref: '#/definitions/UserDefinedFunctionInput'
         description: A <code>FunctionInput</code> object that defines the function to create in the Data Catalog.
+  CreateWorkflowResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow which was provided as part of the request.
+  CreateWorkflowRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name to be assigned to the workflow. It should be unique within your account.
+      Description:
+        $ref: '#/definitions/GenericString'
+        description: A description of the workflow.
+      DefaultRunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: A collection of properties to be used as part of each execution of the workflow.
+      Tags:
+        $ref: '#/definitions/TagsMap'
+        description: The tags to be used with this workflow.
   DeleteClassifierResponse:
     type: object
     properties: {}
@@ -5641,6 +6230,20 @@ definitions:
       FunctionName:
         $ref: '#/definitions/NameString'
         description: The name of the function definition to be deleted.
+  DeleteWorkflowResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow specified in input.
+  DeleteWorkflowRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow to be deleted.
   GetCatalogImportStatusResponse:
     type: object
     properties:
@@ -6327,6 +6930,88 @@ definitions:
       MaxResults:
         $ref: '#/definitions/PageSize'
         description: The maximum number of functions to return in one response.
+  GetWorkflowResponse:
+    type: object
+    properties:
+      Workflow:
+        $ref: '#/definitions/Workflow'
+        description: The resource metadata for the workflow.
+  GetWorkflowRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow to retrieve.
+      IncludeGraph:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies whether to include a graph when returning the workflow resource metadata.
+  GetWorkflowRunResponse:
+    type: object
+    properties:
+      Run:
+        $ref: '#/definitions/WorkflowRun'
+        description: The requested workflow run metadata.
+  GetWorkflowRunRequest:
+    type: object
+    required:
+      - Name
+      - RunId
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow being run.
+      RunId:
+        $ref: '#/definitions/IdString'
+        description: The ID of the workflow run.
+      IncludeGraph:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies whether to include the workflow graph in response or not.
+  GetWorkflowRunPropertiesResponse:
+    type: object
+    properties:
+      RunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: The workflow run properties which were set during the specified run.
+  GetWorkflowRunPropertiesRequest:
+    type: object
+    required:
+      - Name
+      - RunId
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow which was run.
+      RunId:
+        $ref: '#/definitions/IdString'
+        description: The ID of the workflow run whose run properties should be returned.
+  GetWorkflowRunsResponse:
+    type: object
+    properties:
+      Runs:
+        $ref: '#/definitions/WorkflowRuns'
+        description: A list of workflow run metadata objects.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: 'A continuation token, if not all requested workflow runs have been returned.'
+  GetWorkflowRunsRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow whose metadata of runs should be returned.
+      IncludeGraph:
+        $ref: '#/definitions/NullableBoolean'
+        description: Specifies whether to include the workflow graph in response or not.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: The maximum size of the response.
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of workflow runs to be included in the response.
   ImportCatalogToGlueResponse:
     type: object
     properties: {}
@@ -6423,6 +7108,24 @@ definitions:
       Tags:
         $ref: '#/definitions/TagsMap'
         description: Specifies to return only these tagged resources.
+  ListWorkflowsResponse:
+    type: object
+    properties:
+      Workflows:
+        $ref: '#/definitions/WorkflowNames'
+        description: List of names of workflows in the account.
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: 'A continuation token, if not all workflow names have been returned.'
+  ListWorkflowsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/GenericString'
+        description: 'A continuation token, if this is a continuation request.'
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum size of a list to return.
   PutDataCatalogEncryptionSettingsResponse:
     type: object
     properties: {}
@@ -6457,6 +7160,25 @@ definitions:
       PolicyExistsCondition:
         $ref: '#/definitions/ExistCondition'
         description: 'A value of <code>MUST_EXIST</code> is used to update a policy. A value of <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a null value is used, the call will not depend on the existence of a policy.'
+  PutWorkflowRunPropertiesResponse:
+    type: object
+    properties: {}
+  PutWorkflowRunPropertiesRequest:
+    type: object
+    required:
+      - Name
+      - RunId
+      - RunProperties
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow which was run.
+      RunId:
+        $ref: '#/definitions/IdString'
+        description: The ID of the workflow run for which the run properties should be updated.
+      RunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: The properties to put for the specified run.
   ResetJobBookmarkResponse:
     type: object
     properties:
@@ -6524,18 +7246,18 @@ definitions:
       MaxCapacity:
         $ref: '#/definitions/NullableDouble'
         description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
-      WorkerType:
-        $ref: '#/definitions/WorkerType'
-        description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>'
-      NumberOfWorkers:
-        $ref: '#/definitions/NullableInteger'
-        description: '<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>'
       SecurityConfiguration:
         $ref: '#/definitions/NameString'
         description: The name of the <code>SecurityConfiguration</code> structure to be used with this job run.
       NotificationProperty:
         $ref: '#/definitions/NotificationProperty'
         description: Specifies configuration properties of a job run notification.
+      WorkerType:
+        $ref: '#/definitions/NameString'
+        description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>'
+      NumberOfWorkers:
+        $ref: '#/definitions/NullableInteger'
+        description: '<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>'
   ConcurrentRunsExceededException: {}
   StartTriggerResponse:
     type: object
@@ -6551,6 +7273,20 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: The name of the trigger to start.
+  StartWorkflowRunResponse:
+    type: object
+    properties:
+      RunId:
+        $ref: '#/definitions/IdString'
+        description: An Id for the new run.
+  StartWorkflowRunRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow to start.
   StopCrawlerResponse:
     type: object
     properties: {}
@@ -6867,6 +7603,26 @@ definitions:
       FunctionInput:
         $ref: '#/definitions/UserDefinedFunctionInput'
         description: A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.
+  UpdateWorkflowResponse:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow which was specified in input.
+  UpdateWorkflowRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow to be updated.
+      Description:
+        $ref: '#/definitions/GenericString'
+        description: The description of the workflow.
+      DefaultRunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: A collection of properties to be used as part of each execution of the workflow.
   NameString:
     type: string
     minLength: 1
@@ -6898,12 +7654,15 @@ definitions:
       Timeout:
         $ref: '#/definitions/Timeout'
         description: 'The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.'
-      NotificationProperty:
-        $ref: '#/definitions/NotificationProperty'
-        description: Specifies configuration properties of a job run notification.
       SecurityConfiguration:
         $ref: '#/definitions/NameString'
         description: The name of the <code>SecurityConfiguration</code> structure to be used with this action.
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job run notification.
+      CrawlerName:
+        $ref: '#/definitions/NameString'
+        description: The name of the crawler to be used with this action.
     description: Defines an action to be initiated by a trigger.
   ActionList:
     type: array
@@ -7026,6 +7785,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Trigger'
+  WorkflowNames:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+    minItems: 1
+    maxItems: 25
+  NullableBoolean:
+    type: boolean
+  Workflows:
+    type: array
+    items:
+      $ref: '#/definitions/Workflow'
+    minItems: 1
+    maxItems: 25
   IdString:
     type: string
     minLength: 1
@@ -7429,6 +8202,13 @@ definitions:
       - SUCCEEDED
       - FAILED
       - TIMEOUT
+  CrawlState:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - CANCELLED
+      - FAILED
   Condition:
     type: object
     properties:
@@ -7441,6 +8221,12 @@ definitions:
       State:
         $ref: '#/definitions/JobRunState'
         description: 'The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.'
+      CrawlerName:
+        $ref: '#/definitions/NameString'
+        description: The name of the crawler to which this condition applies.
+      CrawlState:
+        $ref: '#/definitions/CrawlState'
+        description: The state of the crawler to which this condition applies.
     description: Defines a condition under which a trigger fires.
   ConditionList:
     type: array
@@ -7572,7 +8358,7 @@ definitions:
       - INSTANCE_ID
       - JDBC_CONNECTION_URL
       - JDBC_ENFORCE_SSL
-  StringList:
+  OrchestrationStringList:
     type: array
     items:
       $ref: '#/definitions/GenericString'
@@ -7580,9 +8366,48 @@ definitions:
     type: object
     properties:
       Connections:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/OrchestrationStringList'
         description: A list of connections used by the job.
     description: Specifies the connections used by a job.
+  TimestampValue:
+    type: string
+    format: date-time
+  LogGroup:
+    type: string
+    pattern: '[\.\-_/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  LogStream:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  Crawl:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/CrawlState'
+        description: The state of the crawler.
+      StartedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time on which the crawl started.
+      CompletedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time on which the crawl completed.
+      ErrorMessage:
+        $ref: '#/definitions/DescriptionString'
+        description: The error message associated with the crawl.
+      LogGroup:
+        $ref: '#/definitions/LogGroup'
+        description: The log group associated with the crawl.
+      LogStream:
+        $ref: '#/definitions/LogStream'
+        description: The log stream associated with the crawl.
+    description: The details of a crawl in the workflow.
+  CrawlList:
+    type: array
+    items:
+      $ref: '#/definitions/Crawl'
   Role:
     type: string
   CrawlerTargets:
@@ -7759,6 +8584,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CrawlerMetrics'
+  CrawlerNodeDetails:
+    type: object
+    properties:
+      Crawls:
+        $ref: '#/definitions/CrawlList'
+        description: A list of crawls represented by the crawl node.
+    description: The details of a Crawler node present in the workflow.
   S3TargetList:
     type: array
     items:
@@ -7875,8 +8707,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NameString'
-  NullableBoolean:
-    type: boolean
   DatabaseInput:
     type: object
     required:
@@ -7900,6 +8730,10 @@ definitions:
   RoleArn:
     type: string
     pattern: 'arn:aws:iam::\d{12}:role/.*'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
   PublicKeysList:
     type: array
     items:
@@ -7913,9 +8747,6 @@ definitions:
     maxProperties: 100
     additionalProperties:
       $ref: '#/definitions/GenericString'
-  TimestampValue:
-    type: string
-    format: date-time
   GrokPattern:
     type: string
     minLength: 1
@@ -7945,7 +8776,7 @@ definitions:
         description: 'The name of the job command. For an Apache Spark ETL job, this must be <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>.'
       ScriptLocation:
         $ref: '#/definitions/ScriptLocationString'
-        description: Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job (required).
+        description: Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
       PythonVersion:
         $ref: '#/definitions/PythonVersionString'
         description: The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
@@ -7955,12 +8786,6 @@ definitions:
   NullableDouble:
     type: number
     format: double
-  WorkerType:
-    type: string
-    enum:
-      - Standard
-      - G.1X
-      - G.2X
   NullableInteger:
     type: integer
   JsonPath:
@@ -8091,6 +8916,10 @@ definitions:
         $ref: '#/definitions/ResourceUriList'
         description: The resource URIs for the function.
     description: A structure used to create or updata a user-defined function.
+  WorkflowRunProperties:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/GenericString'
   RowTag:
     type: string
   EncryptionAtRest:
@@ -8262,6 +9091,20 @@ definitions:
         $ref: '#/definitions/Path'
         description: The name of the DynamoDB table to crawl.
     description: Specifies an Amazon DynamoDB table to crawl.
+  Edge:
+    type: object
+    properties:
+      SourceId:
+        $ref: '#/definitions/NameString'
+        description: The unique of the node within the workflow where the edge starts.
+      DestinationId:
+        $ref: '#/definitions/NameString'
+        description: The unique of the node within the workflow where the edge ends.
+    description: An edge represents a directed connection between two AWS Glue components which are part of the workflow the edge belongs to.
+  EdgeList:
+    type: array
+    items:
+      $ref: '#/definitions/Edge'
   S3EncryptionList:
     type: array
     items:
@@ -8424,9 +9267,6 @@ definitions:
       MaxCapacity:
         $ref: '#/definitions/NullableDouble'
         description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
-      NotificationProperty:
-        $ref: '#/definitions/NotificationProperty'
-        description: Specifies configuration properties of a job run notification.
       WorkerType:
         $ref: '#/definitions/WorkerType'
         description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>'
@@ -8439,6 +9279,9 @@ definitions:
       LogGroupName:
         $ref: '#/definitions/GenericString'
         description: 'The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the default encryption is <code>NONE</code>. If you add a role name and <code>SecurityConfiguration</code> name (in other words, <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security configuration is used to encrypt the log group.'
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job run notification.
     description: Contains information about a job run.
   JobRunList:
     type: array
@@ -8611,6 +9454,9 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: The name of the trigger.
+      WorkflowName:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow associated with the trigger.
       Id:
         $ref: '#/definitions/IdString'
         description: Reserved for future use.
@@ -8659,6 +9505,65 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UserDefinedFunction'
+  Workflow:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the workflow representing the flow.
+      Description:
+        $ref: '#/definitions/GenericString'
+        description: A description of the workflow.
+      DefaultRunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: A collection of properties to be used as part of each execution of the workflow.
+      CreatedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time when the workflow was created.
+      LastModifiedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time when the workflow was last modified.
+      LastRun:
+        $ref: '#/definitions/WorkflowRun'
+        description: The information about the last execution of the workflow.
+      Graph:
+        $ref: '#/definitions/WorkflowGraph'
+        description: The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+    description: A workflow represents a flow in which AWS Glue components should be executed to complete a logical task.
+  WorkflowRun:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the workflow which was executed.
+      WorkflowRunId:
+        $ref: '#/definitions/IdString'
+        description: The ID of this workflow run.
+      WorkflowRunProperties:
+        $ref: '#/definitions/WorkflowRunProperties'
+        description: The workflow run properties which were set during the run.
+      StartedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time when the workflow run was started.
+      CompletedOn:
+        $ref: '#/definitions/TimestampValue'
+        description: The date and time when the workflow run completed.
+      Status:
+        $ref: '#/definitions/WorkflowRunStatus'
+        description: The status of the workflow run.
+      Statistics:
+        $ref: '#/definitions/WorkflowRunStatistics'
+        description: The statistics of the run.
+      Graph:
+        $ref: '#/definitions/WorkflowGraph'
+        description: The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+    description: A workflow run is an execution of a workflow providing all the runtime information.
+  WorkflowRuns:
+    type: array
+    items:
+      $ref: '#/definitions/WorkflowRun'
+    minItems: 1
+    maxItems: 1000
   IntegerFlag:
     type: integer
     minimum: 0
@@ -8680,6 +9585,12 @@ definitions:
         $ref: '#/definitions/PathList'
         description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
     description: Specifies a JDBC data store to crawl.
+  WorkerType:
+    type: string
+    enum:
+      - Standard
+      - G.1X
+      - G.2X
   JobName:
     type: string
   JsonValue:
@@ -8713,6 +9624,13 @@ definitions:
   PythonVersionString:
     type: string
     pattern: '^[2-3]$'
+  JobNodeDetails:
+    type: object
+    properties:
+      JobRuns:
+        $ref: '#/definitions/JobRunList'
+        description: The information for the job runs represented by the job node.
+    description: The details of a Job node present in the workflow.
   PredecessorList:
     type: array
     items:
@@ -8777,16 +9695,6 @@ definitions:
       - SUCCEEDED
       - CANCELLED
       - FAILED
-  LogGroup:
-    type: string
-    pattern: '[\.\-_/#A-Za-z0-9]+'
-    minLength: 1
-    maxLength: 512
-  LogStream:
-    type: string
-    pattern: '[^:*]*'
-    minLength: 1
-    maxLength: 512
   MessagePrefix:
     type: string
     minLength: 1
@@ -8831,6 +9739,45 @@ definitions:
         $ref: '#/definitions/FieldType'
         description: The target type.
     description: Defines a mapping.
+  NodeType:
+    type: string
+    enum:
+      - CRAWLER
+      - JOB
+      - TRIGGER
+  TriggerNodeDetails:
+    type: object
+    properties:
+      Trigger:
+        $ref: '#/definitions/Trigger'
+        description: The information of the trigger represented by the trigger node.
+    description: The details of a Trigger node present in the workflow.
+  Node:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/NodeType'
+        description: The type of AWS Glue component represented by the node.
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the AWS Glue component represented by the node.
+      UniqueId:
+        $ref: '#/definitions/NameString'
+        description: The unique Id assigned to the node within the workflow.
+      TriggerDetails:
+        $ref: '#/definitions/TriggerNodeDetails'
+        description: Details of the Trigger when the node represents a Trigger.
+      JobDetails:
+        $ref: '#/definitions/JobNodeDetails'
+        description: Details of the Job when the node represents a Job.
+      CrawlerDetails:
+        $ref: '#/definitions/CrawlerNodeDetails'
+        description: Details of the crawler when the node represents a crawler.
+    description: 'A node represents an AWS Glue component like Trigger, Job etc. which is part of a workflow.'
+  NodeList:
+    type: array
+    items:
+      $ref: '#/definitions/Node'
   NotifyDelayAfter:
     type: integer
     minimum: 1
@@ -9160,3 +10107,40 @@ definitions:
         $ref: '#/definitions/NullableBoolean'
         description: Enables the processing of files that contain only one column.
     description: Specifies a custom CSV classifier to be updated.
+  WorkflowGraph:
+    type: object
+    properties:
+      Nodes:
+        $ref: '#/definitions/NodeList'
+        description: A list of the the AWS Glue components belong to the workflow represented as nodes.
+      Edges:
+        $ref: '#/definitions/EdgeList'
+        description: A list of all the directed connections between the nodes belonging to the workflow.
+    description: A workflow graph represents the complete workflow containing all the AWS Glue components present in the workflow and all the directed connections between them.
+  WorkflowRunStatus:
+    type: string
+    enum:
+      - RUNNING
+      - COMPLETED
+  WorkflowRunStatistics:
+    type: object
+    properties:
+      TotalActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number of Actions in the workflow run.
+      TimeoutActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number of Actions which timed out.
+      FailedActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number of Actions which have failed.
+      StoppedActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number of Actions which have stopped.
+      SucceededActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number of Actions which have succeeded.
+      RunningActions:
+        $ref: '#/definitions/IntegerValue'
+        description: Total number Actions in running state.
+    description: Workflow run statistics provides statistics about the workflow run.

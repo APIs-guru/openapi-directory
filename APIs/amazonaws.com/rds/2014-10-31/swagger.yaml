@@ -2918,6 +2918,11 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: MaxAllocatedStorage
+          in: query
+          required: false
+          description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+          type: integer
         - name: Action
           in: query
           required: true
@@ -3259,6 +3264,11 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: MaxAllocatedStorage
+          in: formData
+          required: false
+          description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+          type: integer
         - name: Action
           in: query
           required: true
@@ -11057,6 +11067,11 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: MaxAllocatedStorage
+          in: query
+          required: false
+          description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+          type: integer
         - name: Action
           in: query
           required: true
@@ -11372,6 +11387,11 @@ paths:
           required: false
           description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
           type: boolean
+        - name: MaxAllocatedStorage
+          in: formData
+          required: false
+          description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+          type: integer
         - name: Action
           in: query
           required: true
@@ -19128,6 +19148,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
+      MaxAllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+        description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
     description: <p/>
   CreateDBInstanceReadReplicaMessage:
     type: object
@@ -19392,6 +19415,9 @@ definitions:
       ListenerEndpoint:
         $ref: '#/definitions/Endpoint'
         description: Specifies the listener connection endpoint for SQL Server Always On.
+      MaxAllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+        description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
     description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>
   CreateDBParameterGroupMessage:
     type: object
@@ -21366,6 +21392,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
+      MaxAllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+        description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
     description: <p/>
   ModifyDBParameterGroupMessage:
     type: object
@@ -21756,6 +21785,9 @@ definitions:
       SupportedEngineModes:
         $ref: '#/definitions/EngineModeList'
         description: A list of the supported DB engine modes.
+      SupportsStorageAutoscaling:
+        $ref: '#/definitions/BooleanOptional'
+        description: Whether or not Amazon RDS can automatically scale storage for DB instances that use the specified instance class.
     description: <p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <code>DescribeOrderableDBInstanceOptions</code> action. </p>
   OrderableDBInstanceOptionsList:
     type: array
@@ -22783,6 +22815,9 @@ definitions:
       IopsToStorageRatio:
         $ref: '#/definitions/DoubleRangeList'
         description: 'The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage. '
+      SupportsStorageAutoscaling:
+        $ref: '#/definitions/Boolean'
+        description: Whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.
     description: 'Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <code>DescribeValidDBInstanceModifications</code> action. '
   VpcSecurityGroupMembership:
     type: object

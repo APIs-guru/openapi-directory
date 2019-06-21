@@ -3,7 +3,7 @@ info:
   version: '2018-10-23'
   x-release: v4
   title: AWS IoT Events Data
-  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur.'
+  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. AWS IoT Events Data API commands enable you to send inputs to detectors, list detectors, and view or update a detector''s status.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -162,7 +162,7 @@ paths:
   /inputs/messages:
     post:
       operationId: BatchPutMessage
-      description: 'Sends a set of messages to the AWS IoT Events system. Each message payload will be transformed into the input you specify (<code>inputName</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed is not guaranteed--you must send messages one at a time and wait for a successful response to guarantee ordering. '
+      description: 'Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>"inputName"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn''t guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.'
       responses:
         '200':
           description: Success
@@ -194,7 +194,7 @@ paths:
               - messages
             properties:
               messages:
-                description: 'The list of messages to send. Each message has format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code>.'
+                description: 'The list of messages to send. Each message has the following format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code> '
                 type: array
                 items:
                   $ref: '#/definitions/Message'
@@ -242,7 +242,7 @@ paths:
               - detectors
             properties:
               detectors:
-                description: 'The list of detectors (instances) to be updated, along with the values to be updated.'
+                description: 'The list of detectors (instances) to update, along with the values to update.'
                 type: array
                 items:
                   $ref: '#/definitions/UpdateDetectorRequest'
@@ -298,7 +298,7 @@ paths:
           required: false
           description: A filter used to limit results to detectors (instances) created because of the given key ID.
           type: string
-          pattern: '^[a-zA-Z0-9\-_]+$'
+          pattern: '^[a-zA-Z0-9\-_:]+$'
           minLength: 1
           maxLength: 128
     parameters:
@@ -342,7 +342,7 @@ paths:
         - name: detectorModelName
           in: path
           required: true
-          description: The name of the detector model whose instances you want to list.
+          description: The name of the detector model whose detectors (instances) are listed.
           type: string
           pattern: '^[a-zA-Z0-9_-]+$'
           minLength: 1
@@ -390,10 +390,10 @@ definitions:
     properties:
       messageId:
         $ref: '#/definitions/MessageId'
-        description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
+        description: 'The ID to assign to the message. Within each batch sent, each <code>"messageId"</code> must be unique.'
       inputName:
         $ref: '#/definitions/InputName'
-        description: The name of the input into which the message payload will be transformed.
+        description: The name of the input into which the message payload is transformed.
       payload:
         $ref: '#/definitions/Payload'
         description: The payload of the message. This can be a JSON string or a Base-64-encoded string representing binary data (in which case you must decode it).
@@ -407,7 +407,7 @@ definitions:
     properties:
       batchUpdateDetectorErrorEntries:
         $ref: '#/definitions/BatchUpdateDetectorErrorEntries'
-        description: A list of those detector updates which resulted in errors. (The specific update did not occur if an error is listed here.)
+        description: 'A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)'
   UpdateDetectorRequest:
     type: object
     required:
@@ -417,7 +417,7 @@ definitions:
     properties:
       messageId:
         $ref: '#/definitions/MessageId'
-        description: The ID you wish to assign to the detector update "message". Each "messageId" must be unique within each batch sent.
+        description: The ID to assign to the detector update <code>"message"</code>. Each <code>"messageId"</code> must be unique within each batch sent.
       detectorModelName:
         $ref: '#/definitions/DetectorModelName'
         description: The name of the detector model that created the detectors (instances).
@@ -449,14 +449,14 @@ definitions:
     properties:
       messageId:
         $ref: '#/definitions/MessageId'
-        description: The ID of the message that caused the error. (See the value corresponding to the <code>messageId</code> key in the <code>message</code> object.)
+        description: The ID of the message that caused the error. (See the value corresponding to the <code>"messageId"</code> key in the <code>"message"</code> object.)
       errorCode:
         $ref: '#/definitions/ErrorCode'
         description: The code associated with the error.
       errorMessage:
         $ref: '#/definitions/ErrorMessage'
         description: More information about the error.
-    description: Contains informations about the errors encountered.
+    description: Contains information about the errors encountered.
   BatchPutMessageErrorEntries:
     type: array
     items:
@@ -488,20 +488,20 @@ definitions:
     properties:
       messages:
         $ref: '#/definitions/Messages'
-        description: 'The list of messages to send. Each message has format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code>.'
+        description: 'The list of messages to send. Each message has the following format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code> '
   BatchUpdateDetectorErrorEntry:
     type: object
     properties:
       messageId:
         $ref: '#/definitions/MessageId'
-        description: The "messageId" of the update request that caused the error. (The value of the <code>messageId</code> in the update request <code>Detector</code> object.)
+        description: The <code>"messageId"</code> of the update request that caused the error. (The value of the <code>"messageId"</code> in the update request <code>"Detector"</code> object.)
       errorCode:
         $ref: '#/definitions/ErrorCode'
         description: The code of the error.
       errorMessage:
         $ref: '#/definitions/ErrorMessage'
         description: A message describing the error.
-    description: Information about the error which occured when attempting to update a detector.
+    description: Information about the error that occured when attempting to update a detector.
   BatchUpdateDetectorErrorEntries:
     type: array
     items:
@@ -518,7 +518,7 @@ definitions:
     properties:
       detectors:
         $ref: '#/definitions/UpdateDetectorRequests'
-        description: 'The list of detectors (instances) to be updated, along with the values to be updated.'
+        description: 'The list of detectors (instances) to update, along with the values to update.'
   DetectorModelName:
     type: string
     pattern: '^[a-zA-Z0-9_-]+$'
@@ -526,7 +526,7 @@ definitions:
     maxLength: 128
   KeyValue:
     type: string
-    pattern: '^[a-zA-Z0-9\-_]+$'
+    pattern: '^[a-zA-Z0-9\-_:]+$'
     minLength: 1
     maxLength: 128
   DescribeDetectorRequest:
@@ -570,7 +570,7 @@ definitions:
         description: The name of the state.
       variables:
         $ref: '#/definitions/Variables'
-        description: The current state of the detector's variables.
+        description: The current values of the detector's variables.
       timers:
         $ref: '#/definitions/Timers'
         description: The current state of the detector's timers.
@@ -610,11 +610,11 @@ definitions:
         description: The name of the new state of the detector (instance).
       variables:
         $ref: '#/definitions/VariableDefinitions'
-        description: The new values of the detector's variables. Any variable whose value is not specified will be cleared.
+        description: The new values of the detector's variables. Any variable whose value isn't specified is cleared.
       timers:
         $ref: '#/definitions/TimerDefinitions'
-        description: The new values of the detector's timers. Any timer whose value is not specified will be cleared and its timeout event will not occur.
-    description: 'The new state, variable values and timer settings of the detector (instance).'
+        description: 'The new values of the detector''s timers. Any timer whose value isn''t specified is cleared, and its timeout event won''t occur.'
+    description: 'The new state, variable values, and timer settings of the detector (instance).'
   DetectorStateSummary:
     type: object
     properties:
