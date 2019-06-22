@@ -349,6 +349,10 @@ paths:
                 description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
                 type: object
                 properties:
+                  AdTriggers:
+                    $ref: '#/definitions/AdTriggers'
+                  AdsOnDeliveryRestrictions:
+                    $ref: '#/definitions/AdsOnDeliveryRestrictions'
                   Encryption:
                     $ref: '#/definitions/DashEncryption'
                   ManifestLayout:
@@ -402,6 +406,10 @@ paths:
                       "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
                       messages in the input source.
                     $ref: '#/definitions/AdMarkers'
+                  AdTriggers:
+                    $ref: '#/definitions/AdTriggers'
+                  AdsOnDeliveryRestrictions:
+                    $ref: '#/definitions/AdsOnDeliveryRestrictions'
                   Encryption:
                     $ref: '#/definitions/HlsEncryption'
                   IncludeIframeOnlyStream:
@@ -832,6 +840,10 @@ paths:
                 description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
                 type: object
                 properties:
+                  AdTriggers:
+                    $ref: '#/definitions/AdTriggers'
+                  AdsOnDeliveryRestrictions:
+                    $ref: '#/definitions/AdsOnDeliveryRestrictions'
                   Encryption:
                     $ref: '#/definitions/DashEncryption'
                   ManifestLayout:
@@ -885,6 +897,10 @@ paths:
                       "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
                       messages in the input source.
                     $ref: '#/definitions/AdMarkers'
+                  AdTriggers:
+                    $ref: '#/definitions/AdTriggers'
+                  AdsOnDeliveryRestrictions:
+                    $ref: '#/definitions/AdsOnDeliveryRestrictions'
                   Encryption:
                     $ref: '#/definitions/HlsEncryption'
                   IncludeIframeOnlyStream:
@@ -1228,6 +1244,30 @@ definitions:
         description: A directive that determines the order of streams in the output.
         $ref: '#/definitions/StreamOrder'
     description: A StreamSelection configuration.
+  AdTriggers:
+    type: array
+    description: |
+      A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no
+      ad markers are output.  Specify multiple items to create ad markers for all of the included
+      message types.
+    items:
+      $ref: '#/definitions/__AdTriggersElement'
+  AdsOnDeliveryRestrictions:
+    enum:
+      - NONE
+      - RESTRICTED
+      - UNRESTRICTED
+      - BOTH
+    type: string
+    description: |
+      This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to
+      determine whether a message signals an ad.  Choosing "NONE" means no SCTE-35 messages become
+      ads.  Choosing "RESTRICTED" means SCTE-35 messages of the types specified in AdTriggers that
+      contain delivery restrictions will be treated as ads.  Choosing "UNRESTRICTED" means SCTE-35
+      messages of the types specified in AdTriggers that do not contain delivery restrictions will
+      be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in
+      AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags
+      and are always treated as ads if specified in AdTriggers.
   DashEncryption:
     required:
       - SpekeKeyProvider
@@ -1484,6 +1524,17 @@ definitions:
       Whitelist:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
+  __AdTriggersElement:
+    enum:
+      - SPLICE_INSERT
+      - BREAK
+      - PROVIDER_ADVERTISEMENT
+      - DISTRIBUTOR_ADVERTISEMENT
+      - PROVIDER_PLACEMENT_OPPORTUNITY
+      - DISTRIBUTOR_PLACEMENT_OPPORTUNITY
+      - PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY
+      - DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    type: string
   HlsIngest:
     type: object
     properties:
@@ -1603,6 +1654,10 @@ definitions:
   DashPackage:
     type: object
     properties:
+      AdTriggers:
+        $ref: '#/definitions/AdTriggers'
+      AdsOnDeliveryRestrictions:
+        $ref: '#/definitions/AdsOnDeliveryRestrictions'
       Encryption:
         $ref: '#/definitions/DashEncryption'
       ManifestLayout:
@@ -1653,6 +1708,10 @@ definitions:
           "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
           messages in the input source.
         $ref: '#/definitions/AdMarkers'
+      AdTriggers:
+        $ref: '#/definitions/AdTriggers'
+      AdsOnDeliveryRestrictions:
+        $ref: '#/definitions/AdsOnDeliveryRestrictions'
       Encryption:
         $ref: '#/definitions/HlsEncryption'
       IncludeIframeOnlyStream:
@@ -1837,6 +1896,10 @@ definitions:
           "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
           messages in the input source.
         $ref: '#/definitions/AdMarkers'
+      AdTriggers:
+        $ref: '#/definitions/AdTriggers'
+      AdsOnDeliveryRestrictions:
+        $ref: '#/definitions/AdsOnDeliveryRestrictions'
       Id:
         description: The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
         $ref: '#/definitions/__string'
