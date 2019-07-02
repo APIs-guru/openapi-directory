@@ -4095,7 +4095,7 @@ definitions:
         description: The ID of the resource to add a tag to.
       Tags:
         $ref: '#/definitions/Tags'
-        description: The tag to add to the specified resource.
+        description: 'The tag to add to the specified resource. Specifying the tag key is required. You can set the value of a tag to an empty string, but you can''t set the value of a tag to null.'
   UntagResourceRequest:
     type: object
     required:
@@ -4708,13 +4708,16 @@ definitions:
     maxLength: 256
   Tag:
     type: object
+    required:
+      - Key
+      - Value
     properties:
       Key:
         $ref: '#/definitions/TagKey'
         description: 'The key identifier, or name, of the tag.'
       Value:
         $ref: '#/definitions/TagValue'
-        description: The string value that's associated with the key of the tag.
+        description: 'The string value that''s associated with the key of the tag. You can set the value of a tag to an empty string, but you can''t set the value of a tag to null.'
     description: 'A custom key-value pair associated with a resource such as an account within your organization. '
   TagKeys:
     type: array

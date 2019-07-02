@@ -109,6 +109,7 @@ x-servers:
           - cn-northwest-1
         default: cn-north-1
     description: The AmazonApiGatewayV2 endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
@@ -218,6 +219,11 @@ paths:
               version:
                 description: 'A string with a length between [1-64].'
                 type: string
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And1600'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -623,6 +629,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/DomainNameConfiguration'
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And1600'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1405,6 +1416,11 @@ paths:
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/StringWithLengthBetween0And2048'
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And1600'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2957,6 +2973,130 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v2/tags/{resource-arn}':
+    get:
+      operationId: GetTags
+      description: Gets the Tags for an API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTagsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tag an APIGW resource
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: 'AWS resource arn '
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              tags:
+                description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/StringWithLengthBetween1And1600'
+  '/v2/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Untag an APIGW resource
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: 'AWS resource arn '
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The Tag keys to delete
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateApiResponse:
     type: object
@@ -2999,6 +3139,12 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+  StringWithLengthBetween1And1600:
+    type: string
+    description: 'A string with a length between [1-1600].'
   NotFoundException: {}
   TooManyRequestsException: {}
   BadRequestException: {}
@@ -3125,6 +3271,9 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   DomainNameConfiguration:
     type: object
     properties:
@@ -3152,6 +3301,15 @@ definitions:
       HostedZoneId:
         $ref: '#/definitions/__string'
         description: The Amazon Route 53 Hosted Zone ID of the endpoint.
+      SecurityPolicy:
+        $ref: '#/definitions/SecurityPolicy'
+        description: The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
+      DomainNameStatus:
+        $ref: '#/definitions/DomainNameStatus'
+        description: 'The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
+      DomainNameStatusMessage:
+        $ref: '#/definitions/__string'
+        description: An optional text message containing detailed information about status of the domain name migration.
     description: The domain name configuration.
   CreateIntegrationResponse:
     type: object
@@ -3459,6 +3617,9 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   StringWithLengthBetween1And1024:
     type: string
     description: 'A string with a length between [1-1024].'
@@ -3545,6 +3706,9 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   GetApiMappingResponse:
     type: object
     properties:
@@ -3706,6 +3870,9 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   GetDomainNamesResponse:
     type: object
     properties:
@@ -4063,6 +4230,9 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   GetStagesResponse:
     type: object
     properties:
@@ -4074,6 +4244,14 @@ definitions:
         description: |-
           The next page of elements from this collection. Not valid for the last element of
            the collection.
+  GetTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+  TagResourceResponse:
+    type: object
+    properties: {}
   UpdateApiResponse:
     type: object
     properties:
@@ -4550,6 +4728,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__string'
+  Tags:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/StringWithLengthBetween1And1600'
   Api:
     type: object
     required:
@@ -4595,6 +4777,9 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
     description: Represents an API.
   SelectionKey:
     type: string
@@ -4809,6 +4994,9 @@ definitions:
       Version:
         $ref: '#/definitions/StringWithLengthBetween1And64'
         description: A version identifier for the API.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   CreateAuthorizerRequest:
     type: object
     required:
@@ -4915,6 +5103,9 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   IntegrationType:
     type: string
     enum:
@@ -5250,6 +5441,9 @@ definitions:
           A map that defines the stage variables for a Stage. Variable names
            can have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   DeleteApiMappingRequest:
     type: object
     properties: {}
@@ -5321,6 +5515,9 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
     description: Represents a domain name.
   EndpointType:
     type: string
@@ -5328,6 +5525,18 @@ definitions:
       - REGIONAL
       - EDGE
     description: Represents an endpoint type.
+  SecurityPolicy:
+    type: string
+    enum:
+      - TLS_1_0
+      - TLS_1_2
+    description: The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
+  DomainNameStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - UPDATING
+    description: 'The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
   GetApiMappingRequest:
     type: object
     properties: {}
@@ -5605,6 +5814,13 @@ definitions:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
     description: Represents an integration response.
+  GetTagsRequest:
+    type: object
+    properties: {}
+  __mapOf__string:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
   Model:
     type: object
     required:
@@ -5748,7 +5964,19 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
     description: Represents an API stage.
+  TagResourceRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateApiMappingRequest:
     type: object
     required:

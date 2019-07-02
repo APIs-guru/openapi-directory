@@ -1001,7 +1001,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.DeleteDeviceUsageData':
     post:
       operationId: DeleteDeviceUsageData
-      description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. '
+      description: '<p>When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p> <p>When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>'
       responses:
         '200':
           description: Success
@@ -3012,7 +3012,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.SendInvitation':
     post:
       operationId: SendInvitation
-      description: 'Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. '
+      description: 'Sends an enrollment invitation email with a URL to a user. The URL is valid for 30 days or until you call this operation again, whichever comes first. '
       responses:
         '200':
           description: Success
@@ -3815,8 +3815,14 @@ definitions:
         $ref: '#/definitions/ContactName'
         description: The last name of the contact that is used to call the contact on the device.
       PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The phone number of the contact in E.164 format.
+        $ref: '#/definitions/RawPhoneNumber'
+        description: 'The phone number of the contact in E.164 format. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.'
+      PhoneNumbers:
+        $ref: '#/definitions/PhoneNumberList'
+        description: The list of phone numbers for the contact.
+      SipAddresses:
+        $ref: '#/definitions/SipAddressList'
+        description: The list of SIP addresses for the contact.
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency.'
@@ -5183,8 +5189,14 @@ definitions:
         $ref: '#/definitions/ContactName'
         description: The updated last name of the contact.
       PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The updated phone number of the contact.
+        $ref: '#/definitions/RawPhoneNumber'
+        description: 'The updated phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.'
+      PhoneNumbers:
+        $ref: '#/definitions/PhoneNumberList'
+        description: The list of phone numbers for the contact.
+      SipAddresses:
+        $ref: '#/definitions/SipAddressList'
+        description: The list of SIP addresses for the contact.
   UpdateDeviceResponse:
     type: object
     properties: {}
@@ -5700,10 +5712,24 @@ definitions:
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
-  E164PhoneNumber:
+  RawPhoneNumber:
     type: string
-    pattern: '^\+\d{8,}$'
+    pattern: '^[\+0-9\#\,\(][\+0-9\-\.\/\(\)\,\#\s]+$'
+    minLength: 0
+    maxLength: 50
     format: password
+  PhoneNumberList:
+    type: array
+    items:
+      $ref: '#/definitions/PhoneNumber'
+    minItems: 0
+    maxItems: 3
+  SipAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/SipAddress'
+    minItems: 0
+    maxItems: 1
   Contact:
     type: object
     properties:
@@ -5720,8 +5746,14 @@ definitions:
         $ref: '#/definitions/ContactName'
         description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The phone number of the contact.
+        $ref: '#/definitions/RawPhoneNumber'
+        description: 'The phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.'
+      PhoneNumbers:
+        $ref: '#/definitions/PhoneNumberList'
+        description: The list of phone numbers for the contact.
+      SipAddresses:
+        $ref: '#/definitions/SipAddressList'
+        description: The list of SIP addresses for the contact.
     description: A contact with attributes.
   ContactData:
     type: object
@@ -5739,8 +5771,14 @@ definitions:
         $ref: '#/definitions/ContactName'
         description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
-        $ref: '#/definitions/E164PhoneNumber'
-        description: The phone number of the contact.
+        $ref: '#/definitions/RawPhoneNumber'
+        description: 'The phone number of the contact. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.'
+      PhoneNumbers:
+        $ref: '#/definitions/PhoneNumberList'
+        description: The list of phone numbers for the contact.
+      SipAddresses:
+        $ref: '#/definitions/SipAddressList'
+        description: The list of SIP addresses for the contact.
     description: Information related to a contact.
   ContactDataList:
     type: array
@@ -6501,6 +6539,26 @@ definitions:
   OutboundPhoneNumber:
     type: string
     pattern: '\d{10}'
+  PhoneNumberType:
+    type: string
+    enum:
+      - MOBILE
+      - WORK
+      - HOME
+    format: password
+  PhoneNumber:
+    type: object
+    required:
+      - Number
+      - Type
+    properties:
+      Number:
+        $ref: '#/definitions/RawPhoneNumber'
+        description: The raw value of the phone number.
+      Type:
+        $ref: '#/definitions/PhoneNumberType'
+        description: The type of the phone number.
+    description: The phone number for the contact containing the raw number and phone number type.
   ProductDescription:
     type: string
   ProductId:
@@ -6616,6 +6674,30 @@ definitions:
     maximum: 3600
   ShortDescription:
     type: string
+  SipUri:
+    type: string
+    pattern: '^sip[s]?:([^@:]+)\@([^@]+)$'
+    minLength: 1
+    maxLength: 256
+    format: password
+  SipType:
+    type: string
+    enum:
+      - WORK
+    format: password
+  SipAddress:
+    type: object
+    required:
+      - Uri
+      - Type
+    properties:
+      Uri:
+        $ref: '#/definitions/SipUri'
+        description: The URI for the SIP address.
+      Type:
+        $ref: '#/definitions/SipType'
+        description: The type of the SIP address.
+    description: The SIP address for the contact containing the URI and SIP address type.
   SkillTypes:
     type: array
     items:

@@ -262,6 +262,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.CopyWorkspaceImage':
+    post:
+      operationId: CopyWorkspaceImage
+      description: Copies the specified image from the specified Region to the current Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyWorkspaceImageResult'
+        '480':
+          description: ResourceLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceLimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceUnavailableException
+          schema:
+            $ref: '#/definitions/ResourceUnavailableException'
+        '484':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+        '485':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '486':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyWorkspaceImageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.CopyWorkspaceImage
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkspacesService.CreateIpGroup':
     post:
       operationId: CreateIpGroup
@@ -474,7 +531,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage':
     post:
       operationId: DeleteWorkspaceImage
-      description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. '
+      description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. '
       responses:
         '200':
           description: Success
@@ -1163,7 +1220,7 @@ paths:
   '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceState':
     post:
       operationId: ModifyWorkspaceState
-      description: '<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>'
+      description: '<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>'
       responses:
         '200':
           description: Success
@@ -1477,6 +1534,36 @@ definitions:
       UserRules:
         $ref: '#/definitions/IpRuleList'
         description: The rules to add to the group.
+  CopyWorkspaceImageResult:
+    type: object
+    properties:
+      ImageId:
+        $ref: '#/definitions/WorkspaceImageId'
+        description: The identifier of the image.
+  CopyWorkspaceImageRequest:
+    type: object
+    required:
+      - Name
+      - SourceImageId
+      - SourceRegion
+    properties:
+      Name:
+        $ref: '#/definitions/WorkspaceImageName'
+        description: The name of the image.
+      Description:
+        $ref: '#/definitions/WorkspaceImageDescription'
+        description: A description of the image.
+      SourceImageId:
+        $ref: '#/definitions/WorkspaceImageId'
+        description: The identifier of the source image.
+      SourceRegion:
+        $ref: '#/definitions/Region'
+        description: The identifier of the source Region.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the image.
+  ResourceAlreadyExistsException: {}
+  ResourceUnavailableException: {}
   CreateIpGroupResult:
     type: object
     properties:
@@ -1500,7 +1587,6 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-  ResourceAlreadyExistsException: {}
   ResourceCreationFailedException: {}
   CreateTagsResult:
     type: object
@@ -1738,7 +1824,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
-  ResourceUnavailableException: {}
   DescribeWorkspacesConnectionStatusResult:
     type: object
     properties:
@@ -1911,9 +1996,6 @@ definitions:
       RebuildWorkspaceRequests:
         $ref: '#/definitions/RebuildWorkspaceRequests'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
-      AdditionalInfo:
-        $ref: '#/definitions/AdditionalInfo'
-        description: Reserved.
   RevokeIpRulesResult:
     type: object
     properties: {}
@@ -2036,8 +2118,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AccountModification'
-  AdditionalInfo:
-    type: string
   Alias:
     type: string
   DirectoryId:
@@ -2150,14 +2230,32 @@ definitions:
       - CONNECTED
       - DISCONNECTED
       - UNKNOWN
-  IpGroupName:
+  WorkspaceImageName:
     type: string
-  IpGroupDesc:
+    pattern: '^[a-zA-Z0-9_./()\\-]+$'
+    minLength: 1
+    maxLength: 64
+  WorkspaceImageDescription:
     type: string
+    pattern: '^[a-zA-Z0-9_./() -]+$'
+    minLength: 1
+    maxLength: 256
+  WorkspaceImageId:
+    type: string
+    pattern: 'wsi-[0-9a-z]{9,63}$'
+  Region:
+    type: string
+    pattern: '^[-0-9a-z]{1,31}$'
+    minLength: 1
+    maxLength: 31
   TagList:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  IpGroupName:
+    type: string
+  IpGroupDesc:
+    type: string
   WorkspaceRequestList:
     type: array
     items:
@@ -2208,9 +2306,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NonEmptyString'
-  WorkspaceImageId:
-    type: string
-    pattern: 'wsi-[0-9a-z]{9,63}$'
   PaginationToken:
     type: string
     minLength: 1
@@ -2406,16 +2501,6 @@ definitions:
       - BYOL_REGULAR
       - BYOL_GRAPHICS
       - BYOL_GRAPHICSPRO
-  WorkspaceImageName:
-    type: string
-    pattern: '^[a-zA-Z0-9_./()\\-]+$'
-    minLength: 1
-    maxLength: 64
-  WorkspaceImageDescription:
-    type: string
-    pattern: '^[a-zA-Z0-9_./() -]+$'
-    minLength: 1
-    maxLength: 256
   IpRule:
     type: string
   IpRevokedRuleList:

@@ -1,0 +1,271 @@
+swagger: '2.0'
+info:
+  version: '2018-04-02'
+  x-release: v4
+  title: AWS EC2 Instance Connect
+  description: AWS EC2 Connect Service is a service that enables system administrators to publish temporary SSH keys to their EC2 instances in order to establish connections to their instances without leaving a permanent authentication option.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ec2-instance-connect
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ec2-instance-connect-2018-04-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/ec2-instance-connect/'
+host: ec2-instance-connect.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://ec2-instance-connect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The EC2 Instance Connect multi-region endpoint
+  - url: 'https://ec2-instance-connect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The EC2 Instance Connect multi-region endpoint
+  - url: 'http://ec2-instance-connect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EC2 Instance Connect endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://ec2-instance-connect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EC2 Instance Connect endpoint for China (Beijing) and China (Ningxia)
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=AWSEC2InstanceConnectService.SendSSHPublicKey':
+    post:
+      operationId: SendSSHPublicKey
+      description: Pushes an SSH public key to a particular OS user on a given EC2 instance for 60 seconds.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendSSHPublicKeyResponse'
+        '480':
+          description: AuthException
+          schema:
+            $ref: '#/definitions/AuthException'
+        '481':
+          description: InvalidArgsException
+          schema:
+            $ref: '#/definitions/InvalidArgsException'
+        '482':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: EC2InstanceNotFoundException
+          schema:
+            $ref: '#/definitions/EC2InstanceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendSSHPublicKeyRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSEC2InstanceConnectService.SendSSHPublicKey
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  SendSSHPublicKeyResponse:
+    type: object
+    example:
+      RequestId: abcd1234-abcd-1234-abcd-1234abcd1234
+      Success: true
+    properties:
+      RequestId:
+        $ref: '#/definitions/RequestId'
+        description: The request ID as logged by EC2 Connect. Please provide this when contacting AWS Support.
+      Success:
+        $ref: '#/definitions/Success'
+        description: Indicates request success.
+  SendSSHPublicKeyRequest:
+    type: object
+    required:
+      - InstanceId
+      - InstanceOSUser
+      - SSHPublicKey
+      - AvailabilityZone
+    properties:
+      InstanceId:
+        $ref: '#/definitions/InstanceId'
+        description: The EC2 instance you wish to publish the SSH key to.
+      InstanceOSUser:
+        $ref: '#/definitions/InstanceOSUser'
+        description: The OS user on the EC2 instance whom the key may be used to authenticate as.
+      SSHPublicKey:
+        $ref: '#/definitions/SSHPublicKey'
+        description: The public key to be published to the instance. To use it after publication you must have the matching private key.
+      AvailabilityZone:
+        $ref: '#/definitions/AvailabilityZone'
+        description: The availability zone the EC2 instance was launched in.
+  AuthException: {}
+  InvalidArgsException: {}
+  ServiceException: {}
+  ThrottlingException: {}
+  EC2InstanceNotFoundException: {}
+  AvailabilityZone:
+    type: string
+    pattern: '^(\w+-){2,3}\d+\w+$'
+    minLength: 6
+    maxLength: 32
+  InstanceId:
+    type: string
+    pattern: '^i-[a-f0-9]+$'
+    minLength: 10
+    maxLength: 32
+  InstanceOSUser:
+    type: string
+    pattern: '^[A-Za-z_][A-Za-z0-9\@\._-]{0,30}[A-Za-z0-9\$_-]?$'
+    minLength: 1
+    maxLength: 32
+  RequestId:
+    type: string
+  SSHPublicKey:
+    type: string
+    minLength: 256
+    maxLength: 4096
+  Success:
+    type: boolean

@@ -1,0 +1,1388 @@
+swagger: '2.0'
+info:
+  version: '2018-11-25'
+  x-release: v4
+  title: Amazon CloudWatch Application Insights
+  description: '<fullname>Amazon CloudWatch Application Insights for .NET and SQL Server</fullname> <p> Amazon CloudWatch Application Insights for .NET and SQL Server is a service that helps you detect common problems with your .NET and SQL Server-based applications. It enables you to pinpoint the source of issues in your applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key insights into detected problems.</p> <p>After you onboard your application, CloudWatch Application Insights for .NET and SQL Server identifies, recommends, and sets up metrics and logs. It continuously analyzes and correlates your metrics and logs for unusual behavior to surface actionable problems with your application. For example, if your application is slow and unresponsive and leading to HTTP 500 errors in your Application Load Balancer (ALB), Application Insights informs you that a memory pressure problem with your SQL Server database is occurring. It bases this analysis on impactful metrics and log errors. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: application-insights
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/application-insights-2018-11-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/applicationinsights/'
+host: applicationinsights.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://applicationinsights.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Application Insights multi-region endpoint
+  - url: 'https://applicationinsights.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Application Insights multi-region endpoint
+  - url: 'http://applicationinsights.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Application Insights endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://applicationinsights.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Application Insights endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=EC2WindowsBarleyService.CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: Adds an application that is created from a resource group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateApplicationResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.CreateApplication
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.CreateComponent':
+    post:
+      operationId: CreateComponent
+      description: Creates a custom component by grouping similar standalone instances to monitor.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateComponentResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateComponentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.CreateComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteApplication':
+    post:
+      operationId: DeleteApplication
+      description: Removes the specified application from monitoring. Does not delete the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DeleteApplication
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteComponent':
+    post:
+      operationId: DeleteComponent
+      description: 'Ungroups a custom component. When you ungroup custom components, all applicable monitors that are set up for the component are removed and the instances revert to their standalone status.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteComponentResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteComponentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DeleteComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeApplication':
+    post:
+      operationId: DescribeApplication
+      description: Describes the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeApplication
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponent':
+    post:
+      operationId: DescribeComponent
+      description: Describes a component and lists the resources that are grouped together in a component.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeComponentResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeComponentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfiguration':
+    post:
+      operationId: DescribeComponentConfiguration
+      description: Describes the monitoring configuration of the component.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeComponentConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeComponentConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeComponentConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation':
+    post:
+      operationId: DescribeComponentConfigurationRecommendation
+      description: Describes the recommended monitoring configuration of the component.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeComponentConfigurationRecommendationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeComponentConfigurationRecommendationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeObservation':
+    post:
+      operationId: DescribeObservation
+      description: Describes an anomaly or error with the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeObservationResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeObservationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeObservation
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblem':
+    post:
+      operationId: DescribeProblem
+      description: Describes an application problem.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProblemResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProblemRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeProblem
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblemObservations':
+    post:
+      operationId: DescribeProblemObservations
+      description: Describes the anomalies or errors associated with the problem.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProblemObservationsResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProblemObservationsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.DescribeProblemObservations
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListApplications':
+    post:
+      operationId: ListApplications
+      description: 'Lists the IDs of the applications that you are monitoring. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListApplicationsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListApplicationsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListApplications
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListComponents':
+    post:
+      operationId: ListComponents
+      description: 'Lists the auto-grouped, standalone, and custom components of the application.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListComponentsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListComponentsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListComponents
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.ListProblems':
+    post:
+      operationId: ListProblems
+      description: Lists the problems with your application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProblemsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProblemsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.ListProblems
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponent':
+    post:
+      operationId: UpdateComponent
+      description: Updates the custom component name and/or the list of resources that make up the component.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateComponentResponse'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateComponentRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.UpdateComponent
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponentConfiguration':
+    post:
+      operationId: UpdateComponentConfiguration
+      description: Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateComponentConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateComponentConfigurationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.UpdateComponentConfiguration
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  CreateApplicationResponse:
+    type: object
+    properties:
+      ApplicationInfo:
+        $ref: '#/definitions/ApplicationInfo'
+        description: Information about the application.
+  CreateApplicationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+  ResourceInUseException: {}
+  ResourceNotFoundException: {}
+  ValidationException: {}
+  InternalServerException: {}
+  CreateComponentResponse:
+    type: object
+    properties: {}
+  CreateComponentRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+      - ResourceList
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+      ResourceList:
+        $ref: '#/definitions/ResourceList'
+        description: The list of resource ARNs that belong to the component.
+  DeleteApplicationResponse:
+    type: object
+    properties: {}
+  DeleteApplicationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+  BadRequestException: {}
+  DeleteComponentResponse:
+    type: object
+    properties: {}
+  DeleteComponentRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+  DescribeApplicationResponse:
+    type: object
+    properties:
+      ApplicationInfo:
+        $ref: '#/definitions/ApplicationInfo'
+        description: Information about the application.
+  DescribeApplicationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+  DescribeComponentResponse:
+    type: object
+    properties:
+      ApplicationComponent:
+        $ref: '#/definitions/ApplicationComponent'
+      ResourceList:
+        $ref: '#/definitions/ResourceList'
+        description: The list of resource ARNs that belong to the component.
+  DescribeComponentRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+  DescribeComponentConfigurationResponse:
+    type: object
+    properties:
+      Monitor:
+        $ref: '#/definitions/Monitor'
+        description: Indicates whether the application component is monitored.
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
+      ComponentConfiguration:
+        $ref: '#/definitions/ComponentConfiguration'
+        description: The configuration settings of the component. The value is the escaped JSON of the configuration.
+  DescribeComponentConfigurationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+  DescribeComponentConfigurationRecommendationResponse:
+    type: object
+    properties:
+      ComponentConfiguration:
+        $ref: '#/definitions/ComponentConfiguration'
+        description: The recommended configuration settings of the component. The value is the escaped JSON of the configuration.
+  DescribeComponentConfigurationRecommendationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+      - Tier
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+  DescribeObservationResponse:
+    type: object
+    properties:
+      Observation:
+        $ref: '#/definitions/Observation'
+        description: Information about the observation.
+  DescribeObservationRequest:
+    type: object
+    required:
+      - ObservationId
+    properties:
+      ObservationId:
+        $ref: '#/definitions/ObservationId'
+        description: The ID of the observation.
+  DescribeProblemResponse:
+    type: object
+    properties:
+      Problem:
+        $ref: '#/definitions/Problem'
+        description: 'Information about the problem. '
+  DescribeProblemRequest:
+    type: object
+    required:
+      - ProblemId
+    properties:
+      ProblemId:
+        $ref: '#/definitions/ProblemId'
+        description: The ID of the problem.
+  DescribeProblemObservationsResponse:
+    type: object
+    properties:
+      RelatedObservations:
+        $ref: '#/definitions/RelatedObservations'
+        description: Observations related to the problem.
+  DescribeProblemObservationsRequest:
+    type: object
+    required:
+      - ProblemId
+    properties:
+      ProblemId:
+        $ref: '#/definitions/ProblemId'
+        description: The ID of the problem.
+  ListApplicationsResponse:
+    type: object
+    properties:
+      ApplicationInfoList:
+        $ref: '#/definitions/ApplicationInfoList'
+        description: The list of applications.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListApplicationsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
+  ListComponentsResponse:
+    type: object
+    properties:
+      ApplicationComponentList:
+        $ref: '#/definitions/ApplicationComponentList'
+        description: The list of application components.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
+  ListComponentsRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
+  ListProblemsResponse:
+    type: object
+    properties:
+      ProblemList:
+        $ref: '#/definitions/ProblemList'
+        description: 'The list of problems. '
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListProblemsRequest:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      StartTime:
+        $ref: '#/definitions/StartTime'
+        description: 'The time when the problem was detected, in epoch seconds. If you don''t specify a time frame for the request, problems within the past seven days are returned.'
+      EndTime:
+        $ref: '#/definitions/EndTime'
+        description: 'The time when the problem ended, in epoch seconds. If not specified, problems within the past seven days are returned.'
+      MaxResults:
+        $ref: '#/definitions/MaxEntities'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The token to request the next page of results.
+  UpdateComponentResponse:
+    type: object
+    properties: {}
+  UpdateComponentRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+      NewComponentName:
+        $ref: '#/definitions/NewComponentName'
+        description: The new name of the component.
+      ResourceList:
+        $ref: '#/definitions/ResourceList'
+        description: The list of resource ARNs that belong to the component.
+  UpdateComponentConfigurationResponse:
+    type: object
+    properties: {}
+  UpdateComponentConfigurationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+      - ComponentName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+      Monitor:
+        $ref: '#/definitions/Monitor'
+        description: Indicates whether the application component is monitored.
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+      ComponentConfiguration:
+        $ref: '#/definitions/ComponentConfiguration'
+        description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component.'
+  AffectedResource:
+    type: string
+  ComponentName:
+    type: string
+  ResourceType:
+    type: string
+  Tier:
+    type: string
+  Monitor:
+    type: boolean
+  ApplicationComponent:
+    type: object
+    properties:
+      ComponentName:
+        $ref: '#/definitions/ComponentName'
+        description: The name of the component.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.'
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: The stack tier of the application component.
+      Monitor:
+        $ref: '#/definitions/Monitor'
+        description: 'Indicates whether the application component is monitored. '
+    description: Describes a standalone resource or similarly grouped resources that the application is made up of.
+  ApplicationComponentList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationComponent'
+  ResourceGroupName:
+    type: string
+  LifeCycle:
+    type: string
+  Remarks:
+    type: string
+  ApplicationInfo:
+    type: object
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group used for the application.
+      LifeCycle:
+        $ref: '#/definitions/LifeCycle'
+        description: 'The lifecycle of the application. '
+      Remarks:
+        $ref: '#/definitions/Remarks'
+        description: The issues on the user side that are blocking Application Insights from fully monitoring the application.
+    description: Describes the status of the application.
+  ApplicationInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationInfo'
+  ComponentConfiguration:
+    type: string
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceARN'
+  ObservationId:
+    type: string
+  Observation:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ObservationId'
+        description: The ID of the observation type.
+      StartTime:
+        $ref: '#/definitions/StartTime'
+        description: 'The time when the observation was first detected, in epoch seconds.'
+      EndTime:
+        $ref: '#/definitions/EndTime'
+        description: 'The time when the observation ended, in epoch seconds.'
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: The source type of the observation.
+      SourceARN:
+        $ref: '#/definitions/SourceARN'
+        description: The source resource ARN of the observation.
+      LogGroup:
+        $ref: '#/definitions/LogGroup'
+        description: The log group name.
+      LineTime:
+        $ref: '#/definitions/LineTime'
+        description: The timestamp in the CloudWatch Logs that specifies when the matched line occurred.
+      LogText:
+        $ref: '#/definitions/LogText'
+        description: The log text of the observation.
+      LogFilter:
+        $ref: '#/definitions/LogFilter'
+        description: The log filter of the observation.
+      MetricNamespace:
+        $ref: '#/definitions/MetricNamespace'
+        description: The namespace of the observation metric.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the observation metric.
+      Unit:
+        $ref: '#/definitions/Unit'
+        description: The unit of the source observation metric.
+      Value:
+        $ref: '#/definitions/Value'
+        description: The value of the source observation metric.
+    description: Describes an anomaly or error with the application.
+  ProblemId:
+    type: string
+  RelatedObservations:
+    type: object
+    properties:
+      ObservationList:
+        $ref: '#/definitions/ObservationList'
+        description: The list of observations related to the problem.
+    description: Describes observations related to the problem.
+  Problem:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ProblemId'
+        description: The ID of the problem.
+      Title:
+        $ref: '#/definitions/Title'
+        description: The name of the problem.
+      Insights:
+        $ref: '#/definitions/Insights'
+        description: A detailed analysis of the problem using machine learning.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the problem.
+      AffectedResource:
+        $ref: '#/definitions/AffectedResource'
+        description: The resource affected by the problem.
+      StartTime:
+        $ref: '#/definitions/StartTime'
+        description: 'The time when the problem started, in epoch seconds.'
+      EndTime:
+        $ref: '#/definitions/EndTime'
+        description: 'The time when the problem ended, in epoch seconds.'
+      SeverityLevel:
+        $ref: '#/definitions/SeverityLevel'
+        description: A measure of the level of impact of the problem.
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group affected by the problem.
+      Feedback:
+        $ref: '#/definitions/Feedback'
+        description: Feedback provided by the user about the problem.
+    description: Describes a problem that is detected by correlating observations.
+  EndTime:
+    type: string
+    format: date-time
+  FeedbackValue:
+    type: string
+    enum:
+      - NOT_SPECIFIED
+      - USEFUL
+      - NOT_USEFUL
+  Feedback:
+    type: object
+    maxProperties: 10
+    additionalProperties:
+      $ref: '#/definitions/FeedbackValue'
+  FeedbackKey:
+    type: string
+    enum:
+      - INSIGHTS_FEEDBACK
+  Insights:
+    type: string
+  LineTime:
+    type: string
+    format: date-time
+  MaxEntities:
+    type: integer
+    minimum: 1
+    maximum: 40
+  PaginationToken:
+    type: string
+  StartTime:
+    type: string
+    format: date-time
+  ProblemList:
+    type: array
+    items:
+      $ref: '#/definitions/Problem'
+  LogFilter:
+    type: string
+    enum:
+      - ERROR
+      - WARN
+      - INFO
+  LogGroup:
+    type: string
+  LogText:
+    type: string
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  NewComponentName:
+    type: string
+  SourceType:
+    type: string
+  SourceARN:
+    type: string
+  Unit:
+    type: string
+  Value:
+    type: number
+    format: double
+  ObservationList:
+    type: array
+    items:
+      $ref: '#/definitions/Observation'
+  Title:
+    type: string
+  Status:
+    type: string
+    enum:
+      - IGNORE
+      - RESOLVED
+      - PENDING
+  SeverityLevel:
+    type: string
+    enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+  ResourceARN:
+    type: string

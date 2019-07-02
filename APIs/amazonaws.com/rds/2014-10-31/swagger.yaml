@@ -10063,7 +10063,7 @@ paths:
         - name: DBClusterIdentifier
           in: query
           required: true
-          description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBCluster.</p> </li> </ul>'
+          description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints: This identifier must match the identifier of an existing DB cluster.</p>'
           type: string
         - name: NewDBClusterIdentifier
           in: query
@@ -10147,6 +10147,16 @@ paths:
           in: query
           required: false
           description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>For a list of valid engine versions, use <a>DescribeDBEngineVersions</a>.</p>'
+          type: string
+        - name: AllowMajorVersionUpgrade
+          in: query
+          required: false
+          description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p>'
+          type: boolean
+        - name: DBInstanceParameterGroupName
+          in: query
+          required: false
+          description: '<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p> <note> <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB cluster isn''t rebooted automatically. Also, parameter changes aren''t applied during the next maintenance window but instead are applied immediately.</p> </note> <p>Default: The existing name setting</p> <p>Constraints:</p> <ul> <li> <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p> </li> <li> <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with the <code>AllowMajorVersionUpgrade</code> parameter.</p> </li> </ul>'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: query
@@ -10270,7 +10280,7 @@ paths:
         - name: DBClusterIdentifier
           in: formData
           required: true
-          description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBCluster.</p> </li> </ul>'
+          description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints: This identifier must match the identifier of an existing DB cluster.</p>'
           type: string
         - name: NewDBClusterIdentifier
           in: formData
@@ -10354,6 +10364,16 @@ paths:
           in: formData
           required: false
           description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>For a list of valid engine versions, use <a>DescribeDBEngineVersions</a>.</p>'
+          type: string
+        - name: AllowMajorVersionUpgrade
+          in: formData
+          required: false
+          description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p>'
+          type: boolean
+        - name: DBInstanceParameterGroupName
+          in: formData
+          required: false
+          description: '<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p> <note> <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB cluster isn''t rebooted automatically. Also, parameter changes aren''t applied during the next maintenance window but instead are applied immediately.</p> </note> <p>Default: The existing name setting</p> <p>Constraints:</p> <ul> <li> <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p> </li> <li> <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with the <code>AllowMajorVersionUpgrade</code> parameter.</p> </li> </ul>'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: formData
@@ -10897,7 +10917,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: false
-          description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The DB instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
+          description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. In this case, the DB instance isn''t rebooted automatically and the parameter changes isn''t applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
           type: string
         - name: BackupRetentionPeriod
           in: query
@@ -11217,7 +11237,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: false
-          description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The DB instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
+          description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. In this case, the DB instance isn''t rebooted automatically and the parameter changes isn''t applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
           type: string
         - name: BackupRetentionPeriod
           in: formData
@@ -21179,7 +21199,7 @@ definitions:
     properties:
       DBClusterIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBCluster.</p> </li> </ul>'
+        description: '<p>The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive.</p> <p>Constraints: This identifier must match the identifier of an existing DB cluster.</p>'
       NewDBClusterIdentifier:
         $ref: '#/definitions/String'
         description: '<p>The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>The first character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
@@ -21222,6 +21242,12 @@ definitions:
       EngineVersion:
         $ref: '#/definitions/String'
         description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>For a list of valid engine versions, use <a>DescribeDBEngineVersions</a>.</p>'
+      AllowMajorVersionUpgrade:
+        $ref: '#/definitions/Boolean'
+        description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p>'
+      DBInstanceParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p> <note> <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB cluster isn''t rebooted automatically. Also, parameter changes aren''t applied during the next maintenance window but instead are applied immediately.</p> </note> <p>Default: The existing name setting</p> <p>Constraints:</p> <ul> <li> <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p> </li> <li> <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with the <code>AllowMajorVersionUpgrade</code> parameter.</p> </li> </ul>'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in <code>serverless</code> DB engine mode.
@@ -21298,7 +21324,7 @@ definitions:
         description: '<p>The new password for the master user. The password can include any printable ASCII character except "/", """, or "@".</p> <p> Changing this parameter doesn''t result in an outage and the change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The password for the master user is managed by the DB cluster. For more information, see <code>ModifyDBCluster</code>. </p> <p>Default: Uses existing setting</p> <p> <b>MariaDB</b> </p> <p>Constraints: Must contain from 8 to 41 characters.</p> <p> <b>Microsoft SQL Server</b> </p> <p>Constraints: Must contain from 8 to 128 characters.</p> <p> <b>MySQL</b> </p> <p>Constraints: Must contain from 8 to 41 characters.</p> <p> <b>Oracle</b> </p> <p>Constraints: Must contain from 8 to 30 characters.</p> <p> <b>PostgreSQL</b> </p> <p>Constraints: Must contain from 8 to 128 characters.</p> <note> <p>Amazon RDS API actions never return the password, so this action provides a way to regain access to a primary instance user if the password is lost. This includes restoring privileges that might have been accidentally revoked. </p> </note>'
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The DB instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
+        description: '<p>The name of the DB parameter group to apply to the DB instance. Changing this setting doesn''t result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. In this case, the DB instance isn''t rebooted automatically and the parameter changes isn''t applied during the next maintenance window.</p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>'
       BackupRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0. These changes are applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. If you change the parameter from one non-zero value to another non-zero value, the change is asynchronously applied as soon as possible.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see <code>ModifyDBCluster</code>.</p> <p>Default: Uses existing setting</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35</p> </li> <li> <p>Can be specified for a MySQL Read Replica only if the source is running MySQL 5.6 or later</p> </li> <li> <p>Can be specified for a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5</p> </li> <li> <p>Can''t be set to 0 if the DB instance is a source to Read Replicas</p> </li> </ul>'

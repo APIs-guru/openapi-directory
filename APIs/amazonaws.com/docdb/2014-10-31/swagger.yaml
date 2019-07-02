@@ -277,6 +277,14 @@ paths:
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
       parameters:
         - name: ResourceIdentifier
           in: query
@@ -326,6 +334,14 @@ paths:
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
       parameters:
         - name: ResourceIdentifier
           in: formData
@@ -762,13 +778,13 @@ paths:
           type: integer
         - name: MasterUsername
           in: query
-          required: false
+          required: true
           description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
           type: string
         - name: MasterUserPassword
           in: query
-          required: false
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          required: true
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: query
@@ -804,6 +820,11 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -945,13 +966,13 @@ paths:
           type: integer
         - name: MasterUsername
           in: formData
-          required: false
+          required: true
           description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
           type: string
         - name: MasterUserPassword
           in: formData
-          required: false
-          description: '<p>The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          required: true
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: formData
@@ -987,6 +1008,11 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: formData
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -1318,7 +1344,7 @@ paths:
         - name: DBInstanceClass
           in: query
           required: true
-          description: 'The compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. '
+          description: 'The compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. '
           type: string
         - name: Engine
           in: query
@@ -1455,7 +1481,7 @@ paths:
         - name: DBInstanceClass
           in: formData
           required: true
-          description: 'The compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. '
+          description: 'The compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. '
           type: string
         - name: Engine
           in: formData
@@ -3886,7 +3912,7 @@ paths:
         - name: MasterUserPassword
           in: query
           required: false
-          description: '<p>The new password for the master database user. This password can contain any printable ASCII character except "<code>/</code>", "<code>"</code>", or "<code>@</code>".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: query
@@ -3919,6 +3945,11 @@ paths:
           required: false
           description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
           type: string
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -4033,7 +4064,7 @@ paths:
         - name: MasterUserPassword
           in: formData
           required: false
-          description: '<p>The new password for the master database user. This password can contain any printable ASCII character except "<code>/</code>", "<code>"</code>", or "<code>@</code>".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+          description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
           type: string
         - name: PreferredBackupWindow
           in: formData
@@ -4066,6 +4097,11 @@ paths:
           required: false
           description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
           type: string
+        - name: DeletionProtection
+          in: formData
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -4367,7 +4403,7 @@ paths:
         - name: DBInstanceClass
           in: query
           required: false
-          description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
+          description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
           type: string
         - name: ApplyImmediately
           in: query
@@ -4484,7 +4520,7 @@ paths:
         - name: DBInstanceClass
           in: formData
           required: false
-          description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
+          description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
           type: string
         - name: ApplyImmediately
           in: formData
@@ -5077,6 +5113,11 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -5234,6 +5275,11 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: formData
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -5374,6 +5420,11 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -5521,12 +5572,191 @@ paths:
           type: array
           items:
             type: string
+        - name: DeletionProtection
+          in: formData
+          required: false
+          description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+          type: boolean
         - name: Action
           in: query
           required: true
           type: string
           enum:
             - RestoreDBClusterToPointInTime
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=StartDBCluster':
+    get:
+      x-aws-operation-name: StartDBCluster
+      operationId: GET StartDBCluster
+      description: 'Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: true
+          description: 'The identifier of the cluster to restart. Example: <code>docdb-2019-05-28-15-24-52</code> '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartDBCluster
+      operationId: POST StartDBCluster
+      description: 'Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: formData
+          required: true
+          description: 'The identifier of the cluster to restart. Example: <code>docdb-2019-05-28-15-24-52</code> '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StartDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+  '/#Action=StopDBCluster':
+    get:
+      x-aws-operation-name: StopDBCluster
+      operationId: GET StopDBCluster
+      description: 'Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The cluster must be in the <i>available</i> state. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: true
+          description: 'The identifier of the cluster to stop. Example: <code>docdb-2019-05-28-15-24-52</code> '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StopDBCluster
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2014-10-31'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StopDBCluster
+      operationId: POST StopDBCluster
+      description: 'Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The cluster must be in the <i>available</i> state. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: formData
+          required: true
+          description: 'The identifier of the cluster to stop. Example: <code>docdb-2019-05-28-15-24-52</code> '
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - StopDBCluster
         - name: Version
           in: query
           required: true
@@ -5553,6 +5783,8 @@ definitions:
       ResourcePendingMaintenanceActions:
         $ref: '#/definitions/ResourcePendingMaintenanceActions'
   ResourceNotFoundFault: {}
+  InvalidDBClusterStateFault: {}
+  InvalidDBInstanceStateFault: {}
   CopyDBClusterParameterGroupResult:
     type: object
     properties:
@@ -5568,7 +5800,6 @@ definitions:
         $ref: '#/definitions/DBClusterSnapshot'
   DBClusterSnapshotAlreadyExistsFault: {}
   DBClusterSnapshotNotFoundFault: {}
-  InvalidDBClusterStateFault: {}
   InvalidDBClusterSnapshotStateFault: {}
   SnapshotQuotaExceededFault: {}
   KMSKeyNotAccessibleFault: {}
@@ -5587,7 +5818,6 @@ definitions:
   InvalidVPCNetworkStateFault: {}
   InvalidDBSubnetGroupStateFault: {}
   InvalidSubnet: {}
-  InvalidDBInstanceStateFault: {}
   DBClusterParameterGroupNotFoundFault: {}
   DBSubnetGroupDoesNotCoverEnoughAZs: {}
   CreateDBClusterParameterGroupResult:
@@ -5867,6 +6097,16 @@ definitions:
     properties:
       DBCluster:
         $ref: '#/definitions/DBCluster'
+  StartDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  StopDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
   TagList:
     type: array
     items:
@@ -6076,6 +6316,8 @@ definitions:
     required:
       - DBClusterIdentifier
       - Engine
+      - MasterUsername
+      - MasterUserPassword
     properties:
       AvailabilityZones:
         $ref: '#/definitions/AvailabilityZones'
@@ -6109,7 +6351,7 @@ definitions:
         description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
       MasterUserPassword:
         $ref: '#/definitions/String'
-        description: '<p>The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
       PreferredBackupWindow:
         $ref: '#/definitions/String'
         description: '<p>The daily time range during which automated backups are created if automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
@@ -6128,6 +6370,9 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
     description: Represents the input to <a>CreateDBCluster</a>.
   CreateDBClusterParameterGroupMessage:
     type: object
@@ -6236,6 +6481,9 @@ definitions:
       EnabledCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that this DB cluster is configured to export to Amazon CloudWatch Logs.
+      DeletionProtection:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
     description: 'Detailed information about a DB cluster. '
   CreateDBClusterSnapshotMessage:
     type: object
@@ -6266,7 +6514,7 @@ definitions:
         description: '<p>The DB instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
       DBInstanceClass:
         $ref: '#/definitions/String'
-        description: 'The compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. '
+        description: 'The compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. '
       Engine:
         $ref: '#/definitions/String'
         description: '<p>The name of the database engine to be used for this instance.</p> <p>Valid value: <code>docdb</code> </p>'
@@ -7061,7 +7309,7 @@ definitions:
         description: '<p>The port number on which the DB cluster accepts connections.</p> <p>Constraints: Must be a value from <code>1150</code> to <code>65535</code>. </p> <p>Default: The same port as the original DB cluster.</p>'
       MasterUserPassword:
         $ref: '#/definitions/String'
-        description: '<p>The new password for the master database user. This password can contain any printable ASCII character except "<code>/</code>", "<code>"</code>", or "<code>@</code>".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+        description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
       PreferredBackupWindow:
         $ref: '#/definitions/String'
         description: '<p>The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
@@ -7074,6 +7322,9 @@ definitions:
       EngineVersion:
         $ref: '#/definitions/String'
         description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
     description: Represents the input to <a>ModifyDBCluster</a>.
   ModifyDBClusterParameterGroupMessage:
     type: object
@@ -7117,7 +7368,7 @@ definitions:
         description: '<p>The DB instance identifier. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBInstance</code>.</p> </li> </ul>'
       DBInstanceClass:
         $ref: '#/definitions/String'
-        description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
+        description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
       ApplyImmediately:
         $ref: '#/definitions/Boolean'
         description: '<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and are applied on the next reboot.</p> <p>Default: <code>false</code> </p>'
@@ -7296,6 +7547,9 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
     description: Represents the input to <a>RestoreDBClusterFromSnapshot</a>.
   RestoreDBClusterToPointInTimeMessage:
     type: object
@@ -7333,7 +7587,26 @@ definitions:
       EnableCloudwatchLogsExports:
         $ref: '#/definitions/LogTypeList'
         description: A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
     description: Represents the input to <a>RestoreDBClusterToPointInTime</a>.
+  StartDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: 'The identifier of the cluster to restart. Example: <code>docdb-2019-05-28-15-24-52</code> '
+  StopDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: 'The identifier of the cluster to stop. Example: <code>docdb-2019-05-28-15-24-52</code> '
   Subnet:
     type: object
     properties:
