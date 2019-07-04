@@ -6725,6 +6725,11 @@ paths:
           required: false
           description: 'An optional pagination token provided by a previous <code>DescribeDBClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
           type: string
+        - name: IncludeShared
+          in: query
+          required: false
+          description: Optional Boolean parameter that specifies whether the output includes information about clusters shared from other AWS accounts.
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -6781,6 +6786,11 @@ paths:
           required: false
           description: 'An optional pagination token provided by a previous <code>DescribeDBClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
           type: string
+        - name: IncludeShared
+          in: formData
+          required: false
+          description: Optional Boolean parameter that specifies whether the output includes information about clusters shared from other AWS accounts.
+          type: boolean
         - name: Action
           in: query
           required: true
@@ -18895,7 +18905,7 @@ definitions:
         $ref: '#/definitions/StringList'
         description: Identifies all custom endpoints associated with the cluster.
       MultiAZ:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/BooleanOptional'
         description: Specifies whether the DB cluster has instances in multiple Availability Zones.
       Engine:
         $ref: '#/definitions/String'
@@ -18952,7 +18962,7 @@ definitions:
         $ref: '#/definitions/DBClusterRoles'
         description: Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.
       IAMDatabaseAuthenticationEnabled:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/BooleanOptional'
         description: A value that indicates whether the mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
       CloneGroupId:
         $ref: '#/definitions/String'
@@ -18981,10 +18991,10 @@ definitions:
       ScalingConfigurationInfo:
         $ref: '#/definitions/ScalingConfigurationInfo'
       DeletionProtection:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/BooleanOptional'
         description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. '
       HttpEndpointEnabled:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/BooleanOptional'
         description: '<p>A value that indicates whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       ActivityStreamMode:
         $ref: '#/definitions/ActivityStreamMode'
@@ -18999,8 +19009,11 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the Amazon Kinesis data stream used for the database activity stream.
       CopyTagsToSnapshot:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/BooleanOptional'
         description: Specifies whether tags are copied from the DB cluster to snapshots of the DB cluster.
+      CrossAccountClone:
+        $ref: '#/definitions/BooleanOptional'
+        description: Specifies whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
     description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>'
   CreateDBClusterSnapshotMessage:
     type: object
@@ -20422,6 +20435,9 @@ definitions:
       Marker:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous <code>DescribeDBClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      IncludeShared:
+        $ref: '#/definitions/Boolean'
+        description: Optional Boolean parameter that specifies whether the output includes information about clusters shared from other AWS accounts.
     description: <p/>
   DescribeDBEngineVersionsMessage:
     type: object
