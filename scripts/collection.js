@@ -669,7 +669,7 @@ function simplifyProduceConsume(swagger) {
 }
 
 function extractApiKeysFromParameters(swagger) {
-  if (swagger.securityDefinitions || swagger.security)
+  if (swagger.securityDefinitions || swagger.security || swagger.openapi)
     return;
 
   function isApiKeyParam(param) {
