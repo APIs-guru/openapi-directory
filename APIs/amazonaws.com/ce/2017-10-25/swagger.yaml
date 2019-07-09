@@ -467,6 +467,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSInsightsIndexService.GetUsageForecast':
+    post:
+      operationId: GetUsageForecast
+      description: 'Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUsageForecastResponse'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: DataUnavailableException
+          schema:
+            $ref: '#/definitions/DataUnavailableException'
+        '482':
+          description: UnresolvableUsageUnitException
+          schema:
+            $ref: '#/definitions/UnresolvableUsageUnitException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUsageForecastRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSInsightsIndexService.GetUsageForecast
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   GetCostAndUsageResponse:
     type: object
@@ -529,7 +570,7 @@ definitions:
         description: The period of time that you want the forecast to cover.
       Metric:
         $ref: '#/definitions/Metric'
-        description: '<p>Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values for a <code>GetCostForecast</code> call are the following:</p> <ul> <li> <p>AmortizedCost</p> </li> <li> <p>BlendedCost</p> </li> <li> <p>NetAmortizedCost</p> </li> <li> <p>NetUnblendedCost</p> </li> <li> <p>UnblendedCost</p> </li> </ul>'
+        description: '<p>Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values for a <code>GetCostForecast</code> call are the following:</p> <ul> <li> <p>AMORTIZED_COST</p> </li> <li> <p>BLENDED_COST</p> </li> <li> <p>NET_AMORTIZED_COST</p> </li> <li> <p>NET_UNBLENDED_COST</p> </li> <li> <p>UNBLENDED_COST</p> </li> </ul>'
       Granularity:
         $ref: '#/definitions/Granularity'
         description: <p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code> forecasts or 12 months of <code>MONTHLY</code> forecasts.</p> <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>
@@ -731,6 +772,38 @@ definitions:
       NextPageToken:
         $ref: '#/definitions/NextPageToken'
         description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+  GetUsageForecastResponse:
+    type: object
+    properties:
+      Total:
+        $ref: '#/definitions/MetricValue'
+        description: How much you're forecasted to use over the forecast period.
+      ForecastResultsByTime:
+        $ref: '#/definitions/ForecastResultsByTime'
+        description: 'The forecasts for your query, in order. For <code>DAILY</code> forecasts, this is a list of days. For <code>MONTHLY</code> forecasts, this is a list of months.'
+  GetUsageForecastRequest:
+    type: object
+    required:
+      - TimePeriod
+      - Metric
+      - Granularity
+    properties:
+      TimePeriod:
+        $ref: '#/definitions/DateInterval'
+        description: 'The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.'
+      Metric:
+        $ref: '#/definitions/Metric'
+        description: '<p>Which metric Cost Explorer uses to create your forecast.</p> <p>Valid values for a <code>GetUsageForecast</code> call are the following:</p> <ul> <li> <p>USAGE_QUANTITY</p> </li> <li> <p>NORMALIZED_USAGE_AMOUNT</p> </li> </ul>'
+      Granularity:
+        $ref: '#/definitions/Granularity'
+        description: <p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code> forecasts or 12 months of <code>MONTHLY</code> forecasts.</p> <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>
+      Filter:
+        $ref: '#/definitions/Expression'
+        description: The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.
+      PredictionIntervalLevel:
+        $ref: '#/definitions/PredictionIntervalLevel'
+        description: 'Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.'
+  UnresolvableUsageUnitException: {}
   AccountScope:
     type: string
     enum:
