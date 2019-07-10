@@ -299,6 +299,18 @@ paths:
           description: WAFLimitsExceededException
           schema:
             $ref: '#/definitions/WAFLimitsExceededException'
+        '485':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '486':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
       parameters:
         - name: body
           in: body
@@ -438,6 +450,18 @@ paths:
           description: WAFLimitsExceededException
           schema:
             $ref: '#/definitions/WAFLimitsExceededException'
+        '485':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '486':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
       parameters:
         - name: body
           in: body
@@ -483,6 +507,18 @@ paths:
           description: WAFLimitsExceededException
           schema:
             $ref: '#/definitions/WAFLimitsExceededException'
+        '484':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '485':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '486':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
       parameters:
         - name: body
           in: body
@@ -642,6 +678,18 @@ paths:
           description: WAFLimitsExceededException
           schema:
             $ref: '#/definitions/WAFLimitsExceededException'
+        '486':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '487':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+        '488':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
       parameters:
         - name: body
           in: body
@@ -989,6 +1037,14 @@ paths:
           description: WAFNonEmptyEntityException
           schema:
             $ref: '#/definitions/WAFNonEmptyEntityException'
+        '486':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '487':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
       parameters:
         - name: body
           in: body
@@ -1148,6 +1204,14 @@ paths:
           description: WAFNonEmptyEntityException
           schema:
             $ref: '#/definitions/WAFNonEmptyEntityException'
+        '486':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '487':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
       parameters:
         - name: body
           in: body
@@ -1201,6 +1265,14 @@ paths:
           description: WAFInvalidOperationException
           schema:
             $ref: '#/definitions/WAFInvalidOperationException'
+        '486':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '487':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
       parameters:
         - name: body
           in: body
@@ -1360,6 +1432,14 @@ paths:
           description: WAFNonEmptyEntityException
           schema:
             $ref: '#/definitions/WAFNonEmptyEntityException'
+        '486':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '487':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
       parameters:
         - name: body
           in: body
@@ -2632,6 +2712,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20150824.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: WAFInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          schema:
+            $ref: '#/definitions/WAFInvalidParameterException'
+        '482':
+          description: WAFNonexistentItemException
+          schema:
+            $ref: '#/definitions/WAFNonexistentItemException'
+        '483':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
+        '484':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '485':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSWAF_20150824.ListTagsForResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSWAF_20150824.ListWebACLs':
     post:
       operationId: ListWebACLs
@@ -2788,6 +2921,116 @@ paths:
           type: string
           enum:
             - AWSWAF_20150824.PutPermissionPolicy
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20150824.TagResource':
+    post:
+      operationId: TagResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: WAFInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          schema:
+            $ref: '#/definitions/WAFInvalidParameterException'
+        '482':
+          description: WAFLimitsExceededException
+          schema:
+            $ref: '#/definitions/WAFLimitsExceededException'
+        '483':
+          description: WAFNonexistentItemException
+          schema:
+            $ref: '#/definitions/WAFNonexistentItemException'
+        '484':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
+        '485':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '486':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSWAF_20150824.TagResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20150824.UntagResource':
+    post:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: WAFInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          schema:
+            $ref: '#/definitions/WAFInvalidParameterException'
+        '482':
+          description: WAFNonexistentItemException
+          schema:
+            $ref: '#/definitions/WAFNonexistentItemException'
+        '483':
+          description: WAFBadRequestException
+          schema:
+            $ref: '#/definitions/WAFBadRequestException'
+        '484':
+          description: WAFTagOperationException
+          schema:
+            $ref: '#/definitions/WAFTagOperationException'
+        '485':
+          description: WAFTagOperationInternalErrorException
+          schema:
+            $ref: '#/definitions/WAFTagOperationInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSWAF_20150824.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3663,6 +3906,11 @@ definitions:
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: 'The <code>ChangeToken</code> that you used to submit the <code>CreateRateBasedRule</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+  WAFTagOperationException: {}
+  WAFTagOperationInternalErrorException: {}
+  WAFBadRequestException: {}
   CreateRegexMatchSetResponse:
     type: object
     properties:
@@ -3740,6 +3988,8 @@ definitions:
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: The value returned by the most recent call to <a>GetChangeToken</a>.
+      Tags:
+        $ref: '#/definitions/TagList'
   CreateRuleGroupResponse:
     type: object
     properties:
@@ -3765,6 +4015,8 @@ definitions:
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: The value returned by the most recent call to <a>GetChangeToken</a>.
+      Tags:
+        $ref: '#/definitions/TagList'
   CreateSizeConstraintSetResponse:
     type: object
     example:
@@ -3871,6 +4123,8 @@ definitions:
       ChangeToken:
         $ref: '#/definitions/ChangeToken'
         description: The value returned by the most recent call to <a>GetChangeToken</a>.
+      Tags:
+        $ref: '#/definitions/TagList'
   CreateXssMatchSetResponse:
     type: object
     example:
@@ -4779,6 +5033,24 @@ definitions:
       Limit:
         $ref: '#/definitions/PaginationLimit'
         description: 'Specifies the number of subscribed rule groups that you want AWS WAF to return for this request. If you have more objects than the number you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of objects.'
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      NextMarker:
+        $ref: '#/definitions/NextMarker'
+      TagInfoForResource:
+        $ref: '#/definitions/TagInfoForResource'
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      NextMarker:
+        $ref: '#/definitions/NextMarker'
+      Limit:
+        $ref: '#/definitions/PaginationLimit'
+      ResourceARN:
+        $ref: '#/definitions/ResourceArn'
   ListWebACLsResponse:
     type: object
     example:
@@ -4856,6 +5128,32 @@ definitions:
         $ref: '#/definitions/PolicyString'
         description: The policy to attach to the specified RuleGroup.
   WAFInvalidPermissionPolicyException: {}
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceArn'
+      Tags:
+        $ref: '#/definitions/TagList'
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceArn'
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
   UpdateByteMatchSetResponse:
     type: object
     example:
@@ -5390,6 +5688,11 @@ definitions:
     type: integer
     minimum: 2000
     maximum: 2000000000
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
   RateBasedRule:
     type: object
     required:
@@ -6079,6 +6382,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SubscribedRuleGroupSummary'
+  TagInfoForResource:
+    type: object
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceArn'
+      TagList:
+        $ref: '#/definitions/TagList'
   WebACLSummaries:
     type: array
     items:
@@ -6437,6 +6747,26 @@ definitions:
         $ref: '#/definitions/MetricName'
         description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can''t contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
     description: A summary of the rule groups you are subscribed to.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+      Value:
+        $ref: '#/definitions/TagValue'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
   WebACLUpdates:
     type: array
     items:

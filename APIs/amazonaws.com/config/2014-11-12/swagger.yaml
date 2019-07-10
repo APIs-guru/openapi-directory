@@ -434,6 +434,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.DeleteOrganizationConfigRule':
+    post:
+      operationId: DeleteOrganizationConfigRule
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchOrganizationConfigRuleException
+          schema:
+            $ref: '#/definitions/NoSuchOrganizationConfigRuleException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteOrganizationConfigRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.DeleteOrganizationConfigRule
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.DeletePendingAggregationRequest':
     post:
       operationId: DeletePendingAggregationRequest
@@ -478,6 +513,10 @@ paths:
           description: NoSuchRemediationConfigurationException
           schema:
             $ref: '#/definitions/NoSuchRemediationConfigurationException'
+        '481':
+          description: RemediationInProgressException
+          schema:
+            $ref: '#/definitions/RemediationInProgressException'
       parameters:
         - name: body
           in: body
@@ -1038,6 +1077,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRuleStatuses':
+    post:
+      operationId: DescribeOrganizationConfigRuleStatuses
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOrganizationConfigRuleStatusesResponse'
+        '480':
+          description: NoSuchOrganizationConfigRuleException
+          schema:
+            $ref: '#/definitions/NoSuchOrganizationConfigRuleException'
+        '481':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOrganizationConfigRuleStatusesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.DescribeOrganizationConfigRuleStatuses
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRules':
+    post:
+      operationId: DescribeOrganizationConfigRules
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOrganizationConfigRulesResponse'
+        '480':
+          description: NoSuchOrganizationConfigRuleException
+          schema:
+            $ref: '#/definitions/NoSuchOrganizationConfigRuleException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOrganizationConfigRulesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.DescribeOrganizationConfigRules
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.DescribePendingAggregationRequests':
     post:
       operationId: DescribePendingAggregationRequests
@@ -1544,6 +1665,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.GetOrganizationConfigRuleDetailedStatus':
+    post:
+      operationId: GetOrganizationConfigRuleDetailedStatus
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOrganizationConfigRuleDetailedStatusResponse'
+        '480':
+          description: NoSuchOrganizationConfigRuleException
+          schema:
+            $ref: '#/definitions/NoSuchOrganizationConfigRuleException'
+        '481':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOrganizationConfigRuleDetailedStatusRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.GetOrganizationConfigRuleDetailedStatus
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.GetResourceConfigHistory':
     post:
       operationId: GetResourceConfigHistory
@@ -2014,6 +2176,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.PutOrganizationConfigRule':
+    post:
+      operationId: PutOrganizationConfigRule
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutOrganizationConfigRuleResponse'
+        '480':
+          description: MaxNumberOfOrganizationConfigRulesExceededException
+          schema:
+            $ref: '#/definitions/MaxNumberOfOrganizationConfigRulesExceededException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '484':
+          description: OrganizationAccessDeniedException
+          schema:
+            $ref: '#/definitions/OrganizationAccessDeniedException'
+        '485':
+          description: NoAvailableOrganizationException
+          schema:
+            $ref: '#/definitions/NoAvailableOrganizationException'
+        '486':
+          description: OrganizationAllFeaturesNotEnabledException
+          schema:
+            $ref: '#/definitions/OrganizationAllFeaturesNotEnabledException'
+        '487':
+          description: InsufficientPermissionsException
+          schema:
+            $ref: '#/definitions/InsufficientPermissionsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutOrganizationConfigRuleRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.PutOrganizationConfigRule
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.PutRemediationConfigurations':
     post:
       operationId: PutRemediationConfigurations
@@ -2459,6 +2682,14 @@ definitions:
         $ref: '#/definitions/StringWithCharLimit64'
         description: The name of the AWS Config rule for which you want to delete the evaluation results.
     description: <p/>
+  DeleteOrganizationConfigRuleRequest:
+    type: object
+    required:
+      - OrganizationConfigRuleName
+    properties:
+      OrganizationConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+  NoSuchOrganizationConfigRuleException: {}
   DeletePendingAggregationRequestRequest:
     type: object
     required:
@@ -2486,6 +2717,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The type of a resource.
   NoSuchRemediationConfigurationException: {}
+  RemediationInProgressException: {}
   DeleteRetentionConfigurationRequest:
     type: object
     required:
@@ -2756,6 +2988,38 @@ definitions:
         $ref: '#/definitions/DeliveryChannelNameList'
         description: A list of delivery channel names.
     description: The input for the <a>DescribeDeliveryChannels</a> action.
+  DescribeOrganizationConfigRuleStatusesResponse:
+    type: object
+    properties:
+      OrganizationConfigRuleStatuses:
+        $ref: '#/definitions/OrganizationConfigRuleStatuses'
+      NextToken:
+        $ref: '#/definitions/String'
+  DescribeOrganizationConfigRuleStatusesRequest:
+    type: object
+    properties:
+      OrganizationConfigRuleNames:
+        $ref: '#/definitions/OrganizationConfigRuleNames'
+      Limit:
+        $ref: '#/definitions/CosmosPageLimit'
+      NextToken:
+        $ref: '#/definitions/String'
+  DescribeOrganizationConfigRulesResponse:
+    type: object
+    properties:
+      OrganizationConfigRules:
+        $ref: '#/definitions/OrganizationConfigRules'
+      NextToken:
+        $ref: '#/definitions/String'
+  DescribeOrganizationConfigRulesRequest:
+    type: object
+    properties:
+      OrganizationConfigRuleNames:
+        $ref: '#/definitions/OrganizationConfigRuleNames'
+      Limit:
+        $ref: '#/definitions/CosmosPageLimit'
+      NextToken:
+        $ref: '#/definitions/String'
   DescribePendingAggregationRequestsResponse:
     type: object
     properties:
@@ -3061,6 +3325,26 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+  GetOrganizationConfigRuleDetailedStatusResponse:
+    type: object
+    properties:
+      OrganizationConfigRuleDetailedStatus:
+        $ref: '#/definitions/OrganizationConfigRuleDetailedStatus'
+      NextToken:
+        $ref: '#/definitions/String'
+  GetOrganizationConfigRuleDetailedStatusRequest:
+    type: object
+    required:
+      - OrganizationConfigRuleName
+    properties:
+      OrganizationConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+      Filters:
+        $ref: '#/definitions/StatusDetailFilters'
+      Limit:
+        $ref: '#/definitions/CosmosPageLimit'
+      NextToken:
+        $ref: '#/definitions/String'
   GetResourceConfigHistoryResponse:
     type: object
     properties:
@@ -3297,6 +3581,25 @@ definitions:
         description: '<p>Use this parameter to specify a test run for <code>PutEvaluations</code>. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.</p> <note> <p>When <code>TestMode</code> is <code>true</code>, <code>PutEvaluations</code> doesn''t require a valid value for the <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>'
     description: <p/>
   InvalidResultTokenException: {}
+  PutOrganizationConfigRuleResponse:
+    type: object
+    properties:
+      OrganizationConfigRuleArn:
+        $ref: '#/definitions/StringWithCharLimit256'
+  PutOrganizationConfigRuleRequest:
+    type: object
+    required:
+      - OrganizationConfigRuleName
+    properties:
+      OrganizationConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+      OrganizationManagedRuleMetadata:
+        $ref: '#/definitions/OrganizationManagedRuleMetadata'
+      OrganizationCustomRuleMetadata:
+        $ref: '#/definitions/OrganizationCustomRuleMetadata'
+      ExcludedAccounts:
+        $ref: '#/definitions/ExcludedAccounts'
+  MaxNumberOfOrganizationConfigRulesExceededException: {}
   PutRemediationConfigurationsResponse:
     type: object
     properties:
@@ -4364,6 +4667,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationRecorderStatus'
+  CosmosPageLimit:
+    type: integer
+    minimum: 0
+    maximum: 100
   RetentionConfigurationName:
     type: string
     pattern: '[\w\-]+'
@@ -4430,6 +4737,20 @@ definitions:
     type: integer
     minimum: 0
     maximum: 50
+  OrganizationConfigRuleNames:
+    type: array
+    items:
+      $ref: '#/definitions/StringWithCharLimit64'
+    minItems: 0
+    maxItems: 25
+  OrganizationConfigRuleStatuses:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationConfigRuleStatus'
+  OrganizationConfigRules:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationConfigRule'
   DescribePendingAggregationRequestsLimit:
     type: integer
     minimum: 0
@@ -4541,6 +4862,12 @@ definitions:
     type: string
     enum:
       - aws.config
+  ExcludedAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+    minItems: 0
+    maxItems: 1000
   Expression:
     type: string
     minLength: 1
@@ -4607,6 +4934,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceCount'
+  StatusDetailFilters:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+      MemberAccountRuleStatus:
+        $ref: '#/definitions/MemberAccountRuleStatus'
+  OrganizationConfigRuleDetailedStatus:
+    type: array
+    items:
+      $ref: '#/definitions/MemberAccountStatus'
   LaterTime:
     type: string
     format: date-time
@@ -4655,6 +4993,34 @@ definitions:
       $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
+  MemberAccountRuleStatus:
+    type: string
+    enum:
+      - CREATE_SUCCESSFUL
+      - CREATE_IN_PROGRESS
+      - CREATE_FAILED
+      - DELETE_SUCCESSFUL
+      - DELETE_FAILED
+      - DELETE_IN_PROGRESS
+  MemberAccountStatus:
+    type: object
+    required:
+      - AccountId
+      - ConfigRuleName
+      - MemberAccountRuleStatus
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+      ConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+      MemberAccountRuleStatus:
+        $ref: '#/definitions/MemberAccountRuleStatus'
+      ErrorCode:
+        $ref: '#/definitions/String'
+      ErrorMessage:
+        $ref: '#/definitions/String'
+      LastUpdateTime:
+        $ref: '#/definitions/Date'
   MessageType:
     type: string
     enum:
@@ -4664,6 +5030,126 @@ definitions:
       - OversizedConfigurationItemChangeNotification
   Name:
     type: string
+  OrganizationManagedRuleMetadata:
+    type: object
+    required:
+      - RuleIdentifier
+    properties:
+      Description:
+        $ref: '#/definitions/StringWithCharLimit256Min0'
+      RuleIdentifier:
+        $ref: '#/definitions/StringWithCharLimit256'
+      InputParameters:
+        $ref: '#/definitions/StringWithCharLimit2048'
+      MaximumExecutionFrequency:
+        $ref: '#/definitions/MaximumExecutionFrequency'
+      ResourceTypesScope:
+        $ref: '#/definitions/ResourceTypesScope'
+      ResourceIdScope:
+        $ref: '#/definitions/StringWithCharLimit768'
+      TagKeyScope:
+        $ref: '#/definitions/StringWithCharLimit128'
+      TagValueScope:
+        $ref: '#/definitions/StringWithCharLimit256'
+  OrganizationCustomRuleMetadata:
+    type: object
+    required:
+      - LambdaFunctionArn
+      - OrganizationConfigRuleTriggerTypes
+    properties:
+      Description:
+        $ref: '#/definitions/StringWithCharLimit256Min0'
+      LambdaFunctionArn:
+        $ref: '#/definitions/StringWithCharLimit256'
+      OrganizationConfigRuleTriggerTypes:
+        $ref: '#/definitions/OrganizationConfigRuleTriggerTypes'
+      InputParameters:
+        $ref: '#/definitions/StringWithCharLimit2048'
+      MaximumExecutionFrequency:
+        $ref: '#/definitions/MaximumExecutionFrequency'
+      ResourceTypesScope:
+        $ref: '#/definitions/ResourceTypesScope'
+      ResourceIdScope:
+        $ref: '#/definitions/StringWithCharLimit768'
+      TagKeyScope:
+        $ref: '#/definitions/StringWithCharLimit128'
+      TagValueScope:
+        $ref: '#/definitions/StringWithCharLimit256'
+  OrganizationConfigRule:
+    type: object
+    required:
+      - OrganizationConfigRuleName
+      - OrganizationConfigRuleArn
+    properties:
+      OrganizationConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+      OrganizationConfigRuleArn:
+        $ref: '#/definitions/StringWithCharLimit256'
+      OrganizationManagedRuleMetadata:
+        $ref: '#/definitions/OrganizationManagedRuleMetadata'
+      OrganizationCustomRuleMetadata:
+        $ref: '#/definitions/OrganizationCustomRuleMetadata'
+      ExcludedAccounts:
+        $ref: '#/definitions/ExcludedAccounts'
+      LastUpdateTime:
+        $ref: '#/definitions/Date'
+  OrganizationRuleStatus:
+    type: string
+    enum:
+      - CREATE_SUCCESSFUL
+      - CREATE_IN_PROGRESS
+      - CREATE_FAILED
+      - DELETE_SUCCESSFUL
+      - DELETE_FAILED
+      - DELETE_IN_PROGRESS
+  OrganizationConfigRuleStatus:
+    type: object
+    required:
+      - OrganizationConfigRuleName
+      - OrganizationRuleStatus
+    properties:
+      OrganizationConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+      OrganizationRuleStatus:
+        $ref: '#/definitions/OrganizationRuleStatus'
+      ErrorCode:
+        $ref: '#/definitions/String'
+      ErrorMessage:
+        $ref: '#/definitions/String'
+      LastUpdateTime:
+        $ref: '#/definitions/Date'
+  OrganizationConfigRuleTriggerType:
+    type: string
+    enum:
+      - ConfigurationItemChangeNotification
+      - OversizedConfigurationItemChangeNotification
+      - ScheduledNotification
+  OrganizationConfigRuleTriggerTypes:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationConfigRuleTriggerType'
+  StringWithCharLimit256Min0:
+    type: string
+    minLength: 0
+    maxLength: 256
+  StringWithCharLimit2048:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ResourceTypesScope:
+    type: array
+    items:
+      $ref: '#/definitions/StringWithCharLimit256'
+    minItems: 0
+    maxItems: 100
+  StringWithCharLimit768:
+    type: string
+    minLength: 1
+    maxLength: 768
+  StringWithCharLimit128:
+    type: string
+    minLength: 1
+    maxLength: 128
   Owner:
     type: string
     enum:
@@ -4903,10 +5389,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  StringWithCharLimit128:
-    type: string
-    minLength: 1
-    maxLength: 128
   SourceDetails:
     type: array
     items:

@@ -231,6 +231,145 @@ paths:
           type: string
           enum:
             - '2010-08-01'
+  '/#Action=DeleteAnomalyDetector':
+    get:
+      x-aws-operation-name: DeleteAnomalyDetector
+      operationId: GET DeleteAnomalyDetector
+      description: Deletes the specified anomaly detection model from your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAnomalyDetectorOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+      parameters:
+        - name: Namespace
+          in: query
+          required: true
+          description: The namespace associated with the anomaly detection model to delete.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: query
+          required: true
+          description: The metric name associated with the anomaly detection model to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: query
+          required: false
+          description: The metric dimensions associated with the anomaly detection model to delete.
+          type: array
+          items:
+            type: string
+        - name: Stat
+          in: query
+          required: true
+          description: The statistic associated with the anomaly detection model to delete.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteAnomalyDetector
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteAnomalyDetector
+      operationId: POST DeleteAnomalyDetector
+      description: Deletes the specified anomaly detection model from your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAnomalyDetectorOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+      parameters:
+        - name: Namespace
+          in: formData
+          required: true
+          description: The namespace associated with the anomaly detection model to delete.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: formData
+          required: true
+          description: The metric name associated with the anomaly detection model to delete.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: formData
+          required: false
+          description: The metric dimensions associated with the anomaly detection model to delete.
+          type: array
+          items:
+            type: string
+        - name: Stat
+          in: formData
+          required: true
+          description: The statistic associated with the anomaly detection model to delete.
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DeleteAnomalyDetector
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
   '/#Action=DeleteDashboards':
     get:
       x-aws-operation-name: DeleteDashboards
@@ -811,6 +950,149 @@ paths:
           type: string
           enum:
             - DescribeAlarmsForMetric
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+  '/#Action=DescribeAnomalyDetectors':
+    get:
+      x-aws-operation-name: DescribeAnomalyDetectors
+      operationId: GET DescribeAnomalyDetectors
+      description: 'Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAnomalyDetectorsOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: Use the token returned by the previous operation to request the next page of results.
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: '<p>The maximum number of results to return in one operation. The maximum value you can specify is 10.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>'
+          type: integer
+          minimum: 1
+        - name: Namespace
+          in: query
+          required: false
+          description: Limits the results to only the anomaly detection models that are associated with the specified namespace.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: query
+          required: false
+          description: 'Limits the results to only the anomaly detection models that are associated with the specified metric name. If there are multiple metrics with this name in different namespaces that have anomaly detection models, they''re all returned.'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: query
+          required: false
+          description: 'Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they''re all returned.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAnomalyDetectors
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeAnomalyDetectors
+      operationId: POST DescribeAnomalyDetectors
+      description: 'Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAnomalyDetectorsOutput'
+        '480':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: NextToken
+          in: formData
+          required: false
+          description: Use the token returned by the previous operation to request the next page of results.
+          type: string
+        - name: MaxResults
+          in: formData
+          required: false
+          description: '<p>The maximum number of results to return in one operation. The maximum value you can specify is 10.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>'
+          type: integer
+          minimum: 1
+        - name: Namespace
+          in: formData
+          required: false
+          description: Limits the results to only the anomaly detection models that are associated with the specified namespace.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: formData
+          required: false
+          description: 'Limits the results to only the anomaly detection models that are associated with the specified metric name. If there are multiple metrics with this name in different namespaces that have anomaly detection models, they''re all returned.'
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: formData
+          required: false
+          description: 'Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they''re all returned.'
+          type: array
+          items:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - DescribeAnomalyDetectors
         - name: Version
           in: query
           required: true
@@ -1800,11 +2082,178 @@ paths:
           type: string
           enum:
             - '2010-08-01'
+  '/#Action=PutAnomalyDetector':
+    get:
+      x-aws-operation-name: PutAnomalyDetector
+      operationId: GET PutAnomalyDetector
+      description: '<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html">CloudWatch Anomaly Detection</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAnomalyDetectorOutput'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+      parameters:
+        - name: Namespace
+          in: query
+          required: true
+          description: The namespace of the metric to create the anomaly detection model for.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: query
+          required: true
+          description: The name of the metric to create the anomaly detection model for.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: query
+          required: false
+          description: The metric dimensions to create the anomaly detection model for.
+          type: array
+          items:
+            type: string
+        - name: Stat
+          in: query
+          required: true
+          description: The statistic to use for the metric and the anomaly detection model.
+          type: string
+        - name: Configuration.ExcludedTimeRanges
+          in: query
+          description: |-
+            The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.
+            An array of time ranges to exclude from use when the anomaly detection model is trained. Use this to make sure that events that could cause unusual values for the metric, such as deployments, aren't used when CloudWatch creates the model.
+          type: array
+          items:
+            type: string
+        - name: Configuration.MetricTimezone
+          in: query
+          description: |-
+            The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.
+            <p>The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes.</p> <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutAnomalyDetector
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: PutAnomalyDetector
+      operationId: POST PutAnomalyDetector
+      description: '<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html">CloudWatch Anomaly Detection</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAnomalyDetectorOutput'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: InternalServiceFault
+          schema:
+            $ref: '#/definitions/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+      parameters:
+        - name: Namespace
+          in: formData
+          required: true
+          description: The namespace of the metric to create the anomaly detection model for.
+          type: string
+          pattern: '[^:].*'
+          minLength: 1
+          maxLength: 255
+        - name: MetricName
+          in: formData
+          required: true
+          description: The name of the metric to create the anomaly detection model for.
+          type: string
+          minLength: 1
+          maxLength: 255
+        - name: Dimensions
+          in: formData
+          required: false
+          description: The metric dimensions to create the anomaly detection model for.
+          type: array
+          items:
+            type: string
+        - name: Stat
+          in: formData
+          required: true
+          description: The statistic to use for the metric and the anomaly detection model.
+          type: string
+        - name: Configuration.ExcludedTimeRanges
+          in: formData
+          description: |-
+            The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.
+            An array of time ranges to exclude from use when the anomaly detection model is trained. Use this to make sure that events that could cause unusual values for the metric, such as deployments, aren't used when CloudWatch creates the model.
+          type: array
+          items:
+            type: string
+        - name: Configuration.MetricTimezone
+          in: formData
+          description: |-
+            The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.
+            <p>The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes.</p> <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
+          type: string
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - PutAnomalyDetector
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2010-08-01'
   '/#Action=PutDashboard':
     get:
       x-aws-operation-name: PutDashboard
       operationId: GET PutDashboard
-      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
+      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
       responses:
         '200':
           description: Success
@@ -1852,7 +2301,7 @@ paths:
     post:
       x-aws-operation-name: PutDashboard
       operationId: POST PutDashboard
-      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
+      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>'
       responses:
         '200':
           description: Success
@@ -1893,7 +2342,7 @@ paths:
     get:
       x-aws-operation-name: PutMetricAlarm
       operationId: GET PutMetricAlarm
-      description: '<p>Creates or updates an alarm and associates it with the specified metric or metric math expression.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
+      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2034,20 +2483,23 @@ paths:
           minimum: 1
         - name: Threshold
           in: query
-          required: true
+          required: false
           description: The value against which the specified statistic is compared.
           type: number
           format: double
         - name: ComparisonOperator
           in: query
           required: true
-          description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
+          description: '<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p> <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>, <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are used only for alarms based on anomaly detection models.</p>'
           type: string
           enum:
             - GreaterThanOrEqualToThreshold
             - GreaterThanThreshold
             - LessThanThreshold
             - LessThanOrEqualToThreshold
+            - LessThanLowerOrGreaterThanUpperThreshold
+            - LessThanLowerThreshold
+            - GreaterThanUpperThreshold
         - name: TreatMissingData
           in: query
           required: false
@@ -2076,6 +2528,13 @@ paths:
           type: array
           items:
             type: string
+        - name: ThresholdMetricId
+          in: query
+          required: false
+          description: '<p>If this is an alarm based on an anomaly detection model, make this value match the ID of the <code>ANOMALY_DETECTION_BAND</code> function.</p> <p>For an example of how to use this parameter, see the <b>Anomaly Detection Model Alarm</b> example on this page.</p> <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>'
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: Action
           in: query
           required: true
@@ -2099,7 +2558,7 @@ paths:
     post:
       x-aws-operation-name: PutMetricAlarm
       operationId: POST PutMetricAlarm
-      description: '<p>Creates or updates an alarm and associates it with the specified metric or metric math expression.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
+      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2240,20 +2699,23 @@ paths:
           minimum: 1
         - name: Threshold
           in: formData
-          required: true
+          required: false
           description: The value against which the specified statistic is compared.
           type: number
           format: double
         - name: ComparisonOperator
           in: formData
           required: true
-          description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
+          description: '<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p> <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>, <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are used only for alarms based on anomaly detection models.</p>'
           type: string
           enum:
             - GreaterThanOrEqualToThreshold
             - GreaterThanThreshold
             - LessThanThreshold
             - LessThanOrEqualToThreshold
+            - LessThanLowerOrGreaterThanUpperThreshold
+            - LessThanLowerThreshold
+            - GreaterThanUpperThreshold
         - name: TreatMissingData
           in: formData
           required: false
@@ -2282,6 +2744,13 @@ paths:
           type: array
           items:
             type: string
+        - name: ThresholdMetricId
+          in: formData
+          required: false
+          description: '<p>If this is an alarm based on an anomaly detection model, make this value match the ID of the <code>ANOMALY_DETECTION_BAND</code> function.</p> <p>For an example of how to use this parameter, see the <b>Anomaly Detection Model Alarm</b> example on this page.</p> <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>'
+          type: string
+          minLength: 1
+          maxLength: 255
         - name: Action
           in: query
           required: true
@@ -2762,14 +3231,32 @@ definitions:
     minLength: 1
     maxLength: 255
   ResourceNotFound: {}
+  DeleteAnomalyDetectorOutput:
+    type: object
+    properties: {}
+  Dimension:
+    type: object
+    required:
+      - Name
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/DimensionName'
+        description: The name of the dimension.
+      Value:
+        $ref: '#/definitions/DimensionValue'
+        description: The value representing the dimension measurement.
+    description: Expands the identity of a metric.
+  ResourceNotFoundException: {}
+  InternalServiceFault: {}
+  InvalidParameterValueException: {}
+  MissingRequiredParameterException: {}
   DeleteDashboardsOutput:
     type: object
     properties: {}
   DashboardName:
     type: string
-  InvalidParameterValueException: {}
   DashboardNotFoundError: {}
-  InternalServiceFault: {}
   DescribeAlarmHistoryOutput:
     type: object
     properties:
@@ -2795,19 +3282,15 @@ definitions:
       MetricAlarms:
         $ref: '#/definitions/MetricAlarms'
         description: The information for each alarm with the specified metric.
-  Dimension:
+  DescribeAnomalyDetectorsOutput:
     type: object
-    required:
-      - Name
-      - Value
     properties:
-      Name:
-        $ref: '#/definitions/DimensionName'
-        description: The name of the dimension.
-      Value:
-        $ref: '#/definitions/DimensionValue'
-        description: The value representing the dimension measurement.
-    description: Expands the identity of a metric.
+      AnomalyDetectors:
+        $ref: '#/definitions/AnomalyDetectors'
+        description: The list of anomaly detection models returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token that you can use in a subsequent operation to retrieve the next set of results.
   GetDashboardOutput:
     type: object
     properties:
@@ -2873,7 +3356,6 @@ definitions:
   ExtendedStatistic:
     type: string
     pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
-  MissingRequiredParameterException: {}
   InvalidParameterCombinationException: {}
   GetMetricWidgetImageOutput:
     type: object
@@ -2917,7 +3399,29 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: The list of tag keys and values associated with the resource you specified.
-  ResourceNotFoundException: {}
+  PutAnomalyDetectorOutput:
+    type: object
+    properties: {}
+  AnomalyDetectorExcludedTimeRanges:
+    type: array
+    items:
+      $ref: '#/definitions/Range'
+  AnomalyDetectorMetricTimezone:
+    type: string
+  Range:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time of the range to exclude. The format is <code>yyyy-MM-dd''T''HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.'
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end time of the range to exclude. The format is <code>yyyy-MM-dd''T''HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.'
+    description: Specifies one range of days or times to exclude from use for training an anomaly detection model.
+  LimitExceededException: {}
   PutDashboardOutput:
     type: object
     properties:
@@ -2971,7 +3475,7 @@ definitions:
         description: '<p>Array of numbers that is used along with the <code>Values</code> array. Each number in the <code>Count</code> array is the number of times the corresponding value in the <code>Values</code> array occurred during the period. </p> <p>If you omit the <code>Counts</code> array, the default of 1 is used as the value for each count. If you include a <code>Counts</code> array, it must include the same amount of values as the <code>Values</code> array.</p>'
       Unit:
         $ref: '#/definitions/StandardUnit'
-        description: The unit of the metric.
+        description: 'When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric. In a <code>Get</code> operation, this displays the unit that is used for the metric.'
       StorageResolution:
         $ref: '#/definitions/StorageResolution'
         description: '<p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a high-resolution metric, so that CloudWatch stores the metric with sub-minute resolution down to one second. Setting this to 60 specifies this metric as a regular-resolution metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is available only for custom metrics. For more information about high-resolution metrics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User Guide</i>. </p> <p>This field is optional, if you do not specify it the default of 60 is used.</p>'
@@ -3055,6 +3559,55 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  Namespace:
+    type: string
+    pattern: '[^:].*'
+    minLength: 1
+    maxLength: 255
+  MetricName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Dimensions:
+    type: array
+    items:
+      $ref: '#/definitions/Dimension'
+    maxItems: 10
+  Stat:
+    type: string
+  AnomalyDetectorConfiguration:
+    type: object
+    properties:
+      ExcludedTimeRanges:
+        $ref: '#/definitions/AnomalyDetectorExcludedTimeRanges'
+        description: 'An array of time ranges to exclude from use when the anomaly detection model is trained. Use this to make sure that events that could cause unusual values for the metric, such as deployments, aren''t used when CloudWatch creates the model.'
+      MetricTimezone:
+        $ref: '#/definitions/AnomalyDetectorMetricTimezone'
+        description: '<p>The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes.</p> <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>'
+    description: 'The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.'
+  AnomalyDetector:
+    type: object
+    properties:
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: The namespace of the metric associated with the anomaly detection model.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the metric associated with the anomaly detection model.
+      Dimensions:
+        $ref: '#/definitions/Dimensions'
+        description: The metric dimensions associated with the anomaly detection model.
+      Stat:
+        $ref: '#/definitions/Stat'
+        description: The statistic associated with the anomaly detection model.
+      Configuration:
+        $ref: '#/definitions/AnomalyDetectorConfiguration'
+        description: 'The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.'
+    description: An anomaly detection model associated with a particular CloudWatch metric athresnd statistic. You can use the model to display a band of expected normal values when the metric is graphed.
+  AnomalyDetectors:
+    type: array
+    items:
+      $ref: '#/definitions/AnomalyDetector'
   ComparisonOperator:
     type: string
     enum:
@@ -3062,6 +3615,9 @@ definitions:
       - GreaterThanThreshold
       - LessThanThreshold
       - LessThanOrEqualToThreshold
+      - LessThanLowerOrGreaterThanUpperThreshold
+      - LessThanLowerThreshold
+      - GreaterThanUpperThreshold
   DatapointValue:
     type: number
     format: double
@@ -3203,6 +3759,25 @@ definitions:
       AlarmNames:
         $ref: '#/definitions/AlarmNames'
         description: The alarms to be deleted.
+  DeleteAnomalyDetectorInput:
+    type: object
+    required:
+      - Namespace
+      - MetricName
+      - Stat
+    properties:
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: The namespace associated with the anomaly detection model to delete.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The metric name associated with the anomaly detection model to delete.
+      Dimensions:
+        $ref: '#/definitions/Dimensions'
+        description: The metric dimensions associated with the anomaly detection model to delete.
+      Stat:
+        $ref: '#/definitions/Stat'
+        description: The statistic associated with the anomaly detection model to delete.
   DeleteDashboardsInput:
     type: object
     required:
@@ -3238,20 +3813,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to indicate that there is more data available.
-  MetricName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Namespace:
-    type: string
-    pattern: '[^:].*'
-    minLength: 1
-    maxLength: 255
-  Dimensions:
-    type: array
-    items:
-      $ref: '#/definitions/Dimension'
-    maxItems: 10
   Period:
     type: integer
     minimum: 1
@@ -3313,6 +3874,27 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to indicate that there is more data available.
+  MaxReturnedResultsCount:
+    type: integer
+    minimum: 1
+  DescribeAnomalyDetectorsInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: Use the token returned by the previous operation to request the next page of results.
+      MaxResults:
+        $ref: '#/definitions/MaxReturnedResultsCount'
+        description: '<p>The maximum number of results to return in one operation. The maximum value you can specify is 10.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>'
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: Limits the results to only the anomaly detection models that are associated with the specified namespace.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: 'Limits the results to only the anomaly detection models that are associated with the specified metric name. If there are multiple metrics with this name in different namespaces that have anomaly detection models, they''re all returned.'
+      Dimensions:
+        $ref: '#/definitions/Dimensions'
+        description: 'Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they''re all returned.'
   DimensionName:
     type: string
     minLength: 1
@@ -3555,6 +4137,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 255
+  MetricId:
+    type: string
+    minLength: 1
+    maxLength: 255
   MetricAlarm:
     type: object
     properties:
@@ -3596,7 +4182,7 @@ definitions:
         description: The time stamp of the last update to the alarm state.
       MetricName:
         $ref: '#/definitions/MetricName'
-        description: The name of the metric associated with the alarm.
+        description: 'The name of the metric associated with the alarm, if this is an alarm based on a single metric.'
       Namespace:
         $ref: '#/definitions/Namespace'
         description: The namespace of the metric associated with the alarm.
@@ -3635,16 +4221,15 @@ definitions:
         description: 'Used only for alarms based on percentiles. If <code>ignore</code>, the alarm state does not change during periods with too few data points to be statistically significant. If <code>evaluate</code> or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.'
       Metrics:
         $ref: '#/definitions/MetricDataQueries'
-        description: <p/>
+        description: 'An array of MetricDataQuery structures, used in an alarm based on a metric math expression. Each structure either retrieves a metric or performs a math expression. One item in the Metrics array is the math expression that the alarm watches. This expression by designated by having <code>ReturnValue</code> set to true.'
+      ThresholdMetricId:
+        $ref: '#/definitions/MetricId'
+        description: 'In an alarm based on an anomaly detection model, this is the ID of the <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the alarm.'
     description: Represents an alarm.
   MetricData:
     type: array
     items:
       $ref: '#/definitions/MetricDatum'
-  MetricId:
-    type: string
-    minLength: 1
-    maxLength: 255
   MetricStat:
     type: object
     required:
@@ -3663,7 +4248,7 @@ definitions:
         description: The statistic to return. It can include any CloudWatch statistic or extended statistic.
       Unit:
         $ref: '#/definitions/StandardUnit'
-        description: The unit to use for the returned data points.
+        description: 'When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric. In a <code>Get</code> operation, this displays the unit that is used for the metric.'
     description: 'This structure defines the metric to be returned, along with the statistics, period, and units.'
   MetricExpression:
     type: string
@@ -3731,8 +4316,28 @@ definitions:
   StorageResolution:
     type: integer
     minimum: 1
-  Stat:
-    type: string
+  PutAnomalyDetectorInput:
+    type: object
+    required:
+      - Namespace
+      - MetricName
+      - Stat
+    properties:
+      Namespace:
+        $ref: '#/definitions/Namespace'
+        description: The namespace of the metric to create the anomaly detection model for.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the metric to create the anomaly detection model for.
+      Dimensions:
+        $ref: '#/definitions/Dimensions'
+        description: The metric dimensions to create the anomaly detection model for.
+      Stat:
+        $ref: '#/definitions/Stat'
+        description: The statistic to use for the metric and the anomaly detection model.
+      Configuration:
+        $ref: '#/definitions/AnomalyDetectorConfiguration'
+        description: '<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges.</p> <p>The configuration can also include the time zone to use for the metric.</p> <p>You can in</p>'
   PutDashboardInput:
     type: object
     required:
@@ -3750,7 +4355,6 @@ definitions:
     required:
       - AlarmName
       - EvaluationPeriods
-      - Threshold
       - ComparisonOperator
     properties:
       AlarmName:
@@ -3803,7 +4407,7 @@ definitions:
         description: The value against which the specified statistic is compared.
       ComparisonOperator:
         $ref: '#/definitions/ComparisonOperator'
-        description: ' The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.'
+        description: '<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p> <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>, <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are used only for alarms based on anomaly detection models.</p>'
       TreatMissingData:
         $ref: '#/definitions/TreatMissingData'
         description: '<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>'
@@ -3816,6 +4420,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p>'
+      ThresholdMetricId:
+        $ref: '#/definitions/MetricId'
+        description: '<p>If this is an alarm based on an anomaly detection model, make this value match the ID of the <code>ANOMALY_DETECTION_BAND</code> function.</p> <p>For an example of how to use this parameter, see the <b>Anomaly Detection Model Alarm</b> example on this page.</p> <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>'
   PutMetricDataInput:
     type: object
     required:
