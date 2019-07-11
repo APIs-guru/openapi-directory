@@ -305,7 +305,7 @@ paths:
           description: The maximum number of results to return.
           type: integer
           minimum: 1
-          maximum: 100000
+          maximum: 100
         - name: Namespace
           in: path
           required: true
@@ -842,7 +842,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
     delete:
       operationId: DeleteUserByPrincipalId
-      description: Deletes a user after locating the user by its principal ID.
+      description: '<p>Deletes a user identified by its principal ID. </p> <p>The permission resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:user/default/<i>&lt;user-name&gt; </i> </code>.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-user-by-principal-id --aws-account-id=111122223333 --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS </code> </p>'
       responses:
         '200':
           description: Success
@@ -1000,6 +1000,11 @@ paths:
           required: false
           description: 'Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.'
           type: boolean
+        - name: user-arn
+          in: query
+          required: false
+          description: '<p>The Amazon QuickSight user''s ARN, for use with <code>QUICKSIGHT</code> identity type. You can use this for any of the following:</p> <ul> <li> <p>Amazon QuickSight users in your account (readers, authors, or admins)</p> </li> <li> <p>AD users</p> </li> <li> <p>Invited non-federated users</p> </li> <li> <p>Federated IAM users</p> </li> <li> <p>Federated IAM role-based sessions</p> </li> </ul>'
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1068,7 +1073,7 @@ paths:
           description: The maximum number of results to return from this request.
           type: integer
           minimum: 1
-          maximum: 100000
+          maximum: 100
         - name: AwsAccountId
           in: path
           required: true
@@ -1157,7 +1162,7 @@ paths:
           description: The maximum number of results to return from this request.
           type: integer
           minimum: 1
-          maximum: 100000
+          maximum: 100
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1223,7 +1228,7 @@ paths:
           description: The maximum number of results to return from this request.
           type: integer
           minimum: 1
-          maximum: 100000
+          maximum: 100
         - name: Namespace
           in: path
           required: true
@@ -1329,7 +1334,7 @@ paths:
                 description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
                 type: string
               SessionName:
-                description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+                description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
                 type: string
                 pattern: '[\w+=.@-]*'
                 minLength: 2
@@ -1630,6 +1635,7 @@ definitions:
   DeleteUserByPrincipalIdRequest:
     type: object
     properties: {}
+    description: <p/>
   UserName:
     type: string
     pattern: '[\u0020-\u00FF]+'
@@ -1696,7 +1702,7 @@ definitions:
   MaxResults:
     type: integer
     minimum: 1
-    maximum: 100000
+    maximum: 100
   ListGroupMembershipsRequest:
     type: object
     properties: {}
@@ -1747,7 +1753,7 @@ definitions:
         description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
       SessionName:
         $ref: '#/definitions/RoleSessionName'
-        description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+        description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
       UserName:
         $ref: '#/definitions/UserName'
         description: The Amazon QuickSight user name that you want to create for the user you are registering.

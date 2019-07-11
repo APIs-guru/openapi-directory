@@ -1642,6 +1642,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeServiceActionExecutionParameters':
+    post:
+      operationId: DescribeServiceActionExecutionParameters
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeServiceActionExecutionParametersOutput'
+        '480':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeServiceActionExecutionParametersInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWS242ServiceCatalogService.DescribeServiceActionExecutionParameters
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWS242ServiceCatalogService.DescribeTagOption':
     post:
       operationId: DescribeTagOption
@@ -4384,6 +4421,23 @@ definitions:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+  DescribeServiceActionExecutionParametersOutput:
+    type: object
+    properties:
+      ServiceActionParameters:
+        $ref: '#/definitions/ExecutionParameters'
+  DescribeServiceActionExecutionParametersInput:
+    type: object
+    required:
+      - ProvisionedProductId
+      - ServiceActionId
+    properties:
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
   DescribeTagOptionOutput:
     type: object
     properties:
@@ -4544,6 +4598,8 @@ definitions:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
         description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      Parameters:
+        $ref: '#/definitions/ExecutionParameterMap'
   GetAWSOrganizationsAccessStatusOutput:
     type: object
     properties:
@@ -6168,6 +6224,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecordOutput'
+  ExecutionParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ExecutionParameter'
   Description:
     type: string
   DisableTemplateValidation:
@@ -6183,6 +6243,39 @@ definitions:
     enum:
       - STATIC
       - DYNAMIC
+  ExecutionParameterMap:
+    type: object
+    minProperties: 1
+    maxProperties: 200
+    additionalProperties:
+      $ref: '#/definitions/ExecutionParameterValueList'
+  ExecutionParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 50
+  ExecutionParameterType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ExecutionParameterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ExecutionParameterValue'
+    minItems: 0
+    maxItems: 25
+  ExecutionParameter:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ExecutionParameterKey'
+      Type:
+        $ref: '#/definitions/ExecutionParameterType'
+      DefaultValues:
+        $ref: '#/definitions/ExecutionParameterValueList'
+  ExecutionParameterValue:
+    type: string
+    minLength: 0
+    maxLength: 512
   ServiceActionAssociationErrorCode:
     type: string
     enum:
