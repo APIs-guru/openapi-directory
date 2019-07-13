@@ -5835,10 +5835,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/GetAccessKeyLastUsedResponse'
-        '480':
-          description: NoSuchEntityException
-          schema:
-            $ref: '#/definitions/NoSuchEntityException'
       parameters:
         - name: AccessKeyId
           in: query
@@ -5877,10 +5873,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/GetAccessKeyLastUsedResponse'
-        '480':
-          description: NoSuchEntityException
-          schema:
-            $ref: '#/definitions/NoSuchEntityException'
       parameters:
         - name: AccessKeyId
           in: formData

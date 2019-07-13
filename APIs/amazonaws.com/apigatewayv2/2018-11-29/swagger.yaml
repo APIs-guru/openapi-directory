@@ -4293,6 +4293,9 @@ definitions:
         description: |-
           The warning messages reported when failonwarnings is turned on during
            API import.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   UpdateApiMappingResponse:
     type: object
     properties:
@@ -4410,6 +4413,9 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   UpdateIntegrationResponse:
     type: object
     properties:
@@ -4695,6 +4701,9 @@ definitions:
           A map that defines the stage variables for a stage resource. Variable names can
            have alphanumeric and underscore characters, and the values must match
            [A-Za-z0-9-._~:/?#&=,]+.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..'
   AccessLogSettings:
     type: object
     properties:

@@ -893,7 +893,7 @@ paths:
               iamRole:
                 description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
                 type: string
-                pattern: 'arn:.*'
+                pattern: 'arn:aws:iam::\w+:role/.*'
                 minLength: 1
                 maxLength: 255
               failureBehavior:
@@ -2537,6 +2537,7 @@ definitions:
     type: string
     enum:
       - Kinetic
+      - Melodic
   CreateRobotApplicationVersionResponse:
     type: object
     properties:
@@ -2688,7 +2689,7 @@ definitions:
         description: Information about the vpc configuration.
   S3Bucket:
     type: string
-    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
+    pattern: '[a-z0-9][a-z0-9.\-]*[a-z0-9]'
     minLength: 3
     maxLength: 63
   S3Key:
@@ -2731,13 +2732,13 @@ definitions:
   Subnets:
     type: array
     items:
-      $ref: '#/definitions/GenericString'
+      $ref: '#/definitions/NonEmptyString'
     minItems: 1
     maxItems: 16
   SecurityGroups:
     type: array
     items:
-      $ref: '#/definitions/GenericString'
+      $ref: '#/definitions/NonEmptyString'
     minItems: 1
     maxItems: 5
   Boolean:
@@ -3447,7 +3448,7 @@ definitions:
     type: integer
   IamRole:
     type: string
-    pattern: 'arn:.*'
+    pattern: 'arn:aws:iam::\w+:role/.*'
     minLength: 1
     maxLength: 255
   FailureBehavior:
@@ -3940,6 +3941,9 @@ definitions:
   ListTagsForResourceRequest:
     type: object
     properties: {}
+  NonEmptyString:
+    type: string
+    minLength: 1
   PercentDone:
     type: number
     format: float

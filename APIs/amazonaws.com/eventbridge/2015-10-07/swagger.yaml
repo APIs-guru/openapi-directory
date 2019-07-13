@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '2015-10-07'
   x-release: v4
-  title: Amazon CloudWatch Events
+  title: Amazon EventBridge
   description: '<p>Amazon EventBridge helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume</p> </li> </ul> <p>For more information about the features of Amazon EventBridge, see the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/">Amazon EventBridge User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
@@ -17,10 +17,10 @@ info:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
   x-providerName: amazonaws.com
-  x-serviceName: events
+  x-serviceName: eventbridge
   x-origin:
     - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/events-2015-10-07.normal.json'
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/eventbridge-2015-10-07.normal.json'
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
@@ -64,7 +64,7 @@ x-servers:
           - ap-south-1
           - sa-east-1
         default: us-east-1
-    description: The Amazon CloudWatch Events multi-region endpoint
+    description: The Amazon EventBridge multi-region endpoint
   - url: 'https://events.{region}.amazonaws.com'
     variables:
       region:
@@ -90,7 +90,7 @@ x-servers:
           - ap-south-1
           - sa-east-1
         default: us-east-1
-    description: The Amazon CloudWatch Events multi-region endpoint
+    description: The Amazon EventBridge multi-region endpoint
   - url: 'http://events.{region}.amazonaws.com.cn'
     variables:
       region:
@@ -99,7 +99,7 @@ x-servers:
           - cn-north-1
           - cn-northwest-1
         default: cn-north-1
-    description: The Amazon CloudWatch Events endpoint for China (Beijing) and China (Ningxia)
+    description: The Amazon EventBridge endpoint for China (Beijing) and China (Ningxia)
   - url: 'https://events.{region}.amazonaws.com.cn'
     variables:
       region:
@@ -108,7 +108,7 @@ x-servers:
           - cn-north-1
           - cn-northwest-1
         default: cn-north-1
-    description: The Amazon CloudWatch Events endpoint for China (Beijing) and China (Ningxia)
+    description: The Amazon EventBridge endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 consumes:
   - application/json
