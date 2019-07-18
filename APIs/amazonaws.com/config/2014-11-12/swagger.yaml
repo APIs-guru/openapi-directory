@@ -449,6 +449,10 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: OrganizationAccessDeniedException
+          schema:
+            $ref: '#/definitions/OrganizationAccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -1098,6 +1102,10 @@ paths:
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: OrganizationAccessDeniedException
+          schema:
+            $ref: '#/definitions/OrganizationAccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -1139,6 +1147,10 @@ paths:
           description: InvalidLimitException
           schema:
             $ref: '#/definitions/InvalidLimitException'
+        '483':
+          description: OrganizationAccessDeniedException
+          schema:
+            $ref: '#/definitions/OrganizationAccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -1686,6 +1698,10 @@ paths:
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: OrganizationAccessDeniedException
+          schema:
+            $ref: '#/definitions/OrganizationAccessDeniedException'
       parameters:
         - name: body
           in: body
@@ -2690,6 +2706,7 @@ definitions:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
   NoSuchOrganizationConfigRuleException: {}
+  OrganizationAccessDeniedException: {}
   DeletePendingAggregationRequestRequest:
     type: object
     required:
@@ -3528,7 +3545,6 @@ definitions:
         $ref: '#/definitions/TagsList'
   LimitExceededException: {}
   InvalidRoleException: {}
-  OrganizationAccessDeniedException: {}
   NoAvailableOrganizationException: {}
   OrganizationAllFeaturesNotEnabledException: {}
   PutConfigurationRecorderRequest:
@@ -4999,6 +5015,9 @@ definitions:
       - CREATE_SUCCESSFUL
       - CREATE_IN_PROGRESS
       - CREATE_FAILED
+      - UPDATE_SUCCESSFUL
+      - UPDATE_FAILED
+      - UPDATE_IN_PROGRESS
       - DELETE_SUCCESSFUL
       - DELETE_FAILED
       - DELETE_IN_PROGRESS
@@ -5099,6 +5118,9 @@ definitions:
       - CREATE_SUCCESSFUL
       - CREATE_IN_PROGRESS
       - CREATE_FAILED
+      - UPDATE_SUCCESSFUL
+      - UPDATE_FAILED
+      - UPDATE_IN_PROGRESS
       - DELETE_SUCCESSFUL
       - DELETE_FAILED
       - DELETE_IN_PROGRESS
