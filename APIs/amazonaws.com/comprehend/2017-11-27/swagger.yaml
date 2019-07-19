@@ -2377,7 +2377,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   UnsupportedLanguageException: {}
   BatchDetectKeyPhrasesResponse:
     type: object
@@ -2402,7 +2402,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   BatchDetectSentimentResponse:
     type: object
     required:
@@ -2426,7 +2426,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   BatchDetectSyntaxResponse:
     type: object
     required:
@@ -2450,7 +2450,7 @@ definitions:
         description: 'A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/SyntaxLanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   CreateDocumentClassifierResponse:
     type: object
     properties:
@@ -2485,7 +2485,7 @@ definitions:
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
       VolumeKmsKeyId:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
@@ -2703,7 +2703,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   DetectKeyPhrasesResponse:
     type: object
     properties:
@@ -2721,7 +2721,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   DetectSentimentResponse:
     type: object
     properties:
@@ -2742,7 +2742,7 @@ definitions:
         description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
   DetectSyntaxResponse:
     type: object
     properties:
@@ -2760,7 +2760,7 @@ definitions:
         description: 'A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.'
       LanguageCode:
         $ref: '#/definitions/SyntaxLanguageCode'
-        description: The language code of the input documents. You can specify English ("en") or Spanish ("es").
+        description: 'The language code of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").'
   ListDocumentClassificationJobsResponse:
     type: object
     properties:
@@ -3100,7 +3100,7 @@ definitions:
         description: The identifier of the job.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenString'
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
@@ -3141,7 +3141,7 @@ definitions:
         description: The identifier of the job.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+        description: 'The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestTokenString'
         description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
@@ -3575,7 +3575,7 @@ definitions:
     properties:
       EntityTypes:
         $ref: '#/definitions/EntityTypesList'
-        description: The entity types in the input data for an entity recognizer.
+        description: The entity types in the input data for an entity recognizer. A maximum of 12 entity types can be used at one time to train an entity recognizer.
       Documents:
         $ref: '#/definitions/EntityRecognizerDocuments'
         description: S3 location of the documents folder for an entity recognizer
@@ -4139,7 +4139,7 @@ definitions:
       F1Score:
         $ref: '#/definitions/Double'
         description: 'A measure of how accurate the recognizer results are for the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
-    description: ' Detailed information about the accuracy of an entity recognizer. '
+    description: 'Detailed information about the accuracy of an entity recognizer. '
   EntityRecognizerFilter:
     type: object
     properties:
@@ -4172,7 +4172,7 @@ definitions:
         description: ' The number of documents in the input data that were used to test the entity recognizer. Typically this is 10 to 20 percent of the input documents.'
       EvaluationMetrics:
         $ref: '#/definitions/EntityRecognizerEvaluationMetrics'
-        description: ' Detailed information about the accuracy of an entity recognizer.'
+        description: Detailed information about the accuracy of an entity recognizer.
       EntityTypes:
         $ref: '#/definitions/EntityRecognizerMetadataEntityTypesList'
         description: Entity types from the metadata of an entity recognizer.
@@ -4183,7 +4183,26 @@ definitions:
       Type:
         $ref: '#/definitions/AnyLengthString'
         description: 'Type of entity from the list of entity types in the metadata of an entity recognizer. '
+      EvaluationMetrics:
+        $ref: '#/definitions/EntityTypesEvaluationMetrics'
+        description: 'Detailed information about the accuracy of the entity recognizer for a specific item on the list of entity types. '
+      NumberOfTrainMentions:
+        $ref: '#/definitions/Integer'
+        description: 'indicates the number of times the given entity name was seen in the training data. '
     description: Individual item from the list of entity types in the metadata of an entity recognizer.
+  EntityTypesEvaluationMetrics:
+    type: object
+    properties:
+      Precision:
+        $ref: '#/definitions/Double'
+        description: 'A measure of the usefulness of the recognizer results for a specific entity type in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. '
+      Recall:
+        $ref: '#/definitions/Double'
+        description: A measure of how complete the recognizer results are for a specific entity type in the test data. High recall means that the recognizer returned most of the relevant results.
+      F1Score:
+        $ref: '#/definitions/Double'
+        description: 'A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
+    description: 'Detailed information about the accuracy of an entity recognizer for a specific entity type. '
   EntityRecognizerPropertiesList:
     type: array
     items:
