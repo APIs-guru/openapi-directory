@@ -3,7 +3,7 @@ info:
   version: '2018-07-27'
   x-release: v4
   title: AWS IoT Events
-  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur.'
+  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. AWS IoT Events API commands enable you to create, read, update and delete inputs and detector models, and to list their versions.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -240,7 +240,7 @@ paths:
                 minLength: 1
                 maxLength: 2048
               tags:
-                description: Metadata which can be used to manage the detector model.
+                description: Metadata that can be used to manage the detector model.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -344,9 +344,9 @@ paths:
                 properties:
                   attributes:
                     $ref: '#/definitions/Attributes'
-                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here is available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
               tags:
-                description: Metadata which can be used to manage the input.
+                description: Metadata that can be used to manage the input.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -447,7 +447,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeDetectorModel
-      description: 'Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned.'
+      description: 'Describes a detector model. If the <code>"version"</code> parameter is not specified, information about the latest version is returned.'
       responses:
         '200':
           description: Success
@@ -491,7 +491,7 @@ paths:
           maxLength: 128
     post:
       operationId: UpdateDetectorModel
-      description: Updates a detector model. Detectors (instances) spawned by the previous version will be deleted and re-created as new inputs arrive.
+      description: Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
       responses:
         '200':
           description: Success
@@ -525,7 +525,7 @@ paths:
         - name: detectorModelName
           in: path
           required: true
-          description: The name of the detector model to be updated.
+          description: The name of the detector model that is updated.
           type: string
           pattern: '^[a-zA-Z0-9_-]+$'
           minLength: 1
@@ -595,7 +595,7 @@ paths:
         - name: inputName
           in: path
           required: true
-          description: The name of the input to be deleted.
+          description: The name of the input to delete.
           type: string
           pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
           minLength: 1
@@ -704,7 +704,7 @@ paths:
                 properties:
                   attributes:
                     $ref: '#/definitions/Attributes'
-                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here is available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+                    description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
   /logging:
     get:
       operationId: DescribeLoggingOptions
@@ -749,7 +749,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutLoggingOptions
-      description: '<p>Sets or updates the AWS IoT Events logging options.</p> <p>Note that if you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.</p>'
+      description: '<p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>"loggingOptions"</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>"roleArn"</code> field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.</p>'
       responses:
         '200':
           description: Success
@@ -795,7 +795,7 @@ paths:
                     description: The ARN of the role that grants permission to AWS IoT Events to perform logging.
                   level:
                     $ref: '#/definitions/LoggingLevel'
-                    description: 'The logging level. Currently, only "ERROR" is supported.'
+                    description: The logging level.
                   enabled:
                     $ref: '#/definitions/LoggingEnabled'
                     description: 'If TRUE, logging is enabled for AWS IoT Events.'
@@ -907,7 +907,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Add to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+      description: Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
       responses:
         '200':
           description: Success
@@ -1038,7 +1038,7 @@ definitions:
       value:
         $ref: '#/definitions/TagValue'
         description: The tag's value.
-    description: Metadata which can be used to manage the resource.
+    description: Metadata that can be used to manage the resource.
   InvalidRequestException: {}
   ResourceInUseException: {}
   ResourceAlreadyExistsException: {}
@@ -1176,7 +1176,7 @@ definitions:
     properties:
       targetArn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The ARN of the Amazon SNS target to which the message is sent.
+        description: The ARN of the Amazon SNS target where the message is sent.
     description: Information required to publish the Amazon SNS message.
   IotTopicPublishAction:
     type: object
@@ -1186,7 +1186,7 @@ definitions:
       mqttTopic:
         $ref: '#/definitions/MQTTTopic'
         description: The MQTT topic of the message.
-    description: Information required to publish the MQTT message via the AWS IoT Message Broker.
+    description: Information required to publish the MQTT message via the AWS IoT message broker.
   SetTimerAction:
     type: object
     required:
@@ -1218,6 +1218,48 @@ definitions:
         $ref: '#/definitions/TimerName'
         description: The name of the timer to reset.
     description: Information needed to reset the timer.
+  LambdaAction:
+    type: object
+    required:
+      - functionArn
+    properties:
+      functionArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the Lambda function which is executed.
+    description: 'Calls a Lambda function, passing in information about the detector model instance and the event which triggered the action.'
+  IotEventsAction:
+    type: object
+    required:
+      - inputName
+    properties:
+      inputName:
+        $ref: '#/definitions/InputName'
+        description: The name of the AWS IoT Events input where the data is sent.
+    description: 'Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.'
+  SqsAction:
+    type: object
+    required:
+      - queueUrl
+    properties:
+      queueUrl:
+        $ref: '#/definitions/QueueUrl'
+        description: The URL of the SQS queue where the data is written.
+      useBase64:
+        $ref: '#/definitions/UseBase64'
+        description: 'Set this to TRUE if you want the data to be Base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
+    description: Sends information about the detector model instance and the event which triggered the action to an AWS SQS queue.
+  FirehoseAction:
+    type: object
+    required:
+      - deliveryStreamName
+    properties:
+      deliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The name of the Kinesis Data Firehose stream where the data is written.
+      separator:
+        $ref: '#/definitions/FirehoseSeparator'
+        description: 'A character separator that is used to separate records written to the Kinesis Data Firehose stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
+    description: Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose stream.
   Action:
     type: object
     properties:
@@ -1229,7 +1271,7 @@ definitions:
         description: Sends an Amazon SNS message.
       iotTopicPublish:
         $ref: '#/definitions/IotTopicPublishAction'
-        description: Publishes an MQTT message with the given topic to the AWS IoT Message Broker.
+        description: Publishes an MQTT message with the given topic to the AWS IoT message broker.
       setTimer:
         $ref: '#/definitions/SetTimerAction'
         description: Information needed to set the timer.
@@ -1239,7 +1281,19 @@ definitions:
       resetTimer:
         $ref: '#/definitions/ResetTimerAction'
         description: Information needed to reset the timer.
-    description: An action to be performed when the <code>condition</code> is TRUE.
+      lambda:
+        $ref: '#/definitions/LambdaAction'
+        description: 'Calls a Lambda function, passing in information about the detector model instance and the event which triggered the action.'
+      iotEvents:
+        $ref: '#/definitions/IotEventsAction'
+        description: 'Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.'
+      sqs:
+        $ref: '#/definitions/SqsAction'
+        description: Sends information about the detector model instance and the event which triggered the action to an AWS SQS queue.
+      firehose:
+        $ref: '#/definitions/FirehoseAction'
+        description: Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose stream.
+    description: An action to be performed when the <code>"condition"</code> is TRUE.
   Actions:
     type: array
     items:
@@ -1256,7 +1310,7 @@ definitions:
     properties:
       jsonPath:
         $ref: '#/definitions/AttributeJsonPath'
-        description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to the AWS IoT Events system (<code>BatchPutMessage</code>). Each such message contains a JSON payload, and the attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
+        description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to the AWS IoT Events system (<code>BatchPutMessage</code>). Each such message contains a JSON payload, and the attribute (and its paired value) specified here are available for use in the <code>"condition"</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
     description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
   TimerName:
     type: string
@@ -1314,7 +1368,7 @@ definitions:
         description: The ARN of the role that grants permission to AWS IoT Events to perform its operations.
       tags:
         $ref: '#/definitions/Tags'
-        description: Metadata which can be used to manage the detector model.
+        description: Metadata that can be used to manage the detector model.
   DetectorModelConfiguration:
     type: object
     properties:
@@ -1361,7 +1415,7 @@ definitions:
     properties:
       attributes:
         $ref: '#/definitions/Attributes'
-        description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here is available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+        description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>"condition"</code> expressions used by detectors that monitor this input. '
     description: The definition of the input.
   CreateInputRequest:
     type: object
@@ -1380,7 +1434,7 @@ definitions:
         description: The definition of the input.
       tags:
         $ref: '#/definitions/Tags'
-        description: Metadata which can be used to manage the input.
+        description: Metadata that can be used to manage the input.
   InputConfiguration:
     type: object
     required:
@@ -1415,6 +1469,8 @@ definitions:
   DeleteInputRequest:
     type: object
     properties: {}
+  DeliveryStreamName:
+    type: string
   DetectorModelVersion:
     type: string
     minLength: 1
@@ -1460,7 +1516,7 @@ definitions:
         description: The ARN of the role that grants permission to AWS IoT Events to perform logging.
       level:
         $ref: '#/definitions/LoggingLevel'
-        description: 'The logging level. Currently, only "ERROR" is supported.'
+        description: The logging level.
       enabled:
         $ref: '#/definitions/LoggingEnabled'
         description: 'If TRUE, logging is enabled for AWS IoT Events.'
@@ -1470,7 +1526,7 @@ definitions:
     description: The values of the AWS IoT Events logging options.
   KeyValue:
     type: string
-    pattern: '^[a-zA-Z0-9\-_]+$'
+    pattern: '^[a-zA-Z0-9\-_:]+$'
     minLength: 1
     maxLength: 128
   DetectorDebugOption:
@@ -1559,15 +1615,18 @@ definitions:
         description: The name of the event.
       condition:
         $ref: '#/definitions/Condition'
-        description: '[Optional] The Boolean expression that when TRUE causes the <code>actions</code> to be performed. If not present, the actions are performed (=TRUE); if the expression result is not a Boolean value the actions are NOT performed (=FALSE).'
+        description: '[Optional] The Boolean expression that when TRUE causes the <code>"actions"</code> to be performed. If not present, the actions are performed (=TRUE); if the expression result is not a Boolean value, the actions are NOT performed (=FALSE).'
       actions:
         $ref: '#/definitions/Actions'
         description: The actions to be performed.
-    description: Specifies the <code>actions</code> to be performed when the <code>condition</code> evaluates to TRUE.
+    description: Specifies the <code>"actions"</code> to be performed when the <code>"condition"</code> evaluates to TRUE.
   Events:
     type: array
     items:
       $ref: '#/definitions/Event'
+  FirehoseSeparator:
+    type: string
+    pattern: '([\n\t])|(\r\n)|(,)'
   InputArn:
     type: string
   InputStatus:
@@ -1630,15 +1689,15 @@ definitions:
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is TRUE.
+        description: Specifies the actions that are performed when the state is entered and the <code>"condition"</code> is TRUE.
     description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
   OnExitLifecycle:
     type: object
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the actions that are performed when the state is exited and the <code>condition</code> is TRUE.
-    description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
+        description: Specifies the <code>"actions"</code> that are performed when the state is exited and the <code>"condition"</code> is TRUE.
+    description: 'When exiting this state, perform these <code>"actions"</code> if the specified <code>"condition"</code> is TRUE.'
   TransitionEvents:
     type: array
     items:
@@ -1648,11 +1707,11 @@ definitions:
     properties:
       events:
         $ref: '#/definitions/Events'
-        description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
+        description: Specifies the actions performed when the <code>"condition"</code> evaluates to TRUE.
       transitionEvents:
         $ref: '#/definitions/TransitionEvents'
-        description: Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
-    description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
+        description: 'Specifies the actions performed, and the next state entered, when a <code>"condition"</code> evaluates to TRUE.'
+    description: Specifies the actions performed when the <code>"condition"</code> evaluates to TRUE.
   PutLoggingOptionsRequest:
     type: object
     required:
@@ -1661,6 +1720,8 @@ definitions:
       loggingOptions:
         $ref: '#/definitions/LoggingOptions'
         description: The new values of the AWS IoT Events logging options.
+  QueueUrl:
+    type: string
   Seconds:
     type: integer
   VariableName:
@@ -1672,6 +1733,8 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  UseBase64:
+    type: boolean
   State:
     type: object
     required:
@@ -1682,13 +1745,13 @@ definitions:
         description: The name of the state.
       onInput:
         $ref: '#/definitions/OnInputLifecycle'
-        description: 'When an input is received and the <code>condition</code> is TRUE, perform the specified <code>actions</code>.'
+        description: 'When an input is received and the <code>"condition"</code> is TRUE, perform the specified <code>"actions"</code>.'
       onEnter:
         $ref: '#/definitions/OnEnterLifecycle'
-        description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
+        description: 'When entering this state, perform these <code>"actions"</code> if the <code>"condition"</code> is TRUE.'
       onExit:
         $ref: '#/definitions/OnExitLifecycle'
-        description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
+        description: 'When exiting this state, perform these <code>"actions"</code> if the specified <code>"condition"</code> is TRUE.'
     description: Information that defines a state of a detector.
   TagValue:
     type: string
@@ -1718,14 +1781,14 @@ definitions:
         description: The name of the transition event.
       condition:
         $ref: '#/definitions/Condition'
-        description: '[Required] A Boolean expression that when TRUE causes the actions to be performed and the <code>nextState</code> to be entered.'
+        description: '[Required] A Boolean expression that when TRUE causes the actions to be performed and the <code>"nextState"</code> to be entered.'
       actions:
         $ref: '#/definitions/Actions'
         description: The actions to be performed.
       nextState:
         $ref: '#/definitions/StateName'
         description: The next state to enter.
-    description: Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
+    description: Specifies the actions performed and the next state entered when a <code>"condition"</code> evaluates to TRUE.
   UntagResourceRequest:
     type: object
     properties: {}
