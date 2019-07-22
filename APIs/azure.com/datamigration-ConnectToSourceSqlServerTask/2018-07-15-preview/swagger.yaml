@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-ConnectToSourceSqlServerTask
   x-tags:
@@ -45,6 +44,10 @@ definitions:
       collectAgentJobs:
         default: false
         description: Flag for whether to collect agent jobs from source server.
+        type: boolean
+      collectDatabases:
+        default: true
+        description: Flag for whether to collect databases from source server.
         type: boolean
       collectLogins:
         default: false
@@ -112,6 +115,10 @@ definitions:
           - dataSource
         type: object
         x-ms-discriminator-value: SqlConnectionInfo
+      validateSsisCatalogOnly:
+        default: false
+        description: Flag for whether to validate SSIS catalog is reachable on the source server.
+        type: boolean
     required:
       - sourceConnectionInfo
     type: object

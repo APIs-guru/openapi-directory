@@ -79,7 +79,6 @@ parameters:
     x-ms-parameter-location: method
   subscriptionId:
     description: The subscription identifier.
-    format: uuid
     in: path
     name: subscriptionId
     required: true
@@ -178,51 +177,6 @@ paths:
                 message: Service name is not available.
                 nameAvailable: false
                 reason: AlreadyExists
-  '/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/moveResourcesStatus/{operationResultId}':
-    get:
-      deprecated: false
-      description: Get the operation result for a long running move operation.
-      operationId: MoveResourcesStatus_Get
-      parameters:
-        - $ref: '#/parameters/api-version'
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/locationName'
-        - $ref: '#/parameters/operationResultId'
-      responses:
-        '200':
-          description: The body contains all of the properties of the operation result.
-          schema:
-            $ref: '#/definitions/OperationResultsDescription'
-        '404':
-          description: No operation result was found matching operationResultId.
-          schema:
-            $ref: '#/definitions/ErrorDetails'
-        default:
-          description: Default error response
-          schema:
-            $ref: '#/definitions/ErrorDetails'
-      tags:
-        - Resource
-      x-ms-examples:
-        OperationResultsGet:
-          parameters:
-            api-version: 2018-08-20-preview
-            locationName: westus
-            operationResultId: exampleid
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/providers/Microsoft.HealthcareApis/locations/westus/operationresults/exampleid
-                name: servicename
-                properties: {}
-                startTime: '2019-01-21T06:03:30.2716301Z'
-                status: Requested
-            '404':
-              body:
-                error:
-                  code: OperationResultNotFound
-                  message: The operation result was not found.
   '/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/operationresults/{operationResultId}':
     get:
       deprecated: false
@@ -306,6 +260,24 @@ paths:
                       accessPolicies:
                         - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                         - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                      authenticationConfiguration:
+                        audience: 'https://azurehealthcareapis.com'
+                        authority: 'https://login.microsoftonline.com/common'
+                        smartProxyEnabled: true
+                      corsConfiguration:
+                        allowCredentials: false
+                        headers:
+                          - '*'
+                        maxAge: 1440
+                        methods:
+                          - DELETE
+                          - GET
+                          - OPTIONS
+                          - PATCH
+                          - POST
+                          - PUT
+                        origins:
+                          - '*'
                       cosmosDbConfiguration:
                         offerThroughput: 1000
                       provisioningState: Creating
@@ -313,43 +285,6 @@ paths:
                     type: Microsoft.HealthcareApis/services
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/moveResources':
-    post:
-      deprecated: false
-      description: Moves resources to another subscription and/or resource group.
-      operationId: Services_MoveResources
-      parameters:
-        - $ref: '#/parameters/api-version'
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupName'
-        - description: Set the move resource structure to the name of the service instance to check.
-          in: body
-          name: moveResourcesInputs
-          required: true
-          schema:
-            $ref: '#/definitions/MoveResourcesParameters'
-      responses:
-        '202':
-          description: Accepted - Move request accepted; the operation will complete asynchronously.
-        default:
-          description: DefaultErrorResponse
-          schema:
-            $ref: '#/definitions/ErrorDetails'
-      tags:
-        - Proxy
-      x-ms-examples:
-        ServiceList:
-          parameters:
-            api-version: 2018-08-20-preview
-            moveResourcesInputs:
-              resourceIdsToMove:
-                - /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1
-              targetResourceGroupName: newResourceGroup
-              targetSubscriptionId: newSubscriptionId
-            resourceGroupName: resourceGroup
-            subscriptionId: subid
-          responses:
-            '202': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services':
     get:
       deprecated: false
@@ -390,6 +325,24 @@ paths:
                       accessPolicies:
                         - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                         - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                      authenticationConfiguration:
+                        audience: 'https://azurehealthcareapis.com'
+                        authority: 'https://login.microsoftonline.com/common'
+                        smartProxyEnabled: true
+                      corsConfiguration:
+                        allowCredentials: false
+                        headers:
+                          - '*'
+                        maxAge: 1440
+                        methods:
+                          - DELETE
+                          - GET
+                          - OPTIONS
+                          - PATCH
+                          - POST
+                          - PUT
+                        origins:
+                          - '*'
                       cosmosDbConfiguration:
                         offerThroughput: 1000
                       provisioningState: Creating
@@ -467,6 +420,24 @@ paths:
                   accessPolicies:
                     - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                     - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                  authenticationConfiguration:
+                    audience: 'https://azurehealthcareapis.com'
+                    authority: 'https://login.microsoftonline.com/common'
+                    smartProxyEnabled: true
+                  corsConfiguration:
+                    allowCredentials: false
+                    headers:
+                      - '*'
+                    maxAge: 1440
+                    methods:
+                      - DELETE
+                      - GET
+                      - OPTIONS
+                      - PATCH
+                      - POST
+                      - PUT
+                    origins:
+                      - '*'
                   cosmosDbConfiguration:
                     offerThroughput: 1000
                   provisioningState: Creating
@@ -521,6 +492,24 @@ paths:
                   accessPolicies:
                     - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                     - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                  authenticationConfiguration:
+                    audience: 'https://azurehealthcareapis.com'
+                    authority: 'https://login.microsoftonline.com/common'
+                    smartProxyEnabled: true
+                  corsConfiguration:
+                    allowCredentials: false
+                    headers:
+                      - '*'
+                    maxAge: 1440
+                    methods:
+                      - DELETE
+                      - GET
+                      - OPTIONS
+                      - PATCH
+                      - POST
+                      - PUT
+                    origins:
+                      - '*'
                   cosmosDbConfiguration:
                     offerThroughput: 1000
                   provisioningState: Creating
@@ -572,6 +561,26 @@ paths:
                 accessPolicies:
                   - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                   - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                authenticationConfiguration:
+                  audience: 'https://azurehealthcareapis.com'
+                  authority: 'https://login.microsoftonline.com/common'
+                  smartProxyEnabled: true
+                corsConfiguration:
+                  allowCredentials: false
+                  headers:
+                    - '*'
+                  maxAge: 1440
+                  methods:
+                    - DELETE
+                    - GET
+                    - OPTIONS
+                    - PATCH
+                    - POST
+                    - PUT
+                  origins:
+                    - '*'
+                cosmosDbConfiguration:
+                  offerThroughput: 1000
               tags: {}
             subscriptionId: subid
           responses:
@@ -586,6 +595,24 @@ paths:
                   accessPolicies:
                     - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                     - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                  authenticationConfiguration:
+                    audience: 'https://azurehealthcareapis.com'
+                    authority: 'https://login.microsoftonline.com/common'
+                    smartProxyEnabled: true
+                  corsConfiguration:
+                    allowCredentials: false
+                    headers:
+                      - '*'
+                    maxAge: 1440
+                    methods:
+                      - DELETE
+                      - GET
+                      - OPTIONS
+                      - PATCH
+                      - POST
+                      - PUT
+                    origins:
+                      - '*'
                   cosmosDbConfiguration:
                     offerThroughput: 1000
                   provisioningState: Creating
@@ -602,6 +629,24 @@ paths:
                   accessPolicies:
                     - objectId: c487e7d1-3210-41a3-8ccc-e9372b78da47
                     - objectId: 5b307da8-43d4-492b-8b66-b0294ade872f
+                  authenticationConfiguration:
+                    audience: 'https://azurehealthcareapis.com'
+                    authority: 'https://login.microsoftonline.com/common'
+                    smartProxyEnabled: true
+                  corsConfiguration:
+                    allowCredentials: false
+                    headers:
+                      - '*'
+                    maxAge: 1440
+                    methods:
+                      - DELETE
+                      - GET
+                      - OPTIONS
+                      - PATCH
+                      - POST
+                      - PUT
+                    origins:
+                      - '*'
                   cosmosDbConfiguration:
                     offerThroughput: 1000
                   provisioningState: Creating
@@ -644,27 +689,6 @@ definitions:
         description: The target of the particular error.
         readOnly: true
         type: string
-    type: object
-  MoveResourcesParameters:
-    description: Input values.
-    properties:
-      resourceIdsToMove:
-        description: The list of resources to move.
-        items:
-          type: string
-        maxItems: 250
-        minItems: 1
-        type: array
-      targetResourceGroupName:
-        description: The target resource group to move resources to.
-        type: string
-      targetSubscriptionId:
-        description: The target subscription to move resources to.
-        type: string
-    required:
-      - targetSubscriptionId
-      - targetResourceGroupName
-      - resourceIdsToMove
     type: object
   Operation:
     description: Service REST API operation.
@@ -804,11 +828,71 @@ definitions:
         type: string
     required:
       - objectId
+  ServiceAuthenticationConfigurationInfo:
+    description: Authentication configuration information
+    properties:
+      audience:
+        description: The audience url for the service
+        readOnly: false
+        type: string
+      authority:
+        description: The authority url for the service
+        readOnly: false
+        type: string
+      smartProxyEnabled:
+        description: If the SMART on FHIR proxy is enabled
+        readOnly: false
+        type: boolean
+    type: object
+  ServiceCorsConfigurationHeaderEntry:
+    description: A header for CORS.
+    type: string
+  ServiceCorsConfigurationInfo:
+    description: The settings for the CORS configuration of the service instance.
+    properties:
+      allowCredentials:
+        description: If credentials are allowed via CORS.
+        readOnly: false
+        type: boolean
+      headers:
+        description: The headers to be allowed via CORS.
+        items:
+          $ref: '#/definitions/ServiceCorsConfigurationHeaderEntry'
+        readOnly: false
+        type: array
+      maxAge:
+        description: The max age to be allowed via CORS.
+        maximum: 99999
+        minimum: 0
+        readOnly: false
+        type: integer
+      methods:
+        description: The methods to be allowed via CORS.
+        items:
+          $ref: '#/definitions/ServiceCorsConfigurationMethodEntry'
+        readOnly: false
+        type: array
+      origins:
+        description: The origins to be allowed via CORS.
+        items:
+          $ref: '#/definitions/ServiceCorsConfigurationOriginEntry'
+        readOnly: false
+        type: array
+    type: object
+  ServiceCorsConfigurationMethodEntry:
+    description: A method for CORS.
+    type: string
+  ServiceCorsConfigurationOriginEntry:
+    description: An origin for CORS.
+    pattern: '^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\:\/\/(?:[a-zA-Z0-9-]+[.]?)+(?:\:[0-9]{1,5})?|[*]))$'
+    type: string
   ServiceCosmosDbConfigurationInfo:
     description: The settings for the Cosmos DB database backing the service.
     properties:
       offerThroughput:
         description: The provisioned throughput for the backing database.
+        maximum: 10000
+        minimum: 400
         readOnly: false
         type: integer
     type: object
@@ -870,6 +954,12 @@ definitions:
       accessPolicies:
         $ref: '#/definitions/ServiceAccessPoliciesInfo'
         description: The access policies of the service instance.
+      authenticationConfiguration:
+        $ref: '#/definitions/ServiceAuthenticationConfigurationInfo'
+        description: The authentication configuration for the service instance.
+      corsConfiguration:
+        $ref: '#/definitions/ServiceCorsConfigurationInfo'
+        description: The settings for the CORS configuration of the service instance.
       cosmosDbConfiguration:
         $ref: '#/definitions/ServiceCosmosDbConfigurationInfo'
         description: The settings for the Cosmos DB database backing the service.

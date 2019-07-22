@@ -85,13 +85,13 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             assignmentName: assignSimpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
                 nextLink: null
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/microsoft.blueprint/blueprintAssignments/assignSimpleBlueprint/assignmentOperations/fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.blueprint/blueprintAssignments/assignSimpleBlueprint/assignmentOperations/fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
                     name: fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
                     properties:
                       assignmentState: succeed
@@ -104,7 +104,7 @@ paths:
                                 message: dummy
                           jobState: succeeded
                           kind: azureResource
-                          requestUri: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/microsoft.deployments/deployments/48432786-2f1b-4925-8032-a5d57bcb5b6e
+                          requestUri: /subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.deployments/deployments/48432786-2f1b-4925-8032-a5d57bcb5b6e
                           result:
                             resources:
                               - id: blabla
@@ -138,11 +138,11 @@ paths:
             api-version: 2018-11-01-preview
             assignmentName: assignSimpleBlueprint
             assignmentOperationName: fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/microsoft.blueprint/blueprintAssignments/assignSimpleBlueprint/assignmentOperations/fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.blueprint/blueprintAssignments/assignSimpleBlueprint/assignmentOperations/fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
                 name: fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f
                 properties:
                   assignmentState: succeed
@@ -155,7 +155,7 @@ paths:
                             message: dummy
                       jobState: succeeded
                       kind: azureResource
-                      requestUri: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/microsoft.deployments/deployments/48432786-2f1b-4925-8032-a5d57bcb5b6e
+                      requestUri: /subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.deployments/deployments/48432786-2f1b-4925-8032-a5d57bcb5b6e
                       result:
                         resources:
                           - id: blabla

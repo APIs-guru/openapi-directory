@@ -68,19 +68,16 @@ paths:
               body:
                 value:
                   - display:
-                      description: Create an Azure subscription definition.
                       operation: Create a subscription definition
                       provider: Microsoft Subscription
                       resource: Resources
                     name: Microsoft.Subscription/subscriptionDefinitions/write
                   - display:
-                      description: Get a subscription definition.
                       operation: Get a subscription definition
                       provider: Microsoft Subscription
                       resource: Resources
                     name: Microsoft.Subscription/subscriptionDefinitions/read
                   - display:
-                      description: list your subscription definitions
                       operation: List subscription definitions
                       provider: Microsoft Subscription
                       resource: Resources

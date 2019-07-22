@@ -88,7 +88,8 @@ paths:
                     properties:
                       recoveryServicesVaultResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/longtermretentionvaulttest-1234/providers/Microsoft.RecoveryServices/vaults/testVaultabc
                     type: Microsoft.Sql/servers/backupLongTermRetentionVaults
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/backupLongTermRetentionVaults/{backupLongTermRetentionVaultName}':
     get:
       description: Gets a server backup long term retention vault

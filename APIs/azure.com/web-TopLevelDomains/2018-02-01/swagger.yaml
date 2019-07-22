@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-TopLevelDomains
   x-tags:
@@ -330,8 +329,8 @@ paths:
         List Top Level Domain Agreements:
           parameters:
             agreementOption:
-              ForTransfer: false
-              IncludePrivacy: true
+              forTransfer: false
+              includePrivacy: true
             api-version: '2018-02-01'
             name: in
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345

@@ -90,7 +90,8 @@ paths:
                       partnerServer: sqlcrudtest-test
                       state: Ready
                     type: Microsoft.Sql/servers/communicationLinks
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/communicationLinks/{communicationLinkName}':
     delete:
       description: Deletes a server communication link.

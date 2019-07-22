@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azure-kusto/resource-manager/Microsoft.Kusto/preview/2018-09-07-preview/kusto.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: azure-kusto
   x-tags:
@@ -134,7 +133,7 @@ paths:
               body:
                 value:
                   - etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4
                     location: westus
                     name: KustoClusterRPTest4
                     properties:
@@ -143,9 +142,9 @@ paths:
                       capacity: 2
                       name: L8
                       tier: Standard
-                    type: Microsoft.Kusto/Clusters
+                    type: Microsoft.Kusto/clusters
                   - etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest3
                     location: westus
                     name: KustoClusterRPTest3
                     properties:
@@ -154,7 +153,7 @@ paths:
                       capacity: 2
                       name: L8
                       tier: Standard
-                    type: Microsoft.Kusto/Clusters
+                    type: Microsoft.Kusto/clusters
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/checkNameAvailability':
@@ -192,7 +191,7 @@ paths:
             api-version: 2018-09-07-preview
             clusterName:
               name: kuskusprod
-              type: Microsoft.Kusto/Clusters
+              type: Microsoft.Kusto/clusters
             location: wus
             subscriptionId: 12345678-1234-1234-1234-123456789098
           responses:
@@ -271,7 +270,7 @@ paths:
               body:
                 value:
                   - etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4
                     location: westus
                     name: KustoClusterRPTest4
                     properties:
@@ -280,9 +279,9 @@ paths:
                       capacity: 2
                       name: L8
                       tier: Standard
-                    type: Microsoft.Kusto/Clusters
+                    type: Microsoft.Kusto/clusters
                   - etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest3
                     location: westus
                     name: KustoClusterRPTest3
                     properties:
@@ -291,7 +290,7 @@ paths:
                       capacity: 2
                       name: L8
                       tier: Standard
-                    type: Microsoft.Kusto/Clusters
+                    type: Microsoft.Kusto/clusters
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}':
@@ -358,7 +357,7 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4
                 location: westus
                 name: KustoClusterRPTest4
                 properties:
@@ -367,7 +366,7 @@ paths:
                   capacity: 2
                   name: L8
                   tier: Standard
-                type: Microsoft.Kusto/Clusters
+                type: Microsoft.Kusto/clusters
     patch:
       description: Update a Kusto cluster.
       operationId: Clusters_Update
@@ -410,7 +409,7 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4
                 location: westus
                 name: KustoClusterRPTest4
                 properties:
@@ -419,7 +418,7 @@ paths:
                   capacity: 2
                   name: L8
                   tier: Standard
-                type: Microsoft.Kusto/Clusters
+                type: Microsoft.Kusto/clusters
             '201': {}
       x-ms-long-running-operation: true
     put:
@@ -468,7 +467,7 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-06T12%3A05%3A57.2528942Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4
                 location: westus
                 name: KustoClusterRPTest4
                 properties:
@@ -477,7 +476,7 @@ paths:
                   capacity: 2
                   name: L8
                   tier: Standard
-                type: Microsoft.Kusto/Clusters
+                type: Microsoft.Kusto/clusters
             '201': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability':
@@ -513,7 +512,7 @@ paths:
             clusterName: kustoProd
             databaseName:
               name: kuskus
-              type: Microsoft.Kusto/Clusters/Databases
+              type: Microsoft.Kusto/clusters/databases
             resourceGroupName: kustorptest
             subscriptionId: 12345678-1234-1234-1234-123456789098
           responses:
@@ -554,21 +553,21 @@ paths:
               body:
                 value:
                   - etag: W/"datetime'2017-12-05T15%3A28%3A05.732611Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                     location: westus
                     name: KustoClusterRPTest4/KustoDatabase8
                     properties:
                       provisioningState: Succeeded
                       softDeletePeriodInDays: 1
-                    type: Microsoft.Kusto/Clusters/Databases
+                    type: Microsoft.Kusto/clusters/databases
                   - etag: W/"datetime'2017-12-05T15%3A28%3A05.732611Z'"
-                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase9
+                    id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase9
                     location: westus
                     name: KustoClusterRPTest4/KustoDatabase9
                     properties:
                       provisioningState: Succeeded
                       softDeletePeriodInDays: 1
-                    type: Microsoft.Kusto/Clusters/Databases
+                    type: Microsoft.Kusto/clusters/databases
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}':
@@ -639,13 +638,13 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-05T15%3A28%3A05.732611Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   provisioningState: Succeeded
                   softDeletePeriodInDays: 1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
     patch:
       description: Updates a database.
       operationId: Databases_Update
@@ -694,13 +693,13 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-05T15%3A28%3A05.732611Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   provisioningState: Succeeded
                   softDeletePeriodInDays: 1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
             '201': {}
             '202': {}
       x-ms-long-running-operation: true
@@ -752,13 +751,13 @@ paths:
             '200':
               body:
                 etag: W/"datetime'2017-12-05T15%3A28%3A05.732611Z'"
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   provisioningState: Succeeded
                   softDeletePeriodInDays: 1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
             '201': {}
             '202': {}
       x-ms-long-running-operation: true
@@ -913,20 +912,20 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                  - id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                     location: westus
                     name: KustoClusterRPTest4/KustoDatabase8
                     properties:
                       consumerGroup: testConsumerGroup1
                       eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
-                    type: Microsoft.Kusto/Clusters/Databases
-                  - id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase9
+                    type: Microsoft.Kusto/clusters/databases
+                  - id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase9
                     location: westus
                     name: KustoClusterRPTest4/KustoDatabase9
                     properties:
                       consumerGroup: testConsumerGroup2
                       eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns2/eventhubs/eventhubTest2
-                    type: Microsoft.Kusto/Clusters/Databases
+                    type: Microsoft.Kusto/clusters/databases
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/eventhubconnections/{eventHubConnectionName}':
@@ -1000,13 +999,13 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   consumerGroup: testConsumerGroup1
                   eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
     patch:
       description: Updates a Event Hub connection.
       operationId: EventHubConnections_Update
@@ -1057,13 +1056,13 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   consumerGroup: testConsumerGroup1
                   eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
             '201': {}
             '202': {}
       x-ms-long-running-operation: true
@@ -1117,13 +1116,13 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8
+                id: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/KustoClusterRPTest4/Databases/KustoDatabase8
                 location: westus
                 name: KustoClusterRPTest4/KustoDatabase8
                 properties:
                   consumerGroup: testConsumerGroup1
                   eventHubResourceId: /subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1
-                type: Microsoft.Kusto/Clusters/Databases
+                type: Microsoft.Kusto/clusters/databases
             '201': {}
             '202': {}
       x-ms-long-running-operation: true

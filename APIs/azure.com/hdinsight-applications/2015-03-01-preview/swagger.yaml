@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/applications.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: hdinsight-applications
   x-tags:
@@ -516,6 +515,62 @@ definitions:
             items:
               description: Describes a role on the cluster.
               properties:
+                autoscale:
+                  description: The autoscale request parameters
+                  properties:
+                    capacity:
+                      description: The load-based autoscale request parameters
+                      properties:
+                        maxInstanceCount:
+                          description: The maximum instance count of the cluster
+                          format: int32
+                          type: integer
+                        minInstanceCount:
+                          description: The minimum instance count of the cluster
+                          format: int32
+                          type: integer
+                    recurrence:
+                      description: Schedule-based autoscale request parameters
+                      properties:
+                        schedule:
+                          description: Array of schedule-based autoscale rules
+                          items:
+                            description: 'Parameters for a schedule-based autoscale rule, consisting of an array of days + a time and capacity'
+                            properties:
+                              days:
+                                description: Days of the week for a schedule-based autoscale rule
+                                items:
+                                  enum:
+                                    - Monday
+                                    - Tuesday
+                                    - Wednesday
+                                    - Thursday
+                                    - Friday
+                                    - Saturday
+                                    - Sunday
+                                  type: string
+                                  x-ms-enum:
+                                    modelAsString: false
+                                    name: DaysOfWeek
+                                type: array
+                              timeAndCapacity:
+                                description: Time and capacity request parameters
+                                properties:
+                                  maxInstanceCount:
+                                    description: The maximum instance count of the cluster
+                                    format: int32
+                                    type: integer
+                                  minInstanceCount:
+                                    description: The minimum instance count of the cluster
+                                    format: int32
+                                    type: integer
+                                  time:
+                                    description: '24-hour time in the form xx:xx'
+                                    type: string
+                          type: array
+                        timeZone:
+                          description: The time zone for the autoscale schedule times
+                          type: string
                 dataDisksGroups:
                   description: The data disks groups for the role.
                   items:

@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/data-plane/Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: storage-DataLakeStorage
   x-tags:
@@ -212,6 +211,7 @@ paths:
         - Account Operations
       x-ms-pageable:
         itemName: filesystems
+        nextLinkName: null
   '/{filesystem}':
     delete:
       description: 'Marks the filesystem for deletion.  When a filesystem is deleted, a filesystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).'
@@ -309,6 +309,7 @@ paths:
         - Filesystem Operations
       x-ms-pageable:
         itemName: paths
+        nextLinkName: null
     head:
       description: All system and user-defined filesystem properties are specified in the response headers.
       operationId: Filesystem_GetProperties
@@ -541,6 +542,11 @@ paths:
           pattern: '^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$'
           required: false
           type: string
+        - description: 'Optional. When this header is set to "true" and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4MB in size. If this header is specified without the Range header, the service returns status code 400 (Bad Request). If this header is set to true when the range exceeds 4 MB in size, the service returns status code 400 (Bad Request).'
+          in: header
+          name: x-ms-range-get-content-md5
+          required: false
+          type: boolean
         - description: Optional.  An ETag value. Specify this header to perform the operation only if the resource's ETag matches the value specified. The ETag must be specified in quotes.
           in: header
           name: If-Match
@@ -588,6 +594,9 @@ paths:
               description: The size of the resource in bytes.
               format: int64
               type: integer
+            Content-MD5:
+              description: 'The MD5 hash of complete file. If the file has an MD5 hash and this read operation is to read the complete file, this response header is returned so that the client can check for message content integrity.'
+              type: string
             Content-Range:
               description: Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.
               type: string
@@ -649,6 +658,9 @@ paths:
               description: The size of the resource in bytes.
               format: int64
               type: integer
+            Content-MD5:
+              description: 'The MD5 hash of read range. If the request is to read a specified range and the "x-ms-range-get-content-md5" is set to true, then the request returns an MD5 hash for the range, as long as the range size is less than or equal to 4 MB.'
+              type: string
             Content-Range:
               description: Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.
               type: string
@@ -663,6 +675,9 @@ paths:
               type: string
             Last-Modified:
               description: The data and time the file or directory was last modified.  Write operations on the file or directory update the last modified time.
+              type: string
+            x-ms-content-md5:
+              description: 'The MD5 hash of complete file stored in storage. If the file has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the complete file''s MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range.'
               type: string
             x-ms-lease-duration:
               description: 'When a resource is leased, specifies whether the lease is of infinite or fixed duration.'
@@ -762,6 +777,9 @@ paths:
               description: The size of the resource in bytes.
               format: int64
               type: integer
+            Content-MD5:
+              description: 'The MD5 hash of complete file stored in storage. This header is returned only for "GetProperties" operation. If the Content-MD5 header has been set for the file, this response header is returned for GetProperties call so that the client can check for message content integrity.'
+              type: string
             Content-Range:
               description: Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.
               type: string
@@ -893,6 +911,10 @@ paths:
           name: Content-Length
           required: false
           type: integer
+        - description: 'Optional. An MD5 hash of the request content. This header is valid on "Append" and "Flush" operations. This hash is used to verify the integrity of the request content during transport. When this header is specified, the storage service compares the hash of the content that has arrived with this header value. If the two hashes do not match, the operation will fail with error code 400 (Bad Request). Note that this MD5 hash is not stored with the file. This header is associated with the request content, and not with the stored content of the file itself.'
+          in: header
+          name: Content-MD5
+          type: string
         - description: The lease ID must be specified if there is an active lease.
           in: header
           name: x-ms-lease-id
@@ -922,6 +944,11 @@ paths:
         - description: Optional and only valid for flush and set properties operations.  The service stores this value and includes it in the "Content-Language" response header for "Read File" operations.
           in: header
           name: x-ms-content-language
+          required: false
+          type: string
+        - description: 'Optional and only valid for "Flush & Set Properties" operations.  The service stores this value and includes it in the "Content-Md5" response header for "Read & Get Properties" operations. If this property is not specified on the request, then the property will be cleared for the file. Subsequent calls to "Read & Get Properties" will not return this property unless it is explicitly set on that file again.'
+          in: header
+          name: x-ms-content-md5
           required: false
           type: string
         - description: 'Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set. Valid only for the setProperties operation. If the file or directory exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.'
@@ -999,6 +1026,9 @@ paths:
               description: The size of the resource in bytes.
               format: int64
               type: integer
+            Content-MD5:
+              description: 'An MD5 hash of the request content. This header is only returned for "Flush" operation. This header is returned so that the client can check for message content integrity. This header refers to the content of the request, not actual file content.'
+              type: string
             Content-Range:
               description: Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.
               type: string
@@ -1027,6 +1057,9 @@ paths:
         '202':
           description: The uploaded data was accepted.
           headers:
+            Content-MD5:
+              description: An MD5 hash of the request content. This header is only returned for "Append" operation. This header is returned so that the client can check for message content integrity. The value of this header is computed by the service; it is not necessarily the same value specified in the request headers.
+              type: string
             Date:
               description: A UTC date/time value generated by the service that indicates the time at which the response was initiated.
               type: string

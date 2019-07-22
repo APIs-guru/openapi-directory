@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/stable/2015-08-01/EventHub.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: eventhub-EventHub
   x-tags:
@@ -1215,7 +1214,7 @@ paths:
       description: Gets an AuthorizationRule for an Event Hub by rule name.
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx'
-      operationId: EventHubs_PosttAuthorizationRule
+      operationId: EventHubs_PostAuthorizationRule
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/namespaceNameParameter'

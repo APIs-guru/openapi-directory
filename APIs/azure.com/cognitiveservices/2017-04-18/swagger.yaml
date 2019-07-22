@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cognitiveservices
   x-tags:
@@ -60,6 +59,42 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  /providers/Microsoft.CognitiveServices/checkDomainAvailability:
+    post:
+      description: Check whether a domain is available.
+      operationId: CheckDomainAvailability
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Check Domain Availability parameter.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckDomainAvailabilityParameter'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/CheckDomainAvailabilityResult'
+      tags:
+        - CognitiveServicesAccounts
+      x-ms-examples:
+        Check SKU Availability:
+          parameters:
+            api-version: '2017-04-18'
+            location: westus
+            parameters:
+              subdomainName: contosodemoapp1
+              type: Microsoft.CognitiveServices/accounts
+            subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
+          responses:
+            '200':
+              body:
+                isSubdomainAvailable: false
+                reason: Sub domain name 'contosodemoapp1' is not valid
+                subdomainName: contosodemoapp1
+                type: Microsoft.CognitiveServices/accounts
   /providers/Microsoft.CognitiveServices/operations:
     get:
       deprecated: false
@@ -2446,6 +2481,33 @@ paths:
                     status: Included
                     unit: Count
 definitions:
+  CheckDomainAvailabilityParameter:
+    description: Check Domain availability parameter.
+    properties:
+      subdomainName:
+        description: The subdomain name to use.
+        type: string
+      type:
+        description: The Type of the resource.
+        type: string
+    required:
+      - subdomainName
+      - type
+  CheckDomainAvailabilityResult:
+    description: Check Domain availability result.
+    properties:
+      isSubdomainAvailable:
+        description: Indicates the given SKU is available or not.
+        type: boolean
+      reason:
+        description: Reason why the SKU is not available.
+        type: string
+      subdomainName:
+        description: The subdomain name to use.
+        type: string
+      type:
+        description: The Type of the resource.
+        type: string
   CheckSkuAvailabilityParameter:
     description: Check SKU availability parameter.
     properties:

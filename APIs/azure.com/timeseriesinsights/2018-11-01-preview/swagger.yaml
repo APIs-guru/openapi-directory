@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/timeseriesinsights/data-plane/Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: timeseriesinsights
   x-tags:
@@ -79,7 +78,7 @@ paths:
   /availability:
     get:
       description: Returns the time range and distribution of event count over the event timestamp ($ts). This API can be used to provide landing experience of navigating to the environment.
-      operationId: GetAvailability
+      operationId: Query_GetAvailability
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ClientRequestId'
@@ -103,6 +102,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - Query
       x-ms-examples:
         AvailabilityGet:
           parameters:
@@ -139,7 +140,7 @@ paths:
   /eventSchema:
     post:
       description: Returns environment event schema for a given search span. Event schema is a set of property definitions. Event schema may not be contain all persisted properties when there are too many properties.
-      operationId: GetEventSchema
+      operationId: Query_GetEventSchema
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Parameters to get event schema.
@@ -169,6 +170,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - Query
       x-ms-examples:
         EventSchemaGet:
           parameters:
@@ -209,7 +212,7 @@ paths:
   /timeseries/hierarchies:
     get:
       description: Returns time series hierarchies definitions in pages.
-      operationId: GetHierarchiesPaged
+      operationId: TimeSeriesHierarchies_Get
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ContinuationToken'
@@ -234,6 +237,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesHierarchies
       x-ms-examples:
         HierarchiesGetPage1:
           parameters:
@@ -278,7 +283,7 @@ paths:
   /timeseries/hierarchies/$batch:
     post:
       description: 'Executes a batch get, create, update, delete operation on multiple time series hierarchy definitions.'
-      operationId: ExecuteHierarchiesBatchOperation
+      operationId: TimeSeriesHierarchies_ExecuteBatch
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Time series hierarchies batch request body.
@@ -308,6 +313,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesHierarchies
       x-ms-examples:
         HierarchiesBatchDeleteByIds:
           parameters:
@@ -430,7 +437,7 @@ paths:
   /timeseries/instances:
     get:
       description: Gets time series instances in pages.
-      operationId: GetInstancesPaged
+      operationId: TimeSeriesInstances_Get
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ContinuationToken'
@@ -455,6 +462,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesInstances
       x-ms-examples:
         InstancesGetPage1:
           parameters:
@@ -512,7 +521,7 @@ paths:
   /timeseries/instances/$batch:
     post:
       description: 'Executes a batch get, create, update, delete operation on multiple time series instances.'
-      operationId: ExecuteInstancesBatchOperation
+      operationId: TimeSeriesInstances_ExecuteBatch
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Time series instances suggest request body.
@@ -542,6 +551,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesInstances
       x-ms-examples:
         InstancesBatchDeleteByIds:
           parameters:
@@ -686,7 +697,7 @@ paths:
   /timeseries/instances/search:
     post:
       description: Partial list of hits on search for time series instances based on instance attributes.
-      operationId: SearchInstancesPaged
+      operationId: TimeSeriesInstances_Search
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ContinuationToken'
@@ -695,7 +706,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/InstancesSearchRequest'
+            $ref: '#/definitions/SearchInstancesRequest'
         - $ref: '#/parameters/ClientRequestId'
         - $ref: '#/parameters/ClientSessionId'
       responses:
@@ -707,7 +718,7 @@ paths:
               type: string
               x-ms-client-name: serverRequestId
           schema:
-            $ref: '#/definitions/InstancesSearchResponsePage'
+            $ref: '#/definitions/SearchInstancesResponsePage'
         default:
           description: Unexpected error.
           headers:
@@ -717,8 +728,10 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesInstances
       x-ms-examples:
-        InstancesSearchPage1:
+        SearchInstancesDefault:
           parameters:
             api-version: 2018-11-01-preview
             environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
@@ -727,71 +740,355 @@ paths:
           responses:
             '200':
               body:
+                hierarchyNodes: null
                 instances:
-                  - highlights:
-                      description: <hit>floor</hit> <hit>100</hit>
-                      hierarchyIds:
+                  continuationToken: null
+                  hitCount: 2
+                  hits:
+                    - hierarchyIds:
                         - 1643004c-0a84-48a5-80e5-7688c5ae9295
-                      instanceFieldNames:
-                        - state
-                        - city
-                      instanceFieldValues:
-                        - California
-                        - Los Angeles
+                      highlights: null
                       name: instance1
-                      timeSeriesIds:
-                        - 006dfc2d-0324-4937-998c-d16f3b4f1952
-                        - T1
-                      type: DefaultType
-                    timeSeriesId:
-                      - 006dfc2d-0324-4937-998c-d16f3b4f1952
-                      - T1
-                instancesContinuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
-        InstancesSearchPage2:
+                      timeSeriesId:
+                        - Id1One
+                        - Id2One
+                        - '1.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+                    - hierarchyIds:
+                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                      highlights: null
+                      name: instance2
+                      timeSeriesId:
+                        - Id1Two
+                        - Id2Two
+                        - '2.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+        SearchInstancesExpandHierarchiesOnly:
           parameters:
             api-version: 2018-11-01-preview
-            continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
             environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
             parameters:
+              hierarchies:
+                expand:
+                  kind: UntilChildren
+                pageSize: 2
+                sort:
+                  by: Name
+              instances: null
+              path:
+                - Location
               searchString: floor 100
           responses:
             '200':
               body:
+                hierarchyNodes:
+                  continuationToken: null
+                  hitCount: 1
+                  hits:
+                    - cumulativeInstanceCount: 2
+                      hierarchyNodes:
+                        continuationToken: null
+                        hitCount: 2
+                        hits:
+                          - cumulativeInstanceCount: 1
+                            hierarchyNodes: null
+                            name: San Diego
+                          - cumulativeInstanceCount: 1
+                            hierarchyNodes: null
+                            name: San Francisco
+                      name: California
                 instances:
-                  - highlights:
-                      description: <hit>floor</hit> <hit>100</hit>
-                      hierarchyIds:
-                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
-                      instanceFieldNames:
-                        - state
-                        - city
-                      instanceFieldValues:
-                        - California
-                        - Los Angeles
-                      name: instance1
-                      timeSeriesIds:
-                        - 18672e3d-2beb-4007-9846-042b09ef3c72
-                        - T1
-                      type: DefaultType
-                    timeSeriesId:
-                      - 18672e3d-2beb-4007-9846-042b09ef3c72
-                      - T1
-                instancesContinuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
-        InstancesSearchPage3:
+                  continuationToken: null
+                  hitCount: 0
+                  hits: []
+        SearchInstancesHierarchiesDefaultInputPage1:
           parameters:
             api-version: 2018-11-01-preview
-            continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
             environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
             parameters:
+              hierarchies:
+                expand:
+                  kind: UntilChildren
+                pageSize: 1
+                sort:
+                  by: CumulativeInstanceCount
+              instances:
+                highlights: true
+                pageSize: 1
+                recursive: true
+                sort:
+                  by: Rank
+              path: null
               searchString: floor 100
           responses:
             '200':
               body:
-                instances: []
+                hierarchyNodes:
+                  continuationToken: null
+                  hitCount: 1
+                  hits:
+                    - cumulativeInstanceCount: 2
+                      hierarchyNodes:
+                        continuationToken: null
+                        hitCount: 1
+                        hits:
+                          - cumulativeInstanceCount: 2
+                            hierarchyNodes:
+                              continuationToken: aHsic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNzA4NTgyODU0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=
+                              hitCount: 2
+                              hits:
+                                - cumulativeInstanceCount: 1
+                                  hierarchyNodes: null
+                                  name: San Francisco
+                            name: California
+                      name: Location
+                instances:
+                  continuationToken: c3sic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNTE3MDUxOTg0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=
+                  hitCount: 2
+                  hits:
+                    - hierarchyIds:
+                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                      highlights:
+                        description: <hit>floor</hit> <hit>100</hit>
+                        hierarchyIds:
+                          - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                        hierarchyNames:
+                          - Location
+                        instanceFieldNames:
+                          - state
+                          - city
+                        instanceFieldValues:
+                          - California
+                          - San Francisco
+                        name: instance2
+                        timeSeriesId:
+                          - Id1Two
+                          - Id2Two
+                          - '2.0'
+                        typeName: DefaultType
+                      name: instance2
+                      timeSeriesId:
+                        - Id1Two
+                        - Id2Two
+                        - '2.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+        SearchInstancesHierarchiesDefaultInputPage2:
+          parameters:
+            api-version: 2018-11-01-preview
+            continuationToken: c3sic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNTE3MDUxOTg0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              hierarchies:
+                expand:
+                  kind: UntilChildren
+                pageSize: 1
+                sort:
+                  by: CumulativeInstanceCount
+              instances:
+                highlights: true
+                pageSize: 1
+                recursive: true
+                sort:
+                  by: Rank
+              path: null
+              searchString: floor 100
+          responses:
+            '200':
+              body:
+                hierarchyNodes: null
+                instances:
+                  continuationToken: null
+                  hitCount: 2
+                  hits:
+                    - hierarchyIds:
+                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                      highlights:
+                        description: <hit>floor</hit> <hit>100</hit>
+                        hierarchyIds:
+                          - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                        hierarchyNames:
+                          - Location
+                        instanceFieldNames:
+                          - state
+                          - city
+                        instanceFieldValues:
+                          - California
+                          - Los Angeles
+                        name: instance1
+                        timeSeriesId:
+                          - Id1One
+                          - Id2One
+                          - '1.0'
+                        typeName: DefaultType
+                      name: instance1
+                      timeSeriesId:
+                        - Id1One
+                        - Id2One
+                        - '1.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+        SearchInstancesHierarchiesDefaultInputPage3:
+          parameters:
+            api-version: 2018-11-01-preview
+            continuationToken: aHsic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNzA4NTgyODU0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              hierarchies:
+                expand:
+                  kind: UntilChildren
+                pageSize: 1
+                sort:
+                  by: CumulativeInstanceCount
+              instances:
+                highlights: true
+                pageSize: 1
+                recursive: true
+                sort:
+                  by: Rank
+              path: null
+              searchString: floor 100
+          responses:
+            '200':
+              body:
+                hierarchyNodes:
+                  continuationToken: null
+                  hitCount: 1
+                  hits:
+                    - cumulativeInstanceCount: 2
+                      hierarchyNodes:
+                        continuationToken: null
+                        hitCount: 1
+                        hits:
+                          - cumulativeInstanceCount: 2
+                            hierarchyNodes:
+                              continuationToken: aHsic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNzA4NTgyODU0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=
+                              hitCount: 2
+                              hits:
+                                - cumulativeInstanceCount: 1
+                                  hierarchyNodes: null
+                                  name: San Diego
+                            name: California
+                      name: Location
+                instances: null
+        SearchInstancesOneLevel:
+          parameters:
+            api-version: 2018-11-01-preview
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              hierarchies:
+                expand:
+                  kind: OneLevel
+                pageSize: 2
+                sort:
+                  by: Name
+              instances:
+                highlights: false
+                pageSize: 2
+                recursive: false
+                sort:
+                  by: DisplayName
+              path: null
+              searchString: floor 100
+          responses:
+            '200':
+              body:
+                hierarchyNodes:
+                  continuationToken: null
+                  hitCount: 1
+                  hits:
+                    - cumulativeInstanceCount: 2
+                      hierarchyNodes: null
+                      name: Location
+                instances:
+                  continuationToken: null
+                  hitCount: 0
+                  hits: []
+        SearchInstancesRecursive:
+          parameters:
+            api-version: 2018-11-01-preview
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              hierarchies: null
+              instances:
+                highlights: false
+                pageSize: 2
+                recursive: true
+                sort:
+                  by: DisplayName
+              path: null
+              searchString: floor 100
+          responses:
+            '200':
+              body:
+                hierarchyNodes: null
+                instances:
+                  continuationToken: null
+                  hitCount: 2
+                  hits:
+                    - hierarchyIds:
+                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                      highlights: null
+                      name: instance1
+                      timeSeriesId:
+                        - Id1One
+                        - Id2One
+                        - '1.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+                    - hierarchyIds:
+                        - 1643004c-0a84-48a5-80e5-7688c5ae9295
+                      highlights: null
+                      name: instance2
+                      timeSeriesId:
+                        - Id1Two
+                        - Id2Two
+                        - '2.0'
+                      typeId: 1be09af9-f089-4d6b-9f0b-48018b5f7393
+        SearchInstancesUntilChildren:
+          parameters:
+            api-version: 2018-11-01-preview
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              hierarchies:
+                expand:
+                  kind: UntilChildren
+                pageSize: 2
+                sort:
+                  by: Name
+              instances:
+                highlights: false
+                pageSize: 2
+                recursive: false
+                sort:
+                  by: DisplayName
+              path:
+                - Location
+              searchString: floor 100
+          responses:
+            '200':
+              body:
+                hierarchyNodes:
+                  continuationToken: null
+                  hitCount: 1
+                  hits:
+                    - cumulativeInstanceCount: 2
+                      hierarchyNodes:
+                        continuationToken: null
+                        hitCount: 2
+                        hits:
+                          - cumulativeInstanceCount: 1
+                            hierarchyNodes: null
+                            name: San Diego
+                          - cumulativeInstanceCount: 1
+                            hierarchyNodes: null
+                            name: San Francisco
+                      name: California
+                instances:
+                  continuationToken: null
+                  hitCount: 0
+                  hits: []
   /timeseries/instances/suggest:
     post:
       description: Suggests keywords based on time series instance attributes to be later used in Search Instances.
-      operationId: SuggestInstances
+      operationId: TimeSeriesInstances_Suggest
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Time series instances suggest request body.
@@ -821,6 +1118,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesInstances
       x-ms-examples:
         InstancesSuggest:
           parameters:
@@ -842,7 +1141,7 @@ paths:
   /timeseries/modelSettings:
     get:
       description: 'Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.'
-      operationId: GetModelSettings
+      operationId: ModelSettings_Get
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ClientRequestId'
@@ -866,6 +1165,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - ModelSettings
       x-ms-examples:
         ModelSettingsGet:
           parameters:
@@ -882,7 +1183,7 @@ paths:
                       type: String
     patch:
       description: Updates time series model settings - either the model name or default type ID.
-      operationId: UpdateModelSettings
+      operationId: ModelSettings_Update
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Model settings update request body.
@@ -912,6 +1213,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - ModelSettings
       x-ms-examples:
         ModelSettingsUpdateName:
           parameters:
@@ -931,7 +1234,7 @@ paths:
   /timeseries/query:
     post:
       description: 'Executes Time Series Query in pages of results - Get Events, Get Series or Aggregate Series.'
-      operationId: ExecuteQueryPaged
+      operationId: Query_Execute
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ContinuationToken'
@@ -962,6 +1265,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - Query
       x-ms-examples:
         QueryAggregateSeriesPage1:
           parameters:
@@ -975,7 +1280,6 @@ paths:
                       tsx: count()
                     filter: null
                     kind: aggregate
-                    value: null
                   MaxTemperature:
                     aggregation:
                       tsx: max($value)
@@ -1005,6 +1309,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+                progress: 50
         QueryAggregateSeriesPage2:
           parameters:
             api-version: 2018-11-01-preview
@@ -1018,7 +1323,6 @@ paths:
                       tsx: count()
                     filter: null
                     kind: aggregate
-                    value: null
                   MaxTemperature:
                     aggregation:
                       tsx: max($value)
@@ -1047,6 +1351,7 @@ paths:
           responses:
             '200':
               body:
+                progress: 100
                 properties:
                   - name: Count
                     type: Double
@@ -1139,6 +1444,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+                progress: 50
         QueryGetEventsPage2:
           parameters:
             api-version: 2018-11-01-preview
@@ -1163,6 +1469,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0=
+                progress: 50
                 properties:
                   - name: Building
                     type: String
@@ -1225,6 +1532,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAbCDewidGFrZSI6MTAwMH0=
+                progress: 50
                 properties:
                   - name: Building
                     type: String
@@ -1259,8 +1567,98 @@ paths:
           responses:
             '200':
               body:
+                progress: 100
                 properties: []
                 timestamps: []
+        QueryGetEventsWithTakePage1:
+          parameters:
+            api-version: 2018-11-01-preview
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              getEvents:
+                filter:
+                  tsx: ($event.Value.Double != null) OR ($event.Status.String = 'Good')
+                projectedProperties:
+                  - name: Building
+                    type: String
+                  - name: Temperature
+                    type: Double
+                searchSpan:
+                  from: '2016-08-01T00:00:00Z'
+                  to: '2016-08-01T00:16:50Z'
+                take: 10
+                timeSeriesId:
+                  - 006dfc2d-0324-4937-998c-d16f3b4f1952
+                  - T1
+          responses:
+            '200':
+              body:
+                continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+                progress: 50
+        QueryGetEventsWithTakePage2:
+          parameters:
+            api-version: 2018-11-01-preview
+            continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              getEvents:
+                filter:
+                  tsx: ($event.Value.Double != null) OR ($event.Status.String = 'Good')
+                projectedProperties:
+                  - name: Building
+                    type: String
+                  - name: Temperature
+                    type: Double
+                searchSpan:
+                  from: '2016-08-01T00:00:00Z'
+                  to: '2016-08-01T00:16:50Z'
+                take: 10
+                timeSeriesId:
+                  - 006dfc2d-0324-4937-998c-d16f3b4f1952
+                  - T1
+          responses:
+            '200':
+              body:
+                continuationToken: aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0=
+                progress: 100
+                properties:
+                  - name: Building
+                    type: String
+                    values:
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                      - Millenium
+                  - name: Temperature
+                    type: Double
+                    values:
+                      - 65.125
+                      - 65.375
+                      - 65.625
+                      - 65.875
+                      - 66.125
+                      - 66.375
+                      - 66.625
+                      - 66.875
+                      - 67.125
+                      - 67.375
+                timestamps:
+                  - '2016-08-01T00:00:10Z'
+                  - '2016-08-01T00:00:11Z'
+                  - '2016-08-01T00:00:12Z'
+                  - '2016-08-01T00:00:13Z'
+                  - '2016-08-01T00:00:14Z'
+                  - '2016-08-01T00:00:15Z'
+                  - '2016-08-01T00:00:16Z'
+                  - '2016-08-01T00:00:17Z'
+                  - '2016-08-01T00:00:18Z'
+                  - '2016-08-01T00:00:19Z'
         QueryGetSeriesPage1:
           parameters:
             api-version: 2018-11-01-preview
@@ -1270,7 +1668,8 @@ paths:
                 filter: null
                 inlineVariables:
                   temperatures:
-                    aggregation: null
+                    aggregation:
+                      tsx: avg($value)
                     filter: null
                     kind: numeric
                     value:
@@ -1287,6 +1686,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+                progress: 50
         QueryGetSeriesPage2:
           parameters:
             api-version: 2018-11-01-preview
@@ -1297,7 +1697,8 @@ paths:
                 filter: null
                 inlineVariables:
                   temperatures:
-                    aggregation: null
+                    aggregation:
+                      tsx: avg($value)
                     filter: null
                     kind: numeric
                     value:
@@ -1314,6 +1715,7 @@ paths:
             '200':
               body:
                 continuationToken: aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0=
+                progress: 50
                 properties:
                   - name: temperatures
                     type: Double
@@ -1351,7 +1753,8 @@ paths:
                 filter: null
                 inlineVariables:
                   temperatures:
-                    aggregation: null
+                    aggregation:
+                      tsx: avg($value)
                     filter: null
                     kind: numeric
                     value:
@@ -1367,6 +1770,7 @@ paths:
           responses:
             '200':
               body:
+                progress: 100
                 properties:
                   - name: temperatures
                     type: Double
@@ -1374,10 +1778,96 @@ paths:
                       - 67.825
                 timestamps:
                   - '2016-08-01T00:00:21Z'
+        QueryGetSeriesWithTakePage1:
+          parameters:
+            api-version: 2018-11-01-preview
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              getSeries:
+                filter: null
+                inlineVariables:
+                  temperatures:
+                    aggregation:
+                      tsx: avg($value)
+                    filter: null
+                    kind: numeric
+                    value:
+                      tsx: $event.Temperature
+                projectedVariables:
+                  - temperatures
+                searchSpan:
+                  from: '2016-08-01T00:00:00Z'
+                  to: '2016-08-01T00:16:50Z'
+                take: 10
+                timeSeriesId:
+                  - 006dfc2d-0324-4937-998c-d16f3b4f1952
+                  - T1
+          responses:
+            '200':
+              body:
+                continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+                progress: 50
+        QueryGetSeriesWithTakePage2:
+          parameters:
+            api-version: 2018-11-01-preview
+            continuationToken: aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=
+            environmentFqdn: 10000000-0000-0000-0000-100000000109.env.timeseries.azure.com
+            parameters:
+              getSeries:
+                filter: null
+                inlineVariables:
+                  temperatures:
+                    aggregation:
+                      tsx: avg($value)
+                    filter: null
+                    kind: numeric
+                    value:
+                      tsx: $event.Temperature
+                projectedVariables:
+                  - temperatures
+                searchSpan:
+                  from: '2016-08-01T00:00:00Z'
+                  to: '2016-08-01T00:16:50Z'
+                take: 10
+                timeSeriesId:
+                  - 006dfc2d-0324-4937-998c-d16f3b4f1952
+                  - T1
+          responses:
+            '200':
+              body:
+                continuationToken: aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0=
+                progress: 100
+                properties:
+                  - name: temperatures
+                    type: Double
+                    values:
+                      - 65.125
+                      - 65.375
+                      - 65.625
+                      - 65.875
+                      - 66.125
+                      - 66.375
+                      - 66.625
+                      - 66.875
+                      - 67.125
+                      - 67.375
+                      - 67.625
+                timestamps:
+                  - '2016-08-01T00:00:10Z'
+                  - '2016-08-01T00:00:11Z'
+                  - '2016-08-01T00:00:12Z'
+                  - '2016-08-01T00:00:13Z'
+                  - '2016-08-01T00:00:14Z'
+                  - '2016-08-01T00:00:15Z'
+                  - '2016-08-01T00:00:16Z'
+                  - '2016-08-01T00:00:17Z'
+                  - '2016-08-01T00:00:18Z'
+                  - '2016-08-01T00:00:19Z'
+                  - '2016-08-01T00:00:20Z'
   /timeseries/types:
     get:
       description: Gets time series types in pages.
-      operationId: GetTypesPaged
+      operationId: TimeSeriesTypes_Get
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - $ref: '#/parameters/ContinuationToken'
@@ -1402,6 +1892,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesTypes
       x-ms-examples:
         TypesGetPage1:
           parameters:
@@ -1453,7 +1945,7 @@ paths:
   /timeseries/types/$batch:
     post:
       description: 'Executes a batch get, create, update, delete operation on multiple time series types.'
-      operationId: ExecuteTypesBatchOperation
+      operationId: TimeSeriesTypes_ExecuteBatch
       parameters:
         - $ref: '#/parameters/ApiVersion'
         - description: Time series types batch request body.
@@ -1483,6 +1975,8 @@ paths:
               x-ms-client-name: serverRequestId
           schema:
             $ref: '#/definitions/TsiError'
+      tags:
+        - TimeSeriesTypes
       x-ms-examples:
         TypesBatchDeleteByIds:
           parameters:
@@ -1600,7 +2094,6 @@ paths:
                         tsx: count()
                       filter: null
                       kind: aggregate
-                      value: null
                 - description: This is an outdoor temperature sensor.
                   id: c1cb7a33-ed9b-4cf1-9958-f3162fed8ee8
                   name: OutdoorTemperatureSensor
@@ -1765,13 +2258,17 @@ definitions:
         $ref: '#/definitions/Tsx'
         description: 'Optional top-level filter for the query which will be applied to all the variables in the query. Example: "$event.Status.String=''Good''".  Can be null.'
       projectedProperties:
-        description: Projected properties is an array of property names which you want to project. These properties must appear in the events.
+        description: 'Projected properties is an array of properties which you want to project. These properties must appear in the events; otherwise, they are not returned.'
         items:
-          type: string
+          $ref: '#/definitions/EventProperty'
         type: array
       searchSpan:
         $ref: '#/definitions/DateTimeRange'
         description: The range of time on which the query is executed. Cannot be null.
+      take:
+        description: 'Maximum number of property values in the whole response set, not the maximum number of property values per page. Defaults to 10,000 when not set. Maximum value of take can be 250,000.'
+        format: int32
+        type: integer
       timeSeriesId:
         $ref: '#/definitions/TimeSeriesId'
         description: A single Time Series ID value that uniquely identifies a single time series instance (e.g. a device). Note that a single Time Series ID can be composite if multiple properties are specified as Time Series ID at environment creation time. The position and type of values must match Time Series ID properties specified on the environment and returned by Get Model Setting API. Cannot be null.
@@ -1822,6 +2319,10 @@ definitions:
       searchSpan:
         $ref: '#/definitions/DateTimeRange'
         description: The range of time on which the query is executed. Cannot be null.
+      take:
+        description: 'Maximum number of property values in the whole response set, not the maximum number of property values per page. Defaults to 10,000 when not set. Maximum value of take can be 250,000.'
+        format: int32
+        type: integer
       timeSeriesId:
         $ref: '#/definitions/TimeSeriesId'
         description: A single Time Series ID value that uniquely identifies a single time series instance (e.g. a device). Note that a single Time Series ID can be composite if multiple properties are specified as Time Series ID at environment creation time. The position and type of values must match Time Series ID properties specified on the environment and returned by Get Model Setting API. Cannot be null.
@@ -1878,6 +2379,19 @@ definitions:
         readOnly: true
         type: array
     type: object
+  HierarchiesExpandParameter:
+    description: Definition of whether to expand hierarchy nodes in the same search instances call.
+    properties:
+      kind:
+        description: 'Kind of the expansion of hierarchy nodes. When it is set to ''UntilChildren'', the hierarchy nodes are expanded recursively until there is more than one child. When it is set to ''OneLevel'', the hierarchies are expanded only at the single level matching path search instances parameter. Optional, default is ''UntilChildren''.'
+        enum:
+          - UntilChildren
+          - OneLevel
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HierarchiesExpandKind
+    type: object
   HierarchiesRequestBatchGetDelete:
     description: Request to get or delete multiple time series hierarchies. Exactly one of "hierarchyIds" or "names" must be set.
     properties:
@@ -1893,9 +2407,47 @@ definitions:
           type: string
         type: array
     type: object
-  InstanceHit:
-    description: Time series instance that is returned by instances search call. Returned instance matched the search string and contains highlighted text to be displayed to the user.
+  HierarchiesSortParameter:
+    description: Definition of sorting of hierarchy nodes.
     properties:
+      by:
+        description: 'Value to use for hierarchy node sorting. When it is set to ''CumulativeInstanceCount'', the returned hierarchies are sorted based on the total instances belonging to the hierarchy node and its child hierarchy nodes. When it is set to ''Name'', the returned hierarchies are sorted based on the hierarchy name. Optional, default is ''CumulativeInstanceCount''.'
+        enum:
+          - CumulativeInstanceCount
+          - Name
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HierarchiesSortBy
+    type: object
+  HierarchyHit:
+    description: The hierarchy node which contains the instances matching the query based on the input. May be empty or null.
+    properties:
+      cumulativeInstanceCount:
+        description: Total number of instances that belong to this node and it's subtrees matching the query.
+        format: int32
+        readOnly: true
+        type: integer
+      hierarchyNodes:
+        $ref: '#/definitions/SearchHierarchyNodesResponse'
+        description: Child hierarchy nodes of this node. May be empty or null.
+        readOnly: true
+        type: object
+      name:
+        description: 'Name of the hierarchy node. May be empty, cannot be null.'
+        readOnly: true
+        type: string
+    type: object
+  InstanceHit:
+    description: Time series instance that is returned by instances search call. Returned instance matched the search request and contains highlighted text to be displayed to the user if it is set to 'true'.
+    properties:
+      hierarchyIds:
+        description: List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.
+        items:
+          format: uuid
+          type: string
+        readOnly: true
+        type: array
       highlights:
         description: Highlighted text of time series instance to be displayed to the user. Highlighting inserts <hit> and </hit> tags in the portions of text that matched the search string. Do not use any of the highlighted properties to do further API calls.
         properties:
@@ -1907,6 +2459,12 @@ definitions:
             description: List of highlighted time series hierarchy IDs that time series instance belongs to. Cannot be used to lookup hierarchies. May be null.
             items:
               format: uuid
+              type: string
+            readOnly: true
+            type: array
+          hierarchyNames:
+            description: List of highlighted time series hierarchy names that time series instance belongs to. Cannot be used to lookup hierarchies. May be null.
+            items:
               type: string
             readOnly: true
             type: array
@@ -1926,22 +2484,32 @@ definitions:
             description: Highlighted name of time series instance. May be null.
             readOnly: true
             type: string
-          timeSeriesIds:
+          timeSeriesId:
             description: List of highlighted string values of Time Series ID for displaying. Cannot be used to lookup instance.
             items:
               type: string
             readOnly: true
             type: array
-          type:
+          typeName:
             description: Highlighted time series type name that this instance belongs to.
             readOnly: true
             type: string
         readOnly: true
         type: object
+      name:
+        description: Name of the time series instance that matched the search request. May be null.
+        readOnly: true
+        type: string
       timeSeriesId:
         $ref: '#/definitions/TimeSeriesId'
         description: Time series ID of the time series instance that matched the search request.
         readOnly: true
+        type: array
+      typeId:
+        description: Represents the type that time series instance which matched the search request belongs to. Never null.
+        format: uuid
+        readOnly: true
+        type: string
     type: object
   InstanceOrError:
     description: Result of a batch operation on a particular time series instance. Instance object is set when operation is successful (except put operation) and error object is set when operation is unsuccessful.
@@ -1959,15 +2527,11 @@ definitions:
     description: 'Request to perform a single operation on a batch of instances. Exactly one of "get", "put", "update" or "delete" must be set.'
     properties:
       delete:
+        $ref: '#/definitions/InstancesRequestBatchGetOrDelete'
         description: Time series IDs or names of time series instances to delete.
-        items:
-          $ref: '#/definitions/TimeSeriesId'
-        type: array
       get:
+        $ref: '#/definitions/InstancesRequestBatchGetOrDelete'
         description: Time series IDs or names of time series instances to return.
-        items:
-          $ref: '#/definitions/TimeSeriesId'
-        type: array
       put:
         description: Time series instances to be created or updated.
         items:
@@ -2018,30 +2582,8 @@ definitions:
       timeSeriesIds:
         description: List of time series IDs of the time series instances to return or delete.
         items:
-          format: uuid
-          type: string
+          $ref: '#/definitions/TimeSeriesId'
         type: array
-    type: object
-  InstancesSearchRequest:
-    description: Request to search time series instances using a search string.
-    properties:
-      searchString:
-        description: 'Search string for which the instances are required. Must be present, but can be empty string.'
-        type: string
-    type: object
-  InstancesSearchResponsePage:
-    description: Single page of time series instance search results.
-    properties:
-      instances:
-        description: List of top instances matching the query by relevance. May be empty or null.
-        items:
-          $ref: '#/definitions/InstanceHit'
-        readOnly: true
-        type: array
-      instancesContinuationToken:
-        description: 'If returned, this means that current results represent a partial result. Continuation token allows to get the next page of results. To get the next page of query results, send the same request with continuation token parameter in "x-ms-continuation" HTTP header.'
-        readOnly: true
-        type: string
     type: object
   InstancesSearchStringSuggestion:
     description: Suggested search string to be used for further search for time series instances.
@@ -2054,6 +2596,19 @@ definitions:
         description: Suggested search string. Can be used for further search for time series instances.
         readOnly: true
         type: string
+    type: object
+  InstancesSortParameter:
+    description: Definition of how time series instances are sorted before being returned by search instances call.
+    properties:
+      by:
+        description: 'Value to use for sorting of the time series instances before being returned by search instances call. When it is set to ''Rank'', the returned instances are sorted based on the relevance. When it is set to ''DisplayName'', the returned results are sorted based on the display name. Display name is the name of the instance if it exists, otherwise, display name is the time series ID. Default is ''Rank''.'
+        enum:
+          - Rank
+          - DisplayName
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: InstancesSortBy
     type: object
   InstancesSuggestRequest:
     description: Request to get search string suggestions for time series instances search based on prefix text.
@@ -2078,28 +2633,11 @@ definitions:
         readOnly: true
         type: array
     type: object
-  ModelSettings:
-    description: 'Time series model settings including model name, Time Series ID properties and default type ID.'
-    properties:
-      defaultTypeId:
-        description: Default type ID of the model that new time series instances will automatically belong to.
-        format: uuid
-        readOnly: true
-        type: string
-      name:
-        description: 'Time series model display name which is shown in the UX. Examples: "Temperature Sensors", "MyDevices".'
-        readOnly: true
-        type: string
-      timeSeriesIdProperties:
-        $ref: '#/definitions/TimeSeriesIdProperties'
-        description: Time series ID properties defined during environment creation.
-        readOnly: true
-    type: object
   ModelSettingsResponse:
     description: 'Response containing full time series model settings which include model name, Time Series ID properties and default type ID.'
     properties:
       modelSettings:
-        $ref: '#/definitions/ModelSettings'
+        $ref: '#/definitions/TimeSeriesModelSettings'
         description: 'Model settings including model name, Time Series ID properties and default type ID.'
         readOnly: true
     type: object
@@ -2167,6 +2705,11 @@ definitions:
     allOf:
       - $ref: '#/definitions/PagedResponse'
       - properties:
+          progress:
+            description: 'Approximate progress of the query in percentage. It can be between 0 and 100. When the continuation token in the response is null, the progress is expected to be 100.'
+            format: double
+            readOnly: true
+            type: number
           properties:
             description: 'Collection of time series properties and values for each of the timestamps.  Can be null if server was unable to fill the page in this request, or can be empty if there are no more objects when continuation token is null.'
             items:
@@ -2182,6 +2725,114 @@ definitions:
             type: array
         type: object
     description: 'A single page of query results. If query has not finished yet, a page will have continuation token set. In this case, to get the next page of results, send the same request again with continuation token parameter. If query has completed, the continuation token is null. It is also possible to get an empty page with only continuation token set when no query results have been computed yet. If paging has completed (continuation token is null), then timestamps and properties may be empty if there is no data to return.'
+  SearchHierarchyNodesResponse:
+    description: The hierarchy nodes which contains the instances matching the query based on the input. May be empty or null.
+    properties:
+      continuationToken:
+        description: 'If returned, this means that current results represent a partial result. Continuation token allows to get the next page of results. To get the next page of query results, send the same request with continuation token parameter in "x-ms-continuation" HTTP header.'
+        readOnly: true
+        type: string
+      hitCount:
+        description: Total number of hierarchy nodes which contains the instances matching the query based on the input.
+        format: int32
+        readOnly: true
+        type: integer
+      hits:
+        description: The list of hierarchy nodes which contains the instances matching the query based on the input. May be empty.
+        items:
+          $ref: '#/definitions/HierarchyHit'
+        readOnly: true
+        type: array
+    type: object
+  SearchInstancesHierarchiesParameters:
+    description: Parameter of how to return time series instance hierarchies by search instances call.
+    properties:
+      expand:
+        $ref: '#/definitions/HierarchiesExpandParameter'
+        description: 'Definition of whether to expand hierarchy nodes in the same search instances call. Optional, default is ''UntilChildren''.'
+        type: object
+      pageSize:
+        description: 'Maximum number of hierarchies in the same level to return in the same page. Optional, default is 10 when not set. Range is from 1 to 100. If there are results beyond the page size, the continuation token can be used to fetch the next page.'
+        format: int32
+        type: integer
+      sort:
+        $ref: '#/definitions/HierarchiesSortParameter'
+        description: 'Definition of sorting of hierarchy nodes. Optional, default is ''CumulativeInstanceCount''.'
+        type: object
+    type: object
+  SearchInstancesParameters:
+    description: Parameters of how to return time series instances by search instances call.
+    properties:
+      highlights:
+        description: 'Definition of highlighted search results or not. When it is set to ''true'', the highlighted search results are returned. When it is set to ''false'', the highlighted search results are not returned. Default is ''true''.'
+        type: boolean
+      pageSize:
+        description: 'Maximum number of instances expected in each page of the result. Defaults to 10 when not set. Ranges from 1 to 100. If there are results beyond the page size, the user can use the continuation token to fetch the next page.'
+        format: int32
+        type: integer
+      recursive:
+        description: 'Definition of which instances are returned. When recursive is set to ''true'', all instances that have the path that starts with path the path parameter are returned. When recursive is set to ''false'', only instances that have the path that exactly matches the path parameter are returned. Using recursive search allows to implement search user experience, while using non-recursive search allows to implement navigation experience. Optional, default is ''true''.'
+        type: boolean
+      sort:
+        $ref: '#/definitions/InstancesSortParameter'
+        description: 'Definition of how time series instances are sorted before being returned by search instances call - relevance or alphabetical. Optional, default is "Rank".'
+        type: object
+    type: object
+  SearchInstancesRequest:
+    description: Request to execute a search query against time series instances and return matching time series instances.
+    properties:
+      hierarchies:
+        $ref: '#/definitions/SearchInstancesHierarchiesParameters'
+        description: 'Parameters of how to return time series instance hierarchies. If null, hierarchies are not returned. If instances parameter is null and hierarchies parameter is not null, only hierarchies with no instances are returned.'
+        type: object
+      instances:
+        $ref: '#/definitions/SearchInstancesParameters'
+        description: 'Parameters of how to return time series instances. Can be null. When both the instances and hierarchies parameters are null, the instances are returned in the results based on the default values of parameters, and hierarchies are not returned.'
+        type: object
+      path:
+        description: 'Filter on hierarchy path of time series instances. Path is represented as array of string path segments. First element should be hierarchy name. Example: ["Location", "California"]. Optional, case sensitive, never empty and can be null.'
+        items:
+          type: string
+        type: array
+      searchString:
+        description: 'Query search string that will be matched to the attributes of time series instances. Example: "floor 100". Case-insensitive, must be present, but can be empty string.'
+        type: string
+    required:
+      - searchString
+    type: object
+  SearchInstancesResponse:
+    description: The instances matching the query based on the input. May be empty or null.
+    properties:
+      continuationToken:
+        description: 'If returned, this means that current results represent a partial result. Continuation token allows to get the next page of results. To get the next page of query results, send the same request with continuation token parameter in "x-ms-continuation" HTTP header.'
+        readOnly: true
+        type: string
+      hitCount:
+        description: Total number of instances matching the query based on the input.
+        format: int32
+        readOnly: true
+        type: integer
+      hits:
+        description: The list of instances matching the query based on the input. May be empty.
+        items:
+          $ref: '#/definitions/InstanceHit'
+        readOnly: true
+        type: array
+    type: object
+  SearchInstancesResponsePage:
+    description: Single page of the search results.
+    properties:
+      hierarchyNodes:
+        $ref: '#/definitions/SearchHierarchyNodesResponse'
+        description: The hierarchy nodes which contains the instances matching the query based on the input. May be empty or null.
+        readOnly: true
+        type: object
+      instances:
+        $ref: '#/definitions/SearchInstancesResponse'
+        description: The instances matching the query based on the input. May be empty or null.
+        readOnly: true
+        type: object
+    type: object
   TimeSeriesHierarchy:
     description: Time series hierarchy organizes time series instances into a tree.
     properties:
@@ -2275,6 +2926,23 @@ definitions:
     required:
       - timeSeriesId
       - typeId
+    type: object
+  TimeSeriesModelSettings:
+    description: 'Time series model settings including model name, Time Series ID properties and default type ID.'
+    properties:
+      defaultTypeId:
+        description: Default type ID of the model that new time series instances will automatically belong to.
+        format: uuid
+        readOnly: true
+        type: string
+      name:
+        description: 'Time series model display name which is shown in the UX. Examples: "Temperature Sensors", "MyDevices".'
+        readOnly: true
+        type: string
+      timeSeriesIdProperties:
+        $ref: '#/definitions/TimeSeriesIdProperties'
+        description: Time series ID properties defined during environment creation.
+        readOnly: true
     type: object
   TimeSeriesType:
     description: 'Time series type defines variables or formulas for doing computation on events associated with time series instances. Each time series instance is associated with exactly one type. A type can have one or more variables. For example, a time series instance might be of type Temperature Sensor, which consists of the variables avg temperature, min temperature, and max temperature.'

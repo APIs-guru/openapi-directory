@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/blueprint/resource-manager/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: blueprint-blueprintDefinition
   x-tags:
@@ -124,12 +123,12 @@ paths:
         SubscriptionBlueprint:
           parameters:
             api-version: 2018-11-01-preview
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                     name: simpleBlueprint
                     properties:
                       description: 'blueprint contains all artifact kinds {''template'', ''rbac'', ''policy''}'
@@ -212,11 +211,11 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: simpleBlueprint
                 properties:
                   description: 'blueprint contains all artifact kinds {''template'', ''rbac'', ''policy''}'
@@ -294,11 +293,11 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: simpleBlueprint
                 properties:
                   description: 'blueprint contains all artifact kinds {''template'', ''rbac'', ''policy''}'
@@ -468,11 +467,11 @@ paths:
                       displayName: storage resource group
                 targetScope: subscription
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: simpleBlueprint
                 properties:
                   description: 'blueprint contains all artifact kinds {''template'', ''rbac'', ''policy''}'
@@ -585,12 +584,12 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
                     kind: roleAssignment
                     name: ownerAssignment
                     properties:
@@ -598,7 +597,7 @@ paths:
                       principalIds: '[parameters(''owners'')]'
                       roleDefinitionId: /providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7
                     type: Microsoft.Blueprint/blueprints/artifacts
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
                     kind: policyAssignment
                     name: costCenterPolicy
                     properties:
@@ -610,7 +609,7 @@ paths:
                           value: '[parameter(''costCenter'')]'
                       policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62
                     type: Microsoft.Blueprint/blueprints/artifacts
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
                     kind: template
                     name: storageTemplate
                     properties:
@@ -760,11 +759,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -807,11 +806,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -829,11 +828,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:
@@ -947,11 +946,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -993,11 +992,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -1014,11 +1013,11 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:
@@ -1223,11 +1222,11 @@ paths:
                     storageAccountName: '[concat(uniquestring(resourceGroup().id), ''standardsa'')]'
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -1279,11 +1278,11 @@ paths:
                 policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -1306,11 +1305,11 @@ paths:
                 roleDefinitionId: /providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:
@@ -1373,12 +1372,12 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/v1
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/v1
                     name: v1
                     properties:
                       blueprintName: simpleBlueprint
@@ -1467,12 +1466,12 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: v2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: v2
                 properties:
                   blueprintName: simpleBlueprint
@@ -1558,12 +1557,12 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: v2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: v2
                 properties:
                   blueprintName: simpleBlueprint
@@ -1599,6 +1598,12 @@ paths:
         - $ref: '#/parameters/ScopeParameter'
         - $ref: '#/parameters/BlueprintNameParameter'
         - $ref: '#/parameters/PublishedBlueprintVersionIdParameter'
+        - description: Published Blueprint to create or update.
+          in: body
+          name: publishedBlueprint
+          required: false
+          schema:
+            $ref: '#/definitions/PublishedBlueprint'
       responses:
         '201':
           description: Created -- blueprint definition published.
@@ -1648,12 +1653,12 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: v2
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
                 name: v2
                 properties:
                   blueprintName: simpleBlueprint
@@ -1769,13 +1774,13 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: V2
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
                     kind: roleAssignment
                     name: ownerAssignment
                     properties:
@@ -1783,7 +1788,7 @@ paths:
                       principalIds: '[parameters(''owners'')]'
                       roleDefinitionId: /providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7
                     type: Microsoft.Blueprint/blueprints/versions/artifacts
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
                     kind: policyAssignment
                     name: costCenterPolicy
                     properties:
@@ -1795,7 +1800,7 @@ paths:
                           value: '[parameter(''costCenter'')]'
                       policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62
                     type: Microsoft.Blueprint/blueprints/versions/artifacts
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
                     kind: template
                     name: storageTemplate
                     properties:
@@ -1944,12 +1949,12 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: storageTemplate
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate
                 kind: template
                 name: storageTemplate
                 properties:
@@ -1991,12 +1996,12 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: costCenterPolicy
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy
                 kind: policyAssignment
                 name: costCenterPolicy
                 properties:
@@ -2013,12 +2018,12 @@ paths:
             api-version: 2018-11-01-preview
             artifactName: ownerAssignment
             blueprintName: simpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
             versionId: V2
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment
                 kind: roleAssignment
                 name: ownerAssignment
                 properties:

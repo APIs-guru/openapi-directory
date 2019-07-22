@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2017-10-01/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -84,91 +83,76 @@ paths:
               body:
                 value:
                   - display:
-                      description: Creates a storage account with the specified parameters or update the properties or tags or adds custom domain for the specified storage account.
                       operation: Create/Update Storage Account
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/write
                   - display:
-                      description: Deletes an existing storage account.
                       operation: Delete Storage Account
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/delete
                   - display:
-                      description: Returns the access keys for the specified storage account.
                       operation: List Storage Account Keys
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/listkeys/action
                   - display:
-                      description: Regenerates the access keys for the specified storage account.
                       operation: Regenerate Storage Account Keys
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/regeneratekey/action
                   - display:
-                      description: Checks that account name is valid and is not in use.
                       operation: Check Name Availability
                       provider: Microsoft Storage
                       resource: Name Availability
                     name: Microsoft.Storage/checknameavailability/read
                   - display:
-                      description: Returns the list of storage accounts or gets the properties for the specified storage account.
                       operation: List/Get Storage Account(s)
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/read
                   - display:
-                      description: Returns the limit and the current usage count for resources in the specified subscription
                       operation: Get Subscription Usages
                       provider: Microsoft Storage
                       resource: Usage Metrics
                     name: Microsoft.Storage/usages/read
                   - display:
-                      description: Returns the Account SAS token for the specified storage account.
                       operation: Returns Storage Account SAS Token
                       provider: Microsoft Storage
                       resource: Storage Account SAS Token
                     name: Microsoft.Storage/storageAccounts/listAccountSas/action
                   - display:
-                      description: Storage Service SAS Token
                       operation: Returns Storage Service SAS Token
                       provider: Microsoft Storage
                       resource: Returns the Service SAS token for the specified storage account.
                     name: Microsoft.Storage/storageAccounts/listServiceSas/action
                   - display:
-                      description: Notifies Microsoft.Storage that virtual network or subnet is being deleted
                       operation: Delete virtual network or subnets notifications
                       provider: Microsoft Storage
                       resource: Location
                     name: Microsoft.Storage/locations/deleteVirtualNetworkOrSubnets/action
                   - display:
-                      description: Polls the status of an asynchronous operation.
                       operation: Poll Asynchronous Operation
                       provider: Microsoft Storage
                       resource: Operations
                     name: Microsoft.Storage/operations/read
                   - display:
-                      description: Registers the subscription for the storage resource provider and enables the creation of storage accounts.
                       operation: Registers the Storage Resource Provider
                       provider: Microsoft Storage
                       resource: Storage Resource Provider
                     name: Microsoft.Storage/register/action
                   - display:
-                      description: Lists the Skus supported by Microsoft.Storage.
                       operation: List Skus
                       provider: Microsoft Storage
                       resource: Skus
                     name: Microsoft.Storage/skus/read
                   - display:
-                      description: Create/Update storage account diagnostic settings.
                       operation: Create/Update Diagnostic Settings
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/services/diagnosticSettings/write
                   - display:
-                      description: Get list of Microsoft Storage Metrics definitions.
                       operation: Get list of Microsoft Storage Metrics definitions
                       provider: Microsoft Storage
                       resource: Storage Accounts
@@ -186,21 +170,18 @@ paths:
                             resourceIdDimensionNameOverride: AccountResourceId
                             unit: Bytes
                   - display:
-                      description: Gets the diagnostic setting for the resource.
                       operation: Read diagnostic setting
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/providers/Microsoft.Insights/diagnosticSettings/read
                     origin: system
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource.
                       operation: Write diagnostic setting
                       provider: Microsoft Storage
                       resource: Storage Accounts
                     name: Microsoft.Storage/storageAccounts/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
                   - display:
-                      description: Get list of Microsoft Storage Metrics definitions.
                       operation: Get list of Microsoft Storage Metrics definitions
                       provider: Microsoft Storage
                       resource: Blob service
@@ -247,21 +228,18 @@ paths:
                             name: BlobProvisionedSize
                             unit: Bytes
                   - display:
-                      description: Gets the diagnostic setting for the resource.
                       operation: Read diagnostic setting
                       provider: Microsoft Storage
                       resource: Blob service
                     name: Microsoft.Storage/storageAccounts/blobServices/providers/Microsoft.Insights/diagnosticSettings/read
                     origin: system
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource.
                       operation: Write diagnostic setting
                       provider: Microsoft Storage
                       resource: Blob service
                     name: Microsoft.Storage/storageAccounts/blobServices/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
                   - display:
-                      description: Get list of Microsoft Storage Metrics definitions.
                       operation: Get list of Microsoft Storage Metrics definitions
                       provider: Microsoft Storage
                       resource: Table service
@@ -292,21 +270,18 @@ paths:
                             name: TableEntityCount
                             unit: Count
                   - display:
-                      description: Gets the diagnostic setting for the resource.
                       operation: Read diagnostic setting
                       provider: Microsoft Storage
                       resource: Table service
                     name: Microsoft.Storage/storageAccounts/tableServices/providers/Microsoft.Insights/diagnosticSettings/read
                     origin: system
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource.
                       operation: Write diagnostic setting
                       provider: Microsoft Storage
                       resource: Table service
                     name: Microsoft.Storage/storageAccounts/tableServices/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
                   - display:
-                      description: Get list of Microsoft Storage Metrics definitions.
                       operation: Get list of Microsoft Storage Metrics definitions
                       provider: Microsoft Storage
                       resource: Queue service
@@ -337,21 +312,18 @@ paths:
                             name: QueueMessageCount
                             unit: Count
                   - display:
-                      description: Gets the diagnostic setting for the resource.
                       operation: Read diagnostic setting
                       provider: Microsoft Storage
                       resource: Queue service
                     name: Microsoft.Storage/storageAccounts/queueServices/providers/Microsoft.Insights/diagnosticSettings/read
                     origin: system
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource.
                       operation: Write diagnostic setting
                       provider: Microsoft Storage
                       resource: Queue service
                     name: Microsoft.Storage/storageAccounts/queueServices/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
                   - display:
-                      description: Get list of Microsoft Storage Metrics definitions.
                       operation: Get list of Microsoft Storage Metrics definitions
                       provider: Microsoft Storage
                       resource: File service
@@ -389,20 +361,19 @@ paths:
                             name: FileShareCount
                             unit: Count
                   - display:
-                      description: Gets the diagnostic setting for the resource.
                       operation: Read diagnostic setting
                       provider: Microsoft Storage
                       resource: File service
                     name: Microsoft.Storage/storageAccounts/fileServices/providers/Microsoft.Insights/diagnosticSettings/read
                     origin: system
                   - display:
-                      description: Creates or updates the diagnostic setting for the resource.
                       operation: Write diagnostic setting
                       provider: Microsoft Storage
                       resource: File service
                     name: Microsoft.Storage/storageAccounts/fileServices/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability':
     post:
       description: Checks that the storage account name is valid and is not already in use.
@@ -4174,7 +4145,8 @@ paths:
                     resourceType: storageAccounts
                     restrictions: []
                     tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -4331,7 +4303,8 @@ paths:
                       key1: value1
                       key2: value2
                     type: Microsoft.Storage/storageAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages':
     get:
       description: Gets the current usage count and the limit for the resources under the subscription.
@@ -4361,7 +4334,8 @@ paths:
                       localizedValue: Storage Accounts
                       value: StorageAccounts
                     unit: Count
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -4435,7 +4409,8 @@ paths:
                       key1: value1
                       key2: value2
                     type: Microsoft.Storage/storageAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}':
     delete:
       description: Deletes a storage account in Microsoft Azure.

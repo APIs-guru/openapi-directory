@@ -1200,7 +1200,6 @@ paths:
       responses:
         '201':
           description: Created
-          schema: {}
         default:
           description: Error response.
           schema:
@@ -1216,9 +1215,7 @@ paths:
             listId: '89003'
             term: hell
           responses:
-            '201':
-              body: {}
-              headers: {}
+            '201': {}
   /contentmoderator/moderate/v1.0/ProcessImage/Evaluate:
     post:
       consumes:

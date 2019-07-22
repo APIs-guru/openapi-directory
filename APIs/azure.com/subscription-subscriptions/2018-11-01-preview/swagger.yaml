@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: subscription-subscriptions
   x-tags:
@@ -37,7 +36,7 @@ security:
       - user_impersonation
 parameters:
   apiVersionParameter:
-    description: Version of the API to be used with the client request. Current version is 2015-06-01
+    description: Version of the API to be used with the client request. Current version is 2018-11-01-preview
     in: query
     name: api-version
     required: true

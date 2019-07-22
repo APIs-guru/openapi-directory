@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/data-plane/Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage-DataLakeStorage
   x-tags:
@@ -212,6 +211,7 @@ paths:
         - Account Operations
       x-ms-pageable:
         itemName: filesystems
+        nextLinkName: null
   '/{filesystem}':
     delete:
       description: 'Marks the filesystem for deletion.  When a filesystem is deleted, a filesystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).'
@@ -304,6 +304,7 @@ paths:
         - Filesystem Operations
       x-ms-pageable:
         itemName: paths
+        nextLinkName: null
     head:
       description: All system and user-defined filesystem properties are specified in the response headers.
       operationId: Filesystem_GetProperties

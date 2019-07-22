@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/billing/resource-manager/Microsoft.Billing/preview/2017-04-24-preview/billing.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: billing
   x-tags:
@@ -213,7 +212,7 @@ paths:
           parameters:
             $expand: downloadUrl
             $filter: invoicePeriodEndDate le 2017-02-01
-            $top: '1'
+            $top: 1
             api-version: 2017-04-24-preview
             subscriptionId: subid
           responses:

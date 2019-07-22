@@ -96,7 +96,7 @@ paths:
       description: Get the list of available Service Fabric resource provider API operations.
       operationId: Operations_List
       parameters:
-        - description: The version of the Service Fabric resouce provider API
+        - description: The version of the Service Fabric resource provider API
           in: query
           name: api-version
           required: true
@@ -144,8 +144,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - etag: W/"636462502169240745"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                     location: eastus
                     name: myCluster
                     properties:
@@ -243,12 +242,11 @@ paths:
                       vmImage: Windows
                     tags: {}
                     type: Microsoft.ServiceFabric/clusters
-                  - etag: W/"636462502164040075"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
                     location: eastus
                     name: myCluster2
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                       availableClusterVersions:
                         - codeVersion: 6.1.187.1
@@ -489,6 +487,7 @@ paths:
           responses:
             '200':
               headers: {}
+            '204': {}
     get:
       description: Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.
       operationId: Clusters_Get
@@ -519,7 +518,6 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502169240745"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
@@ -656,9 +654,6 @@ paths:
             api-version: '2018-02-01'
             clusterName: myCluster
             parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
-              location: eastus
-              name: myCluster
               properties:
                 nodeTypes:
                   - applicationPorts:
@@ -686,16 +681,95 @@ paths:
                     name: testnt1
                     vmInstanceCount: 3
                 reliabilityLevel: Bronze
-                upgradeMode: Default
               tags:
                 a: b
-              type: Microsoft.ServiceFabric/clusters
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: eastus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 6.1.480.9494
+                      environment: Windows
+                      supportExpiryUtc: '2018-06-15T23:59:59.9999999'
+                  certificateCommonNames:
+                    commonNames:
+                      - certificateCommonName: abc.com
+                        certificateIssuerThumbprint: 12599211F8F14C90AFA9532AD79A6F2CA1C00622
+                    x509StoreName: My
+                  clientCertificateCommonNames: []
+                  clientCertificateThumbprints: []
+                  clusterCodeVersion: 6.1.480.9494
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
+                  clusterId: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterState: WaitingForNodes
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://diag.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://diag.queue.core.windows.net/'
+                    storageAccountName: diag
+                    tableEndpoint: 'https://diag.table.core.windows.net/'
+                  fabricSettings:
+                    - name: UpgradeService
+                      parameters:
+                        - name: AppPollIntervalInSeconds
+                          value: '60'
+                  managementEndpoint: 'http://myCluster.eastus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 64000
+                        startPort: 49000
+                      httpGatewayEndpointPort: 19007
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                    - applicationPorts:
+                        endPort: 2000
+                        startPort: 1000
+                      clientConnectionEndpointPort: 0
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 4000
+                        startPort: 3000
+                      httpGatewayEndpointPort: 0
+                      isPrimary: false
+                      name: testnt1
+                      vmInstanceCount: 3
+                  provisioningState: Succeeded
+                  reliabilityLevel: Bronze
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: false
+                    healthCheckRetryTimeout: '00:05:00'
+                    healthCheckStableDuration: '00:00:30'
+                    healthCheckWaitDuration: '00:00:30'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 0
+                      maxPercentUnhealthyNodes: 0
+                    upgradeDomainTimeout: '00:15:00'
+                    upgradeReplicaSetCheckTimeout: '00:10:00'
+                    upgradeTimeout: '01:00:00'
+                  upgradeMode: Automatic
+                tags:
+                  a: b
+                type: Microsoft.ServiceFabric/clusters
+              headers:
+                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01'
+                Retry-After: '10'
             '202':
               body:
-                etag: W/"636462502169240744"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
@@ -907,14 +981,13 @@ paths:
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '202':
+            '200':
               body:
-                etag: W/"636462502169240745"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
                 properties:
-                  addonFeatures:
+                  addOnFeatures:
                     - RepairManager
                     - DnsService
                     - BackupRestoreService
@@ -1011,7 +1084,110 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2018-02-01'
                 Retry-After: '10'
-        Put a cluster with mininum parameters:
+            '202':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: eastus
+                name: myCluster
+                properties:
+                  addOnFeatures:
+                    - RepairManager
+                    - DnsService
+                    - BackupRestoreService
+                    - ResourceMonitorService
+                  availableClusterVersions:
+                    - codeVersion: 6.1.480.9494
+                      environment: Windows
+                      supportExpiryUtc: '2018-06-15T23:59:59.9999999'
+                  azureActiveDirectory:
+                    clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                    clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                    tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
+                  certificateCommonNames:
+                    commonNames:
+                      - certificateCommonName: abc.com
+                        certificateIssuerThumbprint: 12599211F8F14C90AFA9532AD79A6F2CA1C00622
+                    x509StoreName: My
+                  clientCertificateCommonNames:
+                    - certificateCommonName: abc.com
+                      certificateIssuerThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                      isAdmin: true
+                  clientCertificateThumbprints:
+                    - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                      isAdmin: false
+                  clusterCodeVersion: 6.1.480.9494
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
+                  clusterId: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterState: WaitingForNodes
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://diag.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://diag.queue.core.windows.net/'
+                    storageAccountName: diag
+                    tableEndpoint: 'https://diag.table.core.windows.net/'
+                  fabricSettings:
+                    - name: UpgradeService
+                      parameters:
+                        - name: AppPollIntervalInSeconds
+                          value: '60'
+                  managementEndpoint: 'https://myCluster.eastus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 64000
+                        startPort: 49000
+                      httpGatewayEndpointPort: 19007
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                  provisioningState: Succeeded
+                  reliabilityLevel: Silver
+                  reverseProxyCertificateCommonNames:
+                    commonNames:
+                      - certificateCommonName: abc.com
+                        certificateIssuerThumbprint: 12599211F8F14C90AFA9532AD79A6F2CA1C00622
+                    x509StoreName: My
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      applicationDeltaHealthPolicies:
+                        'fabric:/myApp1':
+                          defaultServiceTypeDeltaHealthPolicy:
+                            maxPercentDeltaUnhealthyServices: 0
+                          serviceTypeDeltaHealthPolicies:
+                            myServiceType1:
+                              maxPercentDeltaUnhealthyServices: 0
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: true
+                    healthCheckRetryTimeout: '00:05:00'
+                    healthCheckStableDuration: '00:00:30'
+                    healthCheckWaitDuration: '00:00:30'
+                    healthPolicy:
+                      applicationHealthPolicies:
+                        'fabric:/myApp1':
+                          defaultServiceTypeHealthPolicy:
+                            maxPercentUnhealthyServices: 0
+                          serviceTypeHealthPolicies:
+                            myServiceType1:
+                              maxPercentUnhealthyServices: 100
+                      maxPercentUnhealthyApplications: 0
+                      maxPercentUnhealthyNodes: 0
+                    upgradeDomainTimeout: '00:15:00'
+                    upgradeReplicaSetCheckTimeout: '00:10:00'
+                    upgradeTimeout: '00:15:00'
+                  upgradeMode: Manual
+                  vmImage: Windows
+                tags: {}
+                type: Microsoft.ServiceFabric/clusters
+              headers:
+                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2018-02-01'
+                Retry-After: '10'
+        Put a cluster with minimum parameters:
           parameters:
             api-version: '2018-02-01'
             clusterName: myCluster
@@ -1054,7 +1230,68 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502169240743"
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: eastus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 6.1.480.9494
+                      environment: Windows
+                      supportExpiryUtc: '2018-06-15T23:59:59.9999999'
+                  clientCertificateCommonNames: []
+                  clientCertificateThumbprints: []
+                  clusterCodeVersion: 6.1.480.9494
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
+                  clusterId: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterState: WaitingForNodes
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://diag.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://diag.queue.core.windows.net/'
+                    storageAccountName: diag
+                    tableEndpoint: 'https://diag.table.core.windows.net/'
+                  fabricSettings:
+                    - name: UpgradeService
+                      parameters:
+                        - name: AppPollIntervalInSeconds
+                          value: '60'
+                  managementEndpoint: 'http://myCluster.eastus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 64000
+                        startPort: 49000
+                      httpGatewayEndpointPort: 19007
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                  provisioningState: Succeeded
+                  reliabilityLevel: Silver
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: false
+                    healthCheckRetryTimeout: '00:45:00'
+                    healthCheckStableDuration: '00:05:00'
+                    healthCheckWaitDuration: '00:05:00'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 100
+                      maxPercentUnhealthyNodes: 100
+                    upgradeDomainTimeout: '02:00:00'
+                    upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                    upgradeTimeout: '12:00:00'
+                  upgradeMode: Automatic
+                tags: {}
+                type: Microsoft.ServiceFabric/clusters
+              headers: {}
+            '202':
+              body:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
@@ -1147,8 +1384,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - etag: W/"636462502169240745"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                     location: eastus
                     name: myCluster
                     properties:
@@ -1246,12 +1482,11 @@ paths:
                       vmImage: Windows
                     tags: {}
                     type: Microsoft.ServiceFabric/clusters
-                  - etag: W/"636462502164040075"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
                     location: eastus
                     name: myCluster2
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                       availableClusterVersions:
                         - codeVersion: 6.1.187.1
@@ -1794,7 +2029,7 @@ definitions:
         description: 'The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
         type: string
       upgradeReplicaSetCheckTimeout:
-        description: 'The maximum amount of time to block processing of an upgrade domain and revent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
+        description: 'The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
         type: string
       upgradeTimeout:
         description: 'The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
@@ -1849,7 +2084,7 @@ definitions:
 
         - Bronze - No privileges. This is the default.
         - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
-        - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
+        - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM SKUs like D15_V2, G5 etc.
     enum:
       - Bronze
       - Silver
@@ -1904,10 +2139,10 @@ definitions:
 
             - Bronze - No privileges. This is the default.
             - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
-            - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
+            - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM SKUs like D15_V2, G5 etc.
       ephemeralPorts:
         $ref: '#/definitions/EndpointRangeDescription'
-        description: The range of empheral ports that nodes in this node type should be configured with.
+        description: The range of ephemeral ports that nodes in this node type should be configured with.
       httpGatewayEndpointPort:
         description: The HTTP cluster management endpoint port.
         type: integer

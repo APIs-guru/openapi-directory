@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/servers.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-servers
   x-tags:
@@ -107,7 +106,8 @@ paths:
                       state: Ready
                       version: '12.0'
                     type: Microsoft.Sql/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers':
     get:
       description: Returns a list of servers in a resource group.
@@ -174,7 +174,8 @@ paths:
                       state: Ready
                       version: '12.0'
                     type: Microsoft.Sql/servers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}':
     delete:
       description: Deletes a SQL server.

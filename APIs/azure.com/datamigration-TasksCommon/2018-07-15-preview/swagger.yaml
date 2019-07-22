@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-TasksCommon
   x-tags:
@@ -1195,6 +1194,47 @@ definitions:
       - targetConnectionInfo
       - storageResourceId
     type: object
+  SsisMigrationInfo:
+    description: 'SSIS migration info with SSIS store type, overwrite policy.'
+    properties:
+      environmentOverwriteOption:
+        $ref: '#/definitions/SsisMigrationOverwriteOption'
+        description: The overwrite option for the SSIS environment migration
+      projectOverwriteOption:
+        $ref: '#/definitions/SsisMigrationOverwriteOption'
+        description: The overwrite option for the SSIS project migration
+      ssisStoreType:
+        $ref: '#/definitions/SsisStoreType'
+        description: 'The SSIS store type of source, only SSIS catalog is supported now in DMS'
+    type: object
+  SsisMigrationOverwriteOption:
+    description: 'The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object'
+    enum:
+      - Ignore
+      - Overwrite
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SsisMigrationOverwriteOption
+  SsisMigrationStage:
+    description: Current stage of SSIS migration
+    enum:
+      - None
+      - Initialize
+      - InProgress
+      - Completed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SsisMigrationStage
+  SsisStoreType:
+    description: An enumeration of supported source SSIS store type in DMS
+    enum:
+      - SsisCatalog
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SsisStoreType
   StartMigrationScenarioServerRoleResult:
     description: Server role migration result
     properties:

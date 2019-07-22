@@ -658,7 +658,7 @@ definitions:
         description: The name of the database to import.
         type: string
       edition:
-        description: The edition for the database being created.
+        description: "The edition for the database being created.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n"
         enum:
           - Web
           - Business
@@ -671,6 +671,9 @@ definitions:
           - DataWarehouse
           - System
           - System2
+          - GeneralPurpose
+          - BusinessCritical
+          - Hyperscale
         type: string
         x-ms-enum:
           modelAsString: true

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicefabric
   x-tags:
@@ -36,7 +35,7 @@ security:
       - user_impersonation
 parameters:
   api-version:
-    description: The version of the ServiceFabric resouce provider api
+    description: The version of the ServiceFabric resource provider api
     in: query
     name: api-version
     required: true
@@ -1378,7 +1377,7 @@ definitions:
     description: Client certificate details using common name
     properties:
       certificateCommonName:
-        description: Certificate common name to be granted access; be carefull using wild card common names
+        description: Certificate common name to be granted access; be careful using wild card common names
         type: string
       certificateIssuerThumbprint:
         description: Certificate issuer thumbprint
@@ -1478,7 +1477,7 @@ definitions:
         description: The settings to enable AAD authentication on the cluster
       certificate:
         $ref: '#/definitions/CertificateDescription'
-        description: 'This primay certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client'
+        description: 'This primary certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client'
       clientCertificateCommonNames:
         description: ' List of client certificates to whitelist based on common names'
         items:
@@ -1527,7 +1526,7 @@ definitions:
         description: The http management endpoint of the cluster
         type: string
       nodeTypes:
-        description: The list of nodetypes that make up the cluster
+        description: The list of node types that make up the cluster
         items:
           $ref: '#/definitions/NodeTypeDescription'
         type: array
@@ -1574,7 +1573,7 @@ definitions:
     properties:
       certificate:
         $ref: '#/definitions/CertificateDescription'
-        description: 'This primay certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client, the certificate should exist in the virtual machine scale sets or Azure key vault, before you add it. It will override original value'
+        description: 'This primary certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client, the certificate should exist in the virtual machine scale sets or Azure key vault, before you add it. It will override original value'
       clientCertificateCommonNames:
         description: List of client certificates to whitelist based on common names.
         items:
@@ -1594,7 +1593,7 @@ definitions:
           $ref: '#/definitions/SettingsSectionDescription'
         type: array
       nodeTypes:
-        description: 'The list of nodetypes that make up the cluster, it will override'
+        description: 'The list of node types that make up the cluster, it will override'
         items:
           $ref: '#/definitions/NodeTypeDescription'
         type: array
@@ -1767,7 +1766,7 @@ definitions:
         description: The TCP cluster management endpoint port
         type: integer
       durabilityLevel:
-        description: Nodetype durability Level
+        description: Node type durability Level
         enum:
           - Bronze
           - Silver
@@ -1775,7 +1774,7 @@ definitions:
         type: string
       ephemeralPorts:
         $ref: '#/definitions/EndpointRangeDescription'
-        description: System assgined application ports
+        description: System assigned application ports
       httpGatewayEndpointPort:
         description: The HTTP cluster management endpoint port
         type: integer
@@ -1823,7 +1822,7 @@ definitions:
     properties:
       display:
         $ref: '#/definitions/AvailableOperationDisplay'
-        description: Dispaly of the result
+        description: Display of the result
       name:
         description: Result name
         type: string

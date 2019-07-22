@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/visualstudio/resource-manager/Microsoft.VisualStudio/preview/2017-11-01-preview/Csm.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: visualstudio-Csm
   x-tags:
@@ -165,6 +164,7 @@ paths:
                 nameAvailable: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.visualstudio/account/{rootResourceName}/project':
     get:
+      deprecated: true
       description: Gets all Visual Studio Team Services project resources created in the specified Team Services account.
       operationId: Project_ListByAccountResource
       parameters:
@@ -219,6 +219,7 @@ paths:
                     type: Microsoft.VisualStudio/account/project
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.visualstudio/account/{rootResourceName}/project/{resourceName}':
     get:
+      deprecated: true
       description: Gets the details of a Team Services project resource.
       operationId: Projects_Get
       parameters:
@@ -280,6 +281,7 @@ paths:
                 type: microsoft.visualstudio/account/project
             '404': {}
     patch:
+      deprecated: true
       description: Updates the tags of the specified Team Services project.
       operationId: Projects_Update
       parameters:
@@ -348,6 +350,7 @@ paths:
                   NewTag: NewTagValue
                 type: microsoft.visualstudio/account/project
     put:
+      deprecated: true
       description: 'Creates a Team Services project in the collection with the specified name. ''VersionControlOption'' and ''ProcessTemplateId'' must be specified in the resource properties. Valid values for VersionControlOption: Git, Tfvc. Valid values for ProcessTemplateId: 6B724908-EF14-45CF-84F8-768B5384DA45, ADCC42AB-9882-485E-A3ED-7678F01F66BC, 27450541-8E31-4150-9947-DC59F998FC01 (these IDs correspond to Scrum, Agile, and CMMI process templates).'
       operationId: Projects_Create
       parameters:

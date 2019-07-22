@@ -1058,7 +1058,8 @@ paths:
                     tags:
                       TagName: ForSDKTest
                     type: Microsoft.StorSimple/Managers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers':
     get:
       deprecated: false
@@ -1107,7 +1108,8 @@ paths:
                       sku:
                         name: Standard
                     type: Microsoft.StorSimple/Managers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}':
     delete:
       deprecated: false
@@ -1332,7 +1334,8 @@ paths:
                       initiatorName: 'iqn.1991-05.com.microsoft:test2'
                       volumeCount: 1
                     type: Microsoft.StorSimple/managers/accessControlRecords
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords/{accessControlRecordName}':
     delete:
       deprecated: false
@@ -1641,7 +1644,8 @@ paths:
                             seconds: 0
                       volumeCount: 0
                     type: Microsoft.StorSimple/managers/bandwidthSettings
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/bandwidthSettings/{bandwidthSettingName}':
     delete:
       deprecated: false
@@ -1930,7 +1934,8 @@ paths:
                       supportedVmTypes:
                         - Standard_DS3
                     type: Microsoft.StorSimple/managers/cloudApplianceConfigurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice':
     post:
       deprecated: false
@@ -2089,7 +2094,8 @@ paths:
                       totalTieredStorageInBytes: 1099511627776
                       usingStorageInBytes: 0
                     type: Microsoft.StorSimple/managers/devices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}':
     delete:
       deprecated: false
@@ -2418,7 +2424,8 @@ paths:
                         - /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/volume2
                         - /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/volume1
                     type: Microsoft.StorSimple/managers/devices/backupPolicies
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}':
     delete:
       deprecated: false
@@ -2669,7 +2676,8 @@ paths:
                       scheduleStatus: Enabled
                       startTime: '2017-06-24T01:00:00Z'
                     type: Microsoft.StorSimple/managers/devices/backupPolicies/schedules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/schedules/{backupScheduleName}':
     delete:
       deprecated: false
@@ -3155,7 +3163,8 @@ paths:
                       displayName: CONTROLLER 0 COMPONENTS
                       lastUpdatedTime: '2017-06-21T21:49:05.3244117Z'
                     type: managers/devices/hardwareComponentGroups
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/hardwareComponentGroups/{hardwareComponentGroupName}/changeControllerPowerState':
     post:
       deprecated: false
@@ -3492,7 +3501,8 @@ paths:
                             sizeInBytes: 10737418240
                             volumeId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/vcForOdataFilterTest/volumes/vol%2540123
                             volumeType: Tiered
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metrics':
     get:
       deprecated: false
@@ -3545,7 +3555,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metricsDefinitions':
     get:
       deprecated: false
@@ -4070,7 +4081,8 @@ paths:
                     resourceId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest
                     type: Microsoft.StorSimple/managers/devices/metricsDefinitions
                     unit: BytesPerSecond
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default':
     get:
       deprecated: false
@@ -4582,7 +4594,8 @@ paths:
                       totalCloudStorageUsageInBytes: 200277
                       volumeCount: 4
                     type: Microsoft.StorSimple/managers/devices/volumeContainers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}':
     delete:
       deprecated: false
@@ -4780,7 +4793,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metricsDefinitions':
     get:
       deprecated: false
@@ -5012,7 +5026,8 @@ paths:
                     resourceId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/vcForOdataFilterTest
                     type: Microsoft.StorSimple/managers/devices/volumeContainers/metricsDefinitions
                     unit: Count
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes':
     get:
       deprecated: false
@@ -5097,7 +5112,8 @@ paths:
                       volumeStatus: Online
                       volumeType: Tiered
                     type: Microsoft.StorSimple/managers/devices/volumeContainers/volumes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}':
     delete:
       deprecated: false
@@ -5326,7 +5342,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metricsDefinitions':
     get:
       deprecated: false
@@ -5585,7 +5602,8 @@ paths:
                     resourceId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/vcForOdataFilterTest/volumes/CloneVolForSDKTest890836587
                     type: Microsoft.StorSimple/managers/devices/volumeContainers/volumes/metricsDefinitions
                     unit: Count
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumes':
     get:
       deprecated: false
@@ -5668,7 +5686,8 @@ paths:
                       volumeStatus: Online
                       volumeType: Tiered
                     type: Microsoft.StorSimple/managers/devices/volumeContainers/volumes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{sourceDeviceName}/failover':
     post:
       deprecated: false
@@ -5797,7 +5816,8 @@ paths:
                           resultCode: TargetAndSourceCannotBeSameError
                     friendlyDeviceSoftwareVersion: StorSimple 8000 Series Update 4.0
                     volumesCount: 7
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default':
     get:
       deprecated: false
@@ -6043,7 +6063,8 @@ paths:
                   - name: SubscriptionBasedARMApiAccess
                     status: NotAvailable
       x-ms-odata: '#/definitions/FeatureFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/jobs':
     get:
       deprecated: false
@@ -6312,7 +6333,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metricsDefinitions':
     get:
       deprecated: false
@@ -6407,7 +6429,8 @@ paths:
                     resourceId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1
                     type: Microsoft.StorSimple/managers/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/provisionCloudAppliance':
     post:
       deprecated: false
@@ -6520,7 +6543,8 @@ paths:
                       sslStatus: Enabled
                       volumesCount: 5
                     type: Microsoft.StorSimple/managers/storageAccountCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{storageAccountCredentialName}':
     delete:
       deprecated: false

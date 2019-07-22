@@ -217,6 +217,7 @@ paths:
               properties:
                 eventHubAuthorizationRuleId: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule
                 eventHubName: myeventhub
+                logAnalyticsDestinationType: Dedicated
                 logs:
                   - category: WorkflowRuntime
                     enabled: true
@@ -240,6 +241,7 @@ paths:
                 properties:
                   eventHubAuthorizationRuleId: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule
                   eventHubName: myeventhub
+                  logAnalyticsDestinationType: Dedicated
                   logs:
                     - category: WorkflowRuntime
                       enabled: true
@@ -266,13 +268,16 @@ definitions:
       eventHubName:
         description: 'The name of the event hub. If none is specified, the default event hub will be selected.'
         type: string
+      logAnalyticsDestinationType:
+        description: 'A string indicating whether the export to Log Analytics should use the default destination type, i.e. AzureDiagnostics, or use a destination type constructed as follows: <normalized service identity>_<normalized category name>. Possible values are: Dedicated and null (null is default.)'
+        type: string
       logs:
-        description: the list of logs settings.
+        description: The list of logs settings.
         items:
           $ref: '#/definitions/LogSettings'
         type: array
       metrics:
-        description: the list of metric settings.
+        description: The list of metric settings.
         items:
           $ref: '#/definitions/MetricSettings'
         type: array
@@ -283,7 +288,7 @@ definitions:
         description: The resource ID of the storage account to which you would like to send Diagnostic Logs.
         type: string
       workspaceId:
-        description: 'The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2'
+        description: 'The full ARM resource ID of the Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2'
         type: string
   DiagnosticSettingsResource:
     allOf:

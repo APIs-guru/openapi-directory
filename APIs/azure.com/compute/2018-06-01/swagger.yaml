@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-06-01/compute.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -5101,7 +5100,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5201,7 +5199,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -5348,7 +5345,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5447,7 +5443,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 availabilitySet:
                   id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/{existing-availability-set-name}'
@@ -5561,7 +5556,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               plan:
                 name: windows2016
                 product: windows-data-science-vm
@@ -5681,7 +5675,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 diagnosticsProfile:
                   bootDiagnostics:
@@ -5801,7 +5794,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -5940,7 +5932,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               plan:
                 name: windows2016
                 product: windows-data-science-vm
@@ -6066,7 +6057,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -6174,7 +6164,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -6282,7 +6271,6 @@ paths:
             api-version: '2018-06-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -6888,6 +6876,29 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachines
+      x-ms-examples:
+        Lists all available virtual machine sizes to which the specified virtual machine can be resized:
+          parameters:
+            api-version: '2018-06-01'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmName: myVmName
+          responses:
+            '200':
+              body:
+                value:
+                  - maxDataDiskCount: 2
+                    memoryInMB: 2048
+                    name: Standard_A1_V2
+                    numberOfCores: 1
+                    osDiskSizeInMB: 1047552
+                    resourceDiskSizeInMB: 10240
+                  - maxDataDiskCount: 4
+                    memoryInMB: 4096
+                    name: Standard_A2_V2
+                    numberOfCores: 2
+                    osDiskSizeInMB: 1047552
+                    resourceDiskSizeInMB: 20480
       x-ms-pageable:
         nextLinkName: null
 definitions:
@@ -7878,7 +7889,7 @@ definitions:
         readOnly: true
         type: array
       proximityPlacementGroupType:
-        description: 'Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**'
+        description: 'Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.'
         enum:
           - Standard
           - Ultra
@@ -8752,10 +8763,10 @@ definitions:
         readOnly: true
         type: string
   VirtualMachineReimageParameters:
-    description: 'Parameters for Reimaging Virtual Machine. Default value for OSDisk : true.'
+    description: 'Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged'
     properties:
       tempDisk:
-        description: 'Specifies whether to reimage temp disk. Default value: false.'
+        description: 'Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.'
         type: boolean
   VirtualMachineScaleSet:
     allOf:

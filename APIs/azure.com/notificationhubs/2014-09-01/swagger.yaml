@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: notificationhubs
   x-tags:
@@ -916,7 +915,7 @@ definitions:
         description: Gets or sets provisioning state of the Namespace.
         type: string
       region:
-        description: 'Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe'
+        description: 'Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia East, Australia Southeast, Central US, East US, East US 2, West US, North Central US, South Central US, East Asia, Southeast Asia, Brazil South, Japan East, Japan West, North Europe, West Europe'
         externalDocs:
           url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
         type: string

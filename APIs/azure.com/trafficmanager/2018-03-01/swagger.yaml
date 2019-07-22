@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-03-01/trafficmanager.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: trafficmanager
   x-tags:
@@ -263,7 +262,8 @@ paths:
                       trafficRoutingMethod: Performance
                     tags: {}
                     type: Microsoft.Network/trafficManagerProfiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles':
     get:
       description: Lists all Traffic Manager profiles within a resource group.
@@ -359,7 +359,8 @@ paths:
                       trafficRoutingMethod: Performance
                     tags: {}
                     type: Microsoft.Network/trafficManagerProfiles
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}':
     delete:
       description: Deletes a Traffic Manager profile.

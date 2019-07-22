@@ -68,6 +68,21 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  SapMonitorNameParameter:
+    description: Name of the SAP monitor resource.
+    in: path
+    name: sapMonitorName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SapMonitorParameter:
+    description: Request body representing a SAP Monitor
+    in: body
+    name: sapMonitorParameter
+    required: true
+    schema:
+      $ref: '#/definitions/SapMonitor'
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
@@ -254,6 +269,62 @@ paths:
                       storageProfile:
                         nfsIpAddress: 200.200.200.203
                     type: Microsoft.HanaOnAzure/hanaInstances
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors':
+    get:
+      description: Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.
+      operationId: SapMonitors_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SapMonitorListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Gets a list of SAP monitors in the specified subscription.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        List all SAP Monitors in a subscription:
+          parameters:
+            api-version: 2017-11-03-preview
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor1
+                    location: westus
+                    name: mySapMonitor1
+                    properties:
+                      hanaDbName: ''
+                      hanaDbSqlPort: 1234
+                      hanaDbUsername: ''
+                      hanaHostname: ''
+                      hanaSubnet: ''
+                      provisioningState: Succeeded
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/sapMonitors
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor2
+                    location: westus
+                    name: mySapMonitor2
+                    properties:
+                      hanaDbName: ''
+                      hanaDbSqlPort: 1234
+                      hanaDbUsername: ''
+                      hanaHostname: ''
+                      hanaSubnet: ''
+                      provisioningState: Succeeded
+                    tags:
+                      key: value
+                    type: Microsoft.HanaOnAzure/sapMonitors
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances':
@@ -699,6 +770,10 @@ paths:
           description: OK
         '202':
           description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       tags:
         - HanaOnAzure
       x-ms-examples:
@@ -711,6 +786,295 @@ paths:
           responses:
             '200': {}
             '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/shutdown':
+    post:
+      description: The operation to shutdown a SAP HANA instance.
+      operationId: HanaInstances_Shutdown
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Shutdown a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/start':
+    post:
+      description: The operation to start a SAP HANA instance.
+      operationId: HanaInstances_Start
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Start a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}':
+    delete:
+      description: 'Deletes a SAP monitor with the specified subscription, resource group, and monitor name.'
+      operationId: SapMonitors_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/SapMonitorNameParameter'
+      responses:
+        '200':
+          description: Deleted SapMonitor
+        '202':
+          description: Deleting SapMonitor
+        '204':
+          description: No SapMonitor to delete
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Deletes a SAP monitor.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Deletes a SAP monitor:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            sapMonitorName: mySapMonitor
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+    get:
+      description: 'Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.'
+      operationId: SapMonitors_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/SapMonitorNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SapMonitor'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Gets properties of a SAP monitor.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Get properties of a SAP monitor:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            sapMonitorName: mySapMonitor
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor
+                location: westus
+                name: mySapMonitor
+                properties:
+                  hanaDbName: ''
+                  hanaDbSqlPort: 1234
+                  hanaDbUsername: ''
+                  hanaHostname: ''
+                  hanaSubnet: ''
+                  provisioningState: Succeeded
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/sapMonitors
+    patch:
+      description: 'Patches the Tags field of a SAP monitor for the specified subscription, resource group, and monitor name.'
+      operationId: SapMonitors_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/SapMonitorNameParameter'
+        - $ref: '#/parameters/TagsParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SapMonitor'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Patches the Tags field of a SAP monitor.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Delete Tags field of a SAP monitor:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            sapMonitorName: mySapMonitor
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+            tagsParameter:
+              tags: {}
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor
+                location: westus
+                name: mySapMonitor
+                properties:
+                  hanaDbName: ''
+                  hanaDbSqlPort: 1234
+                  hanaDbUsername: ''
+                  hanaHostname: ''
+                  hanaSubnet: ''
+                  provisioningState: Succeeded
+                tags: {}
+                type: Microsoft.HanaOnAzure/sapMonitors
+        Update Tags field of a SAP monitor:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            sapMonitorName: mySapMonitor
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+            tagsParameter:
+              tags:
+                testkey: testvalue
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor
+                location: westus
+                name: mySapMonitor
+                properties:
+                  hanaDbName: ''
+                  hanaDbSqlPort: 1234
+                  hanaDbUsername: ''
+                  hanaHostname: ''
+                  hanaSubnet: ''
+                  provisioningState: Succeeded
+                tags:
+                  testkey: testvalue
+                type: Microsoft.HanaOnAzure/sapMonitors
+    put:
+      description: 'Creates a SAP monitor for the specified subscription, resource group, and resource name.'
+      operationId: SapMonitors_Create
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/SapMonitorNameParameter'
+        - $ref: '#/parameters/SapMonitorParameter'
+      responses:
+        '200':
+          description: Created SapMonitor
+          schema:
+            $ref: '#/definitions/SapMonitor'
+        '201':
+          description: Creating SapMonitor
+          schema:
+            $ref: '#/definitions/SapMonitor'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Creates a SAP monitor.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Create a SAP Monitor:
+          parameters:
+            api-version: 2017-11-03-preview
+            resourceGroupName: myResourceGroup
+            sapMonitorName: mySapMonitor
+            sapMonitorParameter:
+              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/sapMonitors/mySapMonitor
+              location: westus
+              name: mySapMonitor
+              properties:
+                hanaDbName: ''
+                hanaDbPassword: ''
+                hanaDbSqlPort: 1234
+                hanaDbUsername: ''
+                hanaHostname: ''
+                hanaSubnet: ''
+                provisioningState: Succeeded
+              tags:
+                key: value
+              type: Microsoft.HanaOnAzure/sapMonitors
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaDbName: ''
+                  hanaDbSqlPort: 1234
+                  hanaDbUsername: ''
+                  hanaHostname: ''
+                  hanaSubnet: ''
+                  provisioningState: Succeeded
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/hanaInstances
+            '201':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaDbName: ''
+                  hanaDbSqlPort: 1234
+                  hanaDbUsername: ''
+                  hanaHostname: ''
+                  hanaSubnet: ''
+                  provisioningState: Accepted
+                tags:
+                  key: value
+                type: Microsoft.HanaOnAzure/hanaInstances
       x-ms-long-running-operation: true
 definitions:
   Disk:
@@ -987,6 +1351,62 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  SapMonitor:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: SAP monitor info on Azure (ARM properties and SAP monitor properties)
+    properties:
+      properties:
+        $ref: '#/definitions/SapMonitorProperties'
+        description: SAP monitor properties
+        x-ms-client-flatten: true
+  SapMonitorListResult:
+    description: The response from the List SAP monitors operation.
+    properties:
+      nextLink:
+        description: The URL to get the next set of SAP monitors.
+        type: string
+      value:
+        description: The list of SAP monitors.
+        items:
+          $ref: '#/definitions/SapMonitor'
+        type: array
+  SapMonitorProperties:
+    description: Describes the properties of a SAP monitor.
+    properties:
+      hanaDbName:
+        description: Database name of the HANA instance.
+        type: string
+      hanaDbPassword:
+        description: Database password of the HANA instance.
+        type: string
+      hanaDbSqlPort:
+        description: Database port of the HANA instance.
+        type: integer
+      hanaDbUsername:
+        description: Database username of the HANA instance.
+        type: string
+      hanaHostname:
+        description: Hostname of the HANA instance.
+        type: string
+      hanaSubnet:
+        description: Specifies the SAP monitor unique ID.
+        type: string
+      provisioningState:
+        description: State of provisioning of the HanaInstance
+        enum:
+          - Accepted
+          - Creating
+          - Updating
+          - Failed
+          - Succeeded
+          - Deleting
+          - Migrating
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HanaProvisioningStatesEnum
   StorageProfile:
     description: Specifies the storage settings for the HANA instance disks.
     properties:

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory-Pipeline
   x-tags:
@@ -119,9 +118,9 @@ definitions:
         $ref: '#/definitions/RedshiftUnloadSettings'
         description: 'The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.'
     type: object
-  AmazonS3ReadSetting:
+  AmazonS3ReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Azure data lake store read settings.
     properties:
       enablePartitionDiscovery:
@@ -167,9 +166,9 @@ definitions:
       variableName:
         description: Name of the variable whose value needs to be appended to.
         type: string
-  AzureBlobFSReadSetting:
+  AzureBlobFSReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Azure blobFS read settings.
     properties:
       enablePartitionDiscovery:
@@ -215,14 +214,14 @@ definitions:
         description: 'Treat empty as null. Type: boolean (or Expression with resultType boolean).'
         type: object
     type: object
-  AzureBlobFSWriteSetting:
+  AzureBlobFSWriteSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorWriteSetting'
+      - $ref: '#/definitions/StoreWriteSettings'
     description: Azure blobFS write settings.
     type: object
-  AzureBlobStorageReadSetting:
+  AzureBlobStorageReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Azure blob read settings.
     properties:
       enablePartitionDiscovery:
@@ -244,9 +243,9 @@ definitions:
         description: 'Azure blob wildcardFolderPath. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  AzureBlobStorageWriteSetting:
+  AzureBlobStorageWriteSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorWriteSetting'
+      - $ref: '#/definitions/StoreWriteSettings'
     description: Azure blob write settings.
     type: object
   AzureDataExplorerSink:
@@ -281,9 +280,9 @@ definitions:
     required:
       - query
     type: object
-  AzureDataLakeStoreReadSetting:
+  AzureDataLakeStoreReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Azure data lake store read settings.
     properties:
       enablePartitionDiscovery:
@@ -326,9 +325,9 @@ definitions:
         description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
         type: object
     type: object
-  AzureDataLakeStoreWriteSetting:
+  AzureDataLakeStoreWriteSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorWriteSetting'
+      - $ref: '#/definitions/StoreWriteSettings'
     description: Azure data lake store write settings.
     type: object
   AzureFunctionActivity:
@@ -488,6 +487,15 @@ definitions:
         description: 'Database query. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  AzurePostgreSqlSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure PostgreSQL sink.
+    properties:
+      preCopyScript:
+        description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   AzurePostgreSqlSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -513,7 +521,7 @@ definitions:
         enum:
           - Merge
           - Upload
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: AzureSearchIndexWriteBehaviorType
@@ -591,6 +599,24 @@ definitions:
         description: 'Azure Table source query. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  BinarySink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Binary sink.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreReadSettings'
+        description: Binary store settings.
+    type: object
+  BinarySource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Binary source.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreReadSettings'
+        description: Binary store settings.
+    type: object
   BlobSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -642,12 +668,40 @@ definitions:
           - LOCAL_ONE
           - SERIAL
           - LOCAL_SERIAL
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: CassandraSourceReadConsistencyLevels
       query:
         description: 'Database query. Should be a SQL-92 query expression or Cassandra Query Language (CQL) command. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  CommonDataServiceForAppsSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Common Data Service for Apps sink.
+    properties:
+      ignoreNullValues:
+        description: 'The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      writeBehavior:
+        description: The write behavior for the operation.
+        enum:
+          - Upsert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsSinkWriteBehavior
+    required:
+      - writeBehavior
+    type: object
+  CommonDataServiceForAppsSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Common Data Service for Apps source.
+    properties:
+      query:
+        description: 'FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string).'
         type: object
     type: object
   ConcurSource:
@@ -658,37 +712,6 @@ definitions:
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
-    type: object
-  ConnectorReadSetting:
-    additionalProperties:
-      type: object
-    description: Connector read setting.
-    properties:
-      maxConcurrentConnections:
-        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
-        type: object
-      type:
-        description: The read setting type.
-        type: string
-    required:
-      - type
-    type: object
-  ConnectorWriteSetting:
-    additionalProperties:
-      type: object
-    description: Connector write settings.
-    properties:
-      copyBehavior:
-        description: The type of copy behavior for copy sink.
-        type: object
-      maxConcurrentConnections:
-        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
-        type: object
-      type:
-        description: The write setting type.
-        type: string
-    required:
-      - type
     type: object
   ControlActivity:
     allOf:
@@ -803,7 +826,7 @@ definitions:
       - PreserveHierarchy
       - FlattenHierarchy
       - MergeFiles
-    type: object
+    type: string
     x-ms-enum:
       modelAsString: true
       name: CopyBehaviorType
@@ -1161,6 +1184,15 @@ definitions:
         type: object
     required:
       - pythonFile
+  Db2Source:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for Db2 databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   DeleteActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -1210,9 +1242,9 @@ definitions:
         type: object
     required:
       - dataset
-  DelimitedTextReadSetting:
+  DelimitedTextReadSettings:
     allOf:
-      - $ref: '#/definitions/FormatReadSetting'
+      - $ref: '#/definitions/FormatReadSettings'
     description: Delimited text read settings.
     properties:
       skipLineCount:
@@ -1225,10 +1257,10 @@ definitions:
     description: A copy activity DelimitedText sink.
     properties:
       formatSettings:
-        $ref: '#/definitions/DelimitedTextWriteSetting'
+        $ref: '#/definitions/DelimitedTextWriteSettings'
         description: DelimitedText format settings.
       storeSettings:
-        $ref: '#/definitions/ConnectorWriteSetting'
+        $ref: '#/definitions/StoreWriteSettings'
         description: DelimitedText store settings.
     type: object
   DelimitedTextSource:
@@ -1237,15 +1269,15 @@ definitions:
     description: A copy activity DelimitedText source.
     properties:
       formatSettings:
-        $ref: '#/definitions/DelimitedTextReadSetting'
+        $ref: '#/definitions/DelimitedTextReadSettings'
         description: DelimitedText format settings.
       storeSettings:
-        $ref: '#/definitions/ConnectorReadSetting'
+        $ref: '#/definitions/StoreReadSettings'
         description: DelimitedText store settings.
     type: object
-  DelimitedTextWriteSetting:
+  DelimitedTextWriteSettings:
     allOf:
-      - $ref: '#/definitions/FormatWriteSetting'
+      - $ref: '#/definitions/FormatWriteSettings'
     description: Delimited text write settings.
     properties:
       fileExtension:
@@ -1315,6 +1347,34 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  DynamicsCrmSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Dynamics CRM sink.
+    properties:
+      ignoreNullValues:
+        description: 'The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      writeBehavior:
+        description: The write behavior for the operation.
+        enum:
+          - Upsert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsSinkWriteBehavior
+    required:
+      - writeBehavior
+    type: object
+  DynamicsCrmSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Dynamics CRM source.
+    properties:
+      query:
+        description: 'FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   DynamicsSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -1327,7 +1387,7 @@ definitions:
         description: The write behavior for the operation.
         enum:
           - Upsert
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: DynamicsSinkWriteBehavior
@@ -1434,6 +1494,9 @@ definitions:
       executionCredential:
         $ref: '#/definitions/SSISExecutionCredential'
         description: The package execution credential.
+      logLocation:
+        $ref: '#/definitions/SSISLogLocation'
+        description: SSIS package execution log location.
       loggingLevel:
         description: 'The logging level of SSIS package execution. Type: string (or Expression with resultType string).'
         type: object
@@ -1499,9 +1562,9 @@ definitions:
         $ref: '#/definitions/ActivityPolicy'
         description: Activity policy.
     x-ms-discriminator-value: Execution
-  FileServerReadSetting:
+  FileServerReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: File server read settings.
     properties:
       enablePartitionDiscovery:
@@ -1523,9 +1586,9 @@ definitions:
         description: 'FileServer wildcardFolderPath. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  FileServerWriteSetting:
+  FileServerWriteSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorWriteSetting'
+      - $ref: '#/definitions/StoreWriteSettings'
     description: File server write settings.
     type: object
   FileSystemSink:
@@ -1639,7 +1702,7 @@ definitions:
     required:
       - items
       - activities
-  FormatReadSetting:
+  FormatReadSettings:
     additionalProperties:
       type: object
     description: Format read settings.
@@ -1650,7 +1713,7 @@ definitions:
     required:
       - type
     type: object
-  FormatWriteSetting:
+  FormatWriteSettings:
     additionalProperties:
       type: object
     description: Format write settings.
@@ -1661,9 +1724,9 @@ definitions:
     required:
       - type
     type: object
-  FtpReadSetting:
+  FtpReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Ftp read settings.
     properties:
       recursive:
@@ -2178,9 +2241,9 @@ definitions:
       - input
       - output
       - filePaths
-  HdfsReadSetting:
+  HdfsReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: HDFS read settings.
     properties:
       distcpSettings:
@@ -2226,9 +2289,9 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  HttpReadSetting:
+  HttpReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Sftp read settings.
     properties:
       additionalHeaders:
@@ -2311,6 +2374,24 @@ definitions:
     properties:
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  InformixSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Informix sink.
+    properties:
+      preCopyScript:
+        description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  InformixSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for Informix.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
         type: object
     type: object
   JiraSource:
@@ -2422,6 +2503,24 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  MicrosoftAccessSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Microsoft Access sink.
+    properties:
+      preCopyScript:
+        description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  MicrosoftAccessSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for Microsoft Access.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   MongoDbCursorMethodsProperties:
     additionalProperties:
       type: object
@@ -2464,13 +2563,57 @@ definitions:
         description: 'Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string).'
         type: object
     type: object
+  MySqlSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for MySQL databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  NetezzaPartitionSettings:
+    description: The settings that will be leveraged for Netezza source partitioning.
+    properties:
+      partitionColumnName:
+        description: 'The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+      partitionLowerBound:
+        description: 'The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+      partitionUpperBound:
+        description: 'The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   NetezzaSource:
     allOf:
       - $ref: '#/definitions/CopySource'
     description: A copy activity Netezza source.
     properties:
+      partitionOption:
+        description: The partition mechanism that will be used for Netezza read in parallel.
+        enum:
+          - None
+          - DataSlice
+          - DynamicRange
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetezzaPartitionOption
+      partitionSettings:
+        $ref: '#/definitions/NetezzaPartitionSettings'
+        description: The settings that will be leveraged for Netezza source partitioning.
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ODataSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for OData source.
+    properties:
+      query:
+        description: 'OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
         type: object
     type: object
   OdbcSink:
@@ -2482,6 +2625,15 @@ definitions:
         description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  OdbcSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for ODBC databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   Office365Source:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -2489,7 +2641,7 @@ definitions:
     properties: {}
     type: object
   OraclePartitionSettings:
-    description: The settings that will be leveraged for oracle source partitioning.
+    description: The settings that will be leveraged for Oracle source partitioning.
     properties:
       partitionColumnName:
         description: 'The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
@@ -2498,7 +2650,7 @@ definitions:
         description: 'The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
         type: object
       partitionNames:
-        description: 'Names of the physical partitions of oracle table. '
+        description: 'Names of the physical partitions of Oracle table. '
         items:
           description: 'Type: string (or Expression with resultType string).'
           type: object
@@ -2534,18 +2686,18 @@ definitions:
         description: 'Oracle reader query. Type: string (or Expression with resultType string).'
         type: object
       partitionOption:
-        description: The partition mechanism that will be used for oracle read in parallel.
+        description: The partition mechanism that will be used for Oracle read in parallel.
         enum:
           - None
           - PhysicalPartitionsOfTable
           - DynamicRange
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
-          name: TabularPartitionOption
+          name: OraclePartitionOption
       partitionSettings:
         $ref: '#/definitions/OraclePartitionSettings'
-        description: The settings that will be leveraged for oracle source partitioning.
+        description: The settings that will be leveraged for Oracle source partitioning.
       queryTimeout:
         description: 'Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
         type: object
@@ -2556,7 +2708,7 @@ definitions:
     description: A copy activity Parquet sink.
     properties:
       storeSettings:
-        $ref: '#/definitions/ConnectorWriteSetting'
+        $ref: '#/definitions/StoreWriteSettings'
         description: Parquet store settings.
     type: object
   ParquetSource:
@@ -2565,7 +2717,7 @@ definitions:
     description: A copy activity Parquet source.
     properties:
       storeSettings:
-        $ref: '#/definitions/ConnectorReadSetting'
+        $ref: '#/definitions/StoreReadSettings'
         description: Parquet store settings.
     type: object
   PaypalSource:
@@ -2689,6 +2841,15 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: PolybaseSettingsRejectType
+  PostgreSqlSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for PostgreSQL databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   PrestoSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -2780,6 +2941,40 @@ definitions:
         description: 'The time to await before sending next page request. '
         type: object
     type: object
+  SSISAccessCredential:
+    description: SSIS access credential.
+    properties:
+      domain:
+        description: Domain for windows authentication.
+        type: object
+      password:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        properties:
+          value:
+            description: Value of secure string.
+            type: string
+        required:
+          - value
+        type: object
+        x-ms-discriminator-value: SecureString
+      userName:
+        description: UseName for windows authentication.
+        type: object
+    required:
+      - domain
+      - userName
+      - password
+    type: object
   SSISConnectionManager:
     additionalProperties:
       $ref: '#/definitions/SSISExecutionParameter'
@@ -2828,14 +3023,90 @@ definitions:
     required:
       - value
     type: object
+  SSISLogLocation:
+    description: SSIS package execution log location
+    properties:
+      logPath:
+        description: 'The SSIS package execution log path. Type: string (or Expression with resultType string).'
+        type: object
+      type:
+        description: The type of SSIS log location.
+        enum:
+          - File
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SsisLogLocationType
+      typeProperties:
+        $ref: '#/definitions/SSISLogLocationTypeProperties'
+        description: SSIS package execution log location properties.
+        x-ms-client-flatten: true
+    required:
+      - logPath
+      - type
+      - typeProperties
+    type: object
+  SSISLogLocationTypeProperties:
+    description: SSIS package execution log location properties.
+    properties:
+      accessCredential:
+        $ref: '#/definitions/SSISAccessCredential'
+        description: The package execution log access credential.
+      logRefreshInterval:
+        description: 'Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    type: object
   SSISPackageLocation:
     description: SSIS package location.
     properties:
       packagePath:
         description: 'The SSIS package path. Type: string (or Expression with resultType string).'
         type: object
+      type:
+        description: The type of SSIS package location.
+        enum:
+          - SSISDB
+          - File
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SsisPackageLocationType
+      typeProperties:
+        $ref: '#/definitions/SSISPackageLocationTypeProperties'
+        description: SSIS package location properties.
+        x-ms-client-flatten: true
     required:
       - packagePath
+    type: object
+  SSISPackageLocationTypeProperties:
+    description: SSIS package location properties.
+    properties:
+      accessCredential:
+        $ref: '#/definitions/SSISAccessCredential'
+        description: The package access credential.
+      configurationPath:
+        description: 'The configuration file of the package execution. Type: string (or Expression with resultType string).'
+        type: object
+      packagePassword:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        properties:
+          value:
+            description: Value of secure string.
+            type: string
+        required:
+          - value
+        type: object
+        x-ms-discriminator-value: SecureString
     type: object
   SSISPropertyOverride:
     description: SSIS property override.
@@ -2858,6 +3129,45 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  SalesforceServiceCloudSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Salesforce Service Cloud sink.
+    properties:
+      externalIdFieldName:
+        description: 'The name of the external ID field for upsert operation. Default value is ''Id'' column. Type: string (or Expression with resultType string).'
+        type: object
+      ignoreNullValues:
+        description: 'The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      writeBehavior:
+        description: The write behavior for the operation. Default is Insert.
+        enum:
+          - Insert
+          - Upsert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SalesforceSinkWriteBehavior
+    type: object
+  SalesforceServiceCloudSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Salesforce Service Cloud source.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+      readBehavior:
+        description: The read behavior for the operation. Default is Query.
+        enum:
+          - Query
+          - QueryAll
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SalesforceSourceReadBehavior
+    type: object
   SalesforceSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -2874,7 +3184,7 @@ definitions:
         enum:
           - Insert
           - Upsert
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: SalesforceSinkWriteBehavior
@@ -2892,7 +3202,7 @@ definitions:
         enum:
           - Query
           - QueryAll
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: SalesforceSourceReadBehavior
@@ -2907,7 +3217,7 @@ definitions:
         enum:
           - Insert
           - Update
-        type: object
+        type: string
         x-ms-enum:
           modelAsString: true
           name: SapCloudForCustomerSinkWriteBehavior
@@ -2983,10 +3293,11 @@ definitions:
           - PartitionOnCalendarYear
           - PartitionOnCalendarMonth
           - PartitionOnCalendarDate
-        type: object
+          - PartitionOnTime
+        type: string
         x-ms-enum:
           modelAsString: true
-          name: TabularPartitionOption
+          name: SapTablePartitionOption
       partitionSettings:
         $ref: '#/definitions/SapTablePartitionSettings'
         description: The settings that will be leveraged for SAP table source partitioning.
@@ -3033,9 +3344,9 @@ definitions:
       variableName:
         description: Name of the variable whose value needs to be set.
         type: string
-  SftpReadSetting:
+  SftpReadSettings:
     allOf:
-      - $ref: '#/definitions/ConnectorReadSetting'
+      - $ref: '#/definitions/StoreReadSettings'
     description: Sftp read settings.
     properties:
       modifiedDatetimeEnd:
@@ -3100,6 +3411,49 @@ definitions:
         type: object
       storedProcedureParameters:
         description: 'Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter.'
+        type: object
+    type: object
+  SqlMISink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure SQL Managed Instance sink.
+    properties:
+      preCopyScript:
+        description: 'SQL pre-copy script. Type: string (or Expression with resultType string).'
+        type: object
+      sqlWriterStoredProcedureName:
+        description: 'SQL writer stored procedure name. Type: string (or Expression with resultType string).'
+        type: object
+      sqlWriterTableType:
+        description: 'SQL writer table type. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        additionalProperties:
+          $ref: '#/definitions/StoredProcedureParameter'
+        description: SQL stored procedure parameters.
+        type: object
+      storedProcedureTableTypeParameterName:
+        description: 'The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SqlMISource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure SQL Managed Instance source.
+    properties:
+      produceAdditionalTypes:
+        description: Which additional types to produce.
+        type: object
+      sqlReaderQuery:
+        description: 'SQL reader query. Type: string (or Expression with resultType string).'
+        type: object
+      sqlReaderStoredProcedureName:
+        description: 'Name of the stored procedure for a Azure SQL Managed Instance source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        additionalProperties:
+          $ref: '#/definitions/StoredProcedureParameter'
+        description: 'Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".'
         type: object
     type: object
   SqlServerSink:
@@ -3253,6 +3607,37 @@ definitions:
     required:
       - linkedServiceName
     type: object
+  StoreReadSettings:
+    additionalProperties:
+      type: object
+    description: Connector read setting.
+    properties:
+      maxConcurrentConnections:
+        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
+        type: object
+      type:
+        description: The read setting type.
+        type: string
+    required:
+      - type
+    type: object
+  StoreWriteSettings:
+    additionalProperties:
+      type: object
+    description: Connector write settings.
+    properties:
+      copyBehavior:
+        description: The type of copy behavior for copy sink.
+        type: object
+      maxConcurrentConnections:
+        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
+        type: object
+      type:
+        description: The write setting type.
+        type: string
+    required:
+      - type
+    type: object
   StoredProcedureParameter:
     description: SQL stored procedure parameter.
     properties:
@@ -3277,6 +3662,15 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: StoredProcedureParameterType
+  SybaseSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for Sybase databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   TabularTranslator:
     allOf:
       - $ref: '#/definitions/CopyTranslator'
@@ -3293,6 +3687,41 @@ definitions:
         type: object
       schemaMapping:
         description: 'The schema mapping to map between tabular data and hierarchical data. Example: {"Column1": "$.Column1", "Column2": "$.Column2.Property1", "Column3": "$.Column2.Property2"}. Type: object (or Expression with resultType object). This property will be retired. Please use mappings property.'
+        type: object
+    type: object
+  TeradataPartitionSettings:
+    description: The settings that will be leveraged for teradata source partitioning.
+    properties:
+      partitionColumnName:
+        description: 'The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string).'
+        type: object
+      partitionLowerBound:
+        description: 'The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+      partitionUpperBound:
+        description: 'The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  TeradataSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Teradata source.
+    properties:
+      partitionOption:
+        description: The partition mechanism that will be used for teradata read in parallel.
+        enum:
+          - None
+          - Hash
+          - DynamicRange
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TeradataPartitionOption
+      partitionSettings:
+        $ref: '#/definitions/TeradataPartitionSettings'
+        description: The settings that will be leveraged for teradata source partitioning.
+      query:
+        description: 'Teradata query. Type: string (or Expression with resultType string).'
         type: object
     type: object
   UntilActivity:

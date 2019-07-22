@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2018-07-10/service.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -15065,8 +15064,19 @@ definitions:
       primaryNicStaticIPAddress:
         description: Primary nic static IP address.
         type: string
+      recoveryLBBackendAddressPoolIds:
+        description: The target backend address pools for the NIC.
+        items:
+          type: string
+        type: array
+      recoveryNetworkSecurityGroupId:
+        description: The id of the NSG associated with the NIC.
+        type: string
       recoveryNicIpAddressType:
         description: IP allocation type for recovery VM.
+        type: string
+      recoveryPublicIpAddressId:
+        description: The id of the public IP address resource associated with the NIC.
         type: string
       recoveryVMNetworkId:
         description: Recovery VM network Id.
@@ -15101,6 +15111,17 @@ definitions:
         type: boolean
       nicId:
         description: The nic Id.
+        type: string
+      recoveryLBBackendAddressPoolIds:
+        description: The target backend address pools for the NIC.
+        items:
+          type: string
+        type: array
+      recoveryNetworkSecurityGroupId:
+        description: The id of the NSG associated with the NIC.
+        type: string
+      recoveryPublicIpAddressId:
+        description: The id of the public IP address resource associated with the NIC.
         type: string
       recoveryVMSubnetName:
         description: Recovery VM subnet name.

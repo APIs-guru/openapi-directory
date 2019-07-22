@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/restorePoints.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-restorePoints
   x-tags:
@@ -147,7 +146,8 @@ paths:
                       restorePointCreationDate: null
                       restorePointType: CONTINUOUS
                     type: Microsoft.Sql/servers/databases/restorePoints
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   RestorePoint:
     allOf:

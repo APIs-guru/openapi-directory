@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storagesync/resource-manager/Microsoft.StorageSync/stable/2018-04-02/storagesync.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storagesync
   x-tags:
@@ -353,7 +352,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices':
     get:
       description: Get a StorageSyncService list by Resource group name.
@@ -435,7 +435,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}':
     delete:
       description: Delete a given StorageSyncService.
@@ -793,7 +794,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}':
     delete:
       description: Delete the given registered server.
@@ -1167,7 +1169,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}':
     delete:
       description: Delete a given SyncGroup.
@@ -1468,7 +1471,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}':
     delete:
       description: Delete a given CloudEndpoint.
@@ -2396,7 +2400,8 @@ paths:
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}':
     delete:
       description: Delete a given ServerEndpoint.

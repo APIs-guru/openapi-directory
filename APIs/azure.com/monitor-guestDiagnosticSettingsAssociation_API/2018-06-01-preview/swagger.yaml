@@ -67,7 +67,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettingsAssociations':
     get:
       description: Get a list of all guest diagnostic settings association in a subscription.
-      operationId: guestDiagnosticsSettingsAssociation_List
+      operationId: GuestDiagnosticsSettingsAssociation_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
@@ -85,7 +85,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettingsAssociations':
     get:
       description: Get a list of all guest diagnostic settings association in a resource group.
-      operationId: guestDiagnosticsSettingsAssociation_ListByResourceGroup
+      operationId: GuestDiagnosticsSettingsAssociation_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -140,7 +140,7 @@ paths:
               headers: {}
     get:
       description: Gets guest diagnostics association settings.
-      operationId: guestDiagnosticsSettingsAssociation_Get
+      operationId: GuestDiagnosticsSettingsAssociation_Get
       parameters:
         - description: 'The fully qualified ID of the resource, including the resource name and resource type.'
           in: path
@@ -180,7 +180,7 @@ paths:
               headers: {}
     patch:
       description: Updates an existing guestDiagnosticsSettingsAssociation Resource. To update other fields use the CreateOrUpdate method
-      operationId: guestDiagnosticsSettingsAssociation_Update
+      operationId: GuestDiagnosticsSettingsAssociation_Update
       parameters:
         - description: 'The fully qualified ID of the resource, including the resource name and resource type.'
           in: path
@@ -228,7 +228,7 @@ paths:
               headers: {}
     put:
       description: Creates or updates guest diagnostics settings association.
-      operationId: guestDiagnosticsSettingsAssociation_CreateOrUpdate
+      operationId: GuestDiagnosticsSettingsAssociation_CreateOrUpdate
       parameters:
         - description: 'The fully qualified ID of the resource, including the resource name and resource type.'
           in: path

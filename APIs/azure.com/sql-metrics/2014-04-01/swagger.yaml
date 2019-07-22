@@ -304,7 +304,8 @@ paths:
                     primaryAggregationType: Maximum
                     resourceUri: /subscriptions/b6a6e0c5-e79c-4c6d-a878-72eafbca4cf2/resourceGroups/QA/providers/Microsoft.Sql/servers/nafantest/databases/db1
                     unit: Percent
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/metrics':
     get:
       description: Returns database metrics.
@@ -385,7 +386,8 @@ paths:
                     startTime: '2017-06-02T18:35:00Z'
                     timeGrain: '00:10:00'
                     unit: percent
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/metricDefinitions':
     get:
       description: Returns elastic pool metric definitions.
@@ -650,7 +652,8 @@ paths:
                     primaryAggregationType: Maximum
                     resourceUri: /subscriptions/b6a6e0c5-e79c-4c6d-a878-72eafbca4cf2/resourceGroups/QA/providers/Microsoft.Sql/servers/nafantest/databases/db1
                     unit: Percent
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/metrics':
     get:
       description: Returns elastic pool  metrics.
@@ -731,7 +734,8 @@ paths:
                     startTime: '2017-06-02T18:35:00Z'
                     timeGrain: '00:10:00'
                     unit: percent
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   Metric:
     description: Database metrics.

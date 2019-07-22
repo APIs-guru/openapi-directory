@@ -284,7 +284,8 @@ paths:
                       suffixSize: null
                       tableName: Table_1
                     type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}':
     put:
       description: Creates or updates a database data masking rule.

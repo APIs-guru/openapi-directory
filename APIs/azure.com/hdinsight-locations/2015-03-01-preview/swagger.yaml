@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/locations.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: hdinsight-locations
   x-tags:
@@ -43,7 +42,7 @@ parameters:
     required: true
     type: string
   LocationParameter:
-    description: The location.
+    description: The Azure location (region) for which to make the request.
     in: path
     name: location
     required: true
@@ -56,6 +55,73 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/billingSpecs':
+    get:
+      description: Lists the billingSpecs for the specified subscription and location.
+      operationId: Locations_ListBillingSpecs
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            $ref: '#/definitions/BillingResponseListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Regions
+      x-ms-examples:
+        Get the subscription billingSpecs for the specified location:
+          parameters:
+            api-version: 2015-03-01-preview
+            location: East US 2
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                billingResources:
+                  - billingMeters: []
+                    diskBillingMeters: []
+                    region: East US 2
+                  - billingMeters:
+                      - meter: 11111111-1111-1111-1111-111111111111
+                        meterParameter: default
+                        unit: CoreHours
+                      - meter: 11111111-1111-1111-1111-111111111111
+                        meterParameter: Kafka
+                        unit: CoreHours
+                    diskBillingMeters:
+                      - diskRpMeter: 11111111-1111-1111-1111-111111111111
+                        sku: All
+                        tier: Standard
+                      - diskRpMeter: 11111111-1111-1111-1111-111111111111
+                        sku: All
+                        tier: Standard
+                    region: default
+                vmSizeFilters:
+                  - clusterFlavors: null
+                    clusterVersions: null
+                    filterMode: Exclude
+                    nodeTypes: null
+                    osType: null
+                    regions: null
+                    vmSizes: null
+                vmSizes:
+                  - A5
+                  - A6
+                  - A7
   '/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/capabilities':
     get:
       description: Gets the capabilities for the specified location.
@@ -91,7 +157,7 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              Body:
+              body:
                 features:
                   - ALLOW_GATEWAY_AUTH_BYPASS
                   - AUX_IAAS_FUNCTIONALITIES
@@ -175,8 +241,6 @@ paths:
                   - VIRTUAL_NETWORK_ENABLED
                   - VMSIZES_AUX
                 quota:
-                  cores_used: 72
-                  max_cores_allowed: 1000
                   regionalQuotas:
                     - cores_available: 1000
                       cores_used: 0
@@ -294,7 +358,7 @@ paths:
                           Storm: 0.9.3
                         displayName: Version 3.2.1000.0.8840373
                         friendlyName: '3.2'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: 1.1.2
                           HDP: '2.3'
@@ -303,7 +367,7 @@ paths:
                           Storm: 0.10.0
                         displayName: Version 3.3.1000.0.9776961
                         friendlyName: '3.3'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: 1.1.2
                           HDP: '2.4'
@@ -313,7 +377,7 @@ paths:
                           Storm: 0.10.0
                         displayName: Version 3.4.1000.0.9719475
                         friendlyName: '3.4'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: 1.1.2
                           HDP: '2.5'
@@ -324,40 +388,40 @@ paths:
                           Storm: 1.0.1
                         displayName: Version 3.5.1000.0.9732704
                         friendlyName: '3.5'
-                        isDefault: true
+                        isDefault: 'true'
                       - componentVersions:
                           HDP: '2.6'
                           Spark: 2.1.0
                         displayName: Version 3.6.1000.0.9503998
                         friendlyName: '3.6'
-                        isDefault: false
+                        isDefault: 'false'
                       - displayName: Version 99.152.1000.0.6943836
                         friendlyName: '99.152'
-                        isDefault: false
+                        isDefault: 'false'
                   paas:
                     available:
                       - displayName: HdInsight version 1.6.1.0.335536
                         friendlyName: '1.6'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HDP: '1.3'
                           Hadoop: 1.2.0
                         displayName: Version 2.1.9.406.1221105
                         friendlyName: '2.1'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HDP: '2.0'
                           Hadoop: 2.2.0
                         displayName: Version 3.0.6.989.2441725
                         friendlyName: '3.0'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: '0.98'
                           HDP: 2.1.7
                           Hadoop: 2.4.0
                         displayName: Version 3.1.4.989.2441725
                         friendlyName: '3.1'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: 0.98.4
                           HDP: '2.2'
@@ -365,7 +429,7 @@ paths:
                           Storm: 0.9.3
                         displayName: Version 3.2.7.989.2441725
                         friendlyName: '3.2'
-                        isDefault: false
+                        isDefault: 'false'
                       - componentVersions:
                           HBase: 1.1.2
                           HDP: '2.3'
@@ -373,8 +437,8 @@ paths:
                           Storm: 0.10.0
                         displayName: Version 3.3.0.989.2441725
                         friendlyName: '3.3'
-                        isDefault: true
-                vmsize_filters:
+                        isDefault: 'true'
+                vmSize_filters:
                   - ClusterFlavors:
                       - Sandbox
                     ClusterVersions:
@@ -382,11 +446,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A5
                   - ClusterFlavors:
                       - '*'
@@ -397,11 +459,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A5
                   - ClusterFlavors:
                       - Hadoop
@@ -411,11 +471,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A5
                   - ClusterFlavors:
                       - '*'
@@ -426,11 +484,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A5
                   - ClusterFlavors:
                       - InteractiveHive
@@ -440,11 +496,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A5
                   - ClusterFlavors:
                       - Sandbox
@@ -453,11 +507,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A6
                   - ClusterFlavors:
                       - Hadoop
@@ -467,11 +519,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A6
                   - ClusterFlavors:
                       - '*'
@@ -482,11 +532,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A6
                   - ClusterFlavors:
                       - InteractiveHive
@@ -496,11 +544,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A6
                   - ClusterFlavors:
                       - Sandbox
@@ -509,11 +555,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A7
                   - ClusterFlavors:
                       - Hadoop
@@ -523,11 +567,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A7
                   - ClusterFlavors:
                       - '*'
@@ -538,11 +580,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A7
                   - ClusterFlavors:
                       - InteractiveHive
@@ -552,11 +592,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - A7
                   - ClusterFlavors:
                       - Sandbox
@@ -565,11 +603,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - EXTRALARGE
                   - ClusterFlavors:
                       - Hadoop
@@ -579,11 +615,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - EXTRALARGE
                   - ClusterFlavors:
                       - '*'
@@ -596,11 +630,9 @@ paths:
                       - WorkerNodeRole
                       - EdgeNodeRole
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - EXTRALARGE
                   - ClusterFlavors:
                       - InteractiveHive
@@ -610,11 +642,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - EXTRALARGE
                   - ClusterFlavors:
                       - Sandbox
@@ -623,11 +653,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - LARGE
                   - ClusterFlavors:
                       - Hadoop
@@ -637,11 +665,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - LARGE
                   - ClusterFlavors:
                       - '*'
@@ -652,11 +678,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - LARGE
                   - ClusterFlavors:
                       - InteractiveHive
@@ -666,11 +690,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - LARGE
                   - ClusterFlavors:
                       - Sandbox
@@ -679,11 +701,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - MEDIUM
                   - ClusterFlavors:
                       - '*'
@@ -694,11 +714,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - MEDIUM
                   - ClusterFlavors:
                       - InteractiveHive
@@ -708,11 +726,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - MEDIUM
                   - ClusterFlavors:
                       - Sandbox
@@ -721,11 +737,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - SMALL
                   - ClusterFlavors:
                       - '*'
@@ -736,11 +750,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - SMALL
                   - ClusterFlavors:
                       - HBase
@@ -750,11 +762,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - SMALL
                   - ClusterFlavors:
                       - InteractiveHive
@@ -764,11 +774,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - SMALL
                   - ClusterFlavors:
                       - Sandbox
@@ -777,11 +785,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - '*'
@@ -792,11 +798,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - Hadoop
@@ -806,11 +810,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - '*'
@@ -819,11 +821,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - '*'
@@ -834,11 +834,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - InteractiveHive
@@ -848,11 +846,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1
                   - ClusterFlavors:
                       - Sandbox
@@ -861,11 +857,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - '*'
@@ -876,11 +870,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -890,11 +882,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - '*'
@@ -902,13 +892,11 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - '*'
@@ -919,11 +907,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -933,11 +919,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -946,11 +930,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - '*'
@@ -961,11 +943,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - Hadoop
@@ -975,11 +955,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - '*'
@@ -988,11 +966,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - '*'
@@ -1003,11 +979,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1017,11 +991,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11
                   - ClusterFlavors:
                       - Sandbox
@@ -1030,11 +1002,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - '*'
@@ -1045,11 +1015,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1059,11 +1027,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - '*'
@@ -1072,12 +1038,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - '*'
@@ -1088,11 +1052,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1102,11 +1064,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1115,11 +1075,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12
                   - ClusterFlavors:
                       - Hadoop
@@ -1129,11 +1087,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12
                   - ClusterFlavors:
                       - '*'
@@ -1141,12 +1097,10 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12
                   - ClusterFlavors:
                       - '*'
@@ -1157,11 +1111,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1171,11 +1123,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12
                   - ClusterFlavors:
                       - Sandbox
@@ -1184,11 +1134,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1198,11 +1146,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - '*'
@@ -1211,12 +1157,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - '*'
@@ -1227,11 +1171,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1241,11 +1183,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1254,11 +1194,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13
                   - ClusterFlavors:
                       - Hadoop
@@ -1268,11 +1206,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13
                   - ClusterFlavors:
                       - '*'
@@ -1281,11 +1217,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13
                   - ClusterFlavors:
                       - '*'
@@ -1296,11 +1230,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13
                   - ClusterFlavors:
                       - Hadoop
@@ -1310,11 +1242,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13_V2
                   - ClusterFlavors:
                       - '*'
@@ -1323,12 +1253,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13_V2
                   - ClusterFlavors:
                       - '*'
@@ -1339,11 +1267,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1352,11 +1278,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14
                   - ClusterFlavors:
                       - Hadoop
@@ -1366,11 +1290,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14
                   - ClusterFlavors:
                       - '*'
@@ -1378,12 +1300,10 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14
                   - ClusterFlavors:
                       - '*'
@@ -1394,11 +1314,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14
                   - ClusterFlavors:
                       - Sandbox
@@ -1407,11 +1325,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1421,11 +1337,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - '*'
@@ -1434,12 +1348,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - '*'
@@ -1450,11 +1362,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1463,11 +1373,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - '*'
@@ -1478,11 +1386,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - Hadoop
@@ -1492,11 +1398,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - '*'
@@ -1505,11 +1409,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - '*'
@@ -1520,11 +1422,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1534,11 +1434,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2
                   - ClusterFlavors:
                       - Sandbox
@@ -1547,11 +1445,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - '*'
@@ -1562,11 +1458,9 @@ paths:
                       - HeadNodeRole
                       - WorkerNodeRole
                       - EdgeNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1576,11 +1470,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - '*'
@@ -1589,12 +1481,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - '*'
@@ -1605,11 +1495,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1619,11 +1507,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1632,11 +1518,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3
                   - ClusterFlavors:
                       - Hadoop
@@ -1646,11 +1530,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3
                   - ClusterFlavors:
                       - '*'
@@ -1658,12 +1540,10 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3
                   - ClusterFlavors:
                       - '*'
@@ -1674,11 +1554,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1688,11 +1566,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3
                   - ClusterFlavors:
                       - Sandbox
@@ -1701,11 +1577,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1715,11 +1589,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - '*'
@@ -1727,13 +1599,11 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - '*'
@@ -1744,11 +1614,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1758,11 +1626,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1771,11 +1637,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4
                   - ClusterFlavors:
                       - Hadoop
@@ -1785,11 +1649,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4
                   - ClusterFlavors:
                       - '*'
@@ -1797,12 +1659,10 @@ paths:
                       - '*'
                     FilterMode: Exclude
                     NodeTypes:
-                      - '*'
-                    OsType:
                       - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4
                   - ClusterFlavors:
                       - '*'
@@ -1813,11 +1673,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1827,11 +1685,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4
                   - ClusterFlavors:
                       - Sandbox
@@ -1840,11 +1696,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1854,11 +1708,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - '*'
@@ -1867,12 +1719,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - '*'
@@ -1883,11 +1733,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1897,11 +1745,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - Sandbox
@@ -1910,11 +1756,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D5_V2
                   - ClusterFlavors:
                       - Hadoop
@@ -1924,11 +1768,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D5_V2
                   - ClusterFlavors:
                       - '*'
@@ -1937,12 +1779,10 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - Brazil South
                       - Japan West
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D5_V2
                   - ClusterFlavors:
                       - '*'
@@ -1953,11 +1793,9 @@ paths:
                     FilterMode: Exclude
                     NodeTypes:
                       - '*'
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D5_V2
                   - ClusterFlavors:
                       - InteractiveHive
@@ -1967,11 +1805,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - '*'
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D5_V2
                   - ClusterFlavors:
                       - HBase
@@ -1981,11 +1817,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D1_V2
                   - ClusterFlavors:
                       - HBase
@@ -1995,11 +1829,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D11_V2
                   - ClusterFlavors:
                       - '*'
@@ -2009,11 +1841,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - HBase
@@ -2023,11 +1853,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D12_V2
                   - ClusterFlavors:
                       - '*'
@@ -2037,11 +1865,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13_V2
                   - ClusterFlavors:
                       - HBase
@@ -2051,11 +1877,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D13_V2
                   - ClusterFlavors:
                       - '*'
@@ -2065,11 +1889,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - HBase
@@ -2079,11 +1901,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D14_V2
                   - ClusterFlavors:
                       - HBase
@@ -2093,11 +1913,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D2_V2
                   - ClusterFlavors:
                       - '*'
@@ -2107,11 +1925,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - HBase
@@ -2121,11 +1937,9 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D3_V2
                   - ClusterFlavors:
                       - '*'
@@ -2135,11 +1949,9 @@ paths:
                     NodeTypes:
                       - HeadNodeRole
                       - WorkerNodeRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
                   - ClusterFlavors:
                       - HBase
@@ -2149,13 +1961,11 @@ paths:
                     FilterMode: Include
                     NodeTypes:
                       - ZookeeperRole
-                    OsType:
-                      - '*'
                     Regions:
                       - Central India
-                    VMSizes:
+                    vmsizes:
                       - STANDARD_D4_V2
-                vmsizes:
+                vmSizes:
                   iaas:
                     available:
                       - A5
@@ -2243,7 +2053,7 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              Body:
+              body:
                 value:
                   - currentValue: 0
                     limit: 5000
@@ -2252,6 +2062,55 @@ paths:
                       value: cores
                     unit: Count
 definitions:
+  BillingMeters:
+    description: The billing meters.
+    properties:
+      meter:
+        description: The HDInsight meter guid.
+        type: string
+      meterParameter:
+        description: The virtual machine sizes.
+        type: string
+      unit:
+        description: 'The unit of meter, VMHours or CoreHours.'
+        type: string
+    type: object
+  BillingResources:
+    description: The billing resources.
+    properties:
+      billingMeters:
+        description: The billing meter information.
+        items:
+          $ref: '#/definitions/BillingMeters'
+        type: array
+      diskBillingMeters:
+        description: The managed disk billing information.
+        items:
+          $ref: '#/definitions/DiskBillingMeters'
+        type: array
+      region:
+        description: The region or location.
+        type: string
+    type: object
+  BillingResponseListResult:
+    description: The response for the operation to get regional billingSpecs for a subscription.
+    properties:
+      billingResources:
+        description: The billing and managed disk billing resources for a region.
+        items:
+          $ref: '#/definitions/BillingResources'
+        type: array
+      vmSizeFilters:
+        description: The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.
+        items:
+          $ref: '#/definitions/VmSizeCompatibilityFilterV2'
+        type: array
+      vmSizes:
+        description: The virtual machine sizes to include or exclude.
+        items:
+          type: string
+        type: array
+    type: object
   CapabilitiesResult:
     description: The Get Capabilities operation response.
     properties:
@@ -2283,6 +2142,25 @@ definitions:
           $ref: '#/definitions/VmSizesCapability'
         description: The virtual machine sizes.
         type: object
+  DiskBillingMeters:
+    description: The disk billing meters.
+    properties:
+      diskRpMeter:
+        description: The managed disk meter guid.
+        type: string
+      sku:
+        description: 'The managed disk billing sku, P30 or S30.'
+        type: string
+      tier:
+        description: 'The managed disk billing tier, Standard or Premium.'
+        enum:
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Tier
+    type: object
   LocalizedName:
     description: The details about the localizable name of a type of usage.
     properties:
@@ -2401,6 +2279,55 @@ definitions:
         items:
           type: string
         type: array
+  VmSizeCompatibilityFilterV2:
+    description: 'This class represent a single filter object that defines a multidimensional set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and ClusterVersions. The constraint should be defined based on the following: FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of exclusion/inclusion) and the ordering of the Filters. Later filters override previous settings if conflicted.'
+    properties:
+      clusterFlavors:
+        description: The list of cluster flavors under the effect of the filter.
+        items:
+          type: string
+        type: array
+      clusterVersions:
+        description: The list of cluster versions affected in Major.Minor format.
+        items:
+          type: string
+        type: array
+      filterMode:
+        description: The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.
+        enum:
+          - Exclude
+          - Include
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: FilterMode
+      nodeTypes:
+        description: The list of node types affected by the filter.
+        items:
+          type: string
+        type: array
+      osType:
+        description: 'The OSType affected, Windows or Linux.'
+        items:
+          enum:
+            - Windows
+            - Linux
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: OSType
+        type: array
+      regions:
+        description: The list of regions under the effect of the filter.
+        items:
+          type: string
+        type: array
+      vmSizes:
+        description: The list of virtual machine sizes to include or exclude.
+        items:
+          type: string
+        type: array
+    type: object
   VmSizesCapability:
     description: The virtual machine sizes capability.
     properties:

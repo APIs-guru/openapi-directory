@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/iothub/resource-manager/Microsoft.Devices/preview/2019-03-22-preview/iothub.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: iothub
   x-tags:
@@ -1014,6 +1013,11 @@ paths:
                   features: None
                   hostName: iot-dps-cit-hub-1.azure-devices.net
                   ipFilterRules: []
+                  locations:
+                    - location: West US
+                      role: primary
+                    - location: East US
+                      role: secondary
                   messagingEndpoints:
                     fileNotifications:
                       lockDurationAsIso8601: PT1M
@@ -1194,7 +1198,6 @@ paths:
             iotHubDescription:
               etag: AAAAAAFD6M4=
               location: centraluseuap
-              name: iot-dps-cit-hub-1
               properties:
                 cloudToDevice:
                   defaultTtlAsIso8601: PT1H
@@ -1206,22 +1209,15 @@ paths:
                 enableFileUploadNotifications: false
                 eventHubEndpoints:
                   events:
-                    endpoint: 'sb://iothub-ns-iot-dps-ci-245306-76aca8e13b.servicebus.windows.net/'
                     partitionCount: 2
-                    partitionIds:
-                      - '0'
-                      - '1'
-                    path: iot-dps-cit-hub-1
                     retentionTimeInDays: 1
                 features: None
-                hostName: iot-dps-cit-hub-1.azure-devices.net
                 ipFilterRules: []
                 messagingEndpoints:
                   fileNotifications:
                     lockDurationAsIso8601: PT1M
                     maxDeliveryCount: 10
                     ttlAsIso8601: PT1H
-                provisioningState: Succeeded
                 routing:
                   endpoints:
                     eventHubs: []
@@ -1237,7 +1233,6 @@ paths:
                     name: $fallback
                     source: DeviceMessages
                   routes: []
-                state: Active
                 storageEndpoints:
                   $default:
                     connectionString: ''
@@ -1246,9 +1241,7 @@ paths:
               sku:
                 capacity: 1
                 name: S1
-                tier: Standard
               tags: {}
-              type: Microsoft.Devices/IotHubs
             resourceGroupName: myResourceGroup
             resourceName: testHub
             subscriptionId: 91d12660-3dec-467a-be2a-213b5544ddc0
@@ -2720,6 +2713,22 @@ definitions:
           $ref: '#/definitions/IotHubDescription'
         type: array
     type: object
+  IotHubLocationDescription:
+    description: Public representation of one of the locations where a resource is provisioned.
+    properties:
+      location:
+        description: Azure Geo Regions
+        type: string
+      role:
+        description: Specific Role assigned to this location
+        enum:
+          - primary
+          - secondary
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IotHubReplicaRoleType
+    type: object
   IotHubNameAvailabilityInfo:
     description: The properties indicating whether a given IoT hub name is available.
     properties:
@@ -2788,6 +2797,12 @@ definitions:
         description: The IP filter rules.
         items:
           $ref: '#/definitions/IpFilterRule'
+        type: array
+      locations:
+        description: Primary and secondary location for iot hub
+        items:
+          $ref: '#/definitions/IotHubLocationDescription'
+        readOnly: true
         type: array
       messagingEndpoints:
         additionalProperties:

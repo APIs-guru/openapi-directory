@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/DTL.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: devtestlabs-DTL
   x-tags:
@@ -660,23 +659,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=defaultStorageAccount)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -789,23 +784,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -832,23 +823,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=defaultStorageAccount)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -914,23 +901,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=displayName)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -967,23 +950,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=displayName)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1017,7 +996,7 @@ paths:
           name: artifactSourceName
           required: true
           type: string
-        - description: The name of the azure Resource Manager template.
+        - description: The name of the azure resource manager template.
           in: path
           name: name
           required: true
@@ -1025,7 +1004,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=displayName)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1059,23 +1037,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=title)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1117,7 +1091,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=title)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1219,7 +1192,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=displayName)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1234,7 +1206,7 @@ paths:
       tags:
         - ArtifactSources
     patch:
-      description: Modify properties of artifact sources.
+      description: Allows modifying tags of artifact sources. All other properties will be ignored.
       operationId: ArtifactSources_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1325,7 +1297,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=labCostDetails)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1392,23 +1363,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=vm)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1476,7 +1443,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=vm)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1491,7 +1457,7 @@ paths:
       tags:
         - CustomImages
     patch:
-      description: Modify properties of custom images.
+      description: Allows modifying tags of custom images. All other properties will be ignored.
       operationId: CustomImages_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1578,23 +1544,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=description)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1659,7 +1621,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=description)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1674,7 +1635,7 @@ paths:
       tags:
         - Formulas
     patch:
-      description: Modify properties of formulas.
+      description: Allows modifying tags of formulas. All other properties will be ignored.
       operationId: Formulas_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1708,7 +1669,7 @@ paths:
       tags:
         - Formulas
     put:
-      description: Create or replace an existing Formula. This operation can take a while to complete.
+      description: Create or replace an existing formula. This operation can take a while to complete.
       operationId: Formulas_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1761,23 +1722,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=author)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1809,23 +1766,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=webHookUrl)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1854,7 +1807,7 @@ paths:
           name: labName
           required: true
           type: string
-        - description: The name of the notificationChannel.
+        - description: The name of the notification channel.
           in: path
           name: name
           required: true
@@ -1882,7 +1835,7 @@ paths:
           name: labName
           required: true
           type: string
-        - description: The name of the notificationChannel.
+        - description: The name of the notification channel.
           in: path
           name: name
           required: true
@@ -1890,7 +1843,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=webHookUrl)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -1905,7 +1857,7 @@ paths:
       tags:
         - NotificationChannels
     patch:
-      description: Modify properties of notification channels.
+      description: Allows modifying tags of notification channels. All other properties will be ignored.
       operationId: NotificationChannels_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1915,7 +1867,7 @@ paths:
           name: labName
           required: true
           type: string
-        - description: The name of the notificationChannel.
+        - description: The name of the notification channel.
           in: path
           name: name
           required: true
@@ -1939,7 +1891,7 @@ paths:
       tags:
         - NotificationChannels
     put:
-      description: Create or replace an existing notificationChannel.
+      description: Create or replace an existing notification channel.
       operationId: NotificationChannels_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1949,7 +1901,7 @@ paths:
           name: labName
           required: true
           type: string
-        - description: The name of the notificationChannel.
+        - description: The name of the notification channel.
           in: path
           name: name
           required: true
@@ -1988,7 +1940,7 @@ paths:
           name: labName
           required: true
           type: string
-        - description: The name of the notificationChannel.
+        - description: The name of the notification channel.
           in: path
           name: name
           required: true
@@ -2064,23 +2016,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=description)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2155,7 +2103,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=description)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2170,7 +2117,7 @@ paths:
       tags:
         - Policies
     patch:
-      description: Modify properties of policies.
+      description: Allows modifying tags of policies. All other properties will be ignored.
       operationId: Policies_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -2266,23 +2213,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2347,7 +2290,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2362,7 +2304,7 @@ paths:
       tags:
         - Schedules
     patch:
-      description: Modify properties of schedules.
+      description: Allows modifying tags of schedules. All other properties will be ignored.
       operationId: Schedules_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -2494,49 +2436,6 @@ paths:
         - Schedules
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners':
-    get:
-      description: List service runners in a given lab.
-      operationId: ServiceRunners_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupName'
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
-          in: query
-          name: $filter
-          required: false
-          type: string
-        - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
-          in: query
-          name: $orderby
-          required: false
-          type: string
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ServiceRunnerList'
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      tags:
-        - ServiceRunners
-      x-ms-odata: '#/definitions/ServiceRunner'
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{name}':
     delete:
       description: Delete service runner.
@@ -2595,7 +2494,7 @@ paths:
       tags:
         - ServiceRunners
     put:
-      description: Create or replace an existing Service runner.
+      description: Create or replace an existing service runner.
       operationId: ServiceRunners_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -2647,23 +2546,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=identity)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2731,7 +2626,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=identity)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2746,7 +2640,7 @@ paths:
       tags:
         - Users
     patch:
-      description: Modify properties of user profiles.
+      description: Allows modifying tags of user profiles. All other properties will be ignored.
       operationId: Users_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -2838,23 +2732,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=diskType)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2932,7 +2822,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=diskType)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -2947,7 +2836,7 @@ paths:
       tags:
         - Disks
     patch:
-      description: Modify properties of disks.
+      description: Allows modifying tags of disks. All other properties will be ignored.
       operationId: Disks_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3131,23 +3020,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=deploymentProperties)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3225,7 +3110,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=deploymentProperties)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3240,7 +3124,7 @@ paths:
       tags:
         - Environments
     patch:
-      description: Modify properties of environments.
+      description: Allows modifying tags of environments. All other properties will be ignored.
       operationId: Environments_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3342,23 +3226,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=value)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3433,7 +3313,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=value)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3448,7 +3327,7 @@ paths:
       tags:
         - Secrets
     patch:
-      description: Modify properties of secrets.
+      description: Allows modifying tags of secrets. All other properties will be ignored.
       operationId: Secrets_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3550,23 +3429,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=applicableSchedule)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3600,7 +3475,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3636,7 +3511,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3644,7 +3519,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=applicableSchedule)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3659,7 +3533,7 @@ paths:
       tags:
         - ServiceFabrics
     patch:
-      description: Modify properties of service fabrics.
+      description: Allows modifying tags of service fabrics. All other properties will be ignored.
       operationId: ServiceFabrics_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3674,7 +3548,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3698,7 +3572,7 @@ paths:
       tags:
         - ServiceFabrics
     put:
-      description: Create or replace an existing Service Fabric. This operation can take a while to complete.
+      description: Create or replace an existing service fabric. This operation can take a while to complete.
       operationId: ServiceFabrics_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3713,7 +3587,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3758,7 +3632,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3792,7 +3666,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3827,7 +3701,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: name
           required: true
@@ -3862,7 +3736,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -3870,23 +3744,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3920,7 +3790,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -3958,7 +3828,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -3971,7 +3841,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -3986,7 +3855,7 @@ paths:
       tags:
         - ServiceFabricSchedules
     patch:
-      description: Modify properties of schedules.
+      description: Allows modifying tags of schedules. All other properties will be ignored.
       operationId: ServiceFabricSchedules_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -4001,7 +3870,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -4045,7 +3914,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -4094,7 +3963,7 @@ paths:
           name: userName
           required: true
           type: string
-        - description: The name of the service Fabric.
+        - description: The name of the service fabric.
           in: path
           name: serviceFabricName
           required: true
@@ -4132,23 +4001,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=artifacts,computeVm,networkInterface,applicableSchedule)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -4251,12 +4116,9 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get virtual machine.
@@ -4277,7 +4139,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=artifacts,computeVm,networkInterface,applicableSchedule)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -4338,7 +4199,7 @@ paths:
                   MyTag: MyValue
                 type: Microsoft.DevTestLab/labs/virtualMachines
     patch:
-      description: Modify properties of virtual machines.
+      description: Allows modifying tags of virtual machines. All other properties will be ignored.
       operationId: VirtualMachines_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -4421,7 +4282,7 @@ paths:
                   MyTag: MyValue
                 type: Microsoft.DevTestLab/labs/virtualMachines
     put:
-      description: Create or replace an existing Virtual machine. This operation can take a while to complete.
+      description: Create or replace an existing virtual machine. This operation can take a while to complete.
       operationId: VirtualMachines_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -4668,10 +4529,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/detachDataDisk':
     post:
@@ -4818,10 +4677,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/resize':
     post:
@@ -4870,10 +4727,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/restart':
     post:
@@ -4914,10 +4769,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start':
     post:
@@ -4958,10 +4811,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop':
     post:
@@ -5001,10 +4852,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/transferDisks':
     post:
@@ -5075,10 +4924,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules':
     get:
@@ -5100,23 +4947,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -5191,7 +5034,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -5206,7 +5048,7 @@ paths:
       tags:
         - VirtualMachineSchedules
     patch:
-      description: Modify properties of schedules.
+      description: Allows modifying tags of schedules. All other properties will be ignored.
       operationId: VirtualMachineSchedules_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -5337,23 +5179,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=externalSubnets)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -5446,12 +5284,9 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get virtual network.
@@ -5472,7 +5307,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($expand=externalSubnets)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -5523,7 +5357,7 @@ paths:
                   MyTag: MyValue
                 type: Microsoft.DevTestLab/labs/virtualNetworks
     patch:
-      description: Modify properties of virtual networks.
+      description: Allows modifying tags of virtual networks. All other properties will be ignored.
       operationId: VirtualNetworks_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -5708,12 +5542,9 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get lab.
@@ -5729,7 +5560,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=defaultStorageAccount)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -5782,7 +5612,7 @@ paths:
                   MyTag: MyValue
                 type: Microsoft.DevTestLab/labs
     patch:
-      description: Modify properties of labs.
+      description: Allows modifying tags of labs. All other properties will be ignored.
       operationId: Labs_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -5978,10 +5808,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment':
     post:
@@ -6042,10 +5870,8 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/exportResourceUsage':
     post:
@@ -6188,23 +6014,19 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - description: 'The filter to apply to the operation. Example: ''$filter=contains(name,''myName'')'
           in: query
           name: $filter
-          required: false
           type: string
         - description: 'The maximum number of resources to return from the operation. Example: ''$top=10'''
           format: int32
           in: query
           name: $top
-          required: false
           type: integer
         - description: 'The ordering expression for the results, using OData notation. Example: ''$orderby=name desc'''
           in: query
           name: $orderby
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -6259,7 +6081,6 @@ paths:
         - description: 'Specify the $expand query. Example: ''properties($select=status)'''
           in: query
           name: $expand
-          required: false
           type: string
         - $ref: '#/parameters/api-version'
       responses:
@@ -6274,7 +6095,7 @@ paths:
       tags:
         - GlobalSchedules
     patch:
-      description: Modify properties of schedules.
+      description: Allows modifying tags of schedules. All other properties will be ignored.
       operationId: GlobalSchedules_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -6844,7 +6665,7 @@ definitions:
         description: The name of the disk to be attached.
         type: string
       diskSizeGiB:
-        description: Size of the disk to be attached in Gibibytes.
+        description: Size of the disk to be attached in GibiBytes.
         format: int32
         type: integer
       diskType:
@@ -6852,6 +6673,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -6864,7 +6686,7 @@ definitions:
         description: The name of the disk to be attached.
         type: string
       diskSizeGiB:
-        description: Size of the disk to be attached in Gibibytes.
+        description: Size of the disk to be attached in GibiBytes.
         format: int32
         type: integer
       diskType:
@@ -6872,6 +6694,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -7331,6 +7154,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -7347,6 +7171,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -7426,7 +7251,7 @@ definitions:
         description: 'When backed by a blob, the name of the VHD blob without extension.'
         type: string
       diskSizeGiB:
-        description: The size of the disk in Gibibytes.
+        description: The size of the disk in GibiBytes.
         format: int32
         type: integer
       diskType:
@@ -7434,6 +7259,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -7466,7 +7292,7 @@ definitions:
         description: 'When backed by a blob, the name of the VHD blob without extension.'
         type: string
       diskSizeGiB:
-        description: The size of the disk in Gibibytes.
+        description: The size of the disk in GibiBytes.
         format: int32
         type: integer
       diskType:
@@ -7474,6 +7300,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8211,6 +8038,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8266,7 +8094,7 @@ definitions:
         readOnly: true
         type: string
       vmCreationResourceGroup:
-        description: The resource group in which lab virtual machines will be created in.
+        description: 'The resource group in which all new lab virtual machines will be created. To let DevTest Labs manage resource group creation, set this value to null.'
         readOnly: true
         type: string
     type: object
@@ -8295,6 +8123,7 @@ definitions:
         enum:
           - Standard
           - Premium
+          - StandardSSD
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8564,6 +8393,7 @@ definitions:
         enum:
           - FromCustomImage
           - FromGalleryImage
+          - FromSharedGalleryImage
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8678,6 +8508,7 @@ definitions:
         enum:
           - FromCustomImage
           - FromGalleryImage
+          - FromSharedGalleryImage
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8827,6 +8658,7 @@ definitions:
         enum:
           - FromCustomImage
           - FromGalleryImage
+          - FromSharedGalleryImage
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8938,6 +8770,7 @@ definitions:
         enum:
           - FromCustomImage
           - FromGalleryImage
+          - FromSharedGalleryImage
         type: string
         x-ms-enum:
           modelAsString: true
@@ -9925,18 +9758,6 @@ definitions:
       identity:
         $ref: '#/definitions/IdentityProperties'
         description: The identity of the resource.
-    type: object
-  ServiceRunnerList:
-    description: The response of a list operation.
-    properties:
-      nextLink:
-        description: Link for next set of results.
-        type: string
-      value:
-        description: Results of the list operation.
-        items:
-          $ref: '#/definitions/ServiceRunner'
-        type: array
     type: object
   SharedPublicIpAddressConfiguration:
     description: Properties of a virtual machine that determine how it is connected to a load balancer.

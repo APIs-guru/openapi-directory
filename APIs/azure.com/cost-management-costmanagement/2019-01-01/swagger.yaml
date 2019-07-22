@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2019-01-01/costmanagement.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -3997,7 +3996,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ExportDeliveryDestination:
-    description: The destination information for the delivery of the export.
+    description: 'The destination information for the delivery of the export. To allow access to a storage account, you must register the account''s subscription with the Microsoft.CostManagementExports resource provider. This is required once per subscription. When creating an export in the Azure portal, it is done automatically. However, API users need to register the subscription. For more information see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services .'
     properties:
       container:
         description: The name of the container where exports will be uploaded.

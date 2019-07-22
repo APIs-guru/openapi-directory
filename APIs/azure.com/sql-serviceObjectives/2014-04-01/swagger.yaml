@@ -561,7 +561,8 @@ paths:
                     isSystem: false
                     serviceObjectiveName: ElasticPool
                   type: Microsoft.Sql/servers/serviceObjectives
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}':
     get:
       description: Gets a database service objective.

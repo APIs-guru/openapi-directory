@@ -132,7 +132,8 @@ paths:
                       supportedCarriers:
                         - DHL
                     type: Microsoft.ImportExport/locations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/providers/Microsoft.ImportExport/locations/{locationName}':
     get:
       description: Returns the details about a location to which you can ship the disks associated with an import or export job. A location is an Azure region.
@@ -246,7 +247,8 @@ paths:
                       provider: Microsoft Import/Export
                       resource: Import/Export Resource Provider
                     name: Microsoft.ImportExport/register/action
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.ImportExport/jobs':
     get:
       description: Returns all active and completed jobs in a subscription.
@@ -879,7 +881,8 @@ paths:
                 value:
                   - bitLockerKey: 000000-000000-111111-222222-333333-444444-555555-666666
                     driveId: 9CA995BB
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   DriveBitLockerKey:
     description: BitLocker recovery key or password to the specified drive

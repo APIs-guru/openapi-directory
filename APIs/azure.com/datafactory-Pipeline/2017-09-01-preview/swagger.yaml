@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/Pipeline.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: datafactory-Pipeline
   x-tags:
@@ -885,6 +884,9 @@ definitions:
       executionCredential:
         $ref: '#/definitions/SSISExecutionCredential'
         description: The package execution credential.
+      logLocation:
+        $ref: '#/definitions/SSISLogLocation'
+        description: SSIS package execution log location.
       loggingLevel:
         description: 'The logging level of SSIS package execution. Type: string (or Expression with resultType string).'
         type: object
@@ -1930,6 +1932,30 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  SSISAccessCredential:
+    description: SSIS access credential.
+    properties:
+      domain:
+        description: Domain for windows authentication.
+        type: object
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      userName:
+        description: UseName for windows authentication.
+        type: object
+    required:
+      - domain
+      - userName
+      - password
+    type: object
   SSISConnectionManager:
     additionalProperties:
       $ref: '#/definitions/SSISExecutionParameter'
@@ -1978,14 +2004,80 @@ definitions:
     required:
       - value
     type: object
+  SSISLogLocation:
+    description: SSIS package execution log location
+    properties:
+      logPath:
+        description: 'The SSIS package execution log path. Type: string (or Expression with resultType string).'
+        type: object
+      type:
+        description: The type of SSIS log location.
+        enum:
+          - File
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SsisLogLocationType
+      typeProperties:
+        $ref: '#/definitions/SSISLogLocationTypeProperties'
+        description: SSIS package execution log location properties.
+        x-ms-client-flatten: true
+    required:
+      - logPath
+      - type
+      - typeProperties
+    type: object
+  SSISLogLocationTypeProperties:
+    description: SSIS package execution log location properties.
+    properties:
+      accessCredential:
+        $ref: '#/definitions/SSISAccessCredential'
+        description: The package execution log access credential.
+      logRefreshInterval:
+        description: 'Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    type: object
   SSISPackageLocation:
     description: SSIS package location.
     properties:
       packagePath:
         description: 'The SSIS package path. Type: string (or Expression with resultType string).'
         type: object
+      type:
+        description: The type of SSIS package location.
+        enum:
+          - SSISDB
+          - File
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SsisPackageLocationType
+      typeProperties:
+        $ref: '#/definitions/SSISPackageLocationTypeProperties'
+        description: SSIS package location properties.
+        x-ms-client-flatten: true
     required:
       - packagePath
+    type: object
+  SSISPackageLocationTypeProperties:
+    description: SSIS package location properties.
+    properties:
+      accessCredential:
+        $ref: '#/definitions/SSISAccessCredential'
+        description: The package access credential.
+      configurationPath:
+        description: 'The configuration file of the package execution. Type: string (or Expression with resultType string).'
+        type: object
+      packagePassword:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
     type: object
   SSISPropertyOverride:
     description: SSIS property override.

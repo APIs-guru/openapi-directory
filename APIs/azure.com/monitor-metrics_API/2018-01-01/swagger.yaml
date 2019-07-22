@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: monitor-metrics_API
   x-tags:
@@ -317,8 +316,8 @@ definitions:
         type: number
       count:
         description: the number of samples in the time range. Can be used to determine the number of values that contributed to the average value.
-        format: int64
-        type: integer
+        format: double
+        type: number
       maximum:
         description: the greatest value in the time range.
         format: double
@@ -393,6 +392,10 @@ definitions:
       - MilliSeconds
       - ByteSeconds
       - Unspecified
+      - Cores
+      - MilliCores
+      - NanoCores
+      - BitsPerSecond
     type: string
     x-ms-enum:
       modelAsString: false

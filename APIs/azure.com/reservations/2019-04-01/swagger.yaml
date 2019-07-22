@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/reservations/resource-manager/Microsoft.Capacity/preview/2019-04-01/reservations.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: reservations
   x-tags:
@@ -39,6 +38,13 @@ parameters:
     name: api-version
     required: true
     type: string
+  ExpandRenewPropertiesParameter:
+    description: Supported value of this query is renewProperties
+    in: query
+    name: expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
   LocationIdParameter:
     description: Filters the skus based on the location specified in this parameter. This can be an azure region or global
     in: query
@@ -392,6 +398,7 @@ paths:
                 billingScopeId: /subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83
                 displayName: TestReservationOrder
                 quantity: '1'
+                renew: false
                 reservedResourceProperties:
                   instanceFlexibility: 'On'
                 reservedResourceType: VirtualMachines
@@ -480,6 +487,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                     expiryDate: '2018-09-22'
@@ -492,6 +500,7 @@ paths:
                       mergeDestination: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/6ef59113-3482-40da-8d79-787f823e34bc
                     provisioningState: Cancelled
                     quantity: 1
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                     splitProperties:
@@ -507,6 +516,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                     expiryDate: '2018-09-22'
@@ -519,6 +529,7 @@ paths:
                       mergeDestination: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/6ef59113-3482-40da-8d79-787f823e34bc
                     provisioningState: Cancelled
                     quantity: 2
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                     splitProperties:
@@ -534,6 +545,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                     expiryDate: '2018-09-22'
@@ -545,6 +557,7 @@ paths:
                         - /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/e0e4b4f5-77ea-4984-9ee4-6bf9850ee6de
                     provisioningState: Succeeded
                     quantity: 3
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                   sku:
@@ -589,6 +602,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
                       expiryDate: '2018-09-22'
@@ -599,6 +613,7 @@ paths:
                       lastUpdatedDateTime: '2017-09-22T01:00:36.3191627Z'
                       provisioningState: Cancelled
                       quantity: 3
+                      renew: false
                       reservedResourceType: VirtualMachines
                       skuDescription: D1 v2
                       splitProperties:
@@ -616,6 +631,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                       expiryDate: '2018-09-22'
@@ -628,6 +644,7 @@ paths:
                         mergeDestination: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/6ef59113-3482-40da-8d79-787f823e34bc
                       provisioningState: Cancelled
                       quantity: 1
+                      renew: false
                       reservedResourceType: VirtualMachines
                       skuDescription: D1 v2
                       splitProperties:
@@ -643,6 +660,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                       expiryDate: '2018-09-22'
@@ -655,6 +673,7 @@ paths:
                         mergeDestination: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/6ef59113-3482-40da-8d79-787f823e34bc
                       provisioningState: Cancelled
                       quantity: 2
+                      renew: false
                       reservedResourceType: VirtualMachines
                       skuDescription: D1 v2
                       splitProperties:
@@ -670,6 +689,7 @@ paths:
                       appliedScopeType: Single
                       appliedScopes:
                         - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                      billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                       displayName: cabri_test
                       effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                       expiryDate: '2018-09-22'
@@ -681,6 +701,7 @@ paths:
                           - /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/e0e4b4f5-77ea-4984-9ee4-6bf9850ee6de
                       provisioningState: Succeeded
                       quantity: 3
+                      renew: false
                       reservedResourceType: VirtualMachines
                       skuDescription: D1 v2
                     sku:
@@ -696,6 +717,7 @@ paths:
         - $ref: '#/parameters/ReservationIdParameter'
         - $ref: '#/parameters/ReservationOrderIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ExpandRenewPropertiesParameter'
       responses:
         '200':
           description: Get `Reservation` details.
@@ -712,6 +734,7 @@ paths:
         GetReservation:
           parameters:
             api-version: '2019-04-01'
+            expand: renewProperties
             reservationId: 6ef59113-3482-40da-8d79-787f823e34bc
             reservationOrderId: 276e7ae4-84d0-4da6-ab4b-d6b94f3557da
           responses:
@@ -725,6 +748,7 @@ paths:
                   appliedScopeType: Single
                   appliedScopes:
                     - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                  billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                   displayName: cabri_test
                   effectiveDateTime: '2017-09-22T22:46:32.7632798Z'
                   expiryDate: '2018-09-22'
@@ -736,6 +760,30 @@ paths:
                       - /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/e0e4b4f5-77ea-4984-9ee4-6bf9850ee6de
                   provisioningState: Succeeded
                   quantity: 3
+                  renew: false
+                  renewDestination: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/00238563-7312-4c20-a134-8c030bf938a7
+                  renewProperties:
+                    billingCurrencyTotal:
+                      amount: 466
+                      currencyCode: USD
+                    pricingCurrencyTotal:
+                      amount: 466
+                      currencyCode: USD
+                    purchaseProperties:
+                      location: westus
+                      properties:
+                        appliedScopeType: Shared
+                        billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
+                        displayName: Renew_Test_0618
+                        quantity: 2
+                        renew: false
+                        reservedResourceProperties:
+                          instanceFlexibility: 'On'
+                        reservedResourceType: VirtualMachines
+                        term: P1Y
+                      sku:
+                        name: Standard_D1
+                  renewSource: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/00238563-7312-4c20-a134-8c030bf938a7
                   reservedResourceType: VirtualMachines
                   skuDescription: D1 v2
                 sku:
@@ -783,6 +831,7 @@ paths:
                 name: 276e7ae4-84d0-4da6-ab4b-d6b94f3557da/6ef59113-3482-40da-8d79-787f823e34bc
                 properties:
                   appliedScopeType: Shared
+                  billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                   displayName: cabri_test
                   effectiveDateTime: '2017-09-22T23:57:48.1891638Z'
                   expiryDate: '2018-09-22'
@@ -794,6 +843,7 @@ paths:
                       - /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/e0e4b4f5-77ea-4984-9ee4-6bf9850ee6de
                   provisioningState: Succeeded
                   quantity: 3
+                  renew: false
                   reservedResourceType: VirtualMachines
                   skuDescription: D1 v2
                 sku:
@@ -977,6 +1027,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
                     expiryDate: '2018-09-22'
@@ -984,6 +1035,7 @@ paths:
                     lastUpdatedDateTime: '2017-09-22T01:00:36.3191627Z'
                     provisioningState: Succeeded
                     quantity: 1
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                     splitProperties:
@@ -999,6 +1051,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
                     expiryDate: '2018-09-22'
@@ -1006,6 +1059,7 @@ paths:
                     lastUpdatedDateTime: '2017-09-22T01:00:36.3191627Z'
                     provisioningState: Succeeded
                     quantity: 2
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                     splitProperties:
@@ -1021,6 +1075,7 @@ paths:
                     appliedScopeType: Single
                     appliedScopes:
                       - /subscriptions/98df3792-7962-4f18-8be2-d5576f122de3
+                    billingScopeId: /subscriptions/19376483-64b8-49e4-a931-d5248828720a
                     displayName: cabri_test
                     effectiveDateTime: '2017-09-22T01:00:30.9253826Z'
                     expiryDate: '2018-09-22'
@@ -1031,6 +1086,7 @@ paths:
                     lastUpdatedDateTime: '2017-09-22T01:00:36.3191627Z'
                     provisioningState: Cancelled
                     quantity: 3
+                    renew: false
                     reservedResourceType: VirtualMachines
                     skuDescription: D1 v2
                     splitProperties:
@@ -1464,6 +1520,13 @@ definitions:
       name:
         description: Name of the Reservation
         type: string
+      renew:
+        $ref: '#/definitions/Renew'
+      renewProperties:
+        properties:
+          purchaseProperties:
+            $ref: '#/definitions/PurchaseRequest'
+        type: object
     type: object
   PurchaseRequest:
     properties:
@@ -1489,6 +1552,8 @@ definitions:
         type: string
       quantity:
         $ref: '#/definitions/ReservationQuantity'
+      renew:
+        $ref: '#/definitions/Renew'
       reservedResourceProperties:
         description: Properties specific to each reserved resource type. Not required if not applicable.
         properties:
@@ -1499,6 +1564,31 @@ definitions:
         $ref: '#/definitions/ReservedResourceType'
       term:
         $ref: '#/definitions/ReservationTerm'
+    type: object
+  Renew:
+    default: false
+    description: Setting this to true will automatically purchase a new reservation on the expiration date time.
+    type: boolean
+  RenewPropertiesResponse:
+    properties:
+      billingCurrencyTotal:
+        description: Currency and amount that customer will be charged in customer's local currency for renewal purchase. Tax is not included.
+        properties:
+          amount:
+            type: number
+          currencyCode:
+            type: string
+        type: object
+      pricingCurrencyTotal:
+        description: Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is not included. This is locked price 30 days before expiry.
+        properties:
+          amount:
+            type: number
+          currencyCode:
+            type: string
+        type: object
+      purchaseProperties:
+        $ref: '#/definitions/PurchaseRequest'
     type: object
   ReservationList:
     properties:
@@ -1587,6 +1677,8 @@ definitions:
         $ref: '#/definitions/AppliedScopeType'
       appliedScopes:
         $ref: '#/definitions/AppliedScopes'
+      billingScopeId:
+        $ref: '#/definitions/BillingScopeId'
       displayName:
         description: Friendly name for user to easily identify the reservation
         type: string
@@ -1614,6 +1706,16 @@ definitions:
         type: string
       quantity:
         $ref: '#/definitions/ReservationQuantity'
+      renew:
+        $ref: '#/definitions/Renew'
+      renewDestination:
+        description: 'Reservation Id of the reservation which is purchased because of renew. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}.'
+        type: string
+      renewProperties:
+        $ref: '#/definitions/RenewPropertiesResponse'
+      renewSource:
+        description: 'Reservation Id of the reservation from which this reservation is renewed. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}.'
+        type: string
       reservedResourceType:
         $ref: '#/definitions/ReservedResourceType'
       skuDescription:
@@ -1694,6 +1796,10 @@ definitions:
       - SqlDatabases
       - SuseLinux
       - CosmosDb
+      - RedHat
+      - SqlDataWarehouse
+      - VMwareCloudSimple
+      - RedHatOsa
     type: string
     x-ms-enum:
       modelAsString: true

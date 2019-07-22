@@ -146,6 +146,8 @@ paths:
           description: |-
             *** Error Responses: ***
 
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
       tags:
         - LongTermRetentionBackups
@@ -219,6 +221,8 @@ paths:
         default:
           description: |-
             *** Error Responses: ***
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
       tags:
@@ -300,6 +304,8 @@ paths:
           description: |-
             *** Error Responses: ***
 
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
       tags:
         - LongTermRetentionBackups
@@ -380,6 +386,10 @@ paths:
           description: |-
             *** Error Responses: ***
 
+             * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
       tags:
         - LongTermRetentionBackups
@@ -394,8 +404,7 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200': {}
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
     get:
       description: Gets a long term retention backup.
@@ -432,6 +441,10 @@ paths:
           description: |-
             *** Error Responses: ***
 
+             * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
 
              * 404 ResourceNotFound - The requested resource was not found.
@@ -450,6 +463,372 @@ paths:
             '200':
               body:
                 id: '/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/2017-03-10T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2017-09-06T08:00:00.000Z'
+                name: '2017-03-10T08:00:00.000Z;55555555-6666-7777-8888-999999999999;131637960820000000'
+                properties:
+                  backupTime: '2017-09-06T08:00:00.000Z'
+                  databaseDeletionTime: null
+                  databaseName: testDatabase
+                  serverCreateTime: '2017-03-10T08:00:00.000Z'
+                  serverName: testserver
+                type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups':
+    get:
+      description: Lists the long term retention backups for a given location.
+      operationId: LongTermRetentionBackups_ListByResourceGroupLocation
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The location of the database
+          in: path
+          name: locationName
+          required: true
+          type: string
+        - description: Whether or not to only get the latest backup for each database.
+          in: query
+          name: onlyLatestPerDatabase
+          required: false
+          type: boolean
+        - $ref: '#/parameters/LongTermRetentionDatabaseStateParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of backups.
+          schema:
+            $ref: '#/definitions/LongTermRetentionBackupListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+      tags:
+        - LongTermRetentionBackups
+      x-ms-examples:
+        Get all long term retention backups under the location.:
+          parameters:
+            api-version: '2017-03-01'
+            locationName: japaneast
+            resourceGroupName: testResourceGroup
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver1/longTermRetentionDatabases/testDatabase1/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000
+                    name: '55555555-6666-7777-8888-999999999999;2017-08-23T08:00:00.000Z'
+                    properties:
+                      backupTime: '2017-08-23T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase1
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver1
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver2/longTermRetentionDatabases/testDatabase2/longTermRetentionBackups/12341234-1234-1234-1234-123123123123;131657960820000000
+                    name: '12341234-1234-1234-1234-123123123123;2017-08-30T08:00:00.000Z'
+                    properties:
+                      backupTime: '2017-08-30T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase2
+                      serverCreateTime: '2017-04-10T08:00:00.000Z'
+                      serverName: testserver2
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver3/longTermRetentionDatabases/testDatabase3/longTermRetentionBackups/43214321-4321-4321-4321-321321321321;131677960820000000
+                    name: '43214321-4321-4321-4321-321321321321;2017-09-06T08:00:00.000Z'
+                    properties:
+                      backupTime: '2017-09-06T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase3
+                      serverCreateTime: '2017-05-10T08:00:00.000Z'
+                      serverName: testserver3
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups':
+    get:
+      description: Lists the long term retention backups for a given server.
+      operationId: LongTermRetentionBackups_ListByResourceGroupServer
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The location of the database
+          in: path
+          name: locationName
+          required: true
+          type: string
+        - description: The name of the server
+          in: path
+          name: longTermRetentionServerName
+          required: true
+          type: string
+        - description: Whether or not to only get the latest backup for each database.
+          in: query
+          name: onlyLatestPerDatabase
+          required: false
+          type: boolean
+        - $ref: '#/parameters/LongTermRetentionDatabaseStateParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of backups.
+          schema:
+            $ref: '#/definitions/LongTermRetentionBackupListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+      tags:
+        - LongTermRetentionBackups
+      x-ms-examples:
+        Get all long term retention backups under the server.:
+          parameters:
+            api-version: '2017-03-01'
+            locationName: japaneast
+            longTermRetentionServerName: testserver
+            resourceGroupName: testResourceGroup
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase1/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000
+                    name: 55555555-6666-7777-8888-999999999999;131637960820000000
+                    properties:
+                      backupTime: '2017-08-23T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase1
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase2/longTermRetentionBackups/12341234-1234-1234-1234-123123123123;131657960820000000
+                    name: 12341234-1234-1234-1234-123123123123;131657960820000000
+                    properties:
+                      backupTime: '2017-08-30T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase2
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase3/longTermRetentionBackups/43214321-4321-4321-4321-321321321321;131677960820000000
+                    name: 43214321-4321-4321-4321-321321321321;131667960820000000
+                    properties:
+                      backupTime: '2017-09-06T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase3
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups':
+    get:
+      description: Lists all long term retention backups for a database.
+      operationId: LongTermRetentionBackups_ListByResourceGroupDatabase
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The location of the database
+          in: path
+          name: locationName
+          required: true
+          type: string
+        - description: The name of the server
+          in: path
+          name: longTermRetentionServerName
+          required: true
+          type: string
+        - description: The name of the database
+          in: path
+          name: longTermRetentionDatabaseName
+          required: true
+          type: string
+        - description: Whether or not to only get the latest backup for each database.
+          in: query
+          name: onlyLatestPerDatabase
+          required: false
+          type: boolean
+        - $ref: '#/parameters/LongTermRetentionDatabaseStateParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of backups.
+          schema:
+            $ref: '#/definitions/LongTermRetentionBackupListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+      tags:
+        - LongTermRetentionBackups
+      x-ms-examples:
+        Get all long term retention backups under the database.:
+          parameters:
+            api-version: '2017-03-01'
+            locationName: japaneast
+            longTermRetentionDatabaseName: testDatabase
+            longTermRetentionServerName: testserver
+            resourceGroupName: testResourceGroup
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000
+                    name: 55555555-6666-7777-8888-999999999999;131637960820000000
+                    properties:
+                      backupTime: '2017-08-23T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131657960820000000
+                    name: 55555555-6666-7777-8888-999999999999;131657960820000000
+                    properties:
+                      backupTime: '2017-08-30T08:00:00.000Z'
+                      databaseDeletionTime: null
+                      databaseName: testDatabase
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131677960820000000
+                    name: 55555555-6666-7777-8888-999999999999;131677960820000000
+                    properties:
+                      backupTime: '2017-09-06T08:00:00.000Z'
+                      databaseDeletionTime: '2017-09-07T08:00:00.000Z'
+                      databaseName: testDatabase
+                      serverCreateTime: '2017-03-10T08:00:00.000Z'
+                      serverName: testserver
+                    type: Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}':
+    delete:
+      description: Deletes a long term retention backup.
+      operationId: LongTermRetentionBackups_DeleteByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The location of the database
+          in: path
+          name: locationName
+          required: true
+          type: string
+        - description: The name of the server
+          in: path
+          name: longTermRetentionServerName
+          required: true
+          type: string
+        - description: The name of the database
+          in: path
+          name: longTermRetentionDatabaseName
+          required: true
+          type: string
+        - description: The backup name.
+          in: path
+          name: backupName
+          required: true
+          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully deleted the backup.
+        '202':
+          description: Accepted
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+      tags:
+        - LongTermRetentionBackups
+      x-ms-examples:
+        Delete the long term retention backup.:
+          parameters:
+            api-version: 2017-03-01-preview
+            backupName: 55555555-6666-7777-8888-999999999999;131637960820000000
+            locationName: japaneast
+            longTermRetentionDatabaseName: testDatabase
+            longTermRetentionServerName: testserver
+            resourceGroupName: testResourceGroup
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+    get:
+      description: Gets a long term retention backup.
+      operationId: LongTermRetentionBackups_GetByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The location of the database.
+          in: path
+          name: locationName
+          required: true
+          type: string
+        - description: The name of the server
+          in: path
+          name: longTermRetentionServerName
+          required: true
+          type: string
+        - description: The name of the database
+          in: path
+          name: longTermRetentionDatabaseName
+          required: true
+          type: string
+        - description: The backup name.
+          in: path
+          name: backupName
+          required: true
+          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the backup.
+          schema:
+            $ref: '#/definitions/LongTermRetentionBackup'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.
+
+             * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 ResourceNotFound - The requested resource was not found.
+      tags:
+        - LongTermRetentionBackups
+      x-ms-examples:
+        Get the long term retention backup.:
+          parameters:
+            api-version: '2017-03-01'
+            backupName: 55555555-6666-7777-8888-999999999999;131637960820000000
+            locationName: japaneast
+            longTermRetentionDatabaseName: testDatabase
+            longTermRetentionServerName: testserver
+            resourceGroupName: testResourceGroup
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/2017-03-10T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2017-09-06T08:00:00.000Z'
                 name: '2017-03-10T08:00:00.000Z;55555555-6666-7777-8888-999999999999;131637960820000000'
                 properties:
                   backupTime: '2017-09-06T08:00:00.000Z'

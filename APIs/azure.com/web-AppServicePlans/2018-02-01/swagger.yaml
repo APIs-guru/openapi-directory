@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/AppServicePlans.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-AppServicePlans
   x-tags:
@@ -3673,6 +3672,8 @@ paths:
                           enum:
                             - SystemAssigned
                             - UserAssigned
+                            - 'SystemAssigned, UserAssigned'
+                            - None
                           type: string
                           x-ms-enum:
                             modelAsString: true
@@ -3752,6 +3753,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -4930,7 +4934,6 @@ paths:
                       description: |-
                         A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                         Point-To-Site VPN connection.
-                      format: byte
                       type: string
                     certThumbprint:
                       description: The client certificate thumbprint.
@@ -5103,7 +5106,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.

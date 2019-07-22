@@ -75,11 +75,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called "Operation-Location". The "Operation-Location" field contains the URL that you must use for your "Read Operation Result" operation to access OCR results.​'
+      description: 'Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called ''Operation-Location''. The ''Operation-Location'' field contains the URL that you must use for your ''GetReadOperationResult'' operation to access OCR results.​'
       operationId: BatchReadFile
       parameters:
         - $ref: '#/parameters/ImageUrl'
-        - $ref: '#/parameters/TextRecognitionMode'
       responses:
         '202':
           description: The service has accepted the request and will start processing later.
@@ -92,22 +91,21 @@ paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Batch Read File request:
           parameters:
             Endpoint: '{Endpoint}'
             ImageUrl: '{url}'
             Ocp-Apim-Subscription-Key: '{API key}'
-            mode: Printed
           responses:
             '202':
               header:
-                Operation-Location: 'https://{domain}/vision/v2.0/getReadResult/e56ffa6e-1ee4-4042-bc07-993db706c95f'
+                Operation-Location: 'https://{domain}/vision/v2.0/read/operations/e56ffa6e-1ee4-4042-bc07-993db706c95f'
   '/read/operations/{operationId}':
     get:
-      description: This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from "Operation-Location" field returned from Batch Read File interface.
+      description: This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'Operation-Location' field returned from Batch Read File interface.
       operationId: GetReadOperationResult
       parameters:
-        - description: Id of read operation returned in the response of the "Batch Read File" interface.
+        - description: Id of read operation returned in the response of the 'Batch Read File' interface.
           in: path
           name: operationId
           required: true
@@ -122,7 +120,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Get Read Operation Result request:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '{API key}'
@@ -350,7 +348,7 @@ paths:
         - $ref: '#/parameters/TextRecognitionMode'
       responses:
         '202':
-          description: The service has accepted the request and will start processing later. It will return Accepted immediately and include an Operation-Location header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.
+          description: The service has accepted the request and will start processing later. It will return Accepted immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.
           headers:
             Operation-Location:
               description: 'URL to query for status of the operation. The operation ID will expire in 48 hours. '
@@ -360,7 +358,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Recognize Text request:
           parameters:
             Endpoint: 'https://westus.api.cognitive.microsoft.com'
             ImageUrl: '{url}'
@@ -390,7 +388,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Get Text Operation Result request:
           parameters:
             Endpoint: 'https://westus.api.cognitive.microsoft.com'
             Ocp-Apim-Subscription-Key: '{API key}'
@@ -599,7 +597,7 @@ definitions:
   BoundingBox:
     description: 'Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.'
     items:
-      type: integer
+      type: number
       x-nullable: false
     type: array
   ComputerVisionError:
@@ -649,7 +647,7 @@ definitions:
       - url
     type: object
   Line:
-    description: Json object representing a recognized text line.
+    description: An object representing a recognized text line.
     properties:
       boundingBox:
         $ref: '#/definitions/BoundingBox'
@@ -666,7 +664,7 @@ definitions:
   OperationStatus:
     description: Status code of the text operation.
     enum:
-      - Not Started
+      - NotStarted
       - Running
       - Failed
       - Succeeded
@@ -679,7 +677,7 @@ definitions:
     description: OCR result of the read operation.
     properties:
       recognitionResults:
-        description: A array of text recognition result of the read operation.
+        description: An array of text recognition result of the read operation.
         items:
           $ref: '#/definitions/TextRecognitionResult'
         type: array
@@ -698,7 +696,7 @@ definitions:
         description: Status of the text operation.
     type: object
   TextRecognitionResult:
-    description: Json object representing a recognized text region
+    description: An object representing a recognized text region
     properties:
       clockwiseOrientation:
         description: 'The orientation of the image in degrees in the clockwise direction. Range between [0, 360).'
@@ -715,7 +713,7 @@ definitions:
         description: The 1-based page number of the recognition result.
         type: integer
       unit:
-        description: 'The unit used in the Width, Height and BoundingBox. For images, the unit is "pixel". For PDF, the unit is "inch".'
+        description: 'The unit used in the Width, Height and BoundingBox. For images, the unit is ''pixel''. For PDF, the unit is ''inch''.'
         enum:
           - pixel
           - inch
@@ -731,7 +729,7 @@ definitions:
       - lines
     type: object
   Word:
-    description: Json object representing a recognized word.
+    description: An object representing a recognized word.
     properties:
       boundingBox:
         $ref: '#/definitions/BoundingBox'
@@ -763,11 +761,10 @@ x-ms-paths:
     post:
       consumes:
         - application/octet-stream
-      description: 'Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called "Operation-Location". The "Operation-Location" field contains the URL that you must use for your "Get Read Result operation" to access OCR results.​'
+      description: 'Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called ''Operation-Location''. The ''Operation-Location'' field contains the URL that you must use for your ''Get Read Result operation'' to access OCR results.​'
       operationId: BatchReadFileInStream
       parameters:
         - $ref: '#/parameters/ImageStream'
-        - $ref: '#/parameters/TextRecognitionMode'
       produces:
         - application/json
       responses:
@@ -782,16 +779,15 @@ x-ms-paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Batch Read File request:
           parameters:
             Endpoint: '{Endpoint}'
             Image: '{binary}'
             Ocp-Apim-Subscription-Key: '{API key}'
-            mode: Printed
           responses:
             '202':
               header:
-                Operation-Location: 'https://{domain}/vision/v2.0/getReadResult/e56ffa6e-1ee4-4042-bc07-993db706c95f'
+                Operation-Location: 'https://{domain}/vision/v2.0/read/operations/e56ffa6e-1ee4-4042-bc07-993db706c95f'
   /recognizeText?overload=stream:
     post:
       consumes:
@@ -815,7 +811,7 @@ x-ms-paths:
           schema:
             $ref: '#/definitions/ComputerVisionError'
       x-ms-examples:
-        Successful Domain Model analysis request:
+        Successful Recognize Text request:
           parameters:
             Endpoint: 'https://westus.api.cognitive.microsoft.com'
             Image: '{binary}'

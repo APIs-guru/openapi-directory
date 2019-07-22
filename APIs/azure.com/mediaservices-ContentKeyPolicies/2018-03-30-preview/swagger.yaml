@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: mediaservices-ContentKeyPolicies
   x-tags:
@@ -1629,4 +1628,3 @@ definitions:
       - rawBody
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.ContentKeyPolicyX509CertificateTokenKey'
-  ODataError: {}

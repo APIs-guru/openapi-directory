@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/security/resource-manager/Microsoft.Security/stable/2018-06-01/pricings.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: security-pricings
   x-tags:
@@ -54,7 +53,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings':
     get:
-      description: Security pricing configurations in the subscription
+      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
       operationId: Pricings_List
       parameters:
         - description: API version for the operation
@@ -119,9 +118,14 @@ paths:
                     properties:
                       pricingTier: Free
                     type: Microsoft.Security/pricings
+                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts
+                    name: StorageAccounts
+                    properties:
+                      pricingTier: Standard
+                    type: Microsoft.Security/pricings
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}':
     get:
-      description: Security pricing configuration in the subscription
+      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
       operationId: Pricings_Get
       parameters:
         - description: API version for the operation
@@ -178,7 +182,7 @@ paths:
                   pricingTier: Standard
                 type: Microsoft.Security/pricings
     put:
-      description: Security pricing configuration in the subscription
+      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
       operationId: Pricings_Update
       parameters:
         - description: API version for the operation
@@ -286,7 +290,7 @@ definitions:
         readOnly: true
         type: string
       pricingTier:
-        description: The pricing tier value
+        description: 'The pricing tier value. Azure Security Center is provided in two pricing tiers: free and standard, with the standard tier available with a trial period. The standard tier offers advanced security capabilities, while the free tier offers basic security features.'
         enum:
           - Free
           - Standard

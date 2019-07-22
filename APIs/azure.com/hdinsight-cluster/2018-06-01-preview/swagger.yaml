@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: hdinsight-cluster
   x-tags:
@@ -665,6 +664,88 @@ paths:
       tags:
         - Clusters
       x-ms-examples:
+        Create HDInsight cluster with Autoscale configuration:
+          parameters:
+            api-version: 2018-06-01-preview
+            clusterName: cluster1
+            parameters:
+              properties:
+                clusterDefinition:
+                  componentVersion:
+                    Hadoop: '2.7'
+                  configurations:
+                    gateway:
+                      restAuthCredential.isEnabled: true
+                      restAuthCredential.password: '**********'
+                      restAuthCredential.username: admin
+                  kind: hadoop
+                clusterVersion: '3.6'
+                computeProfile:
+                  roles:
+                    - autoscale:
+                        capacity: null
+                        recurrence:
+                          schedule:
+                            - days:
+                                - Monday
+                                - Tuesday
+                                - Wednesday
+                                - Thursday
+                                - Friday
+                              timeAndCapacity:
+                                maxInstanceCount: 3
+                                minInstanceCount: 3
+                                time: '09:00'
+                            - days:
+                                - Monday
+                                - Tuesday
+                                - Wednesday
+                                - Thursday
+                                - Friday
+                              timeAndCapacity:
+                                maxInstanceCount: 6
+                                minInstanceCount: 6
+                                time: '18:00'
+                            - days:
+                                - Saturday
+                                - Sunday
+                              timeAndCapacity:
+                                maxInstanceCount: 2
+                                minInstanceCount: 2
+                                time: '09:00'
+                            - days:
+                                - Saturday
+                                - Sunday
+                              timeAndCapacity:
+                                maxInstanceCount: 4
+                                minInstanceCount: 4
+                                time: '18:00'
+                          timeZone: China Standard Time
+                      dataDisksGroups: null
+                      hardwareProfile:
+                        vmSize: Standard_D4_V2
+                      name: workernode
+                      osProfile:
+                        linuxOperatingSystemProfile:
+                          password: '**********'
+                          username: sshuser
+                      scriptActions: []
+                      targetInstanceCount: 4
+                      virtualNetworkProfile: null
+                osType: Linux
+                storageProfile:
+                  storageaccounts:
+                    - container: hdinsight-autoscale-tes-2019-06-18t05-49-16-591z
+                      isDefault: true
+                      key: storagekey
+                      name: mystorage.blob.core.windows.net
+                tier: Standard
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
         Create Hadoop cluster with Azure Data Lake Storage Gen 2:
           parameters:
             api-version: 2018-06-01-preview
@@ -1181,11 +1262,81 @@ paths:
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
+            '200':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
             '202':
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
       x-ms-long-running-operation: true
 definitions:
+  Autoscale:
+    description: The autoscale request parameters
+    properties:
+      capacity:
+        $ref: '#/definitions/AutoscaleCapacity'
+        description: Parameters for load-based autoscale
+      recurrence:
+        $ref: '#/definitions/AutoscaleRecurrence'
+        description: Parameters for schedule-based autoscale
+  AutoscaleCapacity:
+    description: The load-based autoscale request parameters
+    properties:
+      maxInstanceCount:
+        description: The maximum instance count of the cluster
+        format: int32
+        type: integer
+      minInstanceCount:
+        description: The minimum instance count of the cluster
+        format: int32
+        type: integer
+  AutoscaleRecurrence:
+    description: Schedule-based autoscale request parameters
+    properties:
+      schedule:
+        description: Array of schedule-based autoscale rules
+        items:
+          $ref: '#/definitions/AutoscaleSchedule'
+        type: array
+      timeZone:
+        description: The time zone for the autoscale schedule times
+        type: string
+  AutoscaleSchedule:
+    description: 'Parameters for a schedule-based autoscale rule, consisting of an array of days + a time and capacity'
+    properties:
+      days:
+        description: Days of the week for a schedule-based autoscale rule
+        items:
+          enum:
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+            - Sunday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DaysOfWeek
+        type: array
+      timeAndCapacity:
+        $ref: '#/definitions/AutoscaleTimeAndCapacity'
+        description: Time and capacity for a schedule-based autoscale rule
+  AutoscaleTimeAndCapacity:
+    description: Time and capacity request parameters
+    properties:
+      maxInstanceCount:
+        description: The maximum instance count of the cluster
+        format: int32
+        type: integer
+      minInstanceCount:
+        description: The minimum instance count of the cluster
+        format: int32
+        type: integer
+      time:
+        description: '24-hour time in the form xx:xx'
+        type: string
   Cluster:
     allOf:
       - $ref: '#/definitions/TrackedResource'
@@ -1616,6 +1767,10 @@ definitions:
   Role:
     description: Describes a role on the cluster.
     properties:
+      autoscale:
+        $ref: '#/definitions/Autoscale'
+        description: The autoscale configurations.
+        x-ms-client-name: autoscaleConfiguration
       dataDisksGroups:
         description: The data disks groups for the role.
         items:

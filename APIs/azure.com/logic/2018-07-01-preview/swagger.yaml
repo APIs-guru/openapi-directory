@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/logic/resource-manager/Microsoft.Logic/preview/2018-07-01-preview/logic.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: logic
   x-tags:
@@ -1549,17 +1548,17 @@ paths:
                                 suspendMessageOnFileNameGenerationError: true
                                 transmitFileNameInMimeHeader: true
                               errorSettings:
-                                resendIfMdnNotReceived: true
+                                resendIfMDNNotReceived: true
                                 suspendDuplicateMessage: true
                               mdnSettings:
                                 dispositionNotificationTo: 'http://tempuri.org'
                                 mdnText: Sample
                                 micHashingAlgorithm: None
-                                needMdn: true
+                                needMDN: true
                                 receiptDeliveryUrl: 'http://tempuri.org'
                                 sendInboundMdnToMessageBox: true
-                                sendMdnAsynchronously: true
-                                signMdn: true
+                                sendMDNAsynchronously: true
+                                signMDN: true
                                 signOutboundMdnIfOptional: true
                               messageConnectionSettings:
                                 ignoreCertificateNameMismatch: true
@@ -1567,12 +1566,12 @@ paths:
                                 supportHttpStatusCodeContinue: true
                                 unfoldHttpHeaders: true
                               securitySettings:
-                                enableNrrForInboundDecodedMessages: true
-                                enableNrrForInboundEncodedMessages: true
-                                enableNrrForInboundMdn: true
-                                enableNrrForOutboundDecodedMessages: true
-                                enableNrrForOutboundEncodedMessages: true
-                                enableNrrForOutboundMdn: true
+                                enableNRRForInboundDecodedMessages: true
+                                enableNRRForInboundEncodedMessages: true
+                                enableNRRForInboundMDN: true
+                                enableNRRForOutboundDecodedMessages: true
+                                enableNRRForOutboundEncodedMessages: true
+                                enableNRRForOutboundMDN: true
                                 overrideGroupSigningCertificate: false
                               validationSettings:
                                 checkCertificateRevocationListOnReceive: true
@@ -1604,17 +1603,17 @@ paths:
                                 suspendMessageOnFileNameGenerationError: true
                                 transmitFileNameInMimeHeader: true
                               errorSettings:
-                                resendIfMdnNotReceived: true
+                                resendIfMDNNotReceived: true
                                 suspendDuplicateMessage: true
                               mdnSettings:
                                 dispositionNotificationTo: 'http://tempuri.org'
                                 mdnText: Sample
                                 micHashingAlgorithm: None
-                                needMdn: true
+                                needMDN: true
                                 receiptDeliveryUrl: 'http://tempuri.org'
                                 sendInboundMdnToMessageBox: true
-                                sendMdnAsynchronously: true
-                                signMdn: true
+                                sendMDNAsynchronously: true
+                                signMDN: true
                                 signOutboundMdnIfOptional: true
                               messageConnectionSettings:
                                 ignoreCertificateNameMismatch: true
@@ -1622,12 +1621,12 @@ paths:
                                 supportHttpStatusCodeContinue: true
                                 unfoldHttpHeaders: true
                               securitySettings:
-                                enableNrrForInboundDecodedMessages: true
-                                enableNrrForInboundEncodedMessages: true
-                                enableNrrForInboundMdn: true
-                                enableNrrForOutboundDecodedMessages: true
-                                enableNrrForOutboundEncodedMessages: true
-                                enableNrrForOutboundMdn: true
+                                enableNRRForInboundDecodedMessages: true
+                                enableNRRForInboundEncodedMessages: true
+                                enableNRRForInboundMDN: true
+                                enableNRRForOutboundDecodedMessages: true
+                                enableNRRForOutboundEncodedMessages: true
+                                enableNRRForOutboundMDN: true
                                 overrideGroupSigningCertificate: false
                               validationSettings:
                                 checkCertificateRevocationListOnReceive: true
@@ -1959,17 +1958,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -1977,12 +1976,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -2014,17 +2013,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -2032,12 +2031,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -2127,17 +2126,17 @@ paths:
                           suspendMessageOnFileNameGenerationError: true
                           transmitFileNameInMimeHeader: true
                         errorSettings:
-                          resendIfMdnNotReceived: true
+                          resendIfMDNNotReceived: true
                           suspendDuplicateMessage: true
                         mdnSettings:
                           dispositionNotificationTo: 'http://tempuri.org'
                           mdnText: Sample
                           micHashingAlgorithm: SHA1
-                          needMdn: true
+                          needMDN: true
                           receiptDeliveryUrl: 'http://tempuri.org'
                           sendInboundMdnToMessageBox: true
-                          sendMdnAsynchronously: true
-                          signMdn: true
+                          sendMDNAsynchronously: true
+                          signMDN: true
                           signOutboundMdnIfOptional: true
                         messageConnectionSettings:
                           ignoreCertificateNameMismatch: true
@@ -2145,12 +2144,12 @@ paths:
                           supportHttpStatusCodeContinue: true
                           unfoldHttpHeaders: true
                         securitySettings:
-                          enableNrrForInboundDecodedMessages: true
-                          enableNrrForInboundEncodedMessages: true
-                          enableNrrForInboundMdn: true
-                          enableNrrForOutboundDecodedMessages: true
-                          enableNrrForOutboundEncodedMessages: true
-                          enableNrrForOutboundMdn: true
+                          enableNRRForInboundDecodedMessages: true
+                          enableNRRForInboundEncodedMessages: true
+                          enableNRRForInboundMDN: true
+                          enableNRRForOutboundDecodedMessages: true
+                          enableNRRForOutboundEncodedMessages: true
+                          enableNRRForOutboundMDN: true
                           overrideGroupSigningCertificate: false
                         validationSettings:
                           checkCertificateRevocationListOnReceive: true
@@ -2182,17 +2181,17 @@ paths:
                           suspendMessageOnFileNameGenerationError: true
                           transmitFileNameInMimeHeader: true
                         errorSettings:
-                          resendIfMdnNotReceived: true
+                          resendIfMDNNotReceived: true
                           suspendDuplicateMessage: true
                         mdnSettings:
                           dispositionNotificationTo: 'http://tempuri.org'
                           mdnText: Sample
                           micHashingAlgorithm: SHA1
-                          needMdn: true
+                          needMDN: true
                           receiptDeliveryUrl: 'http://tempuri.org'
                           sendInboundMdnToMessageBox: true
-                          sendMdnAsynchronously: true
-                          signMdn: true
+                          sendMDNAsynchronously: true
+                          signMDN: true
                           signOutboundMdnIfOptional: true
                         messageConnectionSettings:
                           ignoreCertificateNameMismatch: true
@@ -2200,12 +2199,12 @@ paths:
                           supportHttpStatusCodeContinue: true
                           unfoldHttpHeaders: true
                         securitySettings:
-                          enableNrrForInboundDecodedMessages: true
-                          enableNrrForInboundEncodedMessages: true
-                          enableNrrForInboundMdn: true
-                          enableNrrForOutboundDecodedMessages: true
-                          enableNrrForOutboundEncodedMessages: true
-                          enableNrrForOutboundMdn: true
+                          enableNRRForInboundDecodedMessages: true
+                          enableNRRForInboundEncodedMessages: true
+                          enableNRRForInboundMDN: true
+                          enableNRRForOutboundDecodedMessages: true
+                          enableNRRForOutboundEncodedMessages: true
+                          enableNRRForOutboundMDN: true
                           overrideGroupSigningCertificate: false
                         validationSettings:
                           checkCertificateRevocationListOnReceive: true
@@ -2263,17 +2262,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -2281,12 +2280,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -2318,17 +2317,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -2336,12 +2335,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -2393,17 +2392,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -2411,12 +2410,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -2448,17 +2447,17 @@ paths:
                             suspendMessageOnFileNameGenerationError: true
                             transmitFileNameInMimeHeader: true
                           errorSettings:
-                            resendIfMdnNotReceived: true
+                            resendIfMDNNotReceived: true
                             suspendDuplicateMessage: true
                           mdnSettings:
                             dispositionNotificationTo: 'http://tempuri.org'
                             mdnText: Sample
                             micHashingAlgorithm: SHA1
-                            needMdn: true
+                            needMDN: true
                             receiptDeliveryUrl: 'http://tempuri.org'
                             sendInboundMdnToMessageBox: true
-                            sendMdnAsynchronously: true
-                            signMdn: true
+                            sendMDNAsynchronously: true
+                            signMDN: true
                             signOutboundMdnIfOptional: true
                           messageConnectionSettings:
                             ignoreCertificateNameMismatch: true
@@ -2466,12 +2465,12 @@ paths:
                             supportHttpStatusCodeContinue: true
                             unfoldHttpHeaders: true
                           securitySettings:
-                            enableNrrForInboundDecodedMessages: true
-                            enableNrrForInboundEncodedMessages: true
-                            enableNrrForInboundMdn: true
-                            enableNrrForOutboundDecodedMessages: true
-                            enableNrrForOutboundEncodedMessages: true
-                            enableNrrForOutboundMdn: true
+                            enableNRRForInboundDecodedMessages: true
+                            enableNRRForInboundEncodedMessages: true
+                            enableNRRForInboundMDN: true
+                            enableNRRForOutboundDecodedMessages: true
+                            enableNRRForOutboundEncodedMessages: true
+                            enableNRRForOutboundMDN: true
                             overrideGroupSigningCertificate: false
                           validationSettings:
                             checkCertificateRevocationListOnReceive: true
@@ -3451,8 +3450,8 @@ paths:
                 - error:
                     code: NotFound
                     message: Some error occurred
+                  eventLevel: Informational
                   eventTime: '2016-08-05T01:54:49.505567Z'
-                  eventlevel: Informational
                   record:
                     agreementProperties:
                       agreementName: testAgreement
@@ -4116,7 +4115,7 @@ paths:
             api-version: 2018-07-01-preview
             integrationAccountName: testIntegrationAccount
             regenerateAccessKey:
-              KeyType: Primary
+              keyType: Primary
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:

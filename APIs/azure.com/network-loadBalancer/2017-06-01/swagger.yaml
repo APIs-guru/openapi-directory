@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-06-01/loadBalancer.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-loadBalancer
   x-tags:
@@ -2237,7 +2236,6 @@ definitions:
     required:
       - protocol
       - frontendPort
-  NetworkInterfacePropertiesFormat: {}
   OutboundNatRule:
     allOf:
       - description: Reference to another subresource.
@@ -2351,5 +2349,3 @@ definitions:
     required:
       - protocol
       - port
-  PublicIPAddressPropertiesFormat: {}
-  SubnetPropertiesFormat: {}

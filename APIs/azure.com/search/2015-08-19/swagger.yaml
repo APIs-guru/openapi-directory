@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/resource-manager/Microsoft.Search/stable/2015-08-19/search.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: search
   x-tags:
@@ -88,7 +87,8 @@ paths:
             $ref: '#/definitions/OperationListResult'
       tags:
         - Operations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability':
     post:
       description: 'Checks whether or not the given Search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).'
@@ -191,7 +191,8 @@ paths:
                     tags:
                       app-name: My e-commerce app
                     type: Microsoft.Search/searchServices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices':
     get:
       description: Gets a list of all Search services in the given resource group.
@@ -254,7 +255,8 @@ paths:
                     tags:
                       app-name: My e-commerce app
                     type: Microsoft.Search/searchServices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}':
     delete:
       description: 'Deletes a Search service in the given resource group, along with its associated resources.'
@@ -737,7 +739,8 @@ paths:
                     name: Query key for browser-based clients
                   - key: <another query API key>
                     name: Query key for mobile clients
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}':
     post:
       description: Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.

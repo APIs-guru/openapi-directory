@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/firewallRules.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-firewallRules
   x-tags:
@@ -115,7 +114,8 @@ paths:
                       endIpAddress: 0.0.0.2
                       startIpAddress: 0.0.0.2
                     type: Microsoft.Sql/servers/firewallRules
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}':
     delete:
       description: Deletes a firewall rule.

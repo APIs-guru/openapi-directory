@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-02-01/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -392,7 +391,8 @@ paths:
                       resource: File service
                     name: Microsoft.Storage/storageAccounts/fileServices/providers/Microsoft.Insights/diagnosticSettings/write
                     origin: system
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability':
     post:
       description: Checks that the storage account name is valid and is not already in use.
@@ -480,7 +480,8 @@ paths:
                       localizedValue: Storage Accounts
                       value: StorageAccounts
                     unit: Count
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus':
     get:
       description: Lists the available SKUs supported by Microsoft.Storage for given subscription.
@@ -4230,7 +4231,8 @@ paths:
                     resourceType: storageAccounts
                     restrictions: []
                     tier: Standard
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -4400,7 +4402,8 @@ paths:
                       key1: value1
                       key2: value2
                     type: Microsoft.Storage/storageAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages':
     get:
       description: Gets the current usage count and the limit for the resources under the subscription.
@@ -4440,7 +4443,8 @@ paths:
                       localizedValue: Storage Accounts
                       value: StorageAccounts
                     unit: Count
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -4527,7 +4531,8 @@ paths:
                       key1: value1
                       key2: value2
                     type: Microsoft.Storage/storageAccounts
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}':
     delete:
       description: Deletes a storage account in Microsoft Azure.

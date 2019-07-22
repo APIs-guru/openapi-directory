@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicefabric/resource-manager/Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: servicefabric
   x-tags:
@@ -122,7 +121,7 @@ paths:
       description: ''
       operationId: Operations_List
       parameters:
-        - description: The version of the ServiceFabric resouce provider api
+        - description: The version of the ServiceFabric resource provider api
           in: query
           name: api-version
           required: true
@@ -171,12 +170,11 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - etag: W/"636462502169240745"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                     location: eastus
                     name: myCluster
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                         - DnsService
                       availableClusterVersions:
@@ -184,9 +182,9 @@ paths:
                           environment: Windows
                           supportExpiryUtc: '9999-12-31T23:59:59.9999999'
                       azureActiveDirectory:
-                        clientApplication: some_random_guid
-                        clusterApplication: some_random_guid
-                        tenantId: some_random_guid
+                        clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                        clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                        tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
                       certificate:
                         thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                         thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
@@ -199,7 +197,7 @@ paths:
                         - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                           isAdmin: false
                       clusterCodeVersion: 6.0.219.9494
-                      clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                      clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                       clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                       clusterState: WaitingForNodes
                       diagnosticsStorageAccountConfig:
@@ -234,42 +232,24 @@ paths:
                         thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
                         x509StoreName: My
                       upgradeDescription:
-                        deltaHealthPolicy:
-                          applicationDeltaHealthPolicies:
-                            myAppDeltaHealthPolicy:
-                              defaultServiceTypeDeltaHealthPolicy:
-                                maxPercentDeltaUnhealthyServices: 100
-                              serivceTypeDeltaHealthPolicies:
-                                mySvcTypeDeltaHealthPolicy:
-                                  maxPercentDeltaUnhealthyServices: 100
-                          maxPercentDeltaUnhealthyApplications: 0
-                          maxPercentDeltaUnhealthyNodes: 0
-                          maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
                         forceRestart: true
                         healthCheckRetryTimeout: '00:05:00'
                         healthCheckStableDuration: '00:00:30'
                         healthCheckWaitDuration: '00:00:30'
                         healthPolicy:
-                          applicationHealthPolicies:
-                            myAppHealthPolicy:
-                              defaultServiceTypeHealthPolicy:
-                                maxPercentUnhealthyServices: 100
                           maxPercentUnhealthyApplications: 100
                           maxPercentUnhealthyNodes: 100
-                        overrideUserUpgradePolicy: false
                         upgradeDomainTimeout: '00:15:00'
                         upgradeReplicaSetCheckTimeout: '00:10:00'
                         upgradeTimeout: '00:15:00'
                       upgradeMode: Manual
                       vmImage: Windows
-                    tags: {}
                     type: Microsoft.ServiceFabric/clusters
-                  - etag: W/"636462502164040075"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
                     location: eastus
                     name: myCluster2
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                       availableClusterVersions:
                         - codeVersion: 6.0.127.1
@@ -278,7 +258,7 @@ paths:
                       clientCertificateCommonNames: []
                       clientCertificateThumbprints: []
                       clusterCodeVersion: 6.0.127.1
-                      clusterEndpoint: 2747e469-b24e-4039-8a0a-46151419523f
+                      clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                       clusterId: 2747e469-b24e-4039-8a0a-46151419523f
                       clusterState: WaitingForNodes
                       diagnosticsStorageAccountConfig:
@@ -320,13 +300,11 @@ paths:
                         healthPolicy:
                           maxPercentUnhealthyApplications: 100
                           maxPercentUnhealthyNodes: 100
-                        overrideUserUpgradePolicy: false
                         upgradeDomainTimeout: '02:00:00'
                         upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
                         upgradeTimeout: '12:00:00'
                       upgradeMode: Manual
                       vmImage: linux
-                    tags: {}
                     type: Microsoft.ServiceFabric/clusters
               headers: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions':
@@ -516,6 +494,7 @@ paths:
           responses:
             '200':
               headers: {}
+            '204': {}
     get:
       description: |
         Get cluster resource
@@ -547,12 +526,11 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502169240745"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
                 properties:
-                  addonFeatures:
+                  addOnFeatures:
                     - RepairManager
                     - DnsService
                   availableClusterVersions:
@@ -560,9 +538,9 @@ paths:
                       environment: Windows
                       supportExpiryUtc: '9999-12-31T23:59:59.9999999'
                   azureActiveDirectory:
-                    clientApplication: some_random_guid
-                    clusterApplication: some_random_guid
-                    tenantId: some_random_guid
+                    clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                    clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                    tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
                   certificate:
                     thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                     thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
@@ -575,7 +553,7 @@ paths:
                     - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                       isAdmin: false
                   clusterCodeVersion: 6.0.219.9494
-                  clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                   clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                   clusterState: WaitingForNodes
                   diagnosticsStorageAccountConfig:
@@ -611,13 +589,6 @@ paths:
                     x509StoreName: My
                   upgradeDescription:
                     deltaHealthPolicy:
-                      applicationDeltaHealthPolicies:
-                        myAppDeltaHealthPolicy:
-                          defaultServiceTypeDeltaHealthPolicy:
-                            maxPercentDeltaUnhealthyServices: 100
-                          serivceTypeDeltaHealthPolicies:
-                            mySvcTypeDeltaHealthPolicy:
-                              maxPercentDeltaUnhealthyServices: 100
                       maxPercentDeltaUnhealthyApplications: 0
                       maxPercentDeltaUnhealthyNodes: 0
                       maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
@@ -626,19 +597,13 @@ paths:
                     healthCheckStableDuration: '00:00:30'
                     healthCheckWaitDuration: '00:00:30'
                     healthPolicy:
-                      applicationHealthPolicies:
-                        myAppHealthPolicy:
-                          defaultServiceTypeHealthPolicy:
-                            maxPercentUnhealthyServices: 100
                       maxPercentUnhealthyApplications: 100
                       maxPercentUnhealthyNodes: 100
-                    overrideUserUpgradePolicy: false
                     upgradeDomainTimeout: '00:15:00'
                     upgradeReplicaSetCheckTimeout: '00:10:00'
                     upgradeTimeout: '00:15:00'
                   upgradeMode: Manual
                   vmImage: Windows
-                tags: {}
                 type: Microsoft.ServiceFabric/clusters
               headers: {}
     patch:
@@ -677,12 +642,8 @@ paths:
             api-version: 2017-07-01-preview
             clusterName: myCluster
             parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
-              location: eastus
-              name: myCluster
               properties:
-                addonFeatures: []
-                clusterState: Default
+                addOnFeatures: []
                 nodeTypes:
                   - applicationPorts:
                       endPort: 30000
@@ -709,21 +670,19 @@ paths:
                     name: testnt1
                     vmInstanceCount: 3
                 reliabilityLevel: Bronze
-                upgradeMode: Default
+                upgradeMode: Automatic
               tags:
                 a: b
-              type: Microsoft.ServiceFabric/clusters
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '202':
+            '200':
               body:
-                etag: W/"636462502169240744"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
                 properties:
-                  addonFeatures: []
+                  addOnFeatures: []
                   availableClusterVersions:
                     - codeVersion: 6.0.219.9494
                       environment: Windows
@@ -731,7 +690,7 @@ paths:
                   clientCertificateCommonNames: []
                   clientCertificateThumbprints: []
                   clusterCodeVersion: 6.0.219.9494
-                  clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                   clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                   clusterState: WaitingForNodes
                   diagnosticsStorageAccountConfig:
@@ -785,7 +744,6 @@ paths:
                     healthPolicy:
                       maxPercentUnhealthyApplications: 100
                       maxPercentUnhealthyNodes: 100
-                    overrideUserUpgradePolicy: false
                     upgradeDomainTimeout: '02:00:00'
                     upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
                     upgradeTimeout: '12:00:00'
@@ -796,6 +754,7 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2017-07-01-privatepreview'
                 Retry-After: '10'
+            '202': {}
       x-ms-long-running-operation: true
     put:
       description: |
@@ -837,13 +796,13 @@ paths:
               location: eastus
               name: myCluster
               properties:
-                addonFeatures:
+                addOnFeatures:
                   - RepairManager
                   - DnsService
                 azureActiveDirectory:
-                  clientApplication: some_random_guid
-                  clusterApplication: some_random_guid
-                  tenantId: some_random_guid
+                  clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                  clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                  tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
                 certificate:
                   thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                   thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
@@ -856,7 +815,6 @@ paths:
                   - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                     isAdmin: false
                 clusterCodeVersion: 6.0.219.9494
-                clusterState: Default
                 diagnosticsStorageAccountConfig:
                   blobEndpoint: 'https://diag.blob.core.windows.net/'
                   protectedAccountKeyName: StorageAccountKey1
@@ -889,13 +847,6 @@ paths:
                   x509StoreName: My
                 upgradeDescription:
                   deltaHealthPolicy:
-                    applicationDeltaHealthPolicies:
-                      myAppDeltaHealthPolicy:
-                        defaultServiceTypeDeltaHealthPolicy:
-                          maxPercentDeltaUnhealthyServices: 100
-                        serivceTypeDeltaHealthPolicies:
-                          mySvcTypeDeltaHealthPolicy:
-                            maxPercentDeltaUnhealthyServices: 100
                     maxPercentDeltaUnhealthyApplications: 0
                     maxPercentDeltaUnhealthyNodes: 0
                     maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
@@ -904,31 +855,24 @@ paths:
                   healthCheckStableDuration: '00:00:30'
                   healthCheckWaitDuration: '00:00:30'
                   healthPolicy:
-                    applicationHealthPolicies:
-                      myAppHealthPolicy:
-                        defaultServiceTypeHealthPolicy:
-                          maxPercentUnhealthyServices: 100
                     maxPercentUnhealthyApplications: 100
                     maxPercentUnhealthyNodes: 100
-                  overrideUserUpgradePolicy: false
                   upgradeDomainTimeout: '00:15:00'
                   upgradeReplicaSetCheckTimeout: '00:10:00'
                   upgradeTimeout: '00:15:00'
                 upgradeMode: Manual
                 vmImage: Windows
-              tags: {}
               type: Microsoft.ServiceFabric/clusters
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '202':
+            '200':
               body:
-                etag: W/"636462502169240745"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
                 properties:
-                  addonFeatures:
+                  addOnFeatures:
                     - RepairManager
                     - DnsService
                   availableClusterVersions:
@@ -936,9 +880,9 @@ paths:
                       environment: Windows
                       supportExpiryUtc: '9999-12-31T23:59:59.9999999'
                   azureActiveDirectory:
-                    clientApplication: some_random_guid
-                    clusterApplication: some_random_guid
-                    tenantId: some_random_guid
+                    clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                    clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                    tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
                   certificate:
                     thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                     thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
@@ -951,7 +895,7 @@ paths:
                     - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                       isAdmin: false
                   clusterCodeVersion: 6.0.219.9494
-                  clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                   clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                   clusterState: WaitingForNodes
                   diagnosticsStorageAccountConfig:
@@ -987,13 +931,6 @@ paths:
                     x509StoreName: My
                   upgradeDescription:
                     deltaHealthPolicy:
-                      applicationDeltaHealthPolicies:
-                        myAppDeltaHealthPolicy:
-                          defaultServiceTypeDeltaHealthPolicy:
-                            maxPercentDeltaUnhealthyServices: 100
-                          serivceTypeDeltaHealthPolicies:
-                            mySvcTypeDeltaHealthPolicy:
-                              maxPercentDeltaUnhealthyServices: 100
                       maxPercentDeltaUnhealthyApplications: 0
                       maxPercentDeltaUnhealthyNodes: 0
                       maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
@@ -1002,23 +939,18 @@ paths:
                     healthCheckStableDuration: '00:00:30'
                     healthCheckWaitDuration: '00:00:30'
                     healthPolicy:
-                      applicationHealthPolicies:
-                        myAppHealthPolicy:
-                          defaultServiceTypeHealthPolicy:
-                            maxPercentUnhealthyServices: 100
                       maxPercentUnhealthyApplications: 100
                       maxPercentUnhealthyNodes: 100
-                    overrideUserUpgradePolicy: false
                     upgradeDomainTimeout: '00:15:00'
                     upgradeReplicaSetCheckTimeout: '00:10:00'
                     upgradeTimeout: '00:15:00'
                   upgradeMode: Manual
                   vmImage: Windows
-                tags: {}
                 type: Microsoft.ServiceFabric/clusters
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2017-07-01-privatepreview'
                 Retry-After: '10'
+            '202': {}
         Put a cluster with min parameter:
           parameters:
             api-version: 2017-07-01-preview
@@ -1028,8 +960,6 @@ paths:
               location: eastus
               name: myCluster
               properties:
-                addonFeatures: []
-                clusterState: Default
                 diagnosticsStorageAccountConfig:
                   blobEndpoint: 'https://diag.blob.core.windows.net/'
                   protectedAccountKeyName: StorageAccountKey1
@@ -1057,19 +987,16 @@ paths:
                     vmInstanceCount: 5
                 reliabilityLevel: Silver
                 upgradeMode: Automatic
-              tags: {}
               type: Microsoft.ServiceFabric/clusters
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                etag: W/"636462502169240743"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                 location: eastus
                 name: myCluster
                 properties:
-                  addonFeatures: []
                   availableClusterVersions:
                     - codeVersion: 6.0.219.9494
                       environment: Windows
@@ -1077,7 +1004,7 @@ paths:
                   clientCertificateCommonNames: []
                   clientCertificateThumbprints: []
                   clusterCodeVersion: 6.0.219.9494
-                  clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                  clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                   clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                   clusterState: WaitingForNodes
                   diagnosticsStorageAccountConfig:
@@ -1119,1085 +1046,13 @@ paths:
                     healthPolicy:
                       maxPercentUnhealthyApplications: 100
                       maxPercentUnhealthyNodes: 100
-                    overrideUserUpgradePolicy: false
                     upgradeDomainTimeout: '02:00:00'
                     upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
                     upgradeTimeout: '12:00:00'
                   upgradeMode: Automatic
-                tags: {}
                 type: Microsoft.ServiceFabric/clusters
               headers: {}
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes':
-    get:
-      description: Returns all application type names in the specified cluster.
-      operationId: ApplicationType_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ApplicationTypeResourceList'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - ApplicationType
-      x-ms-examples:
-        Get a list of application type version resources:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                nextLink: ''
-                value:
-                  - etag: W/"636462502176040417"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
-                    location: eastus
-                    name: myCluster
-                    properties:
-                      appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                      defaultParameterList: {}
-                      provisioningState: Updating
-                    tags: {}
-                    type: versions
-              headers: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}':
-    delete:
-      description: Deletes the application type name resource.
-      operationId: ApplicationType_Delete
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-        '204':
-          description: The resource was not found.
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - ApplicationType
-      x-ms-examples:
-        Delete an application type:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/6a367b2d-9f60-4941-b886-e348ddcb4127?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    get:
-      description: Returns an application type name resource.
-      operationId: ApplicationType_Get
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ApplicationTypeResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - ApplicationType
-      x-ms-examples:
-        Get an application type:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                etag: W/"636462502174844831"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
-                location: eastus
-                name: myCluster
-                properties:
-                  provisioningState: Succeeded
-                tags: {}
-                type: applicationTypes
-              headers: {}
-    put:
-      description: Creates the application type name resource.
-      operationId: ApplicationType_Put
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/api-version'
-        - description: The application type name resource.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/ApplicationTypeResource'
-          x-ms-parameter-location: method
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ApplicationTypeResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - ApplicationType
-      x-ms-examples:
-        Put an application type:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
-              location: eastus
-              name: myCluster
-              tags: {}
-              type: applicationTypes
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                etag: W/"636462502174844831"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
-                location: eastus
-                name: myCluster
-                properties:
-                  provisioningState: Succeeded
-                tags: {}
-                type: applicationTypes
-              headers: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions':
-    get:
-      description: Returns all versions for the specified application type.
-      operationId: Version_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/VersionResourceList'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Version
-      x-ms-examples:
-        Get a list of application type version resources:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                nextLink: ''
-                value:
-                  - etag: W/"636462502176040417"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
-                    location: eastus
-                    name: myCluster
-                    properties:
-                      appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                      defaultParameterList: {}
-                      provisioningState: Updating
-                    tags: {}
-                    type: versions
-              headers: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}':
-    delete:
-      description: Unprovisions an application type version resource.
-      operationId: Version_Delete
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/version'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-        '204':
-          description: The resource was not found.
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Version
-      x-ms-examples:
-        Delete an application type version:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-            version: '1.0'
-          responses:
-            '202':
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/28e62369-ed8c-4aba-8c05-ab7d6238cc3d?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    get:
-      description: Returns an application type version resource.
-      operationId: Version_Get
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/version'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/VersionResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Version
-      x-ms-examples:
-        Get an application type version:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-            version: '1.0'
-          responses:
-            '200':
-              body:
-                etag: W/"636462502176040417"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
-                location: eastus
-                name: myCluster
-                properties:
-                  appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                  defaultParameterList: {}
-                  provisioningState: Updating
-                tags: {}
-                type: versions
-              headers: {}
-    put:
-      description: Provisions an application type version resource.
-      operationId: Version_Put
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationTypeName'
-        - $ref: '#/parameters/version'
-        - $ref: '#/parameters/api-version'
-        - description: The application type version resource.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/VersionResource'
-          x-ms-parameter-location: method
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/VersionResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Version
-      x-ms-examples:
-        Put an application type version:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationTypeName: myAppType
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
-              location: eastus
-              name: myCluster
-              properties:
-                appPackageUrl: 'http://fakelink.test.com/MyAppType'
-              tags: {}
-              type: versions
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-            version: '1.0'
-          responses:
-            '202':
-              body:
-                etag: W/"636462502176040417"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
-                location: eastus
-                name: myCluster
-                properties:
-                  appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                  defaultParameterList: {}
-                  provisioningState: Updating
-                tags: {}
-                type: versions
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/e2413c7e-d51b-40ac-8155-bc85bf8ae856?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications':
-    get:
-      description: Returns all application resources in the specified cluster.
-      operationId: Application_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ApplicationResourceList'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Application
-      x-ms-examples:
-        Get a list of application resources:
-          parameters:
-            api-version: 2017-07-01-preview
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                nextLink: ''
-                value:
-                  - etag: W/"636462502180261858"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-                    location: eastus
-                    name: myCluster
-                    properties:
-                      metrics:
-                        - maximumCapacity: 3
-                          name: metric1
-                          reservationCapacity: 1
-                          totalApplicationCapacity: 5
-                      provisioningState: Updating
-                      removeApplicationCapacity: false
-                      typeName: myAppType
-                      typeVersion: '1.0'
-                    tags: {}
-                    type: applications
-              headers: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}':
-    delete:
-      description: Deletes an application resource with the specified name.
-      operationId: Application_Delete
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-        '204':
-          description: The resource was not found.
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Application
-      x-ms-examples:
-        Delete an application:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/76053752-a423-4a80-b283-1dad1ba5f314?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    get:
-      description: Returns an application resource with the specified name.
-      operationId: Application_Get
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ApplicationResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Application
-      x-ms-examples:
-        Get an application:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                etag: W/"636462502180261859"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-                location: eastus
-                name: myCluster
-                properties:
-                  maximumNodes: 3
-                  metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
-                  minimumNodes: 1
-                  parameters:
-                    param1: value1
-                  provisioningState: Updating
-                  removeApplicationCapacity: false
-                  typeName: myAppType
-                  typeVersion: '1.0'
-                  upgradePolicy:
-                    applicationHealthPolicy:
-                      considerWarningAsError: true
-                      defaultServiceTypeHealthPolicy:
-                        maxPercentUnhealthyPartitionsPerService: 0
-                        maxPercentUnhealthyReplicasPerPartition: 0
-                        maxPercentUnhealthyServices: 0
-                      maxPercentUnhealthyDeployedApplications: 0
-                    forceRestart: false
-                    rollingUpgradeMonitoringPolicy:
-                      failureAction: Rollback
-                      healthCheckRetryTimeout: '00:10:00'
-                      healthCheckStableDuration: '00:05:00'
-                      healthCheckWaitDuration: '00:02:00'
-                      upgradeDomainTimeout: '1.06:00:00'
-                      upgradeTimeout: '01:00:00'
-                    upgradeReplicaSetCheckTimeout: '01:00:00'
-                tags: {}
-                type: applications
-              headers: {}
-    patch:
-      description: Updates an application resource with the specified name.
-      operationId: Application_Patch
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/api-version'
-        - description: The application resource for patch operations.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/ApplicationResourceUpdate'
-          x-ms-parameter-location: method
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/ApplicationResourceUpdate'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Application
-      x-ms-examples:
-        Patch an application:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-              location: eastus
-              name: myCluster
-              properties:
-                metrics:
-                  - maximumCapacity: 3
-                    name: metric1
-                    reservationCapacity: 1
-                    totalApplicationCapacity: 5
-                removeApplicationCapacity: false
-                typeName: myAppType
-                typeVersion: '1.0'
-              tags: {}
-              type: applications
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502180261858"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-                location: eastus
-                name: myCluster
-                properties:
-                  metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
-                  provisioningState: Updating
-                  removeApplicationCapacity: false
-                  typeName: myAppType
-                  typeVersion: '1.0'
-                tags: {}
-                type: applications
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/a553eb63-c332-40df-8ace-eb8d34a9b298?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    put:
-      description: Creates or updates an application resource with the specified name.
-      operationId: Application_Put
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/api-version'
-        - description: The application resource.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/ApplicationResource'
-          x-ms-parameter-location: method
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/ApplicationResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Application
-      x-ms-examples:
-        Put an application with maximum parameters:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-              location: eastus
-              name: myCluster
-              properties:
-                maximumNodes: 3
-                metrics:
-                  - maximumCapacity: 3
-                    name: metric1
-                    reservationCapacity: 1
-                    totalApplicationCapacity: 5
-                minimumNodes: 1
-                parameters:
-                  param1: value1
-                removeApplicationCapacity: false
-                typeName: myAppType
-                typeVersion: '1.0'
-                upgradePolicy:
-                  applicationHealthPolicy:
-                    considerWarningAsError: true
-                    defaultServiceTypeHealthPolicy:
-                      maxPercentUnhealthyPartitionsPerService: 0
-                      maxPercentUnhealthyReplicasPerPartition: 0
-                      maxPercentUnhealthyServices: 0
-                    maxPercentUnhealthyDeployedApplications: 0
-                  forceRestart: false
-                  rollingUpgradeMonitoringPolicy:
-                    failureAction: Rollback
-                    healthCheckRetryTimeout: '00:10:00'
-                    healthCheckStableDuration: '00:05:00'
-                    healthCheckWaitDuration: '00:02:00'
-                    upgradeDomainTimeout: '1.06:00:00'
-                    upgradeTimeout: '01:00:00'
-                  upgradeReplicaSetCheckTimeout: '01:00:00'
-              tags: {}
-              type: applications
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502180261859"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-                location: eastus
-                name: myCluster
-                properties:
-                  maximumNodes: 3
-                  metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
-                  minimumNodes: 1
-                  parameters:
-                    param1: value1
-                  provisioningState: Updating
-                  removeApplicationCapacity: false
-                  typeName: myAppType
-                  typeVersion: '1.0'
-                  upgradePolicy:
-                    applicationHealthPolicy:
-                      considerWarningAsError: true
-                      defaultServiceTypeHealthPolicy:
-                        maxPercentUnhealthyPartitionsPerService: 0
-                        maxPercentUnhealthyReplicasPerPartition: 0
-                        maxPercentUnhealthyServices: 0
-                      maxPercentUnhealthyDeployedApplications: 0
-                    forceRestart: false
-                    rollingUpgradeMonitoringPolicy:
-                      failureAction: Rollback
-                      healthCheckRetryTimeout: '00:10:00'
-                      healthCheckStableDuration: '00:05:00'
-                      healthCheckWaitDuration: '00:02:00'
-                      upgradeDomainTimeout: '1.06:00:00'
-                      upgradeTimeout: '01:00:00'
-                    upgradeReplicaSetCheckTimeout: '01:00:00'
-                tags: {}
-                type: applications
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/9c2ce367-47ea-43de-b69e-c5a423da4557?api-version=2017-07-01-preview'
-                Retry-After: '10'
-        Put an application with mininum parameters:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-              location: eastus
-              name: myCluster
-              properties:
-                removeApplicationCapacity: false
-                typeName: myAppType
-                typeVersion: '1.0'
-              tags: {}
-              type: applications
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502180261857"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
-                location: eastus
-                name: myCluster
-                properties:
-                  provisioningState: Updating
-                  removeApplicationCapacity: false
-                  typeName: myAppType
-                  typeVersion: '1.0'
-                tags: {}
-                type: applications
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/5dce62ce-439b-47af-81d8-99ab14708e91?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services':
-    get:
-      description: Returns all service resources in the specified application.
-      operationId: Service_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ServiceResourceList'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Service
-      x-ms-examples:
-        Get a list of service resources:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            resourceGroupName: resRg
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                nextLink: ''
-                value:
-                  - etag: W/"636462502183671257"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-                    location: eastus
-                    name: myCluster
-                    properties:
-                      instanceCount: 1
-                      partitionDescription:
-                        partitionScheme: Singleton
-                      provisioningState: Updating
-                      serviceKind: Stateless
-                      serviceLoadMetrics:
-                        - name: metric1
-                          weight: Low
-                      serviceTypeName: myServiceType
-                    tags: {}
-                    type: services
-              headers: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}':
-    delete:
-      description: Deletes a service resource with the specified name.
-      operationId: Service_Delete
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/serviceName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-        '204':
-          description: The resource was not found.
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Service
-      x-ms-examples:
-        Delete a service:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            resourceGroupName: resRg
-            serviceName: myService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/41fa5ef9-7f34-4c36-a730-93e0bb757d22?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    get:
-      description: Returns a service resource with the specified name.
-      operationId: Service_Get
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/serviceName'
-        - $ref: '#/parameters/api-version'
-      responses:
-        '200':
-          description: The operation completed successfully.
-          schema:
-            $ref: '#/definitions/ServiceResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Service
-      x-ms-examples:
-        Get a service:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            resourceGroupName: resRg
-            serviceName: myService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                etag: W/"636462502183671258"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-                location: eastus
-                name: myCluster
-                properties:
-                  defaultMoveCost: Medium
-                  instanceCount: 5
-                  partitionDescription:
-                    partitionScheme: Singleton
-                  placementConstraints: NodeType==frontend
-                  provisioningState: Updating
-                  serviceKind: Stateless
-                  serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
-                  servicePlacementPolicies: []
-                  serviceTypeName: myServiceType
-                tags: {}
-                type: services
-              headers: {}
-    patch:
-      description: Updates a service resource with the specified name.
-      operationId: Service_Patch
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/serviceName'
-        - $ref: '#/parameters/api-version'
-        - description: The service resource for patch operations.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/ServiceResourceUpdate'
-          x-ms-parameter-location: method
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/ServiceResourceUpdate'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Service
-      x-ms-examples:
-        Patch a service:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-              location: eastus
-              name: myCluster
-              properties:
-                serviceKind: Stateless
-                serviceLoadMetrics:
-                  - name: metric1
-                    weight: Low
-                serviceTypeName: myServiceType
-              tags: {}
-              type: services
-            resourceGroupName: resRg
-            serviceName: myService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502183671257"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-                location: eastus
-                name: myCluster
-                properties:
-                  instanceCount: 1
-                  partitionDescription:
-                    partitionScheme: Singleton
-                  provisioningState: Updating
-                  serviceKind: Stateless
-                  serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
-                  serviceTypeName: myServiceType
-                tags: {}
-                type: services
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4dde8d8b-b6b2-4c56-99c6-9b83932bb09a?api-version=2017-07-01-preview'
-                Retry-After: '10'
-      x-ms-long-running-operation: true
-    put:
-      description: Creates or updates a service resource with the specified name.
-      operationId: Service_Put
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/clusterNameParameter'
-        - $ref: '#/parameters/applicationName'
-        - $ref: '#/parameters/serviceName'
-        - $ref: '#/parameters/api-version'
-        - description: The service resource.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/ServiceResource'
-          x-ms-parameter-location: method
-      responses:
-        '202':
-          description: The request was accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/ServiceResource'
-        default:
-          description: The detailed error response.
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      tags:
-        - Service
-      x-ms-examples:
-        Put a service with maximum parameters:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-              location: eastus
-              name: myCluster
-              properties:
-                correlationScheme:
-                  - scheme: Affinity
-                    serviceName: 'fabric:/app1/app1~svc1'
-                defaultMoveCost: Medium
-                instanceCount: 5
-                partitionDescription:
-                  partitionScheme: Singleton
-                placementConstraints: NodeType==frontend
-                serviceKind: Stateless
-                serviceLoadMetrics:
-                  - name: metric1
-                    weight: Low
-                servicePlacementPolicies: []
-                serviceTypeName: myServiceType
-              tags: {}
-              type: services
-            resourceGroupName: resRg
-            serviceName: myService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502183671258"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-                location: eastus
-                name: myCluster
-                properties:
-                  defaultMoveCost: Medium
-                  instanceCount: 5
-                  partitionDescription:
-                    partitionScheme: Singleton
-                  placementConstraints: NodeType==frontend
-                  provisioningState: Updating
-                  serviceKind: Stateless
-                  serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
-                  servicePlacementPolicies: []
-                  serviceTypeName: myServiceType
-                tags: {}
-                type: services
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/2e633105-aadc-4928-9164-d76b974170a3?api-version=2017-07-01-preview'
-                Retry-After: '10'
-        Put a service with mininum parameters:
-          parameters:
-            api-version: 2017-07-01-preview
-            applicationName: myApp
-            clusterName: myCluster
-            parameters:
-              id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-              location: eastus
-              name: myCluster
-              properties:
-                instanceCount: 1
-                partitionDescription:
-                  partitionScheme: Singleton
-                serviceKind: Stateless
-                serviceTypeName: myServiceType
-              tags: {}
-              type: services
-            resourceGroupName: resRg
-            serviceName: myService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '202':
-              body:
-                etag: W/"636462502183671256"
-                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
-                location: eastus
-                name: myCluster
-                properties:
-                  instanceCount: 1
-                  partitionDescription:
-                    partitionScheme: Singleton
-                  provisioningState: Updating
-                  serviceKind: Stateless
-                  serviceTypeName: myServiceType
-                tags: {}
-                type: services
-              headers:
-                Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/5bc615c3-6c5b-4593-80e1-008f55376ec7?api-version=2017-07-01-preview'
-                Retry-After: '10'
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters':
     get:
@@ -2229,14 +1084,12 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
                 value:
-                  - etag: W/"636462502169240745"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
                     location: eastus
                     name: myCluster
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                         - DnsService
                       availableClusterVersions:
@@ -2244,9 +1097,9 @@ paths:
                           environment: Windows
                           supportExpiryUtc: '9999-12-31T23:59:59.9999999'
                       azureActiveDirectory:
-                        clientApplication: some_random_guid
-                        clusterApplication: some_random_guid
-                        tenantId: some_random_guid
+                        clientApplication: d151ad89-4bce-4ae8-b3d1-1dc79679fa75
+                        clusterApplication: 5886372e-7bf4-4878-a497-8098aba608ae
+                        tenantId: 6abcc6a0-8666-43f1-87b8-172cf86a9f9c
                       certificate:
                         thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                         thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
@@ -2259,7 +1112,7 @@ paths:
                         - certificateThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
                           isAdmin: false
                       clusterCodeVersion: 6.0.219.9494
-                      clusterEndpoint: 92584666-9889-4ae8-8d02-91902923d37f
+                      clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                       clusterId: 92584666-9889-4ae8-8d02-91902923d37f
                       clusterState: WaitingForNodes
                       diagnosticsStorageAccountConfig:
@@ -2294,42 +1147,24 @@ paths:
                         thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
                         x509StoreName: My
                       upgradeDescription:
-                        deltaHealthPolicy:
-                          applicationDeltaHealthPolicies:
-                            myAppDeltaHealthPolicy:
-                              defaultServiceTypeDeltaHealthPolicy:
-                                maxPercentDeltaUnhealthyServices: 100
-                              serivceTypeDeltaHealthPolicies:
-                                mySvcTypeDeltaHealthPolicy:
-                                  maxPercentDeltaUnhealthyServices: 100
-                          maxPercentDeltaUnhealthyApplications: 0
-                          maxPercentDeltaUnhealthyNodes: 0
-                          maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
                         forceRestart: true
                         healthCheckRetryTimeout: '00:05:00'
                         healthCheckStableDuration: '00:00:30'
                         healthCheckWaitDuration: '00:00:30'
                         healthPolicy:
-                          applicationHealthPolicies:
-                            myAppHealthPolicy:
-                              defaultServiceTypeHealthPolicy:
-                                maxPercentUnhealthyServices: 100
                           maxPercentUnhealthyApplications: 100
                           maxPercentUnhealthyNodes: 100
-                        overrideUserUpgradePolicy: false
                         upgradeDomainTimeout: '00:15:00'
                         upgradeReplicaSetCheckTimeout: '00:10:00'
                         upgradeTimeout: '00:15:00'
                       upgradeMode: Manual
                       vmImage: Windows
-                    tags: {}
                     type: Microsoft.ServiceFabric/clusters
-                  - etag: W/"636462502164040075"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2
                     location: eastus
                     name: myCluster2
                     properties:
-                      addonFeatures:
+                      addOnFeatures:
                         - RepairManager
                       availableClusterVersions:
                         - codeVersion: 6.0.127.1
@@ -2338,7 +1173,7 @@ paths:
                       clientCertificateCommonNames: []
                       clientCertificateThumbprints: []
                       clusterCodeVersion: 6.0.127.1
-                      clusterEndpoint: 2747e469-b24e-4039-8a0a-46151419523f
+                      clusterEndpoint: 'https://eastus.servicefabric.azure.com'
                       clusterId: 2747e469-b24e-4039-8a0a-46151419523f
                       clusterState: WaitingForNodes
                       diagnosticsStorageAccountConfig:
@@ -2380,13 +1215,11 @@ paths:
                         healthPolicy:
                           maxPercentUnhealthyApplications: 100
                           maxPercentUnhealthyNodes: 100
-                        overrideUserUpgradePolicy: false
                         upgradeDomainTimeout: '02:00:00'
                         upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
                         upgradeTimeout: '12:00:00'
                       upgradeMode: Manual
                       vmImage: linux
-                    tags: {}
                     type: Microsoft.ServiceFabric/clusters
               headers: {}
 definitions:
@@ -2945,7 +1778,7 @@ definitions:
         description: 'The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
         type: string
       upgradeReplicaSetCheckTimeout:
-        description: 'The maximum amount of time to block processing of an upgrade domain and revent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
+        description: 'The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
         type: string
       upgradeTimeout:
         description: 'The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.'
@@ -3100,7 +1933,7 @@ definitions:
         $ref: '#/definitions/DurabilityLevel'
       ephemeralPorts:
         $ref: '#/definitions/EndpointRangeDescription'
-        description: The range of empheral ports that nodes in this node type should be configured with.
+        description: The range of ephemeral ports that nodes in this node type should be configured with.
       httpGatewayEndpointPort:
         description: The HTTP cluster management endpoint port.
         type: integer
@@ -3460,7 +2293,7 @@ definitions:
       MaxPercentUnhealthyServices:
         default: 0
         description: |
-          The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.
+          The maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.
 
           The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
           If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.

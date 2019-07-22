@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/signalr/resource-manager/Microsoft.SignalRService/stable/2018-10-01/signalr.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: signalr
   x-tags:
@@ -38,9 +37,6 @@ security:
 parameters:
   ApiVersionParameter:
     description: Client Api Version.
-    enum:
-      - 2018-03-01-preview
-      - '2018-10-01'
     in: query
     name: api-version
     required: true
@@ -125,12 +121,16 @@ paths:
                     name: mySignalRService
                     properties:
                       externalIP: 10.0.0.1
-                      hostName: myservice.service.signalr.net
+                      features:
+                        - flag: ServiceMode
+                          properties: {}
+                          value: Serverless
+                      hostName: mysignalrservice.service.signalr.net
                       hostNamePrefix: null
                       provisioningState: Succeeded
                       publicPort: 443
                       serverPort: 443
-                      version: 1.0-preview
+                      version: '1.0'
                     sku:
                       capacity: 1
                       name: Standard_S1
@@ -257,12 +257,16 @@ paths:
                     name: mySignalRService
                     properties:
                       externalIP: 10.0.0.1
-                      hostName: myservice.service.signalr.net
+                      features:
+                        - flag: ServiceMode
+                          properties: {}
+                          value: Serverless
+                      hostName: mysignalrservice.service.signalr.net
                       hostNamePrefix: null
                       provisioningState: Succeeded
                       publicPort: 443
                       serverPort: 443
-                      version: 1.0-preview
+                      version: '1.0'
                     sku:
                       capacity: 1
                       name: Standard_S1
@@ -344,6 +348,8 @@ paths:
               headers:
                 Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}':
     delete:
       description: Operation to delete a SignalR service.
@@ -403,12 +409,16 @@ paths:
                 name: mySignalRService
                 properties:
                   externalIP: 10.0.0.1
-                  hostName: myservice.service.signalr.net
+                  features:
+                    - flag: ServiceMode
+                      properties: {}
+                      value: Serverless
+                  hostName: mysignalrservice.service.signalr.net
                   hostNamePrefix: null
                   provisioningState: Succeeded
                   publicPort: 443
                   serverPort: 443
-                  version: 1.0-preview
+                  version: '1.0'
                 sku:
                   capacity: 1
                   name: Standard_S1
@@ -446,6 +456,10 @@ paths:
             api-version: '2018-10-01'
             parameters:
               properties:
+                features:
+                  - flag: ServiceMode
+                    properties: {}
+                    value: Serverless
                 hostNamePrefix: null
               sku:
                 capacity: 1
@@ -464,12 +478,16 @@ paths:
                 name: mySignalRService
                 properties:
                   externalIP: 10.0.0.1
-                  hostName: myservice.service.signalr.net
+                  features:
+                    - flag: ServiceMode
+                      properties: {}
+                      value: Serverless
+                  hostName: mysignalrservice.service.signalr.net
                   hostNamePrefix: null
                   provisioningState: Succeeded
                   publicPort: 443
                   serverPort: 443
-                  version: 1.0-preview
+                  version: '1.0'
                 sku:
                   capacity: 1
                   name: Standard_S1
@@ -512,6 +530,10 @@ paths:
             parameters:
               location: eastus
               properties:
+                features:
+                  - flag: ServiceMode
+                    properties: {}
+                    value: Serverless
                 hostNamePrefix: null
               sku:
                 capacity: 1
@@ -530,12 +552,16 @@ paths:
                 name: mySignalRService
                 properties:
                   externalIP: 10.0.0.1
-                  hostName: myservice.service.signalr.net
+                  features:
+                    - flag: ServiceMode
+                      properties: {}
+                      value: Serverless
+                  hostName: mysignalrservice.service.signalr.net
                   hostNamePrefix: null
                   provisioningState: Succeeded
                   publicPort: 443
                   serverPort: 443
-                  version: 1.0-preview
+                  version: '1.0'
                 sku:
                   capacity: 1
                   name: Standard_S1
@@ -579,6 +605,8 @@ paths:
                 Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
             '204': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
 definitions:
   Dimension:
     description: Specifications of the Dimension of metrics.
@@ -735,23 +763,23 @@ definitions:
     type: object
     x-ms-azure-resource: true
   ResourceSku:
-    description: The billing information of the resource.(e.g. basic vs. standard)
+    description: The billing information of the SignalR resource.
     properties:
       capacity:
-        description: "Optional, integer. If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not \r\npossible for the resource this may be omitted."
+        description: "Optional, integer. The unit count of SignalR resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1\r\n    Standard: 1,2,5,10,20,50,100"
         format: int32
         type: integer
       family:
-        description: 'Optional, string. If the service has different generations of hardware, for the same SKU, then that can be captured here.'
+        description: Optional string. For future use.
         type: string
       name:
-        description: 'The name of the SKU. This is typically a letter + number code, such as A0 or P3.  Required (if sku is specified)'
+        description: "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1"
         type: string
       size:
-        description: 'Optional, string. When the name field is the combination of tier and some other value, this would be the standalone code.'
+        description: Optional string. For future use.
         type: string
       tier:
-        description: 'Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead.'
+        description: "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead."
         enum:
           - Free
           - Basic
@@ -776,6 +804,11 @@ definitions:
   SignalRCreateOrUpdateProperties:
     description: Settings used to provision or configure the resource.
     properties:
+      features:
+        description: "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags."
+        items:
+          $ref: '#/definitions/SignalRFeature'
+        type: array
       hostNamePrefix:
         description: "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net."
         type: string
@@ -790,6 +823,31 @@ definitions:
         type: string
     required:
       - location
+    type: object
+  SignalRFeature:
+    description: 'Feature of a SignalR resource, which controls the SignalR runtime behavior.'
+    properties:
+      flag:
+        description: Kind of feature. Required.
+        enum:
+          - ServiceMode
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: FeatureFlags
+      properties:
+        additionalProperties:
+          type: string
+        description: Optional properties related to this feature.
+        type: object
+      value:
+        description: 'Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.'
+        maxLength: 128
+        minLength: 1
+        type: string
+    required:
+      - flag
+      - value
     type: object
   SignalRKeys:
     description: A class represents the access keys of SignalR service.

@@ -96,7 +96,8 @@ paths:
                       recoveryServicesBackupPolicyResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/longtermretentionvaulttest-1234/providers/Microsoft.RecoveryServices/vaults/testVaultabc/backupPolicies/testPolicyxyz
                       state: Enabled
                     type: Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{backupLongTermRetentionPolicyName}':
     get:
       description: Returns a database backup long term retention policy

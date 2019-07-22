@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/WebApps.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-WebApps
   x-tags:
@@ -206,6 +205,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -1312,6 +1314,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -2441,6 +2446,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -3495,6 +3503,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -4524,6 +4535,9 @@ paths:
                           ARM resource ID of the source app. App resource ID is of the form 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                        type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
                         type: string
                       trafficManagerProfileId:
                         description: |-
@@ -5615,6 +5629,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -6648,6 +6665,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -7677,6 +7697,9 @@ paths:
                           ARM resource ID of the source app. App resource ID is of the form 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                        type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
                         type: string
                       trafficManagerProfileId:
                         description: |-
@@ -17504,6 +17527,9 @@ paths:
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                               type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
+                              type: string
                             trafficManagerProfileId:
                               description: |-
                                 ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -18642,6 +18668,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -19701,6 +19730,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -20730,6 +20762,9 @@ paths:
                           ARM resource ID of the source app. App resource ID is of the form 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                        type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
                         type: string
                       trafficManagerProfileId:
                         description: |-
@@ -21821,6 +21856,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -22859,6 +22897,9 @@ paths:
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                         type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
+                        type: string
                       trafficManagerProfileId:
                         description: |-
                           ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -23888,6 +23929,9 @@ paths:
                           ARM resource ID of the source app. App resource ID is of the form 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                        type: string
+                      sourceWebAppLocation:
+                        description: 'Location of source app ex: West US or North Europe'
                         type: string
                       trafficManagerProfileId:
                         description: |-
@@ -35079,7 +35123,6 @@ paths:
                       description: |-
                         A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                         Point-To-Site VPN connection.
-                      format: byte
                       type: string
                     certThumbprint:
                       description: The client certificate thumbprint.
@@ -35287,7 +35330,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -35457,7 +35499,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -35570,7 +35611,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -35740,7 +35780,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -35853,7 +35892,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -37612,7 +37650,6 @@ paths:
                       description: |-
                         A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                         Point-To-Site VPN connection.
-                      format: byte
                       type: string
                     certThumbprint:
                       description: The client certificate thumbprint.
@@ -37810,7 +37847,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -37980,7 +38016,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -38088,7 +38123,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -38258,7 +38292,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -38366,7 +38399,6 @@ paths:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -39801,7 +39833,6 @@ definitions:
         description: 'True if configuration is enabled, false if it is disabled and null if configuration is not set.'
         type: boolean
     type: object
-  ErrorEntity: {}
   FileSystemApplicationLogsConfig:
     description: Application logs to file system configuration.
     properties:
@@ -40470,7 +40501,6 @@ definitions:
                     description: |-
                       A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
                       Point-To-Site VPN connection.
-                    format: byte
                     type: string
                   certThumbprint:
                     description: The client certificate thumbprint.
@@ -42589,6 +42619,9 @@ definitions:
                   ARM resource ID of the source app. App resource ID is of the form 
                   /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                   /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                type: string
+              sourceWebAppLocation:
+                description: 'Location of source app ex: West US or North Europe'
                 type: string
               trafficManagerProfileId:
                 description: |-

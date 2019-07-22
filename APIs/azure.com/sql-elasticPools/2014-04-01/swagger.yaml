@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/elasticPools.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-elasticPools
   x-tags:
@@ -141,7 +140,8 @@ paths:
                       state: Ready
                       storageMB: 5000
                     type: Microsoft.Sql/servers/elasticPools
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}':
     delete:
       description: Deletes the elastic pool.
@@ -188,8 +188,6 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              body: ''
-            '202':
               body: ''
             '204':
               body: ''
@@ -576,6 +574,8 @@ definitions:
           - Basic
           - Standard
           - Premium
+          - GeneralPurpose
+          - BusinessCritical
         type: string
         x-ms-enum:
           modelAsString: true

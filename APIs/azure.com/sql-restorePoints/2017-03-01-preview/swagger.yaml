@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: sql-restorePoints
   x-tags:
@@ -196,7 +195,8 @@ paths:
                       restorePointCreationDate: '2017-11-17T03:12:55Z'
                       restorePointType: DISCRETE
                     type: Microsoft.Sql/servers/databases/restorePoints
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     post:
       description: Creates a restore point for a data warehouse.
       operationId: RestorePoints_Create

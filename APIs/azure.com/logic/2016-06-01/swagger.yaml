@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/logic/resource-manager/Microsoft.Logic/stable/2016-06-01/logic.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: logic
   x-tags:
@@ -3451,8 +3450,8 @@ paths:
                 - error:
                     code: NotFound
                     message: Some error occurred
+                  eventLevel: Informational
                   eventTime: '2016-08-05T01:54:49.505567Z'
-                  eventlevel: Informational
                   record:
                     agreementProperties:
                       agreementName: testAgreement
@@ -4116,7 +4115,7 @@ paths:
             api-version: '2016-06-01'
             integrationAccountName: testIntegrationAccount
             regenerateAccessKey:
-              KeyType: Primary
+              keyType: Primary
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:

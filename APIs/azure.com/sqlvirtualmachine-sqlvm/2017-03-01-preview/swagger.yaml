@@ -419,6 +419,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 InvalidParameterValue - An invalid value was given to parameter.
 
              * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.
@@ -443,6 +447,10 @@ paths:
 
              * 400 InvalidSqlVmGroupName - Invalid SQL virtual machine group name.
 
+             * 400 InvalidStorageAccountCredentials - The storage account credentials provided are incorrect.
+
+             * 400 InvalidStorageAccountType - Only storage account of type 'General-Purpose V2' is allowed for this operation.
+
              * 400 SqlVmGroupNotEmpty - SQL virtual machine group is not empty.
 
              * 400 SqlVmGroupUpdateNotAllowed - Update to SQL virtual machine group is not allowed.
@@ -461,19 +469,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachineGroups
       x-ms-examples:
@@ -519,6 +531,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 403 AccessDenied - Access denied.
 
              * 404 ResourceNotFound - The requested resource was not found.
@@ -531,19 +547,23 @@ paths:
 
              * 404 OperationTypeNotFound - Operation Type not found.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachineGroups
       x-ms-examples:
@@ -606,6 +626,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 InvalidParameterValue - An invalid value was given to parameter.
 
              * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.
@@ -630,6 +654,10 @@ paths:
 
              * 400 InvalidSqlVmGroupName - Invalid SQL virtual machine group name.
 
+             * 400 InvalidStorageAccountCredentials - The storage account credentials provided are incorrect.
+
+             * 400 InvalidStorageAccountType - Only storage account of type 'General-Purpose V2' is allowed for this operation.
+
              * 400 SqlVmGroupNotEmpty - SQL virtual machine group is not empty.
 
              * 400 SqlVmGroupUpdateNotAllowed - Update to SQL virtual machine group is not allowed.
@@ -648,19 +676,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachineGroups
       x-ms-examples:
@@ -668,7 +700,6 @@ paths:
           parameters:
             api-version: 2017-03-01-preview
             parameters:
-              location: northeurope
               tags:
                 mytag: myval
             resourceGroupName: testrg
@@ -727,6 +758,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 InvalidParameterValue - An invalid value was given to parameter.
 
              * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.
@@ -751,6 +786,10 @@ paths:
 
              * 400 InvalidSqlVmGroupName - Invalid SQL virtual machine group name.
 
+             * 400 InvalidStorageAccountCredentials - The storage account credentials provided are incorrect.
+
+             * 400 InvalidStorageAccountType - Only storage account of type 'General-Purpose V2' is allowed for this operation.
+
              * 400 SqlVmGroupNotEmpty - SQL virtual machine group is not empty.
 
              * 400 SqlVmGroupUpdateNotAllowed - Update to SQL virtual machine group is not allowed.
@@ -769,19 +808,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachineGroups
       x-ms-examples:
@@ -791,16 +834,16 @@ paths:
             parameters:
               location: northeurope
               properties:
-                SqlImageOffer: SQL2016-WS2016
-                SqlImageSku: Enterprise
-                WsfcDomainProfile:
-                  ClusterBootstrapAccount: testrpadmin
-                  ClusterOperatorAccount: testrp@testdomain.com
-                  DomainFQDN: testdomain.com
-                  OUPath: 'OU=WSCluster,DC=testdomain,DC=com'
-                  SqlServiceAccount: sqlservice@testdomain.com
-                  StorageAccountPrimaryKey: <primary storage access key>
-                  StorageAccountUrl: 'https://storgact.blob.core.windows.net/'
+                sqlImageOffer: SQL2016-WS2016
+                sqlImageSku: Enterprise
+                wsfcDomainProfile:
+                  clusterBootstrapAccount: testrpadmin
+                  clusterOperatorAccount: testrp@testdomain.com
+                  domainFqdn: testdomain.com
+                  ouPath: 'OU=WSCluster,DC=testdomain,DC=com'
+                  sqlServiceAccount: sqlservice@testdomain.com
+                  storageAccountPrimaryKey: <primary storage access key>
+                  storageAccountUrl: 'https://storgact.blob.core.windows.net/'
               tags:
                 mytag: myval
             resourceGroupName: testrg
@@ -926,6 +969,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 DifferentSubSqlVmList - All SQL virtual machines should be under same subscription.
 
              * 400 OnlyStandardPublicIp - Every virtual machine should have standard public IP.
@@ -949,6 +996,10 @@ paths:
              * 400 AvailabilitySetMismatch - Availability set of virtual machines does not match.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
 
              * 400 AgDoesNotExist - Availability group does not exist.
 
@@ -1002,19 +1053,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
 
              * 500 SqlVmGroupIsBusy - SQL virtual machine group is busy.
       tags:
@@ -1068,6 +1123,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 DifferentSubSqlVmList - All SQL virtual machines should be under same subscription.
 
              * 400 OnlyStandardPublicIp - Every virtual machine should have standard public IP.
@@ -1091,6 +1150,10 @@ paths:
              * 400 AvailabilitySetMismatch - Availability set of virtual machines does not match.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
 
              * 400 AgDoesNotExist - Availability group does not exist.
 
@@ -1144,19 +1207,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
 
              * 500 SqlVmGroupIsBusy - SQL virtual machine group is busy.
       tags:
@@ -1234,6 +1301,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 400 DifferentSubSqlVmList - All SQL virtual machines should be under same subscription.
 
              * 400 OnlyStandardPublicIp - Every virtual machine should have standard public IP.
@@ -1257,6 +1328,10 @@ paths:
              * 400 AvailabilitySetMismatch - Availability set of virtual machines does not match.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
 
              * 400 AgDoesNotExist - Availability group does not exist.
 
@@ -1310,19 +1385,23 @@ paths:
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
 
              * 500 SqlVmGroupIsBusy - SQL virtual machine group is busy.
       tags:
@@ -1333,17 +1412,18 @@ paths:
             api-version: 2017-03-01-preview
             availabilityGroupListenerName: agl-test
             parameters:
-              AvailabilityGroupName: ag-test
-              LoadBalancerConfigurations:
-                - LoadBalancerResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb-test
-                  PrivateIPAddress:
-                    IpAddress: 10.1.0.112
-                    SubnetResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default
-                  ProbePort: '59983'
-                  SqlVirtualMachineInstances:
-                    - /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2
-                    - /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3
-              Port: '1433'
+              properties:
+                availabilityGroupName: ag-test
+                loadBalancerConfigurations:
+                  - loadBalancerResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb-test
+                    privateIpAddress:
+                      ipAddress: 10.1.0.112
+                      subnetResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default
+                    probePort: 59983
+                    sqlVirtualMachineInstances:
+                      - /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2
+                      - /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3
+                port: 1433
             resourceGroupName: testrg
             sqlVirtualMachineGroupName: testvmgroup
             subscriptionId: 00000000-1111-2222-3333-444444444444
@@ -1462,19 +1542,17 @@ paths:
 
              * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
-             * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
-
              * 400 VmInsufficientPermission - Insufficient permission to Vm.
 
-             * 400 VmPublisherNotSql - Publisher of VM image is not SQLServer.
-
-             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed.
+             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed in a SQL VM Group.
 
              * 400 InvalidSqlVmGroupResourceIdParameterValue - SQL virtual machine group resource id is not in correct format.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
 
              * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.
+
+             * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images
 
              * 400 InvalidVmResourceIdParameterValue - Provided virtual machine resource id is not valid.
 
@@ -1485,6 +1563,50 @@ paths:
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
              * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
+
+             * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Virtual Machine.
+
+             * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Virtual Machine as this was not created from Azure marketplace image.
+
+             * 400 CannotDetermineSqlVersionAndEditionFromVm - Sql IaaS Extension cannot determine the SQL version and edition from the vm.
+
+             * 400 MismatchSqlVmSku - Sql virtual machine sku mismatch.
+
+             * 400 CannotConvertToAhub - Cannot convert Free SQL editions to AHUB. 
+
+             * 400 SqlEvaluationSkuNotSupported - SQL Evaluation version does not support licensing changes.
+
+             * 400 IncompleteStorageConfigurationSettings - Incomplete Storage Configuration Settings
+
+             * 400 InvalidDefaultFilePath - Invalid Default File Path 
+
+             * 400 InvalidLUNSpecified - Invalid LUN specified, LUN should be a non-negative number.
+
+             * 400 BothStorageV1V2Specified - Invalid Request. Only one of SQL Storage Storage Setting or Storage Configuration Settings should be specified
+
+             * 400 InvalidLUNSpecifiedForSameDrive - Invalid LUN specified. LUN used for the same drive need to be the same.
+
+             * 400 InvalidLUNSpecifiedForDifferentDrives - Invalid LUN specified. Different drive could not reuse the same LUN.
+
+             * 400 InvalidExtendPayload - Invalid Sql Storage Settings Extend Payload. Only one setting with one LUN is allowed.
+
+             * 400 VmAgentIsRunningForNoAgent - Cannot create or update as NoAgent model while the Guest Agent is running.
+
+             * 400 InvalidSqlManagementMode - Cannot update the SQL management mode to {0}, the current mode is {1}.
+
+             * 400 CannotDetermineSqlEditionFromRequest - Cannot determine the SQL edition.
+
+             * 400 SqlManagementMissing - Please specify the Management Mode for Sql Virtual Machine. The property is 'SqlManagement' and allowed values are LightWeight or Full.
+
+             * 400 SqlImageSkuMissingNoAgent - Please specify the Sql Server Edition for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageSku' and allowed values are Developer, Express, Web, Standard, or Enterprise.
+
+             * 400 SqlImageOfferMissingNoAgent - Please specify the Sql Server Version and OS Version for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageOffer' and allowed values are SQL2008-WS2008 and SQL2008R2-WS2008.
+
+             * 400 InvalidSqlImageOfferChange - SqlImageOffer property cannot be updated.
 
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
@@ -1516,6 +1638,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 403 AccessDenied - Access denied.
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
@@ -1532,19 +1658,23 @@ paths:
 
              * 404 OperationTypeNotFound - Operation Type not found.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachines
       x-ms-examples:
@@ -1595,6 +1725,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 403 AccessDenied - Access denied.
 
              * 404 ResourceNotFound - The requested resource was not found.
@@ -1607,19 +1741,23 @@ paths:
 
              * 404 OperationTypeNotFound - Operation Type not found.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachines
       x-ms-examples:
@@ -1680,19 +1818,17 @@ paths:
 
              * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
-             * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
-
              * 400 VmInsufficientPermission - Insufficient permission to Vm.
 
-             * 400 VmPublisherNotSql - Publisher of VM image is not SQLServer.
-
-             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed.
+             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed in a SQL VM Group.
 
              * 400 InvalidSqlVmGroupResourceIdParameterValue - SQL virtual machine group resource id is not in correct format.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
 
              * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.
+
+             * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images
 
              * 400 InvalidVmResourceIdParameterValue - Provided virtual machine resource id is not valid.
 
@@ -1703,6 +1839,50 @@ paths:
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
              * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
+
+             * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Virtual Machine.
+
+             * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Virtual Machine as this was not created from Azure marketplace image.
+
+             * 400 CannotDetermineSqlVersionAndEditionFromVm - Sql IaaS Extension cannot determine the SQL version and edition from the vm.
+
+             * 400 MismatchSqlVmSku - Sql virtual machine sku mismatch.
+
+             * 400 CannotConvertToAhub - Cannot convert Free SQL editions to AHUB. 
+
+             * 400 SqlEvaluationSkuNotSupported - SQL Evaluation version does not support licensing changes.
+
+             * 400 IncompleteStorageConfigurationSettings - Incomplete Storage Configuration Settings
+
+             * 400 InvalidDefaultFilePath - Invalid Default File Path 
+
+             * 400 InvalidLUNSpecified - Invalid LUN specified, LUN should be a non-negative number.
+
+             * 400 BothStorageV1V2Specified - Invalid Request. Only one of SQL Storage Storage Setting or Storage Configuration Settings should be specified
+
+             * 400 InvalidLUNSpecifiedForSameDrive - Invalid LUN specified. LUN used for the same drive need to be the same.
+
+             * 400 InvalidLUNSpecifiedForDifferentDrives - Invalid LUN specified. Different drive could not reuse the same LUN.
+
+             * 400 InvalidExtendPayload - Invalid Sql Storage Settings Extend Payload. Only one setting with one LUN is allowed.
+
+             * 400 VmAgentIsRunningForNoAgent - Cannot create or update as NoAgent model while the Guest Agent is running.
+
+             * 400 InvalidSqlManagementMode - Cannot update the SQL management mode to {0}, the current mode is {1}.
+
+             * 400 CannotDetermineSqlEditionFromRequest - Cannot determine the SQL edition.
+
+             * 400 SqlManagementMissing - Please specify the Management Mode for Sql Virtual Machine. The property is 'SqlManagement' and allowed values are LightWeight or Full.
+
+             * 400 SqlImageSkuMissingNoAgent - Please specify the Sql Server Edition for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageSku' and allowed values are Developer, Express, Web, Standard, or Enterprise.
+
+             * 400 SqlImageOfferMissingNoAgent - Please specify the Sql Server Version and OS Version for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageOffer' and allowed values are SQL2008-WS2008 and SQL2008R2-WS2008.
+
+             * 400 InvalidSqlImageOfferChange - SqlImageOffer property cannot be updated.
 
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
@@ -1734,6 +1914,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 403 AccessDenied - Access denied.
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
@@ -1750,19 +1934,23 @@ paths:
 
              * 404 OperationTypeNotFound - Operation Type not found.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachines
       x-ms-examples:
@@ -1770,7 +1958,6 @@ paths:
           parameters:
             api-version: 2017-03-01-preview
             parameters:
-              location: northeurope
               tags:
                 mytag: myval
             resourceGroupName: testrg
@@ -1784,7 +1971,7 @@ paths:
                 name: testvm
                 properties:
                   provisioningState: Updating
-                  sqlImageSku: Unknown
+                  sqlImageSku: Enterprise
                   sqlServerLicenseType: PAYG
                   virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm
                 tags:
@@ -1832,19 +2019,17 @@ paths:
 
              * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
-             * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
-
              * 400 VmInsufficientPermission - Insufficient permission to Vm.
 
-             * 400 VmPublisherNotSql - Publisher of VM image is not SQLServer.
-
-             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed.
+             * 400 SingleNicOnVmAllowed - Only Single NIC virtual machines are allowed in a SQL VM Group.
 
              * 400 InvalidSqlVmGroupResourceIdParameterValue - SQL virtual machine group resource id is not in correct format.
 
              * 400 MismatchVmGroupSubscription - Subscription id for SQL virtual machine and SQL virtual machine group are different.
 
              * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.
+
+             * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images
 
              * 400 InvalidVmResourceIdParameterValue - Provided virtual machine resource id is not valid.
 
@@ -1855,6 +2040,50 @@ paths:
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
              * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
+             * 400 VmNotRunning - The VM is not in running state.
+
+             * 400 VmAgentNotRunning - The VM agent is not installed or in running state.
+
+             * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Virtual Machine.
+
+             * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Virtual Machine as this was not created from Azure marketplace image.
+
+             * 400 CannotDetermineSqlVersionAndEditionFromVm - Sql IaaS Extension cannot determine the SQL version and edition from the vm.
+
+             * 400 MismatchSqlVmSku - Sql virtual machine sku mismatch.
+
+             * 400 CannotConvertToAhub - Cannot convert Free SQL editions to AHUB. 
+
+             * 400 SqlEvaluationSkuNotSupported - SQL Evaluation version does not support licensing changes.
+
+             * 400 IncompleteStorageConfigurationSettings - Incomplete Storage Configuration Settings
+
+             * 400 InvalidDefaultFilePath - Invalid Default File Path 
+
+             * 400 InvalidLUNSpecified - Invalid LUN specified, LUN should be a non-negative number.
+
+             * 400 BothStorageV1V2Specified - Invalid Request. Only one of SQL Storage Storage Setting or Storage Configuration Settings should be specified
+
+             * 400 InvalidLUNSpecifiedForSameDrive - Invalid LUN specified. LUN used for the same drive need to be the same.
+
+             * 400 InvalidLUNSpecifiedForDifferentDrives - Invalid LUN specified. Different drive could not reuse the same LUN.
+
+             * 400 InvalidExtendPayload - Invalid Sql Storage Settings Extend Payload. Only one setting with one LUN is allowed.
+
+             * 400 VmAgentIsRunningForNoAgent - Cannot create or update as NoAgent model while the Guest Agent is running.
+
+             * 400 InvalidSqlManagementMode - Cannot update the SQL management mode to {0}, the current mode is {1}.
+
+             * 400 CannotDetermineSqlEditionFromRequest - Cannot determine the SQL edition.
+
+             * 400 SqlManagementMissing - Please specify the Management Mode for Sql Virtual Machine. The property is 'SqlManagement' and allowed values are LightWeight or Full.
+
+             * 400 SqlImageSkuMissingNoAgent - Please specify the Sql Server Edition for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageSku' and allowed values are Developer, Express, Web, Standard, or Enterprise.
+
+             * 400 SqlImageOfferMissingNoAgent - Please specify the Sql Server Version and OS Version for Sql Virtual Machine in NoAgent Mode. The property is 'SqlImageOffer' and allowed values are SQL2008-WS2008 and SQL2008R2-WS2008.
+
+             * 400 InvalidSqlImageOfferChange - SqlImageOffer property cannot be updated.
 
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
@@ -1886,6 +2115,10 @@ paths:
 
              * 400 ArgumentNotInRange - Argument '{0}' not in range.
 
+             * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward
+
+             * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.
+
              * 403 AccessDenied - Access denied.
 
              * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL virtual machine group in resource group.
@@ -1902,19 +2135,23 @@ paths:
 
              * 404 OperationTypeNotFound - Operation Type not found.
 
-             * 409 OperationInProgress - Operation in progress on resource already.
-
-             * 409 OperationCanceled - Operation Cancelled.
-
              * 409 ResourceAlreadyExists - Resource already exists.
 
              * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
+             * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.
+
+             * 409 ResourceExists - There was an internal error in cleaning up of resources.
+
+             * 409 OperationInProgress - Operation in progress on resource already.
+
+             * 409 OperationCanceled - Operation Cancelled.
+
+             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
+
              * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
-
-             * 500 RPGenericSystem - System Failure when calling other Resource Provider.
       tags:
         - SqlVirtualMachines
       x-ms-examples:
@@ -1924,12 +2161,12 @@ paths:
             parameters:
               location: northeurope
               properties:
-                SqlVirtualMachineGroupResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup
-                WsfcDomainCredentials:
-                  ClusterBootstrapAccountPassword: <Password>
-                  ClusterOperatorAccountPassword: <Password>
-                  SqlServiceAccountPassword: <Password>
+                sqlVirtualMachineGroupResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup
                 virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2
+                wsfcDomainCredentials:
+                  clusterBootstrapAccountPassword: <Password>
+                  clusterOperatorAccountPassword: <Password>
+                  sqlServiceAccountPassword: <Password>
             resourceGroupName: testrg
             sqlVirtualMachineName: testvm
             subscriptionId: 00000000-1111-2222-3333-444444444444
@@ -1964,40 +2201,42 @@ paths:
             parameters:
               location: northeurope
               properties:
-                AutoBackupSettings:
-                  BackupScheduleType: Manual
-                  BackupSystemDbs: true
-                  Enable: true
-                  EnableEncryption: true
-                  FullBackupFrequency: Daily
-                  FullBackupStartTime: 6
-                  FullBackupWindowHours: 11
-                  LogBackupFrequency: 10
-                  Password: <Password>
-                  RetentionPeriod: 17
-                  StorageAccessKey: <primary storage access key>
-                  StorageAccountUrl: 'https://teststorage.blob.core.windows.net/'
-                AutoPatchingSettings:
-                  DayOfWeek: Sunday
-                  Enable: true
-                  MaintenanceWindowDuration: 60
-                  MaintenanceWindowStartingHour: 2
-                KeyVaultCredentialSettings:
-                  Enable: false
-                ServerConfigurationsManagementSettings:
-                  AdditionalFeaturesServerConfigurations:
-                    IsRServicesEnabled: false
-                  SQLConnectivityUpdateSettings:
-                    ConnectivityType: Private
-                    Port: 1433
-                    SQLAuthUpdatePassword: <password>
-                    SQLAuthUpdateUserName: sqllogin
-                  SQLStorageUpdateSettings:
-                    DiskConfigurationType: NEW
-                    DiskCount: 1
-                    StartingDeviceId: 2
-                  SQLWorkloadTypeUpdateSettings:
-                    SQLWorkloadType: OLTP
+                autoBackupSettings:
+                  backupScheduleType: Manual
+                  backupSystemDbs: true
+                  enable: true
+                  enableEncryption: true
+                  fullBackupFrequency: Daily
+                  fullBackupStartTime: 6
+                  fullBackupWindowHours: 11
+                  logBackupFrequency: 10
+                  password: <Password>
+                  retentionPeriod: 17
+                  storageAccessKey: <primary storage access key>
+                  storageAccountUrl: 'https://teststorage.blob.core.windows.net/'
+                autoPatchingSettings:
+                  dayOfWeek: Sunday
+                  enable: true
+                  maintenanceWindowDuration: 60
+                  maintenanceWindowStartingHour: 2
+                keyVaultCredentialSettings:
+                  enable: false
+                serverConfigurationsManagementSettings:
+                  additionalFeaturesServerConfigurations:
+                    isRServicesEnabled: false
+                  sqlConnectivityUpdateSettings:
+                    connectivityType: PRIVATE
+                    port: 1433
+                    sqlAuthUpdatePassword: <password>
+                    sqlAuthUpdateUserName: sqllogin
+                  sqlStorageUpdateSettings:
+                    diskConfigurationType: NEW
+                    diskCount: 1
+                    startingDeviceId: 2
+                  sqlWorkloadTypeUpdateSettings:
+                    sqlWorkloadType: OLTP
+                sqlImageSku: Enterprise
+                sqlManagement: Full
                 sqlServerLicenseType: PAYG
                 virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm
             resourceGroupName: testrg
@@ -2012,6 +2251,7 @@ paths:
                 properties:
                   provisioningState: Updating
                   sqlImageSku: Enterprise
+                  sqlManagement: Full
                   sqlServerLicenseType: PAYG
                   virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm
                 type: Microsoft.SqlVirtualMachine/sqlVirtualMachines
@@ -2023,6 +2263,7 @@ paths:
                 properties:
                   provisioningState: Provisioning
                   sqlImageSku: Unknown
+                  sqlManagement: Full
                   sqlServerLicenseType: PAYG
                   virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm
                 type: Microsoft.SqlVirtualMachine/sqlVirtualMachines
@@ -2581,21 +2822,31 @@ definitions:
         description: SQL Server configuration management settings.
       sqlImageOffer:
         description: 'SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.'
-        readOnly: true
         type: string
+        x-ms-mutability:
+          - create
       sqlImageSku:
-        description: SQL image sku.
+        description: SQL Server edition type.
         enum:
           - Developer
           - Express
           - Standard
           - Enterprise
           - Web
-        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: SqlImageSku
+      sqlManagement:
+        description: SQL Server Management type.
+        enum:
+          - Full
+          - LightWeight
+          - NoAgent
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SqlManagementMode
       sqlServerLicenseType:
         description: SQL Server license type.
         enum:

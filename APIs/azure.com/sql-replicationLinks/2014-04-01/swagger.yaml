@@ -103,7 +103,8 @@ paths:
                       role: Secondary
                       startTime: '2017-02-10T01:44:27.117'
                     type: Microsoft.Sql/servers/databases/replicationLinks
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}':
     delete:
       description: Deletes a database replication link. Cannot be done during failover.

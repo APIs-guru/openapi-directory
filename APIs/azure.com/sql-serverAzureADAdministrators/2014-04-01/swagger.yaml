@@ -107,7 +107,8 @@ paths:
                       login: DSEngAll
                       sid: 5e90ef3b-9b42-4777-819b-25c36961ea4d
                       tenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}':
     delete:
       description: Deletes an existing server Active Directory Administrator.

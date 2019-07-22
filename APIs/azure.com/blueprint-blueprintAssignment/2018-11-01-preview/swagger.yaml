@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/blueprint/resource-manager/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: blueprint-blueprintAssignment
   x-tags:
@@ -77,12 +76,12 @@ paths:
         Assignment:
           parameters:
             api-version: 2017-11-11-preview
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
                     identity:
                       principalId: 00000000-0000-0000-0000-000000000000
                       tenantId: 00000000-0000-0000-0000-000000000000
@@ -131,11 +130,11 @@ paths:
           parameters:
             api-version: 2017-11-11-preview
             assignmentName: assignSimpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '202':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
                 identity:
                   principalId: 00000000-0000-0000-0000-000000000000
                   tenantId: 00000000-0000-0000-0000-000000000000
@@ -180,11 +179,11 @@ paths:
           parameters:
             api-version: 2017-11-11-preview
             assignmentName: assignSimpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
                 identity:
                   principalId: 00000000-0000-0000-0000-000000000000
                   tenantId: 00000000-0000-0000-0000-000000000000
@@ -230,7 +229,7 @@ paths:
       tags:
         - Assignment
       x-ms-examples:
-        Assignment:
+        Assignment with system-assigned managed identity:
           parameters:
             api-version: 2017-11-11-preview
             assignment:
@@ -254,15 +253,73 @@ paths:
                     location: eastus
                     name: defaultRG
             assignmentName: assignSimpleBlueprint
-            scope: subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '201':
               body:
-                id: /subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
                 identity:
                   principalId: 00000000-0000-0000-0000-000000000000
                   tenantId: 00000000-0000-0000-0000-000000000000
                   type: SystemAssigned
+                location: eastus
+                name: assignSimpleBlueprint
+                properties:
+                  blueprintId: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                  description: enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.
+                  parameters:
+                    costCenter:
+                      value: Contoso/Online/Shopping/Production
+                    owners:
+                      value:
+                        - johnDoe@contoso.com
+                        - johnsteam@contoso.com
+                    storageAccountType:
+                      value: Standard_LRS
+                  provisioningState: creating
+                  resourceGroups:
+                    storageRG:
+                      location: eastus
+                      name: defaultRG
+                type: Microsoft.Blueprint/Assignment
+        Assignment with user-assigned managed identity:
+          parameters:
+            api-version: 2017-11-11-preview
+            assignment:
+              identity:
+                type: UserAssigned
+                userAssignedIdentities:
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity: {}
+              location: eastus
+              properties:
+                blueprintId: /providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint
+                description: enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.
+                parameters:
+                  costCenter:
+                    value: Contoso/Online/Shopping/Production
+                  owners:
+                    value:
+                      - johnDoe@contoso.com
+                      - johnsteam@contoso.com
+                  storageAccountType:
+                    value: Standard_LRS
+                resourceGroups:
+                  storageRG:
+                    location: eastus
+                    name: defaultRG
+            assignmentName: assignSimpleBlueprint
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
+          responses:
+            '201':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint
+                identity:
+                  tenantId: 00000000-0000-0000-0000-000000000000
+                  type: UserAssigned
+                  userAssignedIdentities:
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity:
+                      clientId: 00000000-0000-0000-0000-000000000000
+                      principalId: 00000000-0000-0000-0000-000000000000
                 location: eastus
                 name: assignSimpleBlueprint
                 properties:
@@ -301,11 +358,11 @@ paths:
           parameters:
             api-version: 2018-11-01-preview
             assignmentName: assignSimpleBlueprint
-            scope: 'subscriptions/{subscriptionId}'
+            scope: subscriptions/00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                objectId: 00000000-0000-0000-0000-000000000000
+                objectId: 00000000-1111-0000-1111-000000000000
 definitions:
   Assignment:
     allOf:

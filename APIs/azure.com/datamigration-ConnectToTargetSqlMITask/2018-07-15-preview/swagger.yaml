@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMITask.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-ConnectToTargetSqlMITask
   x-tags:
@@ -32,6 +31,14 @@ definitions:
   ConnectToTargetSqlMITaskInput:
     description: Input for the task that validates connection to Azure SQL Database Managed Instance.
     properties:
+      collectAgentJobs:
+        default: true
+        description: Flag for whether to collect agent jobs from target SQL MI server.
+        type: boolean
+      collectLogins:
+        default: true
+        description: Flag for whether to collect logins from target SQL MI server.
+        type: boolean
       targetConnectionInfo:
         allOf:
           - description: Defines the connection properties of a server
@@ -90,6 +97,10 @@ definitions:
           - dataSource
         type: object
         x-ms-discriminator-value: SqlConnectionInfo
+      validateSsisCatalogOnly:
+        default: false
+        description: Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.
+        type: boolean
     required:
       - targetConnectionInfo
     type: object

@@ -65,446 +65,250 @@ paths:
               body:
                 value:
                   - display:
-                      description: Reading operations
                       operation: Operations read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Operations
                     name: Microsoft.Insights/Operations/Read
-                    properties: {}
                   - display:
-                      description: Read metric definitions
                       operation: Metric definitions read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metric Definitions
                     name: Microsoft.Insights/MetricDefinitions/Read
-                    properties: {}
                   - display:
-                      description: Read metrics
                       operation: Metrics read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metrics
                     name: Microsoft.Insights/Metrics/Read
-                    properties: {}
                   - display:
-                      description: Writing to an alert rule configuration
                       operation: Alert Rule write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Write
-                    properties: {}
                   - display:
-                      description: Deleting an alert rule configuration
                       operation: Alert Rule delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Delete
-                    properties: {}
                   - display:
-                      description: Reading an alert rule configuration
                       operation: Alert Rule read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Read
-                    properties: {}
                   - display:
-                      description: Writing a metric alert
                       operation: Metric alert write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metric alerts
                     name: Microsoft.Insights/MetricAlerts/Write
-                    properties: {}
                   - display:
-                      description: Deleting a metric alert
                       operation: Metric alert delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metric alerts
                     name: Microsoft.Insights/MetricAlerts/Delete
-                    properties: {}
                   - display:
-                      description: Reading a metric alert
                       operation: Metric alert read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metric alerts
                     name: Microsoft.Insights/MetricAlerts/Read
-                    properties: {}
                   - display:
-                      description: Writing to an autoscale setting configuration
                       operation: Autoscale Setting write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Autoscale
                     name: Microsoft.Insights/AutoscaleSettings/Write
-                    properties: {}
                   - display:
-                      description: Deleting an autoscale setting configuration
                       operation: Autoscale Setting delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Autoscale
                     name: Microsoft.Insights/AutoscaleSettings/Delete
-                    properties: {}
                   - display:
-                      description: Reading an autoscale setting configuration
                       operation: Autoscale Setting read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Autoscale
                     name: Microsoft.Insights/AutoscaleSettings/Read
-                    properties: {}
                   - display:
-                      description: Reading an alert rule incident configuration
                       operation: Alert Rule Incidents read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rule Incident resource
                     name: Microsoft.Insights/AlertRules/Incidents/Read
-                    properties: {}
                   - display:
-                      description: Read metric definitions
                       operation: Metric definitions read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Metric Definitions
                     name: Microsoft.Insights/AutoscaleSettings/providers/Microsoft.Insights/MetricDefinitions/Read
-                    properties:
-                      serviceSpecification:
-                        legacyMetricSpecifications: null
-                        logSpecifications: null
-                        metricSpecifications:
-                          - aggregationType: Average
-                            availabilities: null
-                            category: Metric
-                            dimensions:
-                              - displayName: Metric Trigger Source
-                                name: MetricTriggerSource
-                                toBeExportedForShoebox: true
-                            displayDescription: The value computed by autoscale when executed
-                            displayName: Observed Metric Value
-                            fillGapWithZero: false
-                            name: ObservedMetricValue
-                            unit: Count
-                          - aggregationType: Average
-                            availabilities: null
-                            category: Metric
-                            dimensions:
-                              - displayName: Metric Trigger Rule
-                                name: MetricTriggerRule
-                                toBeExportedForShoebox: true
-                            displayDescription: The configured autoscale threshold when autoscale ran.
-                            displayName: Metric Threshold
-                            fillGapWithZero: false
-                            name: MetricThreshold
-                            unit: Count
-                          - aggregationType: Average
-                            availabilities: null
-                            category: ScaleAction
-                            dimensions: null
-                            displayDescription: The capacity reported to autoscale when it executed.
-                            displayName: Observed Capacity
-                            fillGapWithZero: false
-                            name: ObservedCapacity
-                            unit: Count
-                          - aggregationType: Total
-                            availabilities: null
-                            category: ScaleAction
-                            dimensions:
-                              - displayName: Scale Direction
-                                name: ScaleDirection
-                                toBeExportedForShoebox: true
-                            displayDescription: The direction of the scale operation.
-                            displayName: Scale Actions Initiated
-                            fillGapWithZero: true
-                            name: ScaleActionsInitiated
-                            unit: Count
                   - display:
-                      description: Writing an action group
                       operation: Action group write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Action groups
                     name: Microsoft.Insights/ActionGroups/Write
-                    properties: {}
                   - display:
-                      description: Deleting an action group
                       operation: Action group delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Action groups
                     name: Microsoft.Insights/ActionGroups/Delete
-                    properties: {}
                   - display:
-                      description: Reading an action group
                       operation: Action group read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Action groups
                     name: Microsoft.Insights/ActionGroups/Read
-                    properties: {}
                   - display:
-                      description: Reading an activity log alert
                       operation: Activity log alert read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Activity log alert
                     name: Microsoft.Insights/ActivityLogAlerts/Write
-                    properties: {}
                   - display:
-                      description: Deleting an activity log alert
                       operation: Activity log alert delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Activity log alert
                     name: Microsoft.Insights/ActivityLogAlerts/Delete
-                    properties: {}
                   - display:
-                      description: Reading an activity log alert
                       operation: Activity log alert read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Activity log alert
                     name: Microsoft.Insights/ActivityLogAlerts/Read
-                    properties: {}
                   - display:
-                      description: Triggered the Activity Log Alert
                       operation: Activity Log Alert Activated
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Activity Log Alert
                     name: Microsoft.Insights/ActivityLogAlerts/Activated/Action
-                    properties: {}
                   - display:
-                      description: Reading an event category
                       operation: Event category read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Event category
                     name: Microsoft.Insights/EventCategories/Read
-                    properties: {}
                   - display:
-                      description: Read management event type values
                       operation: Event types management values read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Events
                     name: Microsoft.Insights/eventtypes/values/Read
-                    properties: {}
                   - display:
-                      description: Read management event type digest
                       operation: Event types management digest read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Digest events
                     name: Microsoft.Insights/eventtypes/digestevents/Read
-                    properties: {}
                   - display:
-                      description: Writing to diagnostic settings configuration
                       operation: Diagnostic settings write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Diagnostic settings
                     name: Microsoft.Insights/DiagnosticSettings/Write
-                    properties: {}
                   - display:
-                      description: Deleting diagnostic settings configuration
                       operation: Diagnostic settings delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Diagnostic settings
                     name: Microsoft.Insights/DiagnosticSettings/Delete
-                    properties: {}
                   - display:
-                      description: Reading a diagnostic settings configuration
                       operation: Diagnostic settings read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Diagnostic settings
                     name: Microsoft.Insights/DiagnosticSettings/Read
-                    properties: {}
                   - display:
-                      description: Writing to extended diagnostic settings configuration
                       operation: Extended Diagnostic settings write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Extended Diagnostic settings
                     name: Microsoft.Insights/ExtendedDiagnosticSettings/Write
-                    properties: {}
                   - display:
-                      description: Deleting extended diagnostic settings configuration
                       operation: Extended Diagnostic settings delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Extended Diagnostic settings
                     name: Microsoft.Insights/ExtendedDiagnosticSettings/Delete
-                    properties: {}
                   - display:
-                      description: Reading a extended diagnostic settings configuration
                       operation: Extended Diagnostic settings read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Extended Diagnostic settings
                     name: Microsoft.Insights/ExtendedDiagnosticSettings/Read
-                    properties: {}
                   - display:
-                      description: Writing to a log profile configuration
                       operation: Log profile write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Log Profiles
                     name: Microsoft.Insights/LogProfiles/Write
-                    properties: {}
                   - display:
-                      description: Delete log profiles configuration
                       operation: Log profile delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Log Profiles
                     name: Microsoft.Insights/LogProfiles/Delete
-                    properties: {}
                   - display:
-                      description: Read log profiles
                       operation: Log profile read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Log Profiles
                     name: Microsoft.Insights/LogProfiles/Read
-                    properties: {}
                   - display:
-                      description: Read log definitions
                       operation: Log Definitions read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Log Definitions
                     name: Microsoft.Insights/LogDefinitions/Read
-                    properties: {}
                   - display:
-                      description: Autoscale scale up operation
                       operation: Autoscale scale up operation
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Autoscale
                     name: Microsoft.Insights/AutoscaleSettings/Scaleup/Action
-                    properties: {}
                   - display:
-                      description: Autoscale scale down operation
                       operation: Autoscale scale down operation
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Autoscale
                     name: Microsoft.Insights/AutoscaleSettings/Scaledown/Action
-                    properties: {}
                   - display:
-                      description: Alert Rule activated
                       operation: Alert Rule activated
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Activated/Action
-                    properties: {}
                   - display:
-                      description: Alert Rule resolved
                       operation: Alert Rule resolved
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Resolved/Action
-                    properties: {}
                   - display:
-                      description: Alert rule is throttled
                       operation: Alert Rule throttled
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Alert Rules
                     name: Microsoft.Insights/AlertRules/Throttled/Action
-                    properties: {}
                   - display:
-                      description: Register the microsoft insights provider
                       operation: Register Microsoft.Insights
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Microsoft.Insights
                     name: Microsoft.Insights/Register/Action
-                    properties: {}
                   - display:
-                      description: Writing to an application insights component configuration
                       operation: Application insights component write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Application insights components
                     name: Microsoft.Insights/Components/Write
-                    properties: {}
                   - display:
-                      description: Deleting an application insights component configuration
                       operation: Application insights component delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Application insights components
                     name: Microsoft.Insights/Components/Delete
-                    properties: {}
                   - display:
-                      description: Reading an application insights component configuration
                       operation: Application insights component read
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Application insights components
                     name: Microsoft.Insights/Components/Read
-                    properties: {}
                   - display:
-                      description: Writing to a webtest configuration
                       operation: Webtest write
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Web tests
                     name: Microsoft.Insights/Webtests/Write
-                    properties: {}
                   - display:
-                      description: Deleting a webtest configuration
                       operation: Webtest delete
                       provider: Microsoft Monitoring Insights
-                      publisher: Microsoft
                       resource: Web tests
                     name: Microsoft.Insights/Webtests/Delete
-                    properties: {}
                   - display:
-                      description: Reading a Workbooks configuration
                       operation: Workbooks read
                       provider: Microsoft Application Insights
-                      publisher: Microsoft
                       resource: Workbooks
                     name: Microsoft.Insights/Workbooks/Read
-                    properties: {}
                   - display:
-                      description: Writing to a Workbooks configuration
                       operation: Workbooks write
                       provider: Microsoft Application Insights
-                      publisher: Microsoft
                       resource: Workbooks
                     name: Microsoft.Insights/Workbooks/Write
-                    properties: {}
                   - display:
-                      description: Deleting a Workbooks configuration
                       operation: Workbooks delete
                       provider: Microsoft Application Insights
-                      publisher: Microsoft
                       resource: Workbooks
                     name: Microsoft.Insights/Workbooks/Delete
-                    properties: {}
                   - display:
-                      description: Reading a Workbooks configuration
                       operation: Workbooks read
                       provider: Microsoft Application Insights
-                      publisher: Microsoft
                       resource: Workbooks
                     name: Microsoft.Insights/Workbooks/Read
-                    properties: {}
 definitions:
   Operation:
     description: Microsoft Insights API operation definition.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/managementgroups/resource-manager/Microsoft.Management/preview/2018-03-01-preview/management.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: managementgroups-management
   x-tags:
@@ -630,6 +629,53 @@ paths:
                   provisioningState: Updating
                 type: /providers/Microsoft.Management/managementGroups
       x-ms-long-running-operation: true
+  '/providers/Microsoft.Management/managementGroups/{groupId}/descendants':
+    post:
+      description: |
+        List all entities that descend from a management group.
+      operationId: ManagementGroups_GetDescendants
+      parameters:
+        - $ref: '#/parameters/GroupIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SkipTokenParameter'
+        - $ref: '#/parameters/TopParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DescendantListResult'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ManagementGroups_Descendants
+      x-ms-examples:
+        GetDescendants:
+          parameters:
+            api-version: 2018-03-01-preview
+            groupId: 20000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - id: /providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000
+                    name: 20000000-0001-0000-0000-000000000000
+                    properties:
+                      displayName: Group 1
+                      parent:
+                        id: /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000
+                    type: /providers/Microsoft.Management/managementGroups
+                  - id: /subscriptions/20000000-0004-0000-0000-000000000000
+                    name: 20000000-0004-0000-0000-000000000000
+                    properties:
+                      displayName: Subscription 4
+                      parent:
+                        id: /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000
+                    type: /subscriptions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}':
     delete:
       description: De-associates subscription from the management group.
@@ -911,6 +957,58 @@ definitions:
       name:
         description: The name of the parent management group
         readOnly: true
+        type: string
+  DescendantInfo:
+    description: The descendant.
+    properties:
+      id:
+        description: 'The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000'
+        readOnly: true
+        type: string
+        x-nullable: true
+      name:
+        description: 'The name of the descendant. For example, 00000000-0000-0000-0000-000000000000'
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/DescendantInfoProperties'
+        title: Properties
+        x-ms-client-flatten: true
+        x-nullable: true
+      type:
+        description: 'The type of the resource. For example, /providers/Microsoft.Management/managementGroups or /subscriptions'
+        readOnly: true
+        type: string
+        x-nullable: true
+  DescendantInfoProperties:
+    description: The generic properties of an descendant.
+    properties:
+      displayName:
+        description: The friendly name of the management group.
+        type: string
+        x-nullable: true
+      parent:
+        $ref: '#/definitions/DescendantParentGroupInfo'
+        title: Parent
+        x-nullable: true
+    type: object
+  DescendantListResult:
+    description: Describes the result of the request to view descendants.
+    properties:
+      nextLink:
+        description: The URL to use for getting the next set of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of descendants.
+        items:
+          $ref: '#/definitions/DescendantInfo'
+        type: array
+  DescendantParentGroupInfo:
+    description: The ID of the parent management group.
+    properties:
+      id:
+        description: 'The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000'
         type: string
   EntityHierarchyItem:
     description: The management group details for the hierarchy view.

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-AppServiceEnvironments
   x-tags:
@@ -663,6 +662,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -1706,6 +1708,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -5074,6 +5079,9 @@ paths:
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                               type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
+                              type: string
                             trafficManagerProfileId:
                               description: |-
                                 ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -6116,6 +6124,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -7519,6 +7530,9 @@ paths:
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                               type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
+                              type: string
                             trafficManagerProfileId:
                               description: |-
                                 ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -8626,6 +8640,9 @@ paths:
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
                               type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
+                              type: string
                             trafficManagerProfileId:
                               description: |-
                                 ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
@@ -9668,6 +9685,9 @@ paths:
                                 ARM resource ID of the source app. App resource ID is of the form 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
                                 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+                              type: string
+                            sourceWebAppLocation:
+                              description: 'Location of source app ex: West US or North Europe'
                               type: string
                             trafficManagerProfileId:
                               description: |-
@@ -12621,7 +12641,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  ErrorEntity: {}
   HostingEnvironmentDiagnostics:
     description: Diagnostics for an App Service Environment.
     properties:

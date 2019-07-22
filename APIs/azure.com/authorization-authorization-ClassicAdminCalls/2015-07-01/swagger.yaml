@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/authorization/resource-manager/Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: authorization-authorization-ClassicAdminCalls
   x-tags:
@@ -22,10 +21,8 @@ info:
     - Microsoft
 consumes:
   - application/json
-  - text/json
 produces:
   - application/json
-  - text/json
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
@@ -38,6 +35,12 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
+  ApiVersionParameter:
+    description: The API version to use for this operation.
+    in: query
+    name: api-version
+    required: true
+    type: string
   SubscriptionIdParameter:
     description: The ID of the target subscription.
     in: path
@@ -50,11 +53,7 @@ paths:
       description: 'Gets service administrator, account administrator, and co-administrators for the subscription.'
       operationId: ClassicAdministrators_List
       parameters:
-        - description: The API version to use for this operation.
-          in: query
-          name: api-version
-          required: true
-          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
@@ -99,6 +98,7 @@ definitions:
       properties:
         $ref: '#/definitions/ClassicAdministratorProperties'
         description: Properties for the classic administrator.
+        x-ms-client-flatten: true
       type:
         description: The type of the administrator.
         type: string

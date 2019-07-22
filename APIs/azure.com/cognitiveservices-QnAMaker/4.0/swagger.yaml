@@ -390,13 +390,34 @@ paths:
                   questions:
                     - How can I change the default message from QnA Maker?
                   source: Custom Editorial
-                - answer: 'You can use our REST apis to manage your KB. See here for details: https://westus.dev.cognitive.microsoft.com/docs/services/58994a073d9e04097c7ba6fe/operations/58994a073d9e041ad42d9baa'
+                - answer: 'You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create'
+                  context:
+                    isContextOnly: false
+                    prompts:
+                      - displayOrder: 1
+                        displayText: Update KB
+                        qna:
+                          answer: 'You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update'
+                          context:
+                            isContextOnly: false
+                            prompts:
+                              - displayOrder: 1
+                                displayText: Refresh Endpoint Keys
+                                qna:
+                                  answer: 'You can use our REST apis to refresh endpoint keys. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/endpointkeys/refreshkeys'
+                                  questions:
+                                    - How do I programmatically refresh endpoint keys?
+                          metadata:
+                            - name: category
+                              value: api
+                          questions:
+                            - How do I programmatically update my KB?
                   id: 0
                   metadata:
                     - name: category
                       value: api
                   questions:
-                    - How do I programmatically update my KB?
+                    - How do I programmatically create a KB?
                   source: Custom Editorial
               urls:
                 - 'https://docs.microsoft.com/en-in/azure/cognitive-services/qnamaker/faqs'
@@ -517,28 +538,76 @@ paths:
                     questions:
                       - How can I change the default message from QnA Maker?
                     source: Custom Editorial
-                  - answer: 'You can use our REST apis to manage your KB. See here for details: https://westus.dev.cognitive.microsoft.com/docs/services/58994a073d9e04097c7ba6fe/operations/58994a073d9e041ad42d9baa'
-                    id: 0
-                    metadata:
-                      - name: category
-                        value: api
-                    questions:
-                      - How do I programmatically update my KB?
-                    source: Custom Editorial
                 urls:
                   - 'https://docs.microsoft.com/en-us/azure/cognitive-services/Emotion/FAQ'
               delete:
                 ids:
-                  - 4
                   - 13
                   - 35
-                sources:
-                  - Custom Editorial
               update:
-                name: QnA Maker + Emotion API FAQ Bot
+                name: QnA Maker FAQ Prompts Bot
                 qnaList:
-                  - answer: 'Yes, you can use our REST APIs to manage a KB. Please check our documentation for details.'
-                    id: 30
+                  - alternateQuestionClusters:
+                      delete: []
+                    answer: 'You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create'
+                    context:
+                      isContextOnly: false
+                      promptsToAdd:
+                        - displayOrder: 0
+                          displayText: Add Prompts
+                          qna:
+                            alternateQuestionClusters: []
+                            answer: 'Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation'
+                            context:
+                              isContextOnly: false
+                              prompts: []
+                            id: 0
+                            metadata: []
+                            questions:
+                              - How can I add prompts?
+                            source: Editorial
+                          qnaId: 0
+                        - displayOrder: 0
+                          displayText: Delete Prompts
+                          qna:
+                            alternateQuestionClusters: []
+                            answer: 'Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation'
+                            context:
+                              isContextOnly: false
+                              prompts: []
+                            id: 0
+                            metadata: []
+                            questions:
+                              - How can I delete delete prompts?
+                            source: Editorial
+                          qnaId: 0
+                        - displayOrder: 0
+                          displayText: Update Knowledgebase
+                          qna: null
+                          qnaId: 3
+                      promptsToDelete:
+                        - 3
+                    id: 2
+                    metadata:
+                      add: []
+                      delete: []
+                    questions:
+                      add: []
+                      delete: []
+                    source: Custom Editorial
+                  - alternateQuestionClusters:
+                      delete: []
+                    answer: 'You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update'
+                    context:
+                      isContextOnly: false
+                      promptsToAdd:
+                        - displayOrder: 1
+                          displayText: Regenerate Endpoint keys
+                          qna: null
+                          qnaId: 4
+                      promptsToDelete:
+                        - 4
+                    id: 3
                     metadata:
                       add:
                         - name: category
@@ -547,13 +616,9 @@ paths:
                         - name: category
                           value: api
                     questions:
-                      add:
-                        - can I programmatically manage a KB?
-                      delete:
-                        - How do I programmatically update my KB?
-                    source: Custom Q&A
-                urls:
-                  - 'https://docs.microsoft.com/en-us/bot-framework/resources-bot-framework-faq'
+                      add: []
+                      delete: []
+                    source: Custom Editorial
           responses:
             '202':
               body:

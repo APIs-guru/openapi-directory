@@ -108,7 +108,8 @@ paths:
                       state: Enabled
                       storageType: Premium
                     type: Microsoft.Sql/servers/databases/geoBackupPolicies
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies/{geoBackupPolicyName}':
     get:
       description: Gets a geo backup policy.

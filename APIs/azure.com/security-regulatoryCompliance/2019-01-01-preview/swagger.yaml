@@ -57,7 +57,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards':
     get:
       description: Supported regulatory compliance standards details and state
       operationId: RegulatoryComplianceStandards_List
@@ -73,15 +73,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: OData filter. Optional.
           in: query
           name: $filter
@@ -119,7 +110,7 @@ paths:
         Get all supported regulatory compliance standards details and state:
           parameters:
             api-version: '2019-01-01'
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
@@ -130,7 +121,7 @@ paths:
                       failedControls: 4
                       passedControls: 7
                       skippedControls: 0
-                      state: failed
+                      state: Failed
                       unsupportedControls: 0
                     type: Microsoft.Security/regulatoryComplianceStandard
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/ISO-27001
@@ -139,7 +130,7 @@ paths:
                       failedControls: 0
                       passedControls: 0
                       skippedControls: 10
-                      state: skipped
+                      state: Skipped
                       unsupportedControls: 0
                     type: Microsoft.Security/regulatoryComplianceStandard
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/AZURE-CIS
@@ -148,7 +139,7 @@ paths:
                       failedControls: 0
                       passedControls: 0
                       skippedControls: 0
-                      state: unsupported
+                      state: Unsupported
                       unsupportedControls: 0
                     type: Microsoft.Security/regulatoryComplianceStandard
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/SOC-TSP
@@ -157,12 +148,12 @@ paths:
                       failedControls: 0
                       passedControls: 15
                       skippedControls: 0
-                      state: passed
+                      state: Passed
                       unsupportedControls: 0
                     type: Microsoft.Security/regulatoryComplianceStandard
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}':
     get:
       description: Supported regulatory compliance details state for selected standard
       operationId: RegulatoryComplianceStandards_Get
@@ -178,15 +169,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/RegulatoryComplianceStandardName'
       responses:
         '200':
@@ -220,21 +202,20 @@ paths:
           parameters:
             api-version: '2019-01-01'
             regulatoryComplianceStandardName: PCI-DSS-3.2
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                value:
-                  id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2
-                  name: PCI-DSS-3.2
-                  properties:
-                    failedControls: 4
-                    passedControls: 7
-                    skippedControls: 0
-                    state: failed
-                    unsupportedControls: 0
-                  type: Microsoft.Security/regulatoryComplianceStandard
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls':
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2
+                name: PCI-DSS-3.2
+                properties:
+                  failedControls: 4
+                  passedControls: 7
+                  skippedControls: 0
+                  state: Failed
+                  unsupportedControls: 0
+                type: Microsoft.Security/regulatoryComplianceStandard
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls':
     get:
       description: All supported regulatory compliance controls details and state for selected standard
       operationId: RegulatoryComplianceControls_List
@@ -250,15 +231,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/RegulatoryComplianceStandardName'
         - description: OData filter. Optional.
           in: query
@@ -298,7 +270,7 @@ paths:
           parameters:
             api-version: '2019-01-01'
             regulatoryComplianceStandardName: PCI-DSS-3.2
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
@@ -310,9 +282,7 @@ paths:
                       failedAssessments: 4
                       passedAssessments: 7
                       skippedAssessments: 0
-                      standardName: PCI-DSS-3.2
-                      state: failed
-                      unsupportedAssessments: 0
+                      state: Failed
                     type: Microsoft.Security/regulatoryComplianceControl
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2
                     name: '2'
@@ -321,9 +291,7 @@ paths:
                       failedAssessments: 0
                       passedAssessments: 0
                       skippedAssessments: 10
-                      standardName: PCI-DSS-3.2
-                      state: skipped
-                      unsupportedAssessments: 0
+                      state: Skipped
                     type: Microsoft.Security/regulatoryComplianceControl
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2.1
                     name: '2.1'
@@ -332,13 +300,11 @@ paths:
                       failedAssessments: 0
                       passedAssessments: 0
                       skippedAssessments: 0
-                      standardName: PCI-DSS-3.2
-                      state: unsupported
-                      unsupportedAssessments: 0
+                      state: Unsupported
                     type: Microsoft.Security/regulatoryComplianceControl
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}':
     get:
       description: Selected regulatory compliance control details and state
       operationId: RegulatoryComplianceControls_Get
@@ -354,15 +320,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/RegulatoryComplianceStandardName'
         - $ref: '#/parameters/RegulatoryComplianceControlName'
       responses:
@@ -398,23 +355,20 @@ paths:
             api-version: '2019-01-01'
             regulatoryComplianceControlName: '1.1'
             regulatoryComplianceStandardName: PCI-DSS-3.2
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                value:
-                  id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1
-                  name: '1.1'
-                  properties:
-                    description: Common Criteria Related to Organization and Management
-                    failedAssessments: 4
-                    passedAssessments: 7
-                    skippedAssessments: 0
-                    standardName: PCI-DSS-3.2
-                    state: failed
-                    unsupportedAssessments: 0
-                  type: Microsoft.Security/regulatoryComplianceControl
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments':
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1
+                name: '1.1'
+                properties:
+                  description: Common Criteria Related to Organization and Management
+                  failedAssessments: 4
+                  passedAssessments: 7
+                  skippedAssessments: 0
+                  state: Failed
+                type: Microsoft.Security/regulatoryComplianceControl
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments':
     get:
       description: Details and state of assessments mapped to selected regulatory compliance control
       operationId: RegulatoryComplianceAssessments_List
@@ -430,15 +384,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/RegulatoryComplianceStandardName'
         - $ref: '#/parameters/RegulatoryComplianceControlName'
         - description: OData filter. Optional.
@@ -480,7 +425,7 @@ paths:
             api-version: '2019-01-01'
             regulatoryComplianceControlName: '1.1'
             regulatoryComplianceStandardName: PCI-DSS-3.2
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
@@ -490,40 +435,37 @@ paths:
                     properties:
                       assessmentDetailsLink: 'https://management.azure.com/subscriptions/a27e854a-8578-4395-8eaf-6fc7849f3050/providers/Microsoft.Security/securityStatuses/968548cb-02b3-8cd2-11f8-0cf64ab1a347'
                       assessmentType: Assessment
-                      controlName: '1.1'
                       description: Troubleshoot missing scan data on your machines
                       failedResources: 4
                       passedResources: 7
                       skippedResources: 0
-                      state: failed
+                      state: Failed
                     type: Microsoft.Security/regulatoryComplianceAssessment
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2/regulatoryComplianceAssessments/3bcd234d-c9c7-c2a2-89e0-c01f419c1a8a
                     name: 3bcd234d-c9c7-c2a2-89e0-c01f419c1a8a
                     properties:
                       assessmentDetailsLink: 'https://management.azure.com/subscriptions/a27e854a-8578-4395-8eaf-6fc7849f3050/providers/Microsoft.Security/securityStatuses/3bcd234d-c9c7-c2a2-89e0-c01f419c1a8a'
                       assessmentType: Assessment
-                      controlName: '1.1'
                       description: Resolve endpoint protection health issues on your machines
                       failedResources: 0
                       passedResources: 0
                       skippedResources: 10
-                      state: skipped
+                      state: Skipped
                     type: Microsoft.Security/regulatoryComplianceAssessment
                   - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2.1/regulatoryComplianceAssessments/d1db3318-01ff-16de-29eb-28b344515626
                     name: d1db3318-01ff-16de-29eb-28b344515626
                     properties:
                       assessmentDetailsLink: 'https://management.azure.com/subscriptions/a27e854a-8578-4395-8eaf-6fc7849f3050/providers/Microsoft.Security/securityStatuses/d1db3318-01ff-16de-29eb-28b344515626'
                       assessmentType: Assessment
-                      controlName: '1.1'
                       description: Install monitoring agent on your machines
                       failedResources: 0
                       passedResources: 8
                       skippedResources: 0
-                      state: passed
+                      state: Passed
                     type: Microsoft.Security/regulatoryComplianceAssessment
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments/{regulatoryComplianceAssessmentName}':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments/{regulatoryComplianceAssessmentName}':
     get:
       description: Supported regulatory compliance details and state for selected assessment
       operationId: RegulatoryComplianceAssessments_Get
@@ -539,15 +481,6 @@ paths:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           required: true
           type: string
-        - description: The name of the resource group within the user's subscription. The name is case insensitive.
-          in: path
-          maxLength: 90
-          minLength: 1
-          name: resourceGroupName
-          pattern: '^[-\w\._\(\)]+$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/RegulatoryComplianceStandardName'
         - $ref: '#/parameters/RegulatoryComplianceControlName'
         - $ref: '#/parameters/RegulatoryComplianceAssessmentName'
@@ -585,23 +518,21 @@ paths:
             regulatoryComplianceAssessmentName: 968548cb-02b3-8cd2-11f8-0cf64ab1a347
             regulatoryComplianceControlName: '1.1'
             regulatoryComplianceStandardName: PCI-DSS-3.2
-            scope: subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                value:
-                  id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1/regulatoryComplianceAssessments/968548cb-02b3-8cd2-11f8-0cf64ab1a347
-                  name: 968548cb-02b3-8cd2-11f8-0cf64ab1a347
-                  properties:
-                    assessmentDetailsLink: 'https://management.azure.com/subscriptions/a27e854a-8578-4395-8eaf-6fc7849f3050/providers/Microsoft.Security/securityStatuses/968548cb-02b3-8cd2-11f8-0cf64ab1a347'
-                    assessmentType: Assessment
-                    controlName: '1.1'
-                    description: Troubleshoot missing scan data on your machines
-                    failedResources: 4
-                    passedResources: 7
-                    skippedResources: 0
-                    state: failed
-                  type: Microsoft.Security/regulatoryComplianceAssessment
+                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1/regulatoryComplianceAssessments/968548cb-02b3-8cd2-11f8-0cf64ab1a347
+                name: 968548cb-02b3-8cd2-11f8-0cf64ab1a347
+                properties:
+                  assessmentDetailsLink: 'https://management.azure.com/subscriptions/a27e854a-8578-4395-8eaf-6fc7849f3050/providers/Microsoft.Security/securityStatuses/968548cb-02b3-8cd2-11f8-0cf64ab1a347'
+                  assessmentType: Assessment
+                  description: Troubleshoot missing scan data on your machines
+                  failedResources: 4
+                  passedResources: 7
+                  skippedResources: 0
+                  state: Failed
+                type: Microsoft.Security/regulatoryComplianceAssessment
 definitions:
   RegulatoryComplianceAssessment:
     allOf:

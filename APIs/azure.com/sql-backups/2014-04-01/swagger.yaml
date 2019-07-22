@@ -113,7 +113,8 @@ paths:
                       lastAvailableBackupDate: '2017-05-24T02:06:18.78Z'
                       serviceLevelObjective: Basic
                     type: Microsoft.Sql/servers/recoverabledatabases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}':
     get:
       description: 'Gets a recoverable database, which is a resource representing a database''s geo backup'
@@ -237,7 +238,8 @@ paths:
                       maxSizeBytes: '268435456000'
                       serviceLevelObjective: S0
                     type: Microsoft.Sql/servers/restorableDroppedDatabases
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppededDatabaseId}':
     get:
       description: Gets a deleted database that can be restored

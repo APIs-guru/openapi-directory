@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-vmssNetworkInterface
   x-tags:
@@ -662,6 +661,3 @@ paths:
                   provisioningState: Succeeded
                   subnet:
                     id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
-definitions:
-  NetworkInterfaceIPConfigurationPropertiesFormat: {}
-  NetworkInterfacePropertiesFormat: {}

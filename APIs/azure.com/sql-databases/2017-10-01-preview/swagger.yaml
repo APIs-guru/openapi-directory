@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-10-01-preview/databases.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: sql-databases
   x-tags:
@@ -880,21 +879,16 @@ paths:
       tags:
         - Databases
       x-ms-examples:
-        Creates a VCore database with minimum number of parameters.:
+        Creates a VCore database by specifying service objective name.:
           parameters:
             api-version: 2017-03-01-preview
             databaseName: testdb
             parameters:
               location: southeastasia
-              properties:
-                collation: SQL_Latin1_General_CP1_CI_AS
-                createMode: Default
-                licenseType: LicenseIncluded
-                maxSizeBytes: 1073741824
               sku:
                 capacity: 2
-                name: BC_Gen4_2
-                tier: BusinessCritical
+                family: Gen4
+                name: BC
             resourceGroupName: Default-SQL-SouthEastAsia
             serverName: testsvr
             subscriptionId: 00000000-1111-2222-3333-444444444444
@@ -918,7 +912,8 @@ paths:
                   status: Online
                 sku:
                   capacity: 2
-                  name: BC_Gen4_2
+                  family: Gen4
+                  name: BC_Gen4
                   tier: BusinessCritical
                 type: Microsoft.Sql/servers/databases
             '201':
@@ -940,8 +935,134 @@ paths:
                   status: Online
                 sku:
                   capacity: 2
-                  name: BC_Gen4_2
+                  family: Gen4
+                  name: BC_Gen4
                   tier: BusinessCritical
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Creates a VCore database by specifying sku name and capacity.:
+          parameters:
+            api-version: 2017-03-01-preview
+            databaseName: testdb
+            parameters:
+              location: southeastasia
+              sku:
+                capacity: 2
+                name: BC_Gen4
+            resourceGroupName: Default-SQL-SouthEastAsia
+            serverName: testsvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb
+                kind: 'v12.0,user'
+                location: southeastasia
+                name: testdb
+                properties:
+                  catalogCollation: SQL_Latin1_General_CP1_CI_AS
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  creationDate: '2017-06-07T04:41:33.937Z'
+                  currentServiceObjectiveName: BC_Gen4_2
+                  databaseId: 6c764297-577b-470f-9af4-96d3d41e2ba3
+                  defaultSecondaryLocation: North Europe
+                  licenseType: LicenseIncluded
+                  maxLogSizeBytes: 104857600
+                  maxSizeBytes: 1073741824
+                  status: Online
+                sku:
+                  capacity: 2
+                  family: Gen4
+                  name: BC_Gen4
+                  tier: BusinessCritical
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb
+                kind: 'v12.0,user'
+                location: southeastasia
+                name: testdb
+                properties:
+                  catalogCollation: SQL_Latin1_General_CP1_CI_AS
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  creationDate: '2017-06-07T04:41:33.937Z'
+                  currentServiceObjectiveName: BC_Gen4_2
+                  databaseId: 6c764297-577b-470f-9af4-96d3d41e2ba3
+                  defaultSecondaryLocation: North Europe
+                  licenseType: LicenseIncluded
+                  maxLogSizeBytes: 104857600
+                  maxSizeBytes: 1073741824
+                  status: Online
+                sku:
+                  capacity: 2
+                  family: Gen4
+                  name: BC_Gen4
+                  tier: BusinessCritical
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Creates a data warehouse by specifying service objective name.:
+          parameters:
+            api-version: 2017-03-01-preview
+            databaseName: testdw
+            parameters:
+              location: westus
+              sku:
+                name: DW1000c
+            resourceGroupName: Default-SQL-SouthEastAsia
+            serverName: testsvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdw
+                kind: 'v12.0,user,datawarehouse,gen2'
+                location: westus
+                name: testdw
+                properties:
+                  catalogCollation: SQL_Latin1_General_CP1_CI_AS
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  creationDate: '2019-04-24T06:46:14.99Z'
+                  currentServiceObjectiveName: DW1000c
+                  currentSku:
+                    capacity: 9000
+                    name: DataWarehouse
+                    tier: DataWarehouse
+                  databaseId: 188784c9-d602-4684-86cf-e67b6f03551a
+                  defaultSecondaryLocation: eastus
+                  maxSizeBytes: 263882790666240
+                  readScale: Disabled
+                  requestedServiceObjectiveName: DW1000c
+                  status: Online
+                sku:
+                  capacity: 9000
+                  name: DataWarehouse
+                  tier: DataWarehouse
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdw
+                kind: 'v12.0,user,datawarehouse,gen2'
+                location: westus
+                name: testdw
+                properties:
+                  catalogCollation: SQL_Latin1_General_CP1_CI_AS
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  creationDate: '2019-04-24T06:46:14.99Z'
+                  currentServiceObjectiveName: DW1000c
+                  currentSku:
+                    capacity: 9000
+                    name: DataWarehouse
+                    tier: DataWarehouse
+                  databaseId: 188784c9-d602-4684-86cf-e67b6f03551a
+                  defaultSecondaryLocation: eastus
+                  maxSizeBytes: 263882790666240
+                  readScale: Disabled
+                  requestedServiceObjectiveName: DW1000c
+                  status: Online
+                sku:
+                  capacity: 9000
+                  name: DataWarehouse
+                  tier: DataWarehouse
                 type: Microsoft.Sql/servers/databases
             '202': {}
         Creates a database as a copy.:
@@ -1983,6 +2104,10 @@ definitions:
   DatabaseProperties:
     description: The database's properties.
     properties:
+      autoPauseDelay:
+        description: Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled
+        format: int32
+        type: integer
       catalogCollation:
         description: Collation of the metadata catalog.
         enum:
@@ -2094,6 +2219,10 @@ definitions:
         description: The max size of the database expressed in bytes.
         format: int64
         type: integer
+      minCapacity:
+        description: 'Minimal capacity that database will always have allocated, if not paused'
+        format: double
+        type: number
       readScale:
         description: 'The state of read-only routing. If enabled, connections that have application intent set to readonly in their connection string may be routed to a readonly secondary replica in the same region.'
         enum:
@@ -2175,6 +2304,8 @@ definitions:
           - Paused
           - Resuming
           - Scaling
+          - OfflineChangingDwPerformanceTiers
+          - OnlineChangingDwPerformanceTiers
         readOnly: true
         type: string
         x-ms-enum:

@@ -44,6 +44,7 @@ parameters:
 paths:
   /providers/microsoft.visualstudio/pipelineTemplates:
     get:
+      deprecated: true
       description: Gets all pipeline templates which can be used to configure a CI/CD pipeline in a new or an existing Team Services project.
       operationId: PipelineTemplates_List
       parameters:

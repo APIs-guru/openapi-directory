@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/streamingservice.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: mediaservices-streamingservice
   x-tags:
@@ -155,7 +154,7 @@ paths:
                             allow:
                               - address: 0.0.0.0
                                 name: AllowAll
-                                subnetPrefixLength: null
+                                subnetPrefixLength: 0
                         endpoints:
                           - protocol: FragmentedMP4
                             url: 'https://myliveevent1-slitestmedia10.preview-usso.channel.mediaservices.windows.net/a220e223-faf8-4e03-b9a9-2c2432f48025/preview.ism/manifest'
@@ -495,7 +494,7 @@ paths:
               properties:
                 description: test event 1
                 input:
-                  keyFrameIntervalDuration: PT2S
+                  keyFrameIntervalDuration: PT6S
                   streamingProtocol: RTMP
                 preview:
                   accessControl:
@@ -503,6 +502,7 @@ paths:
                       allow:
                         - address: 0.0.0.0
                           name: AllowAll
+                          subnetPrefixLength: 0
               tags:
                 tag1: value1
                 tag2: value2
@@ -536,7 +536,7 @@ paths:
                         allow:
                           - address: 0.0.0.0
                             name: AllowAll
-                            subnetPrefixLength: null
+                            subnetPrefixLength: 0
                     endpoints: []
                     previewLocator: c91726b4-880c-4090-94aa-e6ddb1384b37
                     streamingPolicyName: null
@@ -574,7 +574,7 @@ paths:
                         allow:
                           - address: 0.0.0.0
                             name: AllowAll
-                            subnetPrefixLength: null
+                            subnetPrefixLength: 0
                     endpoints: []
                     previewLocator: c91726b4-880c-4090-94aa-e6ddb1384b37
                     streamingPolicyName: null

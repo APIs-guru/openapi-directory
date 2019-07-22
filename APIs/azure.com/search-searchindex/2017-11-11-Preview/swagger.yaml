@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Data/preview/2017-11-11-preview/searchindex.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: search-searchindex
   x-tags:
@@ -393,6 +392,12 @@ paths:
           x-ms-parameter-grouping:
             name: AutocompleteParameters
           x-nullable: false
+        - description: An OData expression that filters the documents used to produce completed terms for the Autocomplete result.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-grouping:
+            name: AutocompleteParameters
         - description: 'A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there''s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.'
           in: query
           name: fuzzy
@@ -447,6 +452,7 @@ paths:
           parameters:
             api-version: 2017-11-11-Preview
             autocompleteMode: oneTerm
+            filter: 'search.in(docId,''101,102,105'')'
             fuzzy: false
             highlightPostTag: </em>
             highlightPreTag: <em>
@@ -586,6 +592,7 @@ paths:
             api-version: 2017-11-11-Preview
             autocompleteRequest:
               autocompleteMode: oneTerm
+              filter: 'search.in(docId,''101,102,105'')'
               highlightPostTag: </em>
               highlightPreTag: <em>
               minimumCoverage: 80
@@ -912,6 +919,11 @@ definitions:
       autocompleteMode:
         $ref: '#/definitions/AutocompleteMode'
         description: Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.
+      filter:
+        description: An OData expression that filters the documents used to produce completed terms for the Autocomplete result.
+        externalDocs:
+          url: 'https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search'
+        type: string
       fuzzy:
         description: 'A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there''s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.'
         type: boolean

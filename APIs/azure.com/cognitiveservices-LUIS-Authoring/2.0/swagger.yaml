@@ -5544,10 +5544,12 @@ paths:
                     - '?'
                 - entityLabels:
                     - endTokenIndex: 7
-                      entityName: 'Location::To'
+                      entityName: Location
+                      role: To
                       startTokenIndex: 7
                     - endTokenIndex: 5
-                      entityName: 'Location::From'
+                      entityName: Location
+                      role: from
                       startTokenIndex: 5
                   entityPredictions:
                     - endTokenIndex: 9
@@ -10125,6 +10127,12 @@ definitions:
       entityName:
         description: The entity type.
         type: string
+      role:
+        description: The role of the entity within the utterance.
+        type: string
+      roleId:
+        description: The role Id.
+        type: string
       startTokenIndex:
         description: The index within the utterance where the extracted entity starts.
         type: integer
@@ -10141,6 +10149,9 @@ definitions:
         type: integer
       entityName:
         description: The entity type.
+        type: string
+      role:
+        description: The role of the entity within the utterance.
         type: string
       startCharIndex:
         description: The index within the utterance where the extracted entity starts.
@@ -10432,6 +10443,9 @@ definitions:
         type: integer
       entity:
         description: The entity name.
+        type: string
+      role:
+        description: The role of the entity within the utterance.
         type: string
       startPos:
         description: The index within the utterance where the extracted entity starts.

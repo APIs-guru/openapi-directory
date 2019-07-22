@@ -41,6 +41,7 @@ parameters:
     maxLength: 50
     minLength: 3
     name: accountName
+    pattern: '^[a-z0-9]+(-[a-z0-9]+)*'
     required: true
     type: string
     x-ms-parameter-location: method
@@ -3328,10 +3329,9 @@ paths:
             '200':
               body:
                 primaryMasterKey: primaryMasterKey
-                properties:
-                  primaryReadonlyMasterKey: primaryReadonlyMasterKey
-                  secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
+                primaryReadonlyMasterKey: primaryReadonlyMasterKey
                 secondaryMasterKey: secondaryMasterKey
+                secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions':
     get:
       description: Retrieves metric definitions for the given database account.
@@ -4216,6 +4216,14 @@ definitions:
           modelAsString: true
           name: ConflictResolutionMode
     type: object
+  ConnectorOffer:
+    description: The cassandra connector offer type for the Cosmos DB C* database account.
+    enum:
+      - Small
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ConnectorOffer
   ConsistencyPolicy:
     description: The consistency policy for the Cosmos DB database account.
     properties:
@@ -4331,6 +4339,9 @@ definitions:
         items:
           $ref: '#/definitions/Capability'
         type: array
+      connectorOffer:
+        $ref: '#/definitions/ConnectorOffer'
+        description: The cassandra connector offer type for the Cosmos DB database C* account.
       consistencyPolicy:
         $ref: '#/definitions/ConsistencyPolicy'
         description: The consistency policy for the Cosmos DB account.
@@ -4339,6 +4350,9 @@ definitions:
         description: The offer type for the database
       enableAutomaticFailover:
         description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
+      enableCassandraConnector:
+        description: Enables the cassandra connector on the Cosmos DB C* account
         type: boolean
       enableMultipleWriteLocations:
         description: Enables the account to write in multiple locations
@@ -4372,15 +4386,14 @@ definitions:
           $ref: '#/definitions/DatabaseAccountConnectionString'
         type: array
   DatabaseAccountListKeysResult:
+    allOf:
+      - $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
     description: The access keys for the given database account.
     properties:
       primaryMasterKey:
         description: Base 64 encoded value of the primary read-write key.
         readOnly: true
         type: string
-      properties:
-        $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
-        x-ms-client-flatten: true
       secondaryMasterKey:
         description: Base 64 encoded value of the secondary read-write key.
         readOnly: true
@@ -4430,6 +4443,9 @@ definitions:
         items:
           $ref: '#/definitions/Capability'
         type: array
+      connectorOffer:
+        $ref: '#/definitions/ConnectorOffer'
+        description: The cassandra connector offer type for the Cosmos DB database C* account.
       consistencyPolicy:
         $ref: '#/definitions/ConsistencyPolicy'
         description: The consistency policy for the Cosmos DB database account.
@@ -4443,6 +4459,9 @@ definitions:
         type: string
       enableAutomaticFailover:
         description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
+      enableCassandraConnector:
+        description: Enables the cassandra connector on the Cosmos DB C* account
         type: boolean
       enableMultipleWriteLocations:
         description: Enables the account to write in multiple locations

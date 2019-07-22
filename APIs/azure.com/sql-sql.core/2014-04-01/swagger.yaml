@@ -132,7 +132,8 @@ paths:
                     usageBasedRecommendationServiceLevelObjective: null
                     usageBasedRecommendationServiceLevelObjectiveId: null
                   type: Microsoft.Sql/servers/databases/serviceTierAdvisors
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors/{serviceTierAdvisorName}':
     get:
       description: Gets a service tier advisor.
@@ -399,7 +400,8 @@ paths:
                       percentComplete: 100
                       status: Encrypting
                     type: Microsoft.Sql/servers/databases/transparentDataEncryption/operationResults
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity':
     get:
       description: Returns elastic pool activities.
@@ -470,7 +472,8 @@ paths:
                       startTime: '2017-02-10T02:03:06.16Z'
                       state: COMPLETED
                     type: Microsoft.Sql/servers/elasticPools/elasticPoolActivity
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolDatabaseActivity':
     get:
       description: Returns activity on databases inside of an elastic pool.
@@ -559,7 +562,8 @@ paths:
                       startTime: '2016-10-23T03:06:11.19'
                       state: COMPLETED
                     type: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ElasticPoolActivity:
     allOf:

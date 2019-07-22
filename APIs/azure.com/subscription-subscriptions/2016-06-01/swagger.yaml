@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/stable/2016-06-01/subscriptions.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: subscription-subscriptions
   x-tags:
@@ -95,7 +94,8 @@ paths:
       summary: Gets all available geo-locations.
       tags:
         - Subscriptions
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   /tenants:
     get:
       description: Gets the tenants for your account.

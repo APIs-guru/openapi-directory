@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-02-01/blob.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage-blob
   x-tags:
@@ -858,6 +857,93 @@ paths:
                   - tag1
                   - tag2
                   - tag3
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease':
+    post:
+      description: 'The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.'
+      operationId: BlobContainers_Lease
+      parameters:
+        - description: The name of the resource group within the user's subscription. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/AccountName'
+        - $ref: '#/parameters/ContainerName'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Lease Container request body.
+          in: body
+          name: parameters
+          schema:
+            $ref: '#/definitions/LeaseContainerRequest'
+      responses:
+        '200':
+          description: OK -- Lease Container operation completed successfully.
+          schema:
+            $ref: '#/definitions/LeaseContainerResponse'
+      tags:
+        - BlobContainers
+      x-ms-examples:
+        Acquire a lease on a container:
+          parameters:
+            accountName: sto328
+            api-version: '2018-02-01'
+            containerName: container6185
+            monitor: 'true'
+            parameters:
+              properties:
+                action: 0
+                breakPeriod: null
+                leaseDuration: -1
+                leaseId: null
+                proposedLeaseId: null
+            resourceGroupName: res3376
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185'
+                name: container6185
+                properties:
+                  leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
+                type: Microsoft.Storage/storageAccounts/blobServices/containers
+        Break a lease on a container:
+          parameters:
+            accountName: sto328
+            api-version: 2018-03-01-preview
+            containerName: container6185
+            monitor: 'true'
+            parameters:
+              properties:
+                action: 4
+                breakPeriod: null
+                leaseDuration: null
+                leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
+                proposedLeaseId: null
+            resourceGroupName: res3376
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185'
+                name: container6185
+                properties:
+                  leaseTimeSeconds: '0'
+                type: Microsoft.Storage/storageAccounts/blobServices/containers
 definitions:
   BlobContainer:
     allOf:
@@ -1030,6 +1116,41 @@ definitions:
           name: ImmutabilityPolicyState
     required:
       - immutabilityPeriodSinceCreationInDays
+  LeaseContainerRequest:
+    description: Lease Container request schema.
+    properties:
+      action:
+        description: Specifies the lease action. Can be one of the available actions.
+        enum:
+          - Acquire
+          - Renew
+          - Change
+          - Release
+          - Break
+        type: string
+      breakPeriod:
+        description: 'Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60.'
+        type: integer
+      leaseDuration:
+        description: 'Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires.'
+        type: integer
+      leaseId:
+        description: Identifies the lease. Can be specified in any valid GUID string format.
+        type: string
+      proposedLeaseId:
+        description: 'Optional for acquire, required for change. Proposed lease ID, in a GUID string format.'
+        type: string
+    required:
+      - action
+  LeaseContainerResponse:
+    description: Lease Container response schema.
+    properties:
+      leaseId:
+        description: 'Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.'
+        type: string
+      leaseTimeSeconds:
+        description: 'Approximate time remaining in the lease period, in seconds.'
+        type: string
   LegalHold:
     description: The LegalHold property of a blob container.
     properties:

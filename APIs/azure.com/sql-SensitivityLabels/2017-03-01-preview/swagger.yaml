@@ -177,6 +177,11 @@ paths:
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/DatabaseNameParameter'
+        - description: Specifies whether to include disabled recommendations or not.
+          in: query
+          name: includeDisabledRecommendations
+          required: false
+          type: boolean
         - in: query
           name: $skipToken
           required: false
@@ -513,6 +518,134 @@ paths:
                   labelId: bf91e08c-f4f0-478a-b016-25164b2a65ff
                   labelName: PII
                 type: Microsoft.Sql/servers/databases/schemas/tables/columns/sensitivityLabels
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable':
+    post:
+      description: Disables sensitivity recommendations on a given column
+      operationId: SensitivityLabels_DisableRecommendation
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - description: The name of the schema.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - description: The name of the table.
+          in: path
+          name: tableName
+          required: true
+          type: string
+        - description: The name of the column.
+          in: path
+          name: columnName
+          required: true
+          type: string
+        - enum:
+            - recommended
+          in: path
+          name: sensitivityLabelSource
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: SensitivityLabelSource
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully disabled the sensitivity recommendation on the given column.
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.
+
+             * 404 SensitivityLabelsColumnNotFound - The specified column could not be found
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.
+      tags:
+        - SensitivityLabels
+      x-ms-examples:
+        Disables sensitivity recommendations on a given column:
+          parameters:
+            api-version: 2017-03-01-preview
+            columnName: myColumn
+            databaseName: myDatabase
+            resourceGroupName: myRG
+            schemaName: dbo
+            sensitivityLabelSource: recommended
+            serverName: myServer
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+            tableName: myTable
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable':
+    post:
+      description: Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)
+      operationId: SensitivityLabels_EnableRecommendation
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - description: The name of the schema.
+          in: path
+          name: schemaName
+          required: true
+          type: string
+        - description: The name of the table.
+          in: path
+          name: tableName
+          required: true
+          type: string
+        - description: The name of the column.
+          in: path
+          name: columnName
+          required: true
+          type: string
+        - enum:
+            - recommended
+          in: path
+          name: sensitivityLabelSource
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: SensitivityLabelSource
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully enabled the sensitivity recommendations on the given column.
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.
+
+             * 404 SensitivityLabelsColumnNotFound - The specified column could not be found
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.
+      tags:
+        - SensitivityLabels
+      x-ms-examples:
+        Enables sensitivity recommendations on a given column:
+          parameters:
+            api-version: 2017-03-01-preview
+            columnName: myColumn
+            databaseName: myDatabase
+            resourceGroupName: myRG
+            schemaName: dbo
+            sensitivityLabelSource: recommended
+            serverName: myServer
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+            tableName: myTable
+          responses:
+            '200': {}
 definitions:
   SensitivityLabel:
     allOf:
@@ -566,6 +699,10 @@ definitions:
       informationTypeId:
         description: The information type ID.
         type: string
+      isDisabled:
+        description: Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.
+        readOnly: true
+        type: boolean
       labelId:
         description: The label ID.
         type: string

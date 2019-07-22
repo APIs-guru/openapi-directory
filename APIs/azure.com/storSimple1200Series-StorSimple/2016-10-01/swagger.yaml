@@ -1038,7 +1038,8 @@ paths:
                       sku:
                         name: Standard
                     type: Microsoft.StorSimple/Managers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers':
     get:
       deprecated: false
@@ -1093,7 +1094,8 @@ paths:
                       sku:
                         name: Standard
                     type: Microsoft.StorSimple/Managers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}':
     delete:
       deprecated: false
@@ -1354,7 +1356,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords/{accessControlRecordName}':
     delete:
       deprecated: false
@@ -1948,7 +1951,8 @@ paths:
                       status: ReadyToSetup
                       type: Series9000OnPremVirtualAppliance
                     type: Microsoft.StorSimple/managers/devices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}':
     delete:
       deprecated: false
@@ -2288,7 +2292,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupScheduleGroups/{scheduleGroupName}':
     delete:
       deprecated: false
@@ -2753,7 +2758,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/chapSettings/{chapUserName}':
     delete:
       deprecated: false
@@ -3055,7 +3061,8 @@ paths:
                       provisionedCapacityInBytes: 536870912000
                       usedCapacityInBytes: 0
                     type: Microsoft.StorSimple/managers/devices/iscsiServers/disks
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/download':
     post:
       deprecated: false
@@ -3235,7 +3242,8 @@ paths:
                       status: ReadyToSetup
                       type: Series9000OnPremVirtualAppliance
                     type: Microsoft.StorSimple/managers/devices
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers':
     get:
       deprecated: false
@@ -3281,7 +3289,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}':
     delete:
       deprecated: false
@@ -3598,7 +3607,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/metricsDefinitions':
     get:
       deprecated: false
@@ -3667,7 +3677,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-DMNJB2PET0/fileservers/HSDK-DMNJB2PET0'
                     type: Microsoft.StorSimple/managers/devices/fileServers/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares':
     get:
       deprecated: false
@@ -3731,7 +3742,8 @@ paths:
                       shareStatus: Online
                       usedCapacityInBytes: 174063616
                     type: Microsoft.StorSimple/managers/devices/fileServers/shares
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}':
     delete:
       deprecated: false
@@ -4030,7 +4042,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}/metricsDefinitions':
     get:
       deprecated: false
@@ -4105,7 +4118,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-DMNJB2PET0/fileservers/HSDK-DMNJB2PET0/shares/Auto-TestFileShare2'
                     type: Microsoft.StorSimple/managers/devices/fileServers/shares/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/install':
     post:
       deprecated: false
@@ -4190,7 +4204,8 @@ paths:
             '200':
               body:
                 value: []
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}':
     delete:
       deprecated: false
@@ -4512,7 +4527,8 @@ paths:
                       provisionedCapacityInBytes: 536870912000
                       usedCapacityInBytes: 0
                     type: Microsoft.StorSimple/managers/devices/iscsiServers/disks
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}':
     delete:
       deprecated: false
@@ -4811,7 +4827,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metricsDefinitions':
     get:
       deprecated: false
@@ -4886,7 +4903,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-WSJQERQW3F/iscsiservers/HSDK-WSJQERQW3F/disks/TieredIscsiDiskForSDKTest'
                     type: Microsoft.StorSimple/managers/devices/iscsiServers/disks/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metrics':
     get:
       deprecated: false
@@ -4959,7 +4977,8 @@ paths:
                     unit: Bytes
                     values: []
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metricsDefinitions':
     get:
       deprecated: false
@@ -5028,7 +5047,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-UGU4PITWNI/iscsiservers/HSDK-UGU4PITWNI'
                     type: Microsoft.StorSimple/managers/devices/iscsiServers/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs':
     get:
       deprecated: false
@@ -5430,7 +5450,8 @@ paths:
                         sum: 0
                         timeStamp: '2018-08-11T17:00:00Z'
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metricsDefinitions':
     get:
       deprecated: false
@@ -5518,7 +5539,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-UGU4PITWNI'
                     type: Microsoft.StorSimple/managers/devices/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default':
     get:
       deprecated: false
@@ -5803,7 +5825,8 @@ paths:
                       shareStatus: Offline
                       usedCapacityInBytes: 0
                     type: Microsoft.StorSimple/managers/devices/fileServers/shares
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default':
     get:
       deprecated: false
@@ -6183,7 +6206,8 @@ paths:
                       domainName: fareast.corp.microsoft.com
                       storageDomainId: /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageDomains/Default-HSDK-ARCSX4MVKZ-StorageDomain
                     type: Microsoft.StorSimple/managers/devices/fileServers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getEncryptionKey':
     post:
       deprecated: false
@@ -6265,7 +6289,8 @@ paths:
                       reverseChapId: ''
                       storageDomainId: /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageDomains/Default-HSDK-WSJQERQW3F-StorageDomain
                     type: Microsoft.StorSimple/managers/devices/iscsiServers
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/jobs':
     get:
       deprecated: false
@@ -6624,7 +6649,8 @@ paths:
                         sum: 231725
                         timeStamp: '2018-08-09T00:00:00Z'
       x-ms-odata: '#/definitions/MetricFilter'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metricsDefinitions':
     get:
       deprecated: false
@@ -6702,7 +6728,8 @@ paths:
                     resourceId: 'https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374'
                     type: Microsoft.StorSimple/managers/metricsDefinitions
                     unit: Bytes
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials':
     get:
       deprecated: false
@@ -6751,7 +6778,8 @@ paths:
                       location: West US
                       login: sacforsdktest
                     type: Microsoft.StorSimple/managers/storageAccountCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{credentialName}':
     delete:
       deprecated: false
@@ -6983,7 +7011,8 @@ paths:
                       storageAccountCredentialIds:
                         - /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageAccountCredentials/sacforsdktest
                     type: Microsoft.StorSimple/managers/storageDomains
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageDomains/{storageDomainName}':
     delete:
       deprecated: false

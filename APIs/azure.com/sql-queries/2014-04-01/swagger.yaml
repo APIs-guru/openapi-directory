@@ -124,7 +124,8 @@ paths:
                               value: 3308
                       queryId: '19'
                   type: Microsoft.Sql/servers/databases/topQueries
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{queryId}/queryText':
     get:
       description: Gets a query's text.
@@ -177,7 +178,8 @@ paths:
                 - name: current
                   queryText: select 1
                   type: Microsoft.Sql/servers/databases/topQueries/queryText
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{queryId}/statistics':
     get:
       description: Lists a query's statistics.
@@ -252,7 +254,8 @@ paths:
                           unit: microseconds
                           value: 3308
                   queryId: '19'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   QueryInterval:
     description: A database query.

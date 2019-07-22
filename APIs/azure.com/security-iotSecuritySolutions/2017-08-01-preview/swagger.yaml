@@ -57,6 +57,14 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  UpdateIotSecuritySolution:
+    description: The security solution data
+    in: body
+    name: updateIotSecuritySolutionData
+    required: true
+    schema:
+      $ref: '#/definitions/UpdateIotSecuritySolutionData'
+    x-ms-parameter-location: method
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSecuritySolutions':
     get:
@@ -115,12 +123,19 @@ paths:
                     location: East Us
                     name: default
                     properties:
+                      autoDiscoveredResources:
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       disabledDataSources: []
                       displayName: Solution Default
                       export: []
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       status: Enabled
+                      userDefinedResources:
+                        query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                        querySubscriptions:
+                          - 075423e9-7d33-4166-8bdf-3920b04e3735
                       workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                     tags: {}
                     type: Microsoft.Security/IoTSecuritySolutions
@@ -128,13 +143,57 @@ paths:
                     location: East Us
                     name: sec-solution
                     properties:
+                      autoDiscoveredResources:
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/IotHubSecond
                       disabledDataSources: []
                       displayName: Second Solution
                       export:
                         - RawEvents
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/IotHubSecond
+                      recommendationsConfiguration:
+                        - description: Open Ports on device
+                          recommendationType: OpenPortsOnDevice
+                          status: TurnedOff
+                        - description: Permissive firewall policy found in one of the chains
+                          recommendationType: PermissiveFirewallPolicy
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the input chain was found
+                          recommendationType: PermissiveFirewallRuleInput
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the output chain was found
+                          recommendationType: PermissiveFirewallRuleOut
+                          status: TurnedOn
+                        - description: Operation system baseline validation has failed
+                          recommendationType: OperationSystemNotValid
+                          status: TurnedOn
+                        - description: Agent sends unutilized messages
+                          recommendationType: UnutilizedMessagesFromAgent
+                          status: TurnedOn
+                        - description: Security twin configuration not optimal
+                          recommendationType: SecurityTwinConfigurationNotOptimal
+                          status: TurnedOn
+                        - description: Security twin configuration conflict
+                          recommendationType: SecurityTwinConfigurationConflict
+                          status: TurnedOn
+                        - description: Identical authentication credentials used by multiple devices
+                          recommendationType: IdenticalAuthenticationCredentials
+                          status: TurnedOff
+                        - description: Default IP filter policy should be deny
+                          recommendationType: DenyDefaultIpPolicy
+                          status: TurnedOn
+                        - description: IP filter rule includes large IP range
+                          recommendationType: TooLargeIPRange
+                          status: TurnedOn
+                        - description: Enable diagnostics logs in IoT Hub
+                          recommendationType: EnableDiagnosticsLog
+                          status: TurnedOn
                       status: Enabled
+                      userDefinedResources:
+                        query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                        querySubscriptions:
+                          - 075423e9-7d33-4166-8bdf-3920b04e3735
                       workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                     tags: {}
                     type: Microsoft.Security/IoTSecuritySolutions
@@ -151,13 +210,57 @@ paths:
                     location: East Us
                     name: default
                     properties:
+                      autoDiscoveredResources:
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       disabledDataSources: []
                       displayName: Solution Default
                       export:
                         - RawEvents
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                      recommendationsConfiguration:
+                        - description: Open Ports on device
+                          recommendationType: OpenPortsOnDevice
+                          status: TurnedOff
+                        - description: Permissive firewall policy found in one of the chains
+                          recommendationType: PermissiveFirewallPolicy
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the input chain was found
+                          recommendationType: PermissiveFirewallRuleInput
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the output chain was found
+                          recommendationType: PermissiveFirewallRuleOut
+                          status: TurnedOn
+                        - description: Operation system baseline validation has failed
+                          recommendationType: OperationSystemNotValid
+                          status: TurnedOn
+                        - description: Agent sends unutilized messages
+                          recommendationType: UnutilizedMessagesFromAgent
+                          status: TurnedOn
+                        - description: Security twin configuration not optimal
+                          recommendationType: SecurityTwinConfigurationNotOptimal
+                          status: TurnedOn
+                        - description: Security twin configuration conflict
+                          recommendationType: SecurityTwinConfigurationConflict
+                          status: TurnedOn
+                        - description: Identical authentication credentials used by multiple devices
+                          recommendationType: IdenticalAuthenticationCredentials
+                          status: TurnedOff
+                        - description: Default IP filter policy should be deny
+                          recommendationType: DenyDefaultIpPolicy
+                          status: TurnedOn
+                        - description: IP filter rule includes large IP range
+                          recommendationType: TooLargeIPRange
+                          status: TurnedOn
+                        - description: Enable diagnostics logs in IoT Hub
+                          recommendationType: EnableDiagnosticsLog
+                          status: TurnedOn
                       status: Enabled
+                      userDefinedResources:
+                        query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                        querySubscriptions:
+                          - 075423e9-7d33-4166-8bdf-3920b04e3735
                       workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                     tags: {}
                     type: Microsoft.Security/IoTSecuritySolutions
@@ -230,12 +333,56 @@ paths:
                     location: East Us
                     name: default
                     properties:
+                      autoDiscoveredResources:
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       disabledDataSources: []
                       displayName: Solution Default
                       export: []
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                      recommendationsConfiguration:
+                        - description: Open Ports on device
+                          recommendationType: OpenPortsOnDevice
+                          status: TurnedOff
+                        - description: Permissive firewall policy found in one of the chains
+                          recommendationType: PermissiveFirewallPolicy
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the input chain was found
+                          recommendationType: PermissiveFirewallRuleInput
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the output chain was found
+                          recommendationType: PermissiveFirewallRuleOut
+                          status: TurnedOn
+                        - description: Operation system baseline validation has failed
+                          recommendationType: OperationSystemNotValid
+                          status: TurnedOn
+                        - description: Agent sends unutilized messages
+                          recommendationType: UnutilizedMessagesFromAgent
+                          status: TurnedOn
+                        - description: Security twin configuration not optimal
+                          recommendationType: SecurityTwinConfigurationNotOptimal
+                          status: TurnedOn
+                        - description: Security twin configuration conflict
+                          recommendationType: SecurityTwinConfigurationConflict
+                          status: TurnedOn
+                        - description: Identical authentication credentials used by multiple devices
+                          recommendationType: IdenticalAuthenticationCredentials
+                          status: TurnedOff
+                        - description: Default IP filter policy should be deny
+                          recommendationType: DenyDefaultIpPolicy
+                          status: TurnedOn
+                        - description: IP filter rule includes large IP range
+                          recommendationType: TooLargeIPRange
+                          status: TurnedOn
+                        - description: Enable diagnostics logs in IoT Hub
+                          recommendationType: EnableDiagnosticsLog
+                          status: TurnedOn
                       status: Enabled
+                      userDefinedResources:
+                        query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                        querySubscriptions:
+                          - 075423e9-7d33-4166-8bdf-3920b04e3735
                       workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                     tags: {}
                     type: Microsoft.Security/IoTSecuritySolutions
@@ -253,13 +400,57 @@ paths:
                     location: East Us
                     name: default
                     properties:
+                      autoDiscoveredResources:
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                        - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       disabledDataSources: []
                       displayName: Solution Default
                       export:
                         - RawEvents
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                      recommendationsConfiguration:
+                        - description: Open Ports on device
+                          recommendationType: OpenPortsOnDevice
+                          status: TurnedOff
+                        - description: Permissive firewall policy found in one of the chains
+                          recommendationType: PermissiveFirewallPolicy
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the input chain was found
+                          recommendationType: PermissiveFirewallRuleInput
+                          status: TurnedOn
+                        - description: Permissive firewall rule in the output chain was found
+                          recommendationType: PermissiveFirewallRuleOut
+                          status: TurnedOn
+                        - description: Operation system baseline validation has failed
+                          recommendationType: OperationSystemNotValid
+                          status: TurnedOn
+                        - description: Agent sends unutilized messages
+                          recommendationType: UnutilizedMessagesFromAgent
+                          status: TurnedOn
+                        - description: Security twin configuration not optimal
+                          recommendationType: SecurityTwinConfigurationNotOptimal
+                          status: TurnedOn
+                        - description: Security twin configuration conflict
+                          recommendationType: SecurityTwinConfigurationConflict
+                          status: TurnedOn
+                        - description: Identical authentication credentials used by multiple devices
+                          recommendationType: IdenticalAuthenticationCredentials
+                          status: TurnedOff
+                        - description: Default IP filter policy should be deny
+                          recommendationType: DenyDefaultIpPolicy
+                          status: TurnedOn
+                        - description: IP filter rule includes large IP range
+                          recommendationType: TooLargeIPRange
+                          status: TurnedOn
+                        - description: Enable diagnostics logs in IoT Hub
+                          recommendationType: EnableDiagnosticsLog
+                          status: TurnedOn
                       status: Enabled
+                      userDefinedResources:
+                        query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                        querySubscriptions:
+                          - 075423e9-7d33-4166-8bdf-3920b04e3735
                       workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                     tags: {}
                     type: Microsoft.Security/IoTSecuritySolutions
@@ -394,17 +585,61 @@ paths:
                 location: East Us
                 name: default
                 properties:
+                  autoDiscoveredResources:
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   disabledDataSources: []
                   displayName: Solution Default
                   export: []
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                  recommendationsConfiguration:
+                    - description: Open Ports on device
+                      recommendationType: OpenPortsOnDevice
+                      status: TurnedOff
+                    - description: Permissive firewall policy found in one of the chains
+                      recommendationType: PermissiveFirewallPolicy
+                      status: TurnedOn
+                    - description: Permissive firewall rule in the input chain was found
+                      recommendationType: PermissiveFirewallRuleInput
+                      status: TurnedOn
+                    - description: Permissive firewall rule in the output chain was found
+                      recommendationType: PermissiveFirewallRuleOut
+                      status: TurnedOn
+                    - description: Operation system baseline validation has failed
+                      recommendationType: OperationSystemNotValid
+                      status: TurnedOn
+                    - description: Agent sends unutilized messages
+                      recommendationType: UnutilizedMessagesFromAgent
+                      status: TurnedOn
+                    - description: Security twin configuration not optimal
+                      recommendationType: SecurityTwinConfigurationNotOptimal
+                      status: TurnedOn
+                    - description: Security twin configuration conflict
+                      recommendationType: SecurityTwinConfigurationConflict
+                      status: TurnedOn
+                    - description: Identical authentication credentials used by multiple devices
+                      recommendationType: IdenticalAuthenticationCredentials
+                      status: TurnedOff
+                    - description: Default IP filter policy should be deny
+                      recommendationType: DenyDefaultIpPolicy
+                      status: TurnedOn
+                    - description: IP filter rule includes large IP range
+                      recommendationType: TooLargeIPRange
+                      status: TurnedOn
+                    - description: Enable diagnostics logs in IoT Hub
+                      recommendationType: EnableDiagnosticsLog
+                      status: TurnedOn
                   status: Enabled
+                  userDefinedResources:
+                    query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                    querySubscriptions:
+                      - 075423e9-7d33-4166-8bdf-3920b04e3735
                   workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                 tags: {}
                 type: Microsoft.Security/IoTSecuritySolutions
     patch:
-      description: update exists Security Solution tags. to update other fields use the CreateOrUpdate method
+      description: update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method
       operationId: IotSecuritySolution_Update
       parameters:
         - description: API version for the operation
@@ -428,12 +663,7 @@ paths:
           type: string
           x-ms-parameter-location: method
         - $ref: '#/parameters/SolutionName'
-        - description: Updated tag information to set into the iot hub instance.
-          in: body
-          name: securitySolutionTags
-          required: true
-          schema:
-            $ref: '#/definitions/TagsResource'
+        - $ref: '#/parameters/UpdateIotSecuritySolution'
       responses:
         '200':
           description: Updated
@@ -462,15 +692,20 @@ paths:
       tags:
         - IoT Security Solutions
       x-ms-examples:
-        Create an iot security solution:
+        Update an iot security solution:
           parameters:
             api-version: 2017-08-01-preview
             resourceGroupName: myRg
-            securitySolutionTags:
-              tags:
-                foo: bar
             solutionName: default
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            updateIotSecuritySolutionData:
+              properties:
+                userDefinedResources:
+                  query: where type != "microsoft.devices/iothubs" | where name contains "v2"
+                  querySubscriptions:
+                    - 075423e9-7d33-4166-8bdf-3920b04e3735
+              tags:
+                foo: bar
           responses:
             '200':
               body:
@@ -478,13 +713,25 @@ paths:
                 location: East Us
                 name: default
                 properties:
+                  autoDiscoveredResources:
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   disabledDataSources: []
                   displayName: Solution Default
                   export:
                     - RawEvents
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                  recommendationsConfiguration:
+                    - recommendationType: OpenPortsOnDevice
+                      status: TurnedOff
+                    - recommendationType: IdenticalAuthenticationCredentials
+                      status: TurnedOff
                   status: Enabled
+                  userDefinedResources:
+                    query: where type != "microsoft.devices/iothubs" | where name contains "v2"
+                    querySubscriptions:
+                      - 075423e9-7d33-4166-8bdf-3920b04e3735
                   workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                 tags:
                   foo: bar
@@ -559,6 +806,10 @@ paths:
                 iotHubs:
                   - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                 status: Enabled
+                userDefinedResources:
+                  query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                  querySubscriptions:
+                    - 075423e9-7d33-4166-8bdf-3920b04e3735
                 workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
               tags: {}
             resourceGroupName: MyGroup
@@ -571,12 +822,19 @@ paths:
                 location: East Us
                 name: default
                 properties:
+                  autoDiscoveredResources:
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   disabledDataSources: []
                   displayName: Solution Default
                   export: []
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   status: Enabled
+                  userDefinedResources:
+                    query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                    querySubscriptions:
+                      - 075423e9-7d33-4166-8bdf-3920b04e3735
                   workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                 tags: {}
                 type: Microsoft.Security/IoTSecuritySolutions
@@ -586,12 +844,24 @@ paths:
                 location: East Us
                 name: default
                 properties:
+                  autoDiscoveredResources:
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735
+                    - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   disabledDataSources: []
                   displayName: Solution Default
                   export: []
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                  recommendationsConfiguration:
+                    - recommendationType: OpenPortsOnDevice
+                      status: TurnedOff
+                    - recommendationType: IdenticalAuthenticationCredentials
+                      status: TurnedOff
                   status: Enabled
+                  userDefinedResources:
+                    query: where type != "microsoft.devices/iothubs" | where name contains "iot"
+                    querySubscriptions:
+                      - 075423e9-7d33-4166-8bdf-3920b04e3735
                   workspace: /subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1
                 tags: {}
                 type: Microsoft.Security/IoTSecuritySolutions
@@ -628,6 +898,12 @@ definitions:
   IoTSecuritySolutionProperties:
     description: Security Solution setting data
     properties:
+      autoDiscoveredResources:
+        description: List of resources that were automatically discovered as relevant to the security solution.
+        items:
+          type: string
+        readOnly: true
+        type: array
       disabledDataSources:
         description: Disabled data sources. Disabling these data sources compromises the system.
         items:
@@ -662,6 +938,8 @@ definitions:
         items:
           type: string
         type: array
+      recommendationsConfiguration:
+        $ref: '#/definitions/RecommendationConfigurationList'
       status:
         default: Enabled
         description: Security solution status
@@ -672,6 +950,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SecuritySolutionStatus
+      userDefinedResources:
+        $ref: '#/definitions/UserDefinedResourcesProperties'
       workspace:
         description: Workspace resource ID
         type: string
@@ -694,6 +974,75 @@ definitions:
         type: array
     required:
       - value
+  RecommendationConfigurationList:
+    description: List of recommendation configuration
+    items:
+      $ref: '#/definitions/RecommendationConfigurationProperties'
+    type: array
+  RecommendationConfigurationProperties:
+    description: Recommendation configuration
+    properties:
+      description:
+        readOnly: true
+        type: string
+      recommendationType:
+        description: The recommendation type.
+        enum:
+          - OpenPortsOnDevice
+          - PermissiveFirewallPolicy
+          - PermissiveFirewallRuleInput
+          - PermissiveFirewallRuleOut
+          - OperationSystemNotValid
+          - UnutilizedMessagesFromAgent
+          - SecurityTwinConfigurationNotOptimal
+          - SecurityTwinConfigurationConflict
+          - IdenticalAuthenticationCredentials
+          - DenyDefaultIpPolicy
+          - TooLargeIPRange
+          - EnableDiagnosticsLog
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RecommendationType
+          values:
+            - description: A listening endpoint was found on the device.
+              value: OpenPortsOnDevice
+            - description: 'Allowed firewall policy found (INPUT/OUTPUT). Firewall policy should deny all traffic by default, and define rules to allow necessary communication to/from the device.'
+              value: PermissiveFirewallPolicy
+            - description: A rule in the firewall in the input chain has been found that contains a permissive pattern for a wide range of IP addresses or ports.
+              value: PermissiveFirewallRuleInput
+            - description: A rule in the firewall in the output chain has been found that contains a permissive pattern for a wide range of IP addresses or ports.
+              value: PermissiveFirewallRuleOut
+            - description: Device doesn't comply with CIS Linux benchmarks.
+              value: OperationSystemNotValid
+            - description: 10% or more of security messages were smaller than 4kb during the last 24 hours.
+              value: UnutilizedMessagesFromAgent
+            - description: Security twin configuration is not optimal.
+              value: SecurityTwinConfigurationNotOptimal
+            - description: Conflicts were identified in the security twin configuration.
+              value: SecurityTwinConfigurationConflict
+            - description: IoT Hub authentication credentials are used by multiple devices. This may indicate an illegitimate device impersonating a legitimate device. Duplicate credential use increases the risk of device impersonation by a malicious actor.
+              value: IdenticalAuthenticationCredentials
+            - description: 'IP filter configuration should have rules defined for allowed traffic, and should by default, deny all other traffic by default.'
+              value: DenyDefaultIpPolicy
+            - description: An allow IP filter rule source IP range is too large. Overly permissive rules can expose your IoT hub to malicious actors.
+              value: TooLargeIPRange
+            - description: Enable logs and retain them for up to a year. Retaining logs enables you to recreate activity trails for investigation purposes when a security incident occurs or your network is compromised.
+              value: EnableDiagnosticsLog
+      status:
+        default: TurnedOn
+        description: Recommendation status. The recommendation is not generated when the status is turned off
+        enum:
+          - TurnedOff
+          - TurnedOn
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RecommendationConfigStatus
+    required:
+      - recommendationType
+      - status
+    type: object
   TagsResource:
     description: 'A container holding only the Tags for a resource, allowing the user to update the tags.'
     properties:
@@ -702,3 +1051,28 @@ definitions:
           type: string
         description: Resource tags
         type: object
+  UpdateIotSecuritySolutionData:
+    allOf:
+      - $ref: '#/definitions/TagsResource'
+    properties:
+      recommendationsConfiguration:
+        $ref: '#/definitions/RecommendationConfigurationList'
+      userDefinedResources:
+        $ref: '#/definitions/UserDefinedResourcesProperties'
+    type: object
+  UserDefinedResourcesProperties:
+    description: Properties of the solution's user defined resources.
+    properties:
+      query:
+        description: Azure Resource Graph query which represents the security solution's user defined resources. Required to start with "where type != "Microsoft.Devices/IotHubs""
+        type: string
+      querySubscriptions:
+        description: List of Azure subscription ids on which the user defined resources query should be executed.
+        items:
+          pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
+          type: string
+        type: array
+    required:
+      - query
+      - querySubscriptions
+    type: object

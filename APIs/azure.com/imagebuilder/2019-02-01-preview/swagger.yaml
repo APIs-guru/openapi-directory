@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/imagebuilder/resource-manager/Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: imagebuilder
   x-tags:
@@ -194,7 +193,7 @@ paths:
           parameters:
             api-version: 2019-02-01-preview
             resourceGroupName: myResourceGroup
-            subscritionId: '{subscription-id}'
+            subscriptionId: '{subscription-id}'
           responses:
             '202':
               body:

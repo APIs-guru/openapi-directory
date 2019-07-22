@@ -83,7 +83,8 @@ paths:
             $ref: '#/definitions/ExtensionListResult'
       tags:
         - ImportExport
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption':
     get:
       deprecated: true
@@ -139,7 +140,8 @@ paths:
                     properties:
                       status: Enabled
                     type: Microsoft.Sql/servers/databases/transparentDataEncryption
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   ExtensionListResult:
     description: Represents the response to a list extensions request.

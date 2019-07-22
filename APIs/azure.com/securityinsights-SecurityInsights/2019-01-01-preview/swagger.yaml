@@ -50,6 +50,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  AggregationsName:
+    description: The aggregation name. Supports - Cases
+    in: path
+    name: aggregationsName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   AlertRule:
     description: The alert rule
     in: body
@@ -125,6 +132,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  EntityQueryId:
+    description: entity query ID
+    in: path
+    name: entityQueryId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   OperationalInsightsResourceProvider:
     description: The namespace of workspaces resource provider- Microsoft.OperationalInsights.
     in: path
@@ -194,6 +208,56 @@ paths:
             $ref: '#/definitions/operationsList'
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}':
+    get:
+      description: Get aggregative result for the given resources under the defined workspace
+      operationId: CasesAggregations_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/AggregationsName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Aggregations'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Aggregations
+      x-ms-examples:
+        'Get aggregative data for all cases under the defined workspace, between the time range if specified.':
+          parameters:
+            aggregationsName: Cases
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/aggregations/Cases
+                kind: CasesAggregation
+                name: Cases
+                properties:
+                  aggregationBySeverity:
+                    totalCriticalSeverity: 13
+                    totalHighSeverity: 14
+                    totalInformationalSeverity: 26
+                    totalLowSeverity: 15
+                    totalMediumSeverity: 4
+                  aggregationByStatus:
+                    totalDismissedStatus: 1
+                    totalInProgressStatus: 30
+                    totalNewStatus: 42
+                    totalResolvedStatus: 2
+                type: Microsoft.SecurityInsights/aggregations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules':
     get:
       description: Gets all alert rules.
@@ -649,7 +713,9 @@ paths:
                         objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                       createdTimeUtc: '2019-01-01T13:15:30Z'
                       displayName: My bookmark
-                      labels: '[''Tag1'', ''Tag2'']'
+                      labels:
+                        - Tag1
+                        - Tag2
                       lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                       notes: Found a suspicious activity
                       query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
@@ -729,7 +795,6 @@ paths:
               body:
                 etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
-                kind: Scheduled
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
                   createdBy:
@@ -738,7 +803,9 @@ paths:
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
@@ -788,7 +855,9 @@ paths:
                   objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 createdTimeUtc: '2019-01-01T13:15:30Z'
                 displayName: My bookmark
-                labels: '[''Tag1'', ''Tag2'']'
+                labels:
+                  - Tag1
+                  - Tag2
                 lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                 notes: Found a suspicious activity
                 query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
@@ -815,7 +884,9 @@ paths:
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
@@ -836,7 +907,9 @@ paths:
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
@@ -890,7 +963,9 @@ paths:
                       createdTimeUtc: '2019-01-01T13:15:30Z'
                       description: This is a demo case
                       endTimeUtc: '2019-01-01T13:05:30Z'
-                      labels: '[''Tag1'', ''Tag2'']'
+                      labels:
+                        - Tag1
+                        - Tag2
                       lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                       severity: High
                       startTimeUtc: '2019-01-01T13:00:30Z'
@@ -958,9 +1033,9 @@ paths:
         Get a case.:
           parameters:
             api-version: 2019-01-01-preview
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
             operationalInsightsResourceProvider: Microsoft.OperationalIinsights
             resourceGroupName: myRg
-            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
             subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
             workspaceName: myWorkspace
           responses:
@@ -978,7 +1053,9 @@ paths:
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
                   endTimeUtc: '2019-01-01T13:05:30Z'
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
@@ -1028,7 +1105,9 @@ paths:
                 createdTimeUtc: '2019-01-01T13:15:30Z'
                 description: This is a demo case
                 endTimeUtc: '2019-01-01T13:05:30Z'
-                labels: '[''Tag1'', ''Tag2'']'
+                labels:
+                  - Tag1
+                  - Tag2
                 lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                 severity: High
                 startTimeUtc: '2019-01-01T13:00:30Z'
@@ -1055,7 +1134,9 @@ paths:
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
                   endTimeUtc: '2019-01-01T13:05:30Z'
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
@@ -1065,8 +1146,7 @@ paths:
             '201':
               body:
                 etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
-                kind: Scheduled
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
                   assignedTo:
@@ -1077,13 +1157,15 @@ paths:
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
                   endTimeUtc: '2019-01-01T13:05:30Z'
-                  labels: '[''Tag1'', ''Tag2'']'
+                  labels:
+                    - Tag1
+                    - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
                   status: Closed
                   title: My case
-                type: Microsoft.SecurityInsights/alertRules
+                type: Microsoft.SecurityInsights/cases
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors':
     get:
       description: Gets all data connectors.
@@ -1109,7 +1191,7 @@ paths:
         Get all data connectors.:
           parameters:
             api-version: 2019-01-01-preview
-            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
             resourceGroupName: myRg
             subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
             workspaceName: myWorkspace
@@ -1118,7 +1200,7 @@ paths:
               body:
                 value:
                   - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
                     kind: AzureSecurityCenter
                     name: 763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
                     properties:
@@ -1128,7 +1210,7 @@ paths:
                       subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
                     type: Microsoft.SecurityInsights/dataConnectors
                   - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
                     kind: ThreatIntelligence
                     name: c345bf40-8509-4ed2-b947-50cb773aaf04
                     properties:
@@ -1138,7 +1220,7 @@ paths:
                       tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
                     type: Microsoft.SecurityInsights/dataConnectors
                   - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
                     kind: AzureActiveDirectory
                     name: f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
                     properties:
@@ -1148,7 +1230,7 @@ paths:
                       tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
                     type: Microsoft.SecurityInsights/dataConnectors
                   - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     kind: Office365
                     name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     properties:
@@ -1160,9 +1242,41 @@ paths:
                       tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
                     type: Microsoft.SecurityInsights/dataConnectors
                   - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
                     kind: MicrosoftCloudAppSecurity
                     name: b96d014d-b5c2-4a01-9aba-a8058f629d42
+                    properties:
+                      dataTypes:
+                        alerts:
+                          state: Enabled
+                        discoveryLogs:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/07e42cb3-e658-4e90-801c-efa0f29d3d44
+                    kind: AzureAdvancedThreatProtection
+                    name: 07e42cb3-e658-4e90-801c-efa0f29d3d44
+                    properties:
+                      dataTypes:
+                        alerts:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
+                    kind: AmazonWebServicesCloudTrail
+                    name: c345bf40-8509-4ed2-b947-50cb773aaf04
+                    properties:
+                      awsRoleArn: myAwsRoleArn
+                      dataTypes:
+                        logs:
+                          state: Enabled
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/06b3ccb8-1384-4bcc-aec7-852f6d57161b
+                    kind: MicrosoftDefenderAdvancedThreatProtection
+                    name: 06b3ccb8-1384-4bcc-aec7-852f6d57161b
                     properties:
                       dataTypes:
                         alerts:
@@ -1252,7 +1366,7 @@ paths:
           parameters:
             api-version: 2019-01-01-preview
             dataConnectorId: b96d014d-b5c2-4a01-9aba-a8058f629d42
-            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
             resourceGroupName: myRg
             subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
             workspaceName: myWorkspace
@@ -1260,9 +1374,32 @@ paths:
             '200':
               body:
                 etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
                 kind: MicrosoftCloudAppSecurity
                 name: b96d014d-b5c2-4a01-9aba-a8058f629d42
+                properties:
+                  dataTypes:
+                    alerts:
+                      state: Enabled
+                    discoveryLogs:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get a MDATP data connector:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: 06b3ccb8-1384-4bcc-aec7-852f6d57161b
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/06b3ccb8-1384-4bcc-aec7-852f6d57161b
+                kind: MicrosoftDefenderAdvancedThreatProtection
+                name: 06b3ccb8-1384-4bcc-aec7-852f6d57161b
                 properties:
                   dataTypes:
                     alerts:
@@ -1310,6 +1447,48 @@ paths:
                     alerts:
                       state: Enabled
                   tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get an AATP data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: 07e42cb3-e658-4e90-801c-efa0f29d3d44
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/07e42cb3-e658-4e90-801c-efa0f29d3d44
+                kind: AzureAdvancedThreatProtection
+                name: 07e42cb3-e658-4e90-801c-efa0f29d3d44
+                properties:
+                  dataTypes:
+                    alerts:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get an AwsCloudTrail data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: c345bf40-8509-4ed2-b947-50cb773aaf04
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
+                kind: AmazonWebServicesCloudTrail
+                name: c345bf40-8509-4ed2-b947-50cb773aaf04
+                properties:
+                  awsRoleArn: myAwsRoleArn
+                  dataTypes:
+                    logs:
+                      state: Enabled
                 type: Microsoft.SecurityInsights/dataConnectors
         Get an Office365 data connector.:
           parameters:
@@ -1444,8 +1623,7 @@ paths:
             '200':
               body:
                 value:
-                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
                     kind: Account
                     name: e1d3d618-e11f-478b-98e3-bb381539a8e1
                     properties:
@@ -1459,8 +1637,7 @@ paths:
                       sid: S-1-5-18
                       upnSuffix: contoso
                     type: Microsoft.SecurityInsights/entities
-                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
                     kind: Host
                     name: e1d3d618-e11f-478b-98e3-bb381539a8e1
                     properties:
@@ -1471,11 +1648,10 @@ paths:
                       netBiosName: contoso
                       ntDomain: domain
                       omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
-                      osFamily: f7033626-2572-46b1-bba0-06646f4f95b3
-                      osVersion: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                      osFamily: Windows
+                      osVersion: '1.0'
                     type: Microsoft.SecurityInsights/entities
-                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
                     kind: File
                     name: af378b21-b4aa-4fe7-bc70-13f8621a322f
                     properties:
@@ -1518,7 +1694,6 @@ paths:
           responses:
             '200':
               body:
-                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
                 kind: Account
                 name: e1d3d618-e11f-478b-98e3-bb381539a8e1
@@ -1544,7 +1719,6 @@ paths:
           responses:
             '200':
               body:
-                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
                 kind: File
                 name: af378b21-b4aa-4fe7-bc70-13f8621a322f
@@ -1563,7 +1737,6 @@ paths:
           responses:
             '200':
               body:
-                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
                 kind: Host
                 name: e1d3d618-e11f-478b-98e3-bb381539a8e1
@@ -1575,9 +1748,117 @@ paths:
                   netBiosName: contoso
                   ntDomain: domain
                   omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
-                  osFamily: f7033626-2572-46b1-bba0-06646f4f95b3
-                  osVersion: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                  osFamily: Windows
+                  osVersion: '1.0'
                 type: Microsoft.SecurityInsights/entities
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries':
+    get:
+      description: Gets all entity queries.
+      operationId: EntityQueries_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntityQueryList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - EntityQueries
+      x-ms-examples:
+        Get all entity queries.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueries/37ca3555-c135-4a73-a65e-9c1d00323f5d
+                    name: 37ca3555-c135-4a73-a65e-9c1d00323f5d
+                    properties:
+                      dataSources:
+                        - AzureActivity
+                      displayName: Least active accounts on Azure from this IP
+                      inputEntityType: Ip
+                      inputFields:
+                        - Address
+                      outputEntityTypes:
+                        - Account
+                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count asc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<Address>')"
+                    type: Microsoft.SecurityInsights/entityQueries
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueries/97a1d515-abf2-4231-9a35-985f9de0bb91
+                    name: 97a1d515-abf2-4231-9a35-985f9de0bb91
+                    properties:
+                      dataSources:
+                        - AzureActivity
+                      displayName: Most active accounts on Azure from this IP
+                      inputEntityType: Ip
+                      inputFields:
+                        - Address
+                      outputEntityTypes:
+                        - Account
+                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count desc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<Address>')"
+                    type: Microsoft.SecurityInsights/entityQueries
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}':
+    get:
+      description: Gets an entity query.
+      operationId: EntityQueries_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/EntityQueryId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntityQuery'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - EntityQueries
+      x-ms-examples:
+        Get an entity query.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityQueryId: 07da3cc8-c8ad-4710-a44e-334cdcb7882b
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueries/07da3cc8-c8ad-4710-a44e-334cdcb7882b
+                name: 07da3cc8-c8ad-4710-a44e-334cdcb7882b
+                properties:
+                  dataSources:
+                    - SecurityEvent
+                  displayName: Parent processes running on host
+                  inputEntityType: Host
+                  inputFields:
+                    - HostName
+                  outputEntityTypes:
+                    - Process
+                  queryTemplate: "let GetParentProcessesOnHost = (v_Host_HostName:string){\r\n                            SecurityEvent \r\n                            | where EventID == 4688 \r\n                            | where isnotempty(ParentProcessName)\r\n                            | where NewProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe' and ParentProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe'\r\n                            and NewProcessName!contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe' and ParentProcessName !contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe'\r\n                            and ParentProcessName !contains ':\\\\Windows\\\\CCM\\\\CcmExec.exe'\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\svchost.exe' and (NewProcessName !contains ':\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe' or NewProcessName !contains ':\\\\Windows\\\\SysWOW64\\\\wbem\\\\WmiPrvSE.exe'))\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\services.exe' and NewProcessName !contains ':\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')\r\n                            | where toupper(Computer) contains v_Host_HostName or toupper(WorkstationName) contains v_Host_HostName\r\n                            | summarize min(TimeGenerated), max(TimeGenerated) by Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project min_TimeGenerated, max_TimeGenerated, Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project-rename Process_Host_UnstructuredName=Computer, Process_Account_UnstructuredName=Account, Process_CommandLine=CommandLine, Process_ProcessId=ProcessId, Process_ImageFile_FullPath=NewProcessName, Process_ParentProcess_ImageFile_FullPath=ParentProcessName\r\n                            | top 10 by min_TimeGenerated asc};\r\n                            GetParentProcessesOnHost(toupper('<HostName>'))"
+                type: Microsoft.SecurityInsights/entityQueries
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents':
     get:
       description: Gets all office365 consents.
@@ -1824,6 +2105,23 @@ definitions:
       - $ref: '#/definitions/DataConnectorWithAlertsProperties'
     description: AAD (Azure Active Directory) data connector properties.
     type: object
+  AATPDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents AATP (Azure Advanced Threat Protection) data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/AATPDataConnectorProperties'
+        description: AATP (Azure Advanced Threat Protection) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureAdvancedThreatProtection
+  AATPDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
+    description: AATP (Azure Advanced Threat Protection) data connector properties.
+    type: object
   ASCDataConnector:
     allOf:
       - $ref: '#/definitions/DataConnector'
@@ -1930,6 +2228,25 @@ definitions:
         type: array
     required:
       - value
+  Aggregations:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/AggregationsKind'
+    description: The aggregation.
+    discriminator: kind
+    type: object
+  AggregationsKind:
+    description: Describes an Azure resource with kind.
+    properties:
+      kind:
+        description: The kind of the setting
+        enum:
+          - CasesAggregation
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AggregationsKind
+    type: object
   AlertRule:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1977,6 +2294,36 @@ definitions:
           - $ref: '#/definitions/DataConnectorDataTypeCommon'
         description: Alerts data type connection.
         type: object
+    type: object
+  AwsCloudTrailDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents Amazon Web Services CloudTrail data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/AwsCloudTrailDataConnectorProperties'
+        description: Amazon Web Services CloudTrail data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AmazonWebServicesCloudTrail
+  AwsCloudTrailDataConnectorDataTypes:
+    description: The available data types for Amazon Web Services CloudTrail data connector.
+    properties:
+      logs:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: Logs data type.
+        type: object
+    type: object
+  AwsCloudTrailDataConnectorProperties:
+    description: Amazon Web Services CloudTrail data connector properties.
+    properties:
+      awsRoleArn:
+        description: The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account.
+        type: string
+      dataTypes:
+        $ref: '#/definitions/AwsCloudTrailDataConnectorDataTypes'
+        description: The available data types for the connector.
     type: object
   Bookmark:
     allOf:
@@ -2144,7 +2491,7 @@ definitions:
         description: The status of the case
         enum:
           - Draft
-          - Open
+          - New
           - InProgress
           - Closed
         type: string
@@ -2155,7 +2502,7 @@ definitions:
             - description: Case that wasn't promoted yet to active
               value: Draft
             - description: An active case which isn't handled currently
-              value: Open
+              value: New
             - description: An active case which is handled
               value: InProgress
             - description: A non active case
@@ -2167,6 +2514,71 @@ definitions:
       - title
       - severity
       - status
+    type: object
+  CasesAggregation:
+    allOf:
+      - $ref: '#/definitions/Aggregations'
+    description: Represents aggregations results for cases.
+    properties:
+      properties:
+        $ref: '#/definitions/CasesAggregationProperties'
+        description: Properties of aggregations results of cases.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: CasesAggregation
+  CasesAggregationBySeverityProperties:
+    description: Aggregative results of cases by severity property bag.
+    properties:
+      totalCriticalSeverity:
+        description: Total amount of open cases with severity Critical
+        readOnly: true
+        type: integer
+      totalHighSeverity:
+        description: Total amount of open cases with severity High
+        readOnly: true
+        type: integer
+      totalInformationalSeverity:
+        description: Total amount of open cases with severity Informational
+        readOnly: true
+        type: integer
+      totalLowSeverity:
+        description: Total amount of open cases with severity Low
+        readOnly: true
+        type: integer
+      totalMediumSeverity:
+        description: Total amount of open cases with severity medium
+        readOnly: true
+        type: integer
+    type: object
+  CasesAggregationByStatusProperties:
+    description: Aggregative results of cases by status property bag.
+    properties:
+      totalDismissedStatus:
+        description: Total amount of open cases with status Dismissed
+        readOnly: true
+        type: integer
+      totalInProgressStatus:
+        description: Total amount of open cases with status InProgress
+        readOnly: true
+        type: integer
+      totalNewStatus:
+        description: Total amount of open cases with status New
+        readOnly: true
+        type: integer
+      totalResolvedStatus:
+        description: Total amount of open cases with status Resolved
+        readOnly: true
+        type: integer
+    type: object
+  CasesAggregationProperties:
+    description: Aggregative results of cases property bag.
+    properties:
+      aggregationBySeverity:
+        $ref: '#/definitions/CasesAggregationBySeverityProperties'
+        description: Aggregations results by case severity.
+      aggregationByStatus:
+        $ref: '#/definitions/CasesAggregationByStatusProperties'
+        description: Aggregations results by case status.
     type: object
   CloudError:
     description: Error response structure.
@@ -2225,6 +2637,9 @@ definitions:
           - MicrosoftCloudAppSecurity
           - ThreatIntelligence
           - Office365
+          - AmazonWebServicesCloudTrail
+          - AzureAdvancedThreatProtection
+          - MicrosoftDefenderAdvancedThreatProtection
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2235,6 +2650,9 @@ definitions:
             - value: MicrosoftCloudAppSecurity
             - value: ThreatIntelligence
             - value: Office365
+            - value: AmazonWebServicesCloudTrail
+            - value: AzureAdvancedThreatProtection
+            - value: MicrosoftDefenderAdvancedThreatProtection
     type: object
   DataConnectorList:
     description: List all the data connectors.
@@ -2306,6 +2724,61 @@ definitions:
         type: array
     required:
       - value
+  EntityQuery:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Specific entity query.
+    properties:
+      properties:
+        $ref: '#/definitions/EntityQueryProperties'
+        description: Entity query properties
+        x-ms-client-flatten: true
+    type: object
+  EntityQueryList:
+    description: List of all the entity queries.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of entity queries.
+        readOnly: true
+        type: string
+      value:
+        description: Array of entity queries.
+        items:
+          $ref: '#/definitions/EntityQuery'
+        type: array
+    required:
+      - value
+  EntityQueryProperties:
+    description: Describes entity query properties
+    properties:
+      dataSources:
+        description: List of the data sources that are required to run the query
+        items:
+          description: data source
+          type: string
+        type: array
+      displayName:
+        description: The query display name
+        type: string
+      inputEntityType:
+        description: The type of the query's source entity
+        type: string
+      inputFields:
+        description: List of the fields of the source entity that are required to run the query
+        items:
+          description: input field
+          type: string
+        type: array
+      outputEntityTypes:
+        description: List of the desired output types to be constructed from the result
+        items:
+          description: output entity type
+          type: string
+        type: array
+      queryTemplate:
+        description: The template query string to be parsed and formatted
+        type: string
+    type: object
   FileEntity:
     allOf:
       - $ref: '#/definitions/Entity'
@@ -2410,11 +2883,42 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: MicrosoftCloudAppSecurity
+  MCASDataConnectorDataTypes:
+    allOf:
+      - $ref: '#/definitions/AlertsDataTypeOfDataConnector'
+    description: The available data types for MCAS (Microsoft Cloud App Security) data connector.
+    properties:
+      discoveryLogs:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: Discovery log data type connection.
+        type: object
+    type: object
   MCASDataConnectorProperties:
     allOf:
       - $ref: '#/definitions/DataConnectorTenantId'
-      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
     description: MCAS (Microsoft Cloud App Security) data connector properties.
+    properties:
+      dataTypes:
+        $ref: '#/definitions/MCASDataConnectorDataTypes'
+        description: The available data types for the connector.
+    type: object
+  MDATPDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/MDATPDataConnectorProperties'
+        description: MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MicrosoftDefenderAdvancedThreatProtection
+  MDATPDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
+    description: MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
     type: object
   OfficeConsent:
     allOf:
@@ -2599,6 +3103,10 @@ definitions:
       - $ref: '#/definitions/SettingsKind'
     description: The Setting.
     discriminator: kind
+    properties:
+      etag:
+        description: Etag of the alert rule.
+        type: string
     type: object
   SettingsKind:
     description: Describes an Azure resource with kind.
@@ -2680,7 +3188,7 @@ definitions:
           - Enabled
           - Disabled
         readOnly: true
-        type: boolean
+        type: string
         x-ms-enum:
           modelAsString: true
           name: LicenseStatus

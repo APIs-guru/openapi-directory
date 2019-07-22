@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicebus/resource-manager/Microsoft.ServiceBus/stable/2015-08-01/servicebus.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicebus
   x-tags:
@@ -125,217 +124,181 @@ paths:
               body:
                 value:
                   - display:
-                      description: Checks availability of namespace under given subscription.
                       operation: Get namespace availability.
                       provider: Microsoft Azure ServiceBus
                       resource: Non Resource Operation
                     name: Microsoft.ServiceBus/checkNameAvailability/action
                   - display:
-                      description: Registers the subscription for the ServiceBus resource provider and enables the creation of ServiceBus resources
                       operation: Registers the ServiceBus Resource Provider
                       provider: Microsoft Azure ServiceBus
                       resource: ServiceBus Resource Provider
                     name: Microsoft.ServiceBus/register/action
                   - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
                       operation: 'Create Or Update Namespace '
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace
                     name: Microsoft.ServiceBus/namespaces/write
                   - display:
-                      description: Get the list of Namespace Resource Description
                       operation: Get Namespace Resource
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace
                     name: Microsoft.ServiceBus/namespaces/read
                   - display:
-                      description: Delete Namespace Resource
                       operation: Delete Namespace
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace
                     name: Microsoft.ServiceBus/namespaces/Delete
                   - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Namespace Authorization Rules
                       provider: Microsoft Azure ServiceBus
                       resource: AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/authorizationRules/write
                   - display:
-                      description: Get the list of Namespaces Authorization Rules description.
                       operation: Get Namespace Authorization Rules
                       provider: Microsoft Azure ServiceBus
                       resource: AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/authorizationRules/read
                   - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
                       operation: Delete Namespace Authorization Rule
                       provider: Microsoft Azure ServiceBus
                       resource: AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to the Namespace
                       operation: Get Namespace Listkeys
                       provider: Microsoft Azure ServiceBus
                       resource: AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure ServiceBus
                       resource: AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update Queue properties.
                       operation: Create or Update Queue
                       provider: Microsoft Azure ServiceBus
                       resource: Queue
                     name: Microsoft.ServiceBus/namespaces/queues/write
                   - display:
-                      description: Get list of Queue Resource Descriptions
                       operation: Get Queue
                       provider: Microsoft Azure ServiceBus
                       resource: Queue
                     name: Microsoft.ServiceBus/namespaces/queues/read
                   - display:
-                      description: Operation to delete Queue Resource
                       operation: Delete Queue
                       provider: Microsoft Azure ServiceBus
                       resource: Queue
                     name: Microsoft.ServiceBus/namespaces/queues/Delete
                   - display:
-                      description: 'Create Queue Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Queue Authorization Rule
                       provider: Microsoft Azure ServiceBus
                       resource: Queue AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/write
                   - display:
-                      description: ' Get the list of Queue Authorization Rules'
                       operation: ' Get Queue Authorization Rules'
                       provider: Microsoft Azure ServiceBus
                       resource: Queue AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/read
                   - display:
-                      description: Operation to delete Queue Authorization Rules
                       operation: Delete Queue Authorization Rules
                       provider: Microsoft Azure ServiceBus
                       resource: Queue AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to Queue
                       operation: List Queue keys
                       provider: Microsoft Azure ServiceBus
                       resource: Queue AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure ServiceBus
                       resource: Queue AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update Topic properties.
                       operation: Create or Update Topic
                       provider: Microsoft Azure ServiceBus
                       resource: Topic
                     name: Microsoft.ServiceBus/namespaces/topics/write
                   - display:
-                      description: Get list of Topic Resource Descriptions
                       operation: Get Topic
                       provider: Microsoft Azure ServiceBus
                       resource: Topic
                     name: Microsoft.ServiceBus/namespaces/topics/read
                   - display:
-                      description: Operation to delete Topic Resource
                       operation: Delete Topic
                       provider: Microsoft Azure ServiceBus
                       resource: Topic
                     name: Microsoft.ServiceBus/namespaces/topics/Delete
                   - display:
-                      description: 'Create Topic Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Topic Authorization Rule
                       provider: Microsoft Azure ServiceBus
                       resource: Topic AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/write
                   - display:
-                      description: ' Get the list of Topic Authorization Rules'
                       operation: ' Get Topic Authorization Rules'
                       provider: Microsoft Azure ServiceBus
                       resource: Topic AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/read
                   - display:
-                      description: Operation to delete Topic Authorization Rules
                       operation: Delete Topic Authorization Rules
                       provider: Microsoft Azure ServiceBus
                       resource: Topic AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to Topic
                       operation: List Topic keys
                       provider: Microsoft Azure ServiceBus
                       resource: Topic AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure ServiceBus
                       resource: Topic AuthorizationRules
                     name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update TopicSubscription properties.
                       operation: Create or Update TopicSubscription
                       provider: Microsoft Azure ServiceBus
                       resource: TopicSubscription
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/write
                   - display:
-                      description: Get list of TopicSubscription Resource Descriptions
                       operation: Get TopicSubscription
                       provider: Microsoft Azure ServiceBus
                       resource: TopicSubscription
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/read
                   - display:
-                      description: Operation to delete TopicSubscription Resource
                       operation: Delete TopicSubscription
                       provider: Microsoft Azure ServiceBus
                       resource: TopicSubscription
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/Delete
                   - display:
-                      description: Create or Update Rule properties.
                       operation: Create or Update Rule
                       provider: Microsoft Azure ServiceBus
                       resource: Rule
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/write
                   - display:
-                      description: Get list of Rule Resource Descriptions
                       operation: Get Rule
                       provider: Microsoft Azure ServiceBus
                       resource: Rule
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/read
                   - display:
-                      description: Operation to delete Rule Resource
                       operation: Delete Rule
                       provider: Microsoft Azure ServiceBus
                       resource: Rule
                     name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/Delete
                   - display:
-                      description: Get list of Namespace metrics Resource Descriptions
                       operation: Get Namespace metrics
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace metrics
                     name: Microsoft.ServiceBus/namespaces/metricDefinitions/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Get Namespace diagnostic settings
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace diagnostic settings
                     name: Microsoft.ServiceBus/namespaces/diagnosticSettings/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Create or Update Namespace diagnostic settings
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace diagnostic settings
                     name: Microsoft.ServiceBus/namespaces/diagnosticSettings/write
                   - display:
-                      description: Get list of Namespace logs Resource Descriptions
                       operation: Get Namespace logs
                       provider: Microsoft Azure ServiceBus
                       resource: Namespace logs

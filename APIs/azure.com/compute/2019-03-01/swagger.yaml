@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2019-03-01/compute.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -78,6 +77,22 @@ paths:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
         - AvailabilitySets
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups':
+    get:
+      description: Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
+      operationId: DedicatedHostGroups_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostGroupListResult'
+      tags:
+        - DedicatedHostGroups
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images':
@@ -174,8 +189,7 @@ paths:
               body:
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/RequestRateByInterval_20180121-0154_20180123-0154.csv'
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -224,8 +238,7 @@ paths:
               body:
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/ThrottledRequests_20180121-0154_20180123-0154.csv'
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -900,6 +913,450 @@ paths:
         - AvailabilitySets
       x-ms-pageable:
         nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups':
+    get:
+      description: Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
+      operationId: DedicatedHostGroups_ListByResourceGroup
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostGroupListResult'
+      tags:
+        - DedicatedHostGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}':
+    delete:
+      description: Delete a dedicated host group.
+      operationId: DedicatedHostGroups_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - DedicatedHostGroups
+    get:
+      description: Retrieves information about a dedicated host group.
+      operationId: DedicatedHostGroups_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostGroup'
+      tags:
+        - DedicatedHostGroups
+      x-ms-examples:
+        Create a dedicated host group.:
+          parameters:
+            api-version: '2018-10-01'
+            hostGroupName: myDedicatedHostGroup
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                location: westus
+                name: myDedicatedHostGroup
+                properties:
+                  hosts:
+                    - id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost1'
+                    - id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost2'
+                  platformFaultDomainCount: 3
+                tags:
+                  '{tagName}': '{tagValue}'
+                zones:
+                  - '3'
+    patch:
+      description: Update an dedicated host group.
+      operationId: DedicatedHostGroups_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Dedicated Host Group operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DedicatedHostGroupUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostGroup'
+      tags:
+        - DedicatedHostGroups
+    put:
+      description: 'Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)'
+      operationId: DedicatedHostGroups_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: Parameters supplied to the Create Dedicated Host Group.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DedicatedHostGroup'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostGroup'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/DedicatedHostGroup'
+      tags:
+        - DedicatedHostGroups
+      x-ms-examples:
+        Create or update a dedicated host group.:
+          parameters:
+            api-version: '2018-10-01'
+            hostGroupName: myDedicatedHostGroup
+            parameters:
+              location: westus
+              properties:
+                platformFaultDomainCount: 3
+              tags:
+                department: finance
+              zones:
+                - '1'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup'
+                location: westus
+                name: myDedicatedHostGroup
+                properties:
+                  hosts: []
+                  platformFaultDomainCount: 3
+                tags:
+                  department: finance
+                  owner: myCompany
+                zones:
+                  - '1'
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup'
+                location: westus
+                name: myDedicatedHostGroup
+                properties:
+                  hosts: []
+                  platformFaultDomainCount: 3
+                tags:
+                  department: finance
+                zones:
+                  - '1'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts':
+    get:
+      description: Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
+      operationId: DedicatedHosts_ListByHostGroup
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHostListResult'
+      tags:
+        - DedicatedHost
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}':
+    delete:
+      description: Delete a dedicated host.
+      operationId: DedicatedHosts_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host.
+          in: path
+          name: hostName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+      tags:
+        - DedicatedHosts
+      x-ms-long-running-operation: true
+    get:
+      description: Retrieves information about a dedicated host.
+      operationId: DedicatedHosts_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host.
+          in: path
+          name: hostName
+          required: true
+          type: string
+        - description: The expand expression to apply on the operation.
+          enum:
+            - instanceView
+          in: query
+          name: $expand
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: InstanceViewTypes
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHost'
+      tags:
+        - DedicatedHosts
+      x-ms-examples:
+        Get a dedicated host.:
+          parameters:
+            api-version: '2018-10-01'
+            hostGroupName: myDedicatedHostGroup
+            hostName: myHost
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                location: westus
+                name: myHost
+                properties:
+                  autoReplaceOnFailure: true
+                  hostId: '{GUID}'
+                  instanceView:
+                    assetId: eb3f58b8-b4e8-4882-b69f-301a01812407
+                    availableCapacity:
+                      allocatableVMs:
+                        - count: 10
+                          vmSize: Standard_A1
+                    statuses:
+                      - code: ProvisioningState/succeeded
+                        displayStatus: Provisioning succeeded
+                        level: Info
+                      - code: HealthState/available
+                        displayStatus: Host available
+                        level: Info
+                  platformFaultDomain: 1
+                  provisioningState: Succeeded
+                  provisioningTime: '2019-06-27T01:02:38.3138469+00:00'
+                  virtualMachines:
+                    - id: /subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1
+                sku:
+                  name: DSv3-Type1
+                tags:
+                  department: HR
+    patch:
+      description: Update an dedicated host .
+      operationId: DedicatedHosts_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host .
+          in: path
+          name: hostName
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Dedicated Host operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DedicatedHostUpdate'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHost'
+      tags:
+        - DedicatedHosts
+      x-ms-long-running-operation: true
+    put:
+      description: Create or update a dedicated host .
+      operationId: DedicatedHosts_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host group.
+          in: path
+          name: hostGroupName
+          required: true
+          type: string
+        - description: The name of the dedicated host .
+          in: path
+          name: hostName
+          required: true
+          type: string
+        - description: Parameters supplied to the Create Dedicated Host.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DedicatedHost'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DedicatedHost'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/DedicatedHost'
+      tags:
+        - DedicatedHosts
+      x-ms-examples:
+        Create or update a dedicated host .:
+          parameters:
+            api-version: '2018-10-01'
+            hostGroupName: myDedicatedHostGroup
+            hostName: myDedicatedHost
+            parameters:
+              location: westus
+              properties:
+                platformFaultDomain: 1
+              sku:
+                name: DSv3-Type1
+              tags:
+                department: HR
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost'
+                location: westus
+                name: myDedicatedHost
+                properties:
+                  autoReplaceOnFailure: false
+                  hostId: '{GUID}'
+                  licenseType: Windows_Server_Hybrid
+                  platformFaultDomain: 1
+                sku:
+                  name: DSv3-Type1
+                tags:
+                  department: HR
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost'
+                location: westus
+                name: myDedicatedHost
+                properties:
+                  autoReplaceOnFailure: true
+                  hostId: '{GUID}'
+                  platformFaultDomain: 1
+                sku:
+                  name: DSv3-Type1
+                tags:
+                  department: HR
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images':
     get:
       description: Gets the list of images under a resource group.
@@ -5284,7 +5741,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5384,7 +5840,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -5531,7 +5986,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5630,7 +6084,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 availabilitySet:
                   id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/{existing-availability-set-name}'
@@ -5744,7 +6197,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               plan:
                 name: windows2016
                 product: windows-data-science-vm
@@ -5864,7 +6316,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 diagnosticsProfile:
                   bootDiagnostics:
@@ -5984,7 +6435,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -6125,7 +6575,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               plan:
                 name: windows2016
                 product: windows-data-science-vm
@@ -6251,7 +6700,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -6359,7 +6807,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -6467,7 +6914,6 @@ paths:
             api-version: '2019-03-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -7079,6 +7525,29 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachines
+      x-ms-examples:
+        Lists all available virtual machine sizes to which the specified virtual machine can be resized:
+          parameters:
+            api-version: '2019-03-01'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmName: myVmName
+          responses:
+            '200':
+              body:
+                value:
+                  - maxDataDiskCount: 2
+                    memoryInMB: 2048
+                    name: Standard_A1_V2
+                    numberOfCores: 1
+                    osDiskSizeInMB: 1047552
+                    resourceDiskSizeInMB: 10240
+                  - maxDataDiskCount: 4
+                    memoryInMB: 4096
+                    name: Standard_A2_V2
+                    numberOfCores: 2
+                    osDiskSizeInMB: 1047552
+                    resourceDiskSizeInMB: 20480
       x-ms-pageable:
         nextLinkName: null
 definitions:
@@ -7164,7 +7633,7 @@ definitions:
         description: Whether OS image rollback feature should be disabled. Default value is false.
         type: boolean
       enableAutomaticOSUpgrade:
-        description: 'Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, recommendation is to set [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) to false.'
+        description: 'Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. <br><br> If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true.'
         type: boolean
   AutomaticOSUpgradeProperties:
     description: Describes automatic OS upgrade properties on the image.
@@ -7375,6 +7844,177 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+  DedicatedHost:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Specifies information about the Dedicated host.
+    properties:
+      properties:
+        $ref: '#/definitions/DedicatedHostProperties'
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+        description: SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
+    required:
+      - sku
+  DedicatedHostAllocatableVM:
+    description: Represents the dedicated host unutilized capacity in terms of a specific VM size.
+    properties:
+      count:
+        description: Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
+        format: double
+        type: number
+      vmSize:
+        description: VM size in terms of which the unutilized capacity is represented.
+        type: string
+  DedicatedHostAvailableCapacity:
+    description: Dedicated host unutilized capacity.
+    properties:
+      allocatableVMs:
+        description: The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
+        items:
+          $ref: '#/definitions/DedicatedHostAllocatableVM'
+        type: array
+  DedicatedHostGroup:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: 'Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group.'
+    properties:
+      properties:
+        $ref: '#/definitions/DedicatedHostGroupProperties'
+        x-ms-client-flatten: true
+      zones:
+        description: 'Availability Zone to use for this host group � only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
+        items:
+          type: string
+        type: array
+  DedicatedHostGroupListResult:
+    description: The List Dedicated Host Group with resource group response.
+    properties:
+      nextLink:
+        description: The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups.
+        type: string
+      value:
+        description: The list of dedicated host groups
+        items:
+          $ref: '#/definitions/DedicatedHostGroup'
+        type: array
+    required:
+      - value
+  DedicatedHostGroupProperties:
+    description: Dedicated Host Group Properties.
+    properties:
+      hosts:
+        description: A list of references to all dedicated hosts in the dedicated host group.
+        items:
+          $ref: '#/definitions/SubResourceReadOnly'
+        readOnly: true
+        type: array
+      platformFaultDomainCount:
+        description: Number of fault domains that the host group can span.
+        format: int32
+        maximum: 3
+        minimum: 1
+        type: integer
+    required:
+      - platformFaultDomainCount
+  DedicatedHostGroupUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated.
+    properties:
+      properties:
+        $ref: '#/definitions/DedicatedHostGroupProperties'
+        x-ms-client-flatten: true
+      zones:
+        description: 'Availability Zone to use for this host group � only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
+        items:
+          type: string
+        type: array
+  DedicatedHostInstanceView:
+    description: The instance view of a dedicated host.
+    properties:
+      assetId:
+        description: Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
+        readOnly: true
+        type: string
+      availableCapacity:
+        $ref: '#/definitions/DedicatedHostAvailableCapacity'
+        description: Unutilized capacity of the dedicated host.
+      statuses:
+        description: The resource status information.
+        items:
+          $ref: '#/definitions/InstanceViewStatus'
+        type: array
+  DedicatedHostLicenseType:
+    description: 'Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**'
+    enum:
+      - None
+      - Windows_Server_Hybrid
+      - Windows_Server_Perpetual
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: DedicatedHostLicenseTypes
+  DedicatedHostListResult:
+    description: The list dedicated host operation response.
+    properties:
+      nextLink:
+        description: The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts.
+        type: string
+      value:
+        description: The list of dedicated hosts
+        items:
+          $ref: '#/definitions/DedicatedHost'
+        type: array
+    required:
+      - value
+  DedicatedHostProperties:
+    description: Properties of the dedicated host.
+    properties:
+      autoReplaceOnFailure:
+        description: Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
+        type: boolean
+      hostId:
+        description: A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host.
+        readOnly: true
+        type: string
+      instanceView:
+        $ref: '#/definitions/DedicatedHostInstanceView'
+        description: The dedicated host instance view.
+        readOnly: true
+      licenseType:
+        $ref: '#/definitions/DedicatedHostLicenseType'
+        description: 'Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**'
+      platformFaultDomain:
+        description: Fault domain of the dedicated host within a dedicated host group.
+        format: int32
+        maximum: 2
+        minimum: 0
+        type: integer
+      provisioningState:
+        description: 'The provisioning state, which only appears in the response.'
+        readOnly: true
+        type: string
+      provisioningTime:
+        description: The date when the host was first provisioned.
+        format: date-time
+        readOnly: true
+        type: string
+      virtualMachines:
+        description: A list of references to all virtual machines in the Dedicated Host.
+        items:
+          $ref: '#/definitions/SubResourceReadOnly'
+        readOnly: true
+        type: array
+  DedicatedHostUpdate:
+    allOf:
+      - $ref: '#/definitions/UpdateResource'
+    description: 'Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated.'
+    properties:
+      properties:
+        $ref: '#/definitions/DedicatedHostProperties'
+        x-ms-client-flatten: true
   DiagnosticsProfile:
     description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
     properties:
@@ -8095,7 +8735,7 @@ definitions:
         readOnly: true
         type: array
       proximityPlacementGroupType:
-        description: 'Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**'
+        description: 'Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.'
         enum:
           - Standard
           - Ultra
@@ -8889,6 +9529,15 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
+      hyperVGeneration:
+        description: Specifies the HyperVGeneration Type associated with a resource
+        enum:
+          - V1
+          - V2
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: HyperVGenerationType
       maintenanceRedeployStatus:
         $ref: '#/definitions/MaintenanceRedeployStatus'
         description: The Maintenance Operation status on the virtual machine.
@@ -8945,6 +9594,9 @@ definitions:
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
         description: Specifies the hardware settings for the virtual machine.
+      host:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01.'
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
         description: The virtual machine instance view.
@@ -8976,7 +9628,7 @@ definitions:
     description: 'Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged'
     properties:
       tempDisk:
-        description: 'Specifies whether to reimage temp disk. Default value: false.'
+        description: 'Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.'
         type: boolean
   VirtualMachineScaleSet:
     allOf:
@@ -10102,7 +10754,7 @@ definitions:
           $ref: '#/definitions/AdditionalUnattendContent'
         type: array
       enableAutomaticUpdates:
-        description: 'Indicates whether virtual machine is enabled for automatic Windows updates. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.'
+        description: 'Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.'
         type: boolean
       provisionVMAgent:
         description: 'Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.'

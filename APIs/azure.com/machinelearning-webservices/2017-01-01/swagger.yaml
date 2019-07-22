@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/machinelearning/resource-manager/Microsoft.MachineLearning/stable/2017-01-01/webservices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: machinelearning-webservices
   x-tags:
@@ -364,47 +363,47 @@ paths:
                     title: ''
                     type: object
                   package:
-                    Edges:
-                      - SourceNodeId: node2
-                        SourcePortId: Results dataset
-                        TargetNodeId: node1
-                        TargetPortId: Dataset2
-                      - SourceNodeId: node3
-                        TargetNodeId: node1
-                        TargetPortId: Dataset1
-                      - SourceNodeId: node1
-                        SourcePortId: Result Dataset
-                        TargetNodeId: node4
-                    GraphParameters: {}
-                    Nodes:
+                    edges:
+                      - sourceNodeId: node2
+                        sourcePortId: Results dataset
+                        targetNodeId: node1
+                        targetPortId: Dataset2
+                      - sourceNodeId: node3
+                        targetNodeId: node1
+                        targetPortId: Dataset1
+                      - sourceNodeId: node1
+                        sourcePortId: Result Dataset
+                        targetNodeId: node4
+                    graphParameters: {}
+                    nodes:
                       node1:
-                        AssetId: asset1
-                        Parameters:
+                        assetId: asset1
+                        parameters:
                           R Script:
-                            CertificateThumbprint: ''
-                            Value: The R Script
+                            certificateThumbprint: ''
+                            value: The R Script
                           R Version:
-                            CertificateThumbprint: ''
-                            Value: CRAN R 3.1.0
+                            certificateThumbprint: ''
+                            value: CRAN R 3.1.0
                       node2:
-                        AssetId: asset2
-                        Parameters:
+                        assetId: asset2
+                        parameters:
                           Account Key:
-                            CertificateThumbprint: TheThumbprint
-                            Value: Encrypted Key
+                            certificateThumbprint: TheThumbprint
+                            value: Encrypted Key
                           Account Name:
-                            CertificateThumbprint: ''
-                            Value: accountName
+                            certificateThumbprint: ''
+                            value: accountName
                           Please Specify Authentication Type:
-                            CertificateThumbprint: ''
-                            Value: Account
+                            certificateThumbprint: ''
+                            value: Account
                           Please Specify Data Source:
-                            CertificateThumbprint: ''
-                            Value: AzureBlobStorage
+                            certificateThumbprint: ''
+                            value: AzureBlobStorage
                       node3:
-                        InputId: input1
+                        inputId: input1
                       node4:
-                        OutputId: output1
+                        outputId: output1
                   packageType: Graph
                   parameters: {}
                   payloadsInBlobStorage: false
@@ -523,47 +522,47 @@ paths:
                     title: ''
                     type: object
                   package:
-                    Edges:
-                      - SourceNodeId: node2
-                        SourcePortId: Results dataset
-                        TargetNodeId: node1
-                        TargetPortId: Dataset2
-                      - SourceNodeId: node3
-                        TargetNodeId: node1
-                        TargetPortId: Dataset1
-                      - SourceNodeId: node1
-                        SourcePortId: Result Dataset
-                        TargetNodeId: node4
-                    GraphParameters: {}
-                    Nodes:
+                    edges:
+                      - sourceNodeId: node2
+                        sourcePortId: Results dataset
+                        targetNodeId: node1
+                        targetPortId: Dataset2
+                      - sourceNodeId: node3
+                        targetNodeId: node1
+                        targetPortId: Dataset1
+                      - sourceNodeId: node1
+                        sourcePortId: Result Dataset
+                        targetNodeId: node4
+                    graphParameters: {}
+                    nodes:
                       node1:
-                        AssetId: asset1
-                        Parameters:
+                        assetId: asset1
+                        parameters:
                           R Script:
-                            CertificateThumbprint: ''
-                            Value: The R Script
+                            certificateThumbprint: ''
+                            value: The R Script
                           R Version:
-                            CertificateThumbprint: ''
-                            Value: CRAN R 3.1.0
+                            certificateThumbprint: ''
+                            value: CRAN R 3.1.0
                       node2:
-                        AssetId: asset2
-                        Parameters:
+                        assetId: asset2
+                        parameters:
                           Account Key:
-                            CertificateThumbprint: TheThumbprint
-                            Value: Encrypted Key
+                            certificateThumbprint: TheThumbprint
+                            value: Encrypted Key
                           Account Name:
-                            CertificateThumbprint: ''
-                            Value: accountName
+                            certificateThumbprint: ''
+                            value: accountName
                           Please Specify Authentication Type:
-                            CertificateThumbprint: ''
-                            Value: Account
+                            certificateThumbprint: ''
+                            value: Account
                           Please Specify Data Source:
-                            CertificateThumbprint: ''
-                            Value: AzureBlobStorage
+                            certificateThumbprint: ''
+                            value: AzureBlobStorage
                       node3:
-                        InputId: input1
+                        inputId: input1
                       node4:
-                        OutputId: output1
+                        outputId: output1
                   packageType: Graph
                   parameters: {}
                   payloadsInBlobStorage: false
@@ -674,47 +673,47 @@ paths:
                   title: ''
                   type: object
                 package:
-                  Edges:
-                    - SourceNodeId: node2
-                      SourcePortId: Results dataset
-                      TargetNodeId: node1
-                      TargetPortId: Dataset2
-                    - SourceNodeId: node3
-                      TargetNodeId: node1
-                      TargetPortId: Dataset1
-                    - SourceNodeId: node1
-                      SourcePortId: Result Dataset
-                      TargetNodeId: node4
-                  GraphParameters: {}
-                  Nodes:
+                  edges:
+                    - sourceNodeId: node2
+                      sourcePortId: Results dataset
+                      targetNodeId: node1
+                      targetPortId: Dataset2
+                    - sourceNodeId: node3
+                      targetNodeId: node1
+                      targetPortId: Dataset1
+                    - sourceNodeId: node1
+                      sourcePortId: Result Dataset
+                      targetNodeId: node4
+                  graphParameters: {}
+                  nodes:
                     node1:
-                      AssetId: asset1
-                      Parameters:
+                      assetId: asset1
+                      parameters:
                         R Script:
-                          CertificateThumbprint: ''
-                          Value: The R Script
+                          certificateThumbprint: ''
+                          value: The R Script
                         R Version:
-                          CertificateThumbprint: ''
-                          Value: CRAN R 3.1.0
+                          certificateThumbprint: ''
+                          value: CRAN R 3.1.0
                     node2:
-                      AssetId: asset2
-                      Parameters:
+                      assetId: asset2
+                      parameters:
                         Account Key:
-                          CertificateThumbprint: TheThumbprint
-                          Value: Encrypted Key
+                          certificateThumbprint: TheThumbprint
+                          value: Encrypted Key
                         Account Name:
-                          CertificateThumbprint: ''
-                          Value: accountName
+                          certificateThumbprint: ''
+                          value: accountName
                         Please Specify Authentication Type:
-                          CertificateThumbprint: ''
-                          Value: Account
+                          certificateThumbprint: ''
+                          value: Account
                         Please Specify Data Source:
-                          CertificateThumbprint: ''
-                          Value: AzureBlobStorage
+                          certificateThumbprint: ''
+                          value: AzureBlobStorage
                     node3:
-                      InputId: input1
+                      inputId: input1
                     node4:
-                      OutputId: output1
+                      outputId: output1
                 packageType: Graph
                 parameters: {}
                 payloadsInBlobStorage: false
@@ -800,47 +799,47 @@ paths:
                     title: ''
                     type: object
                   package:
-                    Edges:
-                      - SourceNodeId: node2
-                        SourcePortId: Results dataset
-                        TargetNodeId: node1
-                        TargetPortId: Dataset2
-                      - SourceNodeId: node3
-                        TargetNodeId: node1
-                        TargetPortId: Dataset1
-                      - SourceNodeId: node1
-                        SourcePortId: Result Dataset
-                        TargetNodeId: node4
-                    GraphParameters: {}
-                    Nodes:
+                    edges:
+                      - sourceNodeId: node2
+                        sourcePortId: Results dataset
+                        targetNodeId: node1
+                        targetPortId: Dataset2
+                      - sourceNodeId: node3
+                        targetNodeId: node1
+                        targetPortId: Dataset1
+                      - sourceNodeId: node1
+                        sourcePortId: Result Dataset
+                        targetNodeId: node4
+                    graphParameters: {}
+                    nodes:
                       node1:
-                        AssetId: asset1
-                        Parameters:
+                        assetId: asset1
+                        parameters:
                           R Script:
-                            CertificateThumbprint: ''
-                            Value: The R Script
+                            certificateThumbprint: ''
+                            value: The R Script
                           R Version:
-                            CertificateThumbprint: ''
-                            Value: CRAN R 3.1.0
+                            certificateThumbprint: ''
+                            value: CRAN R 3.1.0
                       node2:
-                        AssetId: asset2
-                        Parameters:
+                        assetId: asset2
+                        parameters:
                           Account Key:
-                            CertificateThumbprint: TheThumbprint
-                            Value: Encrypted Key
+                            certificateThumbprint: TheThumbprint
+                            value: Encrypted Key
                           Account Name:
-                            CertificateThumbprint: ''
-                            Value: accountName
+                            certificateThumbprint: ''
+                            value: accountName
                           Please Specify Authentication Type:
-                            CertificateThumbprint: ''
-                            Value: Account
+                            certificateThumbprint: ''
+                            value: Account
                           Please Specify Data Source:
-                            CertificateThumbprint: ''
-                            Value: AzureBlobStorage
+                            certificateThumbprint: ''
+                            value: AzureBlobStorage
                       node3:
-                        InputId: input1
+                        inputId: input1
                       node4:
-                        OutputId: output1
+                        outputId: output1
                   packageType: Graph
                   parameters: {}
                   payloadsInBlobStorage: false
@@ -925,47 +924,47 @@ paths:
                     title: ''
                     type: object
                   package:
-                    Edges:
-                      - SourceNodeId: node2
-                        SourcePortId: Results dataset
-                        TargetNodeId: node1
-                        TargetPortId: Dataset2
-                      - SourceNodeId: node3
-                        TargetNodeId: node1
-                        TargetPortId: Dataset1
-                      - SourceNodeId: node1
-                        SourcePortId: Result Dataset
-                        TargetNodeId: node4
-                    GraphParameters: {}
-                    Nodes:
+                    edges:
+                      - sourceNodeId: node2
+                        sourcePortId: Results dataset
+                        targetNodeId: node1
+                        targetPortId: Dataset2
+                      - sourceNodeId: node3
+                        targetNodeId: node1
+                        targetPortId: Dataset1
+                      - sourceNodeId: node1
+                        sourcePortId: Result Dataset
+                        targetNodeId: node4
+                    graphParameters: {}
+                    nodes:
                       node1:
-                        AssetId: asset1
-                        Parameters:
+                        assetId: asset1
+                        parameters:
                           R Script:
-                            CertificateThumbprint: ''
-                            Value: The R Script
+                            certificateThumbprint: ''
+                            value: The R Script
                           R Version:
-                            CertificateThumbprint: ''
-                            Value: CRAN R 3.1.0
+                            certificateThumbprint: ''
+                            value: CRAN R 3.1.0
                       node2:
-                        AssetId: asset2
-                        Parameters:
+                        assetId: asset2
+                        parameters:
                           Account Key:
-                            CertificateThumbprint: TheThumbprint
-                            Value: Encrypted Key
+                            certificateThumbprint: TheThumbprint
+                            value: Encrypted Key
                           Account Name:
-                            CertificateThumbprint: ''
-                            Value: accountName
+                            certificateThumbprint: ''
+                            value: accountName
                           Please Specify Authentication Type:
-                            CertificateThumbprint: ''
-                            Value: Account
+                            certificateThumbprint: ''
+                            value: Account
                           Please Specify Data Source:
-                            CertificateThumbprint: ''
-                            Value: AzureBlobStorage
+                            certificateThumbprint: ''
+                            value: AzureBlobStorage
                       node3:
-                        InputId: input1
+                        inputId: input1
                       node4:
-                        OutputId: output1
+                        outputId: output1
                   packageType: Graph
                   parameters: {}
                   payloadsInBlobStorage: false

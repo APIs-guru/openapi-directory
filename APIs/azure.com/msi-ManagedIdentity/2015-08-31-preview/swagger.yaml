@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/msi/resource-manager/Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: msi-ManagedIdentity
   x-tags:
@@ -215,10 +214,8 @@ paths:
             resourceName: resourceName
             subscriptionId: subid
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: Gets the identity.
       operationId: UserAssignedIdentities_Get

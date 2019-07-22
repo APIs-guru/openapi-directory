@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/botservice/resource-manager/Microsoft.BotService/preview/2017-12-01/botservice.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: botservice
   x-tags:
@@ -1910,13 +1909,13 @@ definitions:
         readOnly: true
         type: string
   ServiceProviderResponseList:
-    description: The list of bot service service providers response.
+    description: The list of bot service providers response.
     properties:
       nextLink:
-        description: The link used to get the next page of bot service service providers.
+        description: The link used to get the next page of bot service providers.
         type: string
       value:
-        description: Gets the list of bot service service providers and their properties.
+        description: Gets the list of bot service providers and their properties.
         items:
           $ref: '#/definitions/ServiceProvider'
         readOnly: true

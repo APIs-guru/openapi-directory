@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/stable/2018-06-01-preview/locations.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: hdinsight-locations
   x-tags:
@@ -43,7 +42,7 @@ parameters:
     required: true
     type: string
   LocationParameter:
-    description: The location to get capabilities for.
+    description: The Azure location (region) for which to make the request.
     in: path
     name: location
     required: true
@@ -56,6 +55,73 @@ parameters:
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/billingSpecs':
+    get:
+      description: Lists the billingSpecs for the specified subscription and location.
+      operationId: Locations_ListBillingSpecs
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            $ref: '#/definitions/BillingResponseListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Regions
+      x-ms-examples:
+        Get the subscription billingSpecs for the specified location:
+          parameters:
+            api-version: 2018-06-01-preview
+            location: East US 2
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                billingResources:
+                  - billingMeters: []
+                    diskBillingMeters: []
+                    region: East US 2
+                  - billingMeters:
+                      - meter: 11111111-1111-1111-1111-111111111111
+                        meterParameter: default
+                        unit: CoreHours
+                      - meter: 11111111-1111-1111-1111-111111111111
+                        meterParameter: Kafka
+                        unit: CoreHours
+                    diskBillingMeters:
+                      - diskRpMeter: 11111111-1111-1111-1111-111111111111
+                        sku: All
+                        tier: Standard
+                      - diskRpMeter: 11111111-1111-1111-1111-111111111111
+                        sku: All
+                        tier: Standard
+                    region: default
+                vmSizeFilters:
+                  - clusterFlavors: null
+                    clusterVersions: null
+                    filterMode: Exclude
+                    nodeTypes: null
+                    osType: null
+                    regions: null
+                    vmSizes: null
+                vmSizes:
+                  - A5
+                  - A6
+                  - A7
   '/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/usages':
     get:
       description: Lists the usages for the specified location.
@@ -91,7 +157,7 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              Body:
+              body:
                 value:
                   - currentValue: 0
                     limit: 5000
@@ -100,6 +166,74 @@ paths:
                       value: cores
                     unit: Count
 definitions:
+  BillingMeters:
+    description: The billing meters.
+    properties:
+      meter:
+        description: The HDInsight meter guid.
+        type: string
+      meterParameter:
+        description: The virtual machine sizes.
+        type: string
+      unit:
+        description: 'The unit of meter, VMHours or CoreHours.'
+        type: string
+    type: object
+  BillingResources:
+    description: The billing resources.
+    properties:
+      billingMeters:
+        description: The billing meter information.
+        items:
+          $ref: '#/definitions/BillingMeters'
+        type: array
+      diskBillingMeters:
+        description: The managed disk billing information.
+        items:
+          $ref: '#/definitions/DiskBillingMeters'
+        type: array
+      region:
+        description: The region or location.
+        type: string
+    type: object
+  BillingResponseListResult:
+    description: The response for the operation to get regional billingSpecs for a subscription.
+    properties:
+      billingResources:
+        description: The billing and managed disk billing resources for a region.
+        items:
+          $ref: '#/definitions/BillingResources'
+        type: array
+      vmSizeFilters:
+        description: The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.
+        items:
+          $ref: '#/definitions/VmSizeCompatibilityFilterV2'
+        type: array
+      vmSizes:
+        description: The virtual machine sizes to include or exclude.
+        items:
+          type: string
+        type: array
+    type: object
+  DiskBillingMeters:
+    description: The disk billing meters.
+    properties:
+      diskRpMeter:
+        description: The managed disk meter guid.
+        type: string
+      sku:
+        description: 'The managed disk billing sku, P30 or S30.'
+        type: string
+      tier:
+        description: 'The managed disk billing tier, Standard or Premium.'
+        enum:
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Tier
+    type: object
   LocalizedName:
     description: The details about the localizable name of a type of usage.
     properties:
@@ -135,3 +269,52 @@ definitions:
           $ref: '#/definitions/Usage'
         type: array
     readOnly: true
+  VmSizeCompatibilityFilterV2:
+    description: 'This class represent a single filter object that defines a multidimensional set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and ClusterVersions. The constraint should be defined based on the following: FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of exclusion/inclusion) and the ordering of the Filters. Later filters override previous settings if conflicted.'
+    properties:
+      clusterFlavors:
+        description: The list of cluster flavors under the effect of the filter.
+        items:
+          type: string
+        type: array
+      clusterVersions:
+        description: The list of cluster versions affected in Major.Minor format.
+        items:
+          type: string
+        type: array
+      filterMode:
+        description: The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.
+        enum:
+          - Exclude
+          - Include
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: FilterMode
+      nodeTypes:
+        description: The list of node types affected by the filter.
+        items:
+          type: string
+        type: array
+      osType:
+        description: 'The OSType affected, Windows or Linux.'
+        items:
+          enum:
+            - Windows
+            - Linux
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: OSType
+        type: array
+      regions:
+        description: The list of regions under the effect of the filter.
+        items:
+          type: string
+        type: array
+      vmSizes:
+        description: The list of virtual machine sizes to include or exclude.
+        items:
+          type: string
+        type: array
+    type: object

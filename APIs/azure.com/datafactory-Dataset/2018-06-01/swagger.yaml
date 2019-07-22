@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datafactory-Dataset
   x-tags:
@@ -245,11 +244,23 @@ definitions:
     description: Azure PostgreSQL dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/AzurePostgreSqlTableDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: AzurePostgreSqlTable
+  AzurePostgreSqlTableDatasetTypeProperties:
+    description: Azure PostgreSQL dataset properties.
+    properties:
+      schema:
+        description: 'The schema name of the Azure PostgreSQL database. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Azure PostgreSQL database. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: 'The table name of the Azure PostgreSQL database which includes both schema and table. Type: string (or Expression with resultType string).'
+        type: object
   AzureSearchIndexDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -287,6 +298,29 @@ definitions:
     properties:
       tableName:
         description: 'The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string).'
+        type: object
+  AzureSqlMITableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure SQL Managed Instance dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureSqlMITableDatasetTypeProperties'
+        description: Azure SQL Managed Instance dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureSqlMITable
+  AzureSqlMITableDatasetTypeProperties:
+    description: Azure SQL Managed Instance dataset properties.
+    properties:
+      schema:
+        description: 'The schema name of the Azure SQL Managed Instance. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Azure SQL Managed Instance dataset. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
         type: object
   AzureSqlTableDataset:
     allOf:
@@ -326,6 +360,29 @@ definitions:
         type: object
     required:
       - tableName
+  BinaryDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Binary dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/BinaryDatasetTypeProperties'
+        description: Binary dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Binary
+  BinaryDatasetTypeProperties:
+    description: Binary dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the binary dataset.
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the Binary storage.
+    required:
+      - location
+    type: object
   CassandraTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -345,6 +402,23 @@ definitions:
         type: object
       tableName:
         description: 'The table name of the Cassandra database. Type: string (or Expression with resultType string).'
+        type: object
+  CommonDataServiceForAppsEntityDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Common Data Service for Apps entity dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CommonDataServiceForAppsEntityDatasetTypeProperties'
+        description: Common Data Service for Apps entity dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: CommonDataServiceForAppsEntity
+  CommonDataServiceForAppsEntityDatasetTypeProperties:
+    description: Common Data Service for Apps entity dataset properties.
+    properties:
+      entityName:
+        description: 'The logical name of the entity. Type: string (or Expression with resultType string).'
         type: object
   CompressionLevel:
     description: All available compression levels.
@@ -702,6 +776,23 @@ definitions:
         type: object
     required:
       - path
+  DynamicsCrmEntityDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Dynamics CRM entity dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DynamicsCrmEntityDatasetTypeProperties'
+        description: Dynamics CRM entity dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: DynamicsCrmEntity
+  DynamicsCrmEntityDatasetTypeProperties:
+    description: Dynamics CRM entity dataset properties.
+    properties:
+      entityName:
+        description: 'The logical name of the entity. Type: string (or Expression with resultType string).'
+        type: object
   DynamicsEntityDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -904,6 +995,23 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: ImpalaObject
+  InformixTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Informix table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/InformixTableDatasetTypeProperties'
+        description: Informix table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: InformixTable
+  InformixTableDatasetTypeProperties:
+    description: Informix table dataset properties.
+    properties:
+      tableName:
+        description: 'The Informix table name. Type: string (or Expression with resultType string).'
+        type: object
   JiraObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -978,6 +1086,23 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: MarketoObject
+  MicrosoftAccessTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Microsoft Access table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MicrosoftAccessTableDatasetTypeProperties'
+        description: Microsoft Access table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MicrosoftAccessTable
+  MicrosoftAccessTableDatasetTypeProperties:
+    description: Microsoft Access table dataset properties.
+    properties:
+      tableName:
+        description: 'The Microsoft Access table name. Type: string (or Expression with resultType string).'
+        type: object
   MongoDbCollectionDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1020,6 +1145,23 @@ definitions:
         type: object
     required:
       - collection
+  MySqlTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The MySQL table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MySqlTableDatasetTypeProperties'
+        description: MySQL table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MySqlTable
+  MySqlTableDatasetTypeProperties:
+    description: MySql table dataset properties.
+    properties:
+      tableName:
+        description: 'The MySQL table name. Type: string (or Expression with resultType string).'
+        type: object
   NetezzaTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1047,6 +1189,23 @@ definitions:
     properties:
       path:
         description: 'The OData resource path. Type: string (or Expression with resultType string).'
+        type: object
+  OdbcTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The ODBC table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/OdbcTableDatasetTypeProperties'
+        description: ODBC table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: OdbcTable
+  OdbcTableDatasetTypeProperties:
+    description: ODBC table dataset properties.
+    properties:
+      tableName:
+        description: 'The ODBC table name. Type: string (or Expression with resultType string).'
         type: object
   Office365Dataset:
     allOf:
@@ -1161,6 +1320,23 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: PhoenixObject
+  PostgreSqlTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The PostgreSQL table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/PostgreSqlTableDatasetTypeProperties'
+        description: PostgreSQL table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: PostgreSqlTable
+  PostgreSqlTableDatasetTypeProperties:
+    description: PostgreSQL table dataset properties.
+    properties:
+      tableName:
+        description: 'The PostgreSQL table name. Type: string (or Expression with resultType string).'
+        type: object
   PrestoObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1267,6 +1443,23 @@ definitions:
     properties:
       objectApiName:
         description: 'The Salesforce object API name. Type: string (or Expression with resultType string).'
+        type: object
+  SalesforceServiceCloudObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Salesforce Service Cloud object dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SalesforceServiceCloudObjectDatasetTypeProperties'
+        description: Salesforce Service Cloud object dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SalesforceServiceCloudObject
+  SalesforceServiceCloudObjectDatasetTypeProperties:
+    description: Salesforce Service Cloud object dataset properties.
+    properties:
+      objectApiName:
+        description: 'The Salesforce Service Cloud object API name. Type: string (or Expression with resultType string).'
         type: object
   SapCloudForCustomerResourceDataset:
     allOf:
@@ -1444,6 +1637,26 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: SquareObject
+  TeradataTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Teradata database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/TeradataTableDatasetTypeProperties'
+        description: Teradata dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: TeradataTable
+  TeradataTableDatasetTypeProperties:
+    description: Teradata dataset properties.
+    properties:
+      database:
+        description: 'The database name of Teradata. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of Teradata. Type: string (or Expression with resultType string).'
+        type: object
   TextFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'

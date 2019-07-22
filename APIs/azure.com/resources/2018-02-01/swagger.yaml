@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -661,6 +660,84 @@ paths:
       summary: Deploys resources to a resource group.
       tags:
         - Deployments
+      x-ms-examples:
+        Create a deployment that will redeploy another deployment on failure:
+          parameters:
+            api-version: '2018-02-01'
+            deploymentName: exampleDeploymentName
+            parameters:
+              properties:
+                mode: Complete
+                onErrorDeployment:
+                  deploymentName: '{nameOfDeploymentToUse}'
+                  type: SpecificDeployment
+                parameters: {}
+                templateLink: '{templateUri}'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfDeploymentToUse}'
+                    type: SpecificDeployment
+                  provisioningState: Accepted
+                  timestamp: '2018-02-01T00:00:00.0000000Z'
+            '201':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfDeploymentToUse}'
+                    type: SpecificDeployment
+                  provisioningState: Accepted
+                  timestamp: '2018-02-01T00:00:00.0000000Z'
+        Create a deployment that will redeploy the last successful deployment on failure:
+          parameters:
+            api-version: '2018-02-01'
+            deploymentName: exampleDeploymentName
+            parameters:
+              properties:
+                mode: Complete
+                onErrorDeployment:
+                  type: LastSuccessful
+                parameters: {}
+                templateLink: '{templateUri}'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscriptionId}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfLastSuccesfulDeployment}'
+                    type: LastSuccessful
+                  provisioningState: Accepted
+                  timestamp: '2018-02-01T00:00:00.0000000Z'
+            '201':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
+                name: exampleDeploymentName
+                properties:
+                  correlationId: '{correlationId}'
+                  mode: Complete
+                  onErrorDeployment:
+                    deploymentName: '{nameOfLastSuccesfulDeployment}'
+                    type: LastSuccessful
+                  provisioningState: Accepted
+                  timestamp: '2018-02-01T00:00:00.0000000Z'
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel':
     post:
@@ -1569,10 +1646,10 @@ definitions:
     description: Export resource group template request parameters.
     properties:
       options:
-        description: 'The export template options. Supported values include ''IncludeParameterDefaultValue'', ''IncludeComments'' or ''IncludeParameterDefaultValue, IncludeComments'
+        description: 'The export template options. A CSV-formatted list containing zero or more of the following: ''IncludeParameterDefaultValue'', ''IncludeComments'', ''SkipResourceNameParameterization'', ''SkipAllParameterization'''
         type: string
       resources:
-        description: The IDs of the resources. The only supported string currently is '*' (all resources). Future updates will support exporting specific resources.
+        description: 'The IDs of the resources to filter the export by. To export all resources, supply an array with single entry ''*''.'
         items:
           type: string
         type: array

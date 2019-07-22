@@ -936,6 +936,9 @@ definitions:
         items:
           $ref: '#/definitions/JitNetworkAccessPortRule'
         type: array
+      publicIpAddress:
+        description: 'Public IP address of the Azure Firewall that is linked to this policy, if applicable'
+        type: string
     required:
       - id
       - ports
@@ -1008,6 +1011,9 @@ definitions:
         description: The date & time at which the request ends in UTC
         format: date-time
         type: string
+      mappedPort:
+        description: 'The port which is mapped to this port''s `number` in the Azure Firewall, if applicable'
+        type: integer
       number:
         $ref: '#/definitions/PortNumber'
       status:

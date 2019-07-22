@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimanagement.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement
   x-tags:
@@ -179,7 +178,6 @@ parameters:
     maxLength: 256
     minLength: 1
     name: groupId
-    pattern: '^[^*#&+:<>?]+$'
     required: true
     type: string
     x-ms-parameter-location: method

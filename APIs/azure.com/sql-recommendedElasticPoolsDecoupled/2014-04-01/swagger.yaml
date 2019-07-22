@@ -124,7 +124,8 @@ paths:
                       observationPeriodStart: '2014-11-01T00:00:00Z'
                       storageMB: 1000
                     type: Microsoft.Sql/servers/recommendedElasticPools
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}':
     get:
       description: Gets a recommended elastic pool.
@@ -250,7 +251,8 @@ paths:
                   - dateTime: '2017-07-25T12:00:00Z'
                     dtu: 0.018937532104510685
                     sizeGB: 0.921875
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
 definitions:
   RecommendedElasticPool:
     allOf:
@@ -332,6 +334,8 @@ definitions:
           - Basic
           - Standard
           - Premium
+          - GeneralPurpose
+          - BusinessCritical
         readOnly: true
         type: string
         x-ms-enum:

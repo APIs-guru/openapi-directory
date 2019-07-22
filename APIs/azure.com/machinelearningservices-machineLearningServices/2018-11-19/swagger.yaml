@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: machinelearningservices-machineLearningServices
   x-tags:
@@ -292,8 +291,368 @@ paths:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
         - VirtualMachineSizes
-      x-ms-pageable:
-        nextLinkName: null
+      x-ms-examples:
+        List VM Sizes:
+          parameters:
+            api-version: '2018-11-19'
+            location: eastus
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                amlCompute:
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 16384
+                    memoryGB: 4
+                    name: Standard_F2s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 2
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 32768
+                    memoryGB: 8
+                    name: Standard_F4s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 4
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 65536
+                    memoryGB: 16
+                    name: Standard_F8s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 8
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 131072
+                    memoryGB: 32
+                    name: Standard_F16s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 16
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 262144
+                    memoryGB: 64
+                    name: Standard_F32s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 32
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 524288
+                    memoryGB: 128
+                    name: Standard_F64s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 64
+                  - family: standardFSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 589824
+                    memoryGB: 144
+                    name: Standard_F72s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 72
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 51200
+                    memoryGB: 3.5
+                    name: Standard_D1_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 1
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 102400
+                    memoryGB: 7
+                    name: Standard_D2_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 2
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 204800
+                    memoryGB: 14
+                    name: Standard_D3_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 4
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 409600
+                    memoryGB: 28
+                    name: Standard_D4_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 8
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 102400
+                    memoryGB: 14
+                    name: Standard_D11_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 2
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 204800
+                    memoryGB: 28
+                    name: Standard_D12_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 4
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 409600
+                    memoryGB: 56
+                    name: Standard_D13_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 8
+                  - family: standardDv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 819200
+                    memoryGB: 112
+                    name: Standard_D14_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 16
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 7168
+                    memoryGB: 3.5
+                    name: Standard_DS1_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 1
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 14336
+                    memoryGB: 7
+                    name: Standard_DS2_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 2
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 28672
+                    memoryGB: 14
+                    name: Standard_DS3_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 4
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 57344
+                    memoryGB: 28
+                    name: Standard_DS4_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 8
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 114688
+                    memoryGB: 56
+                    name: Standard_DS5_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 16
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 28672
+                    memoryGB: 14
+                    name: Standard_DS11_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 2
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 57344
+                    memoryGB: 28
+                    name: Standard_DS12_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 4
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 114688
+                    memoryGB: 56
+                    name: Standard_DS13_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 8
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 229376
+                    memoryGB: 112
+                    name: Standard_DS14_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 16
+                  - family: standardDSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 286720
+                    memoryGB: 140
+                    name: Standard_DS15_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 20
+                  - family: standardNCSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 344064
+                    memoryGB: 112
+                    name: Standard_NC6s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 6
+                  - family: standardNCSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 688128
+                    memoryGB: 224
+                    name: Standard_NC12s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 12
+                  - family: standardNCSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_NC24rs_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
+                  - family: standardNCSv2Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_NC24s_v2
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
+                  - family: standardNCSv3Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 344064
+                    memoryGB: 112
+                    name: Standard_NC6s_v3
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 6
+                  - family: standardNCSv3Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 688128
+                    memoryGB: 224
+                    name: Standard_NC12s_v3
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 12
+                  - family: standardNCSv3Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_NC24rs_v3
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
+                  - family: standardNCSv3Family
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_NC24s_v3
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
+                  - family: standardNCFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 389120
+                    memoryGB: 56
+                    name: Standard_NC6
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 6
+                  - family: standardNCFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 696320
+                    memoryGB: 112
+                    name: Standard_NC12
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 12
+                  - family: standardNCFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1474560
+                    memoryGB: 224
+                    name: Standard_NC24
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 24
+                  - family: standardNCFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1474560
+                    memoryGB: 224
+                    name: Standard_NC24r
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 24
+                  - family: standardNVFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 389120
+                    memoryGB: 56
+                    name: Standard_NV6
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 6
+                  - family: standardNVFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 696320
+                    memoryGB: 112
+                    name: Standard_NV12
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 12
+                  - family: standardNVFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1474560
+                    memoryGB: 224
+                    name: Standard_NV24
+                    osVhdSizeMB: 1047552
+                    premiumIO: false
+                    vCPUs: 24
+                  - family: standardNDSFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 344064
+                    memoryGB: 112
+                    name: Standard_ND6s
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 6
+                  - family: standardNDSFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 688128
+                    memoryGB: 224
+                    name: Standard_ND12s
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 12
+                  - family: standardNDSFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_ND24rs
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
+                  - family: standardNDSFamily
+                    lowPriorityCapable: true
+                    maxResourceVolumeMB: 1376256
+                    memoryGB: 448
+                    name: Standard_ND24s
+                    osVhdSizeMB: 1047552
+                    premiumIO: true
+                    vCPUs: 24
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces':
     get:
       description: Lists all the available machine learning workspaces under the specified subscription.
@@ -806,7 +1165,7 @@ paths:
           schema:
             $ref: '#/definitions/ClusterUpdateParameters'
       responses:
-        '202':
+        '200':
           description: Compute update initiated.
           schema:
             $ref: '#/definitions/ComputeResource'
@@ -824,16 +1183,15 @@ paths:
             computeName: compute123
             parameters:
               properties:
-                properties:
-                  scaleSettings:
-                    maxNodeCount: 4
-                    minNodeCount: 4
-                    nodeIdleTimeBeforeScaleDown: PT5M
+                scaleSettings:
+                  maxNodeCount: 4
+                  minNodeCount: 4
+                  nodeIdleTimeBeforeScaleDown: PT5M
             resourceGroupName: testrg123
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             workspaceName: workspaces123
           responses:
-            '202':
+            '200':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
                 location: eastus2
@@ -1115,7 +1473,7 @@ paths:
         '200':
           description: The operation was successful. The response contains the list of IP addresses.
           schema:
-            $ref: '#/definitions/ComputeNodesInformation'
+            $ref: '#/definitions/AmlComputeNodesInformation'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1143,6 +1501,7 @@ paths:
                     nodeId: tvm-3601533753_2-20170719t162906z
                     port: 50001
       x-ms-pageable:
+        itemName: nodes
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys':
     post:
@@ -1882,6 +2241,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: UsageUnit
+    type: object
   UsageName:
     description: The Usage Names.
     properties:

@@ -243,7 +243,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationKeyCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     patch:
       description: Update the keyCredentials associated with an application.
       operationId: Applications_UpdateKeyCredentials
@@ -319,7 +320,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationPasswordCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     patch:
       description: Update passwordCredentials associated with an application.
       operationId: Applications_UpdatePasswordCredentials
@@ -436,7 +438,8 @@ paths:
       tags:
         - Domain
       x-ms-odata: '#/definitions/User'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{tenantID}/domains/{domainName}':
     get:
       description: Gets a specific domain in the current tenant.
@@ -707,7 +710,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{tenantID}/groups/{objectId}/members':
     get:
       description: Gets the members of a group.
@@ -1037,7 +1041,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalKeyCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     patch:
       description: Update the keyCredentials associated with a service principal.
       operationId: ServicePrincipals_UpdateKeyCredentials
@@ -1113,7 +1118,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalPasswordCredentials
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
     patch:
       description: Updates the passwordCredentials associated with a service principal.
       operationId: ServicePrincipals_UpdatePasswordCredentials
@@ -1242,7 +1248,8 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - User
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/{tenantID}/users/{upnOrObjectId}':
     delete:
       description: Delete a user.
@@ -2175,7 +2182,7 @@ definitions:
     properties:
       accountEnabled:
         description: whether or not the service principal account is enabled
-        type: string
+        type: boolean
       alternativeNames:
         description: alternative names
         items:
@@ -2260,7 +2267,7 @@ definitions:
     properties:
       accountEnabled:
         description: whether or not the service principal account is enabled
-        type: string
+        type: boolean
       appRoleAssignmentRequired:
         description: Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.
         type: boolean

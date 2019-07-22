@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2019-04-01/blob.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage-blob
   x-tags:
@@ -98,6 +97,18 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - description: Optional. Continuation token for the list operation.
+          in: query
+          name: $skipToken
+          type: string
+        - description: Optional. Specified maximum number of containers that can be included in the list.
+          in: query
+          name: $maxpagesize
+          type: string
+        - description: 'Optional. When specified, only container names starting with the filter will be listed.'
+          in: query
+          name: $filter
+          type: string
       responses:
         '200':
           description: OK -- List Container operation completed successfully.
@@ -116,6 +127,7 @@ paths:
           responses:
             '200':
               body:
+                nextLink: 'https://sto1590endpoint/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto1590/blobServices/default/containers?api-version=2019-04-01&$maxpagesize=2&$skipToken=/sto1590/container5103'
                 value:
                   - etag: '"0x8D589847D51C7DE"'
                     id: '/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto1590/blobServices/default/containers/container1644'
@@ -139,6 +151,8 @@ paths:
                       leaseStatus: Unlocked
                       publicAccess: None
                     type: Microsoft.Storage/storageAccounts/blobServices/containers
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}':
     delete:
       description: Deletes specified container under its account.
@@ -191,10 +205,8 @@ paths:
             resourceGroupName: res4079
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: 'Gets properties of a specified container. '
       operationId: BlobContainers_Get
@@ -881,6 +893,90 @@ paths:
                   immutabilityPeriodSinceCreationInDays: 3
                   state: Unlocked
                 type: Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease':
+    post:
+      description: 'The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.'
+      operationId: BlobContainers_Lease
+      parameters:
+        - description: The name of the resource group within the user's subscription. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: accountName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ContainerName'
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Lease Container request body.
+          in: body
+          name: parameters
+          schema:
+            $ref: '#/definitions/LeaseContainerRequest'
+      responses:
+        '200':
+          description: OK -- Lease Container operation completed successfully.
+          schema:
+            $ref: '#/definitions/LeaseContainerResponse'
+      tags:
+        - BlobContainers
+      x-ms-examples:
+        Acquire a lease on a container:
+          parameters:
+            accountName: sto328
+            api-version: '2019-04-01'
+            containerName: container6185
+            monitor: 'true'
+            parameters:
+              action: Acquire
+              breakPeriod: null
+              leaseDuration: -1
+              leaseId: null
+              proposedLeaseId: null
+            resourceGroupName: res3376
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
+        Break a lease on a container:
+          parameters:
+            accountName: sto328
+            api-version: '2019-04-01'
+            containerName: container6185
+            monitor: 'true'
+            parameters:
+              action: Break
+              breakPeriod: null
+              leaseDuration: null
+              leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
+              proposedLeaseId: null
+            resourceGroupName: res3376
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                leaseTimeSeconds: '0'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold':
     post:
       description: Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
@@ -1479,6 +1575,41 @@ definitions:
           name: ImmutabilityPolicyState
     required:
       - immutabilityPeriodSinceCreationInDays
+  LeaseContainerRequest:
+    description: Lease Container request schema.
+    properties:
+      action:
+        description: Specifies the lease action. Can be one of the available actions.
+        enum:
+          - Acquire
+          - Renew
+          - Change
+          - Release
+          - Break
+        type: string
+      breakPeriod:
+        description: 'Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60.'
+        type: integer
+      leaseDuration:
+        description: 'Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires.'
+        type: integer
+      leaseId:
+        description: Identifies the lease. Can be specified in any valid GUID string format.
+        type: string
+      proposedLeaseId:
+        description: 'Optional for acquire, required for change. Proposed lease ID, in a GUID string format.'
+        type: string
+    required:
+      - action
+  LeaseContainerResponse:
+    description: Lease Container response schema.
+    properties:
+      leaseId:
+        description: 'Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.'
+        type: string
+      leaseTimeSeconds:
+        description: 'Approximate time remaining in the lease period, in seconds.'
+        type: string
   LegalHold:
     description: The LegalHold property of a blob container.
     properties:
@@ -1538,12 +1669,17 @@ definitions:
         description: The blob container properties be listed out.
         x-ms-client-flatten: true
   ListContainerItems:
-    description: The list of blob containers.
+    description: 'Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.'
     properties:
+      nextLink:
+        description: Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size.
+        readOnly: true
+        type: string
       value:
-        description: The list of blob containers.
+        description: List of blobs containers returned.
         items:
           $ref: '#/definitions/ListContainerItem'
+        readOnly: true
         type: array
   TagProperty:
     description: A tag of the LegalHold of a blob container.

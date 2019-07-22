@@ -102,7 +102,8 @@ paths:
                       role: Primary
                       status: Ready
                     type: Microsoft.Sql/servers/disasterRecoveryConfigurations
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}':
     delete:
       description: Deletes a disaster recovery configuration.

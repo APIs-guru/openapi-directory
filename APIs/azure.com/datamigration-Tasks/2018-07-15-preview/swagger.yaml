@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Tasks.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: datamigration-Tasks
   x-tags:
@@ -433,6 +432,10 @@ definitions:
             default: false
             description: Flag for whether to collect agent jobs from source server.
             type: boolean
+          collectDatabases:
+            default: true
+            description: Flag for whether to collect databases from source server.
+            type: boolean
           collectLogins:
             default: false
             description: Flag for whether to collect logins from source server.
@@ -499,6 +502,10 @@ definitions:
               - dataSource
             type: object
             x-ms-discriminator-value: SqlConnectionInfo
+          validateSsisCatalogOnly:
+            default: false
+            description: Flag for whether to validate SSIS catalog is reachable on the source server.
+            type: boolean
         required:
           - sourceConnectionInfo
         type: object
@@ -543,6 +550,10 @@ definitions:
             default: false
             description: Flag for whether to collect agent jobs from source server.
             type: boolean
+          collectDatabases:
+            default: true
+            description: Flag for whether to collect databases from source server.
+            type: boolean
           collectLogins:
             default: false
             description: Flag for whether to collect logins from source server.
@@ -609,6 +620,10 @@ definitions:
               - dataSource
             type: object
             x-ms-discriminator-value: SqlConnectionInfo
+          validateSsisCatalogOnly:
+            default: false
+            description: Flag for whether to validate SSIS catalog is reachable on the source server.
+            type: boolean
         required:
           - sourceConnectionInfo
         type: object
@@ -943,6 +958,18 @@ definitions:
         items:
           description: Output for the task that validates connection to Azure Database for PostgreSQL and target server requirements for Oracle source.
           properties:
+            databaseSchemaMap:
+              description: Mapping of schemas per database
+              items:
+                properties:
+                  database:
+                    type: string
+                  schemas:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
             databases:
               description: List of databases on target server
               items:
@@ -1193,6 +1220,14 @@ definitions:
       input:
         description: Input for the task that validates connection to Azure SQL Database Managed Instance.
         properties:
+          collectAgentJobs:
+            default: true
+            description: Flag for whether to collect agent jobs from target SQL MI server.
+            type: boolean
+          collectLogins:
+            default: true
+            description: Flag for whether to collect logins from target SQL MI server.
+            type: boolean
           targetConnectionInfo:
             allOf:
               - description: Defines the connection properties of a server
@@ -1251,6 +1286,10 @@ definitions:
               - dataSource
             type: object
             x-ms-discriminator-value: SqlConnectionInfo
+          validateSsisCatalogOnly:
+            default: false
+            description: Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.
+            type: boolean
         required:
           - targetConnectionInfo
         type: object
@@ -1616,6 +1655,213 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: GetTDECertificates.Sql
+  GetUserTablesOracleTaskProperties:
+    allOf:
+      - $ref: '#/definitions/ProjectTaskProperties'
+    description: Properties for the task that collects user tables for the given list of Oracle schemas
+    properties:
+      input:
+        description: Input for the task that gets the list of tables contained within a provided list of Oracle schemas.
+        properties:
+          connectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to Oracle server
+            properties:
+              dataSource:
+                description: EZConnect or TNSName connection string.
+                type: string
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: OracleConnectionInfo
+          selectedSchemas:
+            description: List of Oracle schemas for which to collect tables
+            items:
+              type: string
+            type: array
+        required:
+          - connectionInfo
+          - selectedSchemas
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for the task that gets the list of tables contained within a provided list of Oracle schemas.
+          properties:
+            schemaName:
+              description: The schema this result is for
+              readOnly: true
+              type: string
+            tables:
+              description: List of valid tables found for this schema
+              items:
+                description: Table properties
+                properties:
+                  hasRows:
+                    description: Indicates whether table is empty or not
+                    readOnly: true
+                    type: boolean
+                  name:
+                    description: Schema-qualified name of the table
+                    readOnly: true
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+            validationErrors:
+              description: Validation errors associated with the task
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: GetUserTablesOracle
+  GetUserTablesPostgreSqlTaskProperties:
+    allOf:
+      - $ref: '#/definitions/ProjectTaskProperties'
+    description: Properties for the task that collects user tables for the given list of databases
+    properties:
+      input:
+        description: Input for the task that gets the list of tables for a provided list of PostgreSQL databases.
+        properties:
+          connectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to PostgreSQL server
+            properties:
+              databaseName:
+                description: Name of the database
+                type: string
+              port:
+                description: Port for Server
+                type: integer
+              serverName:
+                description: Name of the server
+                type: string
+            required:
+              - serverName
+              - port
+            type: object
+            x-ms-discriminator-value: PostgreSqlConnectionInfo
+          selectedDatabases:
+            description: List of PostgreSQL databases for which to collect tables
+            items:
+              type: string
+            type: array
+        required:
+          - connectionInfo
+          - selectedDatabases
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for the task that gets the list of tables for a provided list of PostgreSQL databases.
+          properties:
+            databaseName:
+              description: The database this result is for
+              readOnly: true
+              type: string
+            tables:
+              description: List of valid tables found for this database
+              items:
+                description: Table properties
+                properties:
+                  hasRows:
+                    description: Indicates whether table is empty or not
+                    readOnly: true
+                    type: boolean
+                  name:
+                    description: Schema-qualified name of the table
+                    readOnly: true
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+            validationErrors:
+              description: Validation errors associated with the task
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: GetUserTablesPostgreSql
   GetUserTablesSqlSyncTaskProperties:
     allOf:
       - $ref: '#/definitions/ProjectTaskProperties'
@@ -3434,7 +3680,189 @@ definitions:
         type: array
     type: object
     x-ms-discriminator-value: Migrate.SqlServer.AzureSqlDbMI
-  ODataError: {}
+  MigrateSsisTaskProperties:
+    allOf:
+      - $ref: '#/definitions/ProjectTaskProperties'
+    description: Properties for task that migrates SSIS packages from SQL Server databases to Azure SQL Database Managed Instance.
+    properties:
+      input:
+        allOf:
+          - description: Base class for migration task input
+            properties:
+              sourceConnectionInfo:
+                allOf:
+                  - description: Defines the connection properties of a server
+                    discriminator: type
+                    properties:
+                      password:
+                        description: Password credential.
+                        type: string
+                      type:
+                        description: Type of connection info
+                        type: string
+                      userName:
+                        description: User name
+                        type: string
+                    required:
+                      - type
+                    type: object
+                    x-ms-discriminator-value: Unknown
+                description: Information for connecting to SQL database server
+                properties:
+                  additionalSettings:
+                    description: Additional connection settings
+                    type: string
+                  authentication:
+                    description: An enumeration of possible authentication types when connecting
+                    enum:
+                      - None
+                      - WindowsAuthentication
+                      - SqlAuthentication
+                      - ActiveDirectoryIntegrated
+                      - ActiveDirectoryPassword
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AuthenticationType
+                  dataSource:
+                    description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                    type: string
+                  encryptConnection:
+                    default: true
+                    description: Whether to encrypt the connection
+                    type: boolean
+                  platform:
+                    description: An enumeration of source platform types
+                    enum:
+                      - SqlOnPrem
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: SqlSourcePlatform
+                  trustServerCertificate:
+                    default: false
+                    description: Whether to trust the server certificate
+                    type: boolean
+                required:
+                  - dataSource
+                type: object
+                x-ms-discriminator-value: SqlConnectionInfo
+              targetConnectionInfo:
+                allOf:
+                  - description: Defines the connection properties of a server
+                    discriminator: type
+                    properties:
+                      password:
+                        description: Password credential.
+                        type: string
+                      type:
+                        description: Type of connection info
+                        type: string
+                      userName:
+                        description: User name
+                        type: string
+                    required:
+                      - type
+                    type: object
+                    x-ms-discriminator-value: Unknown
+                description: Information for connecting to SQL database server
+                properties:
+                  additionalSettings:
+                    description: Additional connection settings
+                    type: string
+                  authentication:
+                    description: An enumeration of possible authentication types when connecting
+                    enum:
+                      - None
+                      - WindowsAuthentication
+                      - SqlAuthentication
+                      - ActiveDirectoryIntegrated
+                      - ActiveDirectoryPassword
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AuthenticationType
+                  dataSource:
+                    description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                    type: string
+                  encryptConnection:
+                    default: true
+                    description: Whether to encrypt the connection
+                    type: boolean
+                  platform:
+                    description: An enumeration of source platform types
+                    enum:
+                      - SqlOnPrem
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: SqlSourcePlatform
+                  trustServerCertificate:
+                    default: false
+                    description: Whether to trust the server certificate
+                    type: boolean
+                required:
+                  - dataSource
+                type: object
+                x-ms-discriminator-value: SqlConnectionInfo
+            required:
+              - sourceConnectionInfo
+              - targetConnectionInfo
+            type: object
+        description: Input for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.
+        properties:
+          ssisMigrationInfo:
+            description: 'SSIS migration info with SSIS store type, overwrite policy.'
+            properties:
+              environmentOverwriteOption:
+                description: 'The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object'
+                enum:
+                  - Ignore
+                  - Overwrite
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SsisMigrationOverwriteOption
+              projectOverwriteOption:
+                description: 'The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object'
+                enum:
+                  - Ignore
+                  - Overwrite
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SsisMigrationOverwriteOption
+              ssisStoreType:
+                description: An enumeration of supported source SSIS store type in DMS
+                enum:
+                  - SsisCatalog
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SsisStoreType
+            type: object
+        required:
+          - ssisMigrationInfo
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.
+          discriminator: resultType
+          properties:
+            id:
+              description: Result identifier
+              readOnly: true
+              type: string
+            resultType:
+              description: Result type
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: Migrate.Ssis
   ProjectTask:
     allOf:
       - description: ARM resource.

@@ -100,7 +100,7 @@ paths:
       description: Get the list of available Service Fabric resource provider API operations.
       operationId: Operations_List
       parameters:
-        - description: The version of the Service Fabric resouce provider API
+        - description: The version of the Service Fabric resource provider API
           in: query
           name: api-version
           required: true
@@ -150,15 +150,12 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
                 value:
-                  - etag: W/"636462502174844831"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
                     location: eastus
                     name: myCluster
                     properties:
                       provisioningState: Succeeded
-                    tags: {}
                     type: applicationTypes
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}':
@@ -196,6 +193,7 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/6a367b2d-9f60-4941-b886-e348ddcb4127?api-version=2017-07-01-preview'
                 Retry-After: '10'
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric cluster resource.
@@ -229,13 +227,11 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502174844831"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
                 location: eastus
                 name: myCluster
                 properties:
                   provisioningState: Succeeded
-                tags: {}
                 type: applicationTypes
               headers: {}
     put:
@@ -276,20 +272,17 @@ paths:
               id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
               location: eastus
               name: myCluster
-              tags: {}
               type: applicationTypes
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '200':
               body:
-                etag: W/"636462502174844831"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType
                 location: eastus
                 name: myCluster
                 properties:
                   provisioningState: Succeeded
-                tags: {}
                 type: applicationTypes
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions':
@@ -325,17 +318,14 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
                 value:
-                  - etag: W/"636462502176040417"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
                     location: eastus
                     name: myCluster
                     properties:
                       appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                      defaultParameterList: {}
+                      defaultParameterList: []
                       provisioningState: Updating
-                    tags: {}
                     type: versions
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}':
@@ -375,6 +365,7 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/28e62369-ed8c-4aba-8c05-ab7d6238cc3d?api-version=2017-07-01-preview'
                 Retry-After: '10'
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.
@@ -410,15 +401,13 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502176040417"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
                 location: eastus
                 name: myCluster
                 properties:
                   appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                  defaultParameterList: {}
+                  defaultParameterList: []
                   provisioningState: Updating
-                tags: {}
                 type: versions
               headers: {}
     put:
@@ -462,7 +451,6 @@ paths:
               name: myCluster
               properties:
                 appPackageUrl: 'http://fakelink.test.com/MyAppType'
-              tags: {}
               type: versions
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -470,15 +458,13 @@ paths:
           responses:
             '202':
               body:
-                etag: W/"636462502176040417"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0
                 location: eastus
                 name: myCluster
                 properties:
                   appPackageUrl: 'http://fakelink.test.com/MyAppType'
-                  defaultParameterList: {}
+                  defaultParameterList: []
                   provisioningState: Updating
-                tags: {}
                 type: versions
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/e2413c7e-d51b-40ac-8155-bc85bf8ae856?api-version=2017-07-01-preview'
@@ -515,23 +501,20 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
                 value:
-                  - etag: W/"636462502180261858"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
                     location: eastus
                     name: myCluster
                     properties:
                       metrics:
-                        - maximumCapacity: 3
-                          name: metric1
-                          reservationCapacity: 1
-                          totalApplicationCapacity: 5
+                        - MaximumCapacity: 3
+                          Name: metric1
+                          ReservationCapacity: 1
+                          TotalApplicationCapacity: 5
                       provisioningState: Updating
                       removeApplicationCapacity: false
                       typeName: myAppType
                       typeVersion: '1.0'
-                    tags: {}
                     type: applications
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}':
@@ -569,6 +552,7 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/76053752-a423-4a80-b283-1dad1ba5f314?api-version=2017-07-01-preview'
                 Retry-After: '10'
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.
@@ -602,17 +586,16 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502180261859"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
                 location: eastus
                 name: myCluster
                 properties:
                   maximumNodes: 3
                   metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
+                    - MaximumCapacity: 3
+                      Name: metric1
+                      ReservationCapacity: 1
+                      TotalApplicationCapacity: 5
                   minimumNodes: 1
                   parameters:
                     param1: value1
@@ -622,12 +605,12 @@ paths:
                   typeVersion: '1.0'
                   upgradePolicy:
                     applicationHealthPolicy:
-                      considerWarningAsError: true
-                      defaultServiceTypeHealthPolicy:
+                      ConsiderWarningAsError: true
+                      DefaultServiceTypeHealthPolicy:
                         maxPercentUnhealthyPartitionsPerService: 0
                         maxPercentUnhealthyReplicasPerPartition: 0
                         maxPercentUnhealthyServices: 0
-                      maxPercentUnhealthyDeployedApplications: 0
+                      MaxPercentUnhealthyDeployedApplications: 0
                     forceRestart: false
                     rollingUpgradeMonitoringPolicy:
                       failureAction: Rollback
@@ -637,7 +620,6 @@ paths:
                       upgradeDomainTimeout: '1.06:00:00'
                       upgradeTimeout: '01:00:00'
                     upgradeReplicaSetCheckTimeout: '01:00:00'
-                tags: {}
                 type: applications
               headers: {}
     patch:
@@ -660,7 +642,7 @@ paths:
         '202':
           description: The request was accepted and the operation will complete asynchronously.
           schema:
-            $ref: '#/definitions/ApplicationResourceUpdate'
+            $ref: '#/definitions/ApplicationResource'
         default:
           description: The detailed error response.
           schema:
@@ -680,35 +662,31 @@ paths:
               name: myCluster
               properties:
                 metrics:
-                  - maximumCapacity: 3
-                    name: metric1
-                    reservationCapacity: 1
-                    totalApplicationCapacity: 5
+                  - MaximumCapacity: 3
+                    Name: metric1
+                    ReservationCapacity: 1
+                    TotalApplicationCapacity: 5
                 removeApplicationCapacity: false
-                typeName: myAppType
                 typeVersion: '1.0'
-              tags: {}
               type: applications
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '202':
               body:
-                etag: W/"636462502180261858"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
                 location: eastus
                 name: myCluster
                 properties:
                   metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
+                    - MaximumCapacity: 3
+                      Name: metric1
+                      ReservationCapacity: 1
+                      TotalApplicationCapacity: 5
                   provisioningState: Updating
                   removeApplicationCapacity: false
                   typeName: myAppType
                   typeVersion: '1.0'
-                tags: {}
                 type: applications
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/a553eb63-c332-40df-8ace-eb8d34a9b298?api-version=2017-07-01-preview'
@@ -755,10 +733,10 @@ paths:
               properties:
                 maximumNodes: 3
                 metrics:
-                  - maximumCapacity: 3
-                    name: metric1
-                    reservationCapacity: 1
-                    totalApplicationCapacity: 5
+                  - MaximumCapacity: 3
+                    Name: metric1
+                    ReservationCapacity: 1
+                    TotalApplicationCapacity: 5
                 minimumNodes: 1
                 parameters:
                   param1: value1
@@ -767,12 +745,12 @@ paths:
                 typeVersion: '1.0'
                 upgradePolicy:
                   applicationHealthPolicy:
-                    considerWarningAsError: true
-                    defaultServiceTypeHealthPolicy:
+                    ConsiderWarningAsError: true
+                    DefaultServiceTypeHealthPolicy:
                       maxPercentUnhealthyPartitionsPerService: 0
                       maxPercentUnhealthyReplicasPerPartition: 0
                       maxPercentUnhealthyServices: 0
-                    maxPercentUnhealthyDeployedApplications: 0
+                    MaxPercentUnhealthyDeployedApplications: 0
                   forceRestart: false
                   rollingUpgradeMonitoringPolicy:
                     failureAction: Rollback
@@ -782,24 +760,22 @@ paths:
                     upgradeDomainTimeout: '1.06:00:00'
                     upgradeTimeout: '01:00:00'
                   upgradeReplicaSetCheckTimeout: '01:00:00'
-              tags: {}
               type: applications
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '202':
               body:
-                etag: W/"636462502180261859"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
                 location: eastus
                 name: myCluster
                 properties:
                   maximumNodes: 3
                   metrics:
-                    - maximumCapacity: 3
-                      name: metric1
-                      reservationCapacity: 1
-                      totalApplicationCapacity: 5
+                    - MaximumCapacity: 3
+                      Name: metric1
+                      ReservationCapacity: 1
+                      TotalApplicationCapacity: 5
                   minimumNodes: 1
                   parameters:
                     param1: value1
@@ -809,12 +785,12 @@ paths:
                   typeVersion: '1.0'
                   upgradePolicy:
                     applicationHealthPolicy:
-                      considerWarningAsError: true
-                      defaultServiceTypeHealthPolicy:
+                      ConsiderWarningAsError: true
+                      DefaultServiceTypeHealthPolicy:
                         maxPercentUnhealthyPartitionsPerService: 0
                         maxPercentUnhealthyReplicasPerPartition: 0
                         maxPercentUnhealthyServices: 0
-                      maxPercentUnhealthyDeployedApplications: 0
+                      MaxPercentUnhealthyDeployedApplications: 0
                     forceRestart: false
                     rollingUpgradeMonitoringPolicy:
                       failureAction: Rollback
@@ -824,12 +800,11 @@ paths:
                       upgradeDomainTimeout: '1.06:00:00'
                       upgradeTimeout: '01:00:00'
                     upgradeReplicaSetCheckTimeout: '01:00:00'
-                tags: {}
                 type: applications
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/9c2ce367-47ea-43de-b69e-c5a423da4557?api-version=2017-07-01-preview'
                 Retry-After: '10'
-        Put an application with mininum parameters:
+        Put an application with minimum parameters:
           parameters:
             api-version: 2017-07-01-preview
             applicationName: myApp
@@ -842,14 +817,12 @@ paths:
                 removeApplicationCapacity: false
                 typeName: myAppType
                 typeVersion: '1.0'
-              tags: {}
               type: applications
             resourceGroupName: resRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
             '202':
               body:
-                etag: W/"636462502180261857"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp
                 location: eastus
                 name: myCluster
@@ -858,7 +831,6 @@ paths:
                   removeApplicationCapacity: false
                   typeName: myAppType
                   typeVersion: '1.0'
-                tags: {}
                 type: applications
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/5dce62ce-439b-47af-81d8-99ab14708e91?api-version=2017-07-01-preview'
@@ -897,23 +869,20 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
                 value:
-                  - etag: W/"636462502183671257"
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
                     location: eastus
                     name: myCluster
                     properties:
                       instanceCount: 1
                       partitionDescription:
-                        partitionScheme: Singleton
+                        PartitionScheme: Singleton
                       provisioningState: Updating
                       serviceKind: Stateless
                       serviceLoadMetrics:
-                        - name: metric1
-                          weight: Low
+                        - Name: metric1
+                          Weight: Low
                       serviceTypeName: myServiceType
-                    tags: {}
                     type: services
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}':
@@ -953,6 +922,7 @@ paths:
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/41fa5ef9-7f34-4c36-a730-93e0bb757d22?api-version=2017-07-01-preview'
                 Retry-After: '10'
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.
@@ -988,7 +958,6 @@ paths:
           responses:
             '200':
               body:
-                etag: W/"636462502183671258"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
                 location: eastus
                 name: myCluster
@@ -996,16 +965,15 @@ paths:
                   defaultMoveCost: Medium
                   instanceCount: 5
                   partitionDescription:
-                    partitionScheme: Singleton
+                    PartitionScheme: Singleton
                   placementConstraints: NodeType==frontend
                   provisioningState: Updating
                   serviceKind: Stateless
                   serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
+                    - Name: metric1
+                      Weight: Low
                   servicePlacementPolicies: []
                   serviceTypeName: myServiceType
-                tags: {}
                 type: services
               headers: {}
     patch:
@@ -1029,7 +997,7 @@ paths:
         '202':
           description: The request was accepted and the operation will complete asynchronously.
           schema:
-            $ref: '#/definitions/ServiceResourceUpdate'
+            $ref: '#/definitions/ServiceResource'
         default:
           description: The detailed error response.
           schema:
@@ -1050,10 +1018,8 @@ paths:
               properties:
                 serviceKind: Stateless
                 serviceLoadMetrics:
-                  - name: metric1
-                    weight: Low
-                serviceTypeName: myServiceType
-              tags: {}
+                  - Name: metric1
+                    Weight: Low
               type: services
             resourceGroupName: resRg
             serviceName: myService
@@ -1061,21 +1027,19 @@ paths:
           responses:
             '202':
               body:
-                etag: W/"636462502183671257"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
                 location: eastus
                 name: myCluster
                 properties:
                   instanceCount: 1
                   partitionDescription:
-                    partitionScheme: Singleton
+                    PartitionScheme: Singleton
                   provisioningState: Updating
                   serviceKind: Stateless
                   serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
+                    - Name: metric1
+                      Weight: Low
                   serviceTypeName: myServiceType
-                tags: {}
                 type: services
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4dde8d8b-b6b2-4c56-99c6-9b83932bb09a?api-version=2017-07-01-preview'
@@ -1122,20 +1086,19 @@ paths:
               name: myCluster
               properties:
                 correlationScheme:
-                  - scheme: Affinity
-                    serviceName: 'fabric:/app1/app1~svc1'
+                  - Scheme: Affinity
+                    ServiceName: 'fabric:/app1/app1~svc1'
                 defaultMoveCost: Medium
                 instanceCount: 5
                 partitionDescription:
-                  partitionScheme: Singleton
+                  PartitionScheme: Singleton
                 placementConstraints: NodeType==frontend
                 serviceKind: Stateless
                 serviceLoadMetrics:
-                  - name: metric1
-                    weight: Low
+                  - Name: metric1
+                    Weight: Low
                 servicePlacementPolicies: []
                 serviceTypeName: myServiceType
-              tags: {}
               type: services
             resourceGroupName: resRg
             serviceName: myService
@@ -1143,7 +1106,6 @@ paths:
           responses:
             '202':
               body:
-                etag: W/"636462502183671258"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
                 location: eastus
                 name: myCluster
@@ -1151,21 +1113,20 @@ paths:
                   defaultMoveCost: Medium
                   instanceCount: 5
                   partitionDescription:
-                    partitionScheme: Singleton
+                    PartitionScheme: Singleton
                   placementConstraints: NodeType==frontend
                   provisioningState: Updating
                   serviceKind: Stateless
                   serviceLoadMetrics:
-                    - name: metric1
-                      weight: Low
+                    - Name: metric1
+                      Weight: Low
                   servicePlacementPolicies: []
                   serviceTypeName: myServiceType
-                tags: {}
                 type: services
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/2e633105-aadc-4928-9164-d76b974170a3?api-version=2017-07-01-preview'
                 Retry-After: '10'
-        Put a service with mininum parameters:
+        Put a service with minimum parameters:
           parameters:
             api-version: 2017-07-01-preview
             applicationName: myApp
@@ -1177,10 +1138,9 @@ paths:
               properties:
                 instanceCount: 1
                 partitionDescription:
-                  partitionScheme: Singleton
+                  PartitionScheme: Singleton
                 serviceKind: Stateless
                 serviceTypeName: myServiceType
-              tags: {}
               type: services
             resourceGroupName: resRg
             serviceName: myService
@@ -1188,47 +1148,22 @@ paths:
           responses:
             '202':
               body:
-                etag: W/"636462502183671256"
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService
                 location: eastus
                 name: myCluster
                 properties:
                   instanceCount: 1
                   partitionDescription:
-                    partitionScheme: Singleton
+                    PartitionScheme: Singleton
                   provisioningState: Updating
                   serviceKind: Stateless
                   serviceTypeName: myServiceType
-                tags: {}
                 type: services
               headers:
                 Location: 'http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/5bc615c3-6c5b-4593-80e1-008f55376ec7?api-version=2017-07-01-preview'
                 Retry-After: '10'
       x-ms-long-running-operation: true
 definitions:
-  ApplicationHealthPolicy:
-    description: |
-      Defines a health policy used to evaluate the health of an application or one of its children entities.
-    properties:
-      ConsiderWarningAsError:
-        default: false
-        description: Indicates whether warnings are treated with the same severity as errors.
-        type: boolean
-      DefaultServiceTypeHealthPolicy:
-        $ref: '#/definitions/ServiceTypeHealthPolicy'
-        description: The health policy used by default to evaluate the health of a service type.
-      MaxPercentUnhealthyDeployedApplications:
-        default: 0
-        description: |
-          The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
-          The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
-          This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
-          The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
-        type: integer
-      ServiceTypeHealthPolicyMap:
-        $ref: '#/definitions/ServiceTypeHealthPolicyMap'
-        description: The map with service type health policy per service type name. The map is empty by default.
-    type: object
   ApplicationMetricDescription:
     description: |
       Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.
@@ -1408,18 +1343,111 @@ definitions:
     description: Describes the policy for a monitored application upgrade.
     properties:
       applicationHealthPolicy:
-        $ref: '#/definitions/ApplicationHealthPolicy'
+        $ref: '#/definitions/ArmApplicationHealthPolicy'
         description: |
           Defines a health policy used to evaluate the health of an application or one of its children entities.
       forceRestart:
         $ref: '#/definitions/ForceRestart'
         description: 'If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).'
       rollingUpgradeMonitoringPolicy:
-        $ref: '#/definitions/RollingUpgradeMonitoringPolicy'
+        $ref: '#/definitions/ArmRollingUpgradeMonitoringPolicy'
         description: The policy used for monitoring the application upgrade
       upgradeReplicaSetCheckTimeout:
-        $ref: '#/definitions/UpgradeReplicaSetCheckTimeout'
         description: 'The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).'
+        type: string
+  ArmApplicationHealthPolicy:
+    description: |
+      Defines a health policy used to evaluate the health of an application or one of its children entities.
+    properties:
+      ConsiderWarningAsError:
+        default: false
+        description: Indicates whether warnings are treated with the same severity as errors.
+        type: boolean
+      DefaultServiceTypeHealthPolicy:
+        $ref: '#/definitions/ArmServiceTypeHealthPolicy'
+        description: The health policy used by default to evaluate the health of a service type.
+      MaxPercentUnhealthyDeployedApplications:
+        default: 0
+        description: |
+          The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
+          The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
+          This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
+          The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
+        type: integer
+      ServiceTypeHealthPolicyMap:
+        $ref: '#/definitions/ArmServiceTypeHealthPolicyMap'
+        description: The map with service type health policy per service type name. The map is empty by default.
+    type: object
+  ArmRollingUpgradeMonitoringPolicy:
+    description: The policy used for monitoring the application upgrade
+    properties:
+      failureAction:
+        description: The activation Mode of the service package
+        enum:
+          - Rollback
+          - Manual
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ArmUpgradeFailureAction
+          values:
+            - description: Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails.
+              value: Rollback
+            - description: Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically.
+              value: Manual
+      healthCheckRetryTimeout:
+        $ref: '#/definitions/HealthCheckRetryTimeout'
+        description: 'The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
+      healthCheckStableDuration:
+        $ref: '#/definitions/HealthCheckStableDuration'
+        description: 'The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
+      healthCheckWaitDuration:
+        $ref: '#/definitions/HealthCheckWaitDuration'
+        description: 'The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
+      upgradeDomainTimeout:
+        $ref: '#/definitions/UpgradeDomainTimeout'
+        description: 'The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
+      upgradeTimeout:
+        $ref: '#/definitions/UpgradeTimeout'
+        description: 'The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
+  ArmServiceTypeHealthPolicy:
+    description: |
+      Represents the health policy used to evaluate the health of services belonging to a service type.
+    properties:
+      maxPercentUnhealthyPartitionsPerService:
+        default: 0
+        description: |
+          The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.
+        maximum: 100
+        minimum: 0
+        type: integer
+      maxPercentUnhealthyReplicasPerPartition:
+        default: 0
+        description: |
+          The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.
+        maximum: 100
+        minimum: 0
+        type: integer
+      maxPercentUnhealthyServices:
+        default: 0
+        description: |
+          The maximum percentage of services allowed to be unhealthy before your application is considered in error.
+        maximum: 100
+        minimum: 0
+        type: integer
+    type: object
+  ArmServiceTypeHealthPolicyMap:
+    additionalProperties:
+      $ref: '#/definitions/ArmServiceTypeHealthPolicy'
+    description: |
+      Defines a ServiceTypeHealthPolicy per service type name.
+
+      The entries in the map replace the default service type health policy for each specified service type.
+      For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.
+      With policy per service type, there's more granular control of the health of the service.
+
+      If no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.
+    type: object
   AvailableOperationDisplay:
     description: Operation supported by Service Fabric resource provider
     properties:
@@ -1589,24 +1617,6 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
-  RollingUpgradeMonitoringPolicy:
-    description: The policy used for monitoring the application upgrade
-    properties:
-      healthCheckRetryTimeout:
-        $ref: '#/definitions/HealthCheckRetryTimeout'
-        description: 'The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
-      healthCheckStableDuration:
-        $ref: '#/definitions/HealthCheckStableDuration'
-        description: 'The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
-      healthCheckWaitDuration:
-        $ref: '#/definitions/HealthCheckWaitDuration'
-        description: 'The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
-      upgradeDomainTimeout:
-        $ref: '#/definitions/UpgradeDomainTimeout'
-        description: 'The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
-      upgradeTimeout:
-        $ref: '#/definitions/UpgradeTimeout'
-        description: 'The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
   ServiceCorrelationDescription:
     description: Creates a particular correlation between services.
     properties:
@@ -1822,30 +1832,6 @@ definitions:
         description: The kind of service (Stateless or Stateful).
     required:
       - serviceKind
-  ServiceTypeHealthPolicy:
-    description: |
-      Represents the health policy used to evaluate the health of services belonging to a service type.
-    properties:
-      maxPercentUnhealthyServices:
-        default: 0
-        description: |
-          The maximum percentage of services allowed to be unhealthy before your application is considered in error.
-        maximum: 100
-        minimum: 0
-        type: integer
-    type: object
-  ServiceTypeHealthPolicyMap:
-    additionalProperties:
-      $ref: '#/definitions/ServiceTypeHealthPolicy'
-    description: |
-      Defines a ServiceTypeHealthPolicy per service type name.
-
-      The entries in the map replace the default service type health policy for each specified service type.
-      For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.
-      With policy per service type, there's more granular control of the health of the service.
-
-      If no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.
-    type: object
   SingletonPartitionSchemeDescription:
     allOf:
       - $ref: '#/definitions/PartitionSchemeDescription'
@@ -1957,11 +1943,6 @@ definitions:
     default: P10675199DT02H48M05.4775807S
     description: 'The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
     type: string
-  UpgradeReplicaSetCheckTimeout:
-    default: 42949672925
-    description: 'The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).'
-    format: int64
-    type: integer
   UpgradeTimeout:
     default: P10675199DT02H48M05.4775807S
     description: 'The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.'
