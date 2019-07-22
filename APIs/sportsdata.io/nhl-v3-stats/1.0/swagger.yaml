@@ -1,0 +1,1913 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.sportsdata.io
+basePath: /v3/nhl/stats
+info:
+  title: NHL v3 Stats
+  version: '1.0'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/nhl-v3-stats.json'
+      version: '2.0'
+  x-providerName: sportsdata.io
+  x-serviceName: nhl-v3-stats
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/AllTeams':
+    get:
+      operationId: TeamsAll
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Team'
+            type: array
+      summary: Teams (All)
+  '/{format}/AreAnyGamesInProgress':
+    get:
+      description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+      operationId: AreGamesInProgress
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: boolean
+      summary: Are Games In Progress
+  '/{format}/BoxScore/{gameid}':
+    get:
+      operationId: BoxScore
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: The GameID of an NHL game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code> or <code>16905</code>
+          in: path
+          name: gameid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/BoxScore'
+      summary: Box Score
+  '/{format}/BoxScores/{date}':
+    get:
+      operationId: BoxScoresByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2017-OCT-31</code>, <code>2018-FEB-15</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/BoxScore'
+            type: array
+      summary: Box Scores by Date
+  '/{format}/BoxScoresDelta/{date}/{minutes}':
+    get:
+      operationId: BoxScoresByDateDelta
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2017-OCT-31</code>, <code>2018-FEB-15</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:
+             <code>1</code> or <code>2</code>.
+             
+          in: path
+          name: minutes
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/BoxScore'
+            type: array
+      summary: Box Scores by Date Delta
+  '/{format}/CurrentSeason':
+    get:
+      operationId: CurrentSeason
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Season'
+      summary: Current Season
+  '/{format}/DfsSlatesByDate/{date}':
+    get:
+      operationId: DfsSlatesByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-DEC-01</code>, <code>2018-FEB-15</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/DfsSlate'
+            type: array
+      summary: DFS Slates by Date
+  '/{format}/FreeAgents':
+    get:
+      operationId: PlayerDetailsByFreeAgent
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Free Agent
+  '/{format}/Games/{season}':
+    get:
+      operationId: Schedules
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc.'
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Schedules
+  '/{format}/GamesByDate/{date}':
+    get:
+      operationId: GamesByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2017-OCT-31</code>, <code>2018-FEB-15</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Games by Date
+  '/{format}/LinesBySeason/{season}':
+    get:
+      operationId: LineCombinationsBySeason
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamLine'
+            type: array
+      summary: Line Combinations by Season
+  '/{format}/News':
+    get:
+      operationId: News
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News
+  '/{format}/NewsByDate/{date}':
+    get:
+      operationId: NewsByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the news.
+             <br>Examples: <code>2017-OCT-31</code>, <code>2018-FEB-15</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News by Date
+  '/{format}/NewsByPlayerID/{playerid}':
+    get:
+      operationId: NewsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+             Example:<code>10000507</code>.
+             
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/News'
+            type: array
+      summary: News by Player
+  '/{format}/Player/{playerid}':
+    get:
+      operationId: PlayerDetailsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>30000007</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Player'
+      summary: Player Details by Player
+  '/{format}/PlayerGameStatsByDate/{date}':
+    get:
+      operationId: PlayerGameStatsByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2017-OCT-31</code>, <code>2018-FEB-15</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGame'
+            type: array
+      summary: Player Game Stats by Date
+  '/{format}/PlayerGameStatsByPlayer/{date}/{playerid}':
+    get:
+      operationId: PlayerGameStatsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+
+            <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>30000378</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayerGame'
+      summary: Player Game Stats by Player
+  '/{format}/PlayerSeasonStats/{season}':
+    get:
+      operationId: PlayerSeasonStats
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerSeason'
+            type: array
+      summary: Player Season Stats
+  '/{format}/PlayerSeasonStatsByPlayer/{season}/{playerid}':
+    get:
+      operationId: PlayerSeasonStatsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>30000378</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayerSeason'
+      summary: Player Season Stats By Player
+  '/{format}/PlayerSeasonStatsByTeam/{season}/{team}':
+    get:
+      operationId: PlayerSeasonStatsByTeam
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+        - description: |-
+            The abbreviation of the requested team.
+             <br>Examples: <code>SF</code>, <code>NYY</code>.
+             
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerSeason'
+            type: array
+      summary: Player Season Stats by Team
+  '/{format}/Players':
+    get:
+      operationId: PlayerDetailsByActive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Active
+  '/{format}/Players/{team}':
+    get:
+      operationId: PlayersByTeam
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The abbreviation of the requested team.
+             <br>Examples: <code>SF</code>, <code>NYY</code>.
+             
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Players by Team
+  '/{format}/Stadiums':
+    get:
+      operationId: Stadiums
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Stadium'
+            type: array
+      summary: Stadiums
+  '/{format}/Standings/{season}':
+    get:
+      operationId: Standings
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Standing'
+            type: array
+      summary: Standings
+  '/{format}/TeamGameStatsByDate/{date}':
+    get:
+      operationId: TeamGameStatsByDate
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+             <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+             
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamGame'
+            type: array
+      summary: Team Game Stats by Date
+  '/{format}/TeamSeasonStats/{season}':
+    get:
+      operationId: TeamSeasonStats
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamSeason'
+            type: array
+      summary: Team Season Stats
+  '/{format}/TeamStatsAllowedByPosition/{season}':
+    get:
+      operationId: TeamStatsAllowedByPosition
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Year of the season.
+             <br>Examples: <code>2016</code>, <code>2017</code>.
+             
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/TeamSeason'
+            type: array
+      summary: Team Stats Allowed by Position
+  '/{format}/teams':
+    get:
+      operationId: TeamsActive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Team'
+            type: array
+      summary: Teams (Active)
+definitions:
+  BoxScore:
+    properties:
+      Game:
+        $ref: '#/definitions/Game'
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
+      PlayerGames:
+        items:
+          $ref: '#/definitions/PlayerGame'
+        type: array
+      ShootoutPlays:
+        items:
+          $ref: '#/definitions/Play'
+        type: array
+      TeamGames:
+        items:
+          $ref: '#/definitions/TeamGame'
+        type: array
+  DfsSlate:
+    properties:
+      DfsSlateGames:
+        items:
+          $ref: '#/definitions/DfsSlateGame'
+        type: array
+      DfsSlatePlayers:
+        items:
+          $ref: '#/definitions/DfsSlatePlayer'
+        type: array
+      IsMultiDaySlate:
+        type: boolean
+      NumberOfGames:
+        type: integer
+      Operator:
+        type: string
+      OperatorDay:
+        type: string
+      OperatorGameType:
+        type: string
+      OperatorName:
+        type: string
+      OperatorSlateID:
+        type: integer
+      OperatorStartTime:
+        type: string
+      RemovedByOperator:
+        type: boolean
+      SalaryCap:
+        type: integer
+      SlateID:
+        type: integer
+      SlateRosterSlots:
+        items:
+          type: string
+        type: array
+  DfsSlateGame:
+    properties:
+      Game:
+        $ref: '#/definitions/Game'
+      GameID:
+        type: integer
+      OperatorGameID:
+        type: integer
+      RemovedByOperator:
+        type: boolean
+      SlateGameID:
+        type: integer
+      SlateID:
+        type: integer
+  DfsSlatePlayer:
+    properties:
+      OperatorPlayerID:
+        type: string
+      OperatorPlayerName:
+        type: string
+      OperatorPosition:
+        type: string
+      OperatorRosterSlots:
+        items:
+          type: string
+        type: array
+      OperatorSalary:
+        type: integer
+      OperatorSlatePlayerID:
+        type: string
+      PlayerGameProjectionStatID:
+        type: integer
+      PlayerID:
+        type: integer
+      RemovedByOperator:
+        type: boolean
+      SlateGameID:
+        type: integer
+      SlateID:
+        type: integer
+      SlatePlayerID:
+        type: integer
+  Game:
+    properties:
+      Attendance:
+        type: integer
+      AwayTeam:
+        type: string
+      AwayTeamID:
+        type: integer
+      AwayTeamMoneyLine:
+        type: integer
+      AwayTeamScore:
+        type: integer
+      Channel:
+        type: string
+      DateTime:
+        type: string
+      Day:
+        type: string
+      GameEndDateTime:
+        type: string
+      GameID:
+        type: integer
+      GlobalAwayTeamID:
+        type: integer
+      GlobalGameID:
+        type: integer
+      GlobalHomeTeamID:
+        type: integer
+      HomeTeam:
+        type: string
+      HomeTeamID:
+        type: integer
+      HomeTeamMoneyLine:
+        type: integer
+      HomeTeamScore:
+        type: integer
+      IsClosed:
+        type: boolean
+      LastPlay:
+        type: string
+      OverUnder:
+        type: number
+      Period:
+        type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
+      PointSpread:
+        type: number
+      PointSpreadAwayTeamMoneyLine:
+        type: integer
+      PointSpreadHomeTeamMoneyLine:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      StadiumID:
+        type: integer
+      Status:
+        type: string
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+      Updated:
+        type: string
+  News:
+    properties:
+      Content:
+        type: string
+      NewsID:
+        type: integer
+      PlayerID:
+        type: integer
+      Source:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      TermsOfUse:
+        type: string
+      Title:
+        type: string
+      Updated:
+        type: string
+      Url:
+        type: string
+  OpponentSeason:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      Losses:
+        type: integer
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      OpponentPosition:
+        type: string
+      OpponentStat:
+        $ref: '#/definitions/OpponentSeason'
+      OvertimeLosses:
+        type: integer
+      PenaltyMinutes:
+        type: number
+      PlusMinus:
+        type: number
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+      Wins:
+        type: integer
+  Penalty:
+    properties:
+      BenchPenaltyServedByPlayerID:
+        type: integer
+      Description:
+        type: string
+      DrawnByPlayerID:
+        type: integer
+      DrawnByTeamID:
+        type: integer
+      IsBenchPenalty:
+        type: boolean
+      PenalizedPlayerID:
+        type: integer
+      PenalizedTeamID:
+        type: integer
+      PenaltyID:
+        type: integer
+      PenaltyMinutes:
+        type: integer
+      PeriodID:
+        type: integer
+      Sequence:
+        type: integer
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+  Period:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Penalties:
+        items:
+          $ref: '#/definitions/Penalty'
+        type: array
+      PeriodID:
+        type: integer
+      ScoringPlays:
+        items:
+          $ref: '#/definitions/ScoringPlay'
+        type: array
+  Play:
+    properties:
+      AwayTeamScore:
+        type: integer
+      Category:
+        type: string
+      ClockMinutes:
+        type: integer
+      ClockSeconds:
+        type: integer
+      Created:
+        type: string
+      Description:
+        type: string
+      FirstAssistedByPlayerID:
+        type: integer
+      HomeTeamScore:
+        type: integer
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      OpposingPlayerID:
+        type: integer
+      PeriodID:
+        type: integer
+      PeriodName:
+        type: string
+      PlayID:
+        type: integer
+      PlayerID:
+        type: integer
+      PowerPlayTeam:
+        type: string
+      PowerPlayTeamID:
+        type: integer
+      SecondAssistedByPlayerID:
+        type: integer
+      Sequence:
+        type: integer
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Type:
+        type: string
+      Updated:
+        type: string
+  Player:
+    properties:
+      BirthCity:
+        type: string
+      BirthDate:
+        type: string
+      BirthState:
+        type: string
+      Catches:
+        type: string
+      DepthChartOrder:
+        type: integer
+      DepthChartPosition:
+        type: string
+      DraftKingsName:
+        type: string
+      DraftKingsPlayerID:
+        type: integer
+      FanDuelName:
+        type: string
+      FanDuelPlayerID:
+        type: integer
+      FantasyAlarmPlayerID:
+        type: integer
+      FantasyDraftName:
+        type: string
+      FantasyDraftPlayerID:
+        type: integer
+      FirstName:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Height:
+        type: integer
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      Jersey:
+        type: integer
+      LastName:
+        type: string
+      PhotoUrl:
+        type: string
+      PlayerID:
+        type: integer
+      Position:
+        type: string
+      RotoWirePlayerID:
+        type: integer
+      RotoworldPlayerID:
+        type: integer
+      Shoots:
+        type: string
+      SportRadarPlayerID:
+        type: string
+      SportsDirectPlayerID:
+        type: integer
+      StatsPlayerID:
+        type: integer
+      Status:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUpdated:
+        type: string
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUpdated:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
+      Weight:
+        type: integer
+      XmlTeamPlayerID:
+        type: integer
+      YahooName:
+        type: string
+      YahooPlayerID:
+        type: integer
+  PlayerGame:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DraftKingsPosition:
+        type: string
+      DraftKingsSalary:
+        type: integer
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FanDuelPosition:
+        type: string
+      FanDuelSalary:
+        type: integer
+      FantasyDataSalary:
+        type: integer
+      FantasyDraftPosition:
+        type: string
+      FantasyDraftSalary:
+        type: integer
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      GameID:
+        type: integer
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalGameID:
+        type: integer
+      GlobalOpponentID:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      HomeOrAway:
+        type: string
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      IsGameOver:
+        type: boolean
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      OpponentPositionRank:
+        type: integer
+      OpponentRank:
+        type: integer
+      PenaltyMinutes:
+        type: number
+      PlayerID:
+        type: integer
+      PlusMinus:
+        type: number
+      Position:
+        type: string
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+      YahooPosition:
+        type: string
+      YahooSalary:
+        type: integer
+  PlayerLine:
+    properties:
+      LineNumber:
+        type: integer
+      LineType:
+        type: string
+      Name:
+        type: string
+      PlayerID:
+        type: integer
+      Position:
+        type: string
+      Shoots:
+        type: string
+  PlayerSeason:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      PenaltyMinutes:
+        type: number
+      PlayerID:
+        type: integer
+      PlusMinus:
+        type: number
+      Position:
+        type: string
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+  ScoringPlay:
+    properties:
+      AllowedByTeamID:
+        type: integer
+      AssistedByPlayerID1:
+        type: integer
+      AssistedByPlayerID2:
+        type: integer
+      AwayTeamScore:
+        type: integer
+      EmptyNet:
+        type: boolean
+      HomeTeamScore:
+        type: integer
+      PeriodID:
+        type: integer
+      PowerPlay:
+        type: boolean
+      ScoredByPlayerID:
+        type: integer
+      ScoredByTeamID:
+        type: integer
+      ScoringPlayID:
+        type: integer
+      Sequence:
+        type: integer
+      ShortHanded:
+        type: boolean
+      TimeRemainingMinutes:
+        type: integer
+      TimeRemainingSeconds:
+        type: integer
+  Season:
+    properties:
+      ApiSeason:
+        type: string
+      Description:
+        type: string
+      EndYear:
+        type: integer
+      PostSeasonStartDate:
+        type: string
+      RegularSeasonStartDate:
+        type: string
+      Season:
+        type: integer
+      SeasonType:
+        type: string
+      StartYear:
+        type: integer
+  Stadium:
+    properties:
+      Active:
+        type: boolean
+      Address:
+        type: string
+      Capacity:
+        type: integer
+      City:
+        type: string
+      Country:
+        type: string
+      GeoLat:
+        type: number
+      GeoLong:
+        type: number
+      Name:
+        type: string
+      StadiumID:
+        type: integer
+      State:
+        type: string
+      Zip:
+        type: string
+  Standing:
+    properties:
+      City:
+        type: string
+      Conference:
+        type: string
+      ConferenceLosses:
+        type: integer
+      ConferenceWins:
+        type: integer
+      Division:
+        type: string
+      DivisionLosses:
+        type: integer
+      DivisionWins:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      Key:
+        type: string
+      Losses:
+        type: integer
+      Name:
+        type: string
+      OvertimeLosses:
+        type: integer
+      Percentage:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      ShutoutWins:
+        type: integer
+      TeamID:
+        type: integer
+      Wins:
+        type: integer
+  Team:
+    properties:
+      Active:
+        type: boolean
+      City:
+        type: string
+      Conference:
+        type: string
+      Division:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Name:
+        type: string
+      PrimaryColor:
+        type: string
+      QuaternaryColor:
+        type: string
+      SecondaryColor:
+        type: string
+      StadiumID:
+        type: integer
+      TeamID:
+        type: integer
+      TertiaryColor:
+        type: string
+      WikipediaLogoUrl:
+        type: string
+      WikipediaWordMarkUrl:
+        type: string
+      '[Key]':
+        type: string
+  TeamGame:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      GameID:
+        type: integer
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalGameID:
+        type: integer
+      GlobalOpponentID:
+        type: integer
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      HomeOrAway:
+        type: string
+      IsGameOver:
+        type: boolean
+      Losses:
+        type: integer
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      Opponent:
+        type: string
+      OpponentID:
+        type: integer
+      OvertimeLosses:
+        type: integer
+      PenaltyMinutes:
+        type: number
+      PlusMinus:
+        type: number
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+      Wins:
+        type: integer
+  TeamLine:
+    properties:
+      EvenStrengthLines:
+        items:
+          $ref: '#/definitions/PlayerLine'
+        type: array
+      FullName:
+        type: string
+      Key:
+        type: string
+      PowerPlayLines:
+        items:
+          $ref: '#/definitions/PlayerLine'
+        type: array
+      TeamID:
+        type: integer
+  TeamSeason:
+    properties:
+      Assists:
+        type: number
+      BenchPenaltyMinutes:
+        type: number
+      Blocks:
+        type: number
+      EmptyNetGoals:
+        type: number
+      FaceoffsLost:
+        type: number
+      FaceoffsWon:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      Games:
+        type: integer
+      Giveaways:
+        type: number
+      GlobalTeamID:
+        type: integer
+      Goals:
+        type: number
+      GoaltendingGoalsAgainst:
+        type: number
+      GoaltendingLosses:
+        type: number
+      GoaltendingMinutes:
+        type: integer
+      GoaltendingOvertimeLosses:
+        type: number
+      GoaltendingSaves:
+        type: number
+      GoaltendingSeconds:
+        type: integer
+      GoaltendingShotsAgainst:
+        type: number
+      GoaltendingShutouts:
+        type: number
+      GoaltendingWins:
+        type: number
+      HatTricks:
+        type: number
+      Hits:
+        type: number
+      Losses:
+        type: integer
+      Minutes:
+        type: integer
+      Name:
+        type: string
+      OpponentPosition:
+        type: string
+      OpponentStat:
+        $ref: '#/definitions/OpponentSeason'
+      OvertimeLosses:
+        type: integer
+      PenaltyMinutes:
+        type: number
+      PlusMinus:
+        type: number
+      PowerPlayAssists:
+        type: number
+      PowerPlayGoals:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Seconds:
+        type: integer
+      Shifts:
+        type: number
+      ShootoutGoals:
+        type: number
+      ShortHandedAssists:
+        type: number
+      ShortHandedGoals:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatID:
+        type: integer
+      Takeaways:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Updated:
+        type: string
+      Wins:
+        type: integer
+x-servers:
+  - url: 'http://api.sportsdata.io'
+  - url: 'https://api.sportsdata.io'
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'

@@ -1,0 +1,295 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.sportsdata.io
+basePath: /v3/soccer/projections
+info:
+  title: Soccer v3 Projections
+  version: '1.0'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/soccer-v3-projections.json'
+      version: '2.0'
+  x-providerName: sportsdata.io
+  x-serviceName: soccer-v3-projections
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/PlayerGameProjectionStatsByCompetition/{competition}/{date}':
+    get:
+      operationId: ProjectedPlayerGameStatsByCompetitionWDfsSalaries
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc.'
+          in: path
+          name: competition
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: Projected Player Game Stats by Competition (w/ DFS Salaries)
+  '/{format}/PlayerGameProjectionStatsByDate/{date}':
+    get:
+      operationId: ProjectedPlayerGameStatsByDateWDfsSalaries
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: Projected Player Game Stats by Date (w/ DFS Salaries)
+  '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
+    get:
+      operationId: ProjectedPlayerGameStatsByPlayerWDfsSalaries
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>90026231</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: Projected Player Game Stats by Player (w/ DFS Salaries)
+definitions:
+  PlayerGameProjection:
+    properties:
+      Assists:
+        type: number
+      BlockedShots:
+        type: number
+      Captain:
+        type: boolean
+      CornersWon:
+        type: number
+      Crosses:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DefenderCleanSheets:
+        type: number
+      DraftKingsPosition:
+        type: string
+      DraftKingsSalary:
+        type: integer
+      FanDuelPosition:
+        type: string
+      FanDuelSalary:
+        type: integer
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsMondogoal:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      Fouled:
+        type: number
+      Fouls:
+        type: number
+      GameId:
+        type: integer
+      Games:
+        type: integer
+      GlobalGameId:
+        type: integer
+      GlobalOpponentId:
+        type: integer
+      GlobalTeamId:
+        type: integer
+      GoalkeeperCleanSheets:
+        type: number
+      GoalkeeperGoalsAgainst:
+        type: number
+      GoalkeeperSaves:
+        type: number
+      GoalkeeperSingleGoalAgainst:
+        type: number
+      GoalkeeperWins:
+        type: number
+      Goals:
+        type: number
+      HomeOrAway:
+        type: string
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      Interceptions:
+        type: number
+      IsGameOver:
+        type: boolean
+      Jersey:
+        type: integer
+      LastManTackle:
+        type: number
+      Minutes:
+        type: number
+      MondogoalPosition:
+        type: string
+      MondogoalSalary:
+        type: integer
+      Name:
+        type: string
+      Offsides:
+        type: number
+      Opponent:
+        type: string
+      OpponentId:
+        type: integer
+      OpponentScore:
+        type: number
+      OwnGoals:
+        type: number
+      Passes:
+        type: number
+      PassesCompleted:
+        type: number
+      PenaltiesConceded:
+        type: number
+      PenaltiesWon:
+        type: number
+      PenaltyKickGoals:
+        type: number
+      PenaltyKickMisses:
+        type: number
+      PenaltyKickSaves:
+        type: number
+      PlayerId:
+        type: integer
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      RedCards:
+        type: number
+      RoundId:
+        type: integer
+      Score:
+        type: number
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      ShortName:
+        type: string
+      Shots:
+        type: number
+      ShotsOnGoal:
+        type: number
+      Started:
+        type: integer
+      StatId:
+        type: integer
+      Suspension:
+        type: boolean
+      SuspensionReason:
+        type: string
+      TacklesWon:
+        type: number
+      Team:
+        type: string
+      TeamId:
+        type: integer
+      Touches:
+        type: number
+      Updated:
+        type: string
+      UpdatedUtc:
+        type: string
+      YahooPosition:
+        type: string
+      YahooSalary:
+        type: integer
+      YellowCards:
+        type: number
+      YellowRedCards:
+        type: number
+x-servers:
+  - url: 'http://api.sportsdata.io'
+  - url: 'https://api.sportsdata.io'
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'
