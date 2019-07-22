@@ -433,6 +433,39 @@ paths:
         name: analysis_slug
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/scoring/summary':
+    get:
+      description: Scoring summary
+      operationId: getScoring
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ScoringSummary'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Scoring summary
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_console/stats':
     get:
       description: List clicks and impressions per day
@@ -1866,6 +1899,29 @@ paths:
       summary: Project Query aggregator
       tags:
         - Project
+  '/users/{username}/datasources_summary_by_projects':
+    get:
+      description: Get the datasources details for all projects of a user
+      operationId: getDatasourcesSummaryByProjects
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProjectDatasourceSummary'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get the datasources details for all projects of a user
+      tags:
+        - Datasource
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
   '/users/{username}/projects':
     get:
       description: List all active projects for the user
@@ -2859,6 +2915,9 @@ definitions:
     type: object
   Project:
     properties:
+      account_id:
+        readOnly: true
+        type: string
       active:
         type: boolean
       auto_pin_first_analysis:
@@ -2894,6 +2953,11 @@ definitions:
         format: int64
         maximum: 2147483647
         minimum: 0
+        type: integer
+      public_id:
+        format: int64
+        maximum: 9223372036854776000
+        minimum: -9223372036854776000
         type: integer
       retention_period:
         format: int64
@@ -2945,6 +3009,25 @@ definitions:
         type: string
     required:
       - datasource
+    type: object
+  ProjectDatasourceSummary:
+    properties:
+      datasource:
+        type: string
+      date_last_successful_revision:
+        readOnly: true
+        type: string
+      segments:
+        readOnly: true
+        type: string
+      stats:
+        readOnly: true
+        type: string
+      url:
+        type: string
+    required:
+      - datasource
+      - url
     type: object
   ProjectSavedFilter:
     description: Project's saved UrlFilter
@@ -3109,6 +3192,13 @@ definitions:
       - regex
       - replace
       - ignore_case
+    type: object
+  ScoringSummary:
+    properties:
+      results:
+        type: object
+    required:
+      - results
     type: object
   SitemapsReport:
     properties:

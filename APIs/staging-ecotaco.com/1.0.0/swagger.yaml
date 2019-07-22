@@ -61,11 +61,358 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.7.31
       format: apiBlueprint
       url: 'https://ecotaco.docs.apiary.io/api-description-document'
       version: 1A
   x-providerName: staging-ecotaco.com
+securityDefinitions: {}
+tags:
+  - name: EcoTa.co API Root
+  - description: |-
+      The account methods use the User ressource.
+
+      The User ressource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the User
+
+      - **name** (required, string) : Name of the User
+
+      - **first_name** (required, string) : First name of the User
+
+      - **email** (required, unique, string) : Email of the User
+
+      - **phone** (required, string) : Phone of the User
+
+      - **birth_date** (optional, string) : Birth date of the User
+
+      - **language** (required, string) : Language of the User (fixed by the application)
+
+      - **referral_code** (optional, string) : Driver referal code
+
+      - **avatar_url** (optional, string) : Avatar Url of the User (fixed by the application, gravatar or facebook)
+
+      - **newsletter** (required, boolean) : True if User want to receive the newsletter
+
+      - **addresses** : An Array of addresses (see *Addresses*)
+
+      - **companies** : An Array of companies (see *Companies*)
+
+      The User have a array of **Addresses** with the following attributes :
+
+      - **city** (required, string) : City
+
+      - **country** (required, string) : Country
+
+      - **latitude** (required, float) : Latitude of the Address
+
+      - **longitude** (required, float) : Longitude of the Address
+
+      - **postal_code** (required, integer) : Postal Code
+
+      - **type_address** (required, string) : Address Type (HOME of User)
+
+      - **address_complement** (optional, string) : Address complement
+
+      - **label** (optional, string) : Address Type (HOME of User)
+
+      The User have a array of **Companies** with the following attributes :
+
+      - **id** (required, string) : Id
+
+      - **user_id** (required, string) : Id of user attached to the company
+
+      - **type_relation** (required, float) : Relation and role in the company
+
+      - **name** (required, float) : Name of company
+
+      **type_relation** :
+
+      - company_manager : Can manage user and reserve for others user with relation on the company
+
+      - visitor : Visitor of the company
+
+      - collaborator : Collaborator of the company
+    name: Accounts
+  - description: |-
+      CreditCards resource
+
+      The Credit Card ressource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the credit card
+
+      - **card_id** (required, string) : External stripe ID
+
+      - **card_type** (required,string) : Card Type
+
+      - **client** (required,string) : External stripe Customer ID
+
+      - **expire_month** (required, integer) : Expire Mouth
+
+      - **expire_year** (required, integer) : Expire Year
+
+      - **label** (required, string) : Label of the Card
+
+      - **last4** (required, string) : Last four digit in the card
+
+      - **type_transaction** (required, string) : Type transaction (default : card)
+
+      - **user_id** (required, integer) : ID of the User
+    name: CreditCards
+  - description: |-
+      The Ride resource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the Ride
+
+      - **booking_user_id** (integer) : ID of user who have create the ride
+
+      - **company_id** (integer) : ID of company who have create the ride
+
+      - **requested_start** (required, date) : Requested date of the ride
+
+      - **flight_number** (string) : Fligth number
+
+      - **train_number**  (string) : Train number
+
+      - **nb_passengers** (required, integer) : Number of passengers (de 1 à 8)
+
+      - **pick_up_or_tacking_out** (boolean) : If pick up or tacking out in station or other
+
+      - **comment** (string) : Comment of ride forward to driver
+
+      - **points** : Array of Points (see *Points*)
+       one start point and one end point is required to create a ride
+
+      - **passengers** : Array of Passengers (see *Passengers*)
+       One passenger (attribute main: true) is mandatory to book a ride
+
+      - **distance** (float) : Distance in Km
+
+      - **driver_arrival** (date) : Date of real driver arrival
+
+      - **duration** (integer) : Duration of the Ride in seconds
+
+      - **price** (float) : price of the ride (without promotion)
+
+      - **total_price** (float) : total price of the Ride
+
+      - **real_end** (date) : Date of real end of ride
+
+      - **real_start** (date) : Date of real start of ride
+
+      - **refused_label** (string) : Refused Label (see *REFUSED_LABELS*)
+
+      - **status** (string) : Status of the ride (see *STATUSES*)
+
+      - **eta** (integer) : Estimated Time of arrival
+
+      - **driver** (hash) : Information about driver (see *Driver*)
+
+      - **vehicle** (hash) : Information about vehicle (see *Vehicle*)
+
+      - **estimated_start** (date) : Estimated Start date of the ride
+
+      - **estimated_end** (date) : Estimated End date of the ride
+
+      - **promotional_code_used** : Promotional code use if any
+
+      **STATUSES** :
+
+      - NONE = ''
+
+      - REFUSED = 'refused'
+      The ride can not be reserved
+
+      - ESTIMATED = 'estimated'
+      We have availability for the ride, it can be reserved
+
+      - RESERVED = 'reserved'
+
+      - AFFECTED = 'affected'
+
+      - SENT = 'sent'
+
+      - IN_PROGRESS = 'in_progress'
+
+      - CANCELLED = 'cancelled'
+
+      - CUSTOMER_MISSING = 'customer_missing'
+
+      - FINISHED = 'finished'
+
+      - FAILED = 'failed'
+
+      **REFUSED_LABELS** :
+
+      - NOT_IN_A_CATCHEMENT_AREA = 'not_in_a_catchement_area'
+
+      - ROUTE_COULD_NOT_BE_CALCULATE = 'route_could_not_be_calculate'
+
+      - NO_DRIVER_AVAILABLE_WITH_MORE_THAN_4_PLACES = 'no_driver_available_with_vehicle_with_more_4_places'
+
+      - NO_DRIVER_AVAILABLE = 'no_driver_available'
+
+      - PLANNED_DRIVERS_BUT_NOT_CONNECTED = 'planned_drivers_but_not_conected'
+
+      - ERROR_ON_ONLINE_AND_NEAR_OF = 'error_on_online_and_near_of'
+
+      - TOMTOM_QUOTA_REACHED = 'tomtom_error_request_quota_reached'
+
+      - AUTHORIZATION_REFUSED = 'authorization_refused'
+
+      The Ride have a array of **Points** with the following attributes :
+
+      Only one point with type start and only one point with type start
+
+      - **id** (required, unique, integer) : ID of the Point
+
+      - **longitude** (required, float) : Longitude of the Point
+
+      - **latitude** (required, float) : Latitude of the Point
+
+      - **type_point** (required, string) : Point Type ( 'start' or 'end' )
+
+      - **address** (optional, string) : Address of the Point
+
+      - **address_complement** (optional, string) : Address Complement of the Point
+
+      - **postal_code** (optional, integer) : Postal Code of the Point
+
+      - **city** (optional, string) : City of the Point
+
+      - **country** (optional, string) : Country of the Point
+
+      - **user_input** (optional, string) : User Input for the Point
+
+      - **catchement_areas_id** (required, string) : Catchement Areas ID of the Point (fixed by the application)
+
+      - **ride_id** (required, integer) : The Ride ID (fixed by the application)
+
+      - **comment** (optional, string): Additionnals informations or comment
+
+      - **contacts** (optional, array): Array of Contacts (see *Contacts*)
+
+      The Point may have a array of **Contacts** with the following attributes :
+
+      The contact on the pick up or drop off point
+
+      - **email** (optional, string) : Email of the Contact
+
+      - **first_name** (optional, string) : Fist Name of the Contact
+
+      - **last_name** (optional, string) : Name of the Contact
+
+      - **phone** (optional, string) : Phone number of the Contact
+
+      The Ride have a array of **Passengers** with the following attributes :
+
+      One main passenger (with main attribute at true) is required to book a ride
+
+      - **main** (required, boolean) : If the passenger is the main passenger
+
+      - **first_name** (optional, string) : Fist Name of the Passenger
+
+      - **name** (optional, string) : Last Name of the Passenger
+
+      - **phone** (optional, string) : Phone number of the Passenger (in international format)
+
+      - **email** (optional, string) : Email of the Passenger (required for create user)
+
+      - **user_id** (optional, integer) : The User ID related to the passenger if exist
+
+      - **company_relation** (optional, integer) : The type of relation with the company for the passenger (if register is true)
+
+      - **register** (optional, integer) : for register the passenger
+
+      The Ride have a hash of **Driver** with the following attributes :
+
+      This information is provided when the ride is in_progress status
+
+      - **first_name** (optional, string) : Fist Name of the driver
+
+      - **phone** (optional, string) : Phone number of the driver
+
+      - **latitude** (optional, string) : Latitude of driver
+
+      - **longitude** (optional, string) : Longitude of driver
+
+      The Ride have a hash of **Vehicle** with the following attributes :
+
+      This information is provided when the ride is in_progress status
+
+      - **manufacturer** (optional, string) : Manufacturer of the vehicle
+
+      - **color** (optional, string) : Color of the vehicle
+
+      - **model** (optional, string) : Model of the vehicle
+    name: Rides
+  - description: |-
+      Promotional Codes resource
+
+      The Promotional Codes ressource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the affected promotional code
+
+      - **status** (required, string) : Status of the affected promotional code ('used' or 'notused')
+
+      - **code** (required, string) : The code of the promotional code
+
+      - **label** (required, string) : Label of the promotional code
+
+      - **promotional_type** (required, string) : The type of promotional code ('pourcent', 'amount' or 'km')
+
+      - **value** (required, float) : the value of the promotional code
+
+      - **start_date** (required, date) : Start Date for the promotional code
+
+      - **end_date** (required, date) : End Date for the promotional code
+    name: Promotional Codes
+  - description: 'The Addresses use google API for searching places, and also user favorite or best places.'
+    name: Adresses
+  - description: |-
+      Catchement area resource
+
+      The catchement area ressource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the catchement area
+
+      - **label** (required, string) : Label
+
+      - **launch_at** (required, date) : Launch date of catchement area
+
+      - **coordinates** (required, array) : coordinates
+
+      **Coordinates** :
+
+      - **id** (required, unique, integer) : ID of the coordinates
+
+      - **latitude** (required, float) : Latitude of the coordinates
+
+      - **longitude** (required, float) : Longitude of the coordinates
+
+      - **rank** (required, integer) : Rank to order coordinates of th catchement area
+
+      We provide json or geojson format
+    name: Catchement Areas
+  - description: |-
+      Product resource
+
+      The product ressource has the following attributes :
+
+      - **id** (required, unique, integer) : ID of the product
+
+      - **product_type** (required, string) : Product type (See *TYPES*)
+
+      - **name** (required, dastringte) : Name of product
+
+      - **description** (required, string) : Description of product
+
+      **TYPES** :
+
+      - transport_person : On demand transport person
+
+      - package_delivery : Package delivery
+    name: Products
 paths:
   /:
     get:
@@ -88,7 +435,19 @@ paths:
   /accounts:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -98,7 +457,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -126,7 +494,19 @@ paths:
         - Accounts
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -136,7 +516,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -164,7 +553,19 @@ paths:
         - Accounts
     put:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -174,7 +575,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -203,7 +613,19 @@ paths:
   /accounts/password:
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       responses:
         '201':
           description: Created
@@ -215,7 +637,19 @@ paths:
   /accounts/payment_methods:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -255,7 +689,19 @@ paths:
   /accounts/settings:
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -265,7 +711,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -294,7 +749,19 @@ paths:
   /accounts/sign_in:
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -304,7 +771,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -333,7 +809,19 @@ paths:
   /accounts/update_password:
     put:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -343,7 +831,16 @@ paths:
             application/json:
               user:
                 addresses:
-                  - id: 29
+                  - address_complement: null
+                    city: null
+                    company_id: null
+                    country: null
+                    id: 29
+                    label: null
+                    latitude: null
+                    longitude: null
+                    postal_code: null
+                    street: null
                     type_address: home
                 auth_token: c1cb860b4fa68ff9f3d94791d28a8c89f89f4b4eceded8eec9f1e6fc10ee4e8c
                 avatar_url: 'https://gravatar.com/avatar/45def3303a8c2b379605f3db4f61ebcc.png?s=200&d=http%3A%2F%2Fapp.ecota.co%2Fassets%2Fguest.png'
@@ -379,7 +876,19 @@ paths:
         - **latitude** (optional, float) : The location latitude for the seach
 
         - **search** (required, string) : The search text (most than 3 char)
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       responses:
         '200':
           description: OK
@@ -391,7 +900,19 @@ paths:
   /addresses/places_details:
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -407,6 +928,9 @@ paths:
               name: Gare Lille Flandres
               postal_code: '59800'
               reference: CnRtAAAAnFiSmz9OFYi4ee_IeN8WgX0kjB50NtCCTTxJdTQzz9F33kC5eit_Z2DIW-MyrbwN9_cJ7lkBznVZ6o_Da52wCTzmKvbHvImkYTD24su-vjUfszNnJRWnV2M0ckZEdJ5vpG1S02m6jgzJ_FmOnImI2BIQh6x7kos53RZHQujnMlRkABoU28Ivbhnf72dh3L6yfqeB-oaIHYs
+              region: null
+              street: null
+              street_number: null
               vicinity: Lille
           headers: {}
       summary: Get autocomplete places details
@@ -415,7 +939,19 @@ paths:
   /catchement_areas:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/vnd.geo+json
       responses:
@@ -538,6 +1074,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/vnd.geo+json
       responses:
@@ -589,7 +1138,19 @@ paths:
   /credit_cards:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       responses:
         '200':
           description: OK
@@ -607,6 +1168,7 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
       responses:
         '200':
           description: OK
@@ -618,7 +1180,19 @@ paths:
   /products:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -649,6 +1223,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -668,7 +1255,19 @@ paths:
   /promotional_codes:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -692,7 +1291,13 @@ paths:
         - Promotional Codes
     post:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
       responses:
         '201':
           description: Created
@@ -710,6 +1315,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -719,14 +1337,18 @@ paths:
             application/json:
               ride:
                 booking_user_id: 11
+                comment: null
+                company_id: null
                 distance: 10.079
                 driver:
                   first_name: Céline
                   phone: 0629453814
+                driver_arrival: null
                 duration: 1096
                 estimated_end: '2014-06-12T17:03:55+02:00'
                 estimated_start: '2014-06-12T16:45:39+02:00'
                 eta: 1357
+                flight_number: null
                 id: 322
                 nb_passengers: 1
                 passengers:
@@ -740,9 +1362,11 @@ paths:
                 pick_up_or_tacking_out: false
                 points:
                   - address: 53-57 Rue Masséna
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Lille
+                    comment: null
                     contacts:
                       - email: ''
                         first_name: ''
@@ -756,6 +1380,7 @@ paths:
                     type_point: start
                     user_input: 53-57 Rue Masséna
                   - address: Rue de l'Harmonie
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Villeneuve-d'Ascq
@@ -769,11 +1394,15 @@ paths:
                     user_input: Rue de l'Harmonie
                 price: 19.8
                 product_id: 1
+                promotional_code_used: null
+                real_end: null
+                real_start: null
                 refused_label: ''
                 requested_start: '2014-06-12T16:23:02+02:00'
                 reserved_by_phone: false
                 status: in_progress
                 total_price: 19.8
+                train_number: null
                 vehicle:
                   color: gris
                   manufacturer: Audi
@@ -791,6 +1420,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -800,21 +1442,26 @@ paths:
             application/json:
               ride:
                 booking_user_id: 11
+                comment: null
+                company_id: null
                 created_at: '2014-07-02T17:33:55+02:00'
                 distance: 24.248
                 driver:
                   first_name: Céline
                   phone: 0629453814
+                driver_arrival: null
                 duration: 1424
                 estimated_end: '2014-07-02T18:05:48+02:00'
                 estimated_start: '2014-07-02T17:42:04+02:00'
                 eta: 397
+                flight_number: null
                 id: 378
                 nb_passengers: 1
                 passengers:
                   - main: true
                     user_id: 11
-                  - email: passager@gmail.com
+                  - company_relation: null
+                    email: passager@gmail.com
                     first_name: Non registered
                     main: false
                     name: Passenger
@@ -830,9 +1477,11 @@ paths:
                 pick_up_or_tacking_out: false
                 points:
                   - address: 53-57 Rue Masséna
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Lille
+                    comment: null
                     contacts:
                       - email: ''
                         first_name: ''
@@ -846,6 +1495,7 @@ paths:
                     type_point: start
                     user_input: 53-57 Rue Masséna
                   - address: Rue de l'Harmonie
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Villeneuve-d'Ascq
@@ -858,11 +1508,15 @@ paths:
                     type_point: end
                     user_input: Rue de l'Harmonie
                 price: 39.8
+                promotional_code_used: null
+                real_end: null
+                real_start: null
                 refused_label: ''
                 requested_start: '2014-07-02T17:35:27+02:00'
                 reserved_by_phone: false
                 status: cancelled
                 total_price: 39.8
+                train_number: null
                 updated_at: '2014-07-02T17:35:34+02:00'
                 vehicle:
                   color: gris
@@ -881,6 +1535,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -904,6 +1571,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -913,23 +1593,29 @@ paths:
             application/json:
               ride:
                 booking_user_id: 11
+                comment: null
+                company_id: null
                 created_at: '2014-07-02T17:33:55+02:00'
                 distance: 24.248
                 driver:
                   first_name: Céline
                   phone: 0629453814
+                driver_arrival: null
                 duration: 1424
                 estimated_end: '2014-07-02T18:03:56+02:00'
                 estimated_start: '2014-07-02T17:40:12+02:00'
                 eta: 397
+                flight_number: null
                 id: 378
                 nb_passengers: 1
                 pick_up_or_tacking_out: false
                 points:
                   - address: 53-57 Rue Masséna
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Lille
+                    comment: null
                     contacts:
                       - email: ''
                         first_name: ''
@@ -943,6 +1629,7 @@ paths:
                     type_point: start
                     user_input: 53-57 Rue Masséna
                   - address: Rue de l'Harmonie
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Villeneuve-d'Ascq
@@ -955,11 +1642,15 @@ paths:
                     type_point: end
                     user_input: Rue de l'Harmonie
                 price: 39.8
+                promotional_code_used: null
+                real_end: null
+                real_start: null
                 refused_label: ''
                 requested_start: '2014-07-02T17:33:35+02:00'
                 reserved_by_phone: false
                 status: estimated
                 total_price: 39.8
+                train_number: null
                 updated_at: '2014-07-02T17:34:02+02:00'
                 vehicle:
                   color: gris
@@ -981,6 +1672,19 @@ paths:
           name: id
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       produces:
         - application/json
       responses:
@@ -990,21 +1694,26 @@ paths:
             application/json:
               ride:
                 booking_user_id: 11
+                comment: null
+                company_id: null
                 created_at: '2014-07-02T17:33:55+02:00'
                 distance: 24.248
                 driver:
                   first_name: Céline
                   phone: 0629453814
+                driver_arrival: null
                 duration: 1424
                 estimated_end: '2014-07-02T18:05:48+02:00'
                 estimated_start: '2014-07-02T17:42:04+02:00'
                 eta: 397
+                flight_number: null
                 id: 378
                 nb_passengers: 1
                 passengers:
                   - main: true
                     user_id: 11
-                  - email: passager@gmail.com
+                  - company_relation: null
+                    email: passager@gmail.com
                     first_name: Non registered
                     main: false
                     name: Passenger
@@ -1020,9 +1729,11 @@ paths:
                 pick_up_or_tacking_out: false
                 points:
                   - address: 53-57 Rue Masséna
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Lille
+                    comment: null
                     contacts:
                       - email: ''
                         first_name: ''
@@ -1036,6 +1747,7 @@ paths:
                     type_point: start
                     user_input: 53-57 Rue Masséna
                   - address: Rue de l'Harmonie
+                    address_complement: null
                     catchement_areas_id:
                       - 1
                     city: Villeneuve-d'Ascq
@@ -1048,11 +1760,15 @@ paths:
                     type_point: end
                     user_input: Rue de l'Harmonie
                 price: 39.8
+                promotional_code_used: null
+                real_end: null
+                real_start: null
                 refused_label: ''
                 requested_start: '2014-07-02T17:35:27+02:00'
                 reserved_by_phone: false
                 status: sent
                 total_price: 39.8
+                train_number: null
                 updated_at: '2014-07-02T17:35:30+02:00'
                 vehicle:
                   color: gris
@@ -1071,11 +1787,25 @@ paths:
           name: page
           required: true
           type: number
+          x-example: '1'
         - description: Number of items per page to load
           in: path
           name: per_page
           required: true
           type: number
+          x-example: '1'
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
       responses:
         '200':
           description: OK
@@ -1087,6 +1817,18 @@ paths:
     post:
       description: ''
       parameters:
+        - description: e.g. application/json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/json
+        - description: e.g. en
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+          x-example: en
         - in: path
           name: page
           required: true
@@ -1104,12 +1846,19 @@ paths:
             application/json:
               ride:
                 booking_user_id: 11
+                comment: null
+                company_id: null
                 created_at: '2014-07-02T17:33:55+02:00'
+                distance: null
                 driver:
                   first_name: Céline
                   phone: 0629453814
+                driver_arrival: null
+                duration: null
+                estimated_end: null
                 estimated_start: '2014-07-02T17:33:35+02:00'
                 eta: 0
+                flight_number: null
                 id: 378
                 nb_passengers: 1
                 passengers: []
@@ -1138,9 +1887,16 @@ paths:
                     postal_code: 7700
                     type_point: end
                     user_input: 101 Rue de l'Echauffour..e
+                price: null
+                promotional_code_used: null
+                real_end: null
+                real_start: null
+                refused_label: null
                 requested_start: '2014-07-02T17:33:35+02:00'
                 reserved_by_phone: false
+                status: null
                 total_price: 0
+                train_number: null
                 updated_at: '2014-07-02T17:33:55+02:00'
                 vehicle:
                   color: gris

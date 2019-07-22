@@ -33,6 +33,8 @@ tags:
   - name: Annotation
   - name: Gene
   - name: Lookup
+  - description: Map Web Service
+    name: Map
   - description: NIH Data Commons
     name: NIHdatacommons
   - description: Ontology Web Service
@@ -45,7 +47,34 @@ tags:
   - name: Rat Strain
   - description: Stats Web Service
     name: Statistics
+  - description: Enrichment Web Service
+    name: enrichment-web-service
 paths:
+  '/agr/affectedGenomicModels/{taxonId}':
+    get:
+      operationId: getAffectedGenomicModelsUsingGET
+      parameters:
+        - description: The taxon ID for species
+          in: path
+          name: taxonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get affected genomic models (rat strains with gene alleles) submitted by RGD to AGR by taxonId
+      tags:
+        - AGR
   '/agr/alleles/{taxonId}':
     get:
       operationId: getAllelesForTaxonUsingGET
@@ -482,6 +511,62 @@ paths:
       summary: Returns a list annotations for an ontology term or a term and it's children
       tags:
         - Annotation
+  /enrichment/annotatedGenes:
+    post:
+      consumes:
+        - application/json
+      operationId: getEnrichmentDataUsingPOST
+      parameters:
+        - description: geneRequest
+          in: body
+          name: geneRequest
+          required: true
+          schema:
+            $ref: '#/definitions/EnrichmentGeneRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes annotated to the term.Genes are rgdids separated by comma.Species type is an integer value.term is the ontology
+      tags:
+        - enrichment-web-service
+  /enrichment/data:
+    post:
+      consumes:
+        - application/json
+      operationId: getEnrichmentDataUsingPOST_1
+      parameters:
+        - description: enrichmentRequest
+          in: body
+          name: enrichmentRequest
+          required: true
+          schema:
+            $ref: '#/definitions/EnrichmentRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a chart of ontology terms annotated to the genes.Genes are rgdids separated by comma.Species type is an integer value.Aspect is the Ontology group
+      tags:
+        - enrichment-web-service
   '/genes/affyId/{affyId}/{speciesTypeKey}':
     get:
       operationId: getGenesByAffyIdUsingGET
@@ -1515,6 +1600,59 @@ paths:
       summary: Return a Map of species type keys available in RGD
       tags:
         - Lookup
+  '/maps/chr/{mapKey}':
+    get:
+      operationId: getChromosomesByAssemblyUsingGET
+      parameters:
+        - description: mapKey
+          format: int32
+          in: path
+          name: mapKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of chromosomes
+      tags:
+        - Chromosome
+        - Map
+  '/maps/{speciesTypeKey}':
+    get:
+      operationId: getMapsBySpeciesUsingGET
+      parameters:
+        - description: species Key
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of assemblies
+      tags:
+        - Map
   '/ontology/term/{accId}':
     get:
       operationId: getTermUsingGET
@@ -1588,9 +1726,46 @@ paths:
       summary: Return a list of pathways based on category provided
       tags:
         - Pathway
-  '/phenotype/phenominer/chart/{speciesTypeKey}/{termString}':
+  '/phenotype/phenominer/chart/{speciesTypeKey}/{refRgdId}/{termString}':
     get:
       operationId: getChartInfoUsingGET
+      parameters:
+        - description: 'Species Type Key - 3=rat 4=chinchilla '
+          format: int32
+          in: path
+          name: speciesTypeKey
+          required: true
+          type: integer
+        - description: Reference RGD ID for a study
+          format: int32
+          in: path
+          name: refRgdId
+          required: true
+          type: integer
+        - description: List of term accession IDs
+          in: path
+          name: termString
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study works like a filter.'
+      tags:
+        - Quantitative Phenotype
+  '/phenotype/phenominer/chart/{speciesTypeKey}/{termString}':
+    get:
+      operationId: getChartInfoUsingGET_1
       parameters:
         - description: 'Species Type Key - 3=rat 4=chinchilla '
           format: int32
@@ -2708,6 +2883,30 @@ definitions:
       termAcc:
         type: string
     title: AnnotationRequest
+    type: object
+  EnrichmentGeneRequest:
+    properties:
+      accId:
+        type: string
+      geneSymbols:
+        items:
+          type: string
+        type: array
+      species:
+        type: string
+    title: EnrichmentGeneRequest
+    type: object
+  EnrichmentRequest:
+    properties:
+      aspect:
+        type: string
+      genes:
+        items:
+          type: string
+        type: array
+      species:
+        type: string
+    title: EnrichmentRequest
     type: object
   Gene:
     properties:

@@ -50,6 +50,37 @@ paths:
       summary: Creates a Access Token to write on a Card (e.g. NFC)
       tags:
         - AccessToken
+  /api/Account/login:
+    get:
+      consumes: []
+      deprecated: false
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Account
+    post:
+      consumes: []
+      deprecated: false
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Account
   /api/Actions:
     post:
       consumes:
@@ -364,6 +395,7 @@ paths:
             - MeterTypeCompressedAir
             - MeterTypeSolarLog
             - MeterTypeVirtualMeter
+            - MeterTypeWMBusGateway
           in: query
           name: meterEnergyType
           required: true
@@ -999,6 +1031,79 @@ paths:
       summary: Gets the consumption of a folder with a virtuall tariffs.
       tags:
         - VirtualTariffConsumption
+  /api/oauth/authorize:
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - in: query
+          name: client_id
+          required: true
+          type: string
+        - in: query
+          name: redirect_uri
+          required: true
+          type: string
+        - in: query
+          name: state
+          required: true
+          type: string
+        - in: query
+          name: scope
+          required: false
+          type: string
+        - in: query
+          name: client_secret
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - OAuth
+    post:
+      consumes: []
+      deprecated: false
+      parameters:
+        - in: query
+          name: client_id
+          required: true
+          type: string
+        - in: query
+          name: redirect_uri
+          required: true
+          type: string
+        - in: query
+          name: state
+          required: true
+          type: string
+        - in: query
+          name: scope
+          required: false
+          type: string
+        - in: query
+          name: client_secret
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - OAuth
 definitions:
   AccessTokenToPut:
     description: Container Class for the Put action of an Access Token
@@ -1073,6 +1178,9 @@ definitions:
         description: The Hardware Version of a Meter.
         format: int32
         type: integer
+      ID:
+        description: The ID of the device
+        type: string
     type: object
   CustomDeviceToPost:
     description: Container Class for the Web API
@@ -1134,6 +1242,9 @@ definitions:
         description: The Number of the Active Tariff
         format: int32
         type: integer
+      AdditionalMeterSerialNumber:
+        description: An additional Meter serial number. e.g. the number of a meter a smart-me device is connected to.
+        type: string
       AnalogOutput1:
         description: The analog output number 1 (PWM signal) (0 - 32183)
         format: int32
@@ -1206,6 +1317,7 @@ definitions:
           - MeterTypeCompressedAir
           - MeterTypeSolarLog
           - MeterTypeVirtualMeter
+          - MeterTypeWMBusGateway
         type: string
       DigitalInput1:
         description: The digital input number 1
@@ -1242,6 +1354,7 @@ definitions:
           - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
           - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
           - MeterFamilyTypeSmartMe1PhaseMeter32AGprs
+          - MeterFamilyTypeWMBusGatewayV1
           - MeterFamilyTypeRestApiMeter
           - MeterFamilyTypeVirtualBillingMeter
         type: string
@@ -1411,12 +1524,40 @@ definitions:
         description: The Meter Counter Reading (Total Energy used) in kWh or m3.
         format: double
         type: number
+      CounterReadingExport:
+        description: The Meter Counter Reading only export
+        format: double
+        type: number
+      CounterReadingExportT1:
+        description: The Meter Counter Reading only export (Tariff 1)
+        format: double
+        type: number
+      CounterReadingExportT2:
+        description: The Meter Counter Reading only export (Tariff 2)
+        format: double
+        type: number
       CounterReadingT1:
         description: The Meter Counter Reading Tariff 1 in kWh or m3.
         format: double
         type: number
       CounterReadingT2:
         description: The Meter Counter Reading Tariff 2 in kWh or m3.
+        format: double
+        type: number
+      Current:
+        description: The Current (in A)
+        format: double
+        type: number
+      CurrentL1:
+        description: The Current Phase L1 (in A)
+        format: double
+        type: number
+      CurrentL2:
+        description: The Current Phase L2 (in A)
+        format: double
+        type: number
+      CurrentL3:
+        description: The Current Phase L3 (in A)
         format: double
         type: number
       DeviceEnergyType:
@@ -1436,7 +1577,11 @@ definitions:
           - MeterTypeCompressedAir
           - MeterTypeSolarLog
           - MeterTypeVirtualMeter
+          - MeterTypeWMBusGateway
         type: string
+      DigitalInput1:
+        description: The digital input number 1
+        type: boolean
       Id:
         description: The ID of the device
         type: string
@@ -1457,6 +1602,22 @@ definitions:
       Name:
         description: The Name of the Device
         type: string
+      PowerFactor:
+        description: 'The Power Factor (cos phi). Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL1:
+        description: 'The Power Factor (cos phi) Phase L1. Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL2:
+        description: 'The Power Factor (cos phi) Phase L2. Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL3:
+        description: 'The Power Factor (cos phi) Phase L3. Range: 0 - 1'
+        format: double
+        type: number
       Serial:
         description: The Serial number
         format: int64
@@ -1469,6 +1630,22 @@ definitions:
         description: The Date of the Value (in UTC). If this is null the Server Time is used.
         format: date-time
         type: string
+      Voltage:
+        description: The Voltage (in V)
+        format: double
+        type: number
+      VoltageL1:
+        description: The Voltage Phase L1 (in V)
+        format: double
+        type: number
+      VoltageL2:
+        description: The Voltage Phase L2 (in V)
+        format: double
+        type: number
+      VoltageL3:
+        description: The Voltage Phase L3 (in V)
+        format: double
+        type: number
     type: object
   FolderData:
     description: Container class for the folder API
@@ -1600,6 +1777,7 @@ definitions:
           - Nothing
           - TurnOff
           - TurnOn
+          - SetPwmValue
         type: string
       Name:
         description: The Name of the Output
@@ -1623,6 +1801,7 @@ definitions:
           - ImpulseOutputReactiveEnergy
           - DigitalOutput
           - AnalogPwmSignalOutput
+          - Disabled
         type: string
     type: object
   OutputInformation:

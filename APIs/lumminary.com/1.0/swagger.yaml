@@ -6,7 +6,7 @@ basePath: /v1
 info:
   contact:
     x-twitter: LumminaryDNA
-  description: |
+  description: |-
     # Introduction
     The Lumminary API was built to allow third parties to interact with Lumminary customers and gain access to their genetic data. The Lumminary API is fast, scalable and highly secure. All requests to the Lumminary API take place over SSL, which means all communication of Customer data is encrypted.
 
@@ -16,9 +16,11 @@ info:
     |-----------|-----------|
     |**Third party**|A third party (also referred to as "partner" or as "you") is a company which offers services and products using genetic data.|
     |**Lumminary clients**|The Lumminary client (also referred to as "customer") is an individual who has created an account on the Lumminary platform.|
-    |**Lumminary**|This is  us - our services including the Lumminary platform, the API, the DNA App Store, the Vault, the "Connect with Lumminary" button, and the website in its totality. |
+    |**Lumminary**|This is  us - our services including the Lumminary platform, the API, the DNA App Store, the DNA Vault, the "Connect with Lumminary" button, and the website in its totality. |
     |**CWL**|This is the acronym for the "Connect with Lumminary" button.|
     |**dataset**|This is the term we use when we refer to a customer's genetic data.|
+    |**Lumminary API**|This is a library/module that you can use to integrate your apps with the Lumminary platform.|
+    |**Lumminary toolkit**|This is a stand alone application which helps you integrate with Lumminary without writing any code or interacting with the Lumminary API.|
 
     Let's dive in, now. 
     * [**Overview**](#section/Introduction/Overview)
@@ -35,17 +37,17 @@ info:
 
     ## Overview
 
-    In order to use Lumminary services, you'll need to install the Lumminary API Client and Toolkit. The Lumminary API Client and Toolkit are available in multiple programming languages, and we also provide a sandbox environment which the partner can use for integration and tests.
+    In order to use Lumminary services, you'll need to install the Lumminary API Client or Toolkit. The Lumminary API Client and Toolkit are available in multiple programming languages, and we also provide a sandbox environment which you can use for integration and tests.
 
     There are a couple of differences between the API Client and the Toolkit. Mainly, it's about the ease of use for integration. The Toolkit is basically a stand-alone application that facilitates the integration with the Lumminary API without the need to modify your already existing code.
 
     You use the Lumminary API Client when you want to integrate it inside your own application. This means it gives you full flexibility regarding the integration into your own workflow.
 
-    You use the Lumminary Toolkit for an integration where the Toolkit is placed alongside your own application. You can use the Toolkit from the CLI - for example, to run a cronjob that processes incoming orders. The Toolkit has the Lumminary API Client built in, which means you don't have to separately install the API Client if you already have the Toolkit.
+    You use the Lumminary Toolkit for an integration where the Toolkit is placed alongside your own application. You can use the Toolkit from the CLI - for example, to run a cronjob that processes incoming orders. The Toolkit uses the Lumminary API Client.
 
     # Install Lumminary API Client and/or Toolkit
 
-    We provide the Lumminary API Client and Toolkit in multiple programming languages - default are PHP (minimum version 5.5), Python2.7 and Python3. However, if you need them in another language (Java, Obj-C, JavaScript, C#, Perl, CURL), please contact us.
+    We provide the Lumminary API Client and Toolkit in multiple programming languages - default are PHP (minimum version 7.0), Python2.7 and Python3. However, if you need them in another language (Java, Obj-C, JavaScript, C#, Perl, CURL), please contact us.
 
 
     ## How to install the Lumminary API Client
@@ -63,7 +65,7 @@ info:
         }
     ],
     "require": {
-        "lumminary/api-client-php": "v1.0.0"
+        "lumminary/api-client-php": "v1.0.6"
     }
     ```
 
@@ -76,13 +78,13 @@ info:
     To install directly, run
 
     ```bash
-    pip install git+ssh://git@github.com/Lumminary/lumminary-api-client-python.git@v1.0.0#egg=lumminary-api-client
+    pip install git+https://git@github.com/Lumminary/lumminary-api-client-python.git@v1.0.7#egg=lumminary-api-client
     ```
 
     Or add the following line in your requirements.txt
 
     ```bash
-    git+ssh://git@github.com/Lumminary/lumminary-api-client-python.git@v1.0.0#egg=lumminary-api-client
+    git+https://git@github.com/Lumminary/lumminary-api-client-python.git@v1.0.7#egg=lumminary-api-client
     ```
 
     ## How to install the Lumminary Toolkit
@@ -100,11 +102,21 @@ info:
 
     To install the Lumminary Toolkit, run the following command where 'lumminary-toolkit-directory' is the directory where you want to install the Lumminary Toolkit:
 
-    `git clone git@github.com:Lumminary/lumminary-toolkit-python.git lumminary-toolkit-directory`
+    ```bash
+    git clone git@github.com:Lumminary/lumminary-toolkit-python.git lumminary-toolkit-directory
+    cd lumminary-toolkit-directory
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
+    ```
+
+    Note that before running the toolkit, you should have the virtualenv enabled, like so : `source lumminary-toolkit-directory/env/bin/activate`
 
     ## Toolkit Setup
 
-    After cloning the Lumminary Toolkit project for your language, you need to configure it with your credentials. 
+    We recommend to run the Toolkit in a cronjob; at every run it will check for new Authorizations (Orders) and will download them; afterwards it will check for a new reports folder inside the old authorizations, process the reports, and delete the processed Authorizations and Reports from your server. 
+
+    The first step after you clone the Lumminary Toolkit project for your language is to configure it with your credentials. 
 
     Go to the Lumminary Toolkit base diretory `cd lumminary-toolkit-directory`. Under the Toolkit directory, you will find a file `config/config_template.json` which has the following structure:
 
@@ -112,22 +124,31 @@ info:
     {
         "api_key": <your-api-key>,
         "product_uuid": <your-product-uuid>,
-        "api_host": "https://api.lumminary.com/v1",
+        "api_host": "https:\/\/api.lumminary.com\/v1",
         "output_root": <your-authorization-data-basepath>,
         "export_handler": <your-export-handler-class>,
-        "optional": <your-optional-params>
+        "product_name": <your-product-name>,
+        "operations": [
+            "pull_datasets",
+            "push_reports"
+        ],
+        "optional": {
+            "dna_data_filename": "dna-data.tsv",
+            "authorization_metadata_filename": "authorization-metadata.json"
+        }
     }
     ```
 
-    You should copy this config `cp config/config_template.json config/my-lumminary-toolkit-config.json` then edit it `vim config/my-lumminary-toolkit-config.json` to contain the following values:
+    You should copy this config `cp config/config_template.json config/my-product1-config.json` then edit it `vim config/my-product1-config.json` to contain the following values:
 
     | Config attribute | Example Value                      | Description |
     |------------------|------------------------------------|-------------|
     | api_key        | `"TiiU...bqg=="`                   |Your Lumminary API key.<br> You can obtain it from the Lumminary Admin  |
     | product_uuid   | `"1234-1234-1234-1234"`            |Your product UUID. This value can be obtained from the Lumminary Admin |
-    | api_host       | `"https://api.lumminary.com/v1"`   |   The API endpoint to use.<br>For the sandbox environment you can use "https://api.lumminary.com/v1"    |
-    | output_root    | `"/var/lumminary-orders/"`         | The base directory where data for Authorizations that your Product has received via Lumminary will be saved <br> The Lumminary Toolkit will *never* overwrite authorization data or create this directory, to protect from overwrites or typos    |
+    | api_host       | `"https:\/\/api.lumminary.com\/v1"`   |   The API endpoint to use.<br>For the sandbox environment you can use "https:\/\/sandbox-api.lumminary.com\/v1"    |
+    | output_root    | `"/var/lumminary-orders/product1/"`         | The base directory where the Toolkit places the Authorizations for your Product <br> The Lumminary Toolkit will *never* overwrite Authorization data or create this directory, to protect from overwrites or typos    |
     | export_handler |`"export_handler_tsv"`  | If you have a custom export handler, then your Lumminary contact will provide you with the name of your export handler.   |
+    | operations       |`["pull_datasets", "push_reports"]`        | These are two optional parameters that define the tasks that the Toolkit should perform. Possible values are: <br> 1. `pull_datasets` - this tells the Toolkit to download the Customer Authorization (Customer details and genetic data) <br> 2. `push_reports` - this tells the Toolkit to push the results to the API; see below for more details|
     | optional       | `{}`                               | Export handler specific value |
 
     After updating the config file for your Toolkit, it should look similar to (Note that these are all dummy values) :
@@ -136,10 +157,18 @@ info:
     {
         "api_key": "TiiU...bqg==",
         "product_uuid": "1234-1234-1234-1234",
-        "api_host": "https://api.lumminary.com/v1",
-        "output_root": "/var/lumminary-orders/",
+        "api_host": "https:\/\/api.lumminary.com\/v1",
+        "output_root": "\/var\/lumminary-orders\/product1\/",
         "export_handler": "export_handler_tsv",
-        "optional": {}
+        "product_name": "product 1",
+        "operations": [
+            "pull_datasets",
+            "push_reports"
+        ],
+        "optional": {
+            "dna_data_filename": "dna-data.tsv",
+            "authorization_metadata_filename": "authorization-metadata.json"
+        }
     }
     ```
 
@@ -149,14 +178,15 @@ info:
 
     ```bash
     # While still in the <lumminary-toolkit> directory
-    python lumminary_api_toolkit.py --config-path config/my-lumminary-toolkit-config.json
+    source env/bin/activate;
+    python lumminary_partner_toolkit.py --config-path config/my-lumminary-product1-config.json
     ```
 
     PHP
 
     ```bash
     # While still in the <lumminary-toolkit> directory
-    php lumminary_api_toolkit.py --config-path config/my-lumminary-toolkit-config.json
+    php lumminary-partner-toolkit.php --config-path config/my-lumminary-product1-config.json
     ```
 
     When your Product receives new Authorizations, the Toolkit will pull all the relevant data and save it in the following files:
@@ -165,7 +195,7 @@ info:
     # The DNA data file. Format compatible with 23AndMe by default
     <output_root>/<authorization_uuid>/dna-data.tsv
 
-    # The authorization metadata
+    # The Authorization metadata
     <output_root>/<authorization_uuid>/authorization.json
     ```
 
@@ -173,54 +203,69 @@ info:
 
     ```bash
     $ head -n 5 <output_root>/<authorization_uuid>/dna-data.tsv
-    # rsid  chromosome      position        genotype
-    rs12070387      1       6267531 CC
-    rs149124387     1       12025561        CC
-    rs116458387     1       14920119        AA
-    rs4436387       1       15498452        CC
+    # rsid      chromosome  position        genotype
+    rs12070387  1           6267531         CC
+    rs149124387 1           12025561        CC
+    rs116458387 1           14920119        AA
+    rs4436387   1           15498452        CC
 
     $ cat <output_root>/<authorization_uuid>/authorization.json 
     {
         "authorization": <authorization_uuid>,
         "created_timestamp_utc": 1542920184,
-        "customer": "1234-1234-1234-1234",
+        "customer": <customer_uuid>,
         "customer_address": {
-            "address1": "69 Vine St.",
-            "address2": null,
-            "city": "Parsippany",
-            "country": "US",
-            "state": "NJ",
-            "zipcode": "07054"
+            "address1": <address1>,
+            "address2": <address2>,
+            "city": <city>,
+            "country": <country>,
+            "state": <state>,
+            "zipcode": <zipcode> 
         },
-        "customer_email": "3712014126519136@incognito.lumminary.com",
+        "customer_email": <customer_email>,
         "customer_name": {
             "first_name": <customer_first_name>,
             "last_name": <customer_last_name>
         },
-        "dataset": "2345-2345-2345-2345",
+        "dataset": <dataset_uuid>,
         "product": <your_product_uuid>
     }
     ```
 
-    *Note:* We recommend running the Toolkit in a cronjob, wrapped by some locking mechanism. Also, Toolkit logs are very minimal but can be very helpful when debugging an issue, so please consider saving them to a file. For example
+    After the Toolkit downloaded the Authorizations, you need to process the Customer genetic data file and the Customer details, individually. The Lumminary API supports multiple types of products:
+
+    | Scenario | How to Report |                    
+    |------------------|------------------------------------|
+    |The product is a file (.pdf, .jpeg etc.) | Put the result file(s) into the `tmp_reports` directory. Please refer to the Note underneath this table. |
+    |The product requires authentication | Create a file with the name `result.json` into the `tmp_reports` directory, with the following content: <br> `{ "credentials": { "username": "username@example.com", "password": "your generated password", "url": "https://your-website.com/report"}}`<br> The `url` should point to a login page that upon authentication redirects the user to the report page. You can find the customer's email address in the `authorization-metadata.json` and the `password` attribute must be a secure password. Please refer to the Note underneath this table. |
+    |The product is a physical product| Create a file with the name `result.json` into the `tmp_reports` directory, with the following content: <br> `{"physical_product": { "physical_product_completed": true }}` <br> This should be done upon dispatch. Please refer to the Note underneath this table. |
+    |An error occurred| Create a file with the name `result.json` into the `tmp_reports` directory, with the following content: <br> `{ "unfulfillable": {"error": "Reasons for why it is unfulfillable", }}` <br> The error message is for Lumminary internal usage, and it won't be visible to the customer. This will delete your Authorization, making it unuseable thereafter. So please use this only for unfixable errors, and never for temporary errors you attempt to resolve. Please refer to the Note underneath this table. |
+
+    ###### Note
+    For each scenario above, we recommend you use a temporary directory to avoid uploading incomplete files or reports. So your workflow should be:
+    * create a temporary directory inside the `<output_root>/<authorization_uuid>`, such as `<output_root>/<authorization_uuid>/tmp_reports/`  
+    * place your result file(s) in the `tmp_reports` directory (as in the above table)
+    * rename the directory from `tmp_reports` to `reports`
+
+    We recommend running the Toolkit in a cronjob, wrapped by some locking mechanism. Also, Toolkit logs are very minimal but can be very helpful when debugging an issue, so please consider saving them to a file. For example, the following cronjob runs the Toolkit every minute:
 
     ```bash
     # Open the crontab
     crontab -e
     ```
 
-    Python Toolkit
-
-    ```bash
-    # Add the following line (replace <lumminary-toolkit-directory> with where you cloned the Lumminary Toolkit)
-    * * * * * flock /var/lock/lumminary-toolkit.lock python <lumminary-toolkit-directory>/lumminary_api_toolkit.py --config-path <lumminary-toolkit-directory>/config/my-lumminary-toolkit-config.json
-    ```
-
     PHP Toolkit
 
     ```bash
-    # Add the following line (replace <lumminary-toolkit-directory> with where you cloned the Lumminary Toolkit)
-    * * * * * flock /var/lock/lumminary-toolkit.lock php <lumminary-toolkit-directory>/lumminary_api_toolkit.php --config-path <lumminary-toolkit-directory>/config/my-lumminary-toolkit-config.json >> /var/log/lumminary-toolkit.log
+    # Add the following line (replace <lumminary-toolkit-directory> with the absolute path of the Lumminary Toolkit)
+    * * * * * flock /var/lock/lumminary-toolkit.lock php <lumminary-toolkit-directory>/lumminary-partner-toolkit.php --config-path <lumminary-toolkit-directory>/config/my-product1-config.json >> /var/log/lumminary-toolkit.log
+    ```
+
+    Python Toolkit
+
+    ```bash
+    # Add the following line (replace <lumminary-toolkit-directory> with the absolute path of the Lumminary Toolkit)
+    * * * * * flock /var/lock/lumminary-toolkit.lock source env/bin/activate; python <lumminary-toolkit-directory>/lumminary_partner_toolkit.py --config-path <lumminary-toolkit-directory>/config/my-product1-config.json
     ```
 
     ## API endpoints
@@ -262,17 +307,18 @@ info:
     For this, you must create a file named `env.json` (but any name will do) in your project directory, which should contain:
     ```json
     {
-        "login": <your_product_uuid>,
+        "product_uuid": <your_product_uuid>,
         "api_key": <your_product_api_key>,
         "role": "role_product",
-        "host": <lumminary_api_hostname_endpoint>
+        "api_host": <lumminary_api_hostname_endpoint>
     }
     ```
 
-    In order to load the Credentials from the env.json, you can use the following code:
+    In order to load the Credentials from the `env.json`, you can use the following code:
 
     #### PHP example:
     ```php
+    require_once(__DIR__."/vendor/autoload.php");
     $credentials = new Lumminary\Client\Credentials();
     $credentials->loadJSONCredentials(__DIR__."/env.json");
     ```
@@ -297,6 +343,7 @@ info:
     #### PHP example:
 
     ```php
+    require_once(__DIR__."/vendor/autoload.php");
     $credentials = new Lumminary\Client\Credentials(
         <lumminary_api_hostname_endpoint>,
         <your_product_uuid>,
@@ -310,9 +357,9 @@ info:
     import lumminary_sdk as lumminary
 
     credentials = lumminary.Credentials(
-        uuid = <your_product_uuid>,
+        product_uuid = <your_product_uuid>,
         api_key = <your_product_api_key>,
-        host = <lumminary_api_hostname_endpoint>,
+        api_host = <lumminary_api_hostname_endpoint>,
         role = "role_product"
     )
     ```
@@ -334,27 +381,27 @@ info:
     ```
 
     # Query customers authorizations
-    An authorization represents permission from a client to access their personal and genetic data. 
+    An Authorization represents permission from a client to access their personal and genetic data. 
 
     There are 2 situations where customers grant you access to their data: 
     * when a customer buys your product from the Lumminary DNA App Store
     * when a customer clicks on the "Connect with Lumminary" button on your website
 
-    Each time either of the above situations happens, our platform creates an authorization UUID. You can reliably assume that if you have an authorization UUID, you automatically have access to all the data needed by your products and services. After you process an authorization you need to flag it as processed; authorizations flagged as processed will no longer be on the list of new authorizations.
+    Each time either of the above situations happens, our platform creates an Authorization UUID. You can reliably assume that if you have an Authorization UUID, you automatically have access to all the personal information and genetic data needed by your products and services. After you process an Authorization you need to mark it as processed; processed Authorizations will no longer be on the list of new authorizations.
 
-    There are two ways to obtain the authorization UUID:
-    * _polling_ - this method allows you to periodically interrogate our API and pulls the list of authorization UUIDs. 
-    * _webhooks_ (coming soon) - this method allows our API to push the authorization UUIDs into your platform.
+    There are two ways to obtain the Authorization UUID:
+    * _polling_ - this method allows you to periodically interrogate our API and pulls the list of Authorization UUIDs. 
+    * _webhooks_ (coming soon) - this method allows our API to push the Authorization UUIDs into your platform.
 
     ## Poll method
 
-    To use the polling method, your servers periodically interrogate for new authorization UUIDs. Please keep in mind that authorizations not flagged as processed will always be returned when polling for new authorizations. This means there's a risk of parallel processing the same authorization. To avoid this, you can, for example, consider using locking when processing.
+    To use the polling method, your servers periodically interrogate for new Authorization UUIDs. Please keep in mind that Authorizations not marked as processed will always be returned when polling for new Authorizations. This means there's a risk of parallel processing the same Authorization. To avoid this, you can, for example, consider using locking when processing.
 
     #### A PHP example of using the polling API looks like:
 
     ```php
     $productAuthorizations = $apiClient->getAuthorizationsQueue(
-        $apiClient->getCredentials()->getLogin(),
+        $apiClient->getCredentials()->getProductUuid(),
     );
 
     foreach($productAuthorizations as $productAuthorization)
@@ -363,7 +410,7 @@ info:
          *  Add your code for processing customer data here
          **/ 
         
-        // Flag authorization as processed 
+        // Mark Authorization as processed 
         $apiClient->postProductAuthorization(
             $productAuthorization["productUuid"],
             $productAuthorization["authorizationUuid"]
@@ -375,7 +422,7 @@ info:
 
     ```python
     productAuthorizations = apiClient.get_authorizations_queue(
-        apiClient.get_credentials().login
+        apiClient.get_credentials().product_uuid
     )
 
     for productAuthorization in productAuthorizations:
@@ -383,14 +430,14 @@ info:
         #   Add your code for processing customer data here
         #######
 
-        # Flag authorization as processed
+        # Mark Authorization as processed
         apiClient.post_product_authorization(
             productAuthorization.product_uuid,
             productAuthorization.authorization_uuid
         )
     ```
 
-    Based on the authorization object obtained previously, we can now query the customer's information (personal details and genetic data).
+    Based on the Authorization object obtained previously, we can now query the customer's information (personal details and genetic data).
 
     #### PHP example:
     ```php
@@ -402,14 +449,14 @@ info:
     authorizationMetadata = apiClient.authorization_metadata(productAuthorization.authorization_uuid)
     ```
 
-    #### `authorizationMetadata` object object structure
+    #### authorizationMetadata object object structure
 
     | Attribute name            | Description                                                                                |
     |:-------------------------:|:-------------------------------------------------------------------------------------------|
-    | `customer`                | The UUID of the customer granting the authorization                                        |
+    | `customer`                | The UUID of the customer granting the Authorization                                        |
     | `product`                 | The UUID of the product that was authorized (your product UUID)                            |
-    | `authorization`           | The UUID of the granted authorization.                                                     |
-    | `created_timestamp_utc`   | The unix timestamp in UTC time zone when the customer granted the authorization            |
+    | `authorization`           | The UUID of the granted Authorization.                                                     |
+    | `created_timestamp_utc`   | The unix timestamp in UTC time zone when the customer granted the Authorization            |
     | `dataset`                 | (present only if requested) The UUID of the dataset authorized by the customer             |
     | `customer_email`          | (present only if requested) Customer contact email                                         |
     | `customer_name`           | (present only if requested) Customer name                                                  |
@@ -418,7 +465,7 @@ info:
     By *present only if requested* we mean this attribute will be returned if at the time of configuring either the "Connect with Lumminary" button or your product, you have explicitly requested for that particular set of data.
 
     # Query customer genetic data
-    Based on the authorization object obtained previously, now we have authorizationMetadata which contains the customer's information (personal details and genetic data). Let's use this information to extract some customer genetic data.
+    Based on the Authorization object obtained previously, now we have authorizationMetadata which contains the customer's information (personal details and genetic data). Let's use this information to extract some customer genetic data.
 
     ## Get individual SNPs
     Out of all the available SNPs in the dataset, you can only access those for which the customer has previously granted permission.
@@ -459,13 +506,13 @@ info:
 
     ##### The snpDetails object will contain these important attributes:
 
-    | Attribute name Python     | Attribute name PHP        | Description                                               |
+    | Attribute name PHP     | Attribute name Python        | Description                                               |
     |:-------------------------:|:-------------------------:|:----------------------------------------------------------|
-    | `snp_id`                  | `snpId`                   | The rsid of the SNP                                       |
-    | `reference_genome`        |`referenceGenome`          | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession |
-    | `genotyped_alleles`       | `genotypedAlleles`        | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant |
+    | `snpId`                 | `snp_id`                    | The rsid of the SNP                                       |
+    | `referenceGenome`        |`reference_genome`          | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession |
+    | `genotypedAlleles`       | `genotyped_alleles`        | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant |
     |`phased`                   | `phased`                  | A boolean. True if the SNP is known to be phased, False otherwise |
-    |`chromosome_accession`     | `chromosomeAccession`     | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
+    |`chromosomeAccession`     | `chromosome_accession`     | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
     |`location`                 | `location`                | This is the customer's SNP's location on the chromosome |
 
     When trying to access any customer's SNP for which you don't have permission, an `Unauthorized` exception will be raised.
@@ -506,13 +553,13 @@ info:
 
     ##### The datasetSnps variable will be a list of objects each having the following attributes:
 
-    | Attribute name Python     | Attribute name PHP        | Description                                               |
+    | Attribute name PHP     | Attribute name Python        | Description                                               |
     |:-------------------------:|:-------------------------:|:----------------------------------------------------------|
-    | `snp_id`                  | `snpId`                   | The rsid of the SNP                                       |
-    | `reference_genome`        |`referenceGenome`          | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession |
-    | `genotyped_alleles`       | `genotypedAlleles`        | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant |
+    | `snpId`                  | `snp_id`                   | The rsid of the SNP                                       |
+    | `referenceGenome`        |`reference_genome`          | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession |
+    | `genotypedAlleles`       | `genotyped_alleles`        | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant |
     |`phased`                   | `phased`                  | A boolean. True if the SNP is known to be phased, False otherwise |
-    |`chromosome_accession`     | `chromosomeAccession`     | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
+    |`chromosomeAccession`     | `chromosome_accession`     | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
     |`location`                 | `location`                | This is the customer's SNP's location on the chromosome |
 
     When trying to access any customer's SNP for which you don't have permission, an `Unauthorized` exception will be raised.
@@ -559,33 +606,33 @@ info:
 
     ##### All the geneDetails object attributes are
 
-    | Attribute name Python | Attribute name PHP    | Description                                                                              |
+    | Attribute name PHP | Attribute name Python    | Description                                                                              |
     |:---------------------:|:---------------------:|:-----------------------------------------------------------------------------------------|
-    | `molecular_location`  | `molecularLocation`   | An object containing the location of the gene within the chromosome - see below the molecular location object structure  |
+    | `molecularLocation`  | `molecular_location`   | An object containing the location of the gene within the chromosome - see below the molecular location object structure  |
     | `snps`                | `snps`                | A list of SNP objects present in the gene - see below the SNP object structure           |
     | `symbol`              | `symbol`              | The gene's accession string (name)                                                       |
 
     ##### Molecular location attributes 
 
-    | Attribute name Python     | Attribute name PHP    | Description                                                                              |
+    | Attribute name PHP     | Attribute name Python    | Description                                                                              |
     |:-------------------------:|:---------------------:|:-----------------------------------------------------------------------------------------|
-    | `chromosome_accession`    | `chromosomeAccession` | The scaffold/chromosome on which the gene is placed                                      |
+    | `chromosomeAccession`    | `chromosome_accession` | The scaffold/chromosome on which the gene is placed                                      |
     | `start`                   | `start`               | The gene's start position on the scaffold                                                |
     | `stop`                    | `stop`                | The gene's stop position on the scaffold                                                 |
 
     ##### SNP object structure
 
-    | Attribute name Python     | Attribute name PHP    | Description                                                                              |
+    | Attribute name PHP     | Attribute name Python    | Description                                                                              |
     |:-------------------------:|:---------------------:|:-----------------------------------------------------------------------------------------|
-    | `reference_genome`        | `referenceGenome`     | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession|
-    | `genotyped_alleles`       | `genotypedAlleles`    | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant                                          |
+    | `referenceGenome`        | `reference_genome`     | The reference genome known to be used by the Dataset's source. <br> This impacts the reference allele, location, and based on the dbSNP build, also the SNP's accession|
+    | `genotypedAlleles`       | `genotyped_alleles`    | The genotype value of the customer's queried SNP. <br><br> If the attribute of this SNP has the `phased` flag set to True, <br>the first items in the lists for all SNPs will be on the same inherited chromosome, <br>and analogous for the second item. <br><br> If the SNP is unphased, the order of the items is irrelevant                                          |
     | `phased`                  | `phased`              | A boolean. True if the SNP is known to be phased, False otherwise                         |
-    | `chromosome_accession`    | `chromosomeAccession` | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
+    | `chromosomeAccession`    | `chromosome_accession` | This is the chromosome accession number where the SNP is located; in the format of NC_00x |
     | `location`                | `location`            | This is the customer's SNP's location on the chromosome                                   |
 
     ## Get customer genetic data in 23andMe tsv format
 
-    If your platform is already compatible with importing data from 23andMe, you can use this specific function to generate data in the 23andMe format - list of rows in tab separated values.
+    If your platform is already compatible with 23andMe genotype data files, you can use this specific function to generate data in the 23andMe format - list of rows in tab separated values.
 
     #### PHP example:
     ```PHP
@@ -613,7 +660,8 @@ info:
 
     #### PHP example
     ```php
-    $fileReport = new \SplFileObject($pathToReport);
+    $pathToReportFile = <path_to_report_file>;
+    $fileReport = new \SplFileObject($pathToReportFile); 
     $friendlyFileName = "report_file_name"; //optional, give a friendly name to your report file
     $apiClient->postAuthorizationResultFile(
        $productAuthorization["productUuid"],
@@ -650,7 +698,7 @@ info:
        $productAuthorization["authorizationUuid"],
        <username_generated_by_you>, //optional, default null
        <password_generated_by_you>, //optional, default null
-       <report_on_your_website_url> // https://partnerwebsite.com/reports.php
+       <report_on_your_website_url> // https://partnerwebsite.com/reports.php?reportid=a7508
     );
     ```
 
@@ -661,12 +709,12 @@ info:
        productAuthorization.authorization_uuid,
        <username_generated_by_you>, # optional, default null
        <password_generated_by_you>, # optional, default null
-       <report_on_your_website_url> # https://partnerwebsite.com/reports.php
+       <report_on_your_website_url> # https://partnerwebsite.com/reports.php?reportid=a7508
     )
     ```
 
     ## How to submit a physical product
-    In case you only send the customer a physical product and you don't generate any reports, you need to run the function below so we can flag the order as fulfilled and can inform the client.
+    In case you only send the customer a physical product and you don't generate any reports, you need to run the function below so we can mark the order as fulfilled and can inform the client.
 
     #### PHP example:
     ```php
@@ -686,7 +734,9 @@ info:
 
     # The Connect with Lumminary button
 
-    The "Connect with Lumminary" functionality allows you to get customer details and genetic data from the Lumminary platform for free, anytime you want, for as long the customer grants you access. This functionality offers your customers the option to share their genetic data and other personal information (e.g. name, address, email etc.) stored on the Lumminary platform. Having this button on your website makes it very easy for the customer to share their genetic data with you, as they don't have to download and re-upload their data on your site. The customer always has the option to revoke your access to both their personal details and their genetic data.
+    The "Connect with Lumminary" functionality allows you to get customer details and genetic data from the Lumminary platform for free, anytime you want, for as long the customer grants you access. This functionality offers your customers the option to share their genetic data and other personal information (e.g. name, address, email etc.) stored on the Lumminary platform. 
+
+    Having this button on your website makes it very easy for the customer to share their genetic data with you, as they don't have to download and re-upload their data on your site. The customer always has the option to revoke your access to both their personal details and their genetic data.
 
     **`To protect the customer's privacy, you are not allowed to save their data anywhere. You can, however, always access their data on the Lumminary platform, for as long as they grant you access. If you generate a report based on customer data, you are allowed to save that report on your platform.`**
 
@@ -702,7 +752,9 @@ info:
 
     You have to fill in the form for all products and services that require access to Lumminary customers' genetic data.  
 
-    ## Add the "Connect with Lumminary" button to your website
+    ## Add the Connect with Lumminary button to your website
+
+    Since the CWL flow involves encrypting and decrypting data, we recommend installing the Lumminary API Client, where you'll find some specific helper functions. 
 
     In order to enable the button, you have to include the following script in the `<head>` tag of all the pages where you want to enable the “Connect with Lumminary” button:
 
@@ -712,9 +764,9 @@ info:
     </head>
     ```
 
-    The Javascript creates a CSRF token and attaches it to the button to be transmitted and verified on our servers each time a user clicks on the button. The CSRF token expires every 5 minutes. In case the CSRF token is expired or tempered, the user will be redirected to your website where it's up to you to decide what to do next - reload the page with the button or show the customer an error message.
+    The Javascript creates a CSRF token and attaches it to the button to be transmitted and verified on our servers each time a user clicks on the button. The CSRF token expires after 5 minutes. In case the CSRF token is expired or tampered, the user will be redirected to your website where it's up to you to decide what to do next - reload the page with the button or show the customer an error message.
 
-    The cwl.js file is loaded as a deferred resource, which means that it will load after all the webpage code execution has been finished, so it will not have any impact on your website load speed.
+    The `cwl.js` file is loaded as a deferred resource, which means that it will load after all the webpage code execution has been finished, so it will not have any impact on your website load speed.
 
     ### Chose a button colour
 
@@ -750,7 +802,7 @@ info:
     Each button has 2 attributes which need to be configured:
 
     1. **data-partner-uuid** where you have to add your partner UUID (you have received the partner UUID after filling in the form for product registration). 
-    2. **data-request** which is a string obtained by encrypting a serialized JSON (you have received the CWL encryption key after filling in the form for product registration).
+    2. **data-request** which is a string obtained by encrypting a serialized JSON (you have received the CWL encryption key after filling in the form for product registration). See details below. 
 
     #### Data-request object
 
@@ -778,16 +830,16 @@ info:
     objAuthorizationRequest ["scopes"] = "address,dataset,email"
     ```
 
-    Product UUID is your productUuid for which you ask customer permissions.
+    Product UUID is your `productUuid` for which you ask customer permissions.
 
     #### PHP example:
     ```php
-    $objAuthorizationRequest["productUuid"] = $credentials->getLogin();
+    $objAuthorizationRequest["productUuid"] = $credentials->getProductUuid();
     ```
 
     #### Python example:
     ```python
-    objAuthorizationRequest["productUuid"] = credentials.get_login()
+    objAuthorizationRequest["productUuid"] = credentials.product_uuid
     ```
 
     ##### Optional information
@@ -835,7 +887,7 @@ info:
     objAuthorizationRequest["customData"]["customData3"] = <Some addional data>
     ```
 
-    ## Creating the authorization request
+    ## Creating the Authorization Request
 
     The previously generated object (`objAuthorizationRequest`) will now need to be encrypted. In order to be able to encrypt the object and also query the Lumminary API to obtain the customer details and genetic data, you need to have the Lumminary API Client installed. If you haven't done this already, please follow these [steps](#Install-Lumminary-API-Client-andor-Toolkit).
 
@@ -862,11 +914,11 @@ info:
     requestValueEncryptedUrlEncoded = lumminary.LumminaryApi.cwl_data_request_build(objAuthorizationRequest, partnerCwlKey)
     ```
 
-    The resulting string should be added in the data-request attribute of the `<a>` tag of the "Connect with Lumminary" button.
+    The resulting string should be added in the `data-request` attribute of the `<a>` tag of the "Connect with Lumminary" button.
 
     ### Add data-partner-uuid attribute
 
-    Add the data-partner-uuid in the data-partner-uuid attribute of the `<a>` tag of the "Connect with Lumminary" button. You have received the partner UUID after filling in the form for product registration.
+    Add the `data-partner-uuid` in the `data-partner-uuid` attribute of the `<a>` tag of the "Connect with Lumminary" button. You have received the partner UUID after filling in the form for product registration.
 
     An example of a button correctly configured should look like this:
 
@@ -876,14 +928,14 @@ info:
     </a>
     ```
 
-    ## Summary of user interaction
+    ## Connect with Lumminary summary of user interaction
 
     When a customer clicks on the “Connect with Lumminary” button, a pop-up window opens. After they choose which genetic file to share, the pop-up will automatically close and the user will be redirected to your callback URL in the parent window. Your callback URL needs to be predefined in the Lumminary partner portal. 
 
     The GET request from the client to your callback URL will contain two querystring parameters - `request` and `response`:
 
-    1. `request` – this is exactly the same request which you previously sent in the data-request field. You can decrypt it with the CWL encryption key which you used to encrypt it.
-    2. `response` – the response is an urlencoded encrypted serialized JSON object which contains the authorization UUID and the authorization UTC unix timestamp. You will use the authorization UUID to get the customer's data with the Lumminary API Client. The response string is encrypted with your CWL encryption key, the same as the `data-request` parameter. 
+    1. `request` – this is exactly the same request that you previously sent in the `data-request` field. You can decrypt it with the CWL encryption key which you used to encrypt it.
+    2. `response` – the response is an urlencoded encrypted serialized JSON object which contains the Authorization UUID and the Authorization UTC unix timestamp. You will use the Authorization UUID to get the customer's data with the Lumminary API Client. The response string is encrypted with your CWL encryption key, the same as the `data-request` parameter. 
 
     In order to decrypt the `response` parameter, you can use the following function:
 
@@ -901,15 +953,15 @@ info:
     #### Python example:
     ```python
     // the entire callback URL, including the querystring parameters
-    callbackUrlWithPayload = "https://partnerwebsite.con/callback?request=...&response=..."
+    callback_url_with_payload = "https://partnerwebsite.con/callback?request=...&response=..."
 
     cwlReturnObject = apiClient.cwl_url_query_extract(
-        callbackUrlWithPayload,
-        partnerCwlKey
+        callback_url_with_payload,
+        partner_cwl_key
     )
     ```
 
-    The authorizationPayload will now contain an Object like the example below:
+    The `cwlReturnObject` will now contain an object like the example below:
 
     ```json
     {
@@ -921,11 +973,11 @@ info:
     }
     ```
 
-    With the authorization UUID (`authorizationUuid`) you can [query all the customer details](#Query-customer-genetic-data) from the Lumminary platform.
+    With the Authorization UUID (`authorizationUuid`) you can [query all the customer details](#Query-customer-genetic-data) from the Lumminary platform.
 
     ## Possible errors
 
-    When an error occurs, the customer is redirected back to your callback URL. The redirect contains two querystring parameters - `request` and `response` - exactly like a regular response, but the `response` parameter contains an error object (see below) instead of an authorization object.
+    When an error occurs, the customer is redirected to your callback URL. The redirect contains two querystring parameters - `request` and `response` - exactly like a regular response, but the `response` parameter contains an error object (see below) instead of an Authorization object.
 
     #### PHP example:
     ```php
@@ -941,11 +993,11 @@ info:
     #### Python example:
     ```python
     # the entire callback url, including the querystring parameters
-    callbackUrlWithPayload = "https://partnerwebsite.con/callback?request=...&response=..."
+    callback_url_with_payload = "https://partnerwebsite.con/callback?request=...&response=..."
 
     cwlReturnObject = apiClient.cwl_url_query_extract(
-        callbackUrlWithPayload,
-        partnerCwlKey
+        callback_url_with_payload,
+        partner_cwl_key
     )
     ```
 
@@ -967,7 +1019,7 @@ info:
     |:-----------------:|:---------------------------------------------------------------------------------------------|
     | 1                 | Invalid Security Token                                                                       |
     | 2                 | Invalid Access Scopes                                                                        |
-    | 3                 | Customer refuses request (this happens when the customer cancels instead of granting access) |
+    | 3                 | Customer refuses your request (this happens when the customer cancels instead of granting access) |
   title: Lumminary
   version: '1.0'
   x-apisguru-categories:
@@ -985,7 +1037,7 @@ produces:
   - application/json
 securityDefinitions:
   Bearer:
-    description: The token resulted after authenticating to /auth/jwt. MUST be of the format(excluding quotes) "Bearer paste_token_here"
+    description: The token resulted after authenticating to /auth/jwt. MUST be of the format(excluding quotes) 'Bearer paste_token_here'
     in: header
     name: Authorization
     type: apiKey
@@ -1033,7 +1085,7 @@ responses:
   UUIDInvalidException:
     description: 'The UUID is invalid, most likely detected via CRC mismatch'
   UserClaimsVerificationError:
-    description: The 'claims' field in the JWT could not be verified
+    description: The "claims" field in the JWT could not be verified
   UserLoadError:
     description: Could not load the user to which the JWT is bound
   WrongTokenError:
@@ -1048,11 +1100,7 @@ paths:
         - application/x-www-form-urlencoded
         - multipart/form-data
       description: |-
-        If 2FA is enabled, the 2FA token is validated along with the username/password pair.
-        Otherwise, the 2FA token, even if provided, is ignored.
-
         ## Note:
-        * A fresh and not previously used 2FA token should be passed, otherwise authentication will fail.
         * The JWT tokens returned should be passed to any resource that requires authentication, in the Authentication header, in the format `Bearer: your-token-here`
         * Only JWT authentication tokens are provided (no refresh tokens). These tokens are valid for 30 seconds from the moment they were issued
       operationId: post_jwt_auth
@@ -1071,10 +1119,6 @@ paths:
           in: formData
           name: role
           required: true
-          type: string
-        - description: 'The One-time password provided by a 2FA product, if enabled'
-          in: formData
-          name: 2FA-token
           type: string
         - description: An optional fields mask
           format: mask
@@ -1403,7 +1447,7 @@ paths:
           description: Result saved
         '404':
           description: Object not found
-      summary: 'Singnal that processing is complete, without uploading any result'
+      summary: 'Signal that processing is complete, without uploading any result'
       tags:
         - Lumminary API Spec
       x-code-samples:
@@ -1448,7 +1492,16 @@ paths:
           in: formData
           name: report_url
           type: string
+        - description: An optional fields mask
+          format: mask
+          in: header
+          name: X-Fields
+          type: string
       responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReportCredentials'
         '201':
           description: Result saved
         '404':
@@ -1494,7 +1547,16 @@ paths:
           in: query
           name: original_filename
           type: string
+        - description: An optional fields mask
+          format: mask
+          in: header
+          name: X-Fields
+          type: string
       responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReportFile'
         '201':
           description: Result saved
         '404':
@@ -1513,6 +1575,31 @@ paths:
             );
         - lang: Python
           source: $apiClient->getProductAuthorizations();
+  '/products/{productId}/authorizations/{authorizationId}/unfulfillable':
+    parameters:
+      - description: The UUID of the product
+        in: path
+        name: productId
+        required: true
+        type: string
+      - description: The UUID of the authorization
+        in: path
+        name: authorizationId
+        required: true
+        type: string
+    post:
+      operationId: post_product_authorization_unfulfillable
+      responses:
+        '404':
+          description: Object not found
+      summary: 'Catch-all Authorization state, for authorizations that passed all verifications and should reach the partner Product, but cannot be fulfilled for various reasons'
+      tags:
+        - Lumminary API Spec
+      x-code-samples:
+        - lang: PHP
+          source: '$apiClient->postProductAuthorizationUnfulfillable($productUuid, $authorizationUuid);'
+        - lang: Python
+          source: '$apiClient->postProductAuthorizationUnfulfillable($productUuid, $authorizationUuid);'
   '/reference/genes/databases/{databaseName}/accessions/{accession}':
     get:
       operationId: get_gene
@@ -1719,6 +1806,9 @@ definitions:
       name:
         $ref: '#/definitions/CustomerName'
         description: Access to customer name
+      sex:
+        description: 'The sex of the customer. One of : F, M, null'
+        type: string
     type: object
   Authorization:
     properties:
@@ -1754,7 +1844,7 @@ definitions:
         description: The sequence number of the Authorization. Used as a filter when fetching new Authorizations
         type: integer
       state:
-        description: 'The authorization state. One of : [''authorization_state_pending_dataset'', ''authorization_state_fulfillable'', ''authorization_state_result_available'']'
+        description: 'The authorization state. One of : [''authorization_state_pending_dataset'', ''authorization_state_fulfillable'', ''authorization_state_result_available'', ''authorization_state_not_fulfillable'']'
         type: string
     required:
       - authorization_uuid
@@ -1841,12 +1931,6 @@ definitions:
       zipcode:
         description: ''
         type: string
-    required:
-      - address1
-      - city
-      - country
-      - phone
-      - zipcode
     type: object
   CustomerName:
     properties:
@@ -1856,9 +1940,6 @@ definitions:
       last_name:
         description: Customer last name
         type: string
-    required:
-      - first_name
-      - last_name
     type: object
   FileLocation:
     properties:
@@ -1926,10 +2007,8 @@ definitions:
         description: A boolean value specifying if SNP set is not strict
         type: boolean
       snps_min_required:
-        description: A list of the minimum SNPs required for an Product to be compatible with a Client
-        items:
-          type: string
-        type: array
+        $ref: '#/definitions/SnpsMinRequired'
+        description: Minimum required snps for Dataset-Product compatibility
       snps_min_required_any:
         description: A boolean value specifying if SNP set is not strict
         type: boolean
@@ -2091,4 +2170,19 @@ definitions:
       - create_timestamp
       - file_location
       - report_file_uuid
+    type: object
+  SnpsMinRequired:
+    properties:
+      min_pct:
+        description: Minimum required percentage of snps that should be present in the Dataset for compatibility
+        minimum: 0
+        type: integer
+      snps:
+        description: List of snps that are (possibly partially) required for the Product to be compatible with a Dataset
+        items:
+          type: string
+        type: array
+    required:
+      - min_pct
+      - snps
     type: object

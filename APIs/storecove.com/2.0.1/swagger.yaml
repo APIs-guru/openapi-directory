@@ -288,10 +288,10 @@ paths:
       summary: Delete PeppolIdentifier
       tags:
         - PeppolIdentifiers
-  '/purchase_invoices/{guid}':
+  '/purchase_invoices/{guid}/{packaging}/{package_version}':
     get:
       description: Get a specific Invoice.
-      operationId: get_invoice
+      operationId: get_invoice_ubl
       parameters:
         - description: purchase invoice guid
           format: uuid
@@ -299,29 +299,23 @@ paths:
           name: guid
           required: true
           type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/PurchaseInvoice'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Invoice
-      tags:
-        - PurchaseInvoices
-  '/purchase_invoices/{guid}/ubl':
-    get:
-      description: Get a specific Invoice in UBL form.
-      operationId: get_invoice_ubl
-      parameters:
-        - description: purchase invoice guid
-          format: uuid
+        - default: json
+          description: 'How to package the purchase invoice. Use "json" or "ubl" '
+          enum:
+            - json
+            - ubl
           in: path
-          name: guid
+          name: packaging
+          required: true
+          type: string
+        - default: si12
+          description: The version of the ubl package (ignored for packaging "json").
+          enum:
+            - original
+            - si11
+            - si12
+          in: path
+          name: package_version
           required: true
           type: string
       responses:
@@ -778,7 +772,7 @@ definitions:
     description: A document attachment to the invoice.
     properties:
       document:
-        description: 'The base64 encoded version of the document attachment. The total maximum length of all attachments is 10MB, after encoding.'
+        description: The base64 encoded version of the document attachment.
         minLength: 5
         title: Document Attachment
         type: string
@@ -791,7 +785,7 @@ definitions:
         description: The document attachment mime type. Currently only application/pdf is allowed.
         enum:
           - application/pdf
-        title: Mimetype
+        title: Mime Type
         type: string
       primaryImage:
         default: false
@@ -1383,7 +1377,7 @@ definitions:
         type: string
       invoiceType:
         default: '380'
-        description: 'Use 380 for a regular invoice, 381 for a credit invoice, 384 for a corrective invoice. Note that invoiceType 381 must be for a positive amount! In case of invoiceType 384, the billingReference field must contain the invoiceNumber of the invoice being corrected.'
+        description: 'Do not use. This field is available for legacy reasons only. If you want to send a regular invoice (aka UBL type ''380''), make sure you have a positive invoice amount. For a credit note (aka UBL type ''381''), simply provide a negative invoice amount. If you, in addition to a negative invoice amount, also specify a billingReferences, your invoice will become a corrective invoice (aka UBL type ''384''). If your invoice is not sent in the UBL syntax, Storecove will provide the appropriate type for the syntax the invoice is sent in.'
         enum:
           - '380'
           - '381'
@@ -1404,7 +1398,22 @@ definitions:
         title: Order reference
         type: string
       paymentMeansCode:
-        description: Do not use. Contact Storecove first if you want to use this field.
+        description: 'How the invoice has been / will be paid. Use only online_payment_service (payment will be made or has been made by an online payment service), bank_card (e.g. debit card, credit card), direct_debit (the amount has been / will be taken out of the client''s bank account), standing_agreement (an unspecified payment means known to both buyer and seller) or credit_transfer (the buyer will do / has done a bank transfer). The numeric codes are for legacy purposes, they should not be used.'
+        enum:
+          - online_payment_service
+          - bank_card
+          - direct_debit
+          - standing_agreement
+          - credit_transfer
+          - ''
+          - '1'
+          - '30'
+          - '31'
+          - '42'
+          - '48'
+          - '49'
+          - '57'
+          - '58'
         title: Payment Means Code
         type: string
       paymentMeansIban:
@@ -1439,6 +1448,21 @@ definitions:
         pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
         title: Tax date
         type: string
+      taxSubtotals:
+        description: An array of tax subtotals. This element is mandatory for taxSystem 'tax_line_percentages'.
+        items:
+          $ref: '#/definitions/TaxSubtotal'
+        minItems: 0
+        title: Tax Subtotals
+        type: array
+      taxSystem:
+        default: tax_line_amounts
+        description: 'The tax system used for the invoice. The system ''tax_line_percentages'' is preferred, but for historic purposes ''tax_line_amounts is supported and default. Since not all invoice formats that we are required to send support ''tax_line_amounts'' we will need to convert the invoice to the ''tax_line_percentags'' system if we are forced to send the invoice in that tax system.'
+        enum:
+          - tax_line_amounts
+          - tax_line_percentages
+        title: Tax System
+        type: string
       ublExtensions:
         description: An array of ubl extensions.
         items:
@@ -1471,7 +1495,7 @@ definitions:
         title: allowanceCharge
         type: number
       amountExcludingVat:
-        description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+        description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge.
         title: amountExcludingVat
         type: number
       delivery:
@@ -2633,7 +2657,7 @@ definitions:
     title: Invoice line
     type: object
   InvoiceRecipient:
-    description: 'Ids that identify this invoice recipient. The list of identifiers should match with the accountingCustomerParty. I.e., you should not be sending an invoice for one accountingCustomerParty to the publicIdentifier of another.'
+    description: 'Ids that identify this invoice recipient. When sending invoices with VAT (or with a taxExemptReason), a receiver VAT number is required. Only within the NL legal domain is it allowed to send invoices with VAT but without a VAT number.'
     properties:
       emails:
         description: The email addresses the invoice should be sent to if none of the other identifiers can be used
@@ -2644,19 +2668,10 @@ definitions:
           type: string
         title: Fallback email
         type: array
-      id:
-        description: DEPRECATED. Use widgetIdentification.id
-        minLength: 2
-        title: Entity id
-        type: string
       publicIdentifiers:
         $ref: '#/definitions/PublicIdentifiers'
-        description: The public identifiers for this invoice recipient. These are the identifiers used on the Peppol network.
+        description: 'The public identifiers for this invoice recipient. These are the identifiers used on the Peppol network. Note that when sending invoices with VAT (or with a taxExemptReason), a receiver VAT number is required and that should be one of these publicIdentifiers. Only within the NL legal domain is it allowed to send invoices with VAT but without a VAT number.'
         title: Public Identifiers
-      widgetIdentification:
-        $ref: '#/definitions/WidgetIdentification'
-        description: The identification for the identifier related to the Storecove Destination Configuration widget.
-        title: Widget Identification
     title: Recipient ids
     type: object
   InvoiceRecipientPreflight:
@@ -2665,33 +2680,24 @@ definitions:
       publicIdentifiers:
         $ref: '#/definitions/PublicIdentifiers'
         description: The public identifiers for this invoice recipient.
-      supplierId:
-        description: DEPRECATED.
-        title: Supplier id
-        type: integer
-      widgetIdentification:
-        $ref: '#/definitions/WidgetIdentification'
-        description: The identification for the identifier related to the Storecove Destination Configuration widget.
-        title: Widget Identification
     title: Invoice recipient preflight
     type: object
   InvoiceSubmission:
     description: 'The invoice you want Storecove to process, with some meta-data.'
     properties:
       attachments:
-        description: 'An array of attachments. You should be careful providing multiple attachments, as not all receivers are capable of showing them. If you have multiple PDF attachments, consider concatenating them into a single PDF. However, many receivers _can_ process multiple attachments, especially if you have agreed that upfront. In that case, you may provide up to 10 attchments.'
+        description: 'An array of attachments. You may provide up to 10 attchments, but the total size must not exceed 10MB after Base64 encoding.'
         items:
           $ref: '#/definitions/Attachment'
         maxItems: 10
         title: Attachments
         type: array
       document:
-        description: The invoice in PDF form. The document should be base64 encoded and the enocded string length should not exceed 2MB (2097152 bytes).
-        minLength: 5
+        description: DEPRECATED. Use attachments.
         title: Document
         type: string
       documentUrl:
-        description: 'A URL to retrieve the PDF document via HTTP GET. If the link expires, please allow at least 7 days of validity.'
+        description: DEPRECATED. Use attachments.
         format: uri
         title: Document Url
         type: string
@@ -2708,7 +2714,7 @@ definitions:
         title: The legal supplier id
         type: integer
       mode:
-        description: DEPRECATED. The mode in which to run this invoice submission.
+        description: DEPRECATED.
         enum:
           - direct
         title: Mode
@@ -2770,6 +2776,11 @@ definitions:
         maxLength: 64
         minLength: 2
         title: Company name
+        type: string
+      tenant_id:
+        description: 'The id of the tenant, to be used in case of multi-tenant solutions. This property will included in webhook events.'
+        maxLength: 64
+        title: Tenant Id
         type: string
       zip:
         description: The zipcode.
@@ -2847,6 +2858,11 @@ definitions:
         maxLength: 64
         minLength: 2
         title: Company name
+        type: string
+      tenant_id:
+        description: 'The id of the tenant, to be used in case of multi-tenant solutions. This property will included in webhook events.'
+        maxLength: 64
+        title: Tenant Id
         type: string
       zip:
         description: The zipcode.
@@ -3252,19 +3268,7 @@ definitions:
   ShopAccountInput:
     properties:
       email:
-        description: |
-          This is email address determines where the invoices for all ShopAccounts
-          in the same _external_user_id_ group are sent. Each time you create or
-          update a ShopAccount for an _external_user_id_ and also provide
-          __email__, the email destination for all the ShopAccounts in the
-          _external_user_id_ group are updated at the same time.
-
-          We suggest you provide an immutable email address. If your user can
-          change the email address to which the invoices are to be sent, then you
-          will need to do an update for one of the ShopAccounts for that user in
-          order for Storecove to start using the new email address.
-
-          Note that this field is mandatory for the first ShopAccount that you create for an entity.
+        description: DEPRECATED
         type: string
       external_user_id:
         description: |
@@ -3272,9 +3276,10 @@ definitions:
           this ShopAccount. This could be a user, however, if your
           users can manage multiple organizations/administrations, then it is a
           better idea to put the organization/administration identifier in this
-          field, because the _external_user_id_ groups the ShopAccounts into a set
-          that all deliver their invoices to the same destination (typically an
-          email address).
+          field, because the _external_user_id_ groups ShopAccounts into a set
+          that all deliver their invoices to the same destination. The _external_user_id_
+          is present in the purchase invoice that is retrieved upon receiving the
+          'received_invoice' webhook.
         type: string
       password:
         description: The password for the account.
@@ -3335,7 +3340,7 @@ definitions:
   ShopAccountResult:
     properties:
       email:
-        description: See <<_openapi_shopaccountinput>>.
+        description: DEPRECATED
         type: string
       external_user_id:
         description: See <<_openapi_shopaccountinput>>.
@@ -3368,7 +3373,7 @@ definitions:
   ShopAccountUpdate:
     properties:
       email:
-        description: See <<_openapi_shopaccountinput>>.
+        description: DEPRECATED
         type: string
       password:
         description: See <<_openapi_shopaccountinput>>.
@@ -3386,34 +3391,37 @@ definitions:
   Tax:
     properties:
       amount:
-        description: The amount of VAT. Should equal percentage x amountExcludingVat.
+        description: The amount of VAT. Mandatory if taxSystem == 'tax_line_amounts'.
         title: Amount of VAT
         type: number
       country:
         $ref: '#/definitions/Country'
       percentage:
-        description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
+        description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice. Mandatory if taxSystem == 'line_amount_percentages
         title: Percentage VAT
         type: number
     required:
-      - amount
-      - percentage
       - country
     type: object
-  WidgetIdentification:
-    description: The identification for the identifier related to the Storecove Destination Configuration widget.
+  TaxSubtotal:
+    description: The total amount of tax of this type in the invoice.
     properties:
-      id:
-        description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
-        minLength: 2
-        title: Entity id
-        type: string
-      legalEntityId:
-        description: The id of the LegalEntity this invoice should be sent for.
-        title: LegalEntity Id
-        type: integer
+      country:
+        $ref: '#/definitions/Country'
+        description: Mandatory unless a taxExemptReason is provided.
+      percentage:
+        description: The tax percentage. This should be a valid tax percentage in the country at the time of the taxpointDate of this invoice. Mandatory unless a taxExemptReason is provided.
+        title: Percentage Tax
+        type: number
+      taxAmount:
+        description: The amount of tax. Mandatory unless a taxExemptReason is provided.
+        title: The amount of tax levied
+        type: number
+      taxableAmount:
+        description: The amount on which the tax is levied.
+        title: Taxable Amount
+        type: number
     required:
-      - legalEntityId
-      - id
-    title: Widget Identification
+      - taxableAmount
+    title: Tax Subtotal
     type: object

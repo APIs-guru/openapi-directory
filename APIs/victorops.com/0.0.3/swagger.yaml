@@ -24,11 +24,30 @@ info:
     - format: swagger
       url: 'https://portal.victorops.com/public/api-docs/victorops-api-v1.yaml'
       version: '2.0'
-  x-preferred: true
   x-providerName: victorops.com
 produces:
   - application/json
 parameters:
+  StartMaintenanceModePayload:
+    description: the definition of the maintenance mode you want to start
+    in: body
+    name: body
+    required: true
+    schema:
+      properties:
+        names:
+          description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
+          items:
+            type: string
+          type: array
+        purpose:
+          description: the reason for the maintenance mode
+          type: string
+        type:
+          enum:
+            - RoutingKeys
+          type: string
+      type: object
   ackResolveByUserPayload:
     description: Ack/Resolve payload
     in: body
@@ -168,6 +187,12 @@ parameters:
     name: limit
     required: false
     type: number
+  maintenanceModeId:
+    description: The id of the maintenance mode found in the active maintenance mode object
+    in: path
+    name: maintenancemodeid
+    required: true
+    type: string
   offset:
     default: 0
     description: The offset within the set of matching incidents
@@ -283,7 +308,7 @@ paths:
       description: |
         Retrieve the details of an alert that was sent VictorOps by you.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -315,7 +340,8 @@ paths:
     get:
       description: |
         Get a list of the currently open, acknowledged and recently resolved incidents.
-        This API may be called a maximum of 6 times per minute.
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -348,7 +374,7 @@ paths:
         should be configured using our
         <a href="https://help.victorops.com/knowledge-base/victorops-restendpoint-integration/">REST Endpoint</a>.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -377,7 +403,7 @@ paths:
       description: |
         The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -405,7 +431,7 @@ paths:
       description: |
         The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -433,7 +459,7 @@ paths:
       description: |
         The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -460,6 +486,8 @@ paths:
     post:
       description: |
         Reroute one or more incidents to one or more users and/or escalation policies
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -477,7 +505,7 @@ paths:
       description: |
         The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -500,12 +528,69 @@ paths:
       summary: Resolve an incident or list of incidents
       tags:
         - Incidents
+  /api-public/v1/maintenancemode:
+    get:
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+      responses:
+        '200':
+          description: maintenance mode state
+          schema:
+            $ref: '#/definitions/MaintenanceModeState'
+        '403':
+          $ref: '#/responses/403'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get an organization's current maintenance mode state
+      tags:
+        - Maintenance Mode
+  /api-public/v1/maintenancemode/start:
+    post:
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - $ref: '#/parameters/StartMaintenanceModePayload'
+      responses:
+        '200':
+          description: maintenance mode state
+          schema:
+            $ref: '#/definitions/MaintenanceModeState'
+        '403':
+          $ref: '#/responses/403'
+        '409':
+          description: You have an active global maintanance mode and are attempting to start a second. You may only have a single Global maintenance mode at a time
+        '420':
+          description: You have reached the limit of allowed active maintenance modes
+        '500':
+          $ref: '#/responses/500'
+      summary: Start maintenance mode for routing keys
+      tags:
+        - Maintenance Mode
+  '/api-public/v1/maintenancemode/{maintenancemodeid}/end':
+    put:
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - $ref: '#/parameters/maintenanceModeId'
+      responses:
+        '200':
+          description: maintenance mode state
+          schema:
+            $ref: '#/definitions/MaintenanceModeState'
+        '403':
+          $ref: '#/responses/403'
+        '500':
+          $ref: '#/responses/500'
+      summary: End maintenance mode for routing keys
+      tags:
+        - Maintenance Mode
   /api-public/v1/oncall/current:
     get:
       description: |
-        Get all on-call uesrs/teams for your organization.
+        Get all on-call users/teams for your organization.
 
-        This API may be called a maximum of 1 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -534,7 +619,7 @@ paths:
     get:
       description: |-
         Retrieves a list of routing keys and associated teams.
-        This API may be called a maximum of once a minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -561,7 +646,7 @@ paths:
       description: |
         List all the scheduled overrides on the organization
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -597,7 +682,7 @@ paths:
       description: |
         Creates a new scheduled override. Start and end dates are in ISO8601 format. E.g. `2018-09-28'T'05:00:00Z`
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -633,7 +718,7 @@ paths:
       description: |
         Deletes a scheduled override
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -665,7 +750,7 @@ paths:
       description: |
         Get the specified scheduled override
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -704,6 +789,8 @@ paths:
     get:
       description: |
         Get the specified scheduled override assignments
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -739,6 +826,8 @@ paths:
     delete:
       description: |
         Delete the scheduled override assignment
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -776,6 +865,8 @@ paths:
     get:
       description: |
         Get the specified scheduled override assignments
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -813,6 +904,8 @@ paths:
     put:
       description: |
         Update the scheduled override assignment
+
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -852,7 +945,7 @@ paths:
     get:
       description: |-
         Retrieves a list of escalation policy information.
-        This API may be called a maximum of once a minute
+        This API may be called a maximum of once a minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -882,7 +975,7 @@ paths:
         description: "Email Address", type: "email"
         description: "Phone Number", type: "phone"
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -919,7 +1012,7 @@ paths:
         description: "Send an SMS to a phone number", type: "sms"
         description: "Make a phone call to a phone number", type: "phone"
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -961,7 +1054,7 @@ paths:
         description: "If still unacked after 45 minutes", type: 45
         description: "If still unacked after 60 minutes", type: 60
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -994,7 +1087,7 @@ paths:
         Replaces a currently on-call user in the escalation policy with another.  In many cases, the policy slug
         will match the slug of the team that contains it.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1027,7 +1120,7 @@ paths:
       description: |
         Get all the paging policy steps for the user on the org associated with the API key
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/apiId'
@@ -1057,7 +1150,7 @@ paths:
       description: |
         Create a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/apiId'
@@ -1089,7 +1182,7 @@ paths:
       description: |
         Get a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1120,7 +1213,7 @@ paths:
       description: |
         Create a rule for a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1152,7 +1245,7 @@ paths:
       description: |
         Update a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1185,7 +1278,7 @@ paths:
       description: |
         Delete a rule from a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1217,7 +1310,7 @@ paths:
       description: |
         Get a rule from a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1249,7 +1342,7 @@ paths:
       description: |
         Update a rule for a paging policy step
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/username'
         - $ref: '#/parameters/pagingPolicyStep'
@@ -1283,7 +1376,7 @@ paths:
       description: |
         Get a list of teams for your organization.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1312,7 +1405,7 @@ paths:
       description: |
         Add a team to your organization.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1343,7 +1436,7 @@ paths:
       description: |
         Remove a team from your organization.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1375,7 +1468,7 @@ paths:
       description: |
         Get the information for the specified team.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1409,7 +1502,7 @@ paths:
       description: |
         Update the designated team
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1445,7 +1538,7 @@ paths:
       description: |
         Get the team admins for the specified team.
 
-        This API may be called a maximum of 30 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1477,7 +1570,7 @@ paths:
       description: |
         Get the members for the specified team.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1511,7 +1604,7 @@ paths:
       description: |
         Add a team member to your team.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1547,7 +1640,7 @@ paths:
       description: |
         Remove a team from your organization.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1589,7 +1682,7 @@ paths:
 
         Get the on-call schedule for a team, including on-call overrides.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1627,7 +1720,7 @@ paths:
 
         Replaces a currently on-call user on the team with another.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1660,7 +1753,7 @@ paths:
       description: |
         Get the escalation policies for the specified team.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1696,7 +1789,7 @@ paths:
       description: |
         Get a list of users for your organization
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1725,7 +1818,7 @@ paths:
       description: |
         Add a user to your organization
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1756,7 +1849,7 @@ paths:
       description: |
         Remove a user from your organization. If no replacement is specified, an empty JSON payload ("{}") is still required.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1789,7 +1882,7 @@ paths:
       description: |
         Get the information for the specified user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1823,7 +1916,7 @@ paths:
       description: |
         Update the designated user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1859,7 +1952,7 @@ paths:
       description: |
         Get the contact methods for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1904,7 +1997,7 @@ paths:
       description: |
         Get the contact methods for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1936,7 +2029,7 @@ paths:
       description: |
         Delete a contact device for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -1972,7 +2065,7 @@ paths:
       description: |
         Get the indicated contact device for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2008,7 +2101,7 @@ paths:
       description: |
         Update a contact device for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2046,7 +2139,7 @@ paths:
       description: |
         Get the contact emails for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2077,7 +2170,7 @@ paths:
       description: |
         Create a contact email for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2110,7 +2203,7 @@ paths:
       description: |
         Delete the indicated contact email for the user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2146,7 +2239,7 @@ paths:
       description: |
         Get the indicated contact email for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2183,7 +2276,7 @@ paths:
       description: |
         Get the contact phones for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2214,7 +2307,7 @@ paths:
       description: |
         Create a contact phone for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2247,7 +2340,7 @@ paths:
       description: |
         Delete the indicated contact phone for the user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2283,7 +2376,7 @@ paths:
       description: |
         Get the indicated contact phone for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2323,7 +2416,7 @@ paths:
 
         Get the on-call schedule for a user for all teams, including on-call overrides.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2360,7 +2453,7 @@ paths:
       description: |
         Get paging policies for a user
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2390,7 +2483,7 @@ paths:
   '/api-public/v1/user/{user}/teams':
     get:
       description: |
-        This API may be called a maximum of 30 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2420,7 +2513,7 @@ paths:
       description: |
         Get the on-call schedule for a team, including on-call overrides.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2455,7 +2548,7 @@ paths:
       description: |
         Get the on-call schedule for a user for all teams the user is on, including on-call overrides.
 
-        This API may be called a maximum of 15 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2570,7 +2663,7 @@ paths:
         Returns a log of user shift changes for the specified team. This is historical
         data, and may be up to 15 minutes behind real-time log data.
 
-        This API may be called a maximum of 6 times per minute.
+        This API may be called a maximum of 60 times per minute.
       parameters:
         - $ref: '#/parameters/apiId'
         - $ref: '#/parameters/apiKey'
@@ -2805,6 +2898,25 @@ definitions:
         description: The incident data
         items:
           $ref: '#/definitions/ActiveIncidentInfo'
+        type: array
+    type: object
+  ActiveMaintenanceMode:
+    properties:
+      instanceId:
+        description: external friendly unique id for maintenance mode
+        type: string
+      isGlobal:
+        description: whether this instance is a global maintenance mode or for specific routing keys
+        type: boolean
+      startedAt:
+        description: millis from epoch marking the start time
+        type: number
+      startedBy:
+        description: username of the user that started maintenance mode
+        type: string
+      targets:
+        items:
+          $ref: '#/definitions/MaintenanceModeTarget'
         type: array
     type: object
   AddGroupPayload:
@@ -3201,6 +3313,27 @@ definitions:
         items:
           $ref: '#/definitions/V1User'
         type: array
+    type: object
+  MaintenanceModeState:
+    properties:
+      activeInstances:
+        items:
+          $ref: '#/definitions/ActiveMaintenanceMode'
+        type: array
+      companyId:
+        type: string
+    type: object
+  MaintenanceModeTarget:
+    properties:
+      names:
+        description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
+        items:
+          type: string
+        type: array
+      type:
+        enum:
+          - RoutingKeys
+        type: string
     type: object
   NotificationDescription:
     enum:

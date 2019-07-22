@@ -758,6 +758,7 @@ paths:
   '/api/v1/orders/find/{id}/{partner}':
     get:
       consumes: []
+      deprecated: true
       operationId: OrderApi_Find
       parameters:
         - description: The order id from the external system
@@ -786,7 +787,7 @@ paths:
       consumes: []
       operationId: OrderApi_GetByExtRef
       parameters:
-        - description: The internal billbee id of the order
+        - description: The extern order number of the order
           in: path
           name: extRef
           required: true
@@ -801,7 +802,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]'
-      summary: Get a single order by its internal billbee id
+      summary: Get a single order by its external order number
       tags:
         - Orders
   /api/v1/orders/invoices:
@@ -964,7 +965,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: "### REMARKS ###\r\nUse this call to change the state of an order to i.e. paid or sent.\r\n\r\nThe state is transfered to the external shop/marketplace if configured.\r\nThis is the list of known states:\r\n- 1: ordered\r\n- 2: confirmed\r\n- 3: paid\r\n- 4: shipped\r\n- 5: reclamation\r\n- 6: deleted\r\n- 7: closed\r\n- 8: canceled\r\n- 9: archived\r\n- 10: not used\r\n- 11: demand note 1\r\n- 12: demand note 2\r\n- 13: packed\r\n- 14: offered\r\n- 15: payment reminder"
+      description: "### REMARKS ###\r\nUse this call to change the state of an order to i.e. paid or sent.\r\n\r\nThe state is transfered to the external shop/marketplace if configured.\r\nThis is the list of known states:\r\n- 1: ordered\r\n- 2: confirmed\r\n- 3: paid\r\n- 4: shipped\r\n- 5: reclamation\r\n- 6: deleted\r\n- 7: closed\r\n- 8: canceled\r\n- 9: archived\r\n- 10: not used\r\n- 11: demand note 1\r\n- 12: demand note 2\r\n- 13: packed\r\n- 14: offered\r\n- 15: payment reminder\r\n- 16: fulfilling"
       operationId: OrderApi_UpdateState
       parameters:
         - description: The internal id of the order
@@ -2229,6 +2230,14 @@ definitions:
       WidthCm:
         format: double
         type: number
+    required:
+      - VatIndex
+      - Price
+      - Vat1Rate
+      - Vat2Rate
+      - Type
+      - IsDigital
+      - IsCustomizable
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiModel:
     properties:
@@ -2336,6 +2345,10 @@ definitions:
         type: string
       Tel2:
         type: string
+      Type:
+        description: Customer Type
+        format: int32
+        type: integer
       VatId:
         type: string
     type: object
@@ -2359,6 +2372,10 @@ definitions:
         description: The value of the shipments content
         format: double
         type: number
+      PrinterIdForExportDocs:
+        description: The id of a connected Cloudprinter to sent the export docs to
+        format: int32
+        type: integer
       PrinterName:
         description: The name of a connected Cloudprinter to sent the label to
         type: string
@@ -2401,6 +2418,7 @@ definitions:
           - 12
           - 13
           - 14
+          - 15
         format: int32
         type: integer
     type: object
@@ -2471,6 +2489,10 @@ definitions:
         type: string
       Tel2:
         type: string
+      Type:
+        description: Customer Type
+        format: int32
+        type: integer
       VatId:
         type: string
     type: object
@@ -2682,6 +2704,7 @@ definitions:
           - 100
           - 101
           - 102
+          - 103
         format: int32
         type: integer
       PaymentReference:
@@ -2762,6 +2785,7 @@ definitions:
           - 13
           - 14
           - 15
+          - 16
         format: int32
         type: integer
       Tags:
@@ -4426,6 +4450,7 @@ definitions:
           - 13
           - 14
           - 15
+          - 16
         format: int32
         type: integer
     type: object
@@ -4478,6 +4503,15 @@ definitions:
     type: object
   Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchModel:
     properties:
+      SearchMode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        format: int32
+        type: integer
       Term:
         type: string
       Type:

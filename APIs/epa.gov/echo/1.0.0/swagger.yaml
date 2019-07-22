@@ -7,28 +7,24 @@ info:
   contact:
     name: 'US EPA, OECA Integration, Targeting and Access Branch'
   description: |-
-    Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. 
-    ECHO provides integrated compliance and enforcement information for about 800,000 regulated facilities nationwide.
-    <BR><BR>ECHO Rest Services provide multiple service endpoints, each with specific capabilities, 
-    to search and retrieve data on facilities regulated as Clean Air Act (CAA) stationary sources, Clean Water Act (CWA) dischargers, 
-    Resource Conservation and Recovery Act (RCRA) hazardous waste generators/handlers, and Safe Drinking Water Act (SDWA) public water systems. Data of interest from other EPA sources, 
-    such as the Toxics Release Inventory, is also supplied for context.
-    <BR><BR>
+    Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use.  ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide.
+       ECHO Rest Services provide multiple service endpoints, each with specific capabilities, to search and retrieve data on facilities regulated as Clean Air Act (CAA) stationary sources, Clean Water Act (CWA) dischargers, Resource Conservation and Recovery Act (RCRA) hazardous waste generators/handlers, and Safe Drinking Water Act (SDWA) public water systems.  Data of interest from other EPA sources, such as the Toxics Release Inventory, is also supplied for context.  
+     
     The get_facilities, get_map, get_qid, and get_download end points are meant to be used together, while the enhanced get_facility_info end point is self contained.
-      The get_facility_info end point returns either an array of state, county or zip clusters with summary statistics per cluster or an array of facilities.
-    <BR><BR>
+        The get_facility_info end point returns either an array of state, county or zip clusters with summary statistics per cluster or an array of facilities.
+     
     The recommended use scenario for get_facilities, get_qid, get_map, and get_downoad is:
-    <br>
-    <br><b>1)</b>  Use get_facilities to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
-    <br><b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of facility results.
-    <br><b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates that meet the QID query criteria.
-    <br><b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
-    <br>
-    <br>
+     
+     <b>1)</b>  Use get_facilities to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
+     <b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of facility results.
+     <b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates that meet the QID query criteria.
+     <b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
+     
+     
     Use the qcolumns parameter to customize your search results.  Use the Metdata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output. 
-    <br><br>
+     
     Additional ECHO Resources:   <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
-    <br>
+     
   license:
     name: This page was built with the Swagger API.
     url: 'https://swagger.io'
@@ -452,6 +448,11 @@ parameters:
     name: p_ncs
     required: false
     type: string
+  f.p_neiu:
+    in: formData
+    name: p_neiu
+    required: false
+    type: string
   f.p_ocr:
     description: |-
       Toxics Release Inventory Pounds of On-Site Chemical Releases Limiter.  Enter a keyword to filter results.
@@ -639,12 +640,6 @@ parameters:
     description: 'Standard Industrial Classification (SIC) Code Filter Alternate 3.  Enter the first 2, 3 or 4 SIC code digits to filter results to facilities having those code prefixes.  As this alternative does not utilize an index, p_sic2 will generally be quicker.'
     in: formData
     name: p_sic4
-    required: false
-    type: string
-  f.p_sid:
-    description: 'System Identifier.  The unique facility identifer for the EPA system.  Examples:  For ICIS NPDES the 9 digit NPDES Id.'
-    in: formData
-    name: p_sid
     required: false
     type: string
   f.p_st:
@@ -1212,6 +1207,11 @@ parameters:
     name: p_ncs
     required: false
     type: string
+  q.p_neiu:
+    in: query
+    name: p_neiu
+    required: false
+    type: string
   q.p_ocr:
     description: |-
       Toxics Release Inventory Pounds of On-Site Chemical Releases Limiter.  Enter a keyword to filter results.
@@ -1399,12 +1399,6 @@ parameters:
     description: 'Standard Industrial Classification (SIC) Code Filter Alternate 3.  Enter the first 2, 3 or 4 SIC code digits to filter results to facilities having those code prefixes.  As this alternative does not utilize an index, p_sic2 will generally be quicker.'
     in: query
     name: p_sic4
-    required: false
-    type: string
-  q.p_sid:
-    description: 'System Identifier.  The unique facility identifer for the EPA system.  Examples:  For ICIS NPDES the 9 digit NPDES Id.'
-    in: query
-    name: p_sid
     required: false
     type: string
   q.p_st:
@@ -1650,7 +1644,6 @@ paths:
         - $ref: '#/parameters/q.p_fips'
         - $ref: '#/parameters/q.p_st'
         - $ref: '#/parameters/q.p_zip'
-        - $ref: '#/parameters/q.p_sid'
         - $ref: '#/parameters/q.p_frs'
         - $ref: '#/parameters/q.p_reg'
         - $ref: '#/parameters/q.p_sic'
@@ -1710,6 +1703,7 @@ paths:
         - $ref: '#/parameters/q.p_radius'
         - $ref: '#/parameters/q.p_ejscreen_over80cnt'
         - $ref: '#/parameters/q.p_agoo'
+        - $ref: '#/parameters/q.p_neiu'
         - $ref: '#/parameters/q.queryset'
         - $ref: '#/parameters/q.responseset'
         - $ref: '#/parameters/q.tablelist'
@@ -1761,7 +1755,6 @@ paths:
         - $ref: '#/parameters/f.p_fips'
         - $ref: '#/parameters/f.p_st'
         - $ref: '#/parameters/f.p_zip'
-        - $ref: '#/parameters/f.p_sid'
         - $ref: '#/parameters/f.p_frs'
         - $ref: '#/parameters/f.p_reg'
         - $ref: '#/parameters/f.p_sic'
@@ -1821,6 +1814,7 @@ paths:
         - $ref: '#/parameters/f.p_radius'
         - $ref: '#/parameters/f.p_ejscreen_over80cnt'
         - $ref: '#/parameters/f.p_agoo'
+        - $ref: '#/parameters/f.p_neiu'
         - $ref: '#/parameters/f.queryset'
         - $ref: '#/parameters/f.responseset'
         - $ref: '#/parameters/f.tablelist'
@@ -1873,7 +1867,6 @@ paths:
         - $ref: '#/parameters/q.p_fips'
         - $ref: '#/parameters/q.p_st'
         - $ref: '#/parameters/q.p_zip'
-        - $ref: '#/parameters/q.p_sid'
         - $ref: '#/parameters/q.p_frs'
         - $ref: '#/parameters/q.p_reg'
         - $ref: '#/parameters/q.p_sic'
@@ -1932,6 +1925,7 @@ paths:
         - $ref: '#/parameters/q.p_radius'
         - $ref: '#/parameters/q.p_ejscreen_over80cnt'
         - $ref: '#/parameters/q.p_agoo'
+        - $ref: '#/parameters/q.p_neiu'
         - $ref: '#/parameters/q.responseset'
         - $ref: '#/parameters/q.callback'
         - description: Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
@@ -1980,7 +1974,6 @@ paths:
         - $ref: '#/parameters/f.p_fips'
         - $ref: '#/parameters/f.p_st'
         - $ref: '#/parameters/f.p_zip'
-        - $ref: '#/parameters/f.p_sid'
         - $ref: '#/parameters/f.p_frs'
         - $ref: '#/parameters/f.p_reg'
         - $ref: '#/parameters/f.p_sic'
@@ -2039,6 +2032,7 @@ paths:
         - $ref: '#/parameters/f.p_radius'
         - $ref: '#/parameters/f.p_ejscreen_over80cnt'
         - $ref: '#/parameters/f.p_agoo'
+        - $ref: '#/parameters/f.p_neiu'
         - $ref: '#/parameters/f.responseset'
         - $ref: '#/parameters/f.callback'
         - description: Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.

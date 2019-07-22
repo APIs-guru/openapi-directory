@@ -1494,12 +1494,12 @@ paths:
           name: stop_accessibility
           required: false
           type: boolean
-        - description: Placeholder for future development; currently unavailable
+        - description: Indicates if stop contact information will be returned (default = false)
           in: query
           name: stop_contact
           required: false
           type: boolean
-        - description: Placeholder for future development; currently unavailable
+        - description: Indicates if stop ticket information will be returned (default = false)
           in: query
           name: stop_ticket
           required: false
@@ -1863,12 +1863,32 @@ definitions:
         format: int32
         type: integer
     type: object
+  V3.DirectionWithDescription:
+    properties:
+      direction_id:
+        description: Direction of travel identifier
+        format: int32
+        type: integer
+      direction_name:
+        description: Name of direction of travel
+        type: string
+      route_direction_description:
+        type: string
+      route_id:
+        description: Route identifier
+        format: int32
+        type: integer
+      route_type:
+        description: Transport mode identifier
+        format: int32
+        type: integer
+    type: object
   V3.DirectionsResponse:
     properties:
       directions:
         description: Directions of travel of route
         items:
-          $ref: '#/definitions/V3.Direction'
+          $ref: '#/definitions/V3.DirectionWithDescription'
         type: array
       status:
         $ref: '#/definitions/V3.Status'
@@ -2316,6 +2336,9 @@ definitions:
       route_number:
         description: Route number presented to public (nb. not route_id)
         type: string
+      route_service_status:
+        $ref: '#/definitions/V3.RouteServiceStatus'
+        description: Service status for the route (indicates disruptions)
       route_type:
         description: Transport mode identifier
         format: int32
@@ -2409,11 +2432,19 @@ definitions:
   V3.RouteResponse:
     properties:
       route:
-        $ref: '#/definitions/V3.Route'
+        $ref: '#/definitions/V3.RouteWithStatus'
         description: 'Train lines, tram routes, bus routes, regional coach routes, Night Bus routes'
       status:
         $ref: '#/definitions/V3.Status'
         description: API Status / Metadata
+    type: object
+  V3.RouteServiceStatus:
+    properties:
+      description:
+        type: string
+      timestamp:
+        format: date-time
+        type: string
     type: object
   V3.RouteType:
     properties:
@@ -2435,6 +2466,29 @@ definitions:
       status:
         $ref: '#/definitions/V3.Status'
         description: API Status / Metadata
+    type: object
+  V3.RouteWithStatus:
+    properties:
+      route_gtfs_id:
+        description: GTFS Identifer of the route
+        type: string
+      route_id:
+        description: Route identifier
+        format: int32
+        type: integer
+      route_name:
+        description: Name of route
+        type: string
+      route_number:
+        description: Route number presented to public (nb. not route_id)
+        type: string
+      route_service_status:
+        $ref: '#/definitions/V3.RouteServiceStatus'
+        description: Service status for the route (indicates disruptions)
+      route_type:
+        description: Transport mode identifier
+        format: int32
+        type: integer
     type: object
   V3.Run:
     properties:

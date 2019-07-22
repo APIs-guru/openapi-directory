@@ -597,9 +597,13 @@ definitions:
       description:
         description: A short description or teaser
         type: string
-      station:
+      provider:
         default: NPR
         description: The producer of this aggregation
+        type: string
+      station:
+        default: NPR
+        description: Deprecated - clients should switch to use provider.
         type: string
       title:
         description: The title of this aggregation
@@ -1146,6 +1150,9 @@ definitions:
               - application/json
               - application/xml
               - text/html
+            type: string
+          linkText:
+            description: 'Text recommended to accompany the link. For example, ''Read Story'' with a full story link, or ''Read Transcript'' with a transcript link.'
             type: string
         required:
           - content-type

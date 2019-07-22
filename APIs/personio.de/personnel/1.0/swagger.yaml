@@ -86,6 +86,7 @@ paths:
                   type: AttendancePeriod
                 - attributes:
                     break: 60
+                    comment: null
                     date: '2017-01-18'
                     employee: 325660
                     end_time: '18:30'
@@ -203,8 +204,27 @@ paths:
             application/json:
               data:
                 - attributes:
+                    absence_entitlement:
+                      label: Absence entitlement
+                      value:
+                        - attributes:
+                            entitlement: 30
+                            id: 12345
+                            name: Paid Vacation
+                          type: TimeOffType
+                        - attributes:
+                            entitlement: 0
+                            id: 12346
+                            name: Parental leave
+                          type: TimeOffType
+                        - attributes:
+                            entitlement: 0
+                            id: 12347
+                            name: Sick days
+                          type: TimeOffType
                     contract_end_date:
                       label: Contract ends
+                      value: null
                     cost_centers:
                       label: Cost center
                       value:
@@ -287,6 +307,9 @@ paths:
                     probation_period_end:
                       label: Probation period end
                       value: '2012-07-31T00:00:00+0200'
+                    profile_picture:
+                      label: Profile Picture
+                      value: 'http://api.dev.personio.de/v1/company/employees/2/profile-picture'
                     status:
                       label: Status
                       value: active
@@ -309,6 +332,7 @@ paths:
                         type: Employee
                     termination_date:
                       label: Termination date
+                      value: null
                     termination_reason:
                       label: Termination reason
                       value: ''
@@ -339,9 +363,74 @@ paths:
               success: true
           schema:
             $ref: '#/definitions/EmployeesResponse'
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      description: |
+        Creates new employee. Status of the employee will be set to `active` if `hire_date` provided is in past. Otherwise status will be set to `onboarding`. This endpoint will respond with `id` of created employee in case of success.
+      parameters:
+        - description: Employee email
+          in: formData
+          name: 'employee[email]'
+          required: true
+          type: string
+        - description: Employee first name
+          in: formData
+          name: 'employee[first_name]'
+          required: true
+          type: string
+        - description: Employee last name
+          in: formData
+          name: 'employee[last_name]'
+          required: true
+          type: string
+        - description: Employee gender
+          enum:
+            - male
+            - female
+            - diverse
+          in: formData
+          name: 'employee[gender]'
+          required: false
+          type: string
+        - description: Employee position
+          in: formData
+          name: 'employee[position]'
+          required: false
+          type: string
+        - description: Employee department
+          in: formData
+          name: 'employee[department]'
+          required: false
+          type: string
+        - description: Employee hire date
+          format: date
+          in: formData
+          name: 'employee[hire_date]'
+          required: false
+          type: string
+        - description: Employee weekly working hours
+          in: formData
+          name: 'employee[weekly_hours]'
+          required: false
+          type: number
+      responses:
+        '200':
+          description: Successful creation of a employee
+          examples:
+            application/json:
+              data:
+                id: 81723
+                message: success
+              success: true
+          schema:
+            allOf:
+              - $ref: '#/definitions/Response'
+      summary: Create an employee
   '/company/employees/{employee_id}':
     get:
-      description: Employee
+      description: Show employee by ID
       parameters:
         - description: Numeric `id` of the employee
           format: int32
@@ -356,8 +445,27 @@ paths:
             application/json:
               data:
                 attributes:
+                  absence_entitlement:
+                    label: Absence entitlement
+                    value:
+                      - attributes:
+                          entitlement: 30
+                          id: 12345
+                          name: Paid Vacation
+                        type: TimeOffType
+                      - attributes:
+                          entitlement: 0
+                          id: 12346
+                          name: Parental leave
+                        type: TimeOffType
+                      - attributes:
+                          entitlement: 0
+                          id: 12347
+                          name: Sick days
+                        type: TimeOffType
                   contract_end_date:
                     label: Contract ends
+                    value: null
                   cost_centers:
                     label: Cost center
                     value:
@@ -462,6 +570,7 @@ paths:
                       type: Employee
                   termination_date:
                     label: Termination date
+                    value: null
                   termination_reason:
                     label: Termination reason
                     value: ''
@@ -492,6 +601,29 @@ paths:
               success: true
           schema:
             $ref: '#/definitions/EmployeeResponse'
+  '/company/employees/{employee_id}/profile-picture/{width}':
+    get:
+      description: Show employee profile picture
+      parameters:
+        - description: Numeric `id` of the employee
+          format: int32
+          in: path
+          name: employee_id
+          required: true
+          type: integer
+        - description: Width of the image. Default 75x75
+          format: int32
+          in: path
+          name: width
+          required: true
+          type: integer
+      produces:
+        - image/png
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: file
   /company/time-off-types:
     get:
       description: 'Provides a list of available time-off types, for example ''Paid vacation'', ''Parental leave'' or ''Home office'''
@@ -778,6 +910,32 @@ paths:
           schema:
             $ref: '#/definitions/AbsencePeriodResponse'
 definitions:
+  AbsenceEntitlement:
+    properties:
+      label:
+        type: string
+      value:
+        items:
+          properties:
+            attributes:
+              properties:
+                entitlement:
+                  type: number
+                id:
+                  type: integer
+                name:
+                  type: string
+              type: object
+            type:
+              enum:
+                - TimeOffType
+              type: string
+          type: object
+        type: array
+    required:
+      - label
+      - value
+    type: object
   AbsencePeriodResponse:
     type: object
   AbsencePeriodsResponse:
@@ -1053,12 +1211,10 @@ definitions:
       value:
         properties:
           attributes:
-            items:
-              properties:
-                name:
-                  type: string
-              type: object
-            type: array
+            properties:
+              name:
+                type: string
+            type: object
           type:
             type: string
         type: object
@@ -1068,6 +1224,8 @@ definitions:
       attributes:
         items:
           properties:
+            absence_entitlement:
+              $ref: '#/definitions/AbsenceEntitlement'
             contract_end_date:
               $ref: '#/definitions/Attribute'
             cost_centers:
@@ -1189,6 +1347,7 @@ definitions:
     example:
       attendances:
         - break: 120
+          comment: null
           date: '2017-01-18'
           employee: 1234
           end_time: '18:00'
@@ -1254,12 +1413,10 @@ definitions:
       value:
         properties:
           attributes:
-            items:
-              properties:
-                name:
-                  type: string
-              type: object
-            type: array
+            properties:
+              name:
+                type: string
+            type: object
           type:
             type: string
         type: object
@@ -1302,6 +1459,7 @@ definitions:
   UpdateAttendancePeriodRequest:
     example:
       break: 35
+      comment: null
       date: '2019-03-17'
       end_time: '12:00'
       start_time: '9:00'

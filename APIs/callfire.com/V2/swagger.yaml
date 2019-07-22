@@ -56,14 +56,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -136,6 +136,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find calls
@@ -219,6 +239,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Send calls
@@ -245,14 +285,14 @@ paths:
           type: string
         - default: 10
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -294,6 +334,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallBroadcastPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find call broadcasts
@@ -333,6 +393,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create a call broadcast
@@ -368,6 +448,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallBroadcast'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific call broadcast
@@ -404,8 +504,26 @@ paths:
           schema:
             $ref: '#/definitions/CallBroadcast'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a call broadcast
@@ -432,8 +550,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Archive voice broadcast
@@ -466,14 +602,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -483,6 +619,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/BatchPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find batches in a call broadcast
@@ -523,6 +679,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add batches to a call broadcast
@@ -561,14 +737,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -578,6 +754,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find calls in a call broadcast
@@ -626,6 +822,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add recipients to a call broadcast
@@ -652,8 +868,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Start voice broadcast
@@ -701,6 +935,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallBroadcastStats'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get statistics on call broadcast
@@ -727,8 +981,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Stop voice broadcast
@@ -764,6 +1036,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallRecording'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get call recording by id
@@ -793,7 +1085,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/InputStream'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get call recording in mp3 format
@@ -829,6 +1141,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Call'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific call
@@ -864,6 +1196,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallRecordingList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get call recordings for a call
@@ -904,6 +1256,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallRecording'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get call recording by name
@@ -940,7 +1312,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/InputStream'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get call mp3 recording by name
@@ -976,6 +1368,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Batch'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific batch
@@ -1007,8 +1419,26 @@ paths:
           schema:
             $ref: '#/definitions/Batch'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a batch
@@ -1030,19 +1460,19 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
           type: integer
-        - description: Name of a file to search for
+        - description: value to filter file names again; this value is used to check if the filename contains the filter value.
           in: query
           name: filter
           required: false
@@ -1072,6 +1502,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CampaignSoundPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find sounds
@@ -1107,6 +1557,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CampaignSound'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add sound via call
@@ -1148,6 +1618,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CampaignSound'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add sound via file
@@ -1183,6 +1673,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CampaignSound'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add sound via text-to-speech
@@ -1209,8 +1719,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete a specific sound
@@ -1245,6 +1773,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CampaignSound'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific sound
@@ -1276,7 +1824,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/StreamingOutput'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Download a MP3 sound
@@ -1308,7 +1876,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/StreamingOutput'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Download a WAV sound
@@ -1335,14 +1923,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -1385,6 +1973,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ContactPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find contacts
@@ -1400,7 +2008,7 @@ paths:
       x-sample-php-url: /php/contacts/findContacts.php
       x-sample-python-url: /python/contacts/findContacts.py
     post:
-      description: 'Creates contacts in CallFire system. See [contacts validation rules](https://www.callfire.com/help/docs/getting-started/managing-contacts/validating-contacts#section1)'
+      description: 'Creates contacts in CallFire system. Only values from the next list can be used as external system parameter in contact creation: **NATION_BUILDER, SALES_FORCE_CONTACTS, SALES_FORCE_LEADS, SALES_FORCE_REPORTS, ZOHO, NETSUITE, MAIL_CHIMP**. See [contacts validation rules](https://www.callfire.com/help/docs/getting-started/managing-contacts/validating-contacts#section1)'
       operationId: createContacts
       parameters:
         - description: A list of a contact objects
@@ -1416,6 +2024,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceIdList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create contacts
@@ -1440,14 +2068,16 @@ paths:
           name: fields
           required: false
           type: string
-        - description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+        - default: 100
+          description: To set the maximum number of records to return in a paged list response. The default is 100
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
-        - description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+        - default: 0
+          description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
+          format: int32
           in: query
           name: offset
           required: false
@@ -1501,6 +2131,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/DoNotContactPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find do not contact (dnc) items
@@ -1526,10 +2176,26 @@ paths:
           schema:
             $ref: '#/definitions/AddDoNotContactRequest'
       responses:
-        '200':
-          description: successful operation
+        '400':
+          description: Bad request
           schema:
-            $ref: '#/definitions/JResponse'
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add do not contact (dnc) numbers
@@ -1555,8 +2221,26 @@ paths:
           required: true
           type: string
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete do not contact (dnc) numbers contained in source.
@@ -1596,6 +2280,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ItemList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find universal do not contacts (udnc) associated with toNumber
@@ -1621,8 +2325,26 @@ paths:
           required: true
           type: string
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete do not contact (dnc) number. If number contains commas treat as list of numbers
@@ -1651,6 +2373,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/DoNotContact'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get do not contact (dnc)
@@ -1681,8 +2423,26 @@ paths:
           schema:
             $ref: '#/definitions/DoNotContact'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update an individual do not contact (dnc) number
@@ -1709,14 +2469,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -1731,6 +2491,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ContactListPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find contact lists
@@ -1760,6 +2540,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create contact lists
@@ -1801,6 +2601,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create contact list from file
@@ -1827,8 +2647,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete a contact list
@@ -1863,6 +2701,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ContactList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific contact list
@@ -1894,8 +2752,26 @@ paths:
           schema:
             $ref: '#/definitions/UpdateContactListRequest'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a contact list
@@ -1931,8 +2807,26 @@ paths:
           required: false
           type: array
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete contacts from a contact list
@@ -1963,13 +2857,13 @@ paths:
           required: false
           type: string
         - description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -1979,6 +2873,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ContactPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find contacts in a contact list
@@ -2010,8 +2924,26 @@ paths:
           schema:
             $ref: '#/definitions/AddContactListContactsRequest'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add contacts to a contact list
@@ -2044,8 +2976,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete a contact from a contact list
@@ -2072,8 +3022,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete a contact
@@ -2108,6 +3076,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Contact'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific contact
@@ -2139,8 +3127,26 @@ paths:
           schema:
             $ref: '#/definitions/Contact'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a contact
@@ -2188,6 +3194,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ContactHistory'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a contact's history
@@ -2220,6 +3246,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/KeywordList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find keywords
@@ -2241,18 +3287,28 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
           type: integer
+        - description: Filter by part of Keyword name or Label name of Keyword
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: An exact label name to search by
+          in: query
+          name: labelName
+          required: false
+          type: string
         - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
           in: query
           name: fields
@@ -2263,6 +3319,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/KeywordLeasePage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find keyword leases
@@ -2277,6 +3353,183 @@ paths:
       x-sample-js-url: /js/keywords/findKeywordLeases.js
       x-sample-php-url: /php/keywords/findKeywordLeases.php
       x-sample-python-url: /python/keywords/findKeywordLeases.py
+  /keywords/leases/configs:
+    get:
+      description: Searches for all keyword lease configs for the user. Returns a paged list of KeywordConfig
+      operationId: findKeywordLeaseConfigs
+      parameters:
+        - default: 20
+          description: To set the maximum number of records to return in a paged list response. The default is 100
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Filter by part of Keyword name or Label name of Keyword
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: An exact label name to search by
+          in: query
+          name: labelName
+          required: false
+          type: string
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Page'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Find keyword lease configs
+      tags:
+        - keywords
+      x-sample-csharp-url: /csharp/keywords/findKeywordLeaseConfigs.cs
+      x-sample-curl-request-url: /curl/keywords/findKeywordLeaseConfigs.sh
+      x-sample-curl-response-url: /curl/keywords/findKeywordLeaseConfigs.json
+      x-sample-description-url: /description/keywords/findKeywordLeaseConfigs.md
+      x-sample-go-url: /go/keywords/findKeywordLeaseConfigs.go
+      x-sample-java-url: /java/keywords/findKeywordLeaseConfigs.java
+      x-sample-js-url: /js/keywords/findKeywordLeaseConfigs.js
+      x-sample-php-url: /php/keywords/findKeywordLeaseConfigs.php
+      x-sample-python-url: /python/keywords/findKeywordLeaseConfigs.py
+  '/keywords/leases/configs/{keyword}':
+    get:
+      description: Returns a single KeywordConfig instance for a given keyword lease
+      operationId: getKeywordLeaseConfig
+      parameters:
+        - description: A Keyword to get KeywordConfig by
+          in: path
+          name: keyword
+          required: true
+          type: string
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/KeywordConfig'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Find a specific keyword lease config
+      tags:
+        - keywords
+      x-sample-csharp-url: /csharp/keywords/getKeywordLeaseConfig.cs
+      x-sample-curl-request-url: /curl/keywords/getKeywordLeaseConfig.sh
+      x-sample-curl-response-url: /curl/keywords/getKeywordLeaseConfig.json
+      x-sample-description-url: /description/keywords/getKeywordLeaseConfig.md
+      x-sample-go-url: /go/keywords/getKeywordLeaseConfig.go
+      x-sample-java-url: /java/keywords/getKeywordLeaseConfig.java
+      x-sample-js-url: /js/keywords/getKeywordLeaseConfig.js
+      x-sample-php-url: /php/keywords/getKeywordLeaseConfig.php
+      x-sample-python-url: /python/keywords/getKeywordLeaseConfig.py
+    put:
+      description: 'Updates a keyword lease configuration. Use this API endpoint to enable/disable inbound SMS forwarding, set forward number. Forward number must be in E.164 format)'
+      operationId: updateKeywordLeaseConfig
+      parameters:
+        - description: To update a keyword lease config
+          in: path
+          name: keyword
+          required: true
+          type: string
+        - description: The configuration of a keyword lease object.
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/KeywordConfig'
+      responses:
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Update a keyword lease config
+      tags:
+        - keywords
+      x-sample-csharp-url: /csharp/keywords/updateKeywordLeaseConfig.cs
+      x-sample-curl-request-url: /curl/keywords/updateKeywordLeaseConfig.sh
+      x-sample-curl-response-url: /curl/keywords/updateKeywordLeaseConfig.json
+      x-sample-description-url: /description/keywords/updateKeywordLeaseConfig.md
+      x-sample-go-url: /go/keywords/updateKeywordLeaseConfig.go
+      x-sample-java-url: /java/keywords/updateKeywordLeaseConfig.java
+      x-sample-js-url: /js/keywords/updateKeywordLeaseConfig.js
+      x-sample-php-url: /php/keywords/updateKeywordLeaseConfig.php
+      x-sample-python-url: /python/keywords/updateKeywordLeaseConfig.py
   '/keywords/leases/{keyword}':
     get:
       description: Searches for all keywords owned by user
@@ -2297,6 +3550,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/KeywordLease'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific lease
@@ -2327,8 +3600,26 @@ paths:
           schema:
             $ref: '#/definitions/KeywordLease'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a lease
@@ -2358,6 +3649,26 @@ paths:
           description: successful operation
           schema:
             type: boolean
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Check for a specific keyword
@@ -2382,6 +3693,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Account'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find account details
@@ -2413,14 +3744,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -2430,6 +3761,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ApiCredentialPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find api credentials
@@ -2459,6 +3810,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ApiCredential'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create api credentials
@@ -2485,8 +3856,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete api credentials
@@ -2521,6 +3910,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ApiCredential'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific api credential
@@ -2547,8 +3956,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Disable specified API credentials
@@ -2575,8 +4002,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Enable specified API credentials
@@ -2613,6 +4058,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CreditUsage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find credit usage
@@ -2637,6 +4102,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/BillingPlanUsage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find plan usage
@@ -2661,6 +4146,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/CallerIdList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find caller ids
@@ -2686,8 +4191,26 @@ paths:
           required: true
           type: string
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create a caller id
@@ -2723,6 +4246,26 @@ paths:
           description: successful operation
           schema:
             type: boolean
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Verify a caller id
@@ -2744,19 +4287,19 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
           type: integer
-        - description: Name of a file to search for
+        - description: value to filter file names again; this value is used to check if the filename contains the filter value.
           in: query
           name: filter
           required: false
@@ -2771,6 +4314,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/MediaPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find media
@@ -2803,13 +4366,25 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
-        '201':
-          description: Created
+        '400':
+          description: Bad request
           schema:
-            $ref: '#/definitions/ResourceId'
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
         '500':
           description: Internal Server Error
           schema:
@@ -2856,7 +4431,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/InputStream'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Download media by extension
@@ -2892,6 +4487,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Media'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get a specific media
@@ -2935,7 +4550,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/InputStream'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Download media by extension
@@ -2967,7 +4602,27 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: file
+            $ref: '#/definitions/InputStream'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Download a MP3 media
@@ -2989,14 +4644,14 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3036,6 +4691,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberLeasePage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find leases
@@ -3057,14 +4732,14 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3104,6 +4779,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberConfigPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find lease configs
@@ -3138,6 +4833,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberConfig'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific lease config
@@ -3168,8 +4883,26 @@ paths:
           schema:
             $ref: '#/definitions/NumberConfig'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a lease config
@@ -3204,6 +4937,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberLease'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific lease
@@ -3234,8 +4987,26 @@ paths:
           schema:
             $ref: '#/definitions/NumberLease'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a lease
@@ -3257,7 +5028,7 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
@@ -3292,6 +5063,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find local numbers
@@ -3313,14 +5104,14 @@ paths:
       parameters:
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3355,6 +5146,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/RegionPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find number regions
@@ -3381,7 +5192,7 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
@@ -3396,6 +5207,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find tollfree numbers
@@ -3410,6 +5241,89 @@ paths:
       x-sample-js-url: /js/numbers/findNumbersTollfree.js
       x-sample-php-url: /php/numbers/findNumbersTollfree.php
       x-sample-python-url: /python/numbers/findNumbersTollfree.py
+  /orders:
+    get:
+      description: Searches for account orders
+      operationId: findOrders
+      parameters:
+        - default: 20
+          description: To set the maximum number of records to return in a paged list response. The default is 100
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: 'Filter by order status, accepts multiple values in comma separated string, available values: [PROCESSING, FINISHED, PAYMENT_ERROR, VOID, WAIT_FOR_PAYMENT, PARTIALLY_ADJUSTED, ADJUSTED]'
+          in: query
+          items:
+            type: string
+          name: status
+          required: false
+          type: array
+        - description: 'Start of the find time interval, formatted in unix time milliseconds. Example: 1473781817000'
+          format: int64
+          in: query
+          name: intervalBegin
+          required: false
+          type: integer
+        - description: 'End of the find time interval, formatted in unix time milliseconds. Example: 1473781817000'
+          format: int64
+          in: query
+          name: intervalEnd
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Page'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+        - basicAuth: []
+      summary: Find orders
+      tags:
+        - orders
+      x-sample-csharp-url: /csharp/orders/findOrders.cs
+      x-sample-curl-request-url: /curl/orders/findOrders.sh
+      x-sample-curl-response-url: /curl/orders/findOrders.json
+      x-sample-description-url: /description/orders/findOrders.md
+      x-sample-go-url: /go/orders/findOrders.go
+      x-sample-java-url: /java/orders/findOrders.java
+      x-sample-js-url: /js/orders/findOrders.js
+      x-sample-php-url: /php/orders/findOrders.php
+      x-sample-python-url: /python/orders/findOrders.py
   /orders/keywords:
     post:
       description: 'Purchase keywords. Send a list of available keywords into this API to purchase them using CallFire credits. Make sure the account has enough credits before trying to purchase the keywords. Keyword should only consist of uppercase and lowercase letters and numbers. Number of characters must be greater than 2, but less than 65.'
@@ -3426,6 +5340,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Purchase keywords
@@ -3451,11 +5385,36 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/NumberPurchaseRequest'
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
       responses:
         '201':
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Purchase numbers
@@ -3491,6 +5450,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/NumberOrder'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific order
@@ -3517,14 +5496,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3597,6 +5576,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find texts
@@ -3649,6 +5648,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Send texts
@@ -3675,14 +5694,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3697,6 +5716,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextAutoReplyPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find auto replies
@@ -3726,6 +5765,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create an auto reply
@@ -3752,8 +5811,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete an auto reply
@@ -3788,6 +5865,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextAutoReply'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific auto reply
@@ -3814,14 +5911,14 @@ paths:
           type: string
         - default: 10
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -3863,6 +5960,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextBroadcastPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find text broadcasts
@@ -3902,6 +6019,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create a text broadcast
@@ -3937,6 +6074,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextBroadcast'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific text broadcast
@@ -3973,8 +6130,26 @@ paths:
           schema:
             $ref: '#/definitions/TextBroadcast'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a text broadcast
@@ -4001,8 +6176,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Archive text broadcast
@@ -4035,14 +6228,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -4052,6 +6245,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/BatchPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find batches in a text broadcast
@@ -4092,6 +6305,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add batches to a text broadcast
@@ -4140,6 +6373,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Add recipients to a text broadcast
@@ -4166,8 +6419,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Start text broadcast
@@ -4215,6 +6486,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextBroadcastStatsDto'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Get statistics on text broadcast
@@ -4241,8 +6532,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Stop text broadcast
@@ -4281,14 +6590,14 @@ paths:
           type: string
         - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -4298,6 +6607,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/TextPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find texts in a text broadcast
@@ -4333,6 +6662,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Text'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific text
@@ -4357,16 +6706,16 @@ paths:
           name: fields
           required: false
           type: string
-        - default: 1000
+        - default: 100
           description: To set the maximum number of records to return in a paged list response. The default is 100
-          format: int64
+          format: int32
           in: query
           name: limit
           required: false
           type: integer
         - default: 0
           description: 'Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
-          format: int64
+          format: int32
           in: query
           name: offset
           required: false
@@ -4401,6 +6750,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/WebhookPage'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find webhooks
@@ -4416,7 +6785,7 @@ paths:
       x-sample-php-url: /php/webhooks/findWebhooks.php
       x-sample-python-url: /python/webhooks/findWebhooks.py
     post:
-      description: 'Create a Webhook for notification in the CallFire system. Use the webhooks API to receive notifications of important CallFire events. Select the resource to listen to, and then choose the resource events to receive notifications on. When an event triggers, a POST will be made to the callback URL with a payload of notification information. Available resources and their events include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed'']. Webhooks support secret token which is used as signing key to HmacSHA1 hash of json payload which is returned in ''X-CallFire-Signature'' header. This header can be used to verify callback POST is coming from CallFire. See [security guide](https://developers.callfire.com/security-guide.html)'
+      description: 'Create a Webhook for notification in the CallFire system. Use the webhooks API to receive notifications of important CallFire events. Select the resource to listen to, and then choose the resource events to receive notifications on. When an event triggers, a POST will be made to the callback URL with a payload of notification information. Available resources and their events include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed''], ''MonthlyRenewal'': [''failed'', ''finished''], ''LowBalance'': [''failed'', ''finished'']. Webhooks support secret token which is used as signing key to HmacSHA1 hash of json payload which is returned in ''X-CallFire-Signature'' header. This header can be used to verify callback POST is coming from CallFire. See [security guide](https://developers.callfire.com/security-guide.html)'
       operationId: createWebhook
       parameters:
         - description: A webhook object
@@ -4430,6 +6799,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ResourceId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Create a webhook
@@ -4446,7 +6835,7 @@ paths:
       x-sample-python-url: /python/webhooks/createWebhook.py
   /webhooks/resources:
     get:
-      description: 'Searches for webhook resources. Available resources include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed'']'
+      description: 'Searches for webhook resources. Available resources include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed''], ''MonthlyRenewal'': [''failed'', ''finished''], ''LowBalance'': [''failed'', ''finished'']'
       operationId: findWebhookResources
       parameters:
         - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
@@ -4459,6 +6848,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/ItemList'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find webhook resources
@@ -4478,7 +6887,7 @@ paths:
       description: Returns information about supported events for a given webhook resource
       operationId: getWebhookResource
       parameters:
-        - description: 'A name of a webhook resource. Available resources include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed'']'
+        - description: 'A name of a webhook resource. Available resources include ''CccCampaign'': [''started'', ''stopped'', ''finished''], ''CallBroadcast'': [''started'', ''stopped'', ''finished''], ''TextBroadcast'': [''started'', ''stopped'', ''finished''], ''OutboundCall'': [''finished''], ''InboundCall'': [''finished''], ''OutboundText'': [''finished''], ''InboundText'': [''finished''], ''ContactList'': [''validationFinished'', ''validationFailed''], ''MonthlyRenewal'': [''failed'', ''finished''], ''LowBalance'': [''failed'', ''finished'']'
           in: path
           name: resource
           required: true
@@ -4493,6 +6902,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/WebhookResource'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find specific webhook resource
@@ -4519,8 +6948,26 @@ paths:
           required: true
           type: integer
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Delete a webhook
@@ -4555,6 +7002,26 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Webhook'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Find a specific webhook
@@ -4586,8 +7053,26 @@ paths:
           schema:
             $ref: '#/definitions/Webhook'
       responses:
-        default:
-          description: successful operation
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
       security:
         - basicAuth: []
       summary: Update a webhook
@@ -4627,6 +7112,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
     type: object
   AddContactListContactsRequest:
     description: Request object for adding new contacts to an existing contact list
@@ -4872,6 +7358,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       modified:
         description: 'The time when the given resource was modified, formatted in unix time milliseconds (read only). Example: 1473781817000 for Sat, 05 Jan 1985 14:03:37 GMT '
         format: int64
@@ -4886,6 +7373,7 @@ definitions:
         description: 'List of call records, each record contains call details like originate time, duration, cost, notes made by agents. A single contact may have a multiple phone numbers. In this case if given call was sent as a part of broadcast with configured retry logic then each call record will contain details about attempted phone number'
         items:
           $ref: '#/definitions/CallRecord'
+        readOnly: true
         type: array
       state:
         description: 'State of an action (READY, SELECTED, CALLBACK, DISABLED, FINISHED, DNC, DUP, INVALID, TIMEOUT, PERIOD_LIMIT). See [call states and results](https://developers.callfire.com/results-responses-errors.html)'
@@ -4933,10 +7421,10 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       lastModified:
         description: 'The time when a given resource was updated, formatted in unix time milliseconds (read only). Example: 1473781817000 for Sat, 05 Jan 1985 14:03:37 GMT '
         format: int64
-        readOnly: true
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
@@ -4985,7 +7473,6 @@ definitions:
           - ARCHIVED
           - VALIDATING_START
           - VALIDATING_EMAIL
-        readOnly: true
         type: string
     type: object
   CallBroadcastPage:
@@ -5285,7 +7772,9 @@ definitions:
         description: Labels associated with a call action
         items:
           type: string
+        readOnly: true
         type: array
+        uniqueItems: true
       notes:
         description: Notes of call added by agent
         items:
@@ -5781,32 +8270,6 @@ definitions:
         description: '~'
         type: string
     type: object
-  JResponse:
-    description: '~'
-    properties:
-      entity:
-        description: '~'
-        properties: {}
-        type: object
-      metadata:
-        additionalProperties:
-          items:
-            properties: {}
-            type: object
-          type: array
-        description: '~'
-        type: object
-      status:
-        description: '~'
-        format: int32
-        type: integer
-      statusType:
-        $ref: '#/definitions/StatusType'
-        description: '~'
-      type:
-        $ref: '#/definitions/Type'
-        description: '~'
-    type: object
   Keyword:
     description: '~'
     properties:
@@ -5816,6 +8279,16 @@ definitions:
       shortCode:
         description: '~'
         type: string
+    type: object
+  KeywordConfig:
+    description: '~'
+    properties:
+      keyword:
+        description: '~'
+        type: string
+      textInboundConfig:
+        $ref: '#/definitions/TextInboundConfig'
+        description: '~'
     type: object
   KeywordLease:
     description: Represents a lease object for a given keyword
@@ -5833,6 +8306,11 @@ definitions:
       keyword:
         description: A text used as a keyword
         type: string
+      labels:
+        description: '~'
+        items:
+          type: string
+        type: array
       leaseBegin:
         description: 'A time of a lease timestamp, formatted in unix time milliseconds (read only). Example: 1473781817000 for Sat, 05 Jan 1985 14:03:37 GMT'
         format: int64
@@ -5979,15 +8457,15 @@ definitions:
         type: array
       limit:
         description: '~'
-        format: int64
+        format: int32
         type: integer
       offset:
         description: '~'
-        format: int64
+        format: int32
         type: integer
       totalCount:
         description: '~'
-        format: int64
+        format: int32
         type: integer
     type: object
   MessageTemplateCategory:
@@ -6056,6 +8534,9 @@ definitions:
       number:
         description: 'Phone number in E.164 format (11-digit). Example: 12132000384'
         type: string
+      textInboundConfig:
+        $ref: '#/definitions/TextInboundConfig'
+        description: '~'
     type: object
   NumberConfigPage:
     allOf:
@@ -6149,7 +8630,6 @@ definitions:
       created:
         description: 'The time when the given resource was created, formatted in unix time milliseconds (read only). Example: 1473781817000'
         format: int64
-        readOnly: true
         type: integer
       id:
         description: An id of an order
@@ -6164,17 +8644,18 @@ definitions:
       status:
         description: 'A current status of an order. Available values: NEW, PROCESSING, FINISHED, ERRORED, VOID, WAIT_FOR_PAYMENT, REJECTED'
         enum:
-          - NEW
           - PROCESSING
           - FINISHED
-          - ERRORED
+          - PAYMENT_ERROR
           - VOID
           - WAIT_FOR_PAYMENT
+          - PARTIALLY_ADJUSTED
           - ADJUSTED
+          - NEW
+          - ERRORED
           - APPROVE_TIER_ONE
           - APPROVE_TIER_TWO
           - REJECTED
-        readOnly: true
         type: string
       tollFreeNumbers:
         $ref: '#/definitions/NumberOrderItem'
@@ -6182,7 +8663,6 @@ definitions:
       totalCost:
         description: A total cost of an order
         format: float
-        readOnly: true
         type: number
     type: object
   NumberOrderItem:
@@ -6200,7 +8680,6 @@ definitions:
       unitCost:
         description: A cost of unit
         format: float
-        readOnly: true
         type: number
     type: object
   NumberPurchaseRequest:
@@ -6243,15 +8722,15 @@ definitions:
         type: array
       limit:
         description: A maximum number of returned items. If items.size() < limit assume no more items
-        format: int64
+        format: int32
         type: integer
       offset:
         description: An offset from a start of paging source
-        format: int64
+        format: int32
         type: integer
       totalCount:
         description: Total count of available results. -1 if unknown
-        format: int64
+        format: int32
         type: integer
     type: object
   QuestionResponse:
@@ -6375,6 +8854,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       id:
         description: '~'
         format: int64
@@ -6394,27 +8874,6 @@ definitions:
       timeZone:
         description: '~'
         type: string
-    type: object
-  StatusType:
-    description: '~'
-    properties:
-      family:
-        description: Family
-        enum:
-          - INFORMATIONAL
-          - SUCCESSFUL
-          - REDIRECTION
-          - CLIENT_ERROR
-          - SERVER_ERROR
-          - OTHER
-        type: string
-      reasonPhrase:
-        description: Reason phrase
-        type: string
-      statusCode:
-        description: Status code
-        format: int32
-        type: integer
     type: object
   StreamingOutput:
     description: '~'
@@ -6483,6 +8942,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       media:
         description: '~'
         items:
@@ -6574,10 +9034,10 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       lastModified:
         description: 'A time when the given resource was updated, formatted in unix time milliseconds (read only). Example: 1473781817000'
         format: int64
-        readOnly: true
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
@@ -6624,7 +9084,6 @@ definitions:
           - ARCHIVED
           - VALIDATING_START
           - VALIDATING_EMAIL
-        readOnly: true
         type: string
     type: object
   TextBroadcastPage:
@@ -6675,6 +9134,16 @@ definitions:
         description: '~'
         format: int32
         type: integer
+    type: object
+  TextInboundConfig:
+    description: '~'
+    properties:
+      forwardEnabled:
+        description: '~'
+        type: boolean
+      forwardNumber:
+        description: '~'
+        type: string
     type: object
   TextList:
     allOf:
@@ -6748,7 +9217,9 @@ definitions:
         description: Labels associated with a text action
         items:
           type: string
+        readOnly: true
         type: array
+        uniqueItems: true
       message:
         description: A text message
         type: string
@@ -6789,13 +9260,6 @@ definitions:
           - FRENCHCANADIAN1
         type: string
     type: object
-  Type:
-    description: '~'
-    properties:
-      typeName:
-        description: A name of a type
-        type: string
-    type: object
   UpdateContactListRequest:
     description: A request object which is used to update a contact list
     properties:
@@ -6822,6 +9286,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       expiresAt:
         description: '~'
         format: int64
@@ -6875,6 +9340,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
     type: object
   WeeklySchedule:
     description: Weekly schedule allows to schedule operations by day of week and time of the day
@@ -6884,6 +9350,7 @@ definitions:
         items:
           type: string
         type: array
+        uniqueItems: true
       startTimeOfDay:
         $ref: '#/definitions/LocalTime'
         description: A time when scheduled operation starts

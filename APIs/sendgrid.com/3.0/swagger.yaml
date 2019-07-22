@@ -796,7 +796,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -885,7 +886,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -893,7 +895,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: Cannot create more than 100 API Keys
+                - field: null
+                  message: Cannot create more than 100 API Keys
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -923,7 +926,8 @@ paths:
       responses:
         '204':
           description: ''
-          examples: {}
+          examples:
+            application/json: null
           schema:
             type: 'null'
         '404':
@@ -931,7 +935,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: unable to find API Key
+                - field: null
+                  message: unable to find API Key
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -971,7 +976,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -979,7 +985,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: unable to find API Key
+                - field: null
+                  message: unable to find API Key
           schema:
             type: object
       security:
@@ -1037,7 +1044,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -1093,7 +1101,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: expected JSON request body with 'name' property
+                - field: null
+                  message: expected JSON request body with 'name' property
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -1105,7 +1114,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: unable to find API Key to update
+                - field: null
+                  message: unable to find API Key to update
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -1140,11 +1150,13 @@ paths:
               - description: Our monthly newsletter.
                 id: 100
                 is_default: true
+                last_email_sent_at: null
                 name: Newsletters
                 unsubscribes: 400
               - description: Emails triggered by user-defined rules.
                 id: 101
                 is_default: false
+                last_email_sent_at: null
                 name: Alerts
                 unsubscribes: 1
           schema:
@@ -1282,6 +1294,7 @@ paths:
               description: Our monthly newsletter.
               id: 100
               is_default: true
+              last_email_sent_at: null
               name: Newsletters
               unsubscribes: 400
           schema:
@@ -2073,8 +2086,10 @@ paths:
                   message: suppression_group_id does not exist
                 - field: unsubscribes
                   message: 'Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.'
-                - message: The JSON you have submitted cannot be parsed.
-                - message: You've reached your limit of 250 campaigns. Please delete one or more and try again.
+                - field: null
+                  message: The JSON you have submitted cannot be parsed.
+                - field: null
+                  message: You've reached your limit of 250 campaigns. Please delete one or more and try again.
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -2114,7 +2129,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             type: object
         '404':
@@ -2199,7 +2215,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             type: object
         '404':
@@ -2207,7 +2224,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             type: object
       security:
@@ -2336,7 +2354,8 @@ paths:
                   message: suppression_group_id does not exist
                 - field: unsubscribes
                   message: 'Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.'
-                - message: The JSON you have submitted cannot be parsed.
+                - field: null
+                  message: The JSON you have submitted cannot be parsed.
           schema:
             type: object
         '401':
@@ -2344,7 +2363,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -2352,7 +2372,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: You may only update a campaign when it is in draft mode.
+                - field: null
+                  message: You may only update a campaign when it is in draft mode.
           schema:
             type: object
         '404':
@@ -2360,7 +2381,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2401,10 +2423,14 @@ paths:
           examples:
             application/json:
               errors:
-                - message: This campaign is already In Progress.
-                - message: This campaign is already Sent.
-                - message: This campaign is already Paused.
-                - message: This campaign is already Canceled.
+                - field: null
+                  message: This campaign is already In Progress.
+                - field: null
+                  message: This campaign is already Sent.
+                - field: null
+                  message: This campaign is already Paused.
+                - field: null
+                  message: This campaign is already Canceled.
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -2412,7 +2438,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2450,7 +2477,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2519,8 +2547,10 @@ paths:
               errors:
                 - field: send_at
                   message: Please choose a future time for sending your campaign.
-                - message: The JSON you have submitted cannot be parsed.
-                - message: 'You do not have enough credits to send this campaign. Upgrade your plan to send https://app.sendgrid.com/settings/billing'
+                - field: null
+                  message: The JSON you have submitted cannot be parsed.
+                - field: null
+                  message: 'You do not have enough credits to send this campaign. Upgrade your plan to send https://app.sendgrid.com/settings/billing'
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -2537,7 +2567,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2624,7 +2655,8 @@ paths:
                   message: 'An [unsubscribe] tag in both your html and plain content is required to send a campaign.'
                 - field: suppression_group_id
                   message: Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.
-                - message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
+                - field: null
+                  message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -2632,7 +2664,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -2640,7 +2673,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.
+                - field: null
+                  message: You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -2648,7 +2682,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2722,7 +2757,8 @@ paths:
                   message: 'An [unsubscribe] tag in both your html and plain content is required to send a campaign.'
                 - field: suppression_group_id
                   message: Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.
-                - message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
+                - field: null
+                  message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -2730,7 +2766,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -2738,7 +2775,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: You may only send a campaign when it is in draft mode.
+                - field: null
+                  message: You may only send a campaign when it is in draft mode.
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -2746,7 +2784,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -2812,8 +2851,10 @@ paths:
               errors:
                 - field: send_at
                   message: Please choose a future time for sending your campaign.
-                - message: The JSON you have submitted cannot be parsed.
-                - message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
+                - field: null
+                  message: The JSON you have submitted cannot be parsed.
+                - field: null
+                  message: 'You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing'
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -2821,7 +2862,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: not found
+                - field: null
+                  message: not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -3398,7 +3440,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -3455,7 +3498,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: Returned if request body is invalid JSON
+                - field: null
+                  message: Returned if request body is invalid JSON
                 - field: type
                   message: Returned if custom field type is invalid or not provided
                 - field: name
@@ -3504,7 +3548,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -3553,7 +3598,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -3609,7 +3655,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: list id was invalid
+                - field: null
+                  message: list id was invalid
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -3617,7 +3664,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -3701,7 +3749,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: Returned if request body is invalid JSON
+                - field: null
+                  message: Returned if request body is invalid JSON
                 - field: name
                   message: Returned if list name is not a string
                 - field: name
@@ -3713,7 +3762,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -3766,7 +3816,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -3819,7 +3870,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -3827,7 +3879,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: List ID does not exist
+                - field: null
+                  message: List ID does not exist
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -3953,9 +4006,11 @@ paths:
                     - id: 6234
                       name: age
                       type: number
+                      value: null
                     - id: 6233
                       name: country
                       type: text
+                      value: null
                     - id: 6235
                       name: fname
                       type: text
@@ -3967,6 +4022,7 @@ paths:
                     - id: 6240
                       name: lname
                       type: text
+                      value: null
                   email: example@example.com
                   first_name: Example
                   id: ZGVWfyZWsuYmFpbmVzQHNlbmRmCmLkLmNv==
@@ -4065,8 +4121,10 @@ paths:
                   message: list_id is invalid
                 - field: recipient_id
                   message: no valid recipients were provided
-                - message: no recipients were added
-                - message: request body is invalid JSON
+                - field: null
+                  message: no recipients were added
+                - field: null
+                  message: request body is invalid JSON
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -4074,7 +4132,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4141,7 +4200,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4210,7 +4270,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4276,7 +4337,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4331,7 +4393,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4387,7 +4450,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: Request body is not valid json
+                - field: null
+                  message: Request body is not valid json
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -4395,7 +4459,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4471,7 +4536,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: Request body is not valid json
+                - field: null
+                  message: Request body is not valid json
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -4479,7 +4545,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4513,7 +4580,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4545,7 +4613,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4589,8 +4658,12 @@ paths:
                       type: text
                       value: Fluffy
                   email: jones@example.com
+                  first_name: null
                   id: YUBh
+                  last_clicked: null
+                  last_emailed: null
                   last_name: Jones
+                  last_opened: null
                   updated_at: 1422313790
           schema:
             properties:
@@ -4615,7 +4688,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4648,7 +4722,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: recipient not found
+                - field: null
+                  message: recipient not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -4656,7 +4731,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4664,7 +4740,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: recipient_id is not valid
+                - field: null
+                  message: recipient_id is not valid
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4696,7 +4773,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4748,7 +4826,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: recipient ID is invalid
+                - field: null
+                  message: recipient ID is invalid
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -4756,7 +4835,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -4764,7 +4844,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: recipient id not found
+                - field: null
+                  message: recipient id not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4829,7 +4910,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -4885,7 +4967,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -5012,7 +5095,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -5066,7 +5150,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -5129,7 +5214,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -5243,7 +5329,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -5283,8 +5370,12 @@ paths:
                       type: text
                       value: Indiana
                   email: jones@example.com
+                  first_name: null
                   id: YUBh
+                  last_clicked: null
+                  last_emailed: null
                   last_name: Jones
+                  last_opened: null
                   updated_at: 1422313790
           schema:
             properties:
@@ -5308,7 +5399,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -6169,7 +6261,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: one or more subusers do not belong to this user
+                - field: null
+                  message: one or more subusers do not belong to this user
           schema:
             $ref: '#/definitions/errors'
       security:
@@ -6437,7 +6530,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: ip pool not found
+                - field: null
+                  message: ip pool not found
           schema:
             properties:
               errors:
@@ -6523,7 +6617,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: resource not found
+                - field: null
+                  message: resource not found
           schema:
             properties:
               errors:
@@ -6699,7 +6794,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: resource not found
+                - field: null
+                  message: resource not found
           schema:
             properties:
               errors:
@@ -6746,7 +6842,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: resource not found
+                - field: null
+                  message: resource not found
           schema:
             properties:
               errors:
@@ -6788,7 +6885,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: resource not found
+                - field: null
+                  message: resource not found
           schema:
             properties:
               errors:
@@ -6834,6 +6932,7 @@ paths:
               pools:
                 - test1
               rdns: o1.em.example.com
+              start_date: null
               subusers:
                 - subuser1
                 - subuser2
@@ -6919,7 +7018,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -6953,7 +7053,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: invalid batch id
+                - field: null
+                  message: invalid batch id
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -6961,7 +7062,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -7560,6 +7662,7 @@ paths:
           examples:
             application/json:
               enabled: false
+              hard_bounces: null
               soft_bounces: 1234
           schema:
             $ref: '#/definitions/mail_settings_bounce_purge'
@@ -7596,6 +7699,8 @@ paths:
           examples:
             application/json:
               enabled: false
+              hard_bounces: null
+              soft_bounces: null
           schema:
             $ref: '#/definitions/mail_settings_bounce_purge'
       security:
@@ -7686,6 +7791,7 @@ paths:
           description: ''
           examples:
             application/json:
+              email: null
               enabled: false
           schema:
             $ref: '#/definitions/mail_settings_forward_bounce'
@@ -8717,7 +8823,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             properties:
               errors:
@@ -9774,7 +9881,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -9857,7 +9965,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '403':
@@ -10397,7 +10506,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -10454,7 +10564,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '500':
@@ -10522,7 +10633,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       summary: Update IPs assigned to a subuser
@@ -10551,7 +10663,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -10559,7 +10672,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: No monitor settings for this user
+                - field: null
+                  message: No monitor settings for this user
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       summary: Delete monitor settings
@@ -10584,7 +10698,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -10592,7 +10707,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: No monitor settings for this user
+                - field: null
+                  message: No monitor settings for this user
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -10635,7 +10751,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: User already has a monitor
+                - field: null
+                  message: User already has a monitor
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -10643,7 +10760,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -10689,7 +10807,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -11022,7 +11141,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -11089,7 +11209,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -11134,7 +11255,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -13450,7 +13572,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -13485,7 +13608,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -13543,7 +13667,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: max limit reached
+                - field: null
+                  message: max limit reached
                 - field: batch_id
                   message: invalid batch id
                 - field: batch_id
@@ -13555,7 +13680,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             type: object
       security:
@@ -13587,7 +13713,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -13595,7 +13722,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: batch id not found
+                - field: null
+                  message: batch id not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -13630,7 +13758,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -13688,7 +13817,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: authorization required
+                - field: null
+                  message: authorization required
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '404':
@@ -13696,7 +13826,8 @@ paths:
           examples:
             application/json:
               errors:
-                - message: batch id not found
+                - field: null
+                  message: batch id not found
           schema:
             $ref: '#/definitions/global:ErrorResponse'
       security:
@@ -15185,13 +15316,16 @@ paths:
               valid: true
               validation_results:
                 dkim1:
+                  reason: null
                   valid: true
                 dkim2:
+                  reason: null
                   valid: true
                 mail_cname:
                   reason: Expected your MX record to be "mx.sendgrid.net" but found "example.com".
                   valid: false
                 spf:
+                  reason: null
                   valid: true
           schema:
             properties:
@@ -15548,6 +15682,7 @@ paths:
               valid: true
               validation_results:
                 a_record:
+                  reason: null
                   valid: true
           schema:
             properties:
@@ -16091,6 +16226,7 @@ paths:
                   reason: Expected CNAME to match "sendgrid.net." but found "example.com.".
                   valid: false
                 owner_cname:
+                  reason: null
                   valid: true
           schema:
             properties:
@@ -16981,6 +17117,7 @@ definitions:
   credentials:
     example:
       address: 1234 example street
+      address2: null
       city: Denver
       company: Company name
       country: US
@@ -17416,6 +17553,7 @@ definitions:
   mail_settings_bounce_purge:
     example:
       enabled: false
+      hard_bounces: null
       soft_bounces: 1234
     properties:
       enabled:
@@ -17452,6 +17590,7 @@ definitions:
     type: object
   mail_settings_forward_bounce:
     example:
+      email: null
       enabled: false
     properties:
       email:

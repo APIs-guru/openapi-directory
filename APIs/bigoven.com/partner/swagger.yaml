@@ -880,6 +880,37 @@ paths:
       summary: 'POST a reply to a given review. The date will be set by server. Note that replies no longer have star ratings, only top-level reviews do.'
       tags:
         - Review
+  /recipe/saved/step:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_GetSteps
+      parameters:
+        - description: ''
+          in: query
+          name: userId
+          required: true
+          type: string
+        - description: ''
+          format: int32
+          in: query
+          name: recipeId
+          required: true
+          type: integer
+        - description: ''
+          format: int32
+          in: query
+          name: intStep
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      summary: Returns recipe single step as a string.
+      tags:
+        - Recipe
   /recipe/scan:
     post:
       consumes: []
@@ -914,6 +945,30 @@ paths:
         '500':
           description: 'General error on initiating RecipeScan task; please try again or contact us at support[at]bigoven.com'
       summary: "POST an image as a new RecipeScan request\r\n                1)  Fetch the filename -- DONE\r\n                2)  Copy it to the pics/scan folder - ENSURE NO NAMING COLLISIONS -- DONE\r\n                3)  Create 120 thumbnail size  in pics/scan/120 -- DONE\r\n                4)  Insert the CloudTasks record\r\n                5)  Create the HIT\r\n                6)  Update the CloudTasks record with the HIT ID\r\n                7)  Email the requesing user\r\n                8)  Call out to www.bigoven.com to fetch the image and re-create the thumbnail"
+      tags:
+        - Recipe
+  '/recipe/steps/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_GetRecipeWithSteps
+      parameters:
+        - description: the Recipe ID to retrieve
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: query
+          name: prefetch
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API2.Recipe'
+      summary: Return full Recipe detail with steps. Returns 403 if the recipe is owned by someone else.
       tags:
         - Recipe
   '/recipe/{id}':
@@ -3041,6 +3096,10 @@ definitions:
       StarRating:
         format: double
         type: number
+      Steps:
+        items:
+          $ref: '#/definitions/BigOven.Model.InstructionStep'
+        type: array
       Subcategory:
         type: string
       Title:
@@ -3234,6 +3293,17 @@ definitions:
       Caption:
         type: string
       PhotoUrl:
+        type: string
+    type: object
+  BigOven.Model.InstructionStep:
+    properties:
+      EndGantt:
+        format: int32
+        type: integer
+      StartGantt:
+        format: int32
+        type: integer
+      Text:
         type: string
     type: object
   BigOven.Model.RecipeCategory:

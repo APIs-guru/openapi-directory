@@ -3008,6 +3008,7 @@ paths:
             - File
             - LocalFile
             - Creofuga
+            - Bandcamp
           in: query
           name: pvServices
           required: false
@@ -3209,6 +3210,7 @@ paths:
             - File
             - LocalFile
             - Creofuga
+            - Bandcamp
           in: query
           name: pvServices
           required: false
@@ -3360,6 +3362,7 @@ paths:
             - File
             - LocalFile
             - Creofuga
+            - Bandcamp
           in: query
           name: pvService
           required: true
@@ -5770,6 +5773,7 @@ paths:
             - File
             - LocalFile
             - Creofuga
+            - Bandcamp
           in: query
           name: pvServices
           required: false
@@ -7051,6 +7055,7 @@ definitions:
           - File
           - LocalFile
           - Creofuga
+          - Bandcamp
         type: string
       thumbUrl:
         type: string
@@ -7103,6 +7108,7 @@ definitions:
           - File
           - LocalFile
           - Creofuga
+          - Bandcamp
         type: string
       song:
         $ref: '#/definitions/SongContract'
@@ -7510,6 +7516,7 @@ definitions:
           - File
           - LocalFile
           - Creofuga
+          - Bandcamp
         type: string
       ratingScore:
         format: int32
@@ -7613,6 +7620,7 @@ definitions:
           - File
           - LocalFile
           - Creofuga
+          - Bandcamp
         type: string
       pvs:
         items:

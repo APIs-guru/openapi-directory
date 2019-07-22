@@ -25,19 +25,22 @@ paths:
     get:
       description: The Single Validation API does validation on a single email address and returns all the validation results in either JSON or XML format.
       parameters:
-        - in: query
+        - description: Return the result in json (default) or xml format.
+          in: query
           name: format
           schema:
             enum:
               - json
               - xml
             type: string
-        - in: query
+        - description: The email address to be validated.
+          in: query
           name: email
           required: true
           schema:
             type: string
-        - in: query
+        - description: API key.
+          in: query
           name: key
           required: true
           schema:

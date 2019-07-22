@@ -7,25 +7,25 @@ info:
   contact:
     name: 'US EPA, OECA Integration, Targeting and Access Branch'
   description: |-
-    Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for about 800,000 regulated facilities nationwide.
-    <BR><BR>CASE Rest Services provide multiple service endpoints, each with specific capabilities, to search and retrieve data on civil cases entered into the 
+    Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide.
+     CASE Rest Services provide multiple service endpoints, each with specific capabilities, to search and retrieve data on civil cases entered into the 
     Integrated Compliance Information System (ICIS) and criminal cases entered into the Summary of Criminal Prosecutions database.  
     See Enforcement Case Search Help (https://echo.epa.gov/help/enforcement-case-search-help) for additional information on searching civil and criminal cases. 
-    <BR><BR>
-    The get_cases, get_map, get_qid, and get_download end points are meant to be used together, while the enhanced get_case_info end point is self contained..<br>  
+     
+    The get_cases, get_map, get_qid, and get_download end points are meant to be used together, while the enhanced get_case_info end point is self contained..   
     The recommended use scenario for get_cases, get_qid, get_map, and get_downoad is:
-    <br>
-    <br><b>1)</b>  Use get_cases to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
-    <br><b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of case results.
-    <br><b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates, related to the returned cases, that meet the QID query criteria.
-    <br><b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
-    <br><br>
+     
+     <b>1)</b>  Use get_cases to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
+     <b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of case results.
+     <b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates, related to the returned cases, that meet the QID query criteria.
+     <b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
+     
     In addition to the service endpoints listed above there are two detailed case report services, one for civil cases (get_case_report) and one for criminal cases (get_crcase_report). 
     See the Civil Enforcement Case Report Help (https://echo.epa.gov/help/reports/enforcement-case-report-help) and the Criminal Case Report Help (https://echo.epa.gov/help/reports/criminal-case-report-help) for additional information 
     on then data returned from these two services.   
-    <br>
+     
     Additional ECHO Resources:   <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
-    <br>
+     
   license:
     name: This page was built with the Swagger API.
     url: 'https://swagger.io'
@@ -248,6 +248,11 @@ parameters:
     name: p_cost_recovery
     required: false
     type: string
+  f.p_court_docket_number:
+    in: formData
+    name: p_court_docket_number
+    required: false
+    type: string
   f.p_cp_citation:
     description: Law Section Code Filter Alternative. Enter a single law section code to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
     in: formData
@@ -369,6 +374,11 @@ parameters:
     name: p_from_date
     required: false
     type: string
+  f.p_has_map:
+    in: formData
+    name: p_has_map
+    required: false
+    type: string
   f.p_law:
     description: Law Statute Code Filter.  Enter a single statute code to limit results.
     in: formData
@@ -469,6 +479,12 @@ parameters:
     description: Case Priority Area Description Filter.  Enter a single case priority area description or partial case priority area description to limit results.  Use "%" as a wild-card match for more complex searches.
     in: formData
     name: p_priority_area_desc
+    required: false
+    type: string
+  f.p_qs:
+    description: 'Quick Search. Allows entry for city, state, and/or zip code.'
+    in: formData
+    name: p_qs
     required: false
     type: string
   f.p_rank_order:
@@ -926,6 +942,11 @@ parameters:
     name: p_cost_recovery
     required: false
     type: string
+  q.p_court_docket_number:
+    in: query
+    name: p_court_docket_number
+    required: false
+    type: string
   q.p_cp_citation:
     description: Law Section Code Filter Alternative. Enter a single law section code to limit results.  This parameter accepts partial codes and allows for advanced search modifiers.
     in: query
@@ -1047,6 +1068,11 @@ parameters:
     name: p_from_date
     required: false
     type: string
+  q.p_has_map:
+    in: query
+    name: p_has_map
+    required: false
+    type: string
   q.p_law:
     description: Law Statute Code Filter.  Enter a single statute code to limit results.
     in: query
@@ -1147,6 +1173,12 @@ parameters:
     description: Case Priority Area Description Filter.  Enter a single case priority area description or partial case priority area description to limit results.  Use "%" as a wild-card match for more complex searches.
     in: query
     name: p_priority_area_desc
+    required: false
+    type: string
+  q.p_qs:
+    description: 'Quick Search. Allows entry for city, state, and/or zip code.'
+    in: query
+    name: p_qs
     required: false
     type: string
   q.p_rank_order:
@@ -1432,6 +1464,7 @@ paths:
         - $ref: '#/parameters/q.p_name_type'
         - $ref: '#/parameters/q.p_case_number'
         - $ref: '#/parameters/q.p_docket_number'
+        - $ref: '#/parameters/q.p_court_docket_number'
         - $ref: '#/parameters/q.p_activity_number'
         - $ref: '#/parameters/q.p_case_lead'
         - $ref: '#/parameters/q.p_case_sens_flg'
@@ -1494,6 +1527,8 @@ paths:
         - $ref: '#/parameters/q.qcolumns'
         - $ref: '#/parameters/q.p_pretty_print'
         - $ref: '#/parameters/q.p_ocmap_fy'
+        - $ref: '#/parameters/q.p_qs'
+        - $ref: '#/parameters/q.p_has_map'
       responses:
         '200':
           description: Returns an array of cases that meet the selection criteria.
@@ -1536,6 +1571,7 @@ paths:
         - $ref: '#/parameters/f.p_name_type'
         - $ref: '#/parameters/f.p_case_number'
         - $ref: '#/parameters/f.p_docket_number'
+        - $ref: '#/parameters/f.p_court_docket_number'
         - $ref: '#/parameters/f.p_activity_number'
         - $ref: '#/parameters/f.p_case_lead'
         - $ref: '#/parameters/f.p_case_sens_flg'
@@ -1598,6 +1634,8 @@ paths:
         - $ref: '#/parameters/f.qcolumns'
         - $ref: '#/parameters/f.p_pretty_print'
         - $ref: '#/parameters/f.p_ocmap_fy'
+        - $ref: '#/parameters/f.p_qs'
+        - $ref: '#/parameters/f.p_has_map'
       responses:
         '200':
           description: Returns an array of cases that meet the selection criteria.
@@ -1710,6 +1748,7 @@ paths:
           type: string
         - $ref: '#/parameters/q.p_case_category'
         - $ref: '#/parameters/q.p_case_status'
+        - $ref: '#/parameters/q.p_violation'
         - $ref: '#/parameters/q.p_milestone'
         - $ref: '#/parameters/q.p_from_date'
         - $ref: '#/parameters/q.p_to_date'
@@ -1718,6 +1757,7 @@ paths:
         - $ref: '#/parameters/q.p_name_type'
         - $ref: '#/parameters/q.p_case_number'
         - $ref: '#/parameters/q.p_docket_number'
+        - $ref: '#/parameters/q.p_court_docket_number'
         - $ref: '#/parameters/q.p_activity_number'
         - $ref: '#/parameters/q.p_case_lead'
         - $ref: '#/parameters/q.p_case_sens_flg'
@@ -1737,7 +1777,6 @@ paths:
         - $ref: '#/parameters/q.p_cp_citation'
         - $ref: '#/parameters/q.p_rank_order'
         - $ref: '#/parameters/q.p_enf_program'
-        - $ref: '#/parameters/q.p_violation'
         - $ref: '#/parameters/q.p_priority_area'
         - $ref: '#/parameters/q.p_priority_area_desc'
         - $ref: '#/parameters/q.p_tribal'
@@ -1780,6 +1819,8 @@ paths:
         - $ref: '#/parameters/q.callback'
         - $ref: '#/parameters/q.qcolumns'
         - $ref: '#/parameters/q.p_ocmap_fy'
+        - $ref: '#/parameters/q.p_qs'
+        - $ref: '#/parameters/q.p_has_map'
       responses:
         '200':
           description: Returns an array of cases that meet the selection criteria.
@@ -1822,6 +1863,7 @@ paths:
         - $ref: '#/parameters/f.p_name_type'
         - $ref: '#/parameters/f.p_case_number'
         - $ref: '#/parameters/f.p_docket_number'
+        - $ref: '#/parameters/f.p_court_docket_number'
         - $ref: '#/parameters/f.p_activity_number'
         - $ref: '#/parameters/f.p_case_lead'
         - $ref: '#/parameters/f.p_case_sens_flg'
@@ -1884,6 +1926,8 @@ paths:
         - $ref: '#/parameters/f.callback'
         - $ref: '#/parameters/f.qcolumns'
         - $ref: '#/parameters/f.p_ocmap_fy'
+        - $ref: '#/parameters/f.p_qs'
+        - $ref: '#/parameters/f.p_has_map'
       responses:
         '200':
           description: Returns an array of cases that meet the selection criteria.
@@ -1898,6 +1942,81 @@ paths:
             xml:
               name: Root
       summary: Enforcement Case Search
+      tags:
+        - Case Enforcement
+  /case_rest_services.get_cases_from_facility:
+    get:
+      parameters:
+        - description: Identifier for the service.
+          in: query
+          name: p_id
+          required: true
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/q.callback'
+      responses:
+        '200':
+          description: Results
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/crs0_get_cases_from_facility.Results'
+            required:
+              - Results
+            type: object
+            xml:
+              name: Root
+      summary: Placeholder
+      tags:
+        - Case Enforcement
+    post:
+      parameters:
+        - description: Identifier for the service.
+          in: query
+          name: p_id
+          required: true
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/q.callback'
+      responses:
+        '200':
+          description: Results
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/crs0_get_cases_from_facility.Results'
+            required:
+              - Results
+            type: object
+            xml:
+              name: Root
+      summary: Placeholder
       tags:
         - Case Enforcement
   /case_rest_services.get_crcase_report:
@@ -1923,6 +2042,7 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/q.callback'
+        - $ref: '#/parameters/q.mapset'
       responses:
         '200':
           description: Returns a complex object containing detailed criminal case information for the provided Case Identifier.
@@ -2018,6 +2138,81 @@ paths:
       summary: Enforcement Case Download Data Service
       tags:
         - Case Enforcement
+  /case_rest_services.get_facilities_from_case:
+    get:
+      parameters:
+        - description: Identifier for the service.
+          in: query
+          name: p_id
+          required: true
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/q.callback'
+      responses:
+        '200':
+          description: Results
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/crs0_get_facilities_from_case.Results'
+            required:
+              - Results
+            type: object
+            xml:
+              name: Root
+      summary: Placeholder
+      tags:
+        - Case Enforcement
+    post:
+      parameters:
+        - description: Identifier for the service.
+          in: query
+          name: p_id
+          required: true
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/q.callback'
+      responses:
+        '200':
+          description: Results
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/crs0_get_facilities_from_case.Results'
+            required:
+              - Results
+            type: object
+            xml:
+              name: Root
+      summary: Placeholder
+      tags:
+        - Case Enforcement
   /case_rest_services.get_map:
     get:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
@@ -2081,6 +2276,7 @@ paths:
         - $ref: '#/parameters/f.c1_long'
         - $ref: '#/parameters/f.c2_lat'
         - $ref: '#/parameters/f.c2_long'
+        - $ref: '#/parameters/f.mapset'
       responses:
         '200':
           description: 'Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.'
@@ -2388,6 +2584,8 @@ definitions:
         example: '0'
         title: Cost Recovery Amount
         type: string
+      CourtDocketNumber:
+        type: string
       CwaFlag:
         description: A flag indicating that the Primary Law cited for the case was the Clean Water Act.
         example: '1'
@@ -2542,6 +2740,7 @@ definitions:
       - CaseStatusCode
       - CaseStatusDesc
       - DOJDocketNmbr
+      - CourtDocketNumber
       - PrimaryLaw
       - PrimarySection
       - DateFiled
@@ -2924,6 +3123,72 @@ definitions:
       - TSCARows
       - FederalRows
       - QueryParameters
+    type: object
+  crs0_get_cases_from_facility.CaseNumber:
+    description: Case Number
+    properties:
+      CaseNumber:
+        description: 'A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, "HQ" (headquarters initiated cases), and "EF" or "WF" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.'
+        example: 05-200021274
+        title: Case Number
+        type: string
+    required:
+      - CaseNumber
+    type: object
+  crs0_get_cases_from_facility.CaseNumbers:
+    description: Case Numbers
+    properties:
+      CaseNumbers:
+        items:
+          $ref: '#/definitions/crs0_get_cases_from_facility.CaseNumber'
+        title: CAED Documents
+        type: array
+        xml:
+          name: CAEDDocuments
+          wrapped: true
+    required:
+      - CaseNumbers
+    type: object
+  crs0_get_cases_from_facility.Results:
+    description: Results
+    properties:
+      Results:
+        $ref: '#/definitions/crs0_get_cases_from_facility.CaseNumbers'
+    required:
+      - Results
+    type: object
+  crs0_get_facilities_from_case.RegistryID:
+    description: Registry ID
+    properties:
+      RegistryID:
+        description: An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases.
+        example: '110020837601'
+        title: FRS ID
+        type: string
+    required:
+      - RegistryID
+    type: object
+  crs0_get_facilities_from_case.RegistryIDs:
+    description: Registry IDs
+    properties:
+      RegistryIDs:
+        items:
+          $ref: '#/definitions/crs0_get_facilities_from_case.RegistryID'
+        title: CAED Documents
+        type: array
+        xml:
+          name: CAEDDocuments
+          wrapped: true
+    required:
+      - RegistryIDs
+    type: object
+  crs0_get_facilities_from_case.Results:
+    description: Results
+    properties:
+      Results:
+        $ref: '#/definitions/crs0_get_facilities_from_case.RegistryIDs'
+    required:
+      - Results
     type: object
   crs1_CAEDDocuments:
     description: Case Related Uploaded Documents

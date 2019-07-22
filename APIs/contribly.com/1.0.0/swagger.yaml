@@ -1331,6 +1331,9 @@ definitions:
     properties:
       allowsAnonymousContributions:
         type: boolean
+      callToAction:
+        description: An optional call to action specific to this assignment. ie. Submit your snow pictures.
+        type: string
       cover:
         $ref: '#/definitions/MediaUsage'
       created:
@@ -1580,6 +1583,8 @@ definitions:
         type: string
       name:
         type: string
+      noCss:
+        type: boolean
       ownedBy:
         type: string
       tags:
@@ -1649,6 +1654,8 @@ definitions:
         type: string
       name:
         type: string
+      noCss:
+        type: boolean
       tags:
         items:
           $ref: '#/definitions/Tag'

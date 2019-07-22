@@ -62,7 +62,7 @@ security:
   - SudoHeader: []
 responses:
   AccessToken:
-    description: AccessToken represents a API access token.
+    description: AccessToken represents an API access token.
     headers:
       id:
         format: int64
@@ -71,8 +71,14 @@ responses:
         type: string
       sha1:
         type: string
+      token_last_eight:
+        type: string
   AccessTokenList:
     description: AccessTokenList represents a list of API access token.
+  AnnotatedTag:
+    description: AnnotatedTag
+    schema:
+      $ref: '#/definitions/AnnotatedTag'
   Attachment:
     description: Attachment
     schema:
@@ -107,6 +113,16 @@ responses:
     description: Commit
     schema:
       $ref: '#/definitions/Commit'
+  ContentsListResponse:
+    description: ContentsListResponse
+    schema:
+      items:
+        $ref: '#/definitions/ContentsResponse'
+      type: array
+  ContentsResponse:
+    description: ContentsResponse
+    schema:
+      $ref: '#/definitions/ContentsResponse'
   DeployKey:
     description: DeployKey
     schema:
@@ -123,6 +139,14 @@ responses:
       items:
         $ref: '#/definitions/Email'
       type: array
+  FileDeleteResponse:
+    description: FileDeleteResponse
+    schema:
+      $ref: '#/definitions/FileDeleteResponse'
+  FileResponse:
+    description: FileResponse
+    schema:
+      $ref: '#/definitions/FileResponse'
   GPGKey:
     description: GPGKey
     schema:
@@ -133,6 +157,20 @@ responses:
       items:
         $ref: '#/definitions/GPGKey'
       type: array
+  GitBlobResponse:
+    description: GitBlobResponse
+    schema:
+      $ref: '#/definitions/GitBlobResponse'
+  GitHook:
+    description: GitHook
+    schema:
+      $ref: '#/definitions/GitHook'
+  GitHookList:
+    description: GitHookList
+    schema:
+      items:
+        $ref: '#/definitions/GitHook'
+      type: array
   GitTreeResponse:
     description: GitTreeResponse
     schema:
@@ -140,14 +178,12 @@ responses:
   Hook:
     description: Hook
     schema:
-      items:
-        $ref: '#/definitions/Branch'
-      type: array
+      $ref: '#/definitions/Hook'
   HookList:
     description: HookList
     schema:
       items:
-        $ref: '#/definitions/Branch'
+        $ref: '#/definitions/Hook'
       type: array
   Issue:
     description: Issue
@@ -263,6 +299,10 @@ responses:
       items:
         $ref: '#/definitions/Status'
       type: array
+  Tag:
+    description: Tag
+    schema:
+      $ref: '#/definitions/Tag'
   TagList:
     description: TagList
     schema:
@@ -330,7 +370,7 @@ responses:
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: '#/definitions/EditAttachmentOptions'
+      $ref: '#/definitions/DeleteFileOptions'
   redirect:
     description: APIRedirect is a redirect response
   validationError:
@@ -682,6 +722,7 @@ paths:
           type: string
         - in: body
           name: body
+          required: true
           schema:
             $ref: '#/definitions/EditOrgOption'
       produces:
@@ -1034,6 +1075,15 @@ paths:
           in: query
           name: uid
           type: integer
+        - description: search only for repos that the user with the given id has starred
+          format: int64
+          in: query
+          name: starredBy
+          type: integer
+        - description: include private repositories this user has access to (defaults to true)
+          in: query
+          name: private
+          type: boolean
         - description: page number of results to return (1-based)
           in: query
           name: page
@@ -1111,6 +1161,36 @@ paths:
         '200':
           $ref: '#/responses/Repository'
       summary: Get a repository
+      tags:
+        - repository
+    patch:
+      operationId: repoEdit
+      parameters:
+        - description: owner of the repo to edit
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo to edit
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: Properties of a repo that you can edit
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditRepoOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Repository'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Edit a repository's properties. Only fields that are set will be changed.
       tags:
         - repository
   '/repos/{owner}/{repo}/archive/{archive}':
@@ -1323,6 +1403,162 @@ paths:
       summary: 'Get a commit''s combined status, by branch/tag/commit reference'
       tags:
         - repository
+  '/repos/{owner}/{repo}/contents':
+    get:
+      operationId: repoGetContentsList
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: The name of the commit/branch/tag. Default the repository’s default branch (usually master)
+          in: query
+          name: ref
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ContentsListResponse'
+      summary: Gets the metadata of all the entries of the root dir
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/contents/{filepath}':
+    delete:
+      consumes:
+        - application/json
+      operationId: repoDeleteFile
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: path of the file to delete
+          in: path
+          name: filepath
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFileOptions'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/FileDeleteResponse'
+      summary: Delete a file in a repository
+      tags:
+        - repository
+    get:
+      operationId: repoGetContents
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: 'path of the dir, file, symlink or submodule in the repo'
+          in: path
+          name: filepath
+          required: true
+          type: string
+        - description: The name of the commit/branch/tag. Default the repository’s default branch (usually master)
+          in: query
+          name: ref
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ContentsResponse'
+      summary: 'Gets the metadata and contents (if a file) of an entry in a repository, or a list of entries if a dir'
+      tags:
+        - repository
+    post:
+      consumes:
+        - application/json
+      operationId: repoCreateFile
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: path of the file to create
+          in: path
+          name: filepath
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFileOptions'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/FileResponse'
+      summary: Create a file in a repository
+      tags:
+        - repository
+    put:
+      consumes:
+        - application/json
+      operationId: repoUpdateFile
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: path of the file to update
+          in: path
+          name: filepath
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFileOptions'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/FileResponse'
+      summary: Update a file in a repository
+      tags:
+        - repository
   '/repos/{owner}/{repo}/editorconfig/{filepath}':
     get:
       operationId: repoGetEditorConfig
@@ -1395,6 +1631,33 @@ paths:
         '202':
           $ref: '#/responses/Repository'
       summary: Fork a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/git/blobs/{sha}':
+    get:
+      operationId: GetBlob
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: sha of the commit
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GitBlobResponse'
+      summary: Gets the blob of a repository.
       tags:
         - repository
   '/repos/{owner}/{repo}/git/commits/{sha}':
@@ -1477,6 +1740,33 @@ paths:
         '404':
           $ref: '#/responses/notFound'
       summary: Get specified ref or filtered repository's refs
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/git/tags/{sha}':
+    get:
+      operationId: GetTag
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: sha of the tag
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/AnnotatedTag'
+      summary: Gets the tag of a repository.
       tags:
         - repository
   '/repos/{owner}/{repo}/git/trees/{sha}':
@@ -1565,6 +1855,117 @@ paths:
         '201':
           $ref: '#/responses/Hook'
       summary: Create a hook
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/hooks/git':
+    get:
+      operationId: repoListGitHooks
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GitHookList'
+      summary: List the Git hooks in a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/hooks/git/{id}':
+    delete:
+      operationId: repoDeleteGitHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to get
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Delete a Git hook in a repository
+      tags:
+        - repository
+    get:
+      operationId: repoGetGitHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to get
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GitHook'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a Git hook
+      tags:
+        - repository
+    patch:
+      operationId: repoEditGitHook
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: id of the hook to get
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditGitHookOption'
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GitHook'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Edit a Git hook in a repository
       tags:
         - repository
   '/repos/{owner}/{repo}/hooks/{id}':
@@ -2620,6 +3021,10 @@ paths:
           in: path
           name: repo
           required: true
+          type: string
+        - description: 'Milestone state, Recognised values are open, closed and all. Defaults to "open"'
+          in: query
+          name: state
           type: string
       produces:
         - application/json
@@ -4094,6 +4499,10 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Repository'
+        '409':
+          description: The repository with the same name already exists.
+        '422':
+          $ref: '#/responses/validationError'
       summary: Create a repository
       tags:
         - repository
@@ -4523,7 +4932,7 @@ definitions:
         type: string
         x-go-name: Permission
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   AddTimeOption:
     description: AddTimeOption options for adding time to an issue
     properties:
@@ -4535,7 +4944,44 @@ definitions:
     required:
       - time
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  AnnotatedTag:
+    description: AnnotatedTag represents an annotated tag
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+      object:
+        $ref: '#/definitions/AnnotatedTagObject'
+      sha:
+        type: string
+        x-go-name: SHA
+      tag:
+        type: string
+        x-go-name: Tag
+      tagger:
+        $ref: '#/definitions/CommitUser'
+      url:
+        type: string
+        x-go-name: URL
+      verification:
+        $ref: '#/definitions/PayloadCommitVerification'
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  AnnotatedTagObject:
+    description: AnnotatedTagObject contains meta information of the tag object
+    properties:
+      sha:
+        type: string
+        x-go-name: SHA
+      type:
+        type: string
+        x-go-name: Type
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Attachment:
     description: Attachment a generic attachment
     properties:
@@ -4565,7 +5011,7 @@ definitions:
         type: string
         x-go-name: UUID
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Branch:
     description: Branch represents a repository branch
     properties:
@@ -4575,7 +5021,7 @@ definitions:
         type: string
         x-go-name: Name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Comment:
     description: Comment represents a comment on a commit or issue
     properties:
@@ -4596,6 +5042,13 @@ definitions:
       issue_url:
         type: string
         x-go-name: IssueURL
+      original_author:
+        type: string
+        x-go-name: OriginalAuthor
+      original_author_id:
+        format: int64
+        type: integer
+        x-go-name: OriginalAuthorID
       pull_request_url:
         type: string
         x-go-name: PRURL
@@ -4606,7 +5059,7 @@ definitions:
       user:
         $ref: '#/definitions/User'
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Commit:
     properties:
       author:
@@ -4631,7 +5084,7 @@ definitions:
         x-go-name: URL
     title: Commit contains information generated from a Git commit.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CommitMeta:
     properties:
       sha:
@@ -4642,13 +5095,14 @@ definitions:
         x-go-name: URL
     title: CommitMeta contains meta information of a commit in terms of API.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CommitUser:
     properties:
       date:
         type: string
         x-go-name: Date
       email:
+        format: email
         type: string
         x-go-name: Email
       name:
@@ -4656,7 +5110,59 @@ definitions:
         x-go-name: Name
     title: CommitUser contains information of a user in the context of a commit.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  ContentsResponse:
+    description: 'ContentsResponse contains information about a repo''s entry''s (dir, file, symlink, submodule) metadata and content'
+    properties:
+      _links:
+        $ref: '#/definitions/FileLinksResponse'
+      content:
+        description: '`content` is populated when `type` is `file`, otherwise null'
+        type: string
+        x-go-name: Content
+      download_url:
+        type: string
+        x-go-name: DownloadURL
+      encoding:
+        description: '`encoding` is populated when `type` is `file`, otherwise null'
+        type: string
+        x-go-name: Encoding
+      git_url:
+        type: string
+        x-go-name: GitURL
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      name:
+        type: string
+        x-go-name: Name
+      path:
+        type: string
+        x-go-name: Path
+      sha:
+        type: string
+        x-go-name: SHA
+      size:
+        format: int64
+        type: integer
+        x-go-name: Size
+      submodule_git_url:
+        description: '`submodule_git_url` is populated when `type` is `submodule`, otherwise null'
+        type: string
+        x-go-name: SubmoduleGitURL
+      target:
+        description: '`target` is populated when `type` is `symlink`, otherwise null'
+        type: string
+        x-go-name: Target
+      type:
+        description: '`type` will be `file`, `dir`, `symlink`, or `submodule`'
+        type: string
+        x-go-name: Type
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateEmailOption:
     description: CreateEmailOption options when creating email addresses
     properties:
@@ -4667,7 +5173,36 @@ definitions:
         type: array
         x-go-name: Emails
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CreateFileOptions:
+    description: |-
+      CreateFileOptions options for creating files
+      Note: `author` and `committer` are optional (if only one is given, it will be used for the other, otherwise the authenticated user will be used)
+    properties:
+      author:
+        $ref: '#/definitions/Identity'
+      branch:
+        description: 'branch (optional) to base this file from. if not given, the default branch is used'
+        type: string
+        x-go-name: BranchName
+      committer:
+        $ref: '#/definitions/Identity'
+      content:
+        description: content must be base64 encoded
+        type: string
+        x-go-name: Content
+      message:
+        description: 'message (optional) for the commit of this file. if not supplied, a default message will be used'
+        type: string
+        x-go-name: Message
+      new_branch:
+        description: new_branch (optional) will make a new branch from `branch` before creating the file
+        type: string
+        x-go-name: NewBranchName
+    required:
+      - content
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateForkOption:
     description: CreateForkOption options for creating a fork
     properties:
@@ -4676,7 +5211,7 @@ definitions:
         type: string
         x-go-name: Organization
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateGPGKeyOption:
     description: CreateGPGKeyOption options create user GPG key
     properties:
@@ -4688,7 +5223,7 @@ definitions:
     required:
       - armored_public_key
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateHookOption:
     description: CreateHookOption options when create a hook
     properties:
@@ -4718,7 +5253,7 @@ definitions:
       - type
       - config
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateIssueCommentOption:
     description: CreateIssueCommentOption options for creating a comment on an issue
     properties:
@@ -4728,7 +5263,7 @@ definitions:
     required:
       - body
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateIssueOption:
     description: CreateIssueOption options to create one issue
     properties:
@@ -4769,7 +5304,7 @@ definitions:
     required:
       - title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateKeyOption:
     description: CreateKeyOption options when creating a key
     properties:
@@ -4791,7 +5326,7 @@ definitions:
       - title
       - key
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateLabelOption:
     description: CreateLabelOption options for creating a label
     properties:
@@ -4799,6 +5334,9 @@ definitions:
         example: '#00aabb'
         type: string
         x-go-name: Color
+      description:
+        type: string
+        x-go-name: Description
       name:
         type: string
         x-go-name: Name
@@ -4806,7 +5344,7 @@ definitions:
       - name
       - color
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateMilestoneOption:
     description: CreateMilestoneOption options for creating a milestone
     properties:
@@ -4821,7 +5359,7 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateOrgOption:
     description: CreateOrgOption options for creating an organization
     properties:
@@ -4837,13 +5375,21 @@ definitions:
       username:
         type: string
         x-go-name: UserName
+      visibility:
+        description: 'possible values are `public` (default), `limited` or `private`'
+        enum:
+          - public
+          - limited
+          - private
+        type: string
+        x-go-name: Visibility
       website:
         type: string
         x-go-name: Website
     required:
       - username
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreatePullRequestOption:
     description: CreatePullRequestOption options when creating a pull request
     properties:
@@ -4882,7 +5428,7 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateReleaseOption:
     description: CreateReleaseOption options when creating a release
     properties:
@@ -4907,7 +5453,7 @@ definitions:
     required:
       - tag_name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateRepoOption:
     description: CreateRepoOption options when creating repository
     properties:
@@ -4943,7 +5489,7 @@ definitions:
     required:
       - name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateStatusOption:
     description: CreateStatusOption holds the information needed to create a new Status for a Commit
     properties:
@@ -4959,7 +5505,7 @@ definitions:
         type: string
         x-go-name: TargetURL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateTeamOption:
     description: CreateTeamOption options for creating a team
     properties:
@@ -4992,7 +5538,7 @@ definitions:
     required:
       - name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   CreateUserOption:
     description: CreateUserOption create user options
     properties:
@@ -5027,7 +5573,7 @@ definitions:
       - email
       - password
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   DeleteEmailOption:
     description: DeleteEmailOption options when deleting email addresses
     properties:
@@ -5038,7 +5584,36 @@ definitions:
         type: array
         x-go-name: Emails
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  DeleteFileOptions:
+    description: |-
+      DeleteFileOptions options for deleting files (used for other File structs below)
+      Note: `author` and `committer` are optional (if only one is given, it will be used for the other, otherwise the authenticated user will be used)
+    properties:
+      author:
+        $ref: '#/definitions/Identity'
+      branch:
+        description: 'branch (optional) to base this file from. if not given, the default branch is used'
+        type: string
+        x-go-name: BranchName
+      committer:
+        $ref: '#/definitions/Identity'
+      message:
+        description: 'message (optional) for the commit of this file. if not supplied, a default message will be used'
+        type: string
+        x-go-name: Message
+      new_branch:
+        description: new_branch (optional) will make a new branch from `branch` before creating the file
+        type: string
+        x-go-name: NewBranchName
+      sha:
+        description: sha is the SHA for the file that already exists
+        type: string
+        x-go-name: SHA
+    required:
+      - sha
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   DeployKey:
     description: DeployKey a deploy key
     properties:
@@ -5072,7 +5647,7 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditAttachmentOptions:
     description: EditAttachmentOptions options for editing attachments
     properties:
@@ -5080,7 +5655,7 @@ definitions:
         type: string
         x-go-name: Name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditDeadlineOption:
     description: EditDeadlineOption options for creating a deadline
     properties:
@@ -5091,7 +5666,15 @@ definitions:
     required:
       - due_date
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  EditGitHookOption:
+    description: EditGitHookOption options when modifying one Git hook
+    properties:
+      content:
+        type: string
+        x-go-name: Content
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditHookOption:
     description: EditHookOption options when modify one hook
     properties:
@@ -5109,7 +5692,7 @@ definitions:
         type: array
         x-go-name: Events
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditIssueCommentOption:
     description: EditIssueCommentOption options for editing a comment
     properties:
@@ -5119,7 +5702,7 @@ definitions:
     required:
       - body
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditIssueOption:
     description: EditIssueOption options for editing an issue
     properties:
@@ -5149,18 +5732,21 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditLabelOption:
     description: EditLabelOption options for editing a label
     properties:
       color:
         type: string
         x-go-name: Color
+      description:
+        type: string
+        x-go-name: Description
       name:
         type: string
         x-go-name: Name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditMilestoneOption:
     description: EditMilestoneOption options for editing a milestone
     properties:
@@ -5178,7 +5764,7 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditOrgOption:
     description: EditOrgOption options for editing an organization
     properties:
@@ -5191,11 +5777,19 @@ definitions:
       location:
         type: string
         x-go-name: Location
+      visibility:
+        description: 'possible values are `public`, `limited` or `private`'
+        enum:
+          - public
+          - limited
+          - private
+        type: string
+        x-go-name: Visibility
       website:
         type: string
         x-go-name: Website
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditPullRequestOption:
     description: EditPullRequestOption options when modify pull request
     properties:
@@ -5231,7 +5825,7 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditReleaseOption:
     description: EditReleaseOption options when editing a release
     properties:
@@ -5254,7 +5848,72 @@ definitions:
         type: string
         x-go-name: Target
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  EditRepoOption:
+    description: EditRepoOption options when editing a repository's properties
+    properties:
+      allow_merge_commits:
+        description: 'either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits. `has_pull_requests` must be `true`.'
+        type: boolean
+        x-go-name: AllowMerge
+      allow_rebase:
+        description: 'either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. `has_pull_requests` must be `true`.'
+        type: boolean
+        x-go-name: AllowRebase
+      allow_rebase_explicit:
+        description: 'either `true` to allow rebase with explicit merge commits (--no-ff), or `false` to prevent rebase with explicit merge commits. `has_pull_requests` must be `true`.'
+        type: boolean
+        x-go-name: AllowRebaseMerge
+      allow_squash_merge:
+        description: 'either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. `has_pull_requests` must be `true`.'
+        type: boolean
+        x-go-name: AllowSquash
+      archived:
+        description: set to `true` to archive this repository.
+        type: boolean
+        x-go-name: Archived
+      default_branch:
+        description: sets the default branch for this repository.
+        type: string
+        x-go-name: DefaultBranch
+      description:
+        description: a short description of the repository.
+        type: string
+        x-go-name: Description
+      has_issues:
+        description: either `true` to enable issues for this repository or `false` to disable them.
+        type: boolean
+        x-go-name: HasIssues
+      has_pull_requests:
+        description: 'either `true` to allow pull requests, or `false` to prevent pull request.'
+        type: boolean
+        x-go-name: HasPullRequests
+      has_wiki:
+        description: either `true` to enable the wiki for this repository or `false` to disable it.
+        type: boolean
+        x-go-name: HasWiki
+      ignore_whitespace_conflicts:
+        description: 'either `true` to ignore whitespace for conflicts, or `false` to not ignore whitespace. `has_pull_requests` must be `true`.'
+        type: boolean
+        x-go-name: IgnoreWhitespaceConflicts
+      name:
+        description: name of the repository
+        type: string
+        uniqueItems: true
+        x-go-name: Name
+      private:
+        description: |-
+          either `true` to make the repository private or `false` to make it public.
+          Note: you will get a 422 error if the organization restricts changing repository visibility to organization
+          owners and a non-owner tries to change the value of private.
+        type: boolean
+        x-go-name: Private
+      website:
+        description: a URL with more information about the repository.
+        type: string
+        x-go-name: Website
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditTeamOption:
     description: EditTeamOption options for editing a team
     properties:
@@ -5287,7 +5946,7 @@ definitions:
     required:
       - name
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   EditUserOption:
     description: EditUserOption edit user options
     properties:
@@ -5342,7 +6001,7 @@ definitions:
     required:
       - email
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Email:
     description: Email an email address belonging to a user
     properties:
@@ -5357,7 +6016,72 @@ definitions:
         type: boolean
         x-go-name: Verified
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  FileCommitResponse:
+    properties:
+      author:
+        $ref: '#/definitions/CommitUser'
+      committer:
+        $ref: '#/definitions/CommitUser'
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      message:
+        type: string
+        x-go-name: Message
+      parents:
+        items:
+          $ref: '#/definitions/CommitMeta'
+        type: array
+        x-go-name: Parents
+      sha:
+        type: string
+        x-go-name: SHA
+      tree:
+        $ref: '#/definitions/CommitMeta'
+      url:
+        type: string
+        x-go-name: URL
+    title: FileCommitResponse contains information generated from a Git commit for a repo's file.
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  FileDeleteResponse:
+    description: FileDeleteResponse contains information about a repo's file that was deleted
+    properties:
+      commit:
+        $ref: '#/definitions/FileCommitResponse'
+      content:
+        type: object
+        x-go-name: Content
+      verification:
+        $ref: '#/definitions/PayloadCommitVerification'
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  FileLinksResponse:
+    description: FileLinksResponse contains the links for a repo's file
+    properties:
+      git:
+        type: string
+        x-go-name: GitURL
+      html:
+        type: string
+        x-go-name: HTMLURL
+      self:
+        type: string
+        x-go-name: Self
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  FileResponse:
+    description: FileResponse contains information about a repo's file
+    properties:
+      commit:
+        $ref: '#/definitions/FileCommitResponse'
+      content:
+        $ref: '#/definitions/ContentsResponse'
+      verification:
+        $ref: '#/definitions/PayloadCommitVerification'
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   GPGKey:
     description: GPGKey a user GPG key to sign commit and tag in repository
     properties:
@@ -5405,7 +6129,7 @@ definitions:
         type: array
         x-go-name: SubsKey
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   GPGKeyEmail:
     description: GPGKeyEmail an email attached to a GPGKey
     properties:
@@ -5416,7 +6140,28 @@ definitions:
         type: boolean
         x-go-name: Verified
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  GitBlobResponse:
+    description: GitBlobResponse represents a git blob
+    properties:
+      content:
+        type: string
+        x-go-name: Content
+      encoding:
+        type: string
+        x-go-name: Encoding
+      sha:
+        type: string
+        x-go-name: SHA
+      size:
+        format: int64
+        type: integer
+        x-go-name: Size
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   GitEntry:
     description: GitEntry represents a git tree
     properties:
@@ -5440,7 +6185,21 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  GitHook:
+    description: GitHook represents a Git repository hook
+    properties:
+      content:
+        type: string
+        x-go-name: Content
+      is_active:
+        type: boolean
+        x-go-name: IsActive
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   GitObject:
     properties:
       sha:
@@ -5454,7 +6213,7 @@ definitions:
         x-go-name: URL
     title: GitObject represents a Git object.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   GitTreeResponse:
     description: GitTreeResponse returns a git tree
     properties:
@@ -5481,7 +6240,52 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  Hook:
+    description: Hook a hook is a web hook when one repository changed
+    properties:
+      active:
+        type: boolean
+        x-go-name: Active
+      config:
+        additionalProperties:
+          type: string
+        type: object
+        x-go-name: Config
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      events:
+        items:
+          type: string
+        type: array
+        x-go-name: Events
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      type:
+        type: string
+        x-go-name: Type
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  Identity:
+    description: Identity for a person's identity like an author or committer
+    properties:
+      email:
+        format: email
+        type: string
+        x-go-name: Email
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Issue:
     description: Issue represents an issue in a repository
     properties:
@@ -5526,6 +6330,13 @@ definitions:
         format: int64
         type: integer
         x-go-name: Index
+      original_author:
+        type: string
+        x-go-name: OriginalAuthor
+      original_author_id:
+        format: int64
+        type: integer
+        x-go-name: OriginalAuthorID
       pull_request:
         $ref: '#/definitions/PullRequestMeta'
       state:
@@ -5543,7 +6354,7 @@ definitions:
       user:
         $ref: '#/definitions/User'
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   IssueDeadline:
     description: IssueDeadline represents an issue deadline
     properties:
@@ -5552,7 +6363,7 @@ definitions:
         type: string
         x-go-name: Deadline
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   IssueLabelsOption:
     description: IssueLabelsOption a collection of labels
     properties:
@@ -5564,7 +6375,7 @@ definitions:
         type: array
         x-go-name: Labels
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Label:
     description: Label a label to an issue or a pr
     properties:
@@ -5572,6 +6383,9 @@ definitions:
         example: 00aabb
         type: string
         x-go-name: Color
+      description:
+        type: string
+        x-go-name: Description
       id:
         format: int64
         type: integer
@@ -5583,7 +6397,7 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   MarkdownOption:
     description: MarkdownOption markdown options
     properties:
@@ -5612,7 +6426,7 @@ definitions:
           in: body
         type: boolean
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   MergePullRequestOption:
     description: MergePullRequestForm form for merging Pull Request
     properties:
@@ -5647,12 +6461,27 @@ definitions:
       description:
         type: string
         x-go-name: Description
+      issues:
+        type: boolean
+        x-go-name: Issues
+      labels:
+        type: boolean
+        x-go-name: Labels
+      milestones:
+        type: boolean
+        x-go-name: Milestones
       mirror:
         type: boolean
         x-go-name: Mirror
       private:
         type: boolean
         x-go-name: Private
+      pull_requests:
+        type: boolean
+        x-go-name: PullRequests
+      releases:
+        type: boolean
+        x-go-name: Releases
       repo_name:
         type: string
         x-go-name: RepoName
@@ -5660,6 +6489,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: UID
+      wiki:
+        type: boolean
+        x-go-name: Wiki
     required:
       - clone_addr
       - uid
@@ -5698,7 +6530,7 @@ definitions:
         type: string
         x-go-name: Title
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Organization:
     description: Organization represents an organization
     properties:
@@ -5721,11 +6553,14 @@ definitions:
       username:
         type: string
         x-go-name: UserName
+      visibility:
+        type: string
+        x-go-name: Visibility
       website:
         type: string
         x-go-name: Website
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PRBranchInfo:
     description: PRBranchInfo information about a branch
     properties:
@@ -5745,7 +6580,7 @@ definitions:
         type: string
         x-go-name: Sha
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PayloadCommit:
     description: PayloadCommit represents a commit
     properties:
@@ -5785,7 +6620,7 @@ definitions:
       verification:
         $ref: '#/definitions/PayloadCommitVerification'
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PayloadCommitVerification:
     description: PayloadCommitVerification represents the GPG verification of a commit
     properties:
@@ -5802,7 +6637,7 @@ definitions:
         type: boolean
         x-go-name: Verified
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PayloadUser:
     description: PayloadUser represents the author or committer of a commit
     properties:
@@ -5818,7 +6653,7 @@ definitions:
         type: string
         x-go-name: UserName
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Permission:
     description: Permission represents a set of permissions
     properties:
@@ -5832,7 +6667,7 @@ definitions:
         type: boolean
         x-go-name: Push
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PublicKey:
     description: PublicKey publickey is a user key to push code to repository
     properties:
@@ -5865,7 +6700,7 @@ definitions:
       user:
         $ref: '#/definitions/User'
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PullRequest:
     description: PullRequest represents a pull request
     properties:
@@ -5956,7 +6791,7 @@ definitions:
       user:
         $ref: '#/definitions/User'
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   PullRequestMeta:
     description: PullRequestMeta PR info if an issue is a PR
     properties:
@@ -5968,7 +6803,7 @@ definitions:
         type: string
         x-go-name: Merged
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Reference:
     properties:
       object:
@@ -5981,7 +6816,7 @@ definitions:
         x-go-name: URL
     title: Reference represents a Git reference.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Release:
     description: Release represents a repository release
     properties:
@@ -6032,7 +6867,7 @@ definitions:
         type: string
         x-go-name: ZipURL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   RepoCommit:
     properties:
       author:
@@ -6049,13 +6884,28 @@ definitions:
         x-go-name: URL
     title: RepoCommit contains information of a commit in the context of a repository.
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Repository:
     description: Repository represents a repository
     properties:
+      allow_merge_commits:
+        type: boolean
+        x-go-name: AllowMerge
+      allow_rebase:
+        type: boolean
+        x-go-name: AllowRebase
+      allow_rebase_explicit:
+        type: boolean
+        x-go-name: AllowRebaseMerge
+      allow_squash_merge:
+        type: boolean
+        x-go-name: AllowSquash
       archived:
         type: boolean
         x-go-name: Archived
+      avatar_url:
+        type: string
+        x-go-name: AvatarURL
       clone_url:
         type: string
         x-go-name: CloneURL
@@ -6082,6 +6932,15 @@ definitions:
       full_name:
         type: string
         x-go-name: FullName
+      has_issues:
+        type: boolean
+        x-go-name: HasIssues
+      has_pull_requests:
+        type: boolean
+        x-go-name: HasPullRequests
+      has_wiki:
+        type: boolean
+        x-go-name: HasWiki
       html_url:
         type: string
         x-go-name: HTMLURL
@@ -6089,6 +6948,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: ID
+      ignore_whitespace_conflicts:
+        type: boolean
+        x-go-name: IgnoreWhitespaceConflicts
       mirror:
         type: boolean
         x-go-name: Mirror
@@ -6099,6 +6961,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: OpenIssues
+      original_url:
+        type: string
+        x-go-name: OriginalURL
       owner:
         $ref: '#/definitions/User'
       parent:
@@ -6131,7 +6996,7 @@ definitions:
         type: string
         x-go-name: Website
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   SearchResults:
     description: SearchResults results of a successful search
     properties:
@@ -6144,7 +7009,7 @@ definitions:
         type: boolean
         x-go-name: OK
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   ServerVersion:
     description: ServerVersion wraps the version of the server
     properties:
@@ -6152,11 +7017,11 @@ definitions:
         type: string
         x-go-name: Version
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   StateType:
     description: StateType issue state type
     type: string
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Status:
     description: Status holds a single Status of a single Commit
     properties:
@@ -6189,26 +7054,21 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   StatusState:
     description: |-
       StatusState holds the state of a Status
       It can be "pending", "success", "error", "failure", and "warning"
     type: string
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Tag:
     description: Tag represents a repository tag
     properties:
       commit:
-        properties:
-          sha:
-            type: string
-            x-go-name: SHA
-          url:
-            type: string
-            x-go-name: URL
-        type: object
-        x-go-name: Commit
+        $ref: '#/definitions/CommitMeta'
+      id:
+        type: string
+        x-go-name: ID
       name:
         type: string
         x-go-name: Name
@@ -6219,7 +7079,7 @@ definitions:
         type: string
         x-go-name: ZipballURL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   Team:
     description: Team represents a team in an organization
     properties:
@@ -6258,7 +7118,7 @@ definitions:
         type: array
         x-go-name: Units
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   TimeStamp:
     description: TimeStamp defines a timestamp
     format: int64
@@ -6289,7 +7149,45 @@ definitions:
         type: integer
         x-go-name: UserID
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
+  UpdateFileOptions:
+    description: |-
+      UpdateFileOptions options for updating files
+      Note: `author` and `committer` are optional (if only one is given, it will be used for the other, otherwise the authenticated user will be used)
+    properties:
+      author:
+        $ref: '#/definitions/Identity'
+      branch:
+        description: 'branch (optional) to base this file from. if not given, the default branch is used'
+        type: string
+        x-go-name: BranchName
+      committer:
+        $ref: '#/definitions/Identity'
+      content:
+        description: content must be base64 encoded
+        type: string
+        x-go-name: Content
+      from_path:
+        description: from_path (optional) is the path of the original file which will be moved/renamed to the path in the URL
+        type: string
+        x-go-name: FromPath
+      message:
+        description: 'message (optional) for the commit of this file. if not supplied, a default message will be used'
+        type: string
+        x-go-name: Message
+      new_branch:
+        description: new_branch (optional) will make a new branch from `branch` before creating the file
+        type: string
+        x-go-name: NewBranchName
+      sha:
+        description: sha is the SHA for the file that already exists
+        type: string
+        x-go-name: SHA
+    required:
+      - sha
+      - content
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   User:
     description: User represents a user
     properties:
@@ -6297,6 +7195,10 @@ definitions:
         description: URL to the user's avatar
         type: string
         x-go-name: AvatarURL
+      created:
+        format: date-time
+        type: string
+        x-go-name: Created
       email:
         format: email
         type: string
@@ -6318,12 +7220,16 @@ definitions:
         description: User locale
         type: string
         x-go-name: Language
+      last_login:
+        format: date-time
+        type: string
+        x-go-name: LastLogin
       login:
         description: the user's username
         type: string
         x-go-name: UserName
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs
   UserHeatmapData:
     description: UserHeatmapData represents the data needed to create a heatmap
     properties:
@@ -6358,4 +7264,4 @@ definitions:
         type: string
         x-go-name: URL
     type: object
-    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+    x-go-package: code.gitea.io/gitea/modules/structs

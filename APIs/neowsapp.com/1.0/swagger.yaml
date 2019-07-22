@@ -5,15 +5,13 @@ host: www.neowsapp.com
 basePath: /
 info:
   description: |-
-    A web service for near earth objects. All the data is from the  <a href="http://neo.jpl.nasa.gov/" target="_blank">NASA JPL Asteroid team</a>. 
+    A web service for near earth objects. All the data is from the <a href="http://neo.jpl.nasa.gov/" target="_blank">NASA JPL Asteroid team</a>. 
 
      
 
     NeoWs is proud to power AsteroidTracker on <a href="https://itunes.apple.com/us/app/asteroid-tracker/id689684901?mt=8" target="_blank">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.vitruviussoftware.bunifish.asteroidtracker&feature" target="_blank">Android</a> as well as related apps. 
 
-     Get <a href="http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f" target="_blank">Asteroid Today on Pebble</a> 
-
-    Follow us on <a href="https://twitter.com/AsteroidTracker" target="_blank">Twitter</a>
+     Follow us on <a href="https://twitter.com/AsteroidTracker" target="_blank">Twitter</a>
   title: NeoWs - (Near Earth Object Web Service)
   version: '1.0'
   x-apisguru-categories:
@@ -54,7 +52,7 @@ paths:
         - description: 'End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date'
           in: query
           name: end_date
-          required: true
+          required: false
           type: string
         - description: detailed
           in: query
@@ -247,6 +245,8 @@ definitions:
   CloseApproachData:
     properties:
       close_approach_date:
+        type: string
+      close_approach_date_full:
         type: string
       epoch_date_close_approach:
         format: int64

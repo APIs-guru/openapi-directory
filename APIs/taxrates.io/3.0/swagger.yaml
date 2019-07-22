@@ -2,7 +2,7 @@ swagger: '2.0'
 schemes:
   - https
 host: api.taxrates.io
-basePath: /api/v1
+basePath: /api
 info:
   contact:
     name: apiteam@taxrates.io
@@ -32,43 +32,6 @@ securityDefinitions:
     name: Authorization
     type: apiKey
 paths:
-  /oauth/dialog:
-    get:
-      description: This is the second endpoint you have to hit. When you got your token here you can generate your Bearer authorization header. The header will be used to authorize every API call.
-      parameters:
-        - description: 'Domain name: api.taxrates.io'
-          in: query
-          name: domain
-          required: true
-          type: string
-        - description: The token you got from <<token>> endpoint
-          in: query
-          name: token
-          required: true
-          type: string
-        - description: You have to use api_member as a scope.
-          in: query
-          name: clientscope
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success. JSON formatted authorization string in return.
-          schema:
-            properties:
-              Authorization:
-                description: 'Bearer: __Your authorization key will appear here__'
-                type: string
-            type: object
-        '404':
-          description: No valid token found You have to call <<token>> endpoint to get/refresh your token first.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Authorization endpoint
-      tags:
-        - Authentication
   /oauth/token:
     get:
       description: This the very first URL you must hit when you want to use taxrates.io API. When you got your Client ID key and Client Secret key you are able to use our API resources.
@@ -120,7 +83,44 @@ paths:
       summary: Token generating URL
       tags:
         - Authentication
-  /tax/byaddress:
+  /v1/oauth/dialog:
+    get:
+      description: This is the second endpoint you have to hit. When you got your token here you can generate your Bearer authorization header. The header will be used to authorize every API call.
+      parameters:
+        - description: 'Domain name: api.taxrates.io'
+          in: query
+          name: domain
+          required: true
+          type: string
+        - description: The token you got from <<token>> endpoint
+          in: query
+          name: token
+          required: true
+          type: string
+        - description: You have to use api_member as a scope.
+          in: query
+          name: clientscope
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. JSON formatted authorization string in return.
+          schema:
+            properties:
+              Authorization:
+                description: 'Bearer: __Your authorization key will appear here__'
+                type: string
+            type: object
+        '404':
+          description: No valid token found You have to call <<token>> endpoint to get/refresh your token first.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Authorization endpoint
+      tags:
+        - Authentication
+  /v1/tax/byaddress:
     post:
       description: This endpoint returns tax rates for the country based on the address provided
       parameters:
@@ -156,7 +156,7 @@ paths:
       summary: Get tax rates by address
       tags:
         - Tax service
-  /tax/countrycode:
+  /v1/tax/countrycode:
     get:
       description: This endpoint returns all available tax rates for selected country
       parameters:
@@ -175,6 +175,11 @@ paths:
           name: filter
           required: false
           type: string
+        - description: You must provide a zip code if one of your selected countries is United States and you've had selected a state on your Taxrates.io member's dashboard.
+          in: query
+          name: zip
+          required: false
+          type: string
       responses:
         '200':
           description: Success
@@ -191,7 +196,7 @@ paths:
       summary: Returns tax rate for selected country
       tags:
         - Tax service
-  /tax/ip:
+  /v1/tax/ip:
     get:
       description: This endpoint will return tax rates for country discovered based on Customer's IP address
       parameters:
@@ -208,6 +213,11 @@ paths:
         - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
           in: query
           name: filter
+          required: false
+          type: string
+        - description: You must provide a zip code if one of your selected countries is United States and you've had selected a state on your Taxrates.io member's dashboard.
+          in: query
+          name: zip
           required: false
           type: string
       responses:
@@ -228,7 +238,7 @@ paths:
       summary: Tax rates by geolocation based on Customer IP address
       tags:
         - Tax service
-  /tax/rates:
+  /v1/tax/rates:
     get:
       description: This method returns all tax rates configured on Member's account
       parameters:
@@ -253,6 +263,43 @@ paths:
           schema:
             items:
               $ref: '#/definitions/Rates'
+            type: array
+        '404':
+          description: No configured tax rates found. Have you added any country to your account?
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+      summary: Get all tax rates
+      tags:
+        - Tax service
+  /v3/tax/rates:
+    get:
+      description: This method returns all tax rates configured on Member's account using cursor. Use X-Cursor-Next header to recursively read all rates. Max limit is 500 records per request.
+      parameters:
+        - description: 'Domain name: api.taxrates.io'
+          in: query
+          name: domain
+          required: true
+          type: string
+        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'Cursor shows from which record you want to get information. Default value is 0, next value can be retrieved from X-Cursor-Next header.'
+          in: query
+          name: cursor
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of locations with tax rates
+          schema:
+            items:
+              $ref: '#/definitions/Location'
             type: array
         '404':
           description: No configured tax rates found. Have you added any country to your account?
@@ -300,6 +347,24 @@ definitions:
       message:
         type: string
     type: object
+  Location:
+    properties:
+      id:
+        type: integer
+      name:
+        description: Country name
+        type: string
+      rates:
+        items:
+          $ref: '#/definitions/TaxRate'
+        type: array
+      state:
+        description: State/province name if exists
+        type: string
+      zip:
+        description: Zipcode
+        type: string
+    type: object
   Rates:
     properties:
       country_name:
@@ -323,5 +388,17 @@ definitions:
         type: string
       data_value:
         description: The tax value in percents
+        type: string
+    type: object
+  TaxRate:
+    properties:
+      data_name:
+        description: 'The tax name and description (VAT, GST, PIT, CIT etc)'
+        type: string
+      data_value:
+        description: The tax value in percents
+        type: string
+      type:
+        description: The tax type
         type: string
     type: object

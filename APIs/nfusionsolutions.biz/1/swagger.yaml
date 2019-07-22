@@ -31,7 +31,7 @@ paths:
   '/api/v{version}/Currencies/history':
     get:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
-      operationId: 'ApiV{versionCurrenciesHistoryGet'
+      operationId: History
       parameters:
         - description: auth token
           in: query
@@ -61,6 +61,9 @@ paths:
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -89,7 +92,7 @@ paths:
   '/api/v{version}/Currencies/history/supported':
     get:
       description: "Only the currency pairs in the direction noted can be used with the history endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
-      operationId: 'ApiV{versionCurrenciesHistorySupportedGet'
+      operationId: SupportedCurrencies_History
       parameters:
         - description: auth token
           in: query
@@ -97,6 +100,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -125,7 +131,7 @@ paths:
   '/api/v{version}/Currencies/rate':
     get:
       description: Current Mid Rate
-      operationId: 'ApiV{versionCurrenciesRateGet'
+      operationId: Rate
       parameters:
         - description: auth token
           in: query
@@ -138,6 +144,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -166,7 +175,7 @@ paths:
   '/api/v{version}/Currencies/rate/supported':
     get:
       description: "Any of the currencies in this list can be paired with any other currency in this list when supplied to the Rate endpoint.\r\nFor example: USD/CAD,CAD/USD,USD/EUR,EUR/CAD"
-      operationId: 'ApiV{versionCurrenciesRateSupportedGet'
+      operationId: SupportedCurrencies_Rate
       parameters:
         - description: auth token
           in: query
@@ -174,6 +183,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -202,7 +214,7 @@ paths:
   '/api/v{version}/Currencies/summary':
     get:
       description: Current and daily summary information combined into a single quote
-      operationId: 'ApiV{versionCurrenciesSummaryGet'
+      operationId: Summary
       parameters:
         - description: auth token
           in: query
@@ -215,6 +227,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -243,7 +258,7 @@ paths:
   '/api/v{version}/Currencies/summary/supported':
     get:
       description: "Only the currency pairs in the direction noted can be used with the Summary endpoint.\r\nFor example: USD/CAD is not the same as CAD/USD"
-      operationId: 'ApiV{versionCurrenciesSummarySupportedGet'
+      operationId: SupportedCurrencies_Summary
       parameters:
         - description: auth token
           in: query
@@ -251,6 +266,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -279,7 +297,7 @@ paths:
   '/api/v{version}/Metals/benchmark/history':
     get:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r\n\r\nThe historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
-      operationId: 'ApiV{versionMetalsBenchmarkHistoryGet'
+      operationId: BenchmarkHistory
       parameters:
         - description: auth token
           in: query
@@ -319,11 +337,23 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -352,7 +382,7 @@ paths:
   '/api/v{version}/Metals/benchmark/summary':
     get:
       description: Benchmark price information
-      operationId: 'ApiV{versionMetalsBenchmarkSummaryGet'
+      operationId: BenchmarkSummary
       parameters:
         - description: auth token
           in: query
@@ -370,11 +400,23 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -403,7 +445,7 @@ paths:
   '/api/v{version}/Metals/benchmark/supported':
     get:
       description: ''
-      operationId: 'ApiV{versionMetalsBenchmarkSupportedGet'
+      operationId: BenchmarkSupportedMetals
       parameters:
         - description: auth token
           in: query
@@ -411,6 +453,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -439,7 +484,7 @@ paths:
   '/api/v{version}/Metals/spot/history':
     get:
       description: "Historical OHLC data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r\n\r\nThe historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
-      operationId: 'ApiV{versionMetalsSpotHistoryGet'
+      operationId: SpotHistory
       parameters:
         - description: auth token
           in: query
@@ -479,11 +524,23 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -512,7 +569,7 @@ paths:
   '/api/v{version}/Metals/spot/performance':
     get:
       description: Historical Performance information
-      operationId: 'ApiV{versionMetalsSpotPerformanceGet'
+      operationId: SpotHistoricalPerformance
       parameters:
         - description: auth token
           in: query
@@ -530,11 +587,23 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -563,7 +632,7 @@ paths:
   '/api/v{version}/Metals/spot/performance/annual':
     get:
       description: Annual Historical Performance information
-      operationId: 'ApiV{versionMetalsSpotPerformanceAnnualGet'
+      operationId: SpotAnnualHistoricalPerformance
       parameters:
         - description: auth token
           in: query
@@ -581,11 +650,23 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -620,7 +701,7 @@ paths:
   '/api/v{version}/Metals/spot/ratio/history':
     get:
       description: "Historical data for the specified period and interval size\r\n\r\nThe combination of the interval parameter and start and end dates can result in results\r\nbeing truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
-      operationId: 'ApiV{versionMetalsSpotRatioHistoryGet'
+      operationId: SpotRatioHistory
       parameters:
         - description: auth token
           in: query
@@ -650,6 +731,9 @@ paths:
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -678,7 +762,7 @@ paths:
   '/api/v{version}/Metals/spot/ratio/summary':
     get:
       description: Ratios between prices of two metals
-      operationId: 'ApiV{versionMetalsSpotRatioSummaryGet'
+      operationId: SpotRatioSummary
       parameters:
         - description: auth token
           in: query
@@ -691,6 +775,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -719,7 +806,7 @@ paths:
   '/api/v{version}/Metals/spot/summary':
     get:
       description: Current and daily summary information combined into a single quote
-      operationId: 'ApiV{versionMetalsSpotSummaryGet'
+      operationId: SpotSummary
       parameters:
         - description: auth token
           in: query
@@ -737,26 +824,27 @@ paths:
           required: false
           type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          enum:
+            - mg
+            - g
+            - kg
+            - gr
+            - oz
+            - toz
+            - ct
+            - dwt
           in: query
           name: unitofmeasure
           required: false
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
           type: string
-        - default: true
-          description: apply global and per-tenant spot price adjustments. Defaults to true.
-          in: query
-          name: adjust
-          required: false
-          type: boolean
-        - default: true
-          in: query
-          name: allowSourceOverride
-          required: false
-          type: boolean
         - default: '1'
           description: The requested API version
           in: path
@@ -781,7 +869,7 @@ paths:
   '/api/v{version}/Metals/spot/supported':
     get:
       description: ''
-      operationId: 'ApiV{versionMetalsSpotSupportedGet'
+      operationId: SpotSupportedMetals
       parameters:
         - description: auth token
           in: query
@@ -789,6 +877,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false
@@ -817,7 +908,7 @@ paths:
   '/api/v{version}/Metals/supported/currency':
     get:
       description: ''
-      operationId: 'ApiV{versionMetalsSupportedCurrencyGet'
+      operationId: SupportedCurrencies_Metals
       parameters:
         - description: auth token
           in: query
@@ -825,6 +916,9 @@ paths:
           required: true
           type: string
         - description: to override content negotiation specify a value of json or xml
+          enum:
+            - json
+            - xml
           in: query
           name: format
           required: false

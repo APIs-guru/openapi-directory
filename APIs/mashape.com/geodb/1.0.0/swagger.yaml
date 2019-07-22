@@ -44,9 +44,21 @@ paths:
       description: 'Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
       operationId: findAdminDivisionsUsingGET
       parameters:
-        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+        - description: 'Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
           in: query
-          name: namePrefix
+          name: location
+          required: false
+          type: string
+        - description: The location radius within which to find divisions
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
           required: false
           type: string
         - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
@@ -65,21 +77,9 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: 'Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
+        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
           in: query
-          name: location
-          required: false
-          type: string
-        - description: The location radius within which to find divisions
-          format: int32
-          in: query
-          name: radius
-          required: false
-          type: integer
-        - default: MI
-          description: 'The unit of distance: MI | KM'
-          in: query
-          name: distanceUnit
+          name: namePrefix
           required: false
           type: string
         - description: Only divisions in these time-zones (comma-delimited)
@@ -91,6 +91,12 @@ paths:
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -123,12 +129,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -192,17 +192,6 @@ paths:
           name: divisionId
           required: true
           type: string
-        - description: Only cities having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
-        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
-          in: query
-          name: types
-          required: false
-          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
@@ -215,10 +204,47 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -251,12 +277,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -283,17 +303,6 @@ paths:
           name: divisionId
           required: true
           type: string
-        - description: Only divisions having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
-        - description: 'Only divisions for these types (comma-delimited): CITY | ADM2'
-          in: query
-          name: types
-          required: false
-          type: string
         - description: The location radius within which to find divisions
           format: int32
           in: query
@@ -306,10 +315,42 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only divisions in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -342,12 +383,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -369,27 +404,6 @@ paths:
       description: 'Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
       operationId: findCitiesUsingGET
       parameters:
-        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
-          in: query
-          name: namePrefix
-          required: false
-          type: string
-        - description: Only cities in these countries (comma-delimited country codes or WikiData ids)
-          in: query
-          name: countryIds
-          required: false
-          type: string
-        - description: Only cities NOT in these countries (comma-delimited country codes or WikiData ids)
-          in: query
-          name: excludedCountryIds
-          required: false
-          type: string
-        - description: Only cities having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
         - description: 'Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
           in: query
           name: location
@@ -407,6 +421,27 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: Only cities in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only cities NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
         - description: Only cities in these time-zones (comma-delimited)
           in: query
           name: timeZoneIds
@@ -421,6 +456,12 @@ paths:
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -453,12 +494,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -580,22 +615,6 @@ paths:
       description: 'Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
       operationId: findCitiesNearCityUsingGET
       parameters:
-        - description: The city id (either native 'id' or 'wikiDataId')
-          in: path
-          name: cityId
-          required: true
-          type: string
-        - description: Only cities having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
-        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
-          in: query
-          name: types
-          required: false
-          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
@@ -608,10 +627,52 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: The city id (either native 'id' or 'wikiDataId')
+          in: path
+          name: cityId
+          required: true
+          type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -644,12 +705,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -697,20 +752,26 @@ paths:
       description: 'Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
       operationId: getCountriesUsingGET
       parameters:
-        - description: 'Only countries whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
-          in: query
-          name: namePrefix
-          required: false
-          type: string
         - description: Only countries supporting this currency
           in: query
           name: currencyCode
+          required: false
+          type: string
+        - description: 'Only countries whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
           required: false
           type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -732,12 +793,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -812,6 +867,12 @@ paths:
           name: asciiMode
           required: false
           type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
         - description: Display results in this language
           in: query
           name: languageCode
@@ -831,12 +892,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -916,10 +971,26 @@ paths:
           name: minPopulation
           required: false
           type: integer
+        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only divisions in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -952,12 +1023,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -995,6 +1060,16 @@ paths:
           name: minPopulation
           required: false
           type: integer
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
         - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
           in: query
           name: types
@@ -1004,6 +1079,12 @@ paths:
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -1036,12 +1117,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1068,17 +1143,6 @@ paths:
           name: locationId
           required: true
           type: string
-        - description: Only cities having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
-        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
-          in: query
-          name: types
-          required: false
-          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
@@ -1091,10 +1155,47 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -1127,12 +1228,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1159,12 +1254,6 @@ paths:
           name: locationId
           required: true
           type: string
-        - description: Only divisions having at least this population
-          format: int32
-          in: query
-          name: minPopulation
-          required: false
-          type: integer
         - description: The location radius within which to find divisions
           format: int32
           in: query
@@ -1177,10 +1266,42 @@ paths:
           name: distanceUnit
           required: false
           type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only divisions in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
           name: asciiMode
+          required: false
+          type: boolean
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
           required: false
           type: boolean
         - description: Display results in this language
@@ -1213,12 +1334,6 @@ paths:
           name: includeDeleted
           required: false
           type: string
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1245,6 +1360,12 @@ paths:
           name: countryId
           required: false
           type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
         - default: 10
           description: The maximum number of results to retrieve
           format: int32
@@ -1259,12 +1380,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1284,6 +1399,12 @@ paths:
       description: Get all supported languages
       operationId: getLanguagesUsingGET
       parameters:
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
         - default: 5
           description: The maximum number of results to retrieve
           format: int32
@@ -1298,12 +1419,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1325,6 +1440,12 @@ paths:
       description: Get all known locales
       operationId: getLocalesUsingGET
       parameters:
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
         - default: 10
           description: The maximum number of results to retrieve
           format: int32
@@ -1339,12 +1460,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -1366,6 +1481,12 @@ paths:
       description: Get all known time-zones
       operationId: getTimezonesUsingGET
       parameters:
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
         - default: 10
           description: The maximum number of results to retrieve
           format: int32
@@ -1380,12 +1501,6 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: true
-          description: Include HATEOAS-style links in results
-          in: query
-          name: hateoasMode
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK

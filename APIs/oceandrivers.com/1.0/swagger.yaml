@@ -1,6 +1,6 @@
 swagger: '2.0'
 schemes:
-  - http
+  - https
 host: api.oceandrivers.com
 basePath: /
 info:
@@ -70,7 +70,7 @@ paths:
       operationId: getEasywind
       parameters:
         - default: EW013
-          description: 'currently: ''EW013''|''EW008''|''EW006''|''EW007'''
+          description: 'currently: ''EW013''|''EW008'''
           in: path
           name: easywindId
           required: true
@@ -92,7 +92,7 @@ paths:
       operationId: getEventStations
       parameters:
         - default: trofeoprincesasofia
-          description: 'currently: ''trofeoprincesasofia'''
+          description: 'currently: ''trofeoprincesasofia|palmavela'''
           in: path
           name: eventId
           required: true

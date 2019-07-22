@@ -28,6 +28,142 @@ securityDefinitions:
 tags:
   - name: refunds
 paths:
+  /v1/directdebit/mandates:
+    get:
+      description: 'Searches for mandates with the parameters provided. The Authorisation token needs to be specified in the ''Authorization'' header as ''Authorization: Bearer YOUR_API_KEY_HERE'''
+      operationId: searchMandates
+      parameters:
+        - in: query
+          name: reference
+          required: false
+          type: string
+        - in: query
+          name: state
+          pattern: created|started|pending|submitted|active|inactive|cancelled
+          required: false
+          type: string
+        - in: query
+          name: bank_statement_reference
+          required: false
+          type: string
+        - in: query
+          name: email
+          required: false
+          type: string
+        - in: query
+          name: name
+          required: false
+          type: string
+        - description: 'From date of mandates to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z'
+          in: query
+          name: from_date
+          required: false
+          type: string
+        - description: 'To date of mandates to be searched (this date is exclusive). Example=2015-08-13T12:35:00Z'
+          in: query
+          name: to_date
+          required: false
+          type: string
+        - default: 1
+          format: int32
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 500
+          format: int32
+          in: query
+          maximum: 500
+          minimum: 1
+          name: display_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SearchMandateResponse'
+        '401':
+          description: Credentials are required to access this resource
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/MandateError'
+        '422':
+          description: 'Invalid parameters: from_date, to_date, state, page, display_size. See Public API documentation for the correct data formats'
+          schema:
+            $ref: '#/definitions/PaymentError'
+        '429':
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Downstream system error
+          schema:
+            $ref: '#/definitions/MandateError'
+      summary: Search mandates
+    post:
+      consumes:
+        - application/json
+      description: 'Create a new mandate for the account associated to the Authorisation token. The Authorisation token needs to be specified in the ''Authorization'' header as ''Authorization: Bearer YOUR_API_KEY_HERE'''
+      operationId: createMandate
+      parameters:
+        - description: requestPayload
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateMandateRequest'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/MandateResponse'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/PaymentError'
+        '401':
+          description: Credentials are required to access this resource
+        '429':
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Downstream system error
+          schema:
+            $ref: '#/definitions/PaymentError'
+      summary: Create a new mandate
+  '/v1/directdebit/mandates/{mandateId}':
+    get:
+      description: 'Return information about the mandate. The Authorisation token needs to be specified in the ''Authorization'' header as ''Authorization: Bearer YOUR_API_KEY_HERE'''
+      operationId: getMandate
+      parameters:
+        - in: path
+          name: mandateId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MandateResponse'
+        '401':
+          description: Credentials are required to access this resource
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/MandateError'
+        '429':
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Downstream system error
+          schema:
+            $ref: '#/definitions/MandateError'
+      summary: Find mandate by ID
   /v1/payments:
     get:
       description: 'Search payments by reference, state, ''from'' and ''to'' date. The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE'''
@@ -129,7 +265,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CreatePaymentRequest'
+            $ref: '#/definitions/CreateCardPaymentRequest'
       responses:
         '201':
           description: Created
@@ -466,6 +602,8 @@ definitions:
     properties:
       city:
         example: address city
+        maxLength: 255
+        minLength: 0
         readOnly: true
         type: string
       country:
@@ -474,14 +612,20 @@ definitions:
         type: string
       line1:
         example: address line 1
+        maxLength: 255
+        minLength: 0
         readOnly: true
         type: string
       line2:
         example: address line 2
+        maxLength: 255
+        minLength: 0
         readOnly: true
         type: string
       postcode:
         example: AB1 2CD
+        maxLength: 25
+        minLength: 0
         readOnly: true
         type: string
     type: object
@@ -512,14 +656,16 @@ definitions:
         readOnly: true
         type: string
     type: object
-  CreatePaymentRequest:
+  CreateCardPaymentRequest:
+    description: The Payment Request Payload
     properties:
       amount:
         description: amount in pence
         example: 12000
         format: int32
         maximum: 10000000
-        minimum: 1
+        minimum: 0
+        readOnly: true
         type: integer
       delayed_capture:
         description: delayed capture flag
@@ -529,25 +675,74 @@ definitions:
       description:
         description: payment description
         example: New passport application
+        maxLength: 255
+        minLength: 0
+        readOnly: true
+        type: string
+      email:
+        description: email
+        example: Joe.Bogs@example.org
+        readOnly: true
         type: string
       language:
         description: ISO-639-1 Alpha-2 code of a supported language to use on the payment pages
         enum:
-          - en
-          - cy
+          - ENGLISH
+          - WELSH
         example: en
+        readOnly: true
         type: string
+      metadata:
+        $ref: '#/definitions/ExternalMetadata'
+        readOnly: true
+      prefilled_cardholder_details:
+        $ref: '#/definitions/PrefilledCardholderDetails'
+        description: prefilled_cardholder_details
+        readOnly: true
       reference:
         description: payment reference
         example: '12345'
+        maxLength: 255
+        minLength: 0
+        readOnly: true
         type: string
       return_url:
         description: service return url
         example: 'https://service-name.gov.uk/transactions/12345'
+        maxLength: 2000
+        minLength: 0
+        readOnly: true
         type: string
     required:
       - amount
       - description
+      - reference
+      - return_url
+    type: object
+  CreateMandateRequest:
+    description: The Payload to create a new Mandate
+    properties:
+      description:
+        description: mandate description
+        maxLength: 255
+        minLength: 1
+        readOnly: true
+        type: string
+      reference:
+        description: mandate reference
+        example: test_service_reference
+        maxLength: 255
+        minLength: 0
+        readOnly: true
+        type: string
+      return_url:
+        description: mandate return url
+        example: 'https://service-name.gov.uk/transactions/12345'
+        maxLength: 2000
+        minLength: 0
+        readOnly: true
+        type: string
+    required:
       - reference
       - return_url
     type: object
@@ -573,6 +768,10 @@ definitions:
           - WELSH
         example: en
         type: string
+      metadata:
+        additionalProperties:
+          type: string
+        type: object
       payment_id:
         example: hu20sqlact5260q2nanm0q8u93
         type: string
@@ -612,6 +811,13 @@ definitions:
         example: Too many requests
         type: string
     type: object
+  ExternalMetadata:
+    properties:
+      metadata:
+        additionalProperties:
+          type: object
+        type: object
+    type: object
   GetPaymentResult:
     properties:
       _links:
@@ -648,12 +854,28 @@ definitions:
       email:
         example: your email
         type: string
+      fee:
+        description: 'processing fee taken by the GOV.UK Pay platform, in pence. Only available depending on payment service provider'
+        example: 5
+        format: int64
+        readOnly: true
+        type: integer
       language:
         enum:
           - en
           - cy
         example: en
         type: string
+      metadata:
+        additionalProperties:
+          type: string
+        type: object
+      net_amount:
+        description: 'amount including all surcharges and less all fees, in pence. Only available depending on payment service provider'
+        example: 1195
+        format: int64
+        readOnly: true
+        type: integer
       payment_id:
         example: hu20sqlact5260q2nanm0q8u93
         readOnly: true
@@ -699,6 +921,111 @@ definitions:
         readOnly: true
         type: string
     type: object
+  MandateError:
+    description: A Mandate Error response
+    properties:
+      code:
+        example: P0102
+        type: string
+      description:
+        example: 'Invalid attribute value: return_url. Must be a valid url.'
+        type: string
+      field:
+        example: return_url
+        type: string
+    type: object
+  MandateLinks:
+    description: 'payment, events, self and next links of a Mandate'
+    properties:
+      events:
+        $ref: '#/definitions/Link'
+        description: events
+        readOnly: true
+      next_url:
+        $ref: '#/definitions/Link'
+        description: next_url
+        readOnly: true
+      next_url_post:
+        $ref: '#/definitions/PostLink'
+        description: next_url_post
+        readOnly: true
+      payments:
+        $ref: '#/definitions/Link'
+        description: payments
+        readOnly: true
+      self:
+        $ref: '#/definitions/Link'
+        description: self
+        readOnly: true
+    type: object
+  MandateResponse:
+    properties:
+      _links:
+        $ref: '#/definitions/MandateLinks'
+        description: links
+        readOnly: true
+      bank_statement_reference:
+        description: This value comes from GoCardless when a mandate has been created.
+        readOnly: true
+        type: string
+      created_date:
+        description: mandate created date
+        readOnly: true
+        type: string
+      description:
+        description: description
+        readOnly: true
+        type: string
+      mandate_id:
+        description: mandate id
+        example: jhjcvaiqlediuhh23d89hd3
+        readOnly: true
+        type: string
+      payer:
+        $ref: '#/definitions/Payer'
+        description: payer
+        readOnly: true
+      payment_provider:
+        description: payment_provider
+        readOnly: true
+        type: string
+      provider_id:
+        description: provider id
+        example: jhjcvaiqlediuhh23d89hd3
+        readOnly: true
+        type: string
+      reference:
+        description: service reference
+        example: jhjcvaiqlediuhh23d89hd3
+        readOnly: true
+        type: string
+      return_url:
+        description: service return url
+        example: 'https://service-name.gov.uk/transactions/12345'
+        readOnly: true
+        type: string
+      state:
+        $ref: '#/definitions/MandateStatus'
+        description: mandate state
+        example: CREATED
+        readOnly: true
+    type: object
+  MandateStatus:
+    properties:
+      details:
+        type: string
+      status:
+        type: string
+    type: object
+  Payer:
+    properties:
+      email:
+        readOnly: true
+        type: string
+      name:
+        readOnly: true
+        type: string
+    type: object
   PaymentDetailForSearch:
     properties:
       _links:
@@ -736,12 +1063,28 @@ definitions:
       email:
         example: your email
         type: string
+      fee:
+        description: 'processing fee taken by the GOV.UK Pay platform, in pence. Only available depending on payment service provider'
+        example: 5
+        format: int64
+        readOnly: true
+        type: integer
       language:
         enum:
           - en
           - cy
         example: en
         type: string
+      metadata:
+        additionalProperties:
+          type: string
+        type: object
+      net_amount:
+        description: 'amount including all surcharges and less all fees, in pence. Only available depending on payment service provider'
+        example: 1195
+        format: int64
+        readOnly: true
+        type: integer
       payment_id:
         example: hu20sqlact5260q2nanm0q8u93
         readOnly: true
@@ -979,6 +1322,19 @@ definitions:
         example: application/x-www-form-urlencoded
         type: string
     type: object
+  PrefilledCardholderDetails:
+    properties:
+      billing_address:
+        $ref: '#/definitions/Address'
+        description: prefilled billing address
+        readOnly: true
+      cardholder_name:
+        description: prefilled cardholder name
+        example: J. Bogs
+        maxLength: 255
+        minLength: 0
+        type: string
+    type: object
   Refund:
     properties:
       _links:
@@ -1107,6 +1463,29 @@ definitions:
         description: Availability status of the refund
         example: available
         type: string
+    type: object
+  SearchMandateResponse:
+    properties:
+      _links:
+        $ref: '#/definitions/SearchNavigationLinks'
+        readOnly: true
+      count:
+        format: int32
+        readOnly: true
+        type: integer
+      page:
+        format: int32
+        readOnly: true
+        type: integer
+      results:
+        items:
+          $ref: '#/definitions/MandateResponse'
+        readOnly: true
+        type: array
+      total:
+        format: int32
+        readOnly: true
+        type: integer
     type: object
   SearchNavigationLinks:
     description: Links to navigate through pages

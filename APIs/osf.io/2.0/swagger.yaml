@@ -929,7 +929,12 @@ paths:
                   links: {}
                   type: addon
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 1000
+                prev: null
                 total: 10
           schema:
             items:
@@ -1012,16 +1017,19 @@ paths:
                 - attributes:
                     date_parsed: '2015-02-16T04:16:25.732000'
                     short_title: AMR
+                    summary: null
                     title: Academy of Management Review
                   id: academy-of-management-review
                   links: {}
                   type: citation-styles
               links:
+                first: null
                 last: 'https://api.osf.io/v2/citations/styles/?page=115'
                 meta:
                   per_page: 10
                   total: 1149
                 next: 'https://api.osf.io/v2/citations/styles/?page=2'
+                prev: null
           schema:
             items:
               properties:
@@ -1099,6 +1107,7 @@ paths:
                 attributes:
                   date_parsed: '2015-02-16T04:16:26.233000'
                   short_title: APA
+                  summary: null
                   title: American Psychological Association 6th edition
                 id: apa
                 links: {}
@@ -1452,6 +1461,7 @@ paths:
             application/json:
               data:
                 attributes:
+                  checkout: null
                   current_user_can_comment: true
                   current_version: 1
                   date_created: '2014-10-17T19:24:12.264Z'
@@ -1477,6 +1487,7 @@ paths:
                   download: 'https://osf.io/download/sejcv'
                   info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                   move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                  render: 'https://mfr.osf.io/render?url=https://osf.io/download/sejcv/?direct%26mode=render'
                   self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
                   upload: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
                 relationships:
@@ -1591,6 +1602,11 @@ paths:
                       format: URL
                       readOnly: true
                       type: string
+                    html:
+                      description: A link to the file on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     info:
                       description: A link to the page to view a file's information or a folder's contents.
                       format: URL
@@ -1603,6 +1619,11 @@ paths:
                       type: string
                     new_folder:
                       description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the file.
                       format: URL
                       readOnly: true
                       type: string
@@ -1720,13 +1741,19 @@ paths:
                     size: 216945
                   id: '1'
                   links:
+                    download: 'https://osf.io/download/sejcv/?revision=1'
                     html: 'https://osf.io/ezcuj/files/osfstorage/553e69248c5e4a219919ea54?revision=1'
+                    render: 'https://mfr.osf.io/render?url=https://osf.io/download/sejcv/?direct%26mode=render&revision=1'
                     self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/versions/1/'
                   type: file_versions
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -1755,8 +1782,18 @@ paths:
                 links:
                   description: Links to alternative representations of the file version entity.
                   properties:
+                    download:
+                      description: The Waterbutler API route for downloading the version.
+                      format: URL
+                      readOnly: true
+                      type: string
                     html:
                       description: A link to the html version page.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the version.
                       format: URL
                       readOnly: true
                       type: string
@@ -1812,7 +1849,9 @@ paths:
                   size: 216945
                 id: '1'
                 links:
+                  download: 'https://osf.io/download/sejcv/?revision=1'
                   html: 'https://osf.io/ezcuj/files/osfstorage/553e69248c5e4a219919ea54?revision=1'
+                  render: 'https://mfr.osf.io/render?url=https://osf.io/download/sejcv/?direct%26mode=render&revision=1'
                   self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/versions/1/'
                 type: file_versions
           schema:
@@ -1843,8 +1882,18 @@ paths:
                 links:
                   description: Links to alternative representations of the file version entity.
                   properties:
+                    download:
+                      description: The Waterbutler API route for downloading the version.
+                      format: URL
+                      readOnly: true
+                      type: string
                     html:
                       description: A link to the html version page.
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the version.
                       format: URL
                       readOnly: true
                       type: string
@@ -1899,6 +1948,7 @@ paths:
                     assets:
                       logo: /static/img/institutions/shields/cos-shield.png
                       logo_rounded: /static/img/institutions/shields-rounded-corners/cos-shield.png
+                    auth_url: null
                     description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
                     name: Center For Open Science
                   id: cos
@@ -1922,11 +1972,13 @@ paths:
                           meta: {}
                   type: institutions
               links:
+                first: null
                 last: 'https://api.osf.io/v2/institutions/cos/nodes/?page=2'
                 meta:
                   per_page: 10
                   total: 15
                 next: 'https://api.osf.io/v2/institutions/cos/nodes/?page=2'
+                prev: null
           schema:
             items:
               properties:
@@ -2041,6 +2093,7 @@ paths:
                   assets:
                     logo: /static/img/institutions/shields/cos-shield.png
                     logo_rounded: /static/img/institutions/shields-rounded-corners/cos-shield.png
+                  auth_url: null
                   description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
                   name: Center For Open Science
                 id: cos
@@ -2312,11 +2365,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
                 last: 'https://api.osf.io/v2/institutions/cos/nodes/?page=330'
                 meta:
                   per_page: 10
                   total: 337
                 next: 'https://api.osf.io/v2/institutions/cos/nodes/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -2692,11 +2747,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
                 last: 'https://api.osf.io/v2/institutions/cos/registrations/?page=3'
                 meta:
                   per_page: 10
                   total: 22
                 next: 'https://api.osf.io/v2/institutions/cos/registrations/?page=2'
+                prev: null
       summary: List all affiliated registrations
       tags:
         - Institutions
@@ -2767,11 +2824,13 @@ paths:
                           meta: {}
                   type: users
               links:
+                first: null
                 last: 'https://api.osf.io/v2/institutions/cos/users/?page=8'
                 meta:
                   per_page: 10
                   total: 77
                 next: 'https://api.osf.io/v2/institutions/cos/users/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -2904,6 +2963,10 @@ paths:
                 relationships:
                   description: URLs to other entities or entity collections that have a relationship to the user entity.
                   properties:
+                    default_region:
+                      description: The storage region where the user's files will be stored by default.
+                      readOnly: false
+                      type: string
                     institutions:
                       description: A link to the list of institutions the user is affiliated with.
                       readOnly: true
@@ -3493,7 +3556,12 @@ paths:
                     self: 'https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/'
                   type: metaschemas
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 1
           schema:
             items:
@@ -3622,7 +3690,12 @@ paths:
                     self: 'https://api.osf.io/v2/metaschemas/registrations/564d31db8c5e4a7c9694b2c0/'
                   type: registration_metaschemas
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 1
           schema:
             items:
@@ -3964,6 +4037,7 @@ paths:
                     date_modified: '2016-12-08T21:45:17.058000'
                     description: ''
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -4075,11 +4149,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
                 last: 'https://api.osf.io/v2/nodes/?page=1954'
                 meta:
                   per_page: 10
                   total: 19536
                 next: 'https://api.osf.io/v2/nodes/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -4634,6 +4710,7 @@ paths:
                   date_modified: '2017-01-18T20:46:11.076000'
                   description: We are conducting a study to investigate the replicability of cancer biology studies. Selected results from a substantial number of high-profile papers in the field of cancer biology published between 2010-2012 are being replicated by the Science Exchange network.
                   fork: false
+                  node_license: null
                   preprint: false
                   public: true
                   registration: false
@@ -5042,6 +5119,9 @@ paths:
               data:
                 - attributes:
                     configured: false
+                    external_account_id: null
+                    folder_id: null
+                    folder_path: null
                     node_has_auth: false
                   id: <provider_id>
                   links:
@@ -5049,15 +5129,22 @@ paths:
                   type: node_addons
                 - attributes:
                     configured: false
+                    external_account_id: null
+                    folder_id: null
+                    folder_path: null
                     node_has_auth: false
                   id: <another_provider_id>
                   links:
                     self: 'http://api.osf.io/v2/nodes/gaz5n/addons/<another_provider_id>/'
                   type: node_addons
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -5143,6 +5230,9 @@ paths:
               data:
                 attributes:
                   configured: false
+                  external_account_id: null
+                  folder_id: null
+                  folder_path: null
                   node_has_auth: false
                 id: box
                 links:
@@ -5319,9 +5409,13 @@ paths:
                     root: 'https://api.osf.io/v2/nodes/<node_id>/addons/<provider_id>/folders/'
                   type: node_addon_folders
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 1000
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -5420,6 +5514,7 @@ paths:
                     date_modified: '2016-11-02T21:25:12.572000'
                     description: 'Reproducibility is a defining feature of science, but the extent to which it characterizes current research is unknown. We conducted replications of 100 experimental and correlational studies published in three psychology journals using high-powered designs and original materials when available. Replication effects were half the magnitude of original effects, representing a substantial decline. Ninety-seven percent of original studies had statistically significant results. Thirty-six percent of replications had statistically significant results; 47% of original effect sizes were in the 95% confidence interval of the replication effect size; 39% of effects were subjectively rated to have replicated the original result; and if no bias in original results is assumed, combining original and replication results left 68% with statistically significant effects. Correlational tests suggest that replication success was better predicted by the strength of original evidence than by characteristics of the original and replication teams.'
                     fork: false
+                    node_license: null
                     preprint: true
                     public: true
                     registration: false
@@ -5531,11 +5626,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
                 last: 'https://api.osf.io/v2/nodes/ezcuj/children/?page=5'
                 meta:
                   per_page: 10
                   total: 49
                 next: 'https://api.osf.io/v2/nodes/ezcuj/children/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -6048,6 +6145,7 @@ paths:
                   date_modified: '2018-08-07T20:16:54.236943'
                   description: ''
                   fork: false
+                  node_license: null
                   preprint: false
                   public: false
                   registration: false
@@ -6670,6 +6768,7 @@ paths:
                     has_report: false
                     is_abuse: false
                     is_ham: false
+                    modified: null
                     page: node
                   id: 23pk9
                   links:
@@ -6703,9 +6802,13 @@ paths:
                           meta: {}
                   type: comments
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -7029,6 +7132,7 @@ paths:
                     bibliographic: true
                     index: 0
                     permission: admin
+                    unregistered_contributor: null
                   embeds:
                     users:
                       data:
@@ -7078,10 +7182,14 @@ paths:
                           meta: {}
                   type: contributors
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 9
                   total_bibliographic: 1
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -7345,6 +7453,7 @@ paths:
                   bibliographic: true
                   index: 0
                   permission: admin
+                  unregistered_contributor: null
                 embeds:
                   users:
                     data:
@@ -8184,9 +8293,13 @@ paths:
                           meta: {}
                   type: files
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -8282,6 +8395,11 @@ paths:
                       format: URL
                       readOnly: true
                       type: string
+                    html:
+                      description: A link to the file on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     info:
                       description: A link to the page to view a file's information or a folder's contents.
                       format: URL
@@ -8294,6 +8412,11 @@ paths:
                       type: string
                     new_folder:
                       description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the file.
                       format: URL
                       readOnly: true
                       type: string
@@ -8487,6 +8610,11 @@ paths:
                     format: URL
                     readOnly: true
                     type: string
+                  html:
+                    description: A link to the file on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
                   info:
                     description: A link to the page to view a file's information or a folder's contents.
                     format: URL
@@ -8499,6 +8627,11 @@ paths:
                     type: string
                   new_folder:
                     description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                    format: URL
+                    readOnly: true
+                    type: string
+                  render:
+                    description: A Waterbutler API route for rendering the file.
                     format: URL
                     readOnly: true
                     type: string
@@ -8594,6 +8727,7 @@ paths:
             application/json:
               data:
                 - attributes:
+                    checkout: null
                     current_user_can_comment: true
                     current_version: 1
                     date_created: '2014-10-17T19:24:12.264Z'
@@ -8639,9 +8773,13 @@ paths:
                           meta: {}
                   type: files
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -8737,6 +8875,11 @@ paths:
                       format: URL
                       readOnly: true
                       type: string
+                    html:
+                      description: A link to the file on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     info:
                       description: A link to the page to view a file's information or a folder's contents.
                       format: URL
@@ -8749,6 +8892,11 @@ paths:
                       type: string
                     new_folder:
                       description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the file.
                       format: URL
                       readOnly: true
                       type: string
@@ -8836,6 +8984,7 @@ paths:
             application/json:
               data:
                 attributes:
+                  checkout: null
                   current_user_can_comment: true
                   current_version: 1
                   date_created: '2014-10-17T19:24:12.264Z'
@@ -8974,6 +9123,11 @@ paths:
                     format: URL
                     readOnly: true
                     type: string
+                  html:
+                    description: A link to the file on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
                   info:
                     description: A link to the page to view a file's information or a folder's contents.
                     format: URL
@@ -8986,6 +9140,11 @@ paths:
                     type: string
                   new_folder:
                     description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                    format: URL
+                    readOnly: true
+                    type: string
+                  render:
+                    description: A Waterbutler API route for rendering the file.
                     format: URL
                     readOnly: true
                     type: string
@@ -9079,6 +9238,7 @@ paths:
                     description: ''
                     fork: true
                     forked_date: '2016-11-08T15:59:03.114000'
+                    node_license: null
                     preprint: false
                     public: false
                     registration: false
@@ -9195,9 +9355,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -9741,9 +9905,13 @@ paths:
                           meta: {}
                   type: identifiers
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -9754,13 +9922,13 @@ paths:
                       description: The category of the identifier
                       enum:
                         - doi
-                      readOnly: true
+                      readOnly: false
                       type: string
                     value:
                       description: The identifier value itself
                       readOnly: true
                       type: string
-                  readOnly: true
+                  readOnly: false
                   title: Attributes
                   type: object
                 id:
@@ -9800,6 +9968,115 @@ paths:
       tags:
         - Nodes
       x-response-schema: Identifier
+    post:
+      description: |-
+        Create an identifier for a given node - can only mint DOI's at this time.  Send a POST request with a `category` attribute with a value of 'doi'.
+
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains the created identifier object.
+      operationId: nodes_identifiers_create
+      parameters:
+        - description: The unique identifier of the node.
+          in: path
+          name: node_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  category: doi
+                type: identifiers
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    category: doi
+                    value: 10.17605/OSF.IO/73PND
+                  id: 57f1641db83f6901ed94b459
+                  links:
+                    self: 'https://api.osf.io/v2/identifiers/57f1641db83f6901ed94b459/'
+                  relationships:
+                    referent:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/73pnd/'
+                          meta: {}
+                  type: identifiers
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 2
+                next: null
+                prev: null
+          schema:
+            items:
+              properties:
+                attributes:
+                  description: The properties of the identifier entity.
+                  properties:
+                    category:
+                      description: The category of the identifier
+                      enum:
+                        - doi
+                      readOnly: false
+                      type: string
+                    value:
+                      description: The identifier value itself
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  title: Attributes
+                  type: object
+                id:
+                  description: The identifier of the identifier entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the identifier entity.
+                  properties:
+                    self:
+                      description: A link to the detail page for the identifier.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the identifier entity.
+                  properties:
+                    referent:
+                      description: A relationship to the node the identifier refers to.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the identifier entity (`identifiers`).
+                  readOnly: true
+                  type: string
+              title: Identifier
+              type: object
+            type: array
+      summary: Create identifiers
+      tags:
+        - Nodes
+      x-response-schema: Identifier
   '/nodes/{node_id}/institutions/':
     get:
       description: |-
@@ -9826,6 +10103,7 @@ paths:
             application/json:
               data:
                 - attributes:
+                    auth_url: null
                     description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
                     logo_path: /static/img/institutions/shields/cos-shield.png
                     name: Center For Open Science
@@ -9875,9 +10153,13 @@ paths:
                           meta: {}
                   type: institutions
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -10008,6 +10290,7 @@ paths:
                     date_modified: '2017-03-03T05:00:31.512000'
                     description: 'This is an independent replication as part of the Reproducibility Project: Psychology.'
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -10118,6 +10401,7 @@ paths:
                       - read
                     date_created: '2012-10-31T18:50:46.111000'
                     date_modified: '2016-10-02T19:50:23.605000'
+                    description: null
                     fork: true
                     node_license:
                       copyright_holders:
@@ -10241,9 +10525,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -10520,11 +10808,13 @@ paths:
                       params_node:
                         id: fejxb
                         title: 'Replication of Correll (2008, JPSP, Study 2)'
+                      params_project: null
                       pointer:
                         category: project
                         id: iraqy
                         title: 'Independent Direct Replication #2 of Correll (2008, JPSP, Study 2)'
                         url: /iraqy/
+                      preprint_provider: null
                   id: 58862f8f594d9001f547f484
                   links:
                     self: 'https://api.osf.io/v2/logs/58862f8f594d9001f547f484/'
@@ -10558,6 +10848,8 @@ paths:
                       params_node:
                         id: rtjws
                         title: Analysis Audit
+                      params_project: null
+                      preprint_provider: null
                   id: 5873190554be8101d7e30b3e
                   links:
                     self: 'https://api.osf.io/v2/logs/5873190554be8101d7e30b3e/'
@@ -10574,7 +10866,12 @@ paths:
                           meta: {}
                   type: logs
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 2
           schema:
             items:
@@ -10899,6 +11196,7 @@ paths:
                     doi: 10.1371/journal.pbio.1002456
                     is_preprint_orphan: false
                     is_published: true
+                    license_record: null
                     subjects:
                       - - id: 584240da54be81056cecac48
                           text: Social and Behavioral Sciences
@@ -10948,9 +11246,13 @@ paths:
                           meta: {}
                   type: preprints
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -11183,7 +11485,9 @@ paths:
                   date_modified: '2017-02-12T19:22:26.488000'
                   date_registered: '2017-02-12T19:28:48.864000'
                   description: ''
+                  embargo_end_date: null
                   fork: false
+                  node_license: null
                   node_links:
                     links:
                       related:
@@ -11203,6 +11507,7 @@ paths:
                   registration_supplement: Open-Ended Registration
                   tags: []
                   title: How Awareness Impacts Multiple Forms of Social Bias in Behavior (Final Data Collection and Analysis Plan)
+                  withdrawal_justification: null
                   withdrawn: false
                 id: esa63
                 links:
@@ -11303,20 +11608,14 @@ paths:
                 type: registrations
           schema:
             items:
-              example:
-                data:
-                  attributes:
-                    children:
-                      - fsd2s
-                      - dwsa2
-                    draft_registration: '{draft_registration_id}'
-                    lift_embargo: '2017-05-10T20:44:03.185000'
-                    registration_choice: embargo
-                  type: registrations
               properties:
                 attributes:
                   description: The properties of the registration entity.
                   properties:
+                    article_doi:
+                      description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                      readOnly: false
+                      type: string
                     category:
                       description: The category of the registered node.
                       enum:
@@ -11352,6 +11651,10 @@ paths:
                         type: string
                       readOnly: true
                       type: array
+                    custom_citation:
+                      description: User-entered custom registration citation
+                      readOnly: false
+                      type: string
                     date_created:
                       description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -11374,10 +11677,10 @@ paths:
                       type: string
                     description:
                       description: The description of the registered node.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     draft_registration:
-                      description: The ID of the draft registration from which the registration will be created.
+                      description: Required on POST. The ID of the draft registration from which the registration will be created.
                       readOnly: false
                       type: string
                     embargo_end_date:
@@ -11396,7 +11699,7 @@ paths:
                       type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                      readOnly: true
+                      readOnly: false
                       type: string
                     pending_embargo_approval:
                       description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -11427,7 +11730,7 @@ paths:
                       readOnly: true
                       type: boolean
                     registration_choice:
-                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                       readOnly: false
                       type: string
                     registration_supplement:
@@ -11438,7 +11741,7 @@ paths:
                       description: A list of strings that describe the registered node.
                       items:
                         type: string
-                      readOnly: true
+                      readOnly: false
                       type: array
                     template_from:
                       description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -11491,7 +11794,7 @@ paths:
                   properties:
                     affiliated_institutions:
                       description: A link to the list of institutions this registration is affiliated with.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     children:
                       description: A link to the list of the registered node's children (components).
@@ -11520,6 +11823,10 @@ paths:
                     identifiers:
                       description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
+                      type: string
+                    license:
+                      description: A relationship to the license that has been applied to the registration.
+                      readOnly: false
                       type: string
                     linked_nodes:
                       description: A link to the list of nodes that are linked to this registration.
@@ -11630,268 +11937,6 @@ paths:
                   lift_embargo: '2017-05-10T20:44:03.185000'
                   registration_choice: embargo
                 type: registrations
-            properties:
-              attributes:
-                description: The properties of the registration entity.
-                properties:
-                  category:
-                    description: The category of the registered node.
-                    enum:
-                      - analysis
-                      - communication
-                      - data
-                      - hypothesis
-                      - instrumentation
-                      - methods and measures
-                      - procedure
-                      - project
-                      - software
-                      - other
-                    readOnly: true
-                    type: string
-                  children:
-                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
-                    items:
-                      type: string
-                    readOnly: false
-                    type: array
-                  collection:
-                    description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
-                    readOnly: true
-                    type: boolean
-                  current_user_can_comment:
-                    description: Whether or not the current user has permission to post comments on this registration. Comments on registrations can be set to allow all users to comment or restricted to only contributors.
-                    readOnly: true
-                    type: boolean
-                  current_user_permissions:
-                    description: 'A list of strings representing the permissions for the current user on this registration. Valid permissions are "admin", "read", and "write".'
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  date_created:
-                    description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_modified:
-                    description: 'The time at which the registered node was last modified, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_registered:
-                    description: 'The time at which this registration was created, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_withdrawn:
-                    description: 'The time at which this registration was withdrawn, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: The description of the registered node.
-                    readOnly: true
-                    type: string
-                  draft_registration:
-                    description: The ID of the draft registration from which the registration will be created.
-                    readOnly: false
-                    type: string
-                  embargo_end_date:
-                    description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  fork:
-                    description: Whether or not this registration represents a fork of another node.
-                    readOnly: true
-                    type: boolean
-                  lift_embargo:
-                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
-                    format: date-time
-                    readOnly: false
-                    type: string
-                  node_license:
-                    description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                    readOnly: true
-                    type: string
-                  pending_embargo_approval:
-                    description: Whether or not the embargo associated with this registration is pending approval from project administrators.
-                    readOnly: true
-                    type: boolean
-                  pending_registration_approval:
-                    description: Whether or not the registration is pending approval from project administrators.
-                    readOnly: true
-                    type: boolean
-                  pending_withdrawal:
-                    description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                    readOnly: false
-                    type: boolean
-                  preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
-                    readOnly: true
-                    type: boolean
-                  public:
-                    description: Whether or not the registration is publicly visible.
-                    readOnly: true
-                    type: boolean
-                  registered_meta:
-                    description: A dictionary with supplemental registration questions and responses.
-                    readOnly: true
-                    type: string
-                  registration:
-                    description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
-                    readOnly: true
-                    type: boolean
-                  registration_choice:
-                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
-                    readOnly: false
-                    type: string
-                  registration_supplement:
-                    description: The title of the registration schema this registration conforms to.
-                    readOnly: true
-                    type: string
-                  tags:
-                    description: A list of strings that describe the registered node.
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  template_from:
-                    description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
-                    readOnly: true
-                    type: string
-                  title:
-                    description: The title of the registered node.
-                    readOnly: true
-                    type: string
-                  wiki_enabled:
-                    description: Whether or not the registration has its wiki enabled.
-                    readOnly: true
-                    type: boolean
-                  withdrawal_justification:
-                    description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                    readOnly: false
-                    type: string
-                  withdrawn:
-                    description: Whether or not this registration has been withdrawn.
-                    readOnly: true
-                    type: boolean
-                readOnly: false
-                required:
-                  - draft_registration
-                  - registration_choice
-                title: Attributes
-                type: object
-              id:
-                description: The unique identifier of the registration.
-                readOnly: true
-                type: string
-              links:
-                description: URLs to alternative representations of the registrations entity.
-                properties:
-                  html:
-                    description: A link to the registration's page on the OSF.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  self:
-                    description: A link to the canonical API endpoint of this registration.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              relationships:
-                description: URLs to other entities or entity collections that have a relationship to the registration entity.
-                properties:
-                  affiliated_institutions:
-                    description: A link to the list of institutions this registration is affiliated with.
-                    readOnly: true
-                    type: string
-                  children:
-                    description: A link to the list of the registered node's children (components).
-                    readOnly: true
-                    type: string
-                  citation:
-                    description: A link to the citation details of this registration.
-                    readOnly: true
-                    type: string
-                  comments:
-                    description: A link to the list of comments on this registration.
-                    readOnly: true
-                    type: string
-                  contributors:
-                    description: A link to the list of contributors on this registration.
-                    readOnly: true
-                    type: string
-                  files:
-                    description: A link to the list of storage providers that have been enabled on this registration.
-                    readOnly: true
-                    type: string
-                  forks:
-                    description: A link to the list of nodes that are forks of this registration.
-                    readOnly: true
-                    type: string
-                  identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
-                    readOnly: true
-                    type: string
-                  linked_nodes:
-                    description: A link to the list of nodes that are linked to this registration.
-                    readOnly: true
-                    type: string
-                  logs:
-                    description: A link to the list of log actions pertaining to this registration.
-                    readOnly: true
-                    type: string
-                  node_links:
-                    description: A link to the list of nodes that are linked to this registration. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
-                    readOnly: true
-                    type: string
-                  parent:
-                    description: 'A link to the node that is the direct parent of the current registration, if the current registration is a child registration.'
-                    readOnly: true
-                    type: string
-                  registered_by:
-                    description: A link to the user that initiated this registration.
-                    readOnly: true
-                    type: string
-                  registered_from:
-                    description: A link to the node that this registration was registered from.
-                    readOnly: true
-                    type: string
-                  registration_schema:
-                    description: A link to the metaschema that this registration conforms to.
-                    readOnly: true
-                    type: string
-                  root:
-                    description: 'A link to the node that is the top-level parent of the current registration. If the current registration is the top-level node, the root is the current registration.'
-                    readOnly: true
-                    type: string
-                  view_only_links:
-                    description: A link to the list of view only links that have been created for this registration.
-                    readOnly: true
-                    type: string
-                  wikis:
-                    description: A link to the list of wiki pages for this registration.
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Relationships
-                type: object
-              type:
-                description: The type identifier of the registration entity (`registrations`).
-                readOnly: true
-                type: string
-            required:
-              - id
-              - type
-              - attributes
-              - relationships
-              - links
-            title: Registration
             type: object
       responses:
         '201':
@@ -12201,7 +12246,12 @@ paths:
                           meta: {}
                   type: view_only_links
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 2
           schema:
             items:
@@ -12298,7 +12348,8 @@ paths:
       responses:
         '200':
           description: OK
-          examples: {}
+          examples:
+            application/json: null
           schema:
             properties:
               attributes:
@@ -12744,12 +12795,16 @@ paths:
                     date_last_transitioned: '2018-10-15T13:44:09.478243'
                     date_modified: '2017-02-03T06:19:00.158000'
                     date_published: '2017-02-03T06:18:59.788000'
+                    date_withdrawn: null
                     description: A tale of two cities
+                    doi: null
                     is_preprint_orphan: false
                     is_published: true
                     license_record:
                       copyright_holders: []
                       year: '2017'
+                    original_publication_date: null
+                    preprint_doi_created: null
                     public: true
                     reviews_state: accepted
                     subjects:
@@ -12823,11 +12878,13 @@ paths:
                           meta: {}
                   type: preprints
               links:
+                first: null
                 last: 'https://api.osf.io/v2/preprints/?page=172'
                 meta:
                   per_page: 10
                   total: 1720
                 next: 'https://api.osf.io/v2/preprints/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -13279,6 +13336,7 @@ paths:
                   date_last_transitioned: '2018-10-15T13:44:09.478243'
                   date_modified: '2016-08-29T14:53:51.185000'
                   date_published: '2016-08-29T14:53:51.185000'
+                  date_withdrawn: null
                   description: A study of Kale
                   doi: 10.1371/journal.pbio.1002456
                   is_preprint_orphan: false
@@ -13286,6 +13344,8 @@ paths:
                   license_record:
                     copyright_holders: []
                     year: '2017'
+                  original_publication_date: null
+                  preprint_doi_created: null
                   public: true
                   reviews_state: accepted
                   subjects:
@@ -13326,6 +13386,7 @@ paths:
                         href: 'https://api.osf.io/v2/preprints/khbvy/citation/'
                         meta: {}
                   contributors:
+                    links: null
                     related:
                       href: 'https://api.osf.io/v2/preprints/khbvy/contributors/'
                       meta: {}
@@ -13986,9 +14047,13 @@ paths:
                         meta: {}
                 type: preprint_providers
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 5
+                next: null
+                prev: null
           schema:
             properties:
               attributes:
@@ -14120,9 +14185,13 @@ paths:
                     self: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e965/'
                   type: licenses
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 3
+                next: null
+                prev: null
           schema:
             properties:
               attributes:
@@ -14213,6 +14282,7 @@ paths:
                     date_created: '2017-02-03T06:16:57.129000'
                     date_modified: '2017-02-03T06:19:00.158000'
                     date_published: '2017-02-03T06:18:59.788000'
+                    doi: null
                     is_preprint_orphan: false
                     is_published: true
                     license_record:
@@ -14255,11 +14325,13 @@ paths:
                           meta: {}
                   type: preprints
               links:
+                first: null
                 last: 'https://api.osf.io/v2/preprints/?page=172'
                 meta:
                   per_page: 10
                   total: 1720
                 next: 'https://api.osf.io/v2/preprints/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -14495,11 +14567,13 @@ paths:
                     self: 'https://api.osf.io/v2/taxonomies/584240d854be81056ceca838/'
                   type: taxonomies
               links:
+                first: null
                 last: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/?page=122'
                 meta:
                   per_page: 10
                   total: 1217
                 next: 'https://api.osf.io/v2/providers/preprints/osf/taxonomies/?page=2'
+                prev: null
           schema:
             properties:
               attributes:
@@ -14605,8 +14679,11 @@ paths:
                     date_created: '2015-05-21T19:38:55.398000'
                     date_modified: '2016-02-04T20:58:11.042000'
                     date_registered: '2015-06-01T14:47:40.064000'
+                    date_withdrawn: null
                     description: This investigation seeks to evaluate the impact of badges on the availability and accessibility of open data and materials.
+                    embargo_end_date: null
                     fork: false
+                    node_license: null
                     pending_embargo_approval: false
                     pending_registration_approval: false
                     pending_withdrawal: false
@@ -14629,6 +14706,7 @@ paths:
                       - open data
                       - open materials
                     title: The Effect of Badges on Availability of Data and Materials
+                    withdrawal_justification: null
                     withdrawn: false
                   id: ipkea
                   links:
@@ -14720,27 +14798,23 @@ paths:
                           meta: {}
                   type: registrations
               links:
+                first: null
                 last: 'https://api.osf.io/v2/registrations/?page=856'
                 meta:
                   per_page: 10
                   total: 8559
                 next: 'https://api.osf.io/v2/registrations/?page=2'
+                prev: null
           schema:
             items:
-              example:
-                data:
-                  attributes:
-                    children:
-                      - fsd2s
-                      - dwsa2
-                    draft_registration: '{draft_registration_id}'
-                    lift_embargo: '2017-05-10T20:44:03.185000'
-                    registration_choice: embargo
-                  type: registrations
               properties:
                 attributes:
                   description: The properties of the registration entity.
                   properties:
+                    article_doi:
+                      description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                      readOnly: false
+                      type: string
                     category:
                       description: The category of the registered node.
                       enum:
@@ -14776,6 +14850,10 @@ paths:
                         type: string
                       readOnly: true
                       type: array
+                    custom_citation:
+                      description: User-entered custom registration citation
+                      readOnly: false
+                      type: string
                     date_created:
                       description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -14798,10 +14876,10 @@ paths:
                       type: string
                     description:
                       description: The description of the registered node.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     draft_registration:
-                      description: The ID of the draft registration from which the registration will be created.
+                      description: Required on POST. The ID of the draft registration from which the registration will be created.
                       readOnly: false
                       type: string
                     embargo_end_date:
@@ -14820,7 +14898,7 @@ paths:
                       type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                      readOnly: true
+                      readOnly: false
                       type: string
                     pending_embargo_approval:
                       description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -14851,7 +14929,7 @@ paths:
                       readOnly: true
                       type: boolean
                     registration_choice:
-                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                       readOnly: false
                       type: string
                     registration_supplement:
@@ -14862,7 +14940,7 @@ paths:
                       description: A list of strings that describe the registered node.
                       items:
                         type: string
-                      readOnly: true
+                      readOnly: false
                       type: array
                     template_from:
                       description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -14915,7 +14993,7 @@ paths:
                   properties:
                     affiliated_institutions:
                       description: A link to the list of institutions this registration is affiliated with.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     children:
                       description: A link to the list of the registered node's children (components).
@@ -14944,6 +15022,10 @@ paths:
                     identifiers:
                       description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
+                      type: string
+                    license:
+                      description: A relationship to the license that has been applied to the registration.
+                      readOnly: false
                       type: string
                     linked_nodes:
                       description: A link to the list of nodes that are linked to this registration.
@@ -15044,20 +15126,14 @@ paths:
         '200':
           description: OK
           schema:
-            example:
-              data:
-                attributes:
-                  children:
-                    - fsd2s
-                    - dwsa2
-                  draft_registration: '{draft_registration_id}'
-                  lift_embargo: '2017-05-10T20:44:03.185000'
-                  registration_choice: embargo
-                type: registrations
             properties:
               attributes:
                 description: The properties of the registration entity.
                 properties:
+                  article_doi:
+                    description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                    readOnly: false
+                    type: string
                   category:
                     description: The category of the registered node.
                     enum:
@@ -15093,6 +15169,10 @@ paths:
                       type: string
                     readOnly: true
                     type: array
+                  custom_citation:
+                    description: User-entered custom registration citation
+                    readOnly: false
+                    type: string
                   date_created:
                     description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                     format: date-time
@@ -15115,10 +15195,10 @@ paths:
                     type: string
                   description:
                     description: The description of the registered node.
-                    readOnly: true
+                    readOnly: false
                     type: string
                   draft_registration:
-                    description: The ID of the draft registration from which the registration will be created.
+                    description: Required on POST. The ID of the draft registration from which the registration will be created.
                     readOnly: false
                     type: string
                   embargo_end_date:
@@ -15137,7 +15217,7 @@ paths:
                     type: string
                   node_license:
                     description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                    readOnly: true
+                    readOnly: false
                     type: string
                   pending_embargo_approval:
                     description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -15168,7 +15248,7 @@ paths:
                     readOnly: true
                     type: boolean
                   registration_choice:
-                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                     readOnly: false
                     type: string
                   registration_supplement:
@@ -15179,7 +15259,7 @@ paths:
                     description: A list of strings that describe the registered node.
                     items:
                       type: string
-                    readOnly: true
+                    readOnly: false
                     type: array
                   template_from:
                     description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -15232,7 +15312,7 @@ paths:
                 properties:
                   affiliated_institutions:
                     description: A link to the list of institutions this registration is affiliated with.
-                    readOnly: true
+                    readOnly: false
                     type: string
                   children:
                     description: A link to the list of the registered node's children (components).
@@ -15261,6 +15341,10 @@ paths:
                   identifiers:
                     description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
+                    type: string
+                  license:
+                    description: A relationship to the license that has been applied to the registration.
+                    readOnly: false
                     type: string
                   linked_nodes:
                     description: A link to the list of nodes that are linked to this registration.
@@ -15325,11 +15409,8 @@ paths:
       consumes:
         - application/json
       description: |-
-        Updates selected fields on a registration - only a selection of registration fields are editable.
-
-        Registrations can be updated with either a **PUT** or **PATCH** request. Some fields that can be edited include the `public`, `pending_withdrawal`, and `withdrawal_justification` fields.
-
-        Registrations can only be turned from private to public, not vice versa.
+        Registrations can be updated with either a **PUT** or **PATCH** request. There are a handful of fields that can be edited by registration administrators, and a few fields by users with write permissions.
+        Note - one of the fields you can edit is `public`. Registrations can only be turned from private to public, not vice versa.
 
         You may request a registration to be withdrawn by providing a truthy value for `pending_withdrawal` in the data payload, along with an optional `withdrawal_justification`.
         #### Permissions
@@ -15352,14 +15433,310 @@ paths:
             example:
               data:
                 attributes:
+                  article_doi: 10.12345/elephants
+                  custom_citation: 'Glenn, Dennis. My Registration, 2009.'
+                  description: my description
+                  node_license:
+                    copyright_holders:
+                      - Dennis Glenn
+                    year: 2009
                   pending_withdrawal: true
+                  public: 'True'
+                  tags:
+                    - dogs
+                    - wolves
                   withdrawal_justification: Methods found to be problematic.
                 id: '{registration_id}'
+                relationships:
+                  affiliated_institutions:
+                    data:
+                      id: cos
+                      type: institutions
+                  license:
+                    data:
+                      id: 5c3e3ddsaabb2400019b7c6a
+                      type: licenses
                 type: registrations
             type: object
       responses:
         '200':
           description: Updated
+          schema:
+            properties:
+              attributes:
+                description: The properties of the registration entity.
+                properties:
+                  article_doi:
+                    description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                    readOnly: false
+                    type: string
+                  category:
+                    description: The category of the registered node.
+                    enum:
+                      - analysis
+                      - communication
+                      - data
+                      - hypothesis
+                      - instrumentation
+                      - methods and measures
+                      - procedure
+                      - project
+                      - software
+                      - other
+                    readOnly: true
+                    type: string
+                  children:
+                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
+                  collection:
+                    description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  current_user_can_comment:
+                    description: Whether or not the current user has permission to post comments on this registration. Comments on registrations can be set to allow all users to comment or restricted to only contributors.
+                    readOnly: true
+                    type: boolean
+                  current_user_permissions:
+                    description: 'A list of strings representing the permissions for the current user on this registration. Valid permissions are "admin", "read", and "write".'
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  custom_citation:
+                    description: User-entered custom registration citation
+                    readOnly: false
+                    type: string
+                  date_created:
+                    description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_modified:
+                    description: 'The time at which the registered node was last modified, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_registered:
+                    description: 'The time at which this registration was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_withdrawn:
+                    description: 'The time at which this registration was withdrawn, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the registered node.
+                    readOnly: false
+                    type: string
+                  draft_registration:
+                    description: Required on POST. The ID of the draft registration from which the registration will be created.
+                    readOnly: false
+                    type: string
+                  embargo_end_date:
+                    description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  fork:
+                    description: Whether or not this registration represents a fork of another node.
+                    readOnly: true
+                    type: boolean
+                  lift_embargo:
+                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  node_license:
+                    description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
+                    readOnly: false
+                    type: string
+                  pending_embargo_approval:
+                    description: Whether or not the embargo associated with this registration is pending approval from project administrators.
+                    readOnly: true
+                    type: boolean
+                  pending_registration_approval:
+                    description: Whether or not the registration is pending approval from project administrators.
+                    readOnly: true
+                    type: boolean
+                  pending_withdrawal:
+                    description: Whether or not the registration is pending approval for withdrawal from project administrators.
+                    readOnly: false
+                    type: boolean
+                  preprint:
+                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    readOnly: true
+                    type: boolean
+                  public:
+                    description: Whether or not the registration is publicly visible.
+                    readOnly: true
+                    type: boolean
+                  registered_meta:
+                    description: A dictionary with supplemental registration questions and responses.
+                    readOnly: true
+                    type: string
+                  registration:
+                    description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
+                    readOnly: true
+                    type: boolean
+                  registration_choice:
+                    description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    readOnly: false
+                    type: string
+                  registration_supplement:
+                    description: The title of the registration schema this registration conforms to.
+                    readOnly: true
+                    type: string
+                  tags:
+                    description: A list of strings that describe the registered node.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
+                  template_from:
+                    description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
+                    readOnly: true
+                    type: string
+                  title:
+                    description: The title of the registered node.
+                    readOnly: true
+                    type: string
+                  wiki_enabled:
+                    description: Whether or not the registration has its wiki enabled.
+                    readOnly: true
+                    type: boolean
+                  withdrawal_justification:
+                    description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
+                    readOnly: false
+                    type: string
+                  withdrawn:
+                    description: Whether or not this registration has been withdrawn.
+                    readOnly: true
+                    type: boolean
+                readOnly: false
+                required:
+                  - draft_registration
+                  - registration_choice
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the registration.
+                readOnly: true
+                type: string
+              links:
+                description: URLs to alternative representations of the registrations entity.
+                properties:
+                  html:
+                    description: A link to the registration's page on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
+                  self:
+                    description: A link to the canonical API endpoint of this registration.
+                    format: URL
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Links
+                type: object
+              relationships:
+                description: URLs to other entities or entity collections that have a relationship to the registration entity.
+                properties:
+                  affiliated_institutions:
+                    description: A link to the list of institutions this registration is affiliated with.
+                    readOnly: false
+                    type: string
+                  children:
+                    description: A link to the list of the registered node's children (components).
+                    readOnly: true
+                    type: string
+                  citation:
+                    description: A link to the citation details of this registration.
+                    readOnly: true
+                    type: string
+                  comments:
+                    description: A link to the list of comments on this registration.
+                    readOnly: true
+                    type: string
+                  contributors:
+                    description: A link to the list of contributors on this registration.
+                    readOnly: true
+                    type: string
+                  files:
+                    description: A link to the list of storage providers that have been enabled on this registration.
+                    readOnly: true
+                    type: string
+                  forks:
+                    description: A link to the list of nodes that are forks of this registration.
+                    readOnly: true
+                    type: string
+                  identifiers:
+                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
+                    readOnly: true
+                    type: string
+                  license:
+                    description: A relationship to the license that has been applied to the registration.
+                    readOnly: false
+                    type: string
+                  linked_nodes:
+                    description: A link to the list of nodes that are linked to this registration.
+                    readOnly: true
+                    type: string
+                  logs:
+                    description: A link to the list of log actions pertaining to this registration.
+                    readOnly: true
+                    type: string
+                  node_links:
+                    description: A link to the list of nodes that are linked to this registration. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                    readOnly: true
+                    type: string
+                  parent:
+                    description: 'A link to the node that is the direct parent of the current registration, if the current registration is a child registration.'
+                    readOnly: true
+                    type: string
+                  registered_by:
+                    description: A link to the user that initiated this registration.
+                    readOnly: true
+                    type: string
+                  registered_from:
+                    description: A link to the node that this registration was registered from.
+                    readOnly: true
+                    type: string
+                  registration_schema:
+                    description: A link to the metaschema that this registration conforms to.
+                    readOnly: true
+                    type: string
+                  root:
+                    description: 'A link to the node that is the top-level parent of the current registration. If the current registration is the top-level node, the root is the current registration.'
+                    readOnly: true
+                    type: string
+                  view_only_links:
+                    description: A link to the list of view only links that have been created for this registration.
+                    readOnly: true
+                    type: string
+                  wikis:
+                    description: A link to the list of wiki pages for this registration.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                title: Relationships
+                type: object
+              type:
+                description: The type identifier of the registration entity (`registrations`).
+                readOnly: true
+                type: string
+            required:
+              - id
+              - type
+              - attributes
+              - relationships
+              - links
+            title: Registration
+            type: object
       summary: Update a registration
       tags:
         - Registrations
@@ -15412,7 +15789,9 @@ paths:
                     date_modified: '2016-05-23T14:22:03.885000'
                     date_registered: '2016-05-23T14:24:25.478000'
                     description: ''
+                    embargo_end_date: null
                     fork: false
+                    node_license: null
                     node_links:
                       links:
                         related:
@@ -15440,6 +15819,7 @@ paths:
                     registration_supplement: OSF-Standard Pre-Data Collection Registration
                     tags: []
                     title: Full Project Description
+                    withdrawal_justification: null
                     withdrawn: false
                   id: 4cmnz
                   links:
@@ -15536,25 +15916,23 @@ paths:
                           meta: {}
                   type: registrations
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
-              example:
-                data:
-                  attributes:
-                    children:
-                      - fsd2s
-                      - dwsa2
-                    draft_registration: '{draft_registration_id}'
-                    lift_embargo: '2017-05-10T20:44:03.185000'
-                    registration_choice: embargo
-                  type: registrations
               properties:
                 attributes:
                   description: The properties of the registration entity.
                   properties:
+                    article_doi:
+                      description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                      readOnly: false
+                      type: string
                     category:
                       description: The category of the registered node.
                       enum:
@@ -15590,6 +15968,10 @@ paths:
                         type: string
                       readOnly: true
                       type: array
+                    custom_citation:
+                      description: User-entered custom registration citation
+                      readOnly: false
+                      type: string
                     date_created:
                       description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -15612,10 +15994,10 @@ paths:
                       type: string
                     description:
                       description: The description of the registered node.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     draft_registration:
-                      description: The ID of the draft registration from which the registration will be created.
+                      description: Required on POST. The ID of the draft registration from which the registration will be created.
                       readOnly: false
                       type: string
                     embargo_end_date:
@@ -15634,7 +16016,7 @@ paths:
                       type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                      readOnly: true
+                      readOnly: false
                       type: string
                     pending_embargo_approval:
                       description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -15665,7 +16047,7 @@ paths:
                       readOnly: true
                       type: boolean
                     registration_choice:
-                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                       readOnly: false
                       type: string
                     registration_supplement:
@@ -15676,7 +16058,7 @@ paths:
                       description: A list of strings that describe the registered node.
                       items:
                         type: string
-                      readOnly: true
+                      readOnly: false
                       type: array
                     template_from:
                       description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -15729,7 +16111,7 @@ paths:
                   properties:
                     affiliated_institutions:
                       description: A link to the list of institutions this registration is affiliated with.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     children:
                       description: A link to the list of the registered node's children (components).
@@ -15758,6 +16140,10 @@ paths:
                     identifiers:
                       description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
+                      type: string
+                    license:
+                      description: A relationship to the license that has been applied to the registration.
+                      readOnly: false
                       type: string
                     linked_nodes:
                       description: A link to the list of nodes that are linked to this registration.
@@ -15855,14 +16241,19 @@ paths:
                 - attributes:
                     date_parsed: '2015-02-16T04:16:25.732000'
                     short_title: AMR
+                    summary: null
                     title: Academy of Management Review
                   id: academy-of-management-review
                   links: {}
                   type: citation-styles
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -16111,6 +16502,7 @@ paths:
                     has_report: false
                     is_abuse: false
                     is_ham: false
+                    modified: null
                     page: node
                   id: 23pk9
                   links:
@@ -16144,9 +16536,13 @@ paths:
                           meta: {}
                   type: comments
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -16316,6 +16712,7 @@ paths:
                     bibliographic: true
                     index: 0
                     permission: admin
+                    unregistered_contributor: null
                   embeds:
                     users:
                       data:
@@ -16364,9 +16761,13 @@ paths:
                           meta: {}
                   type: contributors
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -16483,6 +16884,7 @@ paths:
                   bibliographic: true
                   index: 0
                   permission: admin
+                  unregistered_contributor: null
                 embeds:
                   users:
                     data:
@@ -16663,9 +17065,13 @@ paths:
                           meta: {}
                   type: files
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -16761,6 +17167,11 @@ paths:
                       format: URL
                       readOnly: true
                       type: string
+                    html:
+                      description: A link to the file on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     info:
                       description: A link to the page to view a file's information or a folder's contents.
                       format: URL
@@ -16773,6 +17184,11 @@ paths:
                       type: string
                     new_folder:
                       description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the file.
                       format: URL
                       readOnly: true
                       type: string
@@ -16865,6 +17281,7 @@ paths:
             application/json:
               data:
                 - attributes:
+                    checkout: null
                     current_user_can_comment: true
                     current_version: 1
                     date_created: '2014-10-17T19:24:12.264Z'
@@ -16910,9 +17327,13 @@ paths:
                           meta: {}
                   type: files
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -17008,6 +17429,11 @@ paths:
                       format: URL
                       readOnly: true
                       type: string
+                    html:
+                      description: A link to the file on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     info:
                       description: A link to the page to view a file's information or a folder's contents.
                       format: URL
@@ -17020,6 +17446,11 @@ paths:
                       type: string
                     new_folder:
                       description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                      format: URL
+                      readOnly: true
+                      type: string
+                    render:
+                      description: A Waterbutler API route for rendering the file.
                       format: URL
                       readOnly: true
                       type: string
@@ -17107,6 +17538,7 @@ paths:
             application/json:
               data:
                 attributes:
+                  checkout: null
                   current_user_can_comment: true
                   current_version: 1
                   date_created: '2014-10-17T19:24:12.264Z'
@@ -17245,6 +17677,11 @@ paths:
                     format: URL
                     readOnly: true
                     type: string
+                  html:
+                    description: A link to the file on the OSF.
+                    format: URL
+                    readOnly: true
+                    type: string
                   info:
                     description: A link to the page to view a file's information or a folder's contents.
                     format: URL
@@ -17257,6 +17694,11 @@ paths:
                     type: string
                   new_folder:
                     description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                    format: URL
+                    readOnly: true
+                    type: string
+                  render:
+                    description: A Waterbutler API route for rendering the file.
                     format: URL
                     readOnly: true
                     type: string
@@ -17348,7 +17790,9 @@ paths:
                     date_modified: '2016-05-23T14:22:03.885000'
                     date_registered: '2016-05-23T14:24:25.478000'
                     description: ''
+                    embargo_end_date: null
                     fork: false
+                    node_license: null
                     node_links:
                       links:
                         related:
@@ -17376,6 +17820,7 @@ paths:
                     registration_supplement: OSF-Standard Pre-Data Collection Registration
                     tags: []
                     title: Full Project Description
+                    withdrawal_justification: null
                     withdrawn: false
                   id: 4cmnz
                   links:
@@ -17472,25 +17917,23 @@ paths:
                           meta: {}
                   type: registrations
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
-              example:
-                data:
-                  attributes:
-                    children:
-                      - fsd2s
-                      - dwsa2
-                    draft_registration: '{draft_registration_id}'
-                    lift_embargo: '2017-05-10T20:44:03.185000'
-                    registration_choice: embargo
-                  type: registrations
               properties:
                 attributes:
                   description: The properties of the registration entity.
                   properties:
+                    article_doi:
+                      description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                      readOnly: false
+                      type: string
                     category:
                       description: The category of the registered node.
                       enum:
@@ -17526,6 +17969,10 @@ paths:
                         type: string
                       readOnly: true
                       type: array
+                    custom_citation:
+                      description: User-entered custom registration citation
+                      readOnly: false
+                      type: string
                     date_created:
                       description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                       format: date-time
@@ -17548,10 +17995,10 @@ paths:
                       type: string
                     description:
                       description: The description of the registered node.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     draft_registration:
-                      description: The ID of the draft registration from which the registration will be created.
+                      description: Required on POST. The ID of the draft registration from which the registration will be created.
                       readOnly: false
                       type: string
                     embargo_end_date:
@@ -17570,7 +18017,7 @@ paths:
                       type: string
                     node_license:
                       description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                      readOnly: true
+                      readOnly: false
                       type: string
                     pending_embargo_approval:
                       description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -17601,7 +18048,7 @@ paths:
                       readOnly: true
                       type: boolean
                     registration_choice:
-                      description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                      description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                       readOnly: false
                       type: string
                     registration_supplement:
@@ -17612,7 +18059,7 @@ paths:
                       description: A list of strings that describe the registered node.
                       items:
                         type: string
-                      readOnly: true
+                      readOnly: false
                       type: array
                     template_from:
                       description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -17665,7 +18112,7 @@ paths:
                   properties:
                     affiliated_institutions:
                       description: A link to the list of institutions this registration is affiliated with.
-                      readOnly: true
+                      readOnly: false
                       type: string
                     children:
                       description: A link to the list of the registered node's children (components).
@@ -17694,6 +18141,10 @@ paths:
                     identifiers:
                       description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                       readOnly: true
+                      type: string
+                    license:
+                      description: A relationship to the license that has been applied to the registration.
+                      readOnly: false
                       type: string
                     linked_nodes:
                       description: A link to the list of nodes that are linked to this registration.
@@ -17784,20 +18235,14 @@ paths:
           name: body
           required: true
           schema:
-            example:
-              data:
-                attributes:
-                  children:
-                    - fsd2s
-                    - dwsa2
-                  draft_registration: '{draft_registration_id}'
-                  lift_embargo: '2017-05-10T20:44:03.185000'
-                  registration_choice: embargo
-                type: registrations
             properties:
               attributes:
                 description: The properties of the registration entity.
                 properties:
+                  article_doi:
+                    description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                    readOnly: false
+                    type: string
                   category:
                     description: The category of the registered node.
                     enum:
@@ -17833,6 +18278,10 @@ paths:
                       type: string
                     readOnly: true
                     type: array
+                  custom_citation:
+                    description: User-entered custom registration citation
+                    readOnly: false
+                    type: string
                   date_created:
                     description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
                     format: date-time
@@ -17855,10 +18304,10 @@ paths:
                     type: string
                   description:
                     description: The description of the registered node.
-                    readOnly: true
+                    readOnly: false
                     type: string
                   draft_registration:
-                    description: The ID of the draft registration from which the registration will be created.
+                    description: Required on POST. The ID of the draft registration from which the registration will be created.
                     readOnly: false
                     type: string
                   embargo_end_date:
@@ -17877,7 +18326,7 @@ paths:
                     type: string
                   node_license:
                     description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                    readOnly: true
+                    readOnly: false
                     type: string
                   pending_embargo_approval:
                     description: Whether or not the embargo associated with this registration is pending approval from project administrators.
@@ -17908,7 +18357,7 @@ paths:
                     readOnly: true
                     type: boolean
                   registration_choice:
-                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                    description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
                     readOnly: false
                     type: string
                   registration_supplement:
@@ -17919,7 +18368,7 @@ paths:
                     description: A list of strings that describe the registered node.
                     items:
                       type: string
-                    readOnly: true
+                    readOnly: false
                     type: array
                   template_from:
                     description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
@@ -17972,7 +18421,7 @@ paths:
                 properties:
                   affiliated_institutions:
                     description: A link to the list of institutions this registration is affiliated with.
-                    readOnly: true
+                    readOnly: false
                     type: string
                   children:
                     description: A link to the list of the registered node's children (components).
@@ -18001,6 +18450,10 @@ paths:
                   identifiers:
                     description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
                     readOnly: true
+                    type: string
+                  license:
+                    description: A relationship to the license that has been applied to the registration.
+                    readOnly: false
                     type: string
                   linked_nodes:
                     description: A link to the list of nodes that are linked to this registration.
@@ -18107,13 +18560,17 @@ paths:
                     referent:
                       links:
                         related:
-                          href: 'https://api.osf.io/v2/nodes/73pnd/'
+                          href: 'https://api.osf.io/v2/registrations/73pnd/'
                           meta: {}
                   type: identifiers
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -18124,13 +18581,13 @@ paths:
                       description: The category of the identifier
                       enum:
                         - doi
-                      readOnly: true
+                      readOnly: false
                       type: string
                     value:
                       description: The identifier value itself
                       readOnly: true
                       type: string
-                  readOnly: true
+                  readOnly: false
                   title: Attributes
                   type: object
                 id:
@@ -18170,6 +18627,114 @@ paths:
       tags:
         - Registrations
       x-response-schema: Identifier
+    post:
+      description: |-
+        Create an identifier for a given registration - can only mint DOI's at this time.  Send a POST request with a `category` attribute with a value of 'doi'.
+        #### Returns
+
+        Returns a JSON object containing `data` and `links` keys.
+
+        The `data` key contains the created identifier object.
+      operationId: registrations_identifiers_create
+      parameters:
+        - description: The unique identifier of the registration.
+          in: path
+          name: registration_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  category: doi
+                type: identifiers
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    category: doi
+                    value: 10.17605/OSF.IO/73PND
+                  id: 57f1641db83f6901ed94b459
+                  links:
+                    self: 'https://api.osf.io/v2/identifiers/57f1641db83f6901ed94b459/'
+                  relationships:
+                    referent:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/registrations/73pnd/'
+                          meta: {}
+                  type: identifiers
+              links:
+                first: null
+                last: null
+                meta:
+                  per_page: 10
+                  total: 2
+                next: null
+                prev: null
+          schema:
+            items:
+              properties:
+                attributes:
+                  description: The properties of the identifier entity.
+                  properties:
+                    category:
+                      description: The category of the identifier
+                      enum:
+                        - doi
+                      readOnly: false
+                      type: string
+                    value:
+                      description: The identifier value itself
+                      readOnly: true
+                      type: string
+                  readOnly: false
+                  title: Attributes
+                  type: object
+                id:
+                  description: The identifier of the identifier entity.
+                  readOnly: true
+                  type: string
+                links:
+                  description: URLs to alternative representations of the identifier entity.
+                  properties:
+                    self:
+                      description: A link to the detail page for the identifier.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Links
+                  type: object
+                relationships:
+                  description: URLs to other entities or entity collections that have a relationship to the identifier entity.
+                  properties:
+                    referent:
+                      description: A relationship to the node the identifier refers to.
+                      format: URL
+                      readOnly: true
+                      type: string
+                  readOnly: true
+                  title: Relationships
+                  type: object
+                type:
+                  description: The type identifier of the identifier entity (`identifiers`).
+                  readOnly: true
+                  type: string
+              title: Identifier
+              type: object
+            type: array
+      summary: Create identifiers
+      tags:
+        - Registrations
+      x-response-schema: Identifier
   '/registrations/{registration_id}/institutions/':
     get:
       description: |-
@@ -18196,6 +18761,7 @@ paths:
             application/json:
               data:
                 - attributes:
+                    auth_url: null
                     description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
                     logo_path: /static/img/institutions/shields/cos-shield.png
                     name: Center For Open Science
@@ -18245,9 +18811,13 @@ paths:
                           meta: {}
                   type: institutions
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -18378,6 +18948,7 @@ paths:
                     date_modified: '2017-03-03T05:00:31.512000'
                     description: 'This is an independent replication as part of the Reproducibility Project: Psychology.'
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -18488,6 +19059,7 @@ paths:
                       - read
                     date_created: '2012-10-31T18:50:46.111000'
                     date_modified: '2016-10-02T19:50:23.605000'
+                    description: null
                     fork: true
                     node_license:
                       copyright_holders:
@@ -18611,9 +19183,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -18892,6 +19468,7 @@ paths:
                         id: 5wprs
                         title: Full Project Description
                       path: /StudyMaterials_UEH1.pdf
+                      preprint_provider: null
                       urls:
                         download: /project/7eshv/files/osfstorage/5742f41c6c613b01de5b15dd/?action=download
                         view: /project/7eshv/files/osfstorage/5742f41c6c613b01de5b15dd/
@@ -18923,6 +19500,8 @@ paths:
                       params_node:
                         id: 7eshv
                         title: 'Full Questionnaire [in original language]'
+                      params_project: null
+                      preprint_provider: null
                   id: 57431299594d9001ead7174d
                   links:
                     self: 'https://api.osf.io/v2/logs/57431299594d9001ead7174d/'
@@ -18951,6 +19530,8 @@ paths:
                       params_node:
                         id: 5wprs
                         title: Full Project Description
+                      params_project: null
+                      preprint_provider: null
                   id: 57431299594d9001ead71746
                   links:
                     self: 'https://api.osf.io/v2/logs/57431299594d9001ead71746/'
@@ -18979,6 +19560,8 @@ paths:
                       params_node:
                         id: 6gbkh
                         title: Investigating fluctuations in cooperative preferences across the natural female menstrual cycle in a within-subjects-design
+                      params_project: null
+                      preprint_provider: null
                   id: 57431299594d9001ead71742
                   links:
                     self: 'https://api.osf.io/v2/logs/57431299594d9001ead71742/'
@@ -19000,9 +19583,13 @@ paths:
                           meta: {}
                   type: logs
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 5
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -19376,9 +19963,13 @@ paths:
                           meta: {}
                   type: view_only_links
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -19631,9 +20222,13 @@ paths:
                           meta: {}
                   type: wikis
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               example:
@@ -19850,7 +20445,12 @@ paths:
                     self: 'https://api.osf.io/v2/taxonomies/584240d854be81056ceca83c/'
                   type: taxonomies
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 5
           schema:
             items:
@@ -20061,11 +20661,13 @@ paths:
                           meta: {}
                   type: users
               links:
+                first: null
                 last: 'https://api.osf.io/v2/users/?page=4337'
                 meta:
                   per_page: 10
                   total: 43370
                 next: 'https://api.osf.io/v2/users/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -20198,6 +20800,10 @@ paths:
                 relationships:
                   description: URLs to other entities or entity collections that have a relationship to the user entity.
                   properties:
+                    default_region:
+                      description: The storage region where the user's files will be stored by default.
+                      readOnly: false
+                      type: string
                     institutions:
                       description: A link to the list of institutions the user is affiliated with.
                       readOnly: true
@@ -20416,6 +21022,10 @@ paths:
               relationships:
                 description: URLs to other entities or entity collections that have a relationship to the user entity.
                 properties:
+                  default_region:
+                    description: The storage region where the user's files will be stored by default.
+                    readOnly: false
+                    type: string
                   institutions:
                     description: A link to the list of institutions the user is affiliated with.
                     readOnly: true
@@ -20597,6 +21207,10 @@ paths:
               relationships:
                 description: URLs to other entities or entity collections that have a relationship to the user entity.
                 properties:
+                  default_region:
+                    description: The storage region where the user's files will be stored by default.
+                    readOnly: false
+                    type: string
                   institutions:
                     description: A link to the list of institutions the user is affiliated with.
                     readOnly: true
@@ -20708,9 +21322,13 @@ paths:
                     self: 'https://api.osf.io/v2/users/me/addons/googledrive/'
                   type: user_addons
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 4
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -20891,15 +21509,20 @@ paths:
               data:
                 - attributes:
                     display_name: Fabrice Mizero
+                    profile_url: null
                     provider: dropbox
                   id: 58d16ece9ad5a10201027eb4
                   links:
                     self: 'https://api.osf.io/v2/users/me/addons/dropbox/accounts/58d16ece9ad5a10201027eb4/'
                   type: external_accounts
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 1
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -20995,6 +21618,7 @@ paths:
                 data:
                   attributes:
                     display_name: Fabrice Mizero
+                    profile_url: null
                     provider: dropbox
                   id: 58d16ece9ad5a10201027eb4
                   links:
@@ -21201,9 +21825,13 @@ paths:
                           meta: {}
                   type: institutions
               links:
+                first: null
+                last: null
                 meta:
                   per_page: 10
                   total: 2
+                next: null
+                prev: null
           schema:
             items:
               properties:
@@ -21336,7 +21964,9 @@ paths:
                       - read
                     date_created: '2013-10-22T20:07:57.674000'
                     date_modified: '2017-02-09T20:37:49.060000'
+                    description: null
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -21445,11 +22075,13 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
                 last: 'https://api.osf.io/v2/users/alh38/nodes/?page=23'
                 meta:
                   per_page: 10
                   total: 224
                 next: 'https://api.osf.io/v2/users/alh38/nodes/?page=2'
+                prev: null
           schema:
             items:
               example:
@@ -21721,6 +22353,7 @@ paths:
                 date_last_transitioned: '2018-10-15T13:44:09.478243'
                 date_modified: '2016-08-29T14:53:51.185000'
                 date_published: '2016-08-29T14:53:51.185000'
+                date_withdrawn: null
                 description: A study of Kale
                 doi: 10.1371/journal.pbio.1002456
                 is_preprint_orphan: false
@@ -21728,6 +22361,8 @@ paths:
                 license_record:
                   copyright_holders: []
                   year: '2017'
+                original_publication_date: null
+                preprint_doi_created: null
                 public: true
                 reviews_state: accepted
                 subjects:
@@ -21762,6 +22397,7 @@ paths:
                         href: 'https://api.osf.io/v2/preprints/khbvy/citation/'
                         meta: {}
                   contributors:
+                    links: null
                     related:
                       href: 'https://api.osf.io/v2/preprints/khbvy/contributors/'
                       meta: {}
@@ -21798,6 +22434,7 @@ paths:
                       related:
                         href: 'https://api.osf.io/v2/preprint_providers/osf/'
                         meta: {}
+                  relationships: null
                   requests:
                     links:
                       related:
@@ -21816,9 +22453,13 @@ paths:
                 self: 'https://api.osf.io/v2/preprints/khbvy/'
               type: preprints
             links:
+              first: null
+              last: null
               meta:
                 per_page: 10
                 total: 4
+              next: null
+              prev: null
           schema:
             items:
               example:
@@ -22055,7 +22696,9 @@ paths:
                     date_modified: '2016-11-18T19:14:42.873000'
                     date_registered: '2016-11-18T19:16:56.962000'
                     description: ''
+                    embargo_end_date: null
                     fork: false
+                    node_license: null
                     node_links:
                       links:
                         related:
@@ -22083,6 +22726,7 @@ paths:
                     registration_supplement: OSF-Standard Pre-Data Collection Registration
                     tags: []
                     title: Replication Reports
+                    withdrawal_justification: null
                     withdrawn: false
                   id: d5r99
                   links:
@@ -22179,11 +22823,13 @@ paths:
                           meta: {}
                   type: registrations
               links:
+                first: null
                 last: 'https://api.osf.io/v2/users/cdi38/registrations/?page=17'
                 meta:
                   per_page: 10
                   total: 170
                 next: 'https://api.osf.io/v2/users/cdi38/registrations/?page=2'
+                prev: null
       summary: List all registrations
       tags:
         - Users
@@ -22525,6 +23171,7 @@ paths:
                     date_modified: '2017-03-03T05:00:31.512000'
                     description: 'This is an independent replication as part of the Reproducibility Project: Psychology.'
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -22635,6 +23282,7 @@ paths:
                       - read
                     date_created: '2012-10-31T18:50:46.111000'
                     date_modified: '2016-10-02T19:50:23.605000'
+                    description: null
                     fork: true
                     node_license:
                       copyright_holders:
@@ -22765,7 +23413,9 @@ paths:
                       - read
                     date_created: '2014-09-23T18:58:54.915000'
                     date_modified: '2016-08-31T18:16:25.056000'
+                    description: null
                     fork: false
+                    node_license: null
                     preprint: false
                     public: true
                     registration: false
@@ -22874,7 +23524,12 @@ paths:
                           meta: {}
                   type: nodes
               links:
+                first: null
+                last: null
+                meta: null
+                next: null
                 per_page: 10
+                prev: null
                 total: 3
           schema:
             items:

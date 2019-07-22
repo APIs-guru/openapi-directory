@@ -469,7 +469,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning'
+        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
           in: query
           items:
             type: string
@@ -607,6 +607,11 @@ paths:
           name: not_ids
           required: false
           type: array
+        - description: Only items that offer local pickup
+          in: query
+          name: local_pickup
+          required: false
+          type: boolean
         - default: 1
           in: query
           name: page
@@ -661,7 +666,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning'
+        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
           in: query
           items:
             type: string
@@ -799,6 +804,11 @@ paths:
           name: not_ids
           required: false
           type: array
+        - description: Only items that offer local pickup
+          in: query
+          name: local_pickup
+          required: false
+          type: boolean
         - default: 1
           in: query
           name: page
@@ -1021,7 +1031,7 @@ paths:
                 type: string
               upc_does_not_apply:
                 description: 'True if a brand new product has no UPC code, ie for a handmade or custom item'
-                type: string
+                type: boolean
               videos:
                 description: 'List of YouTube video urls. Note: ONLY ONE ALLOWED'
                 items:
@@ -1072,7 +1082,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning'
+        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
           in: query
           items:
             type: string
@@ -1210,6 +1220,11 @@ paths:
           name: not_ids
           required: false
           type: array
+        - description: Only items that offer local pickup
+          in: query
+          name: local_pickup
+          required: false
+          type: boolean
         - default: 1
           in: query
           name: page
@@ -1662,7 +1677,7 @@ paths:
                 type: string
               upc_does_not_apply:
                 description: 'True if a brand new product has no UPC code, ie for a handmade or custom item'
-                type: string
+                type: boolean
               videos:
                 description: 'List of YouTube video urls. Note: ONLY ONE ALLOWED'
                 items:
@@ -2469,13 +2484,20 @@ paths:
                 description: Category slug from /api/categories
                 type: string
               conditions:
-                description: 'Condition: all,new,b-stock,used,non-functioning'
+                description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
                 enum:
                   - all
                   - new
                   - b-stock
                   - used
                   - non-functioning
+                  - all-but-new
+                  - poor
+                  - fair
+                  - good
+                  - very-good
+                  - excellent
+                  - mint
                 items:
                   type: string
                 type: array
@@ -2531,6 +2553,9 @@ paths:
                   - auctions
                   - offers
                 type: string
+              local_pickup:
+                description: Only items that offer local pickup
+                type: boolean
               make:
                 description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
                 items:
@@ -2706,7 +2731,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning'
+        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
           in: query
           items:
             type: string
@@ -2844,6 +2869,11 @@ paths:
           name: not_ids
           required: false
           type: array
+        - description: Only items that offer local pickup
+          in: query
+          name: local_pickup
+          required: false
+          type: boolean
         - default: live
           description: 'Available: ["all", "draft", "ended", "live", "ordered", "sold_out", "suspended", "seller_unavailable"]. Defaults to ''live'''
           in: query
@@ -2889,7 +2919,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning'
+        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
           in: query
           items:
             type: string
@@ -3027,6 +3057,11 @@ paths:
           name: not_ids
           required: false
           type: array
+        - description: Only items that offer local pickup
+          in: query
+          name: local_pickup
+          required: false
+          type: boolean
       responses:
         default:
           description: Unexpected error
@@ -3492,7 +3527,7 @@ paths:
           schema:
             properties:
               provider:
-                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, DHLExpress, DHLGlobalMail, DHL Deutschland, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Other'
+                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL Deutschland, DHLExpress, DHLGlobalMail, DHL, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Other'
                 type: string
               send_notification:
                 description: Should we send an email notification to the buyer
@@ -4071,7 +4106,6 @@ paths:
                   - CN
                   - CO
                   - CR
-                  - CU
                   - CV
                   - CW
                   - CX
@@ -4128,7 +4162,6 @@ paths:
                   - IN
                   - IO
                   - IQ
-                  - IR
                   - IS
                   - IT
                   - JE
@@ -4141,7 +4174,6 @@ paths:
                   - KI
                   - KM
                   - KN
-                  - KP
                   - KR
                   - KW
                   - KY
@@ -4215,7 +4247,6 @@ paths:
                   - SA
                   - SB
                   - SC
-                  - SD
                   - SE
                   - SG
                   - SH
@@ -4231,7 +4262,6 @@ paths:
                   - ST
                   - SV
                   - SX
-                  - SY
                   - SZ
                   - TC
                   - TD

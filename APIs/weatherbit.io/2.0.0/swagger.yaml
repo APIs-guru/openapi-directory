@@ -1274,6 +1274,166 @@ paths:
       summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID. (1 Year/call limit)'
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
+  '/current/airquality?city={city}&country={country}':
+    get:
+      description: Returns current air quality conditions.
+      parameters:
+        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+          format: string
+          in: path
+          name: city
+          required: true
+          type: string
+        - description: Full name of state.
+          format: string
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Country Code (2 letter).
+          format: string
+          in: path
+          name: country
+          required: true
+          type: string
+        - description: 'Wraps return in jsonp callback. Example: callback=func'
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Current air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Returns current air quality conditions - Given City and/or State, Country.'
+      tags:
+        - Current Air Quality
+  '/current/airquality?city_id={city_id}':
+    get:
+      description: Returns current air quality conditions.
+      parameters:
+        - description: 'City ID. Example: 4487042'
+          format: integer
+          in: path
+          name: city_id
+          required: true
+          type: integer
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Current air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns current air quality conditions - Given a City ID.
+      tags:
+        - Current Air Quality
+  '/current/airquality?lat={lat}&lon={lon}':
+    get:
+      description: Returns current air quality conditions.
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Current air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns current air quality conditions - Given a lat/lon.
+      tags:
+        - Current Air Quality
+  '/current/airquality?postal_code={postal_code}':
+    get:
+      description: Returns current air quality conditions.
+      parameters:
+        - description: 'Postal Code. Example: 28546'
+          format: integer
+          in: path
+          name: postal_code
+          required: true
+          type: integer
+        - description: Country Code (2 letter).
+          format: string
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Current air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns current air quality conditions - Given a Postal Code.
+      tags:
+        - Current Air Quality
   '/current?cities={cities}':
     get:
       description: 'Returns a group of Current Observations - Given a list of City IDs. '
@@ -2484,6 +2644,190 @@ paths:
       summary: Returns a 3-hourly forecast - Given a Postal Code.
       tags:
         - 5 day / 3 hour Forecast
+  '/forecast/airquality?city={city}&country={country}':
+    get:
+      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      parameters:
+        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+          format: string
+          in: path
+          name: city
+          required: true
+          type: string
+        - description: Full name of state.
+          format: string
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Country Code (2 letter).
+          format: string
+          in: path
+          name: country
+          required: true
+          type: string
+        - description: 'Wraps return in jsonp callback. Example: callback=func'
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Number of hours to return.
+          format: integer
+          in: query
+          name: hours
+          required: false
+          type: integer
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A forecast object.
+          schema:
+            $ref: '#/definitions/AQHourly'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Returns 72 hour (hourly) Air Quality forecast - Given City and/or State, Country.'
+      tags:
+        - Air Quality Forecast
+  '/forecast/airquality?city_id={city_id}':
+    get:
+      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      parameters:
+        - description: 'City ID. Example: 4487042'
+          format: integer
+          in: path
+          name: city_id
+          required: true
+          type: integer
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Number of hours to return.
+          format: integer
+          in: query
+          name: hours
+          required: false
+          type: integer
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A forecast object.
+          schema:
+            $ref: '#/definitions/AQHourly'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hour (hourly) Air Quality forecast - Given a City ID.
+      tags:
+        - Air Quality Forecast
+  '/forecast/airquality?lat={lat}&lon={lon}':
+    get:
+      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Number of hours to return.
+          format: integer
+          in: query
+          name: hours
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: A forecast object.
+          schema:
+            $ref: '#/definitions/AQHourly'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hour (hourly) Air Quality forecast - Given a lat/lon.
+      tags:
+        - Air Quality Forecast
+  '/forecast/airquality?postal_code={postal_code}':
+    get:
+      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      parameters:
+        - description: 'Postal Code. Example: 28546'
+          format: integer
+          in: path
+          name: postal_code
+          required: true
+          type: integer
+        - description: Country Code (2 letter).
+          format: string
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Number of hours to return.
+          format: integer
+          in: query
+          name: hours
+          required: false
+          type: integer
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A forecast object.
+          schema:
+            $ref: '#/definitions/AQHourly'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hour (hourly) Air Quality forecast - Given a Postal Code.
+      tags:
+        - Air Quality Forecast
   '/forecast/daily?city={city}&country={country}':
     get:
       description: |
@@ -2989,6 +3333,15 @@ paths:
           name: units
           required: false
           type: string
+        - description: 'Time period (default: daily)'
+          enum:
+            - hourly
+            - daily
+          format: string
+          in: query
+          name: tp
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -3113,9 +3466,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: 'Returns an 48 hour (hourly forecast) - Given City and/or State, Country.'
+      summary: 'Returns an 120 hour (hourly forecast) - Given City and/or State, Country.'
       tags:
-        - 48 hour / hourly Forecast
+        - 120 hour / hourly Forecast
   '/forecast/hourly?city_id={city_id}':
     get:
       description: |2
@@ -3203,9 +3556,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns a 48 hour (hourly) forecast - Given a City ID.
+      summary: Returns a 120 hour (hourly) forecast - Given a City ID.
       tags:
-        - 48 hour / hourly Forecast
+        - 120 hour / hourly Forecast
   '/forecast/hourly?ip={ip}':
     get:
       description: |2
@@ -3301,7 +3654,7 @@ paths:
             $ref: '#/definitions/Error'
       summary: 'Returns a hourly forecast - Given an IP Address, or ip=auto for automatic IP lookup.'
       tags:
-        - 48 hour / hourly Forecast
+        - 120 hour / hourly Forecast
   '/forecast/hourly?lat={lat}&lon={lon}':
     get:
       description: |
@@ -3395,9 +3748,9 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns 48 hour (hourly) forecast - Given a lat/lon.
+      summary: Returns 120 hour (hourly) forecast - Given a lat/lon.
       tags:
-        - 48 hour / hourly Forecast
+        - 120 hour / hourly Forecast
   '/forecast/hourly?postal_code={postal_code}':
     get:
       description: |2
@@ -3491,9 +3844,169 @@ paths:
           description: No Data.
           schema:
             $ref: '#/definitions/Error'
-      summary: Returns a 48 hour (hourly) forecast - Given a Postal Code.
+      summary: Returns a 120 hour (hourly) forecast - Given a Postal Code.
       tags:
-        - 48 hour / hourly Forecast
+        - 120 hour / hourly Forecast
+  '/history/airquality?city={city}&country={country}':
+    get:
+      description: Returns historical air quality conditions.
+      parameters:
+        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+          format: string
+          in: path
+          name: city
+          required: true
+          type: string
+        - description: Full name of state.
+          format: string
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Country Code (2 letter).
+          format: string
+          in: path
+          name: country
+          required: true
+          type: string
+        - description: 'Wraps return in jsonp callback. Example: callback=func'
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historical air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: 'Returns 72 hours of historical quality conditions - Given City and/or State, Country.'
+      tags:
+        - Historical Air Quality
+  '/history/airquality?city_id={city_id}':
+    get:
+      description: Returns historical air quality conditions.
+      parameters:
+        - description: City ID.
+          format: double
+          in: path
+          name: city_id
+          required: true
+          type: number
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historical air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hours of historical air quality conditions - Given a City ID.
+      tags:
+        - Historical Air Quality
+  '/history/airquality?lat={lat}&lon={lon}':
+    get:
+      description: Returns historical air quality conditions.
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historical air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hours of historical air quality conditions - Given a lat/lon.
+      tags:
+        - Historical Air Quality
+  '/history/airquality?postal_code={postal_code}':
+    get:
+      description: Returns historical air quality conditions.
+      parameters:
+        - description: 'Postal Code. Example: 28546'
+          format: integer
+          in: path
+          name: postal_code
+          required: true
+          type: integer
+        - description: Country Code (2 letter).
+          format: string
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Wraps return in jsonp callback. Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historical air quality conditions
+          schema:
+            $ref: '#/definitions/AQCurrentGroup'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns 72 hours of historical air quality conditions - Given a Postal Code.
+      tags:
+        - Historical Air Quality
   '/history/daily?city={city}&country={country}':
     get:
       description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
@@ -4199,6 +4712,7 @@ paths:
           type: string
         - description: 'Time period to aggregate by (daily, monthly)'
           enum:
+            - hourly
             - daily
             - monthly
           format: string
@@ -4895,53 +5409,135 @@ paths:
       summary: Returns Historical Observations - Given a station ID.
       tags:
         - Hourly Historical Weather Data
-  '/ip?ip={ip}':
-    get:
-      description: 'Returns a geolocation object. Given an IP address. If no IP supplied, will use request IP address.'
-      parameters:
-        - description: IP address
-          format: string
-          in: path
-          name: ip
-          required: true
-          type: string
-        - description: Wraps return in jsonp callback
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: exclude=all => return IP address only
-          format: string
-          in: query
-          name: exclude
-          required: false
-          type: string
-        - description: '&format=none => return IP address as string'
-          format: string
-          in: query
-          name: format
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        '200':
-          description: A geolocation object.
-          schema:
-            $ref: '#/definitions/GeoIPObj'
-        default:
-          description: No Data.
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Returns an Geolocation object.
-      tags:
-        - IP Geolocation API
 definitions:
+  AQCurrent:
+    properties:
+      aqi:
+        description: Cloud cover as a percentage (%)
+        example: 100
+        type: integer
+      no2:
+        description: Concentration of NO2 (µg/m³)
+        example: 25
+        type: number
+      o3:
+        description: Concentration of O3 (µg/m³)
+        example: 2
+        type: number
+      pm10:
+        description: Concentration of PM 10 (µg/m³)
+        example: 150
+        type: number
+      pm25:
+        description: Concentration of PM 2.5 (µg/m³)
+        example: 230
+        type: number
+      so2:
+        description: Concentration of SO2 (µg/m³)
+        example: 50
+        type: number
+    type: object
+  AQCurrentGroup:
+    properties:
+      city_name:
+        description: City Name
+        example: Raleigh
+        type: string
+      country_code:
+        description: Country Abbreviation
+        example: US
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/AQCurrent'
+        type: array
+      lat:
+        description: Latitude
+        example: '38.25'
+        type: string
+      lon:
+        description: Longitude
+        example: '-78.00'
+        type: string
+      state_code:
+        description: State Abbreviation
+        example: NC
+        type: string
+      timezone:
+        description: Local IANA time zone
+        example: America/New_York
+        type: string
+    type: object
+  AQHour:
+    properties:
+      aqi:
+        description: Cloud cover as a percentage (%)
+        example: 100
+        type: integer
+      no2:
+        description: Concentration of NO2 (µg/m³)
+        example: 25
+        type: number
+      o3:
+        description: Concentration of O3 (µg/m³)
+        example: 2
+        type: number
+      pm10:
+        description: Concentration of PM 10 (µg/m³)
+        example: 150
+        type: number
+      pm25:
+        description: Concentration of PM 2.5 (µg/m³)
+        example: 230
+        type: number
+      so2:
+        description: Concentration of SO2 (µg/m³)
+        example: 50
+        type: number
+      timestamp_local:
+        description: Timestamp in local time
+        example: '2019-03-04T12:00:00'
+        type: string
+      timestamp_utc:
+        description: Timestamp UTC
+        example: '2019-03-04T17:00:00'
+        type: string
+      ts:
+        description: Unix Timestamp
+        example: '1551718800'
+        type: number
+    type: object
+  AQHourly:
+    properties:
+      city_name:
+        description: City Name
+        example: Raleigh
+        type: string
+      country_code:
+        description: Country Abbreviation
+        example: US
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/AQHour'
+        type: array
+      lat:
+        description: Latitude
+        example: '38.25'
+        type: string
+      lon:
+        description: Longitude
+        example: '-78.00'
+        type: string
+      state_code:
+        description: State Abbreviation
+        example: NC
+        type: string
+      timezone:
+        description: Local IANA time zone
+        example: America/New_York
+        type: string
+    type: object
   AlertRegionGroup:
     description: List of impacted regions
     example: 'St Louis, MO'
@@ -4951,6 +5547,10 @@ definitions:
       app_temp:
         description: Apparent temperature - Default (C)
         example: 14.85
+        type: number
+      aqi:
+        description: Air quality index (US EPA standard 0 to +500)
+        example: 50
         type: number
       city_name:
         description: City name (closest)
@@ -4973,12 +5573,20 @@ definitions:
         example: 12
         type: number
       dhi:
-        description: Direct component of solar insolation (W/m^2)
+        description: Diffuse horizontal irradiance (W/m^2)
+        example: 450.4
+        type: number
+      dni:
+        description: Direct normal irradiance (W/m^2)
         example: 450.4
         type: number
       elev_angle:
         description: Current solar elevation angle (Degrees)
         example: 37
+        type: number
+      ghi:
+        description: Global horizontal irradiance (W/m^2)
+        example: 450.4
         type: number
       hour_angle:
         description: Current solar hour angle (Degrees)
@@ -5018,6 +5626,10 @@ definitions:
       snow:
         description: Snowfall in last hour - Default (mm)
         example: 10
+        type: number
+      solar_rad:
+        description: Estimated solar radiation (W/m^2)
+        example: 300.4
         type: number
       state_code:
         description: State abbreviation
@@ -5329,8 +5941,8 @@ definitions:
         example: 100
         type: integer
       datetime:
-        description: (UTC) Date in format "YYYY-MM-DD"
-        example: '2017-02-06'
+        description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
+        example: '2019-03-04:17'
         type: string
       dewpt:
         description: Dewpoint (Average) - default (C)
@@ -5404,10 +6016,18 @@ definitions:
         description: Temperature (Average) - default (C)
         example: 1
         type: number
+      timestamp_local:
+        description: Timestamp in local time
+        example: '2019-03-04T12:00:00'
+        type: string
+      timestamp_utc:
+        description: Timestamp UTC
+        example: '2019-03-04T17:00:00'
+        type: string
       ts:
         description: Unix Timestamp
-        example: 1490990400
-        type: integer
+        example: '1551718800'
+        type: number
       uv:
         description: UV Index
         example: 6.5
@@ -5490,8 +6110,8 @@ definitions:
         example: 100
         type: integer
       datetime:
-        description: '(UTC) Date in format "YYYY-MM-DD:HH"'
-        example: '2017-02-06:02'
+        description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
+        example: '2019-03-04:17'
         type: string
       dewpt:
         description: Dewpoint - Default (C)
@@ -5507,7 +6127,7 @@ definitions:
         type: number
       ghi:
         description: Global horizontal solar irradiance (W/m^2)
-        example: 1500
+        example: 1000
         type: number
       pod:
         description: 'Part of day (d = day, n = night)'
@@ -5520,10 +6140,6 @@ definitions:
       precip:
         description: Accumulated precipitation since last forecast point. Default (mm)
         example: 1.1
-        type: number
-      precip6h:
-        description: Accumulated precipitation since last forecast point. Default (mm)
-        example: 14.5
         type: number
       pres:
         description: Pressure (mb)
@@ -5549,13 +6165,25 @@ definitions:
         description: Snow depth - Default (mm)
         example: 45
         type: number
+      solar_rad:
+        description: Estimated solar radiation (W/m^2)
+        example: 300
+        type: number
       temp:
         description: Temperature - Default (C)
         example: -1.5
         type: number
+      timestamp_local:
+        description: Timestamp in local time
+        example: '2019-03-04T12:00:00'
+        type: string
+      timestamp_utc:
+        description: Timestamp UTC
+        example: '2019-03-04T17:00:00'
+        type: string
       ts:
         description: Unix Timestamp
-        example: '1490990400'
+        example: '1551718800'
         type: number
       uv:
         description: UV Index
@@ -5876,8 +6504,8 @@ definitions:
         example: 325
         type: integer
       wind_gust_spd:
-        description: Wind gust direction (degrees)
-        example: 340
+        description: Wind gust speed - default (m/s)
+        example: 40.98
         type: number
       wind_spd:
         description: Average wind speed - default (m/s)
@@ -5888,7 +6516,7 @@ definitions:
     properties:
       datetime:
         description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
-        example: '2016-01-01:00'
+        example: '2019-03-04:17'
         type: string
       dewpt:
         description: Dew point (Default Celcius)
@@ -5922,10 +6550,6 @@ definitions:
         description: Liquid equivalent precipitation - Default (mm)
         example: 3
         type: number
-      precip6h:
-        description: Liquid equivalent precipitation in last 6 hours - Default (mm)
-        example: 6
-        type: number
       pres:
         description: Pressure (mb)
         example: 845
@@ -5946,14 +6570,26 @@ definitions:
         description: Snowfall in last 6 hours - Default (mm)
         example: 60
         type: number
+      solar_rad:
+        description: Estimated solar radiation (W/m^2)
+        example: 300
+        type: number
       temp:
         description: Temperature (Default Celcius)
         example: -1.2
         type: number
+      timestamp_local:
+        description: Timestamp in local time
+        example: '2019-03-04T12:00:00'
+        type: string
+      timestamp_utc:
+        description: Timestamp UTC
+        example: '2019-03-04T17:00:00'
+        type: string
       ts:
-        description: Unix Timestamp (UTC)
-        example: 1451606400
-        type: integer
+        description: Unix Timestamp
+        example: '1551718800'
+        type: number
       uv:
         description: UV Index (1-11+)
         example: 4

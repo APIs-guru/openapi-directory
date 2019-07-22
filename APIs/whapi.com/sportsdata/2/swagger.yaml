@@ -266,6 +266,13 @@ parameters:
     required: false
     type: string
     x-eg: OB_MG123
+  param_marketGroupId2:
+    description: Filter by marketGroupId (e.g. OB_MG1276585).
+    in: query
+    name: marketGroupId
+    required: true
+    type: string
+    x-eg: OB_MG123
   param_marketId:
     description: The market id to retrieve information for
     in: path
@@ -299,6 +306,13 @@ parameters:
     in: query
     name: marketSort
     required: false
+    type: string
+    x-eg: MR
+  param_marketSort2:
+    description: Filter by market sort (e.g. MR (match result) -- (Outright)).
+    in: query
+    name: marketSort
+    required: true
     type: string
     x-eg: MR
   param_marketStatus:
@@ -809,6 +823,77 @@ paths:
           schema:
             $ref: '#/definitions/errorsWrapper'
       summary: Retrieves a list of market groups for a given competition id
+      tags:
+        - sportsdata
+      x-canReturnErrors:
+        - 0
+  '/competitions/{competitionId}/marketsByGroupid':
+    get:
+      description: Retrieves a list of events/markets/selections where markets within said event match selected sort/groupId
+      operationId: getMarketsByGroupId
+      parameters:
+        - $ref: '#/parameters/param_apiKey'
+        - $ref: '#/parameters/param_competitionId'
+        - $ref: '#/parameters/param_fields'
+        - $ref: '#/parameters/param_include'
+        - $ref: '#/parameters/param_exclude'
+        - $ref: '#/parameters/param_marketSort2'
+        - $ref: '#/parameters/param_marketGroupId2'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json: |
+              {
+               "events": [
+
+               {
+               "id": "OB_EV123",
+               "name": "ManU v City",
+               "markets": {
+               "id": "OB_MA1234",
+               "name": "90 Minutes"
+               "selections": {
+               "id": "OB_OU12345",
+               "fractionalOdds": "2/1"
+               
+               }
+               }
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/marketGroupsWrapper'
+        '400':
+          description: Incorrect or Missing Parameter
+          examples:
+            application/json: |
+              {
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/errorsWrapper'
+        '404':
+          description: No data found for request
+          examples:
+            application/json: |
+              {
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/errorsWrapper'
+      summary: Retrieves a list of events/markets/selections where markets within said event match selected sort/groupId
       tags:
         - sportsdata
       x-canReturnErrors:
@@ -2107,6 +2192,9 @@ definitions:
         type: string
       id:
         description: The Id of the Market Group
+        type: string
+      marketSort:
+        description: The market sort of this group
         type: string
       name:
         description: The Name of the Market Group

@@ -40,8 +40,6 @@ tags:
     name: account
   - description: Manage contacts
     name: contacts
-  - description: Number context service
-    name: context
   - description: Manage groups
     name: groups
   - description: Manage your messages
@@ -542,63 +540,6 @@ paths:
       summary: addToGroup
       tags:
         - contacts
-  /api/rest/v1/context/lookup:
-    get:
-      consumes:
-        - application/json
-        - application/xml
-      deprecated: false
-      description: Returns context information for a single provided
-      parameters:
-        - description: number
-          in: body
-          name: body
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/WebServiceNumberContextLookupResponse'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: lookup
-      tags:
-        - context
-    post:
-      consumes:
-        - application/json
-        - application/xml
-      deprecated: false
-      description: Returns context information for a single provided
-      parameters:
-        - description: number
-          in: body
-          name: body
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/WebServiceNumberContextLookupResponse'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: lookup
-      tags:
-        - context
   /api/rest/v1/groups/all:
     get:
       consumes:
@@ -2179,28 +2120,6 @@ definitions:
         items:
           $ref: '#/definitions/WebServiceMessage'
         type: array
-  WebServiceNumberContextLookupRequest:
-    description: WebServiceNumberContextLookupRequest
-    properties:
-      links:
-        items:
-          $ref: '#/definitions/Link'
-        type: array
-      numbers:
-        items:
-          type: string
-        type: array
-  WebServiceNumberContextLookupResponse:
-    description: WebServiceNumberContextLookupResponse
-    properties:
-      links:
-        items:
-          $ref: '#/definitions/Link'
-        type: array
-      number:
-        type: string
-      numberValid:
-        type: boolean
   WebServiceSendSmsRequest:
     description: WebServiceSendSmsRequest
     properties:

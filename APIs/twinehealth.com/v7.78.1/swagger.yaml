@@ -119,6 +119,8 @@ tags:
     name: patient
   - description: A plan is the set of actions and associated goals for a patient.
     name: plan
+  - description: A patient health result is a quantitative result for a patient.
+    name: result
   - description: A reward allocates a portion of the budget from the reward program activation for achieving a particular goal and sets a target date.
     name: reward
   - description: A reward earning specifies the portion of a reward that was earned and at what date.
@@ -567,6 +569,37 @@ paths:
       summary: Create calendar event response
       tags:
         - calendar event response
+  /coach:
+    get:
+      description: Get a list of coaches matching the specified filters.
+      operationId: fetchCoaches
+      parameters:
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchCoachesResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: List coaches
+      tags:
+        - coach
   '/coach/{id}':
     get:
       description: Get a coach record by id.
@@ -966,6 +999,54 @@ paths:
       summary: Get a health profile answer
       tags:
         - health profile answer
+  /health_profile_question:
+    get:
+      description: Get a list of health profile questions
+      operationId: fetchHealthProfileQuestions
+      parameters:
+        - description: |
+            Patient id to fetch healt profile questions. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
+          in: query
+          name: 'filter[patient]'
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
+          type: string
+        - description: List of related resources to include in the response
+          enum:
+            - question_definition
+            - answer
+          in: query
+          name: include
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchHealthProfileQuestionsResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '409':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: List health profile questions
+      tags:
+        - health profile question
   '/health_profile_question/{id}':
     get:
       description: Get a health profile by id
@@ -1476,10 +1557,20 @@ paths:
       description: Get a list of patient health metrics.
       operationId: fetchPatientHealthMetrics
       parameters:
-        - description: Filter the patient health metrics for a specified patient
+        - description: |
+            Filter the patient health metrics for a specified patient. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: 'filter[patient]'
-          required: true
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
           type: string
         - default: 1
           description: Page number
@@ -1624,10 +1715,20 @@ paths:
       description: Get a list of patient plan summaries
       operationId: fetchPatientPlanSummaries
       parameters:
-        - description: Patient id to fetch plan summary for
+        - description: |
+            Patient id to fetch plan summary for. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: 'filter[patient]'
-          required: true
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
           type: string
         - description: List of related resources to include in the response
           enum:
@@ -1725,15 +1826,125 @@ paths:
       summary: Update a plan summary
       tags:
         - plan
+  /result:
+    get:
+      description: Get a list of patient health results.
+      operationId: fetchPatientHealthResults
+      parameters:
+        - description: Filter the patient health results for a specified patient
+          in: query
+          name: 'filter[patient]'
+          required: true
+          type: string
+        - description: A comma-separated list of action identifiers
+          in: query
+          name: 'filter[actions]'
+          type: string
+        - description: Filter results that occurred after the passed ISO date and time string
+          format: dateTime
+          in: query
+          name: 'filter[start_at]'
+          type: string
+        - description: Filter results that occurred before the passed ISO date and time string
+          format: dateTime
+          in: query
+          name: 'filter[end_at]'
+          type: string
+        - description: A comma-separated list of thread identifiers
+          in: query
+          name: 'filter[threads]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for results created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[created_at]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for results updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[updated_at]'
+          type: string
+        - default: 1
+          description: Page number
+          in: query
+          name: 'page[number]'
+          required: false
+          type: integer
+        - default: 10
+          description: Page size
+          in: query
+          maximum: 50
+          minimum: 0
+          name: 'page[size]'
+          required: false
+          type: integer
+        - default: 50
+          description: Page limit
+          in: query
+          minimum: 0
+          name: 'page[limit]'
+          required: false
+          type: integer
+        - description: Page cursor
+          in: query
+          name: 'page[after]'
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchPatientHealthResultResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '409':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: List patient health results
+      tags:
+        - result
+  '/result/{id}':
+    get:
+      description: Get patient health result by id.
+      operationId: fetchPatientHealthResult
+      parameters:
+        - description: Patient health result identifier
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchPatientHealthResultResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: Get a patient health result
+      tags:
+        - result
   /reward:
     get:
       description: Get a list of rewards matching the specified filters.
       operationId: fetchRewards
       parameters:
-        - description: Patient identifier
+        - description: |
+            Patient identifier. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: 'filter[patient]'
-          required: true
           type: string
         - description: Reward program activation identifier
           in: query
@@ -1742,6 +1953,16 @@ paths:
         - description: Thread identifier
           in: query
           name: 'filter[thread]'
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
           type: string
       responses:
         '200':
@@ -1990,10 +2211,15 @@ paths:
       description: Get a list of reward programs matching the specified filters.
       operationId: fetchRewardPrograms
       parameters:
-        - description: Comma-separated list of group identifiers
+        - description: |
+            Comma-separated list of group identifiers. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
           in: query
           name: 'filter[groups]'
-          required: true
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
           type: string
       responses:
         '200':
@@ -2097,10 +2323,20 @@ paths:
       description: Get a list of reward program activations matching the specified filters.
       operationId: fetchRewardProgramActivations
       parameters:
-        - description: Patient identifier
+        - description: |
+            Patient identifier. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: 'filter[patient]'
-          required: true
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
+          in: query
+          name: 'filter[organization]'
           type: string
       responses:
         '200':
@@ -3682,6 +3918,27 @@ definitions:
     required:
       - data
     type: object
+  FetchHealthProfileQuestionsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/HealthProfileQuestionResource'
+        type: array
+      included:
+        description: |
+          Related resources which are included in the response based on the `include` param.
+          Attributes of each resource will vary depending on the type.
+          See [question_definition](#operation/fetchHealthQuestionDefinition), [answer](#operation/fetchHealthProfileAnswer)
+        items:
+          $ref: '#/definitions/Resource'
+        type: array
+      links:
+        $ref: '#/definitions/CollectionResponseLinks'
+      meta:
+        $ref: '#/definitions/FetchMetaResponse'
+    required:
+      - data
+    type: object
   FetchHealthProfileResponse:
     properties:
       data:
@@ -3773,6 +4030,19 @@ definitions:
       data:
         items:
           $ref: '#/definitions/PatientHealthMetricResource'
+        type: array
+      links:
+        $ref: '#/definitions/CollectionResponseLinks'
+      meta:
+        $ref: '#/definitions/FetchMetaResponse'
+    required:
+      - data
+    type: object
+  FetchPatientHealthResultResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/PatientHealthResultResource'
         type: array
       links:
         $ref: '#/definitions/CollectionResponseLinks'
@@ -4934,6 +5204,210 @@ definitions:
       - type
       - id
     type: object
+  PatientHealthResultResource:
+    example:
+      data:
+        attributes:
+          _thread: 569c631f4b378f51306324f2d69fd29aa0c034ac
+          annotations: []
+          created_at: '2018-09-18T12:24:37.000Z'
+          created_by: 5c0fc0d02d02421ed70ca1d1
+          data:
+            value: 1
+          occurred_at: '2018-09-18T12:24:37.000Z'
+          occurred_at_time_zone: America/New_York
+          source: {}
+          type: medication
+          updated_at: '2018-09-18T12:24:37.000Z'
+          updated_by: 5c0fc0d02d02421ed70ca1d1
+          window: 5c0fc0d42d02421ed70cae01
+        id: 5c0fc0d42d02421ed70cae16
+        relationships:
+          action:
+            data:
+              id: 5ada648779672451a6c1b095
+              type: action
+          metric:
+            data:
+              id: 5c0fc0d42d02421ed70cae16
+              type: patient_health_metric
+          patient:
+            data:
+              id: 5c0fc0d02d02421ed70ca1d1
+              type: patient
+        type: result
+    properties:
+      attributes:
+        properties:
+          _thread:
+            description: 'Links together results. This should be the same as the thread of _action, if it is defined'
+            type: string
+          aggregation:
+            type: string
+          annotations:
+            items:
+              properties:
+                text:
+                  type: string
+                title:
+                  type: string
+              type: object
+            type: array
+          channel:
+            type: string
+          data:
+            properties:
+              value:
+                description: 'Can be any value (number, boolean, string, object) depending on the metric type. Most values are of type number'
+            type: object
+          external_id:
+            type: string
+          metric_type:
+            enum:
+              - blood_pressure_systolic
+              - blood_pressure_diastolic
+              - hemoglobin_a1c
+              - hdl_cholesterol
+              - ldl_cholesterol
+              - total_cholesterol
+              - triglycerides
+              - blood_urea_nitrogen
+              - creatinine
+              - hemoglobin
+              - hematocrit
+              - total_serum_iron
+              - thyroid_stimulating_hormone
+              - free_thyroxine
+              - free_triiodothyronine
+              - total_triiodothyronine
+              - cd4_cell_count
+              - hiv_viral_load
+              - inr
+              - free_testosterone
+              - total_testosterone
+              - c_reactive_protein
+              - prostate_specific_antigen
+              - cotinine
+              - c_peptide
+              - blood_pressure
+              - blood_glucose
+              - weight
+              - heart_rate
+              - body_fat_percentage
+              - body_mass_index
+              - body_temperature
+              - forced_expiratory_volume1
+              - forced_vital_capacity
+              - lean_body_mass
+              - nausea_level
+              - oxygen_saturation
+              - pain_level
+              - peak_expiratory_flow_rate
+              - peripheral_perfusion_index
+              - respiratory_rate
+              - inhaler_usage
+            type: string
+          occurred_at:
+            example: '2018-09-18T12:24:37.000Z'
+            format: dateTime
+            type: string
+          occurred_at_time_zone:
+            example: America/New_York
+            type: string
+          skipped:
+            type: boolean
+          source:
+            properties:
+              metadata:
+                description: Can be any value
+              name:
+                type: string
+              source_id:
+                type: string
+            type: object
+          type:
+            description: Type of result. Usually the same as metric_type except for lifestyle actions
+            type: string
+          window:
+            type: string
+        type: object
+      id:
+        type: string
+      relationships:
+        properties:
+          action:
+            properties:
+              data:
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              links:
+                type: object
+            type: object
+          metric:
+            properties:
+              data:
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              links:
+                type: object
+            type: object
+          patient:
+            properties:
+              data:
+                properties:
+                  id:
+                    description: Required if the `meta.query` is not defined.
+                    example: 5c0fc0d02d02421ed70ca1d1
+                    type: string
+                  meta:
+                    description: Allows the specification of a query for a patient rather than providing a patient id directly
+                    properties:
+                      query:
+                        description: The query must return one and only one patient.
+                        properties:
+                          groups:
+                            items:
+                              type: string
+                            type: array
+                          identifier:
+                            properties:
+                              system:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                              - system
+                              - value
+                            type: object
+                          organization:
+                            type: string
+                        required:
+                          - identifier
+                        type: object
+                    required:
+                      - query
+                    type: object
+                  type:
+                    type: string
+                type: object
+              links:
+                type: object
+            type: object
+        type: object
+      type:
+        type: string
+    required:
+      - type
+      - id
+    type: object
   PatientIdentifier:
     properties:
       label:
@@ -5995,6 +6469,7 @@ x-tagGroups:
       - metric
       - patient
       - plan
+      - result
       - reward
       - reward earning
       - reward earning fulfillment

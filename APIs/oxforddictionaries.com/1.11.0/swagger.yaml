@@ -47,7 +47,7 @@ parameters:
     required: true
     type: string
   keyValFilters:
-    collectionFormat: csv
+    default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
     description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
     in: path
     items:
@@ -55,7 +55,7 @@ parameters:
       type: string
     name: filters
     required: true
-    type: array
+    type: string
   monolingual-lemmatron-source_lang:
     description: IANA language code
     enum:
@@ -81,6 +81,7 @@ parameters:
       - sw
       - ta
       - gu
+      - fr
     in: path
     name: source_lang
     required: true
@@ -209,7 +210,12 @@ paths:
           name: source_language
           required: true
           type: string
-        - $ref: '#/parameters/entriesWordId'
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -237,8 +243,26 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
-        - $ref: '#/parameters/entriesWordId'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - lv
+            - hi
+            - sw
+            - ta
+            - gu
+            - fr
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -267,8 +291,19 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/thesaurus-source_lang'
-        - $ref: '#/parameters/entriesWordId'
+        - description: IANA language code
+          enum:
+            - en
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -302,7 +337,12 @@ paths:
           name: source_lang
           required: true
           type: string
-        - $ref: '#/parameters/entriesWordId'
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - description: Region filter parameter. gb = Oxford Dictionary of English. us = New Oxford American Dictionary.
           enum:
             - gb
@@ -340,8 +380,19 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/thesaurus-source_lang'
-        - $ref: '#/parameters/entriesWordId'
+        - description: IANA language code
+          enum:
+            - en
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -370,8 +421,19 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/thesaurus-source_lang'
-        - $ref: '#/parameters/entriesWordId'
+        - description: IANA language code
+          enum:
+            - en
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -397,9 +459,35 @@ paths:
 
           <div id="dictionary_entries_filters"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
-        - $ref: '#/parameters/entriesWordId'
-        - $ref: '#/parameters/keyValFilters'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - lv
+            - hi
+            - sw
+            - ta
+            - gu
+            - fr
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: ace
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
+        - default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
+          description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+          in: path
+          items:
+            pattern: (lexicalCategory|grammaticalFeatures)=.+
+            type: string
+          name: filters
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -568,7 +656,7 @@ paths:
       summary: Lists available grammatical features in a dataset
       tags:
         - Utility
-  '/inflections/{source_lang}/{word_id}':
+  '/inflections/{source_lang}/{word_id}/{filters}':
     get:
       description: |
 
@@ -576,7 +664,29 @@ paths:
 
           <div id="lemmatron"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-lemmatron-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - hi
+            - nso
+            - tn
+            - zu
+            - de
+            - pt
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
+          description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+          in: path
+          items:
+            pattern: (lexicalCategory|grammaticalFeatures)=.+
+            type: string
+          name: filters
+          required: true
+          type: string
         - default: swimming
           description: The input word
           in: path
@@ -595,36 +705,6 @@ paths:
           description: |
             Internal Error. An error occurred while processing the data.
       summary: Check a word exists in the dictionary and retrieve its root form
-      tags:
-        - Lemmatron
-  '/inflections/{source_lang}/{word_id}/{filters}':
-    get:
-      description: |
-
-        Retrieve available [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) wordform. Filter results by categories.  
-
-          <div id="lemmatron_filters"></div>
-      parameters:
-        - $ref: '#/parameters/monolingual-lemmatron-source_lang'
-        - default: change
-          description: The input word
-          in: path
-          name: word_id
-          required: true
-          type: string
-        - $ref: '#/parameters/keyValFilters'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/Lemmatron'
-            title: InflectionsResults
-        '500':
-          description: |
-            Internal Error. An error occurred while processing the data.
-      summary: Apply optional filters to Lemmatron response
       tags:
         - Lemmatron
   /languages:
@@ -1356,7 +1436,19 @@ paths:
 
           <div id="wordlist_advanced"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-wordlist-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - hi
+            - lv
+            - sw
+            - ta
+            - gu
+          in: path
+          name: source_lang
+          required: true
+          type: string
         - default: lexicalCategory=Noun;domains=sport
           description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path
@@ -1435,7 +1527,19 @@ paths:
 
           <div id="wordlist"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-wordlist-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - hi
+            - lv
+            - sw
+            - ta
+            - gu
+          in: path
+          name: source_lang
+          required: true
+          type: string
         - default: registers=Rare;domains=Art
           description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path

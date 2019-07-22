@@ -121,12 +121,42 @@ paths:
       summary: Convert a scanned image into text
       tags:
         - ImageOcr
+  /ocr/pdf/to/lines-with-location:
+    post:
+      description: 'Converts a PDF into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.'
+      operationId: PdfOcr_PdfToLinesWithLocation
+      parameters:
+        - description: PDF file to perform OCR on.
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+        - description: 'Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)'
+          in: header
+          name: language
+          required: false
+          type: string
+        - description: 'Optional, preprocessing mode, default is ''Auto''.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).'
+          in: header
+          name: preprocessing
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PdfToLinesWithLocationResult'
+      security:
+        - Apikey: []
+      summary: Convert a PDF into text lines with location
+      tags:
+        - PdfOcr
   /ocr/pdf/to/words-with-location:
     post:
       description: 'Converts a PDF into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.'
       operationId: PdfOcr_PdfToWordsWithLocation
       parameters:
-        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+        - description: PDF file to perform OCR on.
           in: formData
           name: imageFile
           required: true
@@ -155,7 +185,7 @@ paths:
     post:
       operationId: PdfOcr_Post
       parameters:
-        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+        - description: PDF file to perform OCR on.
           in: formData
           name: imageFile
           required: true
@@ -177,9 +207,89 @@ paths:
             $ref: '#/definitions/PdfToTextResponse'
       security:
         - Apikey: []
-      summary: 'Converts an uploaded image in common formats such as JPEG, PNG into text via Optical Character Recognition.'
+      summary: Converts an uploaded PDF file into text via Optical Character Recognition.
       tags:
         - PdfOcr
+  /ocr/photo/recognize/business-card:
+    post:
+      description: 'Analyzes a photograph of a business card as input, and outputs key business information such as the name of the person, name of the business, the address of the business, the phone number, the email address and more.'
+      operationId: ImageOcr_PhotoRecognizeBusinessCard
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BusinessCardRecognitionResult'
+      security:
+        - Apikey: []
+      summary: 'Recognize a photo of a business card, extract key business information'
+      tags:
+        - ImageOcr
+  /ocr/photo/recognize/receipt:
+    post:
+      description: 'Analyzes a photograph of a receipt as input, and outputs key business information such as the name of the business, the address of the business, the phone number of the business, the total of the receipt, the date of the receipt, and more.'
+      operationId: ImageOcr_PhotoRecognizeReceipt
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+        - description: 'Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)'
+          in: header
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReceiptRecognitionResult'
+      security:
+        - Apikey: []
+      summary: 'Recognize a photo of a receipt, extract key business information'
+      tags:
+        - ImageOcr
+  /ocr/photo/to/words-with-location:
+    post:
+      description: 'Converts a photo of a document or receipt in common formats such as JPEG, PNG into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on photographs of documents.  If you want to OCR scanned documents (e.g. taken with a scanner), be sure to use the image/toText API instead, as it is designed for that use case.'
+      operationId: ImageOcr_PhotoWordsWithLocation
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+        - description: 'Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)'
+          in: header
+          name: language
+          required: false
+          type: string
+        - description: 'Optional, preprocessing mode, default is ''Auto''.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).'
+          in: header
+          name: preprocessing
+          required: false
+          type: string
+        - description: 'Optional, diagnostics mode, default is ''false''.  Possible values are ''true'' (will set DiagnosticImage to a diagnostic PNG image in the result), and ''false'' (no diagnostics are enabled; this is recommended for best performance).'
+          in: header
+          name: diagnostics
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PhotoToWordsWithLocationResult'
+      security:
+        - Apikey: []
+      summary: Convert a photo of a document or receipt into words with location
+      tags:
+        - ImageOcr
   /ocr/photo/toText:
     post:
       description: 'Converts an uploaded photo of a document in common formats such as JPEG, PNG into text via Optical Character Recognition.  This API is intended to be run on photos of documents, e.g. taken with a smartphone and supports cases where other content, such as a desk, are in the frame and the camera is crooked.  If you want to OCR a scanned image, use the image/toText API call instead as it is designed for scanned images.'
@@ -205,6 +315,68 @@ paths:
       summary: Convert a photo of a document into text
       tags:
         - ImageOcr
+  /ocr/preprocessing/image/binarize:
+    post:
+      description: Perform an adaptive binarization algorithm on the input image to prepare it for further OCR operations.
+      operationId: Preprocessing_Binarize
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: byte
+            type: string
+      security:
+        - Apikey: []
+      summary: Convert an image of text into a binarized (light and dark) view
+      tags:
+        - Preprocessing
+  /ocr/preprocessing/image/binarize/advanced:
+    post:
+      description: 'Perform an advanced adaptive, Deep Learning-based binarization algorithm on the input image to prepare it for further OCR operations.  Provides enhanced accuracy than adaptive binarization.  Image will be upsampled to 300 DPI if it has a DPI below 300.'
+      operationId: Preprocessing_BinarizeAdvanced
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: byte
+            type: string
+      security:
+        - Apikey: []
+      summary: Convert an image of text into a binary (light and dark) view with ML
+      tags:
+        - Preprocessing
+  /ocr/preprocessing/image/get-page-angle:
+    post:
+      description: Analyzes a photo or image of a document and identifies the rotation angle of the page.
+      operationId: Preprocessing_GetPageAngle
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GetPageAngleResult'
+      security:
+        - Apikey: []
+      summary: Get the angle of the page / document / receipt
+      tags:
+        - Preprocessing
   /ocr/preprocessing/image/unrotate:
     post:
       description: 'Detect and unrotate an image of a document (e.g. that was scanned at an angle).  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.'
@@ -219,7 +391,8 @@ paths:
         '200':
           description: OK
           schema:
-            type: object
+            format: byte
+            type: string
       security:
         - Apikey: []
       summary: Detect and unrotate a document image
@@ -239,13 +412,67 @@ paths:
         '200':
           description: OK
           schema:
-            type: object
+            format: byte
+            type: string
       security:
         - Apikey: []
       summary: Detect and unskew a photo of a document
       tags:
         - Preprocessing
+  /ocr/receipts/photo/to/csv:
+    post:
+      deprecated: true
+      description: Leverage Deep Learning to automatically turn a photo of a receipt into a CSV file containing the structured information from the receipt.
+      operationId: Receipts_PhotoToCSV
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      security:
+        - Apikey: []
+      summary: Convert a photo of a receipt into a CSV file containing structured information from the receipt
+      tags:
+        - Receipts
 definitions:
+  BusinessCardRecognitionResult:
+    description: 'Result of recognizing a business card, to extract the key information from the business card'
+    properties:
+      AddressString:
+        type: string
+      BusinessName:
+        type: string
+      EmailAddress:
+        type: string
+      PersonName:
+        type: string
+      PersonTitle:
+        type: string
+      PhoneNumber:
+        type: string
+      Successful:
+        type: boolean
+      Timestamp:
+        format: date-time
+        type: string
+    type: object
+  GetPageAngleResult:
+    description: Result of performing a get-page-angle operation
+    properties:
+      Angle:
+        description: Angle of the page in radians; 0 represents perfectly horizontal
+        format: double
+        type: number
+      Successful:
+        description: 'True if the operation was successful, false otherwise'
+        type: boolean
+    type: object
   ImageToLinesWithLocationResult:
     description: Result of an image to lines-with-location OCR operation
     properties:
@@ -305,7 +532,23 @@ definitions:
         description: Converted text string from the image input.
         type: string
     type: object
+  OcrPageResultWithLinesWithLocation:
+    description: 'OCR results of a page, including lines of text and their location'
+    properties:
+      Lines:
+        description: Word elements in the image
+        items:
+          $ref: '#/definitions/OcrLineElement'
+        type: array
+      PageNumber:
+        description: 'Page number of the page that was OCR-ed, starting with 1 for the first page in the PDF file'
+        format: int32
+        type: integer
+      Successful:
+        type: boolean
+    type: object
   OcrPageResultWithWordsWithLocation:
+    description: 'OCR results of a page, including words of text and their location'
     properties:
       PageNumber:
         description: 'Page number of the page that was OCR-ed, starting with 1 for the first page in the PDF file'
@@ -318,6 +561,33 @@ definitions:
         items:
           $ref: '#/definitions/OcrWordElement'
         type: array
+    type: object
+  OcrPhotoTextElement:
+    description: A single text in an OCR document
+    properties:
+      ConfidenceLevel:
+        description: Confidence level of the machine learning result; possible values are 0.0 (lowest accuracy) - 1.0 (highest accuracy)
+        format: double
+        type: number
+      Height:
+        description: Height of the word in pixels
+        format: int32
+        type: integer
+      Text:
+        description: Text of the word
+        type: string
+      Width:
+        description: Width of the word in pixels
+        format: int32
+        type: integer
+      XLeft:
+        description: X location of the left edge of the word in pixels
+        format: int32
+        type: integer
+      YTop:
+        description: Y location of the top edge of the word in pixels
+        format: int32
+        type: integer
     type: object
   OcrWordElement:
     description: A single word in an OCR document
@@ -366,8 +636,18 @@ definitions:
         format: int32
         type: integer
     type: object
+  PdfToLinesWithLocationResult:
+    description: 'Response from an OCR to lines with location operation.  Includes the confience rating and converted text result, along with the locations of the lines in the pages.'
+    properties:
+      OcrPages:
+        items:
+          $ref: '#/definitions/OcrPageResultWithLinesWithLocation'
+        type: array
+      Successful:
+        type: boolean
+    type: object
   PdfToTextResponse:
-    description: Response from an OCR to text operation.  Includes the confience rating and converted text result.
+    description: Response from an OCR to text operation.  Includes the confidence rating and converted text result.
     properties:
       OcrPages:
         items:
@@ -385,4 +665,37 @@ definitions:
         type: array
       Successful:
         type: boolean
+    type: object
+  PhotoToWordsWithLocationResult:
+    description: Result of an photo to words-with-location OCR operation
+    properties:
+      DiagnosticImage:
+        description: 'Typically null.  To analyze OCR performance, enable diagnostic mode by adding the HTTP header "DiagnosticMode" with the value "true".  When this is true, a diagnostic image showing the details of the OCR result will be set in PNG format into DiagnosticImage.'
+        format: byte
+        type: string
+      Successful:
+        type: boolean
+      TextElements:
+        description: Word elements in the image
+        items:
+          $ref: '#/definitions/OcrPhotoTextElement'
+        type: array
+    type: object
+  ReceiptRecognitionResult:
+    description: 'Result of recognizing a receipt, to extract the key information from the receipt'
+    properties:
+      AddressString:
+        type: string
+      BusinessName:
+        type: string
+      PhoneNumber:
+        type: string
+      ReceiptTotal:
+        format: double
+        type: number
+      Successful:
+        type: boolean
+      Timestamp:
+        format: date-time
+        type: string
     type: object

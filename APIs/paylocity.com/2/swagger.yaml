@@ -6,208 +6,7 @@ basePath: /api
 info:
   contact:
     email: webservices@paylocity.com
-  description: |-
-    For general questions and support of the API, contact: webservices@paylocity.com
-    # Overview
-
-    Paylocity Web Services API is an externally facing RESTful Internet protocol. The Paylocity API uses HTTP verbs and a RESTful endpoint structure. OAuth 2.0 is used as the API Authorization framework. Request and response payloads are formatted as JSON.
-    Paylocity supports v1 and v2 versions of its API endpoints. v1, while supported, won't be enhanced with additional functionality. For direct link to v1 documentation, please click [here](https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm). For additional resources regarding v1/v2 differences and conversion path, please contact webservices@paylocity.com.
-
-    ##### Setup
-
-    Paylocity will provide the secure client credentials and set up the scope (type of requests and allowed company numbers). You will receive the unique client id, secret, and Paylocity public key for the data encryption. The secret will expire in 365 days. 
-    * Paylocity will send you an e-mail 10 days prior to the expiration date for the current secret. If not renewed, the second e-mail notification will be sent 5 days prior to secret's expiration. Each email will contain the code necessary to renew the client secret. 
-    * You can obtain the new secret by calling API endpoint using your current not yet expired credentials and the code that was sent with the notification email. For details on API endpoint, please see Client Credentials section. 
-    * Both the current secret value and the new secret value will be recognized during the transition period. After the current secret expires, you must use the new secret. 
-    * If you were unable to renew the secret via API endpoint, you can still contact Service and they will email you new secret via secure email.
-
-
-    When validating the request, Paylocity API will honor the defaults and required fields set up for the company default New Hire Template as defined in Web Pay.
-
-
-    # Authorization
-
-    Paylocity Web Services API uses OAuth2.0 Authentication with JSON Message Format.
-
-
-    All requests of the Paylocity Web Services API require a bearer token which can be obtained by authenticating the client with the Paylocity Web Services API via OAuth 2.0.
-
-
-    The client must request a bearer token from the authorization endpoint:
-
-
-    auth-server for production: https://api.paylocity.com/IdentityServer/connect/token
-
-
-    auth-server for testing: https://apisandbox.paylocity.com/IdentityServer/connect/token
-
-    ##### Authorization Header
-
-    The request is expected to be in the form of a basic authentication request, with the "Authorization" header containing the client-id and client-secret. This means the standard base-64 encoded user:password, prefixed with "Basic" as the value for the Authorization header, where user is the client-id and password is the client-secret.
-
-    ##### Content-Type Header
-
-    The "Content-Type" header is required to be "application/x-www-form-urlencoded".
-
-    ##### Additional Values
-
-    The request must post the following form encoded values within the request body:
-
-        grant_type = client_credentials
-        scope = WebLinkAPI
-
-    ##### Responses
-
-    Success will return HTTP 200 OK with JSON content:
-
-        {
-          "access_token": "xxx",
-          "expires_in": 3600,
-          "token_type": "Bearer"
-        }
-
-    # Encryption
-
-    Paylocity uses a combination of RSA and AES cryptography. As part of the setup, each client is issued a public RSA key.
-
-    Paylocity recommends the encryption of the incoming requests as additional protection of the sensitive data. Clients can opt-out of the encryption during the initial setup process. Opt-out will allow Paylocity to process unencrypted requests.
-
-    The Paylocity Public Key has the following properties:
-
-    * 2048 bit key size
-
-    * PKCS1 key format
-
-    * PEM encoding
-
-    ##### Properties
-
-    * key (base 64 encoded): The AES symmetric key encrypted with the Paylocity Public Key. It is the key used to encrypt the content. Paylocity will decrypt the AES key using RSA decryption and use it to decrypt the content.
-
-    * iv (base 64 encoded): The AES IV (Initialization Vector) used when encrypting the content.
-
-    * content (base 64 encoded): The AES encrypted request. The key and iv provided in the secureContent request are used by Paylocity for decryption of the content.
-
-    We suggest using the following for the AES:
-
-    * CBC cipher mode
-
-    * PKCS7 padding
-
-    * 128 bit block size
-
-    * 256 bit key size
-
-    ##### Encryption Flow
-
-    * Generate the unencrypted JSON payload to POST/PUT
-    * Encrypt this JSON payload using your _own key and IV_ (NOT with the Paylocity public key)
-    * RSA encrypt the _key_ you used in step 2 with the Paylocity Public Key, then, base64 encode the result
-    * Base64 encode the IV used to encrypt the JSON payload in step 2
-    * Put together a "securecontent" JSON object:
-     
-    {
-      'secureContent' : {
-        'key' : -- RSA-encrypted & base64 encoded key from step 3,
-        'iv' : -- base64 encoded iv from step 4
-        'content' -- content encrypted with your own key from step 2, base64 encoded
-      }
-    }
-
-    ##### Sample Example
-
-        {
-          "secureContent": {
-            "key": "eS3aw6H/qzHMJ00gSi6gQ3xa08DPMazk8BFY96Pd99ODA==",
-            "iv": "NLyXMGq9svw0XO5aI9BzWw==",
-            "content": "gAEOiQltO1w+LzGUoIK8FiYbU42hug94EasSl7N+Q1w="
-          }
-        }
-
-    ##### Sample C# Code
-
-        using Newtonsoft.Json;
-        using System;
-        using System.IO;
-        using System.Security.Cryptography;
-        using System.Text;
-
-        public class SecuredContent
-        {
-          [JsonProperty("key")]
-          public string Key { get; set; }
-
-          [JsonProperty("iv")]
-          public string Iv { get; set; }
-
-          [JsonProperty("content")]
-          public string Content { get; set; }
-
-        }
-
-        public class EndUserSecureRequestExample
-        {
-          public string CreateSecuredRequest(FileInfo paylocityPublicKey, string unsecuredJsonRequest)
-          {
-            string publicKeyXml = File.ReadAllText(paylocityPublicKey.FullName, Encoding.UTF8);
-
-            SecuredContent secureContent = this.CreateSecuredContent(publicKeyXml, unsecuredJsonRequest);
-
-            string secureRequest = JsonConvert.SerializeObject(new { secureContent });
-
-            return secureRequest;
-          }
-
-          private SecuredContent CreateSecuredContent(string publicKeyXml, string request)
-          {
-            using (AesCryptoServiceProvider aesCsp = new AesCryptoServiceProvider())
-            {
-              aesCsp.Mode = CipherMode.CBC;
-              aesCsp.Padding = PaddingMode.PKCS7;
-              aesCsp.BlockSize = 128;
-              aesCsp.KeySize = 256;
-
-              using (ICryptoTransform crt = aesCsp.CreateEncryptor(aesCsp.Key, aesCsp.IV))
-              {
-                using (MemoryStream outputStream = new MemoryStream())
-                {
-                  using (CryptoStream encryptStream = new CryptoStream(outputStream, crt, CryptoStreamMode.Write))
-                  {
-                    byte[] encodedRequest = Encoding.UTF8.GetBytes(request);
-                    encryptStream.Write(encodedRequest, 0, encodedRequest.Length);
-                    encryptStream.FlushFinalBlock();
-                    byte[] encryptedRequest = outputStream.ToArray();
-
-                    using (RSACryptoServiceProvider crp = new RSACryptoServiceProvider())
-                    {
-                      crp.FromXmlstring(publicKeyXml);
-                      byte[] encryptedKey = crp.Encrypt(aesCsp.Key, false);
-
-                      return new SecuredContent()
-                      {
-                        Key = Convert.ToBase64string(encryptedKey),
-                        Iv = Convert.ToBase64string(aesCsp.IV),
-                        Content = Convert.ToBase64string(encryptedRequest)
-                      };
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-
-    ## Support
-
-    Questions about using the Paylocity API? Please contact webservices@paylocity.com.
-
-    # Deductions (v1)
-
-    Deductions API provides endpoints to retrieve, add, update and delete deductions for a company's employees. For schema details, click <a href="https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm" target="_blank">here</a>.
-
-    # OnBoarding (v1)
-
-    Onboarding API sends employee data into Paylocity Onboarding to help ensure an easy and accurate hiring process for subsequent completion into Web Pay. For schema details, click <a href="https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm" target="_blank">here</a>.
+  description: "For general questions and support of the API, contact: webservices@paylocity.com\r\n# Overview\r\n\r\nPaylocity Web Services API is an externally facing RESTful Internet protocol. The Paylocity API uses HTTP verbs and a RESTful endpoint structure. OAuth 2.0 is used as the API Authorization framework. Request and response payloads are formatted as JSON.\r\nPaylocity supports v1 and v2 versions of its API endpoints. v1, while supported, won't be enhanced with additional functionality. For direct link to v1 documentation, please click [here](https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm). For additional resources regarding v1/v2 differences and conversion path, please contact webservices@paylocity.com.\r\n\r\n##### Setup\r\n\r\nPaylocity will provide the secure client credentials and set up the scope (type of requests and allowed company numbers). You will receive the unique client id, secret, and Paylocity public key for the data encryption. The secret will expire in 365 days. \r\n* Paylocity will send you an e-mail 10 days prior to the expiration date for the current secret. If not renewed, the second e-mail notification will be sent 5 days prior to secret's expiration. Each email will contain the code necessary to renew the client secret. \r\n* You can obtain the new secret by calling API endpoint using your current not yet expired credentials and the code that was sent with the notification email. For details on API endpoint, please see Client Credentials section. \r\n* Both the current secret value and the new secret value will be recognized during the transition period. After the current secret expires, you must use the new secret. \r\n* If you were unable to renew the secret via API endpoint, you can still contact Service and they will email you new secret via secure email.\r\n\r\n\r\nWhen validating the request, Paylocity API will honor the defaults and required fields set up for the company default New Hire Template as defined in Web Pay.\r\n\r\n\r\n# Authorization\r\n\r\nPaylocity Web Services API uses OAuth2.0 Authentication with JSON Message Format.\r\n\r\n\r\nAll requests of the Paylocity Web Services API require a bearer token which can be obtained by authenticating the client with the Paylocity Web Services API via OAuth 2.0.\r\n\r\n\r\nThe client must request a bearer token from the authorization endpoint:\r\n\r\n\r\nauth-server for production: https://api.paylocity.com/IdentityServer/connect/token\r\n\r\n\r\nauth-server for testing: https://apisandbox.paylocity.com/IdentityServer/connect/token\r\n\r\n##### Authorization Header\r\n\r\nThe request is expected to be in the form of a basic authentication request, with the \"Authorization\" header containing the client-id and client-secret. This means the standard base-64 encoded user:password, prefixed with \"Basic\" as the value for the Authorization header, where user is the client-id and password is the client-secret.\r\n\r\n##### Content-Type Header\r\n\r\nThe \"Content-Type\" header is required to be \"application/x-www-form-urlencoded\".\r\n\r\n##### Additional Values\r\n\r\nThe request must post the following form encoded values within the request body:\r\n\r\n    grant_type = client_credentials\r\n    scope = WebLinkAPI\r\n\r\n##### Responses\r\n\r\nSuccess will return HTTP 200 OK with JSON content:\r\n\r\n    {\r\n      \"access_token\": \"xxx\",\r\n      \"expires_in\": 3600,\r\n      \"token_type\": \"Bearer\"\r\n    }\r\n\r\n# Encryption\r\n\r\nPaylocity uses a combination of RSA and AES cryptography. As part of the setup, each client is issued a public RSA key.\r\n\r\nPaylocity recommends the encryption of the incoming requests as additional protection of the sensitive data. Clients can opt-out of the encryption during the initial setup process. Opt-out will allow Paylocity to process unencrypted requests.\r\n\r\nThe Paylocity Public Key has the following properties:\r\n\r\n* 2048 bit key size\r\n\r\n* PKCS1 key format\r\n\r\n* PEM encoding\r\n\r\n##### Properties\r\n\r\n* key (base 64 encoded): The AES symmetric key encrypted with the Paylocity Public Key. It is the key used to encrypt the content. Paylocity will decrypt the AES key using RSA decryption and use it to decrypt the content.\r\n\r\n* iv (base 64 encoded): The AES IV (Initialization Vector) used when encrypting the content.\r\n\r\n* content (base 64 encoded): The AES encrypted request. The key and iv provided in the secureContent request are used by Paylocity for decryption of the content.\r\n\r\nWe suggest using the following for the AES:\r\n\r\n* CBC cipher mode\r\n\r\n* PKCS7 padding\r\n\r\n* 128 bit block size\r\n\r\n* 256 bit key size\r\n\r\n##### Encryption Flow\r\n\r\n* Generate the unencrypted JSON payload to POST/PUT\r\n* Encrypt this JSON payload using your _own key and IV_ (NOT with the Paylocity public key)\r\n* RSA encrypt the _key_ you used in step 2 with the Paylocity Public Key, then, base64 encode the result\r\n* Base64 encode the IV used to encrypt the JSON payload in step 2\r\n* Put together a \"securecontent\" JSON object:\r\n \r\n{\r\n  'secureContent' : {\r\n    'key' : -- RSA-encrypted & base64 encoded key from step 3,\r\n    'iv' : -- base64 encoded iv from step 4\r\n    'content' -- content encrypted with your own key from step 2, base64 encoded\r\n  }\r\n}\r\n\r\n##### Sample Example\r\n\r\n    {\r\n      \"secureContent\": {\r\n        \"key\": \"eS3aw6H/qzHMJ00gSi6gQ3xa08DPMazk8BFY96Pd99ODA==\",\r\n        \"iv\": \"NLyXMGq9svw0XO5aI9BzWw==\",\r\n        \"content\": \"gAEOiQltO1w+LzGUoIK8FiYbU42hug94EasSl7N+Q1w=\"\r\n      }\r\n    }\r\n\r\n##### Sample C# Code\r\n\r\n    using Newtonsoft.Json;\r\n    using System;\r\n    using System.IO;\r\n    using System.Security.Cryptography;\r\n    using System.Text;\r\n\r\n    public class SecuredContent\r\n    {\r\n      [JsonProperty(\"key\")]\r\n      public string Key { get; set; }\r\n\r\n      [JsonProperty(\"iv\")]\r\n      public string Iv { get; set; }\r\n\r\n      [JsonProperty(\"content\")]\r\n      public string Content { get; set; }\r\n\r\n    }\r\n\r\n    public class EndUserSecureRequestExample\r\n    {\r\n      public string CreateSecuredRequest(FileInfo paylocityPublicKey, string unsecuredJsonRequest)\r\n      {\r\n        string publicKeyXml = File.ReadAllText(paylocityPublicKey.FullName, Encoding.UTF8);\r\n\r\n        SecuredContent secureContent = this.CreateSecuredContent(publicKeyXml, unsecuredJsonRequest);\r\n\r\n        string secureRequest = JsonConvert.SerializeObject(new { secureContent });\r\n\r\n        return secureRequest;\r\n      }\r\n\r\n      private SecuredContent CreateSecuredContent(string publicKeyXml, string request)\r\n      {\r\n        using (AesCryptoServiceProvider aesCsp = new AesCryptoServiceProvider())\r\n        {\r\n          aesCsp.Mode = CipherMode.CBC;\r\n          aesCsp.Padding = PaddingMode.PKCS7;\r\n          aesCsp.BlockSize = 128;\r\n          aesCsp.KeySize = 256;\r\n\r\n          using (ICryptoTransform crt = aesCsp.CreateEncryptor(aesCsp.Key, aesCsp.IV))\r\n          {\r\n            using (MemoryStream outputStream = new MemoryStream())\r\n            {\r\n              using (CryptoStream encryptStream = new CryptoStream(outputStream, crt, CryptoStreamMode.Write))\r\n              {\r\n                byte[] encodedRequest = Encoding.UTF8.GetBytes(request);\r\n                encryptStream.Write(encodedRequest, 0, encodedRequest.Length);\r\n                encryptStream.FlushFinalBlock();\r\n                byte[] encryptedRequest = outputStream.ToArray();\r\n\r\n                using (RSACryptoServiceProvider crp = new RSACryptoServiceProvider())\r\n                {\r\n                  crp.FromXmlstring(publicKeyXml);\r\n                  byte[] encryptedKey = crp.Encrypt(aesCsp.Key, false);\r\n\r\n                  return new SecuredContent()\r\n                  {\r\n                    Key = Convert.ToBase64string(encryptedKey),\r\n                    Iv = Convert.ToBase64string(aesCsp.IV),\r\n                    Content = Convert.ToBase64string(encryptedRequest)\r\n                  };\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n\r\n## Support\r\n\r\nQuestions about using the Paylocity API? Please contact webservices@paylocity.com.\r\n\r\n# Deductions (v1)\r\n\r\nDeductions API provides endpoints to retrieve, add, update and delete deductions for a company's employees. For schema details, click <a href=\"https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm\" target=\"_blank\">here</a>.\r\n\r\n# OnBoarding (v1)\r\n\r\nOnboarding API sends employee data into Paylocity Onboarding to help ensure an easy and accurate hiring process for subsequent completion into Web Pay. For schema details, click <a href=\"https://docs.paylocity.com/weblink/guides/Paylocity_Web_Services_API/v1/Paylocity_Web_Services_API.htm\" target=\"_blank\">here</a>."
   termsOfService: Paylocity_Automated_Data_Exchange_Request_Form.pdf
   title: Paylocity
   version: '2'
@@ -894,6 +693,57 @@ paths:
       summary: Get Earning by Earning Code and Start Date
       tags:
         - Earnings
+  '/v2/companies/{companyId}/employees/{employeeId}/emergencyContacts':
+    put:
+      description: Sends new or updated employee emergency contacts directly to Web Pay.
+      operationId: Add or update emergency contacts
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Emergency Contact Model
+          in: body
+          name: json
+          required: true
+          schema:
+            $ref: '#/definitions/emergencyContact'
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully added or updated
+        '400':
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Add/update emergency contacts
+      tags:
+        - Emergency Contacts
   '/v2/companies/{companyId}/employees/{employeeId}/localTaxes':
     get:
       description: Returns all local taxes for the selected employee.
@@ -1141,6 +991,292 @@ paths:
       summary: Add/update non-primary state tax
       tags:
         - Non-Primary State Tax
+  '/v2/companies/{companyId}/employees/{employeeId}/paystatement/details/{year}':
+    get:
+      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year.
+      operationId: Gets employee pay statement detail data based on the specified year
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+        - description: The year for which to retrieve pay statement data
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: Number of records per page. Default value is 25.
+          in: query
+          name: pagesize
+          required: false
+          type: integer
+        - description: 'Page number to retrieve; page numbers are 0-based (so to get the first page of results, pass pagenumber=0). Default value is 0.'
+          in: query
+          name: pagenumber
+          required: false
+          type: integer
+        - description: Whether to include the total record count in the header's X-Pcty-Total-Count property. Default value is true.
+          in: query
+          name: includetotalcount
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successfully Retrieved
+          schema:
+            items:
+              $ref: '#/definitions/payStatementDetails'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'The employee, specified year, or check date does not exist'
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get employee pay statements for the specified year.
+      tags:
+        - PayStatements
+  '/v2/companies/{companyId}/employees/{employeeId}/paystatement/details/{year}/{checkDate}':
+    get:
+      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year and check date.
+      operationId: Gets employee pay statement detail data based on the specified year and check date
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+        - description: The year for which to retrieve pay statement data
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: The check date for which to retrieve pay statement data
+          in: path
+          name: checkDate
+          required: true
+          type: string
+        - description: Number of records per page. Default value is 25.
+          in: query
+          name: pagesize
+          required: false
+          type: integer
+        - description: 'Page number to retrieve; page numbers are 0-based (so to get the first page of results, pass pagenumber=0). Default value is 0.'
+          in: query
+          name: pagenumber
+          required: false
+          type: integer
+        - description: Whether to include the total record count in the header's X-Pcty-Total-Count property. Default value is true.
+          in: query
+          name: includetotalcount
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successfully Retrieved
+          schema:
+            items:
+              $ref: '#/definitions/payStatementDetails'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'The employee, specified year, or check date does not exist'
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get employee pay statements for the specified year and check date.
+      tags:
+        - PayStatements
+  '/v2/companies/{companyId}/employees/{employeeId}/paystatement/summary/{year}':
+    get:
+      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year.
+      operationId: Gets employee pay statement summary data based on the specified year
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+        - description: The year for which to retrieve pay statement data
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: Number of records per page. Default value is 25.
+          in: query
+          name: pagesize
+          required: false
+          type: integer
+        - description: 'Page number to retrieve; page numbers are 0-based (so to get the first page of results, pass pagenumber=0). Default value is 0.'
+          in: query
+          name: pagenumber
+          required: false
+          type: integer
+        - description: Whether to include the total record count in the header's X-Pcty-Total-Count property. Default value is true.
+          in: query
+          name: includetotalcount
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successfully Retrieved
+          schema:
+            items:
+              $ref: '#/definitions/payStatementSummary'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'The employee, specified year, or check date does not exist'
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get employee pay statements for the specified year.
+      tags:
+        - PayStatements
+  '/v2/companies/{companyId}/employees/{employeeId}/paystatement/summary/{year}/{checkDate}':
+    get:
+      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year and check date.
+      operationId: Gets employee pay statement summary data based on the specified year and check date
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+        - description: The year for which to retrieve pay statement data
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: The check date for which to retrieve pay statement data
+          in: path
+          name: checkDate
+          required: true
+          type: string
+        - description: Number of records per page. Default value is 25.
+          in: query
+          name: pagesize
+          required: false
+          type: integer
+        - description: 'Page number to retrieve; page numbers are 0-based (so to get the first page of results, pass pagenumber=0). Default value is 0.'
+          in: query
+          name: pagenumber
+          required: false
+          type: integer
+        - description: Whether to include the total record count in the header's X-Pcty-Total-Count property. Default value is true.
+          in: query
+          name: includetotalcount
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successfully Retrieved
+          schema:
+            items:
+              $ref: '#/definitions/payStatementSummary'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'The employee, specified year, or check date does not exist'
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get employee pay statements for the specified year and check date.
+      tags:
+        - PayStatements
   '/v2/companies/{companyId}/employees/{employeeId}/primaryStateTax':
     put:
       description: Sends new or updated employee primary state tax information directly to Web Pay.
@@ -1600,6 +1736,112 @@ definitions:
     required:
       - earningCode
       - startDate
+    type: object
+  emergencyContact:
+    additionalProperties: false
+    description: The emergency contact model
+    properties:
+      address1:
+        description: 1st address line.
+        type:
+          - string
+          - 'null'
+      address2:
+        description: 2nd address line.
+        type:
+          - string
+          - 'null'
+      city:
+        description: City.
+        type:
+          - string
+          - 'null'
+      country:
+        description: County.
+        type:
+          - string
+          - 'null'
+      county:
+        description: "Country.\_ Must be a valid 3 character country code.\_ Common values are *USA* (United States), *CAN* (Canada)."
+        type:
+          - string
+          - 'null'
+      email:
+        description: "Contact email.\_ Must be valid email address format."
+        type:
+          - string
+          - 'null'
+      firstName:
+        description: 'Required. Contact first name. <br  />Max length: 40'
+        type:
+          - string
+          - 'null'
+      homePhone:
+        description: "Contact Home Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+        type:
+          - string
+          - 'null'
+      lastName:
+        description: 'Required. Contact last name. <br  />Max length: 40'
+        type:
+          - string
+          - 'null'
+      mobilePhone:
+        description: "Contact Mobile Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+        type:
+          - string
+          - 'null'
+      notes:
+        description: 'Notes. <br  />Max length: 1000'
+        type:
+          - string
+          - 'null'
+      pager:
+        description: "Contact Pager.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+        type:
+          - string
+          - 'null'
+      primaryPhone:
+        description: "Required. Contact primary phone type.\_ Must match Company setup.\_ Valid\_ values are H (Home), M (Mobile), P (Pager), W (Work)"
+        type:
+          - string
+          - 'null'
+      priority:
+        description: Required. Contact priority. Valid values are *P* (Primary) or *S* (Secondary).
+        type:
+          - string
+          - 'null'
+      relationship:
+        description: "Required. Contact relationship.\_ Must match Company setup.\_ Common values are Spouse, Mother, Father."
+        type:
+          - string
+          - 'null'
+      state:
+        description: "State or Province.\_ If U.S. address, must be valid 2 character state code.\_ Common values are *IL* (Illinois), *CA* (California)."
+        type:
+          - string
+          - 'null'
+      syncEmployeeInfo:
+        description: Valid values are *true* or *false*.
+        type: boolean
+      workExtension:
+        description: Work Extension.
+        type:
+          - string
+          - 'null'
+      workPhone:
+        description: "Contact Work Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+        type:
+          - string
+          - 'null'
+      zip:
+        description: "Postal code.\_ If U.S. address, must be a valid zip code."
+        type:
+          - string
+          - 'null'
+    required:
+      - firstName
+      - lastName
     type: object
   employee:
     additionalProperties: false
@@ -2066,6 +2308,115 @@ definitions:
         type:
           - string
           - 'null'
+      emergencyContacts:
+        description: Add or update Emergency Contacts.
+        items:
+          additionalProperties: false
+          description: The emergency contact model
+          properties:
+            address1:
+              description: 1st address line.
+              type:
+                - string
+                - 'null'
+            address2:
+              description: 2nd address line.
+              type:
+                - string
+                - 'null'
+            city:
+              description: City.
+              type:
+                - string
+                - 'null'
+            country:
+              description: County.
+              type:
+                - string
+                - 'null'
+            county:
+              description: "Country.\_ Must be a valid 3 character country code.\_ Common values are *USA* (United States), *CAN* (Canada)."
+              type:
+                - string
+                - 'null'
+            email:
+              description: "Contact email.\_ Must be valid email address format."
+              type:
+                - string
+                - 'null'
+            firstName:
+              description: 'Required. Contact first name. <br  />Max length: 40'
+              type:
+                - string
+                - 'null'
+            homePhone:
+              description: "Contact Home Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+              type:
+                - string
+                - 'null'
+            lastName:
+              description: 'Required. Contact last name. <br  />Max length: 40'
+              type:
+                - string
+                - 'null'
+            mobilePhone:
+              description: "Contact Mobile Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+              type:
+                - string
+                - 'null'
+            notes:
+              description: 'Notes. <br  />Max length: 1000'
+              type:
+                - string
+                - 'null'
+            pager:
+              description: "Contact Pager.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+              type:
+                - string
+                - 'null'
+            primaryPhone:
+              description: "Required. Contact primary phone type.\_ Must match Company setup.\_ Valid\_ values are H (Home), M (Mobile), P (Pager), W (Work)"
+              type:
+                - string
+                - 'null'
+            priority:
+              description: Required. Contact priority. Valid values are *P* (Primary) or *S* (Secondary).
+              type:
+                - string
+                - 'null'
+            relationship:
+              description: "Required. Contact relationship.\_ Must match Company setup.\_ Common values are Spouse, Mother, Father."
+              type:
+                - string
+                - 'null'
+            state:
+              description: "State or Province.\_ If U.S. address, must be valid 2 character state code.\_ Common values are *IL* (Illinois), *CA* (California)."
+              type:
+                - string
+                - 'null'
+            syncEmployeeInfo:
+              description: Valid values are *true* or *false*.
+              type: boolean
+            workExtension:
+              description: Work Extension.
+              type:
+                - string
+                - 'null'
+            workPhone:
+              description: "Contact Work Phone.\_ Valid phone format\_ *(###) #######* or *######-####* or *### ### ####* or *##########* or, if international, starts with *+#*, only spaces and digits allowed."
+              type:
+                - string
+                - 'null'
+            zip:
+              description: "Postal code.\_ If U.S. address, must be a valid zip code."
+              type:
+                - string
+                - 'null'
+          required:
+            - firstName
+            - lastName
+          type: object
+        type: array
       employeeId:
         description: 'Leave blank to have Web Pay automatically assign the next available employee ID.<br  />Max length: 10'
         type:
@@ -2919,6 +3270,144 @@ definitions:
         type:
           - string
           - 'null'
+    type: object
+  payStatementDetails:
+    additionalProperties: false
+    description: The pay statement details model
+    properties:
+      amount:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      checkDate:
+        description: .<br />
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      det:
+        description: .<br />
+        type:
+          - string
+          - 'null'
+      detCode:
+        description: .<br />
+        type:
+          - string
+          - 'null'
+      hours:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      rate:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      transactionNumber:
+        description: <br />
+        type: integer
+      transactionType:
+        description: .<br />
+        type:
+          - string
+          - 'null'
+      year:
+        description: .<br />
+        type: integer
+    type: object
+  payStatementSummary:
+    additionalProperties: false
+    description: The pay statement summary model
+    properties:
+      autoPay:
+        description: .<br />
+        type: boolean
+      beginDate:
+        description: .<br />
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      checkDate:
+        description: .<br />
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      checkNumber:
+        description: .<br />
+        type: integer
+      directDepositAmount:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      endDate:
+        description: .<br />
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      grossPay:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      hours:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      netCheck:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      netPay:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      overtimeDollars:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      overtimeHours:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      process:
+        description: .<br />
+        type: integer
+      regularDollars:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      regularHours:
+        description: .<br />
+        type:
+          - number
+          - 'null'
+      transactionNumber:
+        description: <br />
+        type: integer
+      voucherNumber:
+        description: .<br />
+        type: integer
+      workersCompCode:
+        description: .<br />
+        type:
+          - string
+          - 'null'
+      year:
+        description: .<br />
+        type: integer
     type: object
   stagedEmployee:
     additionalProperties: false

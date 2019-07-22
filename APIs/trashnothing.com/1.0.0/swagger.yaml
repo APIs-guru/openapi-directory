@@ -529,6 +529,7 @@ paths:
   /posts:
     get:
       description: |
+        NOTE: When paging through the posts returned by this endpoint, there will be at most 1,000 posts that can be returned (eg. 50 pages worth of posts with the default per_page value of 20).  In areas where there are more than 1,000 posts, clients can use more specific query parameters to adjust which posts are returned.
         NOTE: Passing the latitude, longitude and radius parameters filters all posts by their location and so these parameters will temporarily override the current users' location preferences. When latitude, longitude and radius are not specified, public posts will be filtered by the current users' location preferences.
       operationId: get_posts
       parameters:
@@ -683,7 +684,7 @@ paths:
           type: string
         - description: A short description of the item(s).
           in: formData
-          maxLength: 30
+          maxLength: 35
           minLength: 2
           name: title
           required: true
@@ -899,7 +900,8 @@ paths:
     get:
       operationId: get_posts_by_ids
       parameters:
-        - description: 'The IDs of the posts to retrieve.  If more than 10 post IDs are passed, only the first 10 posts will be returned.'
+        - description: |
+            A comma separated list of the post IDs. If more than 10 post IDs are passed, only the first 10 posts will be returned.
           in: query
           name: post_ids
           required: true
@@ -926,6 +928,7 @@ paths:
     get:
       description: |
         Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters.
+        NOTE: When paging through the posts returned by this endpoint, there will be at most 1,000 posts that can be returned (eg. 50 pages worth of posts with the default per_page value of 20).  In areas where there are more than 1,000 posts, clients can use more specific query parameters to adjust which posts are returned.
       operationId: search_posts
       parameters:
         - description: The search query used to find posts.
@@ -1259,6 +1262,11 @@ paths:
           name: send_copy
           required: false
           type: integer
+        - description: The upload_key used to upload any photos that should be attached to this reply.
+          in: formData
+          name: upload_key
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1405,6 +1413,12 @@ paths:
           required: false
           type: string
         - description: |
+            Whether or not to include photos in the digest emails. Set to 1 to enable photos and 0 to disable photos.
+          in: formData
+          name: digest_photos
+          required: false
+          type: integer
+        - description: |
             Whether or not the user will receive post reminder emails (to remind them to update or repost their posts). Set to 1 to enable and 0 to disable.
           in: formData
           name: post_reminders
@@ -1436,11 +1450,17 @@ paths:
         - description: |
             A comma separated list of the sources to show public posts from. Currently only 'trashnothing' is supported.
             If not passed, all sources will be enabled.
-            If set to an empty string, no sources will be enabled which effectively disables public posts for the user so that the user will only see posts from the groups they are a member of.
+            If set to an empty string, no sources will be enabled which effectively disables public posts for the user so that the user will only see posts from the groups they are a member of.  Setting to an empty string is only allowed if the user is a member of one or more groups.
           in: formData
           name: public_post_sources
           required: false
           type: string
+        - description: |
+            Set to 1 to show all group posts on the main posts page and in the digest emails.  Set to 0 to only show group posts in the area defined by the users' location.  Can only be set to 0 if the users' location is already set.
+          in: formData
+          name: show_all_group_posts
+          required: false
+          type: integer
       produces:
         - application/json
       responses:
@@ -2423,6 +2443,9 @@ definitions:
             description: |
               If digest emails are enabled, this is the frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> If digest emails are disabled, this will be null. <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
             type: string
+          digest_photos:
+            description: Whether or not photos are included in the digest emails sent to the user.
+            type: boolean
           email:
             description: Data related to the users' email address.
             properties:
@@ -2493,6 +2516,10 @@ definitions:
             items:
               type: string
             type: array
+          show_all_group_posts:
+            description: |
+              If true, all group posts from the users' groups are shown to them on the main posts page and in the digest emails. <br /><br /> If false, only group posts in the area defined by the users' location are shown.
+            type: boolean
           signup:
             description: The UTC date and time when the user signed up.
             format: date-time
@@ -2508,6 +2535,7 @@ definitions:
     example:
       country: US
       digest: 6_hours
+      digest_photos: false
       email:
         address: johndoe@example.com
         bouncing: false
@@ -2533,6 +2561,7 @@ definitions:
       public_name: false
       public_post_sources:
         - trashnothing
+      show_all_group_posts: true
       signup: '2017-11-20T04:32:06.000Z'
       user_id: 119458
       username: captainjack
@@ -2717,6 +2746,7 @@ definitions:
     example:
       content: This ultrasonic diffuser creates an aroma in your home. It comes with two essential oils - mint and lavender.
       date: '2018-02-05T15:10:21.000Z'
+      footer: null
       group_id: 6
       latitude: 43.653226
       longitude: -79.383184
@@ -2824,9 +2854,11 @@ definitions:
       content: |
         Panasonic microwave oven in good working order 800 W power and turntable inside Has all the normal microwave functions plus grill elements for browning Comes with original instructions booklet It's an old microwave and could do with a bit of a clean, but still works very well
       date: '2018-02-18T17:11:38.000Z'
+      footer: null
       group_id: 81
       latitude: 42.961404
       longitude: -88.012586
+      photos: null
       post_id: 25997431
       satisfied: false
       search_content: Panasonic <span class="highlight">microwave</span> oven in good working order 800 W power and turntable
@@ -2837,6 +2869,8 @@ definitions:
   User:
     example:
       country: GB
+      firstname: null
+      lastname: null
       member_since: '2017-01-27T06:35:55.000Z'
       profile_image: 'https://lh3.googleusercontent.com/-1qVLzuOCyYg/AAAAAAAAAAI/AAAAAAAAAAA/0aGNzRAO61c/s64-c/100783935580725962164.jpg'
       user_id: 2946512

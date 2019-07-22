@@ -575,9 +575,6 @@ definitions:
       ipAddress:
         description: 'The TCP/IP address of the client making the request. The server will attempt to grab this from the headers, so it probably does not need to be passed in the body unless you get back an error message stating that we were unable to determine an IP address from the request.'
         type: string
-      listenerId:
-        description: 'A client-designated unique identifier for the logged-in user, only used if neither an NPR.org public user ID nor an `X-Advertising-ID` header are available.'
-        type: string
       userAgent:
         description: 'An identifying string for the browser making the request. The server will attempt to grab this from the headers, so it probably does not need to be passed in the body unless you get back an error message stating that we were unable to determine a User-Agent from the request.'
         type: string

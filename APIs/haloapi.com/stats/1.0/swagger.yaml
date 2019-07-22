@@ -174,7 +174,10 @@ paths:
                           Data4: int
                   Player:
                     Gamertag: string
+                    Xuid: null
                   PlayerScore: int
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   PreviousCsr:
                     Csr: int
                     DesignationId: int
@@ -336,6 +339,7 @@ paths:
               PlayerStats:
                 - AvgLifeTimeOfPlayer: string
                   BiggestKillScore: int
+                  CharacterIndex: null
                   DNF: boolean
                   DestroyedEnemyVehicles:
                     - Enemy:
@@ -370,6 +374,10 @@ paths:
                       MedalId: int
                   Player:
                     Gamertag: string
+                    Xuid: null
+                  PlayerScore: null
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   Rank: int
                   Score: uint32
                   TeamId: int
@@ -422,6 +430,7 @@ paths:
                         - int
                       StockId: int
               PlaylistId: guid
+              SeasonId: null
               Skulls:
                 - int
               TotalDuration: string
@@ -570,6 +579,7 @@ paths:
             application/json:
               LastUpdatedDateUtc:
                 ISO8601Date: string
+              Links: null
               MetaCommendations:
                 - Id: guid
                   MetRequirements:
@@ -701,7 +711,10 @@ paths:
                       MedalId: int
                   Player:
                     Gamertag: string
+                    Xuid: null
                   PlayerScore: int
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   PresentInMatch: boolean
                   Rank: int
                   TeamId: int
@@ -754,6 +767,7 @@ paths:
                         - int
                       StockId: int
               PlaylistId: guid
+              SeasonId: null
               TeamStats:
                 - Rank: int
                   RoundStats:
@@ -858,7 +872,10 @@ paths:
                       MedalId: int
                   Player:
                     Gamertag: string
+                    Xuid: null
                   PlayerScore: int
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   PresentInMatch: boolean
                   Rank: int
                   TeamId: int
@@ -911,6 +928,7 @@ paths:
                         - int
                       StockId: int
               PlaylistId: guid
+              SeasonId: null
               TeamStats:
                 - Rank: int
                   RoundStats:
@@ -1486,6 +1504,7 @@ paths:
               Results:
                 - Player:
                     Gamertag: string
+                    Xuid: null
                   Rank: int
                   Score:
                     Csr: int
@@ -1527,6 +1546,7 @@ paths:
             application/json:
               LastUpdatedDateUtc:
                 ISO8601Date: string
+              Links: null
               MetaCommendations:
                 - Id: guid
                   MetRequirements:
@@ -1661,12 +1681,16 @@ paths:
                   Players:
                     - Player:
                         Gamertag: string
+                        Xuid: null
+                      PostMatchRatings: null
+                      PreMatchRatings: null
                       Rank: int
                       Result: int
                       TeamId: int
                       TotalAssists: int
                       TotalDeaths: int
                       TotalKills: int
+                  SeasonId: null
                   Teams:
                     - Id: int
                       Rank: int
@@ -2636,6 +2660,7 @@ paths:
           description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
+              Links: null
               Results:
                 - Id: string
                   Result:
@@ -2805,6 +2830,7 @@ paths:
                           StockId: int
                     PlayerId:
                       GamerTag: string
+                      Xuid: null
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
@@ -2846,6 +2872,7 @@ paths:
           description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
+              Links: null
               Results:
                 - Id: string
                   Result:
@@ -3004,6 +3031,7 @@ paths:
                           StockId: int
                     PlayerId:
                       GamerTag: string
+                      Xuid: null
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
@@ -3038,6 +3066,7 @@ paths:
           description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
+              Links: null
               Results:
                 - Id: string
                   Result:
@@ -3196,6 +3225,7 @@ paths:
                           StockId: int
                     PlayerId:
                       GamerTag: string
+                      Xuid: null
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
@@ -3237,11 +3267,13 @@ paths:
           description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
+              Links: null
               Results:
                 - Id: string
                   Result:
                     PlayerId:
                       GamerTag: string
+                      Xuid: null
                     SpartanRank: int
                     WarzoneStat:
                       DestroyedEnemyVehicles:
@@ -3528,6 +3560,10 @@ paths:
                           Data4: int
                   Player:
                     Gamertag: string
+                    Xuid: null
+                  PlayerScore: null
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   ProgressiveCommendationDeltas:
                     - Id: guid
                       PreviousProgress: int
@@ -3603,6 +3639,7 @@ paths:
                     SpartanRankMatchXPScalar: double
                     TotalXP: int
               PlaylistId: guid
+              SeasonId: null
               TeamStats:
                 - Rank: int
                   RoundStats:
@@ -3729,7 +3766,10 @@ paths:
                       MedalId: int
                   Player:
                     Gamertag: string
+                    Xuid: null
                   PlayerScore: int
+                  PostMatchRatings: null
+                  PreMatchRatings: null
                   PresentInMatch: boolean
                   Rank: int
                   TeamId: int
@@ -3782,6 +3822,7 @@ paths:
                         - int
                       StockId: int
               PlaylistId: guid
+              SeasonId: null
               TeamStats:
                 - Rank: int
                   RoundStats:
@@ -3911,12 +3952,16 @@ paths:
                   Players:
                     - Player:
                         Gamertag: string
+                        Xuid: null
+                      PostMatchRatings: null
+                      PreMatchRatings: null
                       Rank: int
                       Result: int
                       TeamId: int
                       TotalAssists: int
                       TotalDeaths: int
                       TotalKills: int
+                  SeasonId: null
                   Teams:
                     - Id: int
                       Rank: int
@@ -3962,6 +4007,7 @@ paths:
           description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
+              Links: null
               Results:
                 - Id: string
                   Result:
@@ -4120,6 +4166,7 @@ paths:
                           StockId: int
                     PlayerId:
                       GamerTag: string
+                      Xuid: null
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
@@ -4178,6 +4225,7 @@ paths:
                   ComputerPlayerId: int
                   HumanPlayerId:
                     Gamertag: string
+                    Xuid: null
                   IsHuman: bool
                   LeaderId: int
                   LeaderPowerStats:
@@ -5351,6 +5399,7 @@ paths:
               Results:
                 - Player:
                     Gamertag: string
+                    Xuid: null
                   Rank: int
                   Score:
                     Csr: int
@@ -5980,6 +6029,3 @@ paths:
         '503':
           description: Service Unavailable
       summary: Halo Wars 2 - Player XPs
-x-servers:
-  - url: 'https://www.haloapi.com'
-  - url: 'https://s3publicapis-eastus2-01.regional.azure-api.net'

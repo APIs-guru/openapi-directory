@@ -83,7 +83,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -1087,6 +1087,39 @@ paths:
       summary: Private Article Reserve DOI
       tags:
         - articles
+  '/account/articles/{article_id}/reserve_handle':
+    post:
+      description: Reserve Handle for article
+      operationId: private_article_reserve_handle
+      parameters:
+        - description: Article unique identifier
+          format: int64
+          in: path
+          minimum: 1
+          name: article_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ArticleHandle'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Article Reserve Handle
+      tags:
+        - articles
   /account/authors/search:
     post:
       description: Search for authors
@@ -1210,7 +1243,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -2038,7 +2071,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ArticleDOI'
+            $ref: '#/definitions/CollectionDOI'
         '400':
           description: Bad Request
         '403':
@@ -2053,6 +2086,68 @@ paths:
       summary: Private Collection Reserve DOI
       tags:
         - collections
+  '/account/collections/{collection_id}/reserve_handle':
+    post:
+      description: Reserve Handle for collection
+      operationId: private_collection_reserve_handle
+      parameters:
+        - description: Collection Unique identifier
+          format: int64
+          in: path
+          minimum: 1
+          name: collection_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CollectionHandle'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Private Collection Reserve Handle
+      tags:
+        - collections
+  /account/funding/search:
+    post:
+      description: Search for fundings
+      operationId: private_funding_search
+      parameters:
+        - description: Search Parameters
+          in: body
+          name: search
+          schema:
+            $ref: '#/definitions/FundingSearch'
+      responses:
+        '200':
+          description: OK. An array of funding information
+          schema:
+            items:
+              $ref: '#/definitions/FundingInformation'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Search Funding
+      tags:
+        - other
   /account/institution:
     get:
       description: Account institution details
@@ -2110,7 +2205,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -2288,7 +2383,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -2334,11 +2429,9 @@ paths:
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
+        - description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
           format: int64
           in: query
-          maximum: 12
-          minimum: 1
           name: item_type
           required: false
           type: integer
@@ -2386,6 +2479,184 @@ paths:
         - OAuth2:
             - all
       summary: Private Account Institution Groups
+      tags:
+        - institutions
+  '/account/institution/review/{curation_id}':
+    get:
+      description: Retrieve a certain curation review by its ID
+      operationId: account_institution_curation
+      responses:
+        '200':
+          description: OK. A curation review.
+          schema:
+            $ref: '#/definitions/CurationDetail'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Institution Curation Review
+      tags:
+        - institutions
+    parameters:
+      - description: ID of the curation
+        format: int64
+        in: path
+        minimum: 1
+        name: curation_id
+        required: true
+        type: integer
+  '/account/institution/review/{curation_id}/comments':
+    get:
+      description: Retrieve a certain curation review's comments.
+      parameters:
+        - description: Number of results included on a page. Used for pagination with query
+          format: int64
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
+          format: int64
+          in: query
+          maximum: 5000
+          minimum: 0
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. A curation review's comments.
+          schema:
+            $ref: '#/definitions/CurationComment'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Institution Curation Review Comments
+      tags:
+        - institutions
+    parameters:
+      - description: ID of the curation
+        format: int64
+        in: path
+        minimum: 1
+        name: curation_id
+        required: true
+        type: integer
+    post:
+      description: Add a new comment to the review.
+      parameters:
+        - description: The content/value of the comment.
+          in: body
+          name: CurationComment
+          required: true
+          schema:
+            $ref: '#/definitions/CurationCommentCreate'
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: POST Institution Curation Review Comment
+      tags:
+        - institutions
+  /account/institution/reviews:
+    get:
+      description: Retrieve a list of curation reviews for this institution
+      operationId: account_institution_curations
+      parameters:
+        - description: Filter by the group ID
+          format: int64
+          in: query
+          minimum: 0
+          name: group_id
+          required: false
+          type: integer
+        - description: Retrieve the reviews for this article
+          format: int64
+          in: query
+          minimum: 0
+          name: article_id
+          required: false
+          type: integer
+        - description: Filter by the status of the review
+          enum:
+            - pending
+            - approved
+            - rejected
+            - closed
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: Number of results included on a page. Used for pagination with query
+          format: int64
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
+          format: int64
+          in: query
+          maximum: 5000
+          minimum: 0
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. A list of curation reviews.
+          schema:
+            $ref: '#/definitions/Curation'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - OAuth2:
+            - all
+      summary: Institution Curation Reviews
       tags:
         - institutions
   /account/institution/roles:
@@ -2610,7 +2881,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -2849,12 +3120,45 @@ paths:
         - projects
       x-subcategory: Private Project Articles
     parameters:
-      - description: Proejct unique identifier
+      - description: Project unique identifier
         format: int64
         in: path
         minimum: 1
         name: project_id
         required: true
+        type: integer
+      - description: Page number. Used for pagination with page_size
+        format: int64
+        in: query
+        maximum: 5000
+        minimum: 1
+        name: page
+        required: false
+        type: integer
+      - default: 10
+        description: The number of results included on a page. Used for pagination with page
+        format: int64
+        in: query
+        maximum: 1000
+        minimum: 1
+        name: page_size
+        required: false
+        type: integer
+      - description: Number of results included on a page. Used for pagination with query
+        format: int64
+        in: query
+        maximum: 1000
+        minimum: 1
+        name: limit
+        required: false
+        type: integer
+      - description: Where to start the listing(the offset of the first result). Used for pagination with limit
+        format: int64
+        in: query
+        maximum: 5000
+        minimum: 0
+        name: offset
+        required: false
         type: integer
     post:
       description: Create a new Article and associate it with this project
@@ -3221,7 +3525,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -3455,7 +3759,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -3480,7 +3784,7 @@ paths:
           name: order_direction
           required: false
           type: string
-        - description: only return collections from this institution
+        - description: only return articles from this institution
           format: int64
           in: query
           name: institution
@@ -3496,28 +3800,31 @@ paths:
           name: modified_since
           required: false
           type: string
-        - description: only return collections from this group
+        - description: only return articles from this group
           format: int64
           in: query
           name: group
           required: false
           type: integer
-        - description: only return collections with this resource_doi
+        - description: only return articles with this resource_doi
           in: query
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
+        - description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
           format: int64
           in: query
-          maximum: 12
-          minimum: 1
           name: item_type
           required: false
           type: integer
-        - description: only return collections with this doi
+        - description: only return articles with this doi
           in: query
           name: doi
+          required: false
+          type: string
+        - description: only return articles with this handle
+          in: query
+          name: handle
           required: false
           type: string
       responses:
@@ -3675,7 +3982,7 @@ paths:
           description: OK. Article version representations
           schema:
             items:
-              $ref: '#/definitions/Version'
+              $ref: '#/definitions/ArticleVersions'
             type: array
         '400':
           description: Bad Request. Article ID must be an integer and bigger than 0.
@@ -3842,7 +4149,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -3897,6 +4204,11 @@ paths:
         - description: only return collections with this doi
           in: query
           name: doi
+          required: false
+          type: string
+        - description: only return collections with this handle
+          in: query
+          name: handle
           required: false
           type: string
       responses:
@@ -4013,7 +4325,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -4053,7 +4365,7 @@ paths:
           description: OK. An array of versions
           schema:
             items:
-              $ref: '#/definitions/Version'
+              $ref: '#/definitions/CollectionVersions'
             type: array
         '400':
           description: Bad Request
@@ -4233,7 +4545,7 @@ paths:
           format: int64
           in: query
           maximum: 5000
-          minimum: 1
+          minimum: 0
           name: offset
           required: false
           type: integer
@@ -4413,7 +4725,7 @@ definitions:
         type: integer
       institution_user_id:
         description: Account institution user id
-        example: 1
+        example: djohn42
         type: string
       last_name:
         description: Last Name
@@ -4500,7 +4812,6 @@ definitions:
         type: string
     required:
       - email
-      - first_name
       - last_name
     type: object
     x-tag: institutions
@@ -4538,10 +4849,14 @@ definitions:
   Article:
     properties:
       defined_type:
-        description: 'Integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
+        description: Type of article identificator
         example: 3
         format: int64
         type: integer
+      defined_type_name:
+        description: Name of the article type identificator
+        example: media
+        type: string
       doi:
         description: DOI
         example: 10.6084/m9.figshare.1434614
@@ -4552,6 +4867,10 @@ definitions:
         type:
           - number
           - 'null'
+      handle:
+        description: Handle
+        example: 111184/figshare.1234
+        type: string
       id:
         description: Unique identifier for article
         example: 1434614
@@ -4563,11 +4882,27 @@ definitions:
         type:
           - string
           - 'null'
+      resource_doi:
+        description: Article DOI
+        example: 10.5072/FK2.developmentfigshare.2000005
+        type:
+          - string
+          - 'null'
+      resource_title:
+        description: Article resource title
+        example: first article
+        type:
+          - string
+          - 'null'
       thumb:
         description: Thumbnail image
         example: 'https://ndownloader.figshare.com/files/123456789/preview/12345678/thumb.png'
         format: url
         type: string
+      timeline:
+        $ref: '#/definitions/TimelineUpdate'
+        description: Various timeline dates
+        type: object
       title:
         description: Title of article
         example: Test article title
@@ -4623,18 +4958,6 @@ definitions:
         items:
           $ref: '#/definitions/PublicFile'
         type: array
-      resource_doi:
-        description: Article DOI
-        example: 10.5072/FK2.developmentfigshare.2000005
-        type:
-          - string
-          - 'null'
-      resource_title:
-        description: Article resource title
-        example: first article
-        type:
-          - string
-          - 'null'
     type: object
     x-tag: articles
   ArticleCompletePrivate:
@@ -4643,6 +4966,7 @@ definitions:
     properties:
       group_resource_id:
         description: Group resource id
+        example: null
         type:
           - string
           - 'null'
@@ -4664,7 +4988,7 @@ definitions:
     properties:
       authors:
         default: []
-        description: List of authors to be assosciated with the article. The list can contain author ids or author names. No more than 10 authors. For adding more authors use the specific authors endpoint.
+        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
         example:
           - name: John Doe
           - id: 1000008
@@ -4688,19 +5012,7 @@ definitions:
           defined_key: value for it
         type: object
       defined_type:
-        description: 'Article type. In responses this will be an integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
-        enum:
-          - figure
-          - media
-          - dataset
-          - fileset
-          - poster
-          - paper
-          - presentation
-          - thesis
-          - code
-          - metadata
-          - preprint
+        description: '<b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>'
         example: media
         type: string
       description:
@@ -4717,10 +5029,19 @@ definitions:
         default: ''
         description: Grant number or funding authority
         type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
+      handle:
+        default: ''
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4748,11 +5069,11 @@ definitions:
         type: array
       resource_doi:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI. For linkback this needs to be used in combination with resource_title.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
         type: string
       resource_title:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title. For linkback this needs to be used in combination with resource_doi.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
         type: string
       tags:
         default: []
@@ -4763,6 +5084,10 @@ definitions:
         items:
           type: string
         type: array
+      timeline:
+        $ref: '#/definitions/TimelineUpdate'
+        description: Various timeline dates
+        type: object
       title:
         description: Title of article
         example: Test article title
@@ -4828,23 +5153,33 @@ definitions:
         type: boolean
     type: object
     x-tag: articles
+  ArticleHandle:
+    properties:
+      handle:
+        description: Reserved Handle
+        example: 11172/FK2.FIGSHARE.20345
+        type: string
+    type: object
+    x-tag: articles
   ArticleSearch:
     allOf:
       - $ref: '#/definitions/CommonSearch'
     properties:
       doi:
-        description: only return collections with this doi
+        description: Only return articles with this doi
         example: 10.6084/m9.figshare.1407024
         type: string
+      handle:
+        description: Only return articles with this handle
+        example: 111084/m9.figshare.14074
+        type: string
       item_type:
-        description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
+        description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
         example: 1
         format: int64
-        maximum: 12
-        minimum: 1
         type: integer
       resource_doi:
-        description: only return collections with this resource_doi
+        description: Only return articles with this resource_doi
         example: 10.6084/m9.figshare.1407024
         type: string
     type: object
@@ -4853,7 +5188,7 @@ definitions:
     properties:
       authors:
         default: []
-        description: List of authors to be assosciated with the article. The list can contain author ids or author names. No more than 10 authors. For adding more authors use the specific authors endpoint.
+        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
         example:
           - name: John Doe
           - id: 1000008
@@ -4877,19 +5212,7 @@ definitions:
           defined_key: value for it
         type: object
       defined_type:
-        description: 'Article type. In responses this will be an integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
-        enum:
-          - figure
-          - media
-          - dataset
-          - fileset
-          - poster
-          - paper
-          - presentation
-          - thesis
-          - code
-          - metadata
-          - preprint
+        description: '<b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>'
         example: media
         type: string
       description:
@@ -4906,10 +5229,19 @@ definitions:
         default: ''
         description: Grant number or funding authority
         type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
+      handle:
+        default: ''
+        description: 'Not appliable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4952,12 +5284,30 @@ definitions:
         items:
           type: string
         type: array
+      timeline:
+        $ref: '#/definitions/TimelineUpdate'
+        description: Various timeline dates
+        type: object
       title:
         description: Title of article
         example: Test article title
         maxLength: 500
         minLength: 3
         type: string
+    type: object
+    x-tag: articles
+  ArticleVersions:
+    properties:
+      url:
+        description: Api endpoint for the item version
+        example: 'https://api.figshare.com/v2/articles/2000005/versions/1'
+        format: url
+        type: string
+      version:
+        description: Version number
+        example: 1
+        format: int64
+        type: integer
     type: object
     x-tag: articles
   ArticlesCreator:
@@ -5031,7 +5381,7 @@ definitions:
   AuthorsCreator:
     properties:
       authors:
-        description: 'List of authors to be assosciated with the article. The list can contain author ids or author names [{"id": 12121}, {"id": 34345}, {"name": "John Doe"}]. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
         example:
           - id: 12121
           - id: 34345
@@ -5098,7 +5448,11 @@ definitions:
     properties:
       doi:
         description: Collection DOI
-        example: 'http://dx.doi.org/10.6084/m9.figshare.123'
+        example: 10.6084/m9.figshare.123
+        type: string
+      handle:
+        description: Collection Handle
+        example: 111184/figshare.1234
         type: string
       id:
         description: Collection id
@@ -5157,6 +5511,12 @@ definitions:
         description: Collection description
         example: description
         type: string
+      funding:
+        description: Full Collection funding information
+        items:
+          $ref: '#/definitions/FundingInformation'
+          type: object
+        type: array
       group_id:
         description: Collection group
         example: 1
@@ -5189,7 +5549,7 @@ definitions:
         type: array
       resource_doi:
         description: Collection resource doi
-        example: 'http://dx.doi.org/10.6084/m9.figshare.123'
+        example: 10.6084/m9.figshare.123
         type: string
       resource_id:
         description: Collection resource id
@@ -5235,7 +5595,7 @@ definitions:
         type: array
       authors:
         default: []
-        description: List of authors to be assosciated with the article. The list can contain author ids or author names. No more than 10 authors. For adding more authors use the specific authors endpoint.
+        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
         example:
           - name: John Doe
           - id: 20005
@@ -5268,10 +5628,23 @@ definitions:
         default: ''
         description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
         type: string
+      funding:
+        default: ''
+        description: Grant number or funding authority
+        type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
+      handle:
+        default: ''
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -5293,7 +5666,7 @@ definitions:
         type: array
       resource_doi:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI. For linkback this needs to be used in combination with resource_title.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
         type: string
       resource_id:
         description: 'Not applicable to regular users. In a publisher case, this is the publisher article id'
@@ -5303,7 +5676,7 @@ definitions:
         type: string
       resource_title:
         default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title. For linkback this needs to be used in combination with resource_doi.'
+        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
         type: string
       resource_version:
         description: 'Not applicable to regular users. In a publisher case, this is the publisher article version'
@@ -5327,6 +5700,22 @@ definitions:
       - title
     type: object
     x-tag: collections
+  CollectionDOI:
+    properties:
+      doi:
+        description: Reserved DOI
+        example: 10.5072/FK2.FIGSHARE.20345
+        type: string
+    type: object
+    x-tag: collections
+  CollectionHandle:
+    properties:
+      handle:
+        description: Reserved Handle
+        example: 11172/FK2.FIGSHARE.20345
+        type: string
+    type: object
+    x-tag: collections
   CollectionPrivateLinkCreator:
     properties:
       expires_date:
@@ -5344,11 +5733,15 @@ definitions:
       - $ref: '#/definitions/CommonSearch'
     properties:
       doi:
-        description: only return collections with this doi
+        description: Only return collections with this doi
         example: 10.6084/m9.figshare.1407024
         type: string
+      handle:
+        description: Only return collections with this handle
+        example: 10084/figshare.1407024
+        type: string
       resource_doi:
-        description: only return collections with this resource_doi
+        description: Only return collections with this resource_doi
         example: 10.6084/m9.figshare.1407024
         type: string
     type: object
@@ -5365,7 +5758,7 @@ definitions:
         type: array
       authors:
         default: []
-        description: List of authors to be assosciated with the article. The list can contain author ids or author names. No more than 10 authors. For adding more authors use the specific authors endpoint.
+        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
         example:
           - name: John Doe
           - id: 20005
@@ -5398,10 +5791,23 @@ definitions:
         default: ''
         description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
         type: string
+      funding:
+        default: ''
+        description: Grant number or funding authority
+        type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
+      handle:
+        default: ''
+        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        type: string
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -5455,6 +5861,20 @@ definitions:
         type: string
     type: object
     x-tag: collections
+  CollectionVersions:
+    properties:
+      id:
+        description: Version number
+        example: 1
+        format: int64
+        type: integer
+      url:
+        description: Api endpoint for the collection version
+        example: 'https://api.figshare.com/v2/collections/2000005/versions/1'
+        format: url
+        type: string
+    type: object
+    x-tag: collections
   CommonSearch:
     properties:
       group:
@@ -5480,10 +5900,10 @@ definitions:
         type: string
       offset:
         description: Where to start the listing(the offset of the first result). Used for pagination with limit
-        example: 1
+        example: 0
         format: int64
         maximum: 5000
-        minimum: 1
+        minimum: 0
         type: integer
       order:
         default: published_date
@@ -5536,6 +5956,101 @@ definitions:
         description: Reason for confidentiality
         type: string
     type: object
+  Curation:
+    properties:
+      account_id:
+        description: The ID of the account of the owner of the article of this review.
+        format: int64
+        type: integer
+      article_id:
+        description: The ID of the article of this review.
+        format: int64
+        type: integer
+      assigned_to:
+        description: The ID of the account to which this review is assigned.
+        format: int64
+        type: integer
+      comments_count:
+        description: The number of comments in the review.
+        format: int64
+        type: integer
+      created_date:
+        description: The creation date of the review.
+        type: string
+      group_id:
+        description: The group in which the article is present.
+        format: int64
+        type: integer
+      id:
+        description: The review id
+        format: int64
+        type: integer
+      modified_date:
+        description: The date the review has been modified.
+        type: string
+      review_date:
+        description: The last time a comment has been added to the review.
+        type:
+          - string
+          - 'null'
+      status:
+        description: The status of the review.
+        enum:
+          - pending
+          - approved
+          - rejected
+          - closed
+        type: string
+      version:
+        description: The Version number of the article in review.
+        format: int64
+        type: integer
+    type: object
+    x-tag: institutions
+  CurationComment:
+    properties:
+      account_id:
+        description: The ID of the account which generated this comment.
+        format: int64
+        type: integer
+      id:
+        description: The ID of the comment.
+        format: int64
+        type: integer
+      text:
+        description: The value/content of the comment.
+        type: string
+      type:
+        description: The ID of the account which generated this comment.
+        enum:
+          - comment
+          - approved
+          - rejected
+          - closed
+        type: string
+    type: object
+    x-tag: institutions
+  CurationCommentCreate:
+    properties:
+      text:
+        description: The contents/value of the comment
+        maxLength: 2000
+        minLength: 1
+        type: string
+    required:
+      - text
+    type: object
+    x-tag: institutions
+  CurationDetail:
+    allOf:
+      - $ref: '#/definitions/Curation'
+    properties:
+      item:
+        $ref: '#/definitions/ArticleComplete'
+        description: Article details
+        type: object
+    type: object
+    x-tag: institutions
   CustomArticleField:
     properties:
       is_mandatory:
@@ -5586,8 +6101,57 @@ definitions:
         type: integer
     type: object
     x-tag: articles
+  FundingCreate:
+    properties:
+      id:
+        description: A funding ID as returned by the Funding Search endpoint
+        format: int64
+        type: integer
+      title:
+        description: The title of the new user created funding
+        type: string
+    type: object
+    x-tag: funding
+  FundingInformation:
+    properties:
+      funder_name:
+        description: Funder's name
+        type: string
+      grant_code:
+        description: The grant code
+        type: string
+      id:
+        description: Funding id
+        example: 1
+        format: int64
+        type: integer
+      is_user_defined:
+        description: Return whether the grant has been introduced manually
+        type: boolean
+      title:
+        description: The funding name
+        example: Scholarly funding
+        type: string
+      url:
+        description: The grant url
+        example: 'https://app.dimensions.ai/details/grant/1'
+        format: url
+        type: string
+    type: object
+    x-tag: funding
+  FundingSearch:
+    properties:
+      search_for:
+        description: Search term
+        type: string
+    type: object
+    x-tag: funding
   Group:
     properties:
+      association_criteria:
+        description: 'HR code associated with group, if code exists'
+        example: IT
+        type: string
       id:
         description: Group id
         example: 1
@@ -5612,6 +6176,7 @@ definitions:
     properties:
       domain:
         description: Institution domain
+        example: null
         type:
           - string
           - 'null'
@@ -5651,10 +6216,10 @@ definitions:
         type: integer
       offset:
         description: Where to start the listing(the offset of the first result). Used for pagination with limit
-        example: 1
+        example: 0
         format: int64
         maximum: 5000
-        minimum: 1
+        minimum: 0
         type: integer
       page:
         description: Page number. Used for pagination with page_size
@@ -5739,10 +6304,10 @@ definitions:
         type: integer
       offset:
         description: Where to start the listing(the offset of the first result). Used for pagination with limit
-        example: 1
+        example: 0
         format: int64
         maximum: 5000
-        minimum: 1
+        minimum: 0
         type: integer
       orcid:
         description: Orcid of author
@@ -5913,6 +6478,7 @@ definitions:
         type: string
       embargo_type:
         description: Article embargo
+        example: null
         type:
           - string
           - 'null'
@@ -5920,6 +6486,10 @@ definitions:
         description: Article funding
         example: none
         type: string
+      funding_list:
+        items:
+          type: integer
+        type: array
       has_linked_file:
         description: True if any files are linked to the article
         example: true
@@ -6058,8 +6628,14 @@ definitions:
           - 'null'
       funding:
         description: Project funding
-        example: none
+        example: ''
         type: string
+      funding_list:
+        description: Full Project funding information
+        items:
+          $ref: '#/definitions/FundingInformation'
+          type: object
+        type: array
     type: object
     x-tag: projects
   ProjectCompletePrivate:
@@ -6089,6 +6665,12 @@ definitions:
         description: Project funding
         example: none
         type: string
+      funding_list:
+        description: Full Project funding information
+        items:
+          $ref: '#/definitions/FundingInformation'
+          type: object
+        type: array
       group_id:
         description: Group of project if any
         example: 0
@@ -6131,6 +6713,11 @@ definitions:
         description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
         example: ''
         type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       group_id:
         description: Only if project type is group.
         example: 0
@@ -6229,6 +6816,11 @@ definitions:
         description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
         example: ''
         type: string
+      funding_list:
+        description: Funding creation / update items
+        items:
+          $ref: '#/definitions/FundingCreate'
+        type: array
       title:
         description: The title for this project - mandatory. 3 - 500 characters.
         example: project title
@@ -6335,6 +6927,46 @@ definitions:
         type: string
     type: object
     x-tag: other
+  Timeline:
+    allOf:
+      - $ref: '#/definitions/TimelineUpdate'
+    properties:
+      posted:
+        description: Posted date
+        example: '2015-12-31'
+        type:
+          - string
+          - 'null'
+      revision:
+        description: Revision date from curation (if curated)
+        example: '2015-12-31'
+        type:
+          - string
+          - 'null'
+      submission:
+        description: Submission date in curation (if curated)
+        example: '2015-12-31'
+        type:
+          - string
+          - 'null'
+    type: object
+    x-tag: timeline
+  TimelineUpdate:
+    properties:
+      firstOnline:
+        description: Online posted date
+        example: '2015-12-31'
+        type: string
+      publisherAcceptance:
+        description: Date when the item was accepted for publication
+        example: '2015-12-31'
+        type: string
+      publisherPublication:
+        description: Publish date
+        example: '2015-12-31'
+        type: string
+    type: object
+    x-tag: timeline_update
   UploadFilePart:
     properties:
       endOffset:
@@ -6437,20 +7069,6 @@ definitions:
         type: string
     type: object
     x-tag: other
-  Version:
-    properties:
-      id:
-        description: Version number
-        example: 1
-        format: int64
-        type: integer
-      url:
-        description: Api endpoint for the item version
-        example: 'https://api.figshare.com/v2/articles/2000005/versions/1'
-        format: url
-        type: string
-    type: object
-    x-tag: articles
 x-additional-descriptions:
   - position: bottom
     subsections:
@@ -6464,8 +7082,6 @@ x-additional-descriptions:
         title: Example Upload on figshare
       - content: description_upload_output
         title: Output of Script
-      - content: description_upload_bash
-        title: Bash Script
     title: Upload files
   - position: bottom
     subsections:

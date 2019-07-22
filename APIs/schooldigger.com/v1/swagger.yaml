@@ -64,7 +64,7 @@ paths:
           name: boundaryAddress
           required: false
           type: string
-        - description: 'Search for districts within (distanceMiles) of (nearLatitude)/(nearLongitude) (Default 5 miles) (optional) (Pro, Enterprise API levels only)'
+        - description: 'Search for districts within (distanceMiles) of (nearLatitude)/(nearLongitude) (Default 50 miles) (optional) (Pro, Enterprise API levels only)'
           format: int32
           in: query
           name: distanceMiles
@@ -111,7 +111,7 @@ paths:
           name: perPage
           required: false
           type: integer
-        - description: 'Sort list. Values are: districtname, distance, rank. For descending order, preceed with ''-'' i.e. -districtname (optional, default: districtname)'
+        - description: 'Sort list. Values are: districtname, distance, rank. For descending order, precede with ''-'' i.e. -districtname (optional, default: districtname)'
           in: query
           name: sortBy
           required: false
@@ -168,6 +168,7 @@ paths:
         - Districts
   '/v1/rankings/districts/{st}':
     get:
+      operationId: Rankings_GetRank_District
       parameters:
         - description: Two character state (e.g. 'CA')
           in: path
@@ -214,6 +215,7 @@ paths:
         - Rankings
   '/v1/rankings/schools/{st}':
     get:
+      operationId: Rankings_GetRank
       parameters:
         - description: Two character state (e.g. 'CA')
           in: path
@@ -278,6 +280,11 @@ paths:
           name: q
           required: false
           type: string
+        - description: 'For parameter ''q'', only search school names instead of school and city (optional)'
+          in: query
+          name: qSearchSchoolNameOnly
+          required: false
+          type: boolean
         - description: Search for schools within this district (7 digit district id) (optional)
           in: query
           name: districtID
@@ -335,7 +342,7 @@ paths:
           name: nearLongitude
           required: false
           type: number
-        - description: 'Full U.S. address: flag returned schools that include this address in its attendance boundary. Example: ''123 Main St. AnyTown CA 90001'' (optional) (Enterprise API level only)'
+        - description: 'Full U.S. address: flag returned schools that include this address in its attendance boundary. Example: ''123 Main St. AnyTown CA 90001'' (optional) (Enterprise API level only) IMPORTANT NOTE: If you have the lat/long of the address, use nearLatitude and nearLongitude instead for much faster response times'
           in: query
           name: boundaryAddress
           required: false
@@ -1297,7 +1304,7 @@ definitions:
         readOnly: false
         type: string
       test:
-        description: The name of the state-administed test
+        description: The name of the state-administered test
         readOnly: false
         type: string
       tier1:

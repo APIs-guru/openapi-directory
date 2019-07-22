@@ -250,19 +250,14 @@ paths:
           name: ebay_site_id
           required: false
           type: integer
-        - description: Private Key from API section in Settings on your store
+        - description: Walmart client ID
           in: query
-          name: walmart_private_key
+          name: walmart_client_id
           required: false
           type: string
-        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+        - description: Walmart client secret
           in: query
-          name: walmart_channel_type
-          required: false
-          type: string
-        - description: Consumer ID from API section in Settings on your store
-          in: query
-          name: walmart_consumer_id
+          name: walmart_client_secret
           required: false
           type: string
         - description: Access token authorizing the app to access resources on behalf of a user
@@ -668,19 +663,14 @@ paths:
           name: volusion_password
           required: false
           type: string
-        - description: Private Key from API section in Settings on your store
+        - description: Walmart client ID
           in: query
-          name: walmart_private_key
+          name: walmart_client_id
           required: false
           type: string
-        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+        - description: Walmart client secret
           in: query
-          name: walmart_channel_type
-          required: false
-          type: string
-        - description: Consumer ID from API section in Settings on your store
-          in: query
-          name: walmart_consumer_id
+          name: walmart_client_secret
           required: false
           type: string
       produces:
@@ -2646,19 +2636,14 @@ paths:
           name: hybris_client_secret
           required: false
           type: string
-        - description: Private Key from API section in Settings on your store
+        - description: Walmart client ID
           in: query
-          name: walmart_private_key
+          name: walmart_client_id
           required: false
           type: string
-        - description: WM_CONSUMER.CHANNEL.TYPE from API section in Settings on your store
+        - description: Walmart client secret
           in: query
-          name: walmart_channel_type
-          required: false
-          type: string
-        - description: Consumer ID from API section in Settings on your store
-          in: query
-          name: walmart_consumer_id
+          name: walmart_client_secret
           required: false
           type: string
       produces:
@@ -3042,6 +3027,179 @@ paths:
                   plugins:
                     items:
                       $ref: '#/definitions/PluginList'
+                    type: array
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.script.add.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Add new script to the storefront
+      operationId: CartScriptAdd
+      parameters:
+        - description: The user-friendly script name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: The user-friendly description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: An html string containing exactly one `script` tag.
+          in: query
+          name: html
+          required: false
+          type: string
+        - description: The URL of the remote script
+          in: query
+          name: src
+          required: false
+          type: string
+        - description: The load method to use for the script
+          in: query
+          name: load_method
+          required: false
+          type: string
+        - default: storefront
+          description: The page or pages on the online store where the script should be included
+          in: query
+          name: scope
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  script_id:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.script.delete.json:
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Remove script from the storefront
+      operationId: CartScriptDelete
+      parameters:
+        - description: Entity id
+          in: query
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  deleted:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.script.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get scripts installed to the storefront
+      operationId: CartScriptList
+      parameters:
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+        - description: Retrieve entities from their creation date
+          in: query
+          name: created_from
+          required: false
+          type: string
+        - description: Retrieve entities to their creation date
+          in: query
+          name: created_to
+          required: false
+          type: string
+        - description: Retrieve entities from their modification date
+          in: query
+          name: modified_from
+          required: false
+          type: string
+        - description: Retrieve entities to their modification date
+          in: query
+          name: modified_to
+          required: false
+          type: string
+        - description: Retrieves only scripts with specific ids
+          in: query
+          name: script_ids
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  scripts:
+                    items:
+                      $ref: '#/definitions/Script'
                     type: array
                 type: object
               return_code:
@@ -5287,6 +5445,26 @@ paths:
           name: exclude
           required: false
           type: string
+        - description: Retrieve entities from their creation date
+          in: query
+          name: created_from
+          required: false
+          type: string
+        - description: Retrieve entities to their creation date
+          in: query
+          name: created_to
+          required: false
+          type: string
+        - description: Retrieve entities from their modification date
+          in: query
+          name: modified_from
+          required: false
+          type: string
+        - description: Retrieve entities to their modification date
+          in: query
+          name: modified_to
+          required: false
+          type: string
         - description: Filter by parent product id
           in: query
           name: product_id
@@ -5716,7 +5894,7 @@ paths:
         - description: Defines URL of the image that has to be added
           in: query
           name: url
-          required: true
+          required: false
           type: string
         - description: Defines alternative text that has to be attached to the picture
           in: query
@@ -6081,6 +6259,11 @@ paths:
           description: Set sorting direction
           in: query
           name: sort_direction
+          required: false
+          type: string
+        - description: Filter by product's sku
+          in: query
+          name: sku
           required: false
           type: string
       produces:
@@ -6735,6 +6918,11 @@ paths:
         - description: Defines product id that has to be updated
           in: query
           name: id
+          required: true
+          type: string
+        - description: Defines product model that has to be updated
+          in: query
+          name: model
           required: true
           type: string
         - description: Defines new product's price
@@ -7433,6 +7621,11 @@ paths:
           name: warehouse_id
           required: false
           type: string
+        - description: This parameter allows to reserve/unreserve product variants quantity.
+          in: query
+          name: reserve_quantity
+          required: false
+          type: number
         - description: Defines new products' variants quantity
           in: query
           name: quantity
@@ -8023,7 +8216,7 @@ definitions:
         type: string
       options:
         items:
-          $ref: '#/definitions/Order_Item_Option'
+          $ref: '#/definitions/Basket_Item_Option'
         type: array
       parent_id:
         type: string
@@ -8042,6 +8235,23 @@ definitions:
       weight:
         type: number
       weight_unit:
+        type: string
+    type: object
+  Basket_Item_Option:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      name:
+        type: string
+      used_in_combination:
+        type: boolean
+      value:
+        type: string
+      value_id:
         type: string
     type: object
   Basket_LiveShippingService:
@@ -10229,6 +10439,33 @@ definitions:
         type: number
       qty:
         type: number
+    type: object
+  Script:
+    properties:
+      additional_fields:
+        type: object
+      created_time:
+        $ref: '#/definitions/DateTime'
+      custom_fields:
+        type: object
+      description:
+        type: string
+      event:
+        type: string
+      html:
+        type: string
+      id:
+        type: string
+      load_method:
+        type: string
+      modified_time:
+        $ref: '#/definitions/DateTime'
+      name:
+        type: string
+      scope:
+        type: string
+      src:
+        type: string
     type: object
   Shipment:
     properties:

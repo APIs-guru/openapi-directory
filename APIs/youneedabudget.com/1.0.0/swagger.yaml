@@ -71,8 +71,7 @@ paths:
       description: Returns a single budget with all related entities.  This resource is effectively a full budget export.
       operationId: getBudgetById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -104,8 +103,7 @@ paths:
       description: Returns all accounts
       operationId: getAccounts
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -137,8 +135,7 @@ paths:
       description: Returns a single account
       operationId: getAccountById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -170,14 +167,12 @@ paths:
       description: Returns all transactions for a specified account
       operationId: getTransactionsByAccount
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the account
-          format: uuid
           in: path
           name: account_id
           required: true
@@ -223,8 +218,7 @@ paths:
       description: 'Returns all categories grouped by category group.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).'
       operationId: getCategories
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -256,14 +250,12 @@ paths:
       description: 'Returns a single category.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).'
       operationId: getCategoryById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the category
-          format: uuid
           in: path
           name: category_id
           required: true
@@ -289,14 +281,12 @@ paths:
       description: Returns all transactions for a specified category
       operationId: getTransactionsByCategory
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the category
-          format: uuid
           in: path
           name: category_id
           required: true
@@ -342,8 +332,7 @@ paths:
       description: Returns all budget months
       operationId: getBudgetMonths
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -375,8 +364,7 @@ paths:
       description: Returns a single budget month
       operationId: getBudgetMonth
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -408,8 +396,7 @@ paths:
       description: 'Returns a single category for a specific budget month.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).'
       operationId: getMonthCategoryById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -421,7 +408,6 @@ paths:
           required: true
           type: string
         - description: The id of the category
-          format: uuid
           in: path
           name: category_id
           required: true
@@ -446,8 +432,7 @@ paths:
       description: Update a category for a specific month
       operationId: updateMonthCategory
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -459,7 +444,6 @@ paths:
           required: true
           type: string
         - description: The id of the category
-          format: uuid
           in: path
           name: category_id
           required: true
@@ -474,7 +458,7 @@ paths:
         '200':
           description: The month category was successfully updated
           schema:
-            $ref: '#/definitions/CategoryResponse'
+            $ref: '#/definitions/SaveCategoryResponse'
         '400':
           description: The request could not be understood due to malformed syntax or validation error(s)
           schema:
@@ -487,8 +471,7 @@ paths:
       description: Returns all payee locations
       operationId: getPayeeLocations
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -514,14 +497,12 @@ paths:
       description: Returns a single payee location
       operationId: getPayeeLocationById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: id of payee location
-          format: uuid
           in: path
           name: payee_location_id
           required: true
@@ -547,8 +528,7 @@ paths:
       description: Returns all payees
       operationId: getPayees
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -580,14 +560,12 @@ paths:
       description: Returns single payee
       operationId: getPayeeById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the payee
-          format: uuid
           in: path
           name: payee_id
           required: true
@@ -613,14 +591,12 @@ paths:
       description: Returns all payee locations for the specified payee
       operationId: getPayeeLocationsByPayee
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: id of payee
-          format: uuid
           in: path
           name: payee_id
           required: true
@@ -646,14 +622,12 @@ paths:
       description: Returns all transactions for a specified payee
       operationId: getTransactionsByPayee
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the payee
-          format: uuid
           in: path
           name: payee_id
           required: true
@@ -699,8 +673,7 @@ paths:
       description: Returns all scheduled transactions
       operationId: getScheduledTransactions
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -726,14 +699,12 @@ paths:
       description: Returns a single scheduled transaction
       operationId: getScheduledTransactionById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
           type: string
         - description: The id of the scheduled transaction
-          format: uuid
           in: path
           name: scheduled_transaction_id
           required: true
@@ -759,8 +730,7 @@ paths:
       description: Returns settings for a budget
       operationId: getBudgetSettingsById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -786,8 +756,7 @@ paths:
       description: Returns budget transactions
       operationId: getTransactions
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -832,8 +801,7 @@ paths:
       description: 'Updates multiple transactions, by ''id'' or ''import_id''.'
       operationId: updateTransactions
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -857,11 +825,10 @@ paths:
       tags:
         - Transactions
     post:
-      description: 'Creates a single transaction or multiple transactions.  If you provide a body containing a ''transaction'' object, a single transaction will be created and if you provide a body containing a ''transactions'' array, multiple transactions will be created.'
+      description: 'Creates a single transaction or multiple transactions.  If you provide a body containing a ''transaction'' object, a single transaction will be created and if you provide a body containing a ''transactions'' array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.'
       operationId: createTransaction
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -893,8 +860,7 @@ paths:
       description: 'Creates multiple transactions.  Although this endpoint is still supported, it is recommended to use ''POST /budgets/{budget_id}/transactions'' to create multiple transactions.'
       operationId: bulkCreateTransactions
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -922,8 +888,7 @@ paths:
       description: Returns a single transaction
       operationId: getTransactionById
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -953,8 +918,7 @@ paths:
       description: Updates a transaction
       operationId: updateTransaction
       parameters:
-        - description: The id of the budget ("last-used" can also be used to specify the last used budget)
-          format: uuid
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
           in: path
           name: budget_id
           required: true
@@ -1064,37 +1028,33 @@ definitions:
   AccountResponse:
     properties:
       data:
-        $ref: '#/definitions/AccountWrapper'
+        properties:
+          account:
+            $ref: '#/definitions/Account'
+        required:
+          - account
+        type: object
     required:
       - data
-    type: object
-  AccountWrapper:
-    properties:
-      account:
-        $ref: '#/definitions/Account'
-    required:
-      - account
     type: object
   AccountsResponse:
     properties:
       data:
-        $ref: '#/definitions/AccountsWrapper'
+        properties:
+          accounts:
+            items:
+              $ref: '#/definitions/Account'
+            type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - accounts
+          - server_knowledge
+        type: object
     required:
       - data
-    type: object
-  AccountsWrapper:
-    properties:
-      accounts:
-        items:
-          $ref: '#/definitions/Account'
-        type: array
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
-    required:
-      - accounts
-      - server_knowledge
     type: object
   BudgetDetail:
     allOf:
@@ -1144,21 +1104,19 @@ definitions:
   BudgetDetailResponse:
     properties:
       data:
-        $ref: '#/definitions/BudgetDetailWrapper'
+        properties:
+          budget:
+            $ref: '#/definitions/BudgetDetail'
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - budget
+          - server_knowledge
+        type: object
     required:
       - data
-    type: object
-  BudgetDetailWrapper:
-    properties:
-      budget:
-        $ref: '#/definitions/BudgetDetail'
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
-    required:
-      - budget
-      - server_knowledge
     type: object
   BudgetSettings:
     properties:
@@ -1173,16 +1131,14 @@ definitions:
   BudgetSettingsResponse:
     properties:
       data:
-        $ref: '#/definitions/BudgetSettingsWrapper'
+        properties:
+          settings:
+            $ref: '#/definitions/BudgetSettings'
+        required:
+          - settings
+        type: object
     required:
       - data
-    type: object
-  BudgetSettingsWrapper:
-    properties:
-      settings:
-        $ref: '#/definitions/BudgetSettings'
-    required:
-      - settings
     type: object
   BudgetSummary:
     properties:
@@ -1190,12 +1146,20 @@ definitions:
         $ref: '#/definitions/CurrencyFormat'
       date_format:
         $ref: '#/definitions/DateFormat'
+      first_month:
+        description: The earliest budget month
+        format: date
+        type: string
       id:
         format: uuid
         type: string
       last_modified_on:
-        description: The last time any changes were made to the budget from either a web or mobile client.
+        description: The last time any changes were made to the budget from either a web or mobile client
         format: date-time
+        type: string
+      last_month:
+        description: The latest budget month
+        format: date
         type: string
       name:
         type: string
@@ -1206,46 +1170,44 @@ definitions:
   BudgetSummaryResponse:
     properties:
       data:
-        $ref: '#/definitions/BudgetSummaryWrapper'
+        properties:
+          budgets:
+            items:
+              $ref: '#/definitions/BudgetSummary'
+            type: array
+          default_budget:
+            $ref: '#/definitions/BudgetSummary'
+            description: 'The default budget, if the associated application is configured to support specifying it'
+        required:
+          - budgets
+          - default_budget
+        type: object
     required:
       - data
-    type: object
-  BudgetSummaryWrapper:
-    properties:
-      budgets:
-        items:
-          $ref: '#/definitions/BudgetSummary'
-        type: array
-    required:
-      - budgets
-    type: object
-  BulkIdWrapper:
-    properties:
-      bulk:
-        $ref: '#/definitions/BulkIds'
-    required:
-      - bulk
-    type: object
-  BulkIds:
-    properties:
-      duplicate_import_ids:
-        description: 'If any Transactions were not created because they had an import_id matching a transaction already on the same account, the specified import_id(s) will be included in this list.'
-        items:
-          type: string
-        type: array
-      transaction_ids:
-        description: The list of Transaction ids that were created.
-        items:
-          type: string
-        type: array
-    required:
-      - transaction_ids
-      - duplicate_import_ids
     type: object
   BulkResponse:
     properties:
       data:
-        $ref: '#/definitions/BulkIdWrapper'
+        properties:
+          bulk:
+            properties:
+              duplicate_import_ids:
+                description: 'If any Transactions were not created because they had an import_id matching a transaction already on the same account, the specified import_id(s) will be included in this list.'
+                items:
+                  type: string
+                type: array
+              transaction_ids:
+                description: The list of Transaction ids that were created.
+                items:
+                  type: string
+                type: array
+            required:
+              - transaction_ids
+              - duplicate_import_ids
+            type: object
+        required:
+          - bulk
+        type: object
     required:
       - data
     type: object
@@ -1261,7 +1223,19 @@ definitions:
   CategoriesResponse:
     properties:
       data:
-        $ref: '#/definitions/CategoryGroupsWrapper'
+        properties:
+          category_groups:
+            items:
+              $ref: '#/definitions/CategoryGroupWithCategories'
+            type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - category_groups
+          - server_knowledge
+        type: object
     required:
       - data
     type: object
@@ -1307,6 +1281,7 @@ definitions:
           - TB
           - TBD
           - MF
+          - null
         type: string
       hidden:
         description: Whether or not the category is hidden
@@ -1369,33 +1344,17 @@ definitions:
         required:
           - categories
         type: object
-  CategoryGroupsWrapper:
-    properties:
-      category_groups:
-        items:
-          $ref: '#/definitions/CategoryGroupWithCategories'
-        type: array
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
-    required:
-      - category_groups
-      - server_knowledge
-    type: object
   CategoryResponse:
     properties:
       data:
-        $ref: '#/definitions/CategoryWrapper'
+        properties:
+          category:
+            $ref: '#/definitions/Category'
+        required:
+          - category
+        type: object
     required:
       - data
-    type: object
-  CategoryWrapper:
-    properties:
-      category:
-        $ref: '#/definitions/Category'
-    required:
-      - category
     type: object
   CurrencyFormat:
     description: The currency format setting for the budget.  In some cases the format will not be available and will be specified as null.
@@ -1484,18 +1443,16 @@ definitions:
   HybridTransactionsResponse:
     properties:
       data:
-        $ref: '#/definitions/HybridTransactionsWrapper'
+        properties:
+          transactions:
+            items:
+              $ref: '#/definitions/HybridTransaction'
+            type: array
+        required:
+          - transactions
+        type: object
     required:
       - data
-    type: object
-  HybridTransactionsWrapper:
-    properties:
-      transactions:
-        items:
-          $ref: '#/definitions/HybridTransaction'
-        type: array
-    required:
-      - transactions
     type: object
   MonthDetail:
     allOf:
@@ -1512,37 +1469,33 @@ definitions:
   MonthDetailResponse:
     properties:
       data:
-        $ref: '#/definitions/MonthDetailWrapper'
+        properties:
+          month:
+            $ref: '#/definitions/MonthDetail'
+        required:
+          - month
+        type: object
     required:
       - data
-    type: object
-  MonthDetailWrapper:
-    properties:
-      month:
-        $ref: '#/definitions/MonthDetail'
-    required:
-      - month
     type: object
   MonthSummariesResponse:
     properties:
       data:
-        $ref: '#/definitions/MonthSummariesWrapper'
+        properties:
+          months:
+            items:
+              $ref: '#/definitions/MonthSummary'
+            type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - months
+          - server_knowledge
+        type: object
     required:
       - data
-    type: object
-  MonthSummariesWrapper:
-    properties:
-      months:
-        items:
-          $ref: '#/definitions/MonthSummary'
-        type: array
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
-    required:
-      - months
-      - server_knowledge
     type: object
   MonthSummary:
     properties:
@@ -1628,67 +1581,76 @@ definitions:
   PayeeLocationResponse:
     properties:
       data:
-        $ref: '#/definitions/PayeeLocationWrapper'
+        properties:
+          payee_location:
+            $ref: '#/definitions/PayeeLocation'
+        required:
+          - payee_location
+        type: object
     required:
       - data
-    type: object
-  PayeeLocationWrapper:
-    properties:
-      payee_location:
-        $ref: '#/definitions/PayeeLocation'
-    required:
-      - payee_location
     type: object
   PayeeLocationsResponse:
     properties:
       data:
-        $ref: '#/definitions/PayeeLocationsWrapper'
+        properties:
+          payee_locations:
+            items:
+              $ref: '#/definitions/PayeeLocation'
+            type: array
+        required:
+          - payee_locations
+        type: object
     required:
       - data
-    type: object
-  PayeeLocationsWrapper:
-    properties:
-      payee_locations:
-        items:
-          $ref: '#/definitions/PayeeLocation'
-        type: array
-    required:
-      - payee_locations
     type: object
   PayeeResponse:
     properties:
       data:
-        $ref: '#/definitions/PayeeWrapper'
+        properties:
+          payee:
+            $ref: '#/definitions/Payee'
+        required:
+          - payee
+        type: object
     required:
       - data
-    type: object
-  PayeeWrapper:
-    properties:
-      payee:
-        $ref: '#/definitions/Payee'
-    required:
-      - payee
     type: object
   PayeesResponse:
     properties:
       data:
-        $ref: '#/definitions/PayeesWrapper'
+        properties:
+          payees:
+            items:
+              $ref: '#/definitions/Payee'
+            type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - payees
+          - server_knowledge
+        type: object
     required:
       - data
     type: object
-  PayeesWrapper:
+  SaveCategoryResponse:
     properties:
-      payees:
-        items:
-          $ref: '#/definitions/Payee'
-        type: array
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
+      data:
+        properties:
+          category:
+            $ref: '#/definitions/Category'
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+        required:
+          - category
+          - server_knowledge
+        type: object
     required:
-      - payees
-      - server_knowledge
+      - data
     type: object
   SaveMonthCategory:
     properties:
@@ -1712,7 +1674,7 @@ definitions:
         format: uuid
         type: string
       amount:
-        description: The transaction amount in milliunits format
+        description: The transaction amount in milliunits format.  Split transaction amounts cannot be changed and if a different amount is supplied it will be ignored.
         format: int64
         type: integer
       approved:
@@ -1730,6 +1692,7 @@ definitions:
           - reconciled
         type: string
       date:
+        description: The transaction date in ISO format (e.g. 2016-12-01).  Future dates (scheduled transactions) are not permitted.  Split transaction dates cannot be changed and if a different date is supplied it will be ignored.
         format: date
         type: string
       flag_color:
@@ -1741,11 +1704,14 @@ definitions:
           - green
           - blue
           - purple
+          - null
         type: string
       import_id:
-        description: 'If specified for a new transaction, the transaction will be treated as Imported and assigned this import_id.  If another transaction on the same account with this same import_id is later attempted to be created, it will be skipped to prevent duplication.  Transactions imported through File Based Import or Direct Import and not through the API, are assigned an import_id in the format: ''YNAB:[milliunit_amount]:[iso_date]:[occurrence]''.  For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of ''YNAB:-294230:2015-12-30:1''.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be ''YNAB:-294230:2015-12-30:2''.  Using a consistent format will prevent duplicates through Direct Import and File Based Import.  If import_id is specified as null, the transaction will be treated as a user entered transaction.'
+        description: 'If specified, the new transaction will be assigned this import_id and considered "imported". *At the time of import* we will attempt to match "imported" transactions with non-imported (i.e. "user-entered") transactions.<br><br>Transactions imported through File Based Import or Direct Import (not through the API) are assigned an import_id in the format: ''YNAB:[milliunit_amount]:[iso_date]:[occurrence]''. For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of ''YNAB:-294230:2015-12-30:1''.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be ''YNAB:-294230:2015-12-30:2''.  Using a consistent format will prevent duplicates through Direct Import and File Based Import.<br><br>If import_id is omitted or specified as null, the transaction will be treated as a "user-entered" transaction. As such, it will be eligible to be matched against transactions later being imported (via DI, FBI, or API).'
+        maxLength: 36
         type: string
       memo:
+        maxLength: 200
         type: string
       payee_id:
         description: The payee for the transaction
@@ -1753,6 +1719,7 @@ definitions:
         type: string
       payee_name:
         description: 'The payee name.  If a payee_name value is provided and payee_id has a null value, the payee_name value will be used to resolve the payee by either (1) a matching payee rename rule (only if import_id is also specified) or (2) a payee with the same name or (3) creation of a new payee.'
+        maxLength: 50
         type: string
     required:
       - account_id
@@ -1771,10 +1738,14 @@ definitions:
       data:
         properties:
           duplicate_import_ids:
-            description: 'If multiple transactions were specified, a list of import_ids that were not were created because of an existing import_id found on the same account'
+            description: 'If multiple transactions were specified, a list of import_ids that were not created because of an existing import_id found on the same account'
             items:
               type: string
             type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
           transaction:
             $ref: '#/definitions/TransactionDetail'
             description: 'If a single transaction was specified, the transaction that was saved'
@@ -1790,6 +1761,7 @@ definitions:
             type: array
         required:
           - transaction_ids
+          - server_knowledge
         type: object
     required:
       - data
@@ -1864,7 +1836,12 @@ definitions:
   ScheduledTransactionResponse:
     properties:
       data:
-        $ref: '#/definitions/ScheduledTransactionWrapper'
+        properties:
+          scheduled_transaction:
+            $ref: '#/definitions/ScheduledTransactionDetail'
+        required:
+          - scheduled_transaction
+        type: object
     required:
       - data
     type: object
@@ -1900,6 +1877,7 @@ definitions:
           - green
           - blue
           - purple
+          - null
         type: string
       frequency:
         enum:
@@ -1943,28 +1921,19 @@ definitions:
       - transfer_account_id
       - deleted
     type: object
-  ScheduledTransactionWrapper:
-    properties:
-      scheduled_transaction:
-        $ref: '#/definitions/ScheduledTransactionDetail'
-    required:
-      - scheduled_transaction
-    type: object
   ScheduledTransactionsResponse:
     properties:
       data:
-        $ref: '#/definitions/ScheduledTransactionsWrapper'
+        properties:
+          scheduled_transactions:
+            items:
+              $ref: '#/definitions/ScheduledTransactionDetail'
+            type: array
+        required:
+          - scheduled_transactions
+        type: object
     required:
       - data
-    type: object
-  ScheduledTransactionsWrapper:
-    properties:
-      scheduled_transactions:
-        items:
-          $ref: '#/definitions/ScheduledTransactionDetail'
-        type: array
-    required:
-      - scheduled_transactions
     type: object
   SubTransaction:
     properties:
@@ -2025,7 +1994,12 @@ definitions:
   TransactionResponse:
     properties:
       data:
-        $ref: '#/definitions/TransactionWrapper'
+        properties:
+          transaction:
+            $ref: '#/definitions/TransactionDetail'
+        required:
+          - transaction
+        type: object
     required:
       - data
     type: object
@@ -2052,6 +2026,7 @@ definitions:
           - reconciled
         type: string
       date:
+        description: The transaction date in ISO format (e.g. 2016-12-01)
         format: date
         type: string
       deleted:
@@ -2066,6 +2041,7 @@ definitions:
           - green
           - blue
           - purple
+          - null
         type: string
       id:
         type: string
@@ -2074,7 +2050,6 @@ definitions:
         type: string
       matched_transaction_id:
         description: 'If transaction is matched, the id of the matched transaction'
-        format: uuid
         type: string
       memo:
         type: string
@@ -2087,7 +2062,6 @@ definitions:
         type: string
       transfer_transaction_id:
         description: 'If a transfer transaction, the id of transaction on the other side of the transfer'
-        format: uuid
         type: string
     required:
       - id
@@ -2106,33 +2080,24 @@ definitions:
       - import_id
       - deleted
     type: object
-  TransactionWrapper:
-    properties:
-      transaction:
-        $ref: '#/definitions/TransactionDetail'
-    required:
-      - transaction
-    type: object
   TransactionsResponse:
     properties:
       data:
-        $ref: '#/definitions/TransactionsWrapper'
+        properties:
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
+          transactions:
+            items:
+              $ref: '#/definitions/TransactionDetail'
+            type: array
+        required:
+          - transactions
+          - server_knowledge
+        type: object
     required:
       - data
-    type: object
-  TransactionsWrapper:
-    properties:
-      server_knowledge:
-        description: The knowledge of the server
-        format: int64
-        type: integer
-      transactions:
-        items:
-          $ref: '#/definitions/TransactionDetail'
-        type: array
-    required:
-      - transactions
-      - server_knowledge
     type: object
   User:
     properties:
@@ -2145,14 +2110,12 @@ definitions:
   UserResponse:
     properties:
       data:
-        $ref: '#/definitions/UserWrapper'
+        properties:
+          user:
+            $ref: '#/definitions/User'
+        required:
+          - user
+        type: object
     required:
       - data
-    type: object
-  UserWrapper:
-    properties:
-      user:
-        $ref: '#/definitions/User'
-    required:
-      - user
     type: object

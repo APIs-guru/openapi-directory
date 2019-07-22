@@ -96,7 +96,7 @@ tags:
     name: repositories
 paths:
   /articles/dedup:
-    get:
+    post:
       description: Method accepts values for several parameters and retrieves a JSON array of articles which have near duplicate content matching the input parameters' values. The response array contains ids of the near duplicate articles along with their relevance scores.
       operationId: nearDuplicateArticles
       parameters:
@@ -747,6 +747,18 @@ paths:
           name: stats
           required: false
           type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistory
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistoryCumulative
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -783,6 +795,18 @@ paths:
           name: stats
           required: false
           type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistory
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistoryCumulative
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -815,6 +839,18 @@ paths:
           description: Whether to retrieve statistics about the repository. The default value is false
           in: query
           name: stats
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistory
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistoryCumulative
           required: false
           type: boolean
       produces:
@@ -866,6 +902,18 @@ paths:
           description: Whether to retrieve statistics about the repository. The default value is false
           in: query
           name: stats
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistory
+          required: false
+          type: boolean
+        - default: false
+          description: Returns deposit history over time
+          in: query
+          name: depositHistoryCumulative
           required: false
           type: boolean
       produces:
@@ -1241,9 +1289,38 @@ definitions:
       - totalHits
   Language:
     properties:
-      code:
+      deletedStatus:
+        description: 'The deleted status of the document: 0 for allowed, 1 for deleted, 2 for disabled'
+        type: integer
+      depositedDate:
+        description: The date the item was deposited in the Data Provider (repository/Journal)
+        format: date
         type: string
-      name:
+      indexed:
+        description: 'The index status of the document: 0 for not indexed, 1 for indexed'
+        type: integer
+      metadataUpdated:
+        description: The last date metadata of this article were updated
+        format: date
+        type: string
+      pdfOrigin:
+        description: The remote URL where we aquired the PDF
+        type: string
+      pdfSize:
+        description: The size of pdf in bytes
+        type: integer
+      pdfStatus:
+        description: 'The pdf status flag of article: 0 no pdf, 1 pdf exists'
+        type: integer
+      tdmOnly:
+        description: 'The tdmOnly flag of the article: 0 normal, 1 tdm only'
+        type: boolean
+      textStatus:
+        description: 'The text status flag of article: 0 does not exist, 1 exists'
+        type: integer
+      timestamp:
+        description: The date of article as given by the repository
+        format: date
         type: string
   RawRecordXml:
     properties:
@@ -1256,13 +1333,65 @@ definitions:
         type: string
   Repository:
     properties:
+      dataProviderSourceStats:
+        description: Statistics based on the Data Provider/repository rather than data processed and filtered by CORE. This array is in beta and may change in the future
+        items: {}
+        type: array
+      history:
+        description: The number of deposits in the repository per date. This field is in beta and may change in the future
+        items: {}
+        type: array
+      historyCumulative:
+        description: The number of deposits in the repository per date over time (cumulative). This field is in beta and may change in the future
+        items: {}
+        type: array
       id:
         description: CORE repository ID
         type: integer
+      lastSeen:
+        description: The time the repository was last harvested by CORE. This field is in beta and may change in the future
+        format: date-time
+        type: string
       name:
         description: Repository name
         type: string
+      openDoarId:
+        description: ID of the repository in Open DOAR
+        type: integer
+      repositoryLocation:
+        $ref: '#/definitions/RepositoryLocation'
+        description: Location of the repository
+      repositoryStats:
+        $ref: '#/definitions/RepositoryStats'
+        description: Statistics about the repository
+      uri:
+        description: Repository URI
+        type: string
+      urlHomepage:
+        description: Repository homepage
+        type: string
+      urlOaipmh:
+        description: Repository OAI-PMH endpoint
+        type: string
   RepositoryDocument: {}
+  RepositoryLocation:
+    properties:
+      country:
+        description: Country name
+        type: string
+      countryCode:
+        description: Two letter country code
+        type: string
+      id:
+        description: CORE repository ID
+        type: integer
+      latitude:
+        type: integer
+      longitude:
+        type: integer
+      repositoryName:
+        description: Repository name
+        type: string
   RepositoryResponse:
     properties:
       data:
@@ -1303,6 +1432,17 @@ definitions:
     required:
       - status
       - totalHits
+  RepositoryStats:
+    properties:
+      countFulltext:
+        description: Repository fulltext count
+        type: integer
+      countMetadata:
+        description: Repository metadata count
+        type: integer
+      dateLastProcessed:
+        description: Last repository processing date
+        type: string
   Resource:
     properties:
       id:

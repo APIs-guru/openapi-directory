@@ -611,26 +611,11 @@ paths:
           required: true
           type: string
         - in: query
-          name: isEnabled
-          required: false
-          type: boolean
-        - collectionFormat: multi
-          in: query
-          items:
-            type: boolean
-          name: 'isEnabled[]'
-          required: false
-          type: array
-        - in: query
           name: 'sort[id]'
           required: false
           type: string
         - in: query
           name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[isEnabled]'
           required: false
           type: string
       produces:
@@ -702,6 +687,60 @@ paths:
       summary: Retrieves a ImpactRuleChange resource.
       tags:
         - ImpactRuleChange
+  /impact-smart-lists:
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: postImpactSmartListCollection
+      parameters:
+        - description: The new ImpactSmartList resource
+          in: body
+          name: impactSmartList
+          schema:
+            $ref: '#/definitions/ImpactSmartList-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: ImpactSmartList resource created
+          schema:
+            $ref: '#/definitions/ImpactSmartList-Read'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a ImpactSmartList resource.
+      tags:
+        - ImpactSmartList
+  '/impact-smart-lists/{id}':
+    get:
+      operationId: getImpactSmartListItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: ImpactSmartList resource response
+          schema:
+            $ref: '#/definitions/ImpactSmartList-Read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a ImpactSmartList resource.
+      tags:
+        - ImpactSmartList
   /imports:
     get:
       operationId: getImportCollection
@@ -836,6 +875,41 @@ paths:
         - text/html
         - text/csv
       operationId: loggingInstanceItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - description: The updated Instance resource
+          in: body
+          name: instance
+          schema:
+            $ref: '#/definitions/Instance-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Instance resource updated
+          schema:
+            $ref: '#/definitions/Instance-Read'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Replaces the Instance resource.
+      tags:
+        - Instance
+  '/instances/{id}/live':
+    put:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: liveInstanceItem
       parameters:
         - in: path
           name: id
@@ -1894,6 +1968,52 @@ paths:
       summary: Publish a version
       tags:
         - RuleSetVersion
+  /rule-statistics:
+    get:
+      operationId: getRuleStatisticCollection
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: RuleStatistic collection response
+          schema:
+            items:
+              $ref: '#/definitions/RuleStatistic'
+            type: array
+      summary: Retrieves the collection of RuleStatistic resources.
+      tags:
+        - RuleStatistic
+  '/rule-statistics/{id}':
+    get:
+      operationId: getRuleStatisticItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: RuleStatistic resource response
+          schema:
+            $ref: '#/definitions/RuleStatistic'
+        '404':
+          description: Resource not found
+      summary: Retrieves a RuleStatistic resource.
+      tags:
+        - RuleStatistic
   /rules:
     get:
       operationId: getRuleCollection
@@ -1903,26 +2023,11 @@ paths:
           required: true
           type: string
         - in: query
-          name: isEnabled
-          required: false
-          type: boolean
-        - collectionFormat: multi
-          in: query
-          items:
-            type: boolean
-          name: 'isEnabled[]'
-          required: false
-          type: array
-        - in: query
           name: 'sort[id]'
           required: false
           type: string
         - in: query
           name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[isEnabled]'
           required: false
           type: string
         - description: The collection page number
@@ -1968,6 +2073,48 @@ paths:
       summary: Retrieves a Rule resource.
       tags:
         - Rule
+  /smart-lists:
+    get:
+      operationId: getSmartListCollection
+      parameters: []
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: SmartList collection response
+          schema:
+            items:
+              $ref: '#/definitions/SmartList'
+            type: array
+      summary: Retrieves the collection of SmartList resources.
+      tags:
+        - SmartList
+  '/smart-lists/{id}':
+    get:
+      operationId: getSmartListItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: SmartList resource response
+          schema:
+            $ref: '#/definitions/SmartList'
+        '404':
+          description: Resource not found
+      summary: Retrieves a SmartList resource.
+      tags:
+        - SmartList
   /stats:
     get:
       operationId: getComputedStatisticCollection
@@ -2555,7 +2702,8 @@ definitions:
       statusCode:
         type: integer
       target: {}
-      viewCount: {}
+      viewCount:
+        type: integer
     type: object
   ComputedStatistic:
     description: ''
@@ -2569,7 +2717,8 @@ definitions:
         items:
           type: string
         type: array
-      id: {}
+      id:
+        type: string
       publishHistories:
         items:
           type: string
@@ -2589,6 +2738,9 @@ definitions:
       archived:
         readOnly: true
         type: boolean
+      canceled:
+        readOnly: true
+        type: boolean
       concurrency:
         readOnly: true
         type: integer
@@ -2599,6 +2751,9 @@ definitions:
       error:
         readOnly: true
         type: string
+      errored:
+        readOnly: true
+        type: boolean
       finishedAt:
         format: date-time
         readOnly: true
@@ -2612,28 +2767,26 @@ definitions:
       includeSubdomain:
         readOnly: true
         type: boolean
+      marking:
+        items:
+          type: string
+        type: array
+      maxDuration:
+        readOnly: true
+        type: string
       maxUrls:
         readOnly: true
         type: integer
       over:
         readOnly: true
         type: boolean
-      processing:
-        readOnly: true
-        type: boolean
       project:
         $ref: '#/definitions/Project'
         readOnly: true
-      state:
-        readOnly: true
-        type: string
       stats:
         items:
           type: string
         type: array
-      timeouted:
-        readOnly: true
-        type: boolean
       updatedAt:
         format: date-time
         readOnly: true
@@ -2660,9 +2813,6 @@ definitions:
         readOnly: true
         type: string
       id:
-        readOnly: true
-        type: string
-      state:
         readOnly: true
         type: string
       stats:
@@ -2697,9 +2847,6 @@ definitions:
       id:
         readOnly: true
         type: string
-      state:
-        readOnly: true
-        type: string
       stats:
         items:
           type: string
@@ -2712,10 +2859,13 @@ definitions:
   Crawl-Write:
     description: ''
     properties:
-      concurrency: {}
+      concurrency:
+        type: integer
       firstUrl: {}
-      includeSubdomain: {}
-      maxUrls: {}
+      includeSubdomain:
+        type: boolean
+      maxUrls:
+        type: integer
       project:
         type: string
     required:
@@ -2741,6 +2891,7 @@ definitions:
         readOnly: true
       id:
         readOnly: true
+        type: string
       project:
         type: string
       url:
@@ -2785,6 +2936,27 @@ definitions:
       - project
       - ruleChange
     type: object
+  ImpactSmartList-Read:
+    description: ''
+    properties:
+      impact:
+        readOnly: true
+      smartList:
+        readOnly: true
+    type: object
+  ImpactSmartList-Write:
+    description: ''
+    properties:
+      project:
+        type: string
+      smartListId:
+        type: string
+      smartListVersion:
+        type: string
+    required:
+      - project
+      - smartListId
+    type: object
   Import-Read:
     description: ''
     properties:
@@ -2809,8 +2981,6 @@ definitions:
         type: string
       project:
         type: string
-      shouldEnable:
-        type: boolean
       startedAt:
         format: date-time
         readOnly: true
@@ -2833,8 +3003,6 @@ definitions:
       csvContent: {}
       project:
         type: string
-      shouldEnable:
-        type: boolean
     required:
       - project
       - csvContent
@@ -2866,6 +3034,8 @@ definitions:
       lastStartedAt:
         format: date-time
         type: string
+      live:
+        type: boolean
       logging:
         type: boolean
       logsLastFlushedAt:
@@ -2961,7 +3131,8 @@ definitions:
   Marker:
     description: ''
     properties:
-      id: {}
+      id:
+        type: string
       maximumOccurrence:
         type: integer
       minimumOccurrence:
@@ -3454,8 +3625,6 @@ definitions:
         type: string
       id:
         type: string
-      isEnabled:
-        type: boolean
       markers:
         items:
           $ref: '#/definitions/Marker'
@@ -3513,8 +3682,6 @@ definitions:
         type: string
       id:
         type: string
-      isEnabled:
-        type: boolean
       markers:
         items:
           $ref: '#/definitions/Marker-Read'
@@ -3556,8 +3723,6 @@ definitions:
       id:
         readOnly: true
         type: string
-      isEnabled:
-        type: boolean
       markers:
         items:
           $ref: '#/definitions/Marker'
@@ -3584,7 +3749,6 @@ definitions:
     required:
       - action
       - source
-      - isEnabled
       - rank
     type: object
   RuleChange-Read:
@@ -3612,8 +3776,6 @@ definitions:
       id:
         readOnly: true
         type: string
-      isEnabled:
-        type: boolean
       markers:
         items:
           $ref: '#/definitions/Marker-Read'
@@ -3629,7 +3791,6 @@ definitions:
     required:
       - action
       - source
-      - isEnabled
       - rank
     type: object
   RuleChange-Write:
@@ -3647,8 +3808,6 @@ definitions:
         type: array
       formattedSource:
         type: string
-      isEnabled:
-        type: boolean
       markers:
         items:
           $ref: '#/definitions/Marker-Write'
@@ -3664,7 +3823,6 @@ definitions:
     required:
       - action
       - source
-      - isEnabled
       - rank
     type: object
   RuleSetVersion:
@@ -3755,6 +3913,44 @@ definitions:
         readOnly: true
         type: boolean
     type: object
+  RuleStatistic:
+    description: ''
+    properties:
+      id:
+        type: string
+      stats:
+        type: string
+    type: object
+  SmartList:
+    description: ''
+    properties:
+      defaultVersion:
+        readOnly: true
+        type: string
+      description:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      name:
+        readOnly: true
+        type: string
+      rules:
+        readOnly: true
+        type: string
+      rulesForVersion:
+        readOnly: true
+      urlsForVersion:
+        readOnly: true
+      version:
+        readOnly: true
+      versions:
+        items:
+          type: string
+        readOnly: true
+        type: array
+    type: object
   User:
     description: ''
     properties:
@@ -3816,6 +4012,11 @@ definitions:
       roles:
         readOnly: true
       salt:
+        readOnly: true
+      sessionVersion:
+        readOnly: true
+        type: integer
+      sessionVersionValid:
         readOnly: true
       superAdmin:
         type: boolean

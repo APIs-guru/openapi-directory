@@ -62,19 +62,6 @@ parameters:
     required: true
     type: integer
 paths:
-  /apps.json:
-    get:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/App'
-      summary: Retrieve all Jumpseller Apps.
-      tags:
-        - Apps
   /categories.json:
     get:
       parameters:
@@ -980,6 +967,18 @@ paths:
       tags:
         - Hooks
   /jsapps.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/App'
+      summary: Retrieve all the Store's JSApps
+      tags:
+        - Apps
     post:
       parameters:
         - $ref: '#/parameters/LoginParam'
@@ -989,7 +988,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/JSApp'
+            $ref: '#/definitions/JSAppEdit'
       responses:
         '200':
           description: OK
@@ -1423,26 +1422,6 @@ paths:
           schema:
             $ref: '#/definitions/NotFound'
       summary: Retrieve a Product List from a query.
-      tags:
-        - Products
-  '/products/sku/{sku}.json':
-    get:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: SKU of the Product
-          in: path
-          name: sku
-          required: true
-          type: string
-      responses:
-        '200':
-          description: An array of products
-          schema:
-            items:
-              $ref: '#/definitions/Product'
-            type: array
-      summary: Retrieve a single Product by SKU.
       tags:
         - Products
   '/products/status/{status}.json':
@@ -2744,9 +2723,6 @@ definitions:
       password:
         description: Password
         type: string
-      password_confirmation:
-        description: Password Confirmation
-        type: string
       phone:
         description: Phone of the Customer
         type: string
@@ -2773,9 +2749,6 @@ definitions:
         type: string
       password:
         description: Password
-        type: string
-      password_confirmation:
-        description: Password Confirmation
         type: string
       phone:
         description: Phone of the Customer
@@ -2925,6 +2898,11 @@ definitions:
         description: Url of the HTML to inject
         type: string
     type: object
+  JSAppEdit:
+    properties:
+      app:
+        $ref: '#/definitions/JSApp'
+    type: object
   Language:
     properties:
       code:
@@ -2985,6 +2963,9 @@ definitions:
         type: string
       billing_address:
         $ref: '#/definitions/BillingAddress'
+      checkout_url:
+        description: Store Checkout Order URL for the given Order
+        type: string
       coupons:
         description: Promotion Coupons used on the given Order
         type: string
@@ -3000,6 +2981,9 @@ definitions:
         description: Discount value for the given Order
         format: float
         type: number
+      duplicate_url:
+        description: Duplicate Order URL for the given Order
+        type: string
       id:
         description: Unique identifier of the Order
         format: int32
@@ -3014,6 +2998,9 @@ definitions:
         items:
           $ref: '#/definitions/OrderProduct'
         type: array
+      recovery_url:
+        description: Recovery Order URL for the given Order
+        type: string
       shipment_status:
         description: Shipment Status for Order Fulfillment.
         enum:
@@ -3218,6 +3205,9 @@ definitions:
         default: false
         description: True if the product is featured
         type: boolean
+      google_product_category:
+        description: Category of a Product based on the Google product taxonomy
+        type: string
       height:
         description: Height of the product
         format: float
@@ -3305,6 +3295,9 @@ definitions:
         default: false
         description: True if the product is featured
         type: boolean
+      google_product_category:
+        description: Category of a Product based on the Google product taxonomy
+        type: string
       height:
         description: Height of the product
         format: float
@@ -3522,6 +3515,10 @@ definitions:
       discount_target:
         description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
         type: string
+      enabled:
+        default: true
+        description: If the promotion is to be temporarily disabled
+        type: boolean
       expires_at:
         description: Expiration date of the promotion (requires 'lasts' param - 'date')
         type: string
@@ -3583,6 +3580,10 @@ definitions:
       discount_target:
         description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
         type: string
+      enabled:
+        default: true
+        description: If the promotion is currently enabled
+        type: boolean
       expires_at:
         description: Expiration date of the promotion
         type: string

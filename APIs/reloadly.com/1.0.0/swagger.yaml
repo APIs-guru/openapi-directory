@@ -866,19 +866,32 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: apiBlueprint
       url: 'https://topupsapi.docs.apiary.io/api-description-document'
       version: 1A
   x-providerName: reloadly.com
 produces:
   - application/json
+securityDefinitions:
+  oauth2:
+    authorizationUrl: ''
+    flow: accessCode
+    scopes: {}
+    tokenUrl: ''
+    type: oauth2
 tags: []
 paths:
   /accounts/balance:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -887,12 +900,20 @@ paths:
               balance: 550.75
               currencyCode: USD
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve account balance
       tags: []
   /countries:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -955,6 +976,8 @@ paths:
                 isoName: AR
                 name: Argentina
           headers: {}
+      security:
+        - oauth2: []
       summary: List All Supported Countries
       tags: []
   /countries/HT:
@@ -962,7 +985,13 @@ paths:
       description: |-
         See http://www.nationsonline.org/oneworld/country_code_list.htm
             - Endpoint : `/countries/{countryIsoCode}`
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -976,6 +1005,8 @@ paths:
               isoName: HT
               name: Haiti
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve a country by country ISO code (ISO Alpha-2)
       tags: []
   /operators/173:
@@ -983,7 +1014,13 @@ paths:
       description: |-
         - Endpoint : `/operators/{operatorId}`
             <h4 id="auto-detect-operator"></h4>
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -996,12 +1033,20 @@ paths:
               operatorId: 173
               status: true
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve a operator by id
       tags: []
   /operators/173/commissions:
     get:
       description: '- Endpoint : `/operators/{operatorId}/commissions`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1016,6 +1061,8 @@ paths:
               percentage: 15
               updatedAt: '2018-06-26 03:36:16'
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve account operator commission by operator id
       tags: []
   /operators/auto-detect/phone/+50936377111/country-code/HT?&includeBundles=true:
@@ -1024,7 +1071,13 @@ paths:
         - NOTE: Supports phone number with a "+" in front of the country dialing code or without a "+" country dialing code.
                  Example : `+50936377111` or `50936377111` are equivalent
                            `/operators/auto-detect/phone/{phone}/country-code/{countryIsoCode}?&includeBundles=true`
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1037,12 +1090,20 @@ paths:
               operatorId: 173
               status: true
           headers: {}
+      security:
+        - oauth2: []
       summary: Auto-detect mobile operator for given phone number
       tags: []
   /operators/commissions?page=1&size=3:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1093,12 +1154,20 @@ paths:
               totalElements: 611
               totalPages: 204
           headers: {}
+      security:
+        - oauth2: []
       summary: List All Commissions
       tags: []
   /operators/countries/HT:
     get:
       description: '- Endpoint : `/operators/countries/{countryIsoCode}`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1117,12 +1186,20 @@ paths:
                 operatorId: 174
                 status: true
           headers: {}
+      security:
+        - oauth2: []
       summary: List available operators by (ISO Alpha-2) country code
       tags: []
   /operators?page=1&size=3&suggestedAmounts=true&suggestedAmountsMap=true&includeBundles=true:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1167,12 +1244,20 @@ paths:
               totalElements: 609
               totalPages: 203
           headers: {}
+      security:
+        - oauth2: []
       summary: List All Operators
       tags: []
   /promotions/5:
     get:
       description: '- Endpoint : `/promotions/{promotionId}`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1181,18 +1266,27 @@ paths:
               denominations: USD 2 and up
               description: '<br />- For top ups of USD$2.00 (EUR 5) or more, customers will receive double bonus 2x + 5 days of Whatsapp.<br />- Validity: 5 days<br />- Applies for all prepaid plans.<br /><br />T&eacute;rminos y Condiciones (Spanish version):<br />- Por recarfas desde 2 USD (5 &euro;) o m&aacute;s, el destinatario recibir&aacute; doble bono (2x) + 5 dias de WhatsApp<br />- Vigencia 5 d&iacute;as&nbsp;<br />- Aplica a todos los planes prepago'
               endDate: 'Mon, 02 Jul 2018 04:59:00 +0000'
+              localDenominations: null
               operatorId: 114
               promotionId: 5
               startDate: 'Mon, 01 Jan 2018 05:00:00 +0000'
               title: ' Movistar Ecuador From 01 Jan 2018 00:00 To 01 Jul 2018 23:59 (GMT-05:00)'
               title2: Bonus 2x
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve topup operator promotion by id
       tags: []
   /promotions/operators/129:
     get:
       description: '- Endpoint : `/promotions/operators/{operatorId}`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1201,6 +1295,7 @@ paths:
               - denominations: USD 10 and up
                 description: '<br />- For top ups of $10 or more, customers in El Salvador receive the top up plus&nbsp;500 MBs + 150 Minutes for USA/CAN for 15 days.<br />- The benefits are applied when the top up is received by the user in El Salvador.<br />- Promotional minutes are valid to call any phone number in the USA.<br />- The promotional benefits&nbsp;will be available for use during a period of 360 hours after the top up was received. (15 days)'
                 endDate: 'Tue, 26 Jun 2018 05:59:00 +0000'
+                localDenominations: null
                 operatorId: 129
                 promotionId: 1
                 startDate: 'Mon, 25 Jun 2018 06:00:00 +0000'
@@ -1209,6 +1304,7 @@ paths:
               - denominations: USD 7 and up
                 description: '<br />- For top ups between USD $7 and up, customers will receive 300 additional MBs + 60 Minutes for USA/CAN<br />- Promotional balance will expire in 5 days'
                 endDate: 'Tue, 26 Jun 2018 05:59:00 +0000'
+                localDenominations: null
                 operatorId: 129
                 promotionId: 6
                 startDate: 'Mon, 25 Jun 2018 06:00:00 +0000'
@@ -1217,18 +1313,27 @@ paths:
               - denominations: USD 7 and up
                 description: '<br />- For top ups between USD $7 and up, customers will receive 300 additional MBs + 60 Minutes for USA/CAN<br />- Promotional balance will expire in 5 days'
                 endDate: 'Sat, 30 Jun 2018 05:59:00 +0000'
+                localDenominations: null
                 operatorId: 129
                 promotionId: 9
                 startDate: 'Fri, 29 Jun 2018 06:00:00 +0000'
                 title: ' Tigo El Salvador From 29 Jun 2018 00:00 To 29 Jun 2018 23:59 (GMT-06:00)'
                 title2: Get 300 MB and 60 minutes for USA or Canada
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve topup operator promotion by operator id
       tags: []
   /promotions?page=1&size=3:
     get:
       description: ''
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1238,6 +1343,7 @@ paths:
                 - denominations: USD 10 and up
                   description: '<br />- For top ups of $10 or more, customers in El Salvador receive the top up plus&nbsp;500 MBs + 150 Minutes for USA/CAN for 15 days.<br />- The benefits are applied when the top up is received by the user in El Salvador.<br />- Promotional minutes are valid to call any phone number in the USA.<br />- The promotional benefits&nbsp;will be available for use during a period of 360 hours after the top up was received. (15 days)'
                   endDate: 'Tue, 26 Jun 2018 05:59:00 +0000'
+                  localDenominations: null
                   operatorId: 129
                   promotionId: 1
                   startDate: 'Mon, 25 Jun 2018 06:00:00 +0000'
@@ -1281,12 +1387,20 @@ paths:
               totalElements: 44
               totalPages: 15
           headers: {}
+      security:
+        - oauth2: []
       summary: List all topup operators promotions
       tags: []
   /topups:
     post:
       description: '- Endpoint : `/topups`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1304,12 +1418,20 @@ paths:
               transactionDate: '2018-06-26 07:43:36'
               transactionId: 1
           headers: {}
+      security:
+        - oauth2: []
       summary: Send Topup
       tags: []
   '/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59':
     get:
       description: '- Endpoint : `/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59`'
-      parameters: []
+      parameters:
+        - description: e.g. application/com.reloadly.topups-v1+json
+          in: header
+          name: Accept
+          required: false
+          type: string
+          x-example: application/com.reloadly.topups-v1+json
       responses:
         '200':
           description: OK
@@ -1347,6 +1469,8 @@ paths:
               totalElements: 1
               totalPages: 1
           headers: {}
+      security:
+        - oauth2: []
       summary: Retrieve topup transactions
       tags: []
 definitions:

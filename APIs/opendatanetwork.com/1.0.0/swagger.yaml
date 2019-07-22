@@ -43,13 +43,14 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/socrata/odn-backend/master/opendatanetwork-apiary.apib'
       version: 1A
   x-providerName: opendatanetwork.com
 produces:
   - application/json
+securityDefinitions: {}
 tags: []
 paths:
   /data/v1/availability/:
@@ -67,6 +68,12 @@ paths:
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
           in: query
           name: app_token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
@@ -139,6 +146,12 @@ paths:
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -184,6 +197,12 @@ paths:
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
           in: query
           name: app_token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
@@ -285,6 +304,12 @@ paths:
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -372,6 +397,12 @@ paths:
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -430,6 +461,12 @@ paths:
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
       responses:
         '200':
           description: OK
@@ -482,6 +519,12 @@ paths:
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
           in: query
           name: app_token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
@@ -547,6 +590,12 @@ paths:
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
           in: query
           name: app_token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0
@@ -622,6 +671,12 @@ paths:
             used with your request. The `app_token` parameter is required if an app token is not passed via the `X-App-Token` HTTP header. Clients must [register for their own app tokens](https://dev.socrata.com/docs/app-tokens.html).
           in: query
           name: app_token
+          required: false
+          type: string
+          x-example: cQovpGcdUT1CSzgYk0KPYdAI0
+        - description: e.g. cQovpGcdUT1CSzgYk0KPYdAI0
+          in: header
+          name: X-App-Token
           required: false
           type: string
           x-example: cQovpGcdUT1CSzgYk0KPYdAI0

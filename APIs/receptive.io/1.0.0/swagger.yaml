@@ -353,6 +353,43 @@ paths:
       summary: Health check for API
       tags:
         - system
+  /search:
+    get:
+      parameters:
+        - description: Specifies the type of entity being searched for. Must be set to 'feature'
+          enum:
+            - feature
+          in: query
+          name: scope
+          required: true
+          type: string
+        - description: The search term.
+          in: query
+          name: q
+          required: true
+          type: string
+        - description: 'A comma seperated list of status values to filter by, if required. Valid values: ''new'', ''waiting'', ''planned'', ''developing'', ''released'', ''declined''.'
+          enum:
+            - new
+            - waiting
+            - planned
+            - developing
+            - released
+            - declined
+          in: query
+          name: status
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Feature'
+            type: array
+      summary: Search features
+      tags:
+        - feature
   /users:
     get:
       description: get a list of User records

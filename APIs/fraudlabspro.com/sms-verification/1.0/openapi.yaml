@@ -28,24 +28,28 @@ paths:
     get:
       description: Verify that an OTP sent by the Send SMS Verification API is valid.
       parameters:
-        - in: query
+        - description: The unique ID that was returned by the Send Verification SMS API that triggered the OTP sms.
+          in: query
           name: tran_id
           required: true
           schema:
             type: string
-        - in: query
+        - description: FraudLabs Pro API key.
+          in: query
           name: key
           required: true
           schema:
             type: string
-        - in: query
+        - description: Returns the API response in json (default) or xml format.
+          in: query
           name: format
           schema:
             enum:
               - json
               - xml
             type: string
-        - in: query
+        - description: The OTP that was sent to the recipient’s phone.
+          in: query
           name: otp
           required: true
           schema:
@@ -64,28 +68,33 @@ paths:
     post:
       description: Send an SMS with verification code and a custom message for authentication purpose.
       parameters:
-        - in: query
+        - description: 'ISO 3166 country code for the recipient mobile phone number. If parameter is supplied, then some basic telephone number validation is done.'
+          in: query
           name: country_code
           schema:
             type: string
-        - in: query
+        - description: Returns the API response in json (default) or xml format.
+          in: query
           name: format
           schema:
             enum:
               - json
               - xml
             type: string
-        - in: query
+        - description: The recipient mobile phone number in E164 format which is a plus followed by just numbers with no spaces or parentheses.
+          in: query
           name: tel
           required: true
           schema:
             type: string
-        - in: query
+        - description: FraudLabs Pro API key.
+          in: query
           name: key
           required: true
           schema:
             type: string
         - allowEmptyValue: true
+          description: The message template for the SMS. Add <otp> as placeholder for the actual OTP to be generated. Max length is 140 characters.
           in: query
           name: mesg
           schema:

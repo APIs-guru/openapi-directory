@@ -222,6 +222,8 @@ paths:
       tags:
         - GlobalWineScore
     x-description: |
+      https://api.globalwinescore.com/globalwinescores/
+
       <br/> **Requires `Business` plan or above** (see <a href="https://www.globalwinescore.com/plans/">our plans</a> for more information)
 
       GlobalWineScores are re-computed every time a renotation is published, hence resulting in a score evolution over time.
@@ -230,7 +232,7 @@ paths:
     x-summary: Historical GWS
   /globalwinescores/latest/:
     get:
-      description: Returns the latest GWS available per wine/vintage
+      description: Returns the latest GWS available per wine/vintage.
       parameters:
         - description: ''
           in: header
@@ -368,4 +370,5 @@ paths:
       summary: List all latest GWS
       tags:
         - GlobalWineScore
+    x-description: 'https://api.globalwinescore.com/globalwinescores/latest/'
     x-summary: GWS

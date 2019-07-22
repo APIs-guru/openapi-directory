@@ -1269,6 +1269,12 @@ paths:
           name: activeOnly
           required: false
           type: boolean
+        - description: 'If specified, limits the number of returned places equal to the given value'
+          format: int32
+          in: query
+          name: numberOfPlacesToReturn
+          required: false
+          type: integer
         - format: double
           in: query
           name: bbBoxpoints.swLat
@@ -3265,11 +3271,11 @@ definitions:
         enum:
           - Unknown
           - All
-          - CycleSuperHighways
+          - Cycle Superhighways
           - Quietways
-          - MiniHollands
-          - CentralLondonGrid
-          - RoadsProject
+          - Cycleways
+          - Mini-Hollands
+          - Central London Grid
         type: string
       segmented:
         description: True if the route is split into segments
@@ -3279,8 +3285,11 @@ definitions:
         enum:
           - Unknown
           - All
-          - Existing
-          - Proposed
+          - Open
+          - In Progress
+          - Planned
+          - Planned - Subject to feasibility and consultation.
+          - Not Open
         type: string
     type: object
   Tfl.Api.Presentation.Entities.DisruptedPoint:
@@ -3658,18 +3667,21 @@ definitions:
         enum:
           - Unknown
           - All
-          - CycleSuperHighways
+          - Cycle Superhighways
           - Quietways
-          - MiniHollands
-          - CentralLondonGrid
-          - RoadsProject
+          - Cycleways
+          - Mini-Hollands
+          - Central London Grid
         type: string
       status:
         enum:
           - Unknown
           - All
-          - Existing
-          - Proposed
+          - Open
+          - In Progress
+          - Planned
+          - Planned - Subject to feasibility and consultation.
+          - Not Open
         type: string
       type:
         type: string

@@ -510,7 +510,6 @@ paths:
         8. Search cars for a given City / State combination 
         9. Get Facets to build the search drill downs 
         10. Get Market averages for price/miles/dom for your search
-      operationId: search
       parameters:
         - $ref: '#/parameters/api_key'
         - description: Latitude component of location
@@ -922,9 +921,421 @@ paths:
       tags:
         - Inventory Search API
     x-swagger-router-controller: Listing
+  /search/auction:
+    get:
+      description: |-
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - description: car search bases on zipcode
+          in: query
+          name: zip
+          required: false
+          type: string
+        - description: Boolean param to search for listings that include leasing options in them
+          in: query
+          name: include_lease
+          required: false
+          type: boolean
+        - description: Boolean param to search for listings that include finance options in them
+          in: query
+          name: include_finance
+          required: false
+          type: boolean
+        - description: 'Search listings with exact lease term, or inside a range with min and max seperated by a dash like lease_term=30-60'
+          in: query
+          name: lease_term
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in lease offers, or inside a range with min and max seperated by a dash like lease_down_payment=30-60'
+          in: query
+          name: lease_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with lease offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like lease_emp=30-60'
+          in: query
+          name: lease_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact finance loan term, or inside a range with min and max seperated by a dash like finance_loan_term=30-60'
+          in: query
+          name: finance_loan_term
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching loans Annual Percentage Rate, or inside a range with min and max seperated by a dash like finance_loan_apr=30-60'
+          in: query
+          name: finance_loan_apr
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like finance_emp=30-60'
+          in: query
+          name: finance_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment=30-60'
+          in: query
+          name: finance_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment percentage in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment_per=30-60'
+          in: query
+          name: finance_down_payment_per
+          required: false
+          type: string
+        - description: Car type. Allowed values are - new / used / certified
+          enum:
+            - new
+            - used
+            - certified
+          in: query
+          name: car_type
+          required: false
+          type: string
+        - description: Indicates whether car has had only one owner or not
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_1_owner
+          required: false
+          type: string
+        - description: Indicates whether car has clean ownership records
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_clean_title
+          required: false
+          type: string
+        - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: 'Car Make - should be a standard OEM Make name. Valid filter values are those that our Search facets API returns for unique make. You can pass in multiple make values separated by comma. e.g. ford,audi'
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: 'Car model to search. Valid filter values are those that our Search facets API returns for unique model. You can pass in multiple model values comma separated for e.g f-150,Mustang.'
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Car trim to search. Valid filter values are those that our Search facets API returns for unique trim. You can pass in multiple trim values comma separated
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: Dealer id to filter the cars.
+          format: string
+          in: query
+          name: dealer_id
+          required: false
+          type: string
+        - description: Car vin to search
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Source to search cars. Valid filter values are those that our Search facets API returns for unique source. You can pass in multiple source values comma separated
+          format: string
+          in: query
+          name: source
+          required: false
+          type: string
+        - description: Body type to filter the cars on. Valid filter values are those that our Search facets API returns for unique body types. You can pass in multiple body types comma separated.
+          format: string
+          in: query
+          name: body_type
+          required: false
+          type: string
+        - description: Body subtype to filter the cars on. Valid filter values are those that our Search facets API returns for unique body subtypes. You can pass in multiple body subtype values comma separated
+          format: string
+          in: query
+          name: body_subtype
+          required: false
+          type: string
+        - description: Vehicle type to filter the cars on. Valid filter values are those that our Search facets API returns for unique vehicle types. You can pass in multiple vehicle type values comma separated
+          format: string
+          in: query
+          name: vehicle_type
+          required: false
+          type: string
+        - description: 'Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc'
+          in: query
+          name: vins
+          required: false
+          type: string
+        - description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
+          in: query
+          name: taxonomy_vins
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim combinations. Each combination needs to have the year,make,model, trim values separated by a pipe ''|'' character in the form year|make|model|trim. e.g. 2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just provide strings of the form - ''year|make||'' or ''year|make|model'' or ''|make|model|'' combinations. Individual year / make / model filters provied with the API calls will take precedence over the Year, Make, Model, Trim combinations. The Make, Model, Trim values must be valid values as per the Marketcheck Vin Decoder. If you are using a separate vin decoder then look at using the ''vins'' or ''taxonomy_vins'' parameter to the search api instead the year|make|model|trim combinations.'
+          in: query
+          name: ymmt
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim fields. For example - year,make,model,trim fields for which user wants to do an exact match'
+          in: query
+          name: match
+          required: false
+          type: string
+        - description: Cylinders to filter the cars on. Valid filter values are those that our Search facets API returns for unique cylinder values. You can pass in multiple cylinder values comma separated
+          format: string
+          in: query
+          name: cylinders
+          required: false
+          type: string
+        - description: 'Transmission to filter the cars on. [a = Automatic, m = Manual]. Valid filter values are those that our Search facets API returns for unique transmission. You can pass in multiple transmission values comma separated'
+          format: string
+          in: query
+          name: transmission
+          required: false
+          type: string
+        - description: Speeds to filter the cars on. Valid filter values are those that our Search facets API returns for unique speeds. You can pass in multiple speeds values comma separated
+          format: string
+          in: query
+          name: speeds
+          required: false
+          type: string
+        - description: Doors to filter the cars on. Valid filter values are those that our Search facets API returns for unique doors. You can pass in multiple doors values comma separated
+          format: string
+          in: query
+          name: doors
+          required: false
+          type: string
+        - description: Drivetrain to filter the cars on. Valid filter values are those that our Search facets API returns for unique drivetrains. You can pass in multiple drivetrain values comma separated
+          format: string
+          in: query
+          name: drivetrain
+          required: false
+          type: string
+        - description: Exterior color to match. Valid filter values are those that our Search facets API returns for unique exterior colors. You can pass in multiple exterior color values comma separated
+          in: query
+          name: exterior_color
+          required: false
+          type: string
+        - description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
+          in: query
+          name: interior_color
+          required: false
+          type: string
+        - description: Base exterior color to match. Valid filter values are those that our Search facets API returns for unique base exterior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_exterior_color
+          required: false
+          type: string
+        - description: Base interior color to match. Valid filter values are those that our Search facets API returns for unique base interior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_interior_color
+          required: false
+          type: string
+        - description: Filter listings on engine
+          in: query
+          name: engine
+          required: false
+          type: string
+        - description: Engine Size to match. Valid filter values are those that our Search facets API returns for unique engine size. You can pass in multiple engine size values comma separated
+          in: query
+          name: engine_size
+          required: false
+          type: string
+        - description: Engine Aspiration to match. Valid filter values are those that our Search facets API returns for unique Engine Aspirations. You can pass in multiple Engine aspirations values comma separated
+          in: query
+          name: engine_aspiration
+          required: false
+          type: string
+        - description: Engine Block to match. Valid filter values are those that our Search facets API returns for unique Engine Block. You can pass in multiple Engine Block values comma separated
+          in: query
+          name: engine_block
+          required: false
+          type: string
+        - description: Miles range to filter cars with miles in the given range. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: miles_range
+          required: false
+          type: string
+        - description: Price range to filter cars with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: price_range
+          required: false
+          type: string
+        - description: Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_range
+          required: false
+          type: string
+        - description: Sort by field - allowed fields are distance|price|miles|dom|age|posted_at|year. Default sort field is distance from the given point
+          format: string
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: Sort order - asc or desc. Default sort order is distance from a point.
+          format: string
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          in: query
+          name: rows
+          required: false
+          type: string
+        - description: Page number to fetch the results for the given criteria. Default is 1. Pagination is allowed only till first 10000 results for the search and sort criteria. The page value can be only between 1 to 10000/rows
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: 'The comma separated list of fields for which facets are requested. Supported fields are - year, make, model, trim, vehicle_type, car_type, body_type, body_subtype, drivetrain, cylinders, transmission, exterior_color, interior_color, doors, engine_size, engine_aspiration, engine_block. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: facets
+          required: false
+          type: string
+        - description: 'The comma separated list of numeric fields for which range facets are requested. Supported fields are - price, miles, dom. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: range_facets
+          required: false
+          type: string
+        - description: 'Control sort order of facets with this parameter with default sort being on count, Other available sort is alphabetical sort, which can be obtained by using index as value for this param'
+          enum:
+            - count
+            - index
+          in: query
+          name: facet_sort
+          required: false
+          type: string
+        - description: 'The list of fields for which stats need to be generated based on the matching listings for the search criteria. Allowed fields are - price, miles, msrp, dom The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.'
+          in: query
+          name: stats
+          required: false
+          type: string
+        - description: 'Filter on Country, by default US. Search available on US (United States) and CA (Canada)'
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: If plot has value true results in around 25k coordinates with limited fields to plot respective graph
+          in: query
+          name: plot
+          required: false
+          type: boolean
+        - description: If nodedup is set to true then API will give results without is_searchable i.e multiple listings for single vin
+          in: query
+          name: nodedup
+          required: false
+          type: boolean
+        - description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
+          in: query
+          name: dedup
+          required: false
+          type: boolean
+        - description: Filter listsings on State
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Filter listings on city
+          in: query
+          name: city
+          required: false
+          type: string
+        - description: Filter listings on dealer_name
+          in: query
+          name: dealer_name
+          required: false
+          type: string
+        - description: Filter listings on web scraped trim
+          in: query
+          name: trim_o
+          required: false
+          type: string
+        - description: Filter trim on custom possible matches
+          in: query
+          name: trim_r
+          required: false
+          type: string
+        - description: Active Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_active_range
+          required: false
+          type: string
+        - description: Last 180 Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_180_range
+          required: false
+          type: string
+        - description: Boolean param to exclude certified cars from search results
+          in: query
+          name: exclude_certified
+          required: false
+          type: boolean
+        - description: fuel type of the car to be searched
+          in: query
+          name: fuel_type
+          required: false
+          type: string
+        - description: 'A boolean indicating whether to include only those listings that have photo_links in search results, And discard those that don''t have them'
+          in: query
+          name: photo_links
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: List of all cars listings matching the search & filter criteria
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Gets active car listings for the given search criteria
+      tags:
+        - Inventory Search API
+    x-swagger-router-controller: Listing
   /search/auto-complete:
     get:
       description: Auto-complete the inputs of your end users
+      operationId: searchAutoComplete
       parameters:
         - $ref: '#/parameters/api_key'
         - description: Field name for which you want auto-completion
@@ -1113,9 +1524,841 @@ paths:
       tags:
         - Inventory Search API
       x-swagger-router-controller: Listing
+  /search/fsbo:
+    get:
+      description: |-
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - description: car search bases on zipcode
+          in: query
+          name: zip
+          required: false
+          type: string
+        - description: Boolean param to search for listings that include leasing options in them
+          in: query
+          name: include_lease
+          required: false
+          type: boolean
+        - description: Boolean param to search for listings that include finance options in them
+          in: query
+          name: include_finance
+          required: false
+          type: boolean
+        - description: 'Search listings with exact lease term, or inside a range with min and max seperated by a dash like lease_term=30-60'
+          in: query
+          name: lease_term
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in lease offers, or inside a range with min and max seperated by a dash like lease_down_payment=30-60'
+          in: query
+          name: lease_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with lease offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like lease_emp=30-60'
+          in: query
+          name: lease_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact finance loan term, or inside a range with min and max seperated by a dash like finance_loan_term=30-60'
+          in: query
+          name: finance_loan_term
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching loans Annual Percentage Rate, or inside a range with min and max seperated by a dash like finance_loan_apr=30-60'
+          in: query
+          name: finance_loan_apr
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like finance_emp=30-60'
+          in: query
+          name: finance_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment=30-60'
+          in: query
+          name: finance_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment percentage in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment_per=30-60'
+          in: query
+          name: finance_down_payment_per
+          required: false
+          type: string
+        - description: Car type. Allowed values are - new / used / certified
+          enum:
+            - new
+            - used
+            - certified
+          in: query
+          name: car_type
+          required: false
+          type: string
+        - description: Indicates whether car has had only one owner or not
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_1_owner
+          required: false
+          type: string
+        - description: Indicates whether car has clean ownership records
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_clean_title
+          required: false
+          type: string
+        - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: 'Car Make - should be a standard OEM Make name. Valid filter values are those that our Search facets API returns for unique make. You can pass in multiple make values separated by comma. e.g. ford,audi'
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: 'Car model to search. Valid filter values are those that our Search facets API returns for unique model. You can pass in multiple model values comma separated for e.g f-150,Mustang.'
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Car trim to search. Valid filter values are those that our Search facets API returns for unique trim. You can pass in multiple trim values comma separated
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: Dealer id to filter the cars.
+          format: string
+          in: query
+          name: dealer_id
+          required: false
+          type: string
+        - description: Car vin to search
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Source to search cars. Valid filter values are those that our Search facets API returns for unique source. You can pass in multiple source values comma separated
+          format: string
+          in: query
+          name: source
+          required: false
+          type: string
+        - description: Body type to filter the cars on. Valid filter values are those that our Search facets API returns for unique body types. You can pass in multiple body types comma separated.
+          format: string
+          in: query
+          name: body_type
+          required: false
+          type: string
+        - description: Body subtype to filter the cars on. Valid filter values are those that our Search facets API returns for unique body subtypes. You can pass in multiple body subtype values comma separated
+          format: string
+          in: query
+          name: body_subtype
+          required: false
+          type: string
+        - description: Vehicle type to filter the cars on. Valid filter values are those that our Search facets API returns for unique vehicle types. You can pass in multiple vehicle type values comma separated
+          format: string
+          in: query
+          name: vehicle_type
+          required: false
+          type: string
+        - description: 'Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc'
+          in: query
+          name: vins
+          required: false
+          type: string
+        - description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
+          in: query
+          name: taxonomy_vins
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim combinations. Each combination needs to have the year,make,model, trim values separated by a pipe ''|'' character in the form year|make|model|trim. e.g. 2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just provide strings of the form - ''year|make||'' or ''year|make|model'' or ''|make|model|'' combinations. Individual year / make / model filters provied with the API calls will take precedence over the Year, Make, Model, Trim combinations. The Make, Model, Trim values must be valid values as per the Marketcheck Vin Decoder. If you are using a separate vin decoder then look at using the ''vins'' or ''taxonomy_vins'' parameter to the search api instead the year|make|model|trim combinations.'
+          in: query
+          name: ymmt
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim fields. For example - year,make,model,trim fields for which user wants to do an exact match'
+          in: query
+          name: match
+          required: false
+          type: string
+        - description: Cylinders to filter the cars on. Valid filter values are those that our Search facets API returns for unique cylinder values. You can pass in multiple cylinder values comma separated
+          format: string
+          in: query
+          name: cylinders
+          required: false
+          type: string
+        - description: 'Transmission to filter the cars on. [a = Automatic, m = Manual]. Valid filter values are those that our Search facets API returns for unique transmission. You can pass in multiple transmission values comma separated'
+          format: string
+          in: query
+          name: transmission
+          required: false
+          type: string
+        - description: Speeds to filter the cars on. Valid filter values are those that our Search facets API returns for unique speeds. You can pass in multiple speeds values comma separated
+          format: string
+          in: query
+          name: speeds
+          required: false
+          type: string
+        - description: Doors to filter the cars on. Valid filter values are those that our Search facets API returns for unique doors. You can pass in multiple doors values comma separated
+          format: string
+          in: query
+          name: doors
+          required: false
+          type: string
+        - description: Drivetrain to filter the cars on. Valid filter values are those that our Search facets API returns for unique drivetrains. You can pass in multiple drivetrain values comma separated
+          format: string
+          in: query
+          name: drivetrain
+          required: false
+          type: string
+        - description: Exterior color to match. Valid filter values are those that our Search facets API returns for unique exterior colors. You can pass in multiple exterior color values comma separated
+          in: query
+          name: exterior_color
+          required: false
+          type: string
+        - description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
+          in: query
+          name: interior_color
+          required: false
+          type: string
+        - description: Base exterior color to match. Valid filter values are those that our Search facets API returns for unique base exterior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_exterior_color
+          required: false
+          type: string
+        - description: Base interior color to match. Valid filter values are those that our Search facets API returns for unique base interior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_interior_color
+          required: false
+          type: string
+        - description: Filter listings on engine
+          in: query
+          name: engine
+          required: false
+          type: string
+        - description: Engine Size to match. Valid filter values are those that our Search facets API returns for unique engine size. You can pass in multiple engine size values comma separated
+          in: query
+          name: engine_size
+          required: false
+          type: string
+        - description: Engine Aspiration to match. Valid filter values are those that our Search facets API returns for unique Engine Aspirations. You can pass in multiple Engine aspirations values comma separated
+          in: query
+          name: engine_aspiration
+          required: false
+          type: string
+        - description: Engine Block to match. Valid filter values are those that our Search facets API returns for unique Engine Block. You can pass in multiple Engine Block values comma separated
+          in: query
+          name: engine_block
+          required: false
+          type: string
+        - description: Miles range to filter cars with miles in the given range. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: miles_range
+          required: false
+          type: string
+        - description: Price range to filter cars with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: price_range
+          required: false
+          type: string
+        - description: Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_range
+          required: false
+          type: string
+        - description: Sort by field - allowed fields are distance|price|miles|dom|age|posted_at|year. Default sort field is distance from the given point
+          format: string
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: Sort order - asc or desc. Default sort order is distance from a point.
+          format: string
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          in: query
+          name: rows
+          required: false
+          type: string
+        - description: Page number to fetch the results for the given criteria. Default is 1. Pagination is allowed only till first 10000 results for the search and sort criteria. The page value can be only between 1 to 10000/rows
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: 'The comma separated list of fields for which facets are requested. Supported fields are - year, make, model, trim, vehicle_type, car_type, body_type, body_subtype, drivetrain, cylinders, transmission, exterior_color, interior_color, doors, engine_size, engine_aspiration, engine_block. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: facets
+          required: false
+          type: string
+        - description: 'The comma separated list of numeric fields for which range facets are requested. Supported fields are - price, miles, dom. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: range_facets
+          required: false
+          type: string
+        - description: 'Control sort order of facets with this parameter with default sort being on count, Other available sort is alphabetical sort, which can be obtained by using index as value for this param'
+          enum:
+            - count
+            - index
+          in: query
+          name: facet_sort
+          required: false
+          type: string
+        - description: 'The list of fields for which stats need to be generated based on the matching listings for the search criteria. Allowed fields are - price, miles, msrp, dom The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.'
+          in: query
+          name: stats
+          required: false
+          type: string
+        - description: 'Filter on Country, by default US. Search available on US (United States) and CA (Canada)'
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: If plot has value true results in around 25k coordinates with limited fields to plot respective graph
+          in: query
+          name: plot
+          required: false
+          type: boolean
+        - description: If nodedup is set to true then API will give results without is_searchable i.e multiple listings for single vin
+          in: query
+          name: nodedup
+          required: false
+          type: boolean
+        - description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
+          in: query
+          name: dedup
+          required: false
+          type: boolean
+        - description: Filter listsings on State
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Filter listings on city
+          in: query
+          name: city
+          required: false
+          type: string
+        - description: Filter listings on dealer_name
+          in: query
+          name: dealer_name
+          required: false
+          type: string
+        - description: Filter listings on web scraped trim
+          in: query
+          name: trim_o
+          required: false
+          type: string
+        - description: Filter trim on custom possible matches
+          in: query
+          name: trim_r
+          required: false
+          type: string
+        - description: Active Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_active_range
+          required: false
+          type: string
+        - description: Last 180 Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_180_range
+          required: false
+          type: string
+        - description: Boolean param to exclude certified cars from search results
+          in: query
+          name: exclude_certified
+          required: false
+          type: boolean
+        - description: fuel type of the car to be searched
+          in: query
+          name: fuel_type
+          required: false
+          type: string
+        - description: 'A boolean indicating whether to include only those listings that have photo_links in search results, And discard those that don''t have them'
+          in: query
+          name: photo_links
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: List of all cars listings matching the search & filter criteria
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Gets active car listings for the given search criteria
+      tags:
+        - Inventory Search API
+    x-swagger-router-controller: Listing
+  /search/recents:
+    get:
+      description: |-
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of 90 days cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+      operationId: search90Days
+      parameters:
+        - $ref: '#/parameters/api_key'
+        - description: Latitude component of location
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude component of location
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: Radius around the search location
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - description: car search bases on zipcode
+          in: query
+          name: zip
+          required: false
+          type: string
+        - description: Boolean param to search for listings that include leasing options in them
+          in: query
+          name: include_lease
+          required: false
+          type: boolean
+        - description: Boolean param to search for listings that include finance options in them
+          in: query
+          name: include_finance
+          required: false
+          type: boolean
+        - description: 'Search listings with exact lease term, or inside a range with min and max seperated by a dash like lease_term=30-60'
+          in: query
+          name: lease_term
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in lease offers, or inside a range with min and max seperated by a dash like lease_down_payment=30-60'
+          in: query
+          name: lease_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with lease offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like lease_emp=30-60'
+          in: query
+          name: lease_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact finance loan term, or inside a range with min and max seperated by a dash like finance_loan_term=30-60'
+          in: query
+          name: finance_loan_term
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching loans Annual Percentage Rate, or inside a range with min and max seperated by a dash like finance_loan_apr=30-60'
+          in: query
+          name: finance_loan_apr
+          required: false
+          type: string
+        - description: 'Search listings with finance offers exactly matching Estimated Monthly Payment(EMI), or inside a range with min and max seperated by a dash like finance_emp=30-60'
+          in: query
+          name: finance_emp
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment=30-60'
+          in: query
+          name: finance_down_payment
+          required: false
+          type: string
+        - description: 'Search listings with exact down payment percentage in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment_per=30-60'
+          in: query
+          name: finance_down_payment_per
+          required: false
+          type: string
+        - description: Car type. Allowed values are - new / used / certified
+          enum:
+            - new
+            - used
+            - certified
+          in: query
+          name: car_type
+          required: false
+          type: string
+        - description: Indicates whether car has had only one owner or not
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_1_owner
+          required: false
+          type: string
+        - description: Indicates whether car has clean ownership records
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: carfax_clean_title
+          required: false
+          type: string
+        - description: Car year - 1980 onwards. Valid filter values are those that our Search facets API returns for unique years. You can pass in multiple year values comma separated.
+          in: query
+          name: year
+          required: false
+          type: string
+        - description: 'Car Make - should be a standard OEM Make name. Valid filter values are those that our Search facets API returns for unique make. You can pass in multiple make values separated by comma. e.g. ford,audi'
+          format: string
+          in: query
+          name: make
+          required: false
+          type: string
+        - description: 'Car model to search. Valid filter values are those that our Search facets API returns for unique model. You can pass in multiple model values comma separated for e.g f-150,Mustang.'
+          format: string
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: Car trim to search. Valid filter values are those that our Search facets API returns for unique trim. You can pass in multiple trim values comma separated
+          format: string
+          in: query
+          name: trim
+          required: false
+          type: string
+        - description: Dealer id to filter the cars.
+          format: string
+          in: query
+          name: dealer_id
+          required: false
+          type: string
+        - description: Car vin to search
+          format: string
+          in: query
+          name: vin
+          required: false
+          type: string
+        - description: Source to search cars. Valid filter values are those that our Search facets API returns for unique source. You can pass in multiple source values comma separated
+          format: string
+          in: query
+          name: source
+          required: false
+          type: string
+        - description: Body type to filter the cars on. Valid filter values are those that our Search facets API returns for unique body types. You can pass in multiple body types comma separated.
+          format: string
+          in: query
+          name: body_type
+          required: false
+          type: string
+        - description: Body subtype to filter the cars on. Valid filter values are those that our Search facets API returns for unique body subtypes. You can pass in multiple body subtype values comma separated
+          format: string
+          in: query
+          name: body_subtype
+          required: false
+          type: string
+        - description: Vehicle type to filter the cars on. Valid filter values are those that our Search facets API returns for unique vehicle types. You can pass in multiple vehicle type values comma separated
+          format: string
+          in: query
+          name: vehicle_type
+          required: false
+          type: string
+        - description: 'Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc'
+          in: query
+          name: vins
+          required: false
+          type: string
+        - description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
+          in: query
+          name: taxonomy_vins
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim combinations. Each combination needs to have the year,make,model, trim values separated by a pipe ''|'' character in the form year|make|model|trim. e.g. 2010|Audi|A5,2014|Nissan|Sentra|S 6MT,|Honda|City|   You could just provide strings of the form - ''year|make||'' or ''year|make|model'' or ''|make|model|'' combinations. Individual year / make / model filters provied with the API calls will take precedence over the Year, Make, Model, Trim combinations. The Make, Model, Trim values must be valid values as per the Marketcheck Vin Decoder. If you are using a separate vin decoder then look at using the ''vins'' or ''taxonomy_vins'' parameter to the search api instead the year|make|model|trim combinations.'
+          in: query
+          name: ymmt
+          required: false
+          type: string
+        - description: 'Comma separated list of Year, Make, Model, Trim fields. For example - year,make,model,trim fields for which user wants to do an exact match'
+          in: query
+          name: match
+          required: false
+          type: string
+        - description: Cylinders to filter the cars on. Valid filter values are those that our Search facets API returns for unique cylinder values. You can pass in multiple cylinder values comma separated
+          format: string
+          in: query
+          name: cylinders
+          required: false
+          type: string
+        - description: 'Transmission to filter the cars on. [a = Automatic, m = Manual]. Valid filter values are those that our Search facets API returns for unique transmission. You can pass in multiple transmission values comma separated'
+          format: string
+          in: query
+          name: transmission
+          required: false
+          type: string
+        - description: Speeds to filter the cars on. Valid filter values are those that our Search facets API returns for unique speeds. You can pass in multiple speeds values comma separated
+          format: string
+          in: query
+          name: speeds
+          required: false
+          type: string
+        - description: Doors to filter the cars on. Valid filter values are those that our Search facets API returns for unique doors. You can pass in multiple doors values comma separated
+          format: string
+          in: query
+          name: doors
+          required: false
+          type: string
+        - description: Drivetrain to filter the cars on. Valid filter values are those that our Search facets API returns for unique drivetrains. You can pass in multiple drivetrain values comma separated
+          format: string
+          in: query
+          name: drivetrain
+          required: false
+          type: string
+        - description: Exterior color to match. Valid filter values are those that our Search facets API returns for unique exterior colors. You can pass in multiple exterior color values comma separated
+          in: query
+          name: exterior_color
+          required: false
+          type: string
+        - description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
+          in: query
+          name: interior_color
+          required: false
+          type: string
+        - description: Base exterior color to match. Valid filter values are those that our Search facets API returns for unique base exterior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_exterior_color
+          required: false
+          type: string
+        - description: Base interior color to match. Valid filter values are those that our Search facets API returns for unique base interior colors. You can pass in multiple base interior color values comma separated
+          in: query
+          name: base_interior_color
+          required: false
+          type: string
+        - description: Filter listings on engine
+          in: query
+          name: engine
+          required: false
+          type: string
+        - description: Engine Size to match. Valid filter values are those that our Search facets API returns for unique engine size. You can pass in multiple engine size values comma separated
+          in: query
+          name: engine_size
+          required: false
+          type: string
+        - description: Engine Aspiration to match. Valid filter values are those that our Search facets API returns for unique Engine Aspirations. You can pass in multiple Engine aspirations values comma separated
+          in: query
+          name: engine_aspiration
+          required: false
+          type: string
+        - description: Engine Block to match. Valid filter values are those that our Search facets API returns for unique Engine Block. You can pass in multiple Engine Block values comma separated
+          in: query
+          name: engine_block
+          required: false
+          type: string
+        - description: Miles range to filter cars with miles in the given range. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: miles_range
+          required: false
+          type: string
+        - description: Price range to filter cars with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
+          format: string
+          in: query
+          name: price_range
+          required: false
+          type: string
+        - description: Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_range
+          required: false
+          type: string
+        - description: Sort by field - allowed fields are distance|price|miles|dom|age|posted_at|year. Default sort field is distance from the given point
+          format: string
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: Sort order - asc or desc. Default sort order is distance from a point.
+          format: string
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: Number of results to return. Default is 10. Max is 50
+          in: query
+          name: rows
+          required: false
+          type: string
+        - description: Page number to fetch the results for the given criteria. Default is 1. Pagination is allowed only till first 10000 results for the search and sort criteria. The page value can be only between 1 to 10000/rows
+          in: query
+          name: start
+          required: false
+          type: string
+        - description: 'The comma separated list of fields for which facets are requested. Supported fields are - year, make, model, trim, vehicle_type, car_type, body_type, body_subtype, drivetrain, cylinders, transmission, exterior_color, interior_color, doors, engine_size, engine_aspiration, engine_block. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: facets
+          required: false
+          type: string
+        - description: 'The comma separated list of numeric fields for which range facets are requested. Supported fields are - price, miles, dom. Facets could be requested in addition to the listings for the search. Please note - The API calls with lots of facet fields may take longer to respond.'
+          in: query
+          name: range_facets
+          required: false
+          type: string
+        - description: 'Control sort order of facets with this parameter with default sort being on count, Other available sort is alphabetical sort, which can be obtained by using index as value for this param'
+          enum:
+            - count
+            - index
+          in: query
+          name: facet_sort
+          required: false
+          type: string
+        - description: 'The list of fields for which stats need to be generated based on the matching listings for the search criteria. Allowed fields are - price, miles, msrp, dom The stats consists of mean, max, average and count of listings based on which the stats are calculated for the field. Stats could be requested in addition to the listings for the search. Please note - The API calls with the stats fields may take longer to respond.'
+          in: query
+          name: stats
+          required: false
+          type: string
+        - description: 'Filter on Country, by default US. Search available on US (United States) and CA (Canada)'
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: If plot has value true results in around 25k coordinates with limited fields to plot respective graph
+          in: query
+          name: plot
+          required: false
+          type: boolean
+        - description: If nodedup is set to true then API will give results without is_searchable i.e multiple listings for single vin
+          in: query
+          name: nodedup
+          required: false
+          type: boolean
+        - description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
+          in: query
+          name: dedup
+          required: false
+          type: boolean
+        - description: Filter listsings on State
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Filter listings on city
+          in: query
+          name: city
+          required: false
+          type: string
+        - description: Filter listings on dealer_name
+          in: query
+          name: dealer_name
+          required: false
+          type: string
+        - description: Filter listings on web scraped trim
+          in: query
+          name: trim_o
+          required: false
+          type: string
+        - description: Filter trim on custom possible matches
+          in: query
+          name: trim_r
+          required: false
+          type: string
+        - description: Active Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_active_range
+          required: false
+          type: string
+        - description: Last 180 Days on Market range to filter cars with the DOM within the given range. Range to be given in the format - min-max e.g. 10-50
+          format: string
+          in: query
+          name: dom_180_range
+          required: false
+          type: string
+        - description: Boolean param to exclude certified cars from search results
+          in: query
+          name: exclude_certified
+          required: false
+          type: boolean
+        - description: fuel type of the car to be searched
+          in: query
+          name: fuel_type
+          required: false
+          type: string
+        - description: 'A boolean indicating whether to include only those listings that have photo_links in search results, And discard those that don''t have them'
+          in: query
+          name: photo_links
+          required: false
+          type: boolean
+        - description: sold parameter to display only sold listings
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          name: sold
+          required: false
+          type: string
+      responses:
+        '200':
+          description: List of all cars listings matching the search & filter criteria
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Gets 90 Day car listings for the given search criteria
+      tags:
+        - Inventory Search API
+    x-swagger-router-controller: Listing
   /specs/auto-complete:
     get:
       description: 'Auto-complete the inputs of your end users, not from active set but from taxonomy (decoder database)'
+      operationId: specsAutoComplete
       parameters:
         - $ref: '#/parameters/api_key'
         - description: Field name for which you want auto-completion

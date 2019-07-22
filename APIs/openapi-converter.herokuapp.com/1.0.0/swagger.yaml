@@ -146,7 +146,8 @@ paths:
       responses:
         '200':
           description: default
-          schema: {}
+          schema:
+            $ref: '#/definitions/validationResult'
       summary: Validate an OpenAPI 3.0.x definition
       tags:
         - validation
@@ -176,10 +177,19 @@ paths:
       responses:
         '200':
           description: default
-          schema: {}
+          schema:
+            $ref: '#/definitions/validationResult'
         '400':
           description: Invalid request
           schema: {}
       summary: Validate an OpenAPI 3.0.x definition supplied in the body of the request
       tags:
         - validation
+definitions:
+  validationResult:
+    properties:
+      openapi:
+        type: string
+    required:
+      - openapi
+    type: object

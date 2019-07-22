@@ -240,6 +240,7 @@ paths:
       summary: Places a multiple or a complex bet.
       tags:
         - Bets
+      x-canReturnErrors: null
   /bet/single:
     post:
       description: 'Places a single bet. When placing a single bet using live inplay bets, the system might generate a bet delay to allow a time margin to negate the effects of major changes (for example, goals) to the market.  Note that the amount of bet delay will vary by category and event type. A delayedBetId will be recieved that can be used to resubmit the bet.'
@@ -330,6 +331,7 @@ paths:
       summary: Places a single bet
       tags:
         - Bets
+      x-canReturnErrors: null
   /betslips:
     post:
       description: Organises the betslip when one or more selections are made. It returns a bet slip structure organised by betting opportunities.
@@ -427,6 +429,7 @@ paths:
       summary: Returns available free bets
       tags:
         - Bets
+      x-canreturnErrors: null
   /history:
     get:
       description: 'Retrieves the customer’s bet history. Options are available to organise the history in terms of date, bet type and settled and unsettled bets. The maximum number of bets and bet history pages retrieved can also be set.'
@@ -1354,3 +1357,4 @@ x-docchapters:
   - docsAndSdks
   - errorHandling
   - statusCodes
+x-globalerrors: null
