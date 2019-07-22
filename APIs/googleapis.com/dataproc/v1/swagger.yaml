@@ -665,7 +665,7 @@ paths:
   '/v1/{name}':
     delete:
       description: Deletes a workflow template. It does not cancel in-progress workflows.
-      operationId: dataproc.projects.locations.workflowTemplates.delete
+      operationId: dataproc.projects.regions.workflowTemplates.delete
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -691,7 +691,7 @@ paths:
         - projects
     get:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
-      operationId: dataproc.projects.locations.workflowTemplates.get
+      operationId: dataproc.projects.regions.workflowTemplates.get
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -699,14 +699,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: 'Optional. The version of workflow template to retrieve. Only previously instatiated versions can be retrieved.If unspecified, retrieves the current version.'
           in: query
           name: version
@@ -737,7 +729,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.locations.workflowTemplates.update
+      operationId: dataproc.projects.regions.workflowTemplates.update
       parameters:
         - in: body
           name: body
@@ -811,7 +803,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiate
+      operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -838,7 +830,7 @@ paths:
   '/v1/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.locations.workflowTemplates.list
+      operationId: dataproc.projects.regions.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -880,7 +872,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.locations.workflowTemplates.create
+      operationId: dataproc.projects.regions.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -919,7 +911,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -962,7 +954,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.locations.workflowTemplates.getIamPolicy
+      operationId: dataproc.projects.regions.workflowTemplates.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -1001,7 +993,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: dataproc.projects.locations.workflowTemplates.setIamPolicy
+      operationId: dataproc.projects.regions.workflowTemplates.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1040,7 +1032,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.locations.workflowTemplates.testIamPermissions
+      operationId: dataproc.projects.regions.workflowTemplates.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1425,7 +1417,18 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for GetIamPolicy method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: 'OPTIONAL: A GetPolicyOptions object for specifying options to GetIamPolicy. This field is only used by Cloud IAM.'
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: 'Optional. The policy format version to be returned. Acceptable values are 0 and 1. If the value is 0, or the field is omitted, policy format version 1 will be returned.'
+        format: int32
+        type: integer
     type: object
   HadoopJob:
     description: 'A Cloud Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).'

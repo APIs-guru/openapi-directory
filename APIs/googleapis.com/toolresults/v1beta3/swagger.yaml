@@ -2022,6 +2022,9 @@ definitions:
       abortedByUser:
         description: 'If the end user aborted the test execution before a pass or fail could be determined. For example, the user pressed ctrl-c which sent a kill signal to the test runner while the test was running.'
         type: boolean
+      hasErrorLogs:
+        description: If results are being provided to the user in certain cases of infrastructure failures
+        type: boolean
       infrastructureFailure:
         description: |-
           If the test runner could not determine success or failure because the test depends on a component other than the system under test which failed.
@@ -2753,6 +2756,7 @@ definitions:
           - availableDeepLinks
           - compatibleWithOrchestrator
           - completeRoboScriptExecution
+          - crashDialogError
           - encounteredLoginScreen
           - encounteredNonAndroidUiWidgetScreen
           - failedToInstall
@@ -2784,6 +2788,9 @@ definitions:
 
       Note: the API related comments are for StepService only. This message is also being used in ExecutionService in a read only mode for the corresponding step.
     properties:
+      elapsedTime:
+        $ref: '#/definitions/Duration'
+        description: Elapsed time of test suite.
       errorCount:
         description: |-
           Number of test cases in error, typically set by the service by parsing the xml_source.

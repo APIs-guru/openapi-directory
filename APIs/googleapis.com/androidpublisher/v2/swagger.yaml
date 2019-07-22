@@ -2791,7 +2791,8 @@ definitions:
         description: |-
           The purchase state of the order. Possible values are:  
           - Purchased 
-          - Canceled
+          - Canceled 
+          - Pending
         format: int32
         type: integer
       purchaseTimeMillis:
@@ -3027,10 +3028,12 @@ definitions:
   Testers:
     properties:
       googleGroups:
+        description: 'A list of all Google Groups, as email addresses, that define testers for this track.'
         items:
           type: string
         type: array
       googlePlusCommunities:
+        description: 'A list of all Google+ Communities, as URLs, that define testers for this track.'
         items:
           type: string
         type: array

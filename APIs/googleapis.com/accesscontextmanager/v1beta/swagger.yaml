@@ -193,17 +193,17 @@ paths:
   '/v1beta/{name}':
     delete:
       description: |-
-        Delete an Service Perimeter by resource
+        Delete an Access Level by resource
         name. The longrunning operation from this RPC will have a successful status
-        once the Service Perimeter has been
-        removed from long-lasting storage.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.delete
+        once the Access Level has been removed
+        from long-lasting storage.
+      operationId: accesscontextmanager.accessPolicies.accessLevels.delete
       parameters:
         - description: |-
-            Required. Resource name for the Service Perimeter.
+            Required. Resource name for the Access Level.
 
             Format:
-            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
+            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
           in: path
           name: name
           required: true
@@ -223,9 +223,9 @@ paths:
         - accessPolicies
     get:
       description: |-
-        Get an Service Perimeter by resource
+        Get an Access Level by resource
         name.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.get
+      operationId: accesscontextmanager.accessPolicies.accessLevels.get
       parameters:
         - description: |-
             Whether to return `BasicLevels` in the Cloud Common Expression
@@ -243,10 +243,10 @@ paths:
           name: accessLevelFormat
           type: string
         - description: |-
-            Required. Resource name for the Service Perimeter.
+            Required. Resource name for the Access Level.
 
             Format:
-            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`
+            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
           in: path
           name: name
           required: true
@@ -256,7 +256,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ServicePerimeter'
+            $ref: '#/definitions/AccessLevel'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -278,21 +278,21 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Update an Service Perimeter. The
-        longrunning operation from this RPC will have a successful status once the
-        changes to the Service Perimeter have
-        propagated to long-lasting storage. Service Perimeter containing
+        Update an Access Level. The longrunning
+        operation from this RPC will have a successful status once the changes to
+        the Access Level have propagated
+        to long-lasting storage. Access Levels containing
         errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
+      operationId: accesscontextmanager.accessPolicies.accessLevels.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/ServicePerimeter'
+            $ref: '#/definitions/AccessLevel'
         - description: |-
-            Required. Resource name for the ServicePerimeter.  The `short_name`
-            component must begin with a letter and only include alphanumeric and '_'.
-            Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
+            Required. Resource name for the Access Level. The `short_name` component
+            must begin with a letter and only include alphanumeric and '_'. Format:
+            `accessPolicies/{policy_id}/accessLevels/{short_name}`
           in: path
           name: name
           required: true
@@ -582,6 +582,24 @@ definitions:
           $ref: '#/definitions/Condition'
         type: array
     type: object
+  BridgeServiceRestriction:
+    description: |-
+      Alpha. Specifies which services are granted access via this Bridge Service
+      Perimeter.
+    properties:
+      allowedServices:
+        description: |-
+          The list of APIs usable through the Bridge Perimeter. Must be empty
+          unless 'enable_restriction' is True.
+        items:
+          type: string
+        type: array
+      enableRestriction:
+        description: |-
+          Whether to restrict the set of APIs callable through the Bridge Service
+          Perimeter.
+        type: boolean
+    type: object
   Condition:
     description: |-
       A condition necessary for an `AccessLevel` to be granted. The Condition is an
@@ -692,6 +710,24 @@ definitions:
         description: |-
           Whether or not screenlock is required for the DevicePolicy to be true.
           Defaults to `false`.
+        type: boolean
+    type: object
+  IngressServiceRestriction:
+    description: |-
+      Alpha. Specifies how Access Levels are to be used for accessing the Service
+      Perimeter.
+    properties:
+      allowedServices:
+        description: |-
+          The list of APIs usable with a valid Access Level. Must be empty unless
+          'enable_restriction' is True.
+        items:
+          type: string
+        type: array
+      enableRestriction:
+        description: |-
+          Whether to restrict the set of APIs callable outside the Service
+          Perimeter via Access Levels.
         type: boolean
     type: object
   ListAccessLevelsResponse:
@@ -876,6 +912,14 @@ definitions:
         items:
           type: string
         type: array
+      bridgeServiceRestriction:
+        $ref: '#/definitions/BridgeServiceRestriction'
+        description: |-
+          Alpha. Configuration for what services are accessible via the Bridge
+          Perimeter. Must be empty for non-Bridge Perimeters.
+      ingressServiceRestriction:
+        $ref: '#/definitions/IngressServiceRestriction'
+        description: Alpha. Configuration for which services may be used with Access Levels.
       resources:
         description: |-
           A list of GCP resources that are inside of the service perimeter.
@@ -902,6 +946,9 @@ definitions:
         items:
           type: string
         type: array
+      vpcServiceRestriction:
+        $ref: '#/definitions/VpcServiceRestriction'
+        description: Alpha. Configuration for within Perimeter allowed APIs.
     type: object
   Status:
     description: |-
@@ -932,4 +979,22 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
+    type: object
+  VpcServiceRestriction:
+    description: |-
+      Alpha. Specifies how APIs are allowed to communicate within the Service
+      Perimeter.
+    properties:
+      allowedServices:
+        description: |-
+          The list of APIs usable within the Service Perimeter. Must be empty
+          unless 'enable_restriction' is True.
+        items:
+          type: string
+        type: array
+      enableRestriction:
+        description: |-
+          Whether to restrict API calls within the Service Perimeter to the list of
+          APIs specified in 'allowed_services'.
+        type: boolean
     type: object

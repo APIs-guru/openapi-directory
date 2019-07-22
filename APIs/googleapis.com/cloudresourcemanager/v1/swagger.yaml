@@ -353,13 +353,10 @@ paths:
     post:
       description: |-
         Request that a new Project be created. The result is an Operation which
-        can be used to track the creation process. It is automatically deleted
-        after a few hours, so there is no need to call DeleteOperation.
-
-        Our SLO permits Project creation to take up to 30 seconds at the 90th
-        percentile. As of 2016-08-29, we are observing 6 seconds 50th percentile
-        latency. 95th percentile latency is around 11 seconds. We recommend
-        polling at the 5th second with an exponential backoff.
+        can be used to track the creation process. This process usually takes a few
+        seconds, but can sometimes take much longer. The tracking Operation is
+        automatically deleted after a few hours, so there is no need to call
+        DeleteOperation.
 
         Authorization requires the Google IAM permission
         `resourcemanager.projects.create` on the specified parent for the new
@@ -879,7 +876,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.organizations.clearOrgPolicy
+      operationId: cloudresourcemanager.projects.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -902,7 +899,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -923,7 +920,7 @@ paths:
         an `etag`set because it is a computed `Policy` across multiple resources.
         Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
         not be expanded.
-      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -950,7 +947,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1023,7 +1020,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.organizations.getOrgPolicy
+      operationId: cloudresourcemanager.projects.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1050,7 +1047,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1066,7 +1063,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1093,7 +1090,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1109,7 +1106,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.organizations.listOrgPolicies
+      operationId: cloudresourcemanager.projects.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1136,7 +1133,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1204,7 +1201,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.organizations.setOrgPolicy
+      operationId: cloudresourcemanager.projects.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1227,7 +1224,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1308,7 +1305,7 @@ definitions:
                   {
                     "log_type": "DATA_READ",
                     "exempted_members": [
-                      "user:foo@gmail.com"
+                      "user:jose@example.com"
                     ]
                   },
                   {
@@ -1320,7 +1317,7 @@ definitions:
                 ]
               },
               {
-                "service": "fooservice.googleapis.com"
+                "service": "sampleservice.googleapis.com"
                 "audit_log_configs": [
                   {
                     "log_type": "DATA_READ",
@@ -1328,7 +1325,7 @@ definitions:
                   {
                     "log_type": "DATA_WRITE",
                     "exempted_members": [
-                      "user:bar@gmail.com"
+                      "user:aliya@example.com"
                     ]
                   }
                 ]
@@ -1336,9 +1333,9 @@ definitions:
             ]
           }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      logging. It also exempts foo@gmail.com from DATA_READ logging, and
-      bar@gmail.com from DATA_WRITE logging.
+      For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts jose@example.com from DATA_READ logging, and
+      aliya@example.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -1362,7 +1359,7 @@ definitions:
               {
                 "log_type": "DATA_READ",
                 "exempted_members": [
-                  "user:foo@gmail.com"
+                  "user:jose@example.com"
                 ]
               },
               {
@@ -1372,7 +1369,7 @@ definitions:
           }
 
       This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
+      jose@example.com from DATA_READ logging.
     properties:
       exemptedMembers:
         description: |-
@@ -1413,7 +1410,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1679,7 +1676,12 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: |-
+          OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          `GetIamPolicy`. This field is only used by Cloud IAM.
     type: object
   GetOrgPolicyRequest:
     description: The request sent to the GetOrgPolicy method.
@@ -1687,6 +1689,18 @@ definitions:
       constraint:
         description: Name of the `Constraint` to get the `Policy`.
         type: string
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: |-
+          Optional. The policy format version to be returned.
+          Acceptable values are 0 and 1.
+          If the value is 0, or the field is omitted, policy format version 1 will be
+          returned.
+        format: int32
+        type: integer
     type: object
   Lien:
     description: |-
@@ -2244,7 +2258,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:
@@ -2403,12 +2417,10 @@ definitions:
           Organizations may be filtered by `owner.directoryCustomerId` or by
           `domain`, where the domain is a G Suite domain, for example:
 
-          clang-format off
-          | Filter                              | Description                      |
-          |-------------------------------------|----------------------------------|
-          | owner.directorycustomerid:123456789 | Organizations with `owner.directory_customer_id` equal to `123456789`.|
-          | domain:google.com                   | Organizations corresponding to the domain `google.com`.|
-          clang-format on
+          * Filter `owner.directorycustomerid:123456789` returns Organization
+          resources with `owner.directory_customer_id` equal to `123456789`.
+          * Filter `domain:google.com` returns Organization resources corresponding
+          to the domain `google.com`.
 
           This field is optional.
         type: string

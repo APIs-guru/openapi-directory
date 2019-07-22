@@ -356,7 +356,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
       encodingType:
         description: The encoding type used by the API to calculate offsets.
         enum:
@@ -386,7 +386,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
       encodingType:
         description: The encoding type used by the API to calculate offsets.
         enum:
@@ -416,7 +416,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
       encodingType:
         description: |-
           The encoding type used by the API to calculate sentence offsets for the
@@ -451,7 +451,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
       encodingType:
         description: The encoding type used by the API to calculate offsets.
         enum:
@@ -488,7 +488,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
       encodingType:
         description: The encoding type used by the API to calculate offsets.
         enum:
@@ -499,7 +499,7 @@ definitions:
         type: string
       features:
         $ref: '#/definitions/Features'
-        description: The enabled features.
+        description: Required. The enabled features.
     type: object
   AnnotateTextResponse:
     description: The text annotations response message.
@@ -564,7 +564,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: Input document.
+        description: Required. Input document.
     type: object
   ClassifyTextResponse:
     description: The document classification response message.

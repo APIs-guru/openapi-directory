@@ -126,6 +126,14 @@ paths:
       operationId: servicebroker.getIamPolicy
       parameters:
         - description: |-
+            Optional. The policy format version to be returned.
+            Acceptable values are 0 and 1.
+            If the value is 0, or the field is omitted, policy format version 1 will be
+            returned.
+          in: query
+          name: options.requestedPolicyVersion
+          type: integer
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -271,7 +279,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -359,7 +367,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:

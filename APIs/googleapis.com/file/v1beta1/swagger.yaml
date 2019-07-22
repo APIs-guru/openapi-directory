@@ -184,8 +184,7 @@ paths:
           schema:
             $ref: '#/definitions/Instance'
         - description: |-
-            Output only.
-            The resource name of the instance, in the format
+            Output only. The resource name of the instance, in the format
             projects/{project_id}/locations/{location_id}/instances/{instance_id}.
           in: path
           name: name
@@ -699,6 +698,9 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
         type: array
+      location:
+        description: 'The location of the node, if different from instance location.'
+        type: string
       nodeId:
         description: |-
           The id of the node.
@@ -836,9 +838,7 @@ definitions:
     description: A Cloud Filestore instance.
     properties:
       createTime:
-        description: |-
-          Output only.
-          The time when the instance was created.
+        description: Output only. The time when the instance was created.
         format: google-datetime
         type: string
       description:
@@ -863,8 +863,7 @@ definitions:
         type: object
       name:
         description: |-
-          Output only.
-          The resource name of the instance, in the format
+          Output only. The resource name of the instance, in the format
           projects/{project_id}/locations/{location_id}/instances/{instance_id}.
         type: string
       networks:
@@ -875,9 +874,7 @@ definitions:
           $ref: '#/definitions/NetworkConfig'
         type: array
       state:
-        description: |-
-          Output only.
-          The instance state.
+        description: Output only. The instance state.
         enum:
           - STATE_UNSPECIFIED
           - CREATING
@@ -887,9 +884,7 @@ definitions:
           - ERROR
         type: string
       statusMessage:
-        description: |-
-          Output only.
-          Additional information about the instance state, if available.
+        description: 'Output only. Additional information about the instance state, if available.'
         type: string
       tier:
         description: The service tier of the instance.
@@ -985,8 +980,7 @@ definitions:
     properties:
       ipAddresses:
         description: |-
-          Output only.
-          IPv4 addresses in the format
+          Output only. IPv4 addresses in the format
           {octet 1}.{octet 2}.{octet 3}.{octet 4} or IPv6 addresses in the format
           {block 1}:{block 2}:{block 3}:{block 4}:{block 5}:{block 6}:{block
           7}:{block 8}.

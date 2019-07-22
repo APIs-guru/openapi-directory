@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: www.googleapis.com
+host: compute.googleapis.com
 basePath: /compute/beta/projects
 info:
   contact:
@@ -16966,6 +16966,102 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/resourcePolicies/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.resourcePolicies.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - resourcePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/resourcePolicies/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.resourcePolicies.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetPolicyRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - resourcePolicies
   '/{project}/regions/{region}/resourcePolicies/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -17327,7 +17423,7 @@ paths:
       tags:
         - routers
     put:
-      description: Updates the specified Router resource with the data included in the request.
+      description: 'Updates the specified Router resource with the data included in the request. This method conforms to PUT semantics, which requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload.'
       operationId: compute.routers.update
       parameters:
         - in: body
@@ -27748,7 +27844,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a new reservation.
+      description: 'Creates a new reservation. For more information, read Reserving zonal resources.'
       operationId: compute.reservations.insert
       parameters:
         - in: body
@@ -29603,9 +29699,23 @@ definitions:
     properties:
       balancingMode:
         description: |-
-          Specifies the balancing mode for this backend. For global HTTP(S) or TCP/SSL load balancing, the default is UTILIZATION. Valid values are UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP/SSL).
+          Specifies the balancing mode for the backend.
 
-          For Internal Load Balancing, the default and only supported mode is CONNECTION.
+          When choosing a balancing mode, you need to consider the loadBalancingScheme, and protocol for the backend service, as well as the type of backend (instance group or NEG).
+
+           
+          - If the load balancing mode is CONNECTION, then the load is spread based on how many concurrent connections the backend can handle.
+          The CONNECTION balancing mode is only available if the protocol for the backend service is SSL, TCP, or UDP.
+
+          If the loadBalancingScheme for the backend service is EXTERNAL (SSL Proxy and TCP Proxy load balancers), you must also specify exactly one of the following parameters: maxConnections, maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
+
+          If the loadBalancingScheme for the backend service is INTERNAL (internal TCP/UDP load balancers), you cannot specify any additional parameters.
+           
+          - If the load balancing mode is RATE, then the load is spread based on the rate of HTTP requests per second (RPS).
+          The RATE balancing mode is only available if the protocol for the backend service is HTTP or HTTPS. You must specify exactly one of the following parameters: maxRate, maxRatePerInstance, or maxRatePerEndpoint.
+           
+          - If the load balancing mode is UTILIZATION, then the load is spread based on the CPU utilization of instances in an instance group.
+          The UTILIZATION balancing mode is only available if the loadBalancingScheme of the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backend is made up of instance groups. There are no restrictions on the backend service protocol.
         enum:
           - CONNECTION
           - RATE
@@ -29626,35 +29736,35 @@ definitions:
         type: boolean
       group:
         description: |-
-          The fully-qualified URL of an Instance Group or Network Endpoint Group resource. In case of instance group this defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
+          The fully-qualified URL of an instance group or network endpoint group (NEG) resource. The type of backend that a backend service supports depends on the backend service's loadBalancingScheme.
 
-          For Network Endpoint Groups this defines list of endpoints. All endpoints of Network Endpoint Group must be hosted on instances located in the same zone as the Network Endpoint Group.
+           
+          - When the loadBalancingScheme for the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, the backend can be either an instance group or a NEG. The backends on the backend service must be either all instance groups or all NEGs. You cannot mix instance group and NEG backends on the same backend service. 
 
-          Backend service can not contain mix of Instance Group and Network Endpoint Group backends.
 
-          Note that you must specify an Instance Group or Network Endpoint Group resource using the fully-qualified URL, rather than a partial URL.
+          - When the loadBalancingScheme for the backend service is INTERNAL, the backend must be an instance group in the same region as the backend service. NEGs are not supported.  
 
-          When the BackendService has load balancing scheme INTERNAL, the instance group must be within the same region as the BackendService. Network Endpoint Groups are not supported for INTERNAL load balancing scheme.
+          You must use the fully-qualified URL (starting with https://www.googleapis.com/) to specify the instance group or NEG. Partial URLs are not supported.
         type: string
       maxConnections:
         description: |-
-          The max number of simultaneous connections for the group. Can be used with either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerInstance must be set.
+          Defines a maximum target for simultaneous connections for the entire backend (instance group or NEG). If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is CONNECTION, and backend is attached to a backend service whose loadBalancingScheme is EXTERNAL, you must specify either this parameter, maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
 
-          This cannot be used for internal load balancing.
+          Not available if the backend's balancingMode is RATE. If the loadBalancingScheme is INTERNAL, then maxConnections is not supported, even though the backend requires a balancing mode of CONNECTION.
         format: int32
         type: integer
       maxConnectionsPerEndpoint:
         description: |-
-          The max number of simultaneous connections that a single backend network endpoint can handle. This is used to calculate the capacity of the group. Can be used in either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerEndpoint must be set.
+          Defines a maximum target for simultaneous connections for an endpoint of a NEG. This is multiplied by the number of endpoints in the NEG to implicitly calculate a maximum number of target maximum simultaneous connections for the NEG. If the backend's balancingMode is CONNECTION, and the backend is attached to a backend service whose loadBalancingScheme is EXTERNAL, you must specify either this parameter, maxConnections, or maxConnectionsPerInstance.
 
-          This cannot be used for internal load balancing.
+          Not available if the backend's balancingMode is RATE. Internal TCP/UDP load balancing does not support setting maxConnectionsPerEndpoint even though its backends require a balancing mode of CONNECTION.
         format: int32
         type: integer
       maxConnectionsPerInstance:
         description: |-
-          The max number of simultaneous connections that a single backend instance can handle. This is used to calculate the capacity of the group. Can be used in either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerInstance must be set.
+          Defines a maximum target for simultaneous connections for a single VM in a backend instance group. This is multiplied by the number of instances in the instance group to implicitly calculate a target maximum number of simultaneous connections for the whole instance group. If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is CONNECTION, and backend is attached to a backend service whose loadBalancingScheme is EXTERNAL, you must specify either this parameter, maxConnections, or maxConnectionsPerEndpoint.
 
-          This cannot be used for internal load balancing.
+          Not available if the backend's balancingMode is RATE. Internal TCP/UDP load balancing does not support setting maxConnectionsPerInstance even though its backends require a balancing mode of CONNECTION.
         format: int32
         type: integer
       maxRate:
@@ -29666,28 +29776,35 @@ definitions:
         type: integer
       maxRatePerEndpoint:
         description: |-
-          The max requests per second (RPS) that a single backend network endpoint can handle. This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerEndpoint must be set.
+          Defines a maximum target for requests per second (RPS) for an endpoint of a NEG. This is multiplied by the number of endpoints in the NEG to implicitly calculate a target maximum rate for the NEG.
 
-          This cannot be used for internal load balancing.
+          If the backend's balancingMode is RATE, you must specify either this parameter, maxRate, or maxRatePerInstance.
+
+          Not available if the backend's balancingMode is CONNECTION.
         format: float
         type: number
       maxRatePerInstance:
         description: |-
-          The max requests per second (RPS) that a single backend instance can handle. This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerInstance must be set.
+          Defines a maximum target for requests per second (RPS) for a single VM in a backend instance group. This is multiplied by the number of instances in the instance group to implicitly calculate a target maximum rate for the whole instance group.
 
-          This cannot be used for internal load balancing.
+          If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is RATE, you must specify either this parameter, maxRate, or maxRatePerEndpoint.
+
+          Not available if the backend's balancingMode is CONNECTION.
         format: float
         type: number
       maxUtilization:
         description: |-
-          Used when balancingMode is UTILIZATION. This ratio defines the CPU utilization target for the group. The default is 0.8. Valid range is [0.0, 1.0].
+          Defines the maximum average CPU utilization of a backend VM in an instance group. The valid range is [0.0, 1.0]. This is an optional parameter if the backend's balancingMode is UTILIZATION.
 
-          This cannot be used for internal load balancing.
+          This parameter can be used in conjunction with maxRate, maxRatePerInstance, maxConnections, or maxConnectionsPerInstance.
         format: float
         type: number
     type: object
   BackendBucket:
-    description: A BackendBucket resource. This resource defines a Cloud Storage bucket.
+    description: |-
+      Represents a Cloud Storage Bucket resource.
+
+      This Cloud Storage bucket resource is referenced by a URL map of a load balancer. For more information, read Backend Buckets.
     properties:
       bucketName:
         description: Cloud Storage bucket name.
@@ -29804,13 +29921,19 @@ definitions:
         type: object
     type: object
   BackendService:
-    description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity. (== resource_for v1.backendService ==) (== resource_for beta.backendService ==)
+    description: |-
+      Represents a Backend Service resource.
+
+
+
+      Backend services must have an associated health check. Backend services also store information about session affinity. For more information, read Backend Services.
+
+      A backendServices resource represents a global backend service. Global backend services are used for HTTP(S), SSL Proxy, TCP Proxy load balancing and Traffic Director.
+
+      A regionBackendServices resource represents a regional backend service. Regional backend services are used for internal TCP/UDP load balancing. For more information, read Internal TCP/UDP Load balancing. (== resource_for v1.backendService ==) (== resource_for beta.backendService ==)
     properties:
       affinityCookieTtlSec:
-        description: |-
-          Lifetime of cookies in seconds if session_affinity is GENERATED_COOKIE. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value for TTL is one day.
-
-          When the load balancing scheme is INTERNAL, this field is not used.
+        description: 'If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400).'
         format: int32
         type: integer
       backends:
@@ -29851,13 +29974,11 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       enableCDN:
-        description: |-
-          If true, enable Cloud CDN for this BackendService.
-
-          When the load balancing scheme is INTERNAL, this field is not used.
+        description: 'If true, enables Cloud CDN for the backend service. Only applicable if the loadBalancingScheme is EXTERNAL and the protocol is HTTP or HTTPS.'
         type: boolean
       failoverPolicy:
         $ref: '#/definitions/BackendServiceFailoverPolicy'
+        description: Applicable only to Failover for Internal TCP/UDP Load Balancing. Requires at least one backend instance group to be defined as a backup (failover) backend.
       fingerprint:
         description: |-
           Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService, otherwise the request will fail with error 412 conditionNotMet.
@@ -29931,22 +30052,22 @@ definitions:
         description: |-
           Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80.
 
-          This cannot be used for internal load balancing.
+          This cannot be used if the loadBalancingScheme is INTERNAL (Internal TCP/UDP Load Balancing).
         format: int32
         type: integer
       portName:
         description: |-
-          Name of backend port. The same name should appear in the instance groups referenced by this service. Required when the load balancing scheme is EXTERNAL.
+          A named port on a backend instance group representing the port for communication to the backend VMs in that group. Required when the loadBalancingScheme is EXTERNAL and the backends are instance groups. The named port must be defined on each backend instance group. This parameter has no meaning if the backends are NEGs.
 
-          When the load balancing scheme is INTERNAL, this field is not used.
+
+
+          Must be omitted when the loadBalancingScheme is INTERNAL (Internal TCP/UDP Load Blaancing).
         type: string
       protocol:
         description: |-
           The protocol this BackendService uses to communicate with backends.
 
-          Possible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP.
-
-          For internal load balancing, the possible values are TCP and UDP, and the default is TCP.
+          Possible values are HTTP, HTTPS, TCP, SSL, or UDP, depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancer or for Traffic director for more information.
         enum:
           - HTTP
           - HTTP2
@@ -29966,13 +30087,13 @@ definitions:
         type: string
       sessionAffinity:
         description: |-
-          Type of session affinity to use. The default is NONE.
+          Type of session affinity to use. The default is NONE. Session affinity is not applicable if the --protocol is UDP.
 
-          When the load balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or GENERATED_COOKIE.
+          When the loadBalancingScheme is EXTERNAL, possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. GENERATED_COOKIE is only available if the protocol is HTTP or HTTPS.
 
-          When the load balancing scheme is INTERNAL, can be NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
+          When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
 
-          When the protocol is UDP, this field is not used.
+          When the loadBalancingScheme is INTERNAL_SELF_MANAGED, possible values are NONE, CLIENT_IP, GENERATED_COOKIE, HEADER_FIELD, or HTTP_COOKIE.
         enum:
           - CLIENT_IP
           - CLIENT_IP_PORT_PROTO
@@ -29983,7 +30104,7 @@ definitions:
           - NONE
         type: string
       timeoutSec:
-        description: How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds.
+        description: 'The backend service timeout has a different meaning depending on the type of load balancer. For more information read,  Backend service settings The default is 30 seconds.'
         format: int32
         type: integer
     type: object
@@ -30078,25 +30199,18 @@ definitions:
     properties:
       disableConnectionDrainOnFailover:
         description: |-
-          On failover or failback, this field indicates whether connection drain will be honored. Setting this to true has the following effect: connections to the old active pool are not drained. Connections to the new active pool use the timeout of 10 min (currently fixed). Setting to false has the following effect: both old and new connections will have a drain timeout of 10 min.
-
           This can be set to true only if the protocol is TCP.
 
           The default is false.
         type: boolean
       dropTrafficIfUnhealthy:
         description: |-
-          This option is used only when no healthy VMs are detected in the primary and backup instance groups. When set to true, traffic is dropped. When set to false, new connections are sent across all VMs in the primary group.
+          Applicable only to Failover for Internal TCP/UDP Load Balancing. If set to true, connections to the load balancer are dropped when all primary and all backup backend VMs are unhealthy. If set to false, connections are distributed among all primary VMs when all primary and all backup backend VMs are unhealthy.
 
           The default is false.
         type: boolean
       failoverRatio:
-        description: |-
-          The value of the field must be in [0, 1]. If the ratio of the healthy VMs in the primary backend is at or below this number, traffic arriving at the load-balanced IP will be directed to the failover backend.
-
-          In case where 'failoverRatio' is not set or all the VMs in the backup backend are unhealthy, the traffic will be directed back to the primary backend in the "force" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.
-
-          This field is only used with l4 load balancing.
+        description: 'Applicable only to Failover for Internal TCP/UDP Load Balancing. The value of the field must be in the range [0, 1]. If the value is 0, the load balancer performs a failover when the number of healthy primary VMs equals zero. For all other values, the load balancer performs a failover when the total number of healthy primary VMs is less than this ratio.'
         format: float
         type: number
     type: object
@@ -30673,7 +30787,7 @@ definitions:
     description: Message containing connection draining configuration.
     properties:
       drainingTimeoutSec:
-        description: 'Time for which instance will be drained (not accept new connections, but still work to finish started).'
+        description: 'The amount of time in seconds to allow existing connections to persist while on unhealthy backend VMs. Only applicable if the protocol is not UDP. The valid range is [0, 3600].'
         format: int32
         type: integer
     type: object
@@ -31979,7 +32093,33 @@ definitions:
         type: integer
     type: object
   ForwardingRule:
-    description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple. (== resource_for beta.forwardingRules ==) (== resource_for v1.forwardingRules ==) (== resource_for beta.globalForwardingRules ==) (== resource_for v1.globalForwardingRules ==) (== resource_for beta.regionForwardingRules ==) (== resource_for v1.regionForwardingRules ==)'
+    description: |-
+      Represents a Forwarding Rule resource.
+
+
+
+      A forwardingRules resource represents a regional forwarding rule.
+
+      Regional external forwarding rules can reference any of the following resources:
+       
+      - A target instance 
+      - A Cloud VPN Classic gateway (targetVpnGateway),  
+      - A target pool for a Network Load Balancer 
+      - A global target HTTP(S) proxy for an HTTP(S) load balancer using Standard Tier 
+      - A target SSL proxy for a SSL Proxy load balancer using Standard Tier 
+      - A target TCP proxy for a TCP Proxy load balancer using Standard Tier.  
+
+      Regional internal forwarding rules can reference the backend service of an internal TCP/UDP load balancer.
+
+      For regional internal forwarding rules, the following applies:  
+      - If the loadBalancingScheme for the load balancer is INTERNAL, then the forwarding rule references a regional internal backend service. 
+      - If the loadBalancingScheme for the load balancer is INTERNAL_MANAGED, then the forwarding rule must reference a regional target HTTP(S) proxy.  
+
+      For more information, read Using Forwarding rules.
+
+      A globalForwardingRules resource represents a global forwarding rule.
+
+      Global forwarding rules are only used by load balancers that use Premium Tier. (== resource_for beta.forwardingRules ==) (== resource_for v1.forwardingRules ==) (== resource_for beta.globalForwardingRules ==) (== resource_for v1.globalForwardingRules ==) (== resource_for beta.regionForwardingRules ==) (== resource_for v1.regionForwardingRules ==)
     properties:
       IPAddress:
         description: |-
@@ -32593,7 +32733,12 @@ definitions:
         type: string
     type: object
   HealthCheck:
-    description: 'An HealthCheck resource. This resource defines a template for how individual virtual machines should be checked for health, via one of the supported protocols.'
+    description: |-
+      Represents a Health Check resource.
+
+      Health checks are used for most GCP load balancers and managed instance group auto-healing. For more information, read Health Check Concepts.
+
+      To perform health checks on network load balancers, you must use either httpHealthChecks or httpsHealthChecks.
     properties:
       checkIntervalSec:
         description: How often (in seconds) to send a health check. The default value is 5 seconds.
@@ -33046,7 +33191,10 @@ definitions:
         type: boolean
     type: object
   HttpHealthCheck:
-    description: 'An HttpHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTP.'
+    description: |-
+      Represents a legacy HTTP Health Check resource.
+
+      Legacy health checks are required by network load balancers. For more information, read Health Check Concepts.
     properties:
       checkIntervalSec:
         description: How often (in seconds) to send a health check. The default value is 5 seconds.
@@ -33082,7 +33230,7 @@ definitions:
         format: int32
         type: integer
       requestPath:
-        description: The request path of the HTTP health check request. The default value is /.
+        description: The request path of the HTTP health check request. The default value is /. This field does not support query parameters.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -33367,7 +33515,10 @@ definitions:
         type: string
     type: object
   HttpsHealthCheck:
-    description: 'An HttpsHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTPS.'
+    description: |-
+      Represents a legacy HTTPS Health Check resource.
+
+      Legacy health checks are required by network load balancers. For more information, read Health Check Concepts.
     properties:
       checkIntervalSec:
         description: How often (in seconds) to send a health check. The default value is 5 seconds.
@@ -33799,7 +33950,7 @@ definitions:
         type: array
       reservationAffinity:
         $ref: '#/definitions/ReservationAffinity'
-        description: The configuration of desired reservations from which this Instance can consume capacity from.
+        description: Specifies the reservations that this instance can consume from.
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Sets the scheduling options for this instance.
@@ -33857,7 +34008,7 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/InstancesScopedList'
           description: '[Output Only] Name of the scope containing this set of instances.'
-        description: A list of InstancesScopedList resources.
+        description: An object that contains a list of instances scoped by zone.
         type: object
       kind:
         default: 'compute#instanceAggregatedList'
@@ -35040,7 +35191,7 @@ definitions:
         type: array
       reservationAffinity:
         $ref: '#/definitions/ReservationAffinity'
-        description: The configuration of desired reservations which this Instance could consume capacity from.
+        description: Specifies the reservations that this instance can consume from.
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Specifies the scheduling options for the instances that are created from this template.
@@ -36226,6 +36377,7 @@ definitions:
         enum:
           - ACTIVE
           - CANCELLED
+          - COMPLETED
           - NS_ACTIVE
           - NS_CANCELED
         type: string
@@ -37420,10 +37572,10 @@ definitions:
     description: 'A network peering attached to a network resource. The message includes the peering name, peer network, peering state, and a flag indicating whether Google Compute Engine should automatically create routes for the peering.'
     properties:
       autoCreateRoutes:
-        description: 'This field will be deprecated soon. Use the exchange_subnet_routes field instead. Indicates whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.'
+        description: This field will be deprecated soon. Use the exchange_subnet_routes field instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
         type: boolean
       exchangeSubnetRoutes:
-        description: 'Whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the peering state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.'
+        description: Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
         type: boolean
       exportCustomRoutes:
         description: Whether to export the custom routes to peer network.
@@ -37460,7 +37612,7 @@ definitions:
   NetworksAddPeeringRequest:
     properties:
       autoCreateRoutes:
-        description: This field will be deprecated soon. Use exchange_subnet_routes in network_peering instead. Whether Google Compute Engine manages the routes automatically.
+        description: This field will be deprecated soon. Use exchange_subnet_routes in network_peering instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
         type: boolean
       name:
         description: 'Name of the peering, which should conform to RFC1035.'
@@ -37841,7 +37993,7 @@ definitions:
     description: |-
       Represent a sole-tenant Node Template resource.
 
-      You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances. (== resource_for beta.nodeTemplates ==) (== resource_for v1.nodeTemplates ==) NextID: 16
+      You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances. (== resource_for beta.nodeTemplates ==) (== resource_for v1.nodeTemplates ==) (== NextID: 16 ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -37882,7 +38034,12 @@ definitions:
         type: string
       serverBinding:
         $ref: '#/definitions/ServerBinding'
-        description: Binding properties for the physical server.
+        description: |-
+          Sets the binding properties for the physical server. Valid values include:  
+          - [Default] RESTART_NODE_ON_ANY_SERVER: Restarts VMs on any available physical server 
+          - RESTART_NODE_ON_MINIMAL_SERVER: Restarts VMs on the same physical server whenever possible  
+
+          See Sole-tenant node options for more information.
       status:
         description: '[Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.'
         enum:
@@ -38990,6 +39147,13 @@ definitions:
           - BACKEND_SERVICES
           - C2_CPUS
           - COMMITMENTS
+          - COMMITTED_CPUS
+          - COMMITTED_LOCAL_SSD_TOTAL_GB
+          - COMMITTED_NVIDIA_K80_GPUS
+          - COMMITTED_NVIDIA_P100_GPUS
+          - COMMITTED_NVIDIA_P4_GPUS
+          - COMMITTED_NVIDIA_T4_GPUS
+          - COMMITTED_NVIDIA_V100_GPUS
           - CPUS
           - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
@@ -39035,6 +39199,7 @@ definitions:
           - PREEMPTIBLE_NVIDIA_V100_GPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
+          - RESERVATIONS
           - RESOURCE_POLICIES
           - ROUTERS
           - ROUTES
@@ -39747,7 +39912,7 @@ definitions:
         type: string
     type: object
   Reservation:
-    description: 'Reservation resource NextID: 13'
+    description: 'Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read  Reserving zonal resources. (== resource_for beta.reservations ==) (== resource_for v1.reservations ==) (== NextID: 13 ==)'
     properties:
       commitment:
         description: '[OutputOnly] Full or partial url for parent commitment for reservations which are tied to a commitment.'
@@ -39777,7 +39942,7 @@ definitions:
         $ref: '#/definitions/AllocationSpecificSKUReservation'
         description: Reservation for instances with specific machine shapes.
       specificReservationRequired:
-        description: 'Indicates whether the reservation can be consumed by VMs with "any reservation" defined. If the field is set, then only VMs that target the reservation by name using --reservation-affinity can consume this reservation.'
+        description: 'Indicates whether the reservation can be consumed by VMs with affinity for "any" reservation. If the field is set, then only VMs that target the reservation by name can consume from this reservation.'
         type: boolean
       status:
         description: '[Output Only] The status of the reservation.'
@@ -39793,7 +39958,7 @@ definitions:
         type: string
     type: object
   ReservationAffinity:
-    description: AllocationAffinity is the configuration of desired allocation which this instance could take capacity from.
+    description: Specifies the reservations that this instance can consume from.
     properties:
       consumeReservationType:
         description: 'Specifies the type of reservation from which this instance can consume resources: ANY_RESERVATION (default), SPECIFIC_RESERVATION, or NO_RESERVATION. See  Consuming reserved instances for examples.'
@@ -39804,10 +39969,10 @@ definitions:
           - UNSPECIFIED
         type: string
       key:
-        description: Corresponds to the label key of reservation resource.
+        description: 'Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify googleapis.com/reservation-name as the key and specify the name of your reservation as its value.'
         type: string
       values:
-        description: Corresponds to the label values of reservation resource.
+        description: Corresponds to the label values of a reservation resource.
         items:
           type: string
         type: array
@@ -41247,7 +41412,7 @@ definitions:
           By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
         type: boolean
       nodeAffinities:
-        description: A set of node affinity and anti-affinity.
+        description: A set of node affinity and anti-affinity configurations. Refer to Configuring node affinity for more information.
         items:
           $ref: '#/definitions/SchedulingNodeAffinity'
         type: array
@@ -41268,7 +41433,7 @@ definitions:
         description: Corresponds to the label key of Node resource.
         type: string
       operator:
-        description: Defines the operation of node selection.
+        description: Defines the operation of node selection. Valid operators are IN for affinity and NOT_IN for anti-affinity.
         enum:
           - IN
           - NOT_IN
@@ -41291,7 +41456,10 @@ definitions:
         $ref: '#/definitions/PreconfiguredWafSet'
     type: object
   SecurityPolicy:
-    description: A security policy is comprised of one or more rules. It can also be associated with one or more 'targets'. (== resource_for v1.securityPolicies ==) (== resource_for beta.securityPolicies ==)
+    description: |-
+      Represents a Cloud Armor Security Policy resource.
+
+      Only external backend services that use load balancers can reference a Security Policy. For more information, read  Cloud Armor Security Policy Concepts. (== resource_for v1.securityPolicies ==) (== resource_for beta.securityPolicies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -41780,7 +41948,10 @@ definitions:
         type: array
     type: object
   SslCertificate:
-    description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user. (== resource_for beta.sslCertificates ==) (== resource_for v1.sslCertificates ==)
+    description: |-
+      Represents an SSL Certificate resource.
+
+      This SSL certificate resource also contains a private key. You can use SSL keys and certificates to secure connections to a load balancer. For more information, read  Creating and Using SSL Certificates. (== resource_for beta.sslCertificates ==) (== resource_for v1.sslCertificates ==)
     properties:
       certificate:
         description: A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
@@ -42149,7 +42320,10 @@ definitions:
         type: array
     type: object
   SslPolicy:
-    description: A SSL policy specifies the server-side support for SSL features. This can be attached to a TargetHttpsProxy or a TargetSslProxy. This affects connections between clients and the HTTPS or SSL proxy load balancer. They do not affect the connection between the load balancers and the backends.
+    description: |-
+      Represents a Cloud Armor Security Policy resource.
+
+      Only external backend services used by HTTP or HTTPS load balancers can reference a Security Policy. For more information, read read  Cloud Armor Security Policy Concepts. (== resource_for beta.sslPolicies ==) (== resource_for v1.sslPolicies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -42514,7 +42688,7 @@ definitions:
         format: float
         type: number
       metadata:
-        description: Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.
+        description: 'Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.'
         enum:
           - EXCLUDE_ALL_METADATA
           - INCLUDE_ALL_METADATA
@@ -42714,7 +42888,10 @@ definitions:
         type: object
     type: object
   TargetHttpProxy:
-    description: A TargetHttpProxy resource. This resource defines an HTTP proxy. (== resource_for beta.targetHttpProxies ==) (== resource_for v1.targetHttpProxies ==)
+    description: |-
+      Represents a Target HTTP Proxy resource.
+
+      A target HTTP proxy is a component of certain types of load balancers. Global forwarding rules reference a target HTTP proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies. (== resource_for beta.targetHttpProxies ==) (== resource_for v1.targetHttpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -42959,7 +43136,10 @@ definitions:
         type: array
     type: object
   TargetHttpsProxy:
-    description: A TargetHttpsProxy resource. This resource defines an HTTPS proxy. (== resource_for beta.targetHttpsProxies ==) (== resource_for v1.targetHttpsProxies ==)
+    description: |-
+      Represents a Target HTTPS Proxy resource.
+
+      A target HTTPS proxy is a component of certain types of load balancers. Global forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies. (== resource_for beta.targetHttpsProxies ==) (== resource_for v1.targetHttpsProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -43388,7 +43568,10 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool. (== resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)'
+    description: |-
+      Represents a Target Pool resource.
+
+      Target pools are used for network TCP/UDP load balancing. A target pool references member instances, an associated legacy HttpHealthCheck resource, and, optionally, a backup target pool. For more information, read Using target pools. (== resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)
     properties:
       backupPool:
         description: |-
@@ -43733,7 +43916,10 @@ definitions:
         type: array
     type: object
   TargetSslProxy:
-    description: A TargetSslProxy resource. This resource defines an SSL proxy. (== resource_for beta.targetSslProxies ==) (== resource_for v1.targetSslProxies ==)
+    description: |-
+      Represents a Target SSL Proxy resource.
+
+      A target SSL proxy is a component of a SSL Proxy load balancer. Global forwarding rules reference a target SSL proxy, and the target proxy then references an external backend service. For more information, read Using Target Proxies. (== resource_for beta.targetSslProxies ==) (== resource_for v1.targetSslProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -43860,7 +44046,10 @@ definitions:
         type: string
     type: object
   TargetTcpProxy:
-    description: A TargetTcpProxy resource. This resource defines a TCP proxy. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
+    description: |-
+      Represents a Target TCP Proxy resource.
+
+      A target TCP proxy is a component of a TCP Proxy load balancer. Global forwarding rules reference ta target TCP proxy, and the target proxy then references an external backend service. For more information, read TCP Proxy Load Balancing Concepts. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -44251,7 +44440,12 @@ definitions:
         type: array
     type: object
   UrlMap:
-    description: 'A UrlMap resource. This resource defines the mapping from URL to the BackendService resource, based on the "longest-match" of the URL''s host and path.'
+    description: |-
+      Represents a URL Map resource.
+
+      A URL map resource is a component of certain types of load balancers. This resource defines mappings from host names and URL paths to either a backend service or a backend bucket.
+
+      To use this resource, the backend service must have a loadBalancingScheme of either EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED For more information, read URL Map Concepts.
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -45208,6 +45402,7 @@ definitions:
           - NO_INCOMING_PACKETS
           - PROVISIONING
           - REJECTED
+          - STOPPED
           - WAITING_FOR_FULL_CONFIG
         type: string
       targetVpnGateway:

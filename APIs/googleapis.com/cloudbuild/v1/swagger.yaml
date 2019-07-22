@@ -1218,12 +1218,6 @@ definitions:
     description: The request message for Operations.CancelOperation.
     properties: {}
     type: object
-  CheckSuiteFilter:
-    description: |-
-      A CheckSuiteFilter is a filter that indicates that we should build on all
-      check suite events.
-    properties: {}
-    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -1255,20 +1249,20 @@ definitions:
 
       This message is experimental.
     properties:
-      checkSuite:
-        $ref: '#/definitions/CheckSuiteFilter'
-        description: |-
-          Output only. Indicates that a build was generated from a check suite
-          event.
       installationId:
-        description: The installationID that emmits the GitHub event.
+        description: The installationID that emits the GitHub event.
         format: int64
         type: string
       name:
-        description: Name of the repository.
+        description: |-
+          Name of the repository. For example: The name for
+          https://github.com/googlecloudplatform/cloud-builders is "cloud-builders".
         type: string
       owner:
-        description: Owner of the repository.
+        description: |-
+          Owner of the repository. For example: The owner for
+          https://github.com/googlecloudplatform/cloud-builders is
+          "googlecloudplatform".
         type: string
       pullRequest:
         $ref: '#/definitions/PullRequestFilter'

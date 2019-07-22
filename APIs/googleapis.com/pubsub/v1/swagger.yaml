@@ -381,6 +381,14 @@ paths:
       operationId: pubsub.projects.topics.getIamPolicy
       parameters:
         - description: |-
+            Optional. The policy format version to be returned.
+            Acceptable values are 0 and 1.
+            If the value is 0, or the field is omitted, policy format version 1 will be
+            returned.
+          in: query
+          name: options.requestedPolicyVersion
+          type: integer
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -1374,12 +1382,11 @@ definitions:
     properties:
       allowedPersistenceRegions:
         description: |-
-          The list of GCP region IDs where messages that are published to the topic
+          A list of IDs of GCP regions where messages that are published to the topic
           may be persisted in storage. Messages published by publishers running in
           non-allowed GCP regions (or running outside of GCP altogether) will be
-          routed for storage in one of the allowed regions. An empty list indicates a
-          misconfiguration at the project or organization level, which will result in
-          all Publish operations failing.
+          routed for storage in one of the allowed regions. An empty list means that
+          no regions are allowed, and is not a valid configuration.
         items:
           type: string
         type: array
@@ -1861,12 +1868,9 @@ definitions:
       messageStoragePolicy:
         $ref: '#/definitions/MessageStoragePolicy'
         description: |-
-          Policy constraining how messages published to the topic may be stored. It
-          is determined when the topic is created based on the policy configured at
-          the project level. It must not be set by the caller in the request to
-          CreateTopic or to UpdateTopic. This field will be populated in the
-          responses for GetTopic, CreateTopic, and UpdateTopic: if not present in the
-          response, then no constraints are in effect.
+          Policy constraining the set of Google Cloud Platform regions where messages
+          published to the topic may be stored. If not present, then no constraints
+          are in effect.
       name:
         description: |-
           The name of the topic. It must have the format

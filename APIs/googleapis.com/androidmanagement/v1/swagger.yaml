@@ -232,14 +232,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets info about an application.
-      operationId: androidmanagement.enterprises.applications.get
+      description: Gets a web app.
+      operationId: androidmanagement.enterprises.webApps.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
+        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Application'
+            $ref: '#/definitions/WebApp'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -2250,7 +2250,7 @@ definitions:
         description: 'The title of the web app as displayed to the user (e.g., amongst a list of other applications, or as a label for an icon).'
         type: string
       versionCode:
-        description: 'The current version of the app.<p>Note that the version can automatically increase during the lifetime of the web app, while Google does internal housekeeping to keep the web app up-to-date.'
+        description: 'The current version of the app.Note that the version can automatically increase during the lifetime of the web app, while Google does internal housekeeping to keep the web app up-to-date.'
         format: int64
         type: string
     type: object
@@ -2271,7 +2271,7 @@ definitions:
         description: 'The URL of the parent frame hosting the iframe with the embedded UI. To prevent XSS, the iframe may not be hosted at other URLs. The URL must use the https scheme.'
         type: string
       permissions:
-        description: Permissions available to an admin in the embedded UI. An admin must have all of these permissions in order to view the UI.
+        description: Permissions available to an admin in the embedded UI. An admin must have all of these permissions in order to view the UI. This field is deprecated.
         items:
           enum:
             - WEB_TOKEN_PERMISSION_UNSPECIFIED

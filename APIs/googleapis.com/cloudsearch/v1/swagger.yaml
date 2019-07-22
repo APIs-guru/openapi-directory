@@ -29,7 +29,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: cloudsearch
 externalDocs:
-  url: 'https://gsuite.google.com/products/cloud-search/'
+  url: 'https://developers.google.com/cloud-search/docs/guides/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -299,8 +299,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1/debug/{parent}/unmappedids':
     get:
-      description: Lists unmapped user identities for an identity source.
-      operationId: cloudsearch.debug.identitysources.unmappedids.list
+      description: List all unmapped identities for a specific item.
+      operationId: cloudsearch.debug.datasources.items.unmappedids.list
       parameters:
         - description: |-
             If you are asked by Google to help with debugging, set this field.
@@ -319,8 +319,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The name of the identity source, in the following format:
-            identitysources/{source_id}
+            The name of the item, in the following format:
+            datasources/{source_id}/items/{ID}
           in: path
           name: parent
           required: true

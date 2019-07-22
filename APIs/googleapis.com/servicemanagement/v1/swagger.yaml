@@ -1421,6 +1421,12 @@ definitions:
         items:
           type: string
         type: array
+      ignoreChildExemptions:
+        description: |-
+          Specifies whether principals can be exempted for the same LogType in
+          lower-level resource policies. If true, any lower-level exemptions will
+          be ignored.
+        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -2122,6 +2128,13 @@ definitions:
         items:
           $ref: '#/definitions/DocumentationRule'
         type: array
+      serviceRootUrl:
+        description: |-
+          Specifies the service root url if the default one (the service name
+          from the yaml file) is not suitable. This can be seen in any fully
+          specified service urls as well as sections that show a base that other
+          urls are relative to.
+        type: string
       summary:
         description: |-
           A short summary of what the service does. Can only be provided by
@@ -2425,7 +2438,24 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: |-
+          OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          `GetIamPolicy`. This field is only used by Cloud IAM.
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: |-
+          Optional. The policy format version to be returned.
+          Acceptable values are 0 and 1.
+          If the value is 0, or the field is omitted, policy format version 1 will be
+          returned.
+        format: int32
+        type: integer
     type: object
   Http:
     description: |-
@@ -3299,8 +3329,6 @@ definitions:
       Different APIs can support different monitored resource types. APIs generally
       provide a `list` method that returns the monitored resource descriptors used
       by the API.
-
-      Next ID: 10
     properties:
       description:
         description: |-

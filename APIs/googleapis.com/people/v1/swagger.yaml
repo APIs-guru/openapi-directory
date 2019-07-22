@@ -745,6 +745,79 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/{resourceName}:deleteContactPhoto':
+    delete:
+      description: Delete a contact's photo.
+      operationId: people.people.deleteContactPhoto
+      parameters:
+        - description: |-
+            **Optional.** Not specifying any fields will skip the post mutate read.
+            A field mask to restrict which fields on the person are
+            returned. Multiple fields can be specified by separating them with commas.
+            Valid values are:
+
+            * addresses
+            * ageRanges
+            * biographies
+            * birthdays
+            * braggingRights
+            * coverPhotos
+            * emailAddresses
+            * events
+            * genders
+            * imClients
+            * interests
+            * locales
+            * memberships
+            * metadata
+            * names
+            * nicknames
+            * occupations
+            * organizations
+            * phoneNumbers
+            * photos
+            * relations
+            * relationshipInterests
+            * relationshipStatuses
+            * residences
+            * sipAddresses
+            * skills
+            * taglines
+            * urls
+            * userDefined
+          in: query
+          name: personFields
+          type: string
+        - description: The resource name of the contact whose photo will be deleted.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeleteContactPhotoResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{resourceName}:updateContact':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -820,6 +893,45 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Person'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - people
+  '/v1/{resourceName}:updateContactPhoto':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Update a contact's photo.
+      operationId: people.people.updateContactPhoto
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateContactPhotoRequest'
+        - description: Person resource name
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UpdateContactPhotoResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
@@ -1095,6 +1207,15 @@ definitions:
           a year.
         format: int32
         type: integer
+    type: object
+  DeleteContactPhotoResponse:
+    description: The response for deleteing a contact's photo.
+    properties:
+      person:
+        $ref: '#/definitions/Person'
+        description: |-
+          The updated person, if person_fields is set in the
+          DeleteContactPhotoRequest; otherwise this will be unset.
     type: object
   DomainMembership:
     description: A read-only G Suite Domain membership.
@@ -2060,6 +2181,63 @@ definitions:
       contactGroup:
         $ref: '#/definitions/ContactGroup'
         description: The contact group to update.
+    type: object
+  UpdateContactPhotoRequest:
+    description: |-
+      A request to update an existing contact's photo.
+      All requests must have a valid photo format: JPEG or PNG.
+    properties:
+      personFields:
+        description: |-
+          **Optional.** Not specifying any fields will skip the post mutate read.
+          A field mask to restrict which fields on the person are
+          returned. Multiple fields can be specified by separating them with commas.
+          Valid values are:
+
+          * addresses
+          * ageRanges
+          * biographies
+          * birthdays
+          * braggingRights
+          * coverPhotos
+          * emailAddresses
+          * events
+          * genders
+          * imClients
+          * interests
+          * locales
+          * memberships
+          * metadata
+          * names
+          * nicknames
+          * occupations
+          * organizations
+          * phoneNumbers
+          * photos
+          * relations
+          * relationshipInterests
+          * relationshipStatuses
+          * residences
+          * sipAddresses
+          * skills
+          * taglines
+          * urls
+          * userDefined
+        format: google-fieldmask
+        type: string
+      photoBytes:
+        description: Raw photo bytes
+        format: byte
+        type: string
+    type: object
+  UpdateContactPhotoResponse:
+    description: The response for updating a contact's photo.
+    properties:
+      person:
+        $ref: '#/definitions/Person'
+        description: |-
+          The updated person, if person_fields is set in the
+          UpdateContactPhotoRequest; otherwise this will be unset.
     type: object
   Url:
     description: A person's associated URLs.

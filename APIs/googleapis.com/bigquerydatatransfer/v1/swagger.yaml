@@ -121,7 +121,7 @@ paths:
   '/v1/{name}':
     delete:
       description: Deletes the specified transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -149,7 +149,7 @@ paths:
         - projects
     get:
       description: Returns information about the particular transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.get
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -195,7 +195,7 @@ paths:
       description: |-
         Updates a data transfer configuration.
         All fields must be set, even if they are not updated.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.patch
+      operationId: bigquerydatatransfer.projects.transferConfigs.patch
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -242,7 +242,7 @@ paths:
             Optional version info. If users want to find a very recent access token,
             that is, immediately after approving access, users have to set the
             version_info claim in the token request. To obtain the version_info, users
-            must use the “none+gsession” response type. which be return a
+            must use the "none+gsession" response type. which be return a
             version_info back in the authorization response which be be put in a JWT
             claim in the token request.
           in: query
@@ -336,7 +336,7 @@ paths:
         them on behalf of the end user. This API just checks whether we have OAuth
         token for the particular user, which is a pre-requisite before user can
         create a transfer config.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
+      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
       parameters:
         - in: body
           name: body
@@ -375,7 +375,7 @@ paths:
       description: |-
         Lists supported data sources and returns their settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.list
+      operationId: bigquerydatatransfer.projects.dataSources.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -433,7 +433,7 @@ paths:
   '/v1/{parent}/runs':
     get:
       description: Returns information about running and completed jobs.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -513,7 +513,7 @@ paths:
   '/v1/{parent}/transferConfigs':
     get:
       description: Returns information about all data transfers in the project.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.list
       parameters:
         - collectionFormat: multi
           description: 'When specified, only configurations of requested data sources are returned.'
@@ -577,7 +577,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new data transfer configuration.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.create
+      operationId: bigquerydatatransfer.projects.transferConfigs.create
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -617,7 +617,7 @@ paths:
             Optional version info. If users want to find a very recent access token,
             that is, immediately after approving access, users have to set the
             version_info claim in the token request. To obtain the version_info, users
-            must use the “none+gsession” response type. which be return a
+            must use the "none+gsession" response type. which be return a
             version_info back in the authorization response which be be put in a JWT
             claim in the token request.
           in: query
@@ -638,7 +638,7 @@ paths:
   '/v1/{parent}/transferLogs':
     get:
       description: Returns user facing log messages for the data transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
       parameters:
         - collectionFormat: multi
           description: |-
@@ -727,7 +727,7 @@ paths:
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
         DEPRECATED: use StartManualTransferRuns instead.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
+      operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
       parameters:
         - in: body
           name: body
@@ -776,7 +776,7 @@ paths:
         current time. The transfer runs can be created for a time range where the
         run_time is between start_time (inclusive) and end_time (exclusive), or for
         a specific run_time.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns
+      operationId: bigquerydatatransfer.projects.transferConfigs.startManualRuns
       parameters:
         - in: body
           name: body
@@ -938,6 +938,11 @@ definitions:
         items:
           type: string
         type: array
+      deprecated:
+        description: |-
+          If true, it should not be used in new transfers, and it should not be
+          visible to users.
+        type: boolean
       description:
         description: Parameter description.
         type: string
@@ -1386,8 +1391,8 @@ definitions:
         type: object
       runTime:
         description: |-
-          For batch transfer runs, specifies the date and time that
-          data should be ingested.
+          For batch transfer runs, specifies the date and time of the data should be
+          ingested.
         format: google-datetime
         type: string
       schedule:

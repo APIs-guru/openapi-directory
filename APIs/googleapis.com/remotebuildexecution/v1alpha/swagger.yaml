@@ -306,8 +306,6 @@ paths:
 
             Example filter:
             configuration.labels.key1 = * AND (state = RUNNING OR state = UPDATING)
-
-            This field is currently ignored in all requests.
           in: query
           name: filter
           type: string
@@ -1460,8 +1458,6 @@ definitions:
 
           Example filter:
           configuration.labels.key1 = * AND (state = RUNNING OR state = UPDATING)
-
-          This field is currently ignored in all requests.
         type: string
       parent:
         description: |-
@@ -1522,7 +1518,7 @@ definitions:
           lowercase letters, numeric characters, underscores and dashes.
           International letters are permitted. Keys must start with a letter but
           values are optional.
-          This field is currently ignored in all requests.
+          There can not be more than 64 labels per resource.
         type: object
       machineType:
         description: |-

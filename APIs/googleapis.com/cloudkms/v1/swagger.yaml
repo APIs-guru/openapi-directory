@@ -121,10 +121,10 @@ tags:
 paths:
   '/v1/{name}':
     get:
-      description: Returns metadata for a given CryptoKeyVersion.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
+      description: Returns metadata for a given ImportJob.
+      operationId: cloudkms.projects.locations.keyRings.importJobs.get
       parameters:
-        - description: The name of the CryptoKeyVersion to get.
+        - description: The name of the ImportJob to get.
           in: path
           name: name
           required: true
@@ -134,7 +134,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/CryptoKeyVersion'
+            $ref: '#/definitions/ImportJob'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -646,6 +646,19 @@ paths:
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
       parameters:
         - description: |-
+            Optional. Only include resources that match the filter in the response
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Optional. Specify how the results should be sorted. If not specified, the
+            results will be sorted in the default order
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: orderBy
+          type: string
+        - description: |-
             Optional limit on the number of CryptoKeyVersions to
             include in the response. Further CryptoKeyVersions can
             subsequently be obtained by including the
@@ -740,11 +753,74 @@ paths:
             - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
+  '/v1/{parent}/cryptoKeyVersions:import':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Imports a new CryptoKeyVersion into an existing CryptoKey using the
+        wrapped key material provided in the request.
+
+        The version ID will be assigned the next sequential id within the
+        CryptoKey.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImportCryptoKeyVersionRequest'
+        - description: |-
+            Required. The name of the CryptoKey to
+            be imported into.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CryptoKeyVersion'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloudkms'
+      tags:
+        - projects
   '/v1/{parent}/cryptoKeys':
     get:
       description: Lists CryptoKeys.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.list
       parameters:
+        - description: |-
+            Optional. Only include resources that match the filter in the response
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Optional. Specify how the results should be sorted. If not specified, the
+            results will be sorted in the default order
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: orderBy
+          type: string
         - description: |-
             Optional limit on the number of CryptoKeys to include in the
             response.  Further CryptoKeys can subsequently be obtained by
@@ -829,6 +905,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            If set to true, the request will create a CryptoKey without any
+            CryptoKeyVersions. You must manually call
+            CreateCryptoKeyVersion or
+            ImportCryptoKeyVersion
+            before you can use this CryptoKey.
+          in: query
+          name: skipInitialVersionCreation
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -845,11 +930,133 @@ paths:
             - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
+  '/v1/{parent}/importJobs':
+    get:
+      description: Lists ImportJobs.
+      operationId: cloudkms.projects.locations.keyRings.importJobs.list
+      parameters:
+        - description: |-
+            Optional. Only include resources that match the filter in the response
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Optional. Specify how the results should be sorted. If not specified, the
+            results will be sorted in the default order
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: orderBy
+          type: string
+        - description: |-
+            Optional limit on the number of ImportJobs to include in the
+            response. Further ImportJobs can subsequently be obtained by
+            including the ListImportJobsResponse.next_page_token in a subsequent
+            request. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Optional pagination token, returned earlier via
+            ListImportJobsResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name of the KeyRing to list, in the format
+            `projects/*/locations/*/keyRings/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListImportJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloudkms'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Create a new ImportJob within a KeyRing.
+
+        ImportJob.import_method is required.
+      operationId: cloudkms.projects.locations.keyRings.importJobs.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImportJob'
+        - description: |-
+            Required. It must be unique within a KeyRing and match the regular
+            expression `[a-zA-Z0-9_-]{1,63}`
+          in: query
+          name: importJobId
+          type: string
+        - description: |-
+            Required. The name of the KeyRing associated with the
+            ImportJobs.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ImportJob'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloudkms'
+      tags:
+        - projects
   '/v1/{parent}/keyRings':
     get:
       description: Lists KeyRings.
       operationId: cloudkms.projects.locations.keyRings.list
       parameters:
+        - description: |-
+            Optional. Only include resources that match the filter in the response
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Optional. Specify how the results should be sorted. If not specified, the
+            results will be sorted in the default order
+            (https://cloud.google.com/kms/docs/sorting-and-filtering).
+          in: query
+          name: orderBy
+          type: string
         - description: |-
             Optional limit on the number of KeyRings to include in the
             response.  Further KeyRings can subsequently be obtained by
@@ -944,8 +1151,16 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
       parameters:
+        - description: |-
+            Optional. The policy format version to be returned.
+            Acceptable values are 0 and 1.
+            If the value is 0, or the field is omitted, policy format version 1 will be
+            returned.
+          in: query
+          name: options.requestedPolicyVersion
+          type: integer
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
@@ -999,7 +1214,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1051,7 +1266,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
+      operationId: cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1332,7 +1547,8 @@ definitions:
       rotationPeriod:
         description: |-
           next_rotation_time will be advanced by this period when the service
-          automatically rotates a key. Must be at least one day.
+          automatically rotates a key. Must be at least 24 hours and at most
+          876,000 hours.
 
           If rotation_period is set, next_rotation_time must also be set.
 
@@ -1415,6 +1631,24 @@ definitions:
           generated.
         format: google-datetime
         type: string
+      importFailureReason:
+        description: |-
+          Output only. The root cause of an import failure. Only present if
+          state is
+          IMPORT_FAILED.
+        type: string
+      importJob:
+        description: |-
+          Output only. The name of the ImportJob used to import this
+          CryptoKeyVersion. Only present if the underlying key material was
+          imported.
+        type: string
+      importTime:
+        description: |-
+          Output only. The time at which this CryptoKeyVersion's key material
+          was imported.
+        format: google-datetime
+        type: string
       name:
         description: |-
           Output only. The resource name for this CryptoKeyVersion in the format
@@ -1438,6 +1672,8 @@ definitions:
           - DISABLED
           - DESTROYED
           - DESTROY_SCHEDULED
+          - PENDING_IMPORT
+          - IMPORT_FAILED
         type: string
     type: object
   CryptoKeyVersionTemplate:
@@ -1600,6 +1836,162 @@ definitions:
           expression.
         type: string
     type: object
+  ImportCryptoKeyVersionRequest:
+    description: Request message for KeyManagementService.ImportCryptoKeyVersion.
+    properties:
+      algorithm:
+        description: |-
+          Required. The algorithm of
+          the key being imported. This does not need to match the
+          version_template of the CryptoKey this
+          version imports into.
+        enum:
+          - CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+          - GOOGLE_SYMMETRIC_ENCRYPTION
+          - RSA_SIGN_PSS_2048_SHA256
+          - RSA_SIGN_PSS_3072_SHA256
+          - RSA_SIGN_PSS_4096_SHA256
+          - RSA_SIGN_PSS_4096_SHA512
+          - RSA_SIGN_PKCS1_2048_SHA256
+          - RSA_SIGN_PKCS1_3072_SHA256
+          - RSA_SIGN_PKCS1_4096_SHA256
+          - RSA_SIGN_PKCS1_4096_SHA512
+          - RSA_DECRYPT_OAEP_2048_SHA256
+          - RSA_DECRYPT_OAEP_3072_SHA256
+          - RSA_DECRYPT_OAEP_4096_SHA256
+          - RSA_DECRYPT_OAEP_4096_SHA512
+          - EC_SIGN_P256_SHA256
+          - EC_SIGN_P384_SHA384
+        type: string
+      importJob:
+        description: |-
+          Required. The name of the ImportJob that was used to
+          wrap this key material.
+        type: string
+      rsaAesWrappedKey:
+        description: |-
+          Wrapped key material produced with
+          RSA_OAEP_3072_SHA1_AES_256
+          or
+          RSA_OAEP_4096_SHA1_AES_256.
+
+          This field contains the concatenation of two wrapped keys:
+          <ol>
+            <li>An ephemeral AES-256 wrapping key wrapped with the
+                public_key using RSAES-OAEP with SHA-1,
+                MGF1 with SHA-1, and an empty label.
+            </li>
+            <li>The key to be imported, wrapped with the ephemeral AES-256 key
+                using AES-KWP (RFC 5649).
+            </li>
+          </ol>
+
+          This format is the same as the format produced by PKCS#11 mechanism
+          CKM_RSA_AES_KEY_WRAP.
+        format: byte
+        type: string
+    type: object
+  ImportJob:
+    description: |-
+      An ImportJob can be used to create CryptoKeys and
+      CryptoKeyVersions using pre-existing key material,
+      generated outside of Cloud KMS.
+
+      When an ImportJob is created, Cloud KMS will generate a "wrapping key",
+      which is a public/private key pair. You use the wrapping key to encrypt (also
+      known as wrap) the pre-existing key material to protect it during the import
+      process. The nature of the wrapping key depends on the choice of
+      import_method. When the wrapping key generation
+      is complete, the state will be set to
+      ACTIVE and the public_key
+      can be fetched. The fetched public key can then be used to wrap your
+      pre-existing key material.
+
+      Once the key material is wrapped, it can be imported into a new
+      CryptoKeyVersion in an existing CryptoKey by calling
+      ImportCryptoKeyVersion.
+      Multiple CryptoKeyVersions can be imported with a single
+      ImportJob. Cloud KMS uses the private key portion of the wrapping key to
+      unwrap the key material. Only Cloud KMS has access to the private key.
+
+      An ImportJob expires 3 days after it is created. Once expired, Cloud KMS
+      will no longer be able to import or unwrap any key material that was wrapped
+      with the ImportJob's public key.
+
+      For more information, see
+      [Importing a key](https://cloud.google.com/kms/docs/importing-a-key).
+    properties:
+      attestation:
+        $ref: '#/definitions/KeyOperationAttestation'
+        description: |-
+          Output only. Statement that was generated and signed by the key creator
+          (for example, an HSM) at key creation time. Use this statement to verify
+          attributes of the key as stored on the HSM, independently of Google.
+          Only present if the chosen ImportMethod is one with a protection
+          level of HSM.
+      createTime:
+        description: Output only. The time at which this ImportJob was created.
+        format: google-datetime
+        type: string
+      expireEventTime:
+        description: |-
+          Output only. The time this ImportJob expired. Only present if
+          state is EXPIRED.
+        format: google-datetime
+        type: string
+      expireTime:
+        description: |-
+          Output only. The time at which this ImportJob is scheduled for
+          expiration and can no longer be used to import key material.
+        format: google-datetime
+        type: string
+      generateTime:
+        description: Output only. The time this ImportJob's key material was generated.
+        format: google-datetime
+        type: string
+      importMethod:
+        description: |-
+          Required and immutable. The wrapping method to be used for incoming
+          key material.
+        enum:
+          - IMPORT_METHOD_UNSPECIFIED
+          - RSA_OAEP_3072_SHA1_AES_256
+          - RSA_OAEP_4096_SHA1_AES_256
+        type: string
+      name:
+        description: |-
+          Output only. The resource name for this ImportJob in the format
+          `projects/*/locations/*/keyRings/*/importJobs/*`.
+        type: string
+      protectionLevel:
+        description: |-
+          Required and immutable. The protection level of the ImportJob. This
+          must match the
+          protection_level of the
+          version_template on the CryptoKey you
+          attempt to import into.
+        enum:
+          - PROTECTION_LEVEL_UNSPECIFIED
+          - SOFTWARE
+          - HSM
+        type: string
+      publicKey:
+        $ref: '#/definitions/WrappingPublicKey'
+        description: |-
+          Output only. The public key with which to wrap key material prior to
+          import. Only returned if state is
+          ACTIVE.
+      state:
+        description: |-
+          Output only. The current state of the ImportJob, indicating if it can
+          be used.
+        enum:
+          - IMPORT_JOB_STATE_UNSPECIFIED
+          - PENDING_GENERATION
+          - ACTIVE
+          - EXPIRED
+        type: string
+    type: object
   KeyOperationAttestation:
     description: |-
       Contains an HSM-generated attestation about a key operation. For more
@@ -1669,6 +2061,24 @@ definitions:
         type: string
       totalSize:
         description: The total number of CryptoKeys that matched the query.
+        format: int32
+        type: integer
+    type: object
+  ListImportJobsResponse:
+    description: Response message for KeyManagementService.ListImportJobs.
+    properties:
+      importJobs:
+        description: The list of ImportJobs.
+        items:
+          $ref: '#/definitions/ImportJob'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve next page of results. Pass this value in
+          ListImportJobsRequest.page_token to retrieve the next page of results.
+        type: string
+      totalSize:
+        description: The total number of ImportJobs that matched the query.
         format: int32
         type: integer
     type: object
@@ -1912,5 +2322,19 @@ definitions:
     properties:
       cryptoKeyVersionId:
         description: The id of the child CryptoKeyVersion to use as primary.
+        type: string
+    type: object
+  WrappingPublicKey:
+    description: |-
+      The public key component of the wrapping key. For details of the type of
+      key this public key corresponds to, see the ImportMethod.
+    properties:
+      pem:
+        description: |-
+          The public key, encoded in PEM format. For more information, see the [RFC
+          7468](https://tools.ietf.org/html/rfc7468) sections for [General
+          Considerations](https://tools.ietf.org/html/rfc7468#section-2) and
+          [Textual Encoding of Subject Public Key Info]
+          (https://tools.ietf.org/html/rfc7468#section-13).
         type: string
     type: object

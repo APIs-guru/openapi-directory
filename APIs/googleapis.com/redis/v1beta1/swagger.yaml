@@ -428,6 +428,50 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1beta1/{name}:failover':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Initiates a failover of the master node to current replica node for a
+        specific STANDARD tier Cloud Memorystore for Redis instance.
+      operationId: redis.projects.locations.instances.failover
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FailoverInstanceRequest'
+        - description: |-
+            Required. Redis instance resource name using the form:
+                `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            where `location_id` refers to a GCP region.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1beta1/{name}:import':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -614,6 +658,19 @@ definitions:
       outputConfig:
         $ref: '#/definitions/OutputConfig'
         description: Required. Specify data to be exported.
+    type: object
+  FailoverInstanceRequest:
+    description: Request for Failover.
+    properties:
+      dataProtectionMode:
+        description: |-
+          Optional. Available data protection modes that the user can choose. If it's
+          unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+        enum:
+          - DATA_PROTECTION_MODE_UNSPECIFIED
+          - LIMITED_DATA_LOSS
+          - FORCE_DATA_LOSS
+        type: string
     type: object
   GcsDestination:
     description: The Cloud Storage location for the output content
@@ -802,8 +859,8 @@ definitions:
           version will perform an upgrade/downgrade to the new version. Currently,
           the supported values are:
 
-           *   `REDIS_4_0` for Redis 4.0 compatibility
-           *   `REDIS_3_2` for Redis 3.2 compatibility (default)
+           *   `REDIS_4_0` for Redis 4.0 compatibility (default)
+           *   `REDIS_3_2` for Redis 3.2 compatibility
         type: string
       reservedIpRange:
         description: |-

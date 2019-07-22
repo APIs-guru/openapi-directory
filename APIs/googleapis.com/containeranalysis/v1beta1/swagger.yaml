@@ -26,7 +26,7 @@ info:
       format: google
       url: 'https://containeranalysis.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
 externalDocs:
@@ -1690,7 +1690,24 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: |-
+          OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          `GetIamPolicy`. This field is only used by Cloud IAM.
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: |-
+          Optional. The policy format version to be returned.
+          Acceptable values are 0 and 1.
+          If the value is 0, or the field is omitted, policy format version 1 will be
+          returned.
+        format: int32
+        type: integer
     type: object
   GitSourceContext:
     description: |-

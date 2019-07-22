@@ -497,12 +497,12 @@ paths:
       tags:
         - customers
     get:
-      description: Gets a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: Gets the details of a configuration.
+      operationId: androiddeviceprovisioning.customers.configurations.get
       parameters:
         - description: |-
-            Required. The device API resource name in the format
-            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
+            Required. The configuration to get. An API resource name in the format
+            `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
           in: path
           name: name
           required: true
@@ -512,9 +512,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Configuration'
       tags:
-        - partners
+        - customers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -966,7 +966,7 @@ definitions:
     properties:
       adminEmails:
         description: |-
-          Input only. Optional. Email address of customer's users in the admin role.
+          Optional. Input only. Email address of customer's users in the admin role.
           Each email address must be associated with a Google Account.
         items:
           type: string

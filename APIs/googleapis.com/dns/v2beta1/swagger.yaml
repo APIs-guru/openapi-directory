@@ -1074,7 +1074,7 @@ definitions:
   ManagedZoneDnsSecConfig:
     properties:
       defaultKeySpecs:
-        description: Specifies parameters that will be used for generating initial DnsKeys for this ManagedZone. Output only while state is not OFF.
+        description: Specifies parameters that will be used for generating initial DnsKeys for this ManagedZone. Can only be changed while state is OFF.
         items:
           $ref: '#/definitions/DnsKeySpec'
         type: array
@@ -1083,7 +1083,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZoneDnsSecConfig".'
         type: string
       nonExistence:
-        description: Specifies the mechanism used to provide authenticated denial-of-existence responses. Output only while state is not OFF.
+        description: Specifies the mechanism used to provide authenticated denial-of-existence responses. Can only be changed while state is OFF.
         enum:
           - NSEC
           - NSEC3

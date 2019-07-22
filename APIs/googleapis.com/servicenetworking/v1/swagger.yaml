@@ -910,8 +910,7 @@ definitions:
         type: string
       peering:
         description: |-
-          Output only.
-          The name of the VPC Network Peering connection that was created by the
+          Output only. The name of the VPC Network Peering connection that was created by the
           service producer.
         type: string
       reservedPeeringRanges:
@@ -929,8 +928,7 @@ definitions:
         type: array
       service:
         description: |-
-          Output only.
-          The name of the peering service that's associated with this connection, in
+          Output only. The name of the peering service that's associated with this connection, in
           the following format: `services/{service name}`.
         type: string
     type: object
@@ -1172,6 +1170,13 @@ definitions:
         items:
           $ref: '#/definitions/DocumentationRule'
         type: array
+      serviceRootUrl:
+        description: |-
+          Specifies the service root url if the default one (the service name
+          from the yaml file) is not suitable. This can be seen in any fully
+          specified service urls as well as sections that show a base that other
+          urls are relative to.
+        type: string
       summary:
         description: |-
           A short summary of what the service does. Can only be provided by

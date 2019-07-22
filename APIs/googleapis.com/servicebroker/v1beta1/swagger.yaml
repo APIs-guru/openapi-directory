@@ -662,6 +662,14 @@ paths:
       operationId: servicebroker.getIamPolicy
       parameters:
         - description: |-
+            Optional. The policy format version to be returned.
+            Acceptable values are 0 and 1.
+            If the value is 0, or the field is omitted, policy format version 1 will be
+            returned.
+          in: query
+          name: options.requestedPolicyVersion
+          type: integer
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -802,15 +810,12 @@ definitions:
           Required.
         type: string
       createTime:
-        description: |-
-          Output only.
-          Timestamp for when the binding was created.
+        description: Output only. Timestamp for when the binding was created.
         format: google-datetime
         type: string
       deploymentName:
         description: |-
-          Output only.
-          String containing the Deployment Manager deployment name that was created
+          Output only. String containing the Deployment Manager deployment name that was created
           for this binding,
         type: string
       parameters:
@@ -826,8 +831,7 @@ definitions:
         type: string
       resourceName:
         description: |-
-          Output only.
-          The resource name of the binding, e.g.
+          Output only. The resource name of the binding, e.g.
           projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
         type: string
       service_id:
@@ -844,9 +848,7 @@ definitions:
       exposed as an OSB Broker.
     properties:
       createTime:
-        description: |-
-          Output only.
-          Timestamp for when the broker was created.
+        description: Output only. Timestamp for when the broker was created.
         format: google-datetime
         type: string
       name:
@@ -863,8 +865,7 @@ definitions:
         type: string
       url:
         description: |-
-          Output only.
-          URL of the broker OSB-compliant endpoint, for example:
+          Output only. URL of the broker OSB-compliant endpoint, for example:
           https://servicebroker.googleapis.com/projects/<project>/brokers/<broker>
         type: string
     type: object
@@ -986,8 +987,7 @@ definitions:
         type: string
       resourceName:
         description: |-
-          Output only.
-          The resource name of the binding, e.g.
+          Output only. The resource name of the binding, e.g.
           projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
         type: string
       route_service_url:
@@ -1222,15 +1222,12 @@ definitions:
           Currently only used for logging context information.
         type: object
       createTime:
-        description: |-
-          Output only.
-          Timestamp for when the instance was created.
+        description: Output only. Timestamp for when the instance was created.
         format: google-datetime
         type: string
       deploymentName:
         description: |-
-          Output only.
-          String containing the Deployment Manager deployment name that was created
+          Output only. String containing the Deployment Manager deployment name that was created
           for this instance,
         type: string
       description:
@@ -1272,8 +1269,7 @@ definitions:
         type: object
       resourceName:
         description: |-
-          Output only.
-          The resource name of the instance, e.g.
+          Output only. The resource name of the instance, e.g.
           projects/project_id/brokers/broker_id/service_instances/instance_id
         type: string
       service_id:
@@ -1326,7 +1322,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1414,7 +1410,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:
