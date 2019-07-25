@@ -1,0 +1,825 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.sportsdata.io
+basePath: /v3/csgo/scores
+info:
+  contact:
+    x-twitter: nfldata
+  description: 'CS:GO v3 Scores'
+  title: 'CS:GO v3 Scores'
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/csgo-v3-scores.json'
+      version: '2.0'
+  x-providerName: sportsdata.io
+  x-serviceName: csgo-v3-scores
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/ActiveMemberships':
+    get:
+      description: Memberships (Active)
+      operationId: MembershipsActive
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships (Active)
+  '/{format}/Areas':
+    get:
+      description: Areas (Countries)
+      operationId: AreasCountries
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Area'
+            type: array
+      summary: Areas (Countries)
+  '/{format}/CompetitionDetails/{competitionid}':
+    get:
+      description: Competition Fixtures (League Details)
+      operationId: CompetitionFixturesLeagueDetails
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'A CS:GO competition/league unique CompetitionId. Possible values include: <code>100000009</code>, etc.'
+          in: path
+          name: competitionid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CompetitionDetail'
+      summary: Competition Fixtures (League Details)
+  '/{format}/Competitions':
+    get:
+      description: Competitions (Leagues)
+      operationId: CompetitionsLeagues
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Competition'
+            type: array
+      summary: Competitions (Leagues)
+  '/{format}/GamesByDate/{date}':
+    get:
+      description: Games by Date
+      operationId: GamesByDate
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2018-01-13</code>, <code>2018-06-13</code>.
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Games by Date
+  '/{format}/HistoricalMemberships':
+    get:
+      description: Memberships (Historical)
+      operationId: MembershipsHistorical
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships (Historical)
+  '/{format}/HistoricalMembershipsByTeam/{teamid}':
+    get:
+      description: Memberships by Team (Historical)
+      operationId: MembershipsByTeamHistorical
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Team ID. 
+            Example:<code>100000001</code>.
+          in: path
+          name: teamid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships by Team (Historical)
+  '/{format}/MembershipsByTeam/{teamid}':
+    get:
+      description: Memberships by Team (Active)
+      operationId: MembershipsByTeamActive
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Team ID. 
+            Example:<code>100000001</code>.
+          in: path
+          name: teamid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships by Team (Active)
+  '/{format}/Player/{playerid}':
+    get:
+      description: Player
+      operationId: Player
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>100000576</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Player'
+      summary: Player
+  '/{format}/Players':
+    get:
+      description: Players
+      operationId: Players
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Players
+  '/{format}/PlayersByTeam/{teamid}':
+    get:
+      description: Players by Team
+      operationId: PlayersByTeam
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Team ID. 
+            Example:<code>100000001</code>.
+          in: path
+          name: teamid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Players by Team
+  '/{format}/Schedule/{roundid}':
+    get:
+      description: Schedule
+      operationId: Schedule
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Round ID. RoundIDs can be found in the Competitions and Competition Details endpoints. 
+            Examples: <code>100000138</code>, <code>1000001412</code>, etc
+          in: path
+          name: roundid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Game'
+            type: array
+      summary: Schedule
+  '/{format}/SeasonTeams/{seasonid}':
+    get:
+      description: Season Teams
+      operationId: SeasonTeams
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Season ID. SeasonIDs can be found in the Competitions and Competition Details endpoints. 
+            Examples: <code>100000023</code>, <code>100000024</code>, etc
+          in: path
+          name: seasonid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/SeasonTeam'
+            type: array
+      summary: Season Teams
+  '/{format}/Standings/{roundid}':
+    get:
+      description: Schedule
+      operationId: Standings
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Round ID. RoundIDs can be found in the Competitions and Competition Details endpoints. 
+            Example: <code>100000138</code>, etc
+          in: path
+          name: roundid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Standing'
+            type: array
+      summary: Standings
+  '/{format}/Teams':
+    get:
+      description: Teams
+      operationId: Teams
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Team'
+            type: array
+      summary: Teams
+  '/{format}/Venues':
+    get:
+      description: Venues
+      operationId: Venues
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Venue'
+            type: array
+      summary: Venues
+definitions:
+  Area:
+    properties:
+      AreaId:
+        type: integer
+      CountryCode:
+        type: string
+      Name:
+        type: string
+  Competition:
+    properties:
+      AreaId:
+        type: integer
+      AreaName:
+        type: string
+      CompetitionId:
+        type: integer
+      Format:
+        type: string
+      Gender:
+        type: string
+      Name:
+        type: string
+      Seasons:
+        items:
+          $ref: '#/definitions/Season'
+        type: array
+      Type:
+        type: string
+  CompetitionDetail:
+    properties:
+      AreaId:
+        type: integer
+      AreaName:
+        type: string
+      CompetitionId:
+        type: integer
+      CurrentSeason:
+        $ref: '#/definitions/Season'
+      Format:
+        type: string
+      Games:
+        items:
+          $ref: '#/definitions/Game'
+        type: array
+      Gender:
+        type: string
+      Name:
+        type: string
+      Seasons:
+        items:
+          $ref: '#/definitions/Season'
+        type: array
+      Teams:
+        items:
+          $ref: '#/definitions/TeamDetail'
+        type: array
+      Type:
+        type: string
+  Game:
+    properties:
+      BestOf:
+        type: string
+      DateTime:
+        type: string
+      Day:
+        type: string
+      DrawMoneyLine:
+        type: integer
+      GameId:
+        type: integer
+      Group:
+        type: string
+      PointSpread:
+        type: number
+      RoundId:
+        type: integer
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Status:
+        type: string
+      TeamAId:
+        type: integer
+      TeamAKey:
+        type: string
+      TeamAMoneyLine:
+        type: integer
+      TeamAName:
+        type: string
+      TeamAPointSpreadPayout:
+        type: integer
+      TeamAScore:
+        type: integer
+      TeamBId:
+        type: integer
+      TeamBKey:
+        type: string
+      TeamBMoneyLine:
+        type: integer
+      TeamBName:
+        type: string
+      TeamBPointSpreadPayout:
+        type: integer
+      TeamBScore:
+        type: integer
+      Updated:
+        type: string
+      UpdatedUtc:
+        type: string
+      VenueId:
+        type: integer
+      VenueType:
+        type: string
+      Week:
+        type: integer
+      Winner:
+        type: string
+  Membership:
+    properties:
+      Active:
+        type: boolean
+      EndDate:
+        type: string
+      MembershipId:
+        type: integer
+      PlayerId:
+        type: integer
+      PlayerName:
+        type: string
+      StartDate:
+        type: string
+      TeamArea:
+        type: string
+      TeamId:
+        type: integer
+      TeamName:
+        type: string
+      Updated:
+        type: string
+  Player:
+    properties:
+      BirthCity:
+        type: string
+      BirthCountry:
+        type: string
+      BirthDate:
+        type: string
+      CommonName:
+        type: string
+      FirstName:
+        type: string
+      Gender:
+        type: string
+      LastName:
+        type: string
+      MatchName:
+        type: string
+      Nationality:
+        type: string
+      PlayerId:
+        type: integer
+      Position:
+        type: string
+      Updated:
+        type: string
+  Round:
+    properties:
+      CurrentRound:
+        type: boolean
+      CurrentWeek:
+        type: integer
+      EndDate:
+        type: string
+      Name:
+        type: string
+      RoundId:
+        type: integer
+      Season:
+        type: integer
+      SeasonId:
+        type: integer
+      SeasonType:
+        type: integer
+      StartDate:
+        type: string
+      Type:
+        type: string
+  Season:
+    properties:
+      CompetitionId:
+        type: integer
+      CompetitionName:
+        type: string
+      CurrentSeason:
+        type: boolean
+      EndDate:
+        type: string
+      Name:
+        type: string
+      Rounds:
+        items:
+          $ref: '#/definitions/Round'
+        type: array
+      Season:
+        type: integer
+      SeasonId:
+        type: integer
+      StartDate:
+        type: string
+  SeasonTeam:
+    properties:
+      Active:
+        type: boolean
+      Gender:
+        type: string
+      SeasonId:
+        type: integer
+      SeasonTeamId:
+        type: integer
+      Team:
+        $ref: '#/definitions/Team'
+      TeamId:
+        type: integer
+      TeamName:
+        type: string
+      Type:
+        type: string
+  Standing:
+    properties:
+      Games:
+        type: integer
+      Group:
+        type: string
+      Losses:
+        type: integer
+      Name:
+        type: string
+      Points:
+        type: integer
+      RoundId:
+        type: integer
+      ScoreAgainst:
+        type: integer
+      ScoreDifference:
+        type: integer
+      ScoreFor:
+        type: integer
+      StandingId:
+        type: integer
+      TeamId:
+        type: integer
+      Wins:
+        type: integer
+      '[Order]':
+        type: integer
+  Team:
+    properties:
+      Active:
+        type: boolean
+      AreaId:
+        type: integer
+      AreaName:
+        type: string
+      Email:
+        type: string
+      Facebook:
+        type: string
+      Founded:
+        type: integer
+      Gender:
+        type: string
+      Instagram:
+        type: string
+      Name:
+        type: string
+      PrimaryColor:
+        type: string
+      QuaternaryColor:
+        type: string
+      SecondaryColor:
+        type: string
+      ShortName:
+        type: string
+      TeamId:
+        type: integer
+      TertiaryColor:
+        type: string
+      Twitter:
+        type: string
+      Type:
+        type: string
+      Website:
+        type: string
+      YouTube:
+        type: string
+      '[Key]':
+        type: string
+  TeamDetail:
+    properties:
+      Active:
+        type: boolean
+      AreaId:
+        type: integer
+      AreaName:
+        type: string
+      Email:
+        type: string
+      Facebook:
+        type: string
+      Founded:
+        type: integer
+      Gender:
+        type: string
+      Instagram:
+        type: string
+      Name:
+        type: string
+      Players:
+        items:
+          $ref: '#/definitions/Player'
+        type: array
+      PrimaryColor:
+        type: string
+      QuaternaryColor:
+        type: string
+      SecondaryColor:
+        type: string
+      ShortName:
+        type: string
+      TeamId:
+        type: integer
+      TertiaryColor:
+        type: string
+      Twitter:
+        type: string
+      Type:
+        type: string
+      Website:
+        type: string
+      YouTube:
+        type: string
+      '[Key]':
+        type: string
+  Venue:
+    properties:
+      Address:
+        type: string
+      Capacity:
+        type: integer
+      City:
+        type: string
+      Country:
+        type: string
+      GeoLat:
+        type: number
+      GeoLong:
+        type: number
+      Name:
+        type: string
+      Nickname1:
+        type: string
+      Nickname2:
+        type: string
+      Opened:
+        type: integer
+      VenueId:
+        type: integer
+      Zip:
+        type: string
+      '[Open]':
+        type: boolean
+x-servers:
+  - url: 'http://api.sportsdata.io'
+  - url: 'https://api.sportsdata.io'
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'

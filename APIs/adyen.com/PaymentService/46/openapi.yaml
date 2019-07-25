@@ -1,0 +1,1956 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://pal-test.adyen.com/pal/servlet/Payment/v46'
+info:
+  contact:
+    email: support@adyen.com
+    name: Adyen Support
+    url: 'https://support.adyen.com/'
+    x-twitter: Adyen
+  description: |-
+    A set of API endpoints that allow you to initiate, settle, and modify payments on the Adyen payments platform. You can use the API to accept card payments (including One-Click and 3D Secure), bank transfers, ewallets, and many other payment methods.
+
+    To learn more about the API, visit [Classic integration](https://docs.adyen.com/classic-integration).
+
+    ## Authentication
+    To connect to the Payments API, you must use your basic authentication credentials. For this, create your web service user, as described in [How to get the WS user password](https://docs.adyen.com/user-management/how-to-get-the-web-service-ws-user-password). Then use its credentials to authenticate your request, for example:
+
+    ```
+    curl
+    -U "ws@Company.YourCompany":"YourWsPassword" \
+    -H "Content-Type: application/json" \
+    ...
+    ```
+    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+
+    ## Versioning
+    Payments API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    For example:
+    ```
+    https://pal-test.adyen.com/pal/servlet/Payment/v46/authorise
+    ```
+  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
+  title: Adyen Payment Service
+  version: '46'
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: 'https://twitter.com/Adyen/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/PaymentService-v46.json'
+      version: '3.0'
+  x-preferred: false
+  x-providerName: adyen.com
+  x-serviceName: PaymentService
+paths:
+  /adjustAuthorisation:
+    post:
+      description: |-
+        Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.
+
+        For more information, refer to [Adjust Authorisation](https://docs.adyen.com/development-resources/payment-modifications/adjust-authorisation).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Increases or decreases the authorised amount.
+      x-groupName: Modifications
+      x-sortIndex: 6
+  /authorise:
+    post:
+      description: |-
+        Creates a payment with a unique reference (`pspReference`) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don't support this and will automatically capture as part of the authorisation.
+
+        For more information, refer to [Classic integration](https://docs.adyen.com/classic-integration).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Creates a payment authorisation.
+      x-groupName: General
+      x-sortIndex: 1
+  /authorise3d:
+    post:
+      description: |-
+        For an authenticated 3D Secure session, completes the payment authorisation. This endpoint must receive the `md` and `paResponse` parameters that you get from the card issuer after a shopper pays via 3D Secure.
+
+        For more information, refer to [3D Secure](https://docs.adyen.com/classic-integration/3d-secure).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest3d'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Completes a 3D Secure payment authorisation.
+      x-groupName: General
+      x-sortIndex: 2
+  /authorise3ds2:
+    post:
+      description: |-
+        For an authenticated 3D Secure 2 session, completes the payment authorisation. This endpoint must receive the `threeDS2Token` and `threeDS2Result` parameters.
+
+        For more information, refer to [3D Secure 2](https://docs.adyen.com/checkout/3d-secure-2).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest3ds2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Completes a 3D Secure 2 payment authorisation.
+      x-groupName: General
+      x-sortIndex: 3
+  /cancel:
+    post:
+      description: |-
+        Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.
+
+        For more information, refer to [Cancel](https://docs.adyen.com/development-resources/payment-modifications/cancel).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels an authorised payment.
+      x-groupName: Modifications
+      x-sortIndex: 2
+  /cancelOrRefund:
+    post:
+      description: |-
+        Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
+
+        > Do not use this request for payments that involve (multiple) partial captures.
+
+        For more information, refer to [Cancel or refund](https://docs.adyen.com/development-resources/payment-modifications/cancel-or-refund).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels or refunds a payment.
+      x-groupName: Modifications
+      x-sortIndex: 4
+  /capture:
+    post:
+      description: |-
+        Captures the authorisation hold on a payment, returning a unique reference for this request. Usually the full authorisation amount is captured, however it's also possible to capture a smaller amount, which results in cancelling the remaining authorisation balance.
+
+        Payment methods, which automatically capture as part of authorisation, don't need to be captured, but submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.
+
+        For more information, refer to [Capture](https://docs.adyen.com/development-resources/payment-modifications/capture).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Captures an authorised payment.
+      x-groupName: Modifications
+      x-sortIndex: 1
+  /refund:
+    post:
+      description: |-
+        Refunds a payment that has previously been captured, returning a unique reference for this request. Refunding can be done on the full captured amount or a partial amount. Multiple (partial) refunds will be accepted as long as their sum doesn't exceed the captured amount. Payments which have been authorised, but not captured, cannot be refunded, use the /cancel method instead.
+
+        > Some payment methods/gateways do not support partial/multiple refunds.
+        > A margin above the captured limit can be configured to cover shipping/handling costs.
+
+        For more information, refer to [Refund](https://docs.adyen.com/development-resources/payment-modifications/refund).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Refunds a captured payment.
+      x-groupName: Modifications
+      x-sortIndex: 3
+  /retrieve3ds2Result:
+    post:
+      description: Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreeDS2ResultRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreeDS2ResultResponse'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
+      x-groupName: General
+      x-sortIndex: 4
+  /technicalCancel:
+    post:
+      description: |-
+        This endpoint allows you to cancel a payment if you do not have the PSP reference of the original payment request available.
+
+        In your call, refer to the original payment by using the `reference` that you specified in your payment request.
+
+        For more information, see [Technical cancel](https://docs.adyen.com/development-resources/payment-modifications/cancel#technical-cancel).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels a payment using your custom reference.
+      x-groupName: Modifications
+      x-sortIndex: 5
+  /voidPendingRefund:
+    post:
+      description: |-
+        This endpoint allows you to cancel the refund request before it has been completed.
+
+        In your call, you can refer to the original refund request either by using the `tenderReference`, or the `pspReference`. We recommend implementing based on the `tenderReference`, as this is generated for both offline and online transactions.
+
+        For more information, refer to [Cancel a refund](https://docs.adyen.com/point-of-sale/build-your-integration/cancel-a-pos-refund-request).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResult'
+          description: OK - the request has succeeded.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels a POS refund request before it has been completed.
+      x-groupName: Modifications
+      x-sortIndex: 7
+components:
+  schemas:
+    AccountInfo:
+      properties:
+        accountAgeIndicator:
+          description: |-
+            Indicator for the length of time since this shopper account was created in the merchant's environment.
+            Allowed values:
+            * notApplicable
+            * thisTransaction
+            * lessThan30Days
+            * from30To60Days
+            * moreThan60Days
+          enum:
+            - notApplicable
+            - thisTransaction
+            - lessThan30Days
+            - from30To60Days
+            - moreThan60Days
+          type: string
+        accountChangeDate:
+          description: Date when the shopper's account was last changed.
+          format: date-time
+          type: string
+        accountChangeIndicator:
+          description: |-
+            Indicator for the length of time since the shopper's account was last updated.
+            Allowed values:
+            * thisTransaction
+            * lessThan30Days
+            * from30To60Days
+            * moreThan60Days
+          enum:
+            - thisTransaction
+            - lessThan30Days
+            - from30To60Days
+            - moreThan60Days
+          type: string
+        accountCreationDate:
+          description: Date when the shopper's account was created.
+          format: date-time
+          type: string
+        addCardAttemptsDay:
+          description: Number of attempts the shopper tried to add a card to their account in the last day.
+          format: int32
+          type: integer
+        deliveryAddressUsageDate:
+          description: Date the selected delivery address was last used.
+          format: date-time
+          type: string
+        deliveryAddressUsageIndicator:
+          description: |-
+            Indicator for the length of time since this delivery address was last used.
+            Allowed values:
+            * thisTransaction
+            * lessThan30Days
+            * from30To60Days
+            * moreThan60Days
+          enum:
+            - thisTransaction
+            - lessThan30Days
+            - from30To60Days
+            - moreThan60Days
+          type: string
+        homePhone:
+          description: Shopper's home phone number (including the country code).
+          type: string
+        mobilePhone:
+          description: Shopper's mobile phone number (including the country code).
+          type: string
+        passwordChangeDate:
+          description: Date when the shopper last changed their password.
+          format: date-time
+          type: string
+        passwordChangeIndicator:
+          description: |-
+            Indicator when the shopper has changed their password.
+            Allowed values:
+            * notApplicable
+            * thisTransaction
+            * lessThan30Days
+            * from30To60Days
+            * moreThan60Days
+          enum:
+            - notApplicable
+            - thisTransaction
+            - lessThan30Days
+            - from30To60Days
+            - moreThan60Days
+          type: string
+        pastTransactionsDay:
+          description: Number of all transactions (successful and abandoned) from this shopper in the past 24 hours.
+          format: int32
+          type: integer
+        pastTransactionsYear:
+          description: Number of all transactions (successful and abandoned) from this shopper in the past year.
+          format: int32
+          type: integer
+        paymentAccountAge:
+          description: Date this payment method was added to the shopper's account.
+          format: date-time
+          type: string
+        paymentAccountIndicator:
+          description: |-
+            Indicator for the length of time since this payment method was added to this shopper's account.
+            Allowed values:
+            * notApplicable
+            * thisTransaction
+            * lessThan30Days
+            * from30To60Days
+            * moreThan60Days
+          enum:
+            - notApplicable
+            - thisTransaction
+            - lessThan30Days
+            - from30To60Days
+            - moreThan60Days
+          type: string
+        purchasesLast6Months:
+          description: Number of successful purchases in the last six months.
+          format: int32
+          type: integer
+        suspiciousActivity:
+          description: Whether suspicious activity was recorded on this account.
+          type: boolean
+        workPhone:
+          description: Shopper's work phone number (including the country code).
+          type: string
+    Address:
+      properties:
+        city:
+          description: |-
+            The name of the city.
+            >Required if either houseNumberOrName, street, postalCode, or stateOrProvince are provided.
+          type: string
+        country:
+          description: |-
+            The two-character country code of the address. The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
+            > If you don't know the country or are not collecting the country from the shopper, provide `countryCode` as `ZZ`.
+          type: string
+        houseNumberOrName:
+          description: The number or name of the house.
+          type: string
+        postalCode:
+          description: |-
+            The postal code.
+            >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The abbreviation of the state or province.
+            >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
+            >Required for an address in the USA or Canada if either houseNumberOrName, street, city, or postalCode are provided.
+          type: string
+        street:
+          description: |-
+            The name of the street.
+            >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+            >Required if either houseNumberOrName, city, postalCode, or stateOrProvince are provided.
+          type: string
+      required:
+        - country
+    Amount:
+      properties:
+        currency:
+          description: 'The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).'
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: |-
+            The payable amount that can be charged for the transaction.
+
+            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+        - currency
+    BankAccount:
+      properties:
+        bankAccountNumber:
+          description: The bank account number (without separators).
+          type: string
+        bankCity:
+          description: The bank city.
+          type: string
+        bankLocationId:
+          description: The location id of the bank. The field value is `nil` in most cases.
+          type: string
+        bankName:
+          description: The name of the bank.
+          type: string
+        bic:
+          description: 'The [Business Identifier Code](https://en.wikipedia.org/wiki/ISO_9362) (BIC) is the SWIFT address assigned to a bank. The field value is `nil` in most cases.'
+          type: string
+        countryCode:
+          description: |-
+            Country code where the bank is located.
+
+            A valid value is an ISO two-character country code (e.g. 'NL').
+          type: string
+        iban:
+          description: 'The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).'
+          type: string
+        ownerName:
+          description: |-
+            The name of the bank account holder.
+            If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example:
+            * χ12 is converted to ch12.
+            * üA is converted to euA.
+            * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'.
+            After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example:
+            * John17 - allowed.
+            * J17 - allowed.
+            * 171 - not allowed.
+            * John-7 - allowed.
+            > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
+          type: string
+        taxId:
+          description: The bank account holder's tax ID.
+          type: string
+    BrowserInfo:
+      properties:
+        acceptHeader:
+          description: The accept header value of the shopper's browser.
+          maxLength: 50
+          minLength: 10
+          type: string
+        colorDepth:
+          description: 'The color depth of the shopper''s browser in bits per pixel. This should be obtained by using the browser''s `screen.colorDepth` property. Accepted values: 1, 4, 8, 15, 16, 24, 32 or 48 bit color depth.'
+          format: int32
+          type: integer
+        javaEnabled:
+          description: Boolean value indicating if the shopper's browser is able to execute Java.
+          type: boolean
+        javaScriptEnabled:
+          description: Boolean value indicating if the shopper's browser is able to execute JavaScript. A default 'true' value is assumed if the field is not present.
+          type: boolean
+        language:
+          description: The `navigator.language` value of the shopper's browser (as defined in IETF BCP 47).
+          type: string
+        screenHeight:
+          description: The total height of the shopper's device screen in pixels.
+          format: int32
+          type: integer
+        screenWidth:
+          description: The total width of the shopper's device screen in pixels.
+          format: int32
+          type: integer
+        timeZoneOffset:
+          description: 'Time difference between UTC time and the shopper''s browser local time, in minutes.'
+          format: int32
+          type: integer
+        userAgent:
+          description: The user agent value of the shopper's browser.
+          maxLength: 50
+          minLength: 10
+          type: string
+      required:
+        - userAgent
+        - acceptHeader
+        - javaEnabled
+        - colorDepth
+        - screenHeight
+        - screenWidth
+        - timeZoneOffset
+        - language
+    Card:
+      properties:
+        cvc:
+          description: |-
+            The [card verification code](https://docs.adyen.com/payments-essentials/payment-glossary#card_security_code_cvc_cvv_cid_) (1-20 characters). Depending on the card brand, it is known also as:
+            * CVV2/CVC2 – length: 3 digits
+            * CID – length: 4 digits
+            > If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server.
+            > This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments).
+            > When this value is returned in a response, it is always empty because it is not stored.
+          maxLength: 20
+          minLength: 1
+          type: string
+        expiryMonth:
+          description: |-
+            The card expiry month.
+            Format: 2 digits, zero-padded for single digits. For example:
+            * 03 = March
+            * 11 = November
+          maxLength: 2
+          minLength: 1
+          type: string
+        expiryYear:
+          description: |-
+            The card expiry year.
+            Format: 4 digits. For example: 2020
+          maxLength: 4
+          minLength: 4
+          type: string
+        holderName:
+          description: 'The name of the cardholder, as printed on the card.'
+          maxLength: 50
+          minLength: 1
+          type: string
+        issueNumber:
+          description: The issue number of the card (for some UK debit cards only).
+          maxLength: 2
+          minLength: 1
+          type: string
+        number:
+          description: |-
+            The card number (4-19 characters). Do not use any separators.
+            When this value is returned in a response, only the last 4 digits of the card number are returned.
+          maxLength: 19
+          minLength: 4
+          type: string
+        startMonth:
+          description: The month component of the start date (for some UK debit cards only).
+          maxLength: 2
+          minLength: 1
+          type: string
+        startYear:
+          description: The year component of the start date (for some UK debit cards only).
+          maxLength: 4
+          minLength: 4
+          type: string
+      required:
+        - number
+        - expiryMonth
+        - expiryYear
+        - holderName
+    DeviceRenderOptions:
+      properties:
+        sdkInterface:
+          description: |-
+            Supported SDK interface types.
+            Allowed values:
+            * Native
+            * Html
+            * both
+          enum:
+            - Html
+            - Native
+            - both
+          type: string
+        sdkUiType:
+          description: |-
+            UI types supported for displaying specific challenges.
+            Allowed values:
+            * text
+            * singleSelect
+            * outOfBand
+            * otherHtml
+            * multiSelect
+          items:
+            enum:
+              - multiSelect
+              - otherHtml
+              - outOfBand
+              - singleSelect
+              - text
+            type: string
+          type: array
+    ForexQuote:
+      properties:
+        account:
+          description: The account name.
+          type: string
+        accountType:
+          description: The account type.
+          type: string
+        baseAmount:
+          $ref: '#/components/schemas/Amount'
+          description: The base amount.
+        basePoints:
+          description: The base points.
+          format: int32
+          type: integer
+        buy:
+          $ref: '#/components/schemas/Amount'
+          description: The buy rate.
+        interbank:
+          $ref: '#/components/schemas/Amount'
+          description: The interbank amount.
+        reference:
+          description: The reference assigned to the forex quote request.
+          type: string
+        sell:
+          $ref: '#/components/schemas/Amount'
+          description: The sell rate.
+        signature:
+          description: The signature to validate the integrity.
+          type: string
+        source:
+          description: The source of the forex quote.
+          type: string
+        type:
+          description: The type of forex.
+          type: string
+        validTill:
+          description: The date until which the forex quote is valid.
+          format: date-time
+          type: string
+      required:
+        - validTill
+        - basePoints
+    FraudCheckResult:
+      properties:
+        accountScore:
+          description: The fraud score generated by the risk check.
+          format: int32
+          type: integer
+        checkId:
+          description: The ID of the risk check.
+          format: int32
+          type: integer
+        name:
+          description: The name of the risk check.
+          type: string
+      required:
+        - checkId
+        - name
+        - accountScore
+    FraudResult:
+      properties:
+        accountScore:
+          description: The total fraud score generated by the risk checks.
+          format: int32
+          type: integer
+        results:
+          description: The result of the individual risk checks.
+          items:
+            $ref: '#/components/schemas/FraudCheckResult'
+          type: array
+      required:
+        - accountScore
+    Installments:
+      properties:
+        value:
+          description: |-
+            Defines the number of installments. Its value needs to be greater than zero.
+
+            Usually, the maximum allowed number of installments is capped. For example, it may not be possible to split a payment in more than 24 installments. The acquirer sets this upper limit, so its value may vary.
+          format: int32
+          type: integer
+      required:
+        - value
+    MerchantRiskIndicator:
+      properties:
+        addressMatch:
+          description: Whether the chosen delivery address is identical to the billing address.
+          type: boolean
+        deliveryAddressIndicator:
+          description: |-
+            Indicator regarding the delivery address.
+            Allowed values:
+            * `shipToBillingAddress`
+            * `shipToVerifiedAddress`
+            * `shipToNewAddress`
+            * `shipToStore`
+            * `digitalGoods`
+            * `goodsNotShipped`
+            * `other`
+          enum:
+            - shipToBillingAddress
+            - shipToVerifiedAddress
+            - shipToNewAddress
+            - shipToStore
+            - digitalGoods
+            - goodsNotShipped
+            - other
+          type: string
+        deliveryEmail:
+          description: The delivery email address (for digital goods).
+          type: string
+        deliveryTimeframe:
+          description: |-
+            The estimated delivery time for the shopper to receive the goods.
+            Allowed values:
+            * `electronicDelivery`
+            * `sameDayShipping`
+            * `overnightShipping`
+            * `twoOrMoreDaysShipping`
+          enum:
+            - electronicDelivery
+            - sameDayShipping
+            - overnightShipping
+            - twoOrMoreDaysShipping
+          type: string
+        giftCardAmount:
+          $ref: '#/components/schemas/Amount'
+          description: The amount of prepaid or gift cards used for this purchase.
+        giftCardCount:
+          description: Number of individual prepaid or gift cards used for this purchase.
+          format: int32
+          type: integer
+        preOrderDate:
+          description: 'For pre-order purchases, the expected date this product will be available to the shopper.'
+          format: date-time
+          type: string
+        preOrderPurchase:
+          description: Indicator for whether this transaction is for pre-ordering a product.
+          type: boolean
+        reorderItems:
+          description: Indicator for whether the shopper has already purchased the same items in the past.
+          type: boolean
+    ModificationRequest:
+      properties:
+        additionalData:
+          description: |-
+            This field contains additional data, which may be required for a particular modification request.
+
+            The additionalData object consists of entries, each of which includes the key and value. For more information on possible key-value pairs, refer to the [ModificationRequest.additionalData](https://docs.adyen.com/api-reference/payments-api/modificationrequest/modificationrequest-additionaldata) section.
+          type: object
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        modificationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount that needs to be captured/refunded. Required for `/capture` and `/refund`, not allowed for `/cancel`. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.'
+        mpiData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+          description: Authentication data produced by an MPI (Mastercard SecureCode or Verified By Visa).
+        originalMerchantReference:
+          description: The original merchant reference to cancel.
+          type: string
+        originalReference:
+          description: |-
+            The original pspReference of the payment to modify.
+            This reference is returned in:
+            * authorisation response
+            * authorisation notification
+          type: string
+        reference:
+          description: |-
+            Optionally, you can specify your reference for the payment modification. This reference is visible in Customer Area and in reports.
+            Maximum length: 80 characters.
+          type: string
+        splits:
+          description: The details of how the payment should be split when distributing a payment to a Marketpay Marketplace and its Accounts.
+          items:
+            $ref: '#/components/schemas/Split'
+          type: array
+        tenderReference:
+          description: The transaction reference provided by the PED. For point-of-sale integrations only.
+          type: string
+        uniqueTerminalId:
+          description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
+          type: string
+      required:
+        - merchantAccount
+        - originalReference
+    ModificationResult:
+      properties:
+        additionalData:
+          description: 'This field contains additional data, which may be returned in a particular modification response.'
+          type: object
+        pspReference:
+          description: Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
+          type: string
+        response:
+          description: Indicates if the modification request has been received for processing.
+          enum:
+            - '[capture-received]'
+            - '[cancel-received]'
+            - '[refund-received]'
+            - '[cancelOrRefund-received]'
+          type: string
+    Name:
+      properties:
+        firstName:
+          description: The first name.
+          type: string
+        gender:
+          description: |-
+            The gender.
+            >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
+          enum:
+            - MALE
+            - FEMALE
+            - UNKNOWN
+          maxLength: 1
+          minLength: 1
+          type: string
+        infix:
+          description: |-
+            The name's infix, if applicable.
+            >A maximum length of twenty (20) characters is imposed.
+          type: string
+        lastName:
+          description: The last name.
+          type: string
+      required:
+        - firstName
+        - lastName
+        - gender
+    PaymentRequest:
+      properties:
+        accountInfo:
+          $ref: '#/components/schemas/AccountInfo'
+          description: |-
+            Shopper account information for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        additionalAmount:
+          $ref: '#/components/schemas/Amount'
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
+        additionalData:
+          description: 'This field contains additional data, which may be required for a particular payment request.'
+          type: object
+        amount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
+        bankAccount:
+          $ref: '#/components/schemas/BankAccount'
+          description: |-
+            The details of the bank account, from which the payment should be made.
+            > Either `bankAccount` or `card` field must be provided in a payment request.
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+          description: |-
+            The address where to send the invoice.
+            > For 3D Secure 2 transactions, schemes require the `billingAddress` for both `deviceChannel` **browser** and **app**. Include all of the fields within this object.
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+          description: |-
+            The shopper's browser information.
+            > For 3D Secure 2 transactions, `browserInfo` is required for `channel` **web** (or `deviceChannel` **browser**).
+        captureDelayHours:
+          description: 'The delay between the authorisation and scheduled auto-capture, specified in hours.'
+          format: int32
+          type: integer
+        card:
+          $ref: '#/components/schemas/Card'
+          description: |-
+            A container for card data.
+            > Either `bankAccount` or `card` field must be provided in a payment request.
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        dccQuote:
+          $ref: '#/components/schemas/ForexQuote'
+          description: The forex quote as returned in the response of the forex service.
+        deliveryAddress:
+          $ref: '#/components/schemas/Address'
+          description: The address where the purchased goods should be delivered.
+        deliveryDate:
+          description: |-
+            The date and time the purchased goods should be delivered.
+
+            Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD
+
+            Example: 2017-07-17T13:42:40.428+01:00
+          format: date-time
+          type: string
+        deviceFingerprint:
+          description: 'A string containing the shopper''s device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).'
+          type: string
+        entityType:
+          description: The type of the entity the payment is processed for.
+          enum:
+            - NaturalPerson
+            - CompanyName
+          type: string
+        fraudOffset:
+          description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
+          format: int32
+          type: integer
+        installments:
+          $ref: '#/components/schemas/Installments'
+          description: 'Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/installment-payments).'
+        mcc:
+          description: 'The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.'
+          type: string
+        merchantAccount:
+          description: 'The merchant account identifier, with which you want to process the transaction.'
+          type: string
+        merchantOrderReference:
+          description: |-
+            This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.
+            The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
+          type: string
+        merchantRiskIndicator:
+          $ref: '#/components/schemas/MerchantRiskIndicator'
+          description: |-
+            Additional risk fields for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        metadata:
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limitations: Error "177", "Metadata size exceeds limit"
+          type: object
+        mpiData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+          description: Authentication data produced by an MPI (Mastercard SecureCode or Verified By Visa).
+        nationality:
+          description: The two-character country code of the shopper's nationality.
+          maxLength: 2
+          type: string
+        orderReference:
+          description: 'When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.'
+          type: string
+        recurring:
+          $ref: '#/components/schemas/Recurring'
+          description: 'The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).'
+        recurringProcessingModel:
+          description: |
+            Defines a recurring payment type.
+            Allowed values:
+            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * `CardOnFile` – Card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * `UnscheduledCardOnFile` – A transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+          enum:
+            - CardOnFile
+            - Subscription
+            - UnscheduledCardOnFile
+          type: string
+        reference:
+          description: |-
+            The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
+            If you need to provide multiple references for a transaction, separate them with hyphens ("-").
+            Maximum length: 80 characters.
+          type: string
+        selectedBrand:
+          description: |-
+            Some payment methods require defining a value for this field to specify how to process the transaction.
+
+            For the Bancontact payment method, it can be set to:
+            * `maestro` (default), to be processed like a Maestro card, or
+            * `bcmc`, to be processed like a Bancontact card.
+          type: string
+        selectedRecurringDetailReference:
+          description: The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
+          type: string
+        sessionId:
+          description: A session ID used to identify a payment session.
+          type: string
+        shopperEmail:
+          description: |-
+            The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
+            > For 3D Secure 2 transactions, schemes require the `shopperEmail` for both `deviceChannel` **browser** and **app**.
+          type: string
+        shopperIP:
+          description: |-
+            The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
+            > This field is mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+          type: string
+        shopperInteraction:
+          description: |-
+            Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer.
+            For the web service API, Adyen assumes Ecommerce shopper interaction by default.
+
+            This field has the following possible values:
+            * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request.
+            * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment).
+            * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone.
+            * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
+          enum:
+            - Ecommerce
+            - ContAuth
+            - Moto
+            - POS
+          type: string
+        shopperLocale:
+          description: The combination of a language code and a country code to specify the language to be used in the payment.
+          type: string
+        shopperName:
+          $ref: '#/components/schemas/Name'
+          description: The shopper's full name and gender (if specified).
+        shopperReference:
+          description: |-
+            The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
+            > This field is required for recurring payments.
+          type: string
+        shopperStatement:
+          description: The text to appear on the shopper's bank statement.
+          type: string
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+        splits:
+          description: The details of how the payment should be split when distributing a payment to a MarketPay Marketplace and its Accounts.
+          items:
+            $ref: '#/components/schemas/Split'
+          type: array
+        store:
+          description: 'The physical store, for which this payment is processed.'
+          maxLength: 16
+          minLength: 1
+          type: string
+        telephoneNumber:
+          description: The shopper's telephone number.
+          type: string
+        threeDS2RequestData:
+          $ref: '#/components/schemas/ThreeDS2RequestData'
+          description: Request fields for 3D Secure 2.
+        totalsGroup:
+          description: 'The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).'
+          maxLength: 16
+          minLength: 1
+          type: string
+        trustedShopper:
+          description: Set to true if the payment should be routed to a trusted MID.
+          type: boolean
+      required:
+        - merchantAccount
+        - reference
+        - amount
+    PaymentRequest3d:
+      properties:
+        accountInfo:
+          $ref: '#/components/schemas/AccountInfo'
+          description: |-
+            Shopper account information for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        additionalAmount:
+          $ref: '#/components/schemas/Amount'
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
+        additionalData:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value. For more information on possible key-value pairs, refer to the [additionalData section](https://docs.adyen.com/api-reference/payments-api#paymentrequestadditionaldata).
+          type: object
+        amount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+          description: |-
+            The address where to send the invoice.
+            > For 3D Secure 2 transactions, schemes require the `billingAddress` for both `deviceChannel` **browser** and **app**. Include all of the fields within this object.
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+          description: |-
+            The shopper's browser information.
+            > For 3D Secure 2 transactions, `browserInfo` is required for `channel` **web** (or `deviceChannel` **browser**).
+        captureDelayHours:
+          description: 'The delay between the authorisation and scheduled auto-capture, specified in hours.'
+          format: int32
+          type: integer
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        dccQuote:
+          $ref: '#/components/schemas/ForexQuote'
+          description: The forex quote as returned in the response of the forex service.
+        deliveryAddress:
+          $ref: '#/components/schemas/Address'
+          description: The address where the purchased goods should be delivered.
+        deliveryDate:
+          description: |-
+            The date and time the purchased goods should be delivered.
+
+            Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD
+
+            Example: 2017-07-17T13:42:40.428+01:00
+          format: date-time
+          type: string
+        deviceFingerprint:
+          description: 'A string containing the shopper''s device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).'
+          type: string
+        fraudOffset:
+          description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
+          format: int32
+          type: integer
+        installments:
+          $ref: '#/components/schemas/Installments'
+          description: 'Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/installment-payments).'
+        mcc:
+          description: 'The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.'
+          type: string
+        md:
+          description: The payment session identifier returned by the card issuer.
+          type: string
+        merchantAccount:
+          description: 'The merchant account identifier, with which you want to process the transaction.'
+          type: string
+        merchantOrderReference:
+          description: |-
+            This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.
+            The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
+          type: string
+        merchantRiskIndicator:
+          $ref: '#/components/schemas/MerchantRiskIndicator'
+          description: |-
+            Additional risk fields for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        metadata:
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limitations: Error "177", "Metadata size exceeds limit"
+          type: object
+        orderReference:
+          description: 'When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.'
+          type: string
+        paResponse:
+          description: Payment authorisation response returned by the card issuer. The `paResponse` field holds the PaRes value received from the card issuer.
+          type: string
+        recurring:
+          $ref: '#/components/schemas/Recurring'
+          description: 'The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).'
+        recurringProcessingModel:
+          description: |
+            Defines a recurring payment type.
+            Allowed values:
+            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * `CardOnFile` – Card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * `UnscheduledCardOnFile` – A transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+          enum:
+            - CardOnFile
+            - Subscription
+            - UnscheduledCardOnFile
+          type: string
+        reference:
+          description: |-
+            The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
+            If you need to provide multiple references for a transaction, separate them with hyphens ("-").
+            Maximum length: 80 characters.
+          type: string
+        selectedBrand:
+          description: |-
+            Some payment methods require defining a value for this field to specify how to process the transaction.
+
+            For the Bancontact payment method, it can be set to:
+            * `maestro` (default), to be processed like a Maestro card, or
+            * `bcmc`, to be processed like a Bancontact card.
+          type: string
+        selectedRecurringDetailReference:
+          description: The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
+          type: string
+        sessionId:
+          description: A session ID used to identify a payment session.
+          type: string
+        shopperEmail:
+          description: |-
+            The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
+            > For 3D Secure 2 transactions, schemes require the `shopperEmail` for both `deviceChannel` **browser** and **app**.
+          type: string
+        shopperIP:
+          description: |-
+            The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
+            > This field is mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+          type: string
+        shopperInteraction:
+          description: |-
+            Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer.
+            For the web service API, Adyen assumes Ecommerce shopper interaction by default.
+
+            This field has the following possible values:
+            * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request.
+            * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment).
+            * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone.
+            * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
+          enum:
+            - Ecommerce
+            - ContAuth
+            - Moto
+            - POS
+          type: string
+        shopperLocale:
+          description: The combination of a language code and a country code to specify the language to be used in the payment.
+          type: string
+        shopperName:
+          $ref: '#/components/schemas/Name'
+          description: The shopper's full name and gender (if specified).
+        shopperReference:
+          description: |-
+            The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
+            > This field is required for recurring payments.
+          type: string
+        shopperStatement:
+          description: The text to appear on the shopper's bank statement.
+          type: string
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+        splits:
+          description: The details of how the payment should be split when distributing a payment to a MarketPay Marketplace and its Accounts.
+          items:
+            $ref: '#/components/schemas/Split'
+          type: array
+        store:
+          description: 'The physical store, for which this payment is processed.'
+          maxLength: 16
+          minLength: 1
+          type: string
+        telephoneNumber:
+          description: The shopper's telephone number.
+          type: string
+        threeDS2RequestData:
+          $ref: '#/components/schemas/ThreeDS2RequestData'
+          description: Request fields for 3D Secure 2.
+        totalsGroup:
+          description: 'The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).'
+          maxLength: 16
+          minLength: 1
+          type: string
+        trustedShopper:
+          description: Set to true if the payment should be routed to a trusted MID.
+          type: boolean
+      required:
+        - merchantAccount
+        - paResponse
+        - md
+    PaymentRequest3ds2:
+      properties:
+        accountInfo:
+          $ref: '#/components/schemas/AccountInfo'
+          description: |-
+            Shopper account information for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        additionalAmount:
+          $ref: '#/components/schemas/Amount'
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
+        additionalData:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value. For more information on possible key-value pairs, refer to the [additionalData section](https://docs.adyen.com/api-reference/payments-api#paymentrequestadditionaldata).
+          type: object
+        amount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount information for the transaction. For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).'
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+          description: |-
+            The address where to send the invoice.
+            > For 3D Secure 2 transactions, schemes require the `billingAddress` for both `deviceChannel` **browser** and **app**. Include all of the fields within this object.
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+          description: |-
+            The shopper's browser information.
+            > For 3D Secure 2 transactions, `browserInfo` is required for `channel` **web** (or `deviceChannel` **browser**).
+        captureDelayHours:
+          description: 'The delay between the authorisation and scheduled auto-capture, specified in hours.'
+          format: int32
+          type: integer
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        dccQuote:
+          $ref: '#/components/schemas/ForexQuote'
+          description: The forex quote as returned in the response of the forex service.
+        deliveryAddress:
+          $ref: '#/components/schemas/Address'
+          description: The address where the purchased goods should be delivered.
+        deliveryDate:
+          description: |-
+            The date and time the purchased goods should be delivered.
+
+            Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD
+
+            Example: 2017-07-17T13:42:40.428+01:00
+          format: date-time
+          type: string
+        deviceFingerprint:
+          description: 'A string containing the shopper''s device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).'
+          type: string
+        fraudOffset:
+          description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
+          format: int32
+          type: integer
+        installments:
+          $ref: '#/components/schemas/Installments'
+          description: 'Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/installment-payments).'
+        mcc:
+          description: 'The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.'
+          type: string
+        merchantAccount:
+          description: 'The merchant account identifier, with which you want to process the transaction.'
+          type: string
+        merchantOrderReference:
+          description: |-
+            This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.
+            The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
+          type: string
+        merchantRiskIndicator:
+          $ref: '#/components/schemas/MerchantRiskIndicator'
+          description: |-
+            Additional risk fields for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+        metadata:
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limitations: Error "177", "Metadata size exceeds limit"
+          type: object
+        orderReference:
+          description: 'When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.'
+          type: string
+        recurring:
+          $ref: '#/components/schemas/Recurring'
+          description: 'The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).'
+        recurringProcessingModel:
+          description: |
+            Defines a recurring payment type.
+            Allowed values:
+            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * `CardOnFile` – Card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * `UnscheduledCardOnFile` – A transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+          enum:
+            - CardOnFile
+            - Subscription
+            - UnscheduledCardOnFile
+          type: string
+        reference:
+          description: |-
+            The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
+            If you need to provide multiple references for a transaction, separate them with hyphens ("-").
+            Maximum length: 80 characters.
+          type: string
+        selectedBrand:
+          description: |-
+            Some payment methods require defining a value for this field to specify how to process the transaction.
+
+            For the Bancontact payment method, it can be set to:
+            * `maestro` (default), to be processed like a Maestro card, or
+            * `bcmc`, to be processed like a Bancontact card.
+          type: string
+        selectedRecurringDetailReference:
+          description: The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
+          type: string
+        sessionId:
+          description: A session ID used to identify a payment session.
+          type: string
+        shopperEmail:
+          description: |-
+            The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
+            > For 3D Secure 2 transactions, schemes require the `shopperEmail` for both `deviceChannel` **browser** and **app**.
+          type: string
+        shopperIP:
+          description: |-
+            The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
+            > This field is mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+          type: string
+        shopperInteraction:
+          description: |-
+            Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer.
+            For the web service API, Adyen assumes Ecommerce shopper interaction by default.
+
+            This field has the following possible values:
+            * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request.
+            * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment).
+            * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone.
+            * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
+          enum:
+            - Ecommerce
+            - ContAuth
+            - Moto
+            - POS
+          type: string
+        shopperLocale:
+          description: The combination of a language code and a country code to specify the language to be used in the payment.
+          type: string
+        shopperName:
+          $ref: '#/components/schemas/Name'
+          description: The shopper's full name and gender (if specified).
+        shopperReference:
+          description: |-
+            The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
+            > This field is required for recurring payments.
+          type: string
+        shopperStatement:
+          description: The text to appear on the shopper's bank statement.
+          type: string
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+        splits:
+          description: The details of how the payment should be split when distributing a payment to a MarketPay Marketplace and its Accounts.
+          items:
+            $ref: '#/components/schemas/Split'
+          type: array
+        store:
+          description: 'The physical store, for which this payment is processed.'
+          maxLength: 16
+          minLength: 1
+          type: string
+        telephoneNumber:
+          description: The shopper's telephone number.
+          type: string
+        threeDS2RequestData:
+          $ref: '#/components/schemas/ThreeDS2RequestData'
+          description: Request fields for 3D Secure 2.
+        threeDS2Result:
+          $ref: '#/components/schemas/ThreeDS2Result'
+          description: Thre ThreeDS2Result that was returned in the final CRes.
+        threeDS2Token:
+          description: The ThreeDS2Token that was returned in the /authorise call.
+          type: string
+        totalsGroup:
+          description: 'The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).'
+          maxLength: 16
+          minLength: 1
+          type: string
+        trustedShopper:
+          description: Set to true if the payment should be routed to a trusted MID.
+          type: boolean
+      required:
+        - merchantAccount
+        - reference
+        - amount
+    PaymentResult:
+      properties:
+        additionalData:
+          description: 'This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs**.'
+          type: object
+        authCode:
+          description: |-
+            Authorisation code:
+            * When the payment is authorised successfully, this field holds the authorisation code for the payment.
+            * When the payment is not authorised, this field is empty.
+          type: string
+        dccAmount:
+          $ref: '#/components/schemas/Amount'
+          description: |-
+            Includes the currency of the conversion and the value of the transaction.
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+        dccSignature:
+          description: |-
+            Cryptographic signature used to verify `dccQuote`.
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+          type: string
+        fraudResult:
+          $ref: '#/components/schemas/FraudResult'
+          description: The fraud result properties of the payment.
+        issuerUrl:
+          description: |-
+            The URL to direct the shopper to.
+            > In case of SecurePlus, do not redirect a shopper to this URL.
+          type: string
+        md:
+          description: The payment session.
+          type: string
+        paRequest:
+          description: |-
+            The 3D request data for the issuer.
+
+            If the value is **CUPSecurePlus-CollectSMSVerificationCode**, collect an SMS code from the shopper and pass it in the `/authorise3D` request. For more information, see [3D Secure](https://docs.adyen.com/classic-integration/3d-secure).
+          type: string
+        pspReference:
+          description: |-
+            Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
+
+            > `pspReference` is returned only for non-redirect payment methods.
+          type: string
+        refusalReason:
+          description: |-
+            If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error.
+
+            When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.
+          type: string
+        resultCode:
+          description: |
+            The result of the payment. Possible values:
+
+            * **AuthenticationFinished** – The payment has been successfully authenticated with 3D Secure 2. Returned for 3D Secure 2 authentication-only transactions.
+            * **Authorised** – The payment was successfully authorised. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state.
+            * **Cancelled** – Indicates the payment has been cancelled (either by the shopper or the merchant) before processing was completed. This is a final state.
+            * **ChallengeShopper** – The issuer requires further shopper interaction before the payment can be authenticated. Returned for 3D Secure 2 transactions.
+            * **Error** – There was an error when the payment was being processed. The reason is given in the `refusalReason` field. This is a final state.
+            * **IdentifyShopper** – The issuer requires the shopper's device fingerprint before the payment can be authenticated. Returned for 3D Secure 2 transactions.
+            * **Refused** – Indicates the payment was refused. The reason is given in the `refusalReason` field. This is a final state.
+            * **Pending** – Indicates that it is not possible to obtain the final status of the payment. This can happen if the systems providing final status information for the payment are unavailable, or if the shopper needs to take further action to complete the payment. For more information on handling a pending payment, refer to [Payments with pending status](https://docs.adyen.com/development-resources/payments-with-pending-status).
+            * **Received** – Indicates the payment has successfully been received by Adyen, and will be processed. This is the initial state for all payments.
+            * **RedirectShopper** – Indicates the shopper should be redirected to an external web page or app to complete the authorisation.
+          enum:
+            - AuthenticationFinished
+            - Authorised
+            - Cancelled
+            - ChallengeShopper
+            - Error
+            - IdentifyShopper
+            - Pending
+            - Received
+            - RedirectShopper
+            - Refused
+          type: string
+    Recurring:
+      properties:
+        contract:
+          description: |-
+            The type of recurring contract to be used.
+            Possible values:
+            * `ONECLICK` – Payment details can be used to initiate a one-click payment, where the shopper enters the [card security code (CVC/CVV)](https://docs.adyen.com/payments-essentials/payment-glossary#card_security_code_cvc_cvv_cid_).
+            * `RECURRING` – Payment details can be used without the card security code to initiate [card-not-present transactions](https://docs.adyen.com/payment-glossary#cardnotpresentcnp).
+            * `ONECLICK,RECURRING` – Payment details can be used regardless of whether the shopper is on your site or not.
+            * `PAYOUT` – Payment details can be used to [make a payout](https://docs.adyen.com/features/third-party-payouts).
+          enum:
+            - ONECLICK
+            - RECURRING
+            - PAYOUT
+          type: string
+        recurringDetailName:
+          description: A descriptive name for this detail.
+          type: string
+        recurringExpiry:
+          description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
+          format: date-time
+          type: string
+        recurringFrequency:
+          description: Minimum number of days between authorisations. Only for 3D Secure 2.
+          type: string
+        tokenService:
+          description: The name of the token service.
+          enum:
+            - VISATOKENSERVICE
+            - MCTOKENSERVICE
+          type: string
+    SDKEphemPubKey:
+      properties:
+        crv:
+          description: The `crv` value as received from the 3D Secure 2 SDK.
+          type: string
+        kty:
+          description: The `kty` value as received from the 3D Secure 2 SDK.
+          type: string
+        x:
+          description: The `x` value as received from the 3D Secure 2 SDK.
+          type: string
+        'y':
+          description: The `y` value as received from the 3D Secure 2 SDK.
+          type: string
+    Split:
+      properties:
+        account:
+          description: |-
+            The account to which this split applies.
+
+            >Required if the type is `MarketPlace`.
+          type: string
+        amount:
+          $ref: '#/components/schemas/SplitAmount'
+          description: The amount of this split.
+        description:
+          description: A description of this split.
+          type: string
+        reference:
+          description: |-
+            The reference of this split. Used to link other operations (e.g. captures and refunds) to this split.
+
+            >Required if the type is `MarketPlace`.
+          type: string
+        type:
+          description: |-
+            The type of this split.
+
+            >Permitted values: `Default`, `PaymentFee`, `VAT`, `Commission`, `MarketPlace`, `Verification`.
+          enum:
+            - Commission
+            - Default
+            - MarketPlace
+            - PaymentFee
+            - VAT
+            - Verification
+          type: string
+      required:
+        - amount
+        - type
+    SplitAmount:
+      properties:
+        currency:
+          description: |-
+            The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+
+            If this value is not provided, the currency in which the payment is made will be used.
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: |-
+            The payable amount that can be charged for the transaction.
+
+            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+    ThreeDS2RequestData:
+      properties:
+        authenticationOnly:
+          description: 'If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/checkout/3d-secure-2/3ds2-checkout-authentication-only-integration), and not the payment authorisation.'
+          type: boolean
+        challengeIndicator:
+          description: |
+            Possibility to specify a preference for receiving a challenge from the issuer.
+            Allowed values:
+            * `noPreference`
+            * `requestNoChallenge`
+            * `requestChallenge`
+          enum:
+            - noPreference
+            - requestNoChallenge
+            - requestChallenge
+          type: string
+        deviceChannel:
+          description: |-
+            The environment of the shopper.
+            Allowed values:
+            * `app`
+            * `browser`
+          type: string
+        deviceRenderOptions:
+          $ref: '#/components/schemas/DeviceRenderOptions'
+          description: |-
+            Display options for the 3D Secure 2 SDK.
+             Required for `deviceChannel` **app**.
+        messageVersion:
+          description: The `messageVersion` value indicating the 3D Secure 2 protocol version.
+          type: string
+        notificationURL:
+          description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
+          type: string
+        sdkAppID:
+          description: |-
+            The `sdkAppID` value as received from the 3D Secure 2 SDK.
+            Required for `deviceChannel` set to **app**.
+          type: string
+        sdkEncData:
+          description: |-
+            The `sdkEncData` value as received from the 3D Secure 2 SDK.
+            Required for `deviceChannel` set to **app**.
+          type: string
+        sdkEphemPubKey:
+          $ref: '#/components/schemas/SDKEphemPubKey'
+          description: |-
+            The `sdkEphemPubKey` value as received from the 3D Secure 2 SDK.
+            Required for `deviceChannel` set to **app**.
+        sdkMaxTimeout:
+          description: |-
+            The maximum amount of time in minutes for the 3D Secure 2 authentication process.
+            Only for `deviceChannel` set to **app**.
+          format: int32
+          type: integer
+        sdkReferenceNumber:
+          description: |-
+            The `sdkReferenceNumber` value as received from the 3D Secure 2 SDK.
+            Only for `deviceChannel` set to **app**.
+          type: string
+        sdkTransID:
+          description: |-
+            The `sdkTransID` value as received from the 3D Secure 2 SDK.
+            Only for `deviceChannel` set to **app**.
+          type: string
+        threeDSCompInd:
+          description: Completion indicator for the device fingerprinting.
+          type: string
+        threeDSRequestorID:
+          description: 'Required for [authentication-only integration](https://docs.adyen.com/checkout/3d-secure-2/3ds2-checkout-authentication-only-integration) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.'
+          type: string
+        threeDSRequestorName:
+          description: 'Required for [authentication-only integration](https://docs.adyen.com/checkout/3d-secure-2/3ds2-checkout-authentication-only-integration) for Visa. Unique 3D Secure requestor name assigned by the Directory Server when you enrol for 3D Secure 2.'
+          type: string
+        threeDSRequestorURL:
+          description: URL of the (customer service) website that will be shown to the shopper in case of technical errors during the 3D Secure 2 process.
+          type: string
+      required:
+        - deviceChannel
+    ThreeDS2Result:
+      properties:
+        authenticationValue:
+          description: The `authenticationValue` value as defined in the 3D Secure 2 specification.
+          type: string
+        dsTransID:
+          description: The `dsTransID` value as defined in the 3D Secure 2 specification.
+          type: string
+        eci:
+          description: The `eci` value as defined in the 3D Secure 2 specification.
+          type: string
+        threeDSServerTransID:
+          description: The `threeDSServerTransID` value as defined in the 3D Secure 2 specification.
+          type: string
+        timestamp:
+          description: The `timestamp` value of the 3D Secure 2 authentication.
+          type: string
+        transStatus:
+          description: The `transStatus` value as defined in the 3D Secure 2 specification.
+          type: string
+        transStatusReason:
+          description: The `transStatusReason` value as defined in the 3D Secure 2 specification.
+          type: string
+    ThreeDS2ResultRequest:
+      properties:
+        merchantAccount:
+          description: 'The merchant account identifier, with which you want to process the transaction.'
+          type: string
+        pspReference:
+          description: The pspReference returned in the /authorise call.
+          type: string
+      required:
+        - merchantAccount
+        - pspReference
+    ThreeDS2ResultResponse:
+      properties:
+        threeDS2Result:
+          $ref: '#/components/schemas/ThreeDS2Result'
+          description: The result of the 3D Secure 2 authentication.
+    ThreeDSecureData:
+      properties:
+        authenticationResponse:
+          description: |-
+            In 3D Secure 1, the authentication response if the shopper was redirected.
+
+            In 3D Secure 2, this is the `transStatus` from challenge flow. If the transaction was frictionless, set this value to **Y**.
+          enum:
+            - 'Y'
+            - 'N'
+            - U
+            - A
+          type: string
+        cavv:
+          description: 'The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).'
+          format: byte
+          type: string
+        cavvAlgorithm:
+          description: The CAVV algorithm used. Include this only for 3D Secure 1.
+          type: string
+        directoryResponse:
+          description: |-
+            In 3D Secure 1, this is the enrollment response from the 3D directory server.
+
+            In 3D Secure 2, this is the `transStatus` from 3D Secure device fingerprinting result.
+          enum:
+            - 'Y'
+            - 'N'
+            - U
+            - E
+            - C
+          type: string
+        dsTransID:
+          description: Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.
+          type: string
+        eci:
+          description: The electronic commerce indicator.
+          type: string
+        threeDSVersion:
+          description: The version of the 3D Secure protocol.
+          type: string
+        xid:
+          description: 'Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).'
+          format: byte
+          type: string
+x-groups:
+  - General
+  - Modifications

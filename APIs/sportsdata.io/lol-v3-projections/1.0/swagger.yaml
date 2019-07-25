@@ -1,0 +1,225 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.sportsdata.io
+basePath: /v3/lol/projections
+info:
+  contact:
+    x-twitter: nfldata
+  description: LoL v3 Projections
+  title: LoL v3 Projections
+  version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://fantasydata.com/downloads/swagger/lol-v3-projections.json'
+      version: '2.0'
+  x-providerName: sportsdata.io
+  x-serviceName: lol-v3-projections
+produces:
+  - application/json
+securityDefinitions:
+  apiKeyHeader:
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+  apiKeyQuery:
+    in: query
+    name: subscription-key
+    type: apiKey
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+tags: []
+paths:
+  '/{format}/PlayerGameProjectionStatsByDate/{date}':
+    get:
+      description: Projected Player Game Stats by Date
+      operationId: ProjectedPlayerGameStatsByDate
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Example: <code>2019-01-20</code>
+          in: path
+          name: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: Projected Player Game Stats by Date
+  '/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}':
+    get:
+      description: Projected Player Game Stats by Date
+      operationId: ProjectedPlayerGameStatsByPlayer
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: |-
+            The date of the game(s).
+            <br>Example: <code>2019-01-20</code>
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: |-
+            Unique FantasyData Player ID.
+            Example:<code>100001500</code>.
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerGameProjection'
+            type: array
+      summary: Projected Player Game Stats by Player
+definitions:
+  PlayerGameProjection:
+    properties:
+      Assists:
+        type: number
+      CombatPlayerScore:
+        type: number
+      DateTime:
+        type: string
+      Day:
+        type: string
+      Deaths:
+        type: number
+      DoubleKills:
+        type: number
+      GameId:
+        type: integer
+      Games:
+        type: integer
+      GoldEarned:
+        type: number
+      GoldSpent:
+        type: number
+      InhibitorKills:
+        type: number
+      KillingSpree:
+        type: number
+      Kills:
+        type: number
+      LargestCriticalStrike:
+        type: number
+      LargestKillingSpree:
+        type: number
+      LargestMultiKill:
+        type: number
+      LongestTimeSpentLiving:
+        type: number
+      MagicDamageDealt:
+        type: number
+      MagicDamageDealtToChampions:
+        type: number
+      MagicDamageTaken:
+        type: number
+      MatchName:
+        type: string
+      Matches:
+        type: integer
+      Name:
+        type: string
+      NeutralMinionsKIlled:
+        type: number
+      NeutralMinionsKIlledTeamJungle:
+        type: number
+      NeutralMinionsKilledEnemyJungle:
+        type: number
+      ObjectivePlayerScore:
+        type: number
+      Opponent:
+        type: string
+      OpponentId:
+        type: integer
+      PentaKills:
+        type: number
+      PhysicalDamageDealt:
+        type: number
+      PhysicalDamageDealtToChampions:
+        type: number
+      PhysicalDamageTaken:
+        type: number
+      PlayerId:
+        type: integer
+      QuadraKills:
+        type: number
+      SightWardsBoughtInGame:
+        type: number
+      Team:
+        type: string
+      TeamId:
+        type: integer
+      TenKillsOrAssists:
+        type: number
+      TotalDamageDealt:
+        type: number
+      TotalDamageDealtToChampions:
+        type: number
+      TotalDamageTaken:
+        type: number
+      TotalHeal:
+        type: number
+      TotalMinionsKilled:
+        type: number
+      TotalPlayerScore:
+        type: number
+      TotalTimeCrowdControlDealt:
+        type: number
+      TotalUnitsHealed:
+        type: number
+      TripleKills:
+        type: number
+      TrueDamageDealt:
+        type: number
+      TrueDamageDealtToChampions:
+        type: number
+      TrueDamageTaken:
+        type: number
+      TurretKills:
+        type: number
+      UnrealKills:
+        type: number
+      Updated:
+        type: string
+      VisionWardsBoughtInGame:
+        type: number
+      WardsKilled:
+        type: number
+      WardsPlaced:
+        type: number
+x-servers:
+  - url: 'http://api.sportsdata.io'
+  - url: 'https://api.sportsdata.io'
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'
