@@ -1,0 +1,515 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ServiceTasks.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datamigration-ServiceTasks
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  CheckOCIDriverTaskProperties:
+    allOf:
+      - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
+        discriminator: taskType
+        properties:
+          clientData:
+            additionalProperties:
+              type: string
+            description: Key value pairs of client data to attach meta data information to task
+            type: object
+          commands:
+            description: Array of command properties.
+            items:
+              description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+              discriminator: commandType
+              properties:
+                commandType:
+                  description: Command type.
+                  type: string
+                errors:
+                  description: Array of errors. This is ignored if submitted.
+                  items:
+                    description: Error information in OData format.
+                    properties:
+                      code:
+                        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                        type: string
+                      details:
+                        description: Inner errors that caused this error
+                        items:
+                          $ref: '#/definitions/ODataError'
+                        type: array
+                      message:
+                        description: The human-readable description of the error
+                        type: string
+                    type: object
+                  readOnly: true
+                  type: array
+                state:
+                  description: The state of the command. This is ignored if submitted.
+                  enum:
+                    - Unknown
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CommandState
+              required:
+                - commandType
+              type: object
+              x-ms-discriminator-value: Unknown
+            readOnly: true
+            type: array
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the task. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Queued
+              - Running
+              - Canceled
+              - Succeeded
+              - Failed
+              - FailedInputValidation
+              - Faulted
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TaskState
+          taskType:
+            description: Task type.
+            type: string
+        required:
+          - taskType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the task that checks for OCI drivers.
+    properties:
+      input:
+        description: Input for the service task to check for OCI drivers.
+        properties:
+          serverVersion:
+            description: Version of the source server to check against.  Optional.
+            type: string
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for the service task to check for OCI drivers.
+          properties:
+            installedDriver:
+              additionalProperties:
+                items:
+                  description: Information about an Oracle OCI driver.
+                  properties:
+                    archiveChecksum:
+                      description: The MD5 Base64 encoded checksum for the driver package.
+                      readOnly: true
+                      type: string
+                    assemblyVersion:
+                      description: Version listed in the OCI assembly 'oci.dll'
+                      readOnly: true
+                      type: string
+                    driverName:
+                      description: The name of the driver package
+                      readOnly: true
+                      type: string
+                    driverSize:
+                      description: The size in bytes of the driver package
+                      readOnly: true
+                      type: string
+                    oracleChecksum:
+                      description: The checksum for the driver package provided by Oracle.
+                      readOnly: true
+                      type: string
+                    supportedOracleVersions:
+                      description: List of Oracle database versions supported by this driver. Only major minor of the version is listed.
+                      items:
+                        type: string
+                      readOnly: true
+                      type: array
+                  type: object
+                type: array
+              description: Information about the installed driver if found and valid.
+              readOnly: true
+              type: object
+            validationErrors:
+              description: Validation errors
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: Service.Check.OCI
+  InstallOCIDriverTaskProperties:
+    allOf:
+      - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
+        discriminator: taskType
+        properties:
+          clientData:
+            additionalProperties:
+              type: string
+            description: Key value pairs of client data to attach meta data information to task
+            type: object
+          commands:
+            description: Array of command properties.
+            items:
+              description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+              discriminator: commandType
+              properties:
+                commandType:
+                  description: Command type.
+                  type: string
+                errors:
+                  description: Array of errors. This is ignored if submitted.
+                  items:
+                    description: Error information in OData format.
+                    properties:
+                      code:
+                        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                        type: string
+                      details:
+                        description: Inner errors that caused this error
+                        items:
+                          $ref: '#/definitions/ODataError'
+                        type: array
+                      message:
+                        description: The human-readable description of the error
+                        type: string
+                    type: object
+                  readOnly: true
+                  type: array
+                state:
+                  description: The state of the command. This is ignored if submitted.
+                  enum:
+                    - Unknown
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CommandState
+              required:
+                - commandType
+              type: object
+              x-ms-discriminator-value: Unknown
+            readOnly: true
+            type: array
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the task. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Queued
+              - Running
+              - Canceled
+              - Succeeded
+              - Failed
+              - FailedInputValidation
+              - Faulted
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TaskState
+          taskType:
+            description: Task type.
+            type: string
+        required:
+          - taskType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the task that installs an OCI driver.
+    properties:
+      input:
+        description: Input for the service task to install an OCI driver.
+        properties:
+          driverPackageName:
+            description: Name of the uploaded driver package to install.
+            type: string
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for the service task to install an OCI driver.
+          properties:
+            validationErrors:
+              description: Validation errors
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: Service.Install.OCI
+  ODataError: {}
+  UploadOCIDriverTaskProperties:
+    allOf:
+      - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
+        discriminator: taskType
+        properties:
+          clientData:
+            additionalProperties:
+              type: string
+            description: Key value pairs of client data to attach meta data information to task
+            type: object
+          commands:
+            description: Array of command properties.
+            items:
+              description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+              discriminator: commandType
+              properties:
+                commandType:
+                  description: Command type.
+                  type: string
+                errors:
+                  description: Array of errors. This is ignored if submitted.
+                  items:
+                    description: Error information in OData format.
+                    properties:
+                      code:
+                        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                        type: string
+                      details:
+                        description: Inner errors that caused this error
+                        items:
+                          $ref: '#/definitions/ODataError'
+                        type: array
+                      message:
+                        description: The human-readable description of the error
+                        type: string
+                    type: object
+                  readOnly: true
+                  type: array
+                state:
+                  description: The state of the command. This is ignored if submitted.
+                  enum:
+                    - Unknown
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CommandState
+              required:
+                - commandType
+              type: object
+              x-ms-discriminator-value: Unknown
+            readOnly: true
+            type: array
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the task. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Queued
+              - Running
+              - Canceled
+              - Succeeded
+              - Failed
+              - FailedInputValidation
+              - Faulted
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TaskState
+          taskType:
+            description: Task type.
+            type: string
+        required:
+          - taskType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the task that uploads an OCI driver.
+    properties:
+      input:
+        description: Input for the service task to upload an OCI driver.
+        properties:
+          driverShare:
+            description: 'File share information with Path, Username, and Password.'
+            properties:
+              password:
+                description: Password credential used to connect to the share location.
+                type: string
+              path:
+                description: The folder path for this share.
+                type: string
+              userName:
+                description: User name credential to connect to the share location
+                type: string
+            required:
+              - path
+            type: object
+        type: object
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: Output for the service task to upload an OCI driver.
+          properties:
+            driverPackageName:
+              description: The name of the driver package that was validated and uploaded.
+              readOnly: true
+              type: string
+            validationErrors:
+              description: Validation errors
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: Service.Upload.OCI

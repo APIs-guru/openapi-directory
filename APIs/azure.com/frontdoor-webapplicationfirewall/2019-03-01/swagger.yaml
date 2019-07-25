@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: APIs to manage web application firewall rules
+  description: APIs to manage web application firewall rules.
   title: WebApplicationFirewallManagement
   version: '2019-03-01'
   x-apisguru-categories:
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/frontdoor/resource-manager/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -715,10 +715,13 @@ definitions:
         description: Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.
         type: integer
       rateLimitDurationInMinutes:
-        description: Defines rate limit duration. Default is 1 minute.
+        description: Time window for resetting the rate limit count. Default is 1 minute.
+        maximum: 5
+        minimum: 0
         type: integer
       rateLimitThreshold:
-        description: Defines rate limit threshold.
+        description: Number of allowed requests per client within the time window.
+        minimum: 0
         type: integer
       ruleType:
         description: Describes type of rule.
@@ -870,6 +873,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/ManagedRuleSetDefinitionProperties'
+        description: Properties for a managed rule set definition.
         x-ms-client-flatten: true
   ManagedRuleSetDefinitionList:
     description: List of managed rule set definitions available for use in a policy.
@@ -921,7 +925,7 @@ definitions:
           type: string
         type: array
       matchVariable:
-        description: Match variable to compare against.
+        description: Request variable to compare with.
         enum:
           - RemoteAddr
           - RequestMethod
@@ -939,7 +943,7 @@ definitions:
         description: Describes if the result of this condition should be negated.
         type: boolean
       operator:
-        description: Describes operator to be matched
+        description: Comparison type to use for matching with the variable value.
         enum:
           - Any
           - IPMatch
@@ -958,7 +962,7 @@ definitions:
           modelAsString: true
           name: Operator
       selector:
-        description: 'Selector can used to match against a specific key from QueryString, PostArgs, RequestHeader or Cookies.'
+        description: 'Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables. Default is null.'
         type: string
       transforms:
         description: List of transforms.

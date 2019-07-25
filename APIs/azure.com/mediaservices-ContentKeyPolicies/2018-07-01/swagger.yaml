@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2019-05-01-preview/ContentKeyPolicies.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -610,13 +610,13 @@ paths:
                           licenseType: Persistent
                           playRight:
                             allowPassingVideoContentToUnknownOutput: NotAllowed
+                            digitalVideoOnlyContentRestriction: false
                             imageConstraintForAnalogComponentVideoRestriction: true
+                            imageConstraintForAnalogComputerMonitorRestriction: false
                             scmsRestriction: 2
                     name: ArmPolicyOptionName
-                    policyOptionId: 00000000-0000-0000-0000-000000000000
                     restriction:
                       '@odata.type': '#Microsoft.Media.ContentKeyPolicyOpenRestriction'
-                policyId: 00000000-0000-0000-0000-000000000000
             resourceGroupName: contoso
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
@@ -627,7 +627,7 @@ paths:
                 properties:
                   created: '2012-11-01T00:00:00Z'
                   description: ArmPolicyDescription
-                  lastModified: '2018-08-08T18:29:29.51Z'
+                  lastModified: '2019-06-03T22:43:06.897Z'
                   options:
                     - configuration:
                         '@odata.type': '#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration'
@@ -645,7 +645,7 @@ paths:
                               imageConstraintForAnalogComputerMonitorRestriction: false
                               scmsRestriction: 2
                       name: ArmPolicyOptionName
-                      policyOptionId: c52f9af0-1f53-4775-8edb-af2d9a6e28cd
+                      policyOptionId: ae7b4a3b-b2c5-4161-9197-ba4d4239f361
                       restriction:
                         '@odata.type': '#Microsoft.Media.ContentKeyPolicyOpenRestriction'
                   policyId: a9bacd1d-60f5-4af3-8d2b-cf46ca5c9b04
@@ -657,7 +657,7 @@ paths:
                 properties:
                   created: '2012-11-01T00:00:00Z'
                   description: ArmPolicyDescription
-                  lastModified: '2018-08-08T18:29:29.51Z'
+                  lastModified: '2019-06-03T22:43:06.897Z'
                   options:
                     - configuration:
                         '@odata.type': '#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration'
@@ -675,7 +675,7 @@ paths:
                               imageConstraintForAnalogComputerMonitorRestriction: false
                               scmsRestriction: 2
                       name: ArmPolicyOptionName
-                      policyOptionId: c52f9af0-1f53-4775-8edb-af2d9a6e28cd
+                      policyOptionId: ae7b4a3b-b2c5-4161-9197-ba4d4239f361
                       restriction:
                         '@odata.type': '#Microsoft.Media.ContentKeyPolicyOpenRestriction'
                   policyId: a9bacd1d-60f5-4af3-8d2b-cf46ca5c9b04

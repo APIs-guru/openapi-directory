@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mariadb/resource-manager/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mariadb/resource-manager/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -36,6 +36,13 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
+  AdvisorNameParameter:
+    description: The advisor name for recommendation action.
+    in: path
+    name: advisorName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ApiVersionParameter:
     description: The API version to use for the request.
     in: query
@@ -70,6 +77,34 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  OperationIdParameter:
+    description: The operation identifier.
+    in: path
+    name: operationId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  QueryIdParameter:
+    description: The Query-Store query identifier.
+    in: path
+    name: queryId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  QueryStatisticIdParameter:
+    description: The Query Statistic identifier.
+    in: path
+    name: queryStatisticId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  RecommendedActionNameParameter:
+    description: The recommended action name.
+    in: path
+    name: recommendedActionName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupParameter:
     description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
     in: path
@@ -99,6 +134,13 @@ parameters:
     name: subscriptionId
     required: true
     type: string
+  WaitStatisticsIdParameter:
+    description: The Wait Statistic identifier.
+    in: path
+    name: waitStatisticsId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   virtualNetworkRuleNameParameter:
     description: The name of the virtual network rule.
     in: path
@@ -390,6 +432,155 @@ paths:
                         vCore: 32
       x-ms-pageable:
         nextLinkName: null
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsAzureAsyncOperation/{operationId}':
+    get:
+      description: Recommendation action session operation status.
+      operationId: LocationBasedRecommendedActionSessionsOperationStatus_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationNameParameter'
+        - $ref: '#/parameters/OperationIdParameter'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/RecommendedActionSessionsOperationStatus'
+      tags:
+        - LocationBasedRecommendedActionSessionsOperationStatus
+      x-ms-examples:
+        RecommendedActionSessionOperationStatus:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            locationName: WestUS
+            operationId: aaaabbbb-cccc-dddd-0000-111122223333
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                name: aaaabbbb-cccc-dddd-0000-111122223333
+                startTime: '2019-05-01T17:15:00Z'
+                status: succeeded
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsOperationResults/{operationId}':
+    get:
+      description: Recommendation action session operation result.
+      operationId: LocationBasedRecommendedActionSessionsResult_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationNameParameter'
+        - $ref: '#/parameters/OperationIdParameter'
+      responses:
+        '200':
+          description: Created
+          schema:
+            $ref: '#/definitions/RecommendationActionsResultList'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/RecommendationActionsResultList'
+      tags:
+        - LocationBasedRecommendedActionSessionsResult
+      x-ms-examples:
+        RecommendedActionSessionResult:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            locationName: WestUS
+            operationId: aaaabbbb-cccc-dddd-0000-111122223333
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-1
+                    name: Index-1
+                    properties:
+                      actionId: 1
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`movie_id`'
+                        indexName: idx_movie_id
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_movie_id` (`movie_id`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`movie_id` appear in Join On clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-2
+                    name: Index-2
+                    properties:
+                      actionId: 2
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`genre`'
+                        indexName: idx_genre
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_genre` (`genre`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`genre` appear in Group By clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+            '201':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-1
+                    name: Index-1
+                    properties:
+                      actionId: 1
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`movie_id`'
+                        indexName: idx_movie_id
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_movie_id` (`movie_id`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`movie_id` appear in Join On clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-2
+                    name: Index-2
+                    properties:
+                      actionId: 2
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`genre`'
+                        indexName: idx_genre
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_genre` (`genre`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`genre` appear in Group By clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers':
     get:
       description: List all the servers in a given subscription.
@@ -990,6 +1181,235 @@ paths:
                 type: Microsoft.DBforMariaDB/servers
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors':
+    get:
+      description: List recommendation action advisors.
+      operationId: Advisors_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AdvisorsResultList'
+      tags:
+        - Advisors
+      x-ms-examples:
+        AdvisorsListByServer:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/advisors/Index
+                    name: Index
+                    properties: {}
+                    type: Microsoft.DBforMariaDB/servers/advisors
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}':
+    get:
+      description: Get a recommendation action advisor.
+      operationId: Advisors_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Advisor'
+      tags:
+        - Advisors
+      x-ms-examples:
+        AdvisorsGet:
+          parameters:
+            advisorName: Index
+            api-version: 2018-06-01-privatepreview
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/advisors/Index
+                name: Index
+                properties: {}
+                type: Microsoft.DBforMariaDB/servers/advisors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/createRecommendedActionSession':
+    post:
+      description: Create recommendation action session for the advisor.
+      operationId: CreateRecommendedActionSession
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+        - description: The name of the database.
+          in: query
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+      tags:
+        - RecommendedActionSessions
+      x-ms-examples:
+        RecommendedActionSessionCreate:
+          parameters:
+            advisorName: Index
+            api-version: 2018-06-01-privatepreview
+            databaseName: someDatabaseName
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions':
+    get:
+      description: Retrieve recommended actions from the advisor.
+      operationId: RecommendedActions_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+        - description: The recommendation action session identifier.
+          in: query
+          name: sessionId
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendationActionsResultList'
+      tags:
+        - RecommendedActions
+      x-ms-examples:
+        RecommendedActionsListByServer:
+          parameters:
+            advisorName: Index
+            api-version: 2018-06-01-privatepreview
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-1
+                    name: Index-1
+                    properties:
+                      actionId: 1
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`movie_id`'
+                        indexName: idx_movie_id
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_movie_id` (`movie_id`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`movie_id` appear in Join On clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-2
+                    name: Index-2
+                    properties:
+                      actionId: 2
+                      advisorName: Index
+                      createdTime: '2019-05-01T23:43:24Z'
+                      details:
+                        engine: InnoDB
+                        indexColumns: '`movies_genres`.`genre`'
+                        indexName: idx_genre
+                        indexType: BTREE
+                        parentTableName: movies_genres
+                        queryIds: '779'
+                        schemaName: movies
+                        script: alter table `movies`.`movies_genres` add index `idx_genre` (`genre`)
+                        tableName: movies_genres
+                      expirationTime: '2019-05-08T23:43:24Z'
+                      reason: Column `movies_genres`.`genre` appear in Group By clause(s).
+                      recommendationType: Add
+                      sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                    type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}':
+    get:
+      description: Retrieve recommended actions from the advisor.
+      operationId: RecommendedActions_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+        - $ref: '#/parameters/RecommendedActionNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendationAction'
+      tags:
+        - RecommendedActions
+      x-ms-examples:
+        RecommendedActionsGet:
+          parameters:
+            advisorName: Index
+            api-version: 2018-06-01-privatepreview
+            recommendedActionName: Index-1
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-1
+                name: Index-1
+                properties:
+                  actionId: 1
+                  advisorName: Index
+                  createdTime: '2019-05-01T23:43:24Z'
+                  details:
+                    engine: InnoDB
+                    indexColumns: '`movies_genres`.`movie_id`'
+                    indexName: idx_movie_id
+                    indexType: BTREE
+                    parentTableName: movies_genres
+                    queryIds: '779'
+                    schemaName: movies
+                    script: alter table `movies`.`movies_genres` add index `idx_movie_id` (`movie_id`)
+                    tableName: movies_genres
+                  expirationTime: '2019-05-08T23:43:24Z'
+                  reason: Column `movies_genres`.`movie_id` appear in Join On clause(s).
+                  recommendationType: Add
+                  sessionId: c63c2114-e2a4-4c7a-98c1-85577d1a5d50
+                type: Microsoft.DBforMariaDB/servers/advisors/recommendedActions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations':
     get:
       description: List all the configurations in a given server.
@@ -1926,6 +2346,92 @@ paths:
                     type: Microsoft.DBforMariaDB/servers/logFiles
       x-ms-pageable:
         nextLinkName: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/queryTexts':
+    get:
+      description: Retrieve the Query-Store query texts for specified queryIds.
+      operationId: QueryTexts_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - collectionFormat: multi
+          description: The query identifiers
+          in: query
+          items:
+            type: string
+          name: queryIds
+          required: true
+          type: array
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QueryTextsResultList'
+      tags:
+        - QueryTexts
+      x-ms-examples:
+        QueryTextsListByServer:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            queryIds:
+              - '1'
+              - '2'
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryTexts/1
+                    name: '1'
+                    properties:
+                      queryId: '1'
+                      queryText: 'UPDATE `performance_schema`.`setup_instruments` SET `ENABLED` = ? , `TIMED` = ? WHERE NAME = ?'
+                    type: Microsoft.DBforMariaDB/servers/queryTexts
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryTexts/2
+                    name: '2'
+                    properties:
+                      queryId: '2'
+                      queryText: 'UPDATE `performance_schema`.`setup_instruments` SET `ENABLED` = ? , `TIMED` = ? WHERE NAME LIKE ?'
+                    type: Microsoft.DBforMariaDB/servers/queryTexts
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/queryTexts/{queryId}':
+    get:
+      description: Retrieve the Query-Store query texts for the queryId.
+      operationId: QueryTexts_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/QueryIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QueryText'
+      tags:
+        - QueryTexts
+      x-ms-examples:
+        QueryTextsGet:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            queryId: 1
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryTexts/1
+                name: '1'
+                properties:
+                  queryId: '1'
+                  queryText: 'UPDATE `performance_schema`.`setup_instruments` SET `ENABLED` = ? , `TIMED` = ? WHERE NAME = ?'
+                type: Microsoft.DBforMariaDB/servers/queryTexts
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas':
     get:
       description: List all the replicas for a given server.
@@ -2210,6 +2716,122 @@ paths:
                 type: Microsoft.DBforMariaDB/servers/securityAlertPolicies
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/topQueryStatistics':
+    get:
+      description: Retrieve the Query-Store top queries for specified metric and aggregation.
+      operationId: TopQueryStatistics_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The required parameters for retrieving top query statistics.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/TopQueryStatisticsInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TopQueryStatisticsResultList'
+      tags:
+        - TopQueryStatistics
+      x-ms-examples:
+        TopQueryStatisticsListByServer:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            parameters:
+              properties:
+                aggregationFunction: avg
+                aggregationWindow: PT15M
+                numberOfTopQueries: 5
+                observationEndTime: '2019-05-07T20:00:00.000Z'
+                observationStartTime: '2019-05-01T20:00:00.000Z'
+                observedMetric: duration
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryStatistic/66-636923268000000000-636923277000000000-avg-duration
+                    name: 66-636923268000000000-636923277000000000-avg-duration
+                    properties:
+                      aggregationFunction: avg
+                      databaseNames:
+                        - /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb
+                      endTime: '2019-05-01T17:15:00Z'
+                      metricDisplayName: Query duration
+                      metricName: duration
+                      metricValue: 123.301446136
+                      metricValueUnit: milliseconds
+                      queryExecutionCount: 1
+                      queryId: '66'
+                      startTime: '2019-05-01T17:00:00Z'
+                    type: Microsoft.DBforMariaDB/servers/queryStatistics
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryStatistic/66-636924483000000000-636924492000000000-avg-duration
+                    name: 66-636924483000000000-636924492000000000-avg-duration
+                    properties:
+                      aggregationFunction: avg
+                      databaseNames:
+                        - /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb
+                      endTime: '2019-05-03T03:00:00Z'
+                      metricDisplayName: Query duration
+                      metricName: duration
+                      metricValue: 1712.301446136
+                      metricValueUnit: milliseconds
+                      queryExecutionCount: 1
+                      queryId: '66'
+                      startTime: '2019-05-03T02:45:00Z'
+                    type: Microsoft.DBforMariaDB/servers/queryStatistics
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/topQueryStatistics/{queryStatisticId}':
+    get:
+      description: Retrieve the query statistic for specified identifier.
+      operationId: TopQueryStatistics_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/QueryStatisticIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QueryStatistic'
+      tags:
+        - TopQueryStatistics
+      x-ms-examples:
+        TopQueryStatisticsGet:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            queryStatisticId: 66-636923268000000000-636923277000000000-avg-duration
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryStatistic/66-636923268000000000-636923277000000000-avg-duration
+                name: 66-636923268000000000-636923277000000000-avg-duration
+                properties:
+                  aggregationFunction: avg
+                  databaseNames:
+                    - /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb
+                  endTime: '2019-05-01T17:15:00Z'
+                  metricDisplayName: Query duration
+                  metricName: duration
+                  metricValue: 123.301446136
+                  metricValueUnit: milliseconds
+                  queryExecutionCount: 1
+                  queryId: '66'
+                  startTime: '2019-05-01T17:00:00Z'
+                type: Microsoft.DBforMariaDB/servers/queryStatistics
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules':
     get:
       description: Gets a list of virtual network rules in a server.
@@ -2450,7 +3072,140 @@ paths:
                 type: Microsoft.DBforMariaDB/servers/virtualNetworkRules
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/waitStatistics':
+    get:
+      description: Retrieve wait statistics for specified aggregation window.
+      operationId: WaitStatistics_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The required parameters for retrieving wait statistics.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/WaitStatisticsInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WaitStatisticsResultList'
+      tags:
+        - WaitStatistics
+      x-ms-examples:
+        WaitStatisticsListByServer:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            parameters:
+              properties:
+                aggregationWindow: PT15M
+                observationEndTime: '2019-05-07T20:00:00.000Z'
+                observationStartTime: '2019-05-01T20:00:00.000Z'
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/waitStatistics/636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0
+                    name: 636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0
+                    properties:
+                      count: 2
+                      databaseName: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb
+                      endTime: '2019-05-06T17:45:00Z'
+                      eventName: wait/io/socket/sql/client_connection
+                      eventTypeName: send
+                      queryId: 2
+                      startTime: '2019-05-06T17:30:00Z'
+                      totalTimeInMs: 12.345
+                      userId: 0
+                    type: Microsoft.DBforMariaDB/servers/waitStatistics
+                  - id: '/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/hyshim-test/providers/Microsoft.DBforMariaDB/servers/hyshim-wait-stats-fix/waitStatistics/636927606000000000-636927615000000000-lock-wait/synch/mutex/mysys/THR_LOCK::mutex-2--0'
+                    name: '636927606000000000-636927615000000000-lock-wait/synch/mutex/mysys/THR_LOCK::mutex-2--0'
+                    properties:
+                      count: 4
+                      databaseName: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/hyshim-test/providers/Microsoft.DBforMariaDB/servers/hyshim-wait-stats-fix/databases/
+                      endTime: '2019-05-06T17:45:00Z'
+                      eventName: 'wait/synch/mutex/mysys/THR_LOCK::mutex'
+                      eventTypeName: lock
+                      queryId: 2
+                      startTime: '2019-05-06T17:30:00Z'
+                      totalTimeInMs: 56.789
+                      userId: 0
+                    type: Microsoft.DBforMariaDB/servers/waitStatistics
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/waitStatistics/{waitStatisticsId}':
+    get:
+      description: Retrieve wait statistics for specified identifier.
+      operationId: WaitStatistics_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/WaitStatisticsIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WaitStatistic'
+      tags:
+        - WaitStatistics
+      x-ms-examples:
+        WaitStatisticsGet:
+          parameters:
+            api-version: 2018-06-01-privatepreview
+            resourceGroupName: testResourceGroupName
+            serverName: testServerName
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+            waitStatisticsId: 636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/waitStatistics/636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0
+                name: 636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0
+                properties:
+                  count: 2
+                  databaseName: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb
+                  endTime: '2019-05-06T17:45:00Z'
+                  eventName: wait/io/socket/sql/client_connection
+                  eventTypeName: send
+                  queryId: 2
+                  startTime: '2019-05-06T17:30:00Z'
+                  totalTimeInMs: 12.346
+                  userId: 0
+                type: Microsoft.DBforMariaDB/servers/waitStatistics
 definitions:
+  Advisor:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a recommendation action advisor.
+    properties:
+      properties:
+        $ref: '#/definitions/AdvisorProperties'
+        description: The properties of a recommendation action advisor.
+        x-ms-client-flatten: true
+  AdvisorProperties:
+    description: The properties of a recommendation action advisor.
+    properties: {}
+  AdvisorsResultList:
+    description: A list of query statistics.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of recommendation action advisors.
+        items:
+          $ref: '#/definitions/Advisor'
+        readOnly: true
+        type: array
+    type: object
   CloudError:
     description: An error response from the Batch service.
     properties:
@@ -2764,6 +3519,154 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  QueryStatistic:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a Query Statistic.
+    properties:
+      properties:
+        $ref: '#/definitions/QueryStatisticProperties'
+        description: The properties of a query statistic.
+        x-ms-client-flatten: true
+  QueryStatisticProperties:
+    description: The properties of a query statistic.
+    properties:
+      aggregationFunction:
+        description: Aggregation function name.
+        type: string
+      databaseNames:
+        description: The list of database names.
+        items:
+          type: string
+        type: array
+      endTime:
+        description: Observation end time.
+        format: date-time
+        type: string
+      metricDisplayName:
+        description: Metric display name.
+        type: string
+      metricName:
+        description: Metric name.
+        type: string
+      metricValue:
+        description: Metric value.
+        format: double
+        type: number
+      metricValueUnit:
+        description: Metric value unit.
+        type: string
+      queryExecutionCount:
+        description: Number of query executions in this time interval.
+        format: int64
+        type: integer
+      queryId:
+        description: Database query identifier.
+        type: string
+      startTime:
+        description: Observation start time.
+        format: date-time
+        type: string
+  QueryText:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a Query Text.
+    properties:
+      properties:
+        $ref: '#/definitions/QueryTextProperties'
+        description: The properties of a query text.
+        x-ms-client-flatten: true
+  QueryTextProperties:
+    description: The properties of a query text.
+    properties:
+      queryId:
+        description: Query identifier unique to the server.
+        type: string
+      queryText:
+        description: Query text.
+        type: string
+  QueryTextsResultList:
+    description: A list of query texts.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of query texts.
+        items:
+          $ref: '#/definitions/QueryText'
+        readOnly: true
+        type: array
+    type: object
+  RecommendationAction:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a Recommendation Action.
+    properties:
+      properties:
+        $ref: '#/definitions/RecommendationActionProperties'
+        description: The properties of a recommendation action.
+        x-ms-client-flatten: true
+  RecommendationActionProperties:
+    description: The properties of a recommendation action.
+    properties:
+      actionId:
+        description: Recommendation action identifier.
+        format: int32
+        type: integer
+      advisorName:
+        description: Advisor name.
+        type: string
+      createdTime:
+        description: Recommendation action creation time.
+        format: date-time
+        type: string
+      details:
+        additionalProperties:
+          type: string
+        description: Recommendation action details.
+        type: object
+      expirationTime:
+        description: Recommendation action expiration time.
+        format: date-time
+        type: string
+      reason:
+        description: Recommendation action reason.
+        type: string
+      recommendationType:
+        description: Recommendation action type.
+        type: string
+      sessionId:
+        description: Recommendation action session identifier.
+        type: string
+  RecommendationActionsResultList:
+    description: A list of recommendation actions.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of recommendation action advisors.
+        items:
+          $ref: '#/definitions/RecommendationAction'
+        readOnly: true
+        type: array
+    type: object
+  RecommendedActionSessionsOperationStatus:
+    description: Recommendation action session operation status.
+    properties:
+      name:
+        description: Operation identifier.
+        type: string
+      startTime:
+        description: Operation start time.
+        format: date-time
+        type: string
+      status:
+        description: Operation status.
+        type: string
   SecurityAlertPolicyProperties:
     description: Properties of a security alert policy.
     properties:
@@ -3080,6 +3983,60 @@ definitions:
         description: Max storage allowed for a server.
         format: int32
         type: integer
+  TopQueryStatisticsInput:
+    description: Input to get top query statistics
+    properties:
+      properties:
+        $ref: '#/definitions/TopQueryStatisticsInputProperties'
+        description: The properties of a wait statistics input.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  TopQueryStatisticsInputProperties:
+    description: The properties for input to get top query statistics
+    properties:
+      aggregationFunction:
+        description: Aggregation function name.
+        type: string
+      aggregationWindow:
+        description: Aggregation interval type in ISO 8601 format.
+        type: string
+      numberOfTopQueries:
+        description: Max number of top queries to return.
+        format: int32
+        type: integer
+      observationEndTime:
+        description: Observation end time.
+        format: date-time
+        type: string
+      observationStartTime:
+        description: Observation start time.
+        format: date-time
+        type: string
+      observedMetric:
+        description: Observed metric name.
+        type: string
+    required:
+      - numberOfTopQueries
+      - aggregationFunction
+      - observedMetric
+      - observationStartTime
+      - observationEndTime
+      - aggregationWindow
+  TopQueryStatisticsResultList:
+    description: A list of query statistics.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of top query statistics.
+        items:
+          $ref: '#/definitions/QueryStatistic'
+        readOnly: true
+        type: array
+    type: object
   TrackedResource:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -3146,4 +4103,90 @@ definitions:
         type: string
     required:
       - virtualNetworkSubnetId
+    type: object
+  WaitStatistic:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a Wait Statistic.
+    properties:
+      properties:
+        $ref: '#/definitions/WaitStatisticProperties'
+        description: The properties of a wait statistic.
+        x-ms-client-flatten: true
+  WaitStatisticProperties:
+    description: The properties of a wait statistic.
+    properties:
+      count:
+        description: Wait event count observed in this time interval.
+        format: int64
+        type: integer
+      databaseName:
+        description: Database Name.
+        type: string
+      endTime:
+        description: Observation end time.
+        format: date-time
+        type: string
+      eventName:
+        description: Wait event name.
+        type: string
+      eventTypeName:
+        description: Wait event type name.
+        type: string
+      queryId:
+        description: Database query identifier.
+        format: int64
+        type: integer
+      startTime:
+        description: Observation start time.
+        format: date-time
+        type: string
+      totalTimeInMs:
+        description: Total time of wait in milliseconds in this time interval.
+        format: double
+        type: number
+      userId:
+        description: Database user identifier.
+        format: int64
+        type: integer
+  WaitStatisticsInput:
+    description: Input to get wait statistics
+    properties:
+      properties:
+        $ref: '#/definitions/WaitStatisticsInputProperties'
+        description: The properties of a wait statistics input.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  WaitStatisticsInputProperties:
+    description: The properties for input to get wait statistics
+    properties:
+      aggregationWindow:
+        description: Aggregation interval type in ISO 8601 format.
+        type: string
+      observationEndTime:
+        description: Observation end time.
+        format: date-time
+        type: string
+      observationStartTime:
+        description: Observation start time.
+        format: date-time
+        type: string
+    required:
+      - observationStartTime
+      - observationEndTime
+      - aggregationWindow
+  WaitStatisticsResultList:
+    description: A list of wait statistics.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of wait statistics.
+        items:
+          $ref: '#/definitions/WaitStatistic'
+        readOnly: true
+        type: array
     type: object

@@ -1,0 +1,60 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure SignalR Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure SignalR Service events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-SignalRService
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  SignalRServiceClientConnectionConnectedEventData:
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event.
+    properties:
+      connectionId:
+        description: The connection Id of connected client connection.
+        type: string
+      hubName:
+        description: The hub of connected client connection.
+        type: string
+      timestamp:
+        description: The time at which the event occurred.
+        format: date-time
+        type: string
+      userId:
+        description: The user Id of connected client connection.
+        type: string
+    type: object
+  SignalRServiceClientConnectionDisconnectedEventData:
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event.
+    properties:
+      connectionId:
+        description: The connection Id of connected client connection.
+        type: string
+      errorMessage:
+        description: The message of error that cause the client connection disconnected.
+        type: string
+      hubName:
+        description: The hub of connected client connection.
+        type: string
+      timestamp:
+        description: The time at which the event occurred.
+        format: date-time
+        type: string
+      userId:
+        description: The user Id of connected client connection.
+        type: string
+    type: object

@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -206,6 +206,7 @@ paths:
                   contentKeys: []
                   created: '2018-08-08T18:29:32.1154071Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
+                  filters: []
                   streamingLocatorId: 7684043b-f6d1-44a7-8bed-8a4aa474c5a4
                   streamingPolicyName: clearStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
@@ -246,8 +247,8 @@ paths:
             api-version: '2018-07-01'
             parameters:
               properties:
-                AssetName: ClimbingMountRainier
-                StreamingPolicyName: clearStreamingPolicy
+                assetName: ClimbingMountRainier
+                streamingPolicyName: clearStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedClearStreamingLocator
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -259,9 +260,10 @@ paths:
                 properties:
                   assetName: ClimbingMountRainier
                   contentKeys: []
-                  created: '2018-08-08T18:29:32.4323237Z'
+                  created: '2019-06-06T17:28:03.7992857Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
-                  streamingLocatorId: e34b0fc4-3be0-4a3c-9793-1f6b7be5b013
+                  filters: []
+                  streamingLocatorId: 7ccb6b56-686c-4d93-a267-8117ee145878
                   streamingPolicyName: clearStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
         Creates a Streaming Locator with secure streaming:
@@ -270,10 +272,10 @@ paths:
             api-version: '2018-07-01'
             parameters:
               properties:
-                AssetName: ClimbingMountRainier
-                EndTime: '2028-12-31T23:59:59.9999999Z'
-                StartTime: '2018-03-01T00:00:00Z'
-                StreamingPolicyName: secureStreamingPolicy
+                assetName: ClimbingMountRainier
+                endTime: '2028-12-31T23:59:59.9999999Z'
+                startTime: '2018-03-01T00:00:00Z'
+                streamingPolicyName: secureStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedSecureStreamingLocator
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -285,22 +287,23 @@ paths:
                 properties:
                   assetName: ClimbingMountRainier
                   contentKeys:
-                    - id: 1b2d5581-4518-4a51-ad8a-f55d3bf993d4
+                    - id: 41ddc803-579c-4fe8-b298-b37be5924d9e
                       labelReferenceInStreamingPolicy: cbcsDefaultKey
                       tracks: []
                       type: CommonEncryptionCbcs
-                    - id: 1a9858b1-3566-4bf1-9fee-60f2fb98e7e4
+                    - id: 68a5fd6e-ed9e-4cdf-b276-40304299dc4a
                       labelReferenceInStreamingPolicy: cencDefaultKey
                       tracks: []
                       type: CommonEncryptionCenc
-                    - id: 5faac86a-3aca-4d6b-99c0-6bb8cc3497a1
+                    - id: bfb7cbf3-5834-4d43-a87d-f25ed1b88ed3
                       labelReferenceInStreamingPolicy: aesDefaultKey
                       tracks: []
                       type: EnvelopeEncryption
-                  created: '2018-08-08T18:29:32.6243295Z'
+                  created: '2019-06-06T17:28:03.9392829Z'
                   endTime: '2028-12-31T23:59:59.9999999Z'
+                  filters: []
                   startTime: '2018-03-01T00:00:00Z'
-                  streamingLocatorId: 962775be-41fb-452a-b0dc-72ca2543a945
+                  streamingLocatorId: 1f5db621-0c21-43d7-a340-2b143d62d4e7
                   streamingPolicyName: secureStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
         Creates a Streaming Locator with user defined content keys:
@@ -309,18 +312,18 @@ paths:
             api-version: '2018-07-01'
             parameters:
               properties:
-                ContentKeys:
-                  - Id: 60000000-0000-0000-0000-000000000001
-                    LabelReferenceInStreamingPolicy: aesDefaultKey
-                    Value: 1UqLohAfWsEGkULYxHjYZg==
-                  - Id: 60000000-0000-0000-0000-000000000004
-                    LabelReferenceInStreamingPolicy: cencDefaultKey
-                    Value: 4UqLohAfWsEGkULYxHjYZg==
-                  - Id: 60000000-0000-0000-0000-000000000007
-                    LabelReferenceInStreamingPolicy: cbcsDefaultKey
-                    Value: 7UqLohAfWsEGkULYxHjYZg==
-                StreamingLocatorId: 90000000-0000-0000-0000-00000000000A
                 assetName: ClimbingMountRainier
+                contentKeys:
+                  - id: 60000000-0000-0000-0000-000000000001
+                    labelReferenceInStreamingPolicy: aesDefaultKey
+                    value: 1UqLohAfWsEGkULYxHjYZg==
+                  - id: 60000000-0000-0000-0000-000000000004
+                    labelReferenceInStreamingPolicy: cencDefaultKey
+                    value: 4UqLohAfWsEGkULYxHjYZg==
+                  - id: 60000000-0000-0000-0000-000000000007
+                    labelReferenceInStreamingPolicy: cbcsDefaultKey
+                    value: 7UqLohAfWsEGkULYxHjYZg==
+                streamingLocatorId: 90000000-0000-0000-0000-00000000000A
                 streamingPolicyName: secureStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedSecureStreamingLocatorWithUserDefinedContentKeys
@@ -345,8 +348,9 @@ paths:
                       labelReferenceInStreamingPolicy: aesDefaultKey
                       tracks: []
                       type: EnvelopeEncryption
-                  created: '2018-08-08T18:29:32.7859424Z'
+                  created: '2019-06-06T18:00:49.849356Z'
                   endTime: '9999-12-31T23:59:59.9999999Z'
+                  filters: []
                   streamingLocatorId: 90000000-0000-0000-0000-00000000000a
                   streamingPolicyName: secureStreamingPolicy
                 type: Microsoft.Media/mediaservices/streamingLocators
@@ -954,6 +958,7 @@ paths:
                   customKeyAcquisitionUrlTemplate: 'https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}'
                   enabledProtocols:
                     dash: true
+                    download: false
                     hls: true
                     smoothStreaming: true
             resourceGroupName: contoso

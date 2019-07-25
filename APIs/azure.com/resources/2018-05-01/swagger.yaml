@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-03-01/resources.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-05-01/resources.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -985,8 +985,7 @@ paths:
                     deploymentName: '{nameOfDeploymentToUse}'
                     type: SpecificDeployment
                   provisioningState: Accepted
-                  timestamp: '2019-03-01T00:00:00.0000000Z'
-                type: Microsoft.Resources/deployments
+                  timestamp: '2018-05-01T00:00:00.0000000Z'
             '201':
               body:
                 id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
@@ -998,8 +997,7 @@ paths:
                     deploymentName: '{nameOfDeploymentToUse}'
                     type: SpecificDeployment
                   provisioningState: Accepted
-                  timestamp: '2019-03-01T00:00:00.0000000Z'
-                type: Microsoft.Resources/deployments
+                  timestamp: '2018-05-01T00:00:00.0000000Z'
         Create a deployment that will redeploy the last successful deployment on failure:
           parameters:
             api-version: '2018-05-01'
@@ -1025,8 +1023,7 @@ paths:
                     deploymentName: '{nameOfLastSuccesfulDeployment}'
                     type: LastSuccessful
                   provisioningState: Accepted
-                  timestamp: '2019-03-01T00:00:00.0000000Z'
-                type: Microsoft.Resources/deployments
+                  timestamp: '2018-05-01T00:00:00.0000000Z'
             '201':
               body:
                 id: '/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName'
@@ -1038,8 +1035,7 @@ paths:
                     deploymentName: '{nameOfLastSuccesfulDeployment}'
                     type: LastSuccessful
                   provisioningState: Accepted
-                  timestamp: '2019-03-01T00:00:00.0000000Z'
-                type: Microsoft.Resources/deployments
+                  timestamp: '2018-05-01T00:00:00.0000000Z'
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel':
     post:
@@ -1957,10 +1953,10 @@ definitions:
     description: Export resource group template request parameters.
     properties:
       options:
-        description: 'The export template options. Supported values include ''IncludeParameterDefaultValue'', ''IncludeComments'' or ''IncludeParameterDefaultValue, IncludeComments'
+        description: 'The export template options. A CSV-formatted list containing zero or more of the following: ''IncludeParameterDefaultValue'', ''IncludeComments'', ''SkipResourceNameParameterization'', ''SkipAllParameterization'''
         type: string
       resources:
-        description: The IDs of the resources. The only supported string currently is '*' (all resources). Future updates will support exporting specific resources.
+        description: 'The IDs of the resources to filter the export by. To export all resources, supply an array with single entry ''*''.'
         items:
           type: string
         type: array
@@ -2148,12 +2144,8 @@ definitions:
       namespace:
         description: The namespace of the resource provider.
         type: string
-      registrationPolicy:
-        description: The registration policy of the resource provider.
-        readOnly: true
-        type: string
       registrationState:
-        description: The registration state of the resource provider.
+        description: The registration state of the provider.
         readOnly: true
         type: string
       resourceTypes:
@@ -2187,9 +2179,6 @@ definitions:
         items:
           type: string
         type: array
-      capabilities:
-        description: The additional capabilities offered by this resource type.
-        type: string
       locations:
         description: The collection of locations where this resource type can be created.
         items:

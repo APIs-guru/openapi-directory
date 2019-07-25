@@ -1,0 +1,3340 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
+  title: NetworkManagementClient
+  version: '2019-02-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-02-01/applicationGateway.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: network-applicationGateway
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders':
+    get:
+      description: Lists all available request headers.
+      operationId: ApplicationGateways_ListAvailableRequestHeaders
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of all available request headers.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableRequestHeadersResult'
+        default:
+          description: unexpected error
+          schema:
+            description: Common error representation.
+            properties:
+              code:
+                description: Error code.
+                type: string
+              details:
+                description: Error details.
+                items:
+                  description: Common error details representation.
+                  properties:
+                    code:
+                      description: Error code.
+                      type: string
+                    message:
+                      description: Error message.
+                      type: string
+                    target:
+                      description: Error target.
+                      type: string
+                type: array
+              innerError:
+                description: Inner error message.
+                type: string
+              message:
+                description: Error message.
+                type: string
+              target:
+                description: Error target.
+                type: string
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Request Headers:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: 72f988bf-86f1-41af-91ab-2d7cd0dddd4
+          responses:
+            '200':
+              body:
+                - Accept-Charset
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders':
+    get:
+      description: Lists all available response headers.
+      operationId: ApplicationGateways_ListAvailableResponseHeaders
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of all available response headers.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableResponseHeadersResult'
+        default:
+          description: unexpected error
+          schema:
+            description: Common error representation.
+            properties:
+              code:
+                description: Error code.
+                type: string
+              details:
+                description: Error details.
+                items:
+                  description: Common error details representation.
+                  properties:
+                    code:
+                      description: Error code.
+                      type: string
+                    message:
+                      description: Error message.
+                      type: string
+                    target:
+                      description: Error target.
+                      type: string
+                type: array
+              innerError:
+                description: Inner error message.
+                type: string
+              message:
+                description: Error message.
+                type: string
+              target:
+                description: Error target.
+                type: string
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Response Headers:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: 72f988bf-86f1-41af-91ab-2d7cd0dddd4
+          responses:
+            '200':
+              body:
+                - Access-Control-Allow-Origin
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables':
+    get:
+      description: Lists all available server variables.
+      operationId: ApplicationGateways_ListAvailableServerVariables
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of all available server variables.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableServerVariablesResult'
+        default:
+          description: unexpected error
+          schema:
+            description: Common error representation.
+            properties:
+              code:
+                description: Error code.
+                type: string
+              details:
+                description: Error details.
+                items:
+                  description: Common error details representation.
+                  properties:
+                    code:
+                      description: Error code.
+                      type: string
+                    message:
+                      description: Error message.
+                      type: string
+                    target:
+                      description: Error target.
+                      type: string
+                type: array
+              innerError:
+                description: Inner error message.
+                type: string
+              message:
+                description: Error message.
+                type: string
+              target:
+                description: Error target.
+                type: string
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Server Variables:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: 72f988bf-86f1-41af-91ab-2d7cd0dddd4
+          responses:
+            '200':
+              body:
+                - request_query
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default':
+    get:
+      description: Lists available Ssl options for configuring Ssl policy.
+      operationId: ApplicationGateways_ListAvailableSslOptions
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns all available Ssl options for configuring Ssl policy.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableSslOptions'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Ssl Options:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: subid
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies':
+    get:
+      description: Lists all SSL predefined policies for configuring Ssl policy.
+      operationId: ApplicationGateways_ListAvailableSslPredefinedPolicies
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a lists of all Ssl predefined policies for configuring Ssl policy.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableSslPredefinedPolicies'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Ssl Predefined Policies:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: subid
+          responses:
+            '200': {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}':
+    get:
+      description: Gets Ssl predefined policy with the specified policy name.
+      operationId: ApplicationGateways_GetSslPredefinedPolicy
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Name of Ssl predefined policy.
+          in: path
+          name: predefinedPolicyName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a Ssl predefined policy with the specified policy name.
+          schema:
+            $ref: '#/definitions/ApplicationGatewaySslPredefinedPolicy'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Ssl Predefined Policy by name:
+          parameters:
+            api-version: '2019-02-01'
+            predefinedPolicyName: AppGwSslPolicy20150501
+            subscriptionId: subid
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets':
+    get:
+      description: Lists all available web application firewall rule sets.
+      operationId: ApplicationGateways_ListAvailableWafRuleSets
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of all available web application firewall rule sets.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayAvailableWafRuleSetsResult'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Available Waf Rule Sets:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/
+                    name: OWASP_3.0
+                    properties:
+                      provisioningState: Succeeded
+                      ruleGroups:
+                        - description: ''
+                          ruleGroupName: General
+                          rules:
+                            - description: Possible Multipart Unmatched Boundary.
+                              ruleId: 200004
+                      ruleSetType: OWASP
+                      ruleSetVersion: '3.0'
+                    type: Microsoft.Network/applicationGatewayAvailableWafRuleSets
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways':
+    get:
+      description: Gets all the application gateways in a subscription.
+      operationId: ApplicationGateways_ListAll
+      parameters:
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of ApplicationGateway resources.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayListResult'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Lists all application gateways in a subscription:
+          parameters:
+            api-version: '2019-02-01'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - location: southcentralus
+                    name: appgw
+                    properties:
+                      backendAddressPools:
+                        - name: appgwpool
+                          properties:
+                            backendAddresses:
+                              - ipAddress: 10.0.1.1
+                              - ipAddress: 10.0.1.2
+                      backendHttpSettingsCollection:
+                        - name: appgwbhs
+                          properties:
+                            cookieBasedAffinity: Disabled
+                            port: 80
+                            protocol: Http
+                            requestTimeout: 30
+                      frontendIPConfigurations:
+                        - name: appgwfip
+                          properties:
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                      frontendPorts:
+                        - name: appgwfp
+                          properties:
+                            port: 443
+                      gatewayIPConfigurations:
+                        - name: appgwipc
+                          properties:
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet
+                      httpListeners:
+                        - name: appgwhl
+                          properties:
+                            frontendIPConfiguration:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                            frontendPort:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                            protocol: Https
+                            requireServerNameIndication: false
+                            sslCertificate:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                      requestRoutingRules:
+                        - name: appgwrule
+                          properties:
+                            backendAddressPool:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                            backendHttpSettings:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                            httpListener:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                            ruleType: Basic
+                      sku:
+                        capacity: 3
+                        name: Standard_Medium
+                        tier: Standard
+                      sslCertificates:
+                        - name: sslcert
+                          properties:
+                            data: base64-pfxData
+                            password: pass1
+                    type: Microsoft.Network/applicationGateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways':
+    get:
+      description: Lists all application gateways in a resource group.
+      operationId: ApplicationGateways_List
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The operation returns a list of ApplicationGateway resources.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayListResult'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Lists all application gateways in a resource group:
+          parameters:
+            api-version: '2019-02-01'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - location: southcentralus
+                    name: appgw
+                    properties:
+                      backendAddressPools:
+                        - name: appgwpool
+                          properties:
+                            backendAddresses:
+                              - ipAddress: 10.0.1.1
+                              - ipAddress: 10.0.1.2
+                      backendHttpSettingsCollection:
+                        - name: appgwbhs
+                          properties:
+                            cookieBasedAffinity: Disabled
+                            port: 80
+                            protocol: Http
+                            requestTimeout: 30
+                      frontendIPConfigurations:
+                        - name: appgwfip
+                          properties:
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                      frontendPorts:
+                        - name: appgwfp
+                          properties:
+                            port: 443
+                      gatewayIPConfigurations:
+                        - name: appgwipc
+                          properties:
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet
+                      httpListeners:
+                        - name: appgwhl
+                          properties:
+                            frontendIPConfiguration:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                            frontendPort:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                            protocol: Https
+                            requireServerNameIndication: false
+                            sslCertificate:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                      requestRoutingRules:
+                        - name: appgwrule
+                          properties:
+                            backendAddressPool:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                            backendHttpSettings:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                            httpListener:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                            ruleType: Basic
+                      sku:
+                        capacity: 3
+                        name: Standard_Medium
+                        tier: Standard
+                      sslCertificates:
+                        - name: sslcert
+                          properties:
+                            data: base64-pfxData
+                            password: pass1
+                    type: Microsoft.Network/applicationGateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}':
+    delete:
+      description: Deletes the specified application gateway.
+      operationId: ApplicationGateways_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Delete successful.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+        '204':
+          description: Request successful. Resource with the specified name does not exist
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Delete ApplicationGateway:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
+    get:
+      description: Gets the specified application gateway.
+      operationId: ApplicationGateways_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request successful. The operation returns an ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get ApplicationGateway:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw
+                location: southcentralus
+                name: appgw
+                properties:
+                  authenticationCertificates: []
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                      name: appgwpool
+                      properties:
+                        backendAddresses: []
+                        provisioningState: Succeeded
+                  backendHttpSettingsCollection:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                      name: appgwbhs
+                      properties:
+                        cookieBasedAffinity: Disabled
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestTimeout: 30
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                      name: appgwfip
+                      properties:
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        publicIPAddress:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                  frontendPorts:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                      name: appgwfp
+                      properties:
+                        port: 443
+                        provisioningState: Succeeded
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                      name: appgwfp80
+                      properties:
+                        port: 80
+                        provisioningState: Succeeded
+                  gatewayIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/gatewayIPConfigurations/appgwipc
+                      name: appgwipc
+                      properties:
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet
+                  httpListeners:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                      name: appgwhl
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                        protocol: Https
+                        provisioningState: Succeeded
+                        requireServerNameIndication: false
+                        sslCertificate:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                      name: appgwhttplistener
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                        protocol: Http
+                        provisioningState: Succeeded
+                  operationalState: Running
+                  probes: []
+                  provisioningState: Succeeded
+                  requestRoutingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwrule
+                      name: appgwrule
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                        provisioningState: Succeeded
+                        rewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        ruleType: Basic
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwPathBasedRule
+                      name: appgwPathBasedRule
+                      properties:
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                        provisioningState: Succeeded
+                        ruleType: PathBasedRouting
+                        urlPathMap:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                  rewriteRuleSets:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                      name: rewriteRuleSet1
+                      properties:
+                        provisioningState: Succeeded
+                        rewriteRules:
+                          - actionSet:
+                              requestHeaderConfigurations:
+                                - headerName: X-Forwarded-For
+                                  headerValue: '{var_remote-addr}'
+                              responseHeaderConfigurations:
+                                - headerName: Strict-Transport-Security
+                                  headerValue: max-age=31536000
+                            conditions:
+                              - ignoreCase: true
+                                negate: false
+                                pattern: ^Bearer
+                                variable: http_req_Authorization
+                            name: Set X-Forwarded-For
+                            ruleSequence: 102
+                  sku:
+                    capacity: 3
+                    name: Standard_Medium
+                    tier: Standard
+                  sslCertificates:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                      name: sslcert
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: '*****'
+                  urlPathMaps:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                      name: pathMap1
+                      properties:
+                        defaultBackendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        defaultBackendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        defaultRewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        pathRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths
+                            name: apiPaths
+                            properties:
+                              backendAddressPool:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                              backendHttpSettings:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                              paths:
+                                - /api
+                                - /v1/api
+                              provisioningState: Succeeded
+                              rewriteRuleSet:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        provisioningState: Succeeded
+                type: Microsoft.Network/applicationGateways
+    patch:
+      description: Updates the specified application gateway tags.
+      operationId: ApplicationGateways_UpdateTags
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Parameters supplied to update application gateway tags.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            description: Tags object for patch operations.
+            properties:
+              tags:
+                additionalProperties:
+                  type: string
+                description: Resource tags.
+                type: object
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Update successful. The operation returns the resulting ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Update Application Gateway tags:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: AppGw
+            parameters:
+              tags:
+                tag1: value1
+                tag2: value2
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw
+                location: westus
+                name: AppGw
+                properties:
+                  authenticationCertificates: []
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/backendAddressPools/Pool01
+                      name: Pool01
+                      properties:
+                        backendAddresses:
+                          - ipAddress: 10.10.10.1
+                          - ipAddress: 10.10.10.2
+                          - ipAddress: 10.10.10.3
+                        provisioningState: Succeeded
+                  backendHttpSettingsCollection:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/backendHttpSettingsCollection/PoolSetting01
+                      name: PoolSetting01
+                      properties:
+                        cookieBasedAffinity: Disabled
+                        pickHostNameFromBackendAddress: false
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestTimeout: 30
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/frontendIPConfigurations/FrontEndConfig01
+                      name: FrontEndConfig01
+                      properties:
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        publicIPAddress:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/publicIp1
+                  frontendPorts:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/frontendPorts/FrontEndPort01
+                      name: FrontEndPort01
+                      properties:
+                        port: 80
+                        provisioningState: Succeeded
+                  gatewayIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/gatewayIPConfigurations/GatewayIp01
+                      name: GatewayIp01
+                      properties:
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet1
+                  httpListeners:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/httpListeners/listener1
+                      name: listener1
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/frontendIPConfigurations/FrontEndConfig01
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/frontendPorts/FrontEndPort01
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requireServerNameIndication: false
+                  operationalState: Running
+                  probes: []
+                  provisioningState: Succeeded
+                  redirectConfigurations: []
+                  requestRoutingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/requestRoutingRules/Rule01
+                      name: Rule01
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/backendAddressPools/Pool01
+                        backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/backendHttpSettingsCollection/PoolSetting01
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/AppGw/httpListeners/listener1
+                        provisioningState: Succeeded
+                        ruleType: Basic
+                  resourceGuid: 00000000-0000-0000-0000-000000000000
+                  sku:
+                    capacity: 2
+                    name: Standard_Small
+                    tier: Standard
+                  sslCertificates: []
+                  urlPathMaps: []
+                tags:
+                  tag1: value1
+                  tag2: value2
+                type: Microsoft.Network/applicationGateways
+      x-ms-long-running-operation: true
+    put:
+      description: Creates or updates the specified application gateway.
+      operationId: ApplicationGateways_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Parameters supplied to the create or update application gateway operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Update successful. The operation returns the resulting ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+        '201':
+          description: Create successful. The operation returns the resulting ApplicationGateway resource.
+          schema:
+            $ref: '#/definitions/ApplicationGateway'
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Create Application Gateway:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            parameters:
+              identity:
+                type: UserAssigned
+                userAssignedIdentities:
+                  /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1: {}
+              properties:
+                backendAddressPools:
+                  - name: appgwpool
+                    properties:
+                      backendAddresses:
+                        - ipAddress: 10.0.1.1
+                        - ipAddress: 10.0.1.2
+                backendHttpSettingsCollection:
+                  - name: appgwbhs
+                    properties:
+                      cookieBasedAffinity: Disabled
+                      port: 80
+                      protocol: Http
+                      requestTimeout: 30
+                frontendIPConfigurations:
+                  - name: appgwfip
+                    properties:
+                      publicIPAddress:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                frontendPorts:
+                  - name: appgwfp
+                    properties:
+                      port: 443
+                  - name: appgwfp80
+                    properties:
+                      port: 80
+                gatewayIPConfigurations:
+                  - name: appgwipc
+                    properties:
+                      subnet:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet
+                httpListeners:
+                  - name: appgwhl
+                    properties:
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                      frontendPort:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                      protocol: Https
+                      requireServerNameIndication: false
+                      sslCertificate:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                  - name: appgwhttplistener
+                    properties:
+                      frontendIPConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                      frontendPort:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                      protocol: Http
+                requestRoutingRules:
+                  - name: appgwrule
+                    properties:
+                      backendAddressPool:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                      backendHttpSettings:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                      httpListener:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                      rewriteRuleSet:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                      ruleType: Basic
+                  - name: appgwPathBasedRule
+                    properties:
+                      httpListener:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                      ruleType: PathBasedRouting
+                      urlPathMap:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                rewriteRuleSets:
+                  - name: rewriteRuleSet1
+                    properties:
+                      rewriteRules:
+                        - actionSet:
+                            requestHeaderConfigurations:
+                              - headerName: X-Forwarded-For
+                                headerValue: '{var_remote-addr}'
+                            responseHeaderConfigurations:
+                              - headerName: Strict-Transport-Security
+                                headerValue: max-age=31536000
+                          conditions:
+                            - ignoreCase: true
+                              negate: false
+                              pattern: ^Bearer
+                              variable: http_req_Authorization
+                          name: Set X-Forwarded-For
+                          ruleSequence: 102
+                sku:
+                  capacity: 3
+                  name: Standard_Medium
+                  tier: Standard
+                sslCertificates:
+                  - name: sslcert
+                    properties:
+                      data: '****'
+                      password: '****'
+                  - name: sslcert2
+                    properties:
+                      keyVaultSecretId: 'https://kv/secret'
+                trustedRootCertificates:
+                  - name: rootcert
+                    properties:
+                      data: '****'
+                  - name: rootcert1
+                    properties:
+                      keyVaultSecretId: 'https://kv/secret'
+                urlPathMaps:
+                  - name: pathMap1
+                    properties:
+                      defaultBackendAddressPool:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                      defaultBackendHttpSettings:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                      defaultRewriteRuleSet:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                      pathRules:
+                        - name: apiPaths
+                          properties:
+                            backendAddressPool:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                            backendHttpSettings:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                            paths:
+                              - /api
+                              - /v1/api
+                            rewriteRuleSet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw
+                location: southcentralus
+                name: appgw
+                properties:
+                  authenticationCertificates: []
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                      name: appgwpool
+                      properties:
+                        backendAddresses: []
+                        provisioningState: Succeeded
+                  backendHttpSettingsCollection:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                      name: appgwbhs
+                      properties:
+                        cookieBasedAffinity: Disabled
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestTimeout: 30
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                      name: appgwfip
+                      properties:
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        publicIPAddress:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                  frontendPorts:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                      name: appgwfp
+                      properties:
+                        port: 443
+                        provisioningState: Succeeded
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                      name: appgwfp80
+                      properties:
+                        port: 80
+                        provisioningState: Succeeded
+                  gatewayIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/gatewayIPConfigurations/appgwipc
+                      name: appgwipc
+                      properties:
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet
+                  httpListeners:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                      name: appgwhl
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                        protocol: Https
+                        provisioningState: Succeeded
+                        requireServerNameIndication: false
+                        sslCertificate:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                      name: appgwhttplistener
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                        protocol: Http
+                        provisioningState: Succeeded
+                  operationalState: Running
+                  probes: []
+                  provisioningState: Succeeded
+                  requestRoutingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwrule
+                      name: appgwrule
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                        provisioningState: Succeeded
+                        rewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        ruleType: Basic
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwPathBasedRule
+                      name: appgwPathBasedRule
+                      properties:
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                        provisioningState: Succeeded
+                        ruleType: PathBasedRouting
+                        urlPathMap:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                  rewriteRuleSets:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                      name: rewriteRuleSet1
+                      properties:
+                        provisioningState: Succeeded
+                        rewriteRules:
+                          - actionSet:
+                              requestHeaderConfigurations:
+                                - headerName: X-Forwarded-For
+                                  headerValue: '{var_remote-addr}'
+                              responseHeaderConfigurations:
+                                - headerName: Strict-Transport-Security
+                                  headerValue: max-age=31536000
+                            conditions:
+                              - ignoreCase: true
+                                negate: false
+                                pattern: ^Bearer
+                                variable: http_req_Authorization
+                            name: Set X-Forwarded-For
+                            ruleSequence: 102
+                  sku:
+                    capacity: 3
+                    name: Standard_Medium
+                    tier: Standard
+                  sslCertificates:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                      name: sslcert
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: '*****'
+                  urlPathMaps:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                      name: pathMap1
+                      properties:
+                        defaultBackendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        defaultBackendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        defaultRewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        pathRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths
+                            name: apiPaths
+                            properties:
+                              backendAddressPool:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                              backendHttpSettings:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                              paths:
+                                - /api
+                                - /v1/api
+                              provisioningState: Succeeded
+                              rewriteRuleSet:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        provisioningState: Succeeded
+                type: Microsoft.Network/applicationGateways
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw
+                location: southcentralus
+                name: appgw
+                properties:
+                  authenticationCertificates: []
+                  backendAddressPools:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                      name: appgwpool
+                      properties:
+                        backendAddresses: []
+                        provisioningState: Succeeded
+                  backendHttpSettingsCollection:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                      name: appgwbhs
+                      properties:
+                        cookieBasedAffinity: Disabled
+                        port: 80
+                        protocol: Http
+                        provisioningState: Succeeded
+                        requestTimeout: 30
+                  frontendIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                      name: appgwfip
+                      properties:
+                        privateIPAllocationMethod: Dynamic
+                        provisioningState: Succeeded
+                        publicIPAddress:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip
+                  frontendPorts:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                      name: appgwfp
+                      properties:
+                        port: 443
+                        provisioningState: Succeeded
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                      name: appgwfp80
+                      properties:
+                        port: 80
+                        provisioningState: Succeeded
+                  gatewayIPConfigurations:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/gatewayIPConfigurations/appgwipc
+                      name: appgwipc
+                      properties:
+                        provisioningState: Succeeded
+                        subnet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet
+                  httpListeners:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                      name: appgwhl
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp
+                        protocol: Https
+                        provisioningState: Succeeded
+                        requireServerNameIndication: false
+                        sslCertificate:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                      name: appgwhttplistener
+                      properties:
+                        frontendIPConfiguration:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip
+                        frontendPort:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80
+                        protocol: Http
+                        provisioningState: Succeeded
+                  operationalState: Running
+                  probes: []
+                  provisioningState: Succeeded
+                  requestRoutingRules:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwrule
+                      name: appgwrule
+                      properties:
+                        backendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl
+                        provisioningState: Succeeded
+                        rewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        ruleType: Basic
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwPathBasedRule
+                      name: appgwPathBasedRule
+                      properties:
+                        httpListener:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener
+                        provisioningState: Succeeded
+                        ruleType: PathBasedRouting
+                        urlPathMap:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                  rewriteRuleSets:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                      name: rewriteRuleSet1
+                      properties:
+                        provisioningState: Succeeded
+                        rewriteRules:
+                          - actionSet:
+                              requestHeaderConfigurations:
+                                - headerName: X-Forwarded-For
+                                  headerValue: '{var_remote-addr}'
+                              responseHeaderConfigurations:
+                                - headerName: Strict-Transport-Security
+                                  headerValue: max-age=31536000
+                            conditions:
+                              - ignoreCase: true
+                                negate: false
+                                pattern: ^Bearer
+                                variable: http_req_Authorization
+                            name: Set X-Forwarded-For
+                            ruleSequence: 102
+                  sku:
+                    capacity: 3
+                    name: Standard_Medium
+                    tier: Standard
+                  sslCertificates:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert
+                      name: sslcert
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: '*****'
+                  urlPathMaps:
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1
+                      name: pathMap1
+                      properties:
+                        defaultBackendAddressPool:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                        defaultBackendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                        defaultRewriteRuleSet:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        pathRules:
+                          - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths
+                            name: apiPaths
+                            properties:
+                              backendAddressPool:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool
+                              backendHttpSettings:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs
+                              paths:
+                                - /api
+                                - /v1/api
+                              provisioningState: Succeeded
+                              rewriteRuleSet:
+                                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1
+                        provisioningState: Succeeded
+                type: Microsoft.Network/applicationGateways
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth':
+    post:
+      description: Gets the backend health of the specified application gateway in a resource group.
+      operationId: ApplicationGateways_BackendHealth
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Request successful.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayBackendHealth'
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Get Backend Health:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            resourceGroupName: appgw
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                backendAddressPools:
+                  - backendAddressPool:
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFAnalyticsPool
+                    backendHttpSettingsCollection:
+                      - backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings
+                        servers:
+                          - address: 10.220.1.8
+                            health: Up
+                  - backendAddressPool:
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFPool
+                    backendHttpSettingsCollection:
+                      - backendHttpSettings:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings
+                        servers:
+                          - address: 10.220.1.4
+                            health: Up
+                          - address: 10.220.1.5
+                            health: Up
+            '202': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand':
+    post:
+      description: Gets the backend health for given combination of backend pool and http setting of the specified application gateway in a resource group.
+      operationId: ApplicationGateways_BackendHealthOnDemand
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
+          in: query
+          name: $expand
+          required: false
+          type: string
+        - description: Request body for on-demand test probe operation.
+          in: body
+          name: probeRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationGatewayOnDemandProbe'
+      responses:
+        '200':
+          description: Request successful.
+          schema:
+            $ref: '#/definitions/ApplicationGatewayBackendHealthOnDemand'
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Test Backend Health:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            probeRequest:
+              backendHttpSettingName: MFPoolSettings
+              backendPoolName: MFAnalyticsPool
+              path: /
+              pickHostNameFromBackendHttpSettings: true
+              protocol: Http
+              timeout: 30
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                backendAddressPool:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFAnalyticsPool
+                backendHealthHttpSettings:
+                  backendHttpSettings:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings
+                  servers:
+                    - address: 10.220.1.4
+                      health: Up
+                    - address: 10.220.1.5
+                      health: Up
+            '202': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start':
+    post:
+      description: Starts the specified application gateway.
+      operationId: ApplicationGateways_Start
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request successful. The operation starts the ApplicationGateway resource.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Start Application Gateway:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop':
+    post:
+      description: Stops the specified application gateway in a resource group.
+      operationId: ApplicationGateways_Stop
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the application gateway.
+          in: path
+          name: applicationGatewayName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request successful. The operation stops the ApplicationGateway resource.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      tags:
+        - ApplicationGateways
+      x-ms-examples:
+        Stop Application Gateway:
+          parameters:
+            api-version: '2019-02-01'
+            applicationGatewayName: appgw
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
+definitions:
+  ApplicationGateway:
+    allOf:
+      - description: Common resource representation.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+          location:
+            description: Resource location.
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Application gateway resource
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      identity:
+        description: Identity for the resource.
+        properties:
+          principalId:
+            description: The principal id of the system assigned identity. This property will only be provided for a system assigned identity.
+            readOnly: true
+            type: string
+          tenantId:
+            description: The tenant id of the system assigned identity. This property will only be provided for a system assigned identity.
+            readOnly: true
+            type: string
+          type:
+            description: 'The type of identity used for the resource. The type ''SystemAssigned, UserAssigned'' includes both an implicitly created identity and a set of user assigned identities. The type ''None'' will remove any identities from the virtual machine.'
+            enum:
+              - SystemAssigned
+              - UserAssigned
+              - 'SystemAssigned, UserAssigned'
+              - None
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: ResourceIdentityType
+          userAssignedIdentities:
+            additionalProperties:
+              properties:
+                clientId:
+                  description: The client id of user assigned identity.
+                  readOnly: true
+                  type: string
+                principalId:
+                  description: The principal id of user assigned identity.
+                  readOnly: true
+                  type: string
+              type: object
+            description: 'The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}''.'
+            type: object
+      properties:
+        $ref: '#/definitions/ApplicationGatewayPropertiesFormat'
+        description: Properties of the application gateway.
+        x-ms-client-flatten: true
+      zones:
+        description: A list of availability zones denoting where the resource needs to come from.
+        items:
+          type: string
+        type: array
+  ApplicationGatewayAuthenticationCertificate:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Authentication certificates of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the authentication certificate that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat'
+        description: Properties of the application gateway authentication certificate.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayAuthenticationCertificatePropertiesFormat:
+    description: Authentication certificates properties of an application gateway.
+    properties:
+      data:
+        description: Certificate public data.
+        type: string
+      provisioningState:
+        description: 'Provisioning state of the authentication certificate resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayAutoscaleConfiguration:
+    description: Application Gateway autoscale configuration.
+    properties:
+      maxCapacity:
+        description: Upper bound on number of Application Gateway capacity
+        exclusiveMinimum: false
+        format: int32
+        minimum: 2
+        type: integer
+      minCapacity:
+        description: Lower bound on number of Application Gateway capacity
+        exclusiveMinimum: false
+        format: int32
+        minimum: 0
+        type: integer
+    required:
+      - minCapacity
+  ApplicationGatewayAvailableRequestHeadersResult:
+    description: Response for ApplicationGatewayAvailableRequestHeaders API service call.
+    items:
+      type: string
+    type: array
+  ApplicationGatewayAvailableResponseHeadersResult:
+    description: Response for ApplicationGatewayAvailableResponseHeaders API service call.
+    items:
+      type: string
+    type: array
+  ApplicationGatewayAvailableServerVariablesResult:
+    description: Response for ApplicationGatewayAvailableServerVariables API service call.
+    items:
+      type: string
+    type: array
+  ApplicationGatewayAvailableSslOptions:
+    allOf:
+      - description: Common resource representation.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+          location:
+            description: Resource location.
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Response for ApplicationGatewayAvailableSslOptions API service call.
+    properties:
+      properties:
+        $ref: '#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat'
+        description: Properties of the application gateway available SSL options.
+        x-ms-client-flatten: true
+  ApplicationGatewayAvailableSslOptionsPropertiesFormat:
+    description: Properties of ApplicationGatewayAvailableSslOptions
+    properties:
+      availableCipherSuites:
+        description: List of available Ssl cipher suites.
+        items:
+          $ref: '#/definitions/CipherSuitesEnum'
+        type: array
+      availableProtocols:
+        description: List of available Ssl protocols.
+        items:
+          $ref: '#/definitions/ProtocolsEnum'
+        type: array
+      defaultPolicy:
+        $ref: '#/definitions/PolicyNameEnum'
+        description: Name of the Ssl predefined policy applied by default to application gateway
+      predefinedPolicies:
+        description: List of available Ssl predefined policy.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+  ApplicationGatewayAvailableSslPredefinedPolicies:
+    description: Response for ApplicationGatewayAvailableSslOptions API service call.
+    properties:
+      nextLink:
+        description: URL to get the next set of results.
+        type: string
+      value:
+        description: List of available Ssl predefined policy.
+        items:
+          $ref: '#/definitions/ApplicationGatewaySslPredefinedPolicy'
+        type: array
+  ApplicationGatewayAvailableWafRuleSetsResult:
+    description: Response for ApplicationGatewayAvailableWafRuleSets API service call.
+    properties:
+      value:
+        description: The list of application gateway rule sets.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFirewallRuleSet'
+        type: array
+  ApplicationGatewayBackendAddress:
+    description: Backend address of an application gateway.
+    properties:
+      fqdn:
+        description: Fully qualified domain name (FQDN).
+        type: string
+      ipAddress:
+        description: IP address
+        type: string
+  ApplicationGatewayBackendAddressPool:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Backend Address Pool of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the backend address pool that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'
+        description: Properties of the application gateway backend address pool.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayBackendAddressPoolPropertiesFormat:
+    description: Properties of Backend Address Pool of an application gateway.
+    properties:
+      backendAddresses:
+        description: Backend addresses
+        items:
+          description: Backend address of an application gateway.
+          properties:
+            fqdn:
+              description: Fully qualified domain name (FQDN).
+              type: string
+            ipAddress:
+              description: IP address
+              type: string
+        type: array
+      backendIPConfigurations:
+        description: Collection of references to IPs defined in network interfaces.
+        items:
+          $ref: './networkInterface.json#/definitions/NetworkInterfaceIPConfiguration'
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the backend address pool resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayBackendHealth:
+    description: Response for ApplicationGatewayBackendHealth API service call.
+    properties:
+      backendAddressPools:
+        description: A list of ApplicationGatewayBackendHealthPool resources.
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendHealthPool'
+        type: array
+  ApplicationGatewayBackendHealthHttpSettings:
+    description: Application gateway BackendHealthHttp settings.
+    properties:
+      backendHttpSettings:
+        $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
+        description: Reference of an ApplicationGatewayBackendHttpSettings resource.
+      servers:
+        description: List of ApplicationGatewayBackendHealthServer resources.
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendHealthServer'
+        type: array
+  ApplicationGatewayBackendHealthOnDemand:
+    description: Result of on demand test probe
+    properties:
+      backendAddressPool:
+        $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+        description: Reference of an ApplicationGatewayBackendAddressPool resource.
+      backendHealthHttpSettings:
+        $ref: '#/definitions/ApplicationGatewayBackendHealthHttpSettings'
+        description: Application gateway BackendHealthHttp settings.
+  ApplicationGatewayBackendHealthPool:
+    description: Application gateway BackendHealth pool.
+    properties:
+      backendAddressPool:
+        $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+        description: Reference of an ApplicationGatewayBackendAddressPool resource.
+      backendHttpSettingsCollection:
+        description: List of ApplicationGatewayBackendHealthHttpSettings resources.
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendHealthHttpSettings'
+        type: array
+  ApplicationGatewayBackendHealthServer:
+    description: Application gateway backendhealth http settings.
+    properties:
+      address:
+        description: IP address or FQDN of backend server.
+        type: string
+      health:
+        description: Health of backend server.
+        enum:
+          - Unknown
+          - Up
+          - Down
+          - Partial
+          - Draining
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayBackendHealthServerHealth
+      healthProbeLog:
+        description: Health Probe Log.
+        type: string
+      ipConfiguration:
+        allOf:
+          - description: Reference to another subresource.
+            properties:
+              id:
+                description: Resource ID.
+                type: string
+            x-ms-azure-resource: true
+        description: IPConfiguration in a network interface.
+        properties:
+          etag:
+            description: A unique read-only string that changes whenever the resource is updated.
+            type: string
+          name:
+            description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
+            type: string
+          properties:
+            $ref: '#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat'
+            description: Network interface IP configuration properties.
+            x-ms-client-flatten: true
+  ApplicationGatewayBackendHttpSettings:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Backend address pool settings of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the backend http settings that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'
+        description: Properties of the application gateway backend HTTP settings.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayBackendHttpSettingsPropertiesFormat:
+    description: Properties of Backend address pool settings of an application gateway.
+    properties:
+      affinityCookieName:
+        description: Cookie name to use for the affinity cookie.
+        type: string
+      authenticationCertificates:
+        description: Array of references to application gateway authentication certificates.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+      connectionDraining:
+        $ref: '#/definitions/ApplicationGatewayConnectionDraining'
+        description: Connection draining of the backend http settings resource.
+      cookieBasedAffinity:
+        description: Cookie based affinity.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayCookieBasedAffinity
+      hostName:
+        description: Host header to be sent to the backend servers.
+        type: string
+      path:
+        description: Path which should be used as a prefix for all HTTP requests. Null means no path will be prefixed. Default value is null.
+        type: string
+      pickHostNameFromBackendAddress:
+        description: Whether to pick host header should be picked from the host name of the backend server. Default value is false.
+        type: boolean
+      port:
+        description: The destination port on the backend.
+        format: int32
+        type: integer
+      probe:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      probeEnabled:
+        description: Whether the probe is enabled. Default value is false.
+        type: boolean
+      protocol:
+        $ref: '#/definitions/ApplicationGatewayProtocol'
+        description: The protocol used to communicate with the backend.
+      provisioningState:
+        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      requestTimeout:
+        description: Request timeout in seconds. Application Gateway will fail the request if response is not received within RequestTimeout. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+      trustedRootCertificates:
+        description: Array of references to application gateway trusted root certificates.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+  ApplicationGatewayConnectionDraining:
+    description: Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration.
+    properties:
+      drainTimeoutInSec:
+        description: The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        format: int32
+        maximum: 3600
+        minimum: 1
+        type: integer
+      enabled:
+        description: Whether connection draining is enabled or not.
+        type: boolean
+    required:
+      - enabled
+      - drainTimeoutInSec
+  ApplicationGatewayCustomError:
+    description: Customer error of an application gateway.
+    properties:
+      customErrorPageUrl:
+        description: Error page URL of the application gateway customer error.
+        type: string
+      statusCode:
+        description: Status code of the application gateway customer error.
+        enum:
+          - HttpStatus403
+          - HttpStatus502
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayCustomErrorStatusCode
+  ApplicationGatewayFirewallDisabledRuleGroup:
+    description: Allows to disable rules within a rule group or an entire rule group.
+    properties:
+      ruleGroupName:
+        description: The name of the rule group that will be disabled.
+        type: string
+      rules:
+        description: 'The list of rules that will be disabled. If null, all rules of the rule group will be disabled.'
+        items:
+          format: int32
+          type: integer
+          x-nullable: false
+        type: array
+    required:
+      - ruleGroupName
+  ApplicationGatewayFirewallExclusion:
+    description: Allow to exclude some variable satisfy the condition for the WAF check
+    properties:
+      matchVariable:
+        description: The variable to be excluded.
+        type: string
+      selector:
+        description: 'When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to.'
+        type: string
+      selectorMatchOperator:
+        description: 'When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to.'
+        type: string
+    required:
+      - matchVariable
+      - selectorMatchOperator
+      - selector
+  ApplicationGatewayFirewallRule:
+    description: A web application firewall rule.
+    properties:
+      description:
+        description: The description of the web application firewall rule.
+        type: string
+      ruleId:
+        description: The identifier of the web application firewall rule.
+        format: int32
+        type: integer
+    required:
+      - ruleId
+  ApplicationGatewayFirewallRuleGroup:
+    description: A web application firewall rule group.
+    properties:
+      description:
+        description: The description of the web application firewall rule group.
+        type: string
+      ruleGroupName:
+        description: The name of the web application firewall rule group.
+        type: string
+      rules:
+        description: The rules of the web application firewall rule group.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFirewallRule'
+        type: array
+    required:
+      - ruleGroupName
+      - rules
+  ApplicationGatewayFirewallRuleSet:
+    allOf:
+      - description: Common resource representation.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+          location:
+            description: Resource location.
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: A web application firewall rule set.
+    properties:
+      properties:
+        $ref: '#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat'
+        description: Properties of the application gateway firewall rule set.
+        x-ms-client-flatten: true
+  ApplicationGatewayFirewallRuleSetPropertiesFormat:
+    description: Properties of the web application firewall rule set.
+    properties:
+      provisioningState:
+        description: The provisioning state of the web application firewall rule set.
+        type: string
+      ruleGroups:
+        description: The rule groups of the web application firewall rule set.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFirewallRuleGroup'
+        type: array
+      ruleSetType:
+        description: The type of the web application firewall rule set.
+        type: string
+      ruleSetVersion:
+        description: The version of the web application firewall rule set type.
+        type: string
+    required:
+      - ruleSetType
+      - ruleSetVersion
+      - ruleGroups
+  ApplicationGatewayFrontendIPConfiguration:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Frontend IP configuration of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the frontend IP configuration that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'
+        description: Properties of the application gateway frontend IP configuration.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayFrontendIPConfigurationPropertiesFormat:
+    description: Properties of Frontend IP configuration of an application gateway.
+    properties:
+      privateIPAddress:
+        description: PrivateIPAddress of the network interface IP Configuration.
+        type: string
+      privateIPAllocationMethod:
+        description: IP address allocation method.
+        enum:
+          - Static
+          - Dynamic
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IPAllocationMethod
+      provisioningState:
+        description: 'Provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      publicIPAddress:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      subnet:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayFrontendPort:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Frontend port of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the frontend port that is unique within an Application Gateway
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'
+        description: Properties of the application gateway frontend port.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayFrontendPortPropertiesFormat:
+    description: Properties of Frontend port of an application gateway.
+    properties:
+      port:
+        description: Frontend port
+        format: int32
+        type: integer
+      provisioningState:
+        description: 'Provisioning state of the frontend port resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayHeaderConfiguration:
+    description: Header configuration of the Actions set in Application Gateway.
+    properties:
+      headerName:
+        description: Header name of the header configuration
+        type: string
+      headerValue:
+        description: Header value of the header configuration
+        type: string
+  ApplicationGatewayHttpListener:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Http listener of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the HTTP listener that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'
+        description: Properties of the application gateway HTTP listener.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayHttpListenerPropertiesFormat:
+    description: Properties of HTTP listener of an application gateway.
+    properties:
+      customErrorConfigurations:
+        description: Custom error configurations of the HTTP listener.
+        items:
+          $ref: '#/definitions/ApplicationGatewayCustomError'
+        type: array
+      frontendIPConfiguration:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      frontendPort:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      hostName:
+        description: Host name of HTTP listener.
+        type: string
+      protocol:
+        $ref: '#/definitions/ApplicationGatewayProtocol'
+        description: Protocol of the HTTP listener.
+      provisioningState:
+        description: 'Provisioning state of the HTTP listener resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      requireServerNameIndication:
+        description: Applicable only if protocol is https. Enables SNI for multi-hosting.
+        type: boolean
+      sslCertificate:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayIPConfiguration:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the IP configuration that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'
+        description: Properties of the application gateway IP configuration.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayIPConfigurationPropertiesFormat:
+    description: Properties of IP configuration of an application gateway.
+    properties:
+      provisioningState:
+        description: 'Provisioning state of the application gateway subnet resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      subnet:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayListResult:
+    description: Response for ListApplicationGateways API service call.
+    properties:
+      nextLink:
+        description: URL to get the next set of results.
+        type: string
+      value:
+        description: List of an application gateways in a resource group.
+        items:
+          $ref: '#/definitions/ApplicationGateway'
+        type: array
+  ApplicationGatewayOnDemandProbe:
+    description: Details of on demand test probe request
+    properties:
+      backendHttpSettingName:
+        description: Name of backend http setting of application gateway to be used for test probe
+        type: string
+      backendPoolName:
+        description: Name of backend pool of application gateway to which probe request will be sent.
+        type: string
+      host:
+        description: Host name to send the probe to.
+        type: string
+      match:
+        $ref: '#/definitions/ApplicationGatewayProbeHealthResponseMatch'
+        description: Criterion for classifying a healthy probe response.
+      path:
+        description: 'Relative path of probe. Valid path starts from ''/''. Probe is sent to <Protocol>://<host>:<port><path>'
+        type: string
+      pickHostNameFromBackendHttpSettings:
+        description: Whether the host header should be picked from the backend http settings. Default value is false.
+        type: boolean
+      protocol:
+        $ref: '#/definitions/ApplicationGatewayProtocol'
+        description: The protocol used for the probe.
+      timeout:
+        description: The probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+  ApplicationGatewayPathRule:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Path rule of URL path map of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the path rule that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayPathRulePropertiesFormat'
+        description: Properties of the application gateway path rule.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayPathRulePropertiesFormat:
+    description: Properties of path rule of an application gateway.
+    properties:
+      backendAddressPool:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      paths:
+        description: Path rules of URL path map.
+        items:
+          type: string
+        type: array
+      provisioningState:
+        description: 'Path rule of URL path map resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      redirectConfiguration:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      rewriteRuleSet:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayProbe:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Probe of the application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the probe that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayProbePropertiesFormat'
+        description: Properties of the application gateway probe.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayProbeHealthResponseMatch:
+    description: Application gateway probe health response match
+    properties:
+      body:
+        description: Body that must be contained in the health response. Default value is empty.
+        type: string
+      statusCodes:
+        description: Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399.
+        items:
+          type: string
+        type: array
+  ApplicationGatewayProbePropertiesFormat:
+    description: Properties of probe of an application gateway.
+    properties:
+      host:
+        description: Host name to send the probe to.
+        type: string
+      interval:
+        description: The probing interval in seconds. This is the time interval between two consecutive probes. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+      match:
+        $ref: '#/definitions/ApplicationGatewayProbeHealthResponseMatch'
+        description: Criterion for classifying a healthy probe response.
+      minServers:
+        description: Minimum number of servers that are always marked healthy. Default value is 0.
+        format: int32
+        type: integer
+      path:
+        description: 'Relative path of probe. Valid path starts from ''/''. Probe is sent to <Protocol>://<host>:<port><path>'
+        type: string
+      pickHostNameFromBackendHttpSettings:
+        description: Whether the host header should be picked from the backend http settings. Default value is false.
+        type: boolean
+      protocol:
+        $ref: '#/definitions/ApplicationGatewayProtocol'
+        description: The protocol used for the probe.
+      provisioningState:
+        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      timeout:
+        description: The probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds.
+        format: int32
+        type: integer
+      unhealthyThreshold:
+        description: The probe retry count. Backend server is marked down after consecutive probe failure count reaches UnhealthyThreshold. Acceptable values are from 1 second to 20.
+        format: int32
+        type: integer
+  ApplicationGatewayPropertiesFormat:
+    description: Properties of the application gateway.
+    properties:
+      authenticationCertificates:
+        description: 'Authentication certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayAuthenticationCertificate'
+        type: array
+      autoscaleConfiguration:
+        $ref: '#/definitions/ApplicationGatewayAutoscaleConfiguration'
+        description: Autoscale Configuration.
+      backendAddressPools:
+        description: 'Backend address pool of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+        type: array
+      backendHttpSettingsCollection:
+        description: 'Backend http settings of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
+        type: array
+      customErrorConfigurations:
+        description: Custom error configurations of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayCustomError'
+        type: array
+      enableFips:
+        description: Whether FIPS is enabled on the application gateway resource.
+        type: boolean
+      enableHttp2:
+        description: Whether HTTP2 is enabled on the application gateway resource.
+        type: boolean
+      firewallPolicy:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      frontendIPConfigurations:
+        description: 'Frontend IP addresses of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayFrontendIPConfiguration'
+        type: array
+      frontendPorts:
+        description: 'Frontend ports of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayFrontendPort'
+        type: array
+      gatewayIPConfigurations:
+        description: 'Subnets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayIPConfiguration'
+        type: array
+      httpListeners:
+        description: 'Http listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayHttpListener'
+        type: array
+      operationalState:
+        description: Operational state of the application gateway resource.
+        enum:
+          - Stopped
+          - Starting
+          - Running
+          - Stopping
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayOperationalState
+      probes:
+        description: Probes of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayProbe'
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the application gateway resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      redirectConfigurations:
+        description: 'Redirect configurations of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayRedirectConfiguration'
+        type: array
+      requestRoutingRules:
+        description: Request routing rules of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayRequestRoutingRule'
+        type: array
+      resourceGuid:
+        description: Resource GUID property of the application gateway resource.
+        type: string
+      rewriteRuleSets:
+        description: Rewrite rules for the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayRewriteRuleSet'
+        type: array
+      sku:
+        $ref: '#/definitions/ApplicationGatewaySku'
+        description: SKU of the application gateway resource.
+      sslCertificates:
+        description: 'SSL certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewaySslCertificate'
+        type: array
+      sslPolicy:
+        $ref: '#/definitions/ApplicationGatewaySslPolicy'
+        description: SSL policy of the application gateway resource.
+      trustedRootCertificates:
+        description: 'Trusted Root certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayTrustedRootCertificate'
+        type: array
+      urlPathMaps:
+        description: 'URL path map of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).'
+        items:
+          $ref: '#/definitions/ApplicationGatewayUrlPathMap'
+        type: array
+      webApplicationFirewallConfiguration:
+        $ref: '#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration'
+        description: Web application firewall configuration.
+  ApplicationGatewayProtocol:
+    description: Application Gateway protocol.
+    enum:
+      - Http
+      - Https
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ApplicationGatewayProtocol
+  ApplicationGatewayRedirectConfiguration:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Redirect configuration of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the redirect configuration that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayRedirectConfigurationPropertiesFormat'
+        description: Properties of the application gateway redirect configuration.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayRedirectConfigurationPropertiesFormat:
+    description: Properties of redirect configuration of the application gateway.
+    properties:
+      includePath:
+        description: Include path in the redirected url.
+        type: boolean
+      includeQueryString:
+        description: Include query string in the redirected url.
+        type: boolean
+      pathRules:
+        description: Path rules specifying redirect configuration.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+      redirectType:
+        $ref: '#/definitions/RedirectTypeEnum'
+        description: HTTP redirection type.
+        type: string
+      requestRoutingRules:
+        description: Request routing specifying redirect configuration.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+      targetListener:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      targetUrl:
+        description: Url to redirect the request to.
+        type: string
+      urlPathMaps:
+        description: Url path maps specifying default redirect configuration.
+        items:
+          description: Reference to another subresource.
+          properties:
+            id:
+              description: Resource ID.
+              type: string
+          x-ms-azure-resource: true
+        type: array
+  ApplicationGatewayRequestRoutingRule:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Request routing rule of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the request routing rule that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'
+        description: Properties of the application gateway request routing rule.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayRequestRoutingRulePropertiesFormat:
+    description: Properties of request routing rule of the application gateway.
+    properties:
+      backendAddressPool:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      httpListener:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      provisioningState:
+        description: 'Provisioning state of the request routing rule resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      redirectConfiguration:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      rewriteRuleSet:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      ruleType:
+        description: Rule type.
+        enum:
+          - Basic
+          - PathBasedRouting
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayRequestRoutingRuleType
+      urlPathMap:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  ApplicationGatewayRewriteRule:
+    description: Rewrite rule of an application gateway.
+    properties:
+      actionSet:
+        $ref: '#/definitions/ApplicationGatewayRewriteRuleActionSet'
+        description: Set of actions to be done as part of the rewrite Rule.
+        type: object
+      conditions:
+        description: Conditions based on which the action set execution will be evaluated.
+        items:
+          $ref: '#/definitions/ApplicationGatewayRewriteRuleCondition'
+        type: array
+      name:
+        description: Name of the rewrite rule that is unique within an Application Gateway.
+        type: string
+      ruleSequence:
+        description: Rule Sequence of the rewrite rule that determines the order of execution of a particular rule in a RewriteRuleSet.
+        type: integer
+  ApplicationGatewayRewriteRuleActionSet:
+    description: Set of actions in the Rewrite Rule in Application Gateway.
+    properties:
+      requestHeaderConfigurations:
+        description: Request Header Actions in the Action Set
+        items:
+          $ref: '#/definitions/ApplicationGatewayHeaderConfiguration'
+        type: array
+      responseHeaderConfigurations:
+        description: Response Header Actions in the Action Set
+        items:
+          $ref: '#/definitions/ApplicationGatewayHeaderConfiguration'
+        type: array
+  ApplicationGatewayRewriteRuleCondition:
+    description: Set of conditions in the Rewrite Rule in Application Gateway.
+    properties:
+      ignoreCase:
+        description: Setting this paramter to truth value with force the pattern to do a case in-sensitive comparison.
+        type: boolean
+      negate:
+        description: Setting this value as truth will force to check the negation of the condition given by the user.
+        type: boolean
+      pattern:
+        description: 'The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition'
+        type: string
+      variable:
+        description: The condition parameter of the RewriteRuleCondition.
+        type: string
+  ApplicationGatewayRewriteRuleSet:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Rewrite rule set of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        readOnly: true
+        type: string
+      name:
+        description: Name of the rewrite rule set that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayRewriteRuleSetPropertiesFormat'
+        description: Properties of the application gateway rewrite rule set.
+        x-ms-client-flatten: true
+  ApplicationGatewayRewriteRuleSetPropertiesFormat:
+    description: Properties of rewrite rule set of the application gateway.
+    properties:
+      provisioningState:
+        description: 'Provisioning state of the rewrite rule set resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        readOnly: true
+        type: string
+      rewriteRules:
+        description: Rewrite rules in the rewrite rule set.
+        items:
+          $ref: '#/definitions/ApplicationGatewayRewriteRule'
+        type: array
+  ApplicationGatewaySku:
+    description: SKU of an application gateway
+    properties:
+      capacity:
+        description: Capacity (instance count) of an application gateway.
+        format: int32
+        type: integer
+      name:
+        description: Name of an application gateway SKU.
+        enum:
+          - Standard_Small
+          - Standard_Medium
+          - Standard_Large
+          - WAF_Medium
+          - WAF_Large
+          - Standard_v2
+          - WAF_v2
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewaySkuName
+      tier:
+        description: Tier of an application gateway.
+        enum:
+          - Standard
+          - WAF
+          - Standard_v2
+          - WAF_v2
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayTier
+  ApplicationGatewaySslCertificate:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: SSL certificates of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the SSL certificate that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'
+        description: Properties of the application gateway SSL certificate.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewaySslCertificatePropertiesFormat:
+    description: Properties of SSL certificates of an application gateway.
+    properties:
+      data:
+        description: Base-64 encoded pfx certificate. Only applicable in PUT Request.
+        type: string
+      keyVaultSecretId:
+        description: Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
+        type: string
+      password:
+        description: Password for the pfx file specified in data. Only applicable in PUT request.
+        type: string
+      provisioningState:
+        description: 'Provisioning state of the SSL certificate resource Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+      publicCertData:
+        description: Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request.
+        type: string
+  ApplicationGatewaySslPolicy:
+    description: Application Gateway Ssl policy.
+    properties:
+      cipherSuites:
+        description: Ssl cipher suites to be enabled in the specified order to application gateway.
+        items:
+          $ref: '#/definitions/CipherSuitesEnum'
+        type: array
+      disabledSslProtocols:
+        description: Ssl protocols to be disabled on application gateway.
+        items:
+          $ref: '#/definitions/ProtocolsEnum'
+          type: string
+        type: array
+      minProtocolVersion:
+        $ref: '#/definitions/ProtocolsEnum'
+        description: Minimum version of Ssl protocol to be supported on application gateway.
+      policyName:
+        $ref: '#/definitions/PolicyNameEnum'
+        description: Name of Ssl predefined policy
+      policyType:
+        description: Type of Ssl Policy
+        enum:
+          - Predefined
+          - Custom
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewaySslPolicyType
+  ApplicationGatewaySslPredefinedPolicy:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: An Ssl predefined policy
+    properties:
+      name:
+        description: Name of the Ssl predefined policy.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat'
+        description: Properties of the application gateway SSL predefined policy.
+        x-ms-client-flatten: true
+  ApplicationGatewaySslPredefinedPolicyPropertiesFormat:
+    description: Properties of ApplicationGatewaySslPredefinedPolicy
+    properties:
+      cipherSuites:
+        description: Ssl cipher suites to be enabled in the specified order for application gateway.
+        items:
+          $ref: '#/definitions/CipherSuitesEnum'
+        type: array
+      minProtocolVersion:
+        $ref: '#/definitions/ProtocolsEnum'
+        description: Minimum version of Ssl protocol to be supported on application gateway.
+  ApplicationGatewayTrustedRootCertificate:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Trusted Root certificates of an application gateway.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the trusted root certificate that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayTrustedRootCertificatePropertiesFormat'
+        description: Properties of the application gateway trusted root certificate.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayTrustedRootCertificatePropertiesFormat:
+    description: Trusted Root certificates properties of an application gateway.
+    properties:
+      data:
+        description: Certificate public data.
+        type: string
+      keyVaultSecretId:
+        description: Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
+        type: string
+      provisioningState:
+        description: 'Provisioning state of the trusted root certificate resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayUrlPathMap:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        type: string
+      name:
+        description: Name of the URL path map that is unique within an Application Gateway.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'
+        description: Properties of the application gateway URL path map.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource.
+        type: string
+  ApplicationGatewayUrlPathMapPropertiesFormat:
+    description: Properties of UrlPathMap of the application gateway.
+    properties:
+      defaultBackendAddressPool:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      defaultBackendHttpSettings:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      defaultRedirectConfiguration:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      defaultRewriteRuleSet:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      pathRules:
+        description: Path rule of URL path map resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewayPathRule'
+        type: array
+      provisioningState:
+        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        type: string
+  ApplicationGatewayWebApplicationFirewallConfiguration:
+    description: Application gateway web application firewall configuration.
+    properties:
+      disabledRuleGroups:
+        description: The disabled rule groups.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFirewallDisabledRuleGroup'
+        type: array
+      enabled:
+        description: Whether the web application firewall is enabled or not.
+        type: boolean
+      exclusions:
+        description: The exclusion list.
+        items:
+          $ref: '#/definitions/ApplicationGatewayFirewallExclusion'
+        type: array
+      fileUploadLimitInMb:
+        description: Maximum file upload size in Mb for WAF.
+        exclusiveMinimum: false
+        format: int32
+        minimum: 0
+        type: integer
+      firewallMode:
+        description: Web application firewall mode.
+        enum:
+          - Detection
+          - Prevention
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ApplicationGatewayFirewallMode
+      maxRequestBodySize:
+        description: Maximum request body size for WAF.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        format: int32
+        maximum: 128
+        minimum: 8
+        type: integer
+      maxRequestBodySizeInKb:
+        description: Maximum request body size in Kb for WAF.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        format: int32
+        maximum: 128
+        minimum: 8
+        type: integer
+      requestBodyCheck:
+        description: Whether allow WAF to check request Body.
+        type: boolean
+      ruleSetType:
+        description: 'The type of the web application firewall rule set. Possible values are: ''OWASP''.'
+        type: string
+      ruleSetVersion:
+        description: The version of the rule set type.
+        type: string
+    required:
+      - enabled
+      - firewallMode
+      - ruleSetType
+      - ruleSetVersion
+  CipherSuitesEnum:
+    description: Ssl cipher suites enums.
+    enum:
+      - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+      - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+      - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+      - TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+      - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+      - TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+      - TLS_RSA_WITH_AES_256_GCM_SHA384
+      - TLS_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_RSA_WITH_AES_256_CBC_SHA256
+      - TLS_RSA_WITH_AES_128_CBC_SHA256
+      - TLS_RSA_WITH_AES_256_CBC_SHA
+      - TLS_RSA_WITH_AES_128_CBC_SHA
+      - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+      - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+      - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+      - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+      - TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+      - TLS_DHE_DSS_WITH_AES_128_CBC_SHA256
+      - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
+      - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
+      - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ApplicationGatewaySslCipherSuite
+  NetworkInterfaceIPConfigurationPropertiesFormat: {}
+  PolicyNameEnum:
+    description: Ssl predefined policy name enums.
+    enum:
+      - AppGwSslPolicy20150501
+      - AppGwSslPolicy20170401
+      - AppGwSslPolicy20170401S
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ApplicationGatewaySslPolicyName
+  ProtocolsEnum:
+    description: Ssl protocol enums.
+    enum:
+      - TLSv1_0
+      - TLSv1_1
+      - TLSv1_2
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ApplicationGatewaySslProtocol
+  RedirectTypeEnum:
+    description: Redirect type enum.
+    enum:
+      - Permanent
+      - Found
+      - SeeOther
+      - Temporary
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ApplicationGatewayRedirectType
