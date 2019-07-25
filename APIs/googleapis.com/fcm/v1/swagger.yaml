@@ -1,0 +1,480 @@
+swagger: '2.0'
+schemes:
+  - https
+host: fcm.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: FCM send API that provides a cross-platform messaging solution to reliably deliver messages at no cost.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Firebase Cloud Messaging
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: google
+      url: 'https://fcm.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: fcm
+externalDocs:
+  url: 'https://firebase.google.com/docs/cloud-messaging'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 implicit authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1/{parent}/messages:send':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Send a message to specified target (a registration token, topic
+        or condition).
+      operationId: fcm.projects.messages.send
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendMessageRequest'
+        - description: |-
+            Required. It contains the Firebase project id (i.e. the unique identifier
+            for your Firebase project), in the format of `projects/{project_id}`.
+            For legacy support, the numeric project number with no padding is also
+            supported in the format of `projects/{project_number}`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+definitions:
+  AndroidConfig:
+    description: |-
+      Android specific options for messages sent through
+      [FCM connection server](https://goo.gl/4GLdUl).
+    properties:
+      collapseKey:
+        description: |-
+          An identifier of a group of messages that can be collapsed, so that only
+          the last message gets sent when delivery can be resumed. A maximum of 4
+          different collapse keys is allowed at any given time.
+        type: string
+      data:
+        additionalProperties:
+          type: string
+        description: |-
+          Arbitrary key/value payload. If present, it will override
+          google.firebase.fcm.v1.Message.data.
+        type: object
+      fcmOptions:
+        $ref: '#/definitions/AndroidFcmOptions'
+        description: Options for features provided by the FCM SDK for Android.
+      notification:
+        $ref: '#/definitions/AndroidNotification'
+        description: Notification to send to android devices.
+      priority:
+        description: |-
+          Message priority. Can take "normal" and "high" values.
+          For more information, see [Setting the priority of a
+          message](https://goo.gl/GjONJv).
+        enum:
+          - NORMAL
+          - HIGH
+        type: string
+      restrictedPackageName:
+        description: |-
+          Package name of the application where the registration token must match in
+          order to receive the message.
+        type: string
+      ttl:
+        description: |-
+          How long (in seconds) the message should be kept in FCM storage if the
+          device is offline. The maximum time to live supported is 4 weeks, and the
+          default value is 4 weeks if not set. Set it to 0 if want to send the
+          message immediately.
+          In JSON format, the Duration type is encoded as a string rather than an
+          object, where the string ends in the suffix "s" (indicating seconds) and
+          is preceded by the number of seconds, with nanoseconds expressed as
+          fractional seconds. For example, 3 seconds with 0 nanoseconds should be
+          encoded in JSON format as "3s", while 3 seconds and 1 nanosecond should
+          be expressed in JSON format as "3.000000001s". The ttl will be rounded down
+          to the nearest second.
+        format: google-duration
+        type: string
+    type: object
+  AndroidFcmOptions:
+    description: Options for features provided by the FCM SDK for Android.
+    properties:
+      analyticsLabel:
+        description: Label associated with the message's analytics data.
+        type: string
+    type: object
+  AndroidNotification:
+    description: Notification to send to android devices.
+    properties:
+      body:
+        description: |-
+          The notification's body text. If present, it will override
+          google.firebase.fcm.v1.Notification.body.
+        type: string
+      bodyLocArgs:
+        description: |-
+          Variable string values to be used in place of the format specifiers in
+          body_loc_key to use to localize the body text to the user's current
+          localization.
+          See [Formatting and Styling](https://goo.gl/MalYE3) for more information.
+        items:
+          type: string
+        type: array
+      bodyLocKey:
+        description: |-
+          The key to the body string in the app's string resources to use to localize
+          the body text to the user's current localization.
+          See [String Resources](https://goo.gl/NdFZGI) for more information.
+        type: string
+      channelId:
+        description: |-
+          The [notification's channel
+          id](https://developer.android.com/guide/topics/ui/notifiers/notifications#ManageChannels)
+          (new in Android O). The app must create a channel with this channel ID
+          before any notification with this channel ID is received. If you don't send
+          this channel ID in the request, or if the channel ID provided has not yet
+          been created by the app, FCM uses the channel ID specified in the app
+          manifest.
+        type: string
+      clickAction:
+        description: |-
+          The action associated with a user click on the notification.
+          If specified, an activity with a matching intent filter is launched when
+          a user clicks on the notification.
+        type: string
+      color:
+        description: 'The notification''s icon color, expressed in #rrggbb format.'
+        type: string
+      icon:
+        description: |-
+          The notification's icon.
+          Sets the notification icon to myicon for drawable resource myicon.
+          If you don't send this key in the request, FCM displays the launcher icon
+          specified in your app manifest.
+        type: string
+      image:
+        description: |-
+          Contains the URL of an image that is going to be displayed in a
+          notification. If present, it will override
+          google.firebase.fcm.v1.Notification.image.
+        type: string
+      sound:
+        description: |-
+          The sound to play when the device receives the notification.
+          Supports "default" or the filename of a sound resource bundled in the app.
+          Sound files must reside in /res/raw/.
+        type: string
+      tag:
+        description: |-
+          Identifier used to replace existing notifications in the notification
+          drawer.
+          If not specified, each request creates a new notification.
+          If specified and a notification with the same tag is already being shown,
+          the new notification replaces the existing one in the notification drawer.
+        type: string
+      title:
+        description: |-
+          The notification's title. If present, it will override
+          google.firebase.fcm.v1.Notification.title.
+        type: string
+      titleLocArgs:
+        description: |-
+          Variable string values to be used in place of the format specifiers in
+          title_loc_key to use to localize the title text to the user's current
+          localization.
+          See [Formatting and Styling](https://goo.gl/MalYE3) for more information.
+        items:
+          type: string
+        type: array
+      titleLocKey:
+        description: |-
+          The key to the title string in the app's string resources to use to
+          localize the title text to the user's current localization.
+          See [String Resources](https://goo.gl/NdFZGI) for more information.
+        type: string
+    type: object
+  ApnsConfig:
+    description: '[Apple Push Notification Service](https://goo.gl/MXRTPa) specific options.'
+    properties:
+      fcmOptions:
+        $ref: '#/definitions/ApnsFcmOptions'
+        description: Options for features provided by the FCM SDK for iOS.
+      headers:
+        additionalProperties:
+          type: string
+        description: |-
+          HTTP request headers defined in Apple Push Notification Service. Refer to
+          [APNs request headers](https://goo.gl/C6Yhia) for
+          supported headers, e.g. "apns-priority": "10".
+        type: object
+      payload:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          APNs payload as a JSON object, including both `aps` dictionary and custom
+          payload. See [Payload Key Reference](https://goo.gl/32Pl5W).
+          If present, it overrides google.firebase.fcm.v1.Notification.title
+          and google.firebase.fcm.v1.Notification.body.
+        type: object
+    type: object
+  ApnsFcmOptions:
+    description: Options for features provided by the FCM SDK for iOS.
+    properties:
+      analyticsLabel:
+        description: Label associated with the message's analytics data.
+        type: string
+      image:
+        description: |-
+          Contains the URL of an image that is going to be displayed in a
+          notification. If present, it will override
+          google.firebase.fcm.v1.Notification.image.
+        type: string
+    type: object
+  FcmOptions:
+    description: Platform independent options for features provided by the FCM SDKs.
+    properties:
+      analyticsLabel:
+        description: Label associated with the message's analytics data.
+        type: string
+    type: object
+  Message:
+    description: Message to send by Firebase Cloud Messaging Service.
+    properties:
+      android:
+        $ref: '#/definitions/AndroidConfig'
+        description: |-
+          Input only. Android specific options for messages sent through
+          [FCM connection server](https://goo.gl/4GLdUl).
+      apns:
+        $ref: '#/definitions/ApnsConfig'
+        description: |-
+          Input only. [Apple Push Notification Service](https://goo.gl/MXRTPa)
+          specific options.
+      condition:
+        description: |-
+          Condition to send a message to,
+          e.g. "'foo' in topics && 'bar' in topics".
+        type: string
+      data:
+        additionalProperties:
+          type: string
+        description: Input only. Arbitrary key/value payload.
+        type: object
+      fcmOptions:
+        $ref: '#/definitions/FcmOptions'
+        description: |-
+          Input only. Template for FCM SDK feature options to use across all
+          platforms.
+      name:
+        description: |-
+          Output Only. The identifier of the message sent, in the format of
+          `projects/*/messages/{message_id}`.
+        type: string
+      notification:
+        $ref: '#/definitions/Notification'
+        description: Input only. Basic notification template to use across all platforms.
+      token:
+        description: Registration token to send a message to.
+        type: string
+      topic:
+        description: |-
+          Topic name to send a message to, e.g. "weather".
+          Note: "/topics/" prefix should not be provided.
+        type: string
+      webpush:
+        $ref: '#/definitions/WebpushConfig'
+        description: |-
+          Input only. [Webpush protocol](https://tools.ietf.org/html/rfc8030)
+          options.
+    type: object
+  Notification:
+    description: Basic notification template to use across all platforms.
+    properties:
+      body:
+        description: The notification's body text.
+        type: string
+      image:
+        description: |-
+          Contains the URL of an image that is going to be downloaded on the device
+          and displayed in a notification.
+          JPEG, PNG, BMP have full support across platforms. Animated GIF and video
+          only work on iOS. WebP and HEIF have varying levels of support across
+          platforms and platform versions.
+          Android has 1MB image size limit.
+          Quota usage and implications/costs for hosting image on Firebase Storage:
+          https://firebase.google.com/pricing
+        type: string
+      title:
+        description: The notification's title.
+        type: string
+    type: object
+  SendMessageRequest:
+    description: Request to send a message to specified target.
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+        description: Required. Message to send.
+      validateOnly:
+        description: Flag for testing the request without actually delivering the message.
+        type: boolean
+    type: object
+  WebpushConfig:
+    description: '[Webpush protocol](https://tools.ietf.org/html/rfc8030) options.'
+    properties:
+      data:
+        additionalProperties:
+          type: string
+        description: |-
+          Arbitrary key/value payload. If present, it will override
+          google.firebase.fcm.v1.Message.data.
+        type: object
+      fcmOptions:
+        $ref: '#/definitions/WebpushFcmOptions'
+        description: Options for features provided by the FCM SDK for Web.
+      headers:
+        additionalProperties:
+          type: string
+        description: |-
+          HTTP headers defined in webpush protocol. Refer to
+          [Webpush protocol](https://tools.ietf.org/html/rfc8030#section-5) for
+          supported headers, e.g. "TTL": "15".
+        type: object
+      notification:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          Web Notification options as a JSON object. Supports Notification instance
+          properties as defined in [Web Notification
+          API](https://developer.mozilla.org/en-US/docs/Web/API/Notification). If
+          present, "title" and "body" fields override
+          [google.firebase.fcm.v1.Notification.title] and
+          [google.firebase.fcm.v1.Notification.body].
+        type: object
+    type: object
+  WebpushFcmOptions:
+    description: Options for features provided by the FCM SDK for Web.
+    properties:
+      link:
+        description: |-
+          The link to open when the user clicks on the notification.
+          For all URL values, HTTPS is required.
+        type: string
+    type: object
