@@ -1211,6 +1211,8 @@ definitions:
       VersionIdsToStages:
         $ref: '#/definitions/SecretVersionsToStagesMapType'
         description: <p>A list of all of the currently assigned <code>VersionStage</code> staging labels and the <code>VersionId</code> that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.</p> <note> <p>A version that does not have any staging labels attached is considered deprecated and subject to deletion. Such versions are not included in this list.</p> </note>
+      OwningService:
+        $ref: '#/definitions/OwningServiceType'
   DescribeSecretRequest:
     type: object
     required:
@@ -1672,12 +1674,12 @@ definitions:
   SecretBinaryType:
     type: string
     minLength: 0
-    maxLength: 7168
+    maxLength: 10240
     format: password
   SecretStringType:
     type: string
     minLength: 0
-    maxLength: 7168
+    maxLength: 10240
     format: password
   TagListType:
     type: array
@@ -1720,6 +1722,10 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/SecretVersionStagesType'
+  OwningServiceType:
+    type: string
+    minLength: 1
+    maxLength: 128
   ExcludeCharactersType:
     type: string
     minLength: 0
@@ -1744,10 +1750,11 @@ definitions:
     type: string
     minLength: 0
     maxLength: 4096
+    format: password
   NonEmptyResourcePolicyType:
     type: string
     minLength: 1
-    maxLength: 4096
+    maxLength: 20480
   SecretVersionStageType:
     type: string
     minLength: 1
@@ -1816,6 +1823,8 @@ definitions:
       SecretVersionsToStages:
         $ref: '#/definitions/SecretVersionsToStagesMapType'
         description: <p>A list of all of the currently assigned <code>SecretVersionStage</code> staging labels and the <code>SecretVersionId</code> that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.</p> <note> <p>A version that does not have any <code>SecretVersionStage</code> is considered deprecated and subject to deletion. Such versions are not included in this list.</p> </note>
+      OwningService:
+        $ref: '#/definitions/OwningServiceType'
     description: 'A structure that contains the details about a secret. It does not include the encrypted <code>SecretString</code> and <code>SecretBinary</code> values. To get those values, use the <a>GetSecretValue</a> operation.'
   SecretVersionsListEntry:
     type: object

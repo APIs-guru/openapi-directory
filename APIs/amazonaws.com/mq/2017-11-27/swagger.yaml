@@ -195,6 +195,8 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - encryptionOptions
             properties:
               autoMinorVersionUpgrade:
                 description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
@@ -221,6 +223,16 @@ paths:
                 enum:
                   - SINGLE_INSTANCE
                   - ACTIVE_STANDBY_MULTI_AZ
+              encryptionOptions:
+                description: Encryption options for the broker.
+                type: object
+                properties:
+                  KmsKeyId:
+                    $ref: '#/definitions/__string'
+                    description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                  UseAwsOwnedKey:
+                    $ref: '#/definitions/__boolean'
+                    description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
               engineType:
                 description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
                 type: string
@@ -1333,6 +1345,9 @@ definitions:
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
         description: Required. The deployment mode of the broker.
+      EncryptionOptions:
+        $ref: '#/definitions/EncryptionOptions'
+        description: Encryption options for the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -1743,6 +1758,18 @@ definitions:
         $ref: '#/definitions/ConfigurationId'
         description: The pending configuration of the broker.
     description: Broker configuration information
+  EncryptionOptions:
+    type: object
+    required:
+      - UseAwsOwnedKey
+    properties:
+      KmsKeyId:
+        $ref: '#/definitions/__string'
+        description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+      UseAwsOwnedKey:
+        $ref: '#/definitions/__boolean'
+        description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+    description: Encryption options for the broker.
   Logs:
     type: object
     properties:
@@ -1788,6 +1815,9 @@ definitions:
       DeploymentMode:
         $ref: '#/definitions/DeploymentMode'
         description: Required. The deployment mode of the broker.
+      EncryptionOptions:
+        $ref: '#/definitions/EncryptionOptions'
+        description: Encryption options for the broker.
       EngineType:
         $ref: '#/definitions/EngineType'
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'

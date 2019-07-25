@@ -256,7 +256,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -405,7 +405,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -524,7 +524,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -655,7 +655,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -774,7 +774,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -3139,6 +3139,80 @@ paths:
                   Enabled:
                     $ref: '#/definitions/__boolean'
                     description: Specifies whether to enable the voice channel for the application.
+  '/v1/apps/{application-id}/kpis/daterange/{kpi-name}':
+    get:
+      operationId: GetApplicationDateRangeKpi
+      description: ' <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetApplicationDateRangeKpiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          type: string
+        - name: end-time
+          in: query
+          required: false
+          description: 'The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.'
+          type: string
+          format: date-time
+        - name: kpi-name
+          in: path
+          required: true
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+          type: string
+        - name: next-token
+          in: query
+          required: false
+          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          type: string
+        - name: start-time
+          in: query
+          required: false
+          description: 'The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.'
+          type: string
+          format: date-time
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/settings':
     get:
       operationId: GetApplicationSettings
@@ -3295,13 +3369,92 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
           required: false
           description: The NextToken string that specifies which page of results to return in a paginated response.
           type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}':
+    get:
+      operationId: GetCampaignDateRangeKpi
+      description: ' <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignDateRangeKpiResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          type: string
+        - name: campaign-id
+          in: path
+          required: true
+          description: The unique identifier for the campaign.
+          type: string
+        - name: end-time
+          in: query
+          required: false
+          description: 'The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.'
+          type: string
+          format: date-time
+        - name: kpi-name
+          in: path
+          required: true
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+          type: string
+        - name: next-token
+          in: query
+          required: false
+          description: The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          type: string
+        - name: page-size
+          in: query
+          required: false
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+          type: string
+        - name: start-time
+          in: query
+          required: false
+          description: 'The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.'
+          type: string
+          format: date-time
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -3414,7 +3567,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: token
           in: query
@@ -3622,7 +3775,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -3684,7 +3837,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -3803,7 +3956,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: The maximum number of items to include on each page in a paginated response.
+          description: The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
           type: string
         - name: segment-id
           in: path
@@ -4629,6 +4782,13 @@ definitions:
     properties:
       ApplicationResponse:
         $ref: '#/definitions/ApplicationResponse'
+  GetApplicationDateRangeKpiResponse:
+    type: object
+    required:
+      - ApplicationDateRangeKpiResponse
+    properties:
+      ApplicationDateRangeKpiResponse:
+        $ref: '#/definitions/ApplicationDateRangeKpiResponse'
   GetApplicationSettingsResponse:
     type: object
     required:
@@ -4664,6 +4824,13 @@ definitions:
     properties:
       ActivitiesResponse:
         $ref: '#/definitions/ActivitiesResponse'
+  GetCampaignDateRangeKpiResponse:
+    type: object
+    required:
+      - CampaignDateRangeKpiResponse
+    properties:
+      CampaignDateRangeKpiResponse:
+        $ref: '#/definitions/CampaignDateRangeKpiResponse'
   GetCampaignVersionResponse:
     type: object
     required:
@@ -5638,6 +5805,46 @@ definitions:
         $ref: '#/definitions/__string'
         description: The message title to use instead of the default message title. This value overrides the default message title.
     description: Specifies address-based configuration settings for a message that's sent directly to an endpoint.
+  __timestampIso8601:
+    type: string
+    format: date-time
+  BaseKpiResult:
+    type: object
+    required:
+      - Rows
+    properties:
+      Rows:
+        $ref: '#/definitions/ListOfResultRow'
+        description: An array of objects that provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.
+    description: Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.
+  ApplicationDateRangeKpiResponse:
+    type: object
+    required:
+      - KpiResult
+      - KpiName
+      - EndTime
+      - StartTime
+      - ApplicationId
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the application that the metric applies to.
+      EndTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: 'The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+      KpiName:
+        $ref: '#/definitions/__string'
+        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+      KpiResult:
+        $ref: '#/definitions/BaseKpiResult'
+        description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.
+      StartTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: 'The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+    description: 'Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.'
   ApplicationResponse:
     type: object
     required:
@@ -5828,6 +6035,42 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The URL to open in the recipient''s default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.'
     description: Specifies the settings for a one-time message that's sent directly to an endpoint through the Baidu (Baidu Cloud Push) channel.
+  ListOfResultRow:
+    type: array
+    items:
+      $ref: '#/definitions/ResultRow'
+  CampaignDateRangeKpiResponse:
+    type: object
+    required:
+      - KpiResult
+      - KpiName
+      - EndTime
+      - CampaignId
+      - StartTime
+      - ApplicationId
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the application that the metric applies to.
+      CampaignId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier for the campaign that the metric applies to.
+      EndTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: 'The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+      KpiName:
+        $ref: '#/definitions/__string'
+        description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href="developerguide.html">Amazon Pinpoint Developer Guide</a>.'
+      KpiResult:
+        $ref: '#/definitions/BaseKpiResult'
+        description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Campaign Metrics resource. The Campaign Metrics resource returns all results in a single page.
+      StartTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: 'The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.'
+    description: 'Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.'
   CampaignEmailMessage:
     type: object
     required:
@@ -7310,6 +7553,9 @@ definitions:
   GetAppRequest:
     type: object
     properties: {}
+  GetApplicationDateRangeKpiRequest:
+    type: object
+    properties: {}
   GetApplicationSettingsRequest:
     type: object
     properties: {}
@@ -7320,6 +7566,9 @@ definitions:
     type: object
     properties: {}
   GetCampaignActivitiesRequest:
+    type: object
+    properties: {}
+  GetCampaignDateRangeKpiRequest:
     type: object
     properties: {}
   GetCampaignRequest:
@@ -7627,7 +7876,7 @@ definitions:
     properties:
       Carrier:
         $ref: '#/definitions/__string'
-        description: The carrier or service provider that the phone number is currently registered with.
+        description: 'The carrier or service provider that the phone number is currently registered with. In some countries and regions, this value may be the carrier or service provider that the phone number was originally registered with.'
       City:
         $ref: '#/definitions/__string'
         description: The name of the city where the phone number was originally registered.
@@ -7741,6 +7990,40 @@ definitions:
     properties:
       UpdateAttributesRequest:
         $ref: '#/definitions/UpdateAttributesRequest'
+  ListOfResultRowValue:
+    type: array
+    items:
+      $ref: '#/definitions/ResultRowValue'
+  ResultRow:
+    type: object
+    required:
+      - GroupedBys
+      - Values
+    properties:
+      GroupedBys:
+        $ref: '#/definitions/ListOfResultRowValue'
+        description: ' <p>An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.</p>'
+      Values:
+        $ref: '#/definitions/ListOfResultRowValue'
+        description: ' <p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.</p>'
+    description: Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.
+  ResultRowValue:
+    type: object
+    required:
+      - Type
+      - Value
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/__string'
+        description: ' <p>The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.</p>'
+      Type:
+        $ref: '#/definitions/__string'
+        description: ' <p>The data type of the value specified by the Value property.</p>'
+      Value:
+        $ref: '#/definitions/__string'
+        description: ' <p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>'
+    description: ' <p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.</p>'
   SMSChannelRequest:
     type: object
     properties:
