@@ -2432,6 +2432,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
+      PipelineDetails:
+        $ref: '#/definitions/__listOfPipelineDetail'
+        description: Runtime details for the pipelines of a running channel.
       PipelinesRunningCount:
         $ref: '#/definitions/__integer'
         description: The number of currently healthy pipelines.
@@ -2548,6 +2551,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
+      PipelineDetails:
+        $ref: '#/definitions/__listOfPipelineDetail'
+        description: Runtime details for the pipelines of a running channel.
       PipelinesRunningCount:
         $ref: '#/definitions/__integer'
         description: The number of currently healthy pipelines.
@@ -2580,6 +2586,11 @@ definitions:
         description: |
           STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
           SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
+      InputSourceType:
+        $ref: '#/definitions/InputSourceType'
+        description: |
+          Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
+          during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
       MediaConnectFlows:
         $ref: '#/definitions/__listOfMediaConnectFlow'
         description: A list of MediaConnect Flows for this input.
@@ -2821,6 +2832,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
+      PipelineDetails:
+        $ref: '#/definitions/__listOfPipelineDetail'
+        description: Runtime details for the pipelines of a running channel.
       PipelinesRunningCount:
         $ref: '#/definitions/__integer'
         description: The number of currently healthy pipelines.
@@ -2867,6 +2881,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
+      PipelineDetails:
+        $ref: '#/definitions/__listOfPipelineDetail'
+        description: Runtime details for the pipelines of a running channel.
       PipelinesRunningCount:
         $ref: '#/definitions/__integer'
         description: The number of currently healthy pipelines.
@@ -4160,6 +4177,11 @@ definitions:
       - DEBUG
       - DISABLED
     description: The log level the user wants for their channel.
+  __listOfPipelineDetail:
+    type: array
+    description: Placeholder documentation for __listOfPipelineDetail
+    items:
+      $ref: '#/definitions/PipelineDetail'
   ChannelState:
     type: string
     enum:
@@ -4214,6 +4236,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
+      PipelineDetails:
+        $ref: '#/definitions/__listOfPipelineDetail'
+        description: Runtime details for the pipelines of a running channel.
       PipelinesRunningCount:
         $ref: '#/definitions/__integer'
         description: The number of currently healthy pipelines.
@@ -4420,6 +4445,11 @@ definitions:
         description: |
           STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
           SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
+      InputSourceType:
+        $ref: '#/definitions/InputSourceType'
+        description: |
+          Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
+          during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
       MediaConnectFlows:
         $ref: '#/definitions/__listOfMediaConnectFlow'
         description: A list of MediaConnect Flows for this input.
@@ -4575,6 +4605,15 @@ definitions:
       - STANDARD
       - SINGLE_PIPELINE
     description: A standard input has two sources and a single pipeline input only has one.
+  InputSourceType:
+    type: string
+    enum:
+      - STATIC
+      - DYNAMIC
+    description: |
+      There are two types of input sources, static and dynamic. If an input source is dynamic you can
+      change the source url of the input dynamically using an input switch action. However, the only input type
+      to support a dynamic url at this time is MP4_FILE. By default all input sources are static.
   __listOfMediaConnectFlow:
     type: array
     description: Placeholder documentation for __listOfMediaConnectFlow
@@ -5800,6 +5839,10 @@ definitions:
       - CHUNKED
       - NON_CHUNKED
     description: Hls Webdav Http Transfer Mode
+  ImmediateModeScheduleActionStartSettings:
+    type: object
+    properties: {}
+    description: Settings to configure an action so that it occurs immediately. This is only supported for input switch actions currently.
   InputSettings:
     type: object
     properties:
@@ -5853,6 +5896,44 @@ definitions:
         $ref: '#/definitions/__integerMin0Max15'
         description: The index of the input channel used as a source.
     description: Input Channel Level
+  InputTimecodeSource:
+    type: string
+    enum:
+      - ZEROBASED
+      - EMBEDDED
+    description: Documentation update needed
+  StartTimecode:
+    type: object
+    properties:
+      Timecode:
+        $ref: '#/definitions/__string'
+        description: 'The timecode for the frame where you want to start the clip. Optional; if not specified, the clip starts at first frame in the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.'
+    description: Settings to identify the start of the clip.
+  StopTimecode:
+    type: object
+    properties:
+      LastFrameClippingBehavior:
+        $ref: '#/definitions/LastFrameClippingBehavior'
+        description: 'If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode.'
+      Timecode:
+        $ref: '#/definitions/__string'
+        description: 'The timecode for the frame where you want to stop the clip. Optional; if not specified, the clip continues to the end of the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.'
+    description: Settings to identify the end of the clip.
+  InputClippingSettings:
+    type: object
+    required:
+      - InputTimecodeSource
+    properties:
+      InputTimecodeSource:
+        $ref: '#/definitions/InputTimecodeSource'
+        description: The source of the timecodes in the source being clipped.
+      StartTimecode:
+        $ref: '#/definitions/StartTimecode'
+        description: Settings to identify the start of the clip.
+      StopTimecode:
+        $ref: '#/definitions/StopTimecode'
+        description: Settings to identify the end of the clip.
+    description: 'Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.'
   InputDeblockFilter:
     type: string
     enum:
@@ -5999,8 +6080,14 @@ definitions:
     properties:
       InputAttachmentNameReference:
         $ref: '#/definitions/__string'
-        description: The name of the input attachment that should be switched to by this action.
-    description: Settings for the action to switch an input.
+        description: The name of the input attachment (not the name of the input!) to switch to. The name is specified in the channel configuration.
+      InputClippingSettings:
+        $ref: '#/definitions/InputClippingSettings'
+        description: 'Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.'
+      UrlPath:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.'
+    description: 'Settings for the "switch input" action: to switch from ingesting one input to ingesting another input.'
   InputWhitelistRule:
     type: object
     properties:
@@ -6020,6 +6107,12 @@ definitions:
         $ref: '#/definitions/__stringMin32Max32'
         description: Static key value as a 32 character hexadecimal string.
     description: Static Key Settings
+  LastFrameClippingBehavior:
+    type: string
+    enum:
+      - EXCLUDE_LAST_FRAME
+      - INCLUDE_LAST_FRAME
+    description: 'If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode.'
   ListChannelsRequest:
     type: object
     properties: {}
@@ -6297,7 +6390,7 @@ definitions:
       ChannelId:
         $ref: '#/definitions/__stringMin1'
         description: ID of the channel in MediaPackage that is the destination for this output group. You do not need to specify the individual inputs in MediaPackage; MediaLive will handle the connection of the two MediaLive pipelines to the two MediaPackage inputs. The MediaPackage channel and MediaLive channel must be in the same region.
-    description: Media Package Output Destination Settings
+    description: MediaPackage Output Destination Settings
   MediaPackageOutputSettings:
     type: object
     properties: {}
@@ -6680,6 +6773,19 @@ definitions:
       Pipelines:
         $ref: '#/definitions/__listOfPipelinePauseStateSettings'
     description: Settings for the action to set pause state of a channel.
+  PipelineDetail:
+    type: object
+    properties:
+      ActiveInputAttachmentName:
+        $ref: '#/definitions/__string'
+        description: The name of the active input attachment currently being ingested by this pipeline.
+      ActiveInputSwitchActionName:
+        $ref: '#/definitions/__string'
+        description: The name of the input switch schedule action that occurred most recently and that resulted in the switch to the current input attachment for this pipeline.
+      PipelineId:
+        $ref: '#/definitions/__string'
+        description: Pipeline ID
+    description: Runtime details of a pipeline when a channel is running.
   PipelineId:
     type: string
     enum:
@@ -6894,11 +7000,14 @@ definitions:
     properties:
       FixedModeScheduleActionStartSettings:
         $ref: '#/definitions/FixedModeScheduleActionStartSettings'
-        description: Holds the start time for the action.
+        description: Option for specifying the start time for an action.
       FollowModeScheduleActionStartSettings:
         $ref: '#/definitions/FollowModeScheduleActionStartSettings'
-        description: Specifies an action to follow for scheduling this action.
-    description: Settings to specify the start time for an action.
+        description: Option for specifying an action as relative to another action.
+      ImmediateModeScheduleActionStartSettings:
+        $ref: '#/definitions/ImmediateModeScheduleActionStartSettings'
+        description: Option for specifying an action that should be applied immediately.
+    description: Settings to specify when an action should occur. Only one of the options must be selected.
   ScheduleAction:
     type: object
     required:
@@ -6922,7 +7031,7 @@ definitions:
       - SpliceEventId
     properties:
       SpliceEventId:
-        $ref: '#/definitions/__integerMin0Max4294967295'
+        $ref: '#/definitions/__longMin0Max4294967295'
         description: 'The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.'
     description: Settings for a SCTE-35 return_to_network message.
   Scte35SpliceInsertScheduleActionSettings:
@@ -6931,10 +7040,10 @@ definitions:
       - SpliceEventId
     properties:
       Duration:
-        $ref: '#/definitions/__integerMin0Max8589934591'
+        $ref: '#/definitions/__longMin0Max8589934591'
         description: 'Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.'
       SpliceEventId:
-        $ref: '#/definitions/__integerMin0Max4294967295'
+        $ref: '#/definitions/__longMin0Max4294967295'
         description: 'The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.'
     description: Settings for a SCTE-35 splice_insert message.
   Scte35TimeSignalScheduleActionSettings:
@@ -7091,10 +7200,10 @@ definitions:
         $ref: '#/definitions/Scte35SegmentationCancelIndicator'
         description: Corresponds to SCTE-35 segmentation_event_cancel_indicator.
       SegmentationDuration:
-        $ref: '#/definitions/__integerMin0Max1099511627775'
+        $ref: '#/definitions/__longMin0Max1099511627775'
         description: 'Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.'
       SegmentationEventId:
-        $ref: '#/definitions/__integerMin0Max4294967295'
+        $ref: '#/definitions/__longMin0Max4294967295'
         description: 'Corresponds to SCTE-35 segmentation_event_id. '
       SegmentationTypeId:
         $ref: '#/definitions/__integerMin0Max255'
@@ -7115,9 +7224,9 @@ definitions:
         $ref: '#/definitions/__integerMin0Max255'
         description: Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.
     description: Corresponds to SCTE-35 segmentation_descriptor.
-  __integerMin0Max4294967295:
+  __longMin0Max4294967295:
     type: integer
-    description: Placeholder documentation for __integerMin0Max4294967295
+    description: Placeholder documentation for __longMin0Max4294967295
     minimum: 0
     maximum: 4294967295
   Scte35SegmentationCancelIndicator:
@@ -7126,9 +7235,9 @@ definitions:
       - SEGMENTATION_EVENT_NOT_CANCELED
       - SEGMENTATION_EVENT_CANCELED
     description: 'Corresponds to SCTE-35 segmentation_event_cancel_indicator. SEGMENTATION_EVENT_NOT_CANCELED corresponds to 0 in the SCTE-35 specification and indicates that this is an insertion request. SEGMENTATION_EVENT_CANCELED corresponds to 1 in the SCTE-35 specification and indicates that this is a cancelation request, in which case complete this field and the existing event ID to cancel.'
-  __integerMin0Max1099511627775:
+  __longMin0Max1099511627775:
     type: integer
-    description: Placeholder documentation for __integerMin0Max1099511627775
+    description: Placeholder documentation for __longMin0Max1099511627775
     minimum: 0
     maximum: 1099511627775
   __integerMinNegative1000Max1000:
@@ -7148,9 +7257,9 @@ definitions:
       - FOLLOW
       - IGNORE
     description: Scte35 Splice Insert Web Delivery Allowed Behavior
-  __integerMin0Max8589934591:
+  __longMin0Max8589934591:
     type: integer
-    description: Placeholder documentation for __integerMin0Max8589934591
+    description: Placeholder documentation for __longMin0Max8589934591
     minimum: 0
     maximum: 8589934591
   __listOfScte35Descriptor:

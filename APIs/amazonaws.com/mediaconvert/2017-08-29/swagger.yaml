@@ -388,7 +388,7 @@ paths:
                     description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
                   NielsenConfiguration:
                     $ref: '#/definitions/NielsenConfiguration'
-                    description: Settings for Nielsen Configuration
+                    description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
                   OutputGroups:
                     $ref: '#/definitions/__listOfOutputGroup'
                     description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
@@ -593,7 +593,7 @@ paths:
                     description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
                   NielsenConfiguration:
                     $ref: '#/definitions/NielsenConfiguration'
-                    description: Settings for Nielsen Configuration
+                    description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
                   OutputGroups:
                     $ref: '#/definitions/__listOfOutputGroup'
                     description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
@@ -779,7 +779,7 @@ paths:
                     description: Container specific settings.
                   VideoDescription:
                     $ref: '#/definitions/VideoDescription'
-                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
               tags:
                 description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
                 type: object
@@ -1190,7 +1190,7 @@ paths:
                     description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
                   NielsenConfiguration:
                     $ref: '#/definitions/NielsenConfiguration'
-                    description: Settings for Nielsen Configuration
+                    description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
                   OutputGroups:
                     $ref: '#/definitions/__listOfOutputGroup'
                     description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
@@ -1369,7 +1369,7 @@ paths:
                     description: Container specific settings.
                   VideoDescription:
                     $ref: '#/definitions/VideoDescription'
-                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+                    description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
   '/2017-08-29/queues/{name}':
     delete:
       operationId: DeleteQueue
@@ -1874,12 +1874,12 @@ definitions:
     type: object
     properties:
       BreakoutCode:
-        $ref: '#/definitions/__integerMin0Max9'
-        description: 'Use Nielsen Configuration (NielsenConfiguration) to set the Nielsen measurement system breakout code. Supported values are 0, 3, 7, and 9.'
+        $ref: '#/definitions/__integerMin0Max0'
+        description: 'Nielsen has discontinued the use of breakout code functionality. If you must include this property, set the value to zero.'
       DistributorId:
         $ref: '#/definitions/__string'
         description: Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
-    description: Settings for Nielsen Configuration
+    description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
   __listOfOutputGroup:
     type: array
     items:
@@ -1953,7 +1953,7 @@ definitions:
         description: Settings for MOV Container.
       Mp4Settings:
         $ref: '#/definitions/Mp4Settings'
-        description: Settings for MP4 Container
+        description: Settings for MP4 container. You can create audio-only AAC outputs with this container.
     description: Container specific settings.
   VideoDescription:
     type: object
@@ -1963,16 +1963,16 @@ definitions:
         description: 'This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling (AfdSignaling) to specify whether the service includes AFD values in the output video data and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data.'
       AntiAlias:
         $ref: '#/definitions/AntiAlias'
-        description: 'The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
+        description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
       CodecSettings:
         $ref: '#/definitions/VideoCodecSettings'
-        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
+        description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
       ColorMetadata:
         $ref: '#/definitions/ColorMetadata'
         description: Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.
       Crop:
         $ref: '#/definitions/Rectangle'
-        description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".'
+        description: Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
       DropFrameTimecode:
         $ref: '#/definitions/DropFrameTimecode'
         description: 'Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion (TimecodeInsertion) is enabled.'
@@ -1984,13 +1984,13 @@ definitions:
         description: 'Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don''t provide a value here, the service will use the input height.'
       Position:
         $ref: '#/definitions/Rectangle'
-        description: Use Position (Position) to point to a rectangle object to define your position. This setting overrides any other aspect ratio.
+        description: Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black.
       RespondToAfd:
         $ref: '#/definitions/RespondToAfd'
         description: 'Use Respond to AFD (RespondToAfd) to specify how the service changes the video itself in response to AFD values in the input. * Choose Respond to clip the input video frame according to the AFD value, input display aspect ratio, and output display aspect ratio. * Choose Passthrough to include the input AFD values. Do not choose this when AfdSignaling is set to (NONE). A preferred implementation of this workflow is to set RespondToAfd to (NONE) and set AfdSignaling to (AUTO). * Choose None to remove all input AFD values from this output.'
       ScalingBehavior:
         $ref: '#/definitions/ScalingBehavior'
-        description: Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
+        description: Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to have the service stretch your video image to fit. Keep the setting Default (DEFAULT) to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement (position) in this output.
       Sharpness:
         $ref: '#/definitions/__integerMin0Max100'
         description: 'Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
@@ -2198,7 +2198,7 @@ definitions:
         description: 'Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and  FollowInputAudioType. Choose NORMAL when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType.'
       Bitrate:
         $ref: '#/definitions/__integerMin6000Max1024000'
-        description: 'Average bitrate in bits/second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.'
+        description: 'Specify the average bitrate in bits per second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values that you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.'
       CodecProfile:
         $ref: '#/definitions/AacCodecProfile'
         description: AAC Profile.
@@ -2232,7 +2232,7 @@ definitions:
       - MUSIC_AND_EFFECTS
       - VISUALLY_IMPAIRED
       - VOICE_OVER
-    description: Specifies the "Bitstream Mode" (bsmod) for the emitted AC-3 stream. See ATSC A/52-2012 for background on these values.
+    description: 'Specify the bitstream mode for the AC-3 stream that the encoder emits. For more information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
   Ac3CodingMode:
     type: string
     enum:
@@ -2276,10 +2276,10 @@ definitions:
     properties:
       Bitrate:
         $ref: '#/definitions/__integerMin64000Max640000'
-        description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+        description: Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
       BitstreamMode:
         $ref: '#/definitions/Ac3BitstreamMode'
-        description: Specifies the "Bitstream Mode" (bsmod) for the emitted AC-3 stream. See ATSC A/52-2012 for background on these values.
+        description: 'Specify the bitstream mode for the AC-3 stream that the encoder emits. For more information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
       CodingMode:
         $ref: '#/definitions/Ac3CodingMode'
         description: Dolby Digital coding mode. Determines number of channels.
@@ -2297,7 +2297,7 @@ definitions:
         description: 'When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
       SampleRate:
         $ref: '#/definitions/__integerMin48000Max48000'
-        description: Sample rate in hz. Sample rate is always 48000.
+        description: This value is always 48000. It represents the sample rate in Hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AC3.
   AccelerationSettings:
     type: object
@@ -2356,7 +2356,7 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: 'The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
+    description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
   AssociateCertificateRequest:
     type: object
     required:
@@ -2374,8 +2374,64 @@ definitions:
       - AIFF
       - AC3
       - EAC3
+      - EAC3_ATMOS
       - PASSTHROUGH
     description: Type of Audio codec.
+  Eac3AtmosSettings:
+    type: object
+    properties:
+      Bitrate:
+        $ref: '#/definitions/__integerMin384000Max768000'
+        description: |-
+          Specify the average bitrate in bits per second.
+          Valid values: 384k, 448k, 640k, 768k
+      BitstreamMode:
+        $ref: '#/definitions/Eac3AtmosBitstreamMode'
+        description: 'Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
+      CodingMode:
+        $ref: '#/definitions/Eac3AtmosCodingMode'
+        description: The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+      DialogueIntelligence:
+        $ref: '#/definitions/Eac3AtmosDialogueIntelligence'
+        description: Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+      DynamicRangeCompressionLine:
+        $ref: '#/definitions/Eac3AtmosDynamicRangeCompressionLine'
+        description: Specify the absolute peak level for a signal with dynamic range compression.
+      DynamicRangeCompressionRf:
+        $ref: '#/definitions/Eac3AtmosDynamicRangeCompressionRf'
+        description: Specify how the service limits the audio dynamic range when compressing the audio.
+      LoRoCenterMixLevel:
+        $ref: '#/definitions/__doubleMinNegative6Max3'
+        description: |-
+          Specify a value for the following Dolby Atmos setting: Left only/Right only center mix
+          (Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this
+          value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
+          Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+      LoRoSurroundMixLevel:
+        $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
+        description: 'Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.'
+      LtRtCenterMixLevel:
+        $ref: '#/definitions/__doubleMinNegative6Max3'
+        description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.'
+      LtRtSurroundMixLevel:
+        $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
+        description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.'
+      MeteringMode:
+        $ref: '#/definitions/Eac3AtmosMeteringMode'
+        description: Choose how the service meters the loudness of your audio.
+      SampleRate:
+        $ref: '#/definitions/__integerMin48000Max48000'
+        description: This value is always 48000. It represents the sample rate in Hz.
+      SpeechThreshold:
+        $ref: '#/definitions/__integerMin1Max100'
+        description: Specify the percentage of audio content that must be speech before the encoder uses the measured speech loudness as the overall program loudness.
+      StereoDownmix:
+        $ref: '#/definitions/Eac3AtmosStereoDownmix'
+        description: Choose how the service does stereo downmixing.
+      SurroundExMode:
+        $ref: '#/definitions/Eac3AtmosSurroundExMode'
+        description: Specify whether your input audio has an additional center rear surround channel matrix encoded into your left and right surround channels.
+    description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3_ATMOS.
   Eac3Settings:
     type: object
     properties:
@@ -2384,10 +2440,10 @@ definitions:
         description: 'If set to ATTENUATE_3_DB, applies a 3 dB attenuation to the surround channels. Only used for 3/2 coding mode.'
       Bitrate:
         $ref: '#/definitions/__integerMin64000Max640000'
-        description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+        description: Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
       BitstreamMode:
         $ref: '#/definitions/Eac3BitstreamMode'
-        description: Specifies the "Bitstream Mode" (bsmod) for the emitted E-AC-3 stream. See ATSC A/52-2012 (Annex E) for background on these values.
+        description: 'Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
       CodingMode:
         $ref: '#/definitions/Eac3CodingMode'
         description: Dolby Digital Plus coding mode. Determines number of channels.
@@ -2399,10 +2455,10 @@ definitions:
         description: 'Sets the dialnorm for the output. If blank and input audio is Dolby Digital Plus, dialnorm will be passed through.'
       DynamicRangeCompressionLine:
         $ref: '#/definitions/Eac3DynamicRangeCompressionLine'
-        description: Enables Dynamic Range Compression that restricts the absolute peak level for a signal.
+        description: Specify the absolute peak level for a signal with dynamic range compression.
       DynamicRangeCompressionRf:
         $ref: '#/definitions/Eac3DynamicRangeCompressionRf'
-        description: 'Enables Heavy Dynamic Range Compression, ensures that the instantaneous signal peaks do not exceed specified levels.'
+        description: Specify how the service limits the audio dynamic range when compressing the audio.
       LfeControl:
         $ref: '#/definitions/Eac3LfeControl'
         description: 'When encoding 3/2 audio, controls whether the LFE channel is enabled'
@@ -2411,24 +2467,16 @@ definitions:
         description: Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid with 3_2_LFE coding mode.
       LoRoCenterMixLevel:
         $ref: '#/definitions/__doubleMinNegative60Max3'
-        description: |-
-          Left only/Right only center mix level. Only used for 3/2 coding mode.
-          Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
+        description: 'Specify a value for the following Dolby Digital Plus setting: Left only/Right only center mix (Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left only/Right only center (loRoCenterMixLevel).'
       LoRoSurroundMixLevel:
         $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
-        description: |-
-          Left only/Right only surround mix level. Only used for 3/2 coding mode.
-          Valid values: -1.5 -3.0 -4.5 -6.0 -60
+        description: 'Specify a value for the following Dolby Digital Plus setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left only/Right only surround (loRoSurroundMixLevel).'
       LtRtCenterMixLevel:
         $ref: '#/definitions/__doubleMinNegative60Max3'
-        description: |-
-          Left total/Right total center mix level. Only used for 3/2 coding mode.
-          Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
+        description: 'Specify a value for the following Dolby Digital Plus setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left total/Right total center (ltRtCenterMixLevel).'
       LtRtSurroundMixLevel:
         $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
-        description: |-
-          Left total/Right total surround mix level. Only used for 3/2 coding mode.
-          Valid values: -1.5 -3.0 -4.5 -6.0 -60
+        description: 'Specify a value for the following Dolby Digital Plus setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left total/Right total surround (ltRtSurroundMixLevel).'
       MetadataControl:
         $ref: '#/definitions/Eac3MetadataControl'
         description: 'When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
@@ -2440,10 +2488,10 @@ definitions:
         description: Controls the amount of phase-shift applied to the surround channels. Only used for 3/2 coding mode.
       SampleRate:
         $ref: '#/definitions/__integerMin48000Max48000'
-        description: Sample rate in hz. Sample rate is always 48000.
+        description: This value is always 48000. It represents the sample rate in Hz.
       StereoDownmix:
         $ref: '#/definitions/Eac3StereoDownmix'
-        description: Stereo downmix preference. Only used for 3/2 coding mode.
+        description: 'Choose how the service does stereo downmixing. This setting only applies if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Stereo downmix (Eac3StereoDownmix).'
       SurroundExMode:
         $ref: '#/definitions/Eac3SurroundExMode'
         description: 'When encoding 3/2 audio, sets whether an extra center back surround channel is matrix encoded into the left and right surround channels.'
@@ -2456,7 +2504,7 @@ definitions:
     properties:
       Bitrate:
         $ref: '#/definitions/__integerMin32000Max384000'
-        description: Average bitrate in bits/second.
+        description: Specify the average bitrate in bits per second.
       Channels:
         $ref: '#/definitions/__integerMin1Max2'
         description: 'Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give you 1 output channel; choosing Stereo will give you 2. In the API, valid values are 1 and 2.'
@@ -2495,6 +2543,9 @@ definitions:
       Codec:
         $ref: '#/definitions/AudioCodec'
         description: Type of Audio codec.
+      Eac3AtmosSettings:
+        $ref: '#/definitions/Eac3AtmosSettings'
+        description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3_ATMOS.
       Eac3Settings:
         $ref: '#/definitions/Eac3Settings'
         description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3.
@@ -2504,7 +2555,7 @@ definitions:
       WavSettings:
         $ref: '#/definitions/WavSettings'
         description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV.
-    description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings'
+    description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
   AudioDefaultSelection:
     type: string
     enum:
@@ -2516,7 +2567,7 @@ definitions:
     properties:
       Algorithm:
         $ref: '#/definitions/AudioNormalizationAlgorithm'
-        description: 'Audio normalization algorithm to use. 1770-1 conforms to the CALM Act specification, 1770-2 conforms to the EBU R-128 specification.'
+        description: 'Choose one of the following audio normalization algorithms: ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content, suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels. ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of EBU-R128. Supports up to 5.1 audio channels. ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak measurement. ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including configurations such as 7.1.'
       AlgorithmControl:
         $ref: '#/definitions/AudioNormalizationAlgorithmControl'
         description: 'When enabled the output audio is corrected using the chosen algorithm. If disabled, the audio will be measured but not adjusted.'
@@ -2531,8 +2582,8 @@ definitions:
         description: 'If set to TRUE_PEAK, calculate and log the TruePeak for each output''s audio track loudness.'
       TargetLkfs:
         $ref: '#/definitions/__doubleMinNegative59Max0'
-        description: 'Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm. The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.'
-    description: Advanced audio normalization settings.
+        description: 'When you use Audio normalization (AudioNormalizationSettings), optionally use this setting to specify a target loudness. If you don''t specify a value here, the encoder chooses a value for you, based on the algorithm that you choose for Algorithm (algorithm). If you choose algorithm 1770-1, the encoder will choose -24 LKFS; otherwise, the encoder will choose -23 LKFS.'
+    description: Advanced audio normalization settings. Ignore these settings unless you need to comply with a loudness standard.
   __integerMin0Max255:
     type: integer
     minimum: 0
@@ -2770,7 +2821,7 @@ definitions:
     properties:
       AudioNormalizationSettings:
         $ref: '#/definitions/AudioNormalizationSettings'
-        description: Advanced audio normalization settings.
+        description: Advanced audio normalization settings. Ignore these settings unless you need to comply with a loudness standard.
       AudioSourceName:
         $ref: '#/definitions/__string'
         description: 'Specifies which audio data to use from each input. In the simplest case, specify an "Audio Selector":#inputs-audio_selector by name based on its order within each input. For example if you specify "Audio Selector 3", then the third audio selector will be used from each input. If an input does not have an "Audio Selector 3", then the audio selector marked as "default" in that input will be used. If there is no audio selector marked as "default", silence will be inserted for the duration of that input. Alternatively, an "Audio Selector Group":#inputs-audio_selector_group name may be specified, with similar default/silence behavior. If no audio_source_name is specified, then "Audio Selector 1" will be chosen automatically.'
@@ -2782,7 +2833,7 @@ definitions:
         description: 'When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then that value is passed through to the output. If the input contains no ISO 639 audio_type, the value in Audio Type is included in the output. Otherwise the value in Audio Type is included in the output. Note that this field and audioType are both ignored if audioDescriptionBroadcasterMix is set to BROADCASTER_MIXED_AD.'
       CodecSettings:
         $ref: '#/definitions/AudioCodecSettings'
-        description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings'
+        description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
       CustomLanguageCode:
         $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when ''Follow Input Language Code'' is not selected or when ''Follow Input Language Code'' is selected but there is no ISO 639 language code specified by the input.'
@@ -2804,7 +2855,9 @@ definitions:
     enum:
       - ITU_BS_1770_1
       - ITU_BS_1770_2
-    description: 'Audio normalization algorithm to use. 1770-1 conforms to the CALM Act specification, 1770-2 conforms to the EBU R-128 specification.'
+      - ITU_BS_1770_3
+      - ITU_BS_1770_4
+    description: 'Choose one of the following audio normalization algorithms: ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content, suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels. ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of EBU-R128. Supports up to 5.1 audio channels. ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak measurement. ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including configurations such as 7.1.'
   AudioNormalizationAlgorithmControl:
     type: string
     enum:
@@ -3193,7 +3246,10 @@ definitions:
     properties:
       Destination608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
-        description: 'Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. Specify a different number for each output captions track. If you don''t specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.'
+        description: 'Ignore this setting unless your input captions are SCC format. With SCC inputs, you can optionally use this setting to replace the input channel number with the channel number that you specify. Specify a different number for each output captions track for a particular output. If you don''t specify an output channel number, the system uses the input channel number for the output channel number. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.'
+      Destination708ServiceNumber:
+        $ref: '#/definitions/__integerMin1Max6'
+        description: 'Ignore this setting unless your input captions are SCC format and you are performing SCC upconvert. With SCC inputs, you can optionally use this setting to specify the 708 service number that is in the output. Specify a different service number for each output captions track for a particular output. If you don''t specify an output track number, the system uses the 608 channel number for the output 708 service number. You can combine two captions channels in your output. Service numbers must be distinct.'
     description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
   SccDestinationSettings:
     type: object
@@ -3714,7 +3770,7 @@ definitions:
         description: Specify the packet identifier (PID) of the SCTE-35 stream in the transport stream.
       Scte35Source:
         $ref: '#/definitions/M2tsScte35Source'
-        description: Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+        description: For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE). Also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml). Also enable ESAM SCTE-35 (include the property scte35Esam).
       SegmentationMarkers:
         $ref: '#/definitions/M2tsSegmentationMarkers'
         description: Inserts segmentation markers at each segmentation_time period. rai_segstart sets the Random Access Indicator bit in the adaptation field. rai_adapt sets the RAI bit and adds the current timecode in the private data bytes. psi_segstart inserts PAT and PMT tables at the start of segments. ebp adds Encoder Boundary Point information to the adaptation field as per OpenCable specification OC-SP-EBP-I01-130118. ebp_legacy adds Encoder Boundary Point information to the adaptation field using a legacy proprietary format.
@@ -3772,7 +3828,7 @@ definitions:
         description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
       Scte35Source:
         $ref: '#/definitions/M3u8Scte35Source'
-        description: Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+        description: 'For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don''t want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE) if you don''t want manifest conditioning. Choose Passthrough (PASSTHROUGH) and choose Ad markers (adMarkers) if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml).'
       TimedMetadata:
         $ref: '#/definitions/TimedMetadata'
         description: Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.
@@ -3820,7 +3876,7 @@ definitions:
       Mp4MajorBrand:
         $ref: '#/definitions/__string'
         description: Overrides the "Major Brand" field in the output file. Usually not necessary to specify.
-    description: Settings for MP4 Container
+    description: Settings for MP4 container. You can create audio-only AAC outputs with this container.
   JobSettings:
     type: object
     properties:
@@ -3841,7 +3897,7 @@ definitions:
         description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
       NielsenConfiguration:
         $ref: '#/definitions/NielsenConfiguration'
-        description: Settings for Nielsen Configuration
+        description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
       OutputGroups:
         $ref: '#/definitions/__listOfOutputGroup'
         description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
@@ -3940,7 +3996,7 @@ definitions:
         description: 'A portion of the job''s ARN, unique within your AWS Elemental MediaConvert resources'
       JobPercentComplete:
         $ref: '#/definitions/__integer'
-        description: 'An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the service can''t provide information about job progress. In those cases, jobPercentComplete returns a null value.'
+        description: 'An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can''t provide information about job progress. In those cases, jobPercentComplete returns a null value.'
       JobTemplate:
         $ref: '#/definitions/__string'
         description: 'The job template that the job is created from, if it is created from a job template.'
@@ -3992,7 +4048,7 @@ definitions:
         description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
       NielsenConfiguration:
         $ref: '#/definitions/NielsenConfiguration'
-        description: Settings for Nielsen Configuration
+        description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
       OutputGroups:
         $ref: '#/definitions/__listOfOutputGroup'
         description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
@@ -4041,7 +4097,7 @@ definitions:
     properties:
       AccelerationSettings:
         $ref: '#/definitions/AccelerationSettings'
-        description: Accelerated transcoding is currently in private preview. Contact AWS for more information.
+        description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content.'
       Arn:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
@@ -4087,7 +4143,7 @@ definitions:
         description: Container specific settings.
       VideoDescription:
         $ref: '#/definitions/VideoDescription'
-        description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+        description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
     description: Settings for preset
   CreatePresetRequest:
     type: object
@@ -4510,6 +4566,76 @@ definitions:
         $ref: '#/definitions/__integerMin1000Max30000'
         description: The number of milliseconds between instances of this table in the output transport stream.
     description: Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
+  Eac3AtmosBitstreamMode:
+    type: string
+    enum:
+      - COMPLETE_MAIN
+    description: 'Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
+  Eac3AtmosCodingMode:
+    type: string
+    enum:
+      - CODING_MODE_9_1_6
+    description: The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+  Eac3AtmosDialogueIntelligence:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+    description: Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+  Eac3AtmosDynamicRangeCompressionLine:
+    type: string
+    enum:
+      - NONE
+      - FILM_STANDARD
+      - FILM_LIGHT
+      - MUSIC_STANDARD
+      - MUSIC_LIGHT
+      - SPEECH
+    description: Specify the absolute peak level for a signal with dynamic range compression.
+  Eac3AtmosDynamicRangeCompressionRf:
+    type: string
+    enum:
+      - NONE
+      - FILM_STANDARD
+      - FILM_LIGHT
+      - MUSIC_STANDARD
+      - MUSIC_LIGHT
+      - SPEECH
+    description: Specify how the service limits the audio dynamic range when compressing the audio.
+  Eac3AtmosMeteringMode:
+    type: string
+    enum:
+      - LEQ_A
+      - ITU_BS_1770_1
+      - ITU_BS_1770_2
+      - ITU_BS_1770_3
+      - ITU_BS_1770_4
+    description: Choose how the service meters the loudness of your audio.
+  __integerMin384000Max768000:
+    type: integer
+    minimum: 384000
+    maximum: 768000
+  __doubleMinNegative6Max3:
+    type: number
+    format: double
+  __doubleMinNegative60MaxNegative1:
+    type: number
+    format: double
+  Eac3AtmosStereoDownmix:
+    type: string
+    enum:
+      - NOT_INDICATED
+      - STEREO
+      - SURROUND
+      - DPL2
+    description: Choose how the service does stereo downmixing.
+  Eac3AtmosSurroundExMode:
+    type: string
+    enum:
+      - NOT_INDICATED
+      - ENABLED
+      - DISABLED
+    description: Specify whether your input audio has an additional center rear surround channel matrix encoded into your left and right surround channels.
   Eac3AttenuationControl:
     type: string
     enum:
@@ -4524,7 +4650,7 @@ definitions:
       - EMERGENCY
       - HEARING_IMPAIRED
       - VISUALLY_IMPAIRED
-    description: Specifies the "Bitstream Mode" (bsmod) for the emitted E-AC-3 stream. See ATSC A/52-2012 (Annex E) for background on these values.
+    description: 'Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).'
   Eac3CodingMode:
     type: string
     enum:
@@ -4547,7 +4673,7 @@ definitions:
       - MUSIC_STANDARD
       - MUSIC_LIGHT
       - SPEECH
-    description: Enables Dynamic Range Compression that restricts the absolute peak level for a signal.
+    description: Specify the absolute peak level for a signal with dynamic range compression.
   Eac3DynamicRangeCompressionRf:
     type: string
     enum:
@@ -4557,7 +4683,7 @@ definitions:
       - MUSIC_STANDARD
       - MUSIC_LIGHT
       - SPEECH
-    description: 'Enables Heavy Dynamic Range Compression, ensures that the instantaneous signal peaks do not exceed specified levels.'
+    description: Specify how the service limits the audio dynamic range when compressing the audio.
   Eac3LfeControl:
     type: string
     enum:
@@ -4591,9 +4717,6 @@ definitions:
   __doubleMinNegative60Max3:
     type: number
     format: double
-  __doubleMinNegative60MaxNegative1:
-    type: number
-    format: double
   Eac3StereoDownmix:
     type: string
     enum:
@@ -4601,7 +4724,7 @@ definitions:
       - LO_RO
       - LT_RT
       - DPL2
-    description: Stereo downmix preference. Only used for 3/2 coding mode.
+    description: 'Choose how the service does stereo downmixing. This setting only applies if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Stereo downmix (Eac3StereoDownmix).'
   Eac3SurroundExMode:
     type: string
     enum:
@@ -4622,6 +4745,10 @@ definitions:
       - UPCONVERT
       - DISABLED
     description: 'When set to UPCONVERT, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+  __integerMin1Max6:
+    type: integer
+    minimum: 1
+    maximum: 6
   __integerMin1Max1:
     type: integer
     minimum: 1
@@ -4652,7 +4779,7 @@ definitions:
     properties:
       SccXml:
         $ref: '#/definitions/__stringPatternSNSignalProcessingNotificationNS'
-        description: 'Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can''t do both.'
+        description: 'Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. For your MPEG2-TS file outputs, if you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can''t do both.'
     description: ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
   __stringPatternSNSignalProcessingNotificationNS:
     type: string
@@ -4842,7 +4969,7 @@ definitions:
     properties:
       MaxAverageBitrate:
         $ref: '#/definitions/__integerMin1000Max1152000000'
-        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
+        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
       QvbrQualityLevel:
         $ref: '#/definitions/__integerMin1Max10'
         description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
@@ -4885,10 +5012,6 @@ definitions:
     type: integer
     minimum: 0
     maximum: 7
-  __integerMin1Max6:
-    type: integer
-    minimum: 1
-    maximum: 6
   __integerMin1Max32:
     type: integer
     minimum: 1
@@ -4942,7 +5065,7 @@ definitions:
         description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
       Bitrate:
         $ref: '#/definitions/__integerMin1000Max1152000000'
-        description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
+        description: 'Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
         $ref: '#/definitions/H264CodecLevel'
         description: 'Specify an H.264 level that is consistent with your output video settings. If you aren''t sure what level to specify, choose Auto (AUTO).'
@@ -5174,7 +5297,7 @@ definitions:
     properties:
       MaxAverageBitrate:
         $ref: '#/definitions/__integerMin1000Max1466400000'
-        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
+        description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
       QvbrQualityLevel:
         $ref: '#/definitions/__integerMin1Max10'
         description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
@@ -5263,7 +5386,7 @@ definitions:
         description: Enables Alternate Transfer Function SEI message for outputs using Hybrid Log Gamma (HLG) Electro-Optical Transfer Function (EOTF).
       Bitrate:
         $ref: '#/definitions/__integerMin1000Max1466400000'
-        description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
+        description: 'Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
         $ref: '#/definitions/H265CodecLevel'
         description: H.265 Level.
@@ -5385,6 +5508,12 @@ definitions:
     enum:
       - ELEMENTAL
       - ELEMENTAL_SCTE35
+  HlsAudioOnlyContainer:
+    type: string
+    enum:
+      - AUTOMATIC
+      - M2TS
+    description: 'Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create a raw audio-only file with no container. Regardless of the value that you specify here, if this output has video, the service will place outputs into an MPEG2-TS container.'
   HlsAudioTrackType:
     type: string
     enum:
@@ -5543,7 +5672,7 @@ definitions:
     properties:
       AdMarkers:
         $ref: '#/definitions/__listOfHlsAdMarkers'
-        description: Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
+        description: Choose one or more ad marker types to decorate your Apple HLS manifest. This setting does not determine whether SCTE-35 markers appear in the outputs themselves.
       BaseUrl:
         $ref: '#/definitions/__string'
         description: A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
@@ -5626,6 +5755,9 @@ definitions:
       AudioGroupId:
         $ref: '#/definitions/__string'
         description: Specifies the group to which the audio Rendition belongs.
+      AudioOnlyContainer:
+        $ref: '#/definitions/HlsAudioOnlyContainer'
+        description: 'Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container. Regardless of the value that you specify here, if this output has video, the service will place the output into an MPEG2-TS container.'
       AudioRenditionSets:
         $ref: '#/definitions/__string'
         description: 'List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by '',''.'
@@ -5678,6 +5810,22 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/CaptionSelector'
+  Rectangle:
+    type: object
+    properties:
+      Height:
+        $ref: '#/definitions/__integerMin2Max2147483647'
+        description: Height of rectangle in pixels. Specify only even numbers.
+      Width:
+        $ref: '#/definitions/__integerMin2Max2147483647'
+        description: Width of rectangle in pixels. Specify only even numbers.
+      X:
+        $ref: '#/definitions/__integerMin0Max2147483647'
+        description: 'The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.'
+      'Y':
+        $ref: '#/definitions/__integerMin0Max2147483647'
+        description: 'The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.'
+    description: Use Rectangle to identify a specific area of the video frame.
   InputDeblockFilter:
     type: string
     enum:
@@ -5706,9 +5854,9 @@ definitions:
       - ENABLED
       - DISABLED
     description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
-  __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL:
+  __stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL:
     type: string
-    pattern: '^(s3:\/\/)([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$'
+    pattern: '^(http|https|s3)://([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$'
   InputFilterEnable:
     type: string
     enum:
@@ -5775,6 +5923,9 @@ definitions:
       CaptionSelectors:
         $ref: '#/definitions/__mapOfCaptionSelector'
         description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
+      Crop:
+        $ref: '#/definitions/Rectangle'
+        description: 'Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).'
       DeblockFilter:
         $ref: '#/definitions/InputDeblockFilter'
         description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
@@ -5785,7 +5936,7 @@ definitions:
         $ref: '#/definitions/InputDenoiseFilter'
         description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
       FileInput:
-        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL'
+        $ref: '#/definitions/__stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL'
         description: 'Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.'
       FilterEnable:
         $ref: '#/definitions/InputFilterEnable'
@@ -5799,6 +5950,9 @@ definitions:
       InputClippings:
         $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
+      Position:
+        $ref: '#/definitions/Rectangle'
+        description: 'Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black. If you specify a value here, it will override any value that you specify in the output setting Selection placement (position). If you specify a value here, this will override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).'
       ProgramNumber:
         $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn''t exist, the transcoding service will use this default.'
@@ -5861,6 +6015,9 @@ definitions:
       CaptionSelectors:
         $ref: '#/definitions/__mapOfCaptionSelector'
         description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
+      Crop:
+        $ref: '#/definitions/Rectangle'
+        description: 'Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).'
       DeblockFilter:
         $ref: '#/definitions/InputDeblockFilter'
         description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
@@ -5879,6 +6036,9 @@ definitions:
       InputClippings:
         $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
+      Position:
+        $ref: '#/definitions/Rectangle'
+        description: 'Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black. If you specify a value here, it will override any value that you specify in the output setting Selection placement (position). If you specify a value here, this will override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).'
       ProgramNumber:
         $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn''t exist, the transcoding service will use this default.'
@@ -6122,7 +6282,7 @@ definitions:
     enum:
       - PASSTHROUGH
       - NONE
-    description: Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+    description: For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE). Also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml). Also enable ESAM SCTE-35 (include the property scte35Esam).
   M2tsSegmentationMarkers:
     type: string
     enum:
@@ -6172,7 +6332,7 @@ definitions:
     enum:
       - PASSTHROUGH
       - NONE
-    description: Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+    description: 'For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don''t want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE) if you don''t want manifest conditioning. Choose Passthrough (PASSTHROUGH) and choose Ad markers (adMarkers) if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml).'
   TimedMetadata:
     type: string
     enum:
@@ -6436,7 +6596,7 @@ definitions:
         description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
       Bitrate:
         $ref: '#/definitions/__integerMin1000Max288000000'
-        description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
+        description: 'Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
         $ref: '#/definitions/Mpeg2CodecLevel'
         description: Use Level (Mpeg2CodecLevel) to set the MPEG-2 level for the video output.
@@ -6569,10 +6729,10 @@ definitions:
         $ref: '#/definitions/MsSmoothManifestEncoding'
         description: Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16.
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS.
-  __integerMin0Max9:
+  __integerMin0Max0:
     type: integer
     minimum: 0
-    maximum: 9
+    maximum: 0
   NoiseReducerFilter:
     type: string
     enum:
@@ -6669,7 +6829,7 @@ definitions:
         description: 'Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.'
       VideoDescription:
         $ref: '#/definitions/VideoDescription'
-        description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+        description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
     description: An output object describes the settings for a single output file or stream in an output group.
   __listOf__integerMinNegative60Max6:
     type: array
@@ -6886,22 +7046,6 @@ definitions:
     type: integer
     minimum: 2
     maximum: 2147483647
-  Rectangle:
-    type: object
-    properties:
-      Height:
-        $ref: '#/definitions/__integerMin2Max2147483647'
-        description: Height of rectangle in pixels. Specify only even numbers.
-      Width:
-        $ref: '#/definitions/__integerMin2Max2147483647'
-        description: Width of rectangle in pixels. Specify only even numbers.
-      X:
-        $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.'
-      'Y':
-        $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.'
-    description: Use Rectangle to identify a specific area of the video frame.
   __integerMin1Max16:
     type: integer
     minimum: 1
@@ -6930,7 +7074,7 @@ definitions:
         $ref: '#/definitions/S3ServerSideEncryptionType'
         description: 'Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).'
       KmsKeyArn:
-        $ref: '#/definitions/__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912'
+        $ref: '#/definitions/__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912'
         description: 'Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). If you set Server-side encryption to AWS KMS but don''t specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3.'
     description: Settings for how your job outputs are encrypted as they are uploaded to Amazon S3.
   S3ServerSideEncryptionType:
@@ -6939,15 +7083,15 @@ definitions:
       - SERVER_SIDE_ENCRYPTION_S3
       - SERVER_SIDE_ENCRYPTION_KMS
     description: 'Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).'
-  __stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912:
+  __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912:
     type: string
-    pattern: '^arn:aws(-us-gov)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\d{12}:key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+    pattern: '^arn:aws(-us-gov|-cn)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\d{12}:key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
   ScalingBehavior:
     type: string
     enum:
       - DEFAULT
       - STRETCH_TO_OUTPUT
-    description: Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
+    description: Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to have the service stretch your video image to fit. Keep the setting Default (DEFAULT) to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement (position) in this output.
   SccDestinationFramerate:
     type: string
     enum:
@@ -7130,7 +7274,7 @@ definitions:
       ProresSettings:
         $ref: '#/definitions/ProresSettings'
         description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
-    description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
+    description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
   __integerMin0Max15:
     type: integer
     minimum: 0

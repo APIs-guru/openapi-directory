@@ -3,7 +3,7 @@ info:
   version: '2015-09-21'
   x-release: v4
   title: Amazon EC2 Container Registry
-  description: 'Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.'
+  description: '<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1025,6 +1025,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '486':
+          description: ImageTagAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ImageTagAlreadyExistsException'
       parameters:
         - name: body
           in: body
@@ -1045,10 +1049,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImageTagMutability':
+    post:
+      operationId: PutImageTagMutability
+      description: Updates the image tag mutability settings for a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutImageTagMutabilityResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutImageTagMutabilityRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerRegistry_V20150921.PutImageTagMutability
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy':
     post:
       operationId: PutLifecyclePolicy
-      description: 'Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy Template</a>.'
+      description: 'Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy Template</a>.'
       responses:
         '200':
           description: Success
@@ -1089,7 +1134,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy':
     post:
       operationId: SetRepositoryPolicy
-      description: Applies a repository policy on a specified repository to control access permissions.
+      description: 'Applies a repository policy on a specified repository to control access permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1486,7 +1531,10 @@ definitions:
         description: The name to use for the repository. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
       tags:
         $ref: '#/definitions/TagList'
-        description: <p/>
+        description: 'The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+      imageTagMutability:
+        $ref: '#/definitions/ImageTagMutability'
+        description: 'The tag mutability setting for the repository. If this parameter is omitted, the default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.'
   InvalidTagParameterException: {}
   TooManyTagsException: {}
   RepositoryAlreadyExistsException: {}
@@ -1591,7 +1639,7 @@ definitions:
         description: 'The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: A list of repositories to describe.
+        description: The repository that contains the images to describe.
       imageIds:
         $ref: '#/definitions/ImageIdentifierList'
         description: The list of image IDs for the requested repository.
@@ -1884,6 +1932,34 @@ definitions:
         $ref: '#/definitions/ImageTag'
         description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
   ImageAlreadyExistsException: {}
+  ImageTagAlreadyExistsException: {}
+  PutImageTagMutabilityResponse:
+    type: object
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The registry ID associated with the request.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository name associated with the request.
+      imageTagMutability:
+        $ref: '#/definitions/ImageTagMutability'
+        description: The image tag mutability setting for the repository.
+  PutImageTagMutabilityRequest:
+    type: object
+    required:
+      - repositoryName
+      - imageTagMutability
+    properties:
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: 'The AWS account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.'
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository in which to update the image tag mutability settings.
+      imageTagMutability:
+        $ref: '#/definitions/ImageTagMutability'
+        description: 'The tag mutability setting for the repository. If <code>MUTABLE</code> is specified, image tags can be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.'
   PutLifecyclePolicyResponse:
     type: object
     properties:
@@ -1937,7 +2013,7 @@ definitions:
         description: The name of the repository to receive the policy.
       policyText:
         $ref: '#/definitions/RepositoryPolicyText'
-        description: The JSON repository policy text to apply to the repository.
+        description: 'The JSON repository policy text to apply to the repository. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html">Amazon ECR Repository Policy Examples</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
       force:
         $ref: '#/definitions/ForceFlag'
         description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
@@ -2133,6 +2209,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  ImageTagMutability:
+    type: string
+    enum:
+      - MUTABLE
+      - IMMUTABLE
   Repository:
     type: object
     properties:
@@ -2151,6 +2232,9 @@ definitions:
       createdAt:
         $ref: '#/definitions/CreationTimestamp'
         description: 'The date and time, in JavaScript date format, when the repository was created.'
+      imageTagMutability:
+        $ref: '#/definitions/ImageTagMutability'
+        description: The tag mutability setting for the repository.
     description: An object representing a repository.
   CreationTimestamp:
     type: string
@@ -2331,6 +2415,8 @@ definitions:
     description: An object representing an Amazon ECR image failure.
   ImageTag:
     type: string
+    minLength: 1
+    maxLength: 300
   PartSize:
     type: integer
     minimum: 0
