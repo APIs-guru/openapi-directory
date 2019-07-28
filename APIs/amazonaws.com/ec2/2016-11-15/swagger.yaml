@@ -3829,8 +3829,13 @@ paths:
             - Linux with SQL Server Enterprise
         - name: AvailabilityZone
           in: query
-          required: true
+          required: false
           description: The Availability Zone in which to create the Capacity Reservation.
+          type: string
+        - name: AvailabilityZoneId
+          in: query
+          required: false
+          description: ''
           type: string
         - name: Tenancy
           in: query
@@ -3948,8 +3953,13 @@ paths:
             - Linux with SQL Server Enterprise
         - name: AvailabilityZone
           in: formData
-          required: true
+          required: false
           description: The Availability Zone in which to create the Capacity Reservation.
+          type: string
+        - name: AvailabilityZoneId
+          in: formData
+          required: false
+          description: ''
           type: string
         - name: Tenancy
           in: formData
@@ -26790,6 +26800,103 @@ paths:
           type: string
           enum:
             - '2016-11-15'
+  '/#Action=GetCapacityReservationUsage':
+    get:
+      x-aws-operation-name: GetCapacityReservationUsage
+      operationId: GET GetCapacityReservationUsage
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCapacityReservationUsageResult'
+      parameters:
+        - name: CapacityReservationId
+          in: query
+          required: true
+          description: ''
+          type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: ''
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: query
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetCapacityReservationUsage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetCapacityReservationUsage
+      operationId: POST GetCapacityReservationUsage
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCapacityReservationUsageResult'
+      parameters:
+        - name: CapacityReservationId
+          in: formData
+          required: true
+          description: ''
+          type: string
+        - name: NextToken
+          in: formData
+          required: false
+          description: ''
+          type: string
+        - name: MaxResults
+          in: formData
+          required: false
+          description: ''
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: DryRun
+          in: formData
+          required: false
+          description: ''
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - GetCapacityReservationUsage
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
   '/#Action=GetConsoleOutput':
     get:
       x-aws-operation-name: GetConsoleOutput
@@ -42244,6 +42351,23 @@ definitions:
       S3Location:
         $ref: '#/definitions/String'
         description: 'The URL of the exported file in Amazon S3. For example, s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.'
+  GetCapacityReservationUsageResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+      InstanceType:
+        $ref: '#/definitions/String'
+      TotalInstanceCount:
+        $ref: '#/definitions/Integer'
+      AvailableInstanceCount:
+        $ref: '#/definitions/Integer'
+      State:
+        $ref: '#/definitions/CapacityReservationState'
+      InstanceUsages:
+        $ref: '#/definitions/InstanceUsageSet'
   GetConsoleOutputResult:
     type: object
     example:
@@ -44890,6 +45014,12 @@ definitions:
       CapacityReservationId:
         $ref: '#/definitions/String'
         description: The ID of the Capacity Reservation.
+      OwnerId:
+        $ref: '#/definitions/String'
+      CapacityReservationArn:
+        $ref: '#/definitions/String'
+      AvailabilityZoneId:
+        $ref: '#/definitions/String'
       InstanceType:
         $ref: '#/definitions/String'
         description: The type of instance for which the Capacity Reservation reserves capacity.
@@ -45589,7 +45719,6 @@ definitions:
     required:
       - InstanceType
       - InstancePlatform
-      - AvailabilityZone
       - InstanceCount
     properties:
       ClientToken:
@@ -45604,6 +45733,8 @@ definitions:
       AvailabilityZone:
         $ref: '#/definitions/String'
         description: The Availability Zone in which to create the Capacity Reservation.
+      AvailabilityZoneId:
+        $ref: '#/definitions/String'
       Tenancy:
         $ref: '#/definitions/CapacityReservationTenancy'
         description: '<p>Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul>'
@@ -52035,6 +52166,27 @@ definitions:
       - failed
       - available
       - unavailable
+  GetCapacityReservationUsageRequestMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  GetCapacityReservationUsageRequest:
+    type: object
+    required:
+      - CapacityReservationId
+    properties:
+      CapacityReservationId:
+        $ref: '#/definitions/String'
+      NextToken:
+        $ref: '#/definitions/String'
+      MaxResults:
+        $ref: '#/definitions/GetCapacityReservationUsageRequestMaxResults'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+  InstanceUsageSet:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceUsage'
   GetConsoleOutputRequest:
     type: object
     required:
@@ -53498,6 +53650,13 @@ definitions:
       - insufficient-data
       - not-applicable
       - initializing
+  InstanceUsage:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/String'
+      UsedInstanceCount:
+        $ref: '#/definitions/Integer'
   InternetGatewayAttachment:
     type: object
     properties:

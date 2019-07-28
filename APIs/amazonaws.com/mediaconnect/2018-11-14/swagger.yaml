@@ -316,7 +316,7 @@ paths:
                     description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   WhitelistCidr:
                     $ref: '#/definitions/__string'
-                    description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                    description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -750,6 +750,11 @@ paths:
           schema:
             type: object
             properties:
+              cidrAllowList:
+                description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
               description:
                 description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
                 type: string
@@ -800,6 +805,10 @@ paths:
                   - zixi-push
                   - rtp-fec
                   - rtp
+                  - zixi-pull
+              remoteId:
+                description: The remote ID for the Zixi-pull stream.
+                type: string
               smoothingLatency:
                 description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
                 type: integer
@@ -1183,11 +1192,12 @@ paths:
                   - zixi-push
                   - rtp-fec
                   - rtp
+                  - zixi-pull
               streamId:
                 description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                 type: string
               whitelistCidr:
-                description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -1210,10 +1220,11 @@ definitions:
   AddOutputRequest:
     type: object
     required:
-      - Destination
-      - Port
       - Protocol
     properties:
+      CidrAllowList:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       Description:
         $ref: '#/definitions/__string'
         description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
@@ -1235,6 +1246,9 @@ definitions:
       Protocol:
         $ref: '#/definitions/Protocol'
         description: The protocol to use for the output.
+      RemoteId:
+        $ref: '#/definitions/__string'
+        description: The remote ID for the Zixi-pull output stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
         description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
@@ -1316,6 +1330,7 @@ definitions:
       - zixi-push
       - rtp-fec
       - rtp
+      - zixi-pull
   CreateFlow420Exception: {}
   DeleteFlowResponse:
     type: object
@@ -1456,6 +1471,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Output'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   __listOfGrantEntitlementRequest:
     type: array
     items:
@@ -1492,7 +1511,7 @@ definitions:
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
       WhitelistCidr:
         $ref: '#/definitions/__string'
-        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     description: The settings for the source of the flow.
   CreateFlowRequest:
     type: object
@@ -1578,10 +1597,6 @@ definitions:
         $ref: '#/definitions/__listOf__string'
         description: A list of errors that might have been generated from processes on this flow.
     description: Messages that provide the state of the flow.
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
   Entitlement:
     type: object
     required:
@@ -1641,7 +1656,7 @@ definitions:
         description: Attributes related to the transport stream that are used in the source.
       WhitelistCidr:
         $ref: '#/definitions/__string'
-        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     description: The settings for the source of the flow.
   GrantFlowEntitlementsRequest:
     type: object
@@ -1729,6 +1744,9 @@ definitions:
     required:
       - Protocol
     properties:
+      CidrAllowList:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       MaxBitrate:
         $ref: '#/definitions/__integer'
         description: The smoothing max bitrate for RTP and RTP-FEC streams.
@@ -1738,6 +1756,9 @@ definitions:
       Protocol:
         $ref: '#/definitions/Protocol'
         description: The protocol that is used by the source or output.
+      RemoteId:
+        $ref: '#/definitions/__string'
+        description: The remote ID for the Zixi-pull stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
         description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
@@ -1850,6 +1871,9 @@ definitions:
   UpdateFlowOutputRequest:
     type: object
     properties:
+      CidrAllowList:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       Description:
         $ref: '#/definitions/__string'
         description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
@@ -1868,6 +1892,9 @@ definitions:
       Protocol:
         $ref: '#/definitions/Protocol'
         description: The protocol to use for the output.
+      RemoteId:
+        $ref: '#/definitions/__string'
+        description: The remote ID for the Zixi-pull stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
         description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
@@ -1904,5 +1931,5 @@ definitions:
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
       WhitelistCidr:
         $ref: '#/definitions/__string'
-        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     description: A request to update the source of a flow.

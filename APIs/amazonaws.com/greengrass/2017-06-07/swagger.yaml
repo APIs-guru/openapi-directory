@@ -188,9 +188,11 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - RoleArn
             properties:
               RoleArn:
-                description: The ARN of the role you wish to associate with this group.
+                description: The ARN of the role you wish to associate with this group. The existence of the role is not validated.
                 type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -267,6 +269,8 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - RoleArn
             properties:
               RoleArn:
                 description: The ARN of the service role you wish to associate with your account.
@@ -341,7 +345,7 @@ paths:
                 description: The name of the connector definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -479,7 +483,7 @@ paths:
                 description: The name of the core definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -610,6 +614,8 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - DeploymentType
             properties:
               DeploymentId:
                 description: The ID of the deployment if you wish to redeploy a previous deployment.
@@ -697,7 +703,7 @@ paths:
                 description: The name of the device definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -838,7 +844,7 @@ paths:
                 description: The name of the function definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -1000,7 +1006,7 @@ paths:
                 description: The name of the group.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -1212,7 +1218,7 @@ paths:
                 description: The name of the logger definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -1350,7 +1356,7 @@ paths:
                 description: The name of the resource definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -1480,6 +1486,12 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - S3UrlSignerRole
+              - SoftwareToUpdate
+              - UpdateTargets
+              - UpdateTargetsArchitecture
+              - UpdateTargetsOperatingSystem
             properties:
               S3UrlSignerRole:
                 description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
@@ -1514,6 +1526,7 @@ paths:
                   - armv7l
                   - x86_64
                   - aarch64
+                  - openwrt
               UpdateTargetsOperatingSystem:
                 description: The operating system of the cores which are the targets of an update.
                 type: string
@@ -1565,7 +1578,7 @@ paths:
                 description: The name of the subscription definition.
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -1666,62 +1679,6 @@ paths:
           in: path
           required: true
           description: The ID of the subscription definition.
-          type: string
-  '/tags/{resource-arn}':
-    post:
-      operationId: TagResource
-      description: Add tags to a resource.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-      parameters:
-        - name: resource-arn
-          in: path
-          required: true
-          description: The Amazon Resource Name (ARN) of the resource.
-          type: string
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - tags
-            properties:
-              tags:
-                description: A map of the key-value pairs for the resource tag.
-                type: object
-                additionalProperties:
-                  $ref: '#/definitions/__string'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListTagsForResource
-      description: Retrieves the tags for a resource.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListTagsForResourceResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-      parameters:
-        - name: resource-arn
-          in: path
-          required: true
-          description: The Amazon Resource Name (ARN) of the resource.
           type: string
   '/greengrass/definition/connectors/{ConnectorDefinitionId}':
     delete:
@@ -2299,38 +2256,6 @@ paths:
               Name:
                 description: The name of the definition.
                 type: string
-  '/tags/{resource-arn}#tagKeys':
-    delete:
-      operationId: UntagResource
-      description: Remove tags with specified keys from a resource.
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-      parameters:
-        - name: resource-arn
-          in: path
-          required: true
-          description: The Amazon Resource Name (ARN) of the resource.
-          type: string
-        - name: tagKeys
-          in: query
-          required: true
-          description: A list of the keys to remove from the resource tags.
-          type: array
-          items:
-            type: string
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/bulk/deployments/{BulkDeploymentId}/status':
     get:
       operationId: GetBulkDeploymentStatus
@@ -2444,7 +2369,7 @@ paths:
         - name: ConnectorDefinitionVersionId
           in: path
           required: true
-          description: The ID of the connector definition version.
+          description: 'The ID of the connector definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListConnectorDefinitionVersions'''' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
         - name: NextToken
           in: query
@@ -2481,7 +2406,7 @@ paths:
         - name: CoreDefinitionVersionId
           in: path
           required: true
-          description: The ID of the core definition version.
+          description: 'The ID of the core definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListCoreDefinitionVersions'''' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2545,7 +2470,7 @@ paths:
         - name: DeviceDefinitionVersionId
           in: path
           required: true
-          description: The ID of the device definition version.
+          description: 'The ID of the device definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListDeviceDefinitionVersions'''' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
         - name: NextToken
           in: query
@@ -2582,7 +2507,7 @@ paths:
         - name: FunctionDefinitionVersionId
           in: path
           required: true
-          description: The ID of the function definition version.
+          description: 'The ID of the function definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListFunctionDefinitionVersions'''' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
         - name: NextToken
           in: query
@@ -2717,7 +2642,7 @@ paths:
         - name: GroupVersionId
           in: path
           required: true
-          description: The ID of the group version.
+          description: 'The ID of the group version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListGroupVersions'''' requests. If the version is the last one that was associated with a group, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''GroupInformation'''' object.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2749,7 +2674,7 @@ paths:
         - name: LoggerDefinitionVersionId
           in: path
           required: true
-          description: The ID of the logger definition version.
+          description: 'The ID of the logger definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListLoggerDefinitionVersions'''' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
         - name: NextToken
           in: query
@@ -2786,7 +2711,7 @@ paths:
         - name: ResourceDefinitionVersionId
           in: path
           required: true
-          description: The ID of the resource definition version.
+          description: 'The ID of the resource definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListResourceDefinitionVersions'''' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2823,7 +2748,7 @@ paths:
         - name: SubscriptionDefinitionVersionId
           in: path
           required: true
-          description: The ID of the subscription definition version.
+          description: 'The ID of the subscription definition version. This value maps to the ''''Version'''' property of the corresponding ''''VersionInformation'''' object, which is returned by ''''ListSubscriptionDefinitionVersions'''' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''''LatestVersion'''' property of the corresponding ''''DefinitionInformation'''' object.'
           type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -2925,6 +2850,9 @@ paths:
           required: true
           schema:
             type: object
+            required:
+              - ExecutionRoleArn
+              - InputFileUri
             properties:
               ExecutionRoleArn:
                 description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
@@ -2933,7 +2861,61 @@ paths:
                 description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
                 type: string
               tags:
-                description: Tag(s) to add to the new resource
+                description: The key-value pair for the resource tag.
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: Retrieves a list of resource tags for a resource arn.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              tags:
+                description: The key-value pair for the resource tag.
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/__string'
@@ -3005,6 +2987,38 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Remove resource tags from a Greengrass Resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: An array of tag keys to delete
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateRoleToGroupResponse:
     type: object
@@ -3037,10 +3051,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3067,6 +3081,9 @@ definitions:
         description: The unique ID of the version.
   Connector:
     type: object
+    required:
+      - ConnectorArn
+      - Id
     properties:
       ConnectorArn:
         $ref: '#/definitions/__string'
@@ -3095,10 +3112,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3123,6 +3140,10 @@ definitions:
         description: The unique ID of the version.
   Core:
     type: object
+    required:
+      - ThingArn
+      - Id
+      - CertificateArn
     properties:
       CertificateArn:
         $ref: '#/definitions/__string'
@@ -3163,10 +3184,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3191,6 +3212,10 @@ definitions:
         description: The unique ID of the version.
   Device:
     type: object
+    required:
+      - ThingArn
+      - Id
+      - CertificateArn
     properties:
       CertificateArn:
         $ref: '#/definitions/__string'
@@ -3222,10 +3247,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3264,6 +3289,8 @@ definitions:
     description: 'Configuration information that specifies how a Lambda function runs. '
   Function:
     type: object
+    required:
+      - Id
     properties:
       FunctionArn:
         $ref: '#/definitions/__string'
@@ -3292,10 +3319,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3337,10 +3364,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3365,6 +3392,11 @@ definitions:
         description: The unique ID of the version.
   Logger:
     type: object
+    required:
+      - Type
+      - Level
+      - Id
+      - Component
     properties:
       Component:
         $ref: '#/definitions/LoggerComponent'
@@ -3399,10 +3431,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3427,6 +3459,10 @@ definitions:
         description: The unique ID of the version.
   Resource:
     type: object
+    required:
+      - ResourceDataContainer
+      - Id
+      - Name
     properties:
       Id:
         $ref: '#/definitions/__string'
@@ -3464,10 +3500,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
@@ -3492,6 +3528,11 @@ definitions:
         description: The unique ID of the version.
   Subscription:
     type: object
+    required:
+      - Target
+      - Id
+      - Subject
+      - Source
     properties:
       Id:
         $ref: '#/definitions/__string'
@@ -3570,8 +3611,8 @@ definitions:
         $ref: '#/definitions/__string'
         description: Error message
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetConnectivityInfoResponse:
     type: object
     properties:
@@ -3598,16 +3639,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetConnectorDefinitionVersionResponse:
     type: object
     properties:
@@ -3646,16 +3687,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetCoreDefinitionVersionResponse:
     type: object
     properties:
@@ -3712,16 +3753,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetDeviceDefinitionVersionResponse:
     type: object
     properties:
@@ -3760,16 +3801,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetFunctionDefinitionVersionResponse:
     type: object
     properties:
@@ -3808,16 +3849,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetGroupCertificateAuthorityResponse:
     type: object
     properties:
@@ -3877,16 +3918,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetLoggerDefinitionVersionResponse:
     type: object
     properties:
@@ -3922,16 +3963,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetResourceDefinitionVersionResponse:
     type: object
     properties:
@@ -3976,16 +4017,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: The tags for the definition.
+        $ref: '#/definitions/Tags'
+        description: Tag(s) attached to the resource arn.
   GetSubscriptionDefinitionVersionResponse:
     type: object
     properties:
@@ -4188,8 +4229,7 @@ definitions:
     type: object
     properties:
       tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: A map of the key-value pairs for the resource tag.
+        $ref: '#/definitions/Tags'
   ResetDeploymentsResponse:
     type: object
     properties:
@@ -4274,12 +4314,16 @@ definitions:
     properties: {}
   AssociateRoleToGroupRequest:
     type: object
+    required:
+      - RoleArn
     properties:
       RoleArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the role you wish to associate with this group.
+        description: The ARN of the role you wish to associate with this group. The existence of the role is not validated.
   AssociateServiceRoleToAccountRequest:
     type: object
+    required:
+      - RoleArn
     properties:
       RoleArn:
         $ref: '#/definitions/__string'
@@ -4393,6 +4437,7 @@ definitions:
     description: Information about a core definition version.
   Tags:
     type: object
+    description: The key-value pair for the resource tag.
     additionalProperties:
       $ref: '#/definitions/__string'
   CreateConnectorDefinitionRequest:
@@ -4406,7 +4451,7 @@ definitions:
         description: The name of the connector definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateConnectorDefinitionVersionRequest:
     type: object
     properties:
@@ -4424,7 +4469,7 @@ definitions:
         description: The name of the core definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
     description: Information needed to create a core definition.
   CreateCoreDefinitionVersionRequest:
     type: object
@@ -4434,6 +4479,8 @@ definitions:
         description: A list of cores in the core definition version.
   CreateDeploymentRequest:
     type: object
+    required:
+      - DeploymentType
     properties:
       DeploymentId:
         $ref: '#/definitions/__string'
@@ -4462,7 +4509,7 @@ definitions:
         description: The name of the device definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateDeviceDefinitionVersionRequest:
     type: object
     properties:
@@ -4490,7 +4537,7 @@ definitions:
         description: The name of the function definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateFunctionDefinitionVersionRequest:
     type: object
     properties:
@@ -4540,7 +4587,7 @@ definitions:
         description: The name of the group.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateGroupVersionRequest:
     type: object
     properties:
@@ -4583,7 +4630,7 @@ definitions:
         description: The name of the logger definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateLoggerDefinitionVersionRequest:
     type: object
     properties:
@@ -4608,7 +4655,7 @@ definitions:
         description: The name of the resource definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateResourceDefinitionVersionRequest:
     type: object
     properties:
@@ -4647,6 +4694,7 @@ definitions:
       - armv7l
       - x86_64
       - aarch64
+      - openwrt
     description: The architecture of the cores which are the targets of an update.
   UpdateTargetsOperatingSystem:
     type: string
@@ -4657,6 +4705,12 @@ definitions:
     description: The operating system of the cores which are the targets of an update.
   CreateSoftwareUpdateJobRequest:
     type: object
+    required:
+      - S3UrlSignerRole
+      - UpdateTargetsArchitecture
+      - SoftwareToUpdate
+      - UpdateTargets
+      - UpdateTargetsOperatingSystem
     properties:
       S3UrlSignerRole:
         $ref: '#/definitions/S3UrlSignerRole'
@@ -4688,21 +4742,13 @@ definitions:
         description: The name of the subscription definition.
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   CreateSubscriptionDefinitionVersionRequest:
     type: object
     properties:
       Subscriptions:
         $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
-  TagResourceRequest:
-    type: object
-    required:
-      - tags
-    properties:
-      tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: A map of the key-value pairs for the resource tag.
   DefinitionInformation:
     type: object
     properties:
@@ -4720,16 +4766,16 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the definition.
+        description: The ID of the latest version associated with the definition.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the definition.
+        description: The ARN of the latest version associated with the definition.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
       Tags:
         $ref: '#/definitions/Tags'
-        description: The tags for the definition.
+        description: Tag(s) attached to the resource arn.
     description: Information about a definition.
   DeleteConnectorDefinitionRequest:
     type: object
@@ -4753,13 +4799,6 @@ definitions:
     type: object
     properties: {}
   DeleteSubscriptionDefinitionRequest:
-    type: object
-    properties: {}
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  UntagResourceRequest:
     type: object
     properties: {}
   Deployment:
@@ -4975,10 +5014,10 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the group was last updated.'
       LatestVersion:
         $ref: '#/definitions/__string'
-        description: The latest version of the group.
+        description: The ID of the latest version associated with the group.
       LatestVersionArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the latest version of the group.
+        description: The ARN of the latest version associated with the group.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the group.
@@ -5147,6 +5186,8 @@ definitions:
     description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData'''', ''''SecretsManagerSecretResourceData''''.'
   ResourceAccessPolicy:
     type: object
+    required:
+      - ResourceId
     properties:
       Permission:
         $ref: '#/definitions/Permission'
@@ -5185,8 +5226,15 @@ definitions:
         $ref: '#/definitions/__listOf__string'
         description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
     description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   StartBulkDeploymentRequest:
     type: object
+    required:
+      - ExecutionRoleArn
+      - InputFileUri
     properties:
       ExecutionRoleArn:
         $ref: '#/definitions/__string'
@@ -5196,8 +5244,17 @@ definitions:
         description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
       tags:
         $ref: '#/definitions/Tags'
-        description: Tag(s) to add to the new resource
+        description: Tag(s) to add to the new resource.
   StopBulkDeploymentRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/Tags'
+    description: A map of the key-value pairs for the resource tag.
+  UntagResourceRequest:
     type: object
     properties: {}
   UpdateConnectivityInfoRequest:
