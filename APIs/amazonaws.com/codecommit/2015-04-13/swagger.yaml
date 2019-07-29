@@ -922,42 +922,46 @@ paths:
           schema:
             $ref: '#/definitions/MaximumItemsToCompareExceededException'
         '505':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '506':
           description: FileModeRequiredException
           schema:
             $ref: '#/definitions/FileModeRequiredException'
-        '506':
+        '507':
           description: InvalidFileModeException
           schema:
             $ref: '#/definitions/InvalidFileModeException'
-        '507':
+        '508':
           description: NameLengthExceededException
           schema:
             $ref: '#/definitions/NameLengthExceededException'
-        '508':
+        '509':
           description: InvalidEmailException
           schema:
             $ref: '#/definitions/InvalidEmailException'
-        '509':
+        '510':
           description: CommitMessageLengthExceededException
           schema:
             $ref: '#/definitions/CommitMessageLengthExceededException'
-        '510':
+        '511':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '511':
+        '512':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '512':
+        '513':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '513':
+        '514':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '514':
+        '515':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3028,22 +3032,26 @@ paths:
           schema:
             $ref: '#/definitions/ManualMergeRequiredException'
         '493':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '494':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '494':
+        '495':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '495':
+        '496':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '496':
+        '497':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '497':
+        '498':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3209,22 +3217,26 @@ paths:
           schema:
             $ref: '#/definitions/CommitMessageLengthExceededException'
         '513':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '514':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '514':
+        '515':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '515':
+        '516':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '516':
+        '517':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '517':
+        '518':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3310,102 +3322,106 @@ paths:
           schema:
             $ref: '#/definitions/ManualMergeRequiredException'
         '493':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '494':
           description: InvalidConflictDetailLevelException
           schema:
             $ref: '#/definitions/InvalidConflictDetailLevelException'
-        '494':
+        '495':
           description: InvalidConflictResolutionStrategyException
           schema:
             $ref: '#/definitions/InvalidConflictResolutionStrategyException'
-        '495':
+        '496':
           description: InvalidConflictResolutionException
           schema:
             $ref: '#/definitions/InvalidConflictResolutionException'
-        '496':
+        '497':
           description: MaximumConflictResolutionEntriesExceededException
           schema:
             $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
-        '497':
+        '498':
           description: MultipleConflictResolutionEntriesException
           schema:
             $ref: '#/definitions/MultipleConflictResolutionEntriesException'
-        '498':
+        '499':
           description: ReplacementTypeRequiredException
           schema:
             $ref: '#/definitions/ReplacementTypeRequiredException'
-        '499':
+        '500':
           description: InvalidReplacementTypeException
           schema:
             $ref: '#/definitions/InvalidReplacementTypeException'
-        '500':
+        '501':
           description: ReplacementContentRequiredException
           schema:
             $ref: '#/definitions/ReplacementContentRequiredException'
-        '501':
+        '502':
           description: InvalidReplacementContentException
           schema:
             $ref: '#/definitions/InvalidReplacementContentException'
-        '502':
+        '503':
           description: PathRequiredException
           schema:
             $ref: '#/definitions/PathRequiredException'
-        '503':
+        '504':
           description: InvalidPathException
           schema:
             $ref: '#/definitions/InvalidPathException'
-        '504':
+        '505':
           description: FileContentSizeLimitExceededException
           schema:
             $ref: '#/definitions/FileContentSizeLimitExceededException'
-        '505':
+        '506':
           description: FolderContentSizeLimitExceededException
           schema:
             $ref: '#/definitions/FolderContentSizeLimitExceededException'
-        '506':
+        '507':
           description: MaximumFileContentToLoadExceededException
           schema:
             $ref: '#/definitions/MaximumFileContentToLoadExceededException'
-        '507':
+        '508':
           description: MaximumItemsToCompareExceededException
           schema:
             $ref: '#/definitions/MaximumItemsToCompareExceededException'
-        '508':
+        '509':
           description: FileModeRequiredException
           schema:
             $ref: '#/definitions/FileModeRequiredException'
-        '509':
+        '510':
           description: InvalidFileModeException
           schema:
             $ref: '#/definitions/InvalidFileModeException'
-        '510':
+        '511':
           description: NameLengthExceededException
           schema:
             $ref: '#/definitions/NameLengthExceededException'
-        '511':
+        '512':
           description: InvalidEmailException
           schema:
             $ref: '#/definitions/InvalidEmailException'
-        '512':
+        '513':
           description: CommitMessageLengthExceededException
           schema:
             $ref: '#/definitions/CommitMessageLengthExceededException'
-        '513':
+        '514':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '514':
+        '515':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '515':
+        '516':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '516':
+        '517':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '517':
+        '518':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3487,22 +3503,26 @@ paths:
           schema:
             $ref: '#/definitions/RepositoryDoesNotExistException'
         '492':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '493':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '493':
+        '494':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '494':
+        '495':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '495':
+        '496':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '496':
+        '497':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3612,70 +3632,74 @@ paths:
           schema:
             $ref: '#/definitions/MaximumConflictResolutionEntriesExceededException'
         '499':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '500':
           description: PathRequiredException
           schema:
             $ref: '#/definitions/PathRequiredException'
-        '500':
+        '501':
           description: InvalidPathException
           schema:
             $ref: '#/definitions/InvalidPathException'
-        '501':
+        '502':
           description: InvalidFileModeException
           schema:
             $ref: '#/definitions/InvalidFileModeException'
-        '502':
+        '503':
           description: InvalidReplacementContentException
           schema:
             $ref: '#/definitions/InvalidReplacementContentException'
-        '503':
+        '504':
           description: FileContentSizeLimitExceededException
           schema:
             $ref: '#/definitions/FileContentSizeLimitExceededException'
-        '504':
+        '505':
           description: FolderContentSizeLimitExceededException
           schema:
             $ref: '#/definitions/FolderContentSizeLimitExceededException'
-        '505':
+        '506':
           description: MaximumFileContentToLoadExceededException
           schema:
             $ref: '#/definitions/MaximumFileContentToLoadExceededException'
-        '506':
+        '507':
           description: MaximumItemsToCompareExceededException
           schema:
             $ref: '#/definitions/MaximumItemsToCompareExceededException'
-        '507':
+        '508':
           description: RepositoryNameRequiredException
           schema:
             $ref: '#/definitions/RepositoryNameRequiredException'
-        '508':
+        '509':
           description: InvalidRepositoryNameException
           schema:
             $ref: '#/definitions/InvalidRepositoryNameException'
-        '509':
+        '510':
           description: RepositoryDoesNotExistException
           schema:
             $ref: '#/definitions/RepositoryDoesNotExistException'
-        '510':
+        '511':
           description: RepositoryNotAssociatedWithPullRequestException
           schema:
             $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
-        '511':
+        '512':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '512':
+        '513':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '513':
+        '514':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '514':
+        '515':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '515':
+        '516':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -3833,22 +3857,26 @@ paths:
           schema:
             $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
         '511':
+          description: ConcurrentReferenceUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentReferenceUpdateException'
+        '512':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '512':
+        '513':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '513':
+        '514':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '514':
+        '515':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '515':
+        '516':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
@@ -5445,6 +5473,7 @@ definitions:
   InvalidReplacementTypeException: {}
   ReplacementContentRequiredException: {}
   InvalidReplacementContentException: {}
+  ConcurrentReferenceUpdateException: {}
   DeleteBranchOutput:
     type: object
     properties:
@@ -7791,16 +7820,16 @@ definitions:
         description: The name of the trigger.
       destinationArn:
         $ref: '#/definitions/Arn'
-        description: 'The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).'
+        description: 'The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon SNS.'
       customData:
         $ref: '#/definitions/RepositoryTriggerCustomData'
         description: Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
       branches:
         $ref: '#/definitions/BranchNameList'
-        description: '<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>While no content is required in the array, you must include the array itself.</p> </note>'
+        description: '<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>Although no content is required in the array, you must include the array itself.</p> </note>'
       events:
         $ref: '#/definitions/RepositoryTriggerEventList'
-        description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'
+        description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon SNS. </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'
     description: Information about a trigger for a repository.
   RepositoryTriggerEventEnum:
     type: string
