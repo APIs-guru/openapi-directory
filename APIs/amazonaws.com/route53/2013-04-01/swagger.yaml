@@ -2367,7 +2367,7 @@ paths:
         - name: identifier
           in: query
           required: false
-          description: ' <i>Weighted resource record sets only:</i> If results were truncated for a given DNS name and type, specify the value of <code>NextRecordIdentifier</code> from the previous response to get the next resource record set that has the current DNS name and type.'
+          description: ' <i>Resource record sets that have a routing policy other than simple:</i> If results were truncated for a given DNS name and type, specify the value of <code>NextRecordIdentifier</code> from the previous response to get the next resource record set that has the current DNS name and type.'
           type: string
           minLength: 1
           maxLength: 128
@@ -2853,6 +2853,7 @@ definitions:
       - eu-west-3
       - eu-central-1
       - ap-east-1
+      - me-south-1
       - ap-southeast-1
       - ap-southeast-2
       - ap-south-1
@@ -3732,6 +3733,7 @@ definitions:
       - eu-west-2
       - eu-west-3
       - ap-east-1
+      - me-south-1
       - ap-south-1
       - ap-southeast-1
       - ap-southeast-2
@@ -4968,6 +4970,7 @@ definitions:
       - cn-north-1
       - cn-northwest-1
       - ap-east-1
+      - me-south-1
       - ap-south-1
     minLength: 1
     maxLength: 64
