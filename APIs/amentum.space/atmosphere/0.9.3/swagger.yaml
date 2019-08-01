@@ -1,0 +1,256 @@
+swagger: '2.0'
+schemes:
+  - https
+host: atmosphere.amentum.space
+basePath: /api
+info:
+  contact:
+    x-twitter: amentumspace
+  description: |
+    NRLMSISE-00 is an empirical, global reference atmospheric model of the  Earth, from ground to space [1]. It models the temperatures and densities  of the atmosphere's constituents. A primary use of this model is to aid  predictions of satellite orbital decay due to atmospheric drag. <br><br>
+    The NRLMSIS-00 empirical atmosphere model was developed by Mike Picone,  Alan Hedin, and Doug Drob and is based on the MSISE90 model. See the following  refererence for full details including limitations [1] Picone, J. M., et al.  NRLMSISE‐00 empirical model of the atmosphere Statistical comparisons  and scientific issues,  Journal of Geophysical Research Space Physics 107.A12 (2002) <br><br>
+    We provide an open RESTful API to the model that wraps the original code which is available <a href='https://ccmc.gsfc.nasa.gov/modelweb/atmos/nrlmsise00.html'>here</a>.  The API is free but usage is limited to 1000 API calls per day. <br><br>
+    <b>Click on a heading below to expand instructions and to try the API.</b> <br><br>
+    Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as the result of the use of the API. <br><br>
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2019.
+  title: |
+    Atmosphere API - calculate composition and density of the  atmosphere 
+  version: 0.9.3
+  x-apisguru-categories:
+    - location
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/amentumspace/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://atmosphere.amentum.space/api/swagger.json'
+      version: '2.0'
+  x-providerName: amentum.space
+  x-serviceName: atmosphere
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  AP:
+    description: |
+      The Ap-index provides a daily average level for geomagnetic activity F107, F107A, AP effects can be neglected below 80 km. 
+    in: query
+    name: ap
+    required: true
+    type: number
+  Altitude:
+    description: Altitude in (kms)
+    in: query
+    name: altitude
+    required: true
+    type: number
+  Day:
+    description: Day in DD format
+    in: query
+    name: day
+    required: true
+    type: integer
+  F107:
+    description: |
+      Daily flux for previous day (SFU).  F107 and F107A values correspond to  the 10.7 cm radio flux at the actual distance of Earth from Sun  rather than radio flux at 1AU.  F107, F107A, AP effects can be neglected below 80 km. 
+    in: query
+    name: f107
+    required: true
+    type: number
+  F107A:
+    description: |
+      81 day average of F10.7 flux (SFU).  F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1AU.  F107, F107A, AP effects can be neglected below 80 km. 
+    in: query
+    name: f107a
+    required: true
+    type: number
+  GeodeticLatitude:
+    description: GeodeticLatitude (degs)
+    in: query
+    name: geodetic_latitude
+    required: true
+    type: number
+  GeodeticLongitude:
+    description: GeodeticLongitude (degs)
+    in: query
+    name: geodetic_longitude
+    required: true
+    type: number
+  Month:
+    description: Month in MM format
+    in: query
+    name: month
+    required: true
+    type: integer
+  Species:
+    description: |
+      The atmospheric component as a string. 
+    enum:
+      - He
+      - O
+      - N2
+      - O2
+      - Ar
+      - H
+      - 'N'
+    in: query
+    name: species
+    required: true
+    type: string
+  UTC:
+    description: |
+      Coordinated Universal Time (hrs).  The local time is calculated based on this and the longitude according to the following equation Local time = UTC + Longitude (deg) / 15 (deg) This is approximate and does not account for Equation of Time departures. 
+    in: query
+    name: utc
+    required: true
+    type: number
+  Year:
+    description: Year in YYYY format
+    in: query
+    name: year
+    required: true
+    type: integer
+paths:
+  /sample_atmosphere:
+    get:
+      description: |
+        Computes 
+        Number densities (/cm3) of  He, O, N2, O2, Ar, H, N
+        Anomalous oxygen number density (/cm3)
+        Exospheric temperature (K)
+        Temperature at altitude (K)
+        Total mass density (g/cm3)
+        Total mass density is the sum of the masses of the species in  equilibrium at the thermospheric temperature T(z) and the mass  density of the anomalous oxygen component.
+      operationId: handlers.Atmosphere.sample_atmosphere
+      parameters:
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/GeodeticLatitude'
+        - $ref: '#/parameters/GeodeticLongitude'
+        - $ref: '#/parameters/UTC'
+        - $ref: '#/parameters/F107A'
+        - $ref: '#/parameters/F107'
+        - $ref: '#/parameters/AP'
+      responses:
+        '200':
+          description: Successful atmospheric density calculation
+          schema:
+            properties:
+              Ar_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              H_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              He_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              N2_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              N_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              O2_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              O_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              anomalous_O_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              at_alt_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              exospheric_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              total_mass:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      summary: Computes the MSIS atmospheric parameters for given conditions
+      tags:
+        - Sample the atmosphere under given conditions
+  /sample_species:
+    get:
+      description: |
+        Computes 
+        Number density (/cm3) of the species
+      operationId: handlers.Atmosphere.sample_species
+      parameters:
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/GeodeticLatitude'
+        - $ref: '#/parameters/GeodeticLongitude'
+        - $ref: '#/parameters/UTC'
+        - $ref: '#/parameters/F107A'
+        - $ref: '#/parameters/F107'
+        - $ref: '#/parameters/AP'
+        - $ref: '#/parameters/Species'
+      responses:
+        '200':
+          description: Successful atmospheric density calculation
+          schema:
+            properties:
+              num_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      summary: Computes the number density for given species
+      tags:
+        - Sample the number density of a given atmospheric component
