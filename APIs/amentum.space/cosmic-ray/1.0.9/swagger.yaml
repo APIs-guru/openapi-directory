@@ -1,0 +1,176 @@
+swagger: '2.0'
+schemes:
+  - https
+host: cosmicrays.amentum.space
+basePath: /api
+info:
+  contact:
+    x-twitter: amentumspace
+  description: |
+    High energy galactic cosmic rays and bursts of solar energetic particles  can collide with nuclei of gases in the atmosphere,  leading to a cascade of nuclear and electromagnetic reactions.  The result is a complex mix of high energy radiation, the intensity  and composition of which varies spatially and temporally. Understanding this mix is important for a variety of applications, including estimating  the exposures of aircrew, pilots, and frequent flyers, to ionising radiation  hazards. <br><br>
+    The PARMA model, developed by the Japan Atomic Energy Agency (JAEA), can instantaneously estimate cosmic ray fluxes of neutrons, protons, ions, muons, electrons, positrons, and photons for a given date, latitude, longitude, and altitude. A comprehensive description of PARMA, and  Terms and Conditions of its use, can be found  <a href="http://phits.jaea.go.jp/expacs/index.html">here</a>. <br><br>
+    We provide an open RESTful API to the model and we have added functionality to calculate Effective Doses.  The API is free but usage is limited to 1000 API calls per day. <br><br>
+    <b>Click on a heading below to expand instructions and to try the API.</b> <br><br>
+    Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as the result of the use of the API. <br><br>
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2019.
+  title: Cosmic Ray API - calculate intensities and doses in the atmosphere
+  version: 1.0.9
+  x-apisguru-categories:
+    - location
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/amentumspace/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://cosmicrays.amentum.space/api/swagger.json'
+      version: '2.0'
+  x-providerName: amentum.space
+  x-serviceName: cosmic-ray
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Altitude:
+    description: 'Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).'
+    in: query
+    name: altitude
+    required: false
+    type: number
+  Angle:
+    description: Direction cosine. 1.0 is in the downward direction.
+    in: query
+    name: angle
+    required: true
+    type: number
+  AtmosphericDepth:
+    description: |
+      Atmospheric depth from the top of the atmosphere (in units of g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2. WARNING: you can specify either altitude OR atmospheric depth, not both.
+    in: query
+    name: atmospheric_depth
+    required: false
+    type: number
+  Day:
+    description: Day in DD.
+    in: query
+    name: day
+    required: true
+    type: integer
+  Latitude:
+    description: Latitude. -90 (S) to 90 (N).
+    in: query
+    name: latitude
+    required: true
+    type: number
+  Longitude:
+    description: Longitude. -180 (W) to 180 (E).
+    in: query
+    name: longitude
+    required: true
+    type: number
+  Month:
+    description: Month in MM.
+    in: query
+    name: month
+    required: true
+    type: integer
+  Particle:
+    description: |
+      The particle type as a string. Specifying 'total', only used for the dose calculation, returns the dose for all particle types.
+    enum:
+      - e-
+      - e+
+      - mu+
+      - mu-
+      - gamma
+      - neutron
+      - proton
+      - alpha
+      - total
+    in: query
+    name: particle
+    required: true
+    type: string
+  Year:
+    description: Year in YYYY.
+    in: query
+    name: year
+    required: true
+    type: integer
+paths:
+  /calculate_dose_rate:
+    get:
+      description: |
+        Effective Dose is a quantity defined by the International Commission on
+         Radiological Protection (ICRP) and represents the stochastic health
+         risk to the human body at low levels of radiation.
+        It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation. The Cosmic Ray API calculates effective dose using double differential intensity distributions, calculated using PARMA [1], combined with dose conversion
+         coefficients for particle types defined in ICRP Publication 116 for an
+         isotropic geometry.
+        [1] T. Sato, Analytical Model for Estimating the Zenith Angle Dependence of Terrestrial Cosmic Ray Fluxes, PLOS ONE, 11(8): e0160390 (2016)
+      operationId: handlers.calculate_dose_rate
+      parameters:
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/AtmosphericDepth'
+        - $ref: '#/parameters/Latitude'
+        - $ref: '#/parameters/Longitude'
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Particle'
+      responses:
+        '200':
+          description: Successful dose read operation
+          schema:
+            properties:
+              units:
+                type: string
+              value:
+                type: string
+            type: object
+      summary: |
+        The effective dose rate calculated for a single particle type, or accumulated over all particle types.
+      tags:
+        - Calculate Effective Dose Rate
+  /get_differential_intensity:
+    get:
+      description: |
+        The differential intensity (a.k.a. flux) of a particle is a directional quantity that describes the number of particles per unit area, per unit solid angle, per unit energy, and per unit time. The API leverages the functionality of PARMA to calculate Differential intensity distributions, with energies in units of MeV and Intensity in units of /cm2/sr/MeV/s.
+      operationId: handlers.get_differential_intensity
+      parameters:
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/AtmosphericDepth'
+        - $ref: '#/parameters/Latitude'
+        - $ref: '#/parameters/Longitude'
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Particle'
+        - $ref: '#/parameters/Angle'
+      responses:
+        '200':
+          description: Successful read of intensity operation
+          schema:
+            properties:
+              energies:
+                properties:
+                  data:
+                    items:
+                      type: number
+                    type: array
+                  units:
+                    type: string
+                type: object
+              intensities:
+                properties:
+                  data:
+                    items:
+                      type: number
+                    type: array
+                  units:
+                    type: string
+                type: object
+            type: object
+      summary: The energy differential intensity of a particle for a given zenith angle.
+      tags:
+        - Get Differential Intensity
