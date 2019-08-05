@@ -620,7 +620,7 @@ paths:
   '/security-profiles/{securityProfileName}/targets#securityProfileTargetArn':
     put:
       operationId: AttachSecurityProfile
-      description: Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+      description: Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.
       responses:
         '200':
           description: Success
@@ -811,6 +811,48 @@ paths:
           required: true
           description: 'If the principal is a certificate, this value must be ARN of the certificate. If the principal is an Amazon Cognito identity, this value must be the ID of the Amazon Cognito identity.'
           type: string
+  '/audit/mitigationactions/tasks/{taskId}/cancel':
+    put:
+      operationId: CancelAuditMitigationActionsTask
+      description: 'Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelAuditMitigationActionsTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: 'The unique identifier for the task that you want to cancel. '
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/audit/tasks/{taskId}/cancel':
     put:
       operationId: CancelAuditTask
@@ -2223,6 +2265,217 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/mitigationactions/actions/{actionName}':
+    post:
+      operationId: CreateMitigationAction
+      description: Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMitigationActionResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: actionName
+          in: path
+          required: true
+          description: 'A friendly name for the action. Choose a friendly name that accurately describes the action (for example, <code>EnableLoggingAction</code>).'
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - roleArn
+              - actionParams
+            properties:
+              roleArn:
+                description: The ARN of the IAM role that is used to apply the mitigation action.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              actionParams:
+                description: 'The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).'
+                type: object
+                properties:
+                  updateDeviceCertificateParams:
+                    $ref: '#/definitions/UpdateDeviceCertificateParams'
+                    description: Parameters to define a mitigation action that changes the state of the device certificate to inactive.
+                  updateCACertificateParams:
+                    $ref: '#/definitions/UpdateCACertificateParams'
+                    description: Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+                  addThingsToThingGroupParams:
+                    $ref: '#/definitions/AddThingsToThingGroupParams'
+                    description: 'Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.'
+                  replaceDefaultPolicyVersionParams:
+                    $ref: '#/definitions/ReplaceDefaultPolicyVersionParams'
+                    description: Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+                  enableIoTLoggingParams:
+                    $ref: '#/definitions/EnableIoTLoggingParams'
+                    description: Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.
+                  publishFindingToSnsParams:
+                    $ref: '#/definitions/PublishFindingToSnsParams'
+                    description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+              tags:
+                description: Metadata that can be used to manage the mitigation action.
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteMitigationAction
+      description: Deletes a defined mitigation action from your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMitigationActionResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: actionName
+          in: path
+          required: true
+          description: The name of the mitigation action that you want to delete.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          maxLength: 128
+    get:
+      operationId: DescribeMitigationAction
+      description: Gets information about a mitigation action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMitigationActionResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: actionName
+          in: path
+          required: true
+          description: The friendly name that uniquely identifies the mitigation action.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          maxLength: 128
+    patch:
+      operationId: UpdateMitigationAction
+      description: Updates the definition for the specified mitigation action.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateMitigationActionResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: actionName
+          in: path
+          required: true
+          description: 'The friendly name for the mitigation action. You can''t change the name by using <code>UpdateMitigationAction</code>. Instead, you must delete and re-create the mitigation action with the new name.'
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              roleArn:
+                description: The ARN of the IAM role that is used to apply the mitigation action.
+                type: string
+                minLength: 20
+                maxLength: 2048
+              actionParams:
+                description: 'The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).'
+                type: object
+                properties:
+                  updateDeviceCertificateParams:
+                    $ref: '#/definitions/UpdateDeviceCertificateParams'
+                    description: Parameters to define a mitigation action that changes the state of the device certificate to inactive.
+                  updateCACertificateParams:
+                    $ref: '#/definitions/UpdateCACertificateParams'
+                    description: Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+                  addThingsToThingGroupParams:
+                    $ref: '#/definitions/AddThingsToThingGroupParams'
+                    description: 'Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.'
+                  replaceDefaultPolicyVersionParams:
+                    $ref: '#/definitions/ReplaceDefaultPolicyVersionParams'
+                    description: Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+                  enableIoTLoggingParams:
+                    $ref: '#/definitions/EnableIoTLoggingParams'
+                    description: Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.
+                  publishFindingToSnsParams:
+                    $ref: '#/definitions/PublishFindingToSnsParams'
+                    description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
   '/otaUpdates/{otaUpdateId}':
     post:
       operationId: CreateOTAUpdate
@@ -2926,14 +3179,18 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRequestException'
         '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
           description: ThrottlingException
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '482':
+        '483':
           description: InternalFailureException
           schema:
             $ref: '#/definitions/InternalFailureException'
-        '483':
+        '484':
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
@@ -2956,7 +3213,7 @@ paths:
               - targetCheckNames
             properties:
               frequency:
-                description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+                description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.'
                 type: string
                 enum:
                   - DAILY
@@ -2968,7 +3225,7 @@ paths:
                 type: string
                 pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
               dayOfWeek:
-                description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+                description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
                 type: string
                 enum:
                   - SUN
@@ -2979,12 +3236,12 @@ paths:
                   - FRI
                   - SAT
               targetCheckNames:
-                description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+                description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
                 type: array
                 items:
                   $ref: '#/definitions/AuditCheckName'
               tags:
-                description: Metadata which can be used to manage the scheduled audit.
+                description: Metadata that can be used to manage the scheduled audit.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -3064,7 +3321,7 @@ paths:
           maxLength: 128
     patch:
       operationId: UpdateScheduledAudit
-      description: 'Updates a scheduled audit, including what checks are performed and how often the audit takes place.'
+      description: 'Updates a scheduled audit, including which checks are performed and how often the audit takes place.'
       responses:
         '200':
           description: Success
@@ -3102,7 +3359,7 @@ paths:
             type: object
             properties:
               frequency:
-                description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+                description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
                 type: string
                 enum:
                   - DAILY
@@ -3114,7 +3371,7 @@ paths:
                 type: string
                 pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
               dayOfWeek:
-                description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+                description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
                 type: string
                 enum:
                   - SUN
@@ -3125,7 +3382,7 @@ paths:
                   - FRI
                   - SAT
               targetCheckNames:
-                description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+                description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
                 type: array
                 items:
                   $ref: '#/definitions/AuditCheckName'
@@ -3186,12 +3443,12 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/AlertTarget'
               additionalMetricsToRetain:
-                description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+                description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
                 type: array
                 items:
                   $ref: '#/definitions/BehaviorMetric'
               tags:
-                description: Metadata which can be used to manage the security profile.
+                description: Metadata that can be used to manage the security profile.
                 type: array
                 items:
                   $ref: '#/definitions/Tag'
@@ -3239,7 +3496,7 @@ paths:
         - name: expectedVersion
           in: query
           required: false
-          description: 'The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a <code>VersionConflictException</code> is thrown.'
+          description: 'The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a <code>VersionConflictException</code> is thrown.'
           type: integer
     get:
       operationId: DescribeSecurityProfile
@@ -3314,7 +3571,7 @@ paths:
         - name: expectedVersion
           in: query
           required: false
-          description: 'The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a <code>VersionConflictException</code> is thrown.'
+          description: 'The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a <code>VersionConflictException</code> is thrown.'
           type: integer
         - name: body
           in: body
@@ -3339,18 +3596,18 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/AlertTarget'
               additionalMetricsToRetain:
-                description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+                description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
                 type: array
                 items:
                   $ref: '#/definitions/BehaviorMetric'
               deleteBehaviors:
-                description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation an exception occurs.'
+                description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation, an exception occurs.'
                 type: boolean
               deleteAlertTargets:
-                description: 'If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation an exception occurs.'
+                description: 'If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation, an exception occurs.'
                 type: boolean
               deleteAdditionalMetricsToRetain:
-                description: 'If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.'
+                description: 'If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.'
                 type: boolean
   '/streams/{streamId}':
     post:
@@ -4492,7 +4749,7 @@ paths:
             type: object
             properties:
               roleArn:
-                description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.'
+                description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.'
                 type: string
                 minLength: 20
                 maxLength: 2048
@@ -4502,7 +4759,7 @@ paths:
                 additionalProperties:
                   $ref: '#/definitions/AuditNotificationTarget'
               auditCheckConfigurations:
-                description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are currently enabled.</p> <p>Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code> this parameter is required and must specify at least one enabled check.</p>'
+                description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
                 type: object
                 additionalProperties:
                   $ref: '#/definitions/AuditCheckConfiguration'
@@ -4673,12 +4930,12 @@ paths:
                     $ref: '#/definitions/RoleArn'
                     description: The ARN of the role.
               removeAutoRegistration:
-                description: 'If true, remove auto registration.'
+                description: 'If true, removes auto registration.'
                 type: boolean
   '/certificates/{certificateId}':
     delete:
       operationId: DeleteCertificate
-      description: '<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>'
+      description: '<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>'
       responses:
         '200':
           description: Success
@@ -4726,7 +4983,7 @@ paths:
         - name: forceDelete
           in: query
           required: false
-          description: Forces a certificate request to be deleted.
+          description: Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
           type: boolean
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
@@ -5156,6 +5413,161 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/audit/findings/{findingId}':
+    get:
+      operationId: DescribeAuditFinding
+      description: 'Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAuditFindingResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: findingId
+          in: path
+          required: true
+          description: A unique identifier for a single audit finding. You can use this identifier to apply mitigation actions to the finding.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/audit/mitigationactions/tasks/{taskId}':
+    get:
+      operationId: DescribeAuditMitigationActionsTask
+      description: 'Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they''re being applied, the task status, and aggregated task statistics.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAuditMitigationActionsTaskResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique identifier for the audit mitigation task.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartAuditMitigationActionsTask
+      description: Starts a task that applies a set of mitigation actions to the specified target.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartAuditMitigationActionsTaskResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TaskAlreadyExistsException
+          schema:
+            $ref: '#/definitions/TaskAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: A unique identifier for the task. You can use this identifier to check the status of the task or to cancel it.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - target
+              - auditCheckToActionsMapping
+              - clientRequestToken
+            properties:
+              target:
+                description: 'Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.'
+                type: object
+                properties:
+                  auditTaskId:
+                    $ref: '#/definitions/AuditTaskId'
+                    description: 'If the task will apply a mitigation action to findings from a specific audit, this value uniquely identifies the audit.'
+                  findingIds:
+                    $ref: '#/definitions/FindingIds'
+                    description: 'If the task will apply a mitigation action to one or more listed findings, this value uniquely identifies those findings.'
+                  auditCheckToReasonCodeFilter:
+                    $ref: '#/definitions/AuditCheckToReasonCodeFilter'
+                    description: Specifies a filter in the form of an audit check and set of reason codes that identify the findings from the audit to which the audit mitigation actions task apply.
+              auditCheckToActionsMapping:
+                description: 'For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your AWS account.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/MitigationActionNameList'
+              clientRequestToken:
+                description: 'Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.'
+                type: string
+                pattern: '^[a-zA-Z0-9-_]+$'
+                minLength: 1
+                maxLength: 64
   '/audit/tasks/{taskId}':
     get:
       operationId: DescribeAuditTask
@@ -5980,7 +6392,6 @@ paths:
           required: false
           description: The name of the thing whose active violations are listed.
           type: string
-          pattern: '[a-zA-Z0-9:_-]+'
           minLength: 1
           maxLength: 128
         - name: securityProfileName
@@ -6115,10 +6526,10 @@ paths:
                 minLength: 1
                 maxLength: 40
               checkName:
-                description: An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+                description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
                 type: string
               resourceIdentifier:
-                description: Information identifying the non-compliant resource.
+                description: Information that identifies the noncompliant resource.
                 type: object
                 properties:
                   deviceCertificateId:
@@ -6129,7 +6540,7 @@ paths:
                     description: The ID of the CA certificate used to authorize the certificate.
                   cognitoIdentityPoolId:
                     $ref: '#/definitions/CognitoIdentityPoolId'
-                    description: The ID of the Cognito Identity Pool.
+                    description: The ID of the Amazon Cognito identity pool.
                   clientId:
                     $ref: '#/definitions/ClientId'
                     description: The client ID.
@@ -6163,6 +6574,156 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/audit/mitigationactions/executions#taskId&findingId':
+    get:
+      operationId: ListAuditMitigationActionsExecutions
+      description: Gets the status of audit mitigation action tasks that were executed.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAuditMitigationActionsExecutionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: query
+          required: true
+          description: Specify this filter to limit results to actions for a specific audit mitigation actions task.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+        - name: actionStatus
+          in: query
+          required: false
+          description: Specify this filter to limit results to those with a specific status.
+          type: string
+          enum:
+            - IN_PROGRESS
+            - COMPLETED
+            - FAILED
+            - CANCELED
+            - SKIPPED
+            - PENDING
+        - name: findingId
+          in: query
+          required: true
+          description: Specify this filter to limit results to those that were applied to a specific audit finding.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time. The default is 25.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/audit/mitigationactions/tasks#startTime&endTime':
+    get:
+      operationId: ListAuditMitigationActionsTasks
+      description: Gets a list of audit mitigation action tasks that match the specified filters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAuditMitigationActionsTasksResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: auditTaskId
+          in: query
+          required: false
+          description: Specify this filter to limit results to tasks that were applied to results for a specific audit.
+          type: string
+          pattern: '[a-zA-Z0-9\-]+'
+          minLength: 1
+          maxLength: 40
+        - name: findingId
+          in: query
+          required: false
+          description: Specify this filter to limit results to tasks that were applied to a specific audit finding.
+          type: string
+          pattern: '[a-zA-Z0-9_-]+'
+          minLength: 1
+          maxLength: 128
+        - name: taskStatus
+          in: query
+          required: false
+          description: Specify this filter to limit results to tasks that are in a specific state.
+          type: string
+          enum:
+            - IN_PROGRESS
+            - COMPLETED
+            - FAILED
+            - CANCELED
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time. The default is 25.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          type: string
+        - name: startTime
+          in: query
+          required: true
+          description: Specify this filter to limit results to tasks that began on or after a specific date and time.
+          type: string
+          format: date-time
+        - name: endTime
+          in: query
+          required: true
+          description: Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.
+          type: string
+          format: date-time
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/audit/tasks#startTime&endTime':
     get:
       operationId: ListAuditTasks
@@ -6188,7 +6749,7 @@ paths:
         - name: startTime
           in: query
           required: true
-          description: The beginning of the time period. Note that audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+          description: The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
           type: string
           format: date-time
         - name: endTime
@@ -6208,7 +6769,7 @@ paths:
         - name: taskStatus
           in: query
           required: false
-          description: 'A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".'
+          description: 'A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".'
           type: string
           enum:
             - IN_PROGRESS
@@ -6731,6 +7292,60 @@ paths:
           pattern: '[a-zA-Z0-9\-]+'
           minLength: 1
           maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /mitigationactions/actions:
+    get:
+      operationId: ListMitigationActions
+      description: Gets a list of all mitigation actions that match the specified filter criteria.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMitigationActionsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: actionType
+          in: query
+          required: false
+          description: Specify a value to limit the result to mitigation actions with a specific action type.
+          type: string
+          enum:
+            - UPDATE_DEVICE_CERTIFICATE
+            - UPDATE_CA_CERTIFICATE
+            - ADD_THINGS_TO_THING_GROUP
+            - REPLACE_DEFAULT_POLICY_VERSION
+            - ENABLE_IOT_LOGGING
+            - PUBLISH_FINDING_TO_SNS
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time. The default is 25.
+          type: integer
+          minimum: 1
+          maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -7286,7 +7901,7 @@ paths:
         - name: recursive
           in: query
           required: false
-          description: 'If true, return child groups as well.'
+          description: 'If true, return child groups too.'
           type: boolean
         - name: securityProfileTargetArn
           in: query
@@ -8309,7 +8924,7 @@ paths:
   '/violation-events#startTime&endTime':
     get:
       operationId: ListViolationEvents
-      description: 'Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).'
+      description: 'Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).'
       responses:
         '200':
           description: Success
@@ -8345,7 +8960,6 @@ paths:
           required: false
           description: A filter to limit results to those alerts caused by the specified thing.
           type: string
-          pattern: '[a-zA-Z0-9:_-]+'
           minLength: 1
           maxLength: 128
         - name: securityProfileName
@@ -8848,7 +9462,7 @@ paths:
               - targetCheckNames
             properties:
               targetCheckNames:
-                description: Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.
+                description: 'Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.'
                 type: array
                 items:
                   $ref: '#/definitions/AuditCheckName'
@@ -9446,6 +10060,9 @@ definitions:
     type: object
     properties: {}
     description: The output from the AttachThingPrincipal operation.
+  CancelAuditMitigationActionsTaskResponse:
+    type: object
+    properties: {}
   CancelAuditTaskResponse:
     type: object
     properties: {}
@@ -9621,6 +10238,76 @@ definitions:
         $ref: '#/definitions/KeyPair'
         description: The generated key pair.
     description: The output of the CreateKeysAndCertificate operation.
+  CreateMitigationActionResponse:
+    type: object
+    properties:
+      actionArn:
+        $ref: '#/definitions/MitigationActionArn'
+        description: The ARN for the new mitigation action.
+      actionId:
+        $ref: '#/definitions/MitigationActionId'
+        description: A unique identifier for the new mitigation action.
+  UpdateDeviceCertificateParams:
+    type: object
+    required:
+      - action
+    properties:
+      action:
+        $ref: '#/definitions/DeviceCertificateUpdateAction'
+        description: The action that you want to apply to the device cerrtificate. The only supported value is <code>DEACTIVATE</code>.
+    description: Parameters to define a mitigation action that changes the state of the device certificate to inactive.
+  UpdateCACertificateParams:
+    type: object
+    required:
+      - action
+    properties:
+      action:
+        $ref: '#/definitions/CACertificateUpdateAction'
+        description: The action that you want to apply to the CA cerrtificate. The only supported value is <code>DEACTIVATE</code>.
+    description: Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+  AddThingsToThingGroupParams:
+    type: object
+    required:
+      - thingGroupNames
+    properties:
+      thingGroupNames:
+        $ref: '#/definitions/ThingGroupNames'
+        description: 'The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you cannot add a thing to more than one group in the same hierarchy.'
+      overrideDynamicGroups:
+        $ref: '#/definitions/OverrideDynamicGroups'
+        description: Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic things groups.
+    description: Parameters used when defining a mitigation action that move a set of things to a thing group.
+  ReplaceDefaultPolicyVersionParams:
+    type: object
+    required:
+      - templateName
+    properties:
+      templateName:
+        $ref: '#/definitions/PolicyTemplateName'
+        description: The name of the template to be applied. The only supported value is <code>BLANK_POLICY</code>.
+    description: Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+  EnableIoTLoggingParams:
+    type: object
+    required:
+      - roleArnForLogging
+      - logLevel
+    properties:
+      roleArnForLogging:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role used for logging.
+      logLevel:
+        $ref: '#/definitions/LogLevel'
+        description: Specifies the types of information to be logged.
+    description: Parameters used when defining a mitigation action that enable AWS IoT logging.
+  PublishFindingToSnsParams:
+    type: object
+    required:
+      - topicArn
+    properties:
+      topicArn:
+        $ref: '#/definitions/SnsTopicArn'
+        description: The ARN of the topic to which you want to publish the findings.
+    description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
   CreateOTAUpdateResponse:
     type: object
     properties:
@@ -9717,7 +10404,7 @@ definitions:
         description: The ARN of the scheduled audit.
   AuditCheckName:
     type: string
-    description: An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+    description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
   CreateSecurityProfileResponse:
     type: object
     properties:
@@ -9921,6 +10608,9 @@ definitions:
   DeleteDynamicThingGroupResponse:
     type: object
     properties: {}
+  DeleteMitigationActionResponse:
+    type: object
+    properties: {}
   DeleteOTAUpdateResponse:
     type: object
     properties: {}
@@ -9960,13 +10650,42 @@ definitions:
     properties:
       roleArn:
         $ref: '#/definitions/RoleArn'
-        description: '<p>The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code> this parameter is required.</p>'
+        description: '<p>The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required.</p>'
       auditNotificationTargetConfigurations:
         $ref: '#/definitions/AuditNotificationTargetConfigurations'
         description: Information about the targets to which audit notifications are sent for this account.
       auditCheckConfigurations:
         $ref: '#/definitions/AuditCheckConfigurations'
         description: Which audit checks are enabled and disabled for this account.
+  DescribeAuditFindingResponse:
+    type: object
+    properties:
+      finding:
+        $ref: '#/definitions/AuditFinding'
+  DescribeAuditMitigationActionsTaskResponse:
+    type: object
+    properties:
+      taskStatus:
+        $ref: '#/definitions/AuditMitigationActionsTaskStatus'
+        description: The current status of the task.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the task was started.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the task was completed or canceled.
+      taskStatistics:
+        $ref: '#/definitions/AuditMitigationActionsTaskStatistics'
+        description: Aggregate counts of the results when the mitigation tasks were applied to the findings for this audit mitigation actions task.
+      target:
+        $ref: '#/definitions/AuditMitigationActionsTaskTarget'
+        description: 'Identifies the findings to which the mitigation actions are applied. This can be by audit checks, by audit task, or a set of findings.'
+      auditCheckToActionsMapping:
+        $ref: '#/definitions/AuditCheckToActionsMapping'
+        description: Specifies the mitigation actions that should be applied to specific audit checks.
+      actionsDefinition:
+        $ref: '#/definitions/MitigationActionList'
+        description: Specifies the mitigation actions and their parameters that are applied as part of this task.
   DescribeAuditTaskResponse:
     type: object
     properties:
@@ -10084,6 +10803,33 @@ definitions:
       execution:
         $ref: '#/definitions/JobExecution'
         description: Information about the job execution.
+  DescribeMitigationActionResponse:
+    type: object
+    properties:
+      actionName:
+        $ref: '#/definitions/MitigationActionName'
+        description: The friendly name that uniquely identifies the mitigation action.
+      actionType:
+        $ref: '#/definitions/MitigationActionType'
+        description: The type of mitigation action.
+      actionArn:
+        $ref: '#/definitions/MitigationActionArn'
+        description: The ARN that identifies this migration action.
+      actionId:
+        $ref: '#/definitions/MitigationActionId'
+        description: A unique identifier for this action.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role used to apply this action.
+      actionParams:
+        $ref: '#/definitions/MitigationActionParams'
+        description: 'Parameters that control how the mitigation action is applied, specific to the type of mitigation action.'
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the mitigation action was added to your AWS account.
+      lastModifiedDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the mitigation action was last changed.
   DescribeRoleAliasResponse:
     type: object
     properties:
@@ -10095,16 +10841,16 @@ definitions:
     properties:
       frequency:
         $ref: '#/definitions/AuditFrequency'
-        description: 'How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+        description: 'How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
       dayOfMonth:
         $ref: '#/definitions/DayOfMonth'
         description: 'The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
       dayOfWeek:
         $ref: '#/definitions/DayOfWeek'
-        description: 'The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".'
+        description: 'The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".'
       targetCheckNames:
         $ref: '#/definitions/TargetAuditCheckNames'
-        description: Which checks are performed during the scheduled audit. (Note that checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+        description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
       scheduledAuditName:
         $ref: '#/definitions/ScheduledAuditName'
         description: The name of the scheduled audit.
@@ -10131,7 +10877,7 @@ definitions:
         description: Where the alerts are sent. (Alerts are always sent to the console.)
       additionalMetricsToRetain:
         $ref: '#/definitions/AdditionalMetricsToRetainList'
-        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
       version:
         $ref: '#/definitions/Version'
         description: The version of the security profile. A new version is generated whenever the security profile is updated.
@@ -10452,6 +11198,24 @@ definitions:
     pattern: '[0-9]+'
     minLength: 12
     maxLength: 12
+  ListAuditMitigationActionsExecutionsResponse:
+    type: object
+    properties:
+      actionsExecutions:
+        $ref: '#/definitions/AuditMitigationActionExecutionMetadataList'
+        description: 'A set of task execution results based on the input parameters. Details include the mitigation action applied, start time, and task status.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
+  ListAuditMitigationActionsTasksResponse:
+    type: object
+    properties:
+      tasks:
+        $ref: '#/definitions/AuditMitigationActionsTaskMetadataList'
+        description: The collection of audit mitigation tasks that matched the filter criteria.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
   ListAuditTasksResponse:
     type: object
     properties:
@@ -10545,6 +11309,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+  ListMitigationActionsResponse:
+    type: object
+    properties:
+      actionIdentifiers:
+        $ref: '#/definitions/MitigationActionIdentifierList'
+        description: A set of actions that matched the specified filter criteria.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
   ListOTAUpdatesResponse:
     type: object
     properties:
@@ -10791,7 +11564,7 @@ definitions:
     properties:
       violationEvents:
         $ref: '#/definitions/ViolationEvents'
-        description: 'The security profile violation alerts issued for this account during the given time frame, potentially filtered by security profile, behavior violated, or thing (device) violating.'
+        description: 'The security profile violation alerts issued for this account during the given time period, potentially filtered by security profile, behavior violated, or thing (device) violating.'
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
@@ -10874,6 +11647,34 @@ definitions:
       - THING_GROUP
   LogTargetName:
     type: string
+  StartAuditMitigationActionsTaskResponse:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditMitigationActionsTaskId'
+        description: The unique identifier for the audit mitigation task. This matches the <code>taskId</code> that you specified in the request.
+  AuditTaskId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 40
+  FindingIds:
+    type: array
+    items:
+      $ref: '#/definitions/FindingId'
+    minItems: 1
+    maxItems: 25
+  AuditCheckToReasonCodeFilter:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ReasonForNonComplianceCodes'
+  MitigationActionNameList:
+    type: array
+    items:
+      $ref: '#/definitions/MitigationActionName'
+    minItems: 1
+    maxItems: 5
+  TaskAlreadyExistsException: {}
   StartOnDemandAuditTaskResponse:
     type: object
     properties:
@@ -11018,6 +11819,15 @@ definitions:
     enum:
       - 'OFF'
       - 'ON'
+  UpdateMitigationActionResponse:
+    type: object
+    properties:
+      actionArn:
+        $ref: '#/definitions/MitigationActionArn'
+        description: The ARN for the new mitigation action.
+      actionId:
+        $ref: '#/definitions/MitigationActionId'
+        description: A unique identifier for the mitigation action.
   UpdateRoleAliasResponse:
     type: object
     properties:
@@ -11053,7 +11863,7 @@ definitions:
         description: Where the alerts are sent. (Alerts are always sent to the console.)
       additionalMetricsToRetain:
         $ref: '#/definitions/AdditionalMetricsToRetainList'
-        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
       version:
         $ref: '#/definitions/Version'
         description: The updated version of the security profile.
@@ -11416,7 +12226,7 @@ definitions:
       roleArn:
         $ref: '#/definitions/AwsArn'
         description: 'The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
-    description: Sends messge data to an AWS IoT Analytics channel.
+    description: Sends message data to an AWS IoT Analytics channel.
   IotEventsAction:
     type: object
     required:
@@ -11461,9 +12271,8 @@ definitions:
     pattern: '[a-zA-Z0-9\-]+'
     minLength: 1
     maxLength: 128
-  ThingName:
+  DeviceDefenderThingName:
     type: string
-    pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
   SecurityProfileName:
@@ -11494,7 +12303,7 @@ definitions:
         $ref: '#/definitions/ViolationId'
         description: The ID of the active violation.
       thingName:
-        $ref: '#/definitions/ThingName'
+        $ref: '#/definitions/DeviceDefenderThingName'
         description: The name of the thing responsible for the active violation.
       securityProfileName:
         $ref: '#/definitions/SecurityProfileName'
@@ -11523,6 +12332,11 @@ definitions:
     maxLength: 128
   BillingGroupArn:
     type: string
+  ThingName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
   ThingArn:
     type: string
   AddThingToBillingGroupRequest:
@@ -11562,6 +12376,12 @@ definitions:
       overrideDynamicGroups:
         $ref: '#/definitions/OverrideDynamicGroups'
         description: 'Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.'
+  ThingGroupNames:
+    type: array
+    items:
+      $ref: '#/definitions/ThingGroupName'
+    minItems: 1
+    maxItems: 10
   AdditionalMetricsToRetainList:
     type: array
     items:
@@ -11704,32 +12524,42 @@ definitions:
     properties:
       checkRunStatus:
         $ref: '#/definitions/AuditCheckRunStatus'
-        description: 'The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".'
+        description: 'The completion status of this check. One of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".'
       checkCompliant:
         $ref: '#/definitions/CheckCompliant'
-        description: True if the check completed and found all resources compliant.
+        description: True if the check is complete and found all resources compliant.
       totalResourcesCount:
         $ref: '#/definitions/TotalResourcesCount'
         description: The number of resources on which the check was performed.
       nonCompliantResourcesCount:
         $ref: '#/definitions/NonCompliantResourcesCount'
-        description: The number of resources that the check found non-compliant.
+        description: The number of resources that were found noncompliant during the check.
       errorCode:
         $ref: '#/definitions/ErrorCode'
-        description: 'The code of any error encountered when performing this check during this audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".'
+        description: The code of any error encountered when this check is performed during this audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
       message:
         $ref: '#/definitions/ErrorMessage'
-        description: The message associated with any error encountered when performing this check during this audit.
+        description: The message associated with any error encountered when this check is performed during this audit.
     description: Information about the audit check.
+  AuditCheckToActionsMapping:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/MitigationActionNameList'
+  ReasonForNonComplianceCodes:
+    type: array
+    items:
+      $ref: '#/definitions/ReasonForNonComplianceCode'
+    minItems: 1
+    maxItems: 25
   AuditDetails:
     type: object
     additionalProperties:
       $ref: '#/definitions/AuditCheckDetails'
-  AuditTaskId:
+  FindingId:
     type: string
-    pattern: '[a-zA-Z0-9\-]+'
+    pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
-    maxLength: 40
+    maxLength: 128
   AuditFindingSeverity:
     type: string
     enum:
@@ -11742,14 +12572,14 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/ResourceType'
-        description: The type of the non-compliant resource.
+        description: The type of the noncompliant resource.
       resourceIdentifier:
         $ref: '#/definitions/ResourceIdentifier'
-        description: Information identifying the non-compliant resource.
+        description: Information that identifies the noncompliant resource.
       additionalInfo:
         $ref: '#/definitions/StringMap'
-        description: Additional information about the non-compliant resource.
-    description: Information about the resource that was non-compliant with the audit check.
+        description: Other information about the noncompliant resource.
+    description: Information about the resource that was noncompliant with the audit check.
   RelatedResources:
     type: array
     items:
@@ -11761,9 +12591,12 @@ definitions:
   AuditFinding:
     type: object
     properties:
+      findingId:
+        $ref: '#/definitions/FindingId'
+        description: A unique identifier for this set of audit findings. This identifier is used to apply mitigation tasks to one or more sets of findings.
       taskId:
         $ref: '#/definitions/AuditTaskId'
-        description: The ID of the audit that generated this result (finding)
+        description: The ID of the audit that generated this result (finding).
       checkName:
         $ref: '#/definitions/AuditCheckName'
         description: The audit check that generated this result.
@@ -11778,16 +12611,16 @@ definitions:
         description: The severity of the result (finding).
       nonCompliantResource:
         $ref: '#/definitions/NonCompliantResource'
-        description: The resource that was found to be non-compliant with the audit check.
+        description: The resource that was found to be noncompliant with the audit check.
       relatedResources:
         $ref: '#/definitions/RelatedResources'
         description: The list of related resources.
       reasonForNonCompliance:
         $ref: '#/definitions/ReasonForNonCompliance'
-        description: The reason the resource was non-compliant.
+        description: The reason the resource was noncompliant.
       reasonForNonComplianceCode:
         $ref: '#/definitions/ReasonForNonComplianceCode'
-        description: A code which indicates the reason that the resource was non-compliant.
+        description: A code that indicates the reason that the resource was noncompliant.
     description: The findings (results) of the audit.
   AuditFindings:
     type: array
@@ -11800,6 +12633,121 @@ definitions:
       - WEEKLY
       - BIWEEKLY
       - MONTHLY
+  AuditMitigationActionsTaskId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  MitigationActionName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    maxLength: 128
+  MitigationActionId:
+    type: string
+  AuditMitigationActionsExecutionStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - CANCELED
+      - SKIPPED
+      - PENDING
+  AuditMitigationActionExecutionMetadata:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditMitigationActionsTaskId'
+        description: The unique identifier for the task that applies the mitigation action.
+      findingId:
+        $ref: '#/definitions/FindingId'
+        description: The unique identifier for the findings to which the task and associated mitigation action are applied.
+      actionName:
+        $ref: '#/definitions/MitigationActionName'
+        description: The friendly name of the mitigation action being applied by the task.
+      actionId:
+        $ref: '#/definitions/MitigationActionId'
+        description: The unique identifier for the mitigation action being applied by the task.
+      status:
+        $ref: '#/definitions/AuditMitigationActionsExecutionStatus'
+        description: The current status of the task being executed.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the task was started.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time when the task was completed or canceled. Blank if the task is still running.
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: 'If an error occurred, the code that indicates which type of error occurred.'
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: 'If an error occurred, a message that describes the error.'
+    description: 'Returned by ListAuditMitigationActionsTask, this object contains information that describes a mitigation action that has been started.'
+  AuditMitigationActionExecutionMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/AuditMitigationActionExecutionMetadata'
+  AuditMitigationActionsTaskStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - CANCELED
+  AuditMitigationActionsTaskMetadata:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/AuditMitigationActionsTaskId'
+        description: The unique identifier for the task.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the audit mitigation actions task was started.
+      taskStatus:
+        $ref: '#/definitions/AuditMitigationActionsTaskStatus'
+        description: The current state of the audit mitigation actions task.
+    description: Information about an audit mitigation actions task that is returned by <code>ListAuditMitigationActionsTasks</code>.
+  AuditMitigationActionsTaskMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/AuditMitigationActionsTaskMetadata'
+  TaskStatisticsForAuditCheck:
+    type: object
+    properties:
+      totalFindingsCount:
+        $ref: '#/definitions/TotalFindingsCount'
+        description: The total number of findings to which a task is being applied.
+      failedFindingsCount:
+        $ref: '#/definitions/FailedFindingsCount'
+        description: The number of findings for which at least one of the actions failed when applied.
+      succeededFindingsCount:
+        $ref: '#/definitions/SucceededFindingsCount'
+        description: The number of findings for which all mitigation actions succeeded when applied.
+      skippedFindingsCount:
+        $ref: '#/definitions/SkippedFindingsCount'
+        description: The number of findings skipped because of filter conditions provided in the parameters to the command.
+      canceledFindingsCount:
+        $ref: '#/definitions/CanceledFindingsCount'
+        description: The number of findings to which the mitigation action task was canceled when applied.
+    description: Provides summary counts of how many tasks for findings are in a particular state. This information is included in the response from DescribeAuditMitigationActionsTask.
+  AuditMitigationActionsTaskStatistics:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TaskStatisticsForAuditCheck'
+  AuditMitigationActionsTaskTarget:
+    type: object
+    properties:
+      auditTaskId:
+        $ref: '#/definitions/AuditTaskId'
+        description: 'If the task will apply a mitigation action to findings from a specific audit, this value uniquely identifies the audit.'
+      findingIds:
+        $ref: '#/definitions/FindingIds'
+        description: 'If the task will apply a mitigation action to one or more listed findings, this value uniquely identifies those findings.'
+      auditCheckToReasonCodeFilter:
+        $ref: '#/definitions/AuditCheckToReasonCodeFilter'
+        description: Specifies a filter in the form of an audit check and set of reason codes that identify the findings from the audit to which the audit mitigation actions task apply.
+    description: 'Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.'
   AuditNotificationTargetConfigurations:
     type: object
     additionalProperties:
@@ -11828,10 +12776,10 @@ definitions:
         description: The ID of this audit.
       taskStatus:
         $ref: '#/definitions/AuditTaskStatus'
-        description: 'The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".'
+        description: 'The status of this audit. One of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".'
       taskType:
         $ref: '#/definitions/AuditTaskType'
-        description: 'The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".'
+        description: The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
     description: The audits that were performed.
   AuditTaskMetadataList:
     type: array
@@ -12154,10 +13102,17 @@ definitions:
         $ref: '#/definitions/CertificateValidity'
         description: When the CA certificate is valid.
     description: Describes a CA certificate.
+  CACertificateUpdateAction:
+    type: string
+    enum:
+      - DEACTIVATE
   CACertificates:
     type: array
     items:
       $ref: '#/definitions/CACertificate'
+  CancelAuditMitigationActionsTaskRequest:
+    type: object
+    properties: {}
   CancelAuditTaskRequest:
     type: object
     properties: {}
@@ -12196,6 +13151,8 @@ definitions:
         $ref: '#/definitions/Comment'
         description: An optional comment string describing why the job was canceled.
   CanceledChecksCount:
+    type: integer
+  CanceledFindingsCount:
     type: integer
   CanceledThings:
     type: integer
@@ -12322,6 +13279,11 @@ definitions:
   ClearDefaultAuthorizerRequest:
     type: object
     properties: {}
+  ClientRequestToken:
+    type: string
+    pattern: '^[a-zA-Z0-9-_]+$'
+    minLength: 1
+    maxLength: 64
   StateReason:
     type: string
   StateValue:
@@ -12575,6 +13537,45 @@ definitions:
         $ref: '#/definitions/PrivateKey'
         description: The private key.
     description: Describes a key pair.
+  MitigationActionParams:
+    type: object
+    properties:
+      updateDeviceCertificateParams:
+        $ref: '#/definitions/UpdateDeviceCertificateParams'
+        description: Parameters to define a mitigation action that changes the state of the device certificate to inactive.
+      updateCACertificateParams:
+        $ref: '#/definitions/UpdateCACertificateParams'
+        description: Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+      addThingsToThingGroupParams:
+        $ref: '#/definitions/AddThingsToThingGroupParams'
+        description: 'Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.'
+      replaceDefaultPolicyVersionParams:
+        $ref: '#/definitions/ReplaceDefaultPolicyVersionParams'
+        description: Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+      enableIoTLoggingParams:
+        $ref: '#/definitions/EnableIoTLoggingParams'
+        description: Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.
+      publishFindingToSnsParams:
+        $ref: '#/definitions/PublishFindingToSnsParams'
+        description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+    description: 'The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).'
+  CreateMitigationActionRequest:
+    type: object
+    required:
+      - roleArn
+      - actionParams
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role that is used to apply the mitigation action.
+      actionParams:
+        $ref: '#/definitions/MitigationActionParams'
+        description: Defines the type of action and the parameters for that action.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata that can be used to manage the mitigation action.
+  MitigationActionArn:
+    type: string
   OTAUpdateId:
     type: string
     pattern: '[a-zA-Z0-9_-]+'
@@ -12716,19 +13717,19 @@ definitions:
     properties:
       frequency:
         $ref: '#/definitions/AuditFrequency'
-        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.'
       dayOfMonth:
         $ref: '#/definitions/DayOfMonth'
         description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
       dayOfWeek:
         $ref: '#/definitions/DayOfWeek'
-        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
       targetCheckNames:
         $ref: '#/definitions/TargetAuditCheckNames'
-        description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+        description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
       tags:
         $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the scheduled audit.
+        description: Metadata that can be used to manage the scheduled audit.
   ScheduledAuditArn:
     type: string
   SecurityProfileDescription:
@@ -12749,10 +13750,10 @@ definitions:
         description: Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
       additionalMetricsToRetain:
         $ref: '#/definitions/AdditionalMetricsToRetainList'
-        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
       tags:
         $ref: '#/definitions/TagList'
-        description: Metadata which can be used to manage the security profile.
+        description: Metadata that can be used to manage the security profile.
   SecurityProfileArn:
     type: string
   StreamId:
@@ -12936,6 +13937,9 @@ definitions:
   DeleteJobRequest:
     type: object
     properties: {}
+  DeleteMitigationActionRequest:
+    type: object
+    properties: {}
   DeleteStream:
     type: boolean
   ForceDeleteAWSJob:
@@ -13016,6 +14020,16 @@ definitions:
   DescribeAccountAuditConfigurationRequest:
     type: object
     properties: {}
+  DescribeAuditFindingRequest:
+    type: object
+    properties: {}
+  DescribeAuditMitigationActionsTaskRequest:
+    type: object
+    properties: {}
+  MitigationActionList:
+    type: array
+    items:
+      $ref: '#/definitions/MitigationAction'
   DescribeAuditTaskRequest:
     type: object
     properties: {}
@@ -13036,10 +14050,10 @@ definitions:
         description: The number of checks that found compliant resources.
       nonCompliantChecks:
         $ref: '#/definitions/NonCompliantChecksCount'
-        description: The number of checks that found non-compliant resources.
+        description: The number of checks that found noncompliant resources.
       failedChecks:
         $ref: '#/definitions/FailedChecksCount'
-        description: 'The number of checks '
+        description: The number of checks.
       canceledChecks:
         $ref: '#/definitions/CanceledChecksCount'
         description: The number of checks that did not run because the audit was canceled.
@@ -13200,6 +14214,18 @@ definitions:
         $ref: '#/definitions/TimeoutConfig'
         description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
     description: The <code>Job</code> object contains details about a job.
+  DescribeMitigationActionRequest:
+    type: object
+    properties: {}
+  MitigationActionType:
+    type: string
+    enum:
+      - UPDATE_DEVICE_CERTIFICATE
+      - UPDATE_CA_CERTIFICATE
+      - ADD_THINGS_TO_THING_GROUP
+      - REPLACE_DEFAULT_POLICY_VERSION
+      - ENABLE_IOT_LOGGING
+      - PUBLISH_FINDING_TO_SNS
   DescribeRoleAliasRequest:
     type: object
     properties: {}
@@ -13374,6 +14400,10 @@ definitions:
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
+  DeviceCertificateUpdateAction:
+    type: string
+    enum:
+      - DEACTIVATE
   DisableAllLogs:
     type: boolean
   DisableTopicRuleRequest:
@@ -13406,7 +14436,7 @@ definitions:
     properties:
       tableName:
         $ref: '#/definitions/TableName'
-        description: The table where the message data will be written
+        description: The table where the message data will be written.
     description: The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.
   EffectivePolicy:
     type: object
@@ -13489,6 +14519,8 @@ definitions:
         description: The threshold for number of succeeded things that will initiate the increase in rate of rollout.
     description: Allows you to define a criteria to initiate the increase in rate of rollout for a job.
   FailedChecksCount:
+    type: integer
+  FailedFindingsCount:
     type: integer
   FailedThings:
     type: integer
@@ -13933,7 +14965,7 @@ definitions:
         description: The ID of the CA certificate used to authorize the certificate.
       cognitoIdentityPoolId:
         $ref: '#/definitions/CognitoIdentityPoolId'
-        description: The ID of the Cognito Identity Pool.
+        description: The ID of the Amazon Cognito identity pool.
       clientId:
         $ref: '#/definitions/ClientId'
         description: The client ID.
@@ -13943,7 +14975,7 @@ definitions:
       account:
         $ref: '#/definitions/AwsAccountId'
         description: The account with which the resource is associated.
-    description: Information identifying the non-compliant resource.
+    description: Information that identifies the noncompliant resource.
   ListAuditFindingsRequest:
     type: object
     properties:
@@ -13955,7 +14987,7 @@ definitions:
         description: A filter to limit results to the findings for the specified audit check.
       resourceIdentifier:
         $ref: '#/definitions/ResourceIdentifier'
-        description: Information identifying the non-compliant resource.
+        description: Information identifying the noncompliant resource.
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return at one time. The default is 25.
@@ -13968,6 +15000,12 @@ definitions:
       endTime:
         $ref: '#/definitions/Timestamp'
         description: 'A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.'
+  ListAuditMitigationActionsExecutionsRequest:
+    type: object
+    properties: {}
+  ListAuditMitigationActionsTasksRequest:
+    type: object
+    properties: {}
   ListAuditTasksRequest:
     type: object
     properties: {}
@@ -14009,6 +15047,13 @@ definitions:
   ListJobsRequest:
     type: object
     properties: {}
+  ListMitigationActionsRequest:
+    type: object
+    properties: {}
+  MitigationActionIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/MitigationActionIdentifier'
   ListOTAUpdatesRequest:
     type: object
     properties: {}
@@ -14246,6 +15291,35 @@ definitions:
       $ref: '#/definitions/Port'
   MissingContextValue:
     type: string
+  MitigationAction:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/MitigationActionName'
+        description: A user-friendly name for the mitigation action.
+      id:
+        $ref: '#/definitions/MitigationActionId'
+        description: A unique identifier for the mitigation action.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The IAM role ARN used to apply this mitigation action.
+      actionParams:
+        $ref: '#/definitions/MitigationActionParams'
+        description: 'The set of parameters for this mitigation action. The parameters vary, depending on the kind of action you apply.'
+    description: Describes which changes should be applied as part of a mitigation action.
+  MitigationActionIdentifier:
+    type: object
+    properties:
+      actionName:
+        $ref: '#/definitions/MitigationActionName'
+        description: The friendly name of the mitigation action.
+      actionArn:
+        $ref: '#/definitions/MitigationActionArn'
+        description: The IAM role ARN used to apply this mitigation action.
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date when this mitigation action was created.
+    description: Information that identifies a mitigation action. This information is returned by ListMitigationActions.
   NonCompliantChecksCount:
     type: integer
   ResourceType:
@@ -14327,6 +15401,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicyName'
+  PolicyTemplateName:
+    type: string
+    enum:
+      - BLANK_POLICY
   PolicyVersion:
     type: object
     properties:
@@ -14355,6 +15433,9 @@ definitions:
     maxLength: 128
   ProcessingTargetName:
     type: string
+  SnsTopicArn:
+    type: string
+    maxLength: 350
   QueueUrl:
     type: string
   RegisterCACertificateRequest:
@@ -14420,10 +15501,10 @@ definitions:
         description: The type of resource.
       resourceIdentifier:
         $ref: '#/definitions/ResourceIdentifier'
-        description: Information identifying the resource.
+        description: Information that identifies the resource.
       additionalInfo:
         $ref: '#/definitions/StringMap'
-        description: Additional information about the resource.
+        description: Other information about the resource.
     description: Information about a related resource.
   RemoveAutoRegistration:
     type: boolean
@@ -14503,7 +15584,7 @@ definitions:
         description: The ARN of the scheduled audit.
       frequency:
         $ref: '#/definitions/AuditFrequency'
-        description: How often the scheduled audit takes place.
+        description: How often the scheduled audit occurs.
       dayOfMonth:
         $ref: '#/definitions/DayOfMonth'
         description: 'The day of the month on which the scheduled audit is run (if the <code>frequency</code> is "MONTHLY"). If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
@@ -14633,8 +15714,26 @@ definitions:
         $ref: '#/definitions/CertificatePathOnDevice'
         description: The location of the code-signing certificate on your device.
     description: Describes the code-signing profile.
+  SkippedFindingsCount:
+    type: integer
   UseBase64:
     type: boolean
+  StartAuditMitigationActionsTaskRequest:
+    type: object
+    required:
+      - target
+      - auditCheckToActionsMapping
+      - clientRequestToken
+    properties:
+      target:
+        $ref: '#/definitions/AuditMitigationActionsTaskTarget'
+        description: 'Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a speecific set of findings.'
+      auditCheckToActionsMapping:
+        $ref: '#/definitions/AuditCheckToActionsMapping'
+        description: 'For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your AWS account.'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.'
   StartOnDemandAuditTaskRequest:
     type: object
     required:
@@ -14642,7 +15741,7 @@ definitions:
     properties:
       targetCheckNames:
         $ref: '#/definitions/TargetAuditCheckNames'
-        description: Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.
+        description: 'Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.'
   StartThingRegistrationTaskRequest:
     type: object
     required:
@@ -14684,6 +15783,8 @@ definitions:
         $ref: '#/definitions/StreamDescription'
         description: A description of the stream.
     description: A summary of a stream.
+  SucceededFindingsCount:
+    type: integer
   TagValue:
     type: string
   TagKeyList:
@@ -14705,6 +15806,8 @@ definitions:
   TotalChecksCount:
     type: integer
   WaitingForDataCollectionChecksCount:
+    type: integer
+  TotalFindingsCount:
     type: integer
   TestAuthorizationRequest:
     type: object
@@ -14887,13 +15990,13 @@ definitions:
     properties:
       roleArn:
         $ref: '#/definitions/RoleArn'
-        description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.'
+        description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.'
       auditNotificationTargetConfigurations:
         $ref: '#/definitions/AuditNotificationTargetConfigurations'
         description: Information about the targets to which audit notifications are sent.
       auditCheckConfigurations:
         $ref: '#/definitions/AuditCheckConfigurations'
-        description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are currently enabled.</p> <p>Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code> this parameter is required and must specify at least one enabled check.</p>'
+        description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
   UpdateAuthorizerRequest:
     type: object
     properties:
@@ -14928,7 +16031,7 @@ definitions:
         description: Information about the registration configuration.
       removeAutoRegistration:
         $ref: '#/definitions/RemoveAutoRegistration'
-        description: 'If true, remove auto registration.'
+        description: 'If true, removes auto registration.'
     description: The input to the UpdateCACertificate operation.
   UpdateCertificateRequest:
     type: object
@@ -14987,6 +16090,15 @@ definitions:
       timeoutConfig:
         $ref: '#/definitions/TimeoutConfig'
         description: 'Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>. '
+  UpdateMitigationActionRequest:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the IAM role that is used to apply the mitigation action.
+      actionParams:
+        $ref: '#/definitions/MitigationActionParams'
+        description: Defines the type of action and the parameters for that action.
   UpdateRoleAliasRequest:
     type: object
     properties:
@@ -15001,16 +16113,16 @@ definitions:
     properties:
       frequency:
         $ref: '#/definitions/AuditFrequency'
-        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.'
+        description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
       dayOfMonth:
         $ref: '#/definitions/DayOfMonth'
         description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
       dayOfWeek:
         $ref: '#/definitions/DayOfWeek'
-        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+        description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
       targetCheckNames:
         $ref: '#/definitions/TargetAuditCheckNames'
-        description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+        description: 'Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
   UpdateSecurityProfileRequest:
     type: object
     properties:
@@ -15025,16 +16137,16 @@ definitions:
         description: Where the alerts are sent. (Alerts are always sent to the console.)
       additionalMetricsToRetain:
         $ref: '#/definitions/AdditionalMetricsToRetainList'
-        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
       deleteBehaviors:
         $ref: '#/definitions/DeleteBehaviors'
-        description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation an exception occurs.'
+        description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation, an exception occurs.'
       deleteAlertTargets:
         $ref: '#/definitions/DeleteAlertTargets'
-        description: 'If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation an exception occurs.'
+        description: 'If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation, an exception occurs.'
       deleteAdditionalMetricsToRetain:
         $ref: '#/definitions/DeleteAdditionalMetricsToRetain'
-        description: 'If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.'
+        description: 'If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation, an exception occurs.'
   UpdateStreamRequest:
     type: object
     properties:
@@ -15123,7 +16235,7 @@ definitions:
         $ref: '#/definitions/ViolationId'
         description: The ID of the violation event.
       thingName:
-        $ref: '#/definitions/ThingName'
+        $ref: '#/definitions/DeviceDefenderThingName'
         description: The name of the thing responsible for the violation event.
       securityProfileName:
         $ref: '#/definitions/SecurityProfileName'
