@@ -1,0 +1,379 @@
+swagger: '2.0'
+schemes:
+  - https
+  - http
+host: api.fungenerators.com
+info:
+  description: |
+    A full featured Facts API. REST access with json/xml/jsonp result support. On this day birth and death support, random fact, keyword search support etc. Below is the documentation for the Random Facts API calls. You can try them out right here. 
+  title: Random Facts
+  version: '1.5'
+  x-apisguru-categories:
+    - text
+  x-origin:
+    - format: swagger
+      url: 'https://fungenerators.com/yaml/facts.yaml'
+      version: '2.0'
+  x-providerName: fungenerators.com
+  x-serviceName: random-facts
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+  - application/js
+securityDefinitions:
+  X-Fungenerators-Api-Secret:
+    in: header
+    name: X-Fungenerators-Api-Secret
+    type: apiKey
+tags:
+  - description: Facts API
+    externalDocs:
+      description: Find out more
+      url: 'http://fungenerators.com/api/facts'
+    name: Facts
+paths:
+  /fact:
+    delete:
+      description: Delete a Fact entry identified by the id.
+      parameters:
+        - description: Fact ID
+          format: string
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "mesg": "Fact 62D6iKM9GSlJxK5nrMf9XwrE is deleted"
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+    get:
+      description: Get a Fact belonging to the id.
+      parameters:
+        - description: ID of the fact to fetch
+          format: string
+          in: query
+          name: id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success":{"total":1},
+                "contents":{
+                  "fact":"There are more than 1,100 known tributaries flowing into the Amazon River. Tributaries are sources of water such as a small river, stream  or other water flow that reaches the river.",
+                  "id":"LCN5KlSn6BMpcm3ruXhfGweF",
+                  "category":null,
+                  "subcategory":null
+                  
+                }
+                
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+    put:
+      description: Add a Fact entry to the database (private collection).
+      parameters:
+        - description: Fact Text
+          format: string
+          in: query
+          name: fact
+          required: true
+          type: string
+        - description: Category of the fact
+          format: string
+          in: query
+          name: category
+          required: true
+          type: string
+        - description: Sub Category of the fact
+          format: string
+          in: query
+          name: subcategory
+          required: true
+          type: string
+        - description: Tags
+          format: string
+          in: query
+          name: tags
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": {
+                      "id": "62D6iKM9GSlJxK5nrMf9XwrE"
+                  }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+  /fact/categories:
+    get:
+      description: Get a random Fact.
+      parameters:
+        - description: start
+          format: integer
+          in: query
+          name: start
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                  "success": {
+                      "total": 1
+                  },
+                  "contents": [
+                      {
+                          "id": "VO_foToeaTPvaDn_utYcOweF",
+                          "question": "What is the unit of currency in the United States of America",
+                          "category": "usa",
+                          "category_name": "USA",
+                          "answer": [
+                              "Dollar"
+                          ]
+                      }
+                  ]
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+  /fact/onthisday/born:
+    get:
+      description: Returns a random ( famous/ relatively famous ) person born on a given day and month
+      parameters:
+        - description: Optional month (1-12). Defaults to current month
+          format: string
+          in: query
+          name: month
+          required: false
+          type: string
+        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+          format: string
+          in: query
+          name: day
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: "\t\t{\n\t\t  \"success\": {\n\t\t    \"total\": 1\n\t\t  },\n\t\t  \"contents\": [\n\t\t    {\n\t\t      \"name\": \"Edward R. Bradley\",\n\t\t      \"occupation\": \"American businessman and horse owner (1st to own 4 Kentucky Derby winners)\",\n\t\t      \"notable\": null,\n\t\t      \"born\": \"1859-12-12\",\n\t\t      \"died\": \"1946-08-15\"\n\t\t    }\n\t\t  ]\n\t\t}"
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+  /fact/onthisday/died:
+    get:
+      description: Returns a random ( famous/ relatively famous ) person died on a given day and month
+      parameters:
+        - description: Optional month (1-12). Defaults to current month
+          format: string
+          in: query
+          name: month
+          required: false
+          type: string
+        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+          format: string
+          in: query
+          name: day
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: "\t\t{\n\t\t  \"success\": {\n\t\t    \"total\": 1\n\t\t  },\n\t\t  \"contents\": [\n\t\t    {\n\t\t      \"name\": \"Edward R. Bradley\",\n\t\t      \"occupation\": \"American businessman and horse owner (1st to own 4 Kentucky Derby winners)\",\n\t\t      \"notable\": null,\n\t\t      \"born\": \"1859-12-12\",\n\t\t      \"died\": \"1946-08-15\"\n\t\t    }\n\t\t  ]\n\t\t}"
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+  /fact/random:
+    get:
+      description: Get a random Fact for a given category(optional) and subcategory(optional).
+      parameters:
+        - description: Category to get the fact from
+          format: string
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: Sub Category to get the fact from
+          format: string
+          in: query
+          name: subcategory
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success":{"total":1},
+                "contents":{
+                  "fact":"There are more than 1,100 known tributaries flowing into the Amazon River. Tributaries are sources of water such as a small river, stream  or other water flow that reaches the river.",
+                  "id":"LCN5KlSn6BMpcm3ruXhfGweF",
+                  "category":null,
+                  "subcategory":null
+                  
+                }
+                
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }                    
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
+  /fact/search:
+    get:
+      description: 'Search for random Fact which has the text in the query, for a given category(optional) and subcategory(optional).'
+      parameters:
+        - description: Text to search for in the facts
+          format: string
+          in: query
+          name: query
+          required: false
+          type: string
+        - description: Category to get the fact from
+          format: string
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: Sub Category to get the fact from
+          format: string
+          in: query
+          name: subcategory
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success":{"total":1},
+                "contents":{
+                  "fact":"There are more than 1,100 known tributaries flowing into the Amazon River. Tributaries are sources of water such as a small river, stream  or other water flow that reaches the river.",
+                  "id":"LCN5KlSn6BMpcm3ruXhfGweF",
+                  "category": "Rivers",
+                  "subcategory": "Amazon River"
+                  
+                }
+                
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }                    
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
