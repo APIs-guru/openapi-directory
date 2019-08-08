@@ -772,6 +772,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: Updates the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApplicationResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApplicationRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - EC2WindowsBarleyService.UpdateApplication
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponent':
     post:
       operationId: UpdateComponent
@@ -873,6 +914,12 @@ definitions:
       ResourceGroupName:
         $ref: '#/definitions/ResourceGroupName'
         description: The name of the resource group.
+      OpsCenterEnabled:
+        $ref: '#/definitions/OpsCenterEnabled'
+        description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+      OpsItemSNSTopicArn:
+        $ref: '#/definitions/OpsItemSNSTopicArn'
+        description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. '
   ResourceInUseException: {}
   ResourceNotFoundException: {}
   ValidationException: {}
@@ -965,7 +1012,7 @@ definitions:
         description: Indicates whether the application component is monitored.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
       ComponentConfiguration:
         $ref: '#/definitions/ComponentConfiguration'
         description: The configuration settings of the component. The value is the escaped JSON of the configuration.
@@ -1002,7 +1049,7 @@ definitions:
         description: The name of the component.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
   DescribeObservationResponse:
     type: object
     properties:
@@ -1113,6 +1160,29 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: The token to request the next page of results.
+  UpdateApplicationResponse:
+    type: object
+    properties:
+      ApplicationInfo:
+        $ref: '#/definitions/ApplicationInfo'
+        description: 'Information about the application. '
+  UpdateApplicationRequest:
+    type: object
+    required:
+      - ResourceGroupName
+    properties:
+      ResourceGroupName:
+        $ref: '#/definitions/ResourceGroupName'
+        description: The name of the resource group.
+      OpsCenterEnabled:
+        $ref: '#/definitions/OpsCenterEnabled'
+        description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+      OpsItemSNSTopicArn:
+        $ref: '#/definitions/OpsItemSNSTopicArn'
+        description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.'
+      RemoveSNSTopic:
+        $ref: '#/definitions/RemoveSNSTopic'
+        description: ' Disassociates the SNS topic from the opsItem created for detected problems.'
   UpdateComponentResponse:
     type: object
     properties: {}
@@ -1154,7 +1224,7 @@ definitions:
         description: Indicates whether the application component is monitored.
       Tier:
         $ref: '#/definitions/Tier'
-        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+        description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
       ComponentConfiguration:
         $ref: '#/definitions/ComponentConfiguration'
         description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component.'
@@ -1192,6 +1262,10 @@ definitions:
     type: string
   LifeCycle:
     type: string
+  OpsItemSNSTopicArn:
+    type: string
+  OpsCenterEnabled:
+    type: boolean
   Remarks:
     type: string
   ApplicationInfo:
@@ -1203,9 +1277,15 @@ definitions:
       LifeCycle:
         $ref: '#/definitions/LifeCycle'
         description: 'The lifecycle of the application. '
+      OpsItemSNSTopicArn:
+        $ref: '#/definitions/OpsItemSNSTopicArn'
+        description: ' The SNS topic provided to Application Insights that is associated to the created opsItems to receive SNS notifications for opsItem updates. '
+      OpsCenterEnabled:
+        $ref: '#/definitions/OpsCenterEnabled'
+        description: ' Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. '
       Remarks:
         $ref: '#/definitions/Remarks'
-        description: The issues on the user side that are blocking Application Insights from fully monitoring the application.
+        description: The issues on the user side that block Application Insights from successfully monitoring an application.
     description: Describes the status of the application.
   ApplicationInfoList:
     type: array
@@ -1384,5 +1464,7 @@ definitions:
       - LOW
       - MEDIUM
       - HIGH
+  RemoveSNSTopic:
+    type: boolean
   ResourceARN:
     type: string

@@ -830,7 +830,7 @@ paths:
                     description: 'The type and amount of a resource to assign to a container. Currently, the only supported resource is <code>GPU</code>.'
                   linuxParameters:
                     $ref: '#/definitions/LinuxParameters'
-                    description: 'Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+                    description: 'Linux-specific modifications that are applied to the container, such as details for device mappings.'
               nodeProperties:
                 description: An object representing the node properties of a multi-node parallel job.
                 type: object
@@ -1391,7 +1391,7 @@ definitions:
       devices:
         $ref: '#/definitions/DevicesList'
         description: 'Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--device</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
-    description: 'Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+    description: 'Linux-specific modifications that are applied to the container, such as details for device mappings.'
   NodeRangeProperties:
     type: array
     items:
@@ -1748,7 +1748,7 @@ definitions:
         description: 'The type and amount of a resource to assign to a container. Currently, the only supported resource is <code>GPU</code>.'
       linuxParameters:
         $ref: '#/definitions/LinuxParameters'
-        description: 'Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+        description: 'Linux-specific modifications that are applied to the container, such as details for device mappings.'
     description: An object representing the details of a container that is part of a job.
   ContainerOverrides:
     type: object
@@ -1819,7 +1819,7 @@ definitions:
         description: 'The type and amount of a resource to assign to a container. Currently, the only supported resource is <code>GPU</code>.'
       linuxParameters:
         $ref: '#/definitions/LinuxParameters'
-        description: 'Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+        description: 'Linux-specific modifications that are applied to the container, such as details for device mappings.'
     description: Container properties are used in job definitions to describe the container that is launched as part of a job.
   ContainerSummary:
     type: object
@@ -1977,7 +1977,7 @@ definitions:
         description: The path for the device on the host container instance.
       containerPath:
         $ref: '#/definitions/String'
-        description: The path inside the container at which to expose the host device.
+        description: The path inside the container at which to expose the host device. By default the <code>hostPath</code> value is used.
       permissions:
         $ref: '#/definitions/DeviceCgroupPermissions'
         description: 'The explicit permissions to provide to the container for the device. By default, the container has permissions for <code>read</code>, <code>write</code>, and <code>mknod</code> for the device.'
