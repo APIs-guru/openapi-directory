@@ -6420,7 +6420,7 @@ paths:
     get:
       x-aws-operation-name: DescribeStorage
       operationId: GET DescribeStorage
-      description: Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.
+      description: Returns the total amount of snapshot usage and provisioned storage in megabytes.
       responses:
         '200':
           description: Success
@@ -6450,7 +6450,7 @@ paths:
     post:
       x-aws-operation-name: DescribeStorage
       operationId: POST DescribeStorage
-      description: Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.
+      description: Returns the total amount of snapshot usage and provisioned storage in megabytes.
       responses:
         '200':
           description: Success
@@ -9433,7 +9433,7 @@ paths:
         - name: NodeType
           in: query
           required: false
-          description: The new node type for the nodes you are adding.
+          description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
           type: string
         - name: NumberOfNodes
           in: query
@@ -9524,7 +9524,7 @@ paths:
         - name: NodeType
           in: formData
           required: false
-          description: The new node type for the nodes you are adding.
+          description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
           type: string
         - name: NumberOfNodes
           in: formData
@@ -11935,6 +11935,12 @@ definitions:
       SnapshotScheduleState:
         $ref: '#/definitions/ScheduleState'
         description: The current state of the cluster snapshot schedule.
+      ExpectedNextSnapshotScheduleTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and backups enabled. '
+      ExpectedNextSnapshotScheduleTimeStatus:
+        $ref: '#/definitions/String'
+        description: '<p> The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:</p> <ul> <li> <p>OnTrack - The next snapshot is expected to be taken on time. </p> </li> <li> <p>Pending - The next snapshot is pending to be taken. </p> </li> </ul>'
       ResizeInfo:
         $ref: '#/definitions/ResizeInfo'
         description: '<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>'
@@ -13739,7 +13745,7 @@ definitions:
         description: The new cluster type for the specified cluster.
       NodeType:
         $ref: '#/definitions/String'
-        description: The new node type for the nodes you are adding.
+        description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
       NumberOfNodes:
         $ref: '#/definitions/Integer'
         description: The new number of nodes for the cluster.

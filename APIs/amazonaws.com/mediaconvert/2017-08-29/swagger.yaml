@@ -948,6 +948,12 @@ paths:
                   ReservedSlots:
                     $ref: '#/definitions/__integer'
                     description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
+              status:
+                description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.'
+                type: string
+                enum:
+                  - ACTIVE
+                  - PAUSED
               tags:
                 description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
                 type: object
@@ -1984,7 +1990,7 @@ definitions:
         description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
       ColorMetadata:
         $ref: '#/definitions/ColorMetadata'
-        description: Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.
+        description: 'Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don''t specify a value, the service sets this to Insert by default.'
       Crop:
         $ref: '#/definitions/Rectangle'
         description: Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
@@ -2863,7 +2869,7 @@ definitions:
         description: Advanced audio remixing settings.
       StreamName:
         $ref: '#/definitions/__stringPatternWS'
-        description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary). Alphanumeric characters, spaces, and underscore are legal.'
+        description: 'Specify a label for this output audio stream. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer''s player device. For outputs in other output groups, the service ignores this setting.'
     description: Description of audio output
   AudioNormalizationAlgorithm:
     type: string
@@ -2898,9 +2904,9 @@ definitions:
   __doubleMinNegative59Max0:
     type: number
     format: double
-  __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE:
+  __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE:
     type: string
-    pattern: '^(s3:\/\/)([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$'
+    pattern: '^(s3:\/\/)([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$'
   __integerMinNegative2147483648Max2147483647:
     type: integer
     minimum: -2147483648
@@ -2930,7 +2936,7 @@ definitions:
         $ref: '#/definitions/AudioDefaultSelection'
         description: 'Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can''t find the specified input audio. If you don''t set a default, those outputs have no audio.'
       ExternalAudioFileInput:
-        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
+        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
         description: Specifies audio data from an external file source.
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
@@ -3160,7 +3166,7 @@ definitions:
         description: 'Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       LanguageDescription:
         $ref: '#/definitions/__string'
-        description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
+        description: 'Specify a label for this set of output captions. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer''s player device. For outputs in other output groups, the service ignores this setting.'
     description: Description of Caption output
   CaptionDescriptionPreset:
     type: object
@@ -3176,7 +3182,7 @@ definitions:
         description: 'Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       LanguageDescription:
         $ref: '#/definitions/__string'
-        description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
+        description: 'Specify a label for this set of output captions. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer''s player device. For outputs in other output groups, the service ignores this setting.'
     description: Caption Description for preset
   CaptionDestinationType:
     type: string
@@ -3261,10 +3267,10 @@ definitions:
     properties:
       Destination608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
-        description: 'Ignore this setting unless your input captions are SCC format. With SCC inputs, you can optionally use this setting to replace the input channel number with the channel number that you specify. Specify a different number for each output captions track for a particular output. If you don''t specify an output channel number, the system uses the input channel number for the output channel number. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.'
+        description: 'Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, pick CC numbers that aren''t in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
       Destination708ServiceNumber:
         $ref: '#/definitions/__integerMin1Max6'
-        description: 'Ignore this setting unless your input captions are SCC format and you are performing SCC upconvert. With SCC inputs, you can optionally use this setting to specify the 708 service number that is in the output. Specify a different service number for each output captions track for a particular output. If you don''t specify an output track number, the system uses the 608 channel number for the output 708 service number. You can combine two captions channels in your output. Service numbers must be distinct.'
+        description: 'Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don''t specify a 708 service number, MediaConvert uses the number you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
     description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
   SccDestinationSettings:
     type: object
@@ -3279,6 +3285,9 @@ definitions:
       PageNumber:
         $ref: '#/definitions/__stringMin3Max3Pattern1809aFAF09aEAE'
         description: 'Set pageNumber to the Teletext page number for the destination captions for this output. This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field.'
+      PageTypes:
+        $ref: '#/definitions/__listOfTeletextPageType'
+        description: 'Specify the page types for this Teletext page. If you don''t specify a value here, the service sets the page type to the default value Subtitle (PAGE_TYPE_SUBTITLE). If you pass through the entire set of Teletext data, don''t use this field. When you pass through a set of Teletext pages, your output has the same page types as your input.'
     description: Settings for Teletext caption output
   TtmlDestinationSettings:
     type: object
@@ -3420,13 +3429,32 @@ definitions:
     type: string
     enum:
       - SAMPLE_AES
-    description: Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption.
+    description: 'For DRM with CMAF, the encryption type is always sample AES.'
   CmafInitializationVectorInManifest:
     type: string
     enum:
       - INCLUDE
       - EXCLUDE
-    description: 'The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest.'
+    description: 'When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests.'
+  SpekeKeyProviderCmaf:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/__stringPatternArnAwsUsGovAcm'
+        description: 'If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate''s Amazon Resource Name (ARN) here.'
+      DashSignaledSystemIds:
+        $ref: '#/definitions/__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
+        description: 'Specify the DRM system IDs that you want signaled in the DASH manifest that MediaConvert creates as part of this CMAF package. The DASH manifest can currently signal up to three system IDs. For more information, see https://dashif.org/identifiers/content_protection/.'
+      HlsSignaledSystemIds:
+        $ref: '#/definitions/__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
+        description: 'Specify the DRM system ID that you want signaled in the HLS manifest that MediaConvert creates as part of this CMAF package. The HLS manifest can currently signal only one system ID. For more information, see https://dashif.org/identifiers/content_protection/.'
+      ResourceId:
+        $ref: '#/definitions/__stringPatternW'
+        description: Specify the resource ID that your SPEKE-compliant key provider uses to identify this content.
+      Url:
+        $ref: '#/definitions/__stringPatternHttps'
+        description: Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
+    description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead.'
   StaticKeyProvider:
     type: object
     properties:
@@ -3446,8 +3474,9 @@ definitions:
   CmafKeyProviderType:
     type: string
     enum:
+      - SPEKE
       - STATIC_KEY
-    description: Indicates which type of key provider is used for encryption.
+    description: 'Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.'
   CmafEncryptionSettings:
     type: object
     properties:
@@ -3456,16 +3485,19 @@ definitions:
         description: 'This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.'
       EncryptionMethod:
         $ref: '#/definitions/CmafEncryptionType'
-        description: Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption.
+        description: 'For DRM with CMAF, the encryption type is always sample AES.'
       InitializationVectorInManifest:
         $ref: '#/definitions/CmafInitializationVectorInManifest'
-        description: 'The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest.'
+        description: 'When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests.'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProviderCmaf'
+        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead.'
       StaticKeyProvider:
         $ref: '#/definitions/StaticKeyProvider'
         description: Use these settings to set up encryption with a static key provider.
       Type:
         $ref: '#/definitions/CmafKeyProviderType'
-        description: Indicates which type of key provider is used for encryption.
+        description: 'Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.'
     description: Settings for CMAF encryption
   __stringPatternS3:
     type: string
@@ -3584,7 +3616,7 @@ definitions:
       - FORCE_709
       - FORCE_HDR10
       - FORCE_HLG_2020
-    description: 'Determines if colorspace conversion will be performed. If set to _None_, no conversion will be performed. If _Force 601_ or _Force 709_ are selected, conversion will be performed for inputs with differing colorspaces. An input''s colorspace can be specified explicitly in the "Video Selector":#inputs-video_selector if necessary.'
+    description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn''t support conversion from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.'
   Hdr10Metadata:
     type: object
     properties:
@@ -3602,10 +3634,10 @@ definitions:
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       MaxContentLightLevel:
         $ref: '#/definitions/__integerMin0Max65535'
-        description: 'Maximum light level among all samples in the coded video sequence, in units of candelas per square meter.'
+        description: 'Maximum light level among all samples in the coded video sequence, in units of candelas per square meter.  This setting doesn''t have a default value; you must specify a value that is suitable for the content.'
       MaxFrameAverageLightLevel:
         $ref: '#/definitions/__integerMin0Max65535'
-        description: 'Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter.'
+        description: 'Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter. This setting doesn''t have a default value; you must specify a value that is suitable for the content.'
       MaxLuminance:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: Nominal maximum mastering display luminance in units of of 0.0001 candelas per square meter.
@@ -3624,7 +3656,7 @@ definitions:
       WhitePointY:
         $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
-    description: 'Use the "HDR master display information" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set "MP4 packaging type" (writeMp4PackagingType) to HVC1 (HVC1). Set "Profile" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set "Level" (H265Settings > codecLevel) to 5 (LEVEL_5).'
+    description: 'Use these settings to specify static color calibration metadata, as defined by SMPTE ST 2086. These values don''t affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator.'
   __integerMinNegative180Max180:
     type: integer
     minimum: -180
@@ -3637,13 +3669,13 @@ definitions:
         description: Brightness level.
       ColorSpaceConversion:
         $ref: '#/definitions/ColorSpaceConversion'
-        description: 'Determines if colorspace conversion will be performed. If set to _None_, no conversion will be performed. If _Force 601_ or _Force 709_ are selected, conversion will be performed for inputs with differing colorspaces. An input''s colorspace can be specified explicitly in the "Video Selector":#inputs-video_selector if necessary.'
+        description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn''t support conversion from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.'
       Contrast:
         $ref: '#/definitions/__integerMin1Max100'
         description: Contrast level.
       Hdr10Metadata:
         $ref: '#/definitions/Hdr10Metadata'
-        description: Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. Note that these settings are not color correction.
+        description: 'Use these settings when you convert to the HDR 10 color space. Specify the SMPTE ST 2086 Mastering Display Color Volume static metadata that you want signaled in the output. These values don''t affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator. When you set Color space conversion (ColorSpaceConversion) to HDR 10 (FORCE_HDR10), these settings are required. You must set values for Max frame average light level (maxFrameAverageLightLevel) and Max content light level (maxContentLightLevel); these settings don''t have a default value. The default values for the other HDR 10 metadata settings are defined by the P3D65 color space. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.'
       Hue:
         $ref: '#/definitions/__integerMinNegative180Max180'
         description: Hue in degrees.
@@ -3656,7 +3688,7 @@ definitions:
     enum:
       - IGNORE
       - INSERT
-    description: Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.
+    description: 'Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don''t specify a value, the service sets this to Insert by default.'
   ColorSpace:
     type: string
     enum:
@@ -3665,13 +3697,13 @@ definitions:
       - REC_709
       - HDR10
       - HLG_2020
-    description: 'If your input video has accurate color space metadata, or if you don''t know about color space, leave this set to the default value FOLLOW. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or if your input video is missing color space metadata that should be there, specify the accurate color space here. If you choose HDR10, you can also correct inaccurate color space coefficients, using the HDR master display information controls. You must also set Color space usage (ColorSpaceUsage) to FORCE for the service to use these values.'
+    description: 'If your input video has accurate color space metadata, or if you don''t know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn''t present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.'
   ColorSpaceUsage:
     type: string
     enum:
       - FORCE
       - FALLBACK
-    description: 'There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available.'
+    description: 'There are two sources for color metadata, the input file and the job input settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata). The Color space usage setting determines which takes precedence. Choose Force (FORCE) to use color metadata from the input job settings. If you don''t specify values for those settings, the service defaults to using metadata from your input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the source when it is present. If there''s no color metadata in your input file, the service defaults to using values you specify in the input settings.'
   ContainerType:
     type: string
     enum:
@@ -4251,6 +4283,12 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
     description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+  QueueStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - PAUSED
+    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.'
   CreateQueueRequest:
     type: object
     required:
@@ -4268,6 +4306,9 @@ definitions:
       ReservationPlanSettings:
         $ref: '#/definitions/ReservationPlanSettings'
         description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+      Status:
+        $ref: '#/definitions/QueueStatus'
+        description: 'Initial state of the queue. If you create a paused queue, then jobs in that queue won''t begin.'
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
@@ -4321,17 +4362,19 @@ definitions:
     properties:
       CertificateArn:
         $ref: '#/definitions/__stringPatternArnAwsUsGovAcm'
-        description: Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response.
+        description: 'If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate''s Amazon Resource Name (ARN) here.'
       ResourceId:
         $ref: '#/definitions/__string'
-        description: The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
+        description: Specify the resource ID that your SPEKE-compliant key provider uses to identify this content.
       SystemIds:
         $ref: '#/definitions/__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
-        description: Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id.
+        description: |-
+          Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id. See
+           https://dashif.org/identifiers/content_protection/ for more details.
       Url:
         $ref: '#/definitions/__stringPatternHttps'
-        description: Use URL (Url) to specify the SPEKE-compliant server that will provide keys for content.
-    description: Settings for use with a SPEKE key provider
+        description: Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
+    description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
   DashIsoEncryptionSettings:
     type: object
     properties:
@@ -4340,7 +4383,7 @@ definitions:
         description: 'This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.'
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: Settings for use with a SPEKE key provider
+        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
     description: Specifies DRM settings for DASH outputs.
   DashIsoHbbtvCompliance:
     type: string
@@ -5023,7 +5066,8 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Scene change detection (inserts I-frames on scene changes).
+      - TRANSITION_DETECTION
+    description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
   __doubleMin0:
     type: number
     format: double
@@ -5186,7 +5230,7 @@ definitions:
         description: 'Places a PPS header on each encoded picture, even if repeated.'
       SceneChangeDetect:
         $ref: '#/definitions/H264SceneChangeDetect'
-        description: Scene change detection (inserts I-frames on scene changes).
+        description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
       Slices:
         $ref: '#/definitions/__integerMin1Max32'
         description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
@@ -5302,10 +5346,7 @@ definitions:
       - BOTTOM_FIELD
       - FOLLOW_TOP_FIELD
       - FOLLOW_BOTTOM_FIELD
-    description: |-
-      Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-        - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-        - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+    description: 'Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose. If you don''t choose a value, the service will default to Progressive (PROGRESSIVE).'
   H265ParControl:
     type: string
     enum:
@@ -5352,7 +5393,8 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Scene change detection (inserts I-frames on scene changes).
+      - TRANSITION_DETECTION
+    description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
   __integerMin0Max1466400000:
     type: integer
     minimum: 0
@@ -5462,10 +5504,7 @@ definitions:
         description: 'Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
       InterlaceMode:
         $ref: '#/definitions/H265InterlaceMode'
-        description: |-
-          Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-            - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-            - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+        description: 'Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose. If you don''t choose a value, the service will default to Progressive (PROGRESSIVE).'
       MaxBitrate:
         $ref: '#/definitions/__integerMin1000Max1466400000'
         description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
@@ -5501,7 +5540,7 @@ definitions:
         description: Specify Sample Adaptive Offset (SAO) filter strength.  Adaptive mode dynamically selects best strength based on content
       SceneChangeDetect:
         $ref: '#/definitions/H265SceneChangeDetect'
-        description: Scene change detection (inserts I-frames on scene changes).
+        description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
       Slices:
         $ref: '#/definitions/__integerMin1Max32'
         description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
@@ -5617,7 +5656,7 @@ definitions:
     enum:
       - SPEKE
       - STATIC_KEY
-    description: Indicates which type of key provider is used for encryption.
+    description: 'Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.'
   HlsEncryptionSettings:
     type: object
     properties:
@@ -5635,13 +5674,13 @@ definitions:
         description: Enable this setting to insert the EXT-X-SESSION-KEY element into the master playlist. This allows for offline Apple HLS FairPlay content protection.
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: Settings for use with a SPEKE key provider
+        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
       StaticKeyProvider:
         $ref: '#/definitions/StaticKeyProvider'
         description: Use these settings to set up encryption with a static key provider.
       Type:
         $ref: '#/definitions/HlsKeyProviderType'
-        description: Indicates which type of key provider is used for encryption.
+        description: 'Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.'
     description: Settings for HLS encryption
   __listOfHlsAdMarkers:
     type: array
@@ -5885,9 +5924,9 @@ definitions:
       - ENABLED
       - DISABLED
     description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
-  __stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL:
+  __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL:
     type: string
-    pattern: '^(http|https|s3)://([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$'
+    pattern: '^(http|https|s3)://([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$'
   InputFilterEnable:
     type: string
     enum:
@@ -5925,13 +5964,13 @@ definitions:
     properties:
       ColorSpace:
         $ref: '#/definitions/ColorSpace'
-        description: 'If your input video has accurate color space metadata, or if you don''t know about color space, leave this set to the default value FOLLOW. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or if your input video is missing color space metadata that should be there, specify the accurate color space here. If you choose HDR10, you can also correct inaccurate color space coefficients, using the HDR master display information controls. You must also set Color space usage (ColorSpaceUsage) to FORCE for the service to use these values.'
+        description: 'If your input video has accurate color space metadata, or if you don''t know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn''t present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.'
       ColorSpaceUsage:
         $ref: '#/definitions/ColorSpaceUsage'
-        description: 'There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available.'
+        description: 'There are two sources for color metadata, the input file and the job input settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata). The Color space usage setting determines which takes precedence. Choose Force (FORCE) to use color metadata from the input job settings. If you don''t specify values for those settings, the service defaults to using metadata from your input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the source when it is present. If there''s no color metadata in your input file, the service defaults to using values you specify in the input settings.'
       Hdr10Metadata:
         $ref: '#/definitions/Hdr10Metadata'
-        description: 'Use the "HDR master display information" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set "MP4 packaging type" (writeMp4PackagingType) to HVC1 (HVC1). Set "Profile" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set "Level" (H265Settings > codecLevel) to 5 (LEVEL_5).'
+        description: 'Use these settings to provide HDR 10 metadata that is missing or inaccurate in your input video. Appropriate values vary depending on the input video and must be provided by a color grader. The color grader generates these values during the HDR 10 mastering process. The valid range for each of these settings is 0 to 50,000. Each increment represents 0.00002 in CIE1931 color coordinate. Related settings - When you specify these values, you must also set Color space (ColorSpace) to HDR 10 (HDR10). To specify whether the the values you specify here take precedence over the values in the metadata of your input file, set Color space usage (ColorSpaceUsage). To specify whether color metadata is included in an output, set Color metadata (ColorMetadata). For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.'
       Pid:
         $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use PID (Pid) to select specific video data from an input file. Specify this value as an integer; the system automatically converts it to the hexidecimal value. For example, 257 selects PID 0x101. A PID, or packet identifier, is an identifier for a set of data in an MPEG-2 transport stream container.'
@@ -5967,7 +6006,7 @@ definitions:
         $ref: '#/definitions/InputDenoiseFilter'
         description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
       FileInput:
-        $ref: '#/definitions/__stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL'
+        $ref: '#/definitions/__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL'
         description: 'Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.'
       FilterEnable:
         $ref: '#/definitions/InputFilterEnable'
@@ -6567,7 +6606,7 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Scene change detection (inserts I-frames on scene changes).
+    description: Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default.
   __integerMin1000Max288000000:
     type: integer
     minimum: 1000
@@ -6699,7 +6738,7 @@ definitions:
         description: Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).
       SceneChangeDetect:
         $ref: '#/definitions/Mpeg2SceneChangeDetect'
-        description: Scene change detection (inserts I-frames on scene changes).
+        description: Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default.
       SlowPal:
         $ref: '#/definitions/Mpeg2SlowPal'
         description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
@@ -6730,7 +6769,7 @@ definitions:
     properties:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: Settings for use with a SPEKE key provider
+        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
     description: 'If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider.'
   MsSmoothManifestEncoding:
     type: string
@@ -6774,7 +6813,8 @@ definitions:
       - SHARPEN
       - CONSERVE
       - SPATIAL
-    description: 'Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain filter based on JND principles.'
+      - TEMPORAL
+    description: 'Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.'
   NoiseReducerFilterSettings:
     type: object
     properties:
@@ -6795,18 +6835,34 @@ definitions:
         $ref: '#/definitions/__integerMin0Max16'
         description: Relative strength of noise reducing filter. Higher values produce stronger filtering.
     description: Noise reducer filter settings for spatial filter.
+  NoiseReducerTemporalFilterSettings:
+    type: object
+    properties:
+      AggressiveMode:
+        $ref: '#/definitions/__integerMin0Max4'
+        description: Use Aggressive mode for content that has complex motion. Higher values produce stronger temporal filtering. This filters highly complex scenes more aggressively and creates better VQ for low bitrate outputs.
+      Speed:
+        $ref: '#/definitions/__integerMinNegative1Max3'
+        description: 'The speed of the filter (higher number is faster). Low setting reduces bit rate at the cost of transcode time, high setting improves transcode time at the cost of bit rate.'
+      Strength:
+        $ref: '#/definitions/__integerMin0Max16'
+        description: 'Relative strength of noise reducing filter. Higher values produce stronger filtering. Recommended Range: * [0 .. 2] for complexity reduction with minimal sharpness loss * [2 .. 8] for complexity reduction with image preservation * [8 .. 16] for noise reduction. Reduce noise combined high complexity reduction'
+    description: Noise reducer filter settings for temporal filter.
   NoiseReducer:
     type: object
     properties:
       Filter:
         $ref: '#/definitions/NoiseReducerFilter'
-        description: 'Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain filter based on JND principles.'
+        description: 'Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.'
       FilterSettings:
         $ref: '#/definitions/NoiseReducerFilterSettings'
         description: Settings for a noise reducer filter
       SpatialFilterSettings:
         $ref: '#/definitions/NoiseReducerSpatialFilterSettings'
         description: Noise reducer filter settings for spatial filter.
+      TemporalFilterSettings:
+        $ref: '#/definitions/NoiseReducerTemporalFilterSettings'
+        description: Noise reducer filter settings for temporal filter.
     description: 'Enable the Noise reducer (NoiseReducer) feature to remove noise from your video output if necessary. Enable or disable this feature for each output individually. This setting is disabled by default. When you enable Noise reducer (NoiseReducer), you must also select a value for Noise reducer filter (NoiseReducerFilter).'
   __integerMin0Max3:
     type: integer
@@ -6820,6 +6876,14 @@ definitions:
     type: integer
     minimum: 0
     maximum: 16
+  __integerMin0Max4:
+    type: integer
+    minimum: 0
+    maximum: 4
+  __integerMinNegative1Max3:
+    type: integer
+    minimum: -1
+    maximum: 3
   __listOfCaptionDescription:
     type: array
     items:
@@ -7067,12 +7131,6 @@ definitions:
         $ref: '#/definitions/ReservationPlanStatus'
         description: Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
     description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
-  QueueStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - PAUSED
-    description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause a queue continue to run until they finish or result in an error.'
   __integerMin2Max2147483647:
     type: integer
     minimum: 2
@@ -7141,6 +7199,13 @@ definitions:
   __stringPatternHttps:
     type: string
     pattern: '^https:\/\/'
+  __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
+    type: array
+    items:
+      $ref: '#/definitions/__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
+  __stringPatternW:
+    type: string
+    pattern: '^[\w-]+$'
   __stringPatternIdentityAZaZ26AZaZ09163:
     type: string
     pattern: '^(identity|[A-Za-z]{2,6}(\.[A-Za-z0-9-]{1,63})+)$'
@@ -7167,6 +7232,19 @@ definitions:
     pattern: '^[1-8][0-9a-fA-F][0-9a-eA-E]$'
     minLength: 3
     maxLength: 3
+  __listOfTeletextPageType:
+    type: array
+    items:
+      $ref: '#/definitions/TeletextPageType'
+  TeletextPageType:
+    type: string
+    enum:
+      - PAGE_TYPE_INITIAL
+      - PAGE_TYPE_SUBTITLE
+      - PAGE_TYPE_ADDL_INFO
+      - PAGE_TYPE_PROGRAM_SCHEDULE
+      - PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
+    description: 'A page type as defined in the standard ETSI EN 300 468, Table 94'
   __integerMin10Max48:
     type: integer
     minimum: 10
@@ -7356,6 +7434,11 @@ definitions:
     type: integer
     minimum: -60
     maximum: 6
+  __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
   __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
     type: string
     pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'

@@ -210,7 +210,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMasterAccount
-      description: Provides the details for the GuardDuty master account to the current GuardDuty member account.
+      description: Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
       responses:
         '200':
           description: Success
@@ -235,7 +235,7 @@ paths:
   '/detector/{detectorId}/findings/archive':
     post:
       operationId: ArchiveFindings
-      description: Archives Amazon GuardDuty findings specified by the list of finding IDs.
+      description: <p>Archives GuardDuty findings specified by the list of finding IDs.</p> <note> <p>Only the master account can archive findings. Member accounts do not have permission to archive findings from their accounts.</p> </note>
       responses:
         '200':
           description: Success
@@ -283,7 +283,7 @@ paths:
   /detector:
     post:
       operationId: CreateDetector
-      description: Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
+      description: 'Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each region that you enable the service. You can have only one detector per account per region.'
       responses:
         '200':
           description: Success
@@ -433,7 +433,7 @@ paths:
                 minimum: 1
                 maximum: 100
               findingCriteria:
-                description: Represents the criteria to be used in the filter for querying findings.
+                description: Contains finding criteria information.
                 type: object
                 properties:
                   Criterion:
@@ -1163,7 +1163,7 @@ paths:
                 minimum: 1
                 maximum: 100
               findingCriteria:
-                description: Represents the criteria to be used in the filter for querying findings.
+                description: Contains finding criteria information.
                 type: object
                 properties:
                   Criterion:
@@ -1610,7 +1610,7 @@ paths:
                 minItems: 0
                 maxItems: 50
               sortCriteria:
-                description: Represents the criteria used for sorting findings.
+                description: Contains information about the criteria for sorting.
                 type: object
                 properties:
                   AttributeName:
@@ -1668,7 +1668,7 @@ paths:
                 minItems: 0
                 maxItems: 10
               findingCriteria:
-                description: Represents the criteria used for querying findings.
+                description: Contains finding criteria information.
                 type: object
                 properties:
                   Criterion:
@@ -1842,14 +1842,14 @@ paths:
             type: object
             properties:
               findingCriteria:
-                description: Represents the criteria used for querying findings.
+                description: Contains finding criteria information.
                 type: object
                 properties:
                   Criterion:
                     $ref: '#/definitions/Criterion'
                     description: Represents a map of finding properties that match specified conditions and values when querying findings.
               sortCriteria:
-                description: Represents the criteria used for sorting findings.
+                description: Contains information about the criteria for sorting.
                 type: object
                 properties:
                   AttributeName:
@@ -2305,6 +2305,7 @@ definitions:
       Email:
         $ref: '#/definitions/Email'
         description: Member account's email address.
+    description: Contains information about the account.
   CreateSampleFindingsResponse:
     type: object
     properties: {}
@@ -2356,7 +2357,7 @@ definitions:
     properties:
       UnprocessedAccounts:
         $ref: '#/definitions/UnprocessedAccounts'
-        description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+        description: The accounts that could not be processed.
   DeleteThreatIntelSetResponse:
     type: object
     properties: {}
@@ -2594,6 +2595,7 @@ definitions:
     properties:
       Tags:
         $ref: '#/definitions/TagMap'
+        description: The tags associated with the resource.
   ListThreatIntelSetsResponse:
     type: object
     required:
@@ -2686,6 +2688,7 @@ definitions:
       UserType:
         $ref: '#/definitions/String'
         description: The type of the user.
+    description: Contains information about the access keys.
   Email:
     type: string
     minLength: 1
@@ -2720,12 +2723,14 @@ definitions:
       ServiceName:
         $ref: '#/definitions/String'
         description: AWS service name whose API was invoked.
+    description: Contains information about the API operation.
   DnsRequestAction:
     type: object
     properties:
       Domain:
         $ref: '#/definitions/String'
         description: Domain information for the DNS request.
+    description: Contains information about the DNS request.
   NetworkConnectionAction:
     type: object
     properties:
@@ -2747,6 +2752,7 @@ definitions:
       RemotePortDetails:
         $ref: '#/definitions/RemotePortDetails'
         description: Remote port information of the connection.
+    description: Contains information about the network connection.
   PortProbeAction:
     type: object
     properties:
@@ -2756,6 +2762,7 @@ definitions:
       PortProbeDetails:
         $ref: '#/definitions/PortProbeDetails'
         description: A list of port probe details objects.
+    description: Contains information about the port probe.
   Action:
     type: object
     properties:
@@ -2774,6 +2781,7 @@ definitions:
       PortProbeAction:
         $ref: '#/definitions/PortProbeAction'
         description: Information about the PORT_PROBE action described in this finding.
+    description: Contains information about action.
   FindingIds:
     type: array
     items:
@@ -2794,6 +2802,7 @@ definitions:
       Domain:
         $ref: '#/definitions/String'
         description: Domain information for the AWS API call.
+    description: Contains information about the domain.
   RemoteIpDetails:
     type: object
     properties:
@@ -2812,6 +2821,7 @@ definitions:
       Organization:
         $ref: '#/definitions/Organization'
         description: ISP Organization information of the remote IP address.
+    description: Continas information about the remote IP address.
   Boolean:
     type: boolean
   City:
@@ -2820,6 +2830,7 @@ definitions:
       CityName:
         $ref: '#/definitions/String'
         description: City name of the remote IP address.
+    description: Contains information about the city associated with the IP address.
   ClientToken:
     type: string
     minLength: 0
@@ -2849,26 +2860,28 @@ definitions:
     properties:
       Eq:
         $ref: '#/definitions/Eq'
-        description: Represents the equal condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents the equal condition to be applied to a single field when querying for findings.
       Neq:
         $ref: '#/definitions/Neq'
-        description: Represents the not equal condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents the not equal condition to be applied to a single field when querying for findings.
       Gt:
         $ref: '#/definitions/Integer'
-        description: Represents a greater than condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents a greater than condition to be applied to a single field when querying for findings.
       Gte:
         $ref: '#/definitions/Integer'
-        description: Represents a greater than equal condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents a greater than equal condition to be applied to a single field when querying for findings.
       Lt:
         $ref: '#/definitions/Integer'
-        description: Represents a less than condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents a less than condition to be applied to a single field when querying for findings.
       Lte:
         $ref: '#/definitions/Integer'
-        description: Represents a less than equal condition to be applied to a single field when querying for findings.
+        description: Deprecated. Represents a less than equal condition to be applied to a single field when querying for findings.
       Equals:
         $ref: '#/definitions/Equals'
+        description: Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
       NotEquals:
         $ref: '#/definitions/NotEquals'
+        description: Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
       GreaterThan:
         $ref: '#/definitions/Long'
         description: Represents a greater than condition to be applied to a single field when querying for findings.
@@ -2881,6 +2894,7 @@ definitions:
       LessThanOrEqual:
         $ref: '#/definitions/Long'
         description: Represents a less than equal condition to be applied to a single field when querying for findings.
+    description: Contains information about the condition.
   CountBySeverity:
     type: object
     additionalProperties:
@@ -2894,6 +2908,7 @@ definitions:
       CountryName:
         $ref: '#/definitions/String'
         description: Country name of the remote IP address.
+    description: Contains information about the country.
   FindingPublishingFrequency:
     type: string
     enum:
@@ -2948,6 +2963,7 @@ definitions:
       Criterion:
         $ref: '#/definitions/Criterion'
         description: Represents a map of finding properties that match specified conditions and values when querying findings.
+    description: Contains finding criteria information.
   CreateFilterRequest:
     type: object
     required:
@@ -3146,6 +3162,17 @@ definitions:
   Double:
     type: number
     format: double
+  ThreatIntelligenceDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ThreatIntelligenceDetail'
+  Evidence:
+    type: object
+    properties:
+      ThreatIntelligenceDetails:
+        $ref: '#/definitions/ThreatIntelligenceDetails'
+        description: A list of threat intelligence details related to the evidence.
+    description: Contains information about the reason that the finding was generated.
   Feedback:
     type: string
     enum:
@@ -3169,12 +3196,16 @@ definitions:
       ResourceType:
         $ref: '#/definitions/String'
         description: The type of the AWS resource.
+    description: Contains information about the resource.
   Service:
     type: object
     properties:
       Action:
         $ref: '#/definitions/Action'
         description: Information about the activity described in a finding.
+      Evidence:
+        $ref: '#/definitions/Evidence'
+        description: An evidence object associated with the service.
       Archived:
         $ref: '#/definitions/Boolean'
         description: Indicates whether this finding is archived.
@@ -3199,6 +3230,7 @@ definitions:
       UserFeedback:
         $ref: '#/definitions/String'
         description: Feedback left about the finding.
+    description: Contains information about the service.
   Finding:
     type: object
     required:
@@ -3215,49 +3247,48 @@ definitions:
     properties:
       AccountId:
         $ref: '#/definitions/String'
-        description: AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
+        description: The ID of the account in which the finding was generated.
       Arn:
         $ref: '#/definitions/String'
-        description: The ARN of a finding described by the action.
+        description: The ARN for the finding.
       Confidence:
         $ref: '#/definitions/Double'
-        description: The confidence level of a finding.
+        description: The confidence score for the finding.
       CreatedAt:
         $ref: '#/definitions/String'
-        description: The time stamp at which a finding was generated.
+        description: The time and date at which the finding was created.
       Description:
         $ref: '#/definitions/String'
-        description: The description of a finding.
+        description: The description of the finding.
       Id:
         $ref: '#/definitions/String'
-        description: The identifier that corresponds to a finding described by the action.
+        description: The ID of the finding.
       Partition:
         $ref: '#/definitions/String'
-        description: The AWS resource partition.
+        description: The partition associated with the finding.
       Region:
         $ref: '#/definitions/String'
-        description: The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
+        description: The Region in which the finding was generated.
       Resource:
         $ref: '#/definitions/Resource'
-        description: The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
       SchemaVersion:
         $ref: '#/definitions/String'
-        description: Findings' schema version.
+        description: The version of the schema used for the finding.
       Service:
         $ref: '#/definitions/Service'
-        description: Additional information assigned to the generated finding by GuardDuty.
       Severity:
         $ref: '#/definitions/Double'
-        description: The severity of a finding.
+        description: The severity of the finding.
       Title:
         $ref: '#/definitions/String'
-        description: The title of a finding.
+        description: The title for the finding.
       Type:
         $ref: '#/definitions/FindingType'
-        description: The type of a finding described by the action.
+        description: The type of the finding.
       UpdatedAt:
         $ref: '#/definitions/String'
-        description: The time stamp at which a finding was last updated.
+        description: The time and date at which the finding was laste updated.
+    description: Contains information about the finding.
   FindingStatisticTypes:
     type: array
     items:
@@ -3270,6 +3301,7 @@ definitions:
       CountBySeverity:
         $ref: '#/definitions/CountBySeverity'
         description: Represents a map of severity to count statistic for a set of findings
+    description: Contains information about finding statistics.
   Findings:
     type: array
     items:
@@ -3285,6 +3317,7 @@ definitions:
       Lon:
         $ref: '#/definitions/Double'
         description: Longitude information of remote IP address.
+    description: 'Contains information about the '
   GetDetectorRequest:
     type: object
     properties: {}
@@ -3300,6 +3333,7 @@ definitions:
       OrderBy:
         $ref: '#/definitions/OrderBy'
         description: Order by which the sorted findings are to be displayed.
+    description: Contains information about the criteria for sorting.
   GetFindingsRequest:
     type: object
     required:
@@ -3348,7 +3382,7 @@ definitions:
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
-        description: Master account ID
+        description: The ID of the account used as the Master account.
       InvitationId:
         $ref: '#/definitions/String'
         description: This value is used to validate the master account to the member account.
@@ -3357,7 +3391,8 @@ definitions:
         description: The status of the relationship between the master and member accounts.
       InvitedAt:
         $ref: '#/definitions/String'
-        description: Timestamp at which the invitation was sent
+        description: Timestamp at which the invitation was sent.
+    description: Contains information about the Master account and invitation.
   GetMembersRequest:
     type: object
     required:
@@ -3399,6 +3434,7 @@ definitions:
       Id:
         $ref: '#/definitions/String'
         description: AWS EC2 instance profile ID.
+    description: Contains information about the instance profile.
   NetworkInterfaces:
     type: array
     items:
@@ -3450,6 +3486,7 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: The tags of the EC2 instance.
+    description: Contains information about the details of an instance.
   Invitation:
     type: object
     properties:
@@ -3465,6 +3502,7 @@ definitions:
       InvitedAt:
         $ref: '#/definitions/String'
         description: Timestamp at which the invitation was sent
+    description: Contains information about the invitation.
   Invitations:
     type: array
     items:
@@ -3550,6 +3588,7 @@ definitions:
       PortName:
         $ref: '#/definitions/String'
         description: Port name of the local connection.
+    description: Contains information about the port for the local connection.
   Member:
     type: object
     required:
@@ -3580,6 +3619,7 @@ definitions:
       UpdatedAt:
         $ref: '#/definitions/String'
         description: Member last updated timestamp.
+    description: 'Continas information about the member account '
   RemotePortDetails:
     type: object
     properties:
@@ -3589,6 +3629,7 @@ definitions:
       PortName:
         $ref: '#/definitions/String'
         description: Port name of the remote connection.
+    description: Contains information about the remote port.
   PrivateIpAddresses:
     type: array
     items:
@@ -3630,6 +3671,7 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The VPC ID of the EC2 instance.
+    description: Contains information about the network interface.
   Organization:
     type: object
     properties:
@@ -3645,6 +3687,7 @@ definitions:
       Org:
         $ref: '#/definitions/String'
         description: Name of the internet provider.
+    description: Continas information about the organization.
   PortProbeDetails:
     type: array
     items:
@@ -3658,6 +3701,7 @@ definitions:
       RemoteIpDetails:
         $ref: '#/definitions/RemoteIpDetails'
         description: Remote IP information of the connection.
+    description: Contains information about the port probe details.
   PrivateIpAddressDetails:
     type: object
     properties:
@@ -3667,6 +3711,7 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: Private IP address of the EC2 instance.
+    description: Contains information about the private IP address.
   ProductCode:
     type: object
     properties:
@@ -3676,6 +3721,7 @@ definitions:
       ProductType:
         $ref: '#/definitions/String'
         description: Product code type.
+    description: Contains information about the product code.
   SecurityGroup:
     type: object
     properties:
@@ -3685,6 +3731,7 @@ definitions:
       GroupName:
         $ref: '#/definitions/String'
         description: EC2 instance's security group name.
+    description: Contains information about the security group.
   StartMonitoringMembersRequest:
     type: object
     required:
@@ -3710,6 +3757,7 @@ definitions:
       Value:
         $ref: '#/definitions/String'
         description: EC2 instance tag value.
+    description: Contains information about the tag associated with the resource.
   TagKeyList:
     type: array
     items:
@@ -3724,6 +3772,20 @@ definitions:
       Tags:
         $ref: '#/definitions/TagMap'
         description: The tags to be added to a resource.
+  ThreatNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ThreatIntelligenceDetail:
+    type: object
+    properties:
+      ThreatListName:
+        $ref: '#/definitions/String'
+        description: The name of the threat intelligence list that triggered the finding.
+      ThreatNames:
+        $ref: '#/definitions/ThreatNames'
+        description: A list of names of the threats in the threat intelligence list that triggered the finding.
+    description: An instance of a threat intelligence detail that constitutes evidence for the finding.
   UnarchiveFindingsRequest:
     type: object
     required:
@@ -3744,6 +3806,7 @@ definitions:
       Result:
         $ref: '#/definitions/String'
         description: A reason why the account hasn't been processed.
+    description: Contains information about the accounts that were not processed.
   UntagResourceRequest:
     type: object
     properties: {}

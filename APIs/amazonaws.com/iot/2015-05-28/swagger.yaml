@@ -3915,7 +3915,7 @@ paths:
                     description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
                   merge:
                     $ref: '#/definitions/Flag'
-                    description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>'
+                    description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p> </note>'
               billingGroupName:
                 description: The name of the billing group the thing will be added to.
                 type: string
@@ -4087,7 +4087,7 @@ paths:
                     description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
                   merge:
                     $ref: '#/definitions/Flag'
-                    description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>'
+                    description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p> </note>'
               expectedVersion:
                 description: 'The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>UpdateThing</code> request is rejected with a <code>VersionConflictException</code>.'
                 type: integer
@@ -6463,7 +6463,7 @@ paths:
         - name: target
           in: path
           required: true
-          description: The group for which the policies will be listed.
+          description: The group or principal for which the policies will be listed.
           type: string
         - name: recursive
           in: query
@@ -10172,7 +10172,7 @@ definitions:
         description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
       merge:
         $ref: '#/definitions/Flag'
-        description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>'
+        description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p> </note>'
     description: The attribute payload.
   InvalidQueryException: {}
   CreateJobResponse:
@@ -12090,6 +12090,9 @@ definitions:
       topic:
         $ref: '#/definitions/TopicPattern'
         description: The name of the MQTT topic.
+      qos:
+        $ref: '#/definitions/Qos'
+        description: The Quality of Service (QoS) level to use when republishing messages.
     description: Describes an action to republish to another topic.
   S3Action:
     type: object
@@ -15436,6 +15439,10 @@ definitions:
   SnsTopicArn:
     type: string
     maxLength: 350
+  Qos:
+    type: integer
+    minimum: 0
+    maximum: 1
   QueueUrl:
     type: string
   RegisterCACertificateRequest:
