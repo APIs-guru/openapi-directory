@@ -614,6 +614,9 @@ paths:
                   cloudWatchLogsRoleArn:
                     $ref: '#/definitions/String'
                     description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                  excludeVerboseContent:
+                    $ref: '#/definitions/Boolean'
+                    description: 'Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.'
               authenticationType:
                 description: 'The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.'
                 type: string
@@ -1498,6 +1501,9 @@ paths:
                   cloudWatchLogsRoleArn:
                     $ref: '#/definitions/String'
                     description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                  excludeVerboseContent:
+                    $ref: '#/definitions/Boolean'
+                    description: 'Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.'
               authenticationType:
                 description: The new authentication type for the <code>GraphqlApi</code> object.
                 type: string
@@ -2895,6 +2901,9 @@ definitions:
       cloudWatchLogsRoleArn:
         $ref: '#/definitions/String'
         description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+      excludeVerboseContent:
+        $ref: '#/definitions/Boolean'
+        description: 'Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.'
     description: The CloudWatch Logs configuration.
   UserPoolConfig:
     type: object
