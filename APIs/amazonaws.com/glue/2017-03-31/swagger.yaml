@@ -2846,61 +2846,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJobBookmarks':
-    post:
-      operationId: GetJobBookmarks
-      description: Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetJobBookmarksResponse'
-        '480':
-          description: InvalidInputException
-          schema:
-            $ref: '#/definitions/InvalidInputException'
-        '481':
-          description: EntityNotFoundException
-          schema:
-            $ref: '#/definitions/EntityNotFoundException'
-        '482':
-          description: InternalServiceException
-          schema:
-            $ref: '#/definitions/InternalServiceException'
-        '483':
-          description: OperationTimeoutException
-          schema:
-            $ref: '#/definitions/OperationTimeoutException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetJobBookmarksRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSGlue.GetJobBookmarks
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.GetJobRun':
     post:
       operationId: GetJobRun
@@ -7362,29 +7307,6 @@ definitions:
       RunId:
         $ref: '#/definitions/RunId'
         description: The unique run identifier associated with this job run.
-  GetJobBookmarksResponse:
-    type: object
-    properties:
-      JobBookmarkEntries:
-        $ref: '#/definitions/JobBookmarkEntryList'
-        description: A list of job bookmark entries that defines a point that a job can resume processing.
-      NextToken:
-        $ref: '#/definitions/IntegerValue'
-        description: 'A continuation token, which has a value of 1 if all the entries are returned, or &gt; 1 if not all requested job runs have been returned.'
-  GetJobBookmarksRequest:
-    type: object
-    required:
-      - JobName
-    properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: The name of the job in question.
-      MaxResults:
-        $ref: '#/definitions/IntegerValue'
-        description: The maximum size of the response.
-      NextToken:
-        $ref: '#/definitions/IntegerValue'
-        description: 'A continuation token, if this is a continuation call.'
   GetJobRunResponse:
     type: object
     properties:
@@ -10555,10 +10477,6 @@ definitions:
         $ref: '#/definitions/JsonValue'
         description: The bookmark itself.
     description: Defines a point that a job can resume processing.
-  JobBookmarkEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/JobBookmarkEntry'
   Job:
     type: object
     properties:

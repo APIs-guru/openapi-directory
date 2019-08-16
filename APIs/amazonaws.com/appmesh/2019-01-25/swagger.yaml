@@ -414,6 +414,11 @@ paths:
                   httpRoute:
                     $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
+                  priority:
+                    $ref: '#/definitions/RoutePriority'
+                    description: |-
+                      The priority for the route. Routes are matched based on the specified value, where 0 is
+                               the highest priority.
                   tcpRoute:
                     $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
@@ -1388,6 +1393,11 @@ paths:
                   httpRoute:
                     $ref: '#/definitions/HttpRoute'
                     description: The HTTP routing information for the route.
+                  priority:
+                    $ref: '#/definitions/RoutePriority'
+                    description: |-
+                      The priority for the route. Routes are matched based on the specified value, where 0 is
+                               the highest priority.
                   tcpRoute:
                     $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
@@ -1964,17 +1974,25 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '482':
+        '483':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: limit
           in: query
@@ -2031,18 +2049,26 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '482':
+        '483':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-        '484':
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '486':
           description: TooManyTagsException
           schema:
             $ref: '#/definitions/TooManyTagsException'
@@ -2092,17 +2118,25 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '482':
+        '483':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
       parameters:
         - name: resourceArn
           in: query
@@ -2206,6 +2240,10 @@ definitions:
         $ref: '#/definitions/HttpRouteMatch'
         description: The criteria for determining an HTTP request match.
     description: An object representing the HTTP routing specification for a route.
+  RoutePriority:
+    type: integer
+    minimum: 0
+    maximum: 1000
   TcpRoute:
     type: object
     required:
@@ -3072,6 +3110,52 @@ definitions:
         $ref: '#/definitions/ServiceName'
         description: The name of the virtual service.
     description: An object representing a virtual service returned by a describe operation.
+  Boolean:
+    type: boolean
+  HeaderMatchMethod:
+    type: object
+    properties:
+      exact:
+        $ref: '#/definitions/HeaderMatch'
+        description: The header value sent by the client must match the specified value exactly.
+      prefix:
+        $ref: '#/definitions/HeaderMatch'
+        description: The header value sent by the client must begin with the specified characters.
+      range:
+        $ref: '#/definitions/MatchRange'
+        description: |-
+          The object that specifies the range of numbers within which the header value sent by the client
+                   must be included.
+      regex:
+        $ref: '#/definitions/HeaderMatch'
+        description: The header value sent by the client must include the specified characters.
+      suffix:
+        $ref: '#/definitions/HeaderMatch'
+        description: The header value sent by the client must end with the specified characters.
+    description: |-
+      An object representing the method and value to match the header value sent with a
+               request. Specify one match method.
+  HeaderName:
+    type: string
+    minLength: 1
+    maxLength: 50
+  HttpRouteHeader:
+    type: object
+    required:
+      - name
+    properties:
+      invert:
+        $ref: '#/definitions/Boolean'
+        description: |-
+          Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code>
+                   method and value. The default value is <code>False</code>.
+      match:
+        $ref: '#/definitions/HeaderMatchMethod'
+        description: The <code>HeaderMatchMethod</code> object.
+      name:
+        $ref: '#/definitions/HeaderName'
+        description: A name for the HTTP header in the client request that will be matched on.
+    description: An object representing the HTTP header in the request.
   FilePath:
     type: string
     minLength: 1
@@ -3085,14 +3169,16 @@ definitions:
       key:
         $ref: '#/definitions/AwsCloudMapInstanceAttributeKey'
         description: |-
-          The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance
-                   that contains the specified key and value is returned.
+          The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
+                   instance that contains the specified key and value is returned.
       value:
         $ref: '#/definitions/AwsCloudMapInstanceAttributeValue'
         description: |-
           The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
                    instance that contains the specified key and value is returned.
-    description: An object representing the AWS Cloud Map attribute information for your virtual node.
+    description: |-
+      An object representing the AWS Cloud Map attribute information for your virtual
+               node.
   AwsCloudMapInstanceAttributes:
     type: array
     items:
@@ -3185,6 +3271,22 @@ definitions:
     pattern: '^([a-zA-Z0-9!-~][ ta-zA-Z0-9!-~]*){0,1}[a-zA-Z0-9!-~]{0,1}$'
     minLength: 1
     maxLength: 1024
+  MatchRange:
+    type: object
+    required:
+      - end
+      - start
+    properties:
+      end:
+        $ref: '#/definitions/Long'
+        description: End of the range value.
+      start:
+        $ref: '#/definitions/Long'
+        description: Start of the range value.
+    description: |-
+      The range of values to match on. The first character of the range is included in the
+               range, though the last character is not. For example, if the range specified were 1-100,
+               only values 1-99 would be matched.
   ListVirtualRoutersLimit:
     type: integer
     minimum: 1
@@ -3300,15 +3402,48 @@ definitions:
       - ACTIVE
       - DELETED
       - INACTIVE
+  HeaderMatch:
+    type: string
+    minLength: 1
+    maxLength: 255
   MeshList:
     type: array
     items:
       $ref: '#/definitions/MeshRef'
+  HttpMethod:
+    type: string
+    enum:
+      - connect
+      - delete
+      - get
+      - head
+      - options
+      - patch
+      - post
+      - put
+      - trace
+  HttpRouteHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/HttpRouteHeader'
+    minItems: 1
+    maxItems: 10
+  HttpScheme:
+    type: string
+    enum:
+      - http
+      - https
   HttpRouteMatch:
     type: object
     required:
       - prefix
     properties:
+      headers:
+        $ref: '#/definitions/HttpRouteHeaders'
+        description: The client request headers to match on.
+      method:
+        $ref: '#/definitions/HttpMethod'
+        description: The client request header method to match on.
       prefix:
         $ref: '#/definitions/String'
         description: |-
@@ -3318,6 +3453,9 @@ definitions:
                    name is <code>my-service.local</code> and you want the route to match requests to
                       <code>my-service.local/metrics</code>, your prefix should be
                    <code>/metrics</code>.
+      scheme:
+        $ref: '#/definitions/HttpScheme'
+        description: The client request scheme to match on.
     description: |-
       An object representing the requirements for a route to match HTTP requests for a virtual
                router.
@@ -3414,6 +3552,11 @@ definitions:
       httpRoute:
         $ref: '#/definitions/HttpRoute'
         description: The HTTP routing information for the route.
+      priority:
+        $ref: '#/definitions/RoutePriority'
+        description: |-
+          The priority for the route. Routes are matched based on the specified value, where 0 is
+                   the highest priority.
       tcpRoute:
         $ref: '#/definitions/TcpRoute'
         description: The TCP routing information for the route.

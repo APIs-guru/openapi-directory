@@ -4368,8 +4368,13 @@ paths:
           type: integer
         - name: IpAddress
           in: query
-          required: true
+          required: false
           description: The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
+          type: string
+        - name: CertificateArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) for the customer gateway certificate.
           type: string
         - name: Type
           in: query
@@ -4420,8 +4425,13 @@ paths:
           type: integer
         - name: IpAddress
           in: formData
-          required: true
+          required: false
           description: The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
+          type: string
+        - name: CertificateArn
+          in: formData
+          required: false
+          description: The Amazon Resource Name (ARN) for the customer gateway certificate.
           type: string
         - name: Type
           in: formData
@@ -32170,7 +32180,7 @@ paths:
         - name: PolicyDocument
           in: query
           required: false
-          description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
+          description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
           type: string
         - name: AddRouteTableId
           in: query
@@ -32267,7 +32277,7 @@ paths:
         - name: PolicyDocument
           in: formData
           required: false
-          description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
+          description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
           type: string
         - name: AddRouteTableId
           in: formData
@@ -32890,6 +32900,11 @@ paths:
           required: false
           description: The ID of the transit gateway.
           type: string
+        - name: CustomerGatewayId
+          in: query
+          required: false
+          description: The ID of the customer gateway at your end of the VPN connection.
+          type: string
         - name: VpnGatewayId
           in: query
           required: false
@@ -32940,6 +32955,11 @@ paths:
           required: false
           description: The ID of the transit gateway.
           type: string
+        - name: CustomerGatewayId
+          in: formData
+          required: false
+          description: The ID of the customer gateway at your end of the VPN connection.
+          type: string
         - name: VpnGatewayId
           in: formData
           required: false
@@ -32956,6 +32976,89 @@ paths:
           type: string
           enum:
             - ModifyVpnConnection
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+  '/#Action=ModifyVpnTunnelCertificate':
+    get:
+      x-aws-operation-name: ModifyVpnTunnelCertificate
+      operationId: GET ModifyVpnTunnelCertificate
+      description: Modifies the VPN tunnel endpoint certificate.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyVpnTunnelCertificateResult'
+      parameters:
+        - name: VpnConnectionId
+          in: query
+          required: true
+          description: The ID of the AWS Site-to-Site VPN connection.
+          type: string
+        - name: VpnTunnelOutsideIpAddress
+          in: query
+          required: true
+          description: The external IP address of the VPN tunnel.
+          type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyVpnTunnelCertificate
+        - name: Version
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2016-11-15'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyVpnTunnelCertificate
+      operationId: POST ModifyVpnTunnelCertificate
+      description: Modifies the VPN tunnel endpoint certificate.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyVpnTunnelCertificateResult'
+      parameters:
+        - name: VpnConnectionId
+          in: formData
+          required: true
+          description: The ID of the AWS Site-to-Site VPN connection.
+          type: string
+        - name: VpnTunnelOutsideIpAddress
+          in: formData
+          required: true
+          description: The external IP address of the VPN tunnel.
+          type: string
+        - name: DryRun
+          in: formData
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          type: boolean
+        - name: Action
+          in: query
+          required: true
+          type: string
+          enum:
+            - ModifyVpnTunnelCertificate
         - name: Version
           in: query
           required: true
@@ -43057,6 +43160,11 @@ definitions:
     properties:
       VpnConnection:
         $ref: '#/definitions/VpnConnection'
+  ModifyVpnTunnelCertificateResult:
+    type: object
+    properties:
+      VpnConnection:
+        $ref: '#/definitions/VpnConnection'
   MonitorInstancesResult:
     type: object
     properties:
@@ -45923,7 +46031,6 @@ definitions:
     type: object
     required:
       - BgpAsn
-      - PublicIp
       - Type
     properties:
       BgpAsn:
@@ -45932,6 +46039,9 @@ definitions:
       PublicIp:
         $ref: '#/definitions/String'
         description: The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
+      CertificateArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the customer gateway certificate.
       Type:
         $ref: '#/definitions/GatewayType'
         description: The type of VPN connection that this customer gateway supports (<code>ipsec.1</code>).
@@ -45951,6 +46061,9 @@ definitions:
       IpAddress:
         $ref: '#/definitions/String'
         description: The Internet-routable IP address of the customer gateway's outside interface.
+      CertificateArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the customer gateway certificate.
       State:
         $ref: '#/definitions/String'
         description: The current state of the customer gateway (<code>pending | available | deleting | deleted</code>).
@@ -54980,7 +55093,7 @@ definitions:
         description: (Gateway endpoint) Specify <code>true</code> to reset the policy document to the default policy. The default policy allows full access to the service.
       PolicyDocument:
         $ref: '#/definitions/String'
-        description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
+        description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
       AddRouteTableIds:
         $ref: '#/definitions/ValueStringList'
         description: (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
@@ -55113,9 +55226,27 @@ definitions:
       TransitGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the transit gateway.
+      CustomerGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the customer gateway at your end of the VPN connection.
       VpnGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the virtual private gateway at the AWS side of the VPN connection.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ModifyVpnTunnelCertificateRequest:
+    type: object
+    required:
+      - VpnConnectionId
+      - VpnTunnelOutsideIpAddress
+    properties:
+      VpnConnectionId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS Site-to-Site VPN connection.
+      VpnTunnelOutsideIpAddress:
+        $ref: '#/definitions/String'
+        description: The external IP address of the VPN tunnel.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -57943,6 +58074,9 @@ definitions:
       StatusMessage:
         $ref: '#/definitions/String'
         description: 'If an error occurs, a description of the error.'
+      CertificateArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
     description: Describes telemetry for a VPN tunnel.
   VgwTelemetryList:
     type: array
