@@ -363,6 +363,9 @@ paths:
                   failureThresholdPercentage:
                     $ref: '#/definitions/Percentage'
                     description: The percentage of deployments that need to fail before stopping deployment.
+                  robotDeploymentTimeoutInSeconds:
+                    $ref: '#/definitions/DeploymentTimeout'
+                    description: 'The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.'
               clientRequestToken:
                 description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
@@ -707,7 +710,6 @@ paths:
               - sources
               - simulationSoftwareSuite
               - robotSoftwareSuite
-              - renderingEngine
             properties:
               name:
                 description: The name of the simulation application.
@@ -867,6 +869,7 @@ paths:
           schema:
             type: object
             required:
+              - loggingConfig
               - maxJobDurationInSeconds
               - iamRole
               - vpcConfig
@@ -887,6 +890,13 @@ paths:
                   s3Prefix:
                     $ref: '#/definitions/S3Key'
                     description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
+              loggingConfig:
+                description: The logging configuration.
+                type: object
+                properties:
+                  recordAllRosTopics:
+                    $ref: '#/definitions/BoxedBoolean'
+                    description: A boolean indicating whether to record all ROS topics.
               maxJobDurationInSeconds:
                 description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
                 type: integer
@@ -916,6 +926,13 @@ paths:
                   $ref: '#/definitions/SimulationApplicationConfig'
                 minItems: 1
                 maxItems: 1
+              dataSources:
+                description: <p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
+                type: array
+                items:
+                  $ref: '#/definitions/DataSourceConfig'
+                minItems: 1
+                maxItems: 5
               tags:
                 description: A map that contains tag keys and tag values that are attached to the simulation job.
                 type: object
@@ -1490,7 +1507,7 @@ paths:
   /listDeploymentJobs:
     post:
       operationId: ListDeploymentJobs
-      description: <p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>
+      description: 'Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. '
       responses:
         '200':
           description: Success
@@ -2311,7 +2328,6 @@ paths:
               - sources
               - simulationSoftwareSuite
               - robotSoftwareSuite
-              - renderingEngine
             properties:
               application:
                 description: The application information for the simulation application.
@@ -2427,6 +2443,8 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  DeploymentTimeout:
+    type: integer
   DeploymentApplicationConfig:
     type: object
     required:
@@ -2599,9 +2617,10 @@ definitions:
     type: string
     enum:
       - Gazebo
+      - RosbagPlay
   SimulationSoftwareSuiteVersionType:
     type: string
-    pattern: 7|9
+    pattern: 7|9|Kinetic|Melodic
   RenderingEngineType:
     type: string
     enum:
@@ -2659,13 +2678,16 @@ definitions:
         description: the failure behavior for the simulation job.
       failureCode:
         $ref: '#/definitions/SimulationJobErrorCode'
-        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>'
+        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> <dt>WrongRegionS3Output</dt> <dd> <p>S3 output bucket is in a different region than AWS RoboMaker.</p> </dd> <dt>WrongRegionRobotApplication</dt> <dd> <p>RobotApplication bucket is in a different region than AWS RoboMaker.</p> </dd> <dt>WrongRegionSimulationApplication</dt> <dd> <p>SimulationApplication bucket is in a different region than AWS RoboMaker.</p> </dd> </dl>'
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       outputLocation:
         $ref: '#/definitions/OutputLocation'
         description: Simulation job output files location.
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: The logging configuration.
       maxJobDurationInSeconds:
         $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds. '
@@ -2681,6 +2703,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application used by the simulation job.
+      dataSources:
+        $ref: '#/definitions/DataSources'
+        description: The data sources for the simulation job.
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the simulation job.
@@ -2697,6 +2722,8 @@ definitions:
     pattern: .*
     minLength: 1
     maxLength: 1024
+  BoxedBoolean:
+    type: boolean
   RobotApplicationConfig:
     type: object
     required:
@@ -2729,6 +2756,23 @@ definitions:
         $ref: '#/definitions/LaunchConfig'
         description: The launch configuration for the simulation application.
     description: Information about a simulation application configuration.
+  DataSourceConfig:
+    type: object
+    required:
+      - name
+      - s3Bucket
+      - s3Keys
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the data source.
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket where the data files are located.
+      s3Keys:
+        $ref: '#/definitions/S3Keys'
+        description: The list of S3 keys identifying the data source files.
+    description: Information about a data source.
   Subnets:
     type: array
     items:
@@ -2951,6 +2995,9 @@ definitions:
       outputLocation:
         $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: The logging configuration.
       maxJobDurationInSeconds:
         $ref: '#/definitions/JobDuration'
         description: 'The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
@@ -2966,6 +3013,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
+      dataSources:
+        $ref: '#/definitions/DataSources'
+        description: The data sources for the simulation job.
       tags:
         $ref: '#/definitions/TagMap'
         description: The list of all tags added to the specified simulation job.
@@ -3207,6 +3257,9 @@ definitions:
       failureThresholdPercentage:
         $ref: '#/definitions/Percentage'
         description: The percentage of deployments that need to fail before stopping deployment.
+      robotDeploymentTimeoutInSeconds:
+        $ref: '#/definitions/DeploymentTimeout'
+        description: 'The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.'
     description: Information about a deployment configuration.
   DeploymentApplicationConfigs:
     type: array
@@ -3403,7 +3456,6 @@ definitions:
       - sources
       - simulationSoftwareSuite
       - robotSoftwareSuite
-      - renderingEngine
     properties:
       name:
         $ref: '#/definitions/Name'
@@ -3444,6 +3496,15 @@ definitions:
         $ref: '#/definitions/S3Key'
         description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
     description: The output location.
+  LoggingConfig:
+    type: object
+    required:
+      - recordAllRosTopics
+    properties:
+      recordAllRosTopics:
+        $ref: '#/definitions/BoxedBoolean'
+        description: A boolean indicating whether to record all ROS topics.
+    description: The logging configuration.
   JobDuration:
     type: integer
   IamRole:
@@ -3468,6 +3529,12 @@ definitions:
       $ref: '#/definitions/SimulationApplicationConfig'
     minItems: 1
     maxItems: 1
+  DataSourceConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/DataSourceConfig'
+    minItems: 1
+    maxItems: 5
   VPCConfig:
     type: object
     required:
@@ -3495,6 +3562,9 @@ definitions:
       outputLocation:
         $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: The logging configuration.
       maxJobDurationInSeconds:
         $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
@@ -3510,6 +3580,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application to use in the simulation job.
+      dataSources:
+        $ref: '#/definitions/DataSourceConfigs'
+        description: <p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
       tags:
         $ref: '#/definitions/TagMap'
         description: A map that contains tag keys and tag values that are attached to the simulation job.
@@ -3540,6 +3613,7 @@ definitions:
       - SimulationApplicationCrash
       - BadPermissionsRobotApplication
       - BadPermissionsSimulationApplication
+      - BadPermissionsS3Object
       - BadPermissionsS3Output
       - BadPermissionsCloudwatchLogs
       - SubnetIpLimitExceeded
@@ -3547,13 +3621,22 @@ definitions:
       - BadPermissionsUserCredentials
       - InvalidBundleRobotApplication
       - InvalidBundleSimulationApplication
+      - InvalidS3Resource
+      - MismatchedEtag
       - RobotApplicationVersionMismatchedEtag
       - SimulationApplicationVersionMismatchedEtag
+      - ResourceNotFound
+      - InvalidInput
+      - WrongRegionS3Bucket
       - WrongRegionS3Output
       - WrongRegionRobotApplication
       - WrongRegionSimulationApplication
   SimulationTimeMillis:
     type: integer
+  DataSources:
+    type: array
+    items:
+      $ref: '#/definitions/DataSource'
   VPCConfigResponse:
     type: object
     properties:
@@ -3570,6 +3653,33 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean indicating if a public IP was assigned.
     description: VPC configuration associated with your simulation job.
+  S3KeyOutputs:
+    type: array
+    items:
+      $ref: '#/definitions/S3KeyOutput'
+  DataSource:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the data source.
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket where the data files are located.
+      s3Keys:
+        $ref: '#/definitions/S3KeyOutputs'
+        description: The list of S3 keys identifying the data source files.
+    description: Information about a data source.
+  S3Keys:
+    type: array
+    items:
+      $ref: '#/definitions/S3Key'
+    minItems: 1
+    maxItems: 100
+  DataSourceNames:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
   DeleteFleetRequest:
     type: object
     required:
@@ -4029,8 +4139,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Name'
-    minItems: 1
-    maxItems: 1
   RobotApplicationSummary:
     type: object
     properties:
@@ -4077,12 +4185,20 @@ definitions:
     description: Information about a robot deployment.
   S3Etag:
     type: string
+  S3KeyOutput:
+    type: object
+    properties:
+      s3Key:
+        $ref: '#/definitions/S3Key'
+        description: The S3 key.
+      etag:
+        $ref: '#/definitions/S3Etag'
+        description: The etag for the object.
+    description: Information about S3 keys.
   SimulationApplicationNames:
     type: array
     items:
       $ref: '#/definitions/Name'
-    minItems: 1
-    maxItems: 1
   SimulationApplicationSummary:
     type: object
     properties:
@@ -4138,6 +4254,9 @@ definitions:
       outputLocation:
         $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: The logging configuration.
       maxJobDurationInSeconds:
         $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
@@ -4153,6 +4272,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
+      dataSources:
+        $ref: '#/definitions/DataSources'
+        description: The data sources for the simulation job.
       tags:
         $ref: '#/definitions/TagMap'
         description: A map that contains tag keys and tag values that are attached to the simulation job.
@@ -4181,6 +4303,9 @@ definitions:
       robotApplicationNames:
         $ref: '#/definitions/RobotApplicationNames'
         description: A list of simulation job robot application names.
+      dataSourceNames:
+        $ref: '#/definitions/DataSourceNames'
+        description: The names of the data sources.
     description: Summary information for a simulation job.
   Source:
     type: object
@@ -4251,7 +4376,6 @@ definitions:
       - sources
       - simulationSoftwareSuite
       - robotSoftwareSuite
-      - renderingEngine
     properties:
       application:
         $ref: '#/definitions/Arn'
