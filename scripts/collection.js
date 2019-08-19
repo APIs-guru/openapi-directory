@@ -610,9 +610,9 @@ function writeSpec(source, format, exPatch, command) {
         if (resolverContext.anyDiff || (!e.message.startsWith('Warning'))) {
           //throw new SpecError(e, context);
           process.exitCode = 1;
-          warnings.push(e.message||e.context.message); // FIXME openapi_3
+          warnings.push(e.message||e.context.message||e); // FIXME openapi_3
         }
-        else console.log(e.message||e.context.message); // FIXME openapi_3
+        else console.log(e.message||e.context.message||e); // FIXME openapi_3
       }
       else {
         newBlackList.push(resolverContext.source);
