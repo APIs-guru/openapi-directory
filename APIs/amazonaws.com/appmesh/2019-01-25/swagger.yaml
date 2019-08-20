@@ -416,9 +416,7 @@ paths:
                     description: The HTTP routing information for the route.
                   priority:
                     $ref: '#/definitions/RoutePriority'
-                    description: |-
-                      The priority for the route. Routes are matched based on the specified value, where 0 is
-                               the highest priority.
+                    description: 'The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.'
                   tcpRoute:
                     $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
@@ -1395,9 +1393,7 @@ paths:
                     description: The HTTP routing information for the route.
                   priority:
                     $ref: '#/definitions/RoutePriority'
-                    description: |-
-                      The priority for the route. Routes are matched based on the specified value, where 0 is
-                               the highest priority.
+                    description: 'The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.'
                   tcpRoute:
                     $ref: '#/definitions/TcpRoute'
                     description: The TCP routing information for the route.
@@ -3123,18 +3119,14 @@ definitions:
         description: The header value sent by the client must begin with the specified characters.
       range:
         $ref: '#/definitions/MatchRange'
-        description: |-
-          The object that specifies the range of numbers within which the header value sent by the client
-                   must be included.
+        description: The object that specifies the range of numbers that the header value sent by the client must be included in.
       regex:
         $ref: '#/definitions/HeaderMatch'
         description: The header value sent by the client must include the specified characters.
       suffix:
         $ref: '#/definitions/HeaderMatch'
         description: The header value sent by the client must end with the specified characters.
-    description: |-
-      An object representing the method and value to match the header value sent with a
-               request. Specify one match method.
+    description: An object representing the method and value to match the header value sent with a request. Specify one match method.
   HeaderName:
     type: string
     minLength: 1
@@ -3146,9 +3138,7 @@ definitions:
     properties:
       invert:
         $ref: '#/definitions/Boolean'
-        description: |-
-          Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code>
-                   method and value. The default value is <code>False</code>.
+        description: Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code> method and value. The default value is <code>False</code>.
       match:
         $ref: '#/definitions/HeaderMatchMethod'
         description: The <code>HeaderMatchMethod</code> object.
@@ -3169,16 +3159,14 @@ definitions:
       key:
         $ref: '#/definitions/AwsCloudMapInstanceAttributeKey'
         description: |-
-          The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
-                   instance that contains the specified key and value is returned.
+          The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance
+                   that contains the specified key and value is returned.
       value:
         $ref: '#/definitions/AwsCloudMapInstanceAttributeValue'
         description: |-
           The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
                    instance that contains the specified key and value is returned.
-    description: |-
-      An object representing the AWS Cloud Map attribute information for your virtual
-               node.
+    description: An object representing the AWS Cloud Map attribute information for your virtual node.
   AwsCloudMapInstanceAttributes:
     type: array
     items:
@@ -3279,14 +3267,11 @@ definitions:
     properties:
       end:
         $ref: '#/definitions/Long'
-        description: End of the range value.
+        description: The end of the range.
       start:
         $ref: '#/definitions/Long'
-        description: Start of the range value.
-    description: |-
-      The range of values to match on. The first character of the range is included in the
-               range, though the last character is not. For example, if the range specified were 1-100,
-               only values 1-99 would be matched.
+        description: The start of the range.
+    description: 'The range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.'
   ListVirtualRoutersLimit:
     type: integer
     minimum: 1
@@ -3413,15 +3398,15 @@ definitions:
   HttpMethod:
     type: string
     enum:
-      - connect
-      - delete
-      - get
-      - head
-      - options
-      - patch
-      - post
-      - put
-      - trace
+      - CONNECT
+      - DELETE
+      - GET
+      - HEAD
+      - OPTIONS
+      - PATCH
+      - POST
+      - PUT
+      - TRACE
   HttpRouteHeaders:
     type: array
     items:
@@ -3455,7 +3440,7 @@ definitions:
                    <code>/metrics</code>.
       scheme:
         $ref: '#/definitions/HttpScheme'
-        description: The client request scheme to match on.
+        description: The client request header scheme to match on.
     description: |-
       An object representing the requirements for a route to match HTTP requests for a virtual
                router.
@@ -3554,9 +3539,7 @@ definitions:
         description: The HTTP routing information for the route.
       priority:
         $ref: '#/definitions/RoutePriority'
-        description: |-
-          The priority for the route. Routes are matched based on the specified value, where 0 is
-                   the highest priority.
+        description: 'The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.'
       tcpRoute:
         $ref: '#/definitions/TcpRoute'
         description: The TCP routing information for the route.
