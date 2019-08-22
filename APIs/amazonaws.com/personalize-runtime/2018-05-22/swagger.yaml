@@ -197,7 +197,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/ItemID'
-                maxItems: 100
               userId:
                 description: The user for which you want the campaign to provide a personalized ranking.
                 type: string
@@ -253,7 +252,6 @@ paths:
                 description: The number of results to return. The default is 25. The maximum is 100.
                 type: integer
                 minimum: 0
-                maximum: 100
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -288,7 +286,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ItemID'
-    maxItems: 100
   UserID:
     type: string
     maxLength: 256
@@ -312,11 +309,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PredictedItem'
-    maxItems: 100
   NumResults:
     type: integer
     minimum: 0
-    maximum: 100
   GetRecommendationsRequest:
     type: object
     required:

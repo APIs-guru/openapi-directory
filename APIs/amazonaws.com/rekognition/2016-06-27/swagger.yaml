@@ -725,7 +725,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.DetectModerationLabels':
     post:
       operationId: DetectModerationLabels
-      description: '<p>Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate.</p> <p>For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>'
+      description: '<p>Detects unsafe content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate.</p> <p>For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>'
       responses:
         '200':
           description: Success
@@ -967,7 +967,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.GetContentModeration':
     post:
       operationId: GetContentModeration
-      description: '<p>Gets the content moderation analysis results for a Amazon Rekognition Video analysis started by <a>StartContentModeration</a>.</p> <p>Content moderation analysis of a video is an asynchronous operation. You start analysis by calling <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartContentModeration</code>. To get the results of the content moderation analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <code>GetContentModeration</code> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.</p> <p> <code>GetContentModeration</code> returns detected content moderation labels, and the time they are detected, in an array, <code>ModerationLabels</code>, of <a>ContentModerationDetection</a> objects. </p> <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code> input parameter. </p> <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code> and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code> returned from the previous call to <code>GetContentModeration</code>.</p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>'
+      description: '<p>Gets the unsafe content analysis results for a Amazon Rekognition Video analysis started by <a>StartContentModeration</a>.</p> <p>Unsafe content analysis of a video is an asynchronous operation. You start analysis by calling <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartContentModeration</code>. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <code>GetContentModeration</code> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.</p> <p> <code>GetContentModeration</code> returns detected unsafe content labels, and the time they are detected, in an array, <code>ModerationLabels</code>, of <a>ContentModerationDetection</a> objects. </p> <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code> input parameter. </p> <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code> and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code> returned from the previous call to <code>GetContentModeration</code>.</p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -1812,7 +1812,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.StartContentModeration':
     post:
       operationId: StartContentModeration
-      description: '<p> Starts asynchronous detection of explicit or suggestive adult content in a stored video.</p> <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartContentModeration</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis. When content moderation analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the content moderation analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>'
+      description: '<p> Starts asynchronous detection of unsafe content in a stored video.</p> <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartContentModeration</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis. When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -2569,7 +2569,7 @@ definitions:
     properties:
       ModerationLabels:
         $ref: '#/definitions/ModerationLabels'
-        description: 'Array of detected Moderation labels and the time, in millseconds from the start of the video, they were detected.'
+        description: 'Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were detected.'
       ModerationModelVersion:
         $ref: '#/definitions/String'
         description: Version number of the moderation detection model that was used to detect unsafe content.
@@ -2656,7 +2656,7 @@ definitions:
     properties:
       JobStatus:
         $ref: '#/definitions/VideoJobStatus'
-        description: The current status of the content moderation job.
+        description: The current status of the unsafe content analysis job.
       StatusMessage:
         $ref: '#/definitions/StatusMessage'
         description: 'If the job fails, <code>StatusMessage</code> provides a descriptive error message.'
@@ -2665,10 +2665,10 @@ definitions:
         description: 'Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from <code>GetContentModeration</code>. '
       ModerationLabels:
         $ref: '#/definitions/ContentModerationDetections'
-        description: The detected moderation labels and the time(s) they were detected.
+        description: The detected unsafe content labels and the time(s) they were detected.
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of moderation labels. '
+        description: 'If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of unsafe content labels. '
       ModerationModelVersion:
         $ref: '#/definitions/String'
         description: Version number of the moderation detection model that was used to detect unsafe content.
@@ -2679,13 +2679,13 @@ definitions:
     properties:
       JobId:
         $ref: '#/definitions/JobId'
-        description: The identifier for the content moderation job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.
+        description: The identifier for the unsafe content job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: 'Maximum number of results to return per paginated call. The largest value you can specify is 1000. If you specify a value greater than 1000, a maximum of 1000 results is returned. The default value is 1000.'
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of content moderation labels.'
+        description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of unsafe content labels.'
       SortBy:
         $ref: '#/definitions/ContentModerationSortBy'
         description: 'Sort to use for elements in the <code>ModerationLabelDetections</code> array. Use <code>TIMESTAMP</code> to sort array elements by the time labels are detected. Use <code>NAME</code> to alphabetically group elements for a label together. Within each label group, the array element are sorted by detection confidence. The default sort is by <code>TIMESTAMP</code>.'
@@ -3189,7 +3189,7 @@ definitions:
         description: Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
       FaceMatchThreshold:
         $ref: '#/definitions/Percent'
-        description: 'Optional value specifying the minimum confidence in the face match to return. For example, don''t return any matches where confidence in matches is less than 70%.'
+        description: 'Optional value specifying the minimum confidence in the face match to return. For example, don''t return any matches where confidence in matches is less than 70%. The default value is 80%. '
   SearchFacesByImageResponse:
     type: object
     example:
@@ -3240,7 +3240,7 @@ definitions:
         description: Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
       FaceMatchThreshold:
         $ref: '#/definitions/Percent'
-        description: '(Optional) Specifies the minimum confidence in the face match to return. For example, don''t return any matches where confidence in matches is less than 70%.'
+        description: '(Optional) Specifies the minimum confidence in the face match to return. For example, don''t return any matches where confidence in matches is less than 70%. The default value is 80%.'
   StartCelebrityRecognitionResponse:
     type: object
     properties:
@@ -3263,7 +3263,7 @@ definitions:
         description: The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to.
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   IdempotentParameterMismatchException: {}
   VideoTooLargeException: {}
   StartContentModerationResponse:
@@ -3271,7 +3271,7 @@ definitions:
     properties:
       JobId:
         $ref: '#/definitions/JobId'
-        description: The identifier for the content moderation analysis job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.
+        description: The identifier for the unsafe content analysis job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.
   StartContentModerationRequest:
     type: object
     required:
@@ -3279,7 +3279,7 @@ definitions:
     properties:
       Video:
         $ref: '#/definitions/Video'
-        description: The video in which you want to moderate content. The video must be stored in an Amazon S3 bucket.
+        description: The video in which you want to detect unsafe content. The video must be stored in an Amazon S3 bucket.
       MinConfidence:
         $ref: '#/definitions/Percent'
         description: 'Specifies the minimum confidence that Amazon Rekognition must have in order to return a moderated content label. Confidence represents how certain Amazon Rekognition is that the moderated content is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition doesn''t return any moderated content labels with a confidence level lower than this specified value. If you don''t specify <code>MinConfidence</code>, <code>GetContentModeration</code> returns labels with confidence values greater than or equal to 50 percent.'
@@ -3288,10 +3288,10 @@ definitions:
         description: 'Idempotent token used to identify the start request. If you use the same token with multiple <code>StartContentModeration</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. '
       NotificationChannel:
         $ref: '#/definitions/NotificationChannel'
-        description: The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the content moderation analysis to.
+        description: The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the unsafe content analysis to.
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   StartFaceDetectionResponse:
     type: object
     properties:
@@ -3317,7 +3317,7 @@ definitions:
         description: '<p>The face attributes you want returned.</p> <p> <code>DEFAULT</code> - The following subset of facial attributes are returned: BoundingBox, Confidence, Pose, Quality and Landmarks. </p> <p> <code>ALL</code> - All facial attributes are returned.</p>'
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   StartFaceSearchResponse:
     type: object
     properties:
@@ -3338,7 +3338,7 @@ definitions:
         description: 'Idempotent token used to identify the start request. If you use the same token with multiple <code>StartFaceSearch</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. '
       FaceMatchThreshold:
         $ref: '#/definitions/Percent'
-        description: 'The minimum confidence in the person match to return. For example, don''t return any matches where confidence in matches is less than 70%. '
+        description: 'The minimum confidence in the person match to return. For example, don''t return any matches where confidence in matches is less than 70%. The default value is 80%.'
       CollectionId:
         $ref: '#/definitions/CollectionId'
         description: ID of the collection that contains the faces you want to search for.
@@ -3347,7 +3347,7 @@ definitions:
         description: 'The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. '
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   StartLabelDetectionResponse:
     type: object
     properties:
@@ -3373,7 +3373,7 @@ definitions:
         description: 'The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection operation to. '
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   StartPersonTrackingResponse:
     type: object
     properties:
@@ -3396,7 +3396,7 @@ definitions:
         description: The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.
       JobTag:
         $ref: '#/definitions/JobTag'
-        description: 'Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. '
+        description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
   StartStreamProcessorResponse:
     type: object
     properties: {}
@@ -3559,7 +3559,7 @@ definitions:
         description: 'Indicates whether or not the mouth on the face is open, and the confidence level in the determination.'
       Emotions:
         $ref: '#/definitions/Emotions'
-        description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY. '
+        description: 'The emotions that appear to be expressed on the face, and the confidence level in the determination. The API is only making a determination of the physical appearance of a person''s face. It is not a determination of the person’s internal emotional state and should not be used in such a way. For example, a person pretending to have a sad face might not be sad emotionally.'
       Landmarks:
         $ref: '#/definitions/Landmarks'
         description: Indicates the location of landmarks on the face. Default attribute.
@@ -3718,21 +3718,21 @@ definitions:
         description: '<p>Specifies the confidence that Amazon Rekognition has that the label has been correctly identified.</p> <p>If you don''t specify the <code>MinConfidence</code> parameter in the call to <code>DetectModerationLabels</code>, the operation returns labels with a confidence value greater than or equal to 50 percent.</p>'
       Name:
         $ref: '#/definitions/String'
-        description: The label name for the type of content detected in the image.
+        description: The label name for the type of unsafe content detected in the image.
       ParentName:
         $ref: '#/definitions/String'
         description: The name for the parent label. Labels at the top level of the hierarchy have the parent label <code>""</code>.
-    description: 'Provides information about a single type of moderated content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.'
+    description: 'Provides information about a single type of unsafe content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.'
   ContentModerationDetection:
     type: object
     properties:
       Timestamp:
         $ref: '#/definitions/Timestamp'
-        description: 'Time, in milliseconds from the beginning of the video, that the moderation label was detected.'
+        description: 'Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.'
       ModerationLabel:
         $ref: '#/definitions/ModerationLabel'
-        description: The moderation label detected by in the stored video.
-    description: Information about a moderation label detection in a stored video.
+        description: The unsafe content label detected by in the stored video.
+    description: Information about an unsafe content label detection in a stored video.
   ContentModerationDetections:
     type: array
     items:
@@ -3836,7 +3836,7 @@ definitions:
       Confidence:
         $ref: '#/definitions/Percent'
         description: Level of confidence in the determination.
-    description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY.'
+    description: 'The emotions that appear to be expressed on the face, and the confidence level in the determination. The API is only making a determination of the physical appearance of a person''s face. It is not a determination of the person’s internal emotional state and should not be used in such a way. For example, a person pretending to have a sad face might not be sad emotionally.'
   Emotions:
     type: array
     items:

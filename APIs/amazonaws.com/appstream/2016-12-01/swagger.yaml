@@ -1607,7 +1607,7 @@ paths:
   '/#X-Amz-Target=PhotonAdminProxyService.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: '<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+      description: '<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1666,6 +1666,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '485':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
       parameters:
         - name: body
           in: body
@@ -1816,7 +1820,7 @@ paths:
   '/#X-Amz-Target=PhotonAdminProxyService.TagResource':
     post:
       operationId: TagResource
-      description: '<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1857,7 +1861,7 @@ paths:
   '/#X-Amz-Target=PhotonAdminProxyService.UntagResource':
     post:
       operationId: UntagResource
-      description: '<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+      description: '<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2256,7 +2260,7 @@ definitions:
         description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. '
       Tags:
         $ref: '#/definitions/Tags'
-        description: '<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+        description: '<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
       IdleDisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
         description: '<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don''t do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>'
@@ -2306,7 +2310,10 @@ definitions:
         description: 'The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. '
       Tags:
         $ref: '#/definitions/Tags'
-        description: '<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+        description: '<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+      AccessEndpoints:
+        $ref: '#/definitions/AccessEndpointList'
+        description: The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
   CreateImageBuilderStreamingURLResult:
     type: object
     properties:
@@ -2364,7 +2371,10 @@ definitions:
         description: 'The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.'
       Tags:
         $ref: '#/definitions/Tags'
-        description: '<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
+        description: '<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+      AccessEndpoints:
+        $ref: '#/definitions/AccessEndpointList'
+        description: The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
   CreateStreamingURLResult:
     type: object
     properties:
@@ -2398,7 +2408,7 @@ definitions:
         description: 'The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 60 seconds.'
       SessionContext:
         $ref: '#/definitions/String'
-        description: 'The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.'
+        description: 'The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.'
   CreateUsageReportSubscriptionResult:
     type: object
     properties:
@@ -3095,6 +3105,34 @@ definitions:
       ApplicationSettings:
         $ref: '#/definitions/ApplicationSettings'
         description: 'The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.'
+      AccessEndpoints:
+        $ref: '#/definitions/AccessEndpointList'
+        description: The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
+  AccessEndpointType:
+    type: string
+    enum:
+      - STREAMING
+  String:
+    type: string
+    minLength: 1
+  AccessEndpoint:
+    type: object
+    required:
+      - EndpointType
+    properties:
+      EndpointType:
+        $ref: '#/definitions/AccessEndpointType'
+        description: The type of VPC interface endpoint.
+      VpceId:
+        $ref: '#/definitions/String'
+        description: The identifier (ID) of the VPC in which the endpoint is used.
+    description: 'Describes a virtual private cloud (VPC) interface endpoint that lets you create a private connection between the VPC that you specify and AppStream 2.0. When you specify a VPC interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify a VPC interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.'
+  AccessEndpointList:
+    type: array
+    items:
+      $ref: '#/definitions/AccessEndpoint'
+    minItems: 1
+    maxItems: 4
   AccountName:
     type: string
     minLength: 1
@@ -3112,9 +3150,6 @@ definitions:
       - FILE_UPLOAD
       - FILE_DOWNLOAD
       - PRINTING_TO_LOCAL_DEVICE
-  String:
-    type: string
-    minLength: 1
   Boolean:
     type: boolean
   Metadata:
@@ -3442,6 +3477,9 @@ definitions:
       AppstreamAgentVersion:
         $ref: '#/definitions/AppstreamAgentVersion'
         description: 'The version of the AppStream 2.0 agent that is currently being used by the image builder. '
+      AccessEndpoints:
+        $ref: '#/definitions/AccessEndpointList'
+        description: The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
     description: 'Describes a virtual machine that is used to create an image. '
   Long:
     type: integer
@@ -3502,6 +3540,9 @@ definitions:
       ApplicationSettings:
         $ref: '#/definitions/ApplicationSettingsResponse'
         description: The persistent application settings for users of the stack.
+      AccessEndpoints:
+        $ref: '#/definitions/AccessEndpointList'
+        description: 'The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. '
     description: Describes a stack.
   StreamingUrlUserId:
     type: string
@@ -3691,6 +3732,7 @@ definitions:
       - NETWORK_INTERFACE_LIMIT_EXCEEDED
       - INTERNAL_SERVICE_ERROR
       - IAM_SERVICE_ROLE_IS_MISSING
+      - STS_DISABLED_IN_REGION
       - SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES
       - IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION
       - SUBNET_NOT_FOUND
@@ -3931,6 +3973,7 @@ definitions:
       - FEEDBACK_URL
       - THEME_NAME
       - USER_SETTINGS
+      - ACCESS_ENDPOINTS
   StackAttributes:
     type: array
     items:

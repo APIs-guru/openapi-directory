@@ -1,0 +1,303 @@
+swagger: '2.0'
+info:
+  version: '2018-06-26'
+  x-release: v4
+  title: Amazon Forecast Query Service
+  description: Provides APIs for creating and managing Amazon Forecast resources.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: forecastquery
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/forecastquery-2018-06-26.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/forecastquery/'
+host: forecastquery.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://forecastquery.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Forecast Query Service multi-region endpoint
+  - url: 'https://forecastquery.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Forecast Query Service multi-region endpoint
+  - url: 'http://forecastquery.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Forecast Query Service endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://forecastquery.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Forecast Query Service endpoint for China (Beijing) and China (Ningxia)
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=AmazonForecastRuntime.QueryForecast':
+    post:
+      operationId: QueryForecast
+      description: '<p>Retrieves a forecast filtered by the supplied criteria.</p> <p>The criteria is a key-value pair. The key is either <code>item_id</code> (or the equivalent non-timestamp, non-target field) from the <code>TARGET_TIME_SERIES</code> dataset, or one of the forecast dimensions specified as part of the <code>FeaturizationConfig</code> object.</p> <p>By default, the complete date range of the filtered forecast is returned. Optionally, you can request a specific date range within the forecast.</p> <note> <p>The forecasts generated by Amazon Forecast are in the same timezone as the dataset that was used to create the predictor.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/QueryForecastResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/QueryForecastRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonForecastRuntime.QueryForecast
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  QueryForecastResponse:
+    type: object
+    properties:
+      Forecast:
+        $ref: '#/definitions/Forecast'
+        description: The forecast.
+  QueryForecastRequest:
+    type: object
+    required:
+      - ForecastArn
+      - Filters
+    properties:
+      ForecastArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the forecast to query.
+      StartDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The start date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss''Z'' (ISO 8601 format) For example, "1970-01-01T00:00:00Z."'
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The end date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss''Z'' (ISO 8601 format). For example, "1970-01-01T00:00:00Z." '
+      Filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>The filtering criteria to apply when retrieving the forecast. For example:</p> <ul> <li> <p>To get a forecast for a specific item specify the following:</p> <p> <code>{"item_id" : "client_1"}</code> </p> </li> </ul> <ul> <li> <p>To get a forecast for a specific item sold in a specific location, specify the following:</p> <p> <code>{"item_id" : "client_1", "location" : "ny"}</code> </p> </li> </ul> <ul> <li> <p>To get a forecast for all blue items sold in a specific location, specify the following:</p> <p> <code>{ "location" : "ny", "color":"blue"}</code> </p> </li> </ul> <p>To get the full forecast, use the operation.</p>'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.'
+  ResourceNotFoundException: {}
+  ResourceInUseException: {}
+  InvalidInputException: {}
+  LimitExceededException: {}
+  InvalidNextTokenException: {}
+  Arn:
+    type: string
+    pattern: 'arn:([a-z\d-]+):forecast:.*:.*:.+'
+    maxLength: 256
+  AttributeName:
+    type: string
+    pattern: '^[a-zA-Z0-9\_\-]+$'
+    maxLength: 256
+  AttributeValue:
+    type: string
+    maxLength: 256
+  Timestamp:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
+    maxLength: 20
+  Double:
+    type: number
+    format: double
+  DataPoint:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp of the specific forecast.
+      Value:
+        $ref: '#/definitions/Double'
+        description: The forecast value.
+    description: The forecast value for a specific date. Part of the <a>Forecast</a> object.
+  DateTime:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
+    maxLength: 20
+  Filters:
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/AttributeValue'
+  Predictions:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TimeSeries'
+  Forecast:
+    type: object
+    properties:
+      Predictions:
+        $ref: '#/definitions/Predictions'
+        description: '<p>The forecast.</p> <p>The <i>string</i> of the string to array map is one of the following values:</p> <ul> <li> <p>mean</p> </li> <li> <p>p10</p> </li> <li> <p>p50</p> </li> <li> <p>p90</p> </li> </ul>'
+    description: Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 3000
+  TimeSeries:
+    type: array
+    items:
+      $ref: '#/definitions/DataPoint'
+  Statistic:
+    type: string
+    maxLength: 4

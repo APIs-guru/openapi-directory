@@ -1001,7 +1001,7 @@ paths:
   '/#X-Amz-Target=AlexaForBusiness.DeleteDeviceUsageData':
     post:
       operationId: DeleteDeviceUsageData
-      description: '<p>When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p> <p>When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>'
+      description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.'
       responses:
         '200':
           description: Success
@@ -3926,6 +3926,9 @@ definitions:
       WakeWord:
         $ref: '#/definitions/WakeWord'
         description: 'A wake word for Alexa, Echo, Amazon, or a computer.'
+      Locale:
+        $ref: '#/definitions/DeviceLocale'
+        description: The locale of the room profile.
       ClientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: The user-specified token that is used during the creation of a profile.
@@ -5305,6 +5308,9 @@ definitions:
       WakeWord:
         $ref: '#/definitions/WakeWord'
         description: The updated wake word for the room profile.
+      Locale:
+        $ref: '#/definitions/DeviceLocale'
+        description: The updated locale for the room profile.
       SetupModeDisabled:
         $ref: '#/definitions/Boolean'
         description: Whether the setup mode of the profile is enabled.
@@ -5890,6 +5896,10 @@ definitions:
       - AMAZON
       - ECHO
       - COMPUTER
+  DeviceLocale:
+    type: string
+    minLength: 1
+    maxLength: 256
   MaxVolumeLimit:
     type: integer
   RoomName:
@@ -5937,7 +5947,7 @@ definitions:
     maxLength: 30
   Email:
     type: string
-    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
+    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z]([-\w]*[0-9a-zA-Z]+)*\.)+[a-zA-Z]{2,9})'
     minLength: 1
     maxLength: 128
   DeviceUsageType:
@@ -6394,6 +6404,9 @@ definitions:
       WakeWord:
         $ref: '#/definitions/WakeWord'
         description: The wake word of a room profile.
+      Locale:
+        $ref: '#/definitions/DeviceLocale'
+        description: The locale of a room profile.
       SetupModeDisabled:
         $ref: '#/definitions/Boolean'
         description: The setup mode of a room profile.
@@ -6591,6 +6604,9 @@ definitions:
       WakeWord:
         $ref: '#/definitions/WakeWord'
         description: The wake word of a room profile.
+      Locale:
+        $ref: '#/definitions/DeviceLocale'
+        description: The locale of a room profile.
     description: The data of a room profile.
   ProfileDataList:
     type: array
