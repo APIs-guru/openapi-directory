@@ -345,6 +345,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.CreateLocationSmb':
+    post:
+      operationId: CreateLocationSmb
+      description: Creates an endpoint for a Server Message Block (SMB) file system.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLocationSmbResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLocationSmbRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.CreateLocationSmb
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=FmrsService.CreateTask':
     post:
       operationId: CreateTask
@@ -633,6 +670,43 @@ paths:
           type: string
           enum:
             - FmrsService.DescribeLocationS3
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=FmrsService.DescribeLocationSmb':
+    post:
+      operationId: DescribeLocationSmb
+      description: 'Returns metadata, such as the path and user information about a SMB location.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLocationSmbResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLocationSmbRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - FmrsService.DescribeLocationSmb
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1262,6 +1336,47 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
     description: CreateLocationS3Request
+  CreateLocationSmbResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+    description: CreateLocationSmbResponse
+  CreateLocationSmbRequest:
+    type: object
+    required:
+      - Subdirectory
+      - ServerHostname
+      - User
+      - Password
+      - AgentArns
+    properties:
+      Subdirectory:
+        $ref: '#/definitions/NonEmptySubdirectory'
+        description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
+      ServerHostname:
+        $ref: '#/definitions/ServerHostname'
+        description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: 'The user who can mount the share, has the permissions to access files and directories in the SMB share.'
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the domain that the SMB server belongs to.
+      Password:
+        $ref: '#/definitions/SmbPassword'
+        description: The password of the user who has permission to access the SMB server.
+      AgentArns:
+        $ref: '#/definitions/AgentArnList'
+        description: 'The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. '
+      MountOptions:
+        $ref: '#/definitions/SmbMountOptions'
+        description: The mount options that are available for DataSync to use to access an SMB location.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+    description: CreateLocationSmbRequest
   CreateTaskResponse:
     type: object
     properties:
@@ -1356,7 +1471,6 @@ definitions:
         description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. '
       PrivateLinkConfig:
         $ref: '#/definitions/PrivateLinkConfig'
-        description: The subnet and the security group that DataSync used to access a VPC endpoint.
     description: DescribeAgentResponse
   DescribeAgentRequest:
     type: object
@@ -1442,6 +1556,40 @@ definitions:
         $ref: '#/definitions/LocationArn'
         description: The Amazon Resource Name (ARN) of the Amazon S3 bucket location to describe.
     description: DescribeLocationS3Request
+  DescribeLocationSmbResponse:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the SMB location that was described.
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: The URL of the source SBM location that was described.
+      AgentArns:
+        $ref: '#/definitions/AgentArnList'
+        description: The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+      User:
+        $ref: '#/definitions/SmbUser'
+        description: The user who is logged on the SMB server.
+      Domain:
+        $ref: '#/definitions/SmbDomain'
+        description: The name of the domain that the SMB server belongs to.
+      MountOptions:
+        $ref: '#/definitions/SmbMountOptions'
+        description: The mount options that are available for DataSync to use to access an SMB location.
+      CreationTime:
+        $ref: '#/definitions/Time'
+        description: The time that the SMB location was created.
+    description: DescribeLocationSmbResponse
+  DescribeLocationSmbRequest:
+    type: object
+    required:
+      - LocationArn
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: The Amazon resource Name (ARN) of the SMB location to describe.
+    description: DescribeLocationSmbRequest
   DescribeTaskResponse:
     type: object
     properties:
@@ -1880,6 +2028,25 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
     description: '<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>'
+  SmbUser:
+    type: string
+    pattern: '^[^\\x5B\\x5D\\/:;|=,+*?]{1,104}$'
+    maxLength: 104
+  SmbDomain:
+    type: string
+    pattern: '^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$'
+    maxLength: 253
+  SmbPassword:
+    type: string
+    pattern: '^.{0,104}$'
+    maxLength: 104
+  SmbMountOptions:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/SmbVersion'
+        description: 'The specific SMB version that you want DataSync to use to mount your SMB share. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.'
+    description: Represents the mount options that are available for DataSync to access an SMB location.
   LogGroupArn:
     type: string
     pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
@@ -1951,7 +2118,8 @@ definitions:
     description: 'The VPC endpoint, subnet and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
   LocationUri:
     type: string
-    pattern: '(efs|nfs|s3)://[a-zA-Z0-9.\-]+'
+    pattern: '^(efs|nfs|s3|smb)://[a-zA-Z0-9.\-]+$'
+    maxLength: 4355
   TaskExecutionStatus:
     type: string
     enum:
@@ -2145,6 +2313,12 @@ definitions:
       - PENDING
       - SUCCESS
       - ERROR
+  SmbVersion:
+    type: string
+    enum:
+      - AUTOMATIC
+      - SMB2
+      - SMB3
   TagKey:
     type: string
     pattern: '^[a-zA-Z0-9\s+=._:/-]+$'
