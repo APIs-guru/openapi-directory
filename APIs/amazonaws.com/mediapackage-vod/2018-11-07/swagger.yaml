@@ -910,6 +910,11 @@ definitions:
       - SpekeKeyProvider
     type: object
     properties:
+      ConstantInitializationVector:
+        description: |
+          A constant initialization vector for encryption (optional).
+          When not specified the initialization vector will be periodically rotated.
+        $ref: '#/definitions/__string'
       EncryptionMethod:
         description: The encryption method to use.
         $ref: '#/definitions/EncryptionMethod'
