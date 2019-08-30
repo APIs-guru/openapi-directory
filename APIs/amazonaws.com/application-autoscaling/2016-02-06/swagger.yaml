@@ -3,7 +3,7 @@ info:
   version: '2016-02-06'
   x-release: v4
   title: Application Auto Scaling
-  description: '<p>With Application Auto Scaling, you can configure automatic scaling for the following resources:</p> <ul> <li> <p>Amazon ECS services</p> </li> <li> <p>Amazon EC2 Spot Fleet requests</p> </li> <li> <p>Amazon EMR clusters</p> </li> <li> <p>Amazon AppStream 2.0 fleets </p> </li> <li> <p>Amazon DynamoDB tables and global secondary indexes throughput capacity</p> </li> <li> <p>Amazon Aurora Replicas</p> </li> <li> <p>Amazon SageMaker endpoint variants</p> </li> <li> <p>Custom resources provided by your own applications or services</p> </li> </ul> <p> <b>API Summary</b> </p> <p>The Application Auto Scaling service API includes two key sets of actions: </p> <ul> <li> <p>Register and manage scalable targets - Register AWS or custom resources as scalable targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and retrieve information on existing scalable targets.</p> </li> <li> <p>Configure and manage automatic scaling - Define scaling policies to dynamically scale your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions, and retrieve your recent scaling activity history.</p> </li> </ul> <p>To learn more about Application Auto Scaling, including information about granting IAM users required permissions for Application Auto Scaling actions, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>.</p>'
+  description: '<p>With Application Auto Scaling, you can configure automatic scaling for the following resources:</p> <ul> <li> <p>Amazon ECS services</p> </li> <li> <p>Amazon EC2 Spot Fleet requests</p> </li> <li> <p>Amazon EMR clusters</p> </li> <li> <p>Amazon AppStream 2.0 fleets </p> </li> <li> <p>Amazon DynamoDB tables and global secondary indexes throughput capacity</p> </li> <li> <p>Amazon Aurora Replicas</p> </li> <li> <p>Amazon SageMaker endpoint variants</p> </li> <li> <p>Custom resources provided by your own applications or services</p> </li> </ul> <p> <b>API Summary</b> </p> <p>The Application Auto Scaling service API includes three key sets of actions: </p> <ul> <li> <p>Register and manage scalable targets - Register AWS or custom resources as scalable targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and retrieve information on existing scalable targets.</p> </li> <li> <p>Configure and manage automatic scaling - Define scaling policies to dynamically scale your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions, and retrieve your recent scaling activity history.</p> </li> <li> <p>Suspend and resume scaling - Temporarily suspend and later resume automatic scaling by calling the <a>RegisterScalableTarget</a> action for any Application Auto Scaling scalable target. You can suspend and resume, individually or in combination, scale-out activities triggered by a scaling policy, scale-in activities triggered by a scaling policy, and scheduled scaling. </p> </li> </ul> <p>To learn more about Application Auto Scaling, including information about granting IAM users required permissions for Application Auto Scaling actions, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -501,6 +501,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeScheduledActionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1005,6 +1015,9 @@ definitions:
       RoleARN:
         $ref: '#/definitions/ResourceIdMaxLen1600'
         description: '<p>Application Auto Scaling creates a service-linked role that grants it permissions to modify the scalable target on your behalf. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html">Service-Linked Roles for Application Auto Scaling</a>.</p> <p>For resources that are not supported using a service-linked role, this parameter is required, and it must specify the ARN of an IAM role that allows Application Auto Scaling to modify the scalable target on your behalf.</p>'
+      SuspendedState:
+        $ref: '#/definitions/SuspendedState'
+        description: '<p>An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling. Setting the value of an attribute to <code>true</code> suspends the specified scaling activities. Setting it to <code>false</code> (default) resumes the specified scaling activities. </p> <p> <b>Suspension Outcomes</b> </p> <ul> <li> <p>For <code>DynamicScalingInSuspended</code>, while a suspension is in effect, all scale-in activities that are triggered by a scaling policy are suspended.</p> </li> <li> <p>For <code>DynamicScalingOutSuspended</code>, while a suspension is in effect, all scale-out activities that are triggered by a scaling policy are suspended.</p> </li> <li> <p>For <code>ScheduledScalingSuspended</code>, while a suspension is in effect, all scaling activities that involve scheduled actions are suspended. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html">Suspend and Resume Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>'
   AdjustmentType:
     type: string
     enum:
@@ -1262,6 +1275,19 @@ definitions:
     description: Represents the minimum and maximum capacity for a scheduled action.
   ResourceCapacity:
     type: integer
+  SuspendedState:
+    type: object
+    properties:
+      DynamicScalingInSuspended:
+        $ref: '#/definitions/ScalingSuspended'
+        description: 'Whether scale in by a target tracking scaling policy or a step scaling policy is suspended. Set the value to <code>true</code> if you don''t want Application Auto Scaling to remove capacity when a scaling policy is triggered. The default is <code>false</code>. '
+      DynamicScalingOutSuspended:
+        $ref: '#/definitions/ScalingSuspended'
+        description: 'Whether scale out by a target tracking scaling policy or a step scaling policy is suspended. Set the value to <code>true</code> if you don''t want Application Auto Scaling to add capacity when a scaling policy is triggered. The default is <code>false</code>. '
+      ScheduledScalingSuspended:
+        $ref: '#/definitions/ScalingSuspended'
+        description: 'Whether scheduled scaling is suspended. Set the value to <code>true</code> if you don''t want Application Auto Scaling to add or remove capacity by initiating scheduled actions. The default is <code>false</code>. '
+    description: 'Specifies whether the scaling activities for a scalable target are in a suspended state. '
   ScalableTarget:
     type: object
     required:
@@ -1294,6 +1320,8 @@ definitions:
       CreationTime:
         $ref: '#/definitions/TimestampType'
         description: The Unix timestamp for when the scalable target was created.
+      SuspendedState:
+        $ref: '#/definitions/SuspendedState'
     description: Represents a scalable target.
   ScalingActivity:
     type: object
@@ -1394,6 +1422,8 @@ definitions:
         $ref: '#/definitions/TimestampType'
         description: The Unix timestamp for when the scaling policy was created.
     description: Represents a scaling policy to use with Application Auto Scaling.
+  ScalingSuspended:
+    type: boolean
   ScheduledAction:
     type: object
     required:

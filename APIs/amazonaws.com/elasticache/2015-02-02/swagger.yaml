@@ -628,6 +628,11 @@ paths:
           required: false
           description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
           type: string
+        - name: KmsKeyId
+          in: query
+          required: false
+          description: The ID of the KMS key used to encrypt the target snapshot.
+          type: string
         - name: Action
           in: query
           required: true
@@ -696,6 +701,11 @@ paths:
           in: formData
           required: false
           description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
+          type: string
+        - name: KmsKeyId
+          in: formData
+          required: false
+          description: The ID of the KMS key used to encrypt the target snapshot.
           type: string
         - name: Action
           in: query
@@ -779,7 +789,7 @@ paths:
         - name: CacheClusterId
           in: query
           required: true
-          description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 50 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: ReplicationGroupId
           in: query
@@ -993,7 +1003,7 @@ paths:
         - name: CacheClusterId
           in: formData
           required: true
-          description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 50 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: ReplicationGroupId
           in: formData
@@ -1551,7 +1561,7 @@ paths:
         - name: ReplicationGroupId
           in: query
           required: true
-          description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 40 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: ReplicationGroupDescription
           in: query
@@ -1693,13 +1703,18 @@ paths:
         - name: TransitEncryptionEnabled
           in: query
           required: false
-          description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
+          description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
           type: boolean
         - name: AtRestEncryptionEnabled
           in: query
           required: false
           description: '<p>A flag that enables encryption at rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created. To enable encryption at rest on a replication group you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the replication group. </p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
           type: boolean
+        - name: KmsKeyId
+          in: query
+          required: false
+          description: The ID of the KMS key used to encrypt the disk on the cluster.
+          type: string
         - name: Action
           in: query
           required: true
@@ -1793,7 +1808,7 @@ paths:
         - name: ReplicationGroupId
           in: formData
           required: true
-          description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 40 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: ReplicationGroupDescription
           in: formData
@@ -1935,13 +1950,18 @@ paths:
         - name: TransitEncryptionEnabled
           in: formData
           required: false
-          description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
+          description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
           type: boolean
         - name: AtRestEncryptionEnabled
           in: formData
           required: false
           description: '<p>A flag that enables encryption at rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created. To enable encryption at rest on a replication group you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the replication group. </p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
           type: boolean
+        - name: KmsKeyId
+          in: formData
+          required: false
+          description: The ID of the KMS key used to encrypt the disk on the cluster.
+          type: string
         - name: Action
           in: query
           required: true
@@ -2015,6 +2035,11 @@ paths:
           in: query
           required: true
           description: A name for the snapshot being created.
+          type: string
+        - name: KmsKeyId
+          in: query
+          required: false
+          description: The ID of the KMS key used to encrypt the snapshot.
           type: string
         - name: Action
           in: query
@@ -2096,6 +2121,11 @@ paths:
           in: formData
           required: true
           description: A name for the snapshot being created.
+          type: string
+        - name: KmsKeyId
+          in: formData
+          required: false
+          description: The ID of the KMS key used to encrypt the snapshot.
           type: string
         - name: Action
           in: query
@@ -4761,10 +4791,14 @@ paths:
           schema:
             $ref: '#/definitions/NoOperationFault'
         '489':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '490':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '490':
+        '491':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -4857,10 +4891,14 @@ paths:
           schema:
             $ref: '#/definitions/NoOperationFault'
         '489':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '490':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '490':
+        '491':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -4903,7 +4941,7 @@ paths:
     get:
       x-aws-operation-name: ListAllowedNodeTypeModifications
       operationId: GET ListAllowedNodeTypeModifications
-      description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type up to.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale up your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
+      description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
       responses:
         '200':
           description: Success
@@ -4959,7 +4997,7 @@ paths:
     post:
       x-aws-operation-name: ListAllowedNodeTypeModifications
       operationId: POST ListAllowedNodeTypeModifications
-      description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type up to.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale up your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
+      description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
       responses:
         '200':
           description: Success
@@ -5707,10 +5745,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidVPCNetworkStateFault'
         '491':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '492':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '492':
+        '493':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -5883,10 +5925,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidVPCNetworkStateFault'
         '491':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '492':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '492':
+        '493':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -6036,10 +6082,14 @@ paths:
           schema:
             $ref: '#/definitions/NodeQuotaForCustomerExceededFault'
         '487':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '488':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '488':
+        '489':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -6138,10 +6188,14 @@ paths:
           schema:
             $ref: '#/definitions/NodeQuotaForCustomerExceededFault'
         '487':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '488':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '488':
+        '489':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -6796,10 +6850,14 @@ paths:
           schema:
             $ref: '#/definitions/TestFailoverNotAvailableFault'
         '486':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '487':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '487':
+        '488':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -6871,10 +6929,14 @@ paths:
           schema:
             $ref: '#/definitions/TestFailoverNotAvailableFault'
         '486':
+          description: InvalidKMSKeyFault
+          schema:
+            $ref: '#/definitions/InvalidKMSKeyFault'
+        '487':
           description: InvalidParameterValueException
           schema:
             $ref: '#/definitions/InvalidParameterValueException'
-        '487':
+        '488':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
@@ -7228,6 +7290,7 @@ definitions:
     properties:
       ReplicationGroup:
         $ref: '#/definitions/ReplicationGroup'
+  InvalidKMSKeyFault: {}
   AllowedNodeTypeModificationsMessage:
     type: object
     properties:
@@ -7771,6 +7834,9 @@ definitions:
       TargetBucket:
         $ref: '#/definitions/String'
         description: '<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.</p> <p>When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the target snapshot.
     description: Represents the input of a <code>CopySnapshotMessage</code> operation.
   Snapshot:
     type: object
@@ -7847,6 +7913,9 @@ definitions:
       NodeSnapshots:
         $ref: '#/definitions/NodeSnapshotList'
         description: A list of the cache nodes in the source cluster.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the snapshot.
     description: Represents a copy of an entire Redis cluster as of the time when the snapshot was taken.
   SecurityGroupIdsList:
     type: array
@@ -7863,7 +7932,7 @@ definitions:
     properties:
       CacheClusterId:
         $ref: '#/definitions/String'
-        description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+        description: '<p>The node group (shard) identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 50 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       ReplicationGroupId:
         $ref: '#/definitions/String'
         description: '<p>The ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.</p> <p>If the specified replication group is Multi-AZ enabled and the Availability Zone is not specified, the cluster is created in Availability Zones that provide the best spread of read replicas across Availability Zones.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
@@ -7994,7 +8063,7 @@ definitions:
     properties:
       ReplicationGroupId:
         $ref: '#/definitions/String'
-        description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+        description: '<p>The replication group identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>A name must contain from 1 to 40 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       ReplicationGroupDescription:
         $ref: '#/definitions/String'
         description: A user-created description for the replication group.
@@ -8072,10 +8141,13 @@ definitions:
         description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p> <code>AuthToken</code> can be specified only on replication groups where <code>TransitEncryptionEnabled</code> is <code>true</code>.</p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: ''/'', ''"'', or ''@''. </p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
       TransitEncryptionEnabled:
         $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code> or <code>4.x</code>, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
+        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p>This parameter is valid only if the <code>Engine</code> parameter is <code>redis</code>, the <code>EngineVersion</code> parameter is <code>3.2.6</code>, <code>4.x</code> or later, and the cluster is being created in an Amazon VPC.</p> <p>If you enable in-transit encryption, you must also specify a value for <code>CacheSubnetGroup</code>.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p> <important> <p>For HIPAA compliance, you must specify <code>TransitEncryptionEnabled</code> as <code>true</code>, an <code>AuthToken</code>, and a <code>CacheSubnetGroup</code>.</p> </important>'
       AtRestEncryptionEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A flag that enables encryption at rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created. To enable encryption at rest on a replication group you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the replication group. </p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the disk on the cluster.
     description: Represents the input of a <code>CreateReplicationGroup</code> operation.
   ReplicationGroup:
     type: object
@@ -8128,6 +8200,9 @@ definitions:
       AtRestEncryptionEnabled:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the disk in the cluster.
     description: Contains all of the attributes of a specific Redis replication group.
   CreateSnapshotMessage:
     type: object
@@ -8143,6 +8218,9 @@ definitions:
       SnapshotName:
         $ref: '#/definitions/String'
         description: A name for the snapshot being created.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The ID of the KMS key used to encrypt the snapshot.
     description: Represents the input of a <code>CreateSnapshot</code> operation.
   ReplicaConfigurationList:
     type: array

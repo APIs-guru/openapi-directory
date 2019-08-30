@@ -623,6 +623,11 @@ paths:
                 type: integer
                 minimum: 1
                 maximum: 10000
+              MaximumBatchingWindowInSeconds:
+                description: ''
+                type: integer
+                minimum: 0
+                maximum: 300
               StartingPosition:
                 description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
                 type: string
@@ -1148,6 +1153,11 @@ paths:
                 type: integer
                 minimum: 1
                 maximum: 10000
+              MaximumBatchingWindowInSeconds:
+                description: ''
+                type: integer
+                minimum: 0
+                maximum: 300
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -2654,6 +2664,8 @@ definitions:
       BatchSize:
         $ref: '#/definitions/BatchSize'
         description: The maximum number of items to retrieve in a single batch.
+      MaximumBatchingWindowInSeconds:
+        $ref: '#/definitions/MaximumBatchingWindowInSeconds'
       EventSourceArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the event source.
@@ -3265,6 +3277,10 @@ definitions:
         description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
   Enabled:
     type: boolean
+  MaximumBatchingWindowInSeconds:
+    type: integer
+    minimum: 0
+    maximum: 300
   EventSourcePosition:
     type: string
     enum:
@@ -3292,6 +3308,8 @@ definitions:
       BatchSize:
         $ref: '#/definitions/BatchSize'
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+      MaximumBatchingWindowInSeconds:
+        $ref: '#/definitions/MaximumBatchingWindowInSeconds'
       StartingPosition:
         $ref: '#/definitions/EventSourcePosition'
         description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
@@ -3798,6 +3816,8 @@ definitions:
       BatchSize:
         $ref: '#/definitions/BatchSize'
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+      MaximumBatchingWindowInSeconds:
+        $ref: '#/definitions/MaximumBatchingWindowInSeconds'
   UpdateFunctionCodeRequest:
     type: object
     properties:

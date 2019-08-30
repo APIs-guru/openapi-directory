@@ -298,7 +298,7 @@ paths:
   '/#X-Amz-Target=CodePipeline_20150709.CreatePipeline':
     post:
       operationId: CreatePipeline
-      description: Creates a pipeline.
+      description: '<p>Creates a pipeline.</p> <note> <p>In the pipeline structure, you must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2712,13 +2712,13 @@ definitions:
         description: The action declaration's name.
       actionTypeId:
         $ref: '#/definitions/ActionTypeId'
-        description: The configuration information for the action type.
+        description: Specifies the action type and the provider of the action.
       runOrder:
         $ref: '#/definitions/ActionRunOrder'
         description: The order in which actions are run.
       configuration:
         $ref: '#/definitions/ActionConfigurationMap'
-        description: The action declaration's configuration.
+        description: '<p>The action''s configuration. These are key-value pairs that specify input values for an action. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Action Structure Requirements in CodePipeline</a>. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html">Configuration Properties Reference</a> in the <i>AWS CloudFormation User Guide</i>. For template snippets with examples, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html">Using Parameter Override Functions with CodePipeline Pipelines</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows: </p> <p> <i>JSON:</i> </p> <p> <code>"Configuration" : { Key : Value },</code> </p>'
       outputArtifacts:
         $ref: '#/definitions/OutputArtifactList'
         description: 'The name or ID of the result of the action declaration, such as a test or build artifact.'
@@ -3180,7 +3180,7 @@ definitions:
     properties:
       id:
         $ref: '#/definitions/EncryptionKeyId'
-        description: 'The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.'
+        description: '<p>The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.</p> <note> <p>Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key.</p> </note>'
       type:
         $ref: '#/definitions/EncryptionKeyType'
         description: 'The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to ''KMS''.'
@@ -3200,7 +3200,7 @@ definitions:
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
         description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
-    description: The Amazon S3 bucket where artifacts are stored for the pipeline.
+    description: '<p>The Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
   ArtifactStoreMap:
     type: object
     additionalProperties:
@@ -3259,10 +3259,10 @@ definitions:
         description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no <code>actionRoleArn</code>, or to use to assume roles for actions with an <code>actionRoleArn</code>.'
       artifactStore:
         $ref: '#/definitions/ArtifactStore'
-        description: 'Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. '
+        description: '<p>Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
       artifactStores:
         $ref: '#/definitions/ArtifactStoreMap'
-        description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either <code>artifactStore</code> or <code>artifactStores</code>, not both.</p> <p>If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p>'
+        description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
       stages:
         $ref: '#/definitions/PipelineStageDeclarationList'
         description: The stage in which to perform the action.
@@ -3339,6 +3339,29 @@ definitions:
         $ref: '#/definitions/Percentage'
         description: 'The percentage of work completed on the action, represented on a scale of zero to one hundred percent.'
     description: The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline.
+  TriggerType:
+    type: string
+    enum:
+      - CreatePipeline
+      - StartPipelineExecution
+      - PollForSourceChanges
+      - Webhook
+      - CloudWatchEvent
+      - PutActionRevision
+  TriggerDetail:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  ExecutionTrigger:
+    type: object
+    properties:
+      triggerType:
+        $ref: '#/definitions/TriggerType'
+        description: 'The type of change-detection method, command, or user interaction that started a pipeline execution.'
+      triggerDetail:
+        $ref: '#/definitions/TriggerDetail'
+        description: 'Detail related to the event that started a pipeline execution, such as the webhook ARN of the webhook that triggered the pipeline execution or the user ARN for a user-initiated <code>start-pipeline-execution</code> CLI command.'
+    description: The interaction or event that started a pipeline execution.
   FailureType:
     type: string
     enum:
@@ -3663,6 +3686,9 @@ definitions:
       sourceRevisions:
         $ref: '#/definitions/SourceRevisionList'
         description: A list of the source artifact revisions that initiated a pipeline execution.
+      trigger:
+        $ref: '#/definitions/ExecutionTrigger'
+        description: 'The interaction or event that started a pipeline execution, such as automated change detection or a <code>StartPipelineExecution</code> API call.'
     description: Summary information about a pipeline execution.
   PipelineSummary:
     type: object
