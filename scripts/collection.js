@@ -1295,6 +1295,8 @@ process.on('exit', function() {
     for (var w of warnings) {
       console.warn(w);
     }
+  }
+  if (moved.length) {
     for (var m of moved) {
       console.info(m);
     }
