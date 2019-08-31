@@ -271,7 +271,7 @@ paths:
                 description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
                 type: boolean
               securityGroups:
-                description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+                description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
                 type: array
                 items:
                   $ref: '#/definitions/__string'
@@ -824,6 +824,11 @@ paths:
                   General:
                     $ref: '#/definitions/__boolean'
                     description: Enables general logging.
+              securityGroups:
+                description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
   '/v1/tags/{resource-arn}#tagKeys':
     delete:
       operationId: DeleteTags
@@ -1366,12 +1371,15 @@ definitions:
       PendingEngineVersion:
         $ref: '#/definitions/__string'
         description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+      PendingSecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: The list of pending security groups to authorize connections to brokers.
       PubliclyAccessible:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
@@ -1546,6 +1554,9 @@ definitions:
       Logs:
         $ref: '#/definitions/Logs'
         description: The list of information about logs to be enabled for the specified broker.
+      SecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
   UpdateConfigurationResponse:
     type: object
     properties:
@@ -1838,7 +1849,7 @@ definitions:
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
@@ -2050,6 +2061,9 @@ definitions:
       Logs:
         $ref: '#/definitions/Logs'
         description: Enables Amazon CloudWatch logging for brokers.
+      SecurityGroups:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.'
     description: Updates the broker using the specified properties.
   UpdateConfigurationRequest:
     type: object

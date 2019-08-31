@@ -2019,6 +2019,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateClusterSettings':
+    post:
+      operationId: UpdateClusterSettings
+      description: Modifies the settings to use for a cluster.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateClusterSettingsResponse'
+        '480':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ClusterNotFoundException
+          schema:
+            $ref: '#/definitions/ClusterNotFoundException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateClusterSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AmazonEC2ContainerServiceV20141113.UpdateClusterSettings
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateContainerAgent':
     post:
       operationId: UpdateContainerAgent
@@ -3647,6 +3692,23 @@ definitions:
       tagKeys:
         $ref: '#/definitions/TagKeys'
         description: The keys of the tags to be removed.
+  UpdateClusterSettingsResponse:
+    type: object
+    properties:
+      cluster:
+        $ref: '#/definitions/Cluster'
+  UpdateClusterSettingsRequest:
+    type: object
+    required:
+      - cluster
+      - settings
+    properties:
+      cluster:
+        $ref: '#/definitions/String'
+        description: The name of the cluster to modify the settings for.
+      settings:
+        $ref: '#/definitions/ClusterSettings'
+        description: 'The setting to use by default for a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the <code>containerInsights</code> value set with <a>PutAccountSetting</a> or <a>PutAccountSettingDefault</a>.'
   UpdateContainerAgentResponse:
     type: object
     properties:
@@ -4002,6 +4064,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  FirelensConfiguration:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/FirelensConfigurationType'
+        description: The log router to use. The valid values are <code>fluentd</code> or <code>fluentbit</code>.
+      options:
+        $ref: '#/definitions/FirelensConfigurationOptionsMap'
+        description: 'The options to use when configuring the log router. This field is optional and can be used to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is <code>"options":{"enable-ecs-log-metadata":"true|false"}</code>.'
+    description: The FireLens configuration for the container. This is used to specify and configure a log router for container logs.
   Container:
     type: object
     properties:
@@ -4047,6 +4121,9 @@ definitions:
       gpuIds:
         $ref: '#/definitions/GpuIds'
         description: The IDs of each GPU assigned to the container.
+      firelensConfiguration:
+        $ref: '#/definitions/FirelensConfiguration'
+        description: The FireLens configuration for the container.
     description: A Docker container that is part of a task.
   ContainerCondition:
     type: string
@@ -4283,6 +4360,9 @@ definitions:
       resourceRequirements:
         $ref: '#/definitions/ResourceRequirements'
         description: The type and amount of a resource to assign to a container. The only supported resource is a GPU.
+      firelensConfiguration:
+        $ref: '#/definitions/FirelensConfiguration'
+        description: The FireLens configuration for the container. This is used to specify and configure a log router for container logs.
     description: Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
   ContainerDefinitions:
     type: array
@@ -4906,6 +4986,15 @@ definitions:
         $ref: '#/definitions/String'
         description: The reason for the failure.
     description: A failed resource.
+  FirelensConfigurationType:
+    type: string
+    enum:
+      - fluentd
+      - fluentbit
+  FirelensConfigurationOptionsMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/String'
   HostEntry:
     type: object
     required:
@@ -4992,6 +5081,7 @@ definitions:
       - fluentd
       - awslogs
       - splunk
+      - awsfirelens
   LogConfigurationOptionsMap:
     type: object
     additionalProperties:
