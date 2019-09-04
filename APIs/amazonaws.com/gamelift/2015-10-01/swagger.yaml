@@ -3675,6 +3675,8 @@ definitions:
       InstanceRoleArn:
         $ref: '#/definitions/NonEmptyString'
         description: 'Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role''s ARN using the <a href="https://console.aws.amazon.com/iam/">IAM dashboard</a> in the AWS Management Console. Learn more about using on-box credentials for your game servers at <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html"> Access external resources from a game server</a>.'
+      CertificateConfiguration:
+        $ref: '#/definitions/CertificateConfiguration'
     description: Represents the input for a request action.
   CreateGameSessionOutput:
     type: object
@@ -5371,6 +5373,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Build'
+  CertificateType:
+    type: string
+    enum:
+      - DISABLED
+      - GENERATED
+  CertificateConfiguration:
+    type: object
+    required:
+      - CertificateType
+    properties:
+      CertificateType:
+        $ref: '#/definitions/CertificateType'
   ComparisonOperatorType:
     type: string
     enum:
@@ -5540,6 +5554,8 @@ definitions:
       InstanceRoleArn:
         $ref: '#/definitions/NonEmptyString'
         description: 'Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role''s ARN using the <a href="https://console.aws.amazon.com/iam/">IAM dashboard</a> in the AWS Management Console. Learn more about using on-box credentials for your game servers at <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html"> Access external resources from a game server</a>.'
+      CertificateConfiguration:
+        $ref: '#/definitions/CertificateConfiguration'
     description: '<p>General properties describing a fleet.</p> <ul> <li> <p> <a>CreateFleet</a> </p> </li> <li> <p> <a>ListFleets</a> </p> </li> <li> <p> <a>DeleteFleet</a> </p> </li> <li> <p>Describe fleets:</p> <ul> <li> <p> <a>DescribeFleetAttributes</a> </p> </li> <li> <p> <a>DescribeFleetCapacity</a> </p> </li> <li> <p> <a>DescribeFleetPortSettings</a> </p> </li> <li> <p> <a>DescribeFleetUtilization</a> </p> </li> <li> <p> <a>DescribeRuntimeConfiguration</a> </p> </li> <li> <p> <a>DescribeEC2InstanceLimits</a> </p> </li> <li> <p> <a>DescribeFleetEvents</a> </p> </li> </ul> </li> <li> <p>Update fleets:</p> <ul> <li> <p> <a>UpdateFleetAttributes</a> </p> </li> <li> <p> <a>UpdateFleetCapacity</a> </p> </li> <li> <p> <a>UpdateFleetPortSettings</a> </p> </li> <li> <p> <a>UpdateRuntimeConfiguration</a> </p> </li> </ul> </li> <li> <p>Manage fleet actions:</p> <ul> <li> <p> <a>StartFleetActions</a> </p> </li> <li> <p> <a>StopFleetActions</a> </p> </li> </ul> </li> </ul>'
   FleetId:
     type: string
@@ -5597,6 +5613,8 @@ definitions:
       IpAddress:
         $ref: '#/definitions/IpAddress'
         description: 'IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.'
+      DnsName:
+        $ref: '#/definitions/DnsName'
       Port:
         $ref: '#/definitions/PortNumber'
         description: 'Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.'
@@ -5762,6 +5780,8 @@ definitions:
       IpAddress:
         $ref: '#/definitions/IpAddress'
         description: 'IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.'
+      DnsName:
+        $ref: '#/definitions/DnsName'
       Port:
         $ref: '#/definitions/PortNumber'
         description: 'Port number for the game session. To connect to a Amazon GameLift server process, an app needs both the IP address and port number.'
@@ -5900,6 +5920,8 @@ definitions:
       IpAddress:
         $ref: '#/definitions/IpAddress'
         description: 'IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is <code>FULFILLED</code>). '
+      DnsName:
+        $ref: '#/definitions/DnsName'
       Port:
         $ref: '#/definitions/PortNumber'
         description: 'Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is <code>FULFILLED</code>).'
@@ -5997,6 +6019,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DesiredPlayerSession'
+  DnsName:
+    type: string
   Double:
     type: number
     format: double
@@ -6218,6 +6242,8 @@ definitions:
       IpAddress:
         $ref: '#/definitions/StringModel'
         description: 'IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.'
+      DnsName:
+        $ref: '#/definitions/DnsName'
       Port:
         $ref: '#/definitions/PositiveInteger'
         description: 'Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.'
@@ -6242,6 +6268,7 @@ definitions:
       - FULFILLED
       - CANCELLED
       - TIMED_OUT
+      - FAILED
   PlayerLatencyList:
     type: array
     items:
@@ -6294,6 +6321,8 @@ definitions:
       IpAddress:
         $ref: '#/definitions/IpAddress'
         description: IP address assigned to the instance.
+      DnsName:
+        $ref: '#/definitions/DnsName'
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
         description: 'Operating system that is running on this instance. '
