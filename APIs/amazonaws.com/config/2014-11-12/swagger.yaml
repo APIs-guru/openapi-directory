@@ -437,7 +437,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.DeleteOrganizationConfigRule':
     post:
       operationId: DeleteOrganizationConfigRule
-      description: ''
+      description: <p>Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule.</p> <p>AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.</p>
       responses:
         '200':
           description: Success
@@ -541,6 +541,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.DeleteRemediationExceptions':
+    post:
+      operationId: DeleteRemediationExceptions
+      description: Deletes one or more remediation exceptions mentioned in the resource keys.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRemediationExceptionsResponse'
+        '480':
+          description: NoSuchRemediationExceptionException
+          schema:
+            $ref: '#/definitions/NoSuchRemediationExceptionException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRemediationExceptionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.DeleteRemediationExceptions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.DeleteRetentionConfiguration':
     post:
       operationId: DeleteRetentionConfiguration
@@ -620,7 +653,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.DescribeAggregateComplianceByConfigRules':
     post:
       operationId: DescribeAggregateComplianceByConfigRules
-      description: '<p>Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. </p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>'
+      description: '<p>Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. </p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1084,7 +1117,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRuleStatuses':
     post:
       operationId: DescribeOrganizationConfigRuleStatuses
-      description: ''
+      description: '<p>Provides organization config rule deployment status for an organization.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1129,7 +1162,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRules':
     post:
       operationId: DescribeOrganizationConfigRules
-      description: ''
+      description: '<p>Returns a list of organization config rules.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1241,6 +1274,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.DescribeRemediationExceptions':
+    post:
+      operationId: DescribeRemediationExceptions
+      description: '<p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response. </p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRemediationExceptionsResponse'
+        '480':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRemediationExceptionsRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.DescribeRemediationExceptions
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=StarlingDoveService.DescribeRemediationExecutionStatus':
     post:
       operationId: DescribeRemediationExecutionStatus
@@ -1254,6 +1334,10 @@ paths:
           description: NoSuchRemediationConfigurationException
           schema:
             $ref: '#/definitions/NoSuchRemediationConfigurationException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
       parameters:
         - name: body
           in: body
@@ -1328,7 +1412,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.GetAggregateComplianceDetailsByConfigRule':
     post:
       operationId: GetAggregateComplianceDetailsByConfigRule
-      description: '<p>Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule. </p> <note> <p>The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page.</p> </note>'
+      description: '<p>Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule. </p> <note> <p>The results can return an empty result page. But if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1680,7 +1764,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.GetOrganizationConfigRuleDetailedStatus':
     post:
       operationId: GetOrganizationConfigRuleDetailedStatus
-      description: ''
+      description: <p>Returns detailed status for each member account within an organization for a given organization config rule.</p> <note> <p>Only a master account can call this API.</p> </note>
       responses:
         '200':
           description: Success
@@ -2195,7 +2279,7 @@ paths:
   '/#X-Amz-Target=StarlingDoveService.PutOrganizationConfigRule':
     post:
       operationId: PutOrganizationConfigRule
-      description: ''
+      description: '<p>Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule.</p> <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <p>You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the <code>PutOrganizationConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>RuleIdentifier</code> key.</p> <p>The maximum number of organization config rules that AWS Config supports is 150.</p> <note> <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2282,6 +2366,39 @@ paths:
           type: string
           enum:
             - StarlingDoveService.PutRemediationConfigurations
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StarlingDoveService.PutRemediationExceptions':
+    post:
+      operationId: PutRemediationExceptions
+      description: 'A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutRemediationExceptionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRemediationExceptionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - StarlingDoveService.PutRemediationExceptions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -2458,10 +2575,14 @@ paths:
           schema:
             $ref: '#/definitions/StartRemediationExecutionResponse'
         '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
           description: InsufficientPermissionsException
           schema:
             $ref: '#/definitions/InsufficientPermissionsException'
-        '481':
+        '482':
           description: NoSuchRemediationConfigurationException
           schema:
             $ref: '#/definitions/NoSuchRemediationConfigurationException'
@@ -2705,6 +2826,7 @@ definitions:
     properties:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name of organization config rule that you want to delete.
   NoSuchOrganizationConfigRuleException: {}
   OrganizationAccessDeniedException: {}
   DeletePendingAggregationRequestRequest:
@@ -2728,13 +2850,32 @@ definitions:
       - ConfigRuleName
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/ConfigRuleName'
         description: The name of the AWS Config rule for which you want to delete remediation configuration.
       ResourceType:
         $ref: '#/definitions/String'
         description: The type of a resource.
   NoSuchRemediationConfigurationException: {}
   RemediationInProgressException: {}
+  DeleteRemediationExceptionsResponse:
+    type: object
+    properties:
+      FailedBatches:
+        $ref: '#/definitions/FailedDeleteRemediationExceptionsBatches'
+        description: Returns a list of failed delete remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.
+  DeleteRemediationExceptionsRequest:
+    type: object
+    required:
+      - ConfigRuleName
+      - ResourceKeys
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/ConfigRuleName'
+        description: The name of the AWS Config rule for which you want to delete remediation exception configuration.
+      ResourceKeys:
+        $ref: '#/definitions/RemediationExceptionResourceKeys'
+        description: 'An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. '
+  NoSuchRemediationExceptionException: {}
   DeleteRetentionConfigurationRequest:
     type: object
     required:
@@ -2769,7 +2910,7 @@ definitions:
         description: Returns a list of AggregateComplianceByConfigRule object.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeAggregateComplianceByConfigRulesRequest:
     type: object
     required:
@@ -2786,7 +2927,7 @@ definitions:
         description: 'The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   InvalidLimitException: {}
   InvalidNextTokenException: {}
   DescribeAggregationAuthorizationsResponse:
@@ -2797,7 +2938,7 @@ definitions:
         description: Returns a list of authorizations granted to various aggregator accounts and regions.
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeAggregationAuthorizationsRequest:
     type: object
     properties:
@@ -2806,7 +2947,7 @@ definitions:
         description: 'The maximum number of AggregationAuthorizations returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeComplianceByConfigRuleResponse:
     type: object
     properties:
@@ -2910,7 +3051,7 @@ definitions:
         description: 'Returns an AggregatedSourceStatus object. '
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeConfigurationAggregatorSourcesStatusRequest:
     type: object
     required:
@@ -2924,7 +3065,7 @@ definitions:
         description: <p>Filters the status type.</p> <ul> <li> <p>Valid value FAILED indicates errors while moving data.</p> </li> <li> <p>Valid value SUCCEEDED indicates the data was successfully moved.</p> </li> <li> <p>Valid value OUTDATED indicates the data is not the most recent.</p> </li> </ul>
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
       Limit:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of AggregatorSourceStatus returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
@@ -2936,7 +3077,7 @@ definitions:
         description: Returns a ConfigurationAggregators object.
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeConfigurationAggregatorsRequest:
     type: object
     properties:
@@ -2945,7 +3086,7 @@ definitions:
         description: The name of the configuration aggregators.
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
       Limit:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of configuration aggregators returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
@@ -3010,33 +3151,43 @@ definitions:
     properties:
       OrganizationConfigRuleStatuses:
         $ref: '#/definitions/OrganizationConfigRuleStatuses'
+        description: A list of <code>OrganizationConfigRuleStatus</code> objects.
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   DescribeOrganizationConfigRuleStatusesRequest:
     type: object
     properties:
       OrganizationConfigRuleNames:
         $ref: '#/definitions/OrganizationConfigRuleNames'
+        description: 'The names of organization config rules for which you want status details. If you do not specify any names, AWS Config returns details for all your organization AWS Confg rules.'
       Limit:
         $ref: '#/definitions/CosmosPageLimit'
+        description: 'The maximum number of <code>OrganizationConfigRuleStatuses</code> returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.'
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   DescribeOrganizationConfigRulesResponse:
     type: object
     properties:
       OrganizationConfigRules:
         $ref: '#/definitions/OrganizationConfigRules'
+        description: Retuns a list <code>OrganizationConfigRule</code> objects.
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   DescribeOrganizationConfigRulesRequest:
     type: object
     properties:
       OrganizationConfigRuleNames:
         $ref: '#/definitions/OrganizationConfigRuleNames'
+        description: 'The names of organization config rules for which you want details. If you do not specify any names, AWS Config returns details for all your organization config rules.'
       Limit:
         $ref: '#/definitions/CosmosPageLimit'
+        description: 'The maximum number of organization config rules returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.'
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   DescribePendingAggregationRequestsResponse:
     type: object
     properties:
@@ -3045,7 +3196,7 @@ definitions:
         description: Returns a PendingAggregationRequests object.
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribePendingAggregationRequestsRequest:
     type: object
     properties:
@@ -3054,7 +3205,7 @@ definitions:
         description: 'The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
         $ref: '#/definitions/String'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeRemediationConfigurationsResponse:
     type: object
     properties:
@@ -3069,6 +3220,32 @@ definitions:
       ConfigRuleNames:
         $ref: '#/definitions/ConfigRuleNames'
         description: 'A list of AWS Config rule names of remediation configurations for which you want details. '
+  DescribeRemediationExceptionsResponse:
+    type: object
+    properties:
+      RemediationExceptions:
+        $ref: '#/definitions/RemediationExceptions'
+        description: Returns a list of remediation exception objects.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.
+  DescribeRemediationExceptionsRequest:
+    type: object
+    required:
+      - ConfigRuleName
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/ConfigRuleName'
+        description: The name of the AWS Config rule.
+      ResourceKeys:
+        $ref: '#/definitions/RemediationExceptionResourceKeys'
+        description: 'An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. '
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: 'The maximum number of RemediationExceptionResourceKey returned on each page. The default is 25. If you specify 0, AWS Config uses the default.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.
   DescribeRemediationExecutionStatusResponse:
     type: object
     properties:
@@ -3076,7 +3253,7 @@ definitions:
         $ref: '#/definitions/RemediationExecutionStatuses'
         description: Returns a list of remediation execution statuses objects.
       NextToken:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/String'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeRemediationExecutionStatusRequest:
     type: object
@@ -3084,7 +3261,7 @@ definitions:
       - ConfigRuleName
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/ConfigRuleName'
         description: A list of AWS Config rule names.
       ResourceKeys:
         $ref: '#/definitions/ResourceKeys'
@@ -3093,7 +3270,7 @@ definitions:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. '
       NextToken:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/String'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeRetentionConfigurationsResponse:
     type: object
@@ -3121,7 +3298,7 @@ definitions:
         description: Returns an AggregateEvaluationResults object.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateComplianceDetailsByConfigRuleRequest:
     type: object
     required:
@@ -3150,7 +3327,7 @@ definitions:
         description: 'The maximum number of evaluation results returned on each page. The default is 50. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateConfigRuleComplianceSummaryResponse:
     type: object
     properties:
@@ -3162,7 +3339,7 @@ definitions:
         description: Returns a list of AggregateComplianceCounts object.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateConfigRuleComplianceSummaryRequest:
     type: object
     required:
@@ -3182,7 +3359,7 @@ definitions:
         description: 'The maximum number of evaluation results returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateDiscoveredResourceCountsResponse:
     type: object
     required:
@@ -3347,8 +3524,10 @@ definitions:
     properties:
       OrganizationConfigRuleDetailedStatus:
         $ref: '#/definitions/OrganizationConfigRuleDetailedStatus'
+        description: A list of <code>MemberAccountStatus</code> objects.
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   GetOrganizationConfigRuleDetailedStatusRequest:
     type: object
     required:
@@ -3356,12 +3535,16 @@ definitions:
     properties:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name of organization config rule for which you want status details for member accounts.
       Filters:
         $ref: '#/definitions/StatusDetailFilters'
+        description: A <code>StatusDetailFilters</code> object.
       Limit:
         $ref: '#/definitions/CosmosPageLimit'
+        description: 'The maximum number of <code>OrganizationConfigRuleDetailedStatus</code> returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100.'
       NextToken:
         $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   GetResourceConfigHistoryResponse:
     type: object
     properties:
@@ -3473,7 +3656,7 @@ definitions:
         description: The tags for the resource.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. '
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   ListTagsForResourceRequest:
     type: object
     required:
@@ -3487,7 +3670,7 @@ definitions:
         description: 'The maximum number of tags returned on each page. The limit maximum is 50. You cannot specify a number greater than 50. If you specify 0, AWS Config uses the default. '
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: 'The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. '
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   ResourceNotFoundException: {}
   PutAggregationAuthorizationResponse:
     type: object
@@ -3509,6 +3692,7 @@ definitions:
         description: The region authorized to collect aggregated data.
       Tags:
         $ref: '#/definitions/TagsList'
+        description: An array of tag object.
   PutConfigRuleRequest:
     type: object
     required:
@@ -3519,6 +3703,7 @@ definitions:
         description: The rule that you want to add to your account.
       Tags:
         $ref: '#/definitions/TagsList'
+        description: An array of tag object.
   MaxNumberOfConfigRulesExceededException: {}
   InsufficientPermissionsException: {}
   PutConfigurationAggregatorResponse:
@@ -3543,6 +3728,7 @@ definitions:
         description: An OrganizationAggregationSource object.
       Tags:
         $ref: '#/definitions/TagsList'
+        description: An array of tag object.
   LimitExceededException: {}
   InvalidRoleException: {}
   NoAvailableOrganizationException: {}
@@ -3602,6 +3788,7 @@ definitions:
     properties:
       OrganizationConfigRuleArn:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: The Amazon Resource Name (ARN) of an organization config rule.
   PutOrganizationConfigRuleRequest:
     type: object
     required:
@@ -3609,12 +3796,16 @@ definitions:
     properties:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name that you assign to an organization config rule.
       OrganizationManagedRuleMetadata:
         $ref: '#/definitions/OrganizationManagedRuleMetadata'
+        description: 'An <code>OrganizationManagedRuleMetadata</code> object. '
       OrganizationCustomRuleMetadata:
         $ref: '#/definitions/OrganizationCustomRuleMetadata'
+        description: An <code>OrganizationCustomRuleMetadata</code> object.
       ExcludedAccounts:
         $ref: '#/definitions/ExcludedAccounts'
+        description: A comma-separated list of accounts that you want to exclude from an organization config rule.
   MaxNumberOfOrganizationConfigRulesExceededException: {}
   PutRemediationConfigurationsResponse:
     type: object
@@ -3630,6 +3821,30 @@ definitions:
       RemediationConfigurations:
         $ref: '#/definitions/RemediationConfigurations'
         description: A list of remediation configuration objects.
+  PutRemediationExceptionsResponse:
+    type: object
+    properties:
+      FailedBatches:
+        $ref: '#/definitions/FailedRemediationExceptionBatches'
+        description: Returns a list of failed remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.
+  PutRemediationExceptionsRequest:
+    type: object
+    required:
+      - ConfigRuleName
+      - ResourceKeys
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/ConfigRuleName'
+        description: The name of the AWS Config rule for which you want to create remediation exception.
+      ResourceKeys:
+        $ref: '#/definitions/RemediationExceptionResourceKeys'
+        description: 'An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. '
+      Message:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: The message contains an explanation of the exception.
+      ExpirationTime:
+        $ref: '#/definitions/Date'
+        description: The exception is automatically deleted after the expiration date.
   PutRetentionConfigurationResponse:
     type: object
     properties:
@@ -3709,7 +3924,7 @@ definitions:
       - ResourceKeys
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/ConfigRuleName'
         description: The list of names of AWS Config rules that you want to run remediation execution for.
       ResourceKeys:
         $ref: '#/definitions/ResourceKeys'
@@ -3788,8 +4003,9 @@ definitions:
     maxItems: 1
   ConfigRuleName:
     type: string
+    pattern: .*\S.*
     minLength: 1
-    maxLength: 64
+    maxLength: 128
   Compliance:
     type: object
     properties:
@@ -3926,55 +4142,81 @@ definitions:
       - 'AWS::EC2::VPC'
       - 'AWS::EC2::VPNConnection'
       - 'AWS::EC2::VPNGateway'
+      - 'AWS::EC2::RegisteredHAInstance'
+      - 'AWS::EC2::NatGateway'
+      - 'AWS::EC2::EgressOnlyInternetGateway'
+      - 'AWS::EC2::VPCEndpoint'
+      - 'AWS::EC2::VPCEndpointService'
+      - 'AWS::EC2::FlowLog'
+      - 'AWS::EC2::VPCPeeringConnection'
       - 'AWS::IAM::Group'
       - 'AWS::IAM::Policy'
       - 'AWS::IAM::Role'
       - 'AWS::IAM::User'
+      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
       - 'AWS::ACM::Certificate'
       - 'AWS::RDS::DBInstance'
+      - 'AWS::RDS::DBParameterGroup'
+      - 'AWS::RDS::DBOptionGroup'
       - 'AWS::RDS::DBSubnetGroup'
       - 'AWS::RDS::DBSecurityGroup'
       - 'AWS::RDS::DBSnapshot'
+      - 'AWS::RDS::DBCluster'
+      - 'AWS::RDS::DBClusterParameterGroup'
+      - 'AWS::RDS::DBClusterSnapshot'
       - 'AWS::RDS::EventSubscription'
-      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
       - 'AWS::S3::Bucket'
-      - 'AWS::SSM::ManagedInstanceInventory'
+      - 'AWS::S3::AccountPublicAccessBlock'
       - 'AWS::Redshift::Cluster'
       - 'AWS::Redshift::ClusterSnapshot'
       - 'AWS::Redshift::ClusterParameterGroup'
       - 'AWS::Redshift::ClusterSecurityGroup'
       - 'AWS::Redshift::ClusterSubnetGroup'
       - 'AWS::Redshift::EventSubscription'
+      - 'AWS::SSM::ManagedInstanceInventory'
       - 'AWS::CloudWatch::Alarm'
       - 'AWS::CloudFormation::Stack'
-      - 'AWS::DynamoDB::Table'
+      - 'AWS::ElasticLoadBalancing::LoadBalancer'
       - 'AWS::AutoScaling::AutoScalingGroup'
       - 'AWS::AutoScaling::LaunchConfiguration'
       - 'AWS::AutoScaling::ScalingPolicy'
       - 'AWS::AutoScaling::ScheduledAction'
+      - 'AWS::DynamoDB::Table'
       - 'AWS::CodeBuild::Project'
       - 'AWS::WAF::RateBasedRule'
       - 'AWS::WAF::Rule'
+      - 'AWS::WAF::RuleGroup'
       - 'AWS::WAF::WebACL'
       - 'AWS::WAFRegional::RateBasedRule'
       - 'AWS::WAFRegional::Rule'
+      - 'AWS::WAFRegional::RuleGroup'
       - 'AWS::WAFRegional::WebACL'
       - 'AWS::CloudFront::Distribution'
       - 'AWS::CloudFront::StreamingDistribution'
-      - 'AWS::WAF::RuleGroup'
-      - 'AWS::WAFRegional::RuleGroup'
+      - 'AWS::Lambda::Alias'
       - 'AWS::Lambda::Function'
       - 'AWS::ElasticBeanstalk::Application'
       - 'AWS::ElasticBeanstalk::ApplicationVersion'
       - 'AWS::ElasticBeanstalk::Environment'
-      - 'AWS::ElasticLoadBalancing::LoadBalancer'
+      - 'AWS::MobileHub::Project'
       - 'AWS::XRay::EncryptionConfig'
       - 'AWS::SSM::AssociationCompliance'
       - 'AWS::SSM::PatchCompliance'
       - 'AWS::Shield::Protection'
       - 'AWS::ShieldRegional::Protection'
       - 'AWS::Config::ResourceCompliance'
+      - 'AWS::LicenseManager::LicenseConfiguration'
+      - 'AWS::ApiGateway::DomainName'
+      - 'AWS::ApiGateway::Method'
+      - 'AWS::ApiGateway::Stage'
+      - 'AWS::ApiGateway::RestApi'
+      - 'AWS::ApiGatewayV2::DomainName'
+      - 'AWS::ApiGatewayV2::Stage'
+      - 'AWS::ApiGatewayV2::Api'
       - 'AWS::CodePipeline::Pipeline'
+      - 'AWS::ServiceCatalog::CloudFormationProvisionedProduct'
+      - 'AWS::ServiceCatalog::CloudFormationProduct'
+      - 'AWS::ServiceCatalog::Portfolio'
   ResourceName:
     type: string
   AggregateResourceIdentifier:
@@ -4074,6 +4316,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
+  AutoRemediationAttemptSeconds:
+    type: integer
+    minimum: 1
+    maximum: 2678000
+  AutoRemediationAttempts:
+    type: integer
+    minimum: 1
+    maximum: 25
   AvailabilityZone:
     type: string
   Version:
@@ -4451,7 +4701,7 @@ definitions:
   ConfigRuleNames:
     type: array
     items:
-      $ref: '#/definitions/StringWithCharLimit64'
+      $ref: '#/definitions/ConfigRuleName'
     minItems: 0
     maxItems: 25
   ConfigRules:
@@ -4687,6 +4937,16 @@ definitions:
     type: integer
     minimum: 0
     maximum: 100
+  RemediationExceptionResourceKeys:
+    type: array
+    items:
+      $ref: '#/definitions/RemediationExceptionResourceKey'
+    minItems: 1
+    maxItems: 100
+  FailedDeleteRemediationExceptionsBatches:
+    type: array
+    items:
+      $ref: '#/definitions/FailedDeleteRemediationExceptionsBatch'
   RetentionConfigurationName:
     type: string
     pattern: '[\w\-]+'
@@ -4779,6 +5039,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RemediationConfiguration'
+    minItems: 0
+    maxItems: 25
+  RemediationExceptions:
+    type: array
+    items:
+      $ref: '#/definitions/RemediationException'
     minItems: 0
     maxItems: 25
   RemediationExecutionStatuses:
@@ -4884,10 +5150,37 @@ definitions:
       $ref: '#/definitions/AccountId'
     minItems: 0
     maxItems: 1000
+  SsmControls:
+    type: object
+    properties:
+      ConcurrentExecutionRatePercentage:
+        $ref: '#/definitions/Percentage'
+        description: 'The maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. You can specify a percentage, such as 10%. The default value is 10. '
+      ErrorPercentage:
+        $ref: '#/definitions/Percentage'
+        description: 'The percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. You can specify a percentage of errors, for example 10%. If you do not specifiy a percentage, the default is 50%. For example, if you set the ErrorPercentage to 40% for 10 non-compliant resources, then SSM stops running the automations when the fifth error is received. '
+    description: AWS Systems Manager (SSM) specific remediation controls.
+  ExecutionControls:
+    type: object
+    properties:
+      SsmControls:
+        $ref: '#/definitions/SsmControls'
+        description: A SsmControls object.
+    description: The controls that AWS Config uses for executing remediations.
   Expression:
     type: string
     minLength: 1
     maxLength: 4096
+  FailedDeleteRemediationExceptionsBatch:
+    type: object
+    properties:
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: 'Returns a failure message for delete remediation exception. For example, AWS Config creates an exception due to an internal error.'
+      FailedItems:
+        $ref: '#/definitions/RemediationExceptionResourceKeys'
+        description: Returns remediation exception resource key object of the failed items.
+    description: List of each of the failed delete remediation exceptions with specific reasons.
   FailedRemediationBatch:
     type: object
     properties:
@@ -4902,6 +5195,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FailedRemediationBatch'
+  FailedRemediationExceptionBatch:
+    type: object
+    properties:
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: 'Returns a failure message. For example, the auto-remediation has failed.'
+      FailedItems:
+        $ref: '#/definitions/RemediationExceptions'
+        description: Returns remediation exception resource key object of the failed items.
+    description: List of each of the failed remediation exceptions with specific reasons.
+  FailedRemediationExceptionBatches:
+    type: array
+    items:
+      $ref: '#/definitions/FailedRemediationExceptionBatch'
   FieldName:
     type: string
   FieldInfo:
@@ -4955,8 +5262,11 @@ definitions:
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
+        description: The 12-digit account ID of the member account within an organization.
       MemberAccountRuleStatus:
         $ref: '#/definitions/MemberAccountRuleStatus'
+        description: '<p>Indicates deployment status for config rule in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. </p> <p>AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account.</p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p> </li> <li> <p> <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p> </li> <li> <p> <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account.</p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> </ul>'
+    description: 'Status filter object to filter results based on specific member account ID or status type for an organization config rule. '
   OrganizationConfigRuleDetailedStatus:
     type: array
     items:
@@ -5030,16 +5340,23 @@ definitions:
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
+        description: The 12-digit account ID of a member account.
       ConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name of config rule deployed in the member account.
       MemberAccountRuleStatus:
         $ref: '#/definitions/MemberAccountRuleStatus'
+        description: '<p>Indicates deployment status for config rule in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. </p> <p> AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account. </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p> </li> <li> <p> <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p> </li> <li> <p> <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account. </p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> </ul>'
       ErrorCode:
         $ref: '#/definitions/String'
+        description: An error code that is returned when config rule creation or deletion failed in the member account.
       ErrorMessage:
         $ref: '#/definitions/String'
+        description: An error message indicating that config rule account creation or deletion has failed due to an error in the member account.
       LastUpdateTime:
         $ref: '#/definitions/Date'
+        description: The timestamp of the last status update.
+    description: 'Organization config rule creation or deletion status in each member account. This includes the name of the rule, the status, error code and error message when the rule creation or deletion failed.'
   MessageType:
     type: string
     enum:
@@ -5056,20 +5373,29 @@ definitions:
     properties:
       Description:
         $ref: '#/definitions/StringWithCharLimit256Min0'
+        description: The description that you provide for organization config rule.
       RuleIdentifier:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: 'For organization config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.'
       InputParameters:
         $ref: '#/definitions/StringWithCharLimit2048'
+        description: 'A string, in JSON format, that is passed to organization config rule Lambda function.'
       MaximumExecutionFrequency:
         $ref: '#/definitions/MaximumExecutionFrequency'
+        description: '<p>The maximum frequency with which AWS Config runs evaluations for a rule. You are using an AWS managed rule that is triggered at a periodic frequency.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>'
       ResourceTypesScope:
         $ref: '#/definitions/ResourceTypesScope'
+        description: The type of the AWS resource that was evaluated.
       ResourceIdScope:
         $ref: '#/definitions/StringWithCharLimit768'
+        description: The ID of the AWS resource that was evaluated.
       TagKeyScope:
         $ref: '#/definitions/StringWithCharLimit128'
+        description: 'One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. '
       TagValueScope:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+    description: An object that specifies organization managed rule metadata such as resource type and ID of AWS resource along with the rule identifier. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic.
   OrganizationCustomRuleMetadata:
     type: object
     required:
@@ -5078,22 +5404,32 @@ definitions:
     properties:
       Description:
         $ref: '#/definitions/StringWithCharLimit256Min0'
+        description: The description that you provide for organization config rule.
       LambdaFunctionArn:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: The lambda function ARN.
       OrganizationConfigRuleTriggerTypes:
         $ref: '#/definitions/OrganizationConfigRuleTriggerTypes'
+        description: '<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> </ul>'
       InputParameters:
         $ref: '#/definitions/StringWithCharLimit2048'
+        description: 'A string, in JSON format, that is passed to organization config rule Lambda function.'
       MaximumExecutionFrequency:
         $ref: '#/definitions/MaximumExecutionFrequency'
+        description: '<p>The maximum frequency with which AWS Config runs evaluations for a rule. Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>'
       ResourceTypesScope:
         $ref: '#/definitions/ResourceTypesScope'
+        description: The type of the AWS resource that was evaluated.
       ResourceIdScope:
         $ref: '#/definitions/StringWithCharLimit768'
+        description: The ID of the AWS resource that was evaluated.
       TagKeyScope:
         $ref: '#/definitions/StringWithCharLimit128'
+        description: 'One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. '
       TagValueScope:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: 'The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). '
+    description: 'An object that specifies organization custom rule metadata such as resource type, resource ID of AWS resource, Lamdba function ARN, and organization trigger types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic.'
   OrganizationConfigRule:
     type: object
     required:
@@ -5102,16 +5438,23 @@ definitions:
     properties:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name that you assign to organization config rule.
       OrganizationConfigRuleArn:
         $ref: '#/definitions/StringWithCharLimit256'
+        description: The Amazon Resource Name (ARN) of organization config rule.
       OrganizationManagedRuleMetadata:
         $ref: '#/definitions/OrganizationManagedRuleMetadata'
+        description: An <code>OrganizationManagedRuleMetadata</code> object.
       OrganizationCustomRuleMetadata:
         $ref: '#/definitions/OrganizationCustomRuleMetadata'
+        description: An <code>OrganizationCustomRuleMetadata</code> object.
       ExcludedAccounts:
         $ref: '#/definitions/ExcludedAccounts'
+        description: A comma-separated list of accounts excluded from organization config rule.
       LastUpdateTime:
         $ref: '#/definitions/Date'
+        description: The timestamp of the last update.
+    description: An organization config rule that has information about config rules that AWS Config creates in member accounts.
   OrganizationRuleStatus:
     type: string
     enum:
@@ -5132,14 +5475,20 @@ definitions:
     properties:
       OrganizationConfigRuleName:
         $ref: '#/definitions/StringWithCharLimit64'
+        description: The name that you assign to organization config rule.
       OrganizationRuleStatus:
         $ref: '#/definitions/OrganizationRuleStatus'
+        description: '<p>Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <p>AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when an organization config rule has been successfully created in all the member accounts. </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when an organization config rule creation is in progress.</p> </li> <li> <p> <code>CREATE_FAILED</code> when an organization config rule creation failed in one or more member accounts within that organization.</p> </li> <li> <p> <code>DELETE_FAILED</code> when an organization config rule deletion failed in one or more member accounts within that organization.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when an organization config rule deletion is in progress.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when an organization config rule has been successfully deleted from all the member accounts.</p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when an organization config rule has been successfully updated in all the member accounts.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when an organization config rule update is in progress.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when an organization config rule update failed in one or more member accounts within that organization.</p> </li> </ul>'
       ErrorCode:
         $ref: '#/definitions/String'
+        description: An error code that is returned when organization config rule creation or deletion has failed.
       ErrorMessage:
         $ref: '#/definitions/String'
+        description: An error message indicating that organization config rule creation or deletion failed due to an error.
       LastUpdateTime:
         $ref: '#/definitions/Date'
+        description: The timestamp of the last update.
+    description: Returns the status for an organization config rule in an organization.
   OrganizationConfigRuleTriggerType:
     type: string
     enum:
@@ -5187,6 +5536,10 @@ definitions:
         $ref: '#/definitions/AwsRegion'
         description: 'The region requesting to aggregate data. '
     description: An object that represents the account ID and region of an aggregator account that is requesting authorization but is not yet authorized.
+  Percentage:
+    type: integer
+    minimum: 1
+    maximum: 100
   TagsList:
     type: array
     items:
@@ -5265,7 +5618,7 @@ definitions:
       - TargetId
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/ConfigRuleName'
         description: The name of the AWS Config rule.
       TargetType:
         $ref: '#/definitions/RemediationTargetType'
@@ -5282,7 +5635,58 @@ definitions:
       ResourceType:
         $ref: '#/definitions/String'
         description: 'The type of a resource. '
+      Automatic:
+        $ref: '#/definitions/Boolean'
+        description: The remediation is triggered automatically.
+      ExecutionControls:
+        $ref: '#/definitions/ExecutionControls'
+        description: An ExecutionControls object.
+      MaximumAutomaticAttempts:
+        $ref: '#/definitions/AutoRemediationAttempts'
+        description: '<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception after the 5th failed attempt within 50 seconds.</p>'
+      RetryAttemptSeconds:
+        $ref: '#/definitions/AutoRemediationAttemptSeconds'
+        description: '<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception. </p>'
+      Arn:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: Amazon Resource Name (ARN) of remediation configuration.
+      CreatedByService:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: 'Name of the service that owns the service linked rule, if applicable.'
     description: 'An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.'
+  RemediationException:
+    type: object
+    required:
+      - ConfigRuleName
+      - ResourceType
+      - ResourceId
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/ConfigRuleName'
+        description: The name of the AWS Config rule.
+      ResourceType:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: The type of a resource.
+      ResourceId:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: 'The ID of the resource (for example., sg-xxxxxx).'
+      Message:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: An explanation of an remediation exception.
+      ExpirationTime:
+        $ref: '#/definitions/Date'
+        description: The time when the remediation exception will be deleted.
+    description: 'An object that represents the details about the remediation exception. The details include the rule name, an explanation of an exception, the time when the exception will be deleted, the resource ID, and resource type. '
+  RemediationExceptionResourceKey:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: The type of a resource.
+      ResourceId:
+        $ref: '#/definitions/StringWithCharLimit1024'
+        description: 'The ID of the resource (for example., sg-xxxxxx).'
+    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID. '
   RemediationExecutionState:
     type: string
     enum:
@@ -5352,6 +5756,8 @@ definitions:
     description: Name of the step from the SSM document.
   ResourceValue:
     type: object
+    required:
+      - Value
     properties:
       Value:
         $ref: '#/definitions/ResourceValueType'
@@ -5359,6 +5765,8 @@ definitions:
     description: The dynamic value of the resource.
   StaticValue:
     type: object
+    required:
+      - Values
     properties:
       Values:
         $ref: '#/definitions/StaticParameterValues'

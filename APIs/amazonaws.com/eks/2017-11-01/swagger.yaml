@@ -726,6 +726,13 @@ definitions:
         $ref: '#/definitions/LogSetups'
         description: The cluster control plane logging configuration for your cluster.
     description: An object representing the logging configuration for resources in your cluster.
+  Identity:
+    type: object
+    properties:
+      oidc:
+        $ref: '#/definitions/OIDC'
+        description: 'The <a href="https://openid.net/connect/">OpenID Connect</a> identity provider information for the cluster.'
+    description: An object representing an identity provider for authentication credentials.
   ClusterStatus:
     type: string
     enum:
@@ -760,6 +767,9 @@ definitions:
       logging:
         $ref: '#/definitions/Logging'
         description: The logging configuration for your cluster.
+      identity:
+        $ref: '#/definitions/Identity'
+        description: The identity provider information for the cluster.
       status:
         $ref: '#/definitions/ClusterStatus'
         description: The current status of the cluster.
@@ -878,6 +888,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ErrorDetail'
+  OIDC:
+    type: object
+    properties:
+      issuer:
+        $ref: '#/definitions/String'
+        description: The issuer URL for the OpenID Connect identity provider.
+    description: 'An object representing the <a href="https://openid.net/connect/">OpenID Connect</a> identity provider information for the cluster.'
   ListClustersRequestMaxResults:
     type: integer
     minimum: 1
