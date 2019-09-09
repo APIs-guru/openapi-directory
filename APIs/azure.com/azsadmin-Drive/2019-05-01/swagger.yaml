@@ -269,48 +269,63 @@ definitions:
     properties:
       action:
         description: Detailed recommended action for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.
+        readOnly: true
         type: string
       capacityGB:
         description: Total capacity in GB of the drive.
         format: int32
+        readOnly: true
         type: integer
       description:
         description: Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.
+        readOnly: true
         type: string
       firmwareVersion:
         description: The firmware version of the drive.
+        readOnly: true
         type: string
       healthStatus:
         description: Health status of the drive.
+        readOnly: true
         type: string
       isIndicationEnabled:
         description: Indicate whether the drive's identification LEDs are active or not.
+        readOnly: true
         type: boolean
       manufacturer:
         description: The name of the drive's manufacturer.
+        readOnly: true
         type: string
       mediaType:
         description: Media type of the drive.
+        readOnly: true
         type: string
       model:
         description: Model of the drive.
+        readOnly: true
         type: string
       operationalStatus:
         description: Operational status of the drive.
+        readOnly: true
         type: string
       physicalLocation:
         description: Indicate where the hardware is located.
+        readOnly: true
         type: string
       serialNumber:
         description: Serial number of the drive.
+        readOnly: true
         type: string
       storageNode:
         description: Node that the drive is physically connected.
+        readOnly: true
         type: string
       storagePool:
         description: The storage pool where the drive is located.
+        readOnly: true
         type: string
       usage:
         description: Intended usage of the drive.
+        readOnly: true
         type: string
     type: object

@@ -120,19 +120,19 @@ paths:
                     location: eastus
                     name: current
                     properties:
-                      RecentlyResolved:
-                        ResolvedTime: '2017-02-28T00:49:00Z'
-                        UnavailableOccuredTime: '2017-02-28T00:48:00Z'
-                        UnavailableSummary: We are sorry your SQL database is unavailable
-                      RecommendedActions:
-                        - Action: 'To start this virtualmachine, open the resource blade and click Start'
-                          ActionUrl: '<#ResourceBlade>'
-                          ActionUrlText: resourceblade
                       availabilityState: Available
                       detailedStatus: We have not seen any issues with your virtual machine
                       occuredTime: '2016-03-29T09:12:00Z'
                       reasonChronicity: Persistent
                       reasonType: Unplanned
+                      recentlyResolvedState:
+                        resolvedTime: '2017-02-28T00:49:00Z'
+                        unavailabilitySummary: We are sorry your SQL database is unavailable
+                        unavailableOccurredTime: '2017-02-28T00:48:00Z'
+                      recommendedActions:
+                        - action: 'To start this virtualmachine, open the resource blade and click Start'
+                          actionUrl: '<#ResourceBlade>'
+                          actionUrlText: resourceblade
                       reportedTime: '2016-05-04T14:11:29.7598931Z'
                       summary: Vm is available
                     type: Microsoft.ResourceHealth/AvailabilityStatuses
@@ -140,18 +140,18 @@ paths:
                     location: eastus
                     name: current
                     properties:
-                      RecommendedActions:
-                        - Action: 'To start this virtualmachine, open the resource blade'
-                          ActionUrl: '<#ResourceBlade>'
-                          ActionUrlText: resourceblade
-                        - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
-                          ActionUrl: '<#SupportCase>'
-                          ActionUrlText: contactsupport
                       availabilityState: Unavailable
                       detailedStatus: Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine
                       occuredTime: '2016-03-29T09:12:00Z'
                       reasonChronicity: Persistent
                       reasonType: Unplanned
+                      recommendedActions:
+                        - action: 'To start this virtualmachine, open the resource blade'
+                          actionUrl: '<#ResourceBlade>'
+                          actionUrlText: resourceblade
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contactsupport
                       reportedTime: '2016-05-04T14:11:29.7598931Z'
                       resolutionETA: '2016-03-29T09:37:00Z'
                       rootCauseAttributionTime: '2016-03-29T09:13:00Z'
@@ -196,19 +196,19 @@ paths:
                     location: eastus
                     name: current
                     properties:
-                      RecentlyResolved:
-                        ResolvedTime: '2017-02-28T00:49:00Z'
-                        UnavailableOccuredTime: '2017-02-28T00:48:00Z'
-                        UnavailableSummary: We are sorry your SQL database is unavailable
-                      RecommendedActions:
-                        - Action: 'To start this virtualmachine, open the resource blade and click Start'
-                          ActionUrl: '<#ResourceBlade>'
-                          ActionUrlText: resourceblade
                       availabilityState: Available
                       detailedStatus: We have not seen any issues with your virtual machine
                       occuredTime: '2016-03-29T09:12:00Z'
                       reasonChronicity: Persistent
                       reasonType: Unplanned
+                      recentlyResolvedState:
+                        resolvedTime: '2017-02-28T00:49:00Z'
+                        unavailabilitySummary: We are sorry your SQL database is unavailable
+                        unavailableOccurredTime: '2017-02-28T00:48:00Z'
+                      recommendedActions:
+                        - action: 'To start this virtualmachine, open the resource blade and click Start'
+                          actionUrl: '<#ResourceBlade>'
+                          actionUrlText: resourceblade
                       reportedTime: '2016-05-04T14:11:29.7598931Z'
                       summary: Vm is available
                     type: Microsoft.ResourceHealth/AvailabilityStatuses
@@ -216,18 +216,18 @@ paths:
                     location: eastus
                     name: current
                     properties:
-                      RecommendedActions:
-                        - Action: 'To start this virtualmachine, open the resource blade'
-                          ActionUrl: '<#ResourceBlade>'
-                          ActionUrlText: resourceblade
-                        - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
-                          ActionUrl: '<#SupportCase>'
-                          ActionUrlText: contactsupport
                       availabilityState: Unavailable
                       detailedStatus: Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine
                       occuredTime: '2016-03-29T09:12:00Z'
                       reasonChronicity: Persistent
                       reasonType: Unplanned
+                      recommendedActions:
+                        - action: 'To start this virtualmachine, open the resource blade'
+                          actionUrl: '<#ResourceBlade>'
+                          actionUrlText: resourceblade
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contactsupport
                       reportedTime: '2016-05-04T14:11:29.7598931Z'
                       resolutionETA: '2016-03-29T09:37:00Z'
                       rootCauseAttributionTime: '2016-03-29T09:13:00Z'
@@ -344,18 +344,18 @@ paths:
                 location: eastus
                 name: current
                 properties:
-                  RecommendedActions:
-                    - Action: 'To start this virtual machine, open the resource blade and click Start'
-                      ActionUrl: '<#ResourceBlade>'
-                      ActionUrlText: resource blade
-                    - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
-                      ActionUrl: '<#SupportCase>'
-                      ActionUrlText: contact support
                   availabilityState: Unavailable
                   detailedStatus: Disk problems are preventing us from automatically recovering your virtual machine
                   occuredTime: '2016-03-29T09:12:00Z'
                   reasonChronicity: Persistent
                   reasonType: Unplanned
+                  recommendedActions:
+                    - action: 'To start this virtual machine, open the resource blade and click Start'
+                      actionUrl: '<#ResourceBlade>'
+                      actionUrlText: resource blade
+                    - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                      actionUrl: '<#SupportCase>'
+                      actionUrlText: contact support
                   reportedTime: '2016-05-04T14:11:29.7598931Z'
                   resolutionETA: '2016-03-29T09:37:00Z'
                   rootCauseAttributionTime: '2016-03-29T09:13:00Z'
@@ -530,18 +530,18 @@ paths:
                 location: southcentralus
                 name: current
                 properties:
-                  RecommendedActions:
-                    - Action: 'To start this virtual machine, open the resource blade and click Start'
-                      ActionUrl: '<#ResourceBlade>'
-                      ActionUrlText: resource blade
-                    - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
-                      ActionUrl: '<#SupportCase>'
-                      ActionUrlText: contact support
                   availabilityState: Available
                   detailedStatus: ''
                   occuredTime: '2018-11-30T23:37:44Z'
                   reasonChronicity: Persistent
                   reasonType: ''
+                  recommendedActions:
+                    - action: 'To start this virtual machine, open the resource blade and click Start'
+                      actionUrl: '<#ResourceBlade>'
+                      actionUrlText: resource blade
+                    - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                      actionUrl: '<#SupportCase>'
+                      actionUrlText: contact support
                   reportedTime: '2018-12-04T01:19:11.955255Z'
                   summary: There aren't any known Azure platform problems affecting this virtual machine
                 type: Microsoft.ResourceHealth/AvailabilityStatuses

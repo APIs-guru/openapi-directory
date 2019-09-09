@@ -72,9 +72,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             eventId: id
           responses:
-            '204':
-              body: ''
-              header: {}
+            '204': {}
   '/events/{eventId}/reward':
     post:
       consumes:
@@ -113,9 +111,7 @@ paths:
             reward:
               value: 1
           responses:
-            '204':
-              body: ''
-              header: {}
+            '204': {}
   /rank:
     post:
       consumes:

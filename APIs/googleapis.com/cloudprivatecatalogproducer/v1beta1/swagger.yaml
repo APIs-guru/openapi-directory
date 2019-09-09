@@ -238,8 +238,12 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     delete:
-      description: Hard deletes a Version.
-      operationId: cloudprivatecatalogproducer.catalogs.products.versions.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: cloudprivatecatalogproducer.operations.delete
       parameters:
         - description: |-
             Forces deletion of the `Catalog` and its `Association` resources.
@@ -248,7 +252,7 @@ paths:
           in: query
           name: force
           type: boolean
-        - description: The resource name of the version.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -265,12 +269,15 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - catalogs
+        - operations
     get:
-      description: Returns the requested Version resource.
-      operationId: cloudprivatecatalogproducer.catalogs.products.versions.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudprivatecatalogproducer.operations.get
       parameters:
-        - description: The resource name of the version.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -280,14 +287,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudPrivatecatalogproducerV1beta1Version'
+            $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - catalogs
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -742,7 +749,7 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0 and 1.
+            Acceptable values are 0, 1, and 3.
             If the value is 0, or the field is omitted, policy format version 1 will be
             returned.
           in: query
@@ -1355,12 +1362,6 @@ definitions:
         items:
           type: string
         type: array
-      ignoreChildExemptions:
-        description: |-
-          Specifies whether principals can be exempted for the same LogType in
-          lower-level resource policies. If true, any lower-level exemptions will
-          be ignored.
-        type: boolean
       logType:
         description: The log type that this config enables.
         enum:

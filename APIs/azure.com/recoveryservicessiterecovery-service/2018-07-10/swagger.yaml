@@ -8983,6 +8983,14 @@ definitions:
       fabricObjectId:
         description: The fabric specific object Id of the virtual machine.
         type: string
+      initialPrimaryFabricLocation:
+        description: The initial primary fabric location.
+        readOnly: true
+        type: string
+      initialRecoveryFabricLocation:
+        description: The initial recovery fabric location.
+        readOnly: true
+        type: string
       isReplicationAgentUpdateRequired:
         description: A value indicating whether replication agent update is required.
         type: boolean
@@ -9080,6 +9088,17 @@ definitions:
         items:
           $ref: '#/definitions/A2AUnprotectedDiskDetails'
         type: array
+      vmEncryptionType:
+        description: The encryption type of the VM.
+        enum:
+          - NotEncrypted
+          - OnePassEncrypted
+          - TwoPassEncrypted
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VmEncryptionType
       vmNics:
         description: The virtual machine nic details.
         items:
@@ -9228,6 +9247,9 @@ definitions:
   A2AVmManagedDiskInputDetails:
     description: Azure VM managed disk input details.
     properties:
+      diskEncryptionInfo:
+        $ref: '#/definitions/DiskEncryptionInfo'
+        description: The recovery disk encryption information (for one / single pass flows).
       diskId:
         description: The disk Id.
         type: string
@@ -9247,6 +9269,9 @@ definitions:
   A2AVmManagedDiskUpdateDetails:
     description: Azure VM managed disk update input details.
     properties:
+      diskEncryptionInfo:
+        $ref: '#/definitions/DiskEncryptionInfo'
+        description: The recovery disk encryption information (for one / single pass flows).
       diskId:
         description: The disk Id.
         type: string

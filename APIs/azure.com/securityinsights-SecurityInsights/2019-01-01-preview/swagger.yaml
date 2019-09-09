@@ -65,6 +65,13 @@ parameters:
     schema:
       $ref: '#/definitions/AlertRule'
     x-ms-parameter-location: method
+  AlertRuleTemplateId:
+    description: Alert rule template ID
+    in: path
+    name: alertRuleTemplateId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ApiVersion:
     description: API version for the operation
     enum:
@@ -96,6 +103,21 @@ parameters:
     schema:
       $ref: '#/definitions/Case'
     x-ms-parameter-location: method
+  CaseComment:
+    description: The case comment
+    in: body
+    name: caseComment
+    required: true
+    schema:
+      $ref: '#/definitions/CaseComment'
+    x-ms-parameter-location: method
+  CaseCommentId:
+    description: Case comment ID
+    in: path
+    name: caseCommentId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   CaseId:
     description: Case ID
     in: path
@@ -125,6 +147,14 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  EntityExpandRequestBody:
+    description: The parameters required to execute an expand operation on the given entity.
+    in: body
+    name: parameters
+    required: true
+    schema:
+      $ref: '#/definitions/EntityExpandParameters'
+    x-ms-parameter-location: method
   EntityId:
     description: entity ID
     in: path
@@ -138,6 +168,35 @@ parameters:
     name: entityQueryId
     required: true
     type: string
+    x-ms-parameter-location: method
+  ODataFilter:
+    description: 'Filters the results, based on a Boolean condition. Optional.'
+    in: query
+    name: $filter
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ODataOrderBy:
+    description: Sorts the results. Optional.
+    in: query
+    name: $orderby
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ODataSkipToken:
+    description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.'
+    in: query
+    name: $skipToken
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ODataTop:
+    description: Returns only the first n results. Optional.
+    format: int32
+    in: query
+    name: $top
+    required: false
+    type: integer
     x-ms-parameter-location: method
   OperationalInsightsResourceProvider:
     description: The namespace of workspaces resource provider- Microsoft.OperationalInsights.
@@ -205,7 +264,7 @@ paths:
         '200':
           description: OK. Successfully retrieved operations list.
           schema:
-            $ref: '#/definitions/operationsList'
+            $ref: '#/definitions/OperationsList'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}':
@@ -258,6 +317,169 @@ paths:
                     totalNewStatus: 42
                     totalResolvedStatus: 2
                 type: Microsoft.SecurityInsights/aggregations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates':
+    get:
+      description: Gets all alert rule templates.
+      operationId: AlertRuleTemplates_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertRuleTemplatesList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rule Templates
+      x-ms-examples:
+        Get all alert rule templates.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa
+                    kind: Scheduled
+                    name: 65360bb0-8986-4ade-a89d-af3cf44d28aa
+                    properties:
+                      alertRulesCreatedByTemplateCount: 0
+                      createdDateUTC: '2019-02-27T00:00:00'
+                      description: |
+                        This alert monitors changes to VPC settings such as new ACL entries and routes in route tables.
+                        More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255
+                      displayName: AWS - Changes to VPC settings
+                      query: |
+
+                        let timeframe = 1d;
+                        AWSCloudTrail
+                        | where TimeGenerated >= ago(timeframe)
+                        | where EventName == "CreateNetworkAclEntry"
+                             or EventName == "CreateRoute"
+                        | project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements
+                      queryFrequency: '1.00:00:00'
+                      queryPeriod: '1.00:00:00'
+                      requiredDataConnectors:
+                        - connectorId: AWS
+                          dataTypes:
+                            AWSCloudTrail: NotExist
+                      severity: Low
+                      status: NotAvailable
+                      tactics:
+                        - LateralMovement
+                        - PrivilegeEscalation
+                      triggerOperator: GreaterThan
+                      triggerThreshold: 0
+                    type: Microsoft.SecurityInsights/AlertRuleTemplates
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/f71aba3d-28fb-450b-b192-4e76a83015c8
+                    kind: Fusion
+                    name: f71aba3d-28fb-450b-b192-4e76a83015c8
+                    properties:
+                      alertRulesCreatedByTemplateCount: 0
+                      createdDateUTC: '2019-07-25T00:00:00'
+                      description: |
+                        Place holder: Fusion uses graph powered machine learning algorithms to correlate between millions of lower fidelity anomalous activities from different products such as Azure AD Identity Protection, and Microsoft Cloud App Security, to combine them into a manageable number of interesting security cases.
+                      displayName: Fusion Detections
+                      status: Available
+                      tactics:
+                        - Persistence
+                        - Exfiltration
+                    type: Microsoft.SecurityInsights/AlertRuleTemplates
+                  - id: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/avdvirInt/providers/Microsoft.SecurityInsights/AlertRuleTemplates/eb7b4e69-085d-44dd-9227-9b0d67af9fe7
+                    kind: Filter
+                    name: eb7b4e69-085d-44dd-9227-9b0d67af9fe7
+                    properties:
+                      alertRulesCreatedByTemplateCount: 0
+                      createdDateUTC: '2019-07-16T00:00:00'
+                      description: |
+                        All alerts from AADIP
+                      displayName: All alerts from AADIP
+                      filterProduct: Azure Active Directory Identity Protection
+                      requiredDataConnectors:
+                        - connectorId: AzureActiveDirectoryIdentityProtection
+                          dataTypes:
+                            SecurityAlert: Exist
+                      status: Available
+                    type: Microsoft.SecurityInsights/AlertRuleTemplates
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}':
+    get:
+      description: Gets the alert rule template.
+      operationId: AlertRuleTemplates_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/AlertRuleTemplateId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertRuleTemplate'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rule Templates
+      x-ms-examples:
+        Get alert rule template by Id.:
+          parameters:
+            alertRuleTemplateId: 65360bb0-8986-4ade-a89d-af3cf44d28aa
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa
+                kind: Scheduled
+                name: 65360bb0-8986-4ade-a89d-af3cf44d28aa
+                properties:
+                  alertRulesCreatedByTemplateCount: 0
+                  createdDateUTC: '2019-02-27T00:00:00'
+                  description: |
+                    This alert monitors changes to VPC settings such as new ACL entries and routes in route tables.
+                    More information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255
+                  displayName: AWS - Changes to VPC settings
+                  query: |
+
+                    let timeframe = 1d;
+                    AWSCloudTrail
+                    | where TimeGenerated >= ago(timeframe)
+                    | where EventName == "CreateNetworkAclEntry"
+                         or EventName == "CreateRoute"
+                    | project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements
+                  queryFrequency: '1.00:00:00'
+                  queryPeriod: '1.00:00:00'
+                  requiredDataConnectors:
+                    - connectorId: AWS
+                      dataTypes:
+                        AWSCloudTrail: NotExist
+                  severity: Low
+                  status: NotAvailable
+                  tactics:
+                    - LateralMovement
+                    - PrivilegeEscalation
+                  triggerOperator: GreaterThan
+                  triggerThreshold: 0
+                type: Microsoft.SecurityInsights/AlertRuleTemplates
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules':
     get:
       description: Gets all alert rules.
@@ -707,18 +929,19 @@ paths:
                     id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     properties:
+                      created: '2019-01-01T13:15:30Z'
                       createdBy:
                         email: john@contoso.com
                         name: john doe
                         objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                      createdTimeUtc: '2019-01-01T13:15:30Z'
                       displayName: My bookmark
                       labels:
                         - Tag1
                         - Tag2
-                      lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                       notes: Found a suspicious activity
                       query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                      queryResult: Security Event query result
+                      updated: '2019-01-01T13:15:30Z'
                       updatedBy:
                         email: john@contoso.com
                         name: john doe
@@ -797,18 +1020,19 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  created: '2019-01-01T13:15:30Z'
                   createdBy:
                     email: john@contoso.com
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                  createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
                   labels:
                     - Tag1
                     - Tag2
-                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  queryResult: Security Event query result
+                  updated: '2019-01-01T13:15:30Z'
                   updatedBy:
                     email: john@contoso.com
                     name: john doe
@@ -849,18 +1073,19 @@ paths:
               id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
               name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
               properties:
+                created: '2019-01-01T13:15:30Z'
                 createdBy:
                   email: john@contoso.com
                   name: john doe
                   objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                createdTimeUtc: '2019-01-01T13:15:30Z'
                 displayName: My bookmark
                 labels:
                   - Tag1
                   - Tag2
-                lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                 notes: Found a suspicious activity
                 query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                queryResult: Security Event query result
+                updated: '2019-01-01T13:15:30Z'
                 updatedBy:
                   email: john@contoso.com
                   name: john doe
@@ -878,18 +1103,19 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  created: '2019-01-01T13:15:30Z'
                   createdBy:
                     email: john@contoso.com
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                  createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
                   labels:
                     - Tag1
                     - Tag2
-                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  queryResult: Security Event query result
+                  updated: '2019-01-01T13:15:30Z'
                   updatedBy:
                     email: john@contoso.com
                     name: john doe
@@ -901,18 +1127,19 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
+                  created: '2019-01-01T13:15:30Z'
                   createdBy:
                     email: john@contoso.com
                     name: john doe
                     objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
-                  createdTimeUtc: '2019-01-01T13:15:30Z'
                   displayName: My bookmark
                   labels:
                     - Tag1
                     - Tag2
-                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
                   notes: Found a suspicious activity
                   query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  queryResult: Security Event query result
+                  updated: '2019-01-01T13:15:30Z'
                   updatedBy:
                     email: john@contoso.com
                     name: john doe
@@ -928,6 +1155,10 @@ paths:
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/OperationalInsightsResourceProvider'
         - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/ODataFilter'
+        - $ref: '#/parameters/ODataOrderBy'
+        - $ref: '#/parameters/ODataTop'
+        - $ref: '#/parameters/ODataSkipToken'
       responses:
         '200':
           description: OK
@@ -942,6 +1173,8 @@ paths:
       x-ms-examples:
         Get all cases.:
           parameters:
+            $orderby: properties/createdTimeUtc desc
+            $top: 1
             api-version: 2019-01-01-preview
             operationalInsightsResourceProvider: Microsoft.OperationalIinsights
             resourceGroupName: myRg
@@ -955,22 +1188,28 @@ paths:
                     id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                     properties:
-                      assignedTo:
-                        email: john@contoso.com
-                        name: john doe
-                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                      caseNumber: 3177
                       closeReason: Resolved
+                      closedReasonText: case resolved
                       createdTimeUtc: '2019-01-01T13:15:30Z'
                       description: This is a demo case
                       endTimeUtc: '2019-01-01T13:05:30Z'
                       labels:
                         - Tag1
                         - Tag2
+                      lastComment: This is a demo case
                       lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                      owner:
+                        email: john@contoso.com
+                        name: john doe
+                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                      relatedAlertIds:
+                        - cf441808-2d50-4c10-81af-cdd0b908c121
                       severity: High
                       startTimeUtc: '2019-01-01T13:00:30Z'
                       status: Closed
                       title: My case
+                      totalComments: 3
                     type: Microsoft.SecurityInsights/cases
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1045,22 +1284,28 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
-                  assignedTo:
-                    email: john@contoso.com
-                    name: john doe
-                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  caseNumber: 3177
                   closeReason: Resolved
+                  closedReasonText: case resolved
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
                   endTimeUtc: '2019-01-01T13:05:30Z'
                   labels:
                     - Tag1
                     - Tag2
+                  lastComment: This is a demo case
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  owner:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  relatedAlertIds:
+                    - cf441808-2d50-4c10-81af-cdd0b908c121
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
                   status: Closed
                   title: My case
+                  totalComments: 3
                 type: Microsoft.SecurityInsights/cases
     put:
       description: Creates or updates the case.
@@ -1094,26 +1339,19 @@ paths:
             api-version: 2019-01-01-preview
             case:
               etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
-              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
-              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
               properties:
-                assignedTo:
-                  email: john@contoso.com
-                  name: john doe
-                  objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 closeReason: Resolved
-                createdTimeUtc: '2019-01-01T13:15:30Z'
                 description: This is a demo case
                 endTimeUtc: '2019-01-01T13:05:30Z'
                 labels:
                   - Tag1
                   - Tag2
-                lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                owner:
+                  objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
                 severity: High
                 startTimeUtc: '2019-01-01T13:00:30Z'
                 status: Closed
                 title: My case
-              type: Microsoft.SecurityInsights/cases
             caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
             operationalInsightsResourceProvider: Microsoft.OperationalInsights
             resourceGroupName: myRg
@@ -1126,10 +1364,7 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
-                  assignedTo:
-                    email: john@contoso.com
-                    name: john doe
-                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  caseNumber: 3177
                   closeReason: Resolved
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
@@ -1138,6 +1373,12 @@ paths:
                     - Tag1
                     - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  owner:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  relatedAlertIds:
+                    - cf441808-2d50-4c10-81af-cdd0b908c121
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
                   status: Closed
@@ -1149,10 +1390,7 @@ paths:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
                 properties:
-                  assignedTo:
-                    email: john@contoso.com
-                    name: john doe
-                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  caseNumber: 3177
                   closeReason: Resolved
                   createdTimeUtc: '2019-01-01T13:15:30Z'
                   description: This is a demo case
@@ -1161,11 +1399,164 @@ paths:
                     - Tag1
                     - Tag2
                   lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  owner:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  relatedAlertIds:
+                    - cf441808-2d50-4c10-81af-cdd0b908c121
                   severity: High
                   startTimeUtc: '2019-01-01T13:00:30Z'
                   status: Closed
                   title: My case
                 type: Microsoft.SecurityInsights/cases
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments':
+    get:
+      description: Gets all case comments.
+      operationId: Comments_ListByCase
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/ODataFilter'
+        - $ref: '#/parameters/ODataOrderBy'
+        - $ref: '#/parameters/ODataTop'
+        - $ref: '#/parameters/ODataSkipToken'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseCommentList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseComments
+      x-ms-examples:
+        Get all case comments.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                    properties:
+                      createdTimeUtc: '2019-01-01T13:15:30Z'
+                      message: Some message
+                      userInfo:
+                        email: john@contoso.com
+                        name: john doe
+                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                    type: Microsoft.SecurityInsights/cases/comments
+      x-ms-odata: '#/definitions/CaseComment'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}':
+    get:
+      description: Gets a case comment.
+      operationId: Cases_GetComment
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/CaseCommentId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseComment'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseComments
+      x-ms-examples:
+        Get a case comment.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseCommentId: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  message: Some message
+                  userInfo:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                type: Microsoft.SecurityInsights/cases/comments
+    put:
+      description: Creates the case comment.
+      operationId: CaseComments_CreateComment
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/CaseCommentId'
+        - $ref: '#/parameters/CaseComment'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/CaseComment'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - CaseComments
+      x-ms-examples:
+        Creates or updates a case comment.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseComment:
+              properties:
+                message: Some message
+            caseCommentId: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '201':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+                properties:
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  message: Some message
+                  userInfo:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                type: Microsoft.SecurityInsights/cases/comments
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors':
     get:
       description: Gets all data connectors.
@@ -1630,6 +2021,7 @@ paths:
                       aadTenantId: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
                       aadUserId: f7033626-2572-46b1-bba0-06646f4f95b3
                       accountName: administrator
+                      friendlyName: administrator
                       isDomainJoined: true
                       ntDomain: domain
                       objectGuid: 11227b78-3c6e-436e-a2a2-02fc7662eca0
@@ -1637,12 +2029,13 @@ paths:
                       sid: S-1-5-18
                       upnSuffix: contoso
                     type: Microsoft.SecurityInsights/entities
-                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/fed9fe89-dce8-40f2-bf44-70f23fe93b3c
                     kind: Host
-                    name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                    name: fed9fe89-dce8-40f2-bf44-70f23fe93b3c
                     properties:
                       azureID: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
                       dnsDomain: contoso
+                      friendlyName: vm1
                       hostName: vm1
                       isDomainJoined: true
                       netBiosName: contoso
@@ -1657,6 +2050,7 @@ paths:
                     properties:
                       directory: 'C:\Windows\System32'
                       fileName: cmd.exe
+                      friendlyName: cmd.exe
                     type: Microsoft.SecurityInsights/entities
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1683,6 +2077,268 @@ paths:
       tags:
         - Entities
       x-ms-examples:
+        Get a cloud application entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: CloudApplication
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  appId: 1
+                  appName: AppName
+                  friendlyName: AppName
+                  instanceName: InstanceName
+                type: Microsoft.SecurityInsights/entities
+        Get a dns entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: f4e74920-f2c0-4412-a45f-66d94fdf01f8
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/f4e74920-f2c0-4412-a45f-66d94fdf01f8
+                kind: DnsResolution
+                name: f4e74920-f2c0-4412-a45f-66d94fdf01f8
+                properties:
+                  domainName: domain
+                  friendlyName: domain
+                  ipAddressEntityIds:
+                    - 475d3120-33e0-4841-9f1c-a8f15a801d19
+                type: Microsoft.SecurityInsights/entities
+        Get a file entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: af378b21-b4aa-4fe7-bc70-13f8621a322f
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
+                kind: File
+                name: af378b21-b4aa-4fe7-bc70-13f8621a322f
+                properties:
+                  directory: 'C:\Windows\System32'
+                  fileName: cmd.exe
+                  friendlyName: cmd.exe
+                type: Microsoft.SecurityInsights/entities
+        Get a file hash entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: ea359fa6-c1e5-f878-e105-6344f3e399a1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/ea359fa6-c1e5-f878-e105-6344f3e399a1
+                kind: FileHash
+                name: ea359fa6-c1e5-f878-e105-6344f3e399a1
+                properties:
+                  algorithm: SHA256
+                  friendlyName: E923636F1093C414AAB39F846E9D7A372BEEFA7B628B28179197E539C56AA0F0(SHA256)
+                  hashValue: E923636F1093C414AAB39F846E9D7A372BEEFA7B628B28179197E539C56AA0F0
+                type: Microsoft.SecurityInsights/entities
+        Get a host entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: Host
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  azureID: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
+                  dnsDomain: contoso
+                  friendlyName: vm1
+                  hostName: vm1
+                  isDomainJoined: true
+                  netBiosName: contoso
+                  ntDomain: domain
+                  omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
+                  osFamily: Windows
+                  osVersion: '1.0'
+                type: Microsoft.SecurityInsights/entities
+        Get a malware entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: af378b21-b4aa-4fe7-bc70-13f8621a322f
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
+                kind: Malware
+                name: af378b21-b4aa-4fe7-bc70-13f8621a322f
+                properties:
+                  category: Trojan
+                  friendlyName: Win32/Toga!rfn
+                  malwareName: Win32/Toga!rfn
+                type: Microsoft.SecurityInsights/entities
+        Get a process entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: 7264685c-038c-42c6-948c-38e14ef1fb98
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/7264685c-038c-42c6-948c-38e14ef1fb98
+                kind: Process
+                name: 7264685c-038c-42c6-948c-38e14ef1fb98
+                properties:
+                  commandLine: '"cmd"'
+                  friendlyName: cmd.exe
+                  imageFileEntityId: bba7b47b-c1c1-4021-b568-5b07b9292f5e
+                  processId: '0x2aa48'
+                type: Microsoft.SecurityInsights/entities
+        Get a registry key entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: RegistryKey
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  friendlyName: SOFTWARE
+                  hive: HKEY_LOCAL_MACHINE
+                  key: SOFTWARE
+                type: Microsoft.SecurityInsights/entities
+        Get a registry value entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: dc44bd11-b348-4d76-ad29-37bf7aa41356
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/dc44bd11-b348-4d76-ad29-37bf7aa41356
+                kind: RegistryValue
+                name: dc44bd11-b348-4d76-ad29-37bf7aa41356
+                properties:
+                  friendlyName: Data
+                  keyEntityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                  valueData: Data
+                  valueName: Name
+                  valueType: String
+                type: Microsoft.SecurityInsights/entities
+        Get a security alert entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: 4aa486e0-6f85-41af-99ea-7acdce7be6c8
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/4aa486e0-6f85-41af-99ea-7acdce7be6c8
+                kind: SecurityAlert
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  additionalData:
+                    Query: |-
+                      Heartbeat 
+                      | extend AccountCustomEntity = "administrator"
+                    Query Period: '05:00:00'
+                    Search Query Results Overall Count: '203'
+                    Total Account Entities: '1'
+                    Trigger Operator: GreaterThan
+                    Trigger Threshold: '200'
+                  alertDisplayName: Suspicious account detected
+                  alertType: c8c99641-985d-4e4e-8e91-fb3466cd0e5b_46c7b6c0-ff43-44dd-8b4d-ceffff7aa7df
+                  confidenceLevel: Unknown
+                  description: ''
+                  endTimeUtc: '2019-07-06T13:21:45.926185Z'
+                  friendlyName: Suspicious account detected
+                  intent: Unknown
+                  processingEndTime: '2019-07-06T13:56:53.5392366Z'
+                  productComponentName: Scheduled Alerts
+                  productName: Azure Sentinel
+                  severity: Medium
+                  startTimeUtc: '2019-07-06T08:21:45.926185Z'
+                  status: New
+                  systemAlertId: 4aa486e0-6f85-41af-99ea-7acdce7be6c8
+                  timeGenerated: '2019-07-06T13:56:53.5392366Z'
+                  vendorName: Microsoft
+                type: Microsoft.SecurityInsights/entities
+        Get a security group entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: SecurityGroup
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  distinguishedName: Name
+                  friendlyName: Group
+                  objectGuid: fb1b8e04-d944-4986-b39a-1ce9adedcd98
+                  sid: Sid
+                type: Microsoft.SecurityInsights/entities
+        Get a url entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: Url
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  friendlyName: 'https://bing.com'
+                  url: 'https://bing.com'
+                type: Microsoft.SecurityInsights/entities
         Get an account entity.:
           parameters:
             api-version: 2019-01-01-preview
@@ -1701,6 +2357,7 @@ paths:
                   aadTenantId: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
                   aadUserId: f7033626-2572-46b1-bba0-06646f4f95b3
                   accountName: administrator
+                  friendlyName: administrator
                   isDomainJoined: true
                   ntDomain: domain
                   objectGuid: 11227b78-3c6e-436e-a2a2-02fc7662eca0
@@ -1708,25 +2365,7 @@ paths:
                   sid: S-1-5-18
                   upnSuffix: contoso
                 type: Microsoft.SecurityInsights/entities
-        Get an file entity.:
-          parameters:
-            api-version: 2019-01-01-preview
-            entityId: af378b21-b4aa-4fe7-bc70-13f8621a322f
-            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
-            resourceGroupName: myRg
-            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
-            workspaceName: myWorkspace
-          responses:
-            '200':
-              body:
-                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
-                kind: File
-                name: af378b21-b4aa-4fe7-bc70-13f8621a322f
-                properties:
-                  directory: 'C:\Windows\System32'
-                  fileName: cmd.exe
-                type: Microsoft.SecurityInsights/entities
-        Get an host entity.:
+        Get an azure resource entity.:
           parameters:
             api-version: 2019-01-01-preview
             entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
@@ -1738,19 +2377,83 @@ paths:
             '200':
               body:
                 id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
-                kind: Host
+                kind: AzureResource
                 name: e1d3d618-e11f-478b-98e3-bb381539a8e1
                 properties:
-                  azureID: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
-                  dnsDomain: contoso
-                  hostName: vm1
-                  isDomainJoined: true
-                  netBiosName: contoso
-                  ntDomain: domain
-                  omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
-                  osFamily: Windows
-                  osVersion: '1.0'
+                  friendlyName: Resource
+                  resourceId: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
                 type: Microsoft.SecurityInsights/entities
+        Get an ip entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: Ip
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  address: 10.3.2.8
+                  friendlyName: 10.3.2.8
+                type: Microsoft.SecurityInsights/entities
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/expand':
+    post:
+      description: Expands an entity.
+      operationId: Entities_Expand
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/EntityId'
+        - $ref: '#/parameters/EntityExpandRequestBody'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntityExpandResponse'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Entities
+      x-ms-examples:
+        Expand an entity:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            parameters:
+              endTime: '2019-05-26T00:00:00.000Z'
+              expansionId: a77992f3-25e9-4d01-99a4-5ff606cc410a
+              startTime: '2019-04-25T00:00:00.000Z'
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                metaData:
+                  aggregations:
+                    - count: 1
+                      entityKind: Account
+                value:
+                  entities:
+                    - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                      kind: Account
+                      name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                      properties:
+                        accountName: administrator
+                        friendlyName: administrator
+                        ntDomain: domain
+                      type: Microsoft.SecurityInsights/entities
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries':
     get:
       description: Gets all entity queries.
@@ -1790,12 +2493,12 @@ paths:
                       dataSources:
                         - AzureActivity
                       displayName: Least active accounts on Azure from this IP
-                      inputEntityType: Ip
+                      inputEntityType: IP
                       inputFields:
-                        - Address
+                        - address
                       outputEntityTypes:
                         - Account
-                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count asc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<Address>')"
+                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count asc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<address>')"
                     type: Microsoft.SecurityInsights/entityQueries
                   - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueries/97a1d515-abf2-4231-9a35-985f9de0bb91
                     name: 97a1d515-abf2-4231-9a35-985f9de0bb91
@@ -1803,12 +2506,12 @@ paths:
                       dataSources:
                         - AzureActivity
                       displayName: Most active accounts on Azure from this IP
-                      inputEntityType: Ip
+                      inputEntityType: IP
                       inputFields:
-                        - Address
+                        - address
                       outputEntityTypes:
                         - Account
-                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count desc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<Address>')"
+                      queryTemplate: "let AccountActivity_byIP = (v_IP_Address:string){\r\n                            AzureActivity\r\n                            | where Caller != '' and CallerIpAddress == v_IP_Address\r\n                            | summarize Account_Aux_StartTime = min(TimeGenerated), Account_Aux_EndTime = max(TimeGenerated), Count = count() by Caller, TenantId\r\n                            | top 10 by Count desc nulls last \r\n                            | extend UPN = iff(Caller contains '@', Caller, ''), Account_AadUserId = iff(Caller !contains '@', Caller,'')\r\n                            | extend Account_Name = split(UPN,'@')[0] , Account_UPNSuffix = split(UPN,'@')[1]\r\n                            | project Account_Name, Account_UPNSuffix, Account_AadUserId, Account_AadTenantId=TenantId, Account_Aux_StartTime , Account_Aux_EndTime};\r\n                            AccountActivity_byIP('<address>')"
                     type: Microsoft.SecurityInsights/entityQueries
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1854,10 +2557,10 @@ paths:
                   displayName: Parent processes running on host
                   inputEntityType: Host
                   inputFields:
-                    - HostName
+                    - hostName
                   outputEntityTypes:
                     - Process
-                  queryTemplate: "let GetParentProcessesOnHost = (v_Host_HostName:string){\r\n                            SecurityEvent \r\n                            | where EventID == 4688 \r\n                            | where isnotempty(ParentProcessName)\r\n                            | where NewProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe' and ParentProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe'\r\n                            and NewProcessName!contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe' and ParentProcessName !contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe'\r\n                            and ParentProcessName !contains ':\\\\Windows\\\\CCM\\\\CcmExec.exe'\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\svchost.exe' and (NewProcessName !contains ':\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe' or NewProcessName !contains ':\\\\Windows\\\\SysWOW64\\\\wbem\\\\WmiPrvSE.exe'))\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\services.exe' and NewProcessName !contains ':\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')\r\n                            | where toupper(Computer) contains v_Host_HostName or toupper(WorkstationName) contains v_Host_HostName\r\n                            | summarize min(TimeGenerated), max(TimeGenerated) by Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project min_TimeGenerated, max_TimeGenerated, Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project-rename Process_Host_UnstructuredName=Computer, Process_Account_UnstructuredName=Account, Process_CommandLine=CommandLine, Process_ProcessId=ProcessId, Process_ImageFile_FullPath=NewProcessName, Process_ParentProcess_ImageFile_FullPath=ParentProcessName\r\n                            | top 10 by min_TimeGenerated asc};\r\n                            GetParentProcessesOnHost(toupper('<HostName>'))"
+                  queryTemplate: "let GetParentProcessesOnHost = (v_Host_HostName:string){\r\n                            SecurityEvent \r\n                            | where EventID == 4688 \r\n                            | where isnotempty(ParentProcessName)\r\n                            | where NewProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe' and ParentProcessName !contains ':\\\\Windows\\\\System32\\\\conhost.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\csc.exe'\r\n                            and NewProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe' and ParentProcessName !contains ':\\\\Windows\\\\Microsoft.NET\\\\Framework64\\\\v2.0.50727\\\\cvtres.exe'\r\n                            and NewProcessName!contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe' and ParentProcessName !contains ':\\\\Program Files\\\\Microsoft Monitoring Agent\\\\Agent\\\\MonitoringHost.exe'\r\n                            and ParentProcessName !contains ':\\\\Windows\\\\CCM\\\\CcmExec.exe'\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\svchost.exe' and (NewProcessName !contains ':\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe' or NewProcessName !contains ':\\\\Windows\\\\SysWOW64\\\\wbem\\\\WmiPrvSE.exe'))\r\n                            | where(ParentProcessName !contains ':\\\\Windows\\\\System32\\\\services.exe' and NewProcessName !contains ':\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')\r\n                            | where toupper(Computer) contains v_Host_HostName or toupper(WorkstationName) contains v_Host_HostName\r\n                            | summarize min(TimeGenerated), max(TimeGenerated) by Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project min_TimeGenerated, max_TimeGenerated, Account, Computer, ParentProcessName, NewProcessName, CommandLine, ProcessId\r\n                            | project-rename Process_Host_UnstructuredName=Computer, Process_Account_UnstructuredName=Account, Process_CommandLine=CommandLine, Process_ProcessId=ProcessId, Process_ImageFile_FullPath=NewProcessName, Process_ParentProcess_ImageFile_FullPath=ParentProcessName\r\n                            | top 10 by min_TimeGenerated asc};\r\n                            GetParentProcessesOnHost(toupper('<hostName>'))"
                 type: Microsoft.SecurityInsights/entityQueries
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents':
     get:
@@ -2154,6 +2857,8 @@ definitions:
     type: object
     x-ms-discriminator-value: Account
   AccountEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
     description: Account entity property bag.
     properties:
       aadTenantId:
@@ -2166,6 +2871,14 @@ definitions:
         type: string
       accountName:
         description: 'The name of the account. This field should hold only the name without any domain added to it, i.e. administrator.'
+        readOnly: true
+        type: string
+      displayName:
+        description: The display name of the account.
+        readOnly: true
+        type: string
+      hostEntityId:
+        description: The Host entity id that contains the account in case it is a local account (not domain joined)
         readOnly: true
         type: string
       isDomainJoined:
@@ -2265,13 +2978,53 @@ definitions:
         description: The kind of the alert rule
         enum:
           - Scheduled
+          - Filter
+          - Fusion
         type: string
         x-ms-enum:
           modelAsString: true
           name: AlertRuleKind
           values:
             - value: Scheduled
+            - value: Filter
+            - value: Fusion
     type: object
+  AlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/AlertRuleKind'
+    description: Alert rule template.
+    discriminator: kind
+    properties:
+      etag:
+        description: Etag of the alert rule.
+        type: string
+    type: object
+  AlertRuleTemplatesList:
+    description: List all the alert rule templates.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of alert rule templates.
+        readOnly: true
+        type: string
+      value:
+        description: Array of alert rule templates.
+        items:
+          $ref: '#/definitions/AlertRuleTemplate'
+        type: array
+    required:
+      - value
+  AlertRuleTriggerOperator:
+    description: The operation against the threshold that triggers alert rule.
+    enum:
+      - GreaterThan
+      - LessThan
+      - Equal
+      - NotEqual
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TriggerOperator
   AlertRulesList:
     description: List all the alert rules.
     properties:
@@ -2286,6 +3039,26 @@ definitions:
         type: array
     required:
       - value
+  AlertSeverity:
+    description: The severity of the alert
+    enum:
+      - High
+      - Medium
+      - Low
+      - Informational
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: AlertSeverity
+      values:
+        - description: High severity
+          value: High
+        - description: Medium severity
+          value: Medium
+        - description: Low severity
+          value: Low
+        - description: Informational severity
+          value: Informational
   AlertsDataTypeOfDataConnector:
     description: Alerts data type for data connectors.
     properties:
@@ -2295,6 +3068,24 @@ definitions:
         description: Alerts data type connection.
         type: object
     type: object
+  AttackTactic:
+    description: The severity for alerts created by this alert rule.
+    enum:
+      - InitialAccess
+      - Execution
+      - Persistence
+      - PrivilegeEscalation
+      - DefenseEvasion
+      - CredentialAccess
+      - Discovery
+      - LateralMovement
+      - Collection
+      - Exfiltration
+      - CommandAndControl
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: AttackTactic
   AwsCloudTrailDataConnector:
     allOf:
       - $ref: '#/definitions/DataConnector'
@@ -2324,6 +3115,71 @@ definitions:
       dataTypes:
         $ref: '#/definitions/AwsCloudTrailDataConnectorDataTypes'
         description: The available data types for the connector.
+    type: object
+  AzureResourceEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents an azure resource entity.
+    properties:
+      properties:
+        $ref: '#/definitions/AzureResourceEntityProperties'
+        description: AzureResource entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureResource
+  AzureResourceEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: AzureResource entity property bag.
+    properties:
+      resourceId:
+        description: The azure resource id of the resource
+        readOnly: true
+        type: string
+    type: object
+  BaseAlertRuleTemplateProperties:
+    description: Base alert rule template property bag.
+    properties:
+      alertRulesCreatedByTemplateCount:
+        description: the number of alert rules that were created by this template
+        type: integer
+      createdDateUTC:
+        description: The time that this alert rule template has been added.
+        readOnly: true
+        type: string
+      description:
+        description: The description of the alert rule template.
+        type: string
+      displayName:
+        description: The display name for alert rule template.
+        type: string
+      requiredDataConnectors:
+        description: The required data connectors for this template
+        items:
+          $ref: '#/definitions/DataConnectorStatus'
+        type: array
+      status:
+        description: The alert rule template status.
+        enum:
+          - Installed
+          - Available
+          - NotAvailable
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TemplateStatus
+          values:
+            - description: Alert rule template installed. and can not use more then once
+              value: Installed
+            - description: Alert rule template is available.
+              value: Available
+            - description: Alert rule template is not available
+              value: NotAvailable
+      tactics:
+        description: The tactics of the alert rule template
+        items:
+          $ref: '#/definitions/AttackTactic'
+        type: array
     type: object
   Bookmark:
     allOf:
@@ -2355,14 +3211,14 @@ definitions:
   BookmarkProperties:
     description: Describes bookmark properties
     properties:
+      created:
+        description: The time the bookmark was created
+        format: date-time
+        type: string
       createdBy:
         $ref: '#/definitions/UserInfo'
         description: Describes a user that created the bookmark
         type: object
-      createdTimeUtc:
-        description: The time the bookmark was created
-        format: date-time
-        type: string
       displayName:
         description: The display name of the bookmark
         type: string
@@ -2371,15 +3227,18 @@ definitions:
         items:
           $ref: '#/definitions/Label'
         type: array
-      lastUpdatedTimeUtc:
-        description: The last time the bookmark was updated
-        format: date-time
-        type: string
       notes:
         description: The notes of the bookmark
         type: string
       query:
         description: The query of the bookmark.
+        type: string
+      queryResult:
+        description: The query result of the bookmark.
+        type: string
+      updated:
+        description: The last time the bookmark was updated
+        format: date-time
         type: string
       updatedBy:
         $ref: '#/definitions/UserInfo'
@@ -2402,6 +3261,49 @@ definitions:
         description: Case properties
         x-ms-client-flatten: true
     type: object
+  CaseComment:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a case comment
+    properties:
+      properties:
+        $ref: '#/definitions/CaseCommentProperties'
+        description: Case comment properties
+        x-ms-client-flatten: true
+    type: object
+  CaseCommentList:
+    description: List of case comments.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of comments.
+        readOnly: true
+        type: string
+      value:
+        description: Array of comments.
+        items:
+          $ref: '#/definitions/CaseComment'
+        type: array
+    required:
+      - value
+  CaseCommentProperties:
+    description: Case comment property bag.
+    properties:
+      createdTimeUtc:
+        description: The time the comment was created
+        format: date-time
+        readOnly: true
+        type: string
+      message:
+        description: The comment message
+        type: string
+      userInfo:
+        $ref: '#/definitions/UserInfo'
+        description: Describes the user that created the comment
+        readOnly: true
+        type: object
+    required:
+      - message
+    type: object
   CaseList:
     description: List all the cases.
     properties:
@@ -2419,15 +3321,17 @@ definitions:
   CaseProperties:
     description: Describes case properties
     properties:
-      assignedTo:
-        $ref: '#/definitions/UserInfo'
-        description: Describes a user that the case is assigned to
-        type: object
+      caseNumber:
+        description: a sequential number
+        readOnly: true
+        type: integer
       closeReason:
         description: The reason the case was closed
         enum:
           - Resolved
           - Dismissed
+          - TruePositive
+          - FalsePositive
           - Other
         type: string
         x-ms-enum:
@@ -2438,11 +3342,19 @@ definitions:
               value: Resolved
             - description: Case was dismissed
               value: Dismissed
+            - description: Case was true positive
+              value: TruePositive
+            - description: Case was false positive
+              value: FalsePositive
             - description: Case was closed for another reason
               value: Other
+      closedReasonText:
+        description: the case close reason details
+        type: string
       createdTimeUtc:
         description: The time the case was created
         format: date-time
+        readOnly: true
         type: string
       description:
         description: The description of the case
@@ -2456,10 +3368,26 @@ definitions:
         items:
           $ref: '#/definitions/Label'
         type: array
+      lastComment:
+        description: the last comment in the case
+        readOnly: true
+        type: string
       lastUpdatedTimeUtc:
         description: The last time the case was updated
         format: date-time
+        readOnly: true
         type: string
+      owner:
+        $ref: '#/definitions/UserInfo'
+        description: Describes a user that the case is assigned to
+        type: object
+      relatedAlertIds:
+        description: List of related alert identifiers
+        items:
+          description: related alert id
+          type: string
+        readOnly: true
+        type: array
       severity:
         description: The severity of the case
         enum:
@@ -2510,10 +3438,15 @@ definitions:
       title:
         description: The title of the case
         type: string
+      totalComments:
+        description: the number of total comments in the case
+        readOnly: true
+        type: integer
     required:
       - title
       - severity
       - status
+      - startTimeUtc
     type: object
   CasesAggregation:
     allOf:
@@ -2579,6 +3512,35 @@ definitions:
       aggregationByStatus:
         $ref: '#/definitions/CasesAggregationByStatusProperties'
         description: Aggregations results by case status.
+    type: object
+  CloudApplicationEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a cloud application entity.
+    properties:
+      properties:
+        $ref: '#/definitions/CloudApplicationEntityProperties'
+        description: CloudApplication entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: CloudApplication
+  CloudApplicationEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: CloudApplication entity property bag.
+    properties:
+      appId:
+        description: The technical identifier of the application.
+        readOnly: true
+        type: integer
+      appName:
+        description: The name of the related cloud application.
+        readOnly: true
+        type: string
+      instanceName:
+        description: The user defined instance name of the cloud application. It is often used to distinguish between several applications of the same type that a customer has.
+        readOnly: true
+        type: string
     type: object
   CloudError:
     description: Error response structure.
@@ -2668,6 +3630,24 @@ definitions:
         type: array
     required:
       - value
+  DataConnectorStatus:
+    description: alert rule template data connector status
+    properties:
+      connectorId:
+        description: the connector id
+        type: string
+      dataTypes:
+        additionalProperties:
+          enum:
+            - Exist
+            - NotExist
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DataTypeStatus
+        description: The data types availability map
+        type: object
+    type: object
   DataConnectorTenantId:
     description: Properties data connector on tenant level.
     properties:
@@ -2682,6 +3662,42 @@ definitions:
         $ref: '#/definitions/AlertsDataTypeOfDataConnector'
         description: The available data types for the connector.
     type: object
+  DnsEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a dns entity.
+    properties:
+      properties:
+        $ref: '#/definitions/DnsEntityProperties'
+        description: Dns entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: DnsResolution
+  DnsEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: Dns entity property bag.
+    properties:
+      dnsServerIpEntityId:
+        description: An ip entity id for the dns server resolving the request
+        readOnly: true
+        type: string
+      domainName:
+        description: The name of the dns record associated with the alert
+        readOnly: true
+        type: string
+      hostIpAddressEntityId:
+        description: An ip entity id for the dns request client
+        readOnly: true
+        type: string
+      ipAddressEntityIds:
+        description: Ip entity identifiers for the resolved ip address.
+        items:
+          description: Ip entity id
+          type: string
+        readOnly: true
+        type: array
+    type: object
   Entity:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2689,26 +3705,168 @@ definitions:
     description: Specific entity.
     discriminator: kind
     type: object
+  EntityCommonProperties:
+    description: Entity common property bag.
+    properties:
+      additionalData:
+        additionalProperties:
+          type: object
+        description: A bag of custom fields that should be part of the entity and will be presented to the user.
+        readOnly: true
+        type: object
+      friendlyName:
+        description: The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated.
+        readOnly: true
+        type: string
+    type: object
+  EntityExpandParameters:
+    description: The parameters required to execute an expand operation on the given entity.
+    properties:
+      endTime:
+        description: 'The end date filter, so the only expansion results returned are before this date.'
+        format: date-time
+        type: string
+      expansionId:
+        description: The Id of the expansion to perform.
+        format: uuid
+        type: string
+      startTime:
+        description: 'The start date filter, so the only expansion results returned are after this date.'
+        format: date-time
+        type: string
+  EntityExpandResponse:
+    description: The entity expansion result operation response.
+    properties:
+      metaData:
+        $ref: '#/definitions/ExpansionResultsMetadata'
+        description: The metadata from the expansion operation results.
+      value:
+        description: The expansion result values.
+        properties:
+          entities:
+            description: Array of the expansion result entities.
+            items:
+              $ref: '#/definitions/Entity'
+            type: array
+        type: object
+  EntityInnerKind:
+    description: The kind of the entity
+    enum:
+      - Account
+      - Host
+      - File
+      - AzureResource
+      - CloudApplication
+      - DnsResolution
+      - FileHash
+      - Ip
+      - Malware
+      - Process
+      - RegistryKey
+      - RegistryValue
+      - SecurityGroup
+      - Url
+      - SecurityAlert
+      - Bookmark
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: EntityKind
+      values:
+        - description: Entity represents account in the system.
+          value: Account
+        - description: Entity represents host in the system.
+          value: Host
+        - description: Entity represents file in the system.
+          value: File
+        - description: Entity represents azure resource in the system.
+          value: AzureResource
+        - description: Entity represents cloud application in the system.
+          value: CloudApplication
+        - description: Entity represents dns resolution in the system.
+          value: DnsResolution
+        - description: Entity represents file hash in the system.
+          value: FileHash
+        - description: Entity represents ip in the system.
+          value: Ip
+        - description: Entity represents malware in the system.
+          value: Malware
+        - description: Entity represents process in the system.
+          value: Process
+        - description: Entity represents registry key in the system.
+          value: RegistryKey
+        - description: Entity represents registry value in the system.
+          value: RegistryValue
+        - description: Entity represents security group in the system.
+          value: SecurityGroup
+        - description: Entity represents url in the system.
+          value: Url
+        - description: Entity represents security alert in the system.
+          value: SecurityAlert
+        - description: Entity represents bookmark in the system.
+          value: Bookmark
+  EntityInnerType:
+    description: The type of the entity
+    enum:
+      - Account
+      - Host
+      - File
+      - AzureResource
+      - CloudApplication
+      - DNS
+      - FileHash
+      - IP
+      - Malware
+      - Process
+      - RegistryKey
+      - RegistryValue
+      - SecurityGroup
+      - URL
+      - SecurityAlert
+      - HuntingBookmark
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: EntityType
+      values:
+        - description: Entity represents account in the system.
+          value: Account
+        - description: Entity represents host in the system.
+          value: Host
+        - description: Entity represents file in the system.
+          value: File
+        - description: Entity represents azure resource in the system.
+          value: AzureResource
+        - description: Entity represents cloud application in the system.
+          value: CloudApplication
+        - description: Entity represents dns in the system.
+          value: DNS
+        - description: Entity represents file hash in the system.
+          value: FileHash
+        - description: Entity represents ip in the system.
+          value: IP
+        - description: Entity represents malware in the system.
+          value: Malware
+        - description: Entity represents process in the system.
+          value: Process
+        - description: Entity represents registry key in the system.
+          value: RegistryKey
+        - description: Entity represents registry value in the system.
+          value: RegistryValue
+        - description: Entity represents security group in the system.
+          value: SecurityGroup
+        - description: Entity represents url in the system.
+          value: URL
+        - description: Entity represents security alert in the system.
+          value: SecurityAlert
+        - description: Entity represents HuntingBookmark in the system.
+          value: HuntingBookmark
   EntityKind:
-    description: Describes an Azure resource with kind.
+    description: Describes an entity with kind.
     properties:
       kind:
-        description: The kind of the entity
-        enum:
-          - Account
-          - Host
-          - File
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: EntityKind
-          values:
-            - description: Entity represents account in the system.
-              value: Account
-            - description: Entity represents host in the system.
-              value: Host
-            - description: Entity represents file in the system.
-              value: File
+        $ref: '#/definitions/EntityInnerKind'
+        description: The kind of the entity.
     type: object
   EntityList:
     description: List of all the entities.
@@ -2761,8 +3919,8 @@ definitions:
         description: The query display name
         type: string
       inputEntityType:
+        $ref: '#/definitions/EntityInnerType'
         description: The type of the query's source entity
-        type: string
       inputFields:
         description: List of the fields of the source entity that are required to run the query
         items:
@@ -2772,12 +3930,40 @@ definitions:
       outputEntityTypes:
         description: List of the desired output types to be constructed from the result
         items:
+          $ref: '#/definitions/EntityInnerType'
           description: output entity type
-          type: string
         type: array
       queryTemplate:
         description: The template query string to be parsed and formatted
         type: string
+    type: object
+  ExpansionResultAggregation:
+    description: Information of a specific aggregation in the expansion result.
+    properties:
+      aggregationType:
+        description: The common type of the aggregation. (for e.g. entity field name)
+        type: string
+      count:
+        description: Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.
+        type: integer
+      displayName:
+        description: The display name of the aggregation by type.
+        type: string
+      entityKind:
+        $ref: '#/definitions/EntityInnerKind'
+        description: The kind of the aggregated entity.
+    required:
+      - entityKind
+      - count
+    type: object
+  ExpansionResultsMetadata:
+    description: Expansion result metadata.
+    properties:
+      aggregations:
+        description: Information of the aggregated nodes in the expansion result.
+        items:
+          $ref: '#/definitions/ExpansionResultAggregation'
+        type: array
     type: object
   FileEntity:
     allOf:
@@ -2791,16 +3977,172 @@ definitions:
     type: object
     x-ms-discriminator-value: File
   FileEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
     description: File entity property bag.
     properties:
       directory:
         description: The full path to the file.
         readOnly: true
         type: string
+      fileHashEntityIds:
+        description: The file hash entity identifiers associated with this file
+        items:
+          description: file hash id
+          type: string
+        readOnly: true
+        type: array
       fileName:
         description: The file name without path (some alerts might not include path).
         readOnly: true
         type: string
+      hostEntityId:
+        description: The Host entity id which the file belongs to
+        readOnly: true
+        type: string
+    type: object
+  FileHashEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a file hash entity.
+    properties:
+      properties:
+        $ref: '#/definitions/FileHashEntityProperties'
+        description: FileHash entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: FileHash
+  FileHashEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: FileHash entity property bag.
+    properties:
+      algorithm:
+        description: The hash algorithm type.
+        enum:
+          - Unknown
+          - MD5
+          - SHA1
+          - SHA256
+          - SHA256AC
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: FileHashAlgorithm
+          values:
+            - description: Unknown hash algorithm
+              value: Unknown
+            - description: MD5 hash type
+              value: MD5
+            - description: SHA1 hash type
+              value: SHA1
+            - description: SHA256 hash type
+              value: SHA256
+            - description: SHA256 Authenticode hash type
+              value: SHA256AC
+      hashValue:
+        description: The file hash value.
+        readOnly: true
+        type: string
+    type: object
+  FilterAlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/AlertRuleTemplate'
+    description: Represents filter alert rule template.
+    properties:
+      properties:
+        allOf:
+          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
+          - $ref: '#/definitions/FilterAlertRuleTemplateProperties'
+        description: Filter alert rule template properties
+        required:
+          - displayName
+          - description
+          - createdDateUTC
+          - status
+          - alertRulesCreatedByTemplateCount
+          - filterProduct
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Filter
+  FilterAlertRuleTemplateProperties:
+    description: Filter alert rule template property bag.
+    properties:
+      filterProduct:
+        description: The filter product name for this template rule.
+        type: string
+      filterSeverities:
+        description: the alert’s severities on which the cases will be generated
+        items:
+          $ref: '#/definitions/AlertSeverity'
+        type: array
+      filterTitles:
+        description: the alert’s titles on which the cases will be generated
+        items:
+          type: string
+        type: array
+    type: object
+  FusionAlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/AlertRuleTemplate'
+    description: Represents fusion alert rule template.
+    properties:
+      properties:
+        allOf:
+          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
+          - $ref: '#/definitions/FusionAlertRuleTemplateProperties'
+        description: Fusion alert rule template properties
+        required:
+          - displayName
+          - description
+          - createdDateUTC
+          - status
+          - alertRulesCreatedByTemplateCount
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Fusion
+  FusionAlertRuleTemplateProperties:
+    description: Filter alert rule template property bag.
+    properties:
+      severity:
+        $ref: '#/definitions/AlertSeverity'
+        description: The severity for alerts created by this alert rule.
+    type: object
+  GeoLocation:
+    description: The geo-location context attached to the ip entity
+    properties:
+      asn:
+        description: Autonomous System Number
+        readOnly: true
+        type: integer
+      city:
+        description: City name
+        readOnly: true
+        type: string
+      countryCode:
+        description: The country code according to ISO 3166 format
+        readOnly: true
+        type: string
+      countryName:
+        description: 'Country name according to ISO 3166 Alpha 2: the lowercase of the English Short Name'
+        readOnly: true
+        type: string
+      latitude:
+        description: 'The longitude of the identified location, expressed as a floating point number with range of -180 to 180, with positive numbers representing East and negative numbers representing West. Latitude and longitude are derived from the city or postal code.'
+        format: double
+        readOnly: true
+        type: number
+      longitude:
+        description: 'The latitude of the identified location, expressed as a floating point number with range of - 90 to 90, with positive numbers representing North and negative numbers representing South. Latitude and longitude are derived from the city or postal code.'
+        format: double
+        readOnly: true
+        type: number
+      state:
+        description: State name
+        readOnly: true
+        type: string
+    readOnly: true
     type: object
   HostEntity:
     allOf:
@@ -2814,6 +4156,8 @@ definitions:
     type: object
     x-ms-discriminator-value: Host
   HostEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
     description: Host entity property bag.
     properties:
       azureID:
@@ -2869,6 +4213,36 @@ definitions:
         readOnly: true
         type: string
     type: object
+  IpEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents an ip entity.
+    properties:
+      properties:
+        $ref: '#/definitions/IpEntityProperties'
+        description: Ip entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Ip
+  IpEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: Ip entity property bag.
+    properties:
+      address:
+        description: 'The IP address as string, e.g. 127.0.0.1 (either in Ipv4 or Ipv6)'
+        readOnly: true
+        type: string
+      location:
+        $ref: '#/definitions/GeoLocation'
+        description: The geo-location context attached to the ip entity
+      threatIntelligence:
+        description: A list of TI contexts attached to the ip entity.
+        items:
+          $ref: '#/definitions/ThreatIntelligence'
+        readOnly: true
+        type: array
+    type: object
   Label:
     description: Label that will be used to tag and filter on.
     type: string
@@ -2919,6 +4293,45 @@ definitions:
       - $ref: '#/definitions/DataConnectorTenantId'
       - $ref: '#/definitions/DataConnectorWithAlertsProperties'
     description: MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
+    type: object
+  MalwareEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a malware entity.
+    properties:
+      properties:
+        $ref: '#/definitions/MalwareEntityProperties'
+        description: File entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Malware
+  MalwareEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: Malware entity property bag.
+    properties:
+      category:
+        description: 'The malware category by the vendor, e.g. Trojan'
+        readOnly: true
+        type: string
+      fileEntityIds:
+        description: List of linked file entity identifiers on which the malware was found
+        items:
+          description: file entity id
+          type: string
+        readOnly: true
+        type: array
+      malwareName:
+        description: 'The malware name by the vendor, e.g. Win32/Toga!rfn'
+        readOnly: true
+        type: string
+      processEntityIds:
+        description: List of linked process entity identifiers on which the malware was found.
+        items:
+          description: process entity id
+          type: string
+        readOnly: true
+        type: array
     type: object
   OfficeConsent:
     allOf:
@@ -2989,6 +4402,230 @@ definitions:
         $ref: '#/definitions/OfficeDataConnectorDataTypes'
         description: The available data types for the connector.
     type: object
+  Operation:
+    description: Operation provided by provider
+    properties:
+      display:
+        description: Properties of the operation
+        properties:
+          description:
+            description: Description of the operation
+            type: string
+          operation:
+            description: Operation name
+            type: string
+          provider:
+            description: Provider name
+            type: string
+          resource:
+            description: Resource name
+            type: string
+        type: object
+      name:
+        description: Name of the operation
+        type: string
+  OperationsList:
+    description: Lists the operations available in the SecurityInsights RP.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of operations.
+        type: string
+      value:
+        description: Array of operations
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+    required:
+      - value
+  ProcessEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a process entity.
+    properties:
+      properties:
+        $ref: '#/definitions/ProcessEntityProperties'
+        description: Process entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Process
+  ProcessEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: Process entity property bag.
+    properties:
+      accountEntityId:
+        description: The account entity id running the processes.
+        readOnly: true
+        type: string
+      commandLine:
+        description: The command line used to create the process
+        readOnly: true
+        type: string
+      creationTimeUtc:
+        description: The time when the process started to run
+        format: date-time
+        readOnly: true
+        type: string
+      elevationToken:
+        description: The elevation token associated with the process.
+        enum:
+          - Default
+          - Full
+          - Limited
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ElevationToken
+          values:
+            - description: Default elevation token
+              value: Default
+            - description: Full elevation token
+              value: Full
+            - description: Limited elevation token
+              value: Limited
+      hostEntityId:
+        description: The host entity id on which the process was running
+        readOnly: true
+        type: string
+      hostLogonSessionEntityId:
+        description: The session entity id in which the process was running
+        readOnly: true
+        type: string
+      imageFileEntityId:
+        description: Image file entity id
+        readOnly: true
+        type: string
+      parentProcessEntityId:
+        description: The parent process entity id.
+        readOnly: true
+        type: string
+      processId:
+        description: The process ID
+        readOnly: true
+        type: string
+    type: object
+  RegistryKeyEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a registry key entity.
+    properties:
+      properties:
+        $ref: '#/definitions/RegistryKeyEntityProperties'
+        description: RegistryKey entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: RegistryKey
+  RegistryKeyEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: RegistryKey entity property bag.
+    properties:
+      hive:
+        description: the hive that holds the registry key.
+        enum:
+          - HKEY_LOCAL_MACHINE
+          - HKEY_CLASSES_ROOT
+          - HKEY_CURRENT_CONFIG
+          - HKEY_USERS
+          - HKEY_CURRENT_USER_LOCAL_SETTINGS
+          - HKEY_PERFORMANCE_DATA
+          - HKEY_PERFORMANCE_NLSTEXT
+          - HKEY_PERFORMANCE_TEXT
+          - HKEY_A
+          - HKEY_CURRENT_USER
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RegistryHive
+          values:
+            - description: HKEY_LOCAL_MACHINE
+              value: HKEY_LOCAL_MACHINE
+            - description: HKEY_CLASSES_ROOT
+              value: HKEY_CLASSES_ROOT
+            - description: HKEY_CURRENT_CONFIG
+              value: HKEY_CURRENT_CONFIG
+            - description: HKEY_USERS
+              value: HKEY_USERS
+            - description: HKEY_CURRENT_USER_LOCAL_SETTINGS
+              value: HKEY_CURRENT_USER_LOCAL_SETTINGS
+            - description: HKEY_PERFORMANCE_DATA
+              value: HKEY_PERFORMANCE_DATA
+            - description: HKEY_PERFORMANCE_NLSTEXT
+              value: HKEY_PERFORMANCE_NLSTEXT
+            - description: HKEY_PERFORMANCE_TEXT
+              value: HKEY_PERFORMANCE_TEXT
+            - description: HKEY_A
+              value: HKEY_A
+            - description: HKEY_CURRENT_USER
+              value: HKEY_CURRENT_USER
+      key:
+        description: The registry key path.
+        readOnly: true
+        type: string
+    type: object
+  RegistryValueEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a registry value entity.
+    properties:
+      properties:
+        $ref: '#/definitions/RegistryValueEntityProperties'
+        description: RegistryKey entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: RegistryValue
+  RegistryValueEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: RegistryValue entity property bag.
+    properties:
+      keyEntityId:
+        description: The registry key entity id.
+        readOnly: true
+        type: string
+      valueData:
+        description: String formatted representation of the value data.
+        readOnly: true
+        type: string
+      valueName:
+        description: The registry value name.
+        readOnly: true
+        type: string
+      valueType:
+        description: 'Specifies the data types to use when storing values in the registry, or identifies the data type of a value in the registry.'
+        enum:
+          - None
+          - Unknown
+          - String
+          - ExpandString
+          - Binary
+          - DWord
+          - MultiString
+          - QWord
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RegistryValueKind
+          values:
+            - description: None
+              value: None
+            - description: Unknown value type
+              value: Unknown
+            - description: String value type
+              value: String
+            - description: ExpandString value type
+              value: ExpandString
+            - description: Binary value type
+              value: Binary
+            - description: DWord value type
+              value: DWord
+            - description: MultiString value type
+              value: MultiString
+            - description: QWord value type
+              value: QWord
+    type: object
   Resource:
     description: An azure resource object
     properties:
@@ -3044,25 +4681,8 @@ definitions:
         format: duration
         type: string
       severity:
+        $ref: '#/definitions/AlertSeverity'
         description: The severity for alerts created by this alert rule.
-        enum:
-          - High
-          - Medium
-          - Low
-          - Informational
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AlertSeverity
-          values:
-            - description: High severity
-              value: High
-            - description: Medium severity
-              value: Medium
-            - description: Low severity
-              value: Low
-            - description: Informational severity
-              value: Informational
       suppressionDuration:
         description: The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.
         format: duration
@@ -3071,16 +4691,8 @@ definitions:
         description: Determines whether the suppression for this alert rule is enabled or disabled.
         type: boolean
       triggerOperator:
+        $ref: '#/definitions/AlertRuleTriggerOperator'
         description: The operation against the threshold that triggers alert rule.
-        enum:
-          - GreaterThan
-          - LessThan
-          - Equal
-          - NotEqual
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: TriggerOperator
       triggerThreshold:
         description: The threshold triggers this alert rule.
         type: integer
@@ -3096,6 +4708,303 @@ definitions:
       - triggerThreshold
       - suppressionEnabled
       - suppressionDuration
+    type: object
+  ScheduledAlertRuleTemplate:
+    allOf:
+      - $ref: '#/definitions/AlertRuleTemplate'
+    description: Represents scheduled alert rule template.
+    properties:
+      properties:
+        allOf:
+          - $ref: '#/definitions/BaseAlertRuleTemplateProperties'
+          - $ref: '#/definitions/ScheduledAlertRuleTemplateProperties'
+        description: Scheduled alert rule template properties
+        required:
+          - displayName
+          - description
+          - createdDateUTC
+          - status
+          - requiredDataConnectors
+          - alertRulesCreatedByTemplateCount
+          - severity
+          - query
+          - queryFrequency
+          - queryPeriod
+          - triggerOperator
+          - triggerThreshold
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Scheduled
+  ScheduledAlertRuleTemplateProperties:
+    description: Schedule alert rule template property bag.
+    properties:
+      query:
+        description: The query that creates alerts for this rule.
+        type: string
+      queryFrequency:
+        description: The frequency (in ISO 8601 duration format) for this alert rule to run.
+        format: duration
+        type: string
+      queryPeriod:
+        description: The period (in ISO 8601 duration format) that this alert rule looks at.
+        format: duration
+        type: string
+      severity:
+        $ref: '#/definitions/AlertSeverity'
+        description: The severity for alerts created by this alert rule.
+      triggerOperator:
+        $ref: '#/definitions/AlertRuleTriggerOperator'
+        description: The operation against the threshold that triggers alert rule.
+      triggerThreshold:
+        description: The threshold triggers this alert rule.
+        type: integer
+    type: object
+  SecurityAlert:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a security alert entity.
+    properties:
+      properties:
+        $ref: '#/definitions/SecurityAlertProperties'
+        description: SecurityAlert entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SecurityAlert
+  SecurityAlertProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: SecurityAlert entity property bag.
+    properties:
+      alertDisplayName:
+        description: The display name of the alert.
+        readOnly: true
+        type: string
+      alertType:
+        description: The type name of the alert.
+        readOnly: true
+        type: string
+      compromisedEntity:
+        description: Display name of the main entity being reported on.
+        readOnly: true
+        type: string
+      confidenceLevel:
+        description: The confidence level of this alert.
+        enum:
+          - Unknown
+          - Low
+          - High
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ConfidenceLevel
+          values:
+            - description: 'Unknown confidence, the is the default value'
+              value: Unknown
+            - description: 'Low confidence, meaning we have some doubts this is indeed malicious or part of an attack'
+              value: Low
+            - description: High confidence that the alert is true positive malicious
+              value: High
+      confidenceReasons:
+        description: The confidence reasons
+        items:
+          description: confidence reason item
+          properties:
+            reason:
+              description: The reason's description
+              readOnly: true
+              type: string
+            reasonType:
+              description: The type (category) of the reason
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      confidenceScore:
+        description: The confidence score of the alert.
+        format: double
+        readOnly: true
+        type: number
+      confidenceScoreStatus:
+        description: 'The confidence score calculation status, i.e. indicating if score calculation is pending for this alert, not applicable or final.'
+        enum:
+          - NotApplicable
+          - InProcess
+          - NotFinal
+          - Final
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ConfidenceScoreStatus
+          values:
+            - description: Score will not be calculated for this alert as it is not supported by virtual analyst
+              value: NotApplicable
+            - description: No score was set yet and calculation is in progress
+              value: InProcess
+            - description: 'Score is calculated and shown as part of the alert, but may be updated again at a later time following the processing of additional data'
+              value: NotFinal
+            - description: Final score was calculated and available
+              value: Final
+      description:
+        description: Alert description.
+        readOnly: true
+        type: string
+      endTimeUtc:
+        description: The impact end time of the alert (the time of the last event contributing to the alert).
+        format: date-time
+        readOnly: true
+        type: string
+      intent:
+        description: Holds the alert intent stage(s) mapping for this alert.
+        enum:
+          - Unknown
+          - Probing
+          - Exploitation
+          - Persistence
+          - PrivilegeEscalation
+          - DefenseEvasion
+          - CredentialAccess
+          - Discovery
+          - LateralMovement
+          - Execution
+          - Collection
+          - Exfiltration
+          - CommandAndControl
+          - Impact
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: KillChainIntent
+          values:
+            - description: The default value.
+              value: Unknown
+            - description: Probing could be an attempt to access a certain resource regardless of a malicious intent or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt originating from outside the network in attempt to scan the target system and find a way in.
+              value: Probing
+            - description: 'Exploitation is the stage where an attacker manage to get foothold on the attacked resource. This stage is applicable not only for compute hosts, but also for resources such as user accounts, certificates etc. Adversaries will often be able to control the resource after this stage.'
+              value: Exploitation
+            - description: 'Persistence is any access, action, or configuration change to a system that gives an adversary a persistent presence on that system. Adversaries will often need to maintain access to systems through interruptions such as system restarts, loss of credentials, or other failures that would require a remote access tool to restart or alternate backdoor for them to regain access.'
+              value: Persistence
+            - description: Privilege escalation is the result of actions that allow an adversary to obtain a higher level of permissions on a system or network. Certain tools or actions require a higher level of privilege to work and are likely necessary at many points throughout an operation. User accounts with permissions to access specific systems or perform specific functions necessary for adversaries to achieve their objective may also be considered an escalation of privilege.
+              value: PrivilegeEscalation
+            - description: 'Defense evasion consists of techniques an adversary may use to evade detection or avoid other defenses. Sometimes these actions are the same as or variations of techniques in other categories that have the added benefit of subverting a particular defense or mitigation. '
+              value: DefenseEvasion
+            - description: 'Credential access represents techniques resulting in access to or control over system, domain, or service credentials that are used within an enterprise environment. Adversaries will likely attempt to obtain legitimate credentials from users or administrator accounts (local system administrator or domain users with administrator access) to use within the network. With sufficient access within a network, an adversary can create accounts for later use within the environment.'
+              value: CredentialAccess
+            - description: 'Discovery consists of techniques that allow the adversary to gain knowledge about the system and internal network. When adversaries gain access to a new system, they must orient themselves to what they now have control of and what benefits operating from that system give to their current objective or overall goals during the intrusion. The operating system provides many native tools that aid in this post-compromise information-gathering phase.'
+              value: Discovery
+            - description: 'Lateral movement consists of techniques that enable an adversary to access and control remote systems on a network and could, but does not necessarily, include execution of tools on remote systems. The lateral movement techniques could allow an adversary to gather information from a system without needing additional tools, such as a remote access tool. An adversary can use lateral movement for many purposes, including remote Execution of tools, pivoting to additional systems, access to specific information or files, access to additional credentials, or to cause an effect.'
+              value: LateralMovement
+            - description: The execution tactic represents techniques that result in execution of adversary-controlled code on a local or remote system. This tactic is often used in conjunction with lateral movement to expand access to remote systems on a network.
+              value: Execution
+            - description: 'Collection consists of techniques used to identify and gather information, such as sensitive files, from a target network prior to exfiltration. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.'
+              value: Collection
+            - description: Exfiltration refers to techniques and attributes that result or aid in the adversary removing files and information from a target network. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.
+              value: Exfiltration
+            - description: The command and control tactic represents how adversaries communicate with systems under their control within a target network.
+              value: CommandAndControl
+            - description: 'The impact intent primary objective is to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process. This would often refer to techniques such as ransom-ware, defacement, data manipulation and others.'
+              value: Impact
+      processingEndTime:
+        description: The time the alert was made available for consumption.
+        format: date-time
+        readOnly: true
+        type: string
+      productComponentName:
+        description: The name of a component inside the product which generated the alert.
+        readOnly: true
+        type: string
+      productName:
+        description: The name of the product which published this alert.
+        readOnly: true
+        type: string
+      productVersion:
+        description: The version of the product generating the alert.
+        readOnly: true
+        type: string
+      remediationSteps:
+        description: Manual action items to take to remediate the alert.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      severity:
+        $ref: '#/definitions/AlertSeverity'
+        description: The severity of the alert
+      startTimeUtc:
+        description: The impact start time of the alert (the time of the first event contributing to the alert).
+        format: date-time
+        readOnly: true
+        type: string
+      status:
+        description: The lifecycle status of the alert.
+        enum:
+          - Unknown
+          - New
+          - Resolved
+          - Dismissed
+          - InProgress
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AlertStatus
+          values:
+            - description: Unknown value
+              value: Unknown
+            - description: New alert
+              value: New
+            - description: Alert closed after handling
+              value: Resolved
+            - description: Alert dismissed as false positive
+              value: Dismissed
+            - description: Alert is being handled
+              value: InProgress
+      systemAlertId:
+        description: Holds the product identifier of the alert for the product.
+        readOnly: true
+        type: string
+      timeGenerated:
+        description: The time the alert was generated.
+        format: date-time
+        readOnly: true
+        type: string
+      vendorName:
+        description: The name of the vendor that raise the alert.
+        readOnly: true
+        type: string
+    type: object
+  SecurityGroupEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a security group entity.
+    properties:
+      properties:
+        $ref: '#/definitions/SecurityGroupEntityProperties'
+        description: SecurityGroup entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SecurityGroup
+  SecurityGroupEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: SecurityGroup entity property bag.
+    properties:
+      distinguishedName:
+        description: The group distinguished name
+        readOnly: true
+        type: string
+      objectGuid:
+        description: 'A single-value attribute that is the unique identifier for the object, assigned by active directory.'
+        format: uuid
+        readOnly: true
+        type: string
+      sid:
+        description: The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group
+        readOnly: true
+        type: string
     type: object
   Settings:
     allOf:
@@ -3149,6 +5058,35 @@ definitions:
       dataTypes:
         $ref: '#/definitions/TIDataConnectorDataTypes'
         description: The available data types for the connector.
+    type: object
+  ThreatIntelligence:
+    description: ThreatIntelligence property bag.
+    properties:
+      confidence:
+        description: Confidence (must be between 0 and 1)
+        format: double
+        readOnly: true
+        type: number
+      providerName:
+        description: Name of the provider from whom this Threat Intelligence information was received
+        readOnly: true
+        type: string
+      reportLink:
+        description: Report link
+        readOnly: true
+        type: string
+      threatDescription:
+        description: Threat description (free text)
+        readOnly: true
+        type: string
+      threatName:
+        description: Threat name (e.g. "Jedobot malware")
+        readOnly: true
+        type: string
+      threatType:
+        description: Threat type (e.g. "Botnet")
+        readOnly: true
+        type: string
     type: object
   ToggleSettings:
     allOf:
@@ -3206,52 +5144,43 @@ definitions:
           modelAsString: true
           name: StatusInMcas
     type: object
+  UrlEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a url entity.
+    properties:
+      properties:
+        $ref: '#/definitions/UrlEntityProperties'
+        description: Url entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Url
+  UrlEntityProperties:
+    allOf:
+      - $ref: '#/definitions/EntityCommonProperties'
+    description: Url entity property bag.
+    properties:
+      url:
+        description: A full URL the entity points to
+        readOnly: true
+        type: string
+    type: object
   UserInfo:
     description: User information that made some action
     properties:
       email:
         description: The email of the user.
+        readOnly: true
         type: string
       name:
         description: The name of the user.
+        readOnly: true
         type: string
       objectId:
         description: The object id of the user.
         format: uuid
         type: string
-    type: object
-  operation:
-    description: Operation provided by provider
-    properties:
-      display:
-        description: Properties of the operation
-        properties:
-          description:
-            description: Description of the operation
-            type: string
-          operation:
-            description: Operation name
-            type: string
-          provider:
-            description: Provider name
-            type: string
-          resource:
-            description: Resource name
-            type: string
-        type: object
-      name:
-        description: Name of the operation
-        type: string
-  operationsList:
-    description: Lists the operations available in the SecurityInsights RP.
-    properties:
-      nextLink:
-        description: URL to fetch the next set of operations.
-        type: string
-      value:
-        description: Array of operations
-        items:
-          $ref: '#/definitions/operation'
-        type: array
+        x-nullable: true
     required:
-      - value
+      - objectId
+    type: object

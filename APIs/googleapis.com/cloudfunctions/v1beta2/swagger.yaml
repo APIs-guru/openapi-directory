@@ -634,23 +634,19 @@ definitions:
 
           See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
           more information on connecting Cloud projects.
-
-          This feature is currently in alpha, available only for whitelisted users.
         type: string
       runtime:
         description: |-
-          Required. The runtime in which the function is going to run. Choices:
-
-          * `nodejs6`: Node.js 6
-          * `nodejs8`: Node.js 8
-          * `nodejs10`: Node.js 10
-          * `python37`: Python 3.7
-          * `go111`: Go 1.11
+          The runtime in which to run the function. Required when deploying a new
+          function, optional when updating an existing function. For a complete
+          list of possible choices, see the
+          [`gcloud` command
+          reference](/sdk/gcloud/reference/functions/deploy#--runtime).
         type: string
       serviceAccount:
         description: |-
           The email of the function's service account. If empty, defaults to
-          {project_id}@appspot.gserviceaccount.com.
+          `{project_id}@appspot.gserviceaccount.com`.
         type: string
       sourceArchiveUrl:
         description: |-
@@ -703,8 +699,7 @@ definitions:
         type: string
       versionId:
         description: |-
-          Output only.
-          The version identifier of the Cloud Function. Each deployment attempt
+          Output only. The version identifier of the Cloud Function. Each deployment attempt
           results in a new version of a function being created.
         format: int64
         type: string
@@ -720,8 +715,6 @@ definitions:
 
           See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
           more information on connecting Cloud projects.
-
-          This feature is currently in alpha, available only for whitelisted users.
         type: string
     type: object
   EventTrigger:

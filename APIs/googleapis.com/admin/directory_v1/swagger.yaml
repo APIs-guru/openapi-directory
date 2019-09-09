@@ -211,7 +211,8 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Maximum number of results to return. Default is 100
+        - default: 100
+          description: Maximum number of results to return. Max allowed value is 200.
           in: query
           minimum: 1
           name: maxResults
@@ -482,7 +483,8 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Maximum number of results to return. Default is 100
+        - default: 100
+          description: Maximum number of results to return. Max allowed value is 100.
           in: query
           minimum: 1
           name: maxResults
@@ -2560,7 +2562,8 @@ paths:
           in: query
           name: domain
           type: string
-        - description: Maximum number of results to return. Default is 200
+        - default: 200
+          description: Maximum number of results to return. Max allowed value is 200.
           in: query
           minimum: 1
           name: maxResults
@@ -2586,7 +2589,7 @@ paths:
           in: query
           name: sortOrder
           type: string
-        - description: 'Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object'
+        - description: 'Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it''s an ID, it should match with the ID of the user object.'
           in: query
           name: userKey
           type: string
@@ -2890,7 +2893,8 @@ paths:
           in: query
           name: includeDerivedMembership
           type: boolean
-        - description: Maximum number of results to return. Default is 200
+        - default: 200
+          description: Maximum number of results to return. Max allowed value is 200.
           in: query
           minimum: 1
           name: maxResults
@@ -3172,7 +3176,8 @@ paths:
           in: query
           name: event
           type: string
-        - description: Maximum number of results to return. Default is 100. Max allowed is 500
+        - default: 100
+          description: Maximum number of results to return.
           in: query
           maximum: 500
           minimum: 1
@@ -3203,7 +3208,7 @@ paths:
           in: query
           name: query
           type: string
-        - description: If set to true retrieves the list of deleted users. Default is false
+        - description: 'If set to true, retrieves the list of deleted users. (Default: false)'
           in: query
           name: showDeleted
           type: string
@@ -3301,7 +3306,8 @@ paths:
           in: query
           name: event
           type: string
-        - description: Maximum number of results to return. Default is 100. Max allowed is 500
+        - default: 100
+          description: Maximum number of results to return.
           in: query
           maximum: 500
           minimum: 1
@@ -3336,7 +3342,7 @@ paths:
           name: resource
           schema:
             $ref: '#/definitions/Channel'
-        - description: If set to true retrieves the list of deleted users. Default is false
+        - description: 'If set to true, retrieves the list of deleted users. (Default: false)'
           in: query
           name: showDeleted
           type: string
@@ -4428,6 +4434,10 @@ definitions:
       annotatedUser:
         description: User of the device
         type: string
+      autoUpdateExpiration:
+        description: (Read-only) The timestamp after which the device will stop receiving Chrome updates or support
+        format: int64
+        type: string
       bootMode:
         description: Chromebook boot mode (Read-only)
         type: string
@@ -4504,11 +4514,17 @@ definitions:
               type: array
           type: object
         type: array
+      dockMacAddress:
+        description: (Read-only) Built-in MAC address for the docking station that the device connected to. Factory sets Media access control address (MAC address) assigned for use by a dock. Currently this is only supported on the Dell Arcada / Sarien devices and the Dell WD19 / WD19TB Docking Station. It is reserved specifically for MAC pass through device policy. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for Dell devices.
+        type: string
       etag:
         description: ETag of the resource.
         type: string
       ethernetMacAddress:
         description: Chromebook Mac Address on ethernet network interface (Read-only)
+        type: string
+      ethernetMacAddress0:
+        description: '(Read-only) MAC address used by the Chromebook’s internal ethernet port, and for onboard network (ethernet) interface. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for Dell devices.'
         type: string
       firmwareVersion:
         description: Chromebook firmware version (Read-only)
@@ -4527,6 +4543,9 @@ definitions:
         type: string
       macAddress:
         description: Chromebook Mac Address on wifi network interface (Read-only)
+        type: string
+      manufactureDate:
+        description: (Read-only) The date the device was manufactured in yyyy-mm-dd format.
         type: string
       meid:
         description: Mobile Equipment identifier for the 3G mobile card in the Chromebook (Read-only)
@@ -4921,7 +4940,7 @@ definitions:
         description: ETag of the resource.
         type: string
       id:
-        description: Unique identifier of customer member (Read-only) Unique identifier of group (Read-only) Unique identifier of member (Read-only)
+        description: The unique ID of the group member. A member id can be used as a member request URI's memberKey. Unique identifier of group (Read-only) Unique identifier of member (Read-only)
         type: string
       kind:
         default: 'admin#directory#member'
@@ -5267,7 +5286,7 @@ definitions:
         description: The name of the privilege.
         type: string
       serviceId:
-        description: The obfuscated ID of the service this privilege is for.
+        description: The obfuscated ID of the service this privilege is for. This value is returned with Privileges.list().
         type: string
       serviceName:
         description: The name of the service this privilege is for.
@@ -5323,7 +5342,7 @@ definitions:
               description: The name of the privilege.
               type: string
             serviceId:
-              description: The obfuscated ID of the service this privilege is for.
+              description: The obfuscated ID of the service this privilege is for. This value is returned with Privileges.list().
               type: string
           type: object
         type: array
@@ -5679,6 +5698,12 @@ definitions:
       primaryEmail:
         description: username of User
         type: string
+      recoveryEmail:
+        description: Recovery email of the user.
+        type: string
+      recoveryPhone:
+        description: 'Recovery phone of the user. The phone number must be in the E.164 format, starting with the plus sign (+). Example: +16506661212.'
+        type: string
       relations: {}
       sshPublicKeys: {}
       suspended:
@@ -5905,7 +5930,7 @@ definitions:
         description: The domain to which the organization belongs to.
         type: string
       fullTimeEquivalent:
-        description: The full-time equivalent percent within the organization (100000 = 100%).
+        description: The full-time equivalent millipercent within the organization (100000 = 100%).
         format: int32
         type: integer
       location:

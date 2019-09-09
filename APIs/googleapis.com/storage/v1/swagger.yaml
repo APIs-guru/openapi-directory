@@ -1018,6 +1018,11 @@ paths:
           name: bucket
           required: true
           type: string
+        - description: 'The IAM policy format version to be returned. If the optionsRequestedPolicyVersion is for an older version that doesn''t support part of the requested IAM policy, the request fails.'
+          in: query
+          minimum: 1
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: The project to be billed for this request if the target bucket is requester-pays bucket.
           in: query
           name: provisionalUserProject
@@ -3176,7 +3181,6 @@ definitions:
                 type: boolean
               lockedTime:
                 description: 'The deadline for changing iamConfiguration.uniformBucketLevelAccess.enabled from true to false in RFC 3339  format. iamConfiguration.uniformBucketLevelAccess.enabled may be changed from true to false until the locked time, after which the field is immutable.'
-                format: date-time
                 type: string
             type: object
         type: object
@@ -3890,6 +3894,10 @@ definitions:
       resourceId:
         description: 'The ID of the resource to which this policy belongs. Will be of the form projects/_/buckets/bucket for buckets, and projects/_/buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input.'
         type: string
+      version:
+        description: The IAM policy format version.
+        format: int32
+        type: integer
     type: object
   RewriteResponse:
     description: A rewrite response.

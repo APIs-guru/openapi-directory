@@ -30,6 +30,13 @@ parameters:
     name: authtoken
     required: true
     type: string
+  CustomerIDParam:
+    description: Id of the Customer
+    format: int32
+    in: path
+    name: id
+    required: true
+    type: integer
   LimitParam:
     default: 50
     description: List restriction
@@ -768,7 +775,7 @@ paths:
       parameters:
         - $ref: '#/parameters/LoginParam'
         - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: '#/parameters/CustomerIDParam'
         - description: Id of the Customer Additional Field
           format: int32
           in: path
@@ -815,6 +822,33 @@ paths:
           schema:
             $ref: '#/definitions/NotFound'
       summary: Create a new Customer Additional Field.
+      tags:
+        - Customer Additional Fields
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/CustomerIDParam'
+        - description: Id of the Customer Additional Field
+          format: int32
+          in: path
+          name: field_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CustomerAdditionalField'
+        '400':
+          description: Customer Additional Field Bad Parameters.
+          schema:
+            $ref: '#/definitions/BadParams'
+        '404':
+          description: Customer Additional Field Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a Customer Additional Field.
       tags:
         - Customer Additional Fields
   /fields.json:
@@ -2432,6 +2466,10 @@ definitions:
         description: Page of the app
         type: string
     type: object
+  BadParams:
+    properties:
+      message:
+        type: string
   BillingAddress:
     properties:
       address:
@@ -2929,11 +2967,7 @@ definitions:
         description: Additional information for the given Order
         type: string
       customer:
-        properties:
-          email:
-            description: Email of the customer for the given Order
-            type: string
-        type: object
+        $ref: '#/definitions/CustomerFields'
       products:
         items:
           $ref: '#/definitions/OrderProduct'

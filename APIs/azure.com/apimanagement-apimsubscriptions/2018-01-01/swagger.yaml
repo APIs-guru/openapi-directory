@@ -647,17 +647,18 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub
-              name: testsub
-              properties:
-                createdDate: '2017-06-02T23:34:03.1055076Z'
-                displayName: testsub
-                primaryKey: 06c34e1a9d394412b292e0611e73d417
-                productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                secondaryKey: 1e756a7705364c529e8d1760190f47b3
-                state: submitted
-                userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-              type: Microsoft.ApiManagement/service/subscriptions
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub
+                name: testsub
+                properties:
+                  createdDate: '2017-06-02T23:34:03.1055076Z'
+                  displayName: testsub
+                  primaryKey: 06c34e1a9d394412b292e0611e73d417
+                  productId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
+                  secondaryKey: 1e756a7705364c529e8d1760190f47b3
+                  state: submitted
+                  userId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
+                type: Microsoft.ApiManagement/service/subscriptions
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -273,6 +273,8 @@ paths:
           description: Update successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.
           schema:
             $ref: '#/definitions/VirtualNetworkGatewayConnection'
+        '202':
+          description: Accepted and the operation will complete asynchronously.
       tags:
         - VirtualNetworkGatewayConnections
       x-ms-examples:
@@ -314,7 +316,10 @@ paths:
                   tag1: value1
                   tag2: value2
                 type: Microsoft.Network/connections
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
     put:
       description: Creates or updates a virtual network gateway connection in the specified resource group.
       operationId: VirtualNetworkGatewayConnections_CreateOrUpdate
@@ -1292,6 +1297,8 @@ paths:
           description: Update successful. The operation returns the resulting VirtualNetworkGateway resource.
           schema:
             $ref: '#/definitions/VirtualNetworkGateway'
+        '202':
+          description: Accepted and the operation will complete asynchronously.
       tags:
         - VirtualNetworkGateways
       x-ms-examples:
@@ -1343,7 +1350,10 @@ paths:
                   tag1: value1
                   tag2: value2
                 type: Microsoft.Network/virtualNetworkGateways
+            '202': {}
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
     put:
       description: Creates or updates a virtual network gateway in the specified resource group.
       operationId: VirtualNetworkGateways_CreateOrUpdate

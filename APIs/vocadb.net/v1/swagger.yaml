@@ -3143,6 +3143,18 @@ paths:
           name: songTypes
           required: false
           type: string
+        - description: Filter by songs published after this date (inclusive).
+          format: date-time
+          in: query
+          name: afterDate
+          required: false
+          type: string
+        - description: Filter by songs published before this date (exclusive).
+          format: date-time
+          in: query
+          name: beforeDate
+          required: false
+          type: string
         - collectionFormat: multi
           description: Filter by one or more tag names (optional).
           in: query

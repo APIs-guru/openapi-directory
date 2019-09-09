@@ -54,7 +54,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to PostgreSQL server
             properties:
               databaseName:
@@ -176,7 +175,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -283,7 +281,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -372,7 +369,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to MySQL server
             properties:
               port:
@@ -403,7 +399,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to MySQL server
             properties:
               port:
@@ -505,7 +500,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to PostgreSQL server
             properties:
               databaseName:
@@ -539,7 +533,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to PostgreSQL server
             properties:
               databaseName:
@@ -644,7 +637,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -758,7 +750,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Properties required to create a connection to Azure SQL database Managed instance
             properties:
               managedInstanceResourceId:
@@ -846,7 +837,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -980,7 +970,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1038,7 +1027,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1151,7 +1139,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1297,7 +1284,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1355,7 +1341,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1512,7 +1497,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -1678,7 +1662,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to MySQL server
             properties:
               port:
@@ -1709,7 +1692,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to MySQL server
             properties:
               port:
@@ -1800,7 +1782,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to PostgreSQL server
             properties:
               databaseName:
@@ -1834,7 +1815,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to PostgreSQL server
             properties:
               databaseName:
@@ -1901,7 +1881,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -1959,7 +1938,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2106,7 +2084,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2164,7 +2141,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2362,7 +2338,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2423,7 +2398,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Properties required to create a connection to Azure SQL database Managed instance
                 properties:
                   managedInstanceResourceId:
@@ -2487,7 +2461,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2545,7 +2518,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -2772,7 +2744,6 @@ definitions:
           required:
             - commandType
           type: object
-          x-ms-discriminator-value: Unknown
         readOnly: true
         type: array
       errors:
@@ -2819,7 +2790,6 @@ definitions:
     required:
       - taskType
     type: object
-    x-ms-discriminator-value: Unknown
   TaskList:
     description: OData page of tasks
     properties:
@@ -2896,7 +2866,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -2954,7 +2923,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -3143,7 +3111,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Information for connecting to SQL database server
                 properties:
                   additionalSettings:
@@ -3204,7 +3171,6 @@ definitions:
                     required:
                       - type
                     type: object
-                    x-ms-discriminator-value: Unknown
                 description: Properties required to create a connection to Azure SQL database Managed instance
                 properties:
                   managedInstanceResourceId:
@@ -3371,7 +3337,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -3429,7 +3394,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:

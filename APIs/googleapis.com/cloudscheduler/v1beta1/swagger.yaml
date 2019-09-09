@@ -120,9 +120,7 @@ paths:
       operationId: cloudscheduler.projects.locations.jobs.delete
       parameters:
         - description: |-
-            Required.
-
-            The job name. For example:
+            Required. The job name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           in: path
           name: name
@@ -146,9 +144,7 @@ paths:
       operationId: cloudscheduler.projects.locations.jobs.get
       parameters:
         - description: |-
-            Required.
-
-            The job name. For example:
+            Required. The job name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           in: path
           name: name
@@ -311,9 +307,7 @@ paths:
           schema:
             $ref: '#/definitions/PauseJobRequest'
         - description: |-
-            Required.
-
-            The job name. For example:
+            Required. The job name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           in: path
           name: name
@@ -360,9 +354,7 @@ paths:
           schema:
             $ref: '#/definitions/ResumeJobRequest'
         - description: |-
-            Required.
-
-            The job name. For example:
+            Required. The job name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           in: path
           name: name
@@ -407,9 +399,7 @@ paths:
           schema:
             $ref: '#/definitions/RunJobRequest'
         - description: |-
-            Required.
-
-            The job name. For example:
+            Required. The job name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           in: path
           name: name
@@ -455,9 +445,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required.
-
-            The location name. For example:
+            Required. The location name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID`.
           in: path
           name: parent
@@ -497,9 +485,7 @@ paths:
           schema:
             $ref: '#/definitions/Job'
         - description: |-
-            Required.
-
-            The location name. For example:
+            Required. The location name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID`.
           in: path
           name: parent
@@ -794,9 +780,7 @@ definitions:
           yourself.
       uri:
         description: |-
-          Required.
-
-          The full URI path that the request will be sent to. This string
+          Required. The full URI path that the request will be sent to. This string
           must begin with either "http://" or "https://". Some examples of
           valid values for uri are:
           `http://acme.com` and `https://acme.com/sales:8080`. Cloud Scheduler will
@@ -1102,9 +1086,7 @@ definitions:
         type: string
       topicName:
         description: |-
-          Required.
-
-          The name of the Cloud Pub/Sub topic to which messages will
+          Required. The name of the Cloud Pub/Sub topic to which messages will
           be published when a job is delivered. The topic name must be in the
           same format as required by PubSub's
           [PublishRequest.name](https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#publishrequest),

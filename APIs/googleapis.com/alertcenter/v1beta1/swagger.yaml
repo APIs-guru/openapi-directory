@@ -317,7 +317,9 @@ paths:
     post:
       description: |-
         Creates new feedback for an alert. Attempting to create a feedback for
-        a non-existent alert returns `NOT_FOUND` error.
+        a non-existent alert returns `NOT_FOUND` error. Attempting to create a
+        feedback for an alert that is marked for deletion returns
+        `FAILED_PRECONDITION' error.
       operationId: alertcenter.alerts.feedback.create
       parameters:
         - description: Required. The identifier of the alert this feedback belongs to.
@@ -348,6 +350,49 @@ paths:
             - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
+  '/v1beta1/alerts/{alertId}/metadata':
+    get:
+      description: |-
+        Returns the metadata of an alert. Attempting to get metadata for
+        a non-existent alert returns `NOT_FOUND` error.
+      operationId: alertcenter.alerts.getMetadata
+      parameters:
+        - description: Required. The identifier of the alert this metadata belongs to.
+          in: path
+          name: alertId
+          required: true
+          type: string
+        - description: |-
+            Optional. The unique identifier of the G Suite organization account of the
+            customer the alert metadata is associated with.
+            Inferred from the caller identity if not provided.
+          in: query
+          name: customerId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AlertMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - alerts
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/alerts/{alertId}:undelete':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -384,6 +429,72 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Alert'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - alerts
+  '/v1beta1/alerts:batchDelete':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Performs batch delete operation on alerts.
+      operationId: alertcenter.alerts.batchDelete
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchDeleteAlertsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchDeleteAlertsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - alerts
+  '/v1beta1/alerts:batchUndelete':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Performs batch undelete operation on alerts.
+      operationId: alertcenter.alerts.batchUndelete
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUndeleteAlertsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchUndeleteAlertsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.alerts'
@@ -560,6 +671,22 @@ definitions:
           If not provided, it indicates an ongoing alert.
         format: google-datetime
         type: string
+      etag:
+        description: |-
+          Optional. `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of an alert from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform alert updates in order to avoid race
+          conditions: An `etag` is returned in the response which contains alerts,
+          and systems are expected to put that etag in the request to update alert to
+          ensure that their change will be applied to the same version of the alert.
+
+          If no `etag` is provided in the call to update alert, then the existing
+          alert is overwritten blindly.
+        type: string
+      metadata:
+        $ref: '#/definitions/AlertMetadata'
+        description: Output only. The metadata associated with this alert.
       securityInvestigationToolLink:
         description: |-
           Output only. An optional
@@ -577,7 +704,7 @@ definitions:
           * Mobile device management
           * Gmail phishing
           * Domain wide takeout
-          * Government attack warning
+          * State sponsored attack
           * Google identity
         type: string
       startTime:
@@ -626,6 +753,57 @@ definitions:
           - VERY_USEFUL
         type: string
     type: object
+  AlertMetadata:
+    description: An alert metadata.
+    properties:
+      alertId:
+        description: Output only. The alert identifier.
+        type: string
+      assignee:
+        description: The email address of the user assigned to the alert.
+        type: string
+      customerId:
+        description: Output only. The unique identifier of the Google account of the customer.
+        type: string
+      etag:
+        description: |-
+          Optional. `etag` is used for optimistic concurrency control as a way to
+          help prevent simultaneous updates of an alert metadata from overwriting
+          each other. It is strongly suggested that systems make use of the `etag` in
+          the read-modify-write cycle to perform metatdata updates in order to avoid
+          race conditions: An `etag` is returned in the response which contains alert
+          metadata, and systems are expected to put that etag in the request to
+          update alert metadata to ensure that their change will be applied to the
+          same version of the alert metadata.
+
+          If no `etag` is provided in the call to update alert metadata, then the
+          existing alert metadata is overwritten blindly.
+        type: string
+      severity:
+        description: |-
+          The severity value of the alert. Alert Center will set this field at alert
+          creation time, default's to an empty string when it could not be
+          determined.
+          The supported values for update actions on this field are the following:
+
+          * HIGH
+          * MEDIUM
+          * LOW
+        type: string
+      status:
+        description: |-
+          The current status of the alert.
+          The supported values are the following:
+
+          * NOT_STARTED
+          * IN_PROGRESS
+          * CLOSED
+        type: string
+      updateTime:
+        description: Output only. The time this metadata was last updated.
+        format: google-datetime
+        type: string
+    type: object
   Attachment:
     description: Attachment with application-specific information about an alert.
     properties:
@@ -654,6 +832,62 @@ definitions:
           The source IP address of the malicious email, for example,
           `127.0.0.1`.
         type: string
+    type: object
+  BatchDeleteAlertsRequest:
+    description: A request to perform batch delete on alerts.
+    properties:
+      alertId:
+        description: Required. list of alert ids.
+        items:
+          type: string
+        type: array
+      customerId:
+        description: |-
+          Optional. The unique identifier of the G Suite organization account of the
+          customer the alerts are associated with.
+        type: string
+    type: object
+  BatchDeleteAlertsResponse:
+    description: Response to batch delete operation on alerts.
+    properties:
+      failedAlertStatus:
+        additionalProperties:
+          $ref: '#/definitions/Status'
+        description: The status details for each failed alert_id.
+        type: object
+      successAlertIds:
+        description: The successful list of alert ids.
+        items:
+          type: string
+        type: array
+    type: object
+  BatchUndeleteAlertsRequest:
+    description: A request to perform batch undelete on alerts.
+    properties:
+      alertId:
+        description: Required. list of alert ids.
+        items:
+          type: string
+        type: array
+      customerId:
+        description: |-
+          Optional. The unique identifier of the G Suite organization account of the
+          customer the alerts are associated with.
+        type: string
+    type: object
+  BatchUndeleteAlertsResponse:
+    description: Response to batch undelete operation on alerts.
+    properties:
+      failedAlertStatus:
+        additionalProperties:
+          $ref: '#/definitions/Status'
+        description: The status details for each failed alert_id.
+        type: object
+      successAlertIds:
+        description: The successful list of alert ids.
+        items:
+          type: string
+        type: array
     type: object
   CloudPubsubTopic:
     description: |-
@@ -955,6 +1189,36 @@ definitions:
     properties:
       email:
         description: The email of the user this incident was created for.
+        type: string
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
+
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
         type: string
     type: object
   SuspiciousActivity:

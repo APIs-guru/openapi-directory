@@ -32,6 +32,29 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: AmazonMWSObject
+  AmazonRedshiftTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Amazon Redshift table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AmazonRedshiftTableDatasetTypeProperties'
+        description: Amazon Redshift table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AmazonRedshiftTable
+  AmazonRedshiftTableDatasetTypeProperties:
+    description: Amazon Redshift table dataset properties.
+    properties:
+      schema:
+        description: 'The Amazon Redshift schema name. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The Amazon Redshift table name. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   AmazonS3Dataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -86,6 +109,40 @@ definitions:
         description: 'Specify the version of amazon S3. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  AvroDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Avro dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AvroDatasetTypeProperties'
+        description: Avro dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Avro
+  AvroDatasetTypeProperties:
+    description: Avro dataset properties.
+    properties:
+      avroCompressionCodec:
+        enum:
+          - none
+          - deflate
+          - snappy
+          - xz
+          - bzip2
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: avroCompressionCodec
+      avroCompressionLevel:
+        maximum: 9
+        minimum: 1
+        type: integer
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the avro storage.
+    required:
+      - location
   AvroFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'
@@ -220,6 +277,17 @@ definitions:
       - $ref: '#/definitions/DatasetLocation'
     description: The location of azure data lake store dataset.
     type: object
+  AzureMariaDBTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Azure Database for MariaDB dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureMariaDBTable
   AzureMySqlTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -297,8 +365,14 @@ definitions:
   AzureSqlDWTableDatasetTypeProperties:
     description: Azure SQL Data Warehouse dataset properties.
     properties:
-      tableName:
+      schema:
+        description: 'The schema name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string).'
+        type: object
+      table:
         description: 'The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
         type: object
   AzureSqlMITableDataset:
     allOf:
@@ -337,8 +411,14 @@ definitions:
   AzureSqlTableDatasetTypeProperties:
     description: Azure SQL dataset properties.
     properties:
-      tableName:
+      schema:
+        description: 'The schema name of the Azure SQL database. Type: string (or Expression with resultType string).'
+        type: object
+      table:
         description: 'The table name of the Azure SQL database. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
         type: object
   AzureTableDataset:
     allOf:
@@ -669,6 +749,29 @@ definitions:
         description: The ZipDeflate compression level.
     type: object
     x-ms-discriminator-value: ZipDeflate
+  Db2TableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Db2 table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/Db2TableDatasetTypeProperties'
+        description: Db2 table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Db2Table
+  Db2TableDatasetTypeProperties:
+    description: Db2 table dataset properties.
+    properties:
+      schema:
+        description: 'The Db2 schema name. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The Db2 table name. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   DelimitedTextDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -745,13 +848,25 @@ definitions:
         type: object
     required:
       - collectionName
+  DrillDatasetTypeProperties:
+    description: Drill Dataset Properties
+    properties:
+      schema:
+        description: 'The schema name of the Drill. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Drill. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   DrillTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Drill server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/DrillDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -884,24 +999,48 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: GoogleAdWordsObject
+  GoogleBigQueryDatasetTypeProperties:
+    description: Google BigQuery Dataset Properties
+    properties:
+      dataset:
+        description: 'The database name of the Google BigQuery. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Google BigQuery. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using database + table properties instead.
+        type: object
   GoogleBigQueryObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Google BigQuery service dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/GoogleBigQueryDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: GoogleBigQueryObject
+  GreenplumDatasetTypeProperties:
+    description: Greenplum Dataset Properties
+    properties:
+      schema:
+        description: 'The schema name of Greenplum. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of Greenplum. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   GreenplumTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Greenplum Database dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/GreenplumDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -922,13 +1061,25 @@ definitions:
       - $ref: '#/definitions/DatasetLocation'
     description: The location of HDFS.
     type: object
+  HiveDatasetTypeProperties:
+    description: Hive Properties
+    properties:
+      schema:
+        description: 'The schema name of the Hive. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Hive. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   HiveObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Hive Server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/HiveDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -985,13 +1136,25 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: HubspotObject
+  ImpalaDatasetTypeProperties:
+    description: Impala Dataset Properties
+    properties:
+      schema:
+        description: 'The schema name of the Impala. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Impala. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   ImpalaObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Impala server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/ImpalaDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -1024,6 +1187,31 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: JiraObject
+  JsonDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Json dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/JsonDatasetTypeProperties'
+        description: Json dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Json
+  JsonDatasetTypeProperties:
+    description: Json dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the json dataset.
+      encodingName:
+        description: 'The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string).'
+        type: object
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the json data storage.
+    required:
+      - location
   JsonFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'
@@ -1169,11 +1357,23 @@ definitions:
     description: Netezza dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/NetezzaTableDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: NetezzaTable
+  NetezzaTableDatasetTypeProperties:
+    description: Netezza dataset properties.
+    properties:
+      schema:
+        description: 'The schema name of the Netezza. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Netezza. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   ODataResourceDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1257,9 +1457,34 @@ definitions:
   OracleTableDatasetTypeProperties:
     description: On-premises Oracle dataset properties.
     properties:
-      tableName:
+      schema:
+        description: 'The schema name of the on-premises Oracle database. Type: string (or Expression with resultType string).'
+        type: object
+      table:
         description: 'The table name of the on-premises Oracle database. Type: string (or Expression with resultType string).'
         type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
+  OrcDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: ORC dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/OrcDatasetTypeProperties'
+        description: ORC dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Orc
+  OrcDatasetTypeProperties:
+    description: ORC dataset properties.
+    properties:
+      location:
+        $ref: '#/definitions/DatasetLocation'
+        description: The location of the ORC data storage.
+    required:
+      - location
   OrcFormat:
     allOf:
       - $ref: '#/definitions/DatasetStorageFormat'
@@ -1310,13 +1535,25 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: PaypalObject
+  PhoenixDatasetTypeProperties:
+    description: Phoenix Dataset Properties
+    properties:
+      schema:
+        description: 'The schema name of the Phoenix. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Phoenix. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   PhoenixObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Phoenix server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/PhoenixDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -1335,8 +1572,26 @@ definitions:
   PostgreSqlTableDatasetTypeProperties:
     description: PostgreSQL table dataset properties.
     properties:
-      tableName:
+      schema:
+        description: 'The PostgreSQL schema name. Type: string (or Expression with resultType string).'
+        type: object
+      table:
         description: 'The PostgreSQL table name. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
+  PrestoDatasetTypeProperties:
+    description: Presto Dataset Properties
+    properties:
+      schema:
+        description: 'The schema name of the Presto. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Presto. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
         type: object
   PrestoObjectDataset:
     allOf:
@@ -1344,7 +1599,7 @@ definitions:
     description: Presto server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/PrestoDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -1462,6 +1717,13 @@ definitions:
       objectApiName:
         description: 'The Salesforce Service Cloud object API name. Type: string (or Expression with resultType string).'
         type: object
+  SapBwCubeDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The SAP BW cube dataset.
+    properties: {}
+    type: object
+    x-ms-discriminator-value: SapBwCube
   SapCloudForCustomerResourceDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1599,13 +1861,25 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: ShopifyObject
+  SparkDatasetTypeProperties:
+    description: Spark Properties
+    properties:
+      schema:
+        description: 'The schema name of the Spark. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Spark. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   SparkObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Spark Server dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/SparkDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object
@@ -1624,8 +1898,14 @@ definitions:
   SqlServerTableDatasetTypeProperties:
     description: On-premises SQL Server dataset properties.
     properties:
-      tableName:
+      schema:
+        description: 'The schema name of the SQL Server dataset. Type: string (or Expression with resultType string).'
+        type: object
+      table:
         description: 'The table name of the SQL Server dataset. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
         type: object
   SquareObjectDataset:
     allOf:
@@ -1638,6 +1918,23 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: SquareObject
+  SybaseTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Sybase table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SybaseTableDatasetTypeProperties'
+        description: Sybase table dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SybaseTable
+  SybaseTableDatasetTypeProperties:
+    description: Sybase table dataset properties.
+    properties:
+      tableName:
+        description: 'The Sybase table name. Type: string (or Expression with resultType string).'
+        type: object
   TeradataTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -1691,13 +1988,25 @@ definitions:
         description: 'Treat empty column values in the text file as null. The default value is true. Type: boolean (or Expression with resultType boolean).'
         type: object
     type: object
+  VerticaDatasetTypeProperties:
+    description: Vertica Properties
+    properties:
+      schema:
+        description: 'The schema name of the Vertica. Type: string (or Expression with resultType string).'
+        type: object
+      table:
+        description: 'The table name of the Vertica. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: This property will be retired. Please consider using schema + table properties instead.
+        type: object
   VerticaTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
     description: Vertica dataset.
     properties:
       typeProperties:
-        $ref: '#/definitions/GenericDatasetTypeProperties'
+        $ref: '#/definitions/VerticaDatasetTypeProperties'
         description: Properties specific to this dataset type.
         x-ms-client-flatten: true
     type: object

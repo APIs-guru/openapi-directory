@@ -1,168 +1,130 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: personalize-runtime.amazonaws.com
+basePath: /
 info:
-  version: '2018-05-22'
-  x-release: v4
-  title: Amazon Personalize Runtime
-  description: <p/>
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: <p/>
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: personalize-runtime
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/personalize-runtime-2018-05-22.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: Amazon Personalize Runtime
+  version: '2018-05-22'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/personalize-runtime-2018-05-22.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: personalize-runtime
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/personalize-runtime/'
-host: personalize-runtime.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://personalize-runtime.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The Amazon Personalize Runtime multi-region endpoint
-  - url: 'https://personalize-runtime.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The Amazon Personalize Runtime multi-region endpoint
-  - url: 'http://personalize-runtime.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Amazon Personalize Runtime endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://personalize-runtime.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Amazon Personalize Runtime endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   /personalize-ranking:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: GetPersonalizedRanking
       description: <p>Re-ranks a list of recommended items for the given user. The first item in the list is deemed the most likely item to be of interest to the user.</p> <note> <p>The solution backing the campaign must have been created using a recipe of type PERSONALIZED_RANKING.</p> </note>
+      operationId: GetPersonalizedRanking
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              campaignArn:
+                description: The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
+                maxLength: 256
+                pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                type: string
+              inputList:
+                description: 'A list of items (itemId''s) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list.'
+                items:
+                  $ref: '#/definitions/ItemID'
+                type: array
+              userId:
+                description: The user for which you want the campaign to provide a personalized ranking.
+                maxLength: 256
+                type: string
+            required:
+              - campaignArn
+              - inputList
+              - userId
+            type: object
       responses:
         '200':
           description: Success
@@ -176,31 +138,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - campaignArn
-              - inputList
-              - userId
-            properties:
-              campaignArn:
-                description: The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
-                type: string
-                pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
-                maxLength: 256
-              inputList:
-                description: 'A list of items (itemId''s) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list.'
-                type: array
-                items:
-                  $ref: '#/definitions/ItemID'
-              userId:
-                description: The user for which you want the campaign to provide a personalized ranking.
-                type: string
-                maxLength: 256
+  /recommendations:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -209,10 +147,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /recommendations:
     post:
-      operationId: GetRecommendations
       description: '<p>Returns a list of recommended items. The required input depends on the recipe type used to create the solution backing the campaign, as follows:</p> <ul> <li> <p>RELATED_ITEMS - <code>itemId</code> required, <code>userId</code> not used</p> </li> <li> <p>USER_PERSONALIZATION - <code>itemId</code> optional, <code>userId</code> required</p> </li> </ul> <note> <p>Campaigns that are backed by a solution created using a recipe of type PERSONALIZED_RANKING use the API.</p> </note>'
+      operationId: GetRecommendations
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              campaignArn:
+                description: The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.
+                maxLength: 256
+                pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                type: string
+              itemId:
+                description: <p>The item ID to provide recommendations for.</p> <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>
+                maxLength: 256
+                type: string
+              numResults:
+                description: The number of results to return. The default is 25. The maximum is 100.
+                minimum: 0
+                type: integer
+              userId:
+                description: <p>The user ID to provide recommendations for.</p> <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>
+                maxLength: 256
+                type: string
+            required:
+              - campaignArn
+            type: object
       responses:
         '200':
           description: Success
@@ -226,75 +189,12 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - campaignArn
-            properties:
-              campaignArn:
-                description: The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.
-                type: string
-                pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
-                maxLength: 256
-              itemId:
-                description: <p>The item ID to provide recommendations for.</p> <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>
-                type: string
-                maxLength: 256
-              userId:
-                description: <p>The user ID to provide recommendations for.</p> <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>
-                type: string
-                maxLength: 256
-              numResults:
-                description: The number of results to return. The default is 25. The maximum is 100.
-                type: integer
-                minimum: 0
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  GetPersonalizedRankingResponse:
-    type: object
-    properties:
-      personalizedRanking:
-        $ref: '#/definitions/ItemList'
-        description: A list of items in order of most likely interest to the user.
-  ItemID:
-    type: string
-    maxLength: 256
-  InvalidInputException: {}
-  ResourceNotFoundException: {}
-  GetRecommendationsResponse:
-    type: object
-    properties:
-      itemList:
-        $ref: '#/definitions/ItemList'
-        description: A list of recommendations.
   Arn:
-    type: string
+    maxLength: 256
     pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
-    maxLength: 256
-  InputList:
-    type: array
-    items:
-      $ref: '#/definitions/ItemID'
-  UserID:
     type: string
-    maxLength: 256
   GetPersonalizedRankingRequest:
-    type: object
-    required:
-      - campaignArn
-      - inputList
-      - userId
     properties:
       campaignArn:
         $ref: '#/definitions/Arn'
@@ -305,17 +205,18 @@ definitions:
       userId:
         $ref: '#/definitions/UserID'
         description: The user for which you want the campaign to provide a personalized ranking.
-  ItemList:
-    type: array
-    items:
-      $ref: '#/definitions/PredictedItem'
-  NumResults:
-    type: integer
-    minimum: 0
-  GetRecommendationsRequest:
-    type: object
     required:
       - campaignArn
+      - inputList
+      - userId
+    type: object
+  GetPersonalizedRankingResponse:
+    properties:
+      personalizedRanking:
+        $ref: '#/definitions/ItemList'
+        description: A list of items in order of most likely interest to the user.
+    type: object
+  GetRecommendationsRequest:
     properties:
       campaignArn:
         $ref: '#/definitions/Arn'
@@ -323,16 +224,115 @@ definitions:
       itemId:
         $ref: '#/definitions/ItemID'
         description: <p>The item ID to provide recommendations for.</p> <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>
-      userId:
-        $ref: '#/definitions/UserID'
-        description: <p>The user ID to provide recommendations for.</p> <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>
       numResults:
         $ref: '#/definitions/NumResults'
         description: The number of results to return. The default is 25. The maximum is 100.
-  PredictedItem:
+      userId:
+        $ref: '#/definitions/UserID'
+        description: <p>The user ID to provide recommendations for.</p> <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>
+    required:
+      - campaignArn
     type: object
+  GetRecommendationsResponse:
+    properties:
+      itemList:
+        $ref: '#/definitions/ItemList'
+        description: A list of recommendations.
+    type: object
+  InputList:
+    items:
+      $ref: '#/definitions/ItemID'
+    type: array
+  InvalidInputException: {}
+  ItemID:
+    maxLength: 256
+    type: string
+  ItemList:
+    items:
+      $ref: '#/definitions/PredictedItem'
+    type: array
+  NumResults:
+    minimum: 0
+    type: integer
+  PredictedItem:
+    description: <p>An object that identifies an item.</p> <p>The and APIs return a list of <code>PredictedItem</code>s.</p>
     properties:
       itemId:
         $ref: '#/definitions/ItemID'
         description: The recommended item ID.
-    description: <p>An object that identifies an item.</p> <p>The and APIs return a list of <code>PredictedItem</code>s.</p>
+    type: object
+  ResourceNotFoundException: {}
+  UserID:
+    maxLength: 256
+    type: string
+x-servers:
+  - description: The Amazon Personalize Runtime multi-region endpoint
+    url: 'http://personalize-runtime.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The Amazon Personalize Runtime multi-region endpoint
+    url: 'https://personalize-runtime.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The Amazon Personalize Runtime endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://personalize-runtime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The Amazon Personalize Runtime endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://personalize-runtime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

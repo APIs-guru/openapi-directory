@@ -326,17 +326,7 @@ paths:
       tags:
         - transferOperations
     get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
+      description: Lists transfer operations.
       operationId: storagetransfer.transferOperations.list
       parameters:
         - description: |-
@@ -627,21 +617,21 @@ definitions:
         description: |-
           Error samples.
 
-          No more than 100 error log entries may be recorded for a given
-          error code for a single task.
+          At most 5 error log entries will be recorded for a given
+          error code for a single transfer operation.
         items:
           $ref: '#/definitions/ErrorLogEntry'
         type: array
     type: object
   GcsData:
     description: |-
-      In a GcsData resource, an object's name is the Google Cloud Storage object's
+      In a GcsData resource, an object's name is the Cloud Storage object's
       name and its `lastModificationTime` refers to the object's updated time,
       which changes when the content or the metadata of the object is updated.
     properties:
       bucketName:
         description: |-
-          Required. Google Cloud Storage bucket name (see
+          Required. Cloud Storage bucket name (see
           [Bucket Name
           Requirements](https://cloud.google.com/storage/docs/naming#requirements)).
         type: string
@@ -686,7 +676,7 @@ definitions:
       [Generating MD5 hashes](https://cloud.google.com/storage/transfer/#md5)
 
       * Ensure that each URL you specify is publicly accessible. For
-      example, in Google Cloud Storage you can
+      example, in Cloud Storage you can
       [share an object publicly]
       (https://cloud.google.com/storage/docs/cloud-console#_sharingdata) and get
       a link to it.
@@ -732,7 +722,7 @@ definitions:
   ObjectConditions:
     description: |-
       Conditions that determine which objects will be transferred. Applies only
-      to S3 and GCS objects.
+      to S3 and Cloud Storage objects.
     properties:
       excludePrefixes:
         description: |-
@@ -792,7 +782,8 @@ definitions:
           `NOW` refers to the `start_time` of the 'TransferOperation`. Also,
           `lastModificationTime` refers to the time of the last change to the
           object's content or metadata - specifically, this would be the `updated`
-          property of GCS objects and the `LastModified` field of S3 objects.
+          property of Cloud Storage objects and the `LastModified` field of S3
+          objects.
         format: google-duration
         type: string
       minTimeElapsedSinceLastModification:
@@ -805,7 +796,8 @@ definitions:
           `NOW` refers to the `start_time` of the 'TransferOperation`. Also,
           `lastModificationTime` refers to the time of the last change to the
           object's content or metadata - specifically, this would be the `updated`
-          property of GCS objects and the `LastModified` field of S3 objects.
+          property of Cloud Storage objects and the `LastModified` field of S3
+          objects.
         format: google-duration
         type: string
     type: object
@@ -1143,10 +1135,10 @@ definitions:
         description: An AWS S3 data source.
       gcsDataSink:
         $ref: '#/definitions/GcsData'
-        description: A Google Cloud Storage data sink.
+        description: A Cloud Storage data sink.
       gcsDataSource:
         $ref: '#/definitions/GcsData'
-        description: A Google Cloud Storage data source.
+        description: A Cloud Storage data source.
       httpDataSource:
         $ref: '#/definitions/HttpData'
         description: An HTTP URL data source.

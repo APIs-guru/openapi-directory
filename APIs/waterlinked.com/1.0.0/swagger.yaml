@@ -636,41 +636,41 @@ definitions:
   CreatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.25563670195047755
-      icon: Sequi fugit quis vero in deleniti.
-      id: 5616739593463034000
-      lat: 0.0974366068846116
-      lng: 0.708728384596471
-      name: Enim ut molestias laboriosam quasi aut ex.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
+      id: 6536865564212348000
+      lat: 0.9848439086783396
+      lng: 0.983923109918765
+      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
       visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.25563670195047755
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Sequi fugit quis vero in deleniti.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
-        example: 5616739593463034000
+        example: 6536865564212348000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.0974366068846116
+        example: 0.9848439086783396
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.708728384596471
+        example: 0.983923109918765
         format: double
         type: number
       name:
         description: Name of POI
-        example: Enim ut molestias laboriosam quasi aut ex.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       visible:
         description: Visibility of POI
@@ -690,10 +690,11 @@ definitions:
     example:
       channel: 13
       compass: static
-      external_pps_enabled: true
-      gps: static
-      imu_vehicle_enabled: true
-      locator_type: s1
+      environment: reflective
+      external_pps_enabled: false
+      gps: onboard
+      imu_vehicle_enabled: false
+      locator_type: u1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -717,9 +718,16 @@ definitions:
           - external
         example: static
         type: string
+      environment:
+        description: Environment setting
+        enum:
+          - reflective
+          - openwater
+        example: reflective
+        type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: true
+        example: false
         type: boolean
       gps:
         description: GPS provider setting
@@ -727,11 +735,11 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: onboard
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
-        example: true
+        example: false
         type: boolean
       locator_type:
         description: Locator type in use
@@ -741,7 +749,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: s1
+        example: u1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -842,29 +850,29 @@ definitions:
   ModifyReceiverConfigPayload:
     description: A receiver configuration
     example:
-      id: 2287845429121360000
-      x: 0.4126800396556589
-      'y': 0.09012467671506151
-      z: 0.6812896786410381
+      id: 831253423044275100
+      x: 0.6812896786410381
+      'y': 0.42906662013966146
+      z: 0.25362356554993554
     properties:
       id:
         description: Unique receiver identifier
-        example: 2287845429121360000
+        example: 831253423044275100
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.4126800396556589
+        example: 0.6812896786410381
         format: double
         type: number
       'y':
         description: Configured Y position relative to master electronics (meter)
-        example: 0.09012467671506151
+        example: 0.42906662013966146
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.6812896786410381
+        example: 0.25362356554993554
         format: double
         type: number
     required:
@@ -901,6 +909,7 @@ definitions:
     description: Global master position from external source
     example:
       cog: 42
+      fix_quality: 1
       hdop: 1.9
       lat: 63.422
       lon: 10.424
@@ -911,8 +920,13 @@ definitions:
       cog:
         description: Course over ground (degrees). -1 means no data.
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: -1
+        type: number
+      fix_quality:
+        description: Fix quality. 0 if no data.
+        example: 1
+        minimum: 0
         type: number
       hdop:
         description: Horizontal dilution of precision. -1 means no data.
@@ -939,7 +953,7 @@ definitions:
       orientation:
         description: Current orientation/compass heading (degrees)
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: 0
         type: number
       sog:
@@ -961,7 +975,7 @@ definitions:
       orientation:
         description: Current orientation/compass heading (degrees). -1 means no orientation set
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: -1
         type: number
     required:
@@ -1026,41 +1040,41 @@ definitions:
   UpdatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.25563670195047755
-      icon: Sequi fugit quis vero in deleniti.
-      id: 5616739593463034000
-      lat: 0.0974366068846116
-      lng: 0.708728384596471
-      name: Enim ut molestias laboriosam quasi aut ex.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
+      id: 6536865564212348000
+      lat: 0.9848439086783396
+      lng: 0.983923109918765
+      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
       visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.25563670195047755
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Sequi fugit quis vero in deleniti.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
-        example: 5616739593463034000
+        example: 6536865564212348000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.0974366068846116
+        example: 0.9848439086783396
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.708728384596471
+        example: 0.983923109918765
         format: double
         type: number
       name:
         description: Name of POI
-        example: Enim ut molestias laboriosam quasi aut ex.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       visible:
         description: Visibility of POI
@@ -1147,10 +1161,11 @@ definitions:
     example:
       channel: 13
       compass: static
-      external_pps_enabled: true
-      gps: static
-      imu_vehicle_enabled: true
-      locator_type: s1
+      environment: reflective
+      external_pps_enabled: false
+      gps: onboard
+      imu_vehicle_enabled: false
+      locator_type: u1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -1174,9 +1189,16 @@ definitions:
           - external
         example: static
         type: string
+      environment:
+        description: Environment setting
+        enum:
+          - reflective
+          - openwater
+        example: reflective
+        type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: true
+        example: false
         type: boolean
       gps:
         description: GPS provider setting
@@ -1184,11 +1206,11 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: onboard
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
-        example: true
+        example: false
         type: boolean
       locator_type:
         description: Locator type in use
@@ -1198,7 +1220,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: s1
+        example: u1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -1300,7 +1322,7 @@ definitions:
     description: Response from server on operations performed (default view)
     example:
       error: something went wrong
-      success: false
+      success: true
     properties:
       error:
         description: Error if it occurs
@@ -1308,7 +1330,7 @@ definitions:
         type: string
       success:
         description: Status of operation
-        example: false
+        example: true
         type: boolean
     required:
       - success
@@ -1317,41 +1339,41 @@ definitions:
   WaterlinkedPoi:
     description: A list of all POI (default view)
     example:
-      depth: 0.25563670195047755
-      icon: Sequi fugit quis vero in deleniti.
-      id: 5616739593463034000
-      lat: 0.0974366068846116
-      lng: 0.708728384596471
-      name: Enim ut molestias laboriosam quasi aut ex.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
+      id: 6536865564212348000
+      lat: 0.9848439086783396
+      lng: 0.983923109918765
+      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
       visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.25563670195047755
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Sequi fugit quis vero in deleniti.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
-        example: 5616739593463034000
+        example: 6536865564212348000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.0974366068846116
+        example: 0.9848439086783396
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.708728384596471
+        example: 0.983923109918765
         format: double
         type: number
       name:
         description: Name of POI
-        example: Enim ut molestias laboriosam quasi aut ex.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       visible:
         description: Visibility of POI
@@ -1369,26 +1391,26 @@ definitions:
   WaterlinkedPoiCollection:
     description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
     example:
-      - depth: 0.25563670195047755
-        icon: Sequi fugit quis vero in deleniti.
-        id: 5616739593463034000
-        lat: 0.0974366068846116
-        lng: 0.708728384596471
-        name: Enim ut molestias laboriosam quasi aut ex.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
+        id: 6536865564212348000
+        lat: 0.9848439086783396
+        lng: 0.983923109918765
+        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.25563670195047755
-        icon: Sequi fugit quis vero in deleniti.
-        id: 5616739593463034000
-        lat: 0.0974366068846116
-        lng: 0.708728384596471
-        name: Enim ut molestias laboriosam quasi aut ex.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
+        id: 6536865564212348000
+        lat: 0.9848439086783396
+        lng: 0.983923109918765
+        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.25563670195047755
-        icon: Sequi fugit quis vero in deleniti.
-        id: 5616739593463034000
-        lat: 0.0974366068846116
-        lng: 0.708728384596471
-        name: Enim ut molestias laboriosam quasi aut ex.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
+        id: 6536865564212348000
+        lat: 0.9848439086783396
+        lng: 0.983923109918765
+        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
     items:
       $ref: '#/definitions/WaterlinkedPoi'
@@ -1397,29 +1419,29 @@ definitions:
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
     example:
-      id: 2287845429121360000
-      x: 0.4126800396556589
-      'y': 0.09012467671506151
-      z: 0.6812896786410381
+      id: 831253423044275100
+      x: 0.6812896786410381
+      'y': 0.42906662013966146
+      z: 0.25362356554993554
     properties:
       id:
         description: Unique receiver identifier
-        example: 2287845429121360000
+        example: 831253423044275100
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.4126800396556589
+        example: 0.6812896786410381
         format: double
         type: number
       'y':
         description: Configured Y position relative to master electronics (meter)
-        example: 0.09012467671506151
+        example: 0.42906662013966146
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.6812896786410381
+        example: 0.25362356554993554
         format: double
         type: number
     required:
@@ -1432,10 +1454,10 @@ definitions:
   WaterlinkedReceiverCollection:
     description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
-      - id: 2287845429121360000
-        x: 0.4126800396556589
-        'y': 0.09012467671506151
-        z: 0.6812896786410381
+      - id: 831253423044275100
+        x: 0.6812896786410381
+        'y': 0.42906662013966146
+        z: 0.25362356554993554
     items:
       $ref: '#/definitions/WaterlinkedReceiver'
     title: 'Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default'
@@ -1500,7 +1522,7 @@ definitions:
       orientation:
         description: Current orientation/compass heading (degrees). -1 means no orientation set
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: -1
         type: number
     required:
@@ -1566,6 +1588,7 @@ definitions:
     description: GPS and IMU position (default view)
     example:
       cog: 42
+      fix_quality: 1
       hdop: 1.9
       lat: 63.422
       lon: 10.424
@@ -1576,8 +1599,13 @@ definitions:
       cog:
         description: Course over ground (degrees). -1 means no data.
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: -1
+        type: number
+      fix_quality:
+        description: Fix quality. 0 if no data.
+        example: 1
+        minimum: 0
         type: number
       hdop:
         description: Horizontal dilution of precision. -1 means no data.
@@ -1604,7 +1632,7 @@ definitions:
       orientation:
         description: Current orientation/compass heading (degrees). -1 means no data.
         example: 42
-        maximum: 359
+        maximum: 359.999
         minimum: -1
         type: number
       sog:
@@ -1620,18 +1648,19 @@ definitions:
       - sog
       - hdop
       - numsats
+      - fix_quality
     title: 'Mediatype identifier: application/vnd.wl.satellite.position+json; view=default'
     type: object
   WlWarning:
     description: Warning message (default view)
     example:
-      id: Commodi omnis libero pariatur quia id modi.
+      id: Libero pariatur quia id modi.
       message: Itaque nemo dolorem ea.
       severity: Dolorum nihil.
     properties:
       id:
         description: Identifier
-        example: Commodi omnis libero pariatur quia id modi.
+        example: Libero pariatur quia id modi.
         type: string
       message:
         description: Message
@@ -1650,10 +1679,10 @@ definitions:
   WlWarningCollection:
     description: WlWarningCollection is the media type for an array of WlWarning (default view)
     example:
-      - id: Commodi omnis libero pariatur quia id modi.
+      - id: Libero pariatur quia id modi.
         message: Itaque nemo dolorem ea.
         severity: Dolorum nihil.
-      - id: Commodi omnis libero pariatur quia id modi.
+      - id: Libero pariatur quia id modi.
         message: Itaque nemo dolorem ea.
         severity: Dolorum nihil.
     items:

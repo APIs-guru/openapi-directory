@@ -41,6 +41,28 @@ parameters:
       type: string
     name: docType
     type: array
+  docTypeRequiredParam:
+    collectionFormat: csv
+    description: The WeGA document type
+    in: query
+    items:
+      enum:
+        - biblio
+        - diaries
+        - documents
+        - letters
+        - news
+        - orgs
+        - persons
+        - places
+        - thematicCommentaries
+        - var
+        - works
+        - writings
+      type: string
+    name: docType
+    required: true
+    type: array
   fromDateParam:
     description: The earliest date
     format: date
@@ -76,7 +98,66 @@ tags:
     name: Correspondence
   - description: Access to encoding features
     name: Code Samples
+  - description: Access to application settings
+    name: Application
 paths:
+  /application/newID:
+    get:
+      description: ''
+      parameters:
+        - $ref: '#/parameters/docTypeRequiredParam'
+      responses:
+        '200':
+          description: A single object with a fresh WeGA ID
+          schema:
+            properties:
+              docID:
+                description: The WeGA ID
+                pattern: '^A[A-F0-9]{6}$'
+                type: string
+              docType:
+                description: The WeGA document type
+                type: string
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Create a new WeGA ID
+      tags:
+        - Application
+  /application/status:
+    get:
+      description: ''
+      responses:
+        '200':
+          description: A single object with status information
+          schema:
+            properties:
+              deployment:
+                description: The datetime of the deployment of the WeGA-WebApp
+                format: date-time
+                type: string
+              status:
+                description: Status (healthy|unhealthy) of the currently running WeGA-WebApp
+                enum:
+                  - healthy
+                  - unhealthy
+                type: string
+              svnRevision:
+                description: The Subversion revision of the currently installed WeGA-data
+                type: integer
+              version:
+                pattern: ^\d+\.\d+\.\d+$
+                type: string
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get status information about the running WeGA-WebApp
+      tags:
+        - Application
   '/code/findByElement/{element}':
     get:
       description: ''

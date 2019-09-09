@@ -5,7 +5,7 @@ host: live-api.letmc.com
 info:
   contact:
     x-twitter: agentOSSoftware
-  title: 'LetMC Api V3, diary'
+  title: 'AgentOS Api V3, diary'
   version: v3-diary
   x-apisguru-categories:
     - ecommerce
@@ -317,6 +317,55 @@ paths:
       summary: A collection of all diary appointment types
       tags:
         - DiaryController
+  '/v3/diary/{shortName}/recurringappointment':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: DiaryController_GetRecurringAppointments
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: The unique ID of the Branch
+          in: query
+          name: branchID
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: The appointment IDs to search for
+          in: query
+          items:
+            type: string
+          name: appointmentTypesToSearch
+          required: true
+          type: array
+        - description: The index of the first item to return
+          format: int32
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: The maximum number of items to return (up to 1000 per request)
+          format: int32
+          in: query
+          name: count
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DiaryAppointmentModelResults'
+      summary: 'Retrieves all recurring appointments:-'
+      tags:
+        - DiaryController
 definitions:
   DiaryAppointmentDetails:
     description: Submission Model - Structure to submit the appointment details
@@ -370,8 +419,19 @@ definitions:
         items:
           $ref: '#/definitions/LinkedPropertiesModel'
         type: array
+      NextRecurringDate:
+        description: 'Date appointment next repeats:-'
+        format: date-time
+        type: string
       OID:
         description: The unique Object ID (OID).
+        type: string
+      Recurrence:
+        description: 'The reccurrence interval for the appointment:-'
+        format: int32
+        type: integer
+      RecurrenceType:
+        description: 'The type of recurrence:-'
         type: string
       RemindAt:
         description: The date/time to remind the staff member of this appointment.

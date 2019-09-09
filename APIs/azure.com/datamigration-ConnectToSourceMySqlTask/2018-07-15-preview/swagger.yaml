@@ -59,7 +59,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to MySQL server
         properties:
           port:
@@ -139,7 +138,6 @@ definitions:
               required:
                 - commandType
               type: object
-              x-ms-discriminator-value: Unknown
             readOnly: true
             type: array
           errors:
@@ -183,7 +181,6 @@ definitions:
         required:
           - taskType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the task that validates MySQL database connection
     properties:
       input:

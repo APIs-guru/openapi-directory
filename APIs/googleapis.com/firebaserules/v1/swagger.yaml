@@ -922,6 +922,13 @@ definitions:
         items:
           $ref: '#/definitions/FunctionMock'
         type: array
+      pathEncoding:
+        description: Specifies whether paths (such as request.path) are encoded and how.
+        enum:
+          - ENCODING_UNSPECIFIED
+          - URL_ENCODED
+          - PLAIN
+        type: string
       request:
         description: |-
           Request context.

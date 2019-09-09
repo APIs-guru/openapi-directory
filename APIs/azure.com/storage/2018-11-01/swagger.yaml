@@ -4551,10 +4551,8 @@ paths:
             resourceGroupName: res4228
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: 'Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.'
       operationId: StorageAccounts_GetProperties
@@ -4799,8 +4797,7 @@ paths:
                   key1: value1
                   key2: value2
                 type: Microsoft.Storage/storageAccounts
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas':
     post:
@@ -4938,10 +4935,8 @@ paths:
             resourceGroupName: res4228
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: location
@@ -5026,10 +5021,8 @@ paths:
             resourceGroupName: res6977
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: Gets the managementpolicy associated with the specified storage account.
       operationId: ManagementPolicies_Get

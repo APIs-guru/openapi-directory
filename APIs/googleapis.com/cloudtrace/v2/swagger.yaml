@@ -443,6 +443,19 @@ definitions:
       spanId:
         description: 'The [SPAN_ID] portion of the span''s resource name.'
         type: string
+      spanKind:
+        description: |-
+          Distinguishes between spans generated in a particular context. For example,
+          two spans with the same name may be distinguished using `CLIENT` (caller)
+          and `SERVER` (callee) to identify an RPC call.
+        enum:
+          - SPAN_KIND_UNSPECIFIED
+          - INTERNAL
+          - SERVER
+          - CLIENT
+          - PRODUCER
+          - CONSUMER
+        type: string
       stackTrace:
         $ref: '#/definitions/StackTrace'
         description: Stack trace captured at the start of the span.

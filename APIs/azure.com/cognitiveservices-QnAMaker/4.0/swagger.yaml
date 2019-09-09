@@ -71,8 +71,6 @@ parameters:
       name: EnvironmentType
     x-ms-parameter-location: method
     x-nullable: false
-    x-schema:
-      $ref: '#/definitions/KnowledgebaseEnvironment'
   KbId:
     description: Knowledgebase id.
     in: path
@@ -454,8 +452,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             kbId: 9d091697-fb8c-4ed5-9ac0-35bf8273bfff
           responses:
-            '204':
-              body: ''
+            '204': {}
     get:
       operationId: Knowledgebase_GetDetails
       parameters:
@@ -1244,15 +1241,6 @@ definitions:
         description: User who created / owns the knowledgebase.
         type: string
     type: object
-  KnowledgebaseEnvironment:
-    description: Enumeration of knowledgebase environments.
-    enum:
-      - Prod
-      - Test
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: KnowledgebaseEnvironmentType
   KnowledgebasesDTO:
     additionalProperties: false
     description: Collection of knowledgebases owned by a user.

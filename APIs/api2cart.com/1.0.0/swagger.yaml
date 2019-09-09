@@ -60,7 +60,7 @@ paths:
           name: store_url
           required: true
           type: string
-        - description: This parameter allows to set up store with custom bridge url (you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
           in: query
           name: bridge_url
           required: false
@@ -208,7 +208,7 @@ paths:
           required: false
           type: string
         - default: production
-          description: ''
+          description: Demandware environment
           in: query
           name: demandware_env_type
           required: false
@@ -239,7 +239,7 @@ paths:
           required: false
           type: string
         - default: production
-          description: ''
+          description: eBay environment
           in: query
           name: ebay_environment
           required: false
@@ -447,7 +447,7 @@ paths:
           name: new_store_key
           required: false
           type: string
-        - description: This parameter allows to set up store with custom bridge url (you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
           in: query
           name: bridge_url
           required: false
@@ -552,7 +552,7 @@ paths:
           name: demandware_user_password
           required: false
           type: string
-        - description: ''
+        - description: Demandware environment
           in: query
           name: demandware_env_type
           required: false
@@ -582,7 +582,7 @@ paths:
           name: ebay_refresh_token
           required: false
           type: string
-        - description: ''
+        - description: eBay environment
           in: query
           name: ebay_environment
           required: false
@@ -2351,7 +2351,7 @@ paths:
           name: store_url
           required: true
           type: string
-        - description: This parameter allows to set up store with custom bridge url (you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
           in: query
           name: bridge_url
           required: false
@@ -2564,7 +2564,7 @@ paths:
           required: false
           type: string
         - default: production
-          description: ''
+          description: eBay environment
           in: query
           name: ebay_environment
           required: false
@@ -3077,6 +3077,11 @@ paths:
           name: scope
           required: false
           type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -3110,6 +3115,11 @@ paths:
           in: query
           name: id
           required: true
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
           type: string
       produces:
         - application/json
@@ -3188,6 +3198,11 @@ paths:
           name: script_ids
           required: false
           type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -3202,6 +3217,37 @@ paths:
                       $ref: '#/definitions/Script'
                     type: array
                 type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.shipping_zones.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get list of shipping zones
+      operationId: CartShippingZonesList
+      parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/Cart_ShippingZone'
               return_code:
                 type: integer
               return_message:
@@ -4822,6 +4868,11 @@ paths:
           name: created_to
           required: false
           type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -4997,6 +5048,12 @@ paths:
           name: order_payment_method
           required: false
           type: string
+        - default: false
+          description: Send notifications to customer after order was created
+          in: query
+          name: send_notifications
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -5493,6 +5550,17 @@ paths:
         - description: Specifies the set of available/not available products for sale
           in: query
           name: avail_sale
+          required: false
+          type: boolean
+        - description: Report request id
+          in: query
+          name: report_request_id
+          required: false
+          type: string
+        - default: false
+          description: Disable report cache for current request
+          in: query
+          name: disable_report_cache
           required: false
           type: boolean
       produces:
@@ -6266,6 +6334,12 @@ paths:
           name: sku
           required: false
           type: string
+        - default: false
+          description: Disable cache for current request
+          in: query
+          name: disable_cache
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -7327,6 +7401,11 @@ paths:
         - description: 'Defines variant removal, specified by variant id'
           in: query
           name: id
+          required: true
+          type: string
+        - description: Defines product's id where the variant has to be deleted
+          in: query
+          name: product_id
           required: true
           type: string
       produces:
@@ -9477,7 +9556,7 @@ definitions:
             price:
               type: number
             quantity:
-              type: number
+              type: integer
           type: object
         type: array
       message:
@@ -9491,7 +9570,6 @@ definitions:
         description: Send notifications to customer after refund was created
         type: boolean
       shipping_price:
-        default: 0
         description: Defines refund shipping amount.
         type: number
       total_price:
@@ -9502,6 +9580,10 @@ definitions:
     type: object
   OrderShipmentAdd:
     properties:
+      adjust_stock:
+        default: false
+        description: This parameter is used for adjust stock.
+        type: boolean
       items:
         description: Defines items in the order that will be shipped
         items:
@@ -9737,6 +9819,8 @@ definitions:
         type: object
       custom_fields:
         type: object
+      order_product_id:
+        type: string
       product_id:
         type: string
       qty:
@@ -10337,6 +10421,8 @@ definitions:
     properties:
       additional_fields:
         type: object
+      available:
+        type: boolean
       custom_fields:
         type: object
       description:

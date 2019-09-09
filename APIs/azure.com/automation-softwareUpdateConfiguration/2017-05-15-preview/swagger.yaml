@@ -110,97 +110,98 @@ paths:
             subscriptionId: 1a7d4044-286c-4acb-969a-96639265bf2e
           responses:
             '200':
-              value:
-                - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01
-                  name: testpatch-01
-                  properties:
-                    creationTime: '2017-10-19T18:54:50.5233333+00:00'
-                    frequency: Week
-                    lastModifiedTime: '2017-10-19T18:54:50.68+00:00'
-                    nextRun: '2017-10-23T12:22:00-07:00'
-                    provisioningState: Succeeded
-                    startTime: '2017-10-19T12:22:00-07:00'
-                    tasks:
-                      postTask:
-                        parameters: null
-                        source: GetCache
-                      preTask:
-                        parameters:
-                          COMPUTERNAME: Computer1
-                        source: HelloWorld
-                    updateConfiguration:
-                      azureVirtualMachines:
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
-                      duration: PT2H
-                      linux: null
-                      nonAzureComputerNames: null
-                      operatingSystem: Windows
-                      targets:
-                        azureQueries:
-                          - locations: null
-                            scope:
-                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
-                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
-                            tagSettings:
-                              filterOperator: All
-                              tags:
-                                tag1:
-                                  - tag1Value1
-                                  - tag1Value2
-                                tag2:
-                                  - tag2Value1
-                                  - tag2Value2
-                      windows:
-                        excludedKbNumbers: null
-                        includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
-                - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
-                  name: testpatch-02
-                  properties:
-                    creationTime: '2017-08-11T21:52:02.7733333+00:00'
-                    frequency: Hour
-                    lastModifiedTime: '2017-08-11T21:52:22.88+00:00'
-                    nextRun: '2018-05-05T12:26:00-07:00'
-                    provisioningState: Succeeded
-                    startTime: '2018-05-05T12:26:00-07:00'
-                    tasks:
-                      postTask:
-                        parameters: null
-                        source: GetCache
-                      preTask:
-                        parameters:
-                          COMPUTERNAME: Computer1
-                        source: HelloWorld
-                    updateConfiguration:
-                      azureVirtualMachines:
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-04
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
-                      duration: PT2H30M
-                      linux: null
-                      nonAzureComputerNames: null
-                      operatingSystem: Windows
-                      targets:
-                        azureQueries:
-                          - locations:
-                              - Japan East
-                              - UK South
-                            scope:
-                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
-                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
-                            tagSettings:
-                              filterOperator: All
-                              tags:
-                                tag1:
-                                  - tag1Value1
-                                  - tag1Value2
-                                tag2:
-                                  - tag2Value1
-                                  - tag2Value2
-                      windows:
-                        excludedKbNumbers: null
-                        includedUpdateClassifications: 'Critical, FeaturePack'
+              body:
+                value:
+                  - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01
+                    name: testpatch-01
+                    properties:
+                      creationTime: '2017-10-19T18:54:50.5233333+00:00'
+                      frequency: Week
+                      lastModifiedTime: '2017-10-19T18:54:50.68+00:00'
+                      nextRun: '2017-10-23T12:22:00-07:00'
+                      provisioningState: Succeeded
+                      startTime: '2017-10-19T12:22:00-07:00'
+                      tasks:
+                        postTask:
+                          parameters: null
+                          source: GetCache
+                        preTask:
+                          parameters:
+                            COMPUTERNAME: Computer1
+                          source: HelloWorld
+                      updateConfiguration:
+                        azureVirtualMachines:
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
+                        duration: PT2H
+                        linux: null
+                        nonAzureComputerNames: null
+                        operatingSystem: Windows
+                        targets:
+                          azureQueries:
+                            - locations: null
+                              scope:
+                                - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                                - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                              tagSettings:
+                                filterOperator: All
+                                tags:
+                                  tag1:
+                                    - tag1Value1
+                                    - tag1Value2
+                                  tag2:
+                                    - tag2Value1
+                                    - tag2Value2
+                        windows:
+                          excludedKbNumbers: null
+                          includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
+                  - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
+                    name: testpatch-02
+                    properties:
+                      creationTime: '2017-08-11T21:52:02.7733333+00:00'
+                      frequency: Hour
+                      lastModifiedTime: '2017-08-11T21:52:22.88+00:00'
+                      nextRun: '2018-05-05T12:26:00-07:00'
+                      provisioningState: Succeeded
+                      startTime: '2018-05-05T12:26:00-07:00'
+                      tasks:
+                        postTask:
+                          parameters: null
+                          source: GetCache
+                        preTask:
+                          parameters:
+                            COMPUTERNAME: Computer1
+                          source: HelloWorld
+                      updateConfiguration:
+                        azureVirtualMachines:
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-04
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
+                        duration: PT2H30M
+                        linux: null
+                        nonAzureComputerNames: null
+                        operatingSystem: Windows
+                        targets:
+                          azureQueries:
+                            - locations:
+                                - Japan East
+                                - UK South
+                              scope:
+                                - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                                - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                              tagSettings:
+                                filterOperator: All
+                                tags:
+                                  tag1:
+                                    - tag1Value1
+                                    - tag1Value2
+                                  tag2:
+                                    - tag2Value1
+                                    - tag2Value2
+                        windows:
+                          excludedKbNumbers: null
+                          includedUpdateClassifications: 'Critical, FeaturePack'
         List software update configurations Targeting a specific azure virtual machine:
           parameters:
             $filter: 'properties/updateConfiguration/azureVirtualMachines/any(m: m eq ''/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01'')'
@@ -211,65 +212,66 @@ paths:
             subscriptionId: 1a7d4044-286c-4acb-969a-96639265bf2e
           responses:
             '200':
-              value:
-                - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01
-                  name: testpatch-01
-                  properties:
-                    creationTime: '2017-10-19T18:54:50.5233333+00:00'
-                    frequency: Week
-                    lastModifiedTime: '2017-10-19T18:54:50.68+00:00'
-                    nextRun: '2017-10-23T12:22:00-07:00'
-                    provisioningState: Succeeded
-                    startTime: '2017-10-19T12:22:00-07:00'
-                    tasks:
-                      postTask:
-                        parameters: null
-                        source: GetCache
-                      preTask:
-                        parameters:
-                          COMPUTERNAME: Computer1
-                        source: HelloWorld
-                    updateConfiguration:
-                      azureVirtualMachines:
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
-                      duration: PT2H
-                      linux: null
-                      nonAzureComputerNames: null
-                      operatingSystem: Windows
-                      windows:
-                        excludedKbNumbers: null
-                        includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
-                - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
-                  name: testpatch-02
-                  properties:
-                    creationTime: '2017-08-11T21:52:02.7733333+00:00'
-                    frequency: Hour
-                    lastModifiedTime: '2017-08-11T21:52:22.88+00:00'
-                    nextRun: '2018-05-05T12:26:00-07:00'
-                    provisioningState: Succeeded
-                    startTime: '2018-05-05T12:26:00-07:00'
-                    tasks:
-                      postTask:
-                        parameters: null
-                        source: GetCache
-                      preTask:
-                        parameters:
-                          COMPUTERNAME: Computer1
-                        source: HelloWorld
-                    updateConfiguration:
-                      azureVirtualMachines:
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
-                        - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
-                      duration: PT2H30M
-                      linux: null
-                      nonAzureComputerNames: null
-                      operatingSystem: Windows
-                      windows:
-                        excludedKbNumbers: null
-                        includedUpdateClassifications: 'Critical, FeaturePack'
+              body:
+                value:
+                  - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01
+                    name: testpatch-01
+                    properties:
+                      creationTime: '2017-10-19T18:54:50.5233333+00:00'
+                      frequency: Week
+                      lastModifiedTime: '2017-10-19T18:54:50.68+00:00'
+                      nextRun: '2017-10-23T12:22:00-07:00'
+                      provisioningState: Succeeded
+                      startTime: '2017-10-19T12:22:00-07:00'
+                      tasks:
+                        postTask:
+                          parameters: null
+                          source: GetCache
+                        preTask:
+                          parameters:
+                            COMPUTERNAME: Computer1
+                          source: HelloWorld
+                      updateConfiguration:
+                        azureVirtualMachines:
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03
+                        duration: PT2H
+                        linux: null
+                        nonAzureComputerNames: null
+                        operatingSystem: Windows
+                        windows:
+                          excludedKbNumbers: null
+                          includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
+                  - id: /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02
+                    name: testpatch-02
+                    properties:
+                      creationTime: '2017-08-11T21:52:02.7733333+00:00'
+                      frequency: Hour
+                      lastModifiedTime: '2017-08-11T21:52:22.88+00:00'
+                      nextRun: '2018-05-05T12:26:00-07:00'
+                      provisioningState: Succeeded
+                      startTime: '2018-05-05T12:26:00-07:00'
+                      tasks:
+                        postTask:
+                          parameters: null
+                          source: GetCache
+                        preTask:
+                          parameters:
+                            COMPUTERNAME: Computer1
+                          source: HelloWorld
+                      updateConfiguration:
+                        azureVirtualMachines:
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05
+                          - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06
+                        duration: PT2H30M
+                        linux: null
+                        nonAzureComputerNames: null
+                        operatingSystem: Windows
+                        windows:
+                          excludedKbNumbers: null
+                          includedUpdateClassifications: 'Critical, FeaturePack'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}':
     delete:
       description: delete a specific software update configuration.

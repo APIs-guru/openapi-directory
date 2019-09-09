@@ -71,6 +71,11 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The expand expression to apply to the operation.
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -4183,6 +4188,164 @@ paths:
                   name: Standard_D1_v2
                   tier: Standard
                 type: Microsoft.Compute/virtualMachineScaleSets
+        Create a scale set with terminate scheduled events enabled.:
+          parameters:
+            api-version: '2019-03-01'
+            parameters:
+              location: westus
+              properties:
+                overprovision: true
+                upgradePolicy:
+                  mode: Manual
+                virtualMachineProfile:
+                  networkProfile:
+                    networkInterfaceConfigurations:
+                      - name: '{vmss-name}'
+                        properties:
+                          enableIPForwarding: true
+                          ipConfigurations:
+                            - name: '{vmss-name}'
+                              properties:
+                                subnet:
+                                  id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}'
+                          primary: true
+                  osProfile:
+                    adminPassword: '{your-password}'
+                    adminUsername: '{your-username}'
+                    computerNamePrefix: '{vmss-name}'
+                  scheduledEventsProfile:
+                    terminateNotificationProfile:
+                      enable: true
+                      notBeforeTimeout: PT5M
+                  storageProfile:
+                    imageReference:
+                      offer: WindowsServer
+                      publisher: MicrosoftWindowsServer
+                      sku: 2016-Datacenter
+                      version: latest
+                    osDisk:
+                      caching: ReadWrite
+                      createOption: FromImage
+                      managedDisk:
+                        storageAccountType: Standard_LRS
+              sku:
+                capacity: 3
+                name: Standard_D1_v2
+                tier: Standard
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmScaleSetName: '{vmss-name}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d053ec5a-8da6-495f-ab13-38216503c6d7
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    scheduledEventsProfile:
+                      terminateNotificationProfile:
+                        enable: true
+                        notBeforeTimeout: PT5M
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: d053ec5a-8da6-495f-ab13-38216503c6d7
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    scheduledEventsProfile:
+                      terminateNotificationProfile:
+                        enable: true
+                        notBeforeTimeout: PT5M
+                    storageProfile:
+                      imageReference:
+                        offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2016-Datacenter
+                        version: latest
+                      osDisk:
+                        caching: ReadWrite
+                        createOption: FromImage
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_D1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
         Create a scale set with virtual machines in different zones.:
           parameters:
             api-version: '2019-03-01'
@@ -5115,6 +5278,16 @@ paths:
           name: instanceId
           required: true
           type: string
+        - description: The expand expression to apply on the operation.
+          enum:
+            - instanceView
+          in: query
+          name: $expand
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: InstanceViewTypes
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -7713,6 +7886,13 @@ definitions:
       sku:
         $ref: '#/definitions/Sku'
         description: Sku of the availability set
+  BillingProfile:
+    description: 'Specifies the billing related details of a low priority VM or VMSS. <br><br>Minimum api-version: 2019-03-01.'
+    properties:
+      maxPrice:
+        description: 'Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current low priority price for the VM size. Also, the prices are compared at the time of create/update of low priority VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current low priority price. <br><br> The maxPrice will also be used for evicting a low priority VM/VMSS if the current low priority price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: $0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the low priority VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01.'
+        format: double
+        type: number
   BootDiagnostics:
     description: Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor.
     properties:
@@ -7885,7 +8065,7 @@ definitions:
         $ref: '#/definitions/DedicatedHostGroupProperties'
         x-ms-client-flatten: true
       zones:
-        description: 'Availability Zone to use for this host group � only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
+        description: 'Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
         items:
           type: string
         type: array
@@ -7928,7 +8108,7 @@ definitions:
         $ref: '#/definitions/DedicatedHostGroupProperties'
         x-ms-client-flatten: true
       zones:
-        description: 'Availability Zone to use for this host group � only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
+        description: 'Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.'
         items:
           type: string
         type: array
@@ -8241,7 +8421,7 @@ definitions:
           modelAsString: true
           name: VirtualMachineSizeTypes
   HyperVGenerationType:
-    description: Specifies the HyperVGeneration Type for the Virtual Machine created from the image
+    description: Specifies the HyperVGeneration Type
     enum:
       - V1
       - V2
@@ -8957,6 +9137,27 @@ definitions:
         $ref: '#/definitions/RollingUpgradeRunningStatus'
         description: Information about the current running state of the overall upgrade.
         readOnly: true
+  ScaleInPolicy:
+    description: Describes a scale-in policy for a virtual machine scale set.
+    properties:
+      rules:
+        description: 'The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>'
+        items:
+          enum:
+            - Default
+            - OldestVM
+            - NewestVM
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: VirtualMachineScaleSetScaleInRules
+        type: array
+  ScheduledEventsProfile:
+    properties:
+      terminateNotificationProfile:
+        $ref: '#/definitions/TerminateNotificationProfile'
+        description: Specifies Terminate Scheduled Event related configurations.
+    type: object
   Sku:
     description: Describes a virtual machine scale set sku.
     properties:
@@ -9025,6 +9226,15 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  TerminateNotificationProfile:
+    properties:
+      enable:
+        description: Specifies whether the Terminate Scheduled event is enabled or disabled.
+        type: boolean
+      notBeforeTimeout:
+        description: 'Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)'
+        type: string
+    type: object
   ThrottledRequestsInput:
     allOf:
       - $ref: '#/definitions/LogAnalyticsInputBase'
@@ -9488,6 +9698,8 @@ definitions:
         items:
           $ref: '#/definitions/DataDiskImage'
         type: array
+      hyperVGeneration:
+        $ref: '#/definitions/HyperVGenerationType'
       osDiskImage:
         $ref: '#/definitions/OSDiskImage'
       plan:
@@ -9588,10 +9800,22 @@ definitions:
         description: Specifies additional capabilities enabled or disabled on the virtual machine.
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference.'
+      billingProfile:
+        $ref: '#/definitions/BillingProfile'
+        description: 'Specifies the billing related details of a low priority virtual machine. <br><br>Minimum api-version: 2019-03-01.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
+      evictionPolicy:
+        description: 'Specifies the eviction policy for the low priority virtual machine. Only supported value is ''Deallocate''. <br><br>Minimum api-version: 2019-03-01'
+        enum:
+          - Deallocate
+          - Delete
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualMachineEvictionPolicyTypes
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
         description: Specifies the hardware settings for the virtual machine.
@@ -9611,6 +9835,15 @@ definitions:
       osProfile:
         $ref: '#/definitions/OSProfile'
         description: Specifies the operating system settings for the virtual machine.
+      priority:
+        description: 'Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01'
+        enum:
+          - Regular
+          - Low
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualMachinePriorityTypes
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
@@ -9621,6 +9854,9 @@ definitions:
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: Specifies the storage settings for the virtual machine disks.
+      virtualMachineScaleSet:
+        $ref: '#/definitions/SubResource'
+        description: 'Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01'
       vmId:
         description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
         readOnly: true
@@ -10081,6 +10317,9 @@ definitions:
       proximityPlacementGroup:
         $ref: '#/definitions/SubResource'
         description: 'Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
+      scaleInPolicy:
+        $ref: '#/definitions/ScaleInPolicy'
+        description: Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in.
       singlePlacementGroup:
         description: 'When true this limits the scale set to a single placement group, of max size 100 virtual machines.'
         type: boolean
@@ -10362,6 +10601,9 @@ definitions:
       overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
+      scaleInPolicy:
+        $ref: '#/definitions/ScaleInPolicy'
+        description: Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in.
       singlePlacementGroup:
         description: 'When true this limits the scale set to a single placement group, of max size 100 virtual machines.'
         type: boolean
@@ -10407,6 +10649,9 @@ definitions:
   VirtualMachineScaleSetUpdateVMProfile:
     description: Describes a virtual machine scale set virtual machine profile.
     properties:
+      billingProfile:
+        $ref: '#/definitions/BillingProfile'
+        description: 'Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: The virtual machine scale set diagnostics profile.
@@ -10422,6 +10667,9 @@ definitions:
       osProfile:
         $ref: '#/definitions/VirtualMachineScaleSetUpdateOSProfile'
         description: The virtual machine scale set OS profile.
+      scheduledEventsProfile:
+        $ref: '#/definitions/ScheduledEventsProfile'
+        description: Specifies Scheduled Event related configurations.
       storageProfile:
         $ref: '#/definitions/VirtualMachineScaleSetUpdateStorageProfile'
         description: The virtual machine scale set storage profile.
@@ -10556,6 +10804,9 @@ definitions:
   VirtualMachineScaleSetVMProfile:
     description: Describes a virtual machine scale set virtual machine profile.
     properties:
+      billingProfile:
+        $ref: '#/definitions/BillingProfile'
+        description: 'Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
@@ -10589,6 +10840,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: VirtualMachinePriorityTypes
+      scheduledEventsProfile:
+        $ref: '#/definitions/ScheduledEventsProfile'
+        description: Specifies Scheduled Event related configurations.
       storageProfile:
         $ref: '#/definitions/VirtualMachineScaleSetStorageProfile'
         description: Specifies the storage settings for the virtual machine disks.

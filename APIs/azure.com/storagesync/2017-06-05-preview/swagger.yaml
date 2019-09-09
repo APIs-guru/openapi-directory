@@ -94,7 +94,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - display:
                       description: Read any Storage Sync Services
@@ -500,7 +500,6 @@ paths:
             api-version: 2017-06-05-preview
             parameters:
               location: WestUS
-              properties: {}
               tags:
                 Dept: IT
                 Environment: Test
@@ -514,7 +513,6 @@ paths:
                 id: /subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1
                 location: WestUS
                 name: SampleStorageSyncService_1
-                properties: {}
                 tags:
                   Dept: IT
                   Environment: Test
@@ -554,7 +552,6 @@ paths:
             api-version: 2017-06-05-preview
             parameters:
               location: WestUS
-              properties: {}
               tags: {}
               type: Microsoft.StorageSync/storageSyncServices
             resourceGroupName: SampleResourceGroup_1
@@ -566,7 +563,6 @@ paths:
                 id: /subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1
                 location: WestUS
                 name: SampleStorageSyncService_1
-                properties: {}
                 tags: {}
                 type: Microsoft.StorageSync/storageSyncServices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers':
@@ -1072,7 +1068,6 @@ paths:
           parameters:
             api-version: 2017-06-05-preview
             parameters:
-              properties: {}
               type: Microsoft.StorageSync/storageSyncServices/syncGroups
             resourceGroupName: SampleResourceGroup_1
             storageSyncServiceName: SampleStorageSyncService_1
@@ -1805,7 +1800,6 @@ paths:
             syncGroupName: SampleSyncGroup_1
           responses:
             '200':
-              body: ''
               headers:
                 x-ms-correlation-request-id: d166ca76-dad2-49df-b409-d2acfd42d730
                 x-ms-request-id: 74e55a4d-1c6f-46de-9a8d-278e53a47403

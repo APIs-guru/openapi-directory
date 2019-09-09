@@ -647,6 +647,11 @@ definitions:
       nextPageToken:
         description: The next page token or empty if none.
         type: string
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
     type: object
   ListLocationsResponse:
     description: The response message for Locations.ListLocations.
@@ -699,6 +704,11 @@ definitions:
         description: The listed nodes.
         items:
           $ref: '#/definitions/TensorFlowVersion'
+        type: array
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
         type: array
     type: object
   Location:

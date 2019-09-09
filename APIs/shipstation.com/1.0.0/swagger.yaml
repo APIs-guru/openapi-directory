@@ -1770,7 +1770,9 @@ paths:
   /orders/createorder:
     post:
       description: |-
-        If the ``orderKey`` is specified, the method becomes idempotent and the existing order with that key will be updated. Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.  The body of this request should specify an [**Order**](https://www.shipstation.com/developer-api/#/reference/model-order) object:
+        If the ``orderKey`` is specified, the method becomes idempotent and the existing order with that key will be updated. This call does not currently support partial updates; the entire resource must be provided in the body of the request.
+
+        Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.  The body of this request should specify an [**Order**](https://www.shipstation.com/developer-api/#/reference/model-order) object:
 
         Name               |Data Type          |Description
         -------------------|-------------------|-------------------
@@ -2323,7 +2325,9 @@ paths:
   /orders/createorders:
     post:
       description: |-
-        This endpoint can be used to create or update multiple orders in one request. If the ``orderKey`` is specified in an order, the existing order with that key will be updated. Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.
+        This endpoint can be used to create or update multiple orders in one request. If the ``orderKey`` is specified in an order, the existing order with that key will be updated. This call does not currently support partial updates; the entire resource must be provided in the body of the request.
+
+        Note: Only orders in an open status in ShipStation (``awaiting_payment``,``awaiting_shipment``, and ``on_hold``) can be updated through this method. ``cancelled`` and ``shipped`` are locked from modification through the API.
 
         Data Type          |Description
         -------------------|-------------------
@@ -3857,7 +3861,7 @@ paths:
               productCategory: null
               productId: 123456789
               productType: null
-              sku: ''
+              sku: BEAU-000
               tags: null
               warehouseLocation: null
               weightOz: null

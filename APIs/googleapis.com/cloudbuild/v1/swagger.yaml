@@ -1176,6 +1176,9 @@ definitions:
         items:
           type: string
         type: array
+      name:
+        description: User assigned name of the trigger. Must be unique within the project.
+        type: string
       substitutions:
         additionalProperties:
           type: string
@@ -1391,14 +1394,14 @@ definitions:
     properties:
       branch:
         description: |-
-          Regexes of branches to match.
+          Regexes matching branches to build.
 
           The syntax of the regular expressions accepted is the syntax accepted by
           RE2 and described at https://github.com/google/re2/wiki/Syntax
         type: string
       tag:
         description: |-
-          Regexes of tags to match.
+          Regexes matching tags to build.
 
           The syntax of the regular expressions accepted is the syntax accepted by
           RE2 and described at https://github.com/google/re2/wiki/Syntax
@@ -1408,7 +1411,11 @@ definitions:
     description: Location of the source in a Google Cloud Source Repository.
     properties:
       branchName:
-        description: Name of the branch to build.
+        description: |-
+          Regex matching branches to build.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
         type: string
       commitSha:
         description: Explicit commit SHA to build.
@@ -1431,7 +1438,11 @@ definitions:
           assumed.
         type: string
       tagName:
-        description: Name of the tag to build.
+        description: |-
+          Regex matching tags to build.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
         type: string
     type: object
   Results:

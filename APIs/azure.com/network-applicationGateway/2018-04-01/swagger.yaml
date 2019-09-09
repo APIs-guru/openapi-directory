@@ -64,7 +64,24 @@ paths:
             api-version: '2018-04-01'
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default
+                name: default
+                properties:
+                  availableCipherSuites:
+                    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                  availableProtocols:
+                    - TLSv1_0
+                    - TLSv1_1
+                    - TLSv1_2
+                  defaultPolicy: AppGwSslPolicy20150501
+                  predefinedPolicies:
+                    - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                type: Microsoft.Network/ApplicationGatewayAvailableSslOptions
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies':
     get:
       description: Lists all SSL predefined policies for configuring Ssl policy.
@@ -93,7 +110,36 @@ paths:
             api-version: '2018-04-01'
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                    name: AppGwSslPolicy20150501
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                      minProtocolVersion: TLSv1_0
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401
+                    name: AppGwSslPolicy20170401
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                      minProtocolVersion: TLSv1_1
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401S
+                    name: AppGwSslPolicy20170401S
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                      minProtocolVersion: TLSv1_2
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}':
@@ -130,7 +176,17 @@ paths:
             predefinedPolicyName: AppGwSslPolicy20150501
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                name: AppGwSslPolicy20150501
+                properties:
+                  cipherSuites:
+                    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                  minProtocolVersion: TLSv1_0
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets':
     get:
       description: Lists all available web application firewall rule sets.

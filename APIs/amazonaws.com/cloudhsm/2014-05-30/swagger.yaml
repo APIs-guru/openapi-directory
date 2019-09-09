@@ -1,169 +1,118 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: cloudhsm.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2014-05-30'
-  x-release: v4
-  title: Amazon CloudHSM
-  description: '<fullname>AWS CloudHSM Service</fullname> <p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p>'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: '<fullname>AWS CloudHSM Service</fullname> <p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: cloudhsm
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudhsm-2014-05-30.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: Amazon CloudHSM
+  version: '2014-05-30'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudhsm-2014-05-30.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: cloudhsm
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/cloudhsm/'
-host: cloudhsm.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://cloudhsm.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The CloudHSM multi-region endpoint
-  - url: 'https://cloudhsm.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The CloudHSM multi-region endpoint
-  - url: 'http://cloudhsm.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The CloudHSM endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://cloudhsm.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The CloudHSM endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=CloudHsmFrontendService.AddTagsToResource':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: AddTagsToResource
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Adds or overwrites one or more tags for the specified AWS CloudHSM resource.</p> <p>Each tag consists of a key and a value. Tag keys must be unique to each resource.</p>'
+      operationId: AddTagsToResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddTagsToResourceRequest'
+        - enum:
+            - CloudHsmFrontendService.AddTagsToResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -181,18 +130,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AddTagsToResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.AddTagsToResource
+  '/#X-Amz-Target=CloudHsmFrontendService.CreateHapg':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -201,10 +139,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.CreateHapg':
     post:
-      operationId: CreateHapg
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Creates a high-availability partition group. A high-availability partition group is a group of partitions that spans multiple physical HSMs.</p>'
+      operationId: CreateHapg
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateHapgRequest'
+        - enum:
+            - CloudHsmFrontendService.CreateHapg
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -222,18 +171,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateHapgRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.CreateHapg
+  '/#X-Amz-Target=CloudHsmFrontendService.CreateHsm':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -242,10 +180,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.CreateHsm':
     post:
-      operationId: CreateHsm
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Creates an uninitialized HSM instance.</p> <p>There is an upfront fee charged for each HSM instance that you create with the <code>CreateHsm</code> operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the <a>DeleteHsm</a> operation, go to the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a>, create a new case, and select <b>Account and Billing Support</b>.</p> <important> <p>It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the <a>DescribeHsm</a> operation. The HSM is ready to be initialized when the status changes to <code>RUNNING</code>.</p> </important>'
+      operationId: CreateHsm
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateHsmRequest'
+        - enum:
+            - CloudHsmFrontendService.CreateHsm
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -263,18 +212,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateHsmRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.CreateHsm
+  '/#X-Amz-Target=CloudHsmFrontendService.CreateLunaClient':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -283,10 +221,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.CreateLunaClient':
     post:
-      operationId: CreateLunaClient
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Creates an HSM client.</p>'
+      operationId: CreateLunaClient
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLunaClientRequest'
+        - enum:
+            - CloudHsmFrontendService.CreateLunaClient
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -304,18 +253,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateLunaClientRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.CreateLunaClient
+  '/#X-Amz-Target=CloudHsmFrontendService.DeleteHapg':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -324,10 +262,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DeleteHapg':
     post:
-      operationId: DeleteHapg
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Deletes a high-availability partition group.</p>'
+      operationId: DeleteHapg
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteHapgRequest'
+        - enum:
+            - CloudHsmFrontendService.DeleteHapg
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -345,18 +294,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteHapgRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DeleteHapg
+  '/#X-Amz-Target=CloudHsmFrontendService.DeleteHsm':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -365,10 +303,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DeleteHsm':
     post:
-      operationId: DeleteHsm
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Deletes an HSM. After completion, this operation cannot be undone and your key material cannot be recovered.</p>'
+      operationId: DeleteHsm
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteHsmRequest'
+        - enum:
+            - CloudHsmFrontendService.DeleteHsm
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -386,18 +335,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteHsmRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DeleteHsm
+  '/#X-Amz-Target=CloudHsmFrontendService.DeleteLunaClient':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -406,10 +344,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DeleteLunaClient':
     post:
-      operationId: DeleteLunaClient
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Deletes a client.</p>'
+      operationId: DeleteLunaClient
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLunaClientRequest'
+        - enum:
+            - CloudHsmFrontendService.DeleteLunaClient
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -427,18 +376,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteLunaClientRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DeleteLunaClient
+  '/#X-Amz-Target=CloudHsmFrontendService.DescribeHapg':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -447,10 +385,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DescribeHapg':
     post:
-      operationId: DescribeHapg
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Retrieves information about a high-availability partition group.</p>'
+      operationId: DescribeHapg
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeHapgRequest'
+        - enum:
+            - CloudHsmFrontendService.DescribeHapg
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -468,18 +417,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeHapgRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DescribeHapg
+  '/#X-Amz-Target=CloudHsmFrontendService.DescribeHsm':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -488,10 +426,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DescribeHsm':
     post:
-      operationId: DescribeHsm
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Retrieves information about an HSM. You can identify the HSM by its ARN or its serial number.</p>'
+      operationId: DescribeHsm
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeHsmRequest'
+        - enum:
+            - CloudHsmFrontendService.DescribeHsm
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -509,18 +458,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeHsmRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DescribeHsm
+  '/#X-Amz-Target=CloudHsmFrontendService.DescribeLunaClient':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -529,10 +467,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.DescribeLunaClient':
     post:
-      operationId: DescribeLunaClient
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Retrieves information about an HSM client.</p>'
+      operationId: DescribeLunaClient
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLunaClientRequest'
+        - enum:
+            - CloudHsmFrontendService.DescribeLunaClient
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -550,18 +499,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeLunaClientRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.DescribeLunaClient
+  '/#X-Amz-Target=CloudHsmFrontendService.GetConfig':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -570,10 +508,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.GetConfig':
     post:
-      operationId: GetConfig
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Gets the configuration files necessary to connect to all high availability partition groups the client is associated with.</p>'
+      operationId: GetConfig
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConfigRequest'
+        - enum:
+            - CloudHsmFrontendService.GetConfig
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -591,18 +540,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetConfigRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.GetConfig
+  '/#X-Amz-Target=CloudHsmFrontendService.ListAvailableZones':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -611,10 +549,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ListAvailableZones':
     post:
-      operationId: ListAvailableZones
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Lists the Availability Zones that have available AWS CloudHSM capacity.</p>'
+      operationId: ListAvailableZones
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAvailableZonesRequest'
+        - enum:
+            - CloudHsmFrontendService.ListAvailableZones
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -632,18 +581,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAvailableZonesRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ListAvailableZones
+  '/#X-Amz-Target=CloudHsmFrontendService.ListHapgs':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -652,10 +590,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ListHapgs':
     post:
-      operationId: ListHapgs
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Lists the high-availability partition groups for the account.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHapgs</code> to retrieve the next set of items.</p>'
+      operationId: ListHapgs
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListHapgsRequest'
+        - enum:
+            - CloudHsmFrontendService.ListHapgs
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -673,18 +622,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListHapgsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ListHapgs
+  '/#X-Amz-Target=CloudHsmFrontendService.ListHsms':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -693,10 +631,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ListHsms':
     post:
-      operationId: ListHsms
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Retrieves the identifiers of all of the HSMs provisioned for the current customer.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHsms</code> to retrieve the next set of items.</p>'
+      operationId: ListHsms
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListHsmsRequest'
+        - enum:
+            - CloudHsmFrontendService.ListHsms
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -714,18 +663,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListHsmsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ListHsms
+  '/#X-Amz-Target=CloudHsmFrontendService.ListLunaClients':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -734,10 +672,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ListLunaClients':
     post:
-      operationId: ListLunaClients
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Lists all of the clients.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListLunaClients</code> to retrieve the next set of items.</p>'
+      operationId: ListLunaClients
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLunaClientsRequest'
+        - enum:
+            - CloudHsmFrontendService.ListLunaClients
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -755,18 +704,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListLunaClientsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ListLunaClients
+  '/#X-Amz-Target=CloudHsmFrontendService.ListTagsForResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -775,10 +713,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ListTagsForResource':
     post:
-      operationId: ListTagsForResource
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Returns a list of all tags for the specified AWS CloudHSM resource.</p>'
+      operationId: ListTagsForResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - enum:
+            - CloudHsmFrontendService.ListTagsForResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -796,18 +745,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ListTagsForResource
+  '/#X-Amz-Target=CloudHsmFrontendService.ModifyHapg':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -816,10 +754,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ModifyHapg':
     post:
-      operationId: ModifyHapg
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Modifies an existing high-availability partition group.</p>'
+      operationId: ModifyHapg
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyHapgRequest'
+        - enum:
+            - CloudHsmFrontendService.ModifyHapg
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -837,18 +786,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ModifyHapgRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ModifyHapg
+  '/#X-Amz-Target=CloudHsmFrontendService.ModifyHsm':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -857,10 +795,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ModifyHsm':
     post:
-      operationId: ModifyHsm
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Modifies an HSM.</p> <important> <p>This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window.</p> </important>'
+      operationId: ModifyHsm
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyHsmRequest'
+        - enum:
+            - CloudHsmFrontendService.ModifyHsm
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -878,18 +827,7 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ModifyHsmRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ModifyHsm
+  '/#X-Amz-Target=CloudHsmFrontendService.ModifyLunaClient':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -898,10 +836,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.ModifyLunaClient':
     post:
-      operationId: ModifyLunaClient
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Modifies the certificate used by the client.</p> <p>This action can potentially start a workflow to install the new certificate on the client''s HSMs.</p>'
+      operationId: ModifyLunaClient
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyLunaClientRequest'
+        - enum:
+            - CloudHsmFrontendService.ModifyLunaClient
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -911,18 +860,7 @@ paths:
           description: CloudHsmServiceException
           schema:
             $ref: '#/definitions/CloudHsmServiceException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ModifyLunaClientRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.ModifyLunaClient
+  '/#X-Amz-Target=CloudHsmFrontendService.RemoveTagsFromResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -931,10 +869,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CloudHsmFrontendService.RemoveTagsFromResource':
     post:
-      operationId: RemoveTagsFromResource
       description: '<p>This is documentation for <b>AWS CloudHSM Classic</b>. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/APIReference/">AWS CloudHSM Classic API Reference</a>.</p> <p> <b>For information about the current version of AWS CloudHSM</b>, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a>, the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>, and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API Reference</a>.</p> <p>Removes one or more tags from the specified AWS CloudHSM resource.</p> <p>To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>'
+      operationId: RemoveTagsFromResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveTagsFromResourceRequest'
+        - enum:
+            - CloudHsmFrontendService.RemoveTagsFromResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -952,40 +901,15 @@ paths:
           description: InvalidRequestException
           schema:
             $ref: '#/definitions/InvalidRequestException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RemoveTagsFromResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - CloudHsmFrontendService.RemoveTagsFromResource
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AddTagsToResourceResponse:
-    type: object
-    required:
-      - Status
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the operation.
+  AZ:
+    pattern: '[a-zA-Z0-9\-]*'
+    type: string
+  AZList:
+    items:
+      $ref: '#/definitions/AZ'
+    type: array
   AddTagsToResourceRequest:
-    type: object
-    required:
-      - ResourceArn
-      - TagList
     properties:
       ResourceArn:
         $ref: '#/definitions/String'
@@ -993,8 +917,58 @@ definitions:
       TagList:
         $ref: '#/definitions/TagList'
         description: One or more tags.
-  CloudHsmServiceException:
+    required:
+      - ResourceArn
+      - TagList
     type: object
+  AddTagsToResourceResponse:
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the operation.
+    required:
+      - Status
+    type: object
+  Boolean:
+    type: boolean
+  Certificate:
+    maxLength: 2400
+    minLength: 600
+    pattern: '[\w :+=./\n-]*'
+    type: string
+  CertificateFingerprint:
+    pattern: '([0-9a-fA-F][0-9a-fA-F]:){15}[0-9a-fA-F][0-9a-fA-F]'
+    type: string
+  ClientArn:
+    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:client-[0-9a-f]{8}'
+    type: string
+  ClientLabel:
+    pattern: '[a-zA-Z0-9_.-]{2,64}'
+    type: string
+  ClientList:
+    items:
+      $ref: '#/definitions/ClientArn'
+    type: array
+  ClientToken:
+    pattern: '[a-zA-Z0-9]{1,64}'
+    type: string
+  ClientVersion:
+    enum:
+      - '5.1'
+      - '5.3'
+    type: string
+  CloudHsmInternalException:
+    description: Indicates that an internal error occurred.
+    properties: {}
+    type: object
+  CloudHsmObjectState:
+    enum:
+      - READY
+      - UPDATING
+      - DEGRADED
+    type: string
+  CloudHsmServiceException:
+    description: Indicates that an exception occurred in the AWS CloudHSM service.
     properties:
       message:
         $ref: '#/definitions/String'
@@ -1002,143 +976,144 @@ definitions:
       retryable:
         $ref: '#/definitions/Boolean'
         description: Indicates if the action can be retried.
-    description: Indicates that an exception occurred in the AWS CloudHSM service.
-  CloudHsmInternalException:
     type: object
-    properties: {}
-    description: Indicates that an internal error occurred.
-  InvalidRequestException:
-    type: object
-    properties: {}
-    description: Indicates that one or more of the request parameters are not valid.
-  CreateHapgResponse:
-    type: object
-    properties:
-      HapgArn:
-        $ref: '#/definitions/HapgArn'
-        description: The ARN of the high-availability partition group.
-    description: Contains the output of the <a>CreateHAPartitionGroup</a> action.
   CreateHapgRequest:
-    type: object
-    required:
-      - Label
+    description: Contains the inputs for the <a>CreateHapgRequest</a> action.
     properties:
       Label:
         $ref: '#/definitions/Label'
         description: The label of the new high-availability partition group.
-    description: Contains the inputs for the <a>CreateHapgRequest</a> action.
-  CreateHsmResponse:
+    required:
+      - Label
     type: object
+  CreateHapgResponse:
+    description: Contains the output of the <a>CreateHAPartitionGroup</a> action.
     properties:
-      HsmArn:
-        $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM.
-    description: Contains the output of the <code>CreateHsm</code> operation.
-  CreateHsmRequest:
+      HapgArn:
+        $ref: '#/definitions/HapgArn'
+        description: The ARN of the high-availability partition group.
     type: object
+  CreateHsmRequest:
+    description: Contains the inputs for the <code>CreateHsm</code> operation.
+    properties:
+      ClientToken:
+        $ref: '#/definitions/ClientToken'
+        description: A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
+      EniIp:
+        $ref: '#/definitions/IpAddress'
+        description: '<p>The IP address to assign to the HSM''s ENI.</p> <p>If an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the subnet.</p>'
+      ExternalId:
+        $ref: '#/definitions/ExternalId'
+        description: 'The external ID from <code>IamRoleArn</code>, if present.'
+      IamRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
+      SshKey:
+        $ref: '#/definitions/SshKey'
+        description: The SSH public key to install on the HSM.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The identifier of the subnet in your VPC in which to place the HSM.
+      SubscriptionType:
+        $ref: '#/definitions/SubscriptionType'
+      SyslogIp:
+        $ref: '#/definitions/IpAddress'
+        description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
     required:
       - SubnetId
       - SshKey
       - IamRoleArn
       - SubscriptionType
-    properties:
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The identifier of the subnet in your VPC in which to place the HSM.
-      SshKey:
-        $ref: '#/definitions/SshKey'
-        description: The SSH public key to install on the HSM.
-      EniIp:
-        $ref: '#/definitions/IpAddress'
-        description: '<p>The IP address to assign to the HSM''s ENI.</p> <p>If an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the subnet.</p>'
-      IamRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
-      ExternalId:
-        $ref: '#/definitions/ExternalId'
-        description: 'The external ID from <code>IamRoleArn</code>, if present.'
-      SubscriptionType:
-        $ref: '#/definitions/SubscriptionType'
-      ClientToken:
-        $ref: '#/definitions/ClientToken'
-        description: A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
-      SyslogIp:
-        $ref: '#/definitions/IpAddress'
-        description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
-    description: Contains the inputs for the <code>CreateHsm</code> operation.
-  CreateLunaClientResponse:
     type: object
+  CreateHsmResponse:
+    description: Contains the output of the <code>CreateHsm</code> operation.
+    properties:
+      HsmArn:
+        $ref: '#/definitions/HsmArn'
+        description: The ARN of the HSM.
+    type: object
+  CreateLunaClientRequest:
+    description: Contains the inputs for the <a>CreateLunaClient</a> action.
+    properties:
+      Certificate:
+        $ref: '#/definitions/Certificate'
+        description: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
+      Label:
+        $ref: '#/definitions/ClientLabel'
+        description: The label for the client.
+    required:
+      - Certificate
+    type: object
+  CreateLunaClientResponse:
+    description: Contains the output of the <a>CreateLunaClient</a> action.
     properties:
       ClientArn:
         $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
-    description: Contains the output of the <a>CreateLunaClient</a> action.
-  CreateLunaClientRequest:
     type: object
-    required:
-      - Certificate
-    properties:
-      Label:
-        $ref: '#/definitions/ClientLabel'
-        description: The label for the client.
-      Certificate:
-        $ref: '#/definitions/Certificate'
-        description: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
-    description: Contains the inputs for the <a>CreateLunaClient</a> action.
-  DeleteHapgResponse:
-    type: object
-    required:
-      - Status
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the action.
-    description: Contains the output of the <a>DeleteHapg</a> action.
   DeleteHapgRequest:
-    type: object
-    required:
-      - HapgArn
+    description: Contains the inputs for the <a>DeleteHapg</a> action.
     properties:
       HapgArn:
         $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group to delete.
-    description: Contains the inputs for the <a>DeleteHapg</a> action.
-  DeleteHsmResponse:
-    type: object
     required:
-      - Status
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the operation.
-    description: Contains the output of the <a>DeleteHsm</a> operation.
-  DeleteHsmRequest:
+      - HapgArn
     type: object
-    required:
-      - HsmArn
-    properties:
-      HsmArn:
-        $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM to delete.
-    description: Contains the inputs for the <a>DeleteHsm</a> operation.
-  DeleteLunaClientResponse:
-    type: object
-    required:
-      - Status
+  DeleteHapgResponse:
+    description: Contains the output of the <a>DeleteHapg</a> action.
     properties:
       Status:
         $ref: '#/definitions/String'
         description: The status of the action.
-  DeleteLunaClientRequest:
-    type: object
     required:
-      - ClientArn
+      - Status
+    type: object
+  DeleteHsmRequest:
+    description: Contains the inputs for the <a>DeleteHsm</a> operation.
+    properties:
+      HsmArn:
+        $ref: '#/definitions/HsmArn'
+        description: The ARN of the HSM to delete.
+    required:
+      - HsmArn
+    type: object
+  DeleteHsmResponse:
+    description: Contains the output of the <a>DeleteHsm</a> operation.
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the operation.
+    required:
+      - Status
+    type: object
+  DeleteLunaClientRequest:
     properties:
       ClientArn:
         $ref: '#/definitions/ClientArn'
         description: The ARN of the client to delete.
-  DescribeHapgResponse:
+    required:
+      - ClientArn
     type: object
+  DeleteLunaClientResponse:
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the action.
+    required:
+      - Status
+    type: object
+  DescribeHapgRequest:
+    description: Contains the inputs for the <a>DescribeHapg</a> action.
+    properties:
+      HapgArn:
+        $ref: '#/definitions/HapgArn'
+        description: The ARN of the high-availability partition group to describe.
+    required:
+      - HapgArn
+    type: object
+  DescribeHapgResponse:
+    description: Contains the output of the <a>DescribeHapg</a> action.
     properties:
       HapgArn:
         $ref: '#/definitions/HapgArn'
@@ -1167,28 +1142,20 @@ definitions:
       State:
         $ref: '#/definitions/CloudHsmObjectState'
         description: The state of the high-availability partition group.
-    description: Contains the output of the <a>DescribeHapg</a> action.
-  DescribeHapgRequest:
     type: object
-    required:
-      - HapgArn
-    properties:
-      HapgArn:
-        $ref: '#/definitions/HapgArn'
-        description: The ARN of the high-availability partition group to describe.
-    description: Contains the inputs for the <a>DescribeHapg</a> action.
-  DescribeHsmResponse:
-    type: object
+  DescribeHsmRequest:
+    description: Contains the inputs for the <a>DescribeHsm</a> operation.
     properties:
       HsmArn:
         $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM.
-      Status:
-        $ref: '#/definitions/HsmStatus'
-        description: The status of the HSM.
-      StatusDetails:
-        $ref: '#/definitions/String'
-        description: Contains additional information about the status of the HSM.
+        description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
+      HsmSerialNumber:
+        $ref: '#/definitions/HsmSerialNumber'
+        description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
+    type: object
+  DescribeHsmResponse:
+    description: Contains the output of the <a>DescribeHsm</a> operation.
+    properties:
       AvailabilityZone:
         $ref: '#/definitions/AZ'
         description: The Availability Zone that the HSM is in.
@@ -1198,106 +1165,94 @@ definitions:
       EniIp:
         $ref: '#/definitions/IpAddress'
         description: The IP address assigned to the HSM's ENI.
-      SubscriptionType:
-        $ref: '#/definitions/SubscriptionType'
-      SubscriptionStartDate:
-        $ref: '#/definitions/Timestamp'
-        description: The subscription start date.
-      SubscriptionEndDate:
-        $ref: '#/definitions/Timestamp'
-        description: The subscription end date.
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier of the VPC that the HSM is in.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The identifier of the subnet that the HSM is in.
-      IamRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: The ARN of the IAM role assigned to the HSM.
-      SerialNumber:
-        $ref: '#/definitions/HsmSerialNumber'
-        description: The serial number of the HSM.
-      VendorName:
-        $ref: '#/definitions/String'
-        description: The name of the HSM vendor.
+      HsmArn:
+        $ref: '#/definitions/HsmArn'
+        description: The ARN of the HSM.
       HsmType:
         $ref: '#/definitions/String'
         description: The HSM model type.
-      SoftwareVersion:
-        $ref: '#/definitions/String'
-        description: The HSM software version.
-      SshPublicKey:
-        $ref: '#/definitions/SshKey'
-        description: The public SSH key.
-      SshKeyLastUpdated:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the SSH key was last updated.
-      ServerCertUri:
-        $ref: '#/definitions/String'
-        description: The URI of the certificate server.
-      ServerCertLastUpdated:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the server certificate was last updated.
+      IamRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The ARN of the IAM role assigned to the HSM.
       Partitions:
         $ref: '#/definitions/PartitionList'
         description: The list of partitions on the HSM.
-    description: Contains the output of the <a>DescribeHsm</a> operation.
-  DescribeHsmRequest:
-    type: object
-    properties:
-      HsmArn:
-        $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
-      HsmSerialNumber:
+      SerialNumber:
         $ref: '#/definitions/HsmSerialNumber'
-        description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
-    description: Contains the inputs for the <a>DescribeHsm</a> operation.
-  DescribeLunaClientResponse:
+        description: The serial number of the HSM.
+      ServerCertLastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the server certificate was last updated.
+      ServerCertUri:
+        $ref: '#/definitions/String'
+        description: The URI of the certificate server.
+      SoftwareVersion:
+        $ref: '#/definitions/String'
+        description: The HSM software version.
+      SshKeyLastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the SSH key was last updated.
+      SshPublicKey:
+        $ref: '#/definitions/SshKey'
+        description: The public SSH key.
+      Status:
+        $ref: '#/definitions/HsmStatus'
+        description: The status of the HSM.
+      StatusDetails:
+        $ref: '#/definitions/String'
+        description: Contains additional information about the status of the HSM.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The identifier of the subnet that the HSM is in.
+      SubscriptionEndDate:
+        $ref: '#/definitions/Timestamp'
+        description: The subscription end date.
+      SubscriptionStartDate:
+        $ref: '#/definitions/Timestamp'
+        description: The subscription start date.
+      SubscriptionType:
+        $ref: '#/definitions/SubscriptionType'
+      VendorName:
+        $ref: '#/definitions/String'
+        description: The name of the HSM vendor.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC that the HSM is in.
     type: object
+  DescribeLunaClientRequest:
     properties:
+      CertificateFingerprint:
+        $ref: '#/definitions/CertificateFingerprint'
+        description: The certificate fingerprint.
       ClientArn:
         $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
+    type: object
+  DescribeLunaClientResponse:
+    properties:
       Certificate:
         $ref: '#/definitions/Certificate'
         description: The certificate installed on the HSMs used by this client.
       CertificateFingerprint:
         $ref: '#/definitions/CertificateFingerprint'
         description: The certificate fingerprint.
-      LastModifiedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time the client was last modified.
-      Label:
-        $ref: '#/definitions/Label'
-        description: The label of the client.
-  DescribeLunaClientRequest:
-    type: object
-    properties:
       ClientArn:
         $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
-      CertificateFingerprint:
-        $ref: '#/definitions/CertificateFingerprint'
-        description: The certificate fingerprint.
-  GetConfigResponse:
+      Label:
+        $ref: '#/definitions/Label'
+        description: The label of the client.
+      LastModifiedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time the client was last modified.
     type: object
-    properties:
-      ConfigType:
-        $ref: '#/definitions/String'
-        description: The type of credentials.
-      ConfigFile:
-        $ref: '#/definitions/String'
-        description: The chrystoki.conf configuration file.
-      ConfigCred:
-        $ref: '#/definitions/String'
-        description: The certificate file containing the server.pem files of the HSMs.
+  EniId:
+    pattern: 'eni-[0-9a-f]{8}'
+    type: string
+  ExternalId:
+    pattern: '[\w :+=./-]*'
+    type: string
   GetConfigRequest:
-    type: object
-    required:
-      - ClientArn
-      - ClientVersion
-      - HapgList
     properties:
       ClientArn:
         $ref: '#/definitions/ClientArn'
@@ -1308,20 +1263,82 @@ definitions:
       HapgList:
         $ref: '#/definitions/HapgList'
         description: A list of ARNs that identify the high-availability partition groups that are associated with the client.
-  ListAvailableZonesResponse:
+    required:
+      - ClientArn
+      - ClientVersion
+      - HapgList
     type: object
+  GetConfigResponse:
+    properties:
+      ConfigCred:
+        $ref: '#/definitions/String'
+        description: The certificate file containing the server.pem files of the HSMs.
+      ConfigFile:
+        $ref: '#/definitions/String'
+        description: The chrystoki.conf configuration file.
+      ConfigType:
+        $ref: '#/definitions/String'
+        description: The type of credentials.
+    type: object
+  HapgArn:
+    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hapg-[0-9a-f]{8}'
+    type: string
+  HapgList:
+    items:
+      $ref: '#/definitions/HapgArn'
+    type: array
+  HsmArn:
+    description: An ARN that identifies an HSM.
+    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}'
+    type: string
+  HsmList:
+    description: Contains a list of ARNs that identify the HSMs.
+    items:
+      $ref: '#/definitions/HsmArn'
+    type: array
+  HsmSerialNumber:
+    pattern: '\d{1,16}'
+    type: string
+  HsmStatus:
+    enum:
+      - PENDING
+      - RUNNING
+      - UPDATING
+      - SUSPENDED
+      - TERMINATING
+      - TERMINATED
+      - DEGRADED
+    type: string
+  IamRoleArn:
+    pattern: 'arn:aws(-iso)?:iam::[0-9]{12}:role/[a-zA-Z0-9_\+=,\.\-@]{1,64}'
+    type: string
+  InvalidRequestException:
+    description: Indicates that one or more of the request parameters are not valid.
+    properties: {}
+    type: object
+  IpAddress:
+    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+    type: string
+  Label:
+    pattern: '[a-zA-Z0-9_.-]{1,64}'
+    type: string
+  ListAvailableZonesRequest:
+    description: Contains the inputs for the <a>ListAvailableZones</a> action.
+    properties: {}
+    type: object
+  ListAvailableZonesResponse:
     properties:
       AZList:
         $ref: '#/definitions/AZList'
         description: The list of Availability Zones that have available AWS CloudHSM capacity.
-  ListAvailableZonesRequest:
     type: object
-    properties: {}
-    description: Contains the inputs for the <a>ListAvailableZones</a> action.
+  ListHapgsRequest:
+    properties:
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
+    type: object
   ListHapgsResponse:
-    type: object
-    required:
-      - HapgList
     properties:
       HapgList:
         $ref: '#/definitions/HapgList'
@@ -1329,14 +1346,17 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.'
-  ListHapgsRequest:
+    required:
+      - HapgList
     type: object
+  ListHsmsRequest:
     properties:
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
-  ListHsmsResponse:
+        description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
     type: object
+  ListHsmsResponse:
+    description: Contains the output of the <code>ListHsms</code> operation.
     properties:
       HsmList:
         $ref: '#/definitions/HsmList'
@@ -1344,17 +1364,14 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.'
-    description: Contains the output of the <code>ListHsms</code> operation.
-  ListHsmsRequest:
     type: object
+  ListLunaClientsRequest:
     properties:
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
-  ListLunaClientsResponse:
+        description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
     type: object
-    required:
-      - ClientList
+  ListLunaClientsResponse:
     properties:
       ClientList:
         $ref: '#/definitions/ClientList'
@@ -1362,38 +1379,26 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.'
-  ListLunaClientsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/PaginationToken'
-        description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
-  ListTagsForResourceResponse:
-    type: object
     required:
-      - TagList
-    properties:
-      TagList:
-        $ref: '#/definitions/TagList'
-        description: One or more tags.
+      - ClientList
+    type: object
   ListTagsForResourceRequest:
-    type: object
-    required:
-      - ResourceArn
     properties:
       ResourceArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
-  ModifyHapgResponse:
-    type: object
-    properties:
-      HapgArn:
-        $ref: '#/definitions/HapgArn'
-        description: The ARN of the high-availability partition group.
-  ModifyHapgRequest:
-    type: object
     required:
-      - HapgArn
+      - ResourceArn
+    type: object
+  ListTagsForResourceResponse:
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: One or more tags.
+    required:
+      - TagList
+    type: object
+  ModifyHapgRequest:
     properties:
       HapgArn:
         $ref: '#/definitions/HapgArn'
@@ -1404,68 +1409,82 @@ definitions:
       PartitionSerialList:
         $ref: '#/definitions/PartitionSerialList'
         description: The list of partition serial numbers to make members of the high-availability partition group.
-  ModifyHsmResponse:
+    required:
+      - HapgArn
     type: object
+  ModifyHapgResponse:
+    properties:
+      HapgArn:
+        $ref: '#/definitions/HapgArn'
+        description: The ARN of the high-availability partition group.
+    type: object
+  ModifyHsmRequest:
+    description: Contains the inputs for the <a>ModifyHsm</a> operation.
+    properties:
+      EniIp:
+        $ref: '#/definitions/IpAddress'
+        description: '<p>The new IP address for the elastic network interface (ENI) attached to the HSM.</p> <p>If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.</p>'
+      ExternalId:
+        $ref: '#/definitions/ExternalId'
+        description: The new external ID.
+      HsmArn:
+        $ref: '#/definitions/HsmArn'
+        description: The ARN of the HSM to modify.
+      IamRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The new IAM role ARN.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
+      SyslogIp:
+        $ref: '#/definitions/IpAddress'
+        description: The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
+    required:
+      - HsmArn
+    type: object
+  ModifyHsmResponse:
+    description: Contains the output of the <a>ModifyHsm</a> operation.
     properties:
       HsmArn:
         $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM.
-    description: Contains the output of the <a>ModifyHsm</a> operation.
-  ModifyHsmRequest:
     type: object
-    required:
-      - HsmArn
-    properties:
-      HsmArn:
-        $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM to modify.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
-      EniIp:
-        $ref: '#/definitions/IpAddress'
-        description: '<p>The new IP address for the elastic network interface (ENI) attached to the HSM.</p> <p>If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.</p>'
-      IamRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: The new IAM role ARN.
-      ExternalId:
-        $ref: '#/definitions/ExternalId'
-        description: The new external ID.
-      SyslogIp:
-        $ref: '#/definitions/IpAddress'
-        description: The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
-    description: Contains the inputs for the <a>ModifyHsm</a> operation.
-  ModifyLunaClientResponse:
-    type: object
-    properties:
-      ClientArn:
-        $ref: '#/definitions/ClientArn'
-        description: The ARN of the client.
   ModifyLunaClientRequest:
-    type: object
-    required:
-      - ClientArn
-      - Certificate
     properties:
-      ClientArn:
-        $ref: '#/definitions/ClientArn'
-        description: The ARN of the client.
       Certificate:
         $ref: '#/definitions/Certificate'
         description: The new certificate for the client.
-  RemoveTagsFromResourceResponse:
-    type: object
+      ClientArn:
+        $ref: '#/definitions/ClientArn'
+        description: The ARN of the client.
     required:
-      - Status
+      - ClientArn
+      - Certificate
+    type: object
+  ModifyLunaClientResponse:
     properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the operation.
-  RemoveTagsFromResourceRequest:
+      ClientArn:
+        $ref: '#/definitions/ClientArn'
+        description: The ARN of the client.
     type: object
-    required:
-      - ResourceArn
-      - TagKeyList
+  PaginationToken:
+    pattern: '[a-zA-Z0-9+/]*'
+    type: string
+  PartitionArn:
+    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}/partition-[0-9]{6,12}'
+    type: string
+  PartitionList:
+    items:
+      $ref: '#/definitions/PartitionArn'
+    type: array
+  PartitionSerial:
+    pattern: '\d{6,12}'
+    type: string
+  PartitionSerialList:
+    items:
+      $ref: '#/definitions/PartitionSerial'
+    type: array
+  RemoveTagsFromResourceRequest:
     properties:
       ResourceArn:
         $ref: '#/definitions/String'
@@ -1473,149 +1492,34 @@ definitions:
       TagKeyList:
         $ref: '#/definitions/TagKeyList'
         description: '<p>The tag key or keys to remove.</p> <p>Specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>'
-  AZ:
-    type: string
-    pattern: '[a-zA-Z0-9\-]*'
-  AZList:
-    type: array
-    items:
-      $ref: '#/definitions/AZ'
-  String:
-    type: string
-    pattern: '[\w :+=./\\-]*'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  Boolean:
-    type: boolean
-  Certificate:
-    type: string
-    pattern: '[\w :+=./\n-]*'
-    minLength: 600
-    maxLength: 2400
-  CertificateFingerprint:
-    type: string
-    pattern: '([0-9a-fA-F][0-9a-fA-F]:){15}[0-9a-fA-F][0-9a-fA-F]'
-  ClientArn:
-    type: string
-    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:client-[0-9a-f]{8}'
-  ClientLabel:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]{2,64}'
-  ClientList:
-    type: array
-    items:
-      $ref: '#/definitions/ClientArn'
-  ClientToken:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,64}'
-  ClientVersion:
-    type: string
-    enum:
-      - '5.1'
-      - '5.3'
-  CloudHsmObjectState:
-    type: string
-    enum:
-      - READY
-      - UPDATING
-      - DEGRADED
-  Label:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]{1,64}'
-  HapgArn:
-    type: string
-    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hapg-[0-9a-f]{8}'
-  SubnetId:
-    type: string
-    pattern: 'subnet-[0-9a-f]{8}'
+    required:
+      - ResourceArn
+      - TagKeyList
+    type: object
+  RemoveTagsFromResourceResponse:
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the operation.
+    required:
+      - Status
+    type: object
   SshKey:
-    type: string
     pattern: '[a-zA-Z0-9+/= ._:\\@-]*'
-  IpAddress:
     type: string
-    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-  IamRoleArn:
+  String:
+    pattern: '[\w :+=./\\-]*'
     type: string
-    pattern: 'arn:aws(-iso)?:iam::[0-9]{12}:role/[a-zA-Z0-9_\+=,\.\-@]{1,64}'
-  ExternalId:
+  SubnetId:
+    pattern: 'subnet-[0-9a-f]{8}'
     type: string
-    pattern: '[\w :+=./-]*'
   SubscriptionType:
-    type: string
+    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>
     enum:
       - PRODUCTION
-    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>
-  HsmArn:
     type: string
-    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}'
-    description: An ARN that identifies an HSM.
-  HsmList:
-    type: array
-    description: Contains a list of ARNs that identify the HSMs.
-    items:
-      $ref: '#/definitions/HsmArn'
-  Timestamp:
-    type: string
-    pattern: \d*
-  PartitionSerialList:
-    type: array
-    items:
-      $ref: '#/definitions/PartitionSerial'
-  HsmSerialNumber:
-    type: string
-    pattern: '\d{1,16}'
-  HsmStatus:
-    type: string
-    enum:
-      - PENDING
-      - RUNNING
-      - UPDATING
-      - SUSPENDED
-      - TERMINATING
-      - TERMINATED
-      - DEGRADED
-  EniId:
-    type: string
-    pattern: 'eni-[0-9a-f]{8}'
-  VpcId:
-    type: string
-    pattern: 'vpc-[0-9a-f]{8}'
-  PartitionList:
-    type: array
-    items:
-      $ref: '#/definitions/PartitionArn'
-  HapgList:
-    type: array
-    items:
-      $ref: '#/definitions/HapgArn'
-  PaginationToken:
-    type: string
-    pattern: '[a-zA-Z0-9+/]*'
-  PartitionArn:
-    type: string
-    pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}/partition-[0-9]{6,12}'
-  PartitionSerial:
-    type: string
-    pattern: '\d{6,12}'
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
   Tag:
-    type: object
-    required:
-      - Key
-      - Value
+    description: A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.
     properties:
       Key:
         $ref: '#/definitions/TagKey'
@@ -1623,4 +1527,100 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
-    description: A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.
+    required:
+      - Key
+      - Value
+    type: object
+  TagKey:
+    maxLength: 128
+    minLength: 1
+    type: string
+  TagKeyList:
+    items:
+      $ref: '#/definitions/TagKey'
+    type: array
+  TagList:
+    items:
+      $ref: '#/definitions/Tag'
+    type: array
+  TagValue:
+    maxLength: 256
+    minLength: 0
+    type: string
+  Timestamp:
+    pattern: \d*
+    type: string
+  VpcId:
+    pattern: 'vpc-[0-9a-f]{8}'
+    type: string
+x-servers:
+  - description: The CloudHSM multi-region endpoint
+    url: 'http://cloudhsm.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The CloudHSM multi-region endpoint
+    url: 'https://cloudhsm.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The CloudHSM endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://cloudhsm.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The CloudHSM endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://cloudhsm.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

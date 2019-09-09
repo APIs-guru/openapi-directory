@@ -34,6 +34,7 @@ securityDefinitions:
     name: access_token
     type: apiKey
   AuthorizationHeaderToken:
+    description: API tokens must be prepended with "token" followed by a space.
     in: header
     name: Authorization
     type: apiKey
@@ -75,6 +76,10 @@ responses:
         type: string
   AccessTokenList:
     description: AccessTokenList represents a list of API access token.
+    schema:
+      items:
+        $ref: '#/definitions/AccessToken'
+      type: array
   AnnotatedTag:
     description: AnnotatedTag
     schema:
@@ -113,6 +118,32 @@ responses:
     description: Commit
     schema:
       $ref: '#/definitions/Commit'
+  CommitList:
+    description: CommitList
+    headers:
+      X-HasMore:
+        description: True if there is another page
+        type: boolean
+      X-Page:
+        description: The current page
+        format: int64
+        type: integer
+      X-PageCount:
+        description: Total number of pages
+        format: int64
+        type: integer
+      X-PerPage:
+        description: Commits per page
+        format: int64
+        type: integer
+      X-Total:
+        description: Total commit count
+        format: int64
+        type: integer
+    schema:
+      items:
+        $ref: '#/definitions/Commit'
+      type: array
   ContentsListResponse:
     description: ContentsListResponse
     schema:
@@ -139,6 +170,10 @@ responses:
       items:
         $ref: '#/definitions/Email'
       type: array
+  EmptyRepository:
+    description: EmptyRepository
+    schema:
+      $ref: '#/definitions/APIError'
   FileDeleteResponse:
     description: FileDeleteResponse
     schema:
@@ -211,6 +246,8 @@ responses:
       type: array
   MarkdownRender:
     description: MarkdownRender is a rendered markdown document
+    schema:
+      type: string
   Milestone:
     description: Milestone
     schema:
@@ -319,6 +356,16 @@ responses:
       items:
         $ref: '#/definitions/Team'
       type: array
+  TopicListResponse:
+    description: TopicListResponse
+    schema:
+      items:
+        $ref: '#/definitions/TopicResponse'
+      type: array
+  TopicNames:
+    description: TopicNames
+    schema:
+      $ref: '#/definitions/TopicName'
   TrackedTime:
     description: TrackedTime
     schema:
@@ -370,7 +417,7 @@ responses:
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: '#/definitions/DeleteFileOptions'
+      $ref: '#/definitions/RepoTopicOptions'
   redirect:
     description: APIRedirect is a redirect response
   validationError:
@@ -384,6 +431,15 @@ paths:
   /admin/orgs:
     get:
       operationId: adminGetAllOrgs
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: 'page size of results, maximum page size is 50'
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -1070,6 +1126,14 @@ paths:
           in: query
           name: q
           type: string
+        - description: Limit search to repositories with keyword as topic
+          in: query
+          name: topic
+          type: boolean
+        - description: include search of keyword within repository description
+          in: query
+          name: includeDesc
+          type: boolean
         - description: search only for repos that the user with the given id owns or contributes to
           format: int64
           in: query
@@ -1376,6 +1440,40 @@ paths:
       summary: Add a collaborator to a repository
       tags:
         - repository
+  '/repos/{owner}/{repo}/commits':
+    get:
+      operationId: repoGetAllCommits
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: SHA or branch to start listing commits from (usually 'master')
+          in: query
+          name: sha
+          type: string
+        - description: page number of requested commits
+          in: query
+          name: page
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/CommitList'
+        '404':
+          $ref: '#/responses/notFound'
+        '409':
+          $ref: '#/responses/EmptyRepository'
+      summary: Get a list of all commits from a repository
+      tags:
+        - repository
   '/repos/{owner}/{repo}/commits/{ref}/statuses':
     get:
       operationId: repoGetCombinedStatusByRef
@@ -1395,6 +1493,10 @@ paths:
           name: ref
           required: true
           type: string
+        - description: page number of results
+          in: query
+          name: page
+          type: integer
       produces:
         - application/json
       responses:
@@ -1756,7 +1858,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: sha of the tag
+        - description: 'sha of the tag. The Git tags API only supports annotated tag objects, not lightweight tags.'
           in: path
           name: sha
           required: true
@@ -1766,7 +1868,7 @@ paths:
       responses:
         '200':
           $ref: '#/responses/AnnotatedTag'
-      summary: Gets the tag of a repository.
+      summary: Gets the tag object of an annotated tag (not lightweight tags)
       tags:
         - repository
   '/repos/{owner}/{repo}/git/trees/{sha}':
@@ -3761,6 +3863,30 @@ paths:
           name: sha
           required: true
           type: string
+        - description: page number of results
+          in: query
+          name: page
+          type: integer
+        - description: type of sort
+          enum:
+            - oldest
+            - recentupdate
+            - leastupdate
+            - leastindex
+            - highestindex
+          in: query
+          name: sort
+          type: string
+        - description: type of state
+          enum:
+            - pending
+            - success
+            - error
+            - failure
+            - warning
+          in: query
+          name: state
+          type: string
       produces:
         - application/json
       responses:
@@ -3950,6 +4076,106 @@ paths:
       summary: List a user's tracked times in a repo
       tags:
         - user
+  '/repos/{owner}/{repo}/topics':
+    get:
+      operationId: repoListTopics
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TopicNames'
+      summary: Get list of topics that a repository has
+      tags:
+        - repository
+    put:
+      operationId: repoUpdateTopics
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RepoTopicOptions'
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Replace list of topics for a repository
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/topics/{topic}':
+    delete:
+      operationId: repoDeleteTopic
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of the topic to delete
+          in: path
+          name: topic
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete a topic from a repository
+      tags:
+        - repository
+    put:
+      operationId: repoAddTopíc
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of the topic to add
+          in: path
+          name: topic
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Add a topic to a repository
+      tags:
+        - repository
   '/repositories/{id}':
     get:
       operationId: repoGetByID
@@ -4195,7 +4421,7 @@ paths:
         - application/json
       responses:
         '200':
-          $ref: '#/responses/Repository'
+          $ref: '#/responses/TopicListResponse'
       summary: search topics via keyword
       tags:
         - repository
@@ -4925,6 +5151,35 @@ paths:
       tags:
         - miscellaneous
 definitions:
+  APIError:
+    description: APIError is an api error with a message
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  AccessToken:
+    properties:
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      sha1:
+        type: string
+        x-go-name: Token
+      token_last_eight:
+        type: string
+        x-go-name: TokenLastEight
+    title: AccessToken represents an API access token.
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   AddCollaboratorOption:
     description: AddCollaboratorOption options when adding a user as a collaborator of a repository
     properties:
@@ -5231,6 +5486,9 @@ definitions:
         default: false
         type: boolean
         x-go-name: Active
+      branch_filter:
+        type: string
+        x-go-name: BranchFilter
       config:
         additionalProperties:
           type: string
@@ -5469,6 +5727,10 @@ definitions:
         description: Gitignores to use
         type: string
         x-go-name: Gitignores
+      issue_labels:
+        description: Issue Label set to use
+        type: string
+        x-go-name: IssueLabels
       license:
         description: License to use
         type: string
@@ -5523,7 +5785,7 @@ definitions:
         type: string
         x-go-name: Permission
       units:
-        enum:
+        example:
           - repo.code
           - repo.issues
           - repo.ext_issues
@@ -5681,6 +5943,9 @@ definitions:
       active:
         type: boolean
         x-go-name: Active
+      branch_filter:
+        type: string
+        x-go-name: BranchFilter
       config:
         additionalProperties:
           type: string
@@ -5931,7 +6196,7 @@ definitions:
         type: string
         x-go-name: Permission
       units:
-        enum:
+        example:
           - repo.code
           - repo.issues
           - repo.ext_issues
@@ -6885,6 +7150,17 @@ definitions:
     title: RepoCommit contains information of a commit in the context of a repository.
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  RepoTopicOptions:
+    description: RepoTopicOptions a collection of repo topic names
+    properties:
+      topics:
+        description: list of topic names
+        items:
+          type: string
+        type: array
+        x-go-name: Topics
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Repository:
     description: Repository represents a repository
     properties:
@@ -7105,7 +7381,7 @@ definitions:
         type: string
         x-go-name: Permission
       units:
-        enum:
+        example:
           - repo.code
           - repo.issues
           - repo.ext_issues
@@ -7123,7 +7399,41 @@ definitions:
     description: TimeStamp defines a timestamp
     format: int64
     type: integer
-    x-go-package: code.gitea.io/gitea/modules/util
+    x-go-package: code.gitea.io/gitea/modules/timeutil
+  TopicName:
+    description: TopicName a list of repo topic names
+    properties:
+      topics:
+        items:
+          type: string
+        type: array
+        x-go-name: TopicNames
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  TopicResponse:
+    description: TopicResponse for returning topics
+    properties:
+      created:
+        format: date-time
+        type: string
+        x-go-name: Created
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      repo_count:
+        format: int64
+        type: integer
+        x-go-name: RepoCount
+      topic_name:
+        type: string
+        x-go-name: Name
+      updated:
+        format: date-time
+        type: string
+        x-go-name: Updated
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   TrackedTime:
     description: TrackedTime worked time for an issue / pr
     properties:

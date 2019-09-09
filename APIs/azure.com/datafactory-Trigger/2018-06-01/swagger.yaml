@@ -100,6 +100,70 @@ definitions:
     required:
       - typeProperties
     type: object
+  ChainingTrigger:
+    allOf:
+      - $ref: '#/definitions/Trigger'
+    description: Trigger that allows the referenced pipeline to depend on other pipeline runs based on runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and their runs should have the values for those runDimensions. The referenced pipeline run would be triggered if the values for the runDimension match for all upstream pipeline runs.
+    properties:
+      pipeline:
+        description: Pipeline that needs to be triggered with the given parameters.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          pipelineReference:
+            description: Pipeline reference type.
+            properties:
+              name:
+                description: Reference name.
+                type: string
+              referenceName:
+                description: Reference pipeline name.
+                type: string
+              type:
+                description: Pipeline reference type.
+                enum:
+                  - PipelineReference
+                type: string
+            required:
+              - type
+              - referenceName
+      typeProperties:
+        description: Chaining Trigger properties.
+        properties:
+          dependsOn:
+            description: Upstream Pipelines.
+            items:
+              description: Pipeline reference type.
+              properties:
+                name:
+                  description: Reference name.
+                  type: string
+                referenceName:
+                  description: Reference pipeline name.
+                  type: string
+                type:
+                  description: Pipeline reference type.
+                  enum:
+                    - PipelineReference
+                  type: string
+              required:
+                - type
+                - referenceName
+            type: array
+          runDimension:
+            description: Run Dimension property that needs to be emitted by upstream pipelines.
+            type: string
+        required:
+          - runDimension
+          - dependsOn
+        x-ms-client-flatten: true
+    required:
+      - pipeline
+      - typeProperties
+    type: object
   DayOfWeek:
     description: The days of the week.
     enum:

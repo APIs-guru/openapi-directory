@@ -62,7 +62,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -120,7 +119,6 @@ definitions:
                 required:
                   - type
                 type: object
-                x-ms-discriminator-value: Unknown
             description: Information for connecting to SQL database server
             properties:
               additionalSettings:
@@ -375,7 +373,6 @@ definitions:
               required:
                 - commandType
               type: object
-              x-ms-discriminator-value: Unknown
             readOnly: true
             type: array
           errors:
@@ -419,7 +416,6 @@ definitions:
         required:
           - taskType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for task that migrates Schema for SQL Server databases to Azure SQL databases
     properties:
       input:

@@ -253,7 +253,50 @@ paths:
             api-version: '2019-02-01'
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default
+                name: default
+                properties:
+                  availableCipherSuites:
+                    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_RSA_WITH_AES_256_CBC_SHA256
+                    - TLS_RSA_WITH_AES_128_CBC_SHA256
+                    - TLS_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                    - TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+                    - TLS_DHE_DSS_WITH_AES_128_CBC_SHA256
+                    - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
+                    - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
+                    - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+                    - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+                  availableProtocols:
+                    - TLSv1_0
+                    - TLSv1_1
+                    - TLSv1_2
+                  defaultPolicy: AppGwSslPolicy20150501
+                  predefinedPolicies:
+                    - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                    - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401
+                    - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401S
+                type: Microsoft.Network/ApplicationGatewayAvailableSslOptions
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies':
     get:
       description: Lists all SSL predefined policies for configuring Ssl policy.
@@ -282,7 +325,84 @@ paths:
             api-version: '2019-02-01'
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                    name: AppGwSslPolicy20150501
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                        - TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+                        - TLS_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA256
+                        - TLS_RSA_WITH_AES_128_CBC_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_RSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                        - TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+                        - TLS_DHE_DSS_WITH_AES_128_CBC_SHA256
+                        - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
+                        - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
+                        - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+                        - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+                      minProtocolVersion: TLSv1_0
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401
+                    name: AppGwSslPolicy20170401
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA256
+                        - TLS_RSA_WITH_AES_128_CBC_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_RSA_WITH_AES_128_CBC_SHA
+                      minProtocolVersion: TLSv1_1
+                  - id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20170401S
+                    name: AppGwSslPolicy20170401S
+                    properties:
+                      cipherSuites:
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                        - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_RSA_WITH_AES_256_GCM_SHA384
+                        - TLS_RSA_WITH_AES_128_GCM_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA256
+                        - TLS_RSA_WITH_AES_128_CBC_SHA256
+                        - TLS_RSA_WITH_AES_256_CBC_SHA
+                        - TLS_RSA_WITH_AES_128_CBC_SHA
+                      minProtocolVersion: TLSv1_2
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}':
@@ -319,7 +439,41 @@ paths:
             predefinedPolicyName: AppGwSslPolicy20150501
             subscriptionId: subid
           responses:
-            '200': {}
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups//providers/Microsoft.Network/ApplicationGatewayAvailableSslOptions/default/ApplicationGatewaySslPredefinedPolicy/AppGwSslPolicy20150501
+                name: AppGwSslPolicy20150501
+                properties:
+                  cipherSuites:
+                    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                    - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_RSA_WITH_AES_256_GCM_SHA384
+                    - TLS_RSA_WITH_AES_128_GCM_SHA256
+                    - TLS_RSA_WITH_AES_256_CBC_SHA256
+                    - TLS_RSA_WITH_AES_128_CBC_SHA256
+                    - TLS_RSA_WITH_AES_256_CBC_SHA
+                    - TLS_RSA_WITH_AES_128_CBC_SHA
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                    - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                    - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                    - TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+                    - TLS_DHE_DSS_WITH_AES_128_CBC_SHA256
+                    - TLS_DHE_DSS_WITH_AES_256_CBC_SHA
+                    - TLS_DHE_DSS_WITH_AES_128_CBC_SHA
+                    - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+                    - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+                  minProtocolVersion: TLSv1_0
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets':
     get:
       description: Lists all available web application firewall rule sets.
@@ -1548,8 +1702,10 @@ paths:
             api-version: '2019-02-01'
             applicationGatewayName: appgw
             probeRequest:
-              backendHttpSettingName: MFPoolSettings
-              backendPoolName: MFAnalyticsPool
+              backendAddressPool:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFAnalyticsPool
+              backendHttpSettings:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings
               path: /
               pickHostNameFromBackendHttpSettings: true
               protocol: Http
@@ -2460,12 +2616,20 @@ definitions:
   ApplicationGatewayOnDemandProbe:
     description: Details of on demand test probe request
     properties:
-      backendHttpSettingName:
-        description: Name of backend http setting of application gateway to be used for test probe
-        type: string
-      backendPoolName:
-        description: Name of backend pool of application gateway to which probe request will be sent.
-        type: string
+      backendAddressPool:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
       host:
         description: Host name to send the probe to.
         type: string

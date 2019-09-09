@@ -21,6 +21,64 @@ info:
     - Microsoft
 paths: {}
 definitions:
+  CmdkeySetup:
+    allOf:
+      - $ref: '#/definitions/CustomSetupBase'
+    description: The custom setup of running cmdkey commands.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CmdkeySetupTypeProperties'
+        description: Cmdkey command custom setup type properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+  CmdkeySetupTypeProperties:
+    description: Cmdkey command custom setup type properties.
+    properties:
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      targetName:
+        description: The server name of data source access.
+        type: object
+      userName:
+        description: The user name of data source access.
+        type: object
+    required:
+      - targetName
+      - userName
+      - password
+    type: object
+  ComponentSetup:
+    allOf:
+      - $ref: '#/definitions/CustomSetupBase'
+    description: The custom setup of installing 3rd party components.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/LicensedComponentSetupTypeProperties'
+        description: Install 3rd party component type properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+  CustomSetupBase:
+    description: The base definition of the custom setup.
+    discriminator: type
+    properties:
+      type:
+        description: The type of custom setup.
+        type: string
+    required:
+      - type
+    type: object
   EntityReference:
     description: The entity reference.
     properties:
@@ -36,6 +94,31 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: IntegrationRuntimeEntityReferenceType
+    type: object
+  EnvironmentVariableSetup:
+    allOf:
+      - $ref: '#/definitions/CustomSetupBase'
+    description: The custom setup of setting environment variable.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/EnvironmentVariableSetupTypeProperties'
+        description: Add environment variable type properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+  EnvironmentVariableSetupTypeProperties:
+    description: Environment variable custom setup type properties.
+    properties:
+      variableName:
+        description: The name of the environment variable.
+        type: string
+      variableValue:
+        description: The value of the environment variable.
+        type: string
+    required:
+      - variableName
+      - variableValue
     type: object
   IntegrationRuntime:
     additionalProperties:
@@ -67,7 +150,6 @@ definitions:
     enum:
       - 'On'
       - 'Off'
-    readOnly: true
     type: string
     x-ms-enum:
       modelAsString: true
@@ -304,6 +386,11 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: IntegrationRuntimeEdition
+      expressCustomSetupProperties:
+        description: Custom setup without script properties for a SSIS integration runtime.
+        items:
+          $ref: '#/definitions/CustomSetupBase'
+        type: array
       licenseType:
         description: License type for bringing your own license scenario.
         enum:
@@ -349,6 +436,8 @@ definitions:
       type:
         $ref: '#/definitions/IntegrationRuntimeType'
         description: Type of integration runtime.
+    required:
+      - type
     type: object
   IntegrationRuntimeType:
     description: The type of integration runtime.
@@ -370,6 +459,26 @@ definitions:
       vNetId:
         description: The ID of the VNet that this integration runtime will join.
         type: string
+    type: object
+  LicensedComponentSetupTypeProperties:
+    description: Installation of licensed component setup type properties.
+    properties:
+      componentName:
+        description: The name of the 3rd party component.
+        type: string
+      licenseKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+    required:
+      - componentName
+      - licenseKey
     type: object
   LinkedIntegrationRuntime:
     description: The linked integration runtime information.
@@ -871,6 +980,8 @@ definitions:
       type:
         $ref: '#/definitions/SsisObjectMetadataType'
         description: Type of metadata.
+    required:
+      - type
     type: object
   SsisObjectMetadataListResponse:
     description: A list of SSIS object metadata.

@@ -849,61 +849,6 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
-  '/v1b3/projects/{projectId}/jobs/{jobId}:snapshot':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: Snapshot the state of a streaming job.
-      operationId: dataflow.projects.jobs.snapshot
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SnapshotJobRequest'
-        - description: The job to be snapshotted.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: The project which owns the job to be snapshotted.
-          in: path
-          name: projectId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Snapshot'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
   '/v1b3/projects/{projectId}/jobs:aggregated':
     get:
       description: List the jobs of a project across all regions.
@@ -1637,62 +1582,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/snapshots':
-    get:
-      description: Lists snapshots.
-      operationId: dataflow.projects.locations.jobs.snapshots.list
-      parameters:
-        - description: 'If specified, list snapshots created from this job.'
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: The location to list snapshots in.
-          in: path
-          name: location
-          required: true
-          type: string
-        - description: The project ID to list snapshots for.
-          in: path
-          name: projectId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListSnapshotsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:lease':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1819,220 +1708,6 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
-  '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}:snapshot':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: Snapshot the state of a streaming job.
-      operationId: dataflow.projects.locations.jobs.snapshot
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SnapshotJobRequest'
-        - description: The job to be snapshotted.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: The location that contains this job.
-          in: path
-          name: location
-          required: true
-          type: string
-        - description: The project which owns the job to be snapshotted.
-          in: path
-          name: projectId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Snapshot'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-  '/v1b3/projects/{projectId}/locations/{location}/snapshots':
-    get:
-      description: Lists snapshots.
-      operationId: dataflow.projects.locations.snapshots.list
-      parameters:
-        - description: 'If specified, list snapshots created from this job.'
-          in: query
-          name: jobId
-          type: string
-        - description: The location to list snapshots in.
-          in: path
-          name: location
-          required: true
-          type: string
-        - description: The project ID to list snapshots for.
-          in: path
-          name: projectId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListSnapshotsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v1b3/projects/{projectId}/locations/{location}/snapshots/{snapshotId}':
-    delete:
-      description: Deletes a snapshot.
-      operationId: dataflow.projects.locations.snapshots.delete
-      parameters:
-        - description: The location that contains this snapshot.
-          in: path
-          name: location
-          required: true
-          type: string
-        - description: The ID of the Cloud Platform project that the snapshot belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The ID of the snapshot.
-          in: path
-          name: snapshotId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DeleteSnapshotResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    get:
-      description: Gets information about a snapshot.
-      operationId: dataflow.projects.locations.snapshots.get
-      parameters:
-        - description: The location that contains this snapshot.
-          in: path
-          name: location
-          required: true
-          type: string
-        - description: The ID of the Cloud Platform project that the snapshot belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The ID of the snapshot.
-          in: path
-          name: snapshotId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Snapshot'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/sql:validate':
     get:
       description: |-
@@ -2295,156 +1970,6 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
-  '/v1b3/projects/{projectId}/snapshots':
-    delete:
-      description: Deletes a snapshot.
-      operationId: dataflow.projects.deleteSnapshots
-      parameters:
-        - description: The location that contains this snapshot.
-          in: query
-          name: location
-          type: string
-        - description: The ID of the Cloud Platform project that the snapshot belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The ID of the snapshot.
-          in: query
-          name: snapshotId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DeleteSnapshotResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    get:
-      description: Lists snapshots.
-      operationId: dataflow.projects.snapshots.list
-      parameters:
-        - description: 'If specified, list snapshots created from this job.'
-          in: query
-          name: jobId
-          type: string
-        - description: The location to list snapshots in.
-          in: query
-          name: location
-          type: string
-        - description: The project ID to list snapshots for.
-          in: path
-          name: projectId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListSnapshotsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-  '/v1b3/projects/{projectId}/snapshots/{snapshotId}':
-    get:
-      description: Gets information about a snapshot.
-      operationId: dataflow.projects.snapshots.get
-      parameters:
-        - description: The location that contains this snapshot.
-          in: query
-          name: location
-          type: string
-        - description: The ID of the Cloud Platform project that the snapshot belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The ID of the snapshot.
-          in: path
-          name: snapshotId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Snapshot'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/templates':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -3132,10 +2657,6 @@ definitions:
       projectId:
         description: ProjectId accessed in the connection.
         type: string
-    type: object
-  DeleteSnapshotResponse:
-    description: Response from deleting a snapshot.
-    properties: {}
     type: object
   DerivedSource:
     description: |-
@@ -4170,15 +3691,6 @@ definitions:
         description: Set if there may be more results than fit in this response.
         type: string
     type: object
-  ListSnapshotsResponse:
-    description: List of snapshots.
-    properties:
-      snapshots:
-        description: Returned snapshots.
-        items:
-          $ref: '#/definitions/Snapshot'
-        type: array
-    type: object
   MapTask:
     description: |-
       MapTask consists of an ordered set of instructions, each of which
@@ -4765,6 +4277,11 @@ definitions:
           The Cloud Storage path to use for temporary files.
           Must be a valid Cloud Storage URL, beginning with `gs://`.
         type: string
+      usePrivateIps:
+        description: |-
+          Optional. Specifies whether worker pools should be started with private IP addresses.
+          False by default.
+        type: boolean
       zone:
         description: |-
           The Compute Engine [availability
@@ -4929,48 +4446,6 @@ definitions:
           description: Properties of the object.
         description: 'The sink to write to, plus its parameters.'
         type: object
-    type: object
-  Snapshot:
-    description: Represents a snapshot of a job.
-    properties:
-      creationTime:
-        description: The time this snapshot was created.
-        format: google-datetime
-        type: string
-      id:
-        description: The unique ID of this snapshot.
-        type: string
-      projectId:
-        description: The project this snapshot belongs to.
-        type: string
-      sourceJobId:
-        description: The job this snapshot was created from.
-        type: string
-      state:
-        description: State of the snapshot.
-        enum:
-          - UNKNOWN_SNAPSHOT_STATE
-          - PENDING
-          - RUNNING
-          - READY
-          - FAILED
-          - DELETED
-        type: string
-      ttl:
-        description: The time after which this snapshot will be automatically deleted.
-        format: google-duration
-        type: string
-    type: object
-  SnapshotJobRequest:
-    description: Request to create a snapshot of a job.
-    properties:
-      location:
-        description: The location that contains this job.
-        type: string
-      ttl:
-        description: TTL for the snapshot.
-        format: google-duration
-        type: string
     type: object
   Source:
     description: A source that records can be read and decoded from.
@@ -5437,6 +4912,14 @@ definitions:
   StreamingConfigTask:
     description: A task that carries configuration information for streaming computations.
     properties:
+      commitStreamChunkSizeBytes:
+        description: Chunk size for commit streams from the harness to windmill.
+        format: int64
+        type: string
+      getDataStreamChunkSizeBytes:
+        description: Chunk size for get data streams from the harness to windmill.
+        format: int64
+        type: string
       maxWorkItemCommitBytes:
         description: Maximum size for work item commit supported windmill storage layer.
         format: int64

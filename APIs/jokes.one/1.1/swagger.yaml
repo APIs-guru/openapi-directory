@@ -389,11 +389,17 @@ paths:
               }              
       tags:
         - joke
-  /joke/categories:
+  /joke/categories/search:
     get:
       description: |
-        Gets a list of `Joke` Categories.
+        Gets a list of `Joke` Categories, based on a query term.
       parameters:
+        - description: Search Query
+          format: string
+          in: query
+          name: query
+          required: true
+          type: string
         - default: 0
           description: Response is paged. This parameter controls where response starts the listing at
           format: int32

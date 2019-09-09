@@ -354,6 +354,7 @@ paths:
             parameters:
               location: West Europe
               properties:
+                ownerEmail: abc@microsoft.com
                 userStorageAccountId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorage
               tags:
                 tagKey1: TagValue1
@@ -591,6 +592,7 @@ definitions:
           name: WorkspaceType
     required:
       - userStorageAccountId
+      - ownerEmail
     type: object
   WorkspacePropertiesUpdateParameters:
     description: The parameters for updating the properties of a machine learning workspace.

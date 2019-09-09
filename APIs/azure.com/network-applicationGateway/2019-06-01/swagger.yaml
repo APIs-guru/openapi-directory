@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/applicationGateway.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-applicationGateway
   x-tags:
@@ -1703,8 +1703,10 @@ paths:
             api-version: '2019-06-01'
             applicationGatewayName: appgw
             probeRequest:
-              backendHttpSettingName: MFPoolSettings
-              backendPoolName: MFAnalyticsPool
+              backendAddressPool:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFAnalyticsPool
+              backendHttpSettings:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings
               path: /
               pickHostNameFromBackendHttpSettings: true
               protocol: Http
@@ -2615,12 +2617,20 @@ definitions:
   ApplicationGatewayOnDemandProbe:
     description: Details of on demand test probe request.
     properties:
-      backendHttpSettingName:
-        description: Name of backend http setting of application gateway to be used for test probe.
-        type: string
-      backendPoolName:
-        description: Name of backend pool of application gateway to which probe request will be sent.
-        type: string
+      backendAddressPool:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      backendHttpSettings:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
       host:
         description: Host name to send the probe to.
         type: string

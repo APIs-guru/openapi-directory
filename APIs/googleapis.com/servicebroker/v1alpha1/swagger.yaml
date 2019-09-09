@@ -424,33 +424,41 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1alpha1/{parent}/v2/service_instances/{instanceId}/service_bindings/{bindingId}':
-    get:
-      description: GetBinding returns the binding information.
-      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.get
+    delete:
+      description: |-
+        Unbinds from a service instance.
+        For synchronous/asynchronous request details see CreateServiceInstance
+        method.
+        If binding does not exist HTTP 410 status will be returned.
+      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.delete
       parameters:
-        - description: The binding id.
+        - description: See CreateServiceInstanceRequest for details.
+          in: query
+          name: acceptsIncomplete
+          type: boolean
+        - description: The id of the binding to delete.
           in: path
           name: bindingId
           required: true
           type: string
-          x-reservedExpansion: true
-        - description: Instance id to which the binding is bound.
+        - description: The service instance id that deleted binding is bound to.
           in: path
           name: instanceId
           required: true
           type: string
-          x-reservedExpansion: true
         - description: 'Parent must match `projects/[PROJECT_ID]/brokers/[BROKER_ID]`.'
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Plan id.
+        - description: The plan id of the service instance.
           in: query
           name: planId
           type: string
-        - description: Service id.
+        - description: |-
+            Additional query parameter hints.
+            The service id of the service instance.
           in: query
           name: serviceId
           type: string
@@ -458,7 +466,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudServicebrokerV1alpha1__GetBindingResponse'
+            $ref: '#/definitions/GoogleCloudServicebrokerV1alpha1__DeleteBindingResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -726,7 +734,7 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0 and 1.
+            Acceptable values are 0, 1, and 3.
             If the value is 0, or the field is omitted, policy format version 1 will be
             returned.
           in: query

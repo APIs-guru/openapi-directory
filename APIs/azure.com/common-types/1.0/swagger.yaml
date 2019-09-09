@@ -55,6 +55,44 @@ definitions:
         readOnly: true
         type: string
     x-ms-client-name: AzureEntityResource
+  ErrorAdditionalInfo:
+    description: The resource management error additional info.
+    properties:
+      info:
+        description: The additional info.
+        readOnly: true
+        type: object
+      type:
+        description: The additional info type.
+        readOnly: true
+        type: string
+  ErrorResponse:
+    description: The resource management error response.
+    properties:
+      additionalInfo:
+        description: The error additional info.
+        items:
+          $ref: '#/definitions/ErrorAdditionalInfo'
+        readOnly: true
+        type: array
+      code:
+        description: The error code.
+        readOnly: true
+        type: string
+      details:
+        description: The error details.
+        items:
+          $ref: '#/definitions/ErrorResponse'
+        readOnly: true
+        type: array
+      message:
+        description: The error message.
+        readOnly: true
+        type: string
+      target:
+        description: The error target.
+        readOnly: true
+        type: string
   Identity:
     description: Identity for the resource.
     properties:

@@ -46,7 +46,7 @@ paths:
                 <li>Added Endpoint.</li>
             </ul>
         </div>
-      operationId: 5969689a2109180f287972a8
+      operationId: Halo-5-Player-Appearance
       parameters:
         - description: The Player's Gamertag
           in: path
@@ -81,17 +81,25 @@ paths:
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
+            <p><strong>August 12, 2019:</strong></p>
+            <ul>
+                <li>Expanded documentation for the HTTP 400 response code to cover unsupported emblem component(s).</li>
+            </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
                 <li>Renamed Endpoint from "Halo 5 - Emblem Image" to "Halo 5 - Player Emblem Image".</li>
             </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
                 <li>Renamed Endpoint from "Emblem Image" to "Halo 5 - Emblem Image".</li>
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdc2e2109180bdcacc404
+      operationId: Halo-5-Player-Emblem-Image
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -108,7 +116,7 @@ paths:
         '302':
           description: Golden Path. The Location header should point at the corresponding Emblem image.
         '400':
-          description: An unsupported value was provided for a query string parameter.
+          description: An unsupported value was provided for a query string parameter or the Player's Emblem contains unsupported component(s) and cannot be rendered at this time.
         '404':
           description: Specified Player was not found.
         '500':
@@ -121,17 +129,25 @@ paths:
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
+            <p><strong>August 12, 2019:</strong></p>
+            <ul>
+                <li>Expanded documentation for the HTTP 400 response code to cover unsupported armor component(s).</li>
+            </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
                 <li>Renamed Endpoint from "Halo 5 - Spartan Image" to "Halo 5 - Player Spartan Image".</li>
             </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
                 <li>Renamed Endpoint from "Spartan Image" to "Halo 5 - Spartan Image".</li>
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-      operationId: 58acdc2e2109180bdcacc405
+      operationId: Halo-5-Player-Spartan-Image
       parameters:
         - description: The Player's Gamertag.
           in: path
@@ -152,7 +168,7 @@ paths:
         '302':
           description: Golden Path. The Location header should point at the corresponding Spartan image.
         '400':
-          description: An unsupported value was provided for a query string parameter.
+          description: An unsupported value was provided for a query string parameter or the Player's Spartan is equipped with unsupported component(s) and cannot be rendered at this time.
         '404':
           description: Specified Player was not found.
         '500':

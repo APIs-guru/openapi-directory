@@ -1,169 +1,118 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: workmail.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2017-10-01'
-  x-release: v4
-  title: Amazon WorkMail
-  description: '<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: '<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: workmail
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workmail-2017-10-01.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: Amazon WorkMail
+  version: '2017-10-01'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workmail-2017-10-01.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: workmail
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/workmail/'
-host: workmail.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://workmail.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The Amazon WorkMail multi-region endpoint
-  - url: 'https://workmail.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The Amazon WorkMail multi-region endpoint
-  - url: 'http://workmail.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Amazon WorkMail endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://workmail.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Amazon WorkMail endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=WorkMailService.AssociateDelegateToResource':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: AssociateDelegateToResource
       description: Adds a member (user or group) to the resource's set of delegates.
+      operationId: AssociateDelegateToResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDelegateToResourceRequest'
+        - enum:
+            - WorkMailService.AssociateDelegateToResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -189,18 +138,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateDelegateToResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.AssociateDelegateToResource
+  '/#X-Amz-Target=WorkMailService.AssociateMemberToGroup':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -209,10 +147,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.AssociateMemberToGroup':
     post:
-      operationId: AssociateMemberToGroup
       description: Adds a member (user or group) to the group's set.
+      operationId: AssociateMemberToGroup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateMemberToGroupRequest'
+        - enum:
+            - WorkMailService.AssociateMemberToGroup
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -250,18 +199,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateMemberToGroupRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.AssociateMemberToGroup
+  '/#X-Amz-Target=WorkMailService.CreateAlias':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -270,10 +208,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.CreateAlias':
     post:
-      operationId: CreateAlias
       description: Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
+      operationId: CreateAlias
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAliasRequest'
+        - enum:
+            - WorkMailService.CreateAlias
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -311,18 +260,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateAliasRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.CreateAlias
+  '/#X-Amz-Target=WorkMailService.CreateGroup':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -331,10 +269,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.CreateGroup':
     post:
-      operationId: CreateGroup
       description: Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
+      operationId: CreateGroup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGroupRequest'
+        - enum:
+            - WorkMailService.CreateGroup
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -372,18 +321,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateGroupRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.CreateGroup
+  '/#X-Amz-Target=WorkMailService.CreateResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -392,10 +330,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.CreateResource':
     post:
-      operationId: CreateResource
       description: 'Creates a new Amazon WorkMail resource. '
+      operationId: CreateResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResourceRequest'
+        - enum:
+            - WorkMailService.CreateResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -429,18 +378,7 @@ paths:
           description: ReservedNameException
           schema:
             $ref: '#/definitions/ReservedNameException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.CreateResource
+  '/#X-Amz-Target=WorkMailService.CreateUser':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -449,10 +387,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.CreateUser':
     post:
-      operationId: CreateUser
       description: Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
+      operationId: CreateUser
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateUserRequest'
+        - enum:
+            - WorkMailService.CreateUser
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -494,18 +443,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateUserRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.CreateUser
+  '/#X-Amz-Target=WorkMailService.DeleteAlias':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -514,10 +452,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeleteAlias':
     post:
-      operationId: DeleteAlias
       description: Remove one or more specified aliases from a set of aliases for a given user.
+      operationId: DeleteAlias
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAliasRequest'
+        - enum:
+            - WorkMailService.DeleteAlias
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -543,18 +492,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteAliasRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeleteAlias
+  '/#X-Amz-Target=WorkMailService.DeleteGroup':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -563,10 +501,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeleteGroup':
     post:
-      operationId: DeleteGroup
       description: Deletes a group from Amazon WorkMail.
+      operationId: DeleteGroup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGroupRequest'
+        - enum:
+            - WorkMailService.DeleteGroup
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -600,18 +549,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteGroupRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeleteGroup
+  '/#X-Amz-Target=WorkMailService.DeleteMailboxPermissions':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -620,10 +558,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeleteMailboxPermissions':
     post:
-      operationId: DeleteMailboxPermissions
       description: Deletes permissions granted to a member (user or group).
+      operationId: DeleteMailboxPermissions
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMailboxPermissionsRequest'
+        - enum:
+            - WorkMailService.DeleteMailboxPermissions
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -649,18 +598,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteMailboxPermissionsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeleteMailboxPermissions
+  '/#X-Amz-Target=WorkMailService.DeleteResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -669,10 +607,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeleteResource':
     post:
-      operationId: DeleteResource
       description: 'Deletes the specified resource. '
+      operationId: DeleteResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourceRequest'
+        - enum:
+            - WorkMailService.DeleteResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -694,18 +643,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeleteResource
+  '/#X-Amz-Target=WorkMailService.DeleteUser':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -714,10 +652,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeleteUser':
     post:
-      operationId: DeleteUser
       description: '<p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>'
+      operationId: DeleteUser
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUserRequest'
+        - enum:
+            - WorkMailService.DeleteUser
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -751,18 +700,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteUserRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeleteUser
+  '/#X-Amz-Target=WorkMailService.DeregisterFromWorkMail':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -771,10 +709,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DeregisterFromWorkMail':
     post:
-      operationId: DeregisterFromWorkMail
       description: 'Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
+      operationId: DeregisterFromWorkMail
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterFromWorkMailRequest'
+        - enum:
+            - WorkMailService.DeregisterFromWorkMail
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -800,18 +749,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeregisterFromWorkMailRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DeregisterFromWorkMail
+  '/#X-Amz-Target=WorkMailService.DescribeGroup':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -820,10 +758,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DescribeGroup':
     post:
-      operationId: DescribeGroup
       description: Returns the data available for the group.
+      operationId: DescribeGroup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeGroupRequest'
+        - enum:
+            - WorkMailService.DescribeGroup
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -845,18 +794,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeGroupRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DescribeGroup
+  '/#X-Amz-Target=WorkMailService.DescribeOrganization':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -865,10 +803,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DescribeOrganization':
     post:
-      operationId: DescribeOrganization
       description: Provides more information regarding a given organization based on its identifier.
+      operationId: DescribeOrganization
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOrganizationRequest'
+        - enum:
+            - WorkMailService.DescribeOrganization
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -882,18 +831,7 @@ paths:
           description: OrganizationNotFoundException
           schema:
             $ref: '#/definitions/OrganizationNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeOrganizationRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DescribeOrganization
+  '/#X-Amz-Target=WorkMailService.DescribeResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -902,10 +840,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DescribeResource':
     post:
-      operationId: DescribeResource
       description: Returns the data available for the resource.
+      operationId: DescribeResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeResourceRequest'
+        - enum:
+            - WorkMailService.DescribeResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -927,18 +876,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DescribeResource
+  '/#X-Amz-Target=WorkMailService.DescribeUser':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -947,10 +885,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DescribeUser':
     post:
-      operationId: DescribeUser
       description: Provides information regarding the user.
+      operationId: DescribeUser
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeUserRequest'
+        - enum:
+            - WorkMailService.DescribeUser
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -972,18 +921,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeUserRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DescribeUser
+  '/#X-Amz-Target=WorkMailService.DisassociateDelegateFromResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -992,10 +930,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DisassociateDelegateFromResource':
     post:
-      operationId: DisassociateDelegateFromResource
       description: Removes a member from the resource's set of delegates.
+      operationId: DisassociateDelegateFromResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateDelegateFromResourceRequest'
+        - enum:
+            - WorkMailService.DisassociateDelegateFromResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1021,18 +970,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateDelegateFromResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DisassociateDelegateFromResource
+  '/#X-Amz-Target=WorkMailService.DisassociateMemberFromGroup':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1041,10 +979,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.DisassociateMemberFromGroup':
     post:
-      operationId: DisassociateMemberFromGroup
       description: Removes a member from a group.
+      operationId: DisassociateMemberFromGroup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateMemberFromGroupRequest'
+        - enum:
+            - WorkMailService.DisassociateMemberFromGroup
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1082,18 +1031,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateMemberFromGroupRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.DisassociateMemberFromGroup
+  '/#X-Amz-Target=WorkMailService.GetMailboxDetails':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1102,10 +1040,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.GetMailboxDetails':
     post:
-      operationId: GetMailboxDetails
       description: Requests a user's mailbox details for a specified organization and user.
+      operationId: GetMailboxDetails
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMailboxDetailsRequest'
+        - enum:
+            - WorkMailService.GetMailboxDetails
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1123,18 +1072,7 @@ paths:
           description: EntityNotFoundException
           schema:
             $ref: '#/definitions/EntityNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetMailboxDetailsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.GetMailboxDetails
+  '/#X-Amz-Target=WorkMailService.ListAliases':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1143,10 +1081,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListAliases':
     post:
-      operationId: ListAliases
       description: Creates a paginated call to list the aliases associated with a given entity.
+      operationId: ListAliases
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAliasesRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListAliases
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1172,28 +1131,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAliasesRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListAliases
+  '/#X-Amz-Target=WorkMailService.ListGroupMembers':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1202,10 +1140,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListGroupMembers':
     post:
-      operationId: ListGroupMembers
       description: Returns an overview of the members of a group. Users and groups can be members of a group.
+      operationId: ListGroupMembers
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGroupMembersRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListGroupMembers
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1231,28 +1190,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupMembersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListGroupMembers
+  '/#X-Amz-Target=WorkMailService.ListGroups':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1261,10 +1199,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListGroups':
     post:
-      operationId: ListGroups
       description: Returns summaries of the organization's groups.
+      operationId: ListGroups
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGroupsRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListGroups
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1286,28 +1245,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListGroupsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListGroups
+  '/#X-Amz-Target=WorkMailService.ListMailboxPermissions':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1316,10 +1254,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListMailboxPermissions':
     post:
-      operationId: ListMailboxPermissions
       description: 'Lists the mailbox permissions associated with a user, group, or resource mailbox.'
+      operationId: ListMailboxPermissions
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMailboxPermissionsRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListMailboxPermissions
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1341,28 +1300,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListMailboxPermissionsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListMailboxPermissions
+  '/#X-Amz-Target=WorkMailService.ListOrganizations':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1371,10 +1309,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListOrganizations':
     post:
-      operationId: ListOrganizations
       description: Returns summaries of the customer's non-deleted organizations.
+      operationId: ListOrganizations
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizationsRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListOrganizations
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1384,28 +1343,7 @@ paths:
           description: InvalidParameterException
           schema:
             $ref: '#/definitions/InvalidParameterException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListOrganizationsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListOrganizations
+  '/#X-Amz-Target=WorkMailService.ListResourceDelegates':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1414,10 +1352,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListResourceDelegates':
     post:
-      operationId: ListResourceDelegates
       description: Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
+      operationId: ListResourceDelegates
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceDelegatesRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListResourceDelegates
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1443,28 +1402,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourceDelegatesRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListResourceDelegates
+  '/#X-Amz-Target=WorkMailService.ListResources':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1473,10 +1411,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListResources':
     post:
-      operationId: ListResources
       description: Returns summaries of the organization's resources.
+      operationId: ListResources
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourcesRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListResources
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1494,28 +1453,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourcesRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListResources
+  '/#X-Amz-Target=WorkMailService.ListUsers':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1524,10 +1462,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ListUsers':
     post:
-      operationId: ListUsers
       description: Returns summaries of the organization's users.
+      operationId: ListUsers
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListUsersRequest'
+        - description: Pagination limit
+          in: query
+          name: MaxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: NextToken
+          required: false
+          type: string
+        - enum:
+            - WorkMailService.ListUsers
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1545,28 +1504,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ListUsers
+  '/#X-Amz-Target=WorkMailService.PutMailboxPermissions':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1575,10 +1513,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.PutMailboxPermissions':
     post:
-      operationId: PutMailboxPermissions
       description: 'Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.'
+      operationId: PutMailboxPermissions
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutMailboxPermissionsRequest'
+        - enum:
+            - WorkMailService.PutMailboxPermissions
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1604,18 +1553,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutMailboxPermissionsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.PutMailboxPermissions
+  '/#X-Amz-Target=WorkMailService.RegisterToWorkMail':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1624,10 +1562,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.RegisterToWorkMail':
     post:
-      operationId: RegisterToWorkMail
       description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com//workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
+      operationId: RegisterToWorkMail
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterToWorkMailRequest'
+        - enum:
+            - WorkMailService.RegisterToWorkMail
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1677,18 +1626,7 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/RegisterToWorkMailRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.RegisterToWorkMail
+  '/#X-Amz-Target=WorkMailService.ResetPassword':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1697,10 +1635,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.ResetPassword':
     post:
-      operationId: ResetPassword
       description: Allows the administrator to reset the password for a user.
+      operationId: ResetPassword
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetPasswordRequest'
+        - enum:
+            - WorkMailService.ResetPassword
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1742,18 +1691,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ResetPasswordRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.ResetPassword
+  '/#X-Amz-Target=WorkMailService.UpdateMailboxQuota':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1762,10 +1700,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.UpdateMailboxQuota':
     post:
-      operationId: UpdateMailboxQuota
       description: Updates a user's current mailbox quota for a specified organization and user.
+      operationId: UpdateMailboxQuota
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateMailboxQuotaRequest'
+        - enum:
+            - WorkMailService.UpdateMailboxQuota
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1791,18 +1740,7 @@ paths:
           description: EntityStateException
           schema:
             $ref: '#/definitions/EntityStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateMailboxQuotaRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.UpdateMailboxQuota
+  '/#X-Amz-Target=WorkMailService.UpdatePrimaryEmailAddress':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1811,10 +1749,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.UpdatePrimaryEmailAddress':
     post:
-      operationId: UpdatePrimaryEmailAddress
       description: 'Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.'
+      operationId: UpdatePrimaryEmailAddress
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePrimaryEmailAddressRequest'
+        - enum:
+            - WorkMailService.UpdatePrimaryEmailAddress
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1868,18 +1817,7 @@ paths:
           description: UnsupportedOperationException
           schema:
             $ref: '#/definitions/UnsupportedOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdatePrimaryEmailAddressRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.UpdatePrimaryEmailAddress
+  '/#X-Amz-Target=WorkMailService.UpdateResource':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1888,10 +1826,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkMailService.UpdateResource':
     post:
-      operationId: UpdateResource
       description: 'Updates data for the resource. To have the latest information, it must be preceded by a <a>DescribeResource</a> call. The dataset in the request should be the one expected when performing another <code>DescribeResource</code> call.'
+      operationId: UpdateResource
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResourceRequest'
+        - enum:
+            - WorkMailService.UpdateResource
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -1937,856 +1886,151 @@ paths:
           description: OrganizationStateException
           schema:
             $ref: '#/definitions/OrganizationStateException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateResourceRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - WorkMailService.UpdateResource
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AssociateDelegateToResourceResponse:
-    type: object
-    properties: {}
+  Aliases:
+    items:
+      $ref: '#/definitions/EmailAddress'
+    type: array
   AssociateDelegateToResourceRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-      - EntityId
     properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The member (user or group) to associate to the resource.
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
         description: The organization under which the resource exists.
       ResourceId:
         $ref: '#/definitions/ResourceId'
         description: The resource for which members (users or groups) are associated.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The member (user or group) to associate to the resource.
-  EntityNotFoundException: {}
-  EntityStateException: {}
-  InvalidParameterException: {}
-  OrganizationNotFoundException: {}
-  OrganizationStateException: {}
-  AssociateMemberToGroupResponse:
-    type: object
-    properties: {}
-  AssociateMemberToGroupRequest:
-    type: object
     required:
       - OrganizationId
-      - GroupId
-      - MemberId
+      - ResourceId
+      - EntityId
+    type: object
+  AssociateDelegateToResourceResponse:
+    properties: {}
+    type: object
+  AssociateMemberToGroupRequest:
     properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The organization under which the group exists.
       GroupId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The group to which the member (user or group) is associated.
       MemberId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The member (user or group) to associate to the group.
-  DirectoryServiceAuthenticationFailedException: {}
-  DirectoryUnavailableException: {}
-  UnsupportedOperationException: {}
-  CreateAliasResponse:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The organization under which the group exists.
+    required:
+      - OrganizationId
+      - GroupId
+      - MemberId
     type: object
+  AssociateMemberToGroupResponse:
     properties: {}
-  CreateAliasRequest:
     type: object
+  BookingOptions:
+    description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
+    properties:
+      AutoAcceptRequests:
+        $ref: '#/definitions/Boolean'
+        description: 'The resource''s ability to automatically reply to requests. If disabled, delegates must be associated to the resource.'
+      AutoDeclineConflictingRequests:
+        $ref: '#/definitions/Boolean'
+        description: The resource's ability to automatically decline any conflicting requests.
+      AutoDeclineRecurringRequests:
+        $ref: '#/definitions/Boolean'
+        description: The resource's ability to automatically decline any recurring requests.
+    type: object
+  Boolean:
+    type: boolean
+  CreateAliasRequest:
+    properties:
+      Alias:
+        $ref: '#/definitions/EmailAddress'
+        description: The alias to add to the member set.
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The member (user or group) to which this alias is added.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The organization under which the member (user or group) exists.
     required:
       - OrganizationId
       - EntityId
       - Alias
+    type: object
+  CreateAliasResponse:
+    properties: {}
+    type: object
+  CreateGroupRequest:
     properties:
+      Name:
+        $ref: '#/definitions/GroupName'
+        description: The name of the group.
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The organization under which the member (user or group) exists.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The member (user or group) to which this alias is added.
-      Alias:
-        $ref: '#/definitions/EmailAddress'
-        description: The alias to add to the member set.
-  EmailAddressInUseException: {}
-  MailDomainNotFoundException: {}
-  MailDomainStateException: {}
-  CreateGroupResponse:
+        description: The organization under which the group is to be created.
+    required:
+      - OrganizationId
+      - Name
     type: object
+  CreateGroupResponse:
     properties:
       GroupId:
         $ref: '#/definitions/WorkMailIdentifier'
         description: The identifier of the group.
-  CreateGroupRequest:
     type: object
-    required:
-      - OrganizationId
-      - Name
+  CreateResourceRequest:
     properties:
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the new resource.
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The organization under which the group is to be created.
-      Name:
-        $ref: '#/definitions/GroupName'
-        description: The name of the group.
-  NameAvailabilityException: {}
-  ReservedNameException: {}
-  CreateResourceResponse:
-    type: object
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The identifier of the new resource.
-  CreateResourceRequest:
-    type: object
+        description: The identifier associated with the organization for which the resource is created.
+      Type:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the new resource. The available types are <code>equipment</code> and <code>room</code>.
     required:
       - OrganizationId
       - Name
       - Type
+    type: object
+  CreateResourceResponse:
     properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The identifier of the new resource.
+    type: object
+  CreateUserRequest:
+    properties:
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: The display name for the new user.
+      Name:
+        $ref: '#/definitions/UserName'
+        description: The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
       OrganizationId:
         $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization for which the resource is created.
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the new resource.
-      Type:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the new resource. The available types are <code>equipment</code> and <code>room</code>.
-  CreateUserResponse:
-    type: object
-    properties:
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the new user.
-  CreateUserRequest:
-    type: object
+        description: The identifier of the organization for which the user is created.
+      Password:
+        $ref: '#/definitions/Password'
+        description: The password for the new user.
     required:
       - OrganizationId
       - Name
       - DisplayName
       - Password
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization for which the user is created.
-      Name:
-        $ref: '#/definitions/UserName'
-        description: The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
-      DisplayName:
-        $ref: '#/definitions/String'
-        description: The display name for the new user.
-      Password:
-        $ref: '#/definitions/Password'
-        description: The password for the new user.
-  InvalidPasswordException: {}
-  DeleteAliasResponse:
     type: object
-    properties: {}
-  DeleteAliasRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-      - Alias
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the user exists.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the member (user or group) from which to have the aliases removed.
-      Alias:
-        $ref: '#/definitions/EmailAddress'
-        description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
-  DeleteGroupResponse:
-    type: object
-    properties: {}
-  DeleteGroupRequest:
-    type: object
-    required:
-      - OrganizationId
-      - GroupId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The organization that contains the group.
-      GroupId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the group to be deleted.
-  DeleteMailboxPermissionsResponse:
-    type: object
-    properties: {}
-  DeleteMailboxPermissionsRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-      - GranteeId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization under which the member (user or group) exists.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the member (user or group)that owns the mailbox.
-      GranteeId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the member (user or group) for which to delete granted permissions.
-  DeleteResourceResponse:
-    type: object
-    properties: {}
-  DeleteResourceRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization from which the resource is deleted.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The identifier of the resource to be deleted.
-  DeleteUserResponse:
-    type: object
-    properties: {}
-  DeleteUserRequest:
-    type: object
-    required:
-      - OrganizationId
-      - UserId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The organization that contains the user to be deleted.
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the user to be deleted.
-  DeregisterFromWorkMailResponse:
-    type: object
-    properties: {}
-  DeregisterFromWorkMailRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the Amazon WorkMail entity exists.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the member (user or group) to be updated.
-  DescribeGroupResponse:
-    type: object
-    properties:
-      GroupId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the described group.
-      Name:
-        $ref: '#/definitions/GroupName'
-        description: The name of the described group.
-      Email:
-        $ref: '#/definitions/EmailAddress'
-        description: The email of the described group.
-      State:
-        $ref: '#/definitions/EntityState'
-        description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a user was registered to WorkMail, in UNIX epoch time format.'
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.'
-  DescribeGroupRequest:
-    type: object
-    required:
-      - OrganizationId
-      - GroupId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the group exists.
-      GroupId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the group to be described.
-  DescribeOrganizationResponse:
-    type: object
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier of an organization.
-      Alias:
-        $ref: '#/definitions/OrganizationName'
-        description: The alias for an organization.
-      State:
-        $ref: '#/definitions/String'
-        description: The state of an organization.
-      DirectoryId:
-        $ref: '#/definitions/String'
-        description: The identifier for the directory associated with an Amazon WorkMail organization.
-      DirectoryType:
-        $ref: '#/definitions/String'
-        description: The type of directory associated with the WorkMail organization.
-      DefaultMailDomain:
-        $ref: '#/definitions/String'
-        description: The default mail domain associated with the organization.
-      CompletedDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.'
-      ErrorMessage:
-        $ref: '#/definitions/String'
-        description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
-  DescribeOrganizationRequest:
-    type: object
-    required:
-      - OrganizationId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization to be described.
-  DescribeResourceResponse:
-    type: object
-    properties:
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The identifier of the described resource.
-      Email:
-        $ref: '#/definitions/EmailAddress'
-        description: The email of the described resource.
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the described resource.
-      Type:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the described resource.
-      BookingOptions:
-        $ref: '#/definitions/BookingOptions'
-        description: The booking options for the described resource.
-      State:
-        $ref: '#/definitions/EntityState'
-        description: 'The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.'
-  DescribeResourceRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization for which the resource is described.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The identifier of the resource to be described.
-  DescribeUserResponse:
-    type: object
+  CreateUserResponse:
     properties:
       UserId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the described user.
-      Name:
-        $ref: '#/definitions/UserName'
-        description: The name for the user.
-      Email:
-        $ref: '#/definitions/EmailAddress'
-        description: The email of the user.
-      DisplayName:
-        $ref: '#/definitions/String'
-        description: The display name of the user.
-      State:
-        $ref: '#/definitions/EntityState'
-        description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
-      UserRole:
-        $ref: '#/definitions/UserRole'
-        description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.'
-  DescribeUserRequest:
+        description: The identifier for the new user.
     type: object
-    required:
-      - OrganizationId
-      - UserId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the user exists.
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the user to be described.
-  DisassociateDelegateFromResourceResponse:
-    type: object
-    properties: {}
-  DisassociateDelegateFromResourceRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-      - EntityId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the resource exists.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The identifier of the resource from which delegates'' set members are removed. '
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The identifier for the member (user, group) to be removed from the resource''s delegates.'
-  DisassociateMemberFromGroupResponse:
-    type: object
-    properties: {}
-  DisassociateMemberFromGroupRequest:
-    type: object
-    required:
-      - OrganizationId
-      - GroupId
-      - MemberId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the group exists.
-      GroupId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the group from which members are removed.
-      MemberId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the member to be removed to the group.
-  GetMailboxDetailsResponse:
-    type: object
-    properties:
-      MailboxQuota:
-        $ref: '#/definitions/MailboxQuota'
-        description: 'The maximum allowed mailbox size, in MB, for the specified user.'
-      MailboxSize:
-        $ref: '#/definitions/MailboxSize'
-        description: 'The current mailbox size, in MB, for the specified user.'
-  GetMailboxDetailsRequest:
-    type: object
-    required:
-      - OrganizationId
-      - UserId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization that contains the user whose mailbox details are being requested.
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the user whose mailbox details are being requested.
-  ListAliasesResponse:
-    type: object
-    properties:
-      Aliases:
-        $ref: '#/definitions/Aliases'
-        description: The entity's paginated aliases.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
-  ListAliasesRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the entity exists.
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the entity for which to list the aliases.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListGroupMembersResponse:
-    type: object
-    properties:
-      Members:
-        $ref: '#/definitions/Members'
-        description: The members associated to the group.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-  ListGroupMembersRequest:
-    type: object
-    required:
-      - OrganizationId
-      - GroupId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the group exists.
-      GroupId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the group to which the members (users or groups) are associated.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' The token to use to retrieve the next page of results. The first call does not contain any tokens.'
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListGroupsResponse:
-    type: object
-    properties:
-      Groups:
-        $ref: '#/definitions/Groups'
-        description: The overview of groups for an organization.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
-  ListGroupsRequest:
-    type: object
-    required:
-      - OrganizationId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the groups exist.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListMailboxPermissionsResponse:
-    type: object
-    properties:
-      Permissions:
-        $ref: '#/definitions/Permissions'
-        description: 'One page of the user, group, or resource mailbox permissions.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
-  ListMailboxPermissionsRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: 'The identifier of the organization under which the user, group, or resource exists.'
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The identifier of the user, group, or resource for which to list mailbox permissions.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListOrganizationsResponse:
-    type: object
-    properties:
-      OrganizationSummaries:
-        $ref: '#/definitions/OrganizationSummaries'
-        description: The overview of owned organizations presented as a list of organization summaries.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
-  ListOrganizationsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListResourceDelegatesResponse:
-    type: object
-    properties:
-      Delegates:
-        $ref: '#/definitions/ResourceDelegates'
-        description: One page of the resource's delegates.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. '
-  ListResourceDelegatesRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization that contains the resource for which delegates are listed.
-      ResourceId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier for the resource whose delegates are listed.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token used to paginate through the delegates associated with a resource.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The number of maximum results in a page.
-  ListResourcesResponse:
-    type: object
-    properties:
-      Resources:
-        $ref: '#/definitions/Resources'
-        description: One page of the organization's resource representation.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' The token used to paginate through all the organization''s resources. While results are still available, it has an associated value. When the last page is reached, the token is empty.'
-  ListResourcesRequest:
-    type: object
-    required:
-      - OrganizationId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the resources exist.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  ListUsersResponse:
-    type: object
-    properties:
-      Users:
-        $ref: '#/definitions/Users'
-        description: The overview of users for an organization.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: ' The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.'
-  ListUsersRequest:
-    type: object
-    required:
-      - OrganizationId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization under which the users exist.
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of results to return in a single call.
-  PutMailboxPermissionsResponse:
-    type: object
-    properties: {}
-  PutMailboxPermissionsRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-      - GranteeId
-      - PermissionValues
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: 'The identifier of the organization under which the user, group, or resource exists.'
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The identifier of the user, group, or resource for which to update mailbox permissions.'
-      GranteeId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The identifier of the user, group, or resource to which to grant the permissions.'
-      PermissionValues:
-        $ref: '#/definitions/PermissionValues'
-        description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
-  RegisterToWorkMailResponse:
-    type: object
-    properties: {}
-  RegisterToWorkMailRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-      - Email
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: 'The identifier for the organization under which the user, group, or resource exists.'
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The identifier for the user, group, or resource to be updated.'
-      Email:
-        $ref: '#/definitions/EmailAddress'
-        description: 'The email for the user, group, or resource to be updated.'
-  EntityAlreadyRegisteredException: {}
-  ResetPasswordResponse:
-    type: object
-    properties: {}
-  ResetPasswordRequest:
-    type: object
-    required:
-      - OrganizationId
-      - UserId
-      - Password
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier of the organization that contains the user for which the password is reset.
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the user for whom the password is reset.
-      Password:
-        $ref: '#/definitions/Password'
-        description: The new password for the user.
-  UpdateMailboxQuotaResponse:
-    type: object
-    properties: {}
-  UpdateMailboxQuotaRequest:
-    type: object
-    required:
-      - OrganizationId
-      - UserId
-      - MailboxQuota
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier for the organization that contains the user for whom to update the mailbox quota.
-      UserId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifer for the user for whom to update the mailbox quota.
-      MailboxQuota:
-        $ref: '#/definitions/MailboxQuota'
-        description: 'The updated mailbox quota, in MB, for the specified user.'
-  UpdatePrimaryEmailAddressResponse:
-    type: object
-    properties: {}
-  UpdatePrimaryEmailAddressRequest:
-    type: object
-    required:
-      - OrganizationId
-      - EntityId
-      - Email
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: 'The organization that contains the user, group, or resource to update.'
-      EntityId:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: 'The user, group, or resource to update.'
-      Email:
-        $ref: '#/definitions/EmailAddress'
-        description: The value of the email to be updated as primary.
-  UpdateResourceResponse:
-    type: object
-    properties: {}
-  UpdateResourceRequest:
-    type: object
-    required:
-      - OrganizationId
-      - ResourceId
-    properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization for which the resource is updated.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The identifier of the resource to be updated.
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the resource to be updated.
-      BookingOptions:
-        $ref: '#/definitions/BookingOptions'
-        description: The resource's booking options to be updated.
-  InvalidConfigurationException: {}
-  EmailAddress:
-    type: string
-    pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    minLength: 1
-    maxLength: 254
-  Aliases:
-    type: array
-    items:
-      $ref: '#/definitions/EmailAddress'
-  OrganizationId:
-    type: string
-    pattern: '^m-[0-9a-f]{32}$'
-  ResourceId:
-    type: string
-    pattern: '^r-[0-9a-f]{32}$'
-  WorkMailIdentifier:
-    type: string
-    minLength: 12
-    maxLength: 256
-  Boolean:
-    type: boolean
-  BookingOptions:
-    type: object
-    properties:
-      AutoAcceptRequests:
-        $ref: '#/definitions/Boolean'
-        description: 'The resource''s ability to automatically reply to requests. If disabled, delegates must be associated to the resource.'
-      AutoDeclineRecurringRequests:
-        $ref: '#/definitions/Boolean'
-        description: The resource's ability to automatically decline any recurring requests.
-      AutoDeclineConflictingRequests:
-        $ref: '#/definitions/Boolean'
-        description: The resource's ability to automatically decline any conflicting requests.
-    description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
-  GroupName:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 256
-  ResourceName:
-    type: string
-    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
-    minLength: 1
-    maxLength: 20
-  ResourceType:
-    type: string
-    enum:
-      - ROOM
-      - EQUIPMENT
-  UserName:
-    type: string
-    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
-    minLength: 1
-    maxLength: 64
-  String:
-    type: string
-    maxLength: 256
-  Password:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    maxLength: 256
-    format: password
-  MemberType:
-    type: string
-    enum:
-      - GROUP
-      - USER
   Delegate:
-    type: object
-    required:
-      - Id
-      - Type
+    description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
     properties:
       Id:
         $ref: '#/definitions/String'
@@ -2794,140 +2038,645 @@ definitions:
       Type:
         $ref: '#/definitions/MemberType'
         description: 'The type of the delegate: user or group.'
-    description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
-  EntityState:
+    required:
+      - Id
+      - Type
+    type: object
+  DeleteAliasRequest:
+    properties:
+      Alias:
+        $ref: '#/definitions/EmailAddress'
+        description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the member (user or group) from which to have the aliases removed.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the user exists.
+    required:
+      - OrganizationId
+      - EntityId
+      - Alias
+    type: object
+  DeleteAliasResponse:
+    properties: {}
+    type: object
+  DeleteGroupRequest:
+    properties:
+      GroupId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the group to be deleted.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The organization that contains the group.
+    required:
+      - OrganizationId
+      - GroupId
+    type: object
+  DeleteGroupResponse:
+    properties: {}
+    type: object
+  DeleteMailboxPermissionsRequest:
+    properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the member (user or group)that owns the mailbox.
+      GranteeId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the member (user or group) for which to delete granted permissions.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization under which the member (user or group) exists.
+    required:
+      - OrganizationId
+      - EntityId
+      - GranteeId
+    type: object
+  DeleteMailboxPermissionsResponse:
+    properties: {}
+    type: object
+  DeleteResourceRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier associated with the organization from which the resource is deleted.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The identifier of the resource to be deleted.
+    required:
+      - OrganizationId
+      - ResourceId
+    type: object
+  DeleteResourceResponse:
+    properties: {}
+    type: object
+  DeleteUserRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The organization that contains the user to be deleted.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the user to be deleted.
+    required:
+      - OrganizationId
+      - UserId
+    type: object
+  DeleteUserResponse:
+    properties: {}
+    type: object
+  DeregisterFromWorkMailRequest:
+    properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the member (user or group) to be updated.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the Amazon WorkMail entity exists.
+    required:
+      - OrganizationId
+      - EntityId
+    type: object
+  DeregisterFromWorkMailResponse:
+    properties: {}
+    type: object
+  DescribeGroupRequest:
+    properties:
+      GroupId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the group to be described.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the group exists.
+    required:
+      - OrganizationId
+      - GroupId
+    type: object
+  DescribeGroupResponse:
+    properties:
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.'
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The email of the described group.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when a user was registered to WorkMail, in UNIX epoch time format.'
+      GroupId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the described group.
+      Name:
+        $ref: '#/definitions/GroupName'
+        description: The name of the described group.
+      State:
+        $ref: '#/definitions/EntityState'
+        description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+    type: object
+  DescribeOrganizationRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization to be described.
+    required:
+      - OrganizationId
+    type: object
+  DescribeOrganizationResponse:
+    properties:
+      Alias:
+        $ref: '#/definitions/OrganizationName'
+        description: The alias for an organization.
+      CompletedDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.'
+      DefaultMailDomain:
+        $ref: '#/definitions/String'
+        description: The default mail domain associated with the organization.
+      DirectoryId:
+        $ref: '#/definitions/String'
+        description: The identifier for the directory associated with an Amazon WorkMail organization.
+      DirectoryType:
+        $ref: '#/definitions/String'
+        description: The type of directory associated with the WorkMail organization.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of an organization.
+      State:
+        $ref: '#/definitions/String'
+        description: The state of an organization.
+    type: object
+  DescribeResourceRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier associated with the organization for which the resource is described.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The identifier of the resource to be described.
+    required:
+      - OrganizationId
+      - ResourceId
+    type: object
+  DescribeResourceResponse:
+    properties:
+      BookingOptions:
+        $ref: '#/definitions/BookingOptions'
+        description: The booking options for the described resource.
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.'
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The email of the described resource.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the described resource.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The identifier of the described resource.
+      State:
+        $ref: '#/definitions/EntityState'
+        description: 'The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+      Type:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the described resource.
+    type: object
+  DescribeUserRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the user exists.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the user to be described.
+    required:
+      - OrganizationId
+      - UserId
+    type: object
+  DescribeUserResponse:
+    properties:
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.'
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: The display name of the user.
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The email of the user.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
+      Name:
+        $ref: '#/definitions/UserName'
+        description: The name for the user.
+      State:
+        $ref: '#/definitions/EntityState'
+        description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the described user.
+      UserRole:
+        $ref: '#/definitions/UserRole'
+        description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
+    type: object
+  DirectoryServiceAuthenticationFailedException: {}
+  DirectoryUnavailableException: {}
+  DisassociateDelegateFromResourceRequest:
+    properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: 'The identifier for the member (user, group) to be removed from the resource''s delegates.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the resource exists.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: 'The identifier of the resource from which delegates'' set members are removed. '
+    required:
+      - OrganizationId
+      - ResourceId
+      - EntityId
+    type: object
+  DisassociateDelegateFromResourceResponse:
+    properties: {}
+    type: object
+  DisassociateMemberFromGroupRequest:
+    properties:
+      GroupId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the group from which members are removed.
+      MemberId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the member to be removed to the group.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the group exists.
+    required:
+      - OrganizationId
+      - GroupId
+      - MemberId
+    type: object
+  DisassociateMemberFromGroupResponse:
+    properties: {}
+    type: object
+  EmailAddress:
+    maxLength: 254
+    minLength: 1
+    pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
     type: string
+  EmailAddressInUseException: {}
+  EntityAlreadyRegisteredException: {}
+  EntityNotFoundException: {}
+  EntityState:
     enum:
       - ENABLED
       - DISABLED
       - DELETED
-  Timestamp:
     type: string
-    format: date-time
-  OrganizationName:
-    type: string
-    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
-    minLength: 1
-    maxLength: 62
-  UserRole:
-    type: string
-    enum:
-      - USER
-      - RESOURCE
-      - SYSTEM_USER
-  MailboxQuota:
-    type: integer
-    minimum: 1
-  MailboxSize:
-    type: number
-    format: double
-    minimum: 0
-  Group:
-    type: object
+  EntityStateException: {}
+  GetMailboxDetailsRequest:
     properties:
-      Id:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization that contains the user whose mailbox details are being requested.
+      UserId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the group.
+        description: The identifier for the user whose mailbox details are being requested.
+    required:
+      - OrganizationId
+      - UserId
+    type: object
+  GetMailboxDetailsResponse:
+    properties:
+      MailboxQuota:
+        $ref: '#/definitions/MailboxQuota'
+        description: 'The maximum allowed mailbox size, in MB, for the specified user.'
+      MailboxSize:
+        $ref: '#/definitions/MailboxSize'
+        description: 'The current mailbox size, in MB, for the specified user.'
+    type: object
+  Group:
+    description: The representation of an Amazon WorkMail group.
+    properties:
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the group was disabled from Amazon WorkMail use.
       Email:
         $ref: '#/definitions/EmailAddress'
         description: The email of the group.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the group was enabled for Amazon WorkMail use.
+      Id:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the group.
       Name:
         $ref: '#/definitions/GroupName'
         description: The name of the group.
       State:
         $ref: '#/definitions/EntityState'
         description: 'The state of the group, which can be ENABLED, DISABLED, or DELETED.'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the group was enabled for Amazon WorkMail use.
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the group was disabled from Amazon WorkMail use.
-    description: The representation of an Amazon WorkMail group.
+    type: object
+  GroupName:
+    maxLength: 256
+    minLength: 1
+    pattern: '[\u0020-\u00FF]+'
+    type: string
   Groups:
-    type: array
     items:
       $ref: '#/definitions/Group'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  Members:
     type: array
-    items:
-      $ref: '#/definitions/Member'
-  Permissions:
-    type: array
-    items:
-      $ref: '#/definitions/Permission'
-  OrganizationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/OrganizationSummary'
-  ResourceDelegates:
-    type: array
-    items:
-      $ref: '#/definitions/Delegate'
-  Resources:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  Users:
-    type: array
-    items:
-      $ref: '#/definitions/User'
-  Member:
-    type: object
+  InvalidConfigurationException: {}
+  InvalidParameterException: {}
+  InvalidPasswordException: {}
+  ListAliasesRequest:
     properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the entity for which to list the aliases.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the entity exists.
+    required:
+      - OrganizationId
+      - EntityId
+    type: object
+  ListAliasesResponse:
+    properties:
+      Aliases:
+        $ref: '#/definitions/Aliases'
+        description: The entity's paginated aliases.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+    type: object
+  ListGroupMembersRequest:
+    properties:
+      GroupId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the group to which the members (users or groups) are associated.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' The token to use to retrieve the next page of results. The first call does not contain any tokens.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the group exists.
+    required:
+      - OrganizationId
+      - GroupId
+    type: object
+  ListGroupMembersResponse:
+    properties:
+      Members:
+        $ref: '#/definitions/Members'
+        description: The members associated to the group.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+    type: object
+  ListGroupsRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the groups exist.
+    required:
+      - OrganizationId
+    type: object
+  ListGroupsResponse:
+    properties:
+      Groups:
+        $ref: '#/definitions/Groups'
+        description: The overview of groups for an organization.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+    type: object
+  ListMailboxPermissionsRequest:
+    properties:
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: 'The identifier of the user, group, or resource for which to list mailbox permissions.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'The identifier of the organization under which the user, group, or resource exists.'
+    required:
+      - OrganizationId
+      - EntityId
+    type: object
+  ListMailboxPermissionsResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+      Permissions:
+        $ref: '#/definitions/Permissions'
+        description: 'One page of the user, group, or resource mailbox permissions.'
+    type: object
+  ListOrganizationsRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+    type: object
+  ListOrganizationsResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+      OrganizationSummaries:
+        $ref: '#/definitions/OrganizationSummaries'
+        description: The overview of owned organizations presented as a list of organization summaries.
+    type: object
+  ListResourceDelegatesRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The number of maximum results in a page.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token used to paginate through the delegates associated with a resource.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization that contains the resource for which delegates are listed.
+      ResourceId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier for the resource whose delegates are listed.
+    required:
+      - OrganizationId
+      - ResourceId
+    type: object
+  ListResourceDelegatesResponse:
+    properties:
+      Delegates:
+        $ref: '#/definitions/ResourceDelegates'
+        description: One page of the resource's delegates.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. '
+    type: object
+  ListResourcesRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the resources exist.
+    required:
+      - OrganizationId
+    type: object
+  ListResourcesResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' The token used to paginate through all the organization''s resources. While results are still available, it has an associated value. When the last page is reached, the token is empty.'
+      Resources:
+        $ref: '#/definitions/Resources'
+        description: One page of the organization's resource representation.
+    type: object
+  ListUsersRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return in a single call.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization under which the users exist.
+    required:
+      - OrganizationId
+    type: object
+  ListUsersResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.'
+      Users:
+        $ref: '#/definitions/Users'
+        description: The overview of users for an organization.
+    type: object
+  MailDomainNotFoundException: {}
+  MailDomainStateException: {}
+  MailboxQuota:
+    minimum: 1
+    type: integer
+  MailboxSize:
+    format: double
+    minimum: 0
+    type: number
+  MaxResults:
+    maximum: 100
+    minimum: 1
+    type: integer
+  Member:
+    description: The representation of a user or group.
+    properties:
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the member was disabled from Amazon WorkMail use.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the member was enabled for Amazon WorkMail use.
       Id:
         $ref: '#/definitions/String'
         description: The identifier of the member.
       Name:
         $ref: '#/definitions/String'
         description: The name of the member.
-      Type:
-        $ref: '#/definitions/MemberType'
-        description: A member can be a user or group.
       State:
         $ref: '#/definitions/EntityState'
         description: 'The state of the member, which can be ENABLED, DISABLED, or DELETED.'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the member was enabled for Amazon WorkMail use.
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the member was disabled from Amazon WorkMail use.
-    description: The representation of a user or group.
-  OrganizationSummary:
+      Type:
+        $ref: '#/definitions/MemberType'
+        description: A member can be a user or group.
     type: object
+  MemberType:
+    enum:
+      - GROUP
+      - USER
+    type: string
+  Members:
+    items:
+      $ref: '#/definitions/Member'
+    type: array
+  NameAvailabilityException: {}
+  NextToken:
+    maxLength: 1024
+    minLength: 1
+    type: string
+  OrganizationId:
+    pattern: '^m-[0-9a-f]{32}$'
+    type: string
+  OrganizationName:
+    maxLength: 62
+    minLength: 1
+    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
+    type: string
+  OrganizationNotFoundException: {}
+  OrganizationStateException: {}
+  OrganizationSummaries:
+    items:
+      $ref: '#/definitions/OrganizationSummary'
+    type: array
+  OrganizationSummary:
+    description: The representation of an organization.
     properties:
-      OrganizationId:
-        $ref: '#/definitions/OrganizationId'
-        description: The identifier associated with the organization.
       Alias:
         $ref: '#/definitions/OrganizationName'
         description: The alias associated with the organization.
       ErrorMessage:
         $ref: '#/definitions/String'
         description: The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier associated with the organization.
       State:
         $ref: '#/definitions/String'
         description: The state associated with the organization.
-    description: The representation of an organization.
-  PermissionValues:
-    type: array
-    items:
-      $ref: '#/definitions/PermissionType'
-  Permission:
     type: object
-    required:
-      - GranteeId
-      - GranteeType
-      - PermissionValues
+  Password:
+    format: password
+    maxLength: 256
+    pattern: '[\u0020-\u00FF]+'
+    type: string
+  Permission:
+    description: 'Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.'
     properties:
       GranteeId:
         $ref: '#/definitions/WorkMailIdentifier'
@@ -2938,63 +2687,314 @@ definitions:
       PermissionValues:
         $ref: '#/definitions/PermissionValues'
         description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
-    description: 'Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.'
+    required:
+      - GranteeId
+      - GranteeType
+      - PermissionValues
+    type: object
   PermissionType:
-    type: string
     enum:
       - FULL_ACCESS
       - SEND_AS
       - SEND_ON_BEHALF
-  Resource:
-    type: object
+    type: string
+  PermissionValues:
+    items:
+      $ref: '#/definitions/PermissionType'
+    type: array
+  Permissions:
+    items:
+      $ref: '#/definitions/Permission'
+    type: array
+  PutMailboxPermissionsRequest:
     properties:
-      Id:
+      EntityId:
         $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the resource.
+        description: 'The identifier of the user, group, or resource for which to update mailbox permissions.'
+      GranteeId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: 'The identifier of the user, group, or resource to which to grant the permissions.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'The identifier of the organization under which the user, group, or resource exists.'
+      PermissionValues:
+        $ref: '#/definitions/PermissionValues'
+        description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+    required:
+      - OrganizationId
+      - EntityId
+      - GranteeId
+      - PermissionValues
+    type: object
+  PutMailboxPermissionsResponse:
+    properties: {}
+    type: object
+  RegisterToWorkMailRequest:
+    properties:
       Email:
         $ref: '#/definitions/EmailAddress'
-        description: The email of the resource.
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the resource.
-      Type:
-        $ref: '#/definitions/ResourceType'
-        description: 'The type of the resource: equipment or room.'
-      State:
-        $ref: '#/definitions/EntityState'
-        description: 'The state of the resource, which can be ENABLED, DISABLED, or DELETED.'
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the resource was enabled for Amazon WorkMail use.
+        description: 'The email for the user, group, or resource to be updated.'
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: 'The identifier for the user, group, or resource to be updated.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'The identifier for the organization under which the user, group, or resource exists.'
+    required:
+      - OrganizationId
+      - EntityId
+      - Email
+    type: object
+  RegisterToWorkMailResponse:
+    properties: {}
+    type: object
+  ReservedNameException: {}
+  ResetPasswordRequest:
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier of the organization that contains the user for which the password is reset.
+      Password:
+        $ref: '#/definitions/Password'
+        description: The new password for the user.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the user for whom the password is reset.
+    required:
+      - OrganizationId
+      - UserId
+      - Password
+    type: object
+  ResetPasswordResponse:
+    properties: {}
+    type: object
+  Resource:
+    description: The representation of a resource.
+    properties:
       DisabledDate:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the resource was disabled from Amazon WorkMail use.
-    description: The representation of a resource.
-  User:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/WorkMailIdentifier'
-        description: The identifier of the user.
       Email:
         $ref: '#/definitions/EmailAddress'
-        description: The email of the user.
+        description: The email of the resource.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the resource was enabled for Amazon WorkMail use.
+      Id:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the resource.
       Name:
-        $ref: '#/definitions/UserName'
-        description: The name of the user.
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource.
+      State:
+        $ref: '#/definitions/EntityState'
+        description: 'The state of the resource, which can be ENABLED, DISABLED, or DELETED.'
+      Type:
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of the resource: equipment or room.'
+    type: object
+  ResourceDelegates:
+    items:
+      $ref: '#/definitions/Delegate'
+    type: array
+  ResourceId:
+    pattern: '^r-[0-9a-f]{32}$'
+    type: string
+  ResourceName:
+    maxLength: 20
+    minLength: 1
+    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+    type: string
+  ResourceType:
+    enum:
+      - ROOM
+      - EQUIPMENT
+    type: string
+  Resources:
+    items:
+      $ref: '#/definitions/Resource'
+    type: array
+  String:
+    maxLength: 256
+    type: string
+  Timestamp:
+    format: date-time
+    type: string
+  UnsupportedOperationException: {}
+  UpdateMailboxQuotaRequest:
+    properties:
+      MailboxQuota:
+        $ref: '#/definitions/MailboxQuota'
+        description: 'The updated mailbox quota, in MB, for the specified user.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier for the organization that contains the user for whom to update the mailbox quota.
+      UserId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifer for the user for whom to update the mailbox quota.
+    required:
+      - OrganizationId
+      - UserId
+      - MailboxQuota
+    type: object
+  UpdateMailboxQuotaResponse:
+    properties: {}
+    type: object
+  UpdatePrimaryEmailAddressRequest:
+    properties:
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The value of the email to be updated as primary.
+      EntityId:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: 'The user, group, or resource to update.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'The organization that contains the user, group, or resource to update.'
+    required:
+      - OrganizationId
+      - EntityId
+      - Email
+    type: object
+  UpdatePrimaryEmailAddressResponse:
+    properties: {}
+    type: object
+  UpdateResourceRequest:
+    properties:
+      BookingOptions:
+        $ref: '#/definitions/BookingOptions'
+        description: The resource's booking options to be updated.
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource to be updated.
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: The identifier associated with the organization for which the resource is updated.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The identifier of the resource to be updated.
+    required:
+      - OrganizationId
+      - ResourceId
+    type: object
+  UpdateResourceResponse:
+    properties: {}
+    type: object
+  User:
+    description: The representation of an Amazon WorkMail user.
+    properties:
+      DisabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the user was disabled from Amazon WorkMail use.
       DisplayName:
         $ref: '#/definitions/String'
         description: The display name of the user.
+      Email:
+        $ref: '#/definitions/EmailAddress'
+        description: The email of the user.
+      EnabledDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date indicating when the user was enabled for Amazon WorkMail use.
+      Id:
+        $ref: '#/definitions/WorkMailIdentifier'
+        description: The identifier of the user.
+      Name:
+        $ref: '#/definitions/UserName'
+        description: The name of the user.
       State:
         $ref: '#/definitions/EntityState'
         description: 'The state of the user, which can be ENABLED, DISABLED, or DELETED.'
       UserRole:
         $ref: '#/definitions/UserRole'
         description: The role of the user.
-      EnabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the user was enabled for Amazon WorkMail use.
-      DisabledDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date indicating when the user was disabled from Amazon WorkMail use.
-    description: The representation of an Amazon WorkMail user.
+    type: object
+  UserName:
+    maxLength: 64
+    minLength: 1
+    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+    type: string
+  UserRole:
+    enum:
+      - USER
+      - RESOURCE
+      - SYSTEM_USER
+    type: string
+  Users:
+    items:
+      $ref: '#/definitions/User'
+    type: array
+  WorkMailIdentifier:
+    maxLength: 256
+    minLength: 12
+    type: string
+x-servers:
+  - description: The Amazon WorkMail multi-region endpoint
+    url: 'http://workmail.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The Amazon WorkMail multi-region endpoint
+    url: 'https://workmail.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The Amazon WorkMail endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://workmail.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The Amazon WorkMail endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://workmail.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

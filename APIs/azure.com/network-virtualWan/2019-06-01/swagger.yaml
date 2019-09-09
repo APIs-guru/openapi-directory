@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualWan.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-virtualWan
   x-tags:
@@ -220,14 +220,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -240,14 +240,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -1418,14 +1418,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -1438,14 +1438,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -1925,23 +1925,23 @@ paths:
             '200':
               body:
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                   name: connection1
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
                   name: connection2
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet2
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}':
@@ -2023,14 +2023,14 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                 name: connection1
                 properties:
                   allowHubToRemoteVnetTransit: true
                   allowRemoteVnetToUseHubVnetGateways: false
                   provisioningState: Succeeded
                   remoteVirtualNetwork:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans':
     get:
       description: Lists all the VirtualWANs in a resource group.
@@ -2796,8 +2796,8 @@ paths:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
                         name: p2sVpnServerConfigRadiusClientRootCert1
                         properties:
-                          Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                           provisioningState: Succeeded
+                          thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                         type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
                     p2SVpnServerConfigRadiusServerRootCertificates:
                       - etag: w/\00000000-0000-0000-0000-000000000000\
@@ -2812,8 +2812,8 @@ paths:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/VpnClientRevokedCert2
                         name: p2sVpnServerConfigVpnClientRevokedCert1
                         properties:
-                          Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                           provisioningState: Succeeded
+                          thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                         type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
                     p2SVpnServerConfigVpnClientRootCertificates:
                       - etag: w/\00000000-0000-0000-0000-000000000000\

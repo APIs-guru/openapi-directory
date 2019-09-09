@@ -259,7 +259,9 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/MessagesResponse'
+            items:
+              $ref: '#/definitions/MessagesResponse'
+            type: array
         default:
           description: Error
           schema:
@@ -485,7 +487,7 @@ definitions:
     description: SMS message object
     properties:
       content:
-        description: 'Message to send to the recipient. Content can be up to 1280 characters in length. You will be charged 1 credit for each 160 characters, up to a maximum of 8 credits. Messages sent to numbers registered outside the UK will be charged double credits (i.e. 2 credits per 160 characters, up to maximum of 8 credits).'
+        description: 'Message to send to the recipient. Content can be up to 1280 characters in length. Messages of 160 characters or fewer are charged 1 credit. If your message is longer than 160 characters then it will be broken down in to chunks of 153 characters before being sent to the recipient''s handset, and you will be charged 1 credit for each 153 characters. Messages sent to numbers registered outside the UK will be charged double credits.'
         example: Your super awesome message
         type: string
       destination:
@@ -623,6 +625,10 @@ definitions:
   Query:
     description: search parameters for querying the message database
     properties:
+      credits:
+        description: The number of credits used on the message
+        example: 2
+        type: number
       destination:
         description: The phone number of the recipient. Start UK numbers with 44 and drop the leading 0.
         example: '447777777777'
@@ -653,7 +659,7 @@ definitions:
         example: YourCompany
         type: string
       status:
-        description: 'The status of the messages you would like returned (either ''SENT'', ''DELIVERED'', ''EXPIRED'', ''DELETED'', ''UNDELIVERABLE'', ''ACCEPTED'', ''UNKNOWN'', ''REJECTED'')'
+        description: 'The status of the messages you would like returned (either ''SENT'', ''DELIVERED'', ''EXPIRED'', ''UNDELIVERABLE'', ''REJECTED'' or ''INCOMING'')'
         example: SENT
         type: string
       to:

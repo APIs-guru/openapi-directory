@@ -442,6 +442,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1:
     get:
       description: This endpoint allows you to get the list of all the available endpoints. No need to be authenticated to use this endpoint.
@@ -513,6 +514,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/asset-categories:
     get:
       description: This endpoint allows you to get a list of asset categories. Asset categories are paginated and sorted by `root/left`.
@@ -720,6 +722,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update several asset categories at once.
       operationId: patch_asset_categories
@@ -857,6 +860,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new asset category.
       operationId: post_asset_categories
@@ -988,6 +992,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/asset-categories/{code}':
     get:
       description: This endpoint allows you to get the information about a given asset category.
@@ -1101,6 +1106,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given asset category. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no category exists for the given code, it creates it.'
       operationId: patch_asset_categories__code_
@@ -1245,6 +1251,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/asset-tags:
     get:
       description: This endpoint allows you to get a list of asset tags. Asset tags are paginated.
@@ -1419,6 +1426,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/asset-tags/{code}':
     get:
       description: This endpoint allows you to get the information about a given asset tag.
@@ -1514,6 +1522,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given asset tag. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no tag exists for the given code, it creates it.'
       operationId: patch_asset_tags__code_
@@ -1640,6 +1649,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/assets:
     get:
       description: This endpoint allows you to get a list of assets. Assets are paginated.
@@ -2044,6 +2054,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update several assets at once.
       operationId: patch_assets
@@ -2284,6 +2295,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new asset.
       operationId: post_assets
@@ -2518,6 +2530,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/assets/{asset_code}/reference-files/{locale_code}':
     get:
       description: This endpoint allows you to get the information about a reference file of a given asset.
@@ -2633,6 +2646,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to upload a new reference file for a given asset and locale. It will also automatically generate all the variation files corresponding to this reference file.
       operationId: post_reference_files__locale_code_
@@ -2795,6 +2809,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/assets/{asset_code}/reference-files/{locale_code}/download':
     get:
       description: This endpoint allows you to download a given reference file.
@@ -2871,6 +2886,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/assets/{asset_code}/variation-files/{channel_code}/{locale_code}':
     get:
       description: This endpoint allows you to get the information about a variation file of a given asset.
@@ -2995,6 +3011,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: 'This endpoint allows you to upload a new variation file for a given asset, channel and locale.'
       operationId: post_variation_files__channel_code__locale_code_
@@ -3141,6 +3158,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/assets/{asset_code}/variation-files/{channel_code}/{locale_code}/download':
     get:
       description: This endpoint allows you to download a given variation file.
@@ -3222,6 +3240,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/assets/{code}':
     get:
       description: This endpoint allows you to get the information about a given asset.
@@ -3438,6 +3457,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given asset. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no asset exists for the given code, it creates it.'
       operationId: patch_assets__code_
@@ -3685,6 +3705,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/association-types:
     get:
       description: This endpoint allows you to get a list of association types. Association types are paginated and sorted by code.
@@ -3876,6 +3897,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update and/or create several association types at once.
       operationId: several_association_types_patch
@@ -4006,6 +4028,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new association type.
       operationId: association_types_post
@@ -4131,6 +4154,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/association-types/{code}':
     get:
       description: This endpoint allows you to get the information about a given association type.
@@ -4238,6 +4262,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given association type. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no association type exists for the given code, it creates it.'
       operationId: association_types_patch
@@ -4376,6 +4401,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/attribute-groups:
     get:
       description: This endpoint allows you to get a list of attribute groups. Attribute groups are paginated and sorted by code.
@@ -4603,6 +4629,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update and/or create several attribute groups at once.
       operationId: several_attribute_groups_patch
@@ -4753,6 +4780,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new attribute group.
       operationId: attribute_groups_post
@@ -4898,6 +4926,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/attribute-groups/{code}':
     get:
       description: This endpoint allows you to get the information about a given attribute group.
@@ -5025,6 +5054,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given attribute group. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute group exists for the given code, it creates it.'
       operationId: attribute_groups_patch
@@ -5183,6 +5213,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/attributes:
     get:
       description: This endpoint allows you to get a list of attributes. Attributes are paginated and sorted by code.
@@ -5398,7 +5429,7 @@ paths:
                                 decimals_allowed:
                                   description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                                   type: boolean
-                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
                                 default_metric_unit:
                                   description: Default metric unit when the attribute type is `pim_catalog_metric`
                                   type: string
@@ -5441,13 +5472,13 @@ paths:
                                   type: boolean
                                   x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
                                 number_max:
-                                  description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+                                  description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                                   type: string
-                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
                                 number_min:
                                   description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                                   type: string
-                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                                  x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
                                 reference_data_name:
                                   description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
                                   type: string
@@ -5477,7 +5508,7 @@ paths:
                                     - pim_catalog_text
                                     - pim_catalog_file
                                     - pim_catalog_image
-                                    - pim_catalog_price
+                                    - pim_catalog_price_collection
                                     - pim_catalog_boolean
                                     - akeneo_reference_entity
                                     - akeneo_reference_entity_collection
@@ -5571,6 +5602,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update and/or create several attributes at once.
       operationId: patch_attributes
@@ -5639,7 +5671,7 @@ paths:
               decimals_allowed:
                 description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: boolean
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               default_metric_unit:
                 description: Default metric unit when the attribute type is `pim_catalog_metric`
                 type: string
@@ -5682,13 +5714,13 @@ paths:
                 type: boolean
                 x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
               number_max:
-                description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+                description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               number_min:
                 description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               reference_data_name:
                 description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
                 type: string
@@ -5718,7 +5750,7 @@ paths:
                   - pim_catalog_text
                   - pim_catalog_file
                   - pim_catalog_image
-                  - pim_catalog_price
+                  - pim_catalog_price_collection
                   - pim_catalog_boolean
                   - akeneo_reference_entity
                   - akeneo_reference_entity_collection
@@ -5854,6 +5886,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new attribute.
       operationId: post_attributes
@@ -5922,7 +5955,7 @@ paths:
               decimals_allowed:
                 description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: boolean
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               default_metric_unit:
                 description: Default metric unit when the attribute type is `pim_catalog_metric`
                 type: string
@@ -5965,13 +5998,13 @@ paths:
                 type: boolean
                 x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
               number_max:
-                description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+                description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               number_min:
                 description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               reference_data_name:
                 description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
                 type: string
@@ -6001,7 +6034,7 @@ paths:
                   - pim_catalog_text
                   - pim_catalog_file
                   - pim_catalog_image
-                  - pim_catalog_price
+                  - pim_catalog_price_collection
                   - pim_catalog_boolean
                   - akeneo_reference_entity
                   - akeneo_reference_entity_collection
@@ -6131,6 +6164,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/attributes/{attribute_code}/options':
     get:
       description: This endpoint allows you to get a list of attribute options. Attribute options are paginated and sorted by code.
@@ -6347,6 +6381,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update several attribute options at once.
       operationId: patch_attributes__attribute_code__options
@@ -6491,6 +6526,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new attribute option.
       operationId: post_attributes__attribute_code__options
@@ -6631,6 +6667,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/attributes/{attribute_code}/options/{code}':
     get:
       description: This endpoint allows you to get the information about a given attribute option.
@@ -6753,6 +6790,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given attribute option. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute option exists for the given code, it creates it.'
       operationId: patch_attributes__attribute_code__options__code_
@@ -6906,6 +6944,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/attributes/{code}':
     get:
       description: This endpoint allows you to get the information about a given attribute.
@@ -6981,7 +7020,7 @@ paths:
               decimals_allowed:
                 description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: boolean
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               default_metric_unit:
                 description: Default metric unit when the attribute type is `pim_catalog_metric`
                 type: string
@@ -7024,13 +7063,13 @@ paths:
                 type: boolean
                 x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
               number_max:
-                description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+                description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               number_min:
                 description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               reference_data_name:
                 description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
                 type: string
@@ -7060,7 +7099,7 @@ paths:
                   - pim_catalog_text
                   - pim_catalog_file
                   - pim_catalog_image
-                  - pim_catalog_price
+                  - pim_catalog_price_collection
                   - pim_catalog_boolean
                   - akeneo_reference_entity
                   - akeneo_reference_entity_collection
@@ -7165,6 +7204,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given attribute. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute exists for the given code, it creates it.'
       operationId: patch_attributes__code_
@@ -7239,7 +7279,7 @@ paths:
               decimals_allowed:
                 description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: boolean
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               default_metric_unit:
                 description: Default metric unit when the attribute type is `pim_catalog_metric`
                 type: string
@@ -7282,13 +7322,13 @@ paths:
                 type: boolean
                 x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
               number_max:
-                description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+                description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               number_min:
                 description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
                 type: string
-                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+                x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
               reference_data_name:
                 description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
                 type: string
@@ -7318,7 +7358,7 @@ paths:
                   - pim_catalog_text
                   - pim_catalog_file
                   - pim_catalog_image
-                  - pim_catalog_price
+                  - pim_catalog_price_collection
                   - pim_catalog_boolean
                   - akeneo_reference_entity
                   - akeneo_reference_entity_collection
@@ -7455,6 +7495,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/categories:
     get:
       description: This endpoint allows you to get a list of categories. Categories are paginated and sorted by `root/left`.
@@ -7681,6 +7722,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update several categories at once.
       operationId: patch_categories
@@ -7819,6 +7861,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new category.
       operationId: post_categories
@@ -7951,6 +7994,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/categories/{code}':
     get:
       description: This endpoint allows you to get the information about a given category.
@@ -8065,6 +8109,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given category. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no category exists for the given code, it creates it.'
       operationId: patch_categories__code_
@@ -8210,6 +8255,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/channels:
     get:
       description: This endpoint allows you to get a list of channels. Channels are paginated and sorted by code.
@@ -8476,6 +8522,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update and/or create several channels at once.
       operationId: several_channels_patch
@@ -8644,6 +8691,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new channel.
       operationId: channels_post
@@ -8807,6 +8855,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/channels/{code}':
     get:
       description: This endpoint allows you to get the information about a given channel.
@@ -8953,6 +9002,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given channel. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no channel exists for the given code, it creates it.'
       operationId: channels_patch
@@ -9129,6 +9179,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/currencies:
     get:
       description: This endpoint allows you to get a list of currencies. Currencies are paginated and sorted by code.
@@ -9306,6 +9357,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/currencies/{code}':
     get:
       description: This endpoint allows you to get the information about a given currency.
@@ -9405,6 +9457,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/families:
     get:
       description: This endpoint allows you to get a list of families. Families are paginated and sorted by code.
@@ -9686,6 +9739,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: This endpoint allows you to update and/or create several families at once.
       operationId: patch_families
@@ -9866,6 +9920,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new family.
       operationId: post_families
@@ -10040,6 +10095,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/families/{code}':
     get:
       description: This endpoint allows you to get the information about a given family.
@@ -10196,6 +10252,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given family. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no family exists for the given code, it creates it.'
       operationId: patch_families__code_
@@ -10383,6 +10440,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/families/{family_code}/variants':
     get:
       description: This endpoint allows you to get a list of family variants. Family variants are paginated and sorted by code.
@@ -10611,6 +10669,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update and/or create several family variants at once, for a given family.'
       operationId: patch_families__family_code__variants
@@ -10791,6 +10850,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a family variant.
       operationId: post_families__family_code__variants
@@ -10965,6 +11025,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/families/{family_code}/variants/{code}':
     get:
       description: This endpoint allows you to get the information about a given family variant.
@@ -11121,6 +11182,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given family variant. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no family variant exists for the given code, it creates it.'
       operationId: patch_families__family_code__variants__code__
@@ -11308,6 +11370,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/locales:
     get:
       description: This endpoint allows you to get a list of locales. Locales are paginated and sorted by code.
@@ -11496,6 +11559,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/locales/{code}':
     get:
       description: This endpoint allows you to get the information about a given locale.
@@ -11597,6 +11661,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/measure-families:
     get:
       description: This endpoint allows you to get a list of measure families. Measure families are paginated and sorted by code.
@@ -11803,6 +11868,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/measure-families/{code}':
     get:
       description: This endpoint allows you to get the information about a given measure family.
@@ -11929,6 +11995,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/media-files:
     get:
       description: This endpoint allows you to get a list of media files that are used as attribute values in products or product models.
@@ -12155,6 +12222,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: This endpoint allows you to create a new media file and associate it to an attribute value of a given product or product model.
       operationId: post_media_files
@@ -12278,6 +12346,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/media-files/{code}':
     get:
       description: This endpoint allows you to get the information about a given media file that is used as an attribute value of a product or a product model.
@@ -12413,6 +12482,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/media-files/{code}/download':
     get:
       description: This endpoint allows you to download a given media file that is used as an attribute value of a product or a product model.
@@ -12485,6 +12555,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/product-models:
     get:
       description: 'This endpoint allows you to get a list of product models. Product models are paginated. In the Enterprise Edition, since the 2.0, permissions based on your user groups are applied to the set of products you request.'
@@ -12554,13 +12625,14 @@ paths:
               items:
                 - _links:
                     self:
-                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/shoes'
+                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/amarisshoe'
                   categories:
                     - clothing
                     - shoes
-                  code: shoes
+                  code: amarisshoe
                   created: '2017-10-04T18:04:10+02:00'
-                  family_variant: familyVariantA1
+                  family: shoes
+                  family_variant: shoes_VariantA1
                   parent: null
                   updated: '2017-10-04T18:04:10+02:00'
                   values:
@@ -12576,13 +12648,14 @@ paths:
                         scope: null
                 - _links:
                     self:
-                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/tshirt'
+                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/Abiloitshirt'
                   categories:
                     - clothing
                     - tshirt
-                  code: tshirt
+                  code: Abiloitshirt
                   created: '2017-10-04T18:04:10+02:00'
-                  family_variant: familyVariantA1
+                  family: clothing
+                  family_variant: clothing_VariantA1
                   parent: null
                   updated: '2017-10-04T18:04:10+02:00'
                   values:
@@ -12598,13 +12671,14 @@ paths:
                         scope: null
                 - _links:
                     self:
-                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/trousers'
+                      href: 'http://demo.akeneo.com/api/rest/v1/product-models/Astertrousers'
                   categories:
                     - clothing
                     - trousers
-                  code: trousers
+                  code: Astertrousers
                   created: '2017-10-04T18:04:10+02:00'
-                  family_variant: familyVariantA1
+                  family: clothing
+                  family_variant: clothing_VariantA1
                   parent: null
                   updated: '2017-10-04T18:04:10+02:00'
                   values:
@@ -12681,6 +12755,7 @@ paths:
                                   - summer_collection
                                 code: model-biker-jacket-leather
                                 created: '2017-10-02T15:03:55+02:00'
+                                family: clothing
                                 family_variant: clothing_material_size
                                 parent: model-biker-jacket
                                 updated: '2017-10-02T15:03:55+02:00'
@@ -12728,11 +12803,16 @@ paths:
                                   type: string
                                   x-immutable: true
                                   x-read-only: true
+                                family:
+                                  description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                                  type: string
+                                  x-immutable: true
+                                  x-validation-rules: It is equal to an existing family code
                                 family_variant:
                                   description: Family variant code from which the product model inherits its attributes and variant attributes
                                   type: string
                                   x-immutable: true
-                                  x-validation-rules: It is equal to an existing family variant code
+                                  x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
                                 metadata:
                                   description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                                   properties:
@@ -12843,6 +12923,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update and/or create several product models at once. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product models exists for the given code, it creates it. In the Enterprise Edition, since the v2.3, permissions based on your user groups are applied to the product models you try to update. It may result in the creation of drafts if you only have edit rights through the product model''s categories.'
       operationId: patch_product_models
@@ -12855,6 +12936,7 @@ paths:
                 - summer_collection
               code: model-biker-jacket-leather
               created: '2017-10-02T15:03:55+02:00'
+              family: clothing
               family_variant: clothing_material_size
               parent: model-biker-jacket
               updated: '2017-10-02T15:03:55+02:00'
@@ -12902,11 +12984,16 @@ paths:
                 type: string
                 x-immutable: true
                 x-read-only: true
+              family:
+                description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                type: string
+                x-immutable: true
+                x-validation-rules: It is equal to an existing family code
               family_variant:
                 description: Family variant code from which the product model inherits its attributes and variant attributes
                 type: string
                 x-immutable: true
-                x-validation-rules: It is equal to an existing family variant code
+                x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
               metadata:
                 description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                 properties:
@@ -13056,6 +13143,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: 'This endpoint allows you to create a new product model. In the Enterprise Edition, since the v2.3, permissions based on your user groups are applied to the product model you try to create.'
       operationId: post_product_models
@@ -13068,6 +13156,7 @@ paths:
                 - summer_collection
               code: model-biker-jacket-leather
               created: '2017-10-02T15:03:55+02:00'
+              family: clothing
               family_variant: clothing_material_size
               parent: model-biker-jacket
               updated: '2017-10-02T15:03:55+02:00'
@@ -13115,11 +13204,16 @@ paths:
                 type: string
                 x-immutable: true
                 x-read-only: true
+              family:
+                description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                type: string
+                x-immutable: true
+                x-validation-rules: It is equal to an existing family code
               family_variant:
                 description: Family variant code from which the product model inherits its attributes and variant attributes
                 type: string
                 x-immutable: true
-                x-validation-rules: It is equal to an existing family variant code
+                x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
               metadata:
                 description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                 properties:
@@ -13248,6 +13342,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/product-models/{code}':
     get:
       description: 'This endpoint allows you to get the information about a given product model. In the Entreprise Edition, since the v2.0, permissions based on your user groups are applied to the product model you request.'
@@ -13267,6 +13362,7 @@ paths:
                 - summer_collection
               code: model-biker-jacket-leather
               created: '2017-10-02T15:03:55+02:00'
+              family: clothing
               family_variant: clothing_material_size
               parent: model-biker-jacket
               updated: '2017-10-02T15:03:55+02:00'
@@ -13314,11 +13410,16 @@ paths:
                 type: string
                 x-immutable: true
                 x-read-only: true
+              family:
+                description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                type: string
+                x-immutable: true
+                x-validation-rules: It is equal to an existing family code
               family_variant:
                 description: Family variant code from which the product model inherits its attributes and variant attributes
                 type: string
                 x-immutable: true
-                x-validation-rules: It is equal to an existing family variant code
+                x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
               metadata:
                 description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                 properties:
@@ -13422,6 +13523,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given product model. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product model exists for the given code, it creates it. In the Enterprise Edition PIM since the 2.3, permissions based on your user groups are applied to the product model you try to update. It may result in the creation of a draft if you only have edit rights through the product model''s categories.'
       operationId: patch_product_models__code_
@@ -13440,6 +13542,7 @@ paths:
                 - summer_collection
               code: model-biker-jacket-leather
               created: '2017-10-02T15:03:55+02:00'
+              family: clothing
               family_variant: clothing_material_size
               parent: model-biker-jacket
               updated: '2017-10-02T15:03:55+02:00'
@@ -13487,11 +13590,16 @@ paths:
                 type: string
                 x-immutable: true
                 x-read-only: true
+              family:
+                description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                type: string
+                x-immutable: true
+                x-validation-rules: It is equal to an existing family code
               family_variant:
                 description: Family variant code from which the product model inherits its attributes and variant attributes
                 type: string
                 x-immutable: true
-                x-validation-rules: It is equal to an existing family variant code
+                x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
               metadata:
                 description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                 properties:
@@ -13612,6 +13720,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/product-models/{code}/draft':
     get:
       description: This endpoint allows you to get the information about a given product model draft.
@@ -13631,6 +13740,7 @@ paths:
                 - summer_collection
               code: model-biker-jacket-leather
               created: '2017-10-02T15:03:55+02:00'
+              family: clothing
               family_variant: clothing_material_size
               parent: model-biker-jacket
               updated: '2017-10-02T15:03:55+02:00'
@@ -13678,11 +13788,16 @@ paths:
                 type: string
                 x-immutable: true
                 x-read-only: true
+              family:
+                description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+                type: string
+                x-immutable: true
+                x-validation-rules: It is equal to an existing family code
               family_variant:
                 description: Family variant code from which the product model inherits its attributes and variant attributes
                 type: string
                 x-immutable: true
-                x-validation-rules: It is equal to an existing family variant code
+                x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
               metadata:
                 description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
                 properties:
@@ -13799,6 +13914,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/product-models/{code}/proposal':
     post:
       description: This endpoint allows you to submit a product model draft for approval.
@@ -13888,6 +14004,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/products:
     get:
       description: 'This endpoint allows you to get a list of products. Products are paginated and they can be filtered. In the Enterprise Edition, since the 2.0, permissions based on your user groups are applied to the set of products you request.'
@@ -14367,6 +14484,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update and/or create several products at once. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product exists for the given identifier, it creates it. In the Enterprise Edition, since the v2.0, permissions based on your user groups are applied to the products you try to update. It may result in the creation of drafts if you only have edit rights through the product''s categories.'
       operationId: patch_products
@@ -14631,6 +14749,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     post:
       description: 'This endpoint allows you to create a new product. In the Enterprise Edition, since the v2.0, permissions based on your user groups are applied to the product you try to create.'
       operationId: post_products
@@ -14889,6 +15008,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/products/{code}':
     delete:
       description: 'This endpoint allows you to delete a given product. In the Enterprise Edition, since the 2.0, permissions based on your user groups are applied to the product you try to delete.'
@@ -14959,6 +15079,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     get:
       description: 'This endpoint allows you to get the information about a given product. In the Entreprise Edition, since the v2.0, permissions based on your user groups are applied to the product you request.'
       operationId: get_products__code_
@@ -15198,6 +15319,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given product. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product exists for the given identifier, it creates it. In the Entreprise Edition, since the v2.0, permissions based on your user groups are applied to the product you try to update. It may result in the creation of a draft if you only have edit rights through the product''s categories.'
       operationId: patch_products__code_
@@ -15454,6 +15576,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/products/{code}/draft':
     get:
       description: This endpoint allows you to get the information about a given draft.
@@ -15694,6 +15817,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/products/{code}/proposal':
     post:
       description: This endpoint allows you to submit a draft for approval.
@@ -15786,6 +15910,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/published-products:
     get:
       description: This endpoint allows you to get a list of published products. Published products are paginated and they can be filtered.
@@ -16257,6 +16382,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/published-products/{code}':
     get:
       description: This endpoint allows you to get the information about a given published product.
@@ -16477,6 +16603,7 @@ paths:
         - '2.3'
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/reference-entities:
     get:
       description: This endpoint allows you to get a list of reference entities. Reference entities are paginated.
@@ -16643,6 +16770,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   /api/rest/v1/reference-entities-media-files:
     post:
       description: 'This endpoint allows you to create a new media file and associate it to the image of a reference entity, or to the main image or to an attribute value of a record.'
@@ -16730,6 +16858,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities-media-files/{code}':
     get:
       description: This endpoint allows you to download a given media file that is associated with a reference entity or a record.
@@ -16783,6 +16912,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{code}':
     get:
       description: This endpoint allows you to get the information about a given reference entity.
@@ -16899,6 +17029,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given reference entity. Note that if the reference entity does not already exist, it creates it.'
       operationId: patch_reference_entity__code_
@@ -17008,6 +17139,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/attributes':
     get:
       description: This endpoint allows you to get the list of attributes of a given reference entity.
@@ -17049,6 +17181,11 @@ paths:
                   description: Attribute code
                   type: string
                   x-immutable: true
+                decimals_allowed:
+                  default: false
+                  description: Whether decimals are allowed when the attribute type is `number`
+                  type: boolean
+                  x-warning: Only for `number` attribute type
                 is_required_for_completeness:
                   default: false
                   description: Whether the attribute should be part of the record's completeness calculation
@@ -17080,6 +17217,16 @@ paths:
                   description: Max file size in MB when the attribute type is `image`
                   type: string
                   x-warning: Only for `image` attribute type
+                max_value:
+                  description: Maximum value allowed when the attribute type is `number`
+                  type: string
+                  x-validation-rules: The maximum value must be greater than the minimum value
+                  x-warning: Only for `number` attribute type
+                min_value:
+                  description: Minimum value allowed when the attribute type is `number`
+                  type: string
+                  x-validation-rules: The minimum value must be lower than the maximum value
+                  x-warning: Only for `number` attribute type
                 reference_entity_code:
                   description: Code of the linked reference entity when the attribute type is `reference_entity_single_link` or `reference_entity_multiple_links`
                   type: string
@@ -17091,6 +17238,7 @@ paths:
                   enum:
                     - text
                     - image
+                    - number
                     - single_option
                     - multiple_options
                     - reference_entity_single_link
@@ -17149,6 +17297,17 @@ paths:
               type: text
               value_per_channel: false
               value_per_locale: false
+            - code: creation_year
+              decimals_allowed: false
+              is_required_for_completeness: false
+              labels:
+                en_US: Creation year
+                fr_FR: Année de création
+              max_value: '2100'
+              min_value: '1800'
+              type: number
+              value_per_channel: false
+              value_per_locale: false
             - allowed_extensions:
                 - png
               code: collection_overview
@@ -17198,9 +17357,10 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options':
     get:
-      description: This endpoint allows you to get a list of attribute options for a given reference entity. Reference entity attribute options are paginated.
+      description: This endpoint allows you to get a list of attribute options for a given reference entity.
       operationId: get_reference_entity_attributes__attribute_code__options
       parameters:
         - description: Code of the reference entity
@@ -17292,6 +17452,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options/{code}':
     get:
       description: This endpoint allows you to get the information about a given attribute option.
@@ -17391,6 +17552,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given option for a given attribute and a given reference entity. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the option does not already exist for the given attribute of the given reference entity, it creates it.'
       operationId: patch_reference_entity_attributes__attribute_code__options__code_
@@ -17506,6 +17668,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{code}':
     get:
       description: This endpoint allows you to get the information about a given attribute for a given reference entity.
@@ -17551,6 +17714,11 @@ paths:
                 description: Attribute code
                 type: string
                 x-immutable: true
+              decimals_allowed:
+                default: false
+                description: Whether decimals are allowed when the attribute type is `number`
+                type: boolean
+                x-warning: Only for `number` attribute type
               is_required_for_completeness:
                 default: false
                 description: Whether the attribute should be part of the record's completeness calculation
@@ -17582,6 +17750,16 @@ paths:
                 description: Max file size in MB when the attribute type is `image`
                 type: string
                 x-warning: Only for `image` attribute type
+              max_value:
+                description: Maximum value allowed when the attribute type is `number`
+                type: string
+                x-validation-rules: The maximum value must be greater than the minimum value
+                x-warning: Only for `number` attribute type
+              min_value:
+                description: Minimum value allowed when the attribute type is `number`
+                type: string
+                x-validation-rules: The minimum value must be lower than the maximum value
+                x-warning: Only for `number` attribute type
               reference_entity_code:
                 description: Code of the linked reference entity when the attribute type is `reference_entity_single_link` or `reference_entity_multiple_links`
                 type: string
@@ -17593,6 +17771,7 @@ paths:
                 enum:
                   - text
                   - image
+                  - number
                   - single_option
                   - multiple_options
                   - reference_entity_single_link
@@ -17628,7 +17807,7 @@ paths:
               - code
               - type
             type: object
-          x-details: Returns the content of the product in JSON format
+          x-details: Returns the content of the reference entity attribute in JSON format
         '401':
           description: Authentication required
           examples:
@@ -17681,6 +17860,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given attribute for a given renference entity. Note that if the attribute does not already exist for the given reference entity, it creates it.'
       operationId: patch_reference_entity_attributes__code_
@@ -17725,6 +17905,11 @@ paths:
                 description: Attribute code
                 type: string
                 x-immutable: true
+              decimals_allowed:
+                default: false
+                description: Whether decimals are allowed when the attribute type is `number`
+                type: boolean
+                x-warning: Only for `number` attribute type
               is_required_for_completeness:
                 default: false
                 description: Whether the attribute should be part of the record's completeness calculation
@@ -17756,6 +17941,16 @@ paths:
                 description: Max file size in MB when the attribute type is `image`
                 type: string
                 x-warning: Only for `image` attribute type
+              max_value:
+                description: Maximum value allowed when the attribute type is `number`
+                type: string
+                x-validation-rules: The maximum value must be greater than the minimum value
+                x-warning: Only for `number` attribute type
+              min_value:
+                description: Minimum value allowed when the attribute type is `number`
+                type: string
+                x-validation-rules: The minimum value must be lower than the maximum value
+                x-warning: Only for `number` attribute type
               reference_entity_code:
                 description: Code of the linked reference entity when the attribute type is `reference_entity_single_link` or `reference_entity_multiple_links`
                 type: string
@@ -17767,6 +17962,7 @@ paths:
                 enum:
                   - text
                   - image
+                  - number
                   - single_option
                   - multiple_options
                   - reference_entity_single_link
@@ -17872,6 +18068,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/records':
     get:
       description: This endpoint allows you to get a list of records of a given reference entity. Records are paginated and can be filtered.
@@ -18041,6 +18238,10 @@ paths:
                                     - channel: null
                                       data: italy
                                       locale: null
+                                  creation_year:
+                                    - channel: null
+                                      data: '1949'
+                                      locale: null
                                   description:
                                     - channel: null
                                       data: 'Kartell, the Italian furniture company that sells modern and remarkable pieces of furnitures.'
@@ -18125,6 +18326,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update and/or create several records of one given reference entity at once. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the record does not already exist for the given reference entity, it creates it.'
       operationId: patch_reference_entity_records
@@ -18149,6 +18351,10 @@ paths:
                     - channel: null
                       data: italy
                       locale: null
+                  creation_year:
+                    - channel: null
+                      data: '1949'
+                      locale: null
                   description:
                     - channel: null
                       data: 'Kartell, the Italian furniture company that sells modern and remarkable pieces of furnitures.'
@@ -18170,6 +18376,10 @@ paths:
                     - channel: null
                       data: france
                       locale: null
+                  creation_year:
+                    - channel: null
+                      data: '1860'
+                      locale: null
                   description:
                     - channel: null
                       data: Very well known French brand of modern and luxury furniture
@@ -18190,6 +18400,10 @@ paths:
                   country:
                     - channel: null
                       data: switzerland
+                      locale: null
+                  creation_year:
+                    - channel: null
+                      data: '1885'
                       locale: null
                   description:
                     - channel: null
@@ -18217,6 +18431,10 @@ paths:
                   country:
                     - channel: null
                       data: italy
+                      locale: null
+                  creation_year:
+                    - channel: null
+                      data: '1949'
                       locale: null
                   description:
                     - channel: null
@@ -18340,6 +18558,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
   '/api/rest/v1/reference-entities/{reference_entity_code}/records/{code}':
     get:
       description: This endpoint allows you to get the information about a given record for a given reference entity.
@@ -18369,6 +18588,10 @@ paths:
                 country:
                   - channel: null
                     data: italy
+                    locale: null
+                creation_year:
+                  - channel: null
+                    data: '1949'
                     locale: null
                 description:
                   - channel: null
@@ -18465,6 +18688,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
     patch:
       description: 'This endpoint allows you to update a given record of a given renference entity. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the record does not already exist for the given reference entity, it creates it.'
       operationId: patch_reference_entity_records__code_
@@ -18493,6 +18717,10 @@ paths:
                 country:
                   - channel: null
                     data: italy
+                    locale: null
+                creation_year:
+                  - channel: null
+                    data: '1949'
                     locale: null
                 description:
                   - channel: null
@@ -18606,6 +18834,7 @@ paths:
       x-versions:
         - '3.0'
         - '3.1'
+        - '3.2'
 definitions:
   Asset:
     example:
@@ -19187,7 +19416,7 @@ definitions:
       decimals_allowed:
         description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
         type: boolean
-        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
       default_metric_unit:
         description: Default metric unit when the attribute type is `pim_catalog_metric`
         type: string
@@ -19230,13 +19459,13 @@ definitions:
         type: boolean
         x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
       number_max:
-        description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+        description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
         type: string
-        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
       number_min:
         description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
         type: string
-        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+        x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
       reference_data_name:
         description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
         type: string
@@ -19266,7 +19495,7 @@ definitions:
           - pim_catalog_text
           - pim_catalog_file
           - pim_catalog_image
-          - pim_catalog_price
+          - pim_catalog_price_collection
           - pim_catalog_boolean
           - akeneo_reference_entity
           - akeneo_reference_entity_collection
@@ -19472,7 +19701,7 @@ definitions:
           decimals_allowed:
             description: 'Whether decimals are allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
             type: boolean
-            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
           default_metric_unit:
             description: Default metric unit when the attribute type is `pim_catalog_metric`
             type: string
@@ -19515,13 +19744,13 @@ definitions:
             type: boolean
             x-warning: Only for `pim_catalog_metric` or `pim_catalog_number` attribute types
           number_max:
-            description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
+            description: 'Maximum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
             type: string
-            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
           number_min:
             description: 'Minimum integer value allowed when the attribute type is `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number`'
             type: string
-            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price` or `pim_catalog_number` attribute types'
+            x-warning: 'Only for `pim_catalog_metric`, `pim_catalog_price_collection` or `pim_catalog_number` attribute types'
           reference_data_name:
             description: Reference entity code when the attribute type is `akeneo_reference_entity` or `akeneo_reference_entity_collection`
             type: string
@@ -19551,7 +19780,7 @@ definitions:
               - pim_catalog_text
               - pim_catalog_file
               - pim_catalog_image
-              - pim_catalog_price
+              - pim_catalog_price_collection
               - pim_catalog_boolean
               - akeneo_reference_entity
               - akeneo_reference_entity_collection
@@ -20885,6 +21114,7 @@ definitions:
         - summer_collection
       code: model-biker-jacket-leather
       created: '2017-10-02T15:03:55+02:00'
+      family: clothing
       family_variant: clothing_material_size
       parent: model-biker-jacket
       updated: '2017-10-02T15:03:55+02:00'
@@ -20932,11 +21162,16 @@ definitions:
         type: string
         x-immutable: true
         x-read-only: true
+      family:
+        description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+        type: string
+        x-immutable: true
+        x-validation-rules: It is equal to an existing family code
       family_variant:
         description: Family variant code from which the product model inherits its attributes and variant attributes
         type: string
         x-immutable: true
-        x-validation-rules: It is equal to an existing family variant code
+        x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
       metadata:
         description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
         properties:
@@ -21002,6 +21237,7 @@ definitions:
             - summer_collection
           code: model-biker-jacket-leather
           created: '2017-10-02T15:03:55+02:00'
+          family: clothing
           family_variant: clothing_material_size
           parent: model-biker-jacket
           updated: '2017-10-02T15:03:55+02:00'
@@ -21049,11 +21285,16 @@ definitions:
             type: string
             x-immutable: true
             x-read-only: true
+          family:
+            description: Family code  from which the product inherits its attributes and attributes requirements (since the 3.2)
+            type: string
+            x-immutable: true
+            x-validation-rules: It is equal to an existing family code
           family_variant:
             description: Family variant code from which the product model inherits its attributes and variant attributes
             type: string
             x-immutable: true
-            x-validation-rules: It is equal to an existing family variant code
+            x-validation-rules: It is equal to an existing family variant code that belong to the family given in the `family` field
           metadata:
             description: More information around the product model (only available since the v2.3 in the Enterprise Edition)
             properties:
@@ -21462,6 +21703,11 @@ definitions:
         description: Attribute code
         type: string
         x-immutable: true
+      decimals_allowed:
+        default: false
+        description: Whether decimals are allowed when the attribute type is `number`
+        type: boolean
+        x-warning: Only for `number` attribute type
       is_required_for_completeness:
         default: false
         description: Whether the attribute should be part of the record's completeness calculation
@@ -21493,6 +21739,16 @@ definitions:
         description: Max file size in MB when the attribute type is `image`
         type: string
         x-warning: Only for `image` attribute type
+      max_value:
+        description: Maximum value allowed when the attribute type is `number`
+        type: string
+        x-validation-rules: The maximum value must be greater than the minimum value
+        x-warning: Only for `number` attribute type
+      min_value:
+        description: Minimum value allowed when the attribute type is `number`
+        type: string
+        x-validation-rules: The minimum value must be lower than the maximum value
+        x-warning: Only for `number` attribute type
       reference_entity_code:
         description: Code of the linked reference entity when the attribute type is `reference_entity_single_link` or `reference_entity_multiple_links`
         type: string
@@ -21504,6 +21760,7 @@ definitions:
         enum:
           - text
           - image
+          - number
           - single_option
           - multiple_options
           - reference_entity_single_link
@@ -21567,6 +21824,11 @@ definitions:
           description: Attribute code
           type: string
           x-immutable: true
+        decimals_allowed:
+          default: false
+          description: Whether decimals are allowed when the attribute type is `number`
+          type: boolean
+          x-warning: Only for `number` attribute type
         is_required_for_completeness:
           default: false
           description: Whether the attribute should be part of the record's completeness calculation
@@ -21598,6 +21860,16 @@ definitions:
           description: Max file size in MB when the attribute type is `image`
           type: string
           x-warning: Only for `image` attribute type
+        max_value:
+          description: Maximum value allowed when the attribute type is `number`
+          type: string
+          x-validation-rules: The maximum value must be greater than the minimum value
+          x-warning: Only for `number` attribute type
+        min_value:
+          description: Minimum value allowed when the attribute type is `number`
+          type: string
+          x-validation-rules: The minimum value must be lower than the maximum value
+          x-warning: Only for `number` attribute type
         reference_entity_code:
           description: Code of the linked reference entity when the attribute type is `reference_entity_single_link` or `reference_entity_multiple_links`
           type: string
@@ -21609,6 +21881,7 @@ definitions:
           enum:
             - text
             - image
+            - number
             - single_option
             - multiple_options
             - reference_entity_single_link
@@ -21769,6 +22042,10 @@ definitions:
           - channel: null
             data: italy
             locale: null
+        creation_year:
+          - channel: null
+            data: '1949'
+            locale: null
         description:
           - channel: null
             data: 'Kartell, the Italian furniture company that sells modern and remarkable pieces of furnitures.'
@@ -21846,6 +22123,10 @@ definitions:
             country:
               - channel: null
                 data: italy
+                locale: null
+            creation_year:
+              - channel: null
+                data: '1949'
                 locale: null
             description:
               - channel: null

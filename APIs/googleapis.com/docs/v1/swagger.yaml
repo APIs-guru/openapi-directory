@@ -809,12 +809,20 @@ definitions:
     properties:
       background:
         $ref: '#/definitions/Background'
-        description: The background of the document.
+        description: |-
+          The background of the document. Documents cannot have a transparent
+          background color.
       defaultFooterId:
-        description: 'The ID of the default footer. If not set, there is no default footer.'
+        description: |-
+          The ID of the default footer. If not set, there is no default footer.
+
+          This property is read-only.
         type: string
       defaultHeaderId:
-        description: 'The ID of the default header. If not set, there is no default header.'
+        description: |-
+          The ID of the default header. If not set, there is no default header.
+
+          This property is read-only.
         type: string
       evenPageFooterId:
         description: |-
@@ -822,6 +830,8 @@ definitions:
           use_even_page_header_footer determines
           whether to use the default_footer_id or this value for the
           footer on even pages. If not set, there is no even page footer.
+
+          This property is read-only.
         type: string
       evenPageHeaderId:
         description: |-
@@ -829,6 +839,8 @@ definitions:
           use_even_page_header_footer determines
           whether to use the default_header_id or this value for the
           header on even pages. If not set, there is no even page header.
+
+          This property is read-only.
         type: string
       firstPageFooterId:
         description: |-
@@ -837,6 +849,8 @@ definitions:
           use_first_page_header_footer determines
           whether to use the default_footer_id or this value for the
           footer on the first page. If not set, there is no first page footer.
+
+          This property is read-only.
         type: string
       firstPageHeaderId:
         description: |-
@@ -845,19 +859,39 @@ definitions:
           The value of use_first_page_header_footer determines
           whether to use the default_header_id or this value for the
           header on the first page. If not set, there is no first page header.
+
+          This property is read-only.
         type: string
       marginBottom:
         $ref: '#/definitions/Dimension'
-        description: The bottom page margin.
+        description: |-
+          The bottom page margin.
+
+          Updating the bottom page margin on the document style clears the bottom
+          page margin on all section styles.
       marginLeft:
         $ref: '#/definitions/Dimension'
-        description: The left page margin.
+        description: |-
+          The left page margin.
+
+          Updating the left page margin on the document style clears the left page
+          margin on all section styles. It may also cause columns to resize in all
+          sections.
       marginRight:
         $ref: '#/definitions/Dimension'
-        description: The right page margin.
+        description: |-
+          The right page margin.
+
+          Updating the right page margin on the document style clears the right page
+          margin on all section styles. It may also cause columns to resize in all
+          sections.
       marginTop:
         $ref: '#/definitions/Dimension'
-        description: The top page margin.
+        description: |-
+          The top page margin.
+
+          Updating the top page margin on the document style clears the top page
+          margin on all section styles.
       pageNumberStart:
         description: The page number from which to start counting the number of pages.
         format: int32
@@ -869,11 +903,15 @@ definitions:
         description: |-
           Indicates whether to use the even page header / footer IDs for the even
           pages.
+
+          This property is read-only.
         type: boolean
       useFirstPageHeaderFooter:
         description: |-
           Indicates whether to use the first page header / footer IDs for the first
           page.
+
+          This property is read-only.
         type: boolean
     type: object
   DocumentStyleSuggestionState:
@@ -1707,6 +1745,23 @@ definitions:
           segment ID signifies the document's body.
         type: string
     type: object
+  MergeTableCellsRequest:
+    description: Merges cells in a Table.
+    properties:
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range specifying which cells of the table to merge.
+
+          Any text in the cells being merged will be concatenated and stored in the
+          "head" cell of the range. This is the upper-left cell of the range when
+          the content direction is left to right, and the upper-right cell of the
+          range otherwise.
+
+          If the range is non-rectangular (which can occur in some cases where the
+          range covers cells that are already merged or where the table is
+          non-rectangular), a 400 bad request error is returned.
+    type: object
   NamedRange:
     description: |-
       A collection of Ranges with the same named range
@@ -2257,7 +2312,9 @@ definitions:
       headingId:
         description: |-
           The heading ID of the paragraph. If empty, then this paragraph is not a
-          heading. This property is read-only.
+          heading.
+
+          This property is read-only.
         type: string
       indentEnd:
         $ref: '#/definitions/Dimension'
@@ -2337,7 +2394,9 @@ definitions:
       tabStops:
         description: |-
           A list of the tab stops for this paragraph. The list of tab stops is not
-          inherited. This property is read-only.
+          inherited.
+
+          This property is read-only.
         items:
           $ref: '#/definitions/TabStop'
         type: array
@@ -2564,6 +2623,34 @@ definitions:
         format: int32
         type: integer
     type: object
+  ReplaceImageRequest:
+    description: |-
+      Replaces an existing image with a new image.
+
+      Replacing an image removes some image effects from the existing image in order to
+      mirror the behavior of the Docs editor.
+    properties:
+      imageObjectId:
+        description: The ID of the existing image that will be replaced.
+        type: string
+      imageReplaceMethod:
+        description: The replacement method.
+        enum:
+          - IMAGE_REPLACE_METHOD_UNSPECIFIED
+          - CENTER_CROP
+        type: string
+      uri:
+        description: |-
+          The URI of the new image.
+
+          The image is fetched once at insertion time and a copy is stored for
+          display inside the document. Images must be less than 50MB in size, cannot
+          exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.
+
+          The provided URI can be at most 2 kB in length. The URI itself is saved
+          with the image, and exposed via the ImageProperties.source_uri field.
+        type: string
+    type: object
   Request:
     description: A single update to apply to a document.
     properties:
@@ -2609,9 +2696,21 @@ definitions:
       insertText:
         $ref: '#/definitions/InsertTextRequest'
         description: Inserts text at the specified location.
+      mergeTableCells:
+        $ref: '#/definitions/MergeTableCellsRequest'
+        description: Merges cells in a table.
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextRequest'
         description: Replaces all instances of the specified text.
+      replaceImage:
+        $ref: '#/definitions/ReplaceImageRequest'
+        description: Replaces an image in the document.
+      unmergeTableCells:
+        $ref: '#/definitions/UnmergeTableCellsRequest'
+        description: Unmerges cells in a table.
+      updateDocumentStyle:
+        $ref: '#/definitions/UpdateDocumentStyleRequest'
+        description: Updates the style of the document.
       updateParagraphStyle:
         $ref: '#/definitions/UpdateParagraphStyleRequest'
         description: Updates the paragraph style at the specified range.
@@ -3088,11 +3187,18 @@ definitions:
         description: The style of the cell.
     type: object
   TableCellBorder:
-    description: A border around a table cell.
+    description: |-
+      A border around a table cell.
+
+      Table cell borders cannot be transparent. To hide a table cell border, make
+      its width 0.
     properties:
       color:
         $ref: '#/definitions/OptionalColor'
-        description: The color of the border.
+        description: |-
+          The color of the border.
+
+          This color cannot be transparent.
       dashStyle:
         description: The dash style of the border.
         enum:
@@ -3147,7 +3253,10 @@ definitions:
         $ref: '#/definitions/TableCellBorder'
         description: The top border of the cell.
       columnSpan:
-        description: The column span of the cell. This property is read-only.
+        description: |-
+          The column span of the cell.
+
+          This property is read-only.
         format: int32
         type: integer
       contentAlignment:
@@ -3174,7 +3283,10 @@ definitions:
         $ref: '#/definitions/Dimension'
         description: The top padding of the cell.
       rowSpan:
-        description: The row span of the cell. This property is read-only.
+        description: |-
+          The row span of the cell.
+
+          This property is read-only.
         format: int32
         type: integer
     type: object
@@ -3542,6 +3654,45 @@ definitions:
         description: Indicates if there was a suggested change to weighted_font_family.
         type: boolean
     type: object
+  UnmergeTableCellsRequest:
+    description: Unmerges cells in a Table.
+    properties:
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range specifying which cells of the table to unmerge.
+
+          All merged cells in this range will be unmerged, and cells that are already
+          unmerged will not be affected. If the range has no merged cells, the
+          request will do nothing.
+
+          If there is text in any of the merged cells, the text will remain in the
+          "head" cell of the resulting block of unmerged cells. The "head" cell is
+          the upper-left cell when the content direction is from left to right, and
+          the upper-right otherwise.
+    type: object
+  UpdateDocumentStyleRequest:
+    description: Updates the DocumentStyle.
+    properties:
+      documentStyle:
+        $ref: '#/definitions/DocumentStyle'
+        description: |-
+          The styles to set on the document.
+
+          Certain document style changes may cause other changes in order to mirror
+          the behavior of the Docs editor. See the documentation of DocumentStyle for more information.
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `document_style` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the background, set `fields` to `"background"`.
+        format: google-fieldmask
+        type: string
+    type: object
   UpdateParagraphStyleRequest:
     description: Update the styling of all paragraphs that overlap with the given range.
     properties:
@@ -3710,6 +3861,8 @@ definitions:
 
           If the range fully contains a paragraph belonging to a list, the
           paragraph's bullet is also updated with the matching text style.
+
+          Ranges cannot be inserted inside a relative UpdateTextStyleRequest.
       textStyle:
         $ref: '#/definitions/TextStyle'
         description: |-

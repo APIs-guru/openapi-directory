@@ -79,7 +79,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to PostgreSQL server
         properties:
           databaseName:
@@ -113,7 +112,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to PostgreSQL server
         properties:
           databaseName:

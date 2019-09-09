@@ -132,12 +132,8 @@ paths:
             associationName: healthSystemMachineConfigAssociation
             resourceUri: subscriptions/8498f01b-8064-4e37-856e-318f3c6c685f/resourceGroups/healthsystem/providers/Microsoft.Compute/virtualMachines/eastussojai
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Gets guest diagnostics association settings.
       operationId: GuestDiagnosticsSettingsAssociation_Get

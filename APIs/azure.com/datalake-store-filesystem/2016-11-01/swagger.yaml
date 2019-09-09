@@ -773,14 +773,15 @@ x-ms-paths:
             tooId: false
           responses:
             '200':
-              AclStatus:
-                entries:
-                  - test_entry_1
-                  - test_entry_2
-                group: test_group
-                owner: test_owner
-                permission: '1'
-                stickyBit: false
+              body:
+                aclStatus:
+                  entries:
+                    - test_entry_1
+                    - test_entry_2
+                  group: test_group
+                  owner: test_owner
+                  permission: '1'
+                  stickyBit: false
   '/webhdfs/v1/{path}?op=GETCONTENTSUMMARY':
     get:
       description: Gets the file content summary object specified by the file path.

@@ -64,6 +64,113 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices':
+    get:
+      description: List blob services of storage account. It returns a collection of one object named default.
+      operationId: BlobServices_List
+      parameters:
+        - description: The name of the resource group within the user's subscription. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: accountName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The API version to use for this operation.
+          in: query
+          minLength: 1
+          name: api-version
+          required: true
+          type: string
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK -- List blob services operation completed successfully.
+          schema:
+            $ref: '#/definitions/BlobServiceItems'
+      tags:
+        - BlobService
+      x-ms-examples:
+        ListBlobServices:
+          parameters:
+            accountName: sto8607
+            api-version: '2019-04-01'
+            monitor: 'true'
+            resourceGroupName: res4410
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/blobServices/default'
+                    name: default
+                    properties:
+                      automaticSnapshotPolicyEnabled: true
+                      changeFeed:
+                        enabled: true
+                      cors:
+                        corsRules:
+                          - allowedHeaders:
+                              - x-ms-meta-abc
+                              - x-ms-meta-data*
+                              - x-ms-meta-target*
+                            allowedMethods:
+                              - GET
+                              - HEAD
+                              - POST
+                              - OPTIONS
+                              - MERGE
+                              - PUT
+                            allowedOrigins:
+                              - 'http://www.contoso.com'
+                              - 'http://www.fabrikam.com'
+                            exposedHeaders:
+                              - x-ms-meta-*
+                            maxAgeInSeconds: 100
+                          - allowedHeaders:
+                              - '*'
+                            allowedMethods:
+                              - GET
+                            allowedOrigins:
+                              - '*'
+                            exposedHeaders:
+                              - '*'
+                            maxAgeInSeconds: 2
+                          - allowedHeaders:
+                              - x-ms-meta-12345675754564*
+                            allowedMethods:
+                              - GET
+                              - PUT
+                            allowedOrigins:
+                              - 'http://www.abc23.com'
+                              - 'https://www.fabrikam.com/*'
+                            exposedHeaders:
+                              - x-ms-meta-abc
+                              - x-ms-meta-data*
+                              - x -ms-meta-target*
+                            maxAgeInSeconds: 2000
+                      defaultServiceVersion: '2017-07-29'
+                      deleteRetentionPolicy:
+                        days: 300
+                        enabled: true
+                    type: Microsoft.Storage/storageAccounts/blobServices
+      x-ms-pageable:
+        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers':
     get:
       description: Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
@@ -1106,6 +1213,8 @@ paths:
                 name: default
                 properties:
                   automaticSnapshotPolicyEnabled: true
+                  changeFeed:
+                    enabled: true
                   cors:
                     corsRules:
                       - allowedHeaders:
@@ -1209,6 +1318,8 @@ paths:
             parameters:
               properties:
                 automaticSnapshotPolicyEnabled: true
+                changeFeed:
+                  enabled: true
                 cors:
                   corsRules:
                     - allowedHeaders:
@@ -1263,6 +1374,8 @@ paths:
                 name: default
                 properties:
                   automaticSnapshotPolicyEnabled: true
+                  changeFeed:
+                    enabled: true
                   cors:
                     corsRules:
                       - allowedHeaders:
@@ -1341,6 +1454,14 @@ definitions:
         description: Properties of the blob container.
         x-ms-client-flatten: true
         x-ms-client-name: ContainerProperties
+  BlobServiceItems:
+    properties:
+      value:
+        description: List of blob services returned.
+        items:
+          $ref: '#/definitions/BlobServiceProperties'
+        readOnly: true
+        type: array
   BlobServiceProperties:
     allOf:
       - properties:
@@ -1365,6 +1486,9 @@ definitions:
           automaticSnapshotPolicyEnabled:
             description: Automatic Snapshot is enabled if set to true.
             type: boolean
+          changeFeed:
+            $ref: '#/definitions/ChangeFeed'
+            description: The blob service properties for change feed events.
           cors:
             $ref: '#/definitions/CorsRules'
             description: 'Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service.'
@@ -1376,6 +1500,12 @@ definitions:
             description: The blob service properties for soft delete.
         x-ms-client-flatten: true
         x-ms-client-name: BlobServiceProperties
+  ChangeFeed:
+    description: The blob service properties for change feed events.
+    properties:
+      enabled:
+        description: Indicates whether change feed event logging is enabled for the Blob service.
+        type: boolean
   ContainerProperties:
     description: The properties of a container.
     properties:

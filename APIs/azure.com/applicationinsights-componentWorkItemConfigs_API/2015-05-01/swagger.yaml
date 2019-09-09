@@ -242,7 +242,6 @@ paths:
       responses:
         '200':
           description: The work item configuration that was successfully deleted.
-          schema: {}
       x-ms-examples:
         WorkItemConfigurationDelete:
           parameters:
@@ -252,8 +251,7 @@ paths:
             subscriptionId: subid
             workItemConfigId: Visual Studio Team Services
           responses:
-            '200':
-              body: {}
+            '200': {}
     get:
       description: Gets specified work item configuration for an Application Insights component.
       operationId: WorkItemConfigurations_GetItem

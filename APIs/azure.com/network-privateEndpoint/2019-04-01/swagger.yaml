@@ -97,7 +97,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateEndpointListResult'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -274,7 +274,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateEndpointListResult'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -394,7 +394,7 @@ paths:
         '204':
           description: Delete successful.
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -476,7 +476,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateEndpoint'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -584,7 +584,7 @@ paths:
           name: privateEndpointName
           required: true
           type: string
-        - description: Parameters supplied to the create or update private endpoint operation
+        - description: Parameters supplied to the create or update private endpoint operation.
           in: body
           name: parameters
           required: true
@@ -610,7 +610,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateEndpoint'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -823,7 +823,7 @@ definitions:
     description: Private endpoint resource.
     properties:
       etag:
-        description: Gets a unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is updated.
         type: string
       properties:
         $ref: '#/definitions/PrivateEndpointProperties'
@@ -856,6 +856,10 @@ definitions:
               x-ms-azure-resource: true
           description: PrivateLinkServiceConnection resource.
           properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is updated.
+              readOnly: true
+              type: string
             name:
               description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
               type: string
@@ -882,9 +886,25 @@ definitions:
                 privateLinkServiceId:
                   description: The resource id of private link service.
                   type: string
+                provisioningState:
+                  description: The current provisioning state.
+                  enum:
+                    - Succeeded
+                    - Updating
+                    - Deleting
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ProvisioningState
                 requestMessage:
                   description: A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
                   type: string
+            type:
+              description: The resource type.
+              readOnly: true
+              type: string
         type: array
       networkInterfaces:
         description: Gets an array of references to the network interfaces created for this private endpoint.
@@ -904,6 +924,10 @@ definitions:
               x-ms-azure-resource: true
           description: PrivateLinkServiceConnection resource.
           properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is updated.
+              readOnly: true
+              type: string
             name:
               description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
               type: string
@@ -930,14 +954,38 @@ definitions:
                 privateLinkServiceId:
                   description: The resource id of private link service.
                   type: string
+                provisioningState:
+                  description: The current provisioning state.
+                  enum:
+                    - Succeeded
+                    - Updating
+                    - Deleting
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ProvisioningState
                 requestMessage:
                   description: A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
                   type: string
+            type:
+              description: The resource type.
+              readOnly: true
+              type: string
         type: array
       provisioningState:
-        description: 'The provisioning state of the private endpoint. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
         readOnly: true
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       subnet:
         $ref: './virtualNetwork.json#/definitions/Subnet'
         description: The ID of the subnet from which the private IP will be allocated.
@@ -951,6 +999,10 @@ definitions:
         x-ms-azure-resource: true
     description: PrivateLinkServiceConnection resource.
     properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        readOnly: true
+        type: string
       name:
         description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
         type: string
@@ -977,9 +1029,25 @@ definitions:
           privateLinkServiceId:
             description: The resource id of private link service.
             type: string
+          provisioningState:
+            description: The current provisioning state.
+            enum:
+              - Succeeded
+              - Updating
+              - Deleting
+              - Failed
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: ProvisioningState
           requestMessage:
             description: A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
             type: string
+      type:
+        description: The resource type.
+        readOnly: true
+        type: string
   PrivateLinkServiceConnectionProperties:
     description: Properties of the PrivateLinkServiceConnection.
     properties:
@@ -1003,6 +1071,18 @@ definitions:
       privateLinkServiceId:
         description: The resource id of private link service.
         type: string
+      provisioningState:
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       requestMessage:
         description: A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
         type: string

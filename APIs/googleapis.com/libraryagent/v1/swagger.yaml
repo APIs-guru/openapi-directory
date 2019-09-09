@@ -164,7 +164,7 @@ paths:
       description: Gets a book. Returns NOT_FOUND if the book does not exist.
       operationId: libraryagent.shelves.books.get
       parameters:
-        - description: The name of the book to retrieve.
+        - description: Required. The name of the book to retrieve.
           in: path
           name: name
           required: true
@@ -215,7 +215,7 @@ paths:
         allocation quota in any dimensions.
       operationId: libraryagent.shelves.books.borrow
       parameters:
-        - description: The name of the book to borrow.
+        - description: Required. The name of the book to borrow.
           in: path
           name: name
           required: true
@@ -254,7 +254,7 @@ paths:
         or the users didn't borrow before.
       operationId: libraryagent.shelves.books.return
       parameters:
-        - description: The name of the book to return.
+        - description: Required. The name of the book to return.
           in: path
           name: name
           required: true
@@ -294,7 +294,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: The name of the shelf whose books we'd like to list.
+        - description: Required. The name of the shelf whose books we'd like to list.
           in: path
           name: parent
           required: true

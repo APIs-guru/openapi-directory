@@ -591,16 +591,17 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2
-              name: testprop2
-              properties:
-                displayName: prop3name
-                secret: true
-                tags:
-                  - foo
-                  - bar
-                value: propValue
-              type: Microsoft.ApiManagement/service/properties
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2
+                name: testprop2
+                properties:
+                  displayName: prop3name
+                  secret: true
+                  tags:
+                    - foo
+                    - bar
+                  value: propValue
+                type: Microsoft.ApiManagement/service/properties
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2

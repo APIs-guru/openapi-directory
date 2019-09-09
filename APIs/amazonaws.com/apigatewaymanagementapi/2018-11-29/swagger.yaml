@@ -1,168 +1,103 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: execute-api.amazonaws.com
+basePath: /
 info:
-  version: '2018-11-29'
-  x-release: v4
-  title: AmazonApiGatewayManagementApi
-  description: 'The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK''s endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or will be the endpoint corresponding to your API''s custom domain and base path, if applicable.'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: 'The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK''s endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or will be the endpoint corresponding to your API''s custom domain and base path, if applicable.'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: apigatewaymanagementapi
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/apigatewaymanagementapi-2018-11-29.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AmazonApiGatewayManagementApi
+  version: '2018-11-29'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/apigatewaymanagementapi-2018-11-29.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: apigatewaymanagementapi
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/execute-api/'
-host: execute-api.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://execute-api.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AmazonApiGatewayManagementApi multi-region endpoint
-  - url: 'https://execute-api.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AmazonApiGatewayManagementApi multi-region endpoint
-  - url: 'http://execute-api.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AmazonApiGatewayManagementApi endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://execute-api.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AmazonApiGatewayManagementApi endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/@connections/{connectionId}':
     delete:
-      operationId: DeleteConnection
       description: Delete the connection with the provided id.
+      operationId: DeleteConnection
+      parameters:
+        - description: ''
+          in: path
+          name: connectionId
+          required: true
+          type: string
       responses:
         '204':
           description: Success
@@ -178,23 +113,15 @@ paths:
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-      parameters:
-        - name: connectionId
-          in: path
-          required: true
-          description: ''
-          type: string
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
-      operationId: GetConnection
       description: Get information about the connection with the provided id.
+      operationId: GetConnection
+      parameters:
+        - description: ''
+          in: path
+          name: connectionId
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -212,15 +139,35 @@ paths:
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-      parameters:
-        - name: connectionId
-          in: path
-          required: true
-          description: ''
-          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: PostToConnection
       description: Sends the provided data to the specified connection.
+      operationId: PostToConnection
+      parameters:
+        - description: The identifier of the connection that a specific client is using.
+          in: path
+          name: connectionId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              Data:
+                description: The data to be sent to the client specified by its connection id.
+                maxLength: 131072
+                type: string
+            required:
+              - Data
+            type: object
       responses:
         '200':
           description: Success
@@ -240,30 +187,19 @@ paths:
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-      parameters:
-        - name: connectionId
-          in: path
-          required: true
-          description: The identifier of the connection that a specific client is using.
-          type: string
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - Data
-            properties:
-              Data:
-                description: The data to be sent to the client specified by its connection id.
-                type: string
-                maxLength: 131072
 definitions:
-  GoneException: {}
-  LimitExceededException: {}
-  ForbiddenException: {}
-  GetConnectionResponse:
+  Data:
+    description: The data to be sent to the client specified by its connection id.
+    maxLength: 131072
+    type: string
+  DeleteConnectionRequest:
+    properties: {}
     type: object
+  ForbiddenException: {}
+  GetConnectionRequest:
+    properties: {}
+    type: object
+  GetConnectionResponse:
     properties:
       ConnectedAt:
         $ref: '#/definitions/__timestampIso8601'
@@ -273,27 +209,9 @@ definitions:
       LastActiveAt:
         $ref: '#/definitions/__timestampIso8601'
         description: The time in ISO 8601 format for when the connection was last active.
-  PayloadTooLargeException: {}
-  Data:
-    type: string
-    description: The data to be sent to the client specified by its connection id.
-    maxLength: 131072
-  __string:
-    type: string
-  DeleteConnectionRequest:
     type: object
-    properties: {}
-  GetConnectionRequest:
-    type: object
-    properties: {}
-  __timestampIso8601:
-    type: string
-    format: date-time
+  GoneException: {}
   Identity:
-    type: object
-    required:
-      - SourceIp
-      - UserAgent
     properties:
       SourceIp:
         $ref: '#/definitions/__string'
@@ -301,11 +219,93 @@ definitions:
       UserAgent:
         $ref: '#/definitions/__string'
         description: The User Agent of the API caller.
-  PostToConnectionRequest:
-    type: object
     required:
-      - Data
+      - SourceIp
+      - UserAgent
+    type: object
+  LimitExceededException: {}
+  PayloadTooLargeException: {}
+  PostToConnectionRequest:
     properties:
       Data:
         $ref: '#/definitions/Data'
         description: The data to be sent to the client specified by its connection id.
+    required:
+      - Data
+    type: object
+  __string:
+    type: string
+  __timestampIso8601:
+    format: date-time
+    type: string
+x-servers:
+  - description: The AmazonApiGatewayManagementApi multi-region endpoint
+    url: 'http://execute-api.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AmazonApiGatewayManagementApi multi-region endpoint
+    url: 'https://execute-api.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AmazonApiGatewayManagementApi endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://execute-api.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AmazonApiGatewayManagementApi endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://execute-api.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

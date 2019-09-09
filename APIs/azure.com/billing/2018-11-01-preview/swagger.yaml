@@ -58,7 +58,7 @@ parameters:
     required: true
     type: string
   billingAccountNameParameter:
-    description: billing Account Id.
+    description: Billing Account Id.
     in: path
     name: billingAccountName
     required: true
@@ -89,6 +89,13 @@ parameters:
     description: Billing Subscription Id.
     in: path
     name: billingSubscriptionName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  customerNameParameter:
+    description: Customer Id.
+    in: path
+    name: customerName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -143,7 +150,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   subscriptionIdParameter:
-    description: Azure Subscription ID.
+    description: Azure Subscription Id.
     in: path
     name: subscriptionId
     required: true
@@ -166,7 +173,7 @@ parameters:
 paths:
   /providers/Microsoft.Billing/billingAccounts:
     get:
-      description: Lists all billing accounts for a user which he has access to.
+      description: Lists all billing accounts for which a user has access.
       operationId: BillingAccounts_List
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -480,6 +487,8 @@ paths:
                         startDate: '2018-05-01T17:32:28Z'
                         status: Active
                     type: Microsoft.Billing/billingAccounts
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}':
     get:
       description: Get the billing account by id.
@@ -747,6 +756,8 @@ paths:
                           statusDate: '2018-11-01T00:00:00Z'
                       status: PendingSignature
                     type: Microsoft.Billing/agreements
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}':
     get:
       description: Get the agreement by name.
@@ -879,6 +890,8 @@ paths:
                       isClassic: false
                       poNumber: ABC12345
                     type: Microsoft.Billing/billingProfiles
+      x-ms-pageable:
+        nextLinkName: nextLink
     post:
       description: The operation to create a BillingProfile.
       operationId: BillingProfiles_Create
@@ -1225,9 +1238,11 @@ paths:
                       subscriptionBillingStatus: Active
                       subscriptionId: 6b96d3f2-4a9d-9008-912f-f87744185aa3
                     type: Microsoft.Billing/billingSubscriptions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections':
     get:
-      description: Lists all invoice sections under a billing profile for a user which he has access to.
+      description: Lists all invoice sections under a billing profile for which a user has access.
       operationId: InvoiceSections_ListByBillingProfileName
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -1264,6 +1279,8 @@ paths:
                     properties:
                       displayName: invoiceSection2
                     type: Microsoft.Billing/invoiceSections
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices':
     get:
       description: List of invoices for a billing profile.
@@ -1368,6 +1385,8 @@ paths:
                       purchaseOrderNumber: '123456'
                       status: PastDue
                     type: Microsoft.Billing/invoices
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}':
     get:
       description: Get the invoice by name.
@@ -1458,21 +1477,22 @@ paths:
             billingProfileName: '{billingProfileName}'
           responses:
             '200':
-              value:
-                - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethods/00000000-0000-0000-0000-000000000055'
-                  name: 00000000-0000-0000-0000-000000000055
-                  properties:
-                    currency: USD
-                    details: Credits
-                    expiration: 4/2020
-                    paymentMethodType: Credits
-                  type: Microsoft.Billing/paymentMethods
-                - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethods/00000000-0000-0000-0000-000000000026'
-                  name: 00000000-0000-0000-0000-000000000026
-                  properties:
-                    details: Check Wire
-                    paymentMethodType: CheckWire
-                  type: Microsoft.Billing/paymentMethods
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethods/00000000-0000-0000-0000-000000000055'
+                    name: 00000000-0000-0000-0000-000000000055
+                    properties:
+                      currency: USD
+                      details: Credits
+                      expiration: '2014-03-18T18:25:43.511Z'
+                      paymentMethodType: Credits
+                    type: Microsoft.Billing/paymentMethods
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethods/00000000-0000-0000-0000-000000000026'
+                    name: 00000000-0000-0000-0000-000000000026
+                    properties:
+                      details: Check Wire
+                      paymentMethodType: CheckWire
+                    type: Microsoft.Billing/paymentMethods
       x-ms-pageable:
         nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default':
@@ -2097,6 +2117,8 @@ paths:
                         value: 50
                       transactionType: Cancel
                     type: Microsoft.Billing/transactions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions':
     get:
       description: Lists billing subscriptions by billing account name.
@@ -2185,9 +2207,415 @@ paths:
                     type: Microsoft.Billing/billingSubscriptions
       x-ms-pageable:
         nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers':
+    get:
+      description: Lists all customers which the current user can work with on-behalf of a partner.
+      operationId: Customers_ListByBillingAccountName
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - description: 'May be used to filter using hasPermission(''{permissionId}'') to only return customers for which the caller has the specified permission.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.'
+          in: query
+          name: $skiptoken
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/CustomerListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Customers
+      x-ms-examples:
+        CustomersListByBillingAccountName:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/22000000-0000-0000-0000-000000000000'
+                    name: 22000000-0000-0000-0000-000000000000
+                    properties:
+                      displayName: customer1
+                    type: Microsoft.Billing/customers
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/22000000-0000-0000-0000-000000000011'
+                    name: 22000000-0000-0000-0000-000000000011
+                    properties:
+                      displayName: customer2
+                    type: Microsoft.Billing/customers
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}':
+    get:
+      description: Get the customer by id.
+      operationId: Customers_Get
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/customerNameParameter'
+        - description: 'May be used to expand enabledAzureSkus, resellers.'
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Customer'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Customers
+      x-ms-examples:
+        Customer:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+          responses:
+            '200':
+              body:
+                id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                name: '{customerName}'
+                properties:
+                  displayName: customer1
+                type: Microsoft.Billing/customers
+        CustomerWithExpand:
+          parameters:
+            $expand: 'enabledAzureSkus,resellers'
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+          responses:
+            '200':
+              body:
+                id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                name: '{customerName}'
+                properties:
+                  displayName: customerName1
+                  enabledAzureSKUs:
+                    - skuDescription: Microsoft Azure Standard
+                      skuId: '0002'
+                  resellers:
+                    - description: Reseller1
+                      resellerId: 89e87bdf-a2a2-4687-925f-4c18b27bccfd
+                    - description: Reseller2
+                      resellerId: 3b65b5a8-bd4f-4084-90e9-e1bd667a2b19
+                type: Microsoft.Billing/customers
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions':
+    get:
+      description: Lists billing subscription by customer name.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
+      operationId: BillingSubscriptions_ListByCustomerName
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/customerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/BillingSubscriptionsListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - BillingSubscriptions
+      x-ms-examples:
+        BillingSubscriptionsListByCustomer:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/billinSubscriptionId1'
+                    name: billingSubscriptionId1
+                    properties:
+                      customerDisplayName: Customer1
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      displayName: My subscription
+                      lastMonthCharges:
+                        currency: USD
+                        value: 5000
+                      monthToDateCharges:
+                        currency: USD
+                        value: 600
+                      reseller:
+                        description: Reseller1
+                        resellerId: 89e87bdf-a2a2-4687-925f-4c18b27bccfd
+                      skuDescription: Microsoft Azure Standard
+                      skuId: '0002'
+                      subscriptionBillingStatus: Active
+                      subscriptionId: 6b96d3f2-9008-4a9d-912f-f87744185aa3
+                    type: Microsoft.Billing/billingSubscriptions
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/billinSubscriptionId2'
+                    name: billingSubscriptionId2
+                    properties:
+                      customerDisplayName: Customer1
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      displayName: Test subscription
+                      lastMonthCharges:
+                        currency: USD
+                        value: 1000
+                      monthToDateCharges:
+                        currency: USD
+                        value: 400
+                      reseller:
+                        description: Reseller3
+                        resellerId: 3b65b5a8-bd4f-4084-90e9-e1bd667a2b19
+                      skuDescription: Microsoft Azure Standard
+                      skuId: '0002'
+                      subscriptionBillingStatus: Active
+                      subscriptionId: 6b96d3f2-9008-4a9d-912f-6b96d3f2
+                    type: Microsoft.Billing/billingSubscriptions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/{billingSubscriptionName}':
+    get:
+      description: Get a single billing subscription by name.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
+      operationId: BillingSubscriptions_GetByCustomerName
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/customerNameParameter'
+        - $ref: '#/parameters/billingSubscriptionNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/BillingSubscriptionSummary'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - BillingSubscriptions
+      x-ms-examples:
+        BillingSubscriptionByCustomerName:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            billingSubscriptionName: '{billingSubscriptionName}'
+            customerName: '{customerName}'
+          responses:
+            '200':
+              body:
+                id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/{billingSubscriptionName}'
+                name: '{billingSubscriptionName}'
+                properties:
+                  customerDisplayName: Customer1
+                  customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                  displayName: My Subscription
+                  lastMonthCharges:
+                    currency: USD
+                    value: 5000
+                  monthToDateCharges:
+                    currency: USD
+                    value: 600
+                  reseller:
+                    description: Reseller2
+                    resellerId: 3b65b5a8-bd4f-4084-90e9-e1bd667a2b19
+                  skuDescription: Microsoft Azure Standard
+                  skuId: '0002'
+                  subscriptionBillingStatus: Active
+                  subscriptionId: 6b96d3f2-9008-4a9d-912f-f87744185aa3
+                type: Microsoft.Billing/billingSubscriptions
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Billing/billingPermissions':
+    get:
+      description: Lists all billing permissions for the caller under customer.
+      operationId: BillingPermissions_ListByCustomers
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/customerNameParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/BillingPermissionsListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - BillingPermissions
+      x-ms-examples:
+        CustomerPermissionsList:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+          responses:
+            '200':
+              body:
+                value:
+                  - actions:
+                      - 30000000-aaaa-bbbb-cccc-200000000007
+                      - 30000000-aaaa-bbbb-cccc-200000000004
+                      - 30000000-aaaa-bbbb-cccc-200000000015
+                      - 30000000-aaaa-bbbb-cccc-200000000009
+                      - 30000000-aaaa-bbbb-cccc-200000000000
+                      - 30000000-aaaa-bbbb-cccc-200000000010
+                      - 30000000-aaaa-bbbb-cccc-200000000001
+                    notActions: []
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transactions':
+    get:
+      description: Lists the transactions by invoice section name for given start date and end date.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
+      operationId: Transactions_ListByCustomerName
+      parameters:
+        - $ref: '#/parameters/billingAccountNameParameter'
+        - $ref: '#/parameters/customerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Start date
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: End date
+          in: query
+          name: endDate
+          required: true
+          type: string
+        - description: 'May be used to filter by transaction kind. The filter supports ''eq'', ''lt'', ''gt'', ''le'', ''ge'', and ''and''. It does not currently support ''ne'', ''or'', or ''not''. Tag filter is a key value pair string where key and value is separated by a colon (:).'
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/TransactionsListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Transactions
+      x-ms-examples:
+        ReservationTransactionsListByCustomer:
+          parameters:
+            $filter: properties/kind eq 'Reservation'
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+            endDate: '2018-05-30'
+            startDate: '2018-04-01'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/41000000-0000-0000-0000-000000000000'
+                    name: 41000000-0000-0000-0000-000000000000
+                    properties:
+                      customerDisplayName: Contoso operations customer
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      date: '2018-04-23T00:00:00Z'
+                      invoice: '2344233'
+                      kind: reservation
+                      orderId: 6d8e7ed9-d3be-48b0-8c7a-e19246a6d30c
+                      orderName: Contoso Reserved
+                      productDescription: 'Standard D1, US West 3'
+                      quantity: 4
+                      subscriptionId: 00000000-0000-0000-0000-000000000000
+                      subscriptionName: Contoso operations billing
+                      transactionAmount:
+                        currency: USD
+                        value: 5000
+                      transactionType: Cancel
+                    type: Microsoft.Billing/transactions
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/82000000-0000-0000-0000-000000000000'
+                    name: 82000000-0000-0000-0000-000000000000
+                    properties:
+                      customerDisplayName: Contoso operations customer
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      date: '2018-05-05T00:00:00Z'
+                      invoice: Pending
+                      kind: reservation
+                      orderId: 1c24006f-8350-4315-ad8f-6d11180448f9
+                      orderName: Test Reserved
+                      productDescription: 'Standard D1, US West 3'
+                      quantity: 5
+                      subscriptionId: 00000000-0000-0000-0000-000000000000
+                      subscriptionName: Contoso operations billing
+                      transactionAmount:
+                        currency: USD
+                        value: 6000
+                      transactionType: Purchase
+                    type: Microsoft.Billing/transactions
+        TransactionsListByCustomer:
+          parameters:
+            api-version: 2018-11-01-preview
+            billingAccountName: '{billingAccountName}'
+            customerName: '{customerName}'
+            endDate: '2018-05-30'
+            startDate: '2018-04-01'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/41000000-0000-0000-0000-000000000000'
+                    name: 41000000-0000-0000-0000-000000000000
+                    properties:
+                      customerDisplayName: Contoso operations customer
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      date: '2018-05-01T00:00:00Z'
+                      invoice: '2344233'
+                      kind: all
+                      productDescription: 'Standard D1, US West 3'
+                      productFamily: Storage
+                      productType: Reserved VM Instance
+                      productTypeId: A12345
+                      transactionAmount:
+                        currency: USD
+                        value: 5000
+                      transactionType: Purchase
+                    type: Microsoft.Billing/transactions
+                  - id: '/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/51000000-0000-0000-0000-000000000000'
+                    name: 51000000-0000-0000-0000-000000000000
+                    properties:
+                      customerDisplayName: Contoso operations customer
+                      customerId: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}'
+                      date: '2018-04-01T00:00:00Z'
+                      invoice: pending
+                      kind: all
+                      productDescription: Standard Support
+                      productFamily: Storage
+                      productType: VM Instance
+                      productTypeId: A12345
+                      transactionAmount:
+                        currency: USD
+                        value: 50
+                      transactionType: Cancel
+                    type: Microsoft.Billing/transactions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments':
     get:
-      description: Lists all departments for a user which he has access to.
+      description: Lists all departments for which a user has access.
       operationId: Departments_ListByBillingAccountName
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -2299,6 +2727,8 @@ paths:
                           type: Microsoft.Billing/enrollmentAccounts
                       status: Active
                     type: Microsoft.Billing/departments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}':
     get:
       description: Get the department by id.
@@ -2381,7 +2811,7 @@ paths:
                 type: Microsoft.Billing/departments
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts':
     get:
-      description: Lists all Enrollment Accounts for a user which he has access to.
+      description: Lists all Enrollment Accounts for which a user has access.
       operationId: EnrollmentAccounts_ListByBillingAccountName
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -2497,6 +2927,8 @@ paths:
                       startDate: '2018-05-01T17:32:28Z'
                       status: Active
                     type: Microsoft.Billing/enrollmentAccounts
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}':
     get:
       description: Get the enrollment account by id.
@@ -2572,7 +3004,7 @@ paths:
                 type: Microsoft.Billing/enrollmentAccounts
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections':
     get:
-      description: Lists all invoice sections for a user which he has access to.
+      description: Lists all invoice sections for which a user has access.
       operationId: InvoiceSections_ListByBillingAccountName
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -3043,6 +3475,8 @@ paths:
                       subscriptionBillingStatus: Active
                       subscriptionId: 6b96d3f2-4a9d-9008-912f-f87744185aa3
                     type: Microsoft.Billing/billingSubscriptions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}':
     get:
       description: Get a single billing subscription by name.
@@ -3068,7 +3502,6 @@ paths:
       x-ms-examples:
         BillingSubscription:
           parameters:
-            $expand: billingProfile
             api-version: 2018-11-01-preview
             billingAccountName: '{billingAccountName}'
             billingSubscriptionName: '{billingSubscriptionName}'
@@ -3351,6 +3784,8 @@ paths:
                       skuId: '0001'
                       status: Active
                     type: Microsoft.Billing/products
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/products/{productName}':
     get:
       description: Get a single product by name.
@@ -3652,7 +4087,7 @@ paths:
             invoiceSectionName: '{invoiceSectionName}'
           responses:
             '200':
-              '200':
+              body:
                 value:
                   - id: 10000000-aaaa-bbbb-cccc-100000000000_6fd330f6-7d26-4aff-b9cf-7bd699f965b9
                     name: 10000000-aaaa-bbbb-cccc-100000000000_6fd330f6-7d26-4aff-b9cf-7bd699f965b9
@@ -4113,6 +4548,8 @@ paths:
                         value: 50
                       transactionType: Cancel
                     type: Microsoft.Billing/transactions
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/transfers':
     get:
       description: Lists all transfer's details initiated from given invoice section.
@@ -4336,6 +4773,8 @@ paths:
                       purchaseOrderNumber: '123456'
                       status: PastDue
                     type: Microsoft.Billing/invoices
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/pricesheet/default/download':
     post:
       description: Download price sheet for an invoice.
@@ -4502,6 +4941,8 @@ paths:
                           type: Microsoft.Billing/billingProfiles
                       displayName: invoiceSection1
                     type: Microsoft.Billing/invoiceSections
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods':
     get:
       description: Lists the Payment Methods by billing account Id.
@@ -4529,27 +4970,28 @@ paths:
             billingAccountName: '{billingAccountName}'
           responses:
             '200':
-              value:
-                - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000011/paymentMethods/00000000-0000-0000-0000-000000000055'
-                  name: 00000000-0000-0000-0000-000000000055
-                  properties:
-                    currency: USD
-                    details: Credits
-                    expiration: 4/2020
-                    paymentMethodType: Credits
-                  type: Microsoft.Billing/paymentMethods
-                - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000022/paymentMethods/00000000-0000-0000-0000-000000000026'
-                  name: 00000000-0000-0000-0000-000000000026
-                  properties:
-                    details: Check Wire
-                    paymentMethodType: CheckWire
-                  type: Microsoft.Billing/paymentMethods
-                - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000011/paymentMethods/00000000-0000-0000-0000-000000000026'
-                  name: 00000000-0000-0000-0000-000000000026
-                  properties:
-                    details: Check Wire
-                    paymentMethodType: CheckWire
-                  type: Microsoft.Billing/paymentMethods
+              body:
+                value:
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000011/paymentMethods/00000000-0000-0000-0000-000000000055'
+                    name: 00000000-0000-0000-0000-000000000055
+                    properties:
+                      currency: USD
+                      details: Credits
+                      expiration: '2014-03-18T18:25:43.511Z'
+                      paymentMethodType: Credits
+                    type: Microsoft.Billing/paymentMethods
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000022/paymentMethods/00000000-0000-0000-0000-000000000026'
+                    name: 00000000-0000-0000-0000-000000000026
+                    properties:
+                      details: Check Wire
+                      paymentMethodType: CheckWire
+                    type: Microsoft.Billing/paymentMethods
+                  - id: '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/00000000-0000-0000-0000-000000000011/paymentMethods/00000000-0000-0000-0000-000000000026'
+                    name: 00000000-0000-0000-0000-000000000026
+                    properties:
+                      details: Check Wire
+                      paymentMethodType: CheckWire
+                    type: Microsoft.Billing/paymentMethods
       x-ms-pageable:
         nextLinkName: nextLink
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products':
@@ -6145,6 +6587,14 @@ definitions:
         description: Billing Profile name to which this product belongs.
         readOnly: true
         type: string
+      customerDisplayName:
+        description: Display name of customer to which this product belongs.
+        readOnly: true
+        type: string
+      customerId:
+        description: Customer id to which this product belongs.
+        readOnly: true
+        type: string
       displayName:
         description: display name.
         readOnly: true
@@ -6164,6 +6614,10 @@ definitions:
       monthToDateCharges:
         $ref: '#/definitions/Amount'
         description: Month to date charges.
+        readOnly: true
+      reseller:
+        $ref: '#/definitions/Reseller'
+        description: Reseller for this subscription.
         readOnly: true
       skuDescription:
         description: The sku description.
@@ -6211,6 +6665,45 @@ definitions:
         items:
           $ref: '#/definitions/BillingSubscriptionSummary'
         readOnly: true
+        type: array
+  Customer:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A partner's customer.
+    properties:
+      properties:
+        $ref: '#/definitions/CustomerProperties'
+        description: The customer.
+        x-ms-client-flatten: true
+    type: object
+  CustomerListResult:
+    description: Result of listing customers.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The list of customers.
+        items:
+          $ref: '#/definitions/Customer'
+        readOnly: true
+        type: array
+  CustomerProperties:
+    description: The properties of a customer.
+    properties:
+      displayName:
+        description: The name of the customer.
+        type: string
+      enabledAzureSKUs:
+        description: Information about the product.
+        items:
+          $ref: '#/definitions/EnabledAzureSKUs'
+        type: array
+      resellers:
+        description: The resellers which are allowed to provide service to this customer.
+        items:
+          $ref: '#/definitions/Reseller'
         type: array
   Department:
     allOf:
@@ -7048,6 +7541,17 @@ definitions:
         readOnly: true
         type: string
     type: object
+  Reseller:
+    description: Details about a reseller.
+    properties:
+      description:
+        description: A description of the reseller.
+        readOnly: true
+        type: string
+      resellerId:
+        description: The reseller id.
+        readOnly: true
+        type: string
   Resource:
     description: The Resource model definition.
     properties:
@@ -7111,6 +7615,14 @@ definitions:
         type: string
       billingProfileName:
         description: Billing Profile name to which this product belongs.
+        readOnly: true
+        type: string
+      customerDisplayName:
+        description: Display name of customer to which this product belongs.
+        readOnly: true
+        type: string
+      customerId:
+        description: Customer id to which this product belongs.
         readOnly: true
         type: string
       date:

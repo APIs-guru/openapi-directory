@@ -224,7 +224,6 @@ paths:
       responses:
         '200':
           description: The annotation that was successfully deleted.
-          schema: {}
       x-ms-examples:
         AnnotationsDelete:
           parameters:
@@ -234,8 +233,7 @@ paths:
             resourceName: my-component
             subscriptionId: subid
           responses:
-            '200':
-              body: {}
+            '200': {}
     get:
       description: Get the annotation for given id.
       operationId: Annotations_Get

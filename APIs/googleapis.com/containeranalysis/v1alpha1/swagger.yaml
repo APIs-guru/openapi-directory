@@ -26,7 +26,7 @@ info:
       format: google
       url: 'https://containeranalysis.googleapis.com/$discovery/rest?version=v1alpha1'
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
 externalDocs:
@@ -119,7 +119,7 @@ paths:
   '/v1alpha1/{name}':
     delete:
       description: Deletes the given `Note` from the system.
-      operationId: containeranalysis.providers.notes.delete
+      operationId: containeranalysis.projects.notes.delete
       parameters:
         - description: |-
             The name of the note in the form of
@@ -140,14 +140,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     get:
-      description: Returns the requested `Note`.
-      operationId: containeranalysis.providers.notes.get
+      description: Gets a specific scan configuration for a project.
+      operationId: containeranalysis.projects.scanConfigs.get
       parameters:
         - description: |-
-            The name of the note in the form of
-            "providers/{provider_id}/notes/{NOTE_ID}"
+            The name of the ScanConfig in the form
+            projects/{project_id}/scanConfigs/{scan_config_id}
           in: path
           name: name
           required: true
@@ -157,14 +157,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -178,16 +178,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates an existing `Note`.
-      operationId: containeranalysis.providers.notes.patch
+      description: Updates the scan configuration to a new value.
+      operationId: containeranalysis.projects.scanConfigs.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
         - description: |-
-            The name of the note.
-            Should be of the form "projects/{provider_id}/notes/{note_id}".
+            The scan config to update of the form
+            projects/{project_id}/scanConfigs/{scan_config_id}.
           in: path
           name: name
           required: true
@@ -201,27 +201,26 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Note'
+            $ref: '#/definitions/ScanConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{name}/notes':
     get:
-      description: Lists all `Notes` for a given project.
-      operationId: containeranalysis.providers.notes.list
+      description: Gets the `Note` attached to the given `Occurrence`.
+      operationId: containeranalysis.projects.occurrences.getNotes
       parameters:
         - description: The filter expression.
           in: query
           name: filter
           type: string
         - description: |-
-            The name field will contain the project Id for example:
-            "providers/{provider_id}
-            @Deprecated
+            The name of the occurrence in the form
+            "projects/{project_id}/occurrences/{OCCURRENCE_ID}"
           in: path
           name: name
           required: true
@@ -243,14 +242,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListNotesResponse'
+            $ref: '#/definitions/Note'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -308,7 +307,7 @@ paths:
         Lists `Occurrences` referencing the specified `Note`. Use this method to
         get all occurrences referencing your `Note` across all your customer
         projects.
-      operationId: containeranalysis.providers.notes.occurrences.list
+      operationId: containeranalysis.projects.notes.occurrences.list
       parameters:
         - description: The filter expression.
           in: query
@@ -341,7 +340,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -466,6 +465,7 @@ paths:
             - DEPLOYABLE
             - DISCOVERY
             - ATTESTATION_AUTHORITY
+            - UPGRADE
           in: query
           name: kind
           type: string
@@ -699,7 +699,7 @@ paths:
         error otherwise. The resource takes the following formats:
         `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for occurrences and
         projects/{PROJECT_ID}/notes/{NOTE_ID} for notes
-      operationId: containeranalysis.providers.notes.getIamPolicy
+      operationId: containeranalysis.projects.notes.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -724,7 +724,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -752,7 +752,7 @@ paths:
         a `PERMISSION_DENIED` error otherwise. The resource takes the following
         formats: `projects/{projectid}/occurrences/{occurrenceid}` for occurrences
         and projects/{projectid}/notes/{noteid} for notes
-      operationId: containeranalysis.providers.notes.setIamPolicy
+      operationId: containeranalysis.projects.notes.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -777,7 +777,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -801,7 +801,7 @@ paths:
         project, or a `PERMISSION_DENIED` error otherwise. The resource takes the
         following formats: `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for
         `Occurrences` and `projects/{PROJECT_ID}/notes/{NOTE_ID}` for `Notes`
-      operationId: containeranalysis.providers.notes.testIamPermissions
+      operationId: containeranalysis.projects.notes.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -826,7 +826,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
 definitions:
   Artifact:
     description: Artifact describes a build product.
@@ -905,111 +905,6 @@ definitions:
         description: 'The human readable name of this Attestation Authority, for example "qa".'
         type: string
     type: object
-  AuditConfig:
-    description: |-
-      Specifies the audit configuration for a service.
-      The configuration determines which permission types are logged, and what
-      identities, if any, are exempted from logging.
-      An AuditConfig must have one or more AuditLogConfigs.
-
-      If there are AuditConfigs for both `allServices` and a specific service,
-      the union of the two AuditConfigs is used for that service: the log_types
-      specified in each AuditConfig are enabled, and the exempted_members in each
-      AuditLogConfig are exempted.
-
-      Example Policy with multiple AuditConfigs:
-
-          {
-            "audit_configs": [
-              {
-                "service": "allServices"
-                "audit_log_configs": [
-                  {
-                    "log_type": "DATA_READ",
-                    "exempted_members": [
-                      "user:foo@gmail.com"
-                    ]
-                  },
-                  {
-                    "log_type": "DATA_WRITE",
-                  },
-                  {
-                    "log_type": "ADMIN_READ",
-                  }
-                ]
-              },
-              {
-                "service": "fooservice.googleapis.com"
-                "audit_log_configs": [
-                  {
-                    "log_type": "DATA_READ",
-                  },
-                  {
-                    "log_type": "DATA_WRITE",
-                    "exempted_members": [
-                      "user:bar@gmail.com"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      logging. It also exempts foo@gmail.com from DATA_READ logging, and
-      bar@gmail.com from DATA_WRITE logging.
-    properties:
-      auditLogConfigs:
-        description: The configuration for logging of each type of permission.
-        items:
-          $ref: '#/definitions/AuditLogConfig'
-        type: array
-      service:
-        description: |-
-          Specifies a service that will be enabled for audit logging.
-          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
-          `allServices` is a special value that covers all services.
-        type: string
-    type: object
-  AuditLogConfig:
-    description: |-
-      Provides the configuration for logging a type of permissions.
-      Example:
-
-          {
-            "audit_log_configs": [
-              {
-                "log_type": "DATA_READ",
-                "exempted_members": [
-                  "user:foo@gmail.com"
-                ]
-              },
-              {
-                "log_type": "DATA_WRITE",
-              }
-            ]
-          }
-
-      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
-    properties:
-      exemptedMembers:
-        description: |-
-          Specifies the identities that do not cause logging for this type of
-          permission.
-          Follows the same format of Binding.members.
-        items:
-          type: string
-        type: array
-      logType:
-        description: The log type that this config enables.
-        enum:
-          - LOG_TYPE_UNSPECIFIED
-          - ADMIN_READ
-          - DATA_WRITE
-          - DATA_READ
-        type: string
-    type: object
   Basis:
     description: |-
       Basis describes the base image portion (Note) of the DockerImage
@@ -1049,7 +944,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1417,6 +1312,7 @@ definitions:
           - DEPLOYABLE
           - DISCOVERY
           - ATTESTATION_AUTHORITY
+          - UPGRADE
         type: string
     type: object
   Distribution:
@@ -1547,7 +1443,7 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0 and 1.
+          Acceptable values are 0, 1, and 3.
           If the value is 0, or the field is omitted, policy format version 1 will be
           returned.
         format: int32
@@ -1620,9 +1516,7 @@ definitions:
       repository (e.g., GitHub).
     properties:
       revisionId:
-        description: |-
-          Required.
-          Git commit hash.
+        description: Required. Git commit hash.
         type: string
       url:
         description: Git repository URL.
@@ -1855,6 +1749,7 @@ definitions:
           - DEPLOYABLE
           - DISCOVERY
           - ATTESTATION_AUTHORITY
+          - UPGRADE
         type: string
       longDescription:
         description: A detailed description of this `Note`.
@@ -1862,7 +1757,7 @@ definitions:
       name:
         description: |-
           The name of the note in the form
-          "providers/{provider_id}/notes/{NOTE_ID}"
+          "projects/{provider_project_id}/notes/{NOTE_ID}"
         type: string
       package:
         $ref: '#/definitions/Package'
@@ -1881,6 +1776,9 @@ definitions:
           a filter in list requests.
         format: google-datetime
         type: string
+      upgrade:
+        $ref: '#/definitions/UpgradeNote'
+        description: A note describing an upgrade.
       vulnerabilityType:
         $ref: '#/definitions/VulnerabilityType'
         description: A package vulnerability type of note.
@@ -1925,6 +1823,7 @@ definitions:
           - DEPLOYABLE
           - DISCOVERY
           - ATTESTATION_AUTHORITY
+          - UPGRADE
         type: string
       name:
         description: |-
@@ -1955,6 +1854,9 @@ definitions:
         description: Output only. The time this `Occurrence` was last updated.
         format: google-datetime
         type: string
+      upgrade:
+        $ref: '#/definitions/UpgradeOccurrence'
+        description: Describes an upgrade.
       vulnerabilityDetails:
         $ref: '#/definitions/VulnerabilityDetails'
         description: Details of a security vulnerability note.
@@ -2127,11 +2029,6 @@ definitions:
       For a description of IAM and its features, see the
       [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
-      auditConfigs:
-        description: Specifies cloud audit logging configuration for this policy.
-        items:
-          $ref: '#/definitions/AuditConfig'
-        type: array
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
@@ -2150,7 +2047,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:
@@ -2239,15 +2136,6 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
-      updateMask:
-        description: |-
-          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-          the fields in the mask will be modified. If no mask is provided, the
-          following default mask is used:
-          paths: "bindings, etag"
-          This field is only used by Cloud IAM.
-        format: google-fieldmask
-        type: string
     type: object
   SeverityCount:
     description: The number of occurrences created for a specific severity.
@@ -2392,6 +2280,68 @@ definitions:
         description: The fields to update.
         format: google-fieldmask
         type: string
+    type: object
+  UpgradeDistribution:
+    description: |-
+      The Upgrade Distribution represents metadata about the Upgrade for each
+      operating system (CPE). Some distributions have additional metadata around
+      updates, classifying them into various categories and severities.
+    properties:
+      classification:
+        description: |-
+          The operating system classification of this Upgrade, as specified by the
+          upstream operating system upgrade feed.
+        type: string
+      cpeUri:
+        description: |-
+          Required - The specific operating system this metadata applies to. See
+          https://cpe.mitre.org/specification/.
+        type: string
+      cve:
+        description: The cve that would be resolved by this upgrade.
+        items:
+          type: string
+        type: array
+      severity:
+        description: The severity as specified by the upstream operating system.
+        type: string
+    type: object
+  UpgradeNote:
+    description: |-
+      An Upgrade Note represents a potential upgrade of a package to a given
+      version. For each package version combination (i.e. bash 4.0, bash 4.1,
+      bash 4.1.2), there will be a Upgrade Note.
+    properties:
+      distributions:
+        description: Metadata about the upgrade for each specific operating system.
+        items:
+          $ref: '#/definitions/UpgradeDistribution'
+        type: array
+      package:
+        description: Required - The package this Upgrade is for.
+        type: string
+      version:
+        $ref: '#/definitions/Version'
+        description: Required - The version of the package in machine + human readable form.
+    type: object
+  UpgradeOccurrence:
+    description: |-
+      An Upgrade Occurrence represents that a specific resource_url could install a
+      specific upgrade. This presence is supplied via local sources (i.e. it is
+      present in the mirror and the running system has noticed its availability).
+    properties:
+      distribution:
+        $ref: '#/definitions/UpgradeDistribution'
+        description: |-
+          Metadata about the upgrade for available for the specific operating system
+          for the resource_url. This allows efficient filtering, as well as
+          making it easier to use the occurrence.
+      package:
+        description: Required - The package this Upgrade is for.
+        type: string
+      parsedVersion:
+        $ref: '#/definitions/Version'
+        description: Required - The version of the package in a machine + human readable form.
     type: object
   Version:
     description: |-

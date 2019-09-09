@@ -182,7 +182,9 @@ paths:
         - comments
 definitions:
   AnalyzeCommentRequest:
-    description: The comment analysis request message.
+    description: |-
+      The comment analysis request message.
+      LINT.IfChange
     properties:
       clientToken:
         description: Opaque token that is echoed from the request to the response.

@@ -15,7 +15,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2019-03-01/actionGroups_API.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: monitor-actionGroups_API
   x-tags:
@@ -247,12 +247,8 @@ paths:
             resourceGroupName: Default-NotificationRules
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Get an action group.
       operationId: ActionGroups_Get
@@ -650,12 +646,8 @@ paths:
             resourceGroupName: Default-NotificationRules
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
-            '200':
-              body: null
-              headers: {}
-            '409':
-              body: null
-              headers: {}
+            '200': {}
+            '409': {}
 definitions:
   ActionGroup:
     description: An Azure action group.

@@ -539,9 +539,7 @@ definitions:
         $ref: '#/definitions/EnvironmentConfig'
         description: Configuration parameters for this environment.
       createTime:
-        description: |-
-          Output only.
-          The time at which this environment was created.
+        description: Output only. The time at which this environment was created.
         format: google-datetime
         type: string
       labels:
@@ -573,15 +571,12 @@ definitions:
           - ERROR
         type: string
       updateTime:
-        description: |-
-          Output only.
-          The time at which this environment was last modified.
+        description: Output only. The time at which this environment was last modified.
         format: google-datetime
         type: string
       uuid:
         description: |-
-          Output only.
-          The UUID (Universally Unique IDentifier) associated with this environment.
+          Output only. The UUID (Universally Unique IDentifier) associated with this environment.
           This value is generated when the environment is created.
         type: string
     type: object
@@ -590,23 +585,19 @@ definitions:
     properties:
       airflowUri:
         description: |-
-          Output only.
-          The URI of the Apache Airflow Web UI hosted within this environment (see
+          Output only. The URI of the Apache Airflow Web UI hosted within this environment (see
           [Airflow web
           interface](/composer/docs/how-to/accessing/airflow-web-interface)).
         type: string
       dagGcsPrefix:
         description: |-
-          Output only.
-          The Cloud Storage prefix of the DAGs for this environment. Although Cloud
+          Output only. The Cloud Storage prefix of the DAGs for this environment. Although Cloud
           Storage objects reside in a flat namespace, a hierarchical file tree
           can be simulated using "/"-delimited object name prefixes. DAG objects for
           this environment reside in a simulated directory with the given prefix.
         type: string
       gkeCluster:
-        description: |-
-          Output only.
-          The Kubernetes Engine cluster used to run this environment.
+        description: Output only. The Kubernetes Engine cluster used to run this environment.
         type: string
       nodeConfig:
         $ref: '#/definitions/NodeConfig'
@@ -722,6 +713,9 @@ definitions:
           specified, the location information from the specified field will be
           propagated to the unspecified field.
 
+          The `machineTypeId` must not be a [shared-core machine
+          type](/compute/docs/machine-types#sharedcore).
+
           If this field is unspecified, the `machineTypeId` defaults
           to "n1-standard-1".
         type: string
@@ -822,22 +816,17 @@ definitions:
     description: Metadata describing an operation.
     properties:
       createTime:
-        description: |-
-          Output only.
-          The time the operation was submitted to the server.
+        description: Output only. The time the operation was submitted to the server.
         format: google-datetime
         type: string
       endTime:
         description: |-
-          Output only.
-          The time when the operation terminated, regardless of its success.
+          Output only. The time when the operation terminated, regardless of its success.
           This field is unset if the operation is still ongoing.
         format: google-datetime
         type: string
       operationType:
-        description: |-
-          Output only.
-          The type of operation being performed.
+        description: Output only. The type of operation being performed.
         enum:
           - TYPE_UNSPECIFIED
           - CREATE
@@ -846,19 +835,14 @@ definitions:
         type: string
       resource:
         description: |-
-          Output only.
-          The resource being operated on, as a [relative resource name](
+          Output only. The resource being operated on, as a [relative resource name](
           /apis/design/resource_names#relative_resource_name).
         type: string
       resourceUuid:
-        description: |-
-          Output only.
-          The UUID of the resource being operated on.
+        description: Output only. The UUID of the resource being operated on.
         type: string
       state:
-        description: |-
-          Output only.
-          The current operation state.
+        description: Output only. The current operation state.
         enum:
           - STATE_UNSPECIFIED
           - PENDING

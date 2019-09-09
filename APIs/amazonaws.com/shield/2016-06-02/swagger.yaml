@@ -1,169 +1,118 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: shield.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2016-06-02'
-  x-release: v4
-  title: AWS Shield
-  description: '<fullname>AWS Shield Advanced</fullname> <p>This is the <i>AWS Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>.</p>'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: '<fullname>AWS Shield Advanced</fullname> <p>This is the <i>AWS Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: shield
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/shield-2016-06-02.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS Shield
+  version: '2016-06-02'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/shield-2016-06-02.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: shield
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/shield/'
-host: shield.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://shield.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Shield multi-region endpoint
-  - url: 'https://shield.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Shield multi-region endpoint
-  - url: 'http://shield.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Shield endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://shield.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Shield endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=AWSShield_20160616.AssociateDRTLogBucket':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: AssociateDRTLogBucket
       description: '<p>Authorizes the DDoS Response team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the DRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
+      operationId: AssociateDRTLogBucket
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDRTLogBucketRequest'
+        - enum:
+            - AWSShield_20160616.AssociateDRTLogBucket
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -201,18 +150,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateDRTLogBucketRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.AssociateDRTLogBucket
+  '/#X-Amz-Target=AWSShield_20160616.AssociateDRTRole':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -221,10 +159,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.AssociateDRTRole':
     post:
-      operationId: AssociateDRTRole
       description: '<p>Authorizes the DDoS Response team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">IAM JSON Policy Elements: Principal</a>.</p> <p>The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">Granting a User Permissions to Pass a Role to an AWS Service</a>. </p> <p>To use the services of the DRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
+      operationId: AssociateDRTRole
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDRTRoleRequest'
+        - enum:
+            - AWSShield_20160616.AssociateDRTRole
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -254,18 +203,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateDRTRoleRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.AssociateDRTRole
+  '/#X-Amz-Target=AWSShield_20160616.CreateProtection':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -274,10 +212,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.CreateProtection':
     post:
-      operationId: CreateProtection
       description: '<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p> <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href="https://console.aws.amazon.com/waf/">AWS WAF console</a>. For more information see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html">Getting Started with AWS Shield Advanced</a> and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html">Add AWS Shield Advanced Protection to more AWS Resources</a>.</p>'
+      operationId: CreateProtection
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProtectionRequest'
+        - enum:
+            - AWSShield_20160616.CreateProtection
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -311,18 +260,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateProtectionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.CreateProtection
+  '/#X-Amz-Target=AWSShield_20160616.CreateSubscription':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -331,10 +269,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.CreateSubscription':
     post:
-      operationId: CreateSubscription
       description: '<p>Activates AWS Shield Advanced for an account.</p> <p>As part of this request you can specify <code>EmergencySettings</code> that automaticaly grant the DDoS response team (DRT) needed permissions to assist you during a suspected DDoS attack. For more information see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html">Authorize the DDoS Response Team to Create Rules and Web ACLs on Your Behalf</a>.</p> <p>To use the services of the DRT, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p> <p>When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. </p>'
+      operationId: CreateSubscription
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubscriptionRequest'
+        - enum:
+            - AWSShield_20160616.CreateSubscription
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -348,18 +297,7 @@ paths:
           description: ResourceAlreadyExistsException
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateSubscriptionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.CreateSubscription
+  '/#X-Amz-Target=AWSShield_20160616.DeleteProtection':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -368,10 +306,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DeleteProtection':
     post:
-      operationId: DeleteProtection
       description: Deletes an AWS Shield Advanced <a>Protection</a>.
+      operationId: DeleteProtection
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProtectionRequest'
+        - enum:
+            - AWSShield_20160616.DeleteProtection
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -389,18 +338,7 @@ paths:
           description: OptimisticLockException
           schema:
             $ref: '#/definitions/OptimisticLockException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteProtectionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DeleteProtection
+  '/#X-Amz-Target=AWSShield_20160616.DeleteSubscription':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -409,11 +347,22 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DeleteSubscription':
     post:
       deprecated: true
-      operationId: DeleteSubscription
       description: 'Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. '
+      operationId: DeleteSubscription
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionRequest'
+        - enum:
+            - AWSShield_20160616.DeleteSubscription
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -431,18 +380,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteSubscriptionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DeleteSubscription
+  '/#X-Amz-Target=AWSShield_20160616.DescribeAttack':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -451,10 +389,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DescribeAttack':
     post:
-      operationId: DescribeAttack
       description: 'Describes the details of a DDoS attack. '
+      operationId: DescribeAttack
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAttackRequest'
+        - enum:
+            - AWSShield_20160616.DescribeAttack
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -468,18 +417,7 @@ paths:
           description: AccessDeniedException
           schema:
             $ref: '#/definitions/AccessDeniedException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeAttackRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DescribeAttack
+  '/#X-Amz-Target=AWSShield_20160616.DescribeDRTAccess':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -488,10 +426,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DescribeDRTAccess':
     post:
-      operationId: DescribeDRTAccess
       description: Returns the current role and list of Amazon S3 log buckets used by the DDoS Response team (DRT) to access your AWS account while assisting with attack mitigation.
+      operationId: DescribeDRTAccess
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDRTAccessRequest'
+        - enum:
+            - AWSShield_20160616.DescribeDRTAccess
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -505,18 +454,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeDRTAccessRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DescribeDRTAccess
+  '/#X-Amz-Target=AWSShield_20160616.DescribeEmergencyContactSettings':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -525,10 +463,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DescribeEmergencyContactSettings':
     post:
-      operationId: DescribeEmergencyContactSettings
       description: Lists the email addresses that the DRT can use to contact you during a suspected attack.
+      operationId: DescribeEmergencyContactSettings
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEmergencyContactSettingsRequest'
+        - enum:
+            - AWSShield_20160616.DescribeEmergencyContactSettings
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -542,18 +491,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeEmergencyContactSettingsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DescribeEmergencyContactSettings
+  '/#X-Amz-Target=AWSShield_20160616.DescribeProtection':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -562,10 +500,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DescribeProtection':
     post:
-      operationId: DescribeProtection
       description: Lists the details of a <a>Protection</a> object.
+      operationId: DescribeProtection
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProtectionRequest'
+        - enum:
+            - AWSShield_20160616.DescribeProtection
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -583,18 +532,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeProtectionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DescribeProtection
+  '/#X-Amz-Target=AWSShield_20160616.DescribeSubscription':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -603,10 +541,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DescribeSubscription':
     post:
-      operationId: DescribeSubscription
       description: Provides details about the AWS Shield Advanced subscription for an account.
+      operationId: DescribeSubscription
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSubscriptionRequest'
+        - enum:
+            - AWSShield_20160616.DescribeSubscription
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -620,18 +569,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeSubscriptionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DescribeSubscription
+  '/#X-Amz-Target=AWSShield_20160616.DisassociateDRTLogBucket':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -640,10 +578,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DisassociateDRTLogBucket':
     post:
-      operationId: DisassociateDRTLogBucket
       description: '<p>Removes the DDoS Response team''s (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs.</p> <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>'
+      operationId: DisassociateDRTLogBucket
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateDRTLogBucketRequest'
+        - enum:
+            - AWSShield_20160616.DisassociateDRTLogBucket
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -673,18 +622,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateDRTLogBucketRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DisassociateDRTLogBucket
+  '/#X-Amz-Target=AWSShield_20160616.DisassociateDRTRole':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -693,10 +631,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.DisassociateDRTRole':
     post:
-      operationId: DisassociateDRTRole
       description: '<p>Removes the DDoS Response team''s (DRT) access to your AWS account.</p> <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>'
+      operationId: DisassociateDRTRole
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateDRTRoleRequest'
+        - enum:
+            - AWSShield_20160616.DisassociateDRTRole
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -718,18 +667,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateDRTRoleRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.DisassociateDRTRole
+  '/#X-Amz-Target=AWSShield_20160616.GetSubscriptionState':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -738,10 +676,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.GetSubscriptionState':
     post:
-      operationId: GetSubscriptionState
       description: 'Returns the <code>SubscriptionState</code>, either <code>Active</code> or <code>Inactive</code>.'
+      operationId: GetSubscriptionState
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSubscriptionStateRequest'
+        - enum:
+            - AWSShield_20160616.GetSubscriptionState
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -751,18 +700,7 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetSubscriptionStateRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.GetSubscriptionState
+  '/#X-Amz-Target=AWSShield_20160616.ListAttacks':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -771,10 +709,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.ListAttacks':
     post:
-      operationId: ListAttacks
       description: Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+      operationId: ListAttacks
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAttacksRequest'
+        - enum:
+            - AWSShield_20160616.ListAttacks
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -792,18 +741,7 @@ paths:
           description: InvalidOperationException
           schema:
             $ref: '#/definitions/InvalidOperationException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAttacksRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.ListAttacks
+  '/#X-Amz-Target=AWSShield_20160616.ListProtections':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -812,10 +750,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.ListProtections':
     post:
-      operationId: ListProtections
       description: Lists all <a>Protection</a> objects for the account.
+      operationId: ListProtections
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProtectionsRequest'
+        - enum:
+            - AWSShield_20160616.ListProtections
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -833,18 +782,7 @@ paths:
           description: InvalidPaginationTokenException
           schema:
             $ref: '#/definitions/InvalidPaginationTokenException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListProtectionsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.ListProtections
+  '/#X-Amz-Target=AWSShield_20160616.UpdateEmergencyContactSettings':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -853,10 +791,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.UpdateEmergencyContactSettings':
     post:
-      operationId: UpdateEmergencyContactSettings
       description: Updates the details of the list of email addresses that the DRT can use to contact you during a suspected attack.
+      operationId: UpdateEmergencyContactSettings
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEmergencyContactSettingsRequest'
+        - enum:
+            - AWSShield_20160616.UpdateEmergencyContactSettings
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -878,18 +827,7 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateEmergencyContactSettingsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.UpdateEmergencyContactSettings
+  '/#X-Amz-Target=AWSShield_20160616.UpdateSubscription':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -898,10 +836,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShield_20160616.UpdateSubscription':
     post:
-      operationId: UpdateSubscription
       description: Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.
+      operationId: UpdateSubscription
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSubscriptionRequest'
+        - enum:
+            - AWSShield_20160616.UpdateSubscription
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -927,327 +876,75 @@ paths:
           description: OptimisticLockException
           schema:
             $ref: '#/definitions/OptimisticLockException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateSubscriptionRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSShield_20160616.UpdateSubscription
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AssociateDRTLogBucketResponse:
-    type: object
-    properties: {}
+  AccessDeniedException: {}
+  AccessDeniedForDependencyException: {}
   AssociateDRTLogBucketRequest:
-    type: object
-    required:
-      - LogBucket
     properties:
       LogBucket:
         $ref: '#/definitions/LogBucket'
         description: The Amazon S3 bucket that contains your AWS WAF logs.
-  InternalErrorException: {}
-  InvalidOperationException: {}
-  NoAssociatedRoleException: {}
-  LimitsExceededException: {}
-  InvalidParameterException: {}
-  AccessDeniedForDependencyException: {}
-  OptimisticLockException: {}
-  ResourceNotFoundException: {}
-  AssociateDRTRoleResponse:
-    type: object
-    properties: {}
-  AssociateDRTRoleRequest:
-    type: object
     required:
-      - RoleArn
+      - LogBucket
+    type: object
+  AssociateDRTLogBucketResponse:
+    properties: {}
+    type: object
+  AssociateDRTRoleRequest:
     properties:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: '<p>The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS account.</p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to this role. For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>.</p>'
-  CreateProtectionResponse:
-    type: object
-    properties:
-      ProtectionId:
-        $ref: '#/definitions/ProtectionId'
-        description: The unique identifier (ID) for the <a>Protection</a> object that is created.
-  CreateProtectionRequest:
-    type: object
     required:
-      - Name
-      - ResourceArn
-    properties:
-      Name:
-        $ref: '#/definitions/ProtectionName'
-        description: Friendly name for the <code>Protection</code> you are creating.
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: '<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>'
-  InvalidResourceException: {}
-  ResourceAlreadyExistsException: {}
-  CreateSubscriptionResponse:
+      - RoleArn
     type: object
+  AssociateDRTRoleResponse:
     properties: {}
-  CreateSubscriptionRequest:
     type: object
-    properties: {}
-  DeleteProtectionResponse:
-    type: object
-    properties: {}
-  DeleteProtectionRequest:
-    type: object
-    required:
-      - ProtectionId
-    properties:
-      ProtectionId:
-        $ref: '#/definitions/ProtectionId'
-        description: The unique identifier (ID) for the <a>Protection</a> object to be deleted.
-  DeleteSubscriptionResponse:
-    type: object
-    properties: {}
-  DeleteSubscriptionRequest:
-    type: object
-    properties: {}
-  LockedSubscriptionException: {}
-  DescribeAttackResponse:
-    type: object
-    properties:
-      Attack:
-        $ref: '#/definitions/AttackDetail'
-        description: The attack that is described.
-  DescribeAttackRequest:
-    type: object
-    required:
-      - AttackId
-    properties:
-      AttackId:
-        $ref: '#/definitions/AttackId'
-        description: The unique identifier (ID) for the attack that to be described.
-  AccessDeniedException: {}
-  DescribeDRTAccessResponse:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The Amazon Resource Name (ARN) of the role the DRT used to access your AWS account.
-      LogBucketList:
-        $ref: '#/definitions/LogBucketList'
-        description: The list of Amazon S3 buckets accessed by the DRT.
-  DescribeDRTAccessRequest:
-    type: object
-    properties: {}
-  DescribeEmergencyContactSettingsResponse:
-    type: object
-    properties:
-      EmergencyContactList:
-        $ref: '#/definitions/EmergencyContactList'
-        description: A list of email addresses that the DRT can use to contact you during a suspected attack.
-  DescribeEmergencyContactSettingsRequest:
-    type: object
-    properties: {}
-  DescribeProtectionResponse:
-    type: object
-    properties:
-      Protection:
-        $ref: '#/definitions/Protection'
-        description: The <a>Protection</a> object that is described.
-  DescribeProtectionRequest:
-    type: object
-    properties:
-      ProtectionId:
-        $ref: '#/definitions/ProtectionId'
-        description: 'The unique identifier (ID) for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: 'The ARN (Amazon Resource Name) of the AWS resource for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
-  DescribeSubscriptionResponse:
-    type: object
-    properties:
-      Subscription:
-        $ref: '#/definitions/Subscription'
-        description: The AWS Shield Advanced subscription details for an account.
-  DescribeSubscriptionRequest:
-    type: object
-    properties: {}
-  DisassociateDRTLogBucketResponse:
-    type: object
-    properties: {}
-  DisassociateDRTLogBucketRequest:
-    type: object
-    required:
-      - LogBucket
-    properties:
-      LogBucket:
-        $ref: '#/definitions/LogBucket'
-        description: The Amazon S3 bucket that contains your AWS WAF logs.
-  DisassociateDRTRoleResponse:
-    type: object
-    properties: {}
-  DisassociateDRTRoleRequest:
-    type: object
-    properties: {}
-  GetSubscriptionStateResponse:
-    type: object
-    required:
-      - SubscriptionState
-    properties:
-      SubscriptionState:
-        $ref: '#/definitions/SubscriptionState'
-        description: The status of the subscription.
-  GetSubscriptionStateRequest:
-    type: object
-    properties: {}
-  ListAttacksResponse:
-    type: object
-    properties:
-      AttackSummaries:
-        $ref: '#/definitions/AttackSummaries'
-        description: The attack information for the specified time range.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: '<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
-  ListAttacksRequest:
-    type: object
-    properties:
-      ResourceArns:
-        $ref: '#/definitions/ResourceArnFilterList'
-        description: 'The ARN (Amazon Resource Name) of the resource that was attacked. If this is left blank, all applicable resources for this account will be included.'
-      StartTime:
-        $ref: '#/definitions/TimeRange'
-        description: 'The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
-      EndTime:
-        $ref: '#/definitions/TimeRange'
-        description: 'The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
-  ListProtectionsResponse:
-    type: object
-    properties:
-      Protections:
-        $ref: '#/definitions/Protections'
-        description: The array of enabled <a>Protection</a> objects.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: '<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
-  ListProtectionsRequest:
-    type: object
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '<p>The maximum number of <a>Protection</a> objects to be returned. If this is left blank the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
-  InvalidPaginationTokenException: {}
-  UpdateEmergencyContactSettingsResponse:
-    type: object
-    properties: {}
-  UpdateEmergencyContactSettingsRequest:
-    type: object
-    properties:
-      EmergencyContactList:
-        $ref: '#/definitions/EmergencyContactList'
-        description: A list of email addresses that the DRT can use to contact you during a suspected attack.
-  UpdateSubscriptionResponse:
-    type: object
-    properties: {}
-  UpdateSubscriptionRequest:
-    type: object
-    properties:
-      AutoRenew:
-        $ref: '#/definitions/AutoRenew'
-        description: 'When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.'
-  LogBucket:
-    type: string
-    pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
-    minLength: 3
-    maxLength: 63
-  RoleArn:
-    type: string
-    pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
-    minLength: 1
-    maxLength: 2048
-  AttackId:
-    type: string
-    pattern: '[a-zA-Z0-9\\-]*'
-    minLength: 1
-    maxLength: 128
-  ResourceArn:
-    type: string
-    pattern: '^arn:aws.*'
-    minLength: 1
-    maxLength: 2048
-  SubResourceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SubResourceSummary'
-  AttackTimestamp:
-    type: string
-    format: date-time
-  SummarizedCounterList:
-    type: array
-    items:
-      $ref: '#/definitions/SummarizedCounter'
-  AttackProperties:
-    type: array
-    items:
-      $ref: '#/definitions/AttackProperty'
-  MitigationList:
-    type: array
-    items:
-      $ref: '#/definitions/Mitigation'
   AttackDetail:
-    type: object
+    description: The details of a DDoS attack.
     properties:
-      AttackId:
-        $ref: '#/definitions/AttackId'
-        description: The unique identifier (ID) of the attack.
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The ARN (Amazon Resource Name) of the resource that was attacked.
-      SubResources:
-        $ref: '#/definitions/SubResourceSummaryList'
-        description: 'If applicable, additional detail about the resource being attacked, for example, IP address or URL.'
-      StartTime:
-        $ref: '#/definitions/AttackTimestamp'
-        description: 'The time the attack started, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      EndTime:
-        $ref: '#/definitions/AttackTimestamp'
-        description: 'The time the attack ended, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       AttackCounters:
         $ref: '#/definitions/SummarizedCounterList'
         description: List of counters that describe the attack for the specified time period.
+      AttackId:
+        $ref: '#/definitions/AttackId'
+        description: The unique identifier (ID) of the attack.
       AttackProperties:
         $ref: '#/definitions/AttackProperties'
         description: The array of <a>AttackProperty</a> objects.
+      EndTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The time the attack ended, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       Mitigations:
         $ref: '#/definitions/MitigationList'
         description: List of mitigation actions taken for the attack.
-    description: The details of a DDoS attack.
-  AttackLayer:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN (Amazon Resource Name) of the resource that was attacked.
+      StartTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The time the attack started, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+      SubResources:
+        $ref: '#/definitions/SubResourceSummaryList'
+        description: 'If applicable, additional detail about the resource being attacked, for example, IP address or URL.'
+    type: object
+  AttackId:
+    maxLength: 128
+    minLength: 1
+    pattern: '[a-zA-Z0-9\\-]*'
     type: string
+  AttackLayer:
     enum:
       - NETWORK
       - APPLICATION
+    type: string
+  AttackProperties:
+    items:
+      $ref: '#/definitions/AttackProperty'
+    type: array
   AttackProperty:
-    type: object
+    description: Details of the described attack.
     properties:
       AttackLayer:
         $ref: '#/definitions/AttackLayer'
@@ -1258,15 +955,14 @@ definitions:
       TopContributors:
         $ref: '#/definitions/TopContributors'
         description: 'The array of <a>Contributor</a> objects that includes the top five contributors to an attack. '
-      Unit:
-        $ref: '#/definitions/Unit'
-        description: The unit of the <code>Value</code> of the contributions.
       Total:
         $ref: '#/definitions/Long'
         description: 'The total contributions made to this attack by all contributors, not just the five listed in the <code>TopContributors</code> list.'
-    description: Details of the described attack.
+      Unit:
+        $ref: '#/definitions/Unit'
+        description: The unit of the <code>Value</code> of the contributions.
+    type: object
   AttackPropertyIdentifier:
-    type: string
     enum:
       - DESTINATION_URL
       - REFERRER
@@ -1276,64 +972,53 @@ definitions:
       - SOURCE_USER_AGENT
       - WORDPRESS_PINGBACK_REFLECTOR
       - WORDPRESS_PINGBACK_SOURCE
-  TopContributors:
-    type: array
-    items:
-      $ref: '#/definitions/Contributor'
-  Unit:
     type: string
-    enum:
-      - BITS
-      - BYTES
-      - PACKETS
-      - REQUESTS
-  Long:
-    type: integer
+  AttackSummaries:
+    items:
+      $ref: '#/definitions/AttackSummary'
+    type: array
   AttackSummary:
-    type: object
+    description: Summarizes all DDoS attacks for a specified time period.
     properties:
       AttackId:
         $ref: '#/definitions/String'
         description: The unique identifier (ID) of the attack.
+      AttackVectors:
+        $ref: '#/definitions/AttackVectorDescriptionList'
+        description: The list of attacks for a specified time period.
+      EndTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The end time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       ResourceArn:
         $ref: '#/definitions/String'
         description: The ARN (Amazon Resource Name) of the resource that was attacked.
       StartTime:
         $ref: '#/definitions/AttackTimestamp'
         description: 'The start time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      EndTime:
-        $ref: '#/definitions/AttackTimestamp'
-        description: 'The end time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      AttackVectors:
-        $ref: '#/definitions/AttackVectorDescriptionList'
-        description: The list of attacks for a specified time period.
-    description: Summarizes all DDoS attacks for a specified time period.
-  AttackSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/AttackSummary'
-  String:
-    type: string
-  AttackVectorDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/AttackVectorDescription'
-  AttackVectorDescription:
     type: object
-    required:
-      - VectorType
+  AttackTimestamp:
+    format: date-time
+    type: string
+  AttackVectorDescription:
+    description: Describes the attack.
     properties:
       VectorType:
         $ref: '#/definitions/String'
         description: '<p>The attack type. Valid values:</p> <ul> <li> <p>UDP_TRAFFIC</p> </li> <li> <p>UDP_FRAGMENT</p> </li> <li> <p>GENERIC_UDP_REFLECTION</p> </li> <li> <p>DNS_REFLECTION</p> </li> <li> <p>NTP_REFLECTION</p> </li> <li> <p>CHARGEN_REFLECTION</p> </li> <li> <p>SSDP_REFLECTION</p> </li> <li> <p>PORT_MAPPER</p> </li> <li> <p>RIP_REFLECTION</p> </li> <li> <p>SNMP_REFLECTION</p> </li> <li> <p>MSSQL_REFLECTION</p> </li> <li> <p>NET_BIOS_REFLECTION</p> </li> <li> <p>SYN_FLOOD</p> </li> <li> <p>ACK_FLOOD</p> </li> <li> <p>REQUEST_FLOOD</p> </li> <li> <p>HTTP_REFLECTION</p> </li> <li> <p>UDS_REFLECTION</p> </li> <li> <p>MEMCACHED_REFLECTION</p> </li> </ul>'
-    description: Describes the attack.
+    required:
+      - VectorType
+    type: object
+  AttackVectorDescriptionList:
+    items:
+      $ref: '#/definitions/AttackVectorDescription'
+    type: array
   AutoRenew:
-    type: string
     enum:
       - ENABLED
       - DISABLED
+    type: string
   Contributor:
-    type: object
+    description: A contributor to the attack and their contribution.
     properties:
       Name:
         $ref: '#/definitions/String'
@@ -1341,31 +1026,261 @@ definitions:
       Value:
         $ref: '#/definitions/Long'
         description: 'The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.'
-    description: A contributor to the attack and their contribution.
-  ProtectionName:
-    type: string
-    pattern: '[ a-zA-Z0-9_\\.\\-]*'
+    type: object
+  CreateProtectionRequest:
+    properties:
+      Name:
+        $ref: '#/definitions/ProtectionName'
+        description: Friendly name for the <code>Protection</code> you are creating.
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: '<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>'
+    required:
+      - Name
+      - ResourceArn
+    type: object
+  CreateProtectionResponse:
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) for the <a>Protection</a> object that is created.
+    type: object
+  CreateSubscriptionRequest:
+    properties: {}
+    type: object
+  CreateSubscriptionResponse:
+    properties: {}
+    type: object
+  DeleteProtectionRequest:
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) for the <a>Protection</a> object to be deleted.
+    required:
+      - ProtectionId
+    type: object
+  DeleteProtectionResponse:
+    properties: {}
+    type: object
+  DeleteSubscriptionRequest:
+    properties: {}
+    type: object
+  DeleteSubscriptionResponse:
+    properties: {}
+    type: object
+  DescribeAttackRequest:
+    properties:
+      AttackId:
+        $ref: '#/definitions/AttackId'
+        description: The unique identifier (ID) for the attack that to be described.
+    required:
+      - AttackId
+    type: object
+  DescribeAttackResponse:
+    properties:
+      Attack:
+        $ref: '#/definitions/AttackDetail'
+        description: The attack that is described.
+    type: object
+  DescribeDRTAccessRequest:
+    properties: {}
+    type: object
+  DescribeDRTAccessResponse:
+    properties:
+      LogBucketList:
+        $ref: '#/definitions/LogBucketList'
+        description: The list of Amazon S3 buckets accessed by the DRT.
+      RoleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the role the DRT used to access your AWS account.
+    type: object
+  DescribeEmergencyContactSettingsRequest:
+    properties: {}
+    type: object
+  DescribeEmergencyContactSettingsResponse:
+    properties:
+      EmergencyContactList:
+        $ref: '#/definitions/EmergencyContactList'
+        description: A list of email addresses that the DRT can use to contact you during a suspected attack.
+    type: object
+  DescribeProtectionRequest:
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: 'The unique identifier (ID) for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: 'The ARN (Amazon Resource Name) of the AWS resource for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
+    type: object
+  DescribeProtectionResponse:
+    properties:
+      Protection:
+        $ref: '#/definitions/Protection'
+        description: The <a>Protection</a> object that is described.
+    type: object
+  DescribeSubscriptionRequest:
+    properties: {}
+    type: object
+  DescribeSubscriptionResponse:
+    properties:
+      Subscription:
+        $ref: '#/definitions/Subscription'
+        description: The AWS Shield Advanced subscription details for an account.
+    type: object
+  DisassociateDRTLogBucketRequest:
+    properties:
+      LogBucket:
+        $ref: '#/definitions/LogBucket'
+        description: The Amazon S3 bucket that contains your AWS WAF logs.
+    required:
+      - LogBucket
+    type: object
+  DisassociateDRTLogBucketResponse:
+    properties: {}
+    type: object
+  DisassociateDRTRoleRequest:
+    properties: {}
+    type: object
+  DisassociateDRTRoleResponse:
+    properties: {}
+    type: object
+  Double:
+    format: double
+    type: number
+  DurationInSeconds:
+    minimum: 0
+    type: integer
+  EmailAddress:
+    maxLength: 150
     minLength: 1
-    maxLength: 128
-  ProtectionId:
+    pattern: ^\S+@\S+\.\S+$
     type: string
-    pattern: '[a-zA-Z0-9\\-]*'
-    minLength: 1
-    maxLength: 36
-  LogBucketList:
-    type: array
-    items:
-      $ref: '#/definitions/LogBucket'
-    minItems: 0
-    maxItems: 10
+  EmergencyContact:
+    description: Contact information that the DRT can use to contact you during a suspected attack.
+    properties:
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: An email address that the DRT can use to contact you during a suspected attack.
+    required:
+      - EmailAddress
+    type: object
   EmergencyContactList:
-    type: array
     items:
       $ref: '#/definitions/EmergencyContact'
-    minItems: 0
     maxItems: 10
-  Protection:
+    minItems: 0
+    type: array
+  GetSubscriptionStateRequest:
+    properties: {}
     type: object
+  GetSubscriptionStateResponse:
+    properties:
+      SubscriptionState:
+        $ref: '#/definitions/SubscriptionState'
+        description: The status of the subscription.
+    required:
+      - SubscriptionState
+    type: object
+  Integer:
+    type: integer
+  InternalErrorException: {}
+  InvalidOperationException: {}
+  InvalidPaginationTokenException: {}
+  InvalidParameterException: {}
+  InvalidResourceException: {}
+  Limit:
+    description: Specifies how many protections of a given type you can create.
+    properties:
+      Max:
+        $ref: '#/definitions/Long'
+        description: The maximum number of protections that can be created for the specified <code>Type</code>.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of protection.
+    type: object
+  Limits:
+    items:
+      $ref: '#/definitions/Limit'
+    type: array
+  LimitsExceededException: {}
+  ListAttacksRequest:
+    properties:
+      EndTime:
+        $ref: '#/definitions/TimeRange'
+        description: 'The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.
+      ResourceArns:
+        $ref: '#/definitions/ResourceArnFilterList'
+        description: 'The ARN (Amazon Resource Name) of the resource that was attacked. If this is left blank, all applicable resources for this account will be included.'
+      StartTime:
+        $ref: '#/definitions/TimeRange'
+        description: 'The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
+    type: object
+  ListAttacksResponse:
+    properties:
+      AttackSummaries:
+        $ref: '#/definitions/AttackSummaries'
+        description: The attack information for the specified time range.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: '<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
+    type: object
+  ListProtectionsRequest:
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '<p>The maximum number of <a>Protection</a> objects to be returned. If this is left blank the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.
+    type: object
+  ListProtectionsResponse:
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: '<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
+      Protections:
+        $ref: '#/definitions/Protections'
+        description: The array of enabled <a>Protection</a> objects.
+    type: object
+  LockedSubscriptionException: {}
+  LogBucket:
+    maxLength: 63
+    minLength: 3
+    pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
+    type: string
+  LogBucketList:
+    items:
+      $ref: '#/definitions/LogBucket'
+    maxItems: 10
+    minItems: 0
+    type: array
+  Long:
+    type: integer
+  MaxResults:
+    maximum: 10000
+    minimum: 0
+    type: integer
+  Mitigation:
+    description: The mitigation applied to a DDoS attack.
+    properties:
+      MitigationName:
+        $ref: '#/definitions/String'
+        description: The name of the mitigation taken for this attack.
+    type: object
+  MitigationList:
+    items:
+      $ref: '#/definitions/Mitigation'
+    type: array
+  NoAssociatedRoleException: {}
+  OptimisticLockException: {}
+  Protection:
+    description: An object that represents a resource that is under DDoS protection.
     properties:
       Id:
         $ref: '#/definitions/ProtectionId'
@@ -1376,73 +1291,132 @@ definitions:
       ResourceArn:
         $ref: '#/definitions/ResourceArn'
         description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
-    description: An object that represents a resource that is under DDoS protection.
-  Subscription:
     type: object
+  ProtectionId:
+    maxLength: 36
+    minLength: 1
+    pattern: '[a-zA-Z0-9\\-]*'
+    type: string
+  ProtectionName:
+    maxLength: 128
+    minLength: 1
+    pattern: '[ a-zA-Z0-9_\\.\\-]*'
+    type: string
+  Protections:
+    items:
+      $ref: '#/definitions/Protection'
+    type: array
+  ResourceAlreadyExistsException: {}
+  ResourceArn:
+    maxLength: 2048
+    minLength: 1
+    pattern: '^arn:aws.*'
+    type: string
+  ResourceArnFilterList:
+    items:
+      $ref: '#/definitions/ResourceArn'
+    type: array
+  ResourceNotFoundException: {}
+  RoleArn:
+    maxLength: 2048
+    minLength: 1
+    pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    type: string
+  String:
+    type: string
+  SubResourceSummary:
+    description: The attack information for the specified SubResource.
     properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time your subscription will end.
-      TimeCommitmentInSeconds:
-        $ref: '#/definitions/DurationInSeconds'
-        description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
+      AttackVectors:
+        $ref: '#/definitions/SummarizedAttackVectorList'
+        description: The list of attack types and associated counters.
+      Counters:
+        $ref: '#/definitions/SummarizedCounterList'
+        description: The counters that describe the details of the attack.
+      Id:
+        $ref: '#/definitions/String'
+        description: The unique identifier (ID) of the <code>SubResource</code>.
+      Type:
+        $ref: '#/definitions/SubResourceType'
+        description: The <code>SubResource</code> type.
+    type: object
+  SubResourceSummaryList:
+    items:
+      $ref: '#/definitions/SubResourceSummary'
+    type: array
+  SubResourceType:
+    enum:
+      - IP
+      - URL
+    type: string
+  Subscription:
+    description: Information about the AWS Shield Advanced subscription for an account.
+    properties:
       AutoRenew:
         $ref: '#/definitions/AutoRenew'
         description: '<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p> <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>'
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time your subscription will end.
       Limits:
         $ref: '#/definitions/Limits'
         description: Specifies how many protections of a given type you can create.
-    description: Information about the AWS Shield Advanced subscription for an account.
-  Double:
-    type: number
-    format: double
-  DurationInSeconds:
-    type: integer
-    minimum: 0
-  EmailAddress:
-    type: string
-    pattern: ^\S+@\S+\.\S+$
-    minLength: 1
-    maxLength: 150
-  EmergencyContact:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+      TimeCommitmentInSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
     type: object
-    required:
-      - EmailAddress
-    properties:
-      EmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: An email address that the DRT can use to contact you during a suspected attack.
-    description: Contact information that the DRT can use to contact you during a suspected attack.
   SubscriptionState:
-    type: string
     enum:
       - ACTIVE
       - INACTIVE
-  Integer:
-    type: integer
-  Limit:
-    type: object
+    type: string
+  SummarizedAttackVector:
+    description: A summary of information about the attack.
     properties:
-      Type:
+      VectorCounters:
+        $ref: '#/definitions/SummarizedCounterList'
+        description: The list of counters that describe the details of the attack.
+      VectorType:
         $ref: '#/definitions/String'
-        description: The type of protection.
-      Max:
-        $ref: '#/definitions/Long'
-        description: The maximum number of protections that can be created for the specified <code>Type</code>.
-    description: Specifies how many protections of a given type you can create.
-  Limits:
-    type: array
-    items:
-      $ref: '#/definitions/Limit'
-  ResourceArnFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceArn'
-  TimeRange:
+        description: 'The attack type, for example, SNMP reflection or SYN flood.'
+    required:
+      - VectorType
     type: object
+  SummarizedAttackVectorList:
+    items:
+      $ref: '#/definitions/SummarizedAttackVector'
+    type: array
+  SummarizedCounter:
+    description: The counter that describes a DDoS attack.
+    properties:
+      Average:
+        $ref: '#/definitions/Double'
+        description: The average value of the counter for a specified time period.
+      Max:
+        $ref: '#/definitions/Double'
+        description: The maximum value of the counter for a specified time period.
+      'N':
+        $ref: '#/definitions/Integer'
+        description: The number of counters for a specified time period.
+      Name:
+        $ref: '#/definitions/String'
+        description: The counter name.
+      Sum:
+        $ref: '#/definitions/Double'
+        description: The total of counter values for a specified time period.
+      Unit:
+        $ref: '#/definitions/String'
+        description: The unit of the counters.
+    type: object
+  SummarizedCounterList:
+    items:
+      $ref: '#/definitions/SummarizedCounter'
+    type: array
+  TimeRange:
+    description: The time range.
     properties:
       FromInclusive:
         $ref: '#/definitions/AttackTimestamp'
@@ -1450,86 +1424,112 @@ definitions:
       ToExclusive:
         $ref: '#/definitions/AttackTimestamp'
         description: 'The end time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-    description: The time range.
-  Token:
-    type: string
-    pattern: ^.*$
-    minLength: 1
-    maxLength: 4096
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 10000
-  Protections:
-    type: array
-    items:
-      $ref: '#/definitions/Protection'
-  Mitigation:
     type: object
-    properties:
-      MitigationName:
-        $ref: '#/definitions/String'
-        description: The name of the mitigation taken for this attack.
-    description: The mitigation applied to a DDoS attack.
-  SubResourceType:
-    type: string
-    enum:
-      - IP
-      - URL
-  SummarizedAttackVectorList:
-    type: array
-    items:
-      $ref: '#/definitions/SummarizedAttackVector'
-  SubResourceSummary:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/SubResourceType'
-        description: The <code>SubResource</code> type.
-      Id:
-        $ref: '#/definitions/String'
-        description: The unique identifier (ID) of the <code>SubResource</code>.
-      AttackVectors:
-        $ref: '#/definitions/SummarizedAttackVectorList'
-        description: The list of attack types and associated counters.
-      Counters:
-        $ref: '#/definitions/SummarizedCounterList'
-        description: The counters that describe the details of the attack.
-    description: The attack information for the specified SubResource.
   Timestamp:
-    type: string
     format: date-time
-  SummarizedAttackVector:
-    type: object
-    required:
-      - VectorType
+    type: string
+  Token:
+    maxLength: 4096
+    minLength: 1
+    pattern: ^.*$
+    type: string
+  TopContributors:
+    items:
+      $ref: '#/definitions/Contributor'
+    type: array
+  Unit:
+    enum:
+      - BITS
+      - BYTES
+      - PACKETS
+      - REQUESTS
+    type: string
+  UpdateEmergencyContactSettingsRequest:
     properties:
-      VectorType:
-        $ref: '#/definitions/String'
-        description: 'The attack type, for example, SNMP reflection or SYN flood.'
-      VectorCounters:
-        $ref: '#/definitions/SummarizedCounterList'
-        description: The list of counters that describe the details of the attack.
-    description: A summary of information about the attack.
-  SummarizedCounter:
+      EmergencyContactList:
+        $ref: '#/definitions/EmergencyContactList'
+        description: A list of email addresses that the DRT can use to contact you during a suspected attack.
     type: object
+  UpdateEmergencyContactSettingsResponse:
+    properties: {}
+    type: object
+  UpdateSubscriptionRequest:
     properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The counter name.
-      Max:
-        $ref: '#/definitions/Double'
-        description: The maximum value of the counter for a specified time period.
-      Average:
-        $ref: '#/definitions/Double'
-        description: The average value of the counter for a specified time period.
-      Sum:
-        $ref: '#/definitions/Double'
-        description: The total of counter values for a specified time period.
-      'N':
-        $ref: '#/definitions/Integer'
-        description: The number of counters for a specified time period.
-      Unit:
-        $ref: '#/definitions/String'
-        description: The unit of the counters.
-    description: The counter that describes a DDoS attack.
+      AutoRenew:
+        $ref: '#/definitions/AutoRenew'
+        description: 'When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.'
+    type: object
+  UpdateSubscriptionResponse:
+    properties: {}
+    type: object
+x-servers:
+  - description: The AWS Shield multi-region endpoint
+    url: 'http://shield.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Shield multi-region endpoint
+    url: 'https://shield.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Shield endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://shield.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AWS Shield endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://shield.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

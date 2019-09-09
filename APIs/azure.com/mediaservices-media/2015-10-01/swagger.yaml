@@ -212,7 +212,7 @@ paths:
                       storageAccounts:
                         - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosostore
                           isPrimary: true
-                    tags: []
+                    tags: {}
                     type: Microsoft.Media/mediaservices
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/contosoresources/providers/Microsoft.Media/mediaservices/contosmedia2
                     location: West US
@@ -224,7 +224,7 @@ paths:
                       storageAccounts:
                         - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/microsoft.storage/storageAccounts/contosostore2
                           isPrimary: true
-                    tags: []
+                    tags: {}
                     type: Microsoft.Media/mediaservices
       x-ms-pageable:
         nextLinkName: null
@@ -256,10 +256,8 @@ paths:
             resourceGroupName: contosoresources
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: Gets a Media Service.
       externalDocs:
@@ -312,7 +310,7 @@ paths:
                   storageAccounts:
                     - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosostore
                       isPrimary: true
-                tags: []
+                tags: {}
                 type: Microsoft.Media/mediaservices
     patch:
       description: Updates a Media Service.
@@ -550,8 +548,7 @@ paths:
             resourceGroupName: contosoresources
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '200':
-              body: ''
+            '200': {}
 definitions:
   ApiEndpoint:
     description: The properties for a Media Services REST API endpoint.

@@ -303,11 +303,16 @@ paths:
                     location: westus
                     name: mySapMonitor1
                     properties:
+                      hanaDbCredentialsMsiId: ''
                       hanaDbName: ''
+                      hanaDbPasswordKeyVaultUrl: ''
                       hanaDbSqlPort: 1234
                       hanaDbUsername: ''
                       hanaHostname: ''
                       hanaSubnet: ''
+                      keyVaultId: ''
+                      logAnalyticsWorkspaceArmId: ''
+                      managedResourceGroupName: testManagedRg
                       provisioningState: Succeeded
                     tags:
                       key: value
@@ -316,11 +321,16 @@ paths:
                     location: westus
                     name: mySapMonitor2
                     properties:
+                      hanaDbCredentialsMsiId: ''
                       hanaDbName: ''
+                      hanaDbPasswordKeyVaultUrl: ''
                       hanaDbSqlPort: 1234
                       hanaDbUsername: ''
                       hanaHostname: ''
                       hanaSubnet: ''
+                      keyVaultId: ''
+                      logAnalyticsWorkspaceArmId: ''
+                      managedResourceGroupName: testManagedRg
                       provisioningState: Succeeded
                     tags:
                       key: value
@@ -722,40 +732,6 @@ paths:
                   key: value
                 type: Microsoft.HanaOnAzure/hanaInstances
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring':
-    post:
-      description: The operation to add a monitor to an SAP HANA instance.
-      operationId: HanaInstances_EnableMonitoring
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/HanaInstanceNameParameter'
-        - $ref: '#/parameters/MonitoringParameter'
-      responses:
-        '200':
-          description: OK
-        '202':
-          description: Accepted
-      tags:
-        - HanaOnAzure
-      x-ms-examples:
-        Monitor a HANA instance:
-          parameters:
-            api-version: 2017-11-03-preview
-            hanaInstanceName: myHanaInstance
-            monitoringParameter:
-              hanaDbPassword: passExample
-              hanaDbSqlPort: 50
-              hanaDbUsername: SYSTEM
-              hanaHostname: hana.hostname
-              hanaSubnet: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
-            resourceGroupName: myResourceGroup
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200': {}
-            '202': {}
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart':
     post:
       description: The operation to restart a SAP HANA instance.
@@ -918,11 +894,16 @@ paths:
                 location: westus
                 name: mySapMonitor
                 properties:
+                  hanaDbCredentialsMsiId: ''
                   hanaDbName: ''
+                  hanaDbPasswordKeyVaultUrl: ''
                   hanaDbSqlPort: 1234
                   hanaDbUsername: ''
                   hanaHostname: ''
                   hanaSubnet: ''
+                  keyVaultId: ''
+                  logAnalyticsWorkspaceArmId: ''
+                  managedResourceGroupName: testManagedRg
                   provisioningState: Succeeded
                 tags:
                   key: value
@@ -964,11 +945,16 @@ paths:
                 location: westus
                 name: mySapMonitor
                 properties:
+                  hanaDbCredentialsMsiId: ''
                   hanaDbName: ''
+                  hanaDbPasswordKeyVaultUrl: ''
                   hanaDbSqlPort: 1234
                   hanaDbUsername: ''
                   hanaHostname: ''
                   hanaSubnet: ''
+                  keyVaultId: ''
+                  logAnalyticsWorkspaceArmId: ''
+                  managedResourceGroupName: testManagedRg
                   provisioningState: Succeeded
                 tags: {}
                 type: Microsoft.HanaOnAzure/sapMonitors
@@ -988,11 +974,16 @@ paths:
                 location: westus
                 name: mySapMonitor
                 properties:
+                  hanaDbCredentialsMsiId: ''
                   hanaDbName: ''
+                  hanaDbPasswordKeyVaultUrl: ''
                   hanaDbSqlPort: 1234
                   hanaDbUsername: ''
                   hanaHostname: ''
                   hanaSubnet: ''
+                  keyVaultId: ''
+                  logAnalyticsWorkspaceArmId: ''
+                  managedResourceGroupName: testManagedRg
                   provisioningState: Succeeded
                 tags:
                   testkey: testvalue
@@ -1033,6 +1024,8 @@ paths:
               location: westus
               name: mySapMonitor
               properties:
+                HanaDbCredentialsMsiID: ''
+                HanaDbPasswordKeyVaultURL: ''
                 hanaDbName: ''
                 hanaDbPassword: ''
                 hanaDbSqlPort: 1234
@@ -1051,7 +1044,9 @@ paths:
                 location: westus
                 name: myHanaInstance
                 properties:
+                  hanaDbCredentialsMsiId: ''
                   hanaDbName: ''
+                  hanaDbPasswordKeyVaultUrl: ''
                   hanaDbSqlPort: 1234
                   hanaDbUsername: ''
                   hanaHostname: ''
@@ -1066,7 +1061,9 @@ paths:
                 location: westus
                 name: myHanaInstance
                 properties:
+                  hanaDbCredentialsMsiId: ''
                   hanaDbName: ''
+                  hanaDbPasswordKeyVaultUrl: ''
                   hanaDbSqlPort: 1234
                   hanaDbUsername: ''
                   hanaHostname: ''
@@ -1374,11 +1371,17 @@ definitions:
   SapMonitorProperties:
     description: Describes the properties of a SAP monitor.
     properties:
+      hanaDbCredentialsMsiId:
+        description: MSI ID passed by customer which has access to customer's KeyVault and to be assigned to the Collector VM.
+        type: string
       hanaDbName:
         description: Database name of the HANA instance.
         type: string
       hanaDbPassword:
         description: Database password of the HANA instance.
+        type: string
+      hanaDbPasswordKeyVaultUrl:
+        description: KeyVault URL link to the password for the HANA database.
         type: string
       hanaDbSqlPort:
         description: Database port of the HANA instance.
@@ -1391,6 +1394,17 @@ definitions:
         type: string
       hanaSubnet:
         description: Specifies the SAP monitor unique ID.
+        type: string
+      keyVaultId:
+        description: Key Vault ID containing customer's HANA credentials.
+        type: string
+      logAnalyticsWorkspaceArmId:
+        description: The ARM ID of the Log Analytics Workspace that is used for monitoring
+        readOnly: true
+        type: string
+      managedResourceGroupName:
+        description: The name of the resource group the SAP Monitor resources get deployed into.
+        readOnly: true
         type: string
       provisioningState:
         description: State of provisioning of the HanaInstance

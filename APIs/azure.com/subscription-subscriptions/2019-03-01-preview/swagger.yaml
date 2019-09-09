@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: subscription-subscriptions
   x-tags:
@@ -58,47 +58,9 @@ parameters:
       $ref: '#/definitions/SubscriptionName'
     x-ms-parameter-location: method
 paths:
-  /providers/Microsoft.Subscription/operations:
-    get:
-      description: Lists all of the available Microsoft.Subscription API operations.
-      operationId: Operations_List
-      parameters:
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-          schema:
-            $ref: '#/definitions/OperationListResult'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        getOperations:
-          parameters:
-            api-version: 2019-03-01-preview
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      operation: Cancels the subscription
-                      provider: Microsoft Subscription
-                      resource: Resources
-                    name: Microsoft.Subscription/cancel/action
-                  - display:
-                      operation: Renames the subscription
-                      provider: Microsoft Subscription
-                      resource: Resources
-                    name: Microsoft.Subscription/rename/action
-                  - display:
-                      operation: Enables the subscription
-                      provider: Microsoft Subscription
-                      resource: Resources
-                    name: Microsoft.Subscription/enable/action
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel':
     post:
-      description: Cancels the subscription
+      description: The operation to cancel a subscription
       operationId: Subscriptions_Cancel
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -109,7 +71,7 @@ paths:
           schema:
             $ref: '#/definitions/CanceledSubscriptionId'
         default:
-          description: Error response describing why the operation failed.
+          description: Describes the error if the operation is not successful.
           schema:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
@@ -123,7 +85,7 @@ paths:
                 value: 83aa47df-e3e9-49ff-877b-94304bf3d3ad
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable':
     post:
-      description: Enables the subscription
+      description: The operation to enable a subscription
       operationId: Subscriptions_Enable
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -134,21 +96,21 @@ paths:
           schema:
             $ref: '#/definitions/EnabledSubscriptionId'
         default:
-          description: Error response describing why the operation failed.
+          description: Describes the error if the operation is not successful.
           schema:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         enableSubscription:
           parameters:
             api-version: 2019-03-01-preview
-            subscriptionId: 83aa47df-e3e9-49ff-877b-94304bf3d3ad
+            subscriptionId: 7948bcee-488c-47ce-941c-38e20ede803d
           responses:
             '200':
               body:
-                value: 83aa47df-e3e9-49ff-877b-94304bf3d3ad
+                value: 7948bcee-488c-47ce-941c-38e20ede803d
   '/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename':
     post:
-      description: Renames the subscription
+      description: The operation to rename a subscription
       operationId: Subscriptions_Rename
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -160,7 +122,7 @@ paths:
           schema:
             $ref: '#/definitions/RenamedSubscriptionId'
         default:
-          description: Error response describing why the operation failed.
+          description: Describes the error if the operation is not successful.
           schema:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
@@ -176,17 +138,17 @@ paths:
                 value: 83aa47df-e3e9-49ff-877b-94304bf3d3ad
 definitions:
   CanceledSubscriptionId:
-    description: Canceled Subscription Id
+    description: The ID of the canceled subscription
     properties:
       value:
-        description: Canceled Subscription Id
+        description: The ID of the canceled subscription
         readOnly: true
         type: string
   EnabledSubscriptionId:
-    description: Enabled Subscription Id
+    description: The ID of the subscriptions that is being enabled
     properties:
       value:
-        description: Enabled Subscription Id
+        description: The ID of the subscriptions that is being enabled
         readOnly: true
         type: string
   ErrorResponse:
@@ -230,14 +192,14 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
   RenamedSubscriptionId:
-    description: Renamed Subscription Id
+    description: The ID of the subscriptions that is being renamed
     properties:
       value:
-        description: Renamed Subscription Id
+        description: The ID of the subscriptions that is being renamed
         readOnly: true
         type: string
   SubscriptionName:
-    description: New name of the subscription.
+    description: The new name of the subscription.
     properties:
       subscriptionName:
         description: New subscription name

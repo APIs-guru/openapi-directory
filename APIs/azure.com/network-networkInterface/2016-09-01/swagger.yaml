@@ -429,9 +429,7 @@ definitions:
       provisioningState:
         description: 'Gets the provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
         type: string
-      publicIPAddress:
-        $ref: './publicIpAddress.json#/definitions/PublicIPAddress'
-        description: The reference of the public IP resource.
+      publicIPAddress: {}
       subnet:
         $ref: './virtualNetwork.json#/definitions/Subnet'
         description: The reference of the subnet resource.
@@ -549,8 +547,7 @@ definitions:
           name: IPAllocationMethod
       provisioningState:
         type: string
-      publicIPAddress:
-        $ref: './publicIpAddress.json#/definitions/PublicIPAddress'
+      publicIPAddress: {}
       subnet:
         $ref: './virtualNetwork.json#/definitions/Subnet'
   NetworkInterfaceListResult:
@@ -621,3 +618,4 @@ definitions:
             description: Resource ID.
             type: string
         x-ms-azure-resource: true
+  PublicIPAddress: {}

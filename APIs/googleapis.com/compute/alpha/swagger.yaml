@@ -112,6 +112,7 @@ tags:
   - name: globalNetworkEndpointGroups
   - name: globalOperations
   - name: globalOrganizationOperations
+  - name: globalPublicDelegatedPrefixes
   - name: healthChecks
   - name: httpHealthChecks
   - name: httpsHealthChecks
@@ -135,6 +136,8 @@ tags:
   - name: organizationSecurityPolicies
   - name: packetMirrorings
   - name: projects
+  - name: publicAdvertisedPrefixes
+  - name: publicDelegatedPrefixes
   - name: regionAutoscalers
   - name: regionBackendServices
   - name: regionCommitments
@@ -2417,6 +2420,74 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/publicDelegatedPrefixes':
+    get:
+      description: Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes.
+      operationId: compute.publicDelegatedPrefixes.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefixAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - publicDelegatedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/reservations':
     get:
       description: Retrieves an aggregated list of reservations.
@@ -2759,7 +2830,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/subnetworks/listUsable':
     get:
-      description: Retrieves an aggregated list of usable subnetworks.
+      description: Retrieves an aggregated list of all usable subnetworks in the project. The list contains all of the subnetworks in the project and the subnetworks that were shared by a Shared VPC host project.
       operationId: compute.subnetworks.listUsable
       parameters:
         - description: |-
@@ -4309,6 +4380,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.backendBuckets.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -7203,6 +7278,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.images.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -7567,6 +7646,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.instanceTemplates.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -8132,6 +8215,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.interconnects.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -8351,6 +8438,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.licenseCodes.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -8684,6 +8775,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.licenses.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -9009,6 +9104,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.machineImages.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -10467,6 +10566,468 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalOperations
+  '/{project}/global/publicAdvertisedPrefixes':
+    get:
+      description: Lists the PublicAdvertisedPrefixes for a project.
+      operationId: compute.publicAdvertisedPrefixes.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicAdvertisedPrefixList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - publicAdvertisedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a PublicAdvertisedPrefix in the specified project using the parameters that are included in the request.
+      operationId: compute.publicAdvertisedPrefixes.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicAdvertisedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicAdvertisedPrefixes
+  '/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}':
+    delete:
+      description: Deletes the specified PublicAdvertisedPrefix
+      operationId: compute.publicAdvertisedPrefixes.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicAdvertisedPrefix resource to delete.
+          in: path
+          name: publicAdvertisedPrefix
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicAdvertisedPrefixes
+    get:
+      description: Returns the specified PublicAdvertisedPrefix resource.
+      operationId: compute.publicAdvertisedPrefixes.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicAdvertisedPrefix resource to return.
+          in: path
+          name: publicAdvertisedPrefix
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicAdvertisedPrefix'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - publicAdvertisedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified Router resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.publicAdvertisedPrefixes.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicAdvertisedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicAdvertisedPrefix resource to patch.
+          in: path
+          name: publicAdvertisedPrefix
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicAdvertisedPrefixes
+  '/{project}/global/publicDelegatedPrefixes':
+    get:
+      description: Lists the global PublicDelegatedPrefixes for a project.
+      operationId: compute.globalPublicDelegatedPrefixes.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefixList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - globalPublicDelegatedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a global PublicDelegatedPrefix in the specified project using the parameters that are included in the request.
+      operationId: compute.globalPublicDelegatedPrefixes.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - globalPublicDelegatedPrefixes
+  '/{project}/global/publicDelegatedPrefixes/{publicDelegatedPrefix}':
+    delete:
+      description: Deletes the specified global PublicDelegatedPrefix.
+      operationId: compute.globalPublicDelegatedPrefixes.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to delete.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - globalPublicDelegatedPrefixes
+    get:
+      description: Returns the specified global PublicDelegatedPrefix resource.
+      operationId: compute.globalPublicDelegatedPrefixes.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to return.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - globalPublicDelegatedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified global PublicDelegatedPrefix resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.globalPublicDelegatedPrefixes.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to patch.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - globalPublicDelegatedPrefixes
   '/{project}/global/routes':
     get:
       description: Retrieves the list of Route resources available to the specified project.
@@ -11352,6 +11913,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.snapshots.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -15493,7 +16058,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RegionCommitmentsUpdateReservationsRequest'
-        - description: Name of the commitment of which the reservation's capacities are being updated.
+        - description: Name of the commitment for which the reservation is being updated.
           in: path
           name: commitment
           required: true
@@ -16155,6 +16720,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.regionDisks.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -19251,6 +19820,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.interconnectAttachments.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -19664,6 +20237,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.nodeTemplates.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -20577,6 +21154,262 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - packetMirrorings
+  '/{project}/regions/{region}/publicDelegatedPrefixes':
+    get:
+      description: Lists the PublicDelegatedPrefixes for a project in the given region.
+      operationId: compute.publicDelegatedPrefixes.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefixList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - publicDelegatedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a PublicDelegatedPrefix in the specified project in the given region using the parameters that are included in the request.
+      operationId: compute.publicDelegatedPrefixes.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicDelegatedPrefixes
+  '/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}':
+    delete:
+      description: Deletes the specified PublicDelegatedPrefix in the given region.
+      operationId: compute.publicDelegatedPrefixes.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to delete.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicDelegatedPrefixes
+    get:
+      description: Returns the specified PublicDelegatedPrefix resource in the given region.
+      operationId: compute.publicDelegatedPrefixes.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to return.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - publicDelegatedPrefixes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified PublicDelegatedPrefix resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.publicDelegatedPrefixes.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicDelegatedPrefix'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the PublicDelegatedPrefix resource to patch.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - publicDelegatedPrefixes
   '/{project}/regions/{region}/resourcePolicies':
     get:
       description: A list all the resource policies that have been configured for the specified project in specified region.
@@ -20790,6 +21623,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.resourcePolicies.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -21852,6 +22689,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.subnetworks.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -26492,6 +27333,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.disks.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -30850,6 +31695,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.instances.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -31915,7 +32764,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/NodeGroupsDeleteNodesRequest'
-        - description: Name of the NodeGroup resource to delete.
+        - description: Name of the NodeGroup resource whose nodes will be deleted.
           in: path
           name: nodeGroup
           required: true
@@ -32152,6 +33001,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.nodeGroups.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -32620,7 +33473,7 @@ paths:
         - zoneOperations
   '/{project}/zones/{zone}/reservations':
     get:
-      description: A list all the reservations that have been configured for the specified project in specified zone.
+      description: A list of all the reservations that have been configured for the specified project in specified zone.
       operationId: compute.reservations.list
       parameters:
         - description: |-
@@ -32780,7 +33633,7 @@ paths:
       tags:
         - reservations
     get:
-      description: Retrieves all information of the specified reservation.
+      description: Retrieves information about the specified reservation.
       operationId: compute.reservations.get
       parameters:
         - description: Project ID for this request.
@@ -32836,7 +33689,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Resizes the reservation (applicable to standalone reservations only)
+      description: 'Resizes the reservation (applicable to standalone reservations only). For more information, read Modifying reservations.'
       operationId: compute.reservations.resize
       parameters:
         - in: body
@@ -32888,6 +33741,10 @@ paths:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.reservations.getIamPolicy
       parameters:
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          type: integer
         - description: Project ID for this request.
           in: path
           name: project
@@ -33940,16 +34797,16 @@ definitions:
     description: This reservation type allows to pre allocate specific instance configuration.
     properties:
       count:
-        description: Specifies number of resources that are allocated.
+        description: Specifies the number of resources that are allocated.
         format: int64
         type: string
       inUseCount:
-        description: '[OutputOnly] Indicates how many resource are in use.'
+        description: '[OutputOnly] Indicates how many instances are in use.'
         format: int64
         type: string
       instanceProperties:
         $ref: '#/definitions/AllocationSpecificSKUAllocationReservedInstanceProperties'
-        description: The instance properties for this specific sku reservation.
+        description: The instance properties for the reservation.
     type: object
   AttachedDisk:
     description: An instance-attached disk resource.
@@ -34056,7 +34913,7 @@ definitions:
         description: 'Specifies the disk name. If not specified, the default is to use the name of the instance. If the disk with the instance name exists already in the given zone/region, a new name will be automatically generated.'
         type: string
       diskSizeGb:
-        description: Specifies the size of the disk in base-2 GB.
+        description: 'Specifies the size of the disk in base-2 GB. If not specified, the disk will be the same size as the image (usually 10GB). If specified, the size must be equal to or larger than 10GB.'
         format: int64
         type: string
       diskType:
@@ -34143,9 +35000,9 @@ definitions:
 
       Example Policy with multiple AuditConfigs:
 
-      { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice.googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] }
+      { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "sampleservice.googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
+      For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -34165,15 +35022,18 @@ definitions:
     description: |-
       Provides the configuration for logging a type of permissions. Example:
 
-      { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", } ] }
+      { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE", } ] }
 
-      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting foo@gmail.com from DATA_READ logging.
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting jose@example.com from DATA_READ logging.
     properties:
       exemptedMembers:
         description: 'Specifies the identities that do not cause logging for this type of permission. Follows the same format of [Binding.members][].'
         items:
           type: string
         type: array
+      ignoreChildExemptions:
+        description: 'Specifies whether principals can be exempted for the same LogType in lower-level resource policies. If true, any lower-level exemptions will be ignored.'
+        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -34680,17 +35540,17 @@ definitions:
 
            
           - If the load balancing mode is CONNECTION, then the load is spread based on how many concurrent connections the backend can handle.
-          The CONNECTION balancing mode is only available if the protocol for the backend service is SSL, TCP, or UDP.
+          You can use the CONNECTION balancing mode if the protocol for the backend service is SSL, TCP, or UDP.
 
           If the loadBalancingScheme for the backend service is EXTERNAL (SSL Proxy and TCP Proxy load balancers), you must also specify exactly one of the following parameters: maxConnections, maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
 
           If the loadBalancingScheme for the backend service is INTERNAL (internal TCP/UDP load balancers), you cannot specify any additional parameters.
            
-          - If the load balancing mode is RATE, then the load is spread based on the rate of HTTP requests per second (RPS).
-          The RATE balancing mode is only available if the protocol for the backend service is HTTP or HTTPS. You must specify exactly one of the following parameters: maxRate, maxRatePerInstance, or maxRatePerEndpoint.
+          - If the load balancing mode is RATE, the load is spread based on the rate of HTTP requests per second (RPS).
+          You can use the RATE balancing mode if the protocol for the backend service is HTTP or HTTPS. You must specify exactly one of the following parameters: maxRate, maxRatePerInstance, or maxRatePerEndpoint.
            
-          - If the load balancing mode is UTILIZATION, then the load is spread based on the CPU utilization of instances in an instance group.
-          The UTILIZATION balancing mode is only available if the loadBalancingScheme of the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backend is made up of instance groups. There are no restrictions on the backend service protocol.
+          - If the load balancing mode is UTILIZATION, the load is spread based on the CPU utilization of instances in an instance group.
+          You can use the UTILIZATION balancing mode if the loadBalancingScheme of the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backends are instance groups. There are no restrictions on the backend service protocol.
         enum:
           - CONNECTION
           - RATE
@@ -35079,7 +35939,7 @@ definitions:
         description: |-
           Type of session affinity to use. The default is NONE. Session affinity is not applicable if the --protocol is UDP.
 
-          When the loadBalancingScheme is EXTERNAL, possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. GENERATED_COOKIE is only available if the protocol is HTTP or HTTPS.
+          When the loadBalancingScheme is EXTERNAL, possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. You can use GENERATED_COOKIE if the protocol is HTTP or HTTPS.
 
           When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
 
@@ -35522,7 +36382,7 @@ definitions:
           - UP
         type: string
       negotiatedLocalControlTxIntervalMs:
-        description: Negotiated transmit interval for control packets. When echo mode is enabled this will reflect the negotiated slow timer interval.
+        description: Negotiated transmit interval for control packets.
         format: uint32
         type: integer
       negotiatedLocalEchoTxIntervalMs:
@@ -35576,7 +36436,7 @@ definitions:
 
           * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
-          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` .
 
 
 
@@ -35741,7 +36601,7 @@ definitions:
         description: '[Output Only] URL of the region where this commitment may be used.'
         type: string
       reservations:
-        description: List of reservations for this commitment.
+        description: List of reservations in this commitment.
         items:
           $ref: '#/definitions/Reservation'
         type: array
@@ -35775,6 +36635,7 @@ definitions:
         enum:
           - COMPUTE_OPTIMIZED
           - GENERAL_PURPOSE
+          - GENERAL_PURPOSE_E2
           - GENERAL_PURPOSE_N2
           - MEMORY_OPTIMIZED
           - TYPE_UNSPECIFIED
@@ -36315,7 +37176,7 @@ definitions:
         description: '[Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used.'
         type: string
       status:
-        description: '[Output Only] The status of disk creation.'
+        description: '[Output Only] The status of disk creation. CREATING: Disk is provisioning. RESTORING: Source data is being copied into the disk. FAILED: Disk creation failed. READY: Disk is ready for use. DELETING: Disk is deleting.'
         enum:
           - CREATING
           - DELETING
@@ -37404,23 +38265,13 @@ definitions:
     properties:
       IPAddress:
         description: |-
-          The IP address that this forwarding rule is serving on behalf of.
+          IP address that this forwarding rule serves. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the target that you specify in the forwarding rule.
 
-          Addresses are restricted based on the forwarding rule's load balancing scheme (EXTERNAL or INTERNAL) and scope (global or regional).
+          If you don't specify a reserved IP address, an ephemeral IP address is assigned. Methods for specifying an IP address:
 
-          When the load balancing scheme is EXTERNAL, for global forwarding rules, the address must be a global IP, and for regional forwarding rules, the address must live in the same region as the forwarding rule. If this field is empty, an ephemeral IPv4 address from the same scope (global or regional) will be assigned. A regional forwarding rule supports IPv4 only. A global forwarding rule supports either IPv4 or IPv6.
+          * IPv4 dotted decimal, as in `100.1.2.3` * Full URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name * Partial URL or by name, as in: * projects/project_id/regions/region/addresses/address-name * regions/region/addresses/address-name * global/addresses/address-name * address-name 
 
-          When the load balancing scheme is INTERNAL_SELF_MANAGED, this must be a URL reference to an existing Address resource ( internal regional static IP address), with a purpose of GCE_END_POINT and address_type of INTERNAL.
-
-          When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnet configured for the forwarding rule. By default, if this field is empty, an ephemeral internal IP address will be automatically allocated from the IP range of the subnet or network configured for this forwarding rule.
-
-          An address can be specified either by a literal IP address or a URL reference to an existing Address resource. The following examples are all valid:  
-          - 100.1.2.3 
-          - https://www.googleapis.com/compute/v1/projects/project/regions/region/addresses/address 
-          - projects/project/regions/region/addresses/address 
-          - regions/region/addresses/address 
-          - global/addresses/address 
-          - address
+          The loadBalancingScheme and the forwarding rule's target determine the type of IP address that you can use. For detailed information, refer to [IP address specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
         type: string
       IPProtocol:
         description: |-
@@ -37535,24 +38386,29 @@ definitions:
         type: string
       portRange:
         description: |-
-          This field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway, TargetPool, TargetInstance.
+          This field is deprecated. See the port
+          field.
+        type: string
+      ports:
+        description: |-
+          List of comma-separated ports. The forwarding rule forwards packets with matching destination ports. If the forwarding rule's loadBalancingScheme is EXTERNAL, and the forwarding rule references a target pool, specifying ports is optional. You can specify an unlimited number of ports, but they must be contiguous. If you omit ports, GCP forwards traffic on any port of the forwarding rule's protocol.
 
-          Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets addressed to ports in the specified range will be forwarded to target. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
+          If the forwarding rule's loadBalancingScheme is EXTERNAL, and the forwarding rule references a target HTTP proxy, target HTTPS proxy, target TCP proxy, target SSL proxy, or target VPN gateway, you must specify ports using the following constraints:
 
-          Some types of forwarding target have constraints on the acceptable ports:  
+           
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
           - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688, 1883, 5222 
           - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688, 1883, 5222 
-          - TargetVpnGateway: 500, 4500
-        type: string
-      ports:
-        description: |-
-          This field is used along with the backend_service field for internal load balancing.
+          - TargetVpnGateway: 500, 4500  
 
-          When the load balancing scheme is INTERNAL, a list of ports can be configured, for example, ['80'], ['8000','9000'] etc. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule.
+          If the forwarding rule's loadBalancingScheme is INTERNAL, you must specify ports in one of the following ways:
 
-          You may specify a maximum of up to 5 ports.
+          * A list of up to five ports, which can be non-contiguous * Keyword ALL, which causes the forwarding rule to forward traffic on any port of the forwarding rule's protocol.
+
+          The ports field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway, TargetPool, TargetInstance.
+
+          Applicable only when IPProtocol is TCP, UDP, or SCTP. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
         items:
           type: string
         type: array
@@ -37567,7 +38423,7 @@ definitions:
         type: string
       serviceLabel:
         description: |-
-          An optional prefix to the service name for this Forwarding Rule. If specified, will be the first label of the fully qualified service name.
+          An optional prefix to the service name for this Forwarding Rule. If specified, the prefix is the first label of the fully qualified service name.
 
           The label must be 1-63 characters long, and comply with RFC1035. Specifically, the label must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
 
@@ -38203,11 +39059,6 @@ definitions:
       enable:
         description: 'Indicates whether or not to export logs. This is false by default, which means no health check logging will be done.'
         type: boolean
-      filter:
-        description: 'Specifies the desired filtering of logs on this health check. If this is unspecified and enable is true, logs are exported with LOG_TRANSITION filter.'
-        enum:
-          - LOG_TRANSITION
-        type: string
     type: object
   HealthCheckReference:
     description: |-
@@ -39280,7 +40131,7 @@ definitions:
           - READY
         type: string
       storageLocations:
-        description: GCS bucket storage location of the image (regional or multi-regional).
+        description: Cloud Storage bucket storage location of the image (regional or multi-regional).
         items:
           type: string
         type: array
@@ -39415,6 +40266,7 @@ definitions:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
       hostname:
+        description: 'Specifies the hostname of the instance. The specified hostname must be RFC1035 compliant. If hostname is not specified, the default hostname is [INSTANCE_NAME].c.[PROJECT_ID].internal when using the global DNS, and [INSTANCE_NAME].[ZONE].c.[PROJECT_ID].internal when using zonal DNS.'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -40178,6 +41030,10 @@ definitions:
   InstanceGroupManagerUpdatePolicy:
     properties:
       instanceRedistributionType:
+        description: |-
+          The  instance redistribution policy for regional managed instance groups. Valid values are:  
+          - PROACTIVE (default): The group attempts to maintain an even distribution of VM instances across zones in the region. 
+          - NONE: For non-autoscaled groups, proactive redistribution is disabled.
         enum:
           - NONE
           - PROACTIVE
@@ -41440,7 +42296,9 @@ definitions:
           - BPS_1G: 1 Gbit/s 
           - BPS_2G: 2 Gbit/s 
           - BPS_5G: 5 Gbit/s 
-          - BPS_10G: 10 Gbit/s
+          - BPS_10G: 10 Gbit/s 
+          - BPS_20G: 20 Gbit/s 
+          - BPS_50G: 50 Gbit/s
         enum:
           - BPS_100M
           - BPS_10G
@@ -41509,6 +42367,10 @@ definitions:
           type: string
         description: Labels to apply to this InterconnectAttachment resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
         type: object
+      mtu:
+        description: 'Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.'
+        format: int32
+        type: integer
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -42730,6 +43592,10 @@ definitions:
         items:
           type: string
         type: array
+      totalStorageBytes:
+        description: '[Output Only] Total size of the storage used by the machine image.'
+        format: int64
+        type: string
     type: object
   MachineImageList:
     description: A list of machine images.
@@ -43140,7 +44006,7 @@ definitions:
         description: '[Output Only] The URL for the health check that verifies whether the instance is healthy.'
         type: string
       healthState:
-        description: '[Output Only] The current instance health state.'
+        description: '[Output Only] The current instance health state. This field will not get promoted to beta/GA and might be removed from alpha APIs after 01/12/2019. Please use detailed_health_state field instead.'
         enum:
           - HEALTHY
           - UNHEALTHY
@@ -43374,7 +44240,7 @@ definitions:
           The name must be 1-63 characters long, and comply with RFC1035.
         type: string
       ipAddress:
-        description: 'Optional IPv4 address of network endpoint. The IP address must belong to a VM in GCE (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.'
+        description: 'Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.'
         type: string
       port:
         description: 'Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.'
@@ -43420,6 +44286,7 @@ definitions:
         description: Type of network endpoints in this network endpoint group. Currently the only supported value is GCE_VM_IP_PORT.
         enum:
           - GCE_VM_IP_PORT
+          - GCE_VM_PRIMARY_IP
           - INTERNET_FQDN_PORT
           - INTERNET_IP_PORT
           - NON_GCP_PRIVATE_IP_PORT
@@ -44132,6 +44999,11 @@ definitions:
       minSize:
         format: int32
         type: integer
+      mode:
+        enum:
+          - MODE_UNSPECIFIED
+          - 'ON'
+        type: string
     type: object
   NodeGroupList:
     description: Contains a list of nodeGroups.
@@ -44243,6 +45115,7 @@ definitions:
   NodeGroupsDeleteNodesRequest:
     properties:
       nodes:
+        description: Names of the nodes to delete.
         items:
           type: string
         type: array
@@ -45075,7 +45948,7 @@ definitions:
         format: int32
         type: integer
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] The unique identifier for the operation. This identifier is defined by the server.'
         format: uint64
         type: string
       insertTime:
@@ -45086,7 +45959,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
-        description: '[Output Only] Name of the resource.'
+        description: '[Output Only] Name of the operation.'
         type: string
       operationType:
         description: '[Output Only] The type of operation, such as insert, update, or delete, and so on.'
@@ -46028,7 +46901,7 @@ definitions:
         description: |-
           `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
 
-          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten.
         format: byte
         type: string
       iamOwned:
@@ -46244,6 +47117,438 @@ definitions:
         description: Email address of the service account.
         type: string
     type: object
+  PublicAdvertisedPrefix:
+    description: A public advertised prefix represents an aggregated IP prefix or netblock which customers bring to cloud. The IP prefix is a single unit of route advertisement and is announced globally to the internet.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      dnsVerificationIp:
+        description: The IPv4 address to be used for reverse DNS verification.
+        type: string
+      fingerprint:
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicAdvertisedPrefix. An up-to-date fingerprint must be provided in order to update the PublicAdvertisedPrefix, otherwise the request will fail with error 412 conditionNotMet.
+
+          To see the latest fingerprint, make a get() request to retrieve a PublicAdvertisedPrefix.
+        format: byte
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource type. The server generates this identifier.'
+        format: uint64
+        type: string
+      ipCidrRange:
+        description: 'The IPv4 address range, in CIDR format, represented by this public advertised prefix.'
+        type: string
+      kind:
+        default: 'compute#publicAdvertisedPrefix'
+        description: '[Output Only] Type of the resource. Always compute#publicAdvertisedPrefix for public advertised prefixes.'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      publicDelegatedPrefixs:
+        description: '[Output Only] The list of public delegated prefixes that exist for this public advertised prefix.'
+        items:
+          $ref: '#/definitions/PublicAdvertisedPrefixPublicDelegatedPrefix'
+        type: array
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL with id for the resource.'
+        type: string
+      sharedSecret:
+        description: '[Output Only] The shared secret to be used for reverse DNS verification.'
+        type: string
+      status:
+        description: The status of the public advertised prefix.
+        enum:
+          - INITIAL
+          - PREFIX_CONFIGURATION_COMPLETE
+          - PREFIX_CONFIGURATION_IN_PROGRESS
+          - PREFIX_REMOVAL_IN_PROGRESS
+          - PTR_CONFIGURED
+          - REVERSE_DNS_LOOKUP_FAILED
+          - VALIDATED
+        type: string
+    type: object
+  PublicAdvertisedPrefixList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of PublicAdvertisedPrefix resources.
+        items:
+          $ref: '#/definitions/PublicAdvertisedPrefix'
+        type: array
+      kind:
+        default: 'compute#publicAdvertisedPrefixList'
+        description: '[Output Only] Type of the resource. Always compute#publicAdvertisedPrefix for public advertised prefixes.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  PublicAdvertisedPrefixPublicDelegatedPrefix:
+    description: Represents a CIDR range which can be used to assign addresses.
+    properties:
+      name:
+        description: The name of the public delegated prefix
+        type: string
+      region:
+        description: 'The region of the public delegated prefix if it is regional. If absent, the prefix is global.'
+        type: string
+      status:
+        description: 'The status of the public delegated prefix. Possible values are: ACTIVE: The public delegated prefix is active DRAINED: The public delegated prefix is drained.'
+        type: string
+    type: object
+  PublicDelegatedPrefix:
+    description: A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      fingerprint:
+        description: |-
+          Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicDelegatedPrefix. An up-to-date fingerprint must be provided in order to update the PublicDelegatedPrefix, otherwise the request will fail with error 412 conditionNotMet.
+
+          To see the latest fingerprint, make a get() request to retrieve a PublicDelegatedPrefix.
+        format: byte
+        type: string
+      googleAnnouncements:
+        description: The list of Google announcements that exist for this delegated prefix.
+        items:
+          $ref: '#/definitions/PublicDelegatedPrefixGoogleAnnouncement'
+        type: array
+      id:
+        description: '[Output Only] The unique identifier for the resource type. The server generates this identifier.'
+        format: uint64
+        type: string
+      ipCidrRange:
+        description: 'The IPv4 address range, in CIDR format, represented by this public delegated prefix.'
+        type: string
+      kind:
+        default: 'compute#publicDelegatedPrefix'
+        description: '[Output Only] Type of the resource. Always compute#publicDelegatedPrefix for public delegated prefixes.'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      parentPrefix:
+        description: The URL of parent prefix. Either PublicAdvertisedPrefix or PublicDelegatedPrefix.
+        type: string
+      publicDelegatedSubPrefixs:
+        description: The list of sub public delegated prefixes that exist for this public delegated prefix.
+        items:
+          $ref: '#/definitions/PublicDelegatedPrefixPublicDelegatedSubPrefix'
+        type: array
+      region:
+        description: '[Output Only] URL of the region where the public delegated prefix resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL with id for the resource.'
+        type: string
+      status:
+        description: '[Output Only] The status of the public delegated prefix.'
+    type: object
+  PublicDelegatedPrefixAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/PublicDelegatedPrefixesScopedList'
+          description: '[Output Only] Name of the scope containing this set of PublicDelegatedPrefixes.'
+        description: A list of PublicDelegatedPrefixesScopedList resources.
+        type: object
+      kind:
+        default: 'compute#publicDelegatedPrefixAggregatedList'
+        description: '[Output Only] Type of the resource. Always compute#publicDelegatedPrefixAggregatedList for aggregated lists of public delegated prefixes.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  PublicDelegatedPrefixGoogleAnnouncement:
+    description: A Google announcement advertises the prefix internally within Google's network backbone from the specified scope.
+    properties:
+      name:
+        description: 'The name of a Google announcement. The name must be 1-63 characters long, and comply with  RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first // character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      status:
+        description: The status of this Google announcement.
+        enum:
+          - CANARY_CONFIGURED
+          - CONFIGURED
+          - INITIAL
+        type: string
+    type: object
+  PublicDelegatedPrefixList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of PublicDelegatedPrefix resources.
+        items:
+          $ref: '#/definitions/PublicDelegatedPrefix'
+        type: array
+      kind:
+        default: 'compute#publicDelegatedPrefixList'
+        description: '[Output Only] Type of the resource. Always compute#publicDelegatedPrefixList for public delegated prefixes.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  PublicDelegatedPrefixPublicDelegatedSubPrefix:
+    description: Represents a sub PublicDelegatedPrefix.
+    properties:
+      delegateeProject:
+        description: Name of the project scoping this PublicDelegatedSubPrefix.
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      ipCidrRange:
+        description: 'The IPv4 address range, in CIDR format, represented by this sub public delegated prefix.'
+        type: string
+      isAddress:
+        description: Whether the sub prefix is delegated to create Address resources in the delegatee project.
+        type: boolean
+      name:
+        description: The name of the sub public delegated prefix.
+        type: string
+      region:
+        description: '[Output Only] The region of the sub public delegated prefix if it is regional. If absent, the sub prefix is global.'
+        type: string
+      status:
+        description: '[Output Only] The status of the sub public delegated prefix.'
+    type: object
+  PublicDelegatedPrefixesScopedList:
+    properties:
+      publicDelegatedPrefixes:
+        description: '[Output Only] A list of PublicDelegatedPrefixes contained in this scope.'
+        items:
+          $ref: '#/definitions/PublicDelegatedPrefix'
+        type: array
+      warning:
+        description: '[Output Only] Informational warning which replaces the list of public delegated prefixes when the list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   Quota:
     description: A quotas entry.
     properties:
@@ -46261,8 +47566,10 @@ definitions:
           - BACKEND_SERVICES
           - C2_CPUS
           - COMMITMENTS
+          - COMMITTED_C2_CPUS
           - COMMITTED_CPUS
           - COMMITTED_LOCAL_SSD_TOTAL_GB
+          - COMMITTED_N2_CPUS
           - COMMITTED_NVIDIA_K80_GPUS
           - COMMITTED_NVIDIA_P100_GPUS
           - COMMITTED_NVIDIA_P4_GPUS
@@ -46286,6 +47593,7 @@ definitions:
           - INTERCONNECTS
           - INTERCONNECT_ATTACHMENTS_PER_REGION
           - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
+          - INTERCONNECT_TOTAL_GBPS
           - INTERNAL_ADDRESSES
           - INTERNAL_FORWARDING_RULES_PER_NETWORK
           - INTERNAL_FORWARDING_RULES_WITH_GLOBAL_ACCESS_PER_NETWORK
@@ -46509,7 +47817,7 @@ definitions:
   RegionCommitmentsUpdateReservationsRequest:
     properties:
       reservations:
-        description: List of reservations for the capacity move of VMs with accelerators and local ssds.
+        description: List of two reservations to transfer GPUs and local SSD between.
         items:
           $ref: '#/definitions/Reservation'
         type: array
@@ -47173,10 +48481,10 @@ definitions:
         type: string
     type: object
   Reservation:
-    description: 'Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read  Reserving zonal resources. (== resource_for beta.reservations ==) (== resource_for v1.reservations ==) (== NextID: 13 ==)'
+    description: 'Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read  Reserving zonal resources. (== resource_for beta.reservations ==) (== resource_for v1.reservations ==)'
     properties:
       commitment:
-        description: '[OutputOnly] Full or partial url for parent commitment for reservations which are tied to a commitment.'
+        description: '[OutputOnly] Full or partial URL to a parent commitment. This field displays for reservations that are tied to a commitment.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -47218,7 +48526,7 @@ definitions:
           - UPDATING
         type: string
       zone:
-        description: 'Zone in which the reservation resides, must be provided if reservation is created with commitment creation.'
+        description: Zone in which the reservation resides. A zone must be provided if the reservation is created within a commitment.
         type: string
     type: object
   ReservationAffinity:
@@ -47822,7 +49130,7 @@ definitions:
         description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
         type: object
       storageLocations:
-        description: GCS bucket storage location of the auto snapshot (regional or multi-regional).
+        description: Cloud Storage bucket storage location of the auto snapshot (regional or multi-regional).
         items:
           type: string
         type: array
@@ -48295,7 +49603,7 @@ definitions:
           - MANAGED_BY_USER
         type: string
       name:
-        description: Name of this BGP peer. The name must be 1-63 characters long and comply with RFC1035.
+        description: 'Name of this BGP peer. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       peerAsn:
@@ -48309,11 +49617,11 @@ definitions:
   RouterBgpPeerBfd:
     properties:
       minReceiveInterval:
-        description: 'The minimum interval, in milliseconds, between BFD packets received from the peer router. The actual value is negotiated between the two routers and is equal to the greater of this value and the transmit interval of the other router. If BFD echo mode is enabled on this router and the peer router, this value is used to negotiate the interval between BFD echo packets transmitted by the peer router. Otherwise, it will be used to determine the interval between BFD control packets. If set, this value must be between 100 and 30000. The default is 300.'
+        description: 'The minimum interval, in milliseconds, between BFD control packets received from the peer router. The actual value is negotiated between the two routers and is equal to the greater of this value and the transmit interval of the other router. If set, this value must be between 100 and 30000. The default is 300.'
         format: uint32
         type: integer
       minTransmitInterval:
-        description: 'The minimum interval, in milliseconds, between BFD packets transmitted to the peer router. The actual value is negotiated between the two routers and is equal to the greater of this value and the corresponding receive interval of the other router. If BFD echo mode is enabled on this router and the peer router, this value is used to negotiate the interval between BFD echo packets transmitted by this router. Otherwise, it will be used to determine the interval between BFD control packets. If set, this value must be between 100 and 30000. The default is 300.'
+        description: 'The minimum interval, in milliseconds, between BFD control packets transmitted to the peer router. The actual value is negotiated between the two routers and is equal to the greater of this value and the corresponding receive interval of the other router. If set, this value must be between 100 and 30000. The default is 300.'
         format: uint32
         type: integer
       mode:
@@ -48366,7 +49674,7 @@ definitions:
           - MANAGED_BY_USER
         type: string
       name:
-        description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
+        description: 'Name of this interface entry. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
     type: object
@@ -49514,7 +50822,7 @@ definitions:
           - UP_TO_DATE
         type: string
       storageLocations:
-        description: GCS bucket storage location of the snapshot (regional or multi-regional).
+        description: Cloud Storage bucket storage location of the snapshot (regional or multi-regional).
         items:
           type: string
         type: array
@@ -50484,6 +51792,9 @@ definitions:
       enable:
         description: 'Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is to disable flow logging.'
         type: boolean
+      filterExpr:
+        description: Can only be specified if VPC flow logs for this subnetwork is enabled. Export filter used to define which VPC flow logs should be logged.
+        type: string
       flowSampling:
         description: 'Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork where 1.0 means all collected logs are reported and 0.0 means no logs are reported. Default is 0.5, which means half of all collected logs are reported.'
         format: float
@@ -50491,9 +51802,15 @@ definitions:
       metadata:
         description: 'Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.'
         enum:
+          - CUSTOM_METADATA
           - EXCLUDE_ALL_METADATA
           - INCLUDE_ALL_METADATA
         type: string
+      metadataFields:
+        description: Can only be specified if VPC flow logs for this subnetwork is enabled and "metadata" was set to CUSTOM_METADATA.
+        items:
+          type: string
+        type: array
     type: object
   SubnetworkSecondaryRange:
     description: Represents a secondary IP range of a subnetwork.

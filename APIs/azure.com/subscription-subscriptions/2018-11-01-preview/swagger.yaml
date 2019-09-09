@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: subscription-subscriptions
   x-tags:
@@ -45,15 +45,15 @@ parameters:
 paths:
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription':
     post:
-      description: Creates an Azure subscription
+      description: The operation to create a new Azure subscription
       operationId: SubscriptionFactory_CreateSubscription
       parameters:
-        - description: The name of the commerce root billing account.
+        - description: The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.
           in: path
           name: billingAccountName
           required: true
           type: string
-        - description: The name of the invoice section.
+        - description: The name of the invoice section in the billing account for which you want to create the subscription.
           in: path
           name: invoiceSectionName
           required: true
@@ -64,7 +64,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SubscriptionCreationParameters'
+            $ref: '#/definitions/ModernSubscriptionCreationParameters'
       responses:
         '200':
           description: Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.
@@ -89,10 +89,9 @@ paths:
             api-version: 2018-11-01-preview
             billingAccountName: 12a6eed9-5d39-4103-a5db-2db1db0a8c67
             body:
-              additionalParameters: {}
               billingProfileId: /providers/Microsoft.Billing/billingAccounts/12a6eed9-5d39-4103-a5db-2db1db0a8c67/billingProfiles/dbcb81c8-cda9-4b01-b9fc-831e6a2e152e
-              costCenter: myCostCenter123
-              displayName: Test Ea Azure Sub
+              costCenter: '135366376'
+              displayName: Contoso MCA subscription
               owner:
                 objectId: 973034ff-acb7-409c-b731-e789672c7b31
               skuId: '0001'
@@ -106,34 +105,6 @@ paths:
                 Location: /providers/Microsoft.Subscription/subscriptionOperations/aeb76128-ebde-4f5a-a9ed-e7bbf2dbc994?api-version=2018-11-01-preview
                 Retry-After: 8
       x-ms-long-running-operation: true
-  /providers/Microsoft.Subscription/operations:
-    get:
-      description: Lists all of the available Microsoft.Subscription API operations.
-      operationId: Operations_List
-      parameters:
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-          schema:
-            $ref: '#/definitions/OperationListResult'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        getOperations:
-          parameters:
-            api-version: 2018-11-01-preview
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      operation: Create an Azure subscription
-                      provider: Microsoft Subscription
-                      resource: Resources
-                    name: Microsoft.Subscription/createSubscription/action
   '/providers/Microsoft.Subscription/subscriptionOperations/{operationId}':
     get:
       description: Get the status of the pending Microsoft.Subscription API operations.
@@ -174,7 +145,7 @@ paths:
                 Retry-After: 8
 definitions:
   AdPrincipal:
-    description: Active Directory Principal for subscription creation delegated permission
+    description: Active Directory Principal who’ll get owner access on the new subscription.
     properties:
       objectId:
         description: Object id of the Principal
@@ -191,6 +162,36 @@ definitions:
         description: Error message indicating why the operation failed.
         type: string
     type: object
+  ModernSubscriptionCreationParameters:
+    description: The parameters required to create a new subscription.
+    properties:
+      additionalParameters:
+        additionalProperties:
+          type: object
+        description: 'Additional, untyped parameters to support custom subscription creation scenarios.'
+        type: object
+      billingProfileId:
+        description: The ARM ID of the billing profile for which you want to create the subscription.
+        type: string
+      costCenter:
+        description: 'If set, the cost center will show up on the Azure usage and charges file.'
+        type: string
+      displayName:
+        description: The friendly name of the subscription.
+        type: string
+      managementGroupId:
+        description: The identifier of the management group to which this subscription will be associated.
+        type: string
+      owner:
+        $ref: '#/definitions/AdPrincipal'
+        description: 'If specified, the AD principal will get owner access to the subscription, along with the user who is performing the create subscription operation'
+      skuId:
+        description: The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.
+        type: string
+    required:
+      - displayName
+      - billingProfileId
+      - skuId
   Operation:
     description: REST API operation
     properties:
@@ -221,34 +222,11 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
-  SubscriptionCreationParameters:
-    description: Subscription Creation Parameters required to create a new Azure subscription.
-    properties:
-      additionalParameters:
-        additionalProperties:
-          type: object
-        description: 'Additional, untyped parameters to support custom subscription creation scenarios.'
-        type: object
-      billingProfileId:
-        description: The ARM id of the billing profile.
-        type: string
-      costCenter:
-        description: optional customer cost center
-        type: string
-      displayName:
-        description: The display name of the subscription.
-        type: string
-      owner:
-        $ref: '#/definitions/AdPrincipal'
-        description: rbac owner of the subscription
-      skuId:
-        description: The commerce id of the sku.
-        type: string
   SubscriptionCreationResult:
     description: The created subscription object.
     properties:
       subscriptionLink:
-        description: The link to the new subscription.
+        description: The link to the new subscription. Use this link to check the status of subscription creation operation.
         type: string
   SubscriptionOperation:
     description: status of the subscription POST operation.

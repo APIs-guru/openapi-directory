@@ -2486,6 +2486,17 @@ paths:
           name: name
           required: false
           type: string
+        - description: '~'
+          format: int32
+          in: query
+          name: contactCount
+          required: false
+          type: integer
+        - description: '~'
+          in: query
+          name: orderBy
+          required: false
+          type: string
       responses:
         '200':
           description: successful operation
@@ -2535,11 +2546,16 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/CreateContactListRequest'
+        - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
+          in: query
+          name: fields
+          required: false
+          type: string
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/ResourceId'
+            $ref: '#/definitions/ContactList'
         '400':
           description: Bad request
           schema:
@@ -7473,6 +7489,9 @@ definitions:
           - ARCHIVED
           - VALIDATING_START
           - VALIDATING_EMAIL
+          - BLOCKED_SUSPICIOUS
+          - DECLINED
+          - APPROVED
         type: string
     type: object
   CallBroadcastPage:
@@ -9084,6 +9103,9 @@ definitions:
           - ARCHIVED
           - VALIDATING_START
           - VALIDATING_EMAIL
+          - BLOCKED_SUSPICIOUS
+          - DECLINED
+          - APPROVED
         type: string
     type: object
   TextBroadcastPage:

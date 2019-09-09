@@ -154,7 +154,7 @@ paths:
     patch:
       description: |-
         Updates the settings associated with a project, folder, or organization.
-        Completely replaces the existing settings.
+        Settings to update are determined by the value of field_mask.
       operationId: accessapproval.organizations.updateAccessApprovalSettings
       parameters:
         - in: body
@@ -173,6 +173,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            The update mask applies to the settings. For the `FieldMask` definition,
+            see
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+            If this field is left unset, only the notification_emails field will be
+            updated.
+          in: query
+          name: updateMask
+          type: string
       responses:
         '200':
           description: Successful response
@@ -342,6 +351,20 @@ definitions:
   AccessApprovalSettings:
     description: Settings on a Project/Folder/Organization related to Access Approval.
     properties:
+      enrolledServices:
+        description: |-
+          A list of Google Cloud Services for which the given resource has Access
+          Approval enrolled. Access requests for the resource given by name against
+          any of these services contained here will be required to have explicit
+          approval. If name refers to an organization, enrollment can be done for
+          individual services. If name refers to a folder or project, enrollment can
+          only be done on an all or nothing basis.
+
+          If a cloud_product is repeated in this list, the first entry will be
+          honored and all following entries will be discarded.
+        items:
+          $ref: '#/definitions/EnrolledService'
+        type: array
       name:
         description: |-
           The resource name of the settings. Format is one of:
@@ -488,6 +511,33 @@ definitions:
       dismissTime:
         description: The time at which the approval request was dismissed.
         format: google-datetime
+        type: string
+    type: object
+  EnrolledService:
+    description: Represents the enrollment of a cloud resource into a specific service.
+    properties:
+      cloudProduct:
+        description: |-
+          The product for which Access Approval will be enrolled. Allowed values are
+          listed below (case-sensitive):
+          <ol>
+            <li>all</li>
+            <li>appengine.googleapis.com</li>
+            <li>bigquery.googleapis.com</li>
+            <li>bigtable.googleapis.com</li>
+            <li>cloudkms.googleapis.com</li>
+            <li>compute.googleapis.com</li>
+            <li>dataflow.googleapis.com</li>
+            <li>iam.googleapis.com</li>
+            <li>pubsub.googleapis.com</li>
+            <li>storage.googleapis.com</li>
+          <ol>
+        type: string
+      enrollmentLevel:
+        description: The enrollment level of the service.
+        enum:
+          - ENROLLMENT_LEVEL_UNSPECIFIED
+          - BLOCK_ALL
         type: string
     type: object
   ListApprovalRequestsResponse:

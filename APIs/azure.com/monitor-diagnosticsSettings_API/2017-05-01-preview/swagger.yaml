@@ -131,12 +131,8 @@ paths:
             name: mysetting
             resourceUri: subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Gets the active diagnostic settings for the specified resource.
       operationId: DiagnosticSettings_Get

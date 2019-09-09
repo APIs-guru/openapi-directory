@@ -131,6 +131,55 @@ paths:
                       export: []
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                      recommendationsConfiguration:
+                        - name: Service Principal Not Used with ACR
+                          recommendationType: IoT_ACRAuthentication
+                          status: Enabled
+                        - name: Agent sending underutilized messages
+                          recommendationType: IoT_AgentSendsUnutilizedMessages
+                          status: TurnedOn
+                        - name: Operating system (OS) baseline validation failure
+                          recommendationType: IoT_Baseline
+                          status: Enabled
+                        - name: Edge Hub memory can be optimized
+                          recommendationType: IoT_EdgeHubMemOptimize
+                          status: Enabled
+                        - name: No Logging Configured for Edge Module
+                          recommendationType: IoT_EdgeLoggingOptions
+                          status: Enabled
+                        - name: Module Settings Inconsistent in SecurityGroup
+                          recommendationType: IoT_InconsistentModuleSettings
+                          status: Enabled
+                        - name: Install the Azure Security of Things Agent
+                          recommendationType: IoT_InstallAgent
+                          status: Enabled
+                        - name: Default IP Filter Policy should be Deny
+                          recommendationType: IoT_IPFilter_DenyAll
+                          status: Enabled
+                        - name: IP Filter rule includes large IP range
+                          recommendationType: IoT_IPFilter_PermissiveRule
+                          status: Enabled
+                        - name: Open Ports On Device
+                          recommendationType: IoT_OpenPorts
+                          status: Disabled
+                        - name: Permissive firewall policy in one of the chains was found
+                          recommendationType: IoT_PermissiveFirewallPolicy
+                          status: Enabled
+                        - name: Permissive firewall rule in the input chain was found
+                          recommendationType: IoT_PermissiveInputFirewallRules
+                          status: Enabled
+                        - name: Permissive firewall rule in the output chain was found
+                          recommendationType: IoT_PermissiveOutputFirewallRules
+                          status: Enabled
+                        - name: High level permissions configured in Edge model twin for Edge module
+                          recommendationType: IoT_PrivilegedDockerOptions
+                          status: Enabled
+                        - name: Same Authentication Credentials used by multiple devices
+                          recommendationType: IoT_SharedCredentials
+                          status: Disabled
+                        - name: TLS cipher suite upgrade
+                          recommendationType: IoT_VulnerableTLSCipherSuite
+                          status: Enabled
                       status: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -153,42 +202,54 @@ paths:
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/IotHubSecond
                       recommendationsConfiguration:
-                        - description: Open Ports on device
-                          recommendationType: OpenPortsOnDevice
-                          status: TurnedOff
-                        - description: Permissive firewall policy found in one of the chains
-                          recommendationType: PermissiveFirewallPolicy
+                        - name: Service Principal Not Used with ACR
+                          recommendationType: IoT_ACRAuthentication
+                          status: Enabled
+                        - name: Agent sending underutilized messages
+                          recommendationType: IoT_AgentSendsUnutilizedMessages
                           status: TurnedOn
-                        - description: Permissive firewall rule in the input chain was found
-                          recommendationType: PermissiveFirewallRuleInput
-                          status: TurnedOn
-                        - description: Permissive firewall rule in the output chain was found
-                          recommendationType: PermissiveFirewallRuleOut
-                          status: TurnedOn
-                        - description: Operation system baseline validation has failed
-                          recommendationType: OperationSystemNotValid
-                          status: TurnedOn
-                        - description: Agent sends unutilized messages
-                          recommendationType: UnutilizedMessagesFromAgent
-                          status: TurnedOn
-                        - description: Security twin configuration not optimal
-                          recommendationType: SecurityTwinConfigurationNotOptimal
-                          status: TurnedOn
-                        - description: Security twin configuration conflict
-                          recommendationType: SecurityTwinConfigurationConflict
-                          status: TurnedOn
-                        - description: Identical authentication credentials used by multiple devices
-                          recommendationType: IdenticalAuthenticationCredentials
-                          status: TurnedOff
-                        - description: Default IP filter policy should be deny
-                          recommendationType: DenyDefaultIpPolicy
-                          status: TurnedOn
-                        - description: IP filter rule includes large IP range
-                          recommendationType: TooLargeIPRange
-                          status: TurnedOn
-                        - description: Enable diagnostics logs in IoT Hub
-                          recommendationType: EnableDiagnosticsLog
-                          status: TurnedOn
+                        - name: Operating system (OS) baseline validation failure
+                          recommendationType: IoT_Baseline
+                          status: Enabled
+                        - name: Edge Hub memory can be optimized
+                          recommendationType: IoT_EdgeHubMemOptimize
+                          status: Enabled
+                        - name: No Logging Configured for Edge Module
+                          recommendationType: IoT_EdgeLoggingOptions
+                          status: Enabled
+                        - name: Module Settings Inconsistent in SecurityGroup
+                          recommendationType: IoT_InconsistentModuleSettings
+                          status: Enabled
+                        - name: Install the Azure Security of Things Agent
+                          recommendationType: IoT_InstallAgent
+                          status: Enabled
+                        - name: Default IP Filter Policy should be Deny
+                          recommendationType: IoT_IPFilter_DenyAll
+                          status: Enabled
+                        - name: IP Filter rule includes large IP range
+                          recommendationType: IoT_IPFilter_PermissiveRule
+                          status: Enabled
+                        - name: Open Ports On Device
+                          recommendationType: IoT_OpenPorts
+                          status: Disabled
+                        - name: Permissive firewall policy in one of the chains was found
+                          recommendationType: IoT_PermissiveFirewallPolicy
+                          status: Enabled
+                        - name: Permissive firewall rule in the input chain was found
+                          recommendationType: IoT_PermissiveInputFirewallRules
+                          status: Enabled
+                        - name: Permissive firewall rule in the output chain was found
+                          recommendationType: IoT_PermissiveOutputFirewallRules
+                          status: Enabled
+                        - name: High level permissions configured in Edge model twin for Edge module
+                          recommendationType: IoT_PrivilegedDockerOptions
+                          status: Enabled
+                        - name: Same Authentication Credentials used by multiple devices
+                          recommendationType: IoT_SharedCredentials
+                          status: Disabled
+                        - name: TLS cipher suite upgrade
+                          recommendationType: IoT_VulnerableTLSCipherSuite
+                          status: Enabled
                       status: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -220,42 +281,54 @@ paths:
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       recommendationsConfiguration:
-                        - description: Open Ports on device
-                          recommendationType: OpenPortsOnDevice
-                          status: TurnedOff
-                        - description: Permissive firewall policy found in one of the chains
-                          recommendationType: PermissiveFirewallPolicy
+                        - name: Service Principal Not Used with ACR
+                          recommendationType: IoT_ACRAuthentication
+                          status: Enabled
+                        - name: Agent sending underutilized messages
+                          recommendationType: IoT_AgentSendsUnutilizedMessages
                           status: TurnedOn
-                        - description: Permissive firewall rule in the input chain was found
-                          recommendationType: PermissiveFirewallRuleInput
-                          status: TurnedOn
-                        - description: Permissive firewall rule in the output chain was found
-                          recommendationType: PermissiveFirewallRuleOut
-                          status: TurnedOn
-                        - description: Operation system baseline validation has failed
-                          recommendationType: OperationSystemNotValid
-                          status: TurnedOn
-                        - description: Agent sends unutilized messages
-                          recommendationType: UnutilizedMessagesFromAgent
-                          status: TurnedOn
-                        - description: Security twin configuration not optimal
-                          recommendationType: SecurityTwinConfigurationNotOptimal
-                          status: TurnedOn
-                        - description: Security twin configuration conflict
-                          recommendationType: SecurityTwinConfigurationConflict
-                          status: TurnedOn
-                        - description: Identical authentication credentials used by multiple devices
-                          recommendationType: IdenticalAuthenticationCredentials
-                          status: TurnedOff
-                        - description: Default IP filter policy should be deny
-                          recommendationType: DenyDefaultIpPolicy
-                          status: TurnedOn
-                        - description: IP filter rule includes large IP range
-                          recommendationType: TooLargeIPRange
-                          status: TurnedOn
-                        - description: Enable diagnostics logs in IoT Hub
-                          recommendationType: EnableDiagnosticsLog
-                          status: TurnedOn
+                        - name: Operating system (OS) baseline validation failure
+                          recommendationType: IoT_Baseline
+                          status: Enabled
+                        - name: Edge Hub memory can be optimized
+                          recommendationType: IoT_EdgeHubMemOptimize
+                          status: Enabled
+                        - name: No Logging Configured for Edge Module
+                          recommendationType: IoT_EdgeLoggingOptions
+                          status: Enabled
+                        - name: Module Settings Inconsistent in SecurityGroup
+                          recommendationType: IoT_InconsistentModuleSettings
+                          status: Enabled
+                        - name: Install the Azure Security of Things Agent
+                          recommendationType: IoT_InstallAgent
+                          status: Enabled
+                        - name: Default IP Filter Policy should be Deny
+                          recommendationType: IoT_IPFilter_DenyAll
+                          status: Enabled
+                        - name: IP Filter rule includes large IP range
+                          recommendationType: IoT_IPFilter_PermissiveRule
+                          status: Enabled
+                        - name: Open Ports On Device
+                          recommendationType: IoT_OpenPorts
+                          status: Disabled
+                        - name: Permissive firewall policy in one of the chains was found
+                          recommendationType: IoT_PermissiveFirewallPolicy
+                          status: Enabled
+                        - name: Permissive firewall rule in the input chain was found
+                          recommendationType: IoT_PermissiveInputFirewallRules
+                          status: Enabled
+                        - name: Permissive firewall rule in the output chain was found
+                          recommendationType: IoT_PermissiveOutputFirewallRules
+                          status: Enabled
+                        - name: High level permissions configured in Edge model twin for Edge module
+                          recommendationType: IoT_PrivilegedDockerOptions
+                          status: Enabled
+                        - name: Same Authentication Credentials used by multiple devices
+                          recommendationType: IoT_SharedCredentials
+                          status: Disabled
+                        - name: TLS cipher suite upgrade
+                          recommendationType: IoT_VulnerableTLSCipherSuite
+                          status: Enabled
                       status: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -342,42 +415,54 @@ paths:
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       recommendationsConfiguration:
-                        - description: Open Ports on device
-                          recommendationType: OpenPortsOnDevice
-                          status: TurnedOff
-                        - description: Permissive firewall policy found in one of the chains
-                          recommendationType: PermissiveFirewallPolicy
+                        - name: Service Principal Not Used with ACR
+                          recommendationType: IoT_ACRAuthentication
+                          status: Enabled
+                        - name: Agent sending underutilized messages
+                          recommendationType: IoT_AgentSendsUnutilizedMessages
                           status: TurnedOn
-                        - description: Permissive firewall rule in the input chain was found
-                          recommendationType: PermissiveFirewallRuleInput
-                          status: TurnedOn
-                        - description: Permissive firewall rule in the output chain was found
-                          recommendationType: PermissiveFirewallRuleOut
-                          status: TurnedOn
-                        - description: Operation system baseline validation has failed
-                          recommendationType: OperationSystemNotValid
-                          status: TurnedOn
-                        - description: Agent sends unutilized messages
-                          recommendationType: UnutilizedMessagesFromAgent
-                          status: TurnedOn
-                        - description: Security twin configuration not optimal
-                          recommendationType: SecurityTwinConfigurationNotOptimal
-                          status: TurnedOn
-                        - description: Security twin configuration conflict
-                          recommendationType: SecurityTwinConfigurationConflict
-                          status: TurnedOn
-                        - description: Identical authentication credentials used by multiple devices
-                          recommendationType: IdenticalAuthenticationCredentials
-                          status: TurnedOff
-                        - description: Default IP filter policy should be deny
-                          recommendationType: DenyDefaultIpPolicy
-                          status: TurnedOn
-                        - description: IP filter rule includes large IP range
-                          recommendationType: TooLargeIPRange
-                          status: TurnedOn
-                        - description: Enable diagnostics logs in IoT Hub
-                          recommendationType: EnableDiagnosticsLog
-                          status: TurnedOn
+                        - name: Operating system (OS) baseline validation failure
+                          recommendationType: IoT_Baseline
+                          status: Enabled
+                        - name: Edge Hub memory can be optimized
+                          recommendationType: IoT_EdgeHubMemOptimize
+                          status: Enabled
+                        - name: No Logging Configured for Edge Module
+                          recommendationType: IoT_EdgeLoggingOptions
+                          status: Enabled
+                        - name: Module Settings Inconsistent in SecurityGroup
+                          recommendationType: IoT_InconsistentModuleSettings
+                          status: Enabled
+                        - name: Install the Azure Security of Things Agent
+                          recommendationType: IoT_InstallAgent
+                          status: Enabled
+                        - name: Default IP Filter Policy should be Deny
+                          recommendationType: IoT_IPFilter_DenyAll
+                          status: Enabled
+                        - name: IP Filter rule includes large IP range
+                          recommendationType: IoT_IPFilter_PermissiveRule
+                          status: Enabled
+                        - name: Open Ports On Device
+                          recommendationType: IoT_OpenPorts
+                          status: Disabled
+                        - name: Permissive firewall policy in one of the chains was found
+                          recommendationType: IoT_PermissiveFirewallPolicy
+                          status: Enabled
+                        - name: Permissive firewall rule in the input chain was found
+                          recommendationType: IoT_PermissiveInputFirewallRules
+                          status: Enabled
+                        - name: Permissive firewall rule in the output chain was found
+                          recommendationType: IoT_PermissiveOutputFirewallRules
+                          status: Enabled
+                        - name: High level permissions configured in Edge model twin for Edge module
+                          recommendationType: IoT_PrivilegedDockerOptions
+                          status: Enabled
+                        - name: Same Authentication Credentials used by multiple devices
+                          recommendationType: IoT_SharedCredentials
+                          status: Disabled
+                        - name: TLS cipher suite upgrade
+                          recommendationType: IoT_VulnerableTLSCipherSuite
+                          status: Enabled
                       status: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -410,42 +495,54 @@ paths:
                       iotHubs:
                         - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                       recommendationsConfiguration:
-                        - description: Open Ports on device
-                          recommendationType: OpenPortsOnDevice
-                          status: TurnedOff
-                        - description: Permissive firewall policy found in one of the chains
-                          recommendationType: PermissiveFirewallPolicy
+                        - name: Service Principal Not Used with ACR
+                          recommendationType: IoT_ACRAuthentication
+                          status: Enabled
+                        - name: Agent sending underutilized messages
+                          recommendationType: IoT_AgentSendsUnutilizedMessages
                           status: TurnedOn
-                        - description: Permissive firewall rule in the input chain was found
-                          recommendationType: PermissiveFirewallRuleInput
-                          status: TurnedOn
-                        - description: Permissive firewall rule in the output chain was found
-                          recommendationType: PermissiveFirewallRuleOut
-                          status: TurnedOn
-                        - description: Operation system baseline validation has failed
-                          recommendationType: OperationSystemNotValid
-                          status: TurnedOn
-                        - description: Agent sends unutilized messages
-                          recommendationType: UnutilizedMessagesFromAgent
-                          status: TurnedOn
-                        - description: Security twin configuration not optimal
-                          recommendationType: SecurityTwinConfigurationNotOptimal
-                          status: TurnedOn
-                        - description: Security twin configuration conflict
-                          recommendationType: SecurityTwinConfigurationConflict
-                          status: TurnedOn
-                        - description: Identical authentication credentials used by multiple devices
-                          recommendationType: IdenticalAuthenticationCredentials
-                          status: TurnedOff
-                        - description: Default IP filter policy should be deny
-                          recommendationType: DenyDefaultIpPolicy
-                          status: TurnedOn
-                        - description: IP filter rule includes large IP range
-                          recommendationType: TooLargeIPRange
-                          status: TurnedOn
-                        - description: Enable diagnostics logs in IoT Hub
-                          recommendationType: EnableDiagnosticsLog
-                          status: TurnedOn
+                        - name: Operating system (OS) baseline validation failure
+                          recommendationType: IoT_Baseline
+                          status: Enabled
+                        - name: Edge Hub memory can be optimized
+                          recommendationType: IoT_EdgeHubMemOptimize
+                          status: Enabled
+                        - name: No Logging Configured for Edge Module
+                          recommendationType: IoT_EdgeLoggingOptions
+                          status: Enabled
+                        - name: Module Settings Inconsistent in SecurityGroup
+                          recommendationType: IoT_InconsistentModuleSettings
+                          status: Enabled
+                        - name: Install the Azure Security of Things Agent
+                          recommendationType: IoT_InstallAgent
+                          status: Enabled
+                        - name: Default IP Filter Policy should be Deny
+                          recommendationType: IoT_IPFilter_DenyAll
+                          status: Enabled
+                        - name: IP Filter rule includes large IP range
+                          recommendationType: IoT_IPFilter_PermissiveRule
+                          status: Enabled
+                        - name: Open Ports On Device
+                          recommendationType: IoT_OpenPorts
+                          status: Disabled
+                        - name: Permissive firewall policy in one of the chains was found
+                          recommendationType: IoT_PermissiveFirewallPolicy
+                          status: Enabled
+                        - name: Permissive firewall rule in the input chain was found
+                          recommendationType: IoT_PermissiveInputFirewallRules
+                          status: Enabled
+                        - name: Permissive firewall rule in the output chain was found
+                          recommendationType: IoT_PermissiveOutputFirewallRules
+                          status: Enabled
+                        - name: High level permissions configured in Edge model twin for Edge module
+                          recommendationType: IoT_PrivilegedDockerOptions
+                          status: Enabled
+                        - name: Same Authentication Credentials used by multiple devices
+                          recommendationType: IoT_SharedCredentials
+                          status: Disabled
+                        - name: TLS cipher suite upgrade
+                          recommendationType: IoT_VulnerableTLSCipherSuite
+                          status: Enabled
                       status: Enabled
                       userDefinedResources:
                         query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -594,42 +691,54 @@ paths:
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   recommendationsConfiguration:
-                    - description: Open Ports on device
-                      recommendationType: OpenPortsOnDevice
-                      status: TurnedOff
-                    - description: Permissive firewall policy found in one of the chains
-                      recommendationType: PermissiveFirewallPolicy
+                    - name: Service Principal Not Used with ACR
+                      recommendationType: IoT_ACRAuthentication
+                      status: Enabled
+                    - name: Agent sending underutilized messages
+                      recommendationType: IoT_AgentSendsUnutilizedMessages
                       status: TurnedOn
-                    - description: Permissive firewall rule in the input chain was found
-                      recommendationType: PermissiveFirewallRuleInput
-                      status: TurnedOn
-                    - description: Permissive firewall rule in the output chain was found
-                      recommendationType: PermissiveFirewallRuleOut
-                      status: TurnedOn
-                    - description: Operation system baseline validation has failed
-                      recommendationType: OperationSystemNotValid
-                      status: TurnedOn
-                    - description: Agent sends unutilized messages
-                      recommendationType: UnutilizedMessagesFromAgent
-                      status: TurnedOn
-                    - description: Security twin configuration not optimal
-                      recommendationType: SecurityTwinConfigurationNotOptimal
-                      status: TurnedOn
-                    - description: Security twin configuration conflict
-                      recommendationType: SecurityTwinConfigurationConflict
-                      status: TurnedOn
-                    - description: Identical authentication credentials used by multiple devices
-                      recommendationType: IdenticalAuthenticationCredentials
-                      status: TurnedOff
-                    - description: Default IP filter policy should be deny
-                      recommendationType: DenyDefaultIpPolicy
-                      status: TurnedOn
-                    - description: IP filter rule includes large IP range
-                      recommendationType: TooLargeIPRange
-                      status: TurnedOn
-                    - description: Enable diagnostics logs in IoT Hub
-                      recommendationType: EnableDiagnosticsLog
-                      status: TurnedOn
+                    - name: Operating system (OS) baseline validation failure
+                      recommendationType: IoT_Baseline
+                      status: Enabled
+                    - name: Edge Hub memory can be optimized
+                      recommendationType: IoT_EdgeHubMemOptimize
+                      status: Enabled
+                    - name: No Logging Configured for Edge Module
+                      recommendationType: IoT_EdgeLoggingOptions
+                      status: Enabled
+                    - name: Module Settings Inconsistent in SecurityGroup
+                      recommendationType: IoT_InconsistentModuleSettings
+                      status: Enabled
+                    - name: Install the Azure Security of Things Agent
+                      recommendationType: IoT_InstallAgent
+                      status: Enabled
+                    - name: Default IP Filter Policy should be Deny
+                      recommendationType: IoT_IPFilter_DenyAll
+                      status: Enabled
+                    - name: IP Filter rule includes large IP range
+                      recommendationType: IoT_IPFilter_PermissiveRule
+                      status: Enabled
+                    - name: Open Ports On Device
+                      recommendationType: IoT_OpenPorts
+                      status: Disabled
+                    - name: Permissive firewall policy in one of the chains was found
+                      recommendationType: IoT_PermissiveFirewallPolicy
+                      status: Enabled
+                    - name: Permissive firewall rule in the input chain was found
+                      recommendationType: IoT_PermissiveInputFirewallRules
+                      status: Enabled
+                    - name: Permissive firewall rule in the output chain was found
+                      recommendationType: IoT_PermissiveOutputFirewallRules
+                      status: Enabled
+                    - name: High level permissions configured in Edge model twin for Edge module
+                      recommendationType: IoT_PrivilegedDockerOptions
+                      status: Enabled
+                    - name: Same Authentication Credentials used by multiple devices
+                      recommendationType: IoT_SharedCredentials
+                      status: Disabled
+                    - name: TLS cipher suite upgrade
+                      recommendationType: IoT_VulnerableTLSCipherSuite
+                      status: Enabled
                   status: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -700,6 +809,11 @@ paths:
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
             updateIotSecuritySolutionData:
               properties:
+                recommendationsConfiguration:
+                  - recommendationType: IoT_OpenPorts
+                    status: Disabled
+                  - recommendationType: IoT_SharedCredentials
+                    status: Disabled
                 userDefinedResources:
                   query: where type != "microsoft.devices/iothubs" | where name contains "v2"
                   querySubscriptions:
@@ -723,10 +837,54 @@ paths:
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   recommendationsConfiguration:
-                    - recommendationType: OpenPortsOnDevice
-                      status: TurnedOff
-                    - recommendationType: IdenticalAuthenticationCredentials
-                      status: TurnedOff
+                    - name: Service Principal Not Used with ACR
+                      recommendationType: IoT_ACRAuthentication
+                      status: Enabled
+                    - name: Agent sending underutilized messages
+                      recommendationType: IoT_AgentSendsUnutilizedMessages
+                      status: TurnedOn
+                    - name: Operating system (OS) baseline validation failure
+                      recommendationType: IoT_Baseline
+                      status: Enabled
+                    - name: Edge Hub memory can be optimized
+                      recommendationType: IoT_EdgeHubMemOptimize
+                      status: Enabled
+                    - name: No Logging Configured for Edge Module
+                      recommendationType: IoT_EdgeLoggingOptions
+                      status: Enabled
+                    - name: Module Settings Inconsistent in SecurityGroup
+                      recommendationType: IoT_InconsistentModuleSettings
+                      status: Enabled
+                    - name: Install the Azure Security of Things Agent
+                      recommendationType: IoT_InstallAgent
+                      status: Enabled
+                    - name: Default IP Filter Policy should be Deny
+                      recommendationType: IoT_IPFilter_DenyAll
+                      status: Enabled
+                    - name: IP Filter rule includes large IP range
+                      recommendationType: IoT_IPFilter_PermissiveRule
+                      status: Enabled
+                    - name: Open Ports On Device
+                      recommendationType: IoT_OpenPorts
+                      status: Disabled
+                    - name: Permissive firewall policy in one of the chains was found
+                      recommendationType: IoT_PermissiveFirewallPolicy
+                      status: Enabled
+                    - name: Permissive firewall rule in the input chain was found
+                      recommendationType: IoT_PermissiveInputFirewallRules
+                      status: Enabled
+                    - name: Permissive firewall rule in the output chain was found
+                      recommendationType: IoT_PermissiveOutputFirewallRules
+                      status: Enabled
+                    - name: High level permissions configured in Edge model twin for Edge module
+                      recommendationType: IoT_PrivilegedDockerOptions
+                      status: Enabled
+                    - name: Same Authentication Credentials used by multiple devices
+                      recommendationType: IoT_SharedCredentials
+                      status: Disabled
+                    - name: TLS cipher suite upgrade
+                      recommendationType: IoT_VulnerableTLSCipherSuite
+                      status: Enabled
                   status: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "v2"
@@ -805,6 +963,11 @@ paths:
                 export: []
                 iotHubs:
                   - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                recommendationsConfiguration:
+                  - recommendationType: IoT_OpenPorts
+                    status: Disabled
+                  - recommendationType: IoT_SharedCredentials
+                    status: Disabled
                 status: Enabled
                 userDefinedResources:
                   query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -830,6 +993,55 @@ paths:
                   export: []
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
+                  recommendationsConfiguration:
+                    - name: Service Principal Not Used with ACR
+                      recommendationType: IoT_ACRAuthentication
+                      status: Enabled
+                    - name: Agent sending underutilized messages
+                      recommendationType: IoT_AgentSendsUnutilizedMessages
+                      status: TurnedOn
+                    - name: Operating system (OS) baseline validation failure
+                      recommendationType: IoT_Baseline
+                      status: Enabled
+                    - name: Edge Hub memory can be optimized
+                      recommendationType: IoT_EdgeHubMemOptimize
+                      status: Enabled
+                    - name: No Logging Configured for Edge Module
+                      recommendationType: IoT_EdgeLoggingOptions
+                      status: Enabled
+                    - name: Module Settings Inconsistent in SecurityGroup
+                      recommendationType: IoT_InconsistentModuleSettings
+                      status: Enabled
+                    - name: Install the Azure Security of Things Agent
+                      recommendationType: IoT_InstallAgent
+                      status: Enabled
+                    - name: Default IP Filter Policy should be Deny
+                      recommendationType: IoT_IPFilter_DenyAll
+                      status: Enabled
+                    - name: IP Filter rule includes large IP range
+                      recommendationType: IoT_IPFilter_PermissiveRule
+                      status: Enabled
+                    - name: Open Ports On Device
+                      recommendationType: IoT_OpenPorts
+                      status: Disabled
+                    - name: Permissive firewall policy in one of the chains was found
+                      recommendationType: IoT_PermissiveFirewallPolicy
+                      status: Enabled
+                    - name: Permissive firewall rule in the input chain was found
+                      recommendationType: IoT_PermissiveInputFirewallRules
+                      status: Enabled
+                    - name: Permissive firewall rule in the output chain was found
+                      recommendationType: IoT_PermissiveOutputFirewallRules
+                      status: Enabled
+                    - name: High level permissions configured in Edge model twin for Edge module
+                      recommendationType: IoT_PrivilegedDockerOptions
+                      status: Enabled
+                    - name: Same Authentication Credentials used by multiple devices
+                      recommendationType: IoT_SharedCredentials
+                      status: Disabled
+                    - name: TLS cipher suite upgrade
+                      recommendationType: IoT_VulnerableTLSCipherSuite
+                      status: Enabled
                   status: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -853,10 +1065,54 @@ paths:
                   iotHubs:
                     - /subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub
                   recommendationsConfiguration:
-                    - recommendationType: OpenPortsOnDevice
-                      status: TurnedOff
-                    - recommendationType: IdenticalAuthenticationCredentials
-                      status: TurnedOff
+                    - name: Service Principal Not Used with ACR
+                      recommendationType: IoT_ACRAuthentication
+                      status: Enabled
+                    - name: Agent sending underutilized messages
+                      recommendationType: IoT_AgentSendsUnutilizedMessages
+                      status: TurnedOn
+                    - name: Operating system (OS) baseline validation failure
+                      recommendationType: IoT_Baseline
+                      status: Enabled
+                    - name: Edge Hub memory can be optimized
+                      recommendationType: IoT_EdgeHubMemOptimize
+                      status: Enabled
+                    - name: No Logging Configured for Edge Module
+                      recommendationType: IoT_EdgeLoggingOptions
+                      status: Enabled
+                    - name: Module Settings Inconsistent in SecurityGroup
+                      recommendationType: IoT_InconsistentModuleSettings
+                      status: Enabled
+                    - name: Install the Azure Security of Things Agent
+                      recommendationType: IoT_InstallAgent
+                      status: Enabled
+                    - name: Default IP Filter Policy should be Deny
+                      recommendationType: IoT_IPFilter_DenyAll
+                      status: Enabled
+                    - name: IP Filter rule includes large IP range
+                      recommendationType: IoT_IPFilter_PermissiveRule
+                      status: Enabled
+                    - name: Open Ports On Device
+                      recommendationType: IoT_OpenPorts
+                      status: Disabled
+                    - name: Permissive firewall policy in one of the chains was found
+                      recommendationType: IoT_PermissiveFirewallPolicy
+                      status: Enabled
+                    - name: Permissive firewall rule in the input chain was found
+                      recommendationType: IoT_PermissiveInputFirewallRules
+                      status: Enabled
+                    - name: Permissive firewall rule in the output chain was found
+                      recommendationType: IoT_PermissiveOutputFirewallRules
+                      status: Enabled
+                    - name: High level permissions configured in Edge model twin for Edge module
+                      recommendationType: IoT_PrivilegedDockerOptions
+                      status: Enabled
+                    - name: Same Authentication Credentials used by multiple devices
+                      recommendationType: IoT_SharedCredentials
+                      status: Disabled
+                    - name: TLS cipher suite upgrade
+                      recommendationType: IoT_VulnerableTLSCipherSuite
+                      status: Enabled
                   status: Enabled
                   userDefinedResources:
                     query: where type != "microsoft.devices/iothubs" | where name contains "iot"
@@ -982,59 +1238,71 @@ definitions:
   RecommendationConfigurationProperties:
     description: Recommendation configuration
     properties:
-      description:
+      name:
         readOnly: true
         type: string
       recommendationType:
         description: The recommendation type.
         enum:
-          - OpenPortsOnDevice
-          - PermissiveFirewallPolicy
-          - PermissiveFirewallRuleInput
-          - PermissiveFirewallRuleOut
-          - OperationSystemNotValid
-          - UnutilizedMessagesFromAgent
-          - SecurityTwinConfigurationNotOptimal
-          - SecurityTwinConfigurationConflict
-          - IdenticalAuthenticationCredentials
-          - DenyDefaultIpPolicy
-          - TooLargeIPRange
-          - EnableDiagnosticsLog
+          - IoT_ACRAuthentication
+          - IoT_AgentSendsUnutilizedMessages
+          - IoT_Baseline
+          - IoT_EdgeHubMemOptimize
+          - IoT_EdgeLoggingOptions
+          - IoT_InconsistentModuleSettings
+          - IoT_InstallAgent
+          - IoT_IPFilter_DenyAll
+          - IoT_IPFilter_PermissiveRule
+          - IoT_OpenPorts
+          - IoT_PermissiveFirewallPolicy
+          - IoT_PermissiveInputFirewallRules
+          - IoT_PermissiveOutputFirewallRules
+          - IoT_PrivilegedDockerOptions
+          - IoT_SharedCredentials
+          - IoT_VulnerableTLSCipherSuite
         type: string
         x-ms-enum:
           modelAsString: true
           name: RecommendationType
           values:
+            - description: Authentication schema used for pull an edge module from an ACR repository does not use Service Principal Authentication.
+              value: IoT_ACRAuthentication
+            - description: 'IoT agent message size capacity is currently underutilized, causing an increase in the number of sent messages. Adjust message intervals for better utilization.'
+              value: IoT_AgentSendsUnutilizedMessages
+            - description: Identified security related system configuration issues.
+              value: IoT_Baseline
+            - description: You can optimize Edge Hub memory usage by turning off protocol heads for any protocols not used by Edge modules in your solution.
+              value: IoT_EdgeHubMemOptimize
+            - description: Logging is disabled for this edge module.
+              value: IoT_EdgeLoggingOptions
+            - description: A minority within a device security group has inconsistent Edge Module settings with the rest of their group.
+              value: IoT_InconsistentModuleSettings
+            - description: Install the Azure Security of Things Agent.
+              value: IoT_InstallAgent
+            - description: IP Filter Configuration should have rules defined for allowed traffic and should deny all other traffic by default.
+              value: IoT_IPFilter_DenyAll
+            - description: An Allow IP Filter rules source IP range is too large. Overly permissive rules might expose your IoT hub to malicious intenders.
+              value: IoT_IPFilter_PermissiveRule
             - description: A listening endpoint was found on the device.
-              value: OpenPortsOnDevice
-            - description: 'Allowed firewall policy found (INPUT/OUTPUT). Firewall policy should deny all traffic by default, and define rules to allow necessary communication to/from the device.'
-              value: PermissiveFirewallPolicy
-            - description: A rule in the firewall in the input chain has been found that contains a permissive pattern for a wide range of IP addresses or ports.
-              value: PermissiveFirewallRuleInput
-            - description: A rule in the firewall in the output chain has been found that contains a permissive pattern for a wide range of IP addresses or ports.
-              value: PermissiveFirewallRuleOut
-            - description: Device doesn't comply with CIS Linux benchmarks.
-              value: OperationSystemNotValid
-            - description: 10% or more of security messages were smaller than 4kb during the last 24 hours.
-              value: UnutilizedMessagesFromAgent
-            - description: Security twin configuration is not optimal.
-              value: SecurityTwinConfigurationNotOptimal
-            - description: Conflicts were identified in the security twin configuration.
-              value: SecurityTwinConfigurationConflict
-            - description: IoT Hub authentication credentials are used by multiple devices. This may indicate an illegitimate device impersonating a legitimate device. Duplicate credential use increases the risk of device impersonation by a malicious actor.
-              value: IdenticalAuthenticationCredentials
-            - description: 'IP filter configuration should have rules defined for allowed traffic, and should by default, deny all other traffic by default.'
-              value: DenyDefaultIpPolicy
-            - description: An allow IP filter rule source IP range is too large. Overly permissive rules can expose your IoT hub to malicious actors.
-              value: TooLargeIPRange
-            - description: Enable logs and retain them for up to a year. Retaining logs enables you to recreate activity trails for investigation purposes when a security incident occurs or your network is compromised.
-              value: EnableDiagnosticsLog
+              value: IoT_OpenPorts
+            - description: An Allowed firewall policy was found (INPUT/OUTPUT). The policy should Deny all traffic by default and define rules to allow necessary communication to/from the device.
+              value: IoT_PermissiveFirewallPolicy
+            - description: A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports.
+              value: IoT_PermissiveInputFirewallRules
+            - description: A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports.
+              value: IoT_PermissiveOutputFirewallRules
+            - description: 'Edge module is configured to run in privileged mode, with extensive Linux capabilities or with host-level network access (send/receive data to host machine).'
+              value: IoT_PrivilegedDockerOptions
+            - description: Same authentication credentials to the IoT Hub used by multiple devices. This could indicate an illegitimate device impersonating a legitimate device. It also exposes the risk of device impersonation by an attacker.
+              value: IoT_SharedCredentials
+            - description: Insecure TLS configurations detected. Immediate upgrade recommended.
+              value: IoT_VulnerableTLSCipherSuite
       status:
-        default: TurnedOn
-        description: Recommendation status. The recommendation is not generated when the status is turned off
+        default: Enabled
+        description: Recommendation status. The recommendation is not generated when the status is disabled
         enum:
-          - TurnedOff
-          - TurnedOn
+          - Disabled
+          - Enabled
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1066,12 +1334,14 @@ definitions:
       query:
         description: Azure Resource Graph query which represents the security solution's user defined resources. Required to start with "where type != "Microsoft.Devices/IotHubs""
         type: string
+        x-nullable: true
       querySubscriptions:
         description: List of Azure subscription ids on which the user defined resources query should be executed.
         items:
           pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
           type: string
         type: array
+        x-nullable: true
     required:
       - query
       - querySubscriptions

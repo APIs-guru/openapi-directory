@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: www.googleapis.com
+host: compute.googleapis.com
 basePath: /compute/v1/projects
 info:
   contact:
@@ -104,6 +104,7 @@ tags:
   - name: backendServices
   - name: diskTypes
   - name: disks
+  - name: externalVpnGateways
   - name: firewalls
   - name: forwardingRules
   - name: globalAddresses
@@ -155,6 +156,7 @@ tags:
   - name: targetTcpProxies
   - name: targetVpnGateways
   - name: urlMaps
+  - name: vpnGateways
   - name: vpnTunnels
   - name: zoneOperations
   - name: zones
@@ -1695,7 +1697,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/subnetworks/listUsable':
     get:
-      description: Retrieves an aggregated list of usable subnetworks.
+      description: Retrieves an aggregated list of all usable subnetworks in the project. The list contains all of the subnetworks in the project and the subnetworks that were shared by a Shared VPC host project.
       operationId: compute.subnetworks.listUsable
       parameters:
         - description: |-
@@ -1957,6 +1959,74 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - targetVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/vpnGateways':
+    get:
+      description: Retrieves an aggregated list of VPN gateways.
+      operationId: compute.vpnGateways.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewayAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -3355,6 +3425,284 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - backendServices
+  '/{project}/global/externalVpnGateways':
+    get:
+      description: Retrieves the list of ExternalVpnGateway available to the specified project.
+      operationId: compute.externalVpnGateways.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ExternalVpnGatewayList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a ExternalVpnGateway in the specified project using the data included in the request.
+      operationId: compute.externalVpnGateways.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExternalVpnGateway'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+  '/{project}/global/externalVpnGateways/{externalVpnGateway}':
+    delete:
+      description: Deletes the specified externalVpnGateway.
+      operationId: compute.externalVpnGateways.delete
+      parameters:
+        - description: Name of the externalVpnGateways to delete.
+          in: path
+          name: externalVpnGateway
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+    get:
+      description: Returns the specified externalVpnGateway. Get a list of available externalVpnGateways by making a list() request.
+      operationId: compute.externalVpnGateways.get
+      parameters:
+        - description: Name of the externalVpnGateway to return.
+          in: path
+          name: externalVpnGateway
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ExternalVpnGateway'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/externalVpnGateways/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an ExternalVpnGateway. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.externalVpnGateways.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+  '/{project}/global/externalVpnGateways/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.externalVpnGateways.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
   '/{project}/global/firewalls':
     get:
       description: Retrieves the list of firewall rules available to the specified project.
@@ -6647,6 +6995,58 @@ paths:
       operationId: compute.networks.switchToCustomMode
       parameters:
         - description: Name of the network to be updated.
+          in: path
+          name: network
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
+  '/{project}/global/networks/{network}/updatePeering':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: 'Updates the specified network peering with the data included in the request Only the following fields can be modified: NetworkPeering.export_custom_routes, and NetworkPeering.import_custom_routes'
+      operationId: compute.networks.updatePeering
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NetworksUpdatePeeringRequest'
+        - description: Name of the network resource which the updated peering is belonging to.
           in: path
           name: network
           required: true
@@ -15849,6 +16249,371 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/vpnGateways':
+    get:
+      description: Retrieves a list of VPN gateways available to the specified project and region.
+      operationId: compute.vpnGateways.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewayList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a VPN gateway in the specified project and region using the data included in the request.
+      operationId: compute.vpnGateways.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VpnGateway'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a VpnGateway. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.vpnGateways.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.vpnGateways.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+  '/{project}/regions/{region}/vpnGateways/{vpnGateway}':
+    delete:
+      description: Deletes the specified VPN gateway.
+      operationId: compute.vpnGateways.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the VPN gateway to delete.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnGateways
+    get:
+      description: Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+      operationId: compute.vpnGateways.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the VPN gateway to return.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGateway'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/vpnGateways/{vpnGateway}/getStatus':
+    get:
+      description: Returns the status for the specified VPN gateway.
+      operationId: compute.vpnGateways.getStatus
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the VPN gateway to return.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewaysGetStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/vpnTunnels':
     get:
       description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
@@ -20439,6 +21204,63 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the Display config for a VM instance. You can only use this method on a stopped VM instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.instances.updateDisplayDevice
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisplayDevice'
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface':
     parameters:
       - $ref: '#/parameters/alt'
@@ -21628,7 +22450,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/NodeGroupsDeleteNodesRequest'
-        - description: Name of the NodeGroup resource to delete.
+        - description: Name of the NodeGroup resource whose nodes will be deleted.
           in: path
           name: nodeGroup
           required: true
@@ -22228,7 +23050,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/reservations':
     get:
-      description: A list all the reservations that have been configured for the specified project in specified zone.
+      description: A list of all the reservations that have been configured for the specified project in specified zone.
       operationId: compute.reservations.list
       parameters:
         - description: |-
@@ -22388,7 +23210,7 @@ paths:
       tags:
         - reservations
     get:
-      description: Retrieves all information of the specified reservation.
+      description: Retrieves information about the specified reservation.
       operationId: compute.reservations.get
       parameters:
         - description: Project ID for this request.
@@ -22444,7 +23266,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Resizes the reservation (applicable to standalone reservations only)
+      description: 'Resizes the reservation (applicable to standalone reservations only). For more information, read Modifying reservations.'
       operationId: compute.reservations.resize
       parameters:
         - in: body
@@ -23467,16 +24289,16 @@ definitions:
     description: This reservation type allows to pre allocate specific instance configuration.
     properties:
       count:
-        description: Specifies number of resources that are allocated.
+        description: Specifies the number of resources that are allocated.
         format: int64
         type: string
       inUseCount:
-        description: '[OutputOnly] Indicates how many resource are in use.'
+        description: '[OutputOnly] Indicates how many instances are in use.'
         format: int64
         type: string
       instanceProperties:
         $ref: '#/definitions/AllocationSpecificSKUAllocationReservedInstanceProperties'
-        description: The instance properties for this specific sku reservation.
+        description: The instance properties for the reservation.
     type: object
   AttachedDisk:
     description: An instance-attached disk resource.
@@ -23569,7 +24391,7 @@ definitions:
         description: 'Specifies the disk name. If not specified, the default is to use the name of the instance. If the disk with the instance name exists already in the given zone/region, a new name will be automatically generated.'
         type: string
       diskSizeGb:
-        description: Specifies the size of the disk in base-2 GB.
+        description: 'Specifies the size of the disk in base-2 GB. If not specified, the disk will be the same size as the image (usually 10GB). If specified, the size must be equal to or larger than 10GB.'
         format: int64
         type: string
       diskType:
@@ -23643,9 +24465,9 @@ definitions:
 
       Example Policy with multiple AuditConfigs:
 
-      { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice.googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] }
+      { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "sampleservice.googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
+      For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -23665,15 +24487,18 @@ definitions:
     description: |-
       Provides the configuration for logging a type of permissions. Example:
 
-      { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", } ] }
+      { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE", } ] }
 
-      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting foo@gmail.com from DATA_READ logging.
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting jose@example.com from DATA_READ logging.
     properties:
       exemptedMembers:
         description: 'Specifies the identities that do not cause logging for this type of permission. Follows the same format of [Binding.members][].'
         items:
           type: string
         type: array
+      ignoreChildExemptions:
+        description: 'Specifies whether principals can be exempted for the same LogType in lower-level resource policies. If true, any lower-level exemptions will be ignored.'
+        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -24065,17 +24890,17 @@ definitions:
 
            
           - If the load balancing mode is CONNECTION, then the load is spread based on how many concurrent connections the backend can handle.
-          The CONNECTION balancing mode is only available if the protocol for the backend service is SSL, TCP, or UDP.
+          You can use the CONNECTION balancing mode if the protocol for the backend service is SSL, TCP, or UDP.
 
           If the loadBalancingScheme for the backend service is EXTERNAL (SSL Proxy and TCP Proxy load balancers), you must also specify exactly one of the following parameters: maxConnections, maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
 
           If the loadBalancingScheme for the backend service is INTERNAL (internal TCP/UDP load balancers), you cannot specify any additional parameters.
            
-          - If the load balancing mode is RATE, then the load is spread based on the rate of HTTP requests per second (RPS).
-          The RATE balancing mode is only available if the protocol for the backend service is HTTP or HTTPS. You must specify exactly one of the following parameters: maxRate, maxRatePerInstance, or maxRatePerEndpoint.
+          - If the load balancing mode is RATE, the load is spread based on the rate of HTTP requests per second (RPS).
+          You can use the RATE balancing mode if the protocol for the backend service is HTTP or HTTPS. You must specify exactly one of the following parameters: maxRate, maxRatePerInstance, or maxRatePerEndpoint.
            
-          - If the load balancing mode is UTILIZATION, then the load is spread based on the CPU utilization of instances in an instance group.
-          The UTILIZATION balancing mode is only available if the loadBalancingScheme of the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backend is made up of instance groups. There are no restrictions on the backend service protocol.
+          - If the load balancing mode is UTILIZATION, the load is spread based on the CPU utilization of instances in an instance group.
+          You can use the UTILIZATION balancing mode if the loadBalancingScheme of the backend service is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backends are instance groups. There are no restrictions on the backend service protocol.
         enum:
           - CONNECTION
           - RATE
@@ -24395,7 +25220,7 @@ definitions:
         description: |-
           Type of session affinity to use. The default is NONE. Session affinity is not applicable if the --protocol is UDP.
 
-          When the loadBalancingScheme is EXTERNAL, possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. GENERATED_COOKIE is only available if the protocol is HTTP or HTTPS.
+          When the loadBalancingScheme is EXTERNAL, possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. You can use GENERATED_COOKIE if the protocol is HTTP or HTTPS.
 
           When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
 
@@ -24669,7 +25494,7 @@ definitions:
 
           * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
-          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` .
 
 
 
@@ -24756,7 +25581,7 @@ definitions:
         description: '[Output Only] URL of the region where this commitment may be used.'
         type: string
       reservations:
-        description: List of reservations for this commitment.
+        description: List of reservations in this commitment.
         items:
           $ref: '#/definitions/Reservation'
         type: array
@@ -25216,7 +26041,7 @@ definitions:
         description: '[Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used.'
         type: string
       status:
-        description: '[Output Only] The status of disk creation.'
+        description: '[Output Only] The status of disk creation. CREATING: Disk is provisioning. RESTORING: Source data is being copied into the disk. FAILED: Disk creation failed. READY: Disk is ready for use. DELETING: Disk is deleting.'
         enum:
           - CREATING
           - DELETING
@@ -25746,6 +26571,13 @@ definitions:
             type: string
         type: object
     type: object
+  DisplayDevice:
+    description: A set of Display Device options
+    properties:
+      enableDisplay:
+        description: Defines whether the instance has Display enabled.
+        type: boolean
+    type: object
   DistributionPolicy:
     properties:
       zones:
@@ -25781,6 +26613,138 @@ definitions:
       title:
         description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
         type: string
+    type: object
+  ExternalVpnGateway:
+    description: 'External VPN gateway is the on-premises VPN gateway(s) or another cloud provider?s VPN gateway that connects to your Google Cloud VPN gateway. To create a highly available VPN from Google Cloud to your on-premises side or another Cloud provider''s VPN gateway, you must create a external VPN gateway resource in GCP, which provides the information to GCP about your external VPN gateway.'
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      interfaces:
+        description: List of interfaces for this external VPN gateway.
+        items:
+          $ref: '#/definitions/ExternalVpnGatewayInterface'
+        type: array
+      kind:
+        default: 'compute#externalVpnGateway'
+        description: '[Output Only] Type of the resource. Always compute#externalVpnGateway for externalVpnGateways.'
+        type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this ExternalVpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet.
+
+          To see the latest fingerprint, make a get() request to retrieve an ExternalVpnGateway.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this ExternalVpnGateway resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      redundancyType:
+        description: Indicates the user-supplied redundancy type of this external VPN gateway.
+        enum:
+          - FOUR_IPS_REDUNDANCY
+          - SINGLE_IP_INTERNALLY_REDUNDANT
+          - TWO_IPS_REDUNDANCY
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  ExternalVpnGatewayInterface:
+    description: The interface for the external VPN gateway.
+    properties:
+      id:
+        description: 'The numeric ID of this interface. The allowed input values for this id for different redundancy types of external VPN gateway: SINGLE_IP_INTERNALLY_REDUNDANT - 0 TWO_IPS_REDUNDANCY - 0, 1 FOUR_IPS_REDUNDANCY - 0, 1, 2, 3'
+        format: uint32
+        type: integer
+      ipAddress:
+        description: 'IP address of the interface in the external VPN gateway. Only IPv4 is supported. This IP address can be either from your on-premise gateway or another Cloud provider?s VPN gateway, it cannot be an IP address from Google Compute Engine.'
+        type: string
+    type: object
+  ExternalVpnGatewayList:
+    description: 'Response to the list request, and contains a list of externalVpnGateways.'
+    properties:
+      etag:
+        type: string
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of ExternalVpnGateway resources.
+        items:
+          $ref: '#/definitions/ExternalVpnGateway'
+        type: array
+      kind:
+        default: 'compute#externalVpnGatewayList'
+        description: '[Output Only] Type of resource. Always compute#externalVpnGatewayList  for lists of externalVpnGateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Firewall:
     description: |-
@@ -26028,23 +26992,13 @@ definitions:
     properties:
       IPAddress:
         description: |-
-          The IP address that this forwarding rule is serving on behalf of.
+          IP address that this forwarding rule serves. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the target that you specify in the forwarding rule.
 
-          Addresses are restricted based on the forwarding rule's load balancing scheme (EXTERNAL or INTERNAL) and scope (global or regional).
+          If you don't specify a reserved IP address, an ephemeral IP address is assigned. Methods for specifying an IP address:
 
-          When the load balancing scheme is EXTERNAL, for global forwarding rules, the address must be a global IP, and for regional forwarding rules, the address must live in the same region as the forwarding rule. If this field is empty, an ephemeral IPv4 address from the same scope (global or regional) will be assigned. A regional forwarding rule supports IPv4 only. A global forwarding rule supports either IPv4 or IPv6.
+          * IPv4 dotted decimal, as in `100.1.2.3` * Full URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name * Partial URL or by name, as in: * projects/project_id/regions/region/addresses/address-name * regions/region/addresses/address-name * global/addresses/address-name * address-name 
 
-          When the load balancing scheme is INTERNAL_SELF_MANAGED, this must be a URL reference to an existing Address resource ( internal regional static IP address), with a purpose of GCE_END_POINT and address_type of INTERNAL.
-
-          When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnet configured for the forwarding rule. By default, if this field is empty, an ephemeral internal IP address will be automatically allocated from the IP range of the subnet or network configured for this forwarding rule.
-
-          An address can be specified either by a literal IP address or a URL reference to an existing Address resource. The following examples are all valid:  
-          - 100.1.2.3 
-          - https://www.googleapis.com/compute/v1/projects/project/regions/region/addresses/address 
-          - projects/project/regions/region/addresses/address 
-          - regions/region/addresses/address 
-          - global/addresses/address 
-          - address
+          The loadBalancingScheme and the forwarding rule's target determine the type of IP address that you can use. For detailed information, refer to [IP address specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
         type: string
       IPProtocol:
         description: |-
@@ -26123,24 +27077,29 @@ definitions:
         type: string
       portRange:
         description: |-
-          This field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway, TargetPool, TargetInstance.
+          This field is deprecated. See the port
+          field.
+        type: string
+      ports:
+        description: |-
+          List of comma-separated ports. The forwarding rule forwards packets with matching destination ports. If the forwarding rule's loadBalancingScheme is EXTERNAL, and the forwarding rule references a target pool, specifying ports is optional. You can specify an unlimited number of ports, but they must be contiguous. If you omit ports, GCP forwards traffic on any port of the forwarding rule's protocol.
 
-          Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets addressed to ports in the specified range will be forwarded to target. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
+          If the forwarding rule's loadBalancingScheme is EXTERNAL, and the forwarding rule references a target HTTP proxy, target HTTPS proxy, target TCP proxy, target SSL proxy, or target VPN gateway, you must specify ports using the following constraints:
 
-          Some types of forwarding target have constraints on the acceptable ports:  
+           
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
           - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688, 1883, 5222 
           - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688, 1883, 5222 
-          - TargetVpnGateway: 500, 4500
-        type: string
-      ports:
-        description: |-
-          This field is used along with the backend_service field for internal load balancing.
+          - TargetVpnGateway: 500, 4500  
 
-          When the load balancing scheme is INTERNAL, a list of ports can be configured, for example, ['80'], ['8000','9000'] etc. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule.
+          If the forwarding rule's loadBalancingScheme is INTERNAL, you must specify ports in one of the following ways:
 
-          You may specify a maximum of up to 5 ports.
+          * A list of up to five ports, which can be non-contiguous * Keyword ALL, which causes the forwarding rule to forward traffic on any port of the forwarding rule's protocol.
+
+          The ports field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway, TargetPool, TargetInstance.
+
+          Applicable only when IPProtocol is TCP, UDP, or SCTP. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
         items:
           type: string
         type: array
@@ -26152,7 +27111,7 @@ definitions:
         type: string
       serviceLabel:
         description: |-
-          An optional prefix to the service name for this Forwarding Rule. If specified, will be the first label of the fully qualified service name.
+          An optional prefix to the service name for this Forwarding Rule. If specified, the prefix is the first label of the fully qualified service name.
 
           The label must be 1-63 characters long, and comply with RFC1035. Specifically, the label must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
 
@@ -27298,12 +28257,16 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      displayDevice:
+        $ref: '#/definitions/DisplayDevice'
+        description: Enables display device for the instance.
       guestAccelerators:
         description: A list of the type and count of accelerator cards attached to the instance.
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
       hostname:
+        description: 'Specifies the hostname of the instance. The specified hostname must be RFC1035 compliant. If hostname is not specified, the default hostname is [INSTANCE_NAME].c.[PROJECT_ID].internal when using the global DNS, and [INSTANCE_NAME].[ZONE].c.[PROJECT_ID].internal when using zonal DNS.'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -28874,7 +29837,9 @@ definitions:
           - BPS_1G: 1 Gbit/s 
           - BPS_2G: 2 Gbit/s 
           - BPS_5G: 5 Gbit/s 
-          - BPS_10G: 10 Gbit/s
+          - BPS_10G: 10 Gbit/s 
+          - BPS_20G: 20 Gbit/s 
+          - BPS_50G: 50 Gbit/s
         enum:
           - BPS_100M
           - BPS_10G
@@ -30287,7 +31252,7 @@ definitions:
           The name must be 1-63 characters long, and comply with RFC1035.
         type: string
       ipAddress:
-        description: 'Optional IPv4 address of network endpoint. The IP address must belong to a VM in GCE (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.'
+        description: 'Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.'
         type: string
       port:
         description: 'Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.'
@@ -30759,6 +31724,12 @@ definitions:
       exchangeSubnetRoutes:
         description: Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
         type: boolean
+      exportCustomRoutes:
+        description: Whether to export the custom routes to peer network.
+        type: boolean
+      importCustomRoutes:
+        description: Whether to import the custom routes from peer network.
+        type: boolean
       name:
         description: 'Name of this peering. Provided by the client when the peering is created. The name must comply with RFC1035. Specifically, the name must be 1-63 characters long and match regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`. The first character must be a lowercase letter, and all the following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         type: string
@@ -30805,6 +31776,11 @@ definitions:
       name:
         description: 'Name of the peering, which should conform to RFC1035.'
         type: string
+    type: object
+  NetworksUpdatePeeringRequest:
+    properties:
+      networkPeering:
+        $ref: '#/definitions/NetworkPeering'
     type: object
   NodeGroup:
     description: |-
@@ -31025,6 +32001,7 @@ definitions:
   NodeGroupsDeleteNodesRequest:
     properties:
       nodes:
+        description: Names of the nodes to delete.
         items:
           type: string
         type: array
@@ -31725,7 +32702,7 @@ definitions:
         format: int32
         type: integer
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] The unique identifier for the operation. This identifier is defined by the server.'
         format: uint64
         type: string
       insertTime:
@@ -31736,7 +32713,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
-        description: '[Output Only] Name of the resource.'
+        description: '[Output Only] Name of the operation.'
         type: string
       operationType:
         description: '[Output Only] The type of operation, such as insert, update, or delete, and so on.'
@@ -32101,7 +33078,7 @@ definitions:
         description: |-
           `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
 
-          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten.
         format: byte
         type: string
       iamOwned:
@@ -32232,8 +33209,10 @@ definitions:
           - BACKEND_SERVICES
           - C2_CPUS
           - COMMITMENTS
+          - COMMITTED_C2_CPUS
           - COMMITTED_CPUS
           - COMMITTED_LOCAL_SSD_TOTAL_GB
+          - COMMITTED_N2_CPUS
           - COMMITTED_NVIDIA_K80_GPUS
           - COMMITTED_NVIDIA_P100_GPUS
           - COMMITTED_NVIDIA_P4_GPUS
@@ -32923,10 +33902,10 @@ definitions:
         description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
     type: object
   Reservation:
-    description: 'Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read  Reserving zonal resources. (== resource_for beta.reservations ==) (== resource_for v1.reservations ==) (== NextID: 13 ==)'
+    description: 'Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read  Reserving zonal resources. (== resource_for beta.reservations ==) (== resource_for v1.reservations ==)'
     properties:
       commitment:
-        description: '[OutputOnly] Full or partial url for parent commitment for reservations which are tied to a commitment.'
+        description: '[OutputOnly] Full or partial URL to a parent commitment. This field displays for reservations that are tied to a commitment.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -32965,7 +33944,7 @@ definitions:
           - UPDATING
         type: string
       zone:
-        description: 'Zone in which the reservation resides, must be provided if reservation is created with commitment creation.'
+        description: Zone in which the reservation resides. A zone must be provided if the reservation is created within a commitment.
         type: string
     type: object
   ReservationAffinity:
@@ -33531,7 +34510,7 @@ definitions:
         description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
         type: object
       storageLocations:
-        description: GCS bucket storage location of the auto snapshot (regional or multi-regional).
+        description: Cloud Storage bucket storage location of the auto snapshot (regional or multi-regional).
         items:
           type: string
         type: array
@@ -33951,7 +34930,7 @@ definitions:
           - MANAGED_BY_USER
         type: string
       name:
-        description: Name of this BGP peer. The name must be 1-63 characters long and comply with RFC1035.
+        description: 'Name of this BGP peer. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       peerAsn:
@@ -33983,7 +34962,7 @@ definitions:
           - MANAGED_BY_USER
         type: string
       name:
-        description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
+        description: 'Name of this interface entry. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
     type: object
@@ -34796,7 +35775,7 @@ definitions:
           - UP_TO_DATE
         type: string
       storageLocations:
-        description: GCS bucket storage location of the snapshot (regional or multi-regional).
+        description: Cloud Storage bucket storage location of the snapshot (regional or multi-regional).
         items:
           type: string
         type: array
@@ -35214,6 +36193,9 @@ definitions:
         default: 'compute#subnetwork'
         description: '[Output Only] Type of the resource. Always compute#subnetwork for Subnetwork resources.'
         type: string
+      logConfig:
+        $ref: '#/definitions/SubnetworkLogConfig'
+        description: 'This field denotes the VPC flow logging options for this subnetwork. If logging is enabled, logs are exported to Stackdriver.'
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -35375,6 +36357,33 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  SubnetworkLogConfig:
+    description: The available logging options for this subnetwork.
+    properties:
+      aggregationInterval:
+        description: Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Default is an interval of 5 seconds per connection.
+        enum:
+          - INTERVAL_10_MIN
+          - INTERVAL_15_MIN
+          - INTERVAL_1_MIN
+          - INTERVAL_30_SEC
+          - INTERVAL_5_MIN
+          - INTERVAL_5_SEC
+        type: string
+      enable:
+        description: 'Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is to disable flow logging.'
+        type: boolean
+      flowSampling:
+        description: 'Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork where 1.0 means all collected logs are reported and 0.0 means no logs are reported. Default is 0.5, which means half of all collected logs are reported.'
+        format: float
+        type: number
+      metadata:
+        description: 'Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.'
+        enum:
+          - EXCLUDE_ALL_METADATA
+          - INCLUDE_ALL_METADATA
+        type: string
     type: object
   SubnetworkSecondaryRange:
     description: Represents a secondary IP range of a subnetwork.
@@ -37233,6 +38242,322 @@ definitions:
             type: string
         type: object
     type: object
+  VpnGateway:
+    description: Represents a VPN gateway resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#vpnGateway'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this VpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet.
+
+          To see the latest fingerprint, make a get() request to retrieve an VpnGateway.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this VpnGateway resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      network:
+        description: URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.
+        type: string
+      region:
+        description: '[Output Only] URL of the region where the VPN gateway resides.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      vpnInterfaces:
+        description: '[Output Only] A list of interfaces on this VPN gateway.'
+        items:
+          $ref: '#/definitions/VpnGatewayVpnGatewayInterface'
+        type: array
+    type: object
+  VpnGatewayAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/VpnGatewaysScopedList'
+          description: '[Output Only] Name of the scope containing this set of VPN gateways.'
+        description: A list of VpnGateway resources.
+        type: object
+      kind:
+        default: 'compute#vpnGatewayAggregatedList'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  VpnGatewayList:
+    description: Contains a list of VpnGateway resources.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of VpnGateway resources.
+        items:
+          $ref: '#/definitions/VpnGateway'
+        type: array
+      kind:
+        default: 'compute#vpnGatewayList'
+        description: '[Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  VpnGatewayStatus:
+    properties:
+      vpnConnections:
+        description: List of VPN connection for this VpnGateway.
+        items:
+          $ref: '#/definitions/VpnGatewayStatusVpnConnection'
+        type: array
+    type: object
+  VpnGatewayStatusHighAvailabilityRequirementState:
+    description: Describes the high availability requirement state for the VPN connection between this Cloud VPN gateway and a peer gateway.
+    properties:
+      state:
+        description: 'Indicates the high availability requirement state for the VPN connection. Valid values are CONNECTION_REDUNDANCY_MET, CONNECTION_REDUNDANCY_NOT_MET.'
+        enum:
+          - CONNECTION_REDUNDANCY_MET
+          - CONNECTION_REDUNDANCY_NOT_MET
+        type: string
+      unsatisfiedReason:
+        description: Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
+        enum:
+          - INCOMPLETE_TUNNELS_COVERAGE
+        type: string
+    type: object
+  VpnGatewayStatusTunnel:
+    description: Contains some information about a VPN tunnel.
+    properties:
+      localGatewayInterface:
+        description: The VPN gateway interface this VPN tunnel is associated with.
+        format: uint32
+        type: integer
+      peerGatewayInterface:
+        description: 'The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or GCP VPN gateway.'
+        format: uint32
+        type: integer
+      tunnelUrl:
+        description: URL reference to the VPN tunnel.
+        type: string
+    type: object
+  VpnGatewayStatusVpnConnection:
+    description: A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be a external VPN gateway or GCP VPN gateway.
+    properties:
+      peerExternalGateway:
+        description: URL reference to the peer external VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.
+        type: string
+      peerGcpGateway:
+        description: URL reference to the peer side VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.
+        type: string
+      state:
+        $ref: '#/definitions/VpnGatewayStatusHighAvailabilityRequirementState'
+        description: HighAvailabilityRequirementState for the VPN connection.
+      tunnels:
+        description: List of VPN tunnels that are in this VPN connection.
+        items:
+          $ref: '#/definitions/VpnGatewayStatusTunnel'
+        type: array
+    type: object
+  VpnGatewayVpnGatewayInterface:
+    description: A VPN gateway interface.
+    properties:
+      id:
+        description: The numeric ID of this VPN gateway interface.
+        format: uint32
+        type: integer
+      ipAddress:
+        description: The external IP address for this VPN gateway interface.
+        type: string
+    type: object
+  VpnGatewaysGetStatusResponse:
+    properties:
+      result:
+        $ref: '#/definitions/VpnGatewayStatus'
+    type: object
+  VpnGatewaysScopedList:
+    properties:
+      vpnGateways:
+        description: '[Output Only] A list of VPN gateways contained in this scope.'
+        items:
+          $ref: '#/definitions/VpnGateway'
+        type: array
+      warning:
+        description: '[Output Only] Informational warning which replaces the list of addresses when the list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   VpnTunnel:
     description: |-
       Represents a Cloud VPN Tunnel resource.
@@ -37268,6 +38593,16 @@ definitions:
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      peerExternalGateway:
+        description: URL of the peer side external VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field is exclusive with the field peerGcpGateway.
+        type: string
+      peerExternalGatewayInterface:
+        description: The interface ID of the external VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created.
+        format: int32
+        type: integer
+      peerGcpGateway:
+        description: 'URL of the peer side HA GCP VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field can be used when creating highly available VPN from VPC network to VPC network, the field is exclusive with the field peerExternalGateway. If provided, the VPN tunnel will automatically use the same vpnGatewayInterface ID in the peer GCP VPN gateway.'
         type: string
       peerIp:
         description: IP address of the peer VPN gateway. Only IPv4 is supported.
@@ -37322,6 +38657,13 @@ definitions:
       targetVpnGateway:
         description: URL of the Target VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
         type: string
+      vpnGateway:
+        description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created. This must be used (instead of target_vpn_gateway) if a High Availability VPN gateway resource is created.
+        type: string
+      vpnGatewayInterface:
+        description: The interface ID of the VPN gateway with which this VPN tunnel is associated.
+        format: int32
+        type: integer
     type: object
   VpnTunnelAggregatedList:
     properties:

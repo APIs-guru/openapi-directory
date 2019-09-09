@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: azsadmin-Volume
   x-tags:
@@ -122,6 +122,7 @@ paths:
                       healthStatus: Healthy
                       operationalStatus: OK
                       remainingCapacityGB: 1317
+                      repairStatus: ''
                       totalCapacityGB: 1375
                       volumeLabel: ObjStore_1
                     tags: {}
@@ -197,6 +198,7 @@ paths:
                   healthStatus: Healthy
                   operationalStatus: OK
                   remainingCapacityGB: 1317
+                  repairStatus: ''
                   totalCapacityGB: 1375
                   volumeLabel: ObjStore_1
                 tags: {}
@@ -253,25 +255,36 @@ definitions:
     properties:
       action:
         description: Detailed recommended action for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.
+        readOnly: true
         type: string
       description:
         description: Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.
+        readOnly: true
         type: string
       healthStatus:
         description: Health status of the volume.
+        readOnly: true
         type: string
       operationalStatus:
         description: Operational status of the volume.
+        readOnly: true
         type: string
       remainingCapacityGB:
         description: Remaining capacity in GB of the volume.
         format: int32
+        readOnly: true
         type: integer
+      repairStatus:
+        description: 'Repair status of the volume. Empty if no repair job running, something like ''Running, 90%'' when repairing.'
+        readOnly: true
+        type: string
       totalCapacityGB:
         description: Total capacity in GB of the volume.
         format: int32
+        readOnly: true
         type: integer
       volumeLabel:
         description: Volume label.
+        readOnly: true
         type: string
     type: object

@@ -217,23 +217,16 @@ paths:
         - operations
     get:
       description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
-      operationId: remotebuildexecution.operations.list
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: remotebuildexecution.projects.operations.get
       parameters:
         - description: The standard list filter.
           in: query
           name: filter
           type: string
-        - description: The name of the operation's parent resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -251,14 +244,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleLongrunningListOperationsResponse'
+            $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1352,6 +1345,19 @@ definitions:
         description: The error message.
         type: string
     type: object
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig:
+    description: AcceleratorConfig defines the accelerator cards to attach to the VM.
+    properties:
+      acceleratorCount:
+        description: The number of the guest accelerator cards exposed to this VM.
+        format: int64
+        type: string
+      acceleratorType:
+        description: |-
+          The type of accelerator to attach to this VM, e.g. "nvidia-tesla-k80" for
+          nVidia Tesla K80.
+        type: string
+    type: object
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest:
     description: The request used for `CreateInstance`.
     properties:
@@ -1487,21 +1493,31 @@ definitions:
     properties:
       filter:
         description: |-
-          Optional. A filter to constrain the pools returned. Filters have the form:
+          Optional. A filter expression that filters resources listed in
+          the response. The expression must specify the field name, a comparison
+          operator, and the value that you want to use for filtering. The value
+          must be a string, a number, or a boolean. String values are
+          case-insensitive.
+          The comparison operator must be either `:`, `=`, `!=`, `>`, `>=`, `<=` or
+          `<`.
+          The `:` operator can be used with string fields to match substrings.
+          For non-string fields it is equivalent to the `=` operator.
+          The `:*` comparison can be used to test  whether a key has been defined.
 
-          <field> <operator> <value> [[AND|OR] <field> <operator> <value>]...
+          You can also filter on nested fields.
 
-          <field> is the path for a field or map key in the Pool proto message.
-          e.g. "configuration.disk_size_gb" or "configuration.labels.key".
-          <operator> can be one of "<", "<=", ">=", ">", "=", "!=", ":".
-          ":" is a HAS operation for strings and repeated primitive fields.
-          <value> is the value to test, case-insensitive for strings. "*" stands for
-          any value and can be used to test for key presence.
-          Parenthesis determine AND/OR precedence. In space separated restrictions,
-          AND is implicit, e.g. "a = b x = y" is equivalent to "a = b AND x = y".
+          To filter on multiple expressions, you can separate expression using
+          `AND` and `OR` operators, using parentheses to specify precedence. If
+          neither operator is specified, `AND` is assumed.
 
-          Example filter:
-          configuration.labels.key1 = * AND (state = RUNNING OR state = UPDATING)
+          Examples:
+
+          Include only pools with more than 100 reserved workers:
+          `(worker_count > 100) (worker_config.reserved = true)`
+
+          Include only pools with a certain label or machines of the n1-standard
+          family:
+          `worker_config.labels.key1 : * OR worker_config.machine_type: n1-standard`
         type: string
       parent:
         description: |-
@@ -1540,6 +1556,9 @@ definitions:
       Defines the configuration to be used for a creating workers in
       the worker pool.
     properties:
+      accelerator:
+        $ref: '#/definitions/GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig'
+        description: The accelerator card attached to each VM.
       diskSizeGb:
         description: |-
           Required. Size of the disk attached to the worker, in GB.
@@ -1560,8 +1579,8 @@ definitions:
           Labels associated with the workers.
           Label keys and values can be no longer than 63 characters, can only contain
           lowercase letters, numeric characters, underscores and dashes.
-          International letters are permitted. Keys must start with a letter but
-          values are optional.
+          International letters are permitted. Label keys must start with a letter.
+          Label values are optional.
           There can not be more than 64 labels per resource.
         type: object
       machineType:

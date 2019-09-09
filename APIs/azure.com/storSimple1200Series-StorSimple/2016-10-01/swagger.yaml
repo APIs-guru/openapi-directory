@@ -1125,8 +1125,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '200':
-              body: ''
+            '200': {}
             '204': {}
     get:
       deprecated: false
@@ -1400,8 +1399,7 @@ paths:
             x-ms-client-request-id:
               - ed092570-e074-40cf-b211-9295c285be86
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -1520,8 +1518,7 @@ paths:
                 properties:
                   initiatorName: 'iqn.2017-06.com.contoso:ForTest'
                 type: Microsoft.StorSimple/managers/accessControlRecords
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/alerts':
     get:
@@ -1887,8 +1884,7 @@ paths:
             x-ms-client-request-id:
               - ed7cb9d6-7681-4969-b874-ca1e0f831eaf
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices':
     get:
       deprecated: false
@@ -1988,8 +1984,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 9eb689cd-7243-43b4-b6f6-5c65cb296641
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -2120,8 +2115,7 @@ paths:
                   status: Online
                   type: Series9000OnPremVirtualAppliance
                 type: Microsoft.StorSimple/managers/devices
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/alertSettings/default':
     get:
@@ -2244,8 +2238,7 @@ paths:
                   emailNotification: Enabled
                   notificationToServiceOwners: Disabled
                 type: Microsoft.StorSimple/managers/devices/alertSettings
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupScheduleGroups':
     get:
@@ -2342,8 +2335,7 @@ paths:
             x-ms-client-request-id:
               - 7c197fe4-5366-4c12-9af9-dee70e022593
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -2480,8 +2472,7 @@ paths:
                     hour: 17
                     minute: 38
                 type: Microsoft.StorSimple/managers/devices/backupScheduleGroups
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups':
     get:
@@ -2617,8 +2608,7 @@ paths:
             x-ms-client-request-id:
               - 37d148f1-71a7-4c3d-a9ef-6eee37f7cc0f
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/elements/{elementName}/clone':
@@ -2708,10 +2698,8 @@ paths:
             x-ms-client-request-id:
               - a5e56f15-80fc-4984-8388-60009c265624
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/chapSettings':
     get:
@@ -2808,10 +2796,8 @@ paths:
             x-ms-client-request-id:
               - 94b586f0-286f-40ee-ac54-085cdc429840
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       deprecated: false
@@ -2950,8 +2936,7 @@ paths:
                     encryptionCertificateThumbprint: D73DB57C4CDD6761E159F8D1E8A7D759424983FD
                     value: QAabTlWY4Qz7ygqWeYVoUpgg+wtITX9O6uAj1j+ejQkNR45r5/1knhgSroeeavtxGGJtaWFwMGGde1EA31eoueZwhhWODWBlaTAhGhY3SITMIKj+9k+xUJwkq6aqc2qDcomW+juLTd72oVwpMCmGALALCPAjNBiKzi7WUV+6U9j/F0dAsz8kmTFBh2rrY3yYTVQ7LjxZ7EPeqiie1ikvLoL/Q8S0jKu+O70m3ES1+WIG61ig4Nl9S/1NlV30wpJdgnnxA4Vg83PEIgoz0nQpfodGguwkDYhaeNYiYZGVXo75UgFMILouVUCHkuKWQOxL48kIleEW3hIL7sZkQQcLwA==
                 type: Microsoft.StorSimple/managers/devices/chapSettings
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate':
     post:
@@ -2988,8 +2973,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 9eb689cd-7243-43b4-b6f6-5c65cb296641
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/disks':
@@ -3098,8 +3082,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failover':
@@ -3150,10 +3133,8 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 9eb689cd-7243-43b4-b6f6-5c65cb296641
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/failoverTargets':
     get:
@@ -3339,8 +3320,7 @@ paths:
             x-ms-client-request-id:
               - bb22f858-1c5f-440a-9def-9c386c529ce5
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -3480,8 +3460,7 @@ paths:
                   domainName: fareast.corp.microsoft.com
                   storageDomainId: /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageDomains/sd-fs-HSDK-4XY4FI2IVG
                 type: Microsoft.StorSimple/managers/devices/fileServers
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/backup':
     post:
@@ -3531,8 +3510,7 @@ paths:
             x-ms-client-request-id:
               - 080efe44-308c-438e-9ea6-b346c82c434b
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/metrics':
@@ -3798,8 +3776,7 @@ paths:
             x-ms-client-request-id:
               - 123caeec-d201-4ea7-a3e1-3f8d0482eea2
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -3961,8 +3938,7 @@ paths:
                   shareStatus: Online
                   usedCapacityInBytes: 0
                 type: Microsoft.StorSimple/managers/devices/fileServers/shares
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/fileservers/{fileServerName}/shares/{shareName}/metrics':
     get:
@@ -4155,8 +4131,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers':
@@ -4254,8 +4229,7 @@ paths:
             x-ms-client-request-id:
               - b39d311d-88d2-4eb6-9608-1a4a03cf54bf
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -4397,8 +4371,7 @@ paths:
                   reverseChapId: ''
                   storageDomainId: /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageDomains/Default-HSDK-WSJQERQW3F-StorageDomain
                 type: Microsoft.StorSimple/managers/devices/iscsiServers
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/backup':
     post:
@@ -4448,8 +4421,7 @@ paths:
             x-ms-client-request-id:
               - d06ed90f-bd9c-4ea4-84ec-e2fa1bf5b460
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks':
@@ -4583,8 +4555,7 @@ paths:
             x-ms-client-request-id:
               - bb36a9cc-1a8a-473e-918a-664f7a56da8f
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -4746,8 +4717,7 @@ paths:
                   provisionedCapacityInBytes: 536870912000
                   usedCapacityInBytes: 0
                 type: Microsoft.StorSimple/managers/devices/iscsiServers/disks
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metrics':
     get:
@@ -5642,10 +5612,8 @@ paths:
             x-ms-client-request-id:
               - b8400008-f58e-40d7-86d0-6cc6267a5e9a
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/update':
     post:
@@ -5694,10 +5662,8 @@ paths:
                   value: j9eR+Da/uCRYZrUaRSOAZErtzAfou9saDAeQjOuByxk/oM5v3z8D5aPYBc6LUoTsBf6wzDyWVytuh1eVQv0ke/oFBxnq236+yDN2x/xY9F+o8byAoQ4kguUmVZ2oI7MEm0UTZKQGdFTYd9wPMOlsPa8GIPdaOzZQ1MVDtdLj/e2ObL1ZX89yTdT1YB2LZa0yyCl/CdkrJyo3racUZYy/mozhyFszghu5hDPQLLba5VWM+EI3AL++XV4h9NIkDbbwLA36g0x0idJzbJQHAt6y//clHhahQeiBlcm5r3KAb13+T1xWc/0nqgWHsF+fRxIMMuXYISJAaF+uHhlaoNdhmA==
             subscriptionId: 9eb689cd-7243-43b4-b6f6-5c65cb296641
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail':
     post:
@@ -5754,8 +5720,7 @@ paths:
             x-ms-client-request-id:
               - 7670cd5c-ae03-4894-95d5-1db50af8e66c
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/shares':
     get:
       deprecated: false
@@ -6006,8 +5971,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 9eb689cd-7243-43b4-b6f6-5c65cb296641
           responses:
-            '204':
-              body: ''
+            '204': {}
     get:
       deprecated: false
       description: Returns the extended information of the specified manager name.
@@ -6822,8 +6786,7 @@ paths:
             x-ms-client-request-id:
               - d029fde2-12ce-446d-859e-8d9dd10bad97
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -6962,8 +6925,7 @@ paths:
                   location: West US
                   login: sacforsdktest
                 type: Microsoft.StorSimple/managers/storageAccountCredentials
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageDomains':
     get:
@@ -7055,8 +7017,7 @@ paths:
             x-ms-client-request-id:
               - 8e99c76d-6870-4af0-ab41-422a39b3f646
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -7181,8 +7142,7 @@ paths:
                   storageAccountCredentialIds:
                     - /subscriptions/9eb689cd-7243-43b4-b6f6-5c65cb296641/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/hAzureSDKOperations/storageAccountCredentials/sacforsdktest
                 type: Microsoft.StorSimple/managers/storageDomains
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
 definitions:
   AccessControlRecord:

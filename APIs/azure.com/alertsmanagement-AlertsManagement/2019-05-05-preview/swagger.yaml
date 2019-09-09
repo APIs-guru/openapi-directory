@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: alertsmanagement-AlertsManagement
   x-tags:
@@ -156,6 +156,7 @@ parameters:
     x-ms-enum:
       modelAsString: true
       name: identifier
+    x-ms-parameter-location: method
   impactedScope:
     description: filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be an well constructed ARM id of the scope.
     in: query
@@ -328,8 +329,9 @@ parameters:
     type: string
     x-ms-parameter-location: method
   subscriptionId:
-    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: The ID of the target subscription.
     in: path
+    minLength: 1
     name: subscriptionId
     required: true
     type: string
@@ -927,7 +929,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/dd91de05-d791-4ceb-b6dc-988682dc7d72/providers/Microsoft.AlertsManagement/smartGroups/a808445e-bb38-4751-85c2-1b109ccc1059
                     name: cpu alert

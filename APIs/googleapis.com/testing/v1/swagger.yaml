@@ -1075,7 +1075,9 @@ definitions:
         type: array
     type: object
   IosModel:
-    description: A description of an iOS device tests may be run on.
+    description: |-
+      A description of an iOS device tests may be run on.
+      Next tag: 10
     properties:
       deviceCapabilities:
         description: |-
@@ -1103,6 +1105,18 @@ definitions:
           The human-readable name for this device model.
           Examples: "iPhone 4s", "iPad Mini 2".
         type: string
+      screenDensity:
+        description: Screen density in DPI.
+        format: int32
+        type: integer
+      screenX:
+        description: Screen size in the horizontal (X) dimension measured in pixels.
+        format: int32
+        type: integer
+      screenY:
+        description: Screen size in the vertical (Y) dimension measured in pixels.
+        format: int32
+        type: integer
       supportedVersionIds:
         description: The set of iOS major software versions this device supports.
         items:

@@ -309,7 +309,8 @@ definitions:
           A list of label keys that were unused by the server in processing the
           request. Thus, for similar requests repeated in a certain future time
           window, the caller can choose to ignore these labels in the requests
-          to achieve better client-side cache hits and quota aggregation.
+          to achieve better client-side cache hits and quota aggregation for rate
+          quota. This field is not populated for allocation quota checks.
         items:
           type: string
         type: array
@@ -1113,6 +1114,11 @@ definitions:
           - ALERT
           - EMERGENCY
         type: string
+      sourceLocation:
+        $ref: '#/definitions/LogEntrySourceLocation'
+        description: |-
+          Optional. Source code location information associated with the log entry,
+          if any.
       structPayload:
         additionalProperties:
           description: Properties of the object.
@@ -1158,6 +1164,32 @@ definitions:
           Optional. An arbitrary producer identifier. The combination of
           `id` and `producer` must be globally unique.  Examples for `producer`:
           `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+        type: string
+    type: object
+  LogEntrySourceLocation:
+    description: |-
+      Additional information about the source code location that produced the log
+      entry.
+    properties:
+      file:
+        description: |-
+          Optional. Source file name. Depending on the runtime environment, this
+          might be a simple name or a fully-qualified name.
+        type: string
+      function:
+        description: |-
+          Optional. Human-readable name of the function or method being invoked, with
+          optional context such as the class or package name. This information may be
+          used in contexts such as the logs viewer, where a file and line number are
+          less meaningful. The format can vary by language. For example:
+          `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+          (Python).
+        type: string
+      line:
+        description: |-
+          Optional. Line within the source file. 1-based; 0 indicates no line number
+          available.
+        format: int64
         type: string
     type: object
   MetricValue:
@@ -1372,8 +1404,8 @@ definitions:
     description: |-
       This message defines attributes for a node that handles a network request.
       The node can be either a service or an application that sends, forwards,
-      or receives the request. Service peers should fill in the `service`,
-      `principal`, and `labels` as appropriate.
+      or receives the request. Service peers should fill in
+      `principal` and `labels` as appropriate.
     properties:
       ip:
         description: The IP address of the peer.
@@ -1398,12 +1430,6 @@ definitions:
           The CLDR country/region code associated with the above IP address.
           If the IP address is private, the `region_code` should reflect the
           physical location where this peer is running.
-        type: string
-      service:
-        description: |-
-          The canonical service name of the peer.
-
-          NOTE: different systems may have different service naming schemes.
         type: string
     type: object
   QuotaError:
@@ -1663,9 +1689,6 @@ definitions:
         description: |-
           The request authentication. May be absent for unauthenticated requests.
           Derived from the HTTP request `Authorization` header or equivalent.
-      fragment:
-        description: The HTTP URL fragment. No URL decoding is performed.
-        type: string
       headers:
         additionalProperties:
           type: string
@@ -1816,8 +1839,10 @@ definitions:
         type: string
       type:
         description: |-
-          The type of the resource. The scheme is platform-specific because
+          The type of the resource. The syntax is platform-specific because
           different platforms define their resources differently.
+
+          For Google APIs, the type format must be "{service}/{kind}".
         type: string
     type: object
   ResourceInfo:

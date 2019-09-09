@@ -4443,10 +4443,8 @@ paths:
             resourceGroupName: res4228
             subscriptionId: 27de630f-e1ee-42de-8849-90def4986454
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: 'Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.'
       operationId: StorageAccounts_GetProperties
@@ -4650,8 +4648,7 @@ paths:
                   key1: value1
                   key2: value2
                 type: Microsoft.Storage/storageAccounts
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas':
     post:

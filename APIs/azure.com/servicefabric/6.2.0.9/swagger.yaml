@@ -2456,9 +2456,7 @@ paths:
                   ServicePlacementPolicies: []
                   ServiceTypeName: Actor1ActorServiceType
               headers: {}
-            '204':
-              body: ''
-              headers: {}
+            '204': {}
   '/ApplicationTypes/{applicationTypeName}/$/Unprovision':
     post:
       description: 'Removes or unregisters a Service Fabric application type from the cluster. This operation can only be performed if all application instances of the application type has been deleted. Once the application type is unregistered, no new application instances can be created for this particular application type.'
@@ -2626,9 +2624,7 @@ paths:
                 TypeName: CalculatorApp
                 TypeVersion: '1.0'
               headers: {}
-            '204':
-              body: ''
-              headers: {}
+            '204': {}
   '/Applications/{applicationId}/$/Delete':
     post:
       description: 'Deletes an existing Service Fabric application. An application must be created before it can be deleted. Deleting an application will delete all services that are part of that application. By default, Service Fabric will try to close service replicas in a graceful manner and then delete the service. However, if a service is having issues closing the replica gracefully, the delete operation may take a long time or get stuck. Use the optional ForceRemove flag to skip the graceful close sequence and forcefully delete the application and all of the its services.'
@@ -6285,9 +6281,7 @@ paths:
                 TypeName: CalculatorApp
                 WorkDirectory: 'C:\SfDevCluster\Data\_App\_Node_1\CalculatorApp_App0\work'
               headers: {}
-            '204':
-              body: ''
-              headers: {}
+            '204': {}
   '/Nodes/{nodeName}/$/GetApplications/{applicationId}/$/GetCodePackages':
     get:
       description: Gets the list of code packages deployed on a Service Fabric node for the given application.
@@ -18448,7 +18442,7 @@ definitions:
     description: |-
       Describes the policy to be used for placement of a Service Fabric service where the service's Primary replicas should optimally be placed in a particular domain.
 
-      This placement policy is usually used with fault domains in scenarios where the Service Fabric cluster is geographically distributed in order to indicate that a service�s primary replica should be located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional or datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica may not end up located in this domain due to failures, capacity limits, or other constraints.
+      This placement policy is usually used with fault domains in scenarios where the Service Fabric cluster is geographically distributed in order to indicate that a service's primary replica should be located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional or datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica may not end up located in this domain due to failures, capacity limits, or other constraints.
     x-ms-discriminator-value: PreferredPrimaryDomain
   ServicePlacementRequireDomainDistributionPolicyDescription:
     allOf:

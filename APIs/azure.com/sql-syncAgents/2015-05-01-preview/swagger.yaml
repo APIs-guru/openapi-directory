@@ -204,12 +204,9 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
             syncAgentName: syncagentcrud-3187
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Gets a sync agent.
@@ -385,8 +382,7 @@ paths:
                   syncDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-Onebox/providers/Microsoft.Sql/servers/syncagentcrud-8475/databases/sync
                   version: 4.2.0.0
                 type: Microsoft.Sql/servers/syncAgents
-            '202':
-              body: ''
+            '202': {}
         Update a sync agent:
           parameters:
             api-version: 2015-05-01-preview
@@ -420,8 +416,7 @@ paths:
                   syncDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-Onebox/providers/Microsoft.Sql/servers/syncagentcrud-8475/databases/sync
                   version: 4.2.0.0
                 type: Microsoft.Sql/servers/syncAgents
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey':
     post:

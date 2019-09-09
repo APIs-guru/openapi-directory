@@ -115,6 +115,8 @@ tags:
   - name: liveChatMessages
   - name: liveChatModerators
   - name: liveStreams
+  - name: members
+  - name: membershipsLevels
   - name: playlistItems
   - name: playlists
   - name: search
@@ -2300,6 +2302,113 @@ paths:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveStreams
+  /members:
+    get:
+      description: Lists members for a channel.
+      operationId: youtube.members.list
+      parameters:
+        - description: 'The hasAccessToLevel parameter specifies, when set, the ID of a pricing level that members from the results set should have access to. When not set, all members will be considered, regardless of their active pricing level.'
+          in: query
+          name: hasAccessToLevel
+          type: string
+        - default: 5
+          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+          in: query
+          maximum: 50
+          minimum: 0
+          name: maxResults
+          type: integer
+        - default: all_current
+          description: The mode parameter specifies which channel members to return.
+          enum:
+            - all_current
+            - updates
+          in: query
+          name: mode
+          type: string
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+        - description: The part parameter specifies the member resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MemberListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+      tags:
+        - members
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /membershipsLevels:
+    get:
+      description: Lists pricing levels for a channel.
+      operationId: youtube.membershipsLevels.list
+      parameters:
+        - description: The part parameter specifies the membershipsLevel resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MembershipsLevelListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+      tags:
+        - membershipsLevels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /playlistItems:
     delete:
       description: Deletes a playlist item.
@@ -4373,6 +4482,7 @@ definitions:
           - dash
           - hls
           - rtmp
+          - webrtc
         type: string
       resolution:
         description: The resolution of the inbound video data.
@@ -4855,7 +4965,6 @@ definitions:
           - private
           - public
           - unlisted
-          - unlisted_new
         type: string
     type: object
   ChannelTopicDetails:
@@ -5059,7 +5168,7 @@ definitions:
         type: string
     type: object
   ContentRating:
-    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 71'
+    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 72'
     properties:
       acbRating:
         description: The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming.
@@ -5716,10 +5825,22 @@ definitions:
         description: The video's rating from the Nacionãlais Kino centrs (National Film Centre of Latvia).
         enum:
           - nkclv12plus
+          - nkclv16plus
           - nkclv18plus
           - nkclv7plus
           - nkclvU
           - nkclvUnrated
+        type: string
+      nmcRating:
+        enum:
+          - nmc15plus
+          - nmc18plus
+          - nmc18tc
+          - nmcG
+          - nmcPg
+          - nmcPg13
+          - nmcPg15
+          - nmcUnrated
         type: string
       oflcRating:
         description: The video's Office of Film and Literature Classification (OFLC - New Zealand) rating.
@@ -6173,6 +6294,11 @@ definitions:
       value:
         type: string
     type: object
+  LevelDetails:
+    properties:
+      displayName:
+        type: string
+    type: object
   LiveBroadcast:
     description: 'A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.'
     properties:
@@ -6317,6 +6443,19 @@ definitions:
         description: 'The date and time that the broadcast actually started. This information is only available once the broadcast''s state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
         type: string
+      broadcastType:
+        enum:
+          - fludd
+          - fluddArchive
+          - gplusHoa
+          - lcrEncoder
+          - mobile
+          - persistent
+          - premiere
+          - unspecified
+          - webcam
+          - ytHoa
+        type: string
       channelId:
         description: The ID that YouTube uses to uniquely identify the channel that is publishing the broadcast.
         type: string
@@ -6386,7 +6525,6 @@ definitions:
           - private
           - public
           - unlisted
-          - unlisted_new
         type: string
       recordingStatus:
         description: The broadcast's recording status.
@@ -6968,6 +7106,134 @@ definitions:
       value:
         type: string
     type: object
+  Member:
+    description: A member resource represents a member for a YouTube channel. A member provides recurring monetary support to a creator and receives special benefits.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the member.
+        type: string
+      kind:
+        default: 'youtube#member'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#member".'
+        type: string
+      snippet:
+        $ref: '#/definitions/MemberSnippet'
+        description: The snippet object contains basic details about the member.
+    type: object
+  MemberListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of members that match the request criteria.
+        items:
+          $ref: '#/definitions/Member'
+        type: array
+      kind:
+        default: 'youtube#memberListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#memberListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  MemberSnippet:
+    properties:
+      creatorChannelId:
+        description: The id of the channel that's offering memberships.
+        type: string
+      memberDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: Details about the member.
+      membershipsDetails:
+        $ref: '#/definitions/MembershipsDetails'
+        description: Details about the user's membership.
+    type: object
+  MembershipsDetails:
+    properties:
+      accessibleLevels:
+        description: All levels that the user has access to. This includes the purchased level and all other levels that are included because of a higher purchase.
+        items:
+          type: string
+        type: array
+      memberSince:
+        description: The date and time when the user became a continuous member across all levels.
+        type: string
+      memberSinceCurrentLevel:
+        description: The date and time when the user started to continuously have access to the currently highest level.
+        type: string
+      memberTotalDuration:
+        description: The cumulative time the user has been a member across all levels in complete months (the time is rounded down to the nearest integer).
+        format: int32
+        type: integer
+      memberTotalDurationCurrentLevel:
+        description: The cumulative time the user has had access to the currently highest level in complete months (the time is rounded down to the nearest integer).
+        format: int32
+        type: integer
+      purchasedLevel:
+        description: The highest level the user has access to at the moment.
+        type: string
+    type: object
+  MembershipsLevel:
+    description: A membershipsLevel resource represents an offer made by YouTube creators for their fans. Users can become members of the channel by joining one of the available levels. They will provide recurring monetary support and receives special benefits.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the memberships level.
+        type: string
+      kind:
+        default: 'youtube#membershipsLevel'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#membershipsLevel".'
+        type: string
+      snippet:
+        $ref: '#/definitions/MembershipsLevelSnippet'
+        description: The snippet object contains basic details about the level.
+    type: object
+  MembershipsLevelListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of pricing levels offered by a creator to the fans.
+        items:
+          $ref: '#/definitions/MembershipsLevel'
+        type: array
+      kind:
+        default: 'youtube#membershipsLevelListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#membershipsLevelListResponse".'
+        type: string
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  MembershipsLevelSnippet:
+    properties:
+      creatorChannelId:
+        description: The id of the channel that's offering channel memberships.
+        type: string
+      levelDetails:
+        $ref: '#/definitions/LevelDetails'
+    type: object
   MonitorStreamInfo:
     description: Settings and Info of the monitor stream
     properties:
@@ -7188,7 +7454,6 @@ definitions:
           - private
           - public
           - unlisted
-          - unlisted_new
         type: string
     type: object
   PlaylistListResponse:
@@ -7280,7 +7545,6 @@ definitions:
           - private
           - public
           - unlisted
-          - unlisted_new
         type: string
     type: object
   PromotedItem:
@@ -8441,7 +8705,6 @@ definitions:
           - private
           - public
           - unlisted
-          - unlisted_new
         type: string
       publicStatsViewable:
         description: 'This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled.'

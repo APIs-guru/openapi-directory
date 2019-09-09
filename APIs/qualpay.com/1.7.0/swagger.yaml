@@ -318,7 +318,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      operationId: nmiEmulatorHandlerUsingPOST
+      operationId: nmiDirectPostHandlerUsingPOST
       produces:
         - '*/*'
         - application/x-www-form-urlencoded
@@ -329,7 +329,51 @@ paths:
             type: string
       security:
         - basicAuth: []
-      summary: nmiEmulatorHandler
+      summary: nmiDirectPostHandler
+      tags:
+        - pg-emulator
+  /emulator/nmi/three-step:
+    post:
+      consumes:
+        - application/xml
+        - text/xml
+      operationId: nmiThreeStepRedirectUsingPOST
+      produces:
+        - '*/*'
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      summary: nmiThreeStepRedirect
+      tags:
+        - pg-emulator
+  '/emulator/nmi/three-step/{pgId}':
+    post:
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      operationId: nmiThreeStepRedirectStepTwoUsingPOST
+      parameters:
+        - description: pgId
+          in: path
+          name: pgId
+          required: true
+          type: string
+      produces:
+        - text/html
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      summary: nmiThreeStepRedirectStepTwo
       tags:
         - pg-emulator
   /emulator/xml/v1/request.api:

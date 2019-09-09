@@ -1167,6 +1167,11 @@ paths:
           name: Sort
           required: false
           type: string
+        - description: 'Optional filter to only display tasks linked to a Task Status where isComplete=false, or where isComplete=true'
+          in: query
+          name: isComplete
+          required: false
+          type: boolean
         - description: Optional filter to only display tasks belonging to a specific ProjectID
           format: int32
           in: query
@@ -1265,6 +1270,36 @@ paths:
       summary: Gets Task by Task ID
       tags:
         - Task
+  /api/TaskStatus:
+    get:
+      consumes: []
+      operationId: TaskStatus_Get
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TaskStatusList'
+      security:
+        - oauth2:
+            - read_projects
+      summary: Gets list of Task Statuses
+      tags:
+        - TaskStatus
+  /api/TaskType:
+    get:
+      consumes: []
+      operationId: TaskType_Get
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TaskTypeList'
+      security:
+        - oauth2:
+            - read_projects
+      summary: Gets list of Task Types
+      tags:
+        - TaskType
   /api/Tax:
     get:
       consumes: []
@@ -1394,7 +1429,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: The FieldsToUpdate field expects a string array collection of the field names you would like updated.
+      description: 'The FieldsToUpdate field expects a string array collection of the field names you would like updated. Valid fields to update inlcude "ProjectIDFK", "TimeSheetCategoryIDFK", "TaskIDFK", "Duration", "EntryDate", "Notes", "hasStartEndTime". If you intend to provide start/end times on timesheets, this is achieved by including the start time in the EntryDate field (Iso date format), along with a Duration (decimal format).'
       operationId: Timesheet_Put
       parameters:
         - description: ''
@@ -1675,7 +1710,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. To create a webhook, you need both the webhook_notifications scope, as well as the scope for the required entity being monitored.  Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent","invoice_updated", "project_created", "project_deleted", "project_updated", "task_created", "task_updated", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account. There is an optional  Secret parameter (string 255 char max). This allows for webhook authentication. If provided, the Secret will be BASE 64 encoded and passed with notications as a basic authentication http header. i.e. Authorization Basic [BASE64 of Secret]"'
+      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. To create a webhook, you need both the webhook_notifications scope, as well as the scope for the required entity being monitored.  Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent","invoice_updated","invoice_deleted", "project_created", "project_deleted", "project_updated", "task_created", "task_updated","task_deleted", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account. There is an optional  Secret parameter (string 255 char max). This allows for webhook authentication. If provided, the Secret will be BASE 64 encoded and passed with notications as a basic authentication http header. i.e. Authorization Basic [BASE64 of Secret]"'
       operationId: Webhook_Post
       parameters:
         - in: body
@@ -1765,6 +1800,20 @@ definitions:
       has24HourTimesheetFormat:
         type: boolean
       hasStartEndTimesheets:
+        type: boolean
+    type: object
+  AccountTaskTypeDetails:
+    properties:
+      AccountTaskTypeID:
+        format: int32
+        type: integer
+      Icon:
+        type: string
+      IconType:
+        type: string
+      Name:
+        type: string
+      isDefault:
         type: boolean
     type: object
   Company:
@@ -2807,6 +2856,9 @@ definitions:
     type: object
   NewTask:
     properties:
+      AccountTaskTypeIDFK:
+        format: int32
+        type: integer
       AssignedToUserIDFK:
         format: int32
         type: integer
@@ -2985,6 +3037,11 @@ definitions:
       DateUpdated:
         format: date-time
         type: string
+      DefaultAccountTaskTypeIDFK:
+        format: int32
+        type: integer
+      DefaultAccountTaskTypeName:
+        type: string
       EndDate:
         format: date-time
         type: string
@@ -3063,6 +3120,11 @@ definitions:
         type: string
       DateUpdated:
         format: date-time
+        type: string
+      DefaultAccountTaskTypeIDFK:
+        format: int32
+        type: integer
+      DefaultAccountTaskTypeName:
         type: string
       Notes:
         type: string
@@ -3380,6 +3442,9 @@ definitions:
     type: object
   TaskDetails:
     properties:
+      AccountTaskTypeIDFK:
+        format: int32
+        type: integer
       ActualTime:
         format: double
         type: number
@@ -3442,8 +3507,12 @@ definitions:
         type: string
       TaskStatusCode:
         type: string
+      TaskStatusName:
+        type: string
       Title:
         type: string
+      isCompleteStatus:
+        type: boolean
     type: object
   TaskList:
     properties:
@@ -3460,6 +3529,39 @@ definitions:
       TotalCount:
         format: int32
         type: integer
+    type: object
+  TaskStatusDetails:
+    properties:
+      AccountTaskTypeIDFK:
+        format: int32
+        type: integer
+      Color:
+        type: string
+      DisplayOrder:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      TaskStatusCode:
+        type: string
+      TaskTypeName:
+        type: string
+      isComplete:
+        type: boolean
+    type: object
+  TaskStatusList:
+    properties:
+      statuses:
+        items:
+          $ref: '#/definitions/TaskStatusDetails'
+        type: array
+    type: object
+  TaskTypeList:
+    properties:
+      tasktypes:
+        items:
+          $ref: '#/definitions/AccountTaskTypeDetails'
+        type: array
     type: object
   TaxComponent:
     properties:
@@ -3672,6 +3774,8 @@ definitions:
         type: integer
       TaskPriorityCode:
         type: string
+      TaskStatusCode:
+        type: string
       Title:
         type: string
     required:
@@ -3698,11 +3802,11 @@ definitions:
       TaskIDFK:
         format: int32
         type: integer
-      TimeSheetCategoryIDFK:
-        format: int32
-        type: integer
       TimeSheetEntryID:
         format: int64
+        type: integer
+      TimesheetCategoryIDFK:
+        format: int32
         type: integer
       hasStartEndTime:
         type: boolean

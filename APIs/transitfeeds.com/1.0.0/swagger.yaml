@@ -201,7 +201,7 @@ paths:
       summary: Retrieve a list of locations.
 definitions:
   API401Response:
-    description: This eleent contains information about a 401 Unauthorized error.
+    description: This element contains information about a 401 Unauthorized error.
     properties:
       msg:
         description: Description of the error.
@@ -217,7 +217,7 @@ definitions:
         type: integer
     type: object
   API404Response:
-    description: This eleent contains information about a 404 File Not Found error.
+    description: This element contains information about a 404 File Not Found error.
     properties:
       msg:
         description: Description of the error.
@@ -381,11 +381,13 @@ definitions:
           Indicates the success status of this request. The following values are possible:
 
           * `OK` - Request was valid.
+          * `DEPRECATED` - Request resolved to a deprecated resource which will not be returned.
           * `EMPTYKEY` - Request was missing API key.
           * `MISSINGINPUT` - A required request parameter was missing.
           * `INVALIDINPUT` - A request parameter was invalid.
         enum:
           - OK
+          - DEPRECATED
           - EMPTYKEY
           - MISSINGINPUT
           - INVALIDINPUT
@@ -487,12 +489,14 @@ definitions:
           Indicates the success status of this request. The following values are possible:
 
           * `OK` - Request was valid.
+          * `DEPRECATED` - Request resolved to a deprecated resource which will not be returned.
           * `EMPTYKEY` - Request was missing API key.
           * `MISSINGINPUT` - A required request parameter was missing.
           * `INVALIDINPUT` - A request parameter was invalid.
           * `OTHER` - Some other error occurred.
         enum:
           - OK
+          - DEPRECATED
           - EMPTYKEY
           - MISSINGINPUT
           - INVALIDINPUT

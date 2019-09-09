@@ -848,6 +848,11 @@ paths:
           name: dedup
           required: false
           type: boolean
+        - description: 'Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself'
+          in: query
+          name: owned
+          required: false
+          type: boolean
         - description: Filter listsings on State
           in: query
           name: state
@@ -1265,6 +1270,11 @@ paths:
         - description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
           in: query
           name: dedup
+          required: false
+          type: boolean
+        - description: 'Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself'
+          in: query
+          name: owned
           required: false
           type: boolean
         - description: Filter listsings on State
@@ -1870,6 +1880,11 @@ paths:
           name: dedup
           required: false
           type: boolean
+        - description: 'Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself'
+          in: query
+          name: owned
+          required: false
+          type: boolean
         - description: Filter listsings on State
           in: query
           name: state
@@ -2282,6 +2297,11 @@ paths:
           name: dedup
           required: false
           type: boolean
+        - description: 'Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself'
+          in: query
+          name: owned
+          required: false
+          type: boolean
         - description: Filter listsings on State
           in: query
           name: state
@@ -2335,11 +2355,18 @@ paths:
           required: false
           type: boolean
         - description: sold parameter to display only sold listings
-          enum:
-            - 'true'
-            - 'false'
           in: query
           name: sold
+          required: false
+          type: boolean
+        - description: 'Last seen date range to filter listings with the last seen in the range given. Range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623'
+          in: query
+          name: last_seen_range
+          required: false
+          type: string
+        - description: 'First seen date range to filter listings with the last seen in the range given. Range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623'
+          in: query
+          name: first_seen_range
           required: false
           type: string
       responses:

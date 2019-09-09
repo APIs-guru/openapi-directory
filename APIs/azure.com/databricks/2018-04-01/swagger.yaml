@@ -404,8 +404,20 @@ paths:
                   name: skuName
                 tags: null
                 type: Microsoft.Databricks/workspaces
-              headers: {}
-            '201': {}
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace
+                location: East US 2
+                name: myWorkspace
+                properties:
+                  managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  parameters: null
+                  provisioningState: Created
+                  uiDefinitionUri: 'https://path/to/workspaceCreateUiDefinition.json'
+                sku:
+                  name: skuName
+                tags: null
+                type: Microsoft.Databricks/workspaces
       x-ms-long-running-operation: true
 definitions:
   ErrorDetail:

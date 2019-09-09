@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2019-03-01/gallery.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-gallery
   x-tags:
@@ -1446,7 +1446,7 @@ paths:
       tags:
         - GalleryImageVersions
       x-ms-examples:
-        Create or update a simple gallery Image Version.:
+        Create or update a simple Gallery Image Version.:
           parameters:
             api-version: '2019-03-01'
             galleryImageName: myGalleryImageName
@@ -1824,7 +1824,7 @@ definitions:
       identifier:
         $ref: '#/definitions/GalleryImageIdentifier'
       osState:
-        description: The allowed values for OS State are 'Generalized'.
+        description: This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
         enum:
           - Generalized
           - Specialized
@@ -1923,7 +1923,7 @@ definitions:
     required:
       - source
   GalleryImageVersionStorageProfile:
-    description: This is the storage profile of a gallery Image Version.
+    description: This is the storage profile of a Gallery Image Version.
     properties:
       dataDiskImages:
         description: A list of data disk images.

@@ -25,6 +25,11 @@ externalDocs:
   url: 'https://developer.iva-api.com/docs/v2/getting-started'
 consumes:
   - application/json
+produces:
+  - application/json
+  - application/xml
+  - text/csv
+  - text/html
 securityDefinitions:
   ApiKeyHeader:
     description: Authorize requests passing your apiKey in HTTP header.
@@ -118,11 +123,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -204,11 +204,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -290,11 +285,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -376,11 +366,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -452,11 +437,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -521,11 +501,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -607,11 +582,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -693,11 +663,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -750,11 +715,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -815,11 +775,6 @@ paths:
           name: DateValue
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -876,11 +831,6 @@ paths:
           required: false
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -962,11 +912,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1027,11 +972,6 @@ paths:
           name: DateValue
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1092,11 +1032,6 @@ paths:
           name: DateValue
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1178,11 +1113,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1226,11 +1156,6 @@ paths:
         - in: query
           name: StartsWith
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1544,11 +1469,6 @@ paths:
           required: false
           type: boolean
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1860,11 +1780,6 @@ paths:
           required: false
           type: boolean
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1921,11 +1836,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -1987,11 +1897,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2053,11 +1958,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2119,11 +2019,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2185,11 +2080,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2253,11 +2143,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2319,11 +2204,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2385,11 +2265,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2451,11 +2326,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2517,11 +2387,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2583,11 +2448,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2642,11 +2502,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2701,11 +2556,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2760,11 +2610,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2819,11 +2664,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2878,11 +2718,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2937,11 +2772,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -2982,11 +2812,6 @@ paths:
       description: 'List of Countries, ISO codes and Country IDs used throughout the API.'
       operationId: GetCountries
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3027,11 +2852,6 @@ paths:
       description: List of filter options available in data demo.
       operationId: GetDataDemoFilters
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3069,11 +2889,6 @@ paths:
       description: Provider enumerator has values added regularly.  Update your SDK to refresh these values.
       operationId: GetCommonEnumerators
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3111,11 +2926,6 @@ paths:
       description: 'A list of image types available in the IVA database. **EX: Poster**'
       operationId: GetImageTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3156,11 +2966,6 @@ paths:
       description: Returns a list of languages used in the API as well as the ISO code and language ID.
       operationId: GetLanguages
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3201,11 +3006,6 @@ paths:
       description: No parameters.
       operationId: GetOriginatingNetworks
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3260,11 +3060,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3299,17 +3094,52 @@ paths:
         - Common
     parameters:
       - $ref: '#/parameters/Accept'
+  /Common/TrendSources:
+    get:
+      deprecated: false
+      description: List of Trend Sources.
+      operationId: GetTrendSources
+      parameters: []
+      responses:
+        '200':
+          description: OK.
+          schema:
+            items:
+              $ref: '#/definitions/TrendSourceResponse'
+            title: List<TrendSourceResponse>
+            type: array
+        '204':
+          description: No content.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden. The subscription key does not have permission to access this method.
+        '404':
+          description: Not found. The item you requested could not be found or has been deleted.
+        '409':
+          description: Conflict.
+        '429':
+          description: Too many requests.
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable.
+      security:
+        - ApiKeyHeader: []
+          ApiKeyQuery: []
+      summary: List of Trend Sources.
+      tags:
+        - Common
+    parameters:
+      - $ref: '#/parameters/Accept'
   /Common/VideoTypes/:
     get:
       deprecated: false
       description: Returns a list of the types of videos that can be associated to a title.
       operationId: GetVideoTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3344,6 +3174,96 @@ paths:
         - Common
     parameters:
       - $ref: '#/parameters/Accept'
+  /Entertainment/Autocomplete/:
+    get:
+      deprecated: false
+      description: Get suggestions based on prefix and field selection.
+      operationId: SearchEntertainmentAutoComplete
+      parameters:
+        - description: 'Rows to return, used for paging. Default is 10, limit is 50.'
+          format: int32
+          in: query
+          name: Size
+          required: false
+          type: integer
+          x-nullable: false
+        - in: query
+          name: Package
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: List of program types. See /Common/GetCommonEnumerators endpoint for complete list.
+          in: query
+          items:
+            enum:
+              - Movie
+              - Show
+              - Game
+              - Season
+              - Episode
+            type: string
+            x-nullable: false
+          name: ProgramTypes
+          required: false
+          type: array
+        - description: List of available auto completion fields.
+          enum:
+            - basedOns_instanceOfLabel
+            - basedOns_label
+            - subjects_label
+            - filmingLocations_label
+            - narrativeLocations_label
+            - microGenres_label
+            - timePeriods_label
+            - title
+            - originalTitle
+            - tags
+            - originatingNetwork
+            - companies_name
+            - contributors_personName
+          in: query
+          name: Field
+          required: true
+          type: string
+          x-nullable: false
+        - description: String prefix to use to locate matching strings based on Field selected.
+          in: query
+          name: Prefix
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK.
+          schema:
+            items:
+              $ref: '#/definitions/SearchEntertainmentAutoCompleteResponse'
+            title: List<SearchEntertainmentAutoCompleteResponse>
+            type: array
+        '204':
+          description: No content.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden. The subscription key does not have permission to access this method.
+        '404':
+          description: Not found. The item you requested could not be found or has been deleted.
+        '409':
+          description: Conflict.
+        '429':
+          description: Too many requests.
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable.
+      security:
+        - ApiKeyHeader: []
+          ApiKeyQuery: []
+      tags:
+        - Entertainment
+    parameters:
+      - $ref: '#/parameters/Accept'
   /Entertainment/Match/:
     get:
       deprecated: false
@@ -3356,10 +3276,16 @@ paths:
           required: true
           type: string
           x-nullable: false
+        - description: 'Id of Entertainment program to be matched against, if this is set no search is run and data is compared to this program only.'
+          format: int64
+          in: query
+          name: EntertainmentId
+          required: true
+          type: integer
         - description: Title of Program to be matched.
           in: query
           name: Title
-          required: true
+          required: false
           type: string
         - collectionFormat: multi
           description: Alternate Titles of Program to be matched.
@@ -3422,11 +3348,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3471,10 +3392,16 @@ paths:
           required: true
           type: string
           x-nullable: false
+        - description: 'Id of Entertainment program to be matched against, if this is set no search is run and data is compared to this program only.'
+          format: int64
+          in: formData
+          name: EntertainmentId
+          required: true
+          type: integer
         - description: Title of Program to be matched.
           in: formData
           name: Title
-          required: true
+          required: false
           type: string
         - collectionFormat: multi
           description: Alternate Titles of Program to be matched.
@@ -3537,11 +3464,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -3571,103 +3493,6 @@ paths:
       summary: 'Match a program using Title, Year, Cast, Director.'
       tags:
         - Entertainment
-  /Entertainment/Match/Game:
-    get:
-      deprecated: false
-      description: 'Requires a valid game and at least a title. Matches to Entertainment Programs of given type, returns all candidates that achieved the highest score, ties possible.'
-      operationId: MatchToEntertainmentGameMatchGame_Get
-      parameters:
-        - description: Title of Program to be matched.
-          in: query
-          name: Title
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: Alternate Titles of Program to be matched.
-          in: query
-          items:
-            type: string
-          name: AlternateTitles
-          required: false
-          type: array
-        - description: Release Year of Program to be matched.
-          format: int32
-          in: query
-          name: Year
-          required: false
-          type: integer
-        - description: Company of Program to be matched.
-          in: query
-          name: Company
-          required: false
-          type: string
-        - description: 'For fuzzy title match, default is 4, set to 0 for no fuzzy match.'
-          format: int32
-          in: query
-          name: StringDistance
-          required: false
-          type: integer
-          x-nullable: false
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/MatchToEntertainmentProgramResponse'
-      summary: 'Match a game using Title, Year, Company.'
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-    post:
-      consumes:
-        - application/x-www-form-urlencoded
-      deprecated: false
-      description: 'Requires a valid game and at least a title. Matches to Entertainment Programs of given type, returns all candidates that achieved the highest score, ties possible.'
-      operationId: MatchToEntertainmentGameMatchGame_Post
-      parameters:
-        - description: Title of Program to be matched.
-          in: formData
-          name: Title
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: Alternate Titles of Program to be matched.
-          in: formData
-          items:
-            type: string
-          name: AlternateTitles
-          required: false
-          type: array
-        - description: Release Year of Program to be matched.
-          format: int32
-          in: formData
-          name: Year
-          required: false
-          type: integer
-        - description: Company of Program to be matched.
-          in: formData
-          name: Company
-          required: false
-          type: string
-        - description: 'For fuzzy title match, default is 4, set to 0 for no fuzzy match.'
-          format: int32
-          in: formData
-          name: StringDistance
-          required: false
-          type: integer
-          x-nullable: false
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/MatchToEntertainmentProgramResponse'
-      summary: 'Match a game using Title, Year, Company.'
-      tags:
-        - private
   /Entertainment/Search/:
     get:
       deprecated: false
@@ -3722,6 +3547,8 @@ paths:
               - iTunes
               - Netflix
               - AtomTickets
+              - YouTubePremium
+              - DCUniverse
             type: string
             x-nullable: false
           name: Providers
@@ -3940,7 +3767,14 @@ paths:
               - Images
               - Availabilities
               - Genres
-              - Trends
+              - ProgramTrends
+              - Subjects
+              - FilmingLocations
+              - NarrativeLocations
+              - BasedOns
+              - TimePeriods
+              - MicroGenres
+              - ProgramTags
             type: string
           name: Includes
           required: false
@@ -4011,8 +3845,7 @@ paths:
             - TimeStamp
             - IvaRating
             - ReleaseDate
-            - AverageTrendRank
-            - TrendRank
+            - CalculatedTrendRank
           in: query
           name: SortBy
           required: false
@@ -4037,6 +3870,14 @@ paths:
           items:
             type: string
           name: Status
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: The original language of the program.
+          in: query
+          items:
+            type: string
+          name: OriginalLanguages
           required: false
           type: array
         - description: Filter results where movie revenue is greater than or equal to this value.
@@ -4091,6 +3932,18 @@ paths:
               - RottenTomatoes
               - TVGuide
               - iTunes
+              - Amazon
+              - Fios
+              - Gamespot
+              - Hulu
+              - MovieClips
+              - Netflix
+              - PlutoTV
+              - Redbox
+              - TheNumbers
+              - Vudu
+              - Xfinity
+              - Youtube
             type: string
           name: TrendBrands
           required: false
@@ -4110,6 +3963,12 @@ paths:
             enum:
               - Publisher
               - TVOD
+              - SVOD
+              - Revenue
+              - Social
+              - Trailers
+              - AVOD
+              - Physical
             type: string
           name: TrendListClassifiers
           required: false
@@ -4122,11 +3981,62 @@ paths:
           name: MissingExternalIdNames
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: BasedOns
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: BasedOnInstanceOfs
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: FilmingLocations
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: NarrativeLocations
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: TimePeriods
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: Subjects
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: query
+          items:
+            type: string
+          name: MicroGenres
+          required: false
+          type: array
       responses:
         '200':
           description: OK.
@@ -4213,6 +4123,8 @@ paths:
               - iTunes
               - Netflix
               - AtomTickets
+              - YouTubePremium
+              - DCUniverse
             type: string
             x-nullable: false
           name: Providers
@@ -4431,7 +4343,14 @@ paths:
               - Images
               - Availabilities
               - Genres
-              - Trends
+              - ProgramTrends
+              - Subjects
+              - FilmingLocations
+              - NarrativeLocations
+              - BasedOns
+              - TimePeriods
+              - MicroGenres
+              - ProgramTags
             type: string
           name: Includes
           required: false
@@ -4502,8 +4421,7 @@ paths:
             - TimeStamp
             - IvaRating
             - ReleaseDate
-            - AverageTrendRank
-            - TrendRank
+            - CalculatedTrendRank
           in: formData
           name: SortBy
           required: false
@@ -4528,6 +4446,14 @@ paths:
           items:
             type: string
           name: Status
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: The original language of the program.
+          in: formData
+          items:
+            type: string
+          name: OriginalLanguages
           required: false
           type: array
         - description: Filter results where movie revenue is greater than or equal to this value.
@@ -4582,6 +4508,18 @@ paths:
               - RottenTomatoes
               - TVGuide
               - iTunes
+              - Amazon
+              - Fios
+              - Gamespot
+              - Hulu
+              - MovieClips
+              - Netflix
+              - PlutoTV
+              - Redbox
+              - TheNumbers
+              - Vudu
+              - Xfinity
+              - Youtube
             type: string
           name: TrendBrands
           required: false
@@ -4601,6 +4539,12 @@ paths:
             enum:
               - Publisher
               - TVOD
+              - SVOD
+              - Revenue
+              - Social
+              - Trailers
+              - AVOD
+              - Physical
             type: string
           name: TrendListClassifiers
           required: false
@@ -4613,11 +4557,62 @@ paths:
           name: MissingExternalIdNames
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: BasedOns
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: BasedOnInstanceOfs
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: FilmingLocations
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: NarrativeLocations
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: TimePeriods
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: Subjects
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: List of string
+          in: formData
+          items:
+            type: string
+          name: MicroGenres
+          required: false
+          type: array
       responses:
         '200':
           description: OK.
@@ -4667,11 +4662,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -4726,11 +4716,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -4785,11 +4770,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -4844,11 +4824,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -4903,11 +4878,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -4962,11 +4932,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5021,11 +4986,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5080,11 +5040,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5139,11 +5094,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5192,11 +5142,6 @@ paths:
           name: country
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5246,11 +5191,6 @@ paths:
           name: state
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5333,11 +5273,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5390,11 +5325,6 @@ paths:
           required: true
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5498,11 +5428,6 @@ paths:
           name: TheaterChainCodes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5591,11 +5516,6 @@ paths:
           name: EndDisplayDate
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5747,11 +5667,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5803,11 +5718,6 @@ paths:
           required: true
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5881,11 +5791,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -5936,11 +5841,6 @@ paths:
           name: IdProvider
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6003,11 +5903,6 @@ paths:
           name: EndDateTime
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6071,11 +5966,6 @@ paths:
           name: EndDisplayDate
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6149,11 +6039,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6225,11 +6110,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6298,11 +6178,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6343,11 +6218,6 @@ paths:
         - in: query
           name: StartsWith
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6409,11 +6279,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6463,11 +6328,6 @@ paths:
           name: ApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6517,11 +6377,6 @@ paths:
           name: ApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6571,11 +6426,6 @@ paths:
           name: ApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6625,11 +6475,6 @@ paths:
           name: ApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6679,11 +6524,6 @@ paths:
           name: FilePath
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6734,11 +6574,6 @@ paths:
           name: FilePath
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6796,11 +6631,6 @@ paths:
           name: ExpirationMinutes
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6858,11 +6688,6 @@ paths:
           name: ExpirationMinutes
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6907,11 +6732,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -6963,11 +6783,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7043,11 +6858,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7088,11 +6898,6 @@ paths:
         `Use to get the Id of the ID type to use with /Find/Movie.`
       operationId: GetMovieAlternateIdTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7171,11 +6976,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7254,11 +7054,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7356,11 +7151,6 @@ paths:
           name: StringDistance
           required: false
           type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7456,11 +7246,6 @@ paths:
           name: StringDistance
           required: false
           type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7496,11 +7281,6 @@ paths:
       description: Returns all Movie Certifications used in a movie response with the Releases object.
       operationId: GetMovieCertifications
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7541,11 +7321,6 @@ paths:
       description: List of all movie genres used in the API.
       operationId: GetMovieGenres
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7586,11 +7361,6 @@ paths:
       description: 'Release type refers to the release. **EX: Theatrical, Home Video, etc.**'
       operationId: GetMovieReleaseTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7698,11 +7468,6 @@ paths:
           required: false
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7771,11 +7536,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7827,11 +7587,6 @@ paths:
           name: Title
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7885,11 +7640,6 @@ paths:
           name: Title
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7939,11 +7689,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -7988,11 +7733,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8074,11 +7814,6 @@ paths:
           name: ExpirationDate
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8152,11 +7887,6 @@ paths:
           name: ExpirationDate
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8206,11 +7936,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8255,11 +7980,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8325,11 +8045,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8370,11 +8085,6 @@ paths:
         - in: query
           name: StartsWith
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8436,11 +8146,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8484,11 +8189,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8563,11 +8263,6 @@ paths:
           required: false
           type: boolean
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8617,11 +8312,6 @@ paths:
           required: false
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8686,11 +8376,6 @@ paths:
           required: true
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8779,11 +8464,6 @@ paths:
           required: true
           type: boolean
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8862,11 +8542,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -8904,11 +8579,6 @@ paths:
       description: 'Alternate Id types refer to the 3rd party ID sets IVA data has matched.  **Ex: IMDB**'
       operationId: GetShowAlternateIdTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9014,11 +8684,6 @@ paths:
           name: StringDistance
           required: false
           type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9122,11 +8787,6 @@ paths:
           name: StringDistance
           required: false
           type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9162,11 +8822,6 @@ paths:
       description: Release types refer to the type of release and are used in the releases object for a show.
       operationId: GetShowReleaseTypes
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9270,11 +8925,6 @@ paths:
           required: false
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9326,11 +8976,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9389,11 +9034,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9455,11 +9095,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9522,11 +9157,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9564,11 +9194,6 @@ paths:
       description: List of Show Certifications and definitions.
       operationId: GetShowCertifications
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9609,11 +9234,6 @@ paths:
       description: Returns a list of all the show genres used in the IVA database.
       operationId: GetShowGenres
       parameters: []
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9688,11 +9308,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9762,11 +9377,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9842,11 +9452,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9891,11 +9496,6 @@ paths:
           required: true
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -9969,11 +9569,6 @@ paths:
           name: Includes
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10017,11 +9612,6 @@ paths:
         - in: query
           name: Id
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10067,11 +9657,6 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10116,11 +9701,6 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10165,11 +9745,6 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10214,11 +9789,6 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10441,11 +10011,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10495,11 +10060,6 @@ paths:
           name: LeagueID
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10572,11 +10132,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10622,11 +10177,6 @@ paths:
           name: TvMediaApiKey
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10676,11 +10226,6 @@ paths:
           name: CountryID
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10735,11 +10280,6 @@ paths:
           name: RegionID
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10822,11 +10362,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10908,11 +10443,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -10970,11 +10500,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11189,11 +10714,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11411,11 +10931,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11633,11 +11148,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11690,11 +11200,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11747,11 +11252,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -11968,11 +11468,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -12025,11 +11520,6 @@ paths:
           required: true
           type: integer
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -12254,11 +11744,6 @@ paths:
           name: Detail
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -12326,7 +11811,7 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: Video bitrate required for MP4 content.
+        - description: Video bit-rate required for MP4 content.
           enum:
             - NOT_SET
             - mp4_80
@@ -12366,7 +11851,7 @@ paths:
           name: end
           required: false
           type: integer
-        - description: Adaptive Maximum rate.
+        - description: 'Adaptive Maximum rate. (Depreciated, use adaptive minimum resolution instead)'
           enum:
             - adap_212000
             - adap_350000
@@ -12380,7 +11865,7 @@ paths:
           required: false
           type: string
           x-nullable: false
-        - description: Adaptive Minimum rate.
+        - description: 'Adaptive Minimum rate. (Depreciated, use adaptive minimum resolution instead)'
           enum:
             - adap_212000
             - adap_350000
@@ -12394,11 +11879,58 @@ paths:
           required: false
           type: string
           x-nullable: false
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
+        - description: 'Adaptive Minimum resolution. Default is QVGA (320 wide, 212Kbps)'
+          enum:
+            - RESOLUTION_QVGA
+            - RESOLUTION_HVGA
+            - RESOLUTION_480P
+            - RESOLUTION_720P
+            - RESOLUTION_1080P
+          in: query
+          name: AdaptiveMinimumResolution
+          required: false
+          type: string
+        - description: Adaptive Maximum resolution. Default is 1080P Resolution.
+          enum:
+            - RESOLUTION_QVGA
+            - RESOLUTION_HVGA
+            - RESOLUTION_480P
+            - RESOLUTION_720P
+            - RESOLUTION_1080P
+          in: query
+          name: AdaptiveMaximumResolution
+          required: false
+          type: string
+        - description: 'Adaptive Client Manifest Version (HLS, default = 3)'
+          format: int32
+          in: query
+          name: AdaptiveClientManifestVersion
+          required: false
+          type: integer
+        - description: 'Adaptive Start Index. Default = 4, the 480P resolution.'
+          format: int32
+          in: query
+          name: AdaptiveStartIndex
+          required: false
+          type: integer
+        - description: Adaptive Minimum Fragment Length. Default is 10 seconds.
+          enum:
+            - Two
+            - Three
+            - Four
+            - Five
+            - Six
+            - Seven
+            - Eight
+            - Nine
+            - Ten
+            - Fifteen
+            - Twenty
+            - Thirty
+          in: query
+          name: AdaptiveMinimumFragmentLength
+          required: false
+          type: string
       responses:
         '200':
           description: OK.
@@ -12457,11 +11989,6 @@ paths:
           name: Type
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
-        - text/csv
-        - text/html
       responses:
         '200':
           description: OK.
@@ -12848,12 +12375,20 @@ definitions:
   Country:
     description: Country
     properties:
+      AlternateNames:
+        description: Alternate names of the Country.
+        items:
+          type: string
+        type: array
       Id:
         format: int32
         type: integer
         x-nullable: false
       IsoCode:
         description: ISO code for a Country.
+        type: string
+      IsoCodeA3:
+        description: ISO 3 character code for a Country.
         type: string
       Name:
         description: Name of the Country.
@@ -12863,12 +12398,20 @@ definitions:
   CountryResponse:
     description: CountryResponse
     properties:
+      AlternateNames:
+        description: Alternate names of the Country.
+        items:
+          type: string
+        type: array
       Id:
         format: int32
         type: integer
         x-nullable: false
       IsoCode:
         description: ISO code for a Country.
+        type: string
+      IsoCodeA3:
+        description: ISO 3 character code for a Country.
         type: string
       Name:
         description: Name of the Country.
@@ -13045,12 +12588,20 @@ definitions:
   DbCountry:
     description: DbCountry
     properties:
+      AlternateNames:
+        description: Alternate names of the Country.
+        items:
+          type: string
+        type: array
       Id:
         format: int32
         type: integer
         x-nullable: false
       IsoCode:
         description: ISO code for a Country.
+        type: string
+      IsoCodeA3:
+        description: ISO 3 character code for a Country.
         type: string
       Name:
         description: Name of the Country.
@@ -13299,10 +12850,6 @@ definitions:
         items:
           $ref: '#/definitions/ProgramAvailability'
         type: array
-      AverageTrendRank:
-        description: The average of all ranking positions found in trending data.
-        format: double
-        type: number
       Budget:
         description: Movie budget
         format: int64
@@ -13347,6 +12894,9 @@ definitions:
       Id:
         description: 'Unique ID of the Movie, Show, Season or Episode in the form of Movie/1 or Show/2'
         type: string
+      Idx:
+        description: Index to differentiate movies with identical titles and year.
+        type: string
       ImageCount:
         description: Count of images
         format: int32
@@ -13388,6 +12938,9 @@ definitions:
           $ref: '#/definitions/ProgramTrend'
         type: array
       ProgramType:
+        type: string
+      RedirectTo:
+        description: Redirect to.
         type: string
       Releases:
         description: List of releases associated with Program.
@@ -13869,6 +13422,10 @@ definitions:
         type: string
       Language:
         description: Language associated with EpisodeImage.
+        type: string
+      Modified:
+        description: Time when image was modified.
+        format: date-time
         type: string
       Modifier:
         description: ID of last user who modified the item.
@@ -17927,6 +17484,11 @@ definitions:
       - Take
     title: GetTmdbShowIds
     type: object
+  GetTrendSources:
+    description: GetTrendSources
+    properties: {}
+    title: GetTrendSources
+    type: object
   GetTvMediaCountries:
     description: GetTvMediaCountries
     properties:
@@ -18947,6 +18509,48 @@ definitions:
   GetVideo:
     description: GetVideo
     properties:
+      AdaptiveClientManifestVersion:
+        description: 'Adaptive Client Manifest Version (HLS, default = 3)'
+        format: int32
+        type: integer
+      AdaptiveMaximumResolution:
+        description: Adaptive Maximum resolution. Default is 1080P Resolution.
+        enum:
+          - RESOLUTION_QVGA
+          - RESOLUTION_HVGA
+          - RESOLUTION_480P
+          - RESOLUTION_720P
+          - RESOLUTION_1080P
+        type: string
+      AdaptiveMinimumFragmentLength:
+        description: Adaptive Minimum Fragment Length. Default is 10 seconds.
+        enum:
+          - Two
+          - Three
+          - Four
+          - Five
+          - Six
+          - Seven
+          - Eight
+          - Nine
+          - Ten
+          - Fifteen
+          - Twenty
+          - Thirty
+        type: string
+      AdaptiveMinimumResolution:
+        description: 'Adaptive Minimum resolution. Default is QVGA (320 wide, 212Kbps)'
+        enum:
+          - RESOLUTION_QVGA
+          - RESOLUTION_HVGA
+          - RESOLUTION_480P
+          - RESOLUTION_720P
+          - RESOLUTION_1080P
+        type: string
+      AdaptiveStartIndex:
+        description: 'Adaptive Start Index. Default = 4, the 480P resolution.'
+        format: int32
+        type: integer
       Expires:
         description: 'UTC Time to video link should expire. ISO 8601 Format: yyyy-mm-dd hh:mm:ss.ffffff0Z'
         format: date-time
@@ -18967,7 +18571,7 @@ definitions:
         type: integer
         x-nullable: false
       KbRate:
-        description: Video bitrate required for MP4 content.
+        description: Video bit-rate required for MP4 content.
         enum:
           - NOT_SET
           - mp4_80
@@ -18980,7 +18584,7 @@ definitions:
           - mp4_8000
         type: string
       MaxRate:
-        description: Adaptive Minimum rate.
+        description: 'Adaptive Minimum rate. (Depreciated, use adaptive minimum resolution instead)'
         enum:
           - adap_212000
           - adap_350000
@@ -18991,7 +18595,7 @@ definitions:
           - adap_3500000
         type: string
       MinRate:
-        description: Adaptive Maximum rate.
+        description: 'Adaptive Maximum rate. (Depreciated, use adaptive minimum resolution instead)'
         enum:
           - adap_212000
           - adap_350000
@@ -19704,326 +19308,306 @@ definitions:
         type: string
     title: LanguageResponse
     type: object
-  List<AnalyticsCountryResponse>:
+  List_AnalyticsCountryResponse_:
     items:
       $ref: '#/definitions/AnalyticsCountryResponse'
     title: List<AnalyticsCountryResponse>
     type: array
-  List<CelebrityRankedResponse>:
+  List_CelebrityRankedResponse_:
     items:
       $ref: '#/definitions/CelebrityRankedResponse'
     title: List<CelebrityRankedResponse>
     type: array
-  List<ChartItem>:
+  List_ChartItem_:
     items:
       $ref: '#/definitions/ChartItem'
     title: List<ChartItem>
     type: array
-  List<ChartPersonItem>:
+  List_ChartPersonItem_:
     items:
       $ref: '#/definitions/ChartPersonItem'
     title: List<ChartPersonItem>
     type: array
-  List<CityResponse>:
+  List_CityResponse_:
     items:
       $ref: '#/definitions/CityResponse'
     title: List<CityResponse>
     type: array
-  List<CompanyResponse>:
+  List_CompanyResponse_:
     items:
       $ref: '#/definitions/CompanyResponse'
     title: List<CompanyResponse>
     type: array
-  List<CountryResponse>:
+  List_CountryResponse_:
     items:
       $ref: '#/definitions/CountryResponse'
     title: List<CountryResponse>
     type: array
-  List<DbShowCertification>:
+  List_DbShowCertification_:
     items:
       $ref: '#/definitions/DbShowCertification'
     title: List<DbShowCertification>
     type: array
-  List<EngagementActionsResponse>:
+  List_EngagementActionsResponse_:
     items:
       $ref: '#/definitions/EngagementActionsResponse'
     title: List<EngagementActionsResponse>
     type: array
-  List<EngagementTimesResponse>:
+  List_EngagementTimesResponse_:
     items:
       $ref: '#/definitions/EngagementTimesResponse'
     title: List<EngagementTimesResponse>
     type: array
-  List<EpisodeChangeHistoryResponse>:
+  List_EpisodeChangeHistoryResponse_:
     items:
       $ref: '#/definitions/EpisodeChangeHistoryResponse'
     title: List<EpisodeChangeHistoryResponse>
     type: array
-  List<EpisodeChangeHistoryWithEntityResponse>:
+  List_EpisodeChangeHistoryWithEntityResponse_:
     items:
       $ref: '#/definitions/EpisodeChangeHistoryWithEntityResponse'
     title: List<EpisodeChangeHistoryWithEntityResponse>
     type: array
-  List<GameChangeHistoryResponse>:
+  List_GameChangeHistoryResponse_:
     items:
       $ref: '#/definitions/GameChangeHistoryResponse'
     title: List<GameChangeHistoryResponse>
     type: array
-  List<ImageBatchResponse>:
+  List_ImageBatchResponse_:
     items:
       $ref: '#/definitions/ImageBatchResponse'
     title: List<ImageBatchResponse>
     type: array
-  List<ImageTypeResponse>:
+  List_ImageTypeResponse_:
     items:
       $ref: '#/definitions/ImageTypeResponse'
     title: List<ImageTypeResponse>
     type: array
-  List<LanguageResponse>:
+  List_LanguageResponse_:
     items:
       $ref: '#/definitions/LanguageResponse'
     title: List<LanguageResponse>
     type: array
-  List<MostActiveResponse>:
+  List_MostActiveResponse_:
     items:
       $ref: '#/definitions/MostActiveResponse'
     title: List<MostActiveResponse>
     type: array
-  List<MovieAlternateIdTypeResponse>:
+  List_MovieAlternateIdTypeResponse_:
     items:
       $ref: '#/definitions/MovieAlternateIdTypeResponse'
     title: List<MovieAlternateIdTypeResponse>
     type: array
-  List<MovieCertificationResponse>:
+  List_MovieCertificationResponse_:
     items:
       $ref: '#/definitions/MovieCertificationResponse'
     title: List<MovieCertificationResponse>
     type: array
-  List<MovieChangeHistoryResponse>:
+  List_MovieChangeHistoryResponse_:
     items:
       $ref: '#/definitions/MovieChangeHistoryResponse'
     title: List<MovieChangeHistoryResponse>
     type: array
-  List<MovieChangeHistoryWithEntityResponse>:
+  List_MovieChangeHistoryWithEntityResponse_:
     items:
       $ref: '#/definitions/MovieChangeHistoryWithEntityResponse'
     title: List<MovieChangeHistoryWithEntityResponse>
     type: array
-  List<MovieExternalIdMap>:
+  List_MovieExternalIdMap_:
     items:
       $ref: '#/definitions/MovieExternalIdMap'
     title: List<MovieExternalIdMap>
     type: array
-  List<MovieGenreResponse>:
+  List_MovieGenreResponse_:
     items:
       $ref: '#/definitions/MovieGenreResponse'
     title: List<MovieGenreResponse>
     type: array
-  List<MovieReleaseTypeResponse>:
+  List_MovieReleaseTypeResponse_:
     items:
       $ref: '#/definitions/MovieReleaseTypeResponse'
     title: List<MovieReleaseTypeResponse>
     type: array
-  List<MovieResponse>:
+  List_MovieResponse_:
     items:
       $ref: '#/definitions/MovieResponse'
     title: List<MovieResponse>
     type: array
-  List<OriginatingNetworkResponse>:
+  List_OriginatingNetworkResponse_:
     items:
       $ref: '#/definitions/OriginatingNetworkResponse'
     title: List<OriginatingNetworkResponse>
     type: array
-  List<PersonChangeHistoryResponse>:
+  List_PersonChangeHistoryResponse_:
     items:
       $ref: '#/definitions/PersonChangeHistoryResponse'
     title: List<PersonChangeHistoryResponse>
     type: array
-  List<PersonChangeHistoryWithEntityResponse>:
+  List_PersonChangeHistoryWithEntityResponse_:
     items:
       $ref: '#/definitions/PersonChangeHistoryWithEntityResponse'
     title: List<PersonChangeHistoryWithEntityResponse>
     type: array
-  List<PersonRankedResponse>:
+  List_PersonRankedResponse_:
     items:
       $ref: '#/definitions/PersonRankedResponse'
     title: List<PersonRankedResponse>
     type: array
-  List<PlatformHardwareResponse>:
+  List_PlatformHardwareResponse_:
     items:
       $ref: '#/definitions/PlatformHardwareResponse'
     title: List<PlatformHardwareResponse>
     type: array
-  List<PlatformOSResponse>:
+  List_PlatformOSResponse_:
     items:
       $ref: '#/definitions/PlatformOSResponse'
     title: List<PlatformOSResponse>
     type: array
-  List<ProgramVideo>:
+  List_ProgramVideo_:
     items:
       $ref: '#/definitions/ProgramVideo'
     title: List<ProgramVideo>
     type: array
-  List<RecentVisitorsResponse>:
+  List_RecentVisitorsResponse_:
     items:
       $ref: '#/definitions/RecentVisitorsResponse'
     title: List<RecentVisitorsResponse>
     type: array
-  List<SeasonChangeHistoryResponse>:
+  List_SearchEntertainmentAutoCompleteResponse_:
+    items:
+      $ref: '#/definitions/SearchEntertainmentAutoCompleteResponse'
+    title: List<SearchEntertainmentAutoCompleteResponse>
+    type: array
+  List_SeasonChangeHistoryResponse_:
     items:
       $ref: '#/definitions/SeasonChangeHistoryResponse'
     title: List<SeasonChangeHistoryResponse>
     type: array
-  List<SeasonChangeHistoryWithEntityResponse>:
+  List_SeasonChangeHistoryWithEntityResponse_:
     items:
       $ref: '#/definitions/SeasonChangeHistoryWithEntityResponse'
     title: List<SeasonChangeHistoryWithEntityResponse>
     type: array
-  List<ShowAlternateIdTypeResponse>:
+  List_ShowAlternateIdTypeResponse_:
     items:
       $ref: '#/definitions/ShowAlternateIdTypeResponse'
     title: List<ShowAlternateIdTypeResponse>
     type: array
-  List<ShowChangeHistoryResponse>:
+  List_ShowChangeHistoryResponse_:
     items:
       $ref: '#/definitions/ShowChangeHistoryResponse'
     title: List<ShowChangeHistoryResponse>
     type: array
-  List<ShowChangeHistoryWithEntityResponse>:
+  List_ShowChangeHistoryWithEntityResponse_:
     items:
       $ref: '#/definitions/ShowChangeHistoryWithEntityResponse'
     title: List<ShowChangeHistoryWithEntityResponse>
     type: array
-  List<ShowExternalIdMap>:
+  List_ShowExternalIdMap_:
     items:
       $ref: '#/definitions/ShowExternalIdMap'
     title: List<ShowExternalIdMap>
     type: array
-  List<ShowGenreResponse>:
+  List_ShowGenreResponse_:
     items:
       $ref: '#/definitions/ShowGenreResponse'
     title: List<ShowGenreResponse>
     type: array
-  List<ShowReleaseTypeResponse>:
+  List_ShowReleaseTypeResponse_:
     items:
       $ref: '#/definitions/ShowReleaseTypeResponse'
     title: List<ShowReleaseTypeResponse>
     type: array
-  List<TagResponse>:
+  List_TagResponse_:
     items:
       $ref: '#/definitions/TagResponse'
     title: List<TagResponse>
     type: array
-  List<TitleReportResponse>:
+  List_TitleReportResponse_:
     items:
       $ref: '#/definitions/TitleReportResponse'
     title: List<TitleReportResponse>
     type: array
-  List<TvMediaCountryResponse>:
+  List_TrendSourceResponse_:
+    items:
+      $ref: '#/definitions/TrendSourceResponse'
+    title: List<TrendSourceResponse>
+    type: array
+  List_TvMediaCountryResponse_:
     items:
       $ref: '#/definitions/TvMediaCountryResponse'
     title: List<TvMediaCountryResponse>
     type: array
-  List<TvMediaGenreResponse>:
+  List_TvMediaGenreResponse_:
     items:
       $ref: '#/definitions/TvMediaGenreResponse'
     title: List<TvMediaGenreResponse>
     type: array
-  List<TvMediaGridResponse>:
+  List_TvMediaGridResponse_:
     items:
       $ref: '#/definitions/TvMediaGridResponse'
     title: List<TvMediaGridResponse>
     type: array
-  List<TvMediaLeagueResponse>:
+  List_TvMediaLeagueResponse_:
     items:
       $ref: '#/definitions/TvMediaLeagueResponse'
     title: List<TvMediaLeagueResponse>
     type: array
-  List<TvMediaLineupResponse>:
+  List_TvMediaLineupResponse_:
     items:
       $ref: '#/definitions/TvMediaLineupResponse'
     title: List<TvMediaLineupResponse>
     type: array
-  List<TvMediaListingResponse>:
+  List_TvMediaListingResponse_:
     items:
       $ref: '#/definitions/TvMediaListingResponse'
     title: List<TvMediaListingResponse>
     type: array
-  List<TvMediaRegionResponse>:
+  List_TvMediaRegionResponse_:
     items:
       $ref: '#/definitions/TvMediaRegionResponse'
     title: List<TvMediaRegionResponse>
     type: array
-  List<TvMediaServiceAreaResponse>:
+  List_TvMediaServiceAreaResponse_:
     items:
       $ref: '#/definitions/TvMediaServiceAreaResponse'
     title: List<TvMediaServiceAreaResponse>
     type: array
-  List<TvMediaShortListingResponse>:
+  List_TvMediaShortListingResponse_:
     items:
       $ref: '#/definitions/TvMediaShortListingResponse'
     title: List<TvMediaShortListingResponse>
     type: array
-  List<TvMediaTeamResponse>:
+  List_TvMediaTeamResponse_:
     items:
       $ref: '#/definitions/TvMediaTeamResponse'
     title: List<TvMediaTeamResponse>
     type: array
-  List<VideoLogResponse>:
+  List_VideoLogResponse_:
     items:
       $ref: '#/definitions/VideoLogResponse'
     title: List<VideoLogResponse>
     type: array
-  List<VideoTypeResponse>:
+  List_VideoTypeResponse_:
     items:
       $ref: '#/definitions/VideoTypeResponse'
     title: List<VideoTypeResponse>
     type: array
-  List<ViewersResponse>:
+  List_ViewersResponse_:
     items:
       $ref: '#/definitions/ViewersResponse'
     title: List<ViewersResponse>
     type: array
-  List<ViewsResponse>:
+  List_ViewsResponse_:
     items:
       $ref: '#/definitions/ViewsResponse'
     title: List<ViewsResponse>
     type: array
-  List<WebBrowsersResponse>:
+  List_WebBrowsersResponse_:
     items:
       $ref: '#/definitions/WebBrowsersResponse'
     title: List<WebBrowsersResponse>
     type: array
-  MatchToEntertainmentGame:
-    description: MatchToEntertainmentGame
-    properties:
-      AlternateTitles:
-        description: Alternate Titles of Program to be matched.
-        items:
-          type: string
-        type: array
-      Company:
-        description: Company of Program to be matched.
-        type: string
-      LimitedResults:
-        type: boolean
-        x-nullable: false
-      StringDistance:
-        description: 'For fuzzy title match, default is 4, set to 0 for no fuzzy match.'
-        format: int32
-        type: integer
-        x-nullable: false
-      Title:
-        description: Title of Program to be matched.
-        type: string
-      Year:
-        description: Release Year of Program to be matched.
-        format: int32
-        type: integer
-    required:
-      - Title
-    title: MatchToEntertainmentGame
-    type: object
   MatchToEntertainmentMovie:
     description: MatchToEntertainmentMovie
     properties:
@@ -20110,6 +19694,10 @@ definitions:
         items:
           type: string
         type: array
+      EntertainmentId:
+        description: 'Id of Entertainment program to be matched against, if this is set no search is run and data is compared to this program only.'
+        format: int64
+        type: integer
       LimitedResults:
         type: boolean
         x-nullable: false
@@ -20142,7 +19730,7 @@ definitions:
         type: integer
     required:
       - ProgramType
-      - Title
+      - EntertainmentId
     title: MatchToEntertainmentProgram
     type: object
   MatchToEntertainmentProgramResponse:
@@ -20151,6 +19739,10 @@ definitions:
       Description:
         description: Description of match operation result.
         type: string
+      EntertainmentId:
+        description: Entertainment program ID on successful match.
+        format: int64
+        type: integer
       ProgramMatches:
         description: List of matched Programs.
         items:
@@ -20811,19 +20403,15 @@ definitions:
         format: int32
         type: integer
         x-nullable: false
-      Id:
-        description: Unique ID of this MovieImage
-        format: int64
-        type: integer
-      ImageId:
-        description: ID of Image associated with MovieImage.
-        format: int64
-        type: integer
       ImageType:
         description: ImageType of MovieImage.
         type: string
       Language:
         description: Language associated with MovieImage.
+        type: string
+      Modified:
+        description: Time when image was last modified.
+        format: date-time
         type: string
       Official:
         description: Determines if image is official.
@@ -20861,10 +20449,6 @@ definitions:
         description: Date of this MovieRelease.
         format: date-time
         type: string
-      Id:
-        description: Unique Id of this MovieRelease.
-        format: int64
-        type: integer
       Type:
         description: The type of this MovieRelease.
         type: string
@@ -21028,10 +20612,6 @@ definitions:
   MovieTag:
     description: MovieTag
     properties:
-      Id:
-        description: ID of the object.
-        format: int64
-        type: integer
       Name:
         description: Name of the Tag.
         type: string
@@ -21566,7 +21146,6 @@ definitions:
       Modified:
         format: date-time
         type: string
-        x-nullable: false
       Type:
         type: string
     title: PersonAlternateId
@@ -21639,6 +21218,10 @@ definitions:
         type: integer
       ImageType:
         description: ImageType of PersonImage.
+        type: string
+      Modified:
+        description: Time of last image modificication.
+        format: date-time
         type: string
       MovieId:
         description: Entertainment Movie ID of the movie this image is from.
@@ -21896,8 +21479,6 @@ definitions:
     properties:
       FilePath:
         type: string
-      Fingerprint:
-        type: string
       Height:
         format: int32
         type: integer
@@ -21905,6 +21486,9 @@ definitions:
       ImageType:
         type: string
       Language:
+        type: string
+      Modified:
+        format: date-time
         type: string
       Official:
         type: boolean
@@ -21935,8 +21519,6 @@ definitions:
         description: Details of the person's face in the image.
       FilePath:
         type: string
-      Fingerprint:
-        type: string
       Height:
         format: int32
         type: integer
@@ -21944,6 +21526,9 @@ definitions:
       ImageType:
         type: string
       Language:
+        type: string
+      Modified:
+        format: date-time
         type: string
       Official:
         type: boolean
@@ -22077,6 +21662,8 @@ definitions:
         type: boolean
       Title:
         type: string
+      TuneIn:
+        type: boolean
       Type:
         type: string
     title: ProgramVideo
@@ -22510,7 +22097,14 @@ definitions:
           - Images
           - Availabilities
           - Genres
-          - Trends
+          - ProgramTrends
+          - Subjects
+          - FilmingLocations
+          - NarrativeLocations
+          - BasedOns
+          - TimePeriods
+          - MicroGenres
+          - ProgramTags
         items:
           type: string
         type: array
@@ -22545,6 +22139,11 @@ definitions:
         items:
           type: string
           x-nullable: false
+        type: array
+      OriginalLanguages:
+        description: The original language of the program.
+        items:
+          type: string
         type: array
       OriginalReleaseDateRange_End:
         description: Filter results based on original release date range.
@@ -22605,6 +22204,8 @@ definitions:
           - iTunes
           - Netflix
           - AtomTickets
+          - YouTubePremium
+          - DCUniverse
         items:
           type: string
           x-nullable: false
@@ -22661,8 +22262,7 @@ definitions:
           - TimeStamp
           - IvaRating
           - ReleaseDate
-          - AverageTrendRank
-          - TrendRank
+          - CalculatedTrendRank
         type: string
       SortByTimeStamp:
         description: Sort results based on last modified descending.  Default is sorted by _score. DEPRECIATED! Use SortBy instead.
@@ -22696,6 +22296,18 @@ definitions:
           - RottenTomatoes
           - TVGuide
           - iTunes
+          - Amazon
+          - Fios
+          - Gamespot
+          - Hulu
+          - MovieClips
+          - Netflix
+          - PlutoTV
+          - Redbox
+          - TheNumbers
+          - Vudu
+          - Xfinity
+          - Youtube
         items:
           type: string
         type: array
@@ -22709,6 +22321,12 @@ definitions:
         enum:
           - Publisher
           - TVOD
+          - SVOD
+          - Revenue
+          - Social
+          - Trailers
+          - AVOD
+          - Physical
         items:
           type: string
         type: array
@@ -22753,6 +22371,60 @@ definitions:
         format: int32
         type: integer
     title: SearchEntertainment
+    type: object
+  SearchEntertainmentAutoComplete:
+    description: SearchEntertainmentAutoComplete
+    properties:
+      Field:
+        description: List of available auto completion fields.
+        enum:
+          - basedOns_instanceOfLabel
+          - basedOns_label
+          - subjects_label
+          - filmingLocations_label
+          - narrativeLocations_label
+          - microGenres_label
+          - timePeriods_label
+          - title
+          - originalTitle
+          - tags
+          - originatingNetwork
+          - companies_name
+          - contributors_personName
+        type: string
+      Prefix:
+        description: String prefix to use to locate matching strings based on Field selected.
+        type: string
+      ProgramTypes:
+        description: List of program types. See /Common/GetCommonEnumerators endpoint for complete list.
+        enum:
+          - Movie
+          - Show
+          - Game
+          - Season
+          - Episode
+        items:
+          type: string
+          x-nullable: false
+        type: array
+      Size:
+        description: 'Rows to return, used for paging. Default is 10, limit is 50.'
+        format: int32
+        type: integer
+        x-nullable: false
+    required:
+      - Field
+      - Prefix
+    title: SearchEntertainmentAutoComplete
+    type: object
+  SearchEntertainmentAutoCompleteResponse:
+    description: SearchEntertainmentAutoCompleteResponse
+    properties:
+      Description:
+        type: string
+      Suggestion:
+        type: string
+    title: SearchEntertainmentAutoCompleteResponse
     type: object
   SearchEntertainmentResponse:
     description: SearchEntertainmentResponse
@@ -23169,6 +22841,10 @@ definitions:
         type: string
       Language:
         description: Language associated with SeasonImage.
+        type: string
+      Modified:
+        description: Time when image was last modified.
+        format: date-time
         type: string
       Modifier:
         description: ID of last user who modified the item.
@@ -23916,6 +23592,10 @@ definitions:
       Language:
         description: Language associated with ShowImage.
         type: string
+      Modified:
+        description: Time when image was last modified.
+        format: date-time
+        type: string
       Official:
         description: Determines if image is official.
         type: boolean
@@ -24402,14 +24082,6 @@ definitions:
   Tag:
     description: Tag
     properties:
-      Id:
-        description: ID of the object.
-        format: int64
-        type: integer
-      Modifier:
-        description: ID of last user who modified the item.
-        format: int32
-        type: integer
       Name:
         description: Name of the Tag.
         type: string
@@ -24479,6 +24151,39 @@ definitions:
         type: integer
         x-nullable: false
     title: TitleReportResponse
+    type: object
+  TrendSourceResponse:
+    description: TrendSourceResponse
+    properties:
+      Active:
+        type: boolean
+        x-nullable: false
+      Brand:
+        type: string
+      Classifiers:
+        items:
+          type: string
+        type: array
+      CountryId:
+        format: int32
+        type: integer
+      Id:
+        format: int32
+        type: integer
+        x-nullable: false
+      ItemCount:
+        format: int32
+        type: integer
+        x-nullable: false
+      ListUrl:
+        type: string
+      Modified:
+        format: date-time
+        type: string
+        x-nullable: false
+      Name:
+        type: string
+    title: TrendSourceResponse
     type: object
   TvMediaChannelResponse:
     description: TvMediaChannelResponse

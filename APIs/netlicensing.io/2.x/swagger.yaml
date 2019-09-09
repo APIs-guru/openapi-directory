@@ -77,7 +77,7 @@ tags:
 paths:
   /license:
     get:
-      description: Return a list of all licenses for the current vendor
+      description: Return a list of all Licenses for the current Vendor
       operationId: listLicenses
       responses:
         '200':
@@ -96,13 +96,13 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Licenses list
+      summary: List Licenses
       tags:
         - License
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new license
+      description: Creates a new License
       operationId: createLicense
       parameters:
         - in: formData
@@ -119,24 +119,24 @@ paths:
           type: boolean
         - in: formData
           name: number
-          required: true
+          required: false
           type: string
-        - description: 'Name for the licensed item. Set from license template on creation, if not specified explicitly.'
+        - description: 'Name for the Licensed item. Set from License Template on creation, if not specified explicitly.'
           in: formData
           name: name
           required: false
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type and 'RENTAL' licensing model
+        - description: Mandatory for 'TIMEVOLUME' License Type and 'RENTAL' licensing model
           in: formData
           name: parentfeature
           required: false
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type.
+        - description: Mandatory for 'TIMEVOLUME' License Type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: For 'TIMEVOLUME' license type.
+        - description: For 'TIMEVOLUME' License Type.
           in: formData
           items:
             default: DAY
@@ -149,34 +149,34 @@ paths:
           name: timeVolumePeriod
           required: false
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type.
+        - description: Mandatory for 'TIMEVOLUME' License Type.
           format: date-time
           in: formData
           name: startDate
           required: false
           type: string
-        - description: 'Price for the license. If >0, it must always be accompanied by the currency specification. Read-only, set from license template on creation'
+        - description: 'Price for the License. If >0, it must always be accompanied by the currency specification. Read-only, set from License Template on creation'
           format: double
           in: formData
           name: price
           required: false
           type: number
-        - description: 'Specifies currency for the license price. Check data types to discover which currencies are supported. Read-only, set from license template on creation'
+        - description: 'Specifies currency for the License price. Check data types to discover which currencies are supported. Read-only, set from License Template on creation'
           in: formData
           name: currency
           required: false
           type: string
-        - description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly'
+        - description: 'If set to ''true'', this License is not shown in NetLicensing Shop as purchased License. Set from License Template on creation, if not specified explicitly'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' License Model.
           in: formData
           name: quantity
           required: false
           type: string
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' License Model.
           in: formData
           name: usedQuantity
           required: false
@@ -196,15 +196,15 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create license
+      summary: Create License
       tags:
         - License
   '/license/{licenseNumber}':
     delete:
-      description: Delete license by a licenseNumber
+      description: Delete License by a 'licenseNumber'
       operationId: deleteLicense
       parameters:
-        - description: Unique number (across all products/licensees of a vendor) that identifies the license. Vendor can assign this number when creating a license or let NetLicensing generate one. Read-only after corresponding creation transaction status is set to closed.
+        - description: Unique number (across all Products/Licensees of a Vendor) that identifies the License. Vendor can assign this number when creating a License or let NetLicensing generate one. Read-only after corresponding creation Transaction status is set to closed.
           in: path
           name: licenseNumber
           required: true
@@ -224,14 +224,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Delete license
+      summary: Delete License
       tags:
         - License
     get:
-      description: Get license by a licenseNumber
+      description: Get License by a 'licenseNumber'
       operationId: getLicense
       parameters:
-        - description: Unique number (across all products/licensees of a vendor) that identifies the license. Vendor can assign this number when creating a license or let NetLicensing generate one. Read-only after corresponding creation transaction status is set to closed.
+        - description: Unique number (across all Products/Licensees of a Vendor) that identifies the License. Vendor can assign this number when creating a License or let NetLicensing generate one. Read-only after corresponding creation Transaction status is set to closed.
           in: path
           name: licenseNumber
           required: true
@@ -251,21 +251,21 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get license
+      summary: Get License
       tags:
         - License
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Update license by a licenseNumber
+      description: Update License by a 'licenseNumber'
       operationId: updateLicense
       parameters:
-        - description: Unique number (across all products/licensees of a vendor) that identifies the license. Vendor can assign this number when creating a license or let NetLicensing generate one. Read-only after corresponding creation transaction status is set to closed.
+        - description: Unique number (across all Products/Licensees of a Vendor) that identifies the License. Vendor can assign this number when creating a License or let NetLicensing generate one. Read-only after corresponding creation Transaction status is set to closed.
           in: path
           name: licenseNumber
           required: true
           type: string
-        - description: Unique number (across all products/licensees of a vendor) that identifies the license. Vendor can assign this number when creating a license or let NetLicensing generate one. Read-only after corresponding creation transaction status is set to closed.
+        - description: Unique number (across all Products/Licensees of a Vendor) that identifies the License. Vendor can assign this number when creating a License or let NetLicensing generate one. Read-only after corresponding creation Transaction status is set to closed.
           in: formData
           name: number
           required: false
@@ -274,12 +274,12 @@ paths:
           name: active
           required: false
           type: boolean
-        - description: 'Name for the licensed item. Set from license template on creation, if not specified explicitly.'
+        - description: 'Name for the Licensed item. Set from License Template on creation, if not specified explicitly.'
           in: formData
           name: name
           required: false
           type: string
-        - description: for TIMEVOLUME licenseType
+        - description: For 'TIMEVOLUME' License type
           format: date-time
           in: formData
           name: startDate
@@ -289,12 +289,12 @@ paths:
           name: parentfeature
           required: false
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type.
+        - description: Mandatory for 'TIMEVOLUME' License Type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: For 'TIMEVOLUME' license type.
+        - description: For 'TIMEVOLUME' License Type.
           in: formData
           items:
             default: DAY
@@ -307,28 +307,28 @@ paths:
           name: timeVolumePeriod
           required: false
           type: string
-        - description: 'Price for the license. If > 0, it must always be accompanied by the currency specification. Read-only, set from license template on creation'
+        - description: 'Price for the License. If > 0, it must always be accompanied by the currency specification. Read-only, set from License Template on creation'
           format: double
           in: formData
           name: price
           required: false
           type: number
-        - description: 'Specifies currency for the license price. Check data types to discover which currencies are supported. Read-only, set from license template on creation'
+        - description: 'Specifies currency for the License price. Check data types to discover which currencies are supported. Read-only, set from License Template on creation'
           in: formData
           name: currency
           required: false
           type: string
-        - description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly'
+        - description: 'If set to ''true'', this License is not shown in NetLicensing Shop as purchased License. Set from License Template on creation, if not specified explicitly'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' License Model.
           in: formData
           name: quantity
           required: false
           type: string
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' License Model.
           in: formData
           name: usedQuantity
           required: false
@@ -348,12 +348,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update license
+      summary: Update License
       tags:
         - License
   /licensee:
     get:
-      description: Return a list of all licensees for the current vendor
+      description: Return a list of all Licensees for the current Vendor
       operationId: listLicensees
       responses:
         '200':
@@ -372,21 +372,21 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Licensees list
+      summary: List Licensees
       tags:
         - Licensee
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new licensee
+      description: Creates a new Licensee
       operationId: createLicensee
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee
+        - description: Unique number (across all Products of a Vendor) that identifies the Licensee. Vendor can assign this number when creating a Licensee or let NetLicensing generate one. Read-only after creation of the first License for the Licensee
           in: formData
           name: number
           required: false
           type: string
-        - description: productNumber to assign new licensee object
+        - description: '''productNumber'' to assign new Licensee object'
           in: formData
           name: productNumber
           required: true
@@ -395,17 +395,17 @@ paths:
           name: name
           required: false
           type: string
-        - description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled'
+        - description: 'If set to ''false'', the Licensee is disabled. Licensee can not obtain new Licenses, and validation is disabled'
           in: formData
           name: active
           required: true
           type: boolean
-        - description: Licensee Secret for licensee.
+        - description: Licensee Secret for Licensee.
           in: formData
           name: licenseeSecret
           required: false
           type: string
-        - description: Mark licensee for transfer.
+        - description: Mark Licensee for transfer.
           in: formData
           name: markedForTransfer
           required: false
@@ -427,15 +427,15 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create licensee
+      summary: Create Licensee
       tags:
         - Licensee
   '/licensee/{licenseeNumber}':
     delete:
-      description: Delete a licensee by number
+      description: Delete a Licensee by 'number'
       operationId: deleteLicensee
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the licensee.
+        - description: Unique number (across all Products of a Vendor) that identifies the Licensee.
           in: path
           name: licenseeNumber
           required: true
@@ -460,14 +460,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Delete licensee
+      summary: Delete Licensee
       tags:
         - Licensee
     get:
-      description: Return a licensee by licenseeNumber
+      description: Return a Licensee by 'licenseeNumber'
       operationId: getLicensee
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
+        - description: Unique number (across all Products of a Vendor) that identifies the Licensee. Vendor can assign this number when creating a Licensee or let NetLicensing generate one. Read-only after creation of the first License for the Licensee.
           in: path
           name: licenseeNumber
           required: true
@@ -487,26 +487,26 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get licensee
+      summary: Get Licensee
       tags:
         - Licensee
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a licensee. Return an updated licensee
+      description: Sets the provided properties to a Licensee. Return an updated Licensee
       operationId: updateLicensee
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
+        - description: Unique number (across all Products of a Vendor) that identifies the Licensee. Vendor can assign this number when creating a Licensee or let NetLicensing generate one. Read-only after creation of the first License for the Licensee.
           in: path
           name: licenseeNumber
           required: true
           type: string
-        - description: New licensee number (update).
+        - description: New Licensee number (update).
           in: formData
           name: number
           required: false
           type: string
-        - description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled'
+        - description: 'If set to ''false'', the Licensee is disabled. Licensee can not obtain new Licenses, and validation is disabled'
           in: formData
           name: active
           required: false
@@ -515,12 +515,12 @@ paths:
           name: name
           required: false
           type: string
-        - description: Licensee Secret for licensee.
+        - description: Licensee Secret for Licensee.
           in: formData
           name: licenseeSecret
           required: false
           type: string
-        - description: Mark licensee for transfer.
+        - description: Mark Licensee for transfer.
           in: formData
           name: markedForTransfer
           required: false
@@ -542,14 +542,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update licensee
+      summary: Update Licensee
       tags:
         - Licensee
   '/licensee/{licenseeNumber}/transfer':
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Licenses transfer between licensees
+      description: Licenses transfer between Licensees
       operationId: transferLicenses
       parameters:
         - description: Licensee number with a maximum length of 1000 characters
@@ -557,7 +557,7 @@ paths:
           name: licenseeNumber
           required: true
           type: string
-        - description: Licensee number which licenses to be transferred
+        - description: Licensee number which Licenses to be transferred
           in: formData
           name: sourceLicenseeNumber
           required: true
@@ -577,14 +577,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Transfer licenses
+      summary: Transfer Licenses
       tags:
         - Licensee
   '/licensee/{licenseeNumber}/validate':
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Validates active licenses of the licensee
+      description: Validates active Licenses of the Licensee
       operationId: validateLicensee
       parameters:
         - description: Licensee number with a maximum length of 1000 characters
@@ -592,17 +592,17 @@ paths:
           name: licenseeNumber
           required: true
           type: string
-        - description: 'Product number, must be provided when ''licensee auto-create'' is enabled (see also Product JavaDoc). Identifies the product to which new licensee should be added'
+        - description: 'Product number, must be provided when ''Licensee auto-create'' is enabled (see also Product JavaDoc). Identifies the Product to which new Licensee should be added'
           in: formData
           name: productNumber
           required: false
           type: string
-        - description: Human-readable name for the auto-created licensee (will be set as custom Licensee property)
+        - description: Human-readable name for the auto-created Licensee (will be set as custom Licensee property)
           in: formData
           name: licenseeName
           required: false
           type: string
-        - description: Licensee Secret key for licensee
+        - description: Licensee Secret key for Licensee
           in: formData
           name: licenseeSecret
           required: false
@@ -622,12 +622,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Validate licensee
+      summary: Validate Licensee
       tags:
         - Licensee
   /licensetemplate:
     get:
-      description: Return a list of all license templates for the current vendor
+      description: Return a list of all License Templates for the current Vendor
       operationId: listLicenseTemplates
       responses:
         '200':
@@ -646,36 +646,36 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: License Templates list
+      summary: List License Templates
       tags:
         - License Template
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new license template
+      description: Creates a new License Template
       operationId: createLicenseTemplate
       parameters:
-        - description: Number of product module to сreate license template object
+        - description: Number of Product Module to create License Template object
           in: formData
           name: productModuleNumber
           required: true
           type: string
-        - description: lUnique number (across all products of a vendor) that identifies the license template. Vendor can assign this number when creating a license template or let NetLicensing generate one. Read-only after creation of the first license from this license template.
+        - description: Unique number (across all Products of a Vendor) that identifies the License Template. Vendor can assign this number when creating a License Template or let NetLicensing generate one. Read-only after creation of the first License from this License Template.
           in: formData
           name: number
-          required: true
+          required: false
           type: string
-        - description: license template name to сreate license template object
+        - description: License Template name to create License Template object
           in: formData
           name: name
           required: true
           type: string
-        - description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
+        - description: 'If set to ''false'', the License Template is disabled. Licensee can not obtain any new Licenses off this License Template.'
           in: formData
           name: active
           required: true
           type: boolean
-        - description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
+        - description: 'Type of Licenses created from this License Template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -688,12 +688,12 @@ paths:
           name: licenseType
           required: true
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type.
+        - description: Mandatory for 'TIMEVOLUME' License Type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: For 'TIMEVOLUME' license type.
+        - description: For 'TIMEVOLUME' License Type.
           in: formData
           items:
             default: DAY
@@ -706,40 +706,45 @@ paths:
           name: timeVolumePeriod
           required: false
           type: string
-        - description: Mandatory for 'FLOATING' license type.
+        - description: Mandatory for 'FLOATING' License Type.
           in: formData
           name: maxSessions
           required: false
           type: string
-        - description: 'price for the license. If >0, it must always be accompanied by the currency specification.'
+        - description: 'Price for the License. If >0, it must always be accompanied by the currency specification.'
           format: double
           in: formData
           name: price
           required: false
           type: number
-        - description: specifies currency for the license price. Check data types to discover which currencies are supported.
+        - description: Specifies currency for the License price. Check data types to discover which currencies are supported.
           in: formData
           name: currency
           required: false
           type: string
-        - description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
+        - description: 'If set to ''true'', every new Licensee automatically gets one License out of this License Template on creation. Automatic Licenses must have their price set to 0.'
           in: formData
           name: automatic
           required: false
           type: boolean
-        - description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
+        - description: 'If set to ''true'', this License Template is not shown in NetLicensing Shop as offered for purchase.'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
+        - description: 'If set to ''true'', Licenses from this License Template are not visible to the end customer, but participate in validation.'
           in: formData
           name: hideLicenses
           required: false
           type: boolean
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' and 'Node-Locked' License Model.
           in: formData
           name: quantity
+          required: false
+          type: string
+        - description: Mandatory for 'Quota' License Model.
+          in: formData
+          name: quota
           required: false
           type: string
       responses:
@@ -757,17 +762,17 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create license template
+      summary: Create License Template
       tags:
         - License Template
   '/licensetemplate/{licenseTemplateNumber}':
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: Delete a license template by number.
+      description: Delete a License Template by 'number'.
       operationId: deleteLicenseTemplate
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the license template.
+        - description: Unique number (across all Products of a Vendor) that identifies the License Template.
           in: path
           name: licenseTemplateNumber
           required: true
@@ -792,14 +797,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Delete license template
+      summary: Delete License Template
       tags:
         - License Template
     get:
-      description: Return a license template by licenseTemplateNumber
+      description: Return a License Template by 'licenseTemplateNumber'
       operationId: getLicenseTemplate
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the license template. Vendor can assign this number when creating a license template or let NetLicensing generate one. Read-only after creation of the first license from this license template.
+        - description: Unique number (across all Products of a Vendor) that identifies the License Template. Vendor can assign this number when creating a License Template or let NetLicensing generate one. Read-only after creation of the first License from this License Template.
           in: path
           name: licenseTemplateNumber
           required: true
@@ -819,36 +824,36 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get license template
+      summary: Get License Template
       tags:
         - License Template
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a license template. Return an updated license template
+      description: Sets the provided properties to a License Template. Return an updated License Template
       operationId: updateLicenseTemplate
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the license template. Vendor can assign this number when creating a license template or let NetLicensing generate one. Read-only after creation of the first license from this license template.
+        - description: Unique number (across all Products of a Vendor) that identifies the License Template. Vendor can assign this number when creating a License Template or let NetLicensing generate one. Read-only after creation of the first License from this License Template.
           in: path
           name: licenseTemplateNumber
           required: true
           type: string
-        - description: New license template number (update).
+        - description: New License Template number (update).
           in: formData
           name: number
           required: false
           type: string
-        - description: Name for the licensed item
+        - description: Name for the Licensed item
           in: formData
           name: name
           required: false
           type: string
-        - description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
+        - description: 'If set to ''false'', the License Template is disabled. Licensee can not obtain any new Licenses off this License Template.'
           in: formData
           name: active
           required: false
           type: boolean
-        - description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
+        - description: 'Type of Licenses created from this License Template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -861,12 +866,12 @@ paths:
           name: licenseType
           required: false
           type: string
-        - description: Mandatory for 'TIMEVOLUME' license type.
+        - description: Mandatory for 'TIMEVOLUME' License Type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: For 'TIMEVOLUME' license type.
+        - description: For 'TIMEVOLUME' License Type.
           in: formData
           items:
             default: DAY
@@ -879,40 +884,45 @@ paths:
           name: timeVolumePeriod
           required: false
           type: string
-        - description: Mandatory for 'FLOATING' license type.
+        - description: Mandatory for 'FLOATING' License Type.
           in: formData
           name: maxSessions
           required: false
           type: string
-        - description: 'Price for the license. If >0, it must always be accompanied by the currency specification.'
+        - description: 'Price for the License. If >0, it must always be accompanied by the currency specification.'
           format: double
           in: formData
           name: price
           required: false
           type: number
-        - description: Specifies currency for the license price. Check data types to discover which currencies are supported.
+        - description: Specifies currency for the License price. Check data types to discover which currencies are supported.
           in: formData
           name: currency
           required: false
           type: string
-        - description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
+        - description: 'If set to ''true'', every new Licensee automatically gets one License out of this License Template on creation. Automatic Licenses must have their price set to 0.'
           in: formData
           name: automatic
           required: false
           type: boolean
-        - description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
+        - description: 'If set to ''true'', this License Template is not shown in NetLicensing Shop as offered for purchase.'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
+        - description: 'If set to ''true'', Licenses from this License Template are not visible to the end customer, but participate in validation.'
           in: formData
           name: hideLicenses
           required: false
           type: boolean
-        - description: Mandatory for 'Pay-per-Use' license model.
+        - description: Mandatory for 'Pay-per-Use' and 'Node-Locked' License Model.
           in: formData
           name: quantity
+          required: false
+          type: string
+        - description: Mandatory for 'Quota' License Model.
+          in: formData
+          name: quota
           required: false
           type: string
       responses:
@@ -930,12 +940,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update license template
+      summary: Update License Template
       tags:
         - License Template
   /paymentmethod:
     get:
-      description: Return a list of all payment methods for the current vendor
+      description: Return a list of all Payment Methods for the current Vendor
       operationId: listPaymentMethods
       responses:
         '200':
@@ -954,12 +964,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Payment Methods list
+      summary: List Payment Methods
       tags:
         - Payment Method
   '/paymentmethod/{paymentMethodNumber}':
     get:
-      description: Return a payment method info by paymentMethodNumber
+      description: Return a Payment Method info by 'paymentMethodNumber'
       operationId: getPaymentMethod
       parameters:
         - description: Payment method number
@@ -982,13 +992,13 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get payment method
+      summary: Get Payment Method
       tags:
         - Payment Method
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a payment method. Return an updated payment method
+      description: Sets the provided properties to a Payment Method. Return an updated Payment Method
       operationId: updatePaymentMethod
       parameters:
         - description: Payment method number
@@ -996,7 +1006,7 @@ paths:
           name: paymentMethodNumber
           required: true
           type: string
-        - description: 'If set to ''false'', the payment method is disabled.'
+        - description: 'If set to ''false'', the Payment Method is disabled.'
           in: formData
           name: active
           required: false
@@ -1021,12 +1031,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update payment method
+      summary: Update Payment Method
       tags:
         - Payment Method
   /product:
     get:
-      description: Return a list of all configured products for the current vendor
+      description: Return a list of all configured Products for the current Vendor
       operationId: listProducts
       responses:
         '200':
@@ -1045,36 +1055,36 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Products list
+      summary: List Products
       tags:
         - Product
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new product
+      description: Creates a new Product
       operationId: createProduct
       parameters:
-        - description: Unique number that identifies the product. Vendor can assign this number when creating a product or let NetLicensing generate one.
+        - description: Unique number that identifies the Product. Vendor can assign this number when creating a Product or let NetLicensing generate one.
           in: formData
           name: number
           required: false
           type: string
-        - description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses.'
+        - description: 'If set to ''false'', the Product is disabled. No new Licensees can be registered for the Product, existing Licensees can not obtain new Licenses.'
           in: formData
           name: active
           required: true
           type: boolean
-        - description: Product name. Together with the version identifies the product for the end customer.
+        - description: Product name. Together with the version identifies the Product for the end customer.
           in: formData
           name: name
           required: true
           type: string
-        - description: 'Product version. Convenience parameter, additional to the product name.'
+        - description: 'Product version. Convenience parameter, additional to the Product name.'
           in: formData
           name: version
           required: true
           type: string
-        - description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
+        - description: 'If set to ''true'', non-existing Licensees will be created at first validation attempt.'
           in: formData
           name: licenseeAutoCreate
           required: false
@@ -1089,7 +1099,7 @@ paths:
           name: licensingInfo
           required: false
           type: string
-        - description: 'Licensee secret mode for product. Supported types: DISABLED, PREDEFINED, CLIENT'
+        - description: '(Deprecated. Use ''Node-Locked'' licensing model instead) Licensee secret mode for Product. Supported types: DISABLED, PREDEFINED, CLIENT'
           enum:
             - DISABLED
             - PREDEFINED
@@ -1098,7 +1108,7 @@ paths:
           name: licenseeSecretMode
           required: false
           type: string
-        - description: 'Vat mode for product. Supported types: GROSS, NET'
+        - description: 'Vat mode for Product. Supported types: GROSS, NET'
           enum:
             - GROSS
             - NET
@@ -1123,17 +1133,17 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create product
+      summary: Create Product
       tags:
         - Product
   '/product/{productNumber}':
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: Delete a product by number
+      description: Delete a Product by 'number'
       operationId: deleteProduct
       parameters:
-        - description: Unique number that identifies the product.
+        - description: Unique number that identifies the Product.
           in: path
           name: productNumber
           required: true
@@ -1158,14 +1168,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Delete product
+      summary: Delete Product
       tags:
         - Product
     get:
-      description: Return a product by productNumber
+      description: Return a Product by 'productNumber'
       operationId: productNumber
       parameters:
-        - description: Unique number that identifies the product.
+        - description: Unique number that identifies the Product.
           in: path
           name: productNumber
           required: true
@@ -1185,41 +1195,41 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get product
+      summary: Get Product
       tags:
         - Product
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a product. Return an updated product
+      description: Sets the provided properties to a Product. Return an updated Product
       operationId: updateProduct
       parameters:
-        - description: Unique number that identifies the product.
+        - description: Unique number that identifies the Product.
           in: path
           name: productNumber
           required: true
           type: string
-        - description: New product number (update)
+        - description: New Product number (update)
           in: formData
           name: number
           required: false
           type: string
-        - description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses.'
+        - description: 'If set to ''false'', the Product is disabled. No new Licensees can be registered for the Product, existing Licensees can not obtain new Licenses.'
           in: formData
           name: active
           required: false
           type: boolean
-        - description: Product name. Together with the version identifies the product for the end customer.
+        - description: Product name. Together with the version identifies the Product for the end customer.
           in: formData
           name: name
           required: false
           type: string
-        - description: 'Product version. Convenience parameter, additional to the product name.'
+        - description: 'Product version. Convenience parameter, additional to the Product name.'
           in: formData
           name: version
           required: false
           type: string
-        - description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
+        - description: 'If set to ''true'', non-existing Licensees will be created at first validation attempt.'
           in: formData
           name: licenseeAutoCreate
           required: false
@@ -1234,7 +1244,7 @@ paths:
           name: licensingInfo
           required: false
           type: string
-        - description: 'Licensee secret mode for product. Supported types: DISABLED, PREDEFINED, CLIENT'
+        - description: '(Deprecated. Use ''Node-Locked'' licensing model instead) Licensee secret mode for Product. Supported types: DISABLED, PREDEFINED, CLIENT'
           enum:
             - DISABLED
             - PREDEFINED
@@ -1243,7 +1253,7 @@ paths:
           name: licenseeSecretMode
           required: false
           type: string
-        - description: 'Vat mode for product. Supported types: GROSS, NET'
+        - description: 'Vat mode for Product. Supported types: GROSS, NET'
           enum:
             - GROSS
             - NET
@@ -1268,12 +1278,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update product
+      summary: Update Product
       tags:
         - Product
   /productmodule:
     get:
-      description: Return a list of all product modules for the current vendor
+      description: Return a list of all Product Modules for the current Vendor
       operationId: listProductModules
       responses:
         '200':
@@ -1292,36 +1302,36 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Product Modules list
+      summary: List Product Modules
       tags:
         - Product Module
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new product module
+      description: Creates a new Product Module
       operationId: createProductModule
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the product module. Vendor can assign this number when creating a product module or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        - description: Unique number (across all Products of a Vendor) that identifies the Product Module. Vendor can assign this number when creating a Product Module or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
           in: formData
           name: productNumber
           required: true
           type: string
-        - description: Unique number (across all products of a vendor) that identifies the product module. Vendor can assign this number when creating a product module or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        - description: Unique number (across all Products of a Vendor) that identifies the Product Module. Vendor can assign this number when creating a Product Module or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
           in: formData
           name: number
           required: false
           type: string
-        - description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
+        - description: 'If set to ''false'', the Product Module is disabled. Licensees can not obtain any new Licenses for this Product Module.'
           in: formData
           name: active
           required: true
           type: boolean
-        - description: Product module name that is visible to the end customers in NetLicensing Shop.
+        - description: Product Module name that is visible to the end customers in NetLicensing Shop.
           in: formData
           name: name
           required: true
           type: string
-        - description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
+        - description: Licensing model applied to this Product Module. Defines what License Templates can be configured for the Product Module and how Licenses for this Product Module are processed during validation.
           in: formData
           items:
             default: Subscription
@@ -1333,6 +1343,7 @@ paths:
               - MultiFeature
               - PayPerUse
               - Quota
+              - NodeLocked
             type: string
           name: licensingModel
           required: true
@@ -1355,7 +1366,18 @@ paths:
           name: redThreshold
           required: false
           type: integer
-        - description: License template. Mandatory for 'Try &amp; Buy' licensing model.
+        - description: Secret Mode. Mandatory for 'Node-Locked' licensing model.
+          in: formData
+          items:
+            default: PREDEFINED
+            enum:
+              - PREDEFINED
+              - CLIENT
+            type: string
+          name: nodeSecretMode
+          required: false
+          type: array
+        - description: License Template. Mandatory for 'Try &amp; Buy' licensing model.
           in: formData
           items:
             default: TIMEVOLUME
@@ -1383,15 +1405,15 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create product module
+      summary: Create Product Module
       tags:
         - Product Module
   '/productmodule/{productModuleNumber}':
     delete:
-      description: Delete a product module by number
+      description: Delete a Product Module by 'number'
       operationId: deleteProductModule
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the product module.
+        - description: Unique number (across all Products of a Vendor) that identifies the Product Module.
           in: path
           name: productModuleNumber
           required: true
@@ -1416,14 +1438,14 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Delete product module
+      summary: Delete Product Module
       tags:
         - Product Module
     get:
-      description: Return a product module by productModuleNumber
+      description: Return a Product Module by 'productModuleNumber'
       operationId: getProductModule
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the product module. Vendor can assign this number when creating a product module or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        - description: Unique number (across all Products of a Vendor) that identifies the Product Module. Vendor can assign this number when creating a Product Module or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
           in: path
           name: productModuleNumber
           required: true
@@ -1443,36 +1465,36 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Get product module
+      summary: Get Product Module
       tags:
         - Product Module
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a product module. Return an updated product module
+      description: Sets the provided properties to a Product Module. Return an updated Product Module
       operationId: updateProductModule
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the product module. Vendor can assign this number when creating a product module or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        - description: Unique number (across all Products of a Vendor) that identifies the Product Module. Vendor can assign this number when creating a Product Module or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
           in: path
           name: productModuleNumber
           required: true
           type: string
-        - description: New product module number (update).
+        - description: New Product Module number (update).
           in: formData
           name: number
           required: false
           type: string
-        - description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
+        - description: 'If set to ''false'', the Product Module is disabled. Licensees can not obtain any new Licenses for this Product Module.'
           in: formData
           name: active
           required: false
           type: boolean
-        - description: Product module name that is visible to the end customers in NetLicensing Shop.
+        - description: Product Module name that is visible to the end customers in NetLicensing Shop.
           in: formData
           name: name
           required: false
           type: string
-        - description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
+        - description: Licensing model applied to this Product Module. Defines what License Templates can be configured for the Product Module and how Licenses for this Product Module are processed during validation.
           in: formData
           items:
             default: Subscription
@@ -1503,7 +1525,7 @@ paths:
           name: redThreshold
           required: false
           type: integer
-        - description: License template. Mandatory for 'Try &amp; Buy' licensing model.
+        - description: License Template. Mandatory for 'Try &amp; Buy' licensing model.
           in: formData
           items:
             default: TIMEVOLUME
@@ -1512,6 +1534,17 @@ paths:
               - FEATURE
             type: string
           name: licenseTemplate
+          required: false
+          type: array
+        - description: Secret Mode. Mandatory for 'Node-Locked' licensing model.
+          in: formData
+          items:
+            default: PREDEFINED
+            enum:
+              - PREDEFINED
+              - CLIENT
+            type: string
+          name: nodeSecretMode
           required: false
           type: array
       responses:
@@ -1531,12 +1564,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update product module
+      summary: Update Product Module
       tags:
         - Product Module
   /token:
     get:
-      description: Return a list of all tokens for the current vendor
+      description: Return a list of all tokens for the current Vendor
       operationId: listTokens
       responses:
         '200':
@@ -1555,13 +1588,13 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Tokens list
+      summary: List Tokens
       tags:
         - Token
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Create token by tokenType and additional token parameters
+      description: Create token by 'tokenType' and additional token parameters
       operationId: createToken
       parameters:
         - description: Token type to be generated
@@ -1573,27 +1606,27 @@ paths:
           name: tokenType
           required: true
           type: string
-        - description: for <i>tokenType=SHOP</i> only (mandatory); identifies licensee that will be assigned to the shop token
+        - description: For <i>tokenType=SHOP</i> only (mandatory); identifies Licensee that will be assigned to the shop token
           in: formData
           name: licenseeNumber
           required: false
           type: string
-        - description: for <i>tokenType=SHOP</i> only; take customers to this URL when they finish checkout
+        - description: For <i>tokenType=SHOP</i> only; take customers to this URL when they finish checkout
           in: formData
           name: successURL
           required: false
           type: string
-        - description: for <i>tokenType=SHOP</i> only; shop link title for successful checkout process
+        - description: For <i>tokenType=SHOP</i> only; shop link title for successful checkout process
           in: formData
           name: successURLTitle
           required: false
           type: string
-        - description: for <i>tokenType=SHOP</i> only; take customers to this URL when they cancel their checkout
+        - description: For <i>tokenType=SHOP</i> only; take customers to this URL when they cancel their checkout
           in: formData
           name: cancelURL
           required: false
           type: string
-        - description: for <i>tokenType=SHOP</i> only; shop link title for cancel checkout process
+        - description: For <i>tokenType=SHOP</i> only; shop link title for cancel checkout process
           in: formData
           name: cancelURLTitle
           required: false
@@ -1619,7 +1652,7 @@ paths:
         - Token
   '/token/{tokenNumber}':
     delete:
-      description: Delete a token by number
+      description: Delete a token by 'number'
       operationId: deleteToken
       parameters:
         - description: Token number
@@ -1646,7 +1679,7 @@ paths:
       tags:
         - Token
     get:
-      description: Return a token by tokenNumber
+      description: Return a token by 'tokenNumber'
       operationId: getToken
       parameters:
         - description: Token number
@@ -1674,7 +1707,7 @@ paths:
         - Token
   /transaction:
     get:
-      description: Return a list of all transactions for the current vendor
+      description: Return a list of all Transactions for the current Vendor
       operationId: listTransactions
       responses:
         '200':
@@ -1693,25 +1726,25 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Transactions list
+      summary: List Transactions
       tags:
         - Transaction
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Creates a new transaction
+      description: Creates a new Transaction
       operationId: createTransaction
       parameters:
         - in: formData
           name: licenseeNumber
-          required: true
+          required: false
           type: string
-        - description: Unique number (across all products of a vendor) that identifies the transaction
+        - description: Unique number (across all Products of a Vendor) that identifies the Transaction
           in: formData
           name: number
           required: false
           type: string
-        - description: always true for transactions
+        - description: Always 'true' for Transactions
           in: formData
           name: active
           required: true
@@ -1724,7 +1757,7 @@ paths:
           name: status
           required: true
           type: string
-        - description: AUTO transaction for internal use only
+        - description: AUTO Transaction for internal use only
           enum:
             - SHOP
           in: formData
@@ -1760,15 +1793,15 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Create transaction
+      summary: Create Transaction
       tags:
         - Transaction
   '/transaction/{transactionNumber}':
     get:
-      description: Return a transaction by transactionNumber
+      description: Return a Transaction by 'transactionNumber'
       operationId: getTransaction
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the transaction
+        - description: Unique number (across all Products of a Vendor) that identifies the Transaction
           in: path
           name: transactionNumber
           required: true
@@ -1788,26 +1821,26 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: 'Get transaction '
+      summary: 'Get Transaction '
       tags:
         - Transaction
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Sets the provided properties to a transaction. Return an updated transaction
+      description: Sets the provided properties to a Transaction. Return an updated Transaction
       operationId: updateTransaction
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the transaction
+        - description: Unique number (across all Products of a Vendor) that identifies the Transaction
           in: path
           name: transactionNumber
           required: true
           type: string
-        - description: Unique number (across all products of a vendor) that identifies the transaction
+        - description: Unique number (across all Products of a Vendor) that identifies the Transaction
           in: formData
           name: number
           required: false
           type: string
-        - description: always true for transactions
+        - description: Always 'true' for Transactions
           in: formData
           name: active
           required: false
@@ -1820,7 +1853,7 @@ paths:
           name: status
           required: false
           type: string
-        - description: AUTO transaction for internal use only
+        - description: AUTO Transaction for internal use only
           enum:
             - SHOP
           in: formData
@@ -1856,12 +1889,12 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Update transaction
+      summary: Update Transaction
       tags:
         - Transaction
   /utility/licenseTypes:
     get:
-      description: Return a list of all license types supported by the service
+      description: Return a list of all License Types supported by the service
       operationId: licenseTypes
       responses:
         '200':
@@ -1878,7 +1911,7 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: License Types list
+      summary: List License Types
       tags:
         - Utility
   /utility/licensingModels:
@@ -1900,29 +1933,29 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Licensing Models list
+      summary: List Licensing Models
       tags:
         - Utility
 definitions:
   License:
     properties:
       active:
-        description: 'If set to ''false'', the license is disabled. License can be re-enabled, but as long as it is disabled, the license is excluded from the validation process.'
+        description: 'If set to ''false'', the License is disabled. License can be re-enabled, but as long as it is disabled, the License is excluded from the validation process.'
         type: boolean
       currency:
-        description: 'specifies currency for the license price. Check data types to discover which currencies are supported. Read-only, set from license template on creation.'
+        description: 'Specifies currency for the License price. Check data types to discover which currencies are supported. Read-only, set from License Template on creation.'
         type: string
       hidden:
-        description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly.'
+        description: 'If set to ''true'', this License is not shown in NetLicensing Shop as purchased License. Set from License Template on creation, if not specified explicitly.'
         type: boolean
       name:
-        description: 'Name for the licensed item. Set from license template on creation, if not specified explicitly.'
+        description: 'Name for the Licensed item. Set from License Template on creation, if not specified explicitly.'
         type: string
       number:
-        description: Unique number (across all products/licensees of a vendor) that identifies the license. Vendor can assign this number when creating a license or let NetLicensing generate one. Read-only after corresponding creation transaction status is set to closed.
+        description: Unique number (across all Products/Licensees of a Vendor) that identifies the License. Vendor can assign this number when creating a License or let NetLicensing generate one. Read-only after corresponding creation Transaction status is set to closed.
         type: string
       price:
-        description: 'price for the license. If >0, it must always be accompanied by the currency specification. Read-only, set from license template on creation.'
+        description: '''price'' for the License. If >0, it must always be accompanied by the currency specification. Read-only, set from License Template on creation.'
         format: double
         type: number
     type: object
@@ -1931,34 +1964,34 @@ definitions:
   LicenseTemplate:
     properties:
       active:
-        description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
+        description: 'If set to ''false'', the License Template is disabled. Licensee can not obtain any new Licenses off this License Template.'
         type: boolean
       automatic:
-        description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
+        description: 'If set to ''true'', every new Licensee automatically gets one License out of this License Template on creation. Automatic Licenses must have their price set to 0.'
         type: boolean
       currency:
-        description: specifies currency for the license price. Check data types to discover which currencies are supported.
+        description: Specifies currency for the License price. Check data types to discover which currencies are supported.
         type: string
       hidden:
-        description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
+        description: 'If set to ''true'', this License Template is not shown in NetLicensing Shop as offered for purchase.'
         type: boolean
       hiddenLicenses:
-        description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
+        description: 'If set to ''true'', Licenses from this License Template are not visible to the end customer, but participate in validation.'
         type: boolean
       licenseType:
-        description: type of licenses created from this license template
+        description: Type of Licenses created from this License Template
         enum:
           - FEATURE
           - TIMEVOLUME
         type: string
       name:
-        description: Name for the licensed item.
+        description: Name for the Licensed item.
         type: string
       number:
-        description: Unique number (across all products of a vendor) that identifies the license template. Vendor can assign this number when creating a license template or let NetLicensing generate one. Read-only after creation of the first license from this license template.
+        description: Unique number (across all Product of a Vendor) that identifies the License Template. Vendor can assign this number when creating a License Template or let NetLicensing generate one. Read-only after creation of the first License from this License Template.
         type: string
       price:
-        description: 'price for the license. If >0, it must always be accompanied by the currency specification.'
+        description: '''price'' for the License. If >0, it must always be accompanied by the currency specification.'
         format: double
         type: number
     type: object
@@ -1967,10 +2000,10 @@ definitions:
   Licensee:
     properties:
       active:
-        description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled.'
+        description: 'If set to ''false'', the Licensee is disabled. Licensee can not obtain new Licenses, and validation is disabled.'
         type: boolean
       number:
-        description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
+        description: Unique number (across all Products of a Vendor) that identifies the Licensee. Vendor can assign this number when creating a Licensee or let NetLicensing generate one. Read-only after creation of the first License for the Licensee.
         type: string
     type: object
     xml:
@@ -1987,19 +2020,19 @@ definitions:
   Product:
     properties:
       active:
-        description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses'
+        description: 'If set to ''false'', the Product is disabled. No new Licensees can be registered for the Product, existing Licensees can not obtain new Licenses'
         type: boolean
       licenseeAutoCreate:
-        description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
+        description: 'If set to ''true'', non-existing Licensees will be created at first validation attempt.'
         type: boolean
       name:
-        description: Product name. Together with the version identifies the product for the end customer
+        description: Product name. Together with the version identifies the Product for the end customer
         type: string
       number:
-        description: Unique number that identifies the product. Vendor can assign this number when creating a product or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        description: Unique number that identifies the Product. Vendor can assign this number when creating a Product or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
         type: string
       version:
-        description: 'Product version. Convenience parameter, additional to the product name.'
+        description: 'Product version. Convenience parameter, additional to the Product name.'
         type: string
     type: object
     xml:
@@ -2007,16 +2040,16 @@ definitions:
   ProductModule:
     properties:
       active:
-        description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
+        description: 'If set to ''false'', the Product Module is disabled. Licensees can not obtain any new Licenses for this Product Module.'
         type: boolean
       licensingInfo:
-        description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
+        description: Licensing model applied to this Product Module. Defines what License Templates can be configured for the Product Module and how Licenses for this Product Module are processed during validation.
         type: string
       name:
-        description: Product module name that is visible to the end customers in NetLicensing Shop.
+        description: Product Module name that is visible to the end customers in NetLicensing Shop.
         type: string
       number:
-        description: Unique number (across all products of a vendor) that identifies the product module. Vendor can assign this number when creating a product module or let NetLicensing generate one. Read-only after creation of the first licensee for the product.
+        description: Unique number (across all Product of a Vendor) that identifies the Product Module. Vendor can assign this number when creating a Product Module or let NetLicensing generate one. Read-only after creation of the first Licensee for the Product.
         type: string
     type: object
     xml:
@@ -2036,7 +2069,7 @@ definitions:
         type: string
       tokenType:
         type: string
-      vensorNumber:
+      vendorNumber:
         type: string
     type: object
     xml:
@@ -2044,10 +2077,10 @@ definitions:
   Transaction:
     properties:
       active:
-        description: Always true for the transactions
+        description: Always true for the Transactions
         type: string
       number:
-        description: Unique number (across all products of a vendor) that identifies the transaction. This number is always generated by NetLicensing.
+        description: Unique number (across all Products of a Vendor) that identifies the Transaction. This number is always generated by NetLicensing.
         type: string
       source:
         enum:

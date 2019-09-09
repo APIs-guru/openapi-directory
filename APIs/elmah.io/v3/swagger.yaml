@@ -367,6 +367,55 @@ paths:
       summary: Create a new message.
       tags:
         - Messages
+  '/v3/messages/{logId}/_bulk':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Messages_CreateBulk
+      parameters:
+        - description: The ID of the log which should contain the new messages.
+          in: path
+          name: logId
+          required: true
+          type: string
+        - description: The messages to create.
+          in: body
+          name: messages
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/CreateMessage'
+            type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: Zero or more messages where successfully created. Check the response body for details.
+          schema:
+            items:
+              $ref: '#/definitions/CreateBulkMessageResult'
+            type: array
+        '400':
+          description: Something wrong with the query parameters.
+        '401':
+          description: No access to log.
+        '403':
+          description: Request limit reached and message where not created.
+        '404':
+          description: Log not found.
+        '429':
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted.
+      summary: Create one or more new messages.
+      tags:
+        - Messages
   '/v3/messages/{logId}/{id}':
     delete:
       consumes: []
@@ -474,6 +523,16 @@ paths:
       tags:
         - Messages
 definitions:
+  CreateBulkMessageResult:
+    properties:
+      Location:
+        description: The location of the created message if StatusCode equals Created.
+        type: string
+      StatusCode:
+        description: Status code of the individual messages as if it were being created through the non-bulk endpoint.
+        format: int32
+        type: integer
+    type: object
   CreateDeployment:
     properties:
       created:
@@ -559,6 +618,9 @@ definitions:
         type: integer
       title:
         description: The textual title or headline of the message to log.
+        type: string
+      titleTemplate:
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
         type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'
@@ -679,6 +741,9 @@ definitions:
       title:
         description: The textual title or headline of the message to log.
         type: string
+      titleTemplate:
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
+        type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'
         type: string
@@ -750,6 +815,9 @@ definitions:
         type: integer
       title:
         description: The textual title or headline of the message to log.
+        type: string
+      titleTemplate:
+        description: "The title template of the message to log. This property can be used from logging frameworks that supports\r\n            structured logging like: \"{user} says {quote}\". In the example, titleTemplate will be this string and title\r\n            will be \"Gilfoyle says It's not magic. It's talent and sweat\"."
         type: string
       type:
         description: 'The type of message. If logging an error, the type of the exception would go into type but you can put anything in there, that makes sense for your domain.'

@@ -120,7 +120,7 @@ paths:
           schema:
             $ref: '#/definitions/AccountsResponse'
         '404':
-          description: No nccounts were found
+          description: No accounts were found
           schema:
             $ref: '#/definitions/ErrorResponse'
         default:
@@ -678,6 +678,12 @@ paths:
           name: budget_id
           required: true
           type: string
+        - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
+          in: query
+          name: last_knowledge_of_server
+          required: false
+          type: integer
       responses:
         '200':
           description: The list of requested scheduled transactions
@@ -806,12 +812,12 @@ paths:
           name: budget_id
           required: true
           type: string
-        - description: 'The transactions to update.  Optionally, transaction ''id'' value(s) can be specified as null and an ''import_id'' value can be provided which will allow transaction(s) to updated by their import_id.'
+        - description: 'The transactions to update. Each transaction must have either an ''id'' or ''import_id'' specified. If ''id'' is specified as null an ''import_id'' value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.'
           in: body
           name: data
           required: true
           schema:
-            $ref: '#/definitions/SaveTransactionsWrapper'
+            $ref: '#/definitions/UpdateTransactionsWrapper'
       responses:
         '209':
           description: The transactions were successfully updated
@@ -873,7 +879,7 @@ paths:
             $ref: '#/definitions/BulkTransactions'
       responses:
         '201':
-          description: The bulk request was processed sucessfully
+          description: The bulk request was processed successfully
           schema:
             $ref: '#/definitions/BulkResponse'
         '400':
@@ -1018,7 +1024,6 @@ definitions:
       - type
       - on_budget
       - closed
-      - note
       - balance
       - cleared_balance
       - uncleared_balance
@@ -1180,7 +1185,6 @@ definitions:
             description: 'The default budget, if the associated application is configured to support specifying it'
         required:
           - budgets
-          - default_budget
         type: object
     required:
       - data
@@ -1276,11 +1280,12 @@ definitions:
         format: date
         type: string
       goal_type:
-        description: 'The type of goal, if the cagegory has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)'
+        description: 'The type of goal, if the category has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)'
         enum:
           - TB
           - TBD
           - MF
+          - NEED
           - null
         type: string
       hidden:
@@ -1302,15 +1307,9 @@ definitions:
       - category_group_id
       - name
       - hidden
-      - note
       - budgeted
       - activity
       - balance
-      - goal_type
-      - goal_creation_month
-      - goal_target
-      - goal_target_month
-      - goal_percentage_complete
       - deleted
     type: object
   CategoryGroup:
@@ -1423,7 +1422,7 @@ definitions:
           category_name:
             type: string
           parent_transaction_id:
-            description: 'For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.'
+            description: 'For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.'
             type: string
           payee_name:
             type: string
@@ -1435,10 +1434,7 @@ definitions:
             type: string
         required:
           - type
-          - parent_transaction_id
           - account_name
-          - payee_name
-          - category_name
         type: object
   HybridTransactionsResponse:
     properties:
@@ -1529,12 +1525,10 @@ definitions:
         type: integer
     required:
       - month
-      - note
       - income
       - budgeted
       - activity
       - to_be_budgeted
-      - age_of_money
       - deleted
     type: object
   Payee:
@@ -1553,7 +1547,6 @@ definitions:
     required:
       - id
       - name
-      - transfer_account_id
       - deleted
     type: object
   PayeeLocation:
@@ -1707,14 +1700,14 @@ definitions:
           - null
         type: string
       import_id:
-        description: 'If specified, the new transaction will be assigned this import_id and considered "imported". *At the time of import* we will attempt to match "imported" transactions with non-imported (i.e. "user-entered") transactions.<br><br>Transactions imported through File Based Import or Direct Import (not through the API) are assigned an import_id in the format: ''YNAB:[milliunit_amount]:[iso_date]:[occurrence]''. For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of ''YNAB:-294230:2015-12-30:1''.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be ''YNAB:-294230:2015-12-30:2''.  Using a consistent format will prevent duplicates through Direct Import and File Based Import.<br><br>If import_id is omitted or specified as null, the transaction will be treated as a "user-entered" transaction. As such, it will be eligible to be matched against transactions later being imported (via DI, FBI, or API).'
+        description: 'If specified, the new transaction will be assigned this import_id and considered "imported".  We will also attempt to match this imported transaction to an existing "user-entered" transation on the same account, with the same amount, and with a date +/-10 days from the imported transaction date.<br><br>Transactions imported through File Based Import or Direct Import (not through the API) are assigned an import_id in the format: ''YNAB:[milliunit_amount]:[iso_date]:[occurrence]''. For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of ''YNAB:-294230:2015-12-30:1''.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be ''YNAB:-294230:2015-12-30:2''.  Using a consistent format will prevent duplicates through Direct Import and File Based Import.<br><br>If import_id is omitted or specified as null, the transaction will be treated as a "user-entered" transaction. As such, it will be eligible to be matched against transactions later being imported (via DI, FBI, or API).'
         maxLength: 36
         type: string
       memo:
         maxLength: 200
         type: string
       payee_id:
-        description: The payee for the transaction
+        description: 'The payee for the transaction.  To create a transfer between two accounts, use the account transfer payee pointing to the target account.  Account transfer payees are specified as tranfer_payee_id on the account resource.'
         format: uuid
         type: string
       payee_name:
@@ -1806,10 +1799,6 @@ definitions:
       - id
       - scheduled_transaction_id
       - amount
-      - memo
-      - payee_id
-      - category_id
-      - transfer_account_id
       - deleted
     type: object
   ScheduledTransactionDetail:
@@ -1829,8 +1818,6 @@ definitions:
             type: array
         required:
           - account_name
-          - payee_name
-          - category_name
           - subtransactions
         type: object
   ScheduledTransactionResponse:
@@ -1913,12 +1900,7 @@ definitions:
       - date_next
       - frequency
       - amount
-      - memo
-      - flag_color
       - account_id
-      - payee_id
-      - category_id
-      - transfer_account_id
       - deleted
     type: object
   ScheduledTransactionsResponse:
@@ -1929,8 +1911,13 @@ definitions:
             items:
               $ref: '#/definitions/ScheduledTransactionDetail'
             type: array
+          server_knowledge:
+            description: The knowledge of the server
+            format: int64
+            type: integer
         required:
           - scheduled_transactions
+          - server_knowledge
         type: object
     required:
       - data
@@ -1964,10 +1951,6 @@ definitions:
       - id
       - transaction_id
       - amount
-      - memo
-      - payee_id
-      - category_id
-      - transfer_account_id
       - deleted
     type: object
   TransactionDetail:
@@ -1987,8 +1970,6 @@ definitions:
             type: array
         required:
           - account_name
-          - payee_name
-          - category_name
           - subtransactions
         type: object
   TransactionResponse:
@@ -2067,17 +2048,9 @@ definitions:
       - id
       - date
       - amount
-      - memo
       - cleared
       - approved
-      - flag_color
       - account_id
-      - payee_id
-      - category_id
-      - transfer_account_id
-      - transfer_transaction_id
-      - matched_transaction_id
-      - import_id
       - deleted
     type: object
   TransactionsResponse:
@@ -2098,6 +2071,24 @@ definitions:
         type: object
     required:
       - data
+    type: object
+  UpdateTransaction:
+    allOf:
+      - properties:
+          id:
+            type: string
+        required:
+          - id
+        type: object
+      - $ref: '#/definitions/SaveTransaction'
+  UpdateTransactionsWrapper:
+    properties:
+      transactions:
+        items:
+          $ref: '#/definitions/UpdateTransaction'
+        type: array
+    required:
+      - transactions
     type: object
   User:
     properties:

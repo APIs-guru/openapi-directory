@@ -279,6 +279,55 @@ paths:
         - X-Fungenerators-Api-Secret: []
       tags:
         - Facts
+  /fact/onthisday/event:
+    get:
+      description: Returns a random ( famous/ relatively famous ) historic event on a given day and month
+      parameters:
+        - description: Optional month (1-12). Defaults to current month
+          format: string
+          in: query
+          name: month
+          required: false
+          type: string
+        - description: Optional day of the month (1- 28/30/31 based on the month). Defaults to current day of the month.
+          format: string
+          in: query
+          name: day
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200  response
+          examples:
+            application/json: |-
+              {
+                "success": {
+                  "total": 1
+                },
+                "contents": {
+                  "id": "KVlPpVL119DtLFtphgOxqQeF",
+                  "day": "26",
+                  "month": "8",
+                  "year": "1883",
+                  "date": "1883-8-26",
+                  "event_type": "event",
+                  "event": "The Indonesian island of Krakatoa erupts in the largest explosion recorded in history, heard 2,200 miles away in Madagascar. The resulting destruction sends volcanic ash up 50 miles into the atmosphere and kills almost 36,000 people–both on the island itself and from the resulting 131-foot tidal waves that obliterate 163 villages on the shores of nearby Java and Sumatra."
+                }
+              }
+        '401':
+          description: 401  response
+          examples:
+            application/json: |-
+              {
+                  "error": {
+                      "code": 401,
+                      "message": "Unauthorized"
+                  }
+              }
+      security:
+        - X-Fungenerators-Api-Secret: []
+      tags:
+        - Facts
   /fact/random:
     get:
       description: Get a random Fact for a given category(optional) and subcategory(optional).

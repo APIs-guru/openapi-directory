@@ -71,6 +71,11 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The expand expression to apply to the operation.
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -172,14 +177,9 @@ paths:
           responses:
             '200':
               body:
-                endTime: '2018-01-30T17:54:17.5832413-08:00'
-                name: 8eb1169a-5cf9-46b1-aadf-41e4f60692df
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/RequestRateByInterval_20180121-0154_20180123-0154.csv'
-                startTime: '2018-01-30T17:54:14.8806951-08:00'
-                status: Succeeded
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -226,14 +226,9 @@ paths:
           responses:
             '200':
               body:
-                endTime: '2018-01-30T17:54:17.5832413-08:00'
-                name: 8eb1169a-5cf9-46b1-aadf-41e4f60692df
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/ThrottledRequests_20180121-0154_20180123-0154.csv'
-                startTime: '2018-01-30T17:54:14.8806951-08:00'
-                status: Succeeded
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -4902,7 +4897,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5002,7 +4996,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -5149,7 +5142,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5248,7 +5240,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 availabilitySet:
                   id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/{existing-availability-set-name}'
@@ -5362,7 +5353,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               plan:
                 name: windows2016
                 product: windows-data-science-vm
@@ -5482,7 +5472,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 diagnosticsProfile:
                   bootDiagnostics:
@@ -5602,7 +5591,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D2_v2
@@ -5741,7 +5729,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5849,7 +5836,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2
@@ -5957,7 +5943,6 @@ paths:
             api-version: '2018-04-01'
             parameters:
               location: westus
-              name: myVM
               properties:
                 hardwareProfile:
                   vmSize: Standard_D1_v2

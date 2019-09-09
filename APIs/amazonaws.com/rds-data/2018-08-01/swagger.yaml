@@ -1,8 +1,15 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: rds-data.amazonaws.com
+basePath: /
 info:
-  version: '2018-08-01'
-  x-release: v4
-  title: AWS RDS DataService
+  contact:
+    email: mike.ralphson@gmail.com
+    name: Mike Ralphson
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   description: |-
     <fullname>Amazon RDS Data Service</fullname>
             <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora
@@ -10,164 +17,93 @@ info:
                 API.</p>
             <p>For more information about the Data Service API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API for Aurora
                     Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  contact:
-    name: Mike Ralphson
-    email: mike.ralphson@gmail.com
-    url: 'https://github.com/mermade/aws2openapi'
-    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: rds-data
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/rds-data-2018-08-01.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS RDS DataService
+  version: '2018-08-01'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/rds-data-2018-08-01.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: rds-data
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/rds-data/'
-host: rds-data.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://rds-data.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS RDS DataService multi-region endpoint
-  - url: 'https://rds-data.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS RDS DataService multi-region endpoint
-  - url: 'http://rds-data.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS RDS DataService endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://rds-data.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS RDS DataService endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   /BatchExecute:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: BatchExecuteStatement
       description: |-
         <p>Runs a batch SQL statement over an array of data.</p>
                 <p>You can run bulk update and insert operations for multiple records using a DML 
@@ -178,6 +114,52 @@ paths:
                             <code>transactionID</code> parameter, changes that result from the call are
                         committed automatically.</p>    
                 </important>
+      operationId: BatchExecuteStatement
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              database:
+                description: The name of the database.
+                maxLength: 64
+                type: string
+              parameterSets:
+                description: The parameter set for the batch operation.
+                items:
+                  $ref: '#/definitions/SqlParametersList'
+                type: array
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              schema:
+                description: The name of the database schema.
+                maxLength: 64
+                type: string
+              secretArn:
+                description: The name or ARN of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+              sql:
+                description: The SQL statement to run.
+                maxLength: 65536
+                type: string
+              transactionId:
+                description: |-
+                  <p>The identifier of a transaction that was started by using the
+                                  <code>BeginTransaction</code> operation. Specify the transaction ID of the
+                              transaction that you want to include the SQL statement in.</p>
+                          <p>If the SQL statement is not part of a transaction, don't set this
+                              parameter.</p>
+                maxLength: 192
+                type: string
+            required:
+              - resourceArn
+              - secretArn
+              - sql
+            type: object
       responses:
         '200':
           description: Success
@@ -203,51 +185,7 @@ paths:
           description: StatementTimeoutException
           schema:
             $ref: '#/definitions/StatementTimeoutException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - resourceArn
-              - secretArn
-              - sql
-            properties:
-              database:
-                description: The name of the database.
-                type: string
-                maxLength: 64
-              parameterSets:
-                description: The parameter set for the batch operation.
-                type: array
-                items:
-                  $ref: '#/definitions/SqlParametersList'
-              resourceArn:
-                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              schema:
-                description: The name of the database schema.
-                type: string
-                maxLength: 64
-              secretArn:
-                description: The name or ARN of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
-              sql:
-                description: The SQL statement to run.
-                type: string
-                maxLength: 65536
-              transactionId:
-                description: |-
-                  <p>The identifier of a transaction that was started by using the
-                                  <code>BeginTransaction</code> operation. Specify the transaction ID of the
-                              transaction that you want to include the SQL statement in.</p>
-                          <p>If the SQL statement is not part of a transaction, don't set this
-                              parameter.</p>
-                type: string
-                maxLength: 192
+  /BeginTransaction:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -256,9 +194,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /BeginTransaction:
     post:
-      operationId: BeginTransaction
       description: |-
         <p>Starts a SQL transaction.</p>
                 
@@ -272,6 +208,33 @@ paths:
                         that you run each DDL statement in a separate <code>ExecuteStatement</code> call with 
                         <code>continueAfterTimeout</code> enabled.</p>
                 </important>
+      operationId: BeginTransaction
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              database:
+                description: The name of the database.
+                maxLength: 64
+                type: string
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              schema:
+                description: The name of the database schema.
+                maxLength: 64
+                type: string
+              secretArn:
+                description: The name or ARN of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+            required:
+              - resourceArn
+              - secretArn
+            type: object
       responses:
         '200':
           description: Success
@@ -297,32 +260,7 @@ paths:
           description: StatementTimeoutException
           schema:
             $ref: '#/definitions/StatementTimeoutException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - resourceArn
-              - secretArn
-            properties:
-              database:
-                description: The name of the database.
-                type: string
-                maxLength: 64
-              resourceArn:
-                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              schema:
-                description: The name of the database schema.
-                type: string
-                maxLength: 64
-              secretArn:
-                description: The name or ARN of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
+  /CommitTransaction:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -331,12 +269,34 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /CommitTransaction:
     post:
-      operationId: CommitTransaction
       description: |-
         Ends a SQL transaction started with the <code>BeginTransaction</code> operation and
                     commits the changes.
+      operationId: CommitTransaction
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              secretArn:
+                description: The name or ARN of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+              transactionId:
+                description: The identifier of the transaction to end and commit.
+                maxLength: 192
+                type: string
+            required:
+              - resourceArn
+              - secretArn
+              - transactionId
+            type: object
       responses:
         '200':
           description: Success
@@ -362,114 +322,16 @@ paths:
           description: ServiceUnavailableError
           schema:
             $ref: '#/definitions/ServiceUnavailableError'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - resourceArn
-              - secretArn
-              - transactionId
-            properties:
-              resourceArn:
-                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              secretArn:
-                description: The name or ARN of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
-              transactionId:
-                description: The identifier of the transaction to end and commit.
-                type: string
-                maxLength: 192
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /ExecuteSql:
-    post:
-      deprecated: true
-      operationId: ExecuteSql
-      description: |-
-        <p>Runs one or more SQL statements.</p>
-                <important>
-                    <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or
-                            <code>ExecuteStatement</code> operation.</p>
-                </important>
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ExecuteSqlResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ServiceUnavailableError
-          schema:
-            $ref: '#/definitions/ServiceUnavailableError'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - awsSecretStoreArn
-              - dbClusterOrInstanceArn
-              - sqlStatements
-            properties:
-              awsSecretStoreArn:
-                description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
-              database:
-                description: The name of the database.
-                type: string
-                maxLength: 64
-              dbClusterOrInstanceArn:
-                description: The ARN of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              schema:
-                description: The name of the database schema.
-                type: string
-                maxLength: 64
-              sqlStatements:
-                description: |-
-                  <p>One or more SQL statements to run on the DB cluster.</p>
-                          <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
-                              statement is permitted, including data definition, data manipulation, and commit
-                              statements. </p>
-                type: string
-                maxLength: 65536
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /Execute:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: ExecuteStatement
       description: |-
         <p>Runs a SQL statement against a database.</p>
                 <important>    
@@ -478,6 +340,65 @@ paths:
                         committed automatically.</p>    
                 </important>
                 <p>The response size limit is 1 MB or 1,000 records. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated.</p>
+      operationId: ExecuteStatement
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              continueAfterTimeout:
+                description: |-
+                  <p>A value that indicates whether to continue running the statement after 
+                              the call times out. By default, the statement stops running when the call 
+                              times out.</p>
+                          <important>
+                              <p>For DDL statements, we recommend continuing to run the statement after 
+                                 the call times out. When a DDL statement terminates before it is finished 
+                                 running, it can result in errors and possibly corrupted data structures.</p>
+                          </important>
+                type: boolean
+              database:
+                description: The name of the database.
+                maxLength: 64
+                type: string
+              includeResultMetadata:
+                description: A value that indicates whether to include metadata in the results.
+                type: boolean
+              parameters:
+                description: The parameters for the SQL statement.
+                items:
+                  $ref: '#/definitions/SqlParameter'
+                type: array
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              schema:
+                description: The name of the database schema.
+                maxLength: 64
+                type: string
+              secretArn:
+                description: The name or ARN of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+              sql:
+                description: The SQL statement to run.
+                maxLength: 65536
+                type: string
+              transactionId:
+                description: |-
+                  <p>The identifier of a transaction that was started by using the
+                                  <code>BeginTransaction</code> operation. Specify the transaction ID of the
+                              transaction that you want to include the SQL statement in.</p>
+                          <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
+                maxLength: 192
+                type: string
+            required:
+              - resourceArn
+              - secretArn
+              - sql
+            type: object
       responses:
         '200':
           description: Success
@@ -503,64 +424,7 @@ paths:
           description: StatementTimeoutException
           schema:
             $ref: '#/definitions/StatementTimeoutException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - resourceArn
-              - secretArn
-              - sql
-            properties:
-              continueAfterTimeout:
-                description: |-
-                  <p>A value that indicates whether to continue running the statement after 
-                              the call times out. By default, the statement stops running when the call 
-                              times out.</p>
-                          <important>
-                              <p>For DDL statements, we recommend continuing to run the statement after 
-                                 the call times out. When a DDL statement terminates before it is finished 
-                                 running, it can result in errors and possibly corrupted data structures.</p>
-                          </important>
-                type: boolean
-              database:
-                description: The name of the database.
-                type: string
-                maxLength: 64
-              includeResultMetadata:
-                description: A value that indicates whether to include metadata in the results.
-                type: boolean
-              parameters:
-                description: The parameters for the SQL statement.
-                type: array
-                items:
-                  $ref: '#/definitions/SqlParameter'
-              resourceArn:
-                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              schema:
-                description: The name of the database schema.
-                type: string
-                maxLength: 64
-              secretArn:
-                description: The name or ARN of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
-              sql:
-                description: The SQL statement to run.
-                type: string
-                maxLength: 65536
-              transactionId:
-                description: |-
-                  <p>The identifier of a transaction that was started by using the
-                                  <code>BeginTransaction</code> operation. Specify the transaction ID of the
-                              transaction that you want to include the SQL statement in.</p>
-                          <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
-                type: string
-                maxLength: 192
+  /ExecuteSql:
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -569,10 +433,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /RollbackTransaction:
     post:
-      operationId: RollbackTransaction
+      deprecated: true
+      description: |-
+        <p>Runs one or more SQL statements.</p>
+                <important>
+                    <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or
+                            <code>ExecuteStatement</code> operation.</p>
+                </important>
+      operationId: ExecuteSql
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              awsSecretStoreArn:
+                description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+              database:
+                description: The name of the database.
+                maxLength: 64
+                type: string
+              dbClusterOrInstanceArn:
+                description: The ARN of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              schema:
+                description: The name of the database schema.
+                maxLength: 64
+                type: string
+              sqlStatements:
+                description: |-
+                  <p>One or more SQL statements to run on the DB cluster.</p>
+                          <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
+                              statement is permitted, including data definition, data manipulation, and commit
+                              statements. </p>
+                maxLength: 65536
+                type: string
+            required:
+              - awsSecretStoreArn
+              - dbClusterOrInstanceArn
+              - sqlStatements
+            type: object
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExecuteSqlResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ServiceUnavailableError
+          schema:
+            $ref: '#/definitions/ServiceUnavailableError'
+  /RollbackTransaction:
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
       description: Performs a rollback of a transaction. Rolling back a transaction cancels its changes.
+      operationId: RollbackTransaction
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              resourceArn:
+                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                maxLength: 100
+                type: string
+              secretArn:
+                description: The name or ARN of the secret that enables access to the DB cluster.
+                maxLength: 100
+                type: string
+              transactionId:
+                description: The identifier of the transaction to roll back.
+                maxLength: 192
+                type: string
+            required:
+              - resourceArn
+              - secretArn
+              - transactionId
+            type: object
       responses:
         '200':
           description: Success
@@ -598,179 +558,19 @@ paths:
           description: ServiceUnavailableError
           schema:
             $ref: '#/definitions/ServiceUnavailableError'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            required:
-              - resourceArn
-              - secretArn
-              - transactionId
-            properties:
-              resourceArn:
-                description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                type: string
-                maxLength: 100
-              secretArn:
-                description: The name or ARN of the secret that enables access to the DB cluster.
-                type: string
-                maxLength: 100
-              transactionId:
-                description: The identifier of the transaction to roll back.
-                type: string
-                maxLength: 192
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  BatchExecuteStatementResponse:
-    type: object
-    properties:
-      updateResults:
-        $ref: '#/definitions/UpdateResults'
-        description: The execution results of each batch entry.
-    description: |-
-      The response elements represent the output of a SQL statement over an array of
-                  data.
-  SqlParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/SqlParameter'
-  BadRequestException: {}
-  ForbiddenException: {}
-  InternalServerErrorException: {}
-  ServiceUnavailableError: {}
-  StatementTimeoutException: {}
-  BeginTransactionResponse:
-    type: object
-    properties:
-      transactionId:
-        $ref: '#/definitions/Id'
-        description: The transaction ID of the transaction started by the call.
-    description: |-
-      The response elements represent the output of a request to start a SQL
-                  transaction.
-  CommitTransactionResponse:
-    type: object
-    properties:
-      transactionStatus:
-        $ref: '#/definitions/TransactionStatus'
-        description: The status of the commit operation.
-    description: The response elements represent the output of a commit transaction request.
-  NotFoundException: {}
-  ExecuteSqlResponse:
-    type: object
-    properties:
-      sqlStatementResults:
-        $ref: '#/definitions/SqlStatementResults'
-        description: The results of the SQL statement or statements.
-    description: |-
-      The response elements represent the output of a request to run one or more SQL
-                  statements.
-  ExecuteStatementResponse:
-    type: object
-    properties:
-      columnMetadata:
-        $ref: '#/definitions/Metadata'
-        description: Metadata for the columns included in the results.
-      generatedFields:
-        $ref: '#/definitions/FieldList'
-        description: Values for fields generated during the request.
-      numberOfRecordsUpdated:
-        $ref: '#/definitions/RecordsUpdated'
-        description: The number of records updated by the request.
-      records:
-        $ref: '#/definitions/SqlRecords'
-        description: The records returned by the SQL statement.
-    description: |-
-      The response elements represent the output of a request to run a SQL statement against
-                  a database.
-  SqlParameter:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ParameterName'
-        description: The name of the parameter.
-      value:
-        $ref: '#/definitions/Field'
-        description: The value of the parameter.
-    description: A parameter used in a SQL statement.
-  RollbackTransactionResponse:
-    type: object
-    properties:
-      transactionStatus:
-        $ref: '#/definitions/TransactionStatus'
-        description: The status of the rollback operation.
-    description: |-
-      The response elements represent the output of a request to perform a rollback of a
-                  transaction.
-  SqlStatementResult:
-    type: object
-    properties:
-      numberOfRecordsUpdated:
-        $ref: '#/definitions/RecordsUpdated'
-        description: The number of records updated by a SQL statement.
-      resultFrame:
-        $ref: '#/definitions/ResultFrame'
-        description: The result set of the SQL statement.
-    description: The result of a SQL statement.
-  SqlStatementResults:
-    type: array
-    items:
-      $ref: '#/definitions/SqlStatementResult'
-  Records:
-    type: array
-    items:
-      $ref: '#/definitions/Record'
-  ResultSetMetadata:
-    type: object
-    properties:
-      columnCount:
-        $ref: '#/definitions/Long'
-        description: The number of columns in the result set.
-      columnMetadata:
-        $ref: '#/definitions/Metadata'
-        description: The metadata of the columns in the result set.
-    description: The metadata of the result set returned by a SQL statement.
-  ResultFrame:
-    type: object
-    properties:
-      records:
-        $ref: '#/definitions/Records'
-        description: The records in the result set.
-      resultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: The result-set metadata in the result set.
-    description: The result set returned by a SQL statement.
-  SqlParameterSets:
-    type: array
-    items:
-      $ref: '#/definitions/SqlParametersList'
-  DbName:
-    type: string
-    maxLength: 64
   Arn:
-    type: string
     maxLength: 100
-  SqlStatement:
     type: string
-    maxLength: 65536
-  Id:
-    type: string
-    maxLength: 192
+  ArrayValueList:
+    items:
+      $ref: '#/definitions/Value'
+    type: array
+  BadRequestException: {}
   BatchExecuteStatementRequest:
-    type: object
-    required:
-      - resourceArn
-      - secretArn
-      - sql
+    description: |-
+      The request parameters represent the input of a SQL statement over an array of
+                  data.
     properties:
       database:
         $ref: '#/definitions/DbName'
@@ -798,189 +598,68 @@ definitions:
                       transaction that you want to include the SQL statement in.</p>
                   <p>If the SQL statement is not part of a transaction, don't set this
                       parameter.</p>
-    description: |-
-      The request parameters represent the input of a SQL statement over an array of
-                  data.
-  Value:
-    type: object
-    properties:
-      arrayValues:
-        $ref: '#/definitions/ArrayValueList'
-        description: An array of column values.
-      bigIntValue:
-        $ref: '#/definitions/BoxedLong'
-        description: A value for a column of big integer data type.
-      bitValue:
-        $ref: '#/definitions/BoxedBoolean'
-        description: A value for a column of BIT data type.
-      blobValue:
-        $ref: '#/definitions/Blob'
-        description: A value for a column of BLOB data type.
-      doubleValue:
-        $ref: '#/definitions/BoxedDouble'
-        description: A value for a column of double data type.
-      intValue:
-        $ref: '#/definitions/BoxedInteger'
-        description: A value for a column of integer data type.
-      isNull:
-        $ref: '#/definitions/BoxedBoolean'
-        description: A NULL value.
-      realValue:
-        $ref: '#/definitions/BoxedFloat'
-        description: A value for a column of real data type.
-      stringValue:
-        $ref: '#/definitions/String'
-        description: A value for a column of string data type.
-      structValue:
-        $ref: '#/definitions/StructValue'
-        description: A value for a column of STRUCT data type.
-    description: Contains the value of a column.
-  ArrayValueList:
-    type: array
-    items:
-      $ref: '#/definitions/Value'
-  UpdateResult:
-    type: object
-    properties:
-      generatedFields:
-        $ref: '#/definitions/FieldList'
-        description: Values for fields generated during the request.
-    description: The response elements represent the results of an update.
-  UpdateResults:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateResult'
-  Row:
-    type: array
-    items:
-      $ref: '#/definitions/Value'
-  FieldList:
-    type: array
-    items:
-      $ref: '#/definitions/Field'
-  SqlRecords:
-    type: array
-    items:
-      $ref: '#/definitions/FieldList'
-  Long:
-    type: integer
-  BoxedInteger:
-    type: integer
-  TransactionStatus:
-    type: string
-    maxLength: 128
-  Integer:
-    type: integer
-  BoxedLong:
-    type: integer
-  ParameterName:
-    type: string
-  Field:
-    type: object
-    properties:
-      blobValue:
-        $ref: '#/definitions/Blob'
-        description: A value of BLOB data type.
-      booleanValue:
-        $ref: '#/definitions/BoxedBoolean'
-        description: A value of Boolean data type.
-      doubleValue:
-        $ref: '#/definitions/BoxedDouble'
-        description: A value of double data type.
-      isNull:
-        $ref: '#/definitions/BoxedBoolean'
-        description: A NULL value.
-      longValue:
-        $ref: '#/definitions/BoxedLong'
-        description: A value of long data type.
-      stringValue:
-        $ref: '#/definitions/String'
-        description: A value of string data type.
-    description: Contains a value.
-  Blob:
-    type: string
-  BoxedBoolean:
-    type: boolean
-  BoxedDouble:
-    type: number
-    format: double
-  String:
-    type: string
-  ExecuteSqlRequest:
-    type: object
-    required:
-      - awsSecretStoreArn
-      - dbClusterOrInstanceArn
-      - sqlStatements
-    properties:
-      awsSecretStoreArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
-      database:
-        $ref: '#/definitions/DbName'
-        description: The name of the database.
-      dbClusterOrInstanceArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the Aurora Serverless DB cluster.
-      schema:
-        $ref: '#/definitions/DbName'
-        description: The name of the database schema.
-      sqlStatements:
-        $ref: '#/definitions/SqlStatement'
-        description: |-
-          <p>One or more SQL statements to run on the DB cluster.</p>
-                  <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
-                      statement is permitted, including data definition, data manipulation, and commit
-                      statements. </p>
-    description: |-
-      The request parameters represent the input of a request to run one or more SQL
-                  statements.
-  StructValue:
-    type: object
-    properties:
-      attributes:
-        $ref: '#/definitions/ArrayValueList'
-        description: The attributes returned in the record.
-    description: A structure value returned by a call.
-  Boolean:
-    type: boolean
-  RollbackTransactionRequest:
-    type: object
     required:
       - resourceArn
       - secretArn
-      - transactionId
+      - sql
+    type: object
+  BatchExecuteStatementResponse:
+    description: |-
+      The response elements represent the output of a SQL statement over an array of
+                  data.
     properties:
+      updateResults:
+        $ref: '#/definitions/UpdateResults'
+        description: The execution results of each batch entry.
+    type: object
+  BeginTransactionRequest:
+    description: |-
+      The request parameters represent the input of a request to start a SQL
+                  transaction.
+    properties:
+      database:
+        $ref: '#/definitions/DbName'
+        description: The name of the database.
       resourceArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+      schema:
+        $ref: '#/definitions/DbName'
+        description: The name of the database schema.
       secretArn:
         $ref: '#/definitions/Arn'
         description: The name or ARN of the secret that enables access to the DB cluster.
+    required:
+      - resourceArn
+      - secretArn
+    type: object
+  BeginTransactionResponse:
+    description: |-
+      The response elements represent the output of a request to start a SQL
+                  transaction.
+    properties:
       transactionId:
         $ref: '#/definitions/Id'
-        description: The identifier of the transaction to roll back.
-    description: |-
-      The request parameters represent the input of a request to perform a rollback of a
-                  transaction.
-  Record:
+        description: The transaction ID of the transaction started by the call.
     type: object
-    properties:
-      values:
-        $ref: '#/definitions/Row'
-        description: The values returned in the record.
-    description: A record returned by a call.
-  BoxedFloat:
+  Blob:
+    type: string
+  Boolean:
+    type: boolean
+  BoxedBoolean:
+    type: boolean
+  BoxedDouble:
+    format: double
     type: number
+  BoxedFloat:
     format: float
-  Metadata:
-    type: array
-    items:
-      $ref: '#/definitions/ColumnMetadata'
-  RecordsUpdated:
+    type: number
+  BoxedInteger:
+    type: integer
+  BoxedLong:
     type: integer
   ColumnMetadata:
-    type: object
+    description: Contains the metadata for a column.
     properties:
       arrayBaseColumnType:
         $ref: '#/definitions/Integer'
@@ -1024,34 +703,76 @@ definitions:
       typeName:
         $ref: '#/definitions/String'
         description: The database-specific data type of the column.
-    description: Contains the metadata for a column.
-  BeginTransactionRequest:
     type: object
-    required:
-      - resourceArn
-      - secretArn
+  CommitTransactionRequest:
+    description: The request parameters represent the input of a commit transaction request.
     properties:
-      database:
-        $ref: '#/definitions/DbName'
-        description: The name of the database.
       resourceArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-      schema:
-        $ref: '#/definitions/DbName'
-        description: The name of the database schema.
       secretArn:
         $ref: '#/definitions/Arn'
         description: The name or ARN of the secret that enables access to the DB cluster.
-    description: |-
-      The request parameters represent the input of a request to start a SQL
-                  transaction.
-  ExecuteStatementRequest:
-    type: object
+      transactionId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the transaction to end and commit.
     required:
       - resourceArn
       - secretArn
-      - sql
+      - transactionId
+    type: object
+  CommitTransactionResponse:
+    description: The response elements represent the output of a commit transaction request.
+    properties:
+      transactionStatus:
+        $ref: '#/definitions/TransactionStatus'
+        description: The status of the commit operation.
+    type: object
+  DbName:
+    maxLength: 64
+    type: string
+  ExecuteSqlRequest:
+    description: |-
+      The request parameters represent the input of a request to run one or more SQL
+                  statements.
+    properties:
+      awsSecretStoreArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
+      database:
+        $ref: '#/definitions/DbName'
+        description: The name of the database.
+      dbClusterOrInstanceArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the Aurora Serverless DB cluster.
+      schema:
+        $ref: '#/definitions/DbName'
+        description: The name of the database schema.
+      sqlStatements:
+        $ref: '#/definitions/SqlStatement'
+        description: |-
+          <p>One or more SQL statements to run on the DB cluster.</p>
+                  <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
+                      statement is permitted, including data definition, data manipulation, and commit
+                      statements. </p>
+    required:
+      - awsSecretStoreArn
+      - dbClusterOrInstanceArn
+      - sqlStatements
+    type: object
+  ExecuteSqlResponse:
+    description: |-
+      The response elements represent the output of a request to run one or more SQL
+                  statements.
+    properties:
+      sqlStatementResults:
+        $ref: '#/definitions/SqlStatementResults'
+        description: The results of the SQL statement or statements.
+    type: object
+  ExecuteStatementRequest:
+    description: |-
+      The request parameters represent the input of a request to run a SQL statement against
+                  a database.
     properties:
       continueAfterTimeout:
         $ref: '#/definitions/Boolean'
@@ -1092,15 +813,108 @@ definitions:
                           <code>BeginTransaction</code> operation. Specify the transaction ID of the
                       transaction that you want to include the SQL statement in.</p>
                   <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
-    description: |-
-      The request parameters represent the input of a request to run a SQL statement against
-                  a database.
-  CommitTransactionRequest:
-    type: object
     required:
       - resourceArn
       - secretArn
-      - transactionId
+      - sql
+    type: object
+  ExecuteStatementResponse:
+    description: |-
+      The response elements represent the output of a request to run a SQL statement against
+                  a database.
+    properties:
+      columnMetadata:
+        $ref: '#/definitions/Metadata'
+        description: Metadata for the columns included in the results.
+      generatedFields:
+        $ref: '#/definitions/FieldList'
+        description: Values for fields generated during the request.
+      numberOfRecordsUpdated:
+        $ref: '#/definitions/RecordsUpdated'
+        description: The number of records updated by the request.
+      records:
+        $ref: '#/definitions/SqlRecords'
+        description: The records returned by the SQL statement.
+    type: object
+  Field:
+    description: Contains a value.
+    properties:
+      blobValue:
+        $ref: '#/definitions/Blob'
+        description: A value of BLOB data type.
+      booleanValue:
+        $ref: '#/definitions/BoxedBoolean'
+        description: A value of Boolean data type.
+      doubleValue:
+        $ref: '#/definitions/BoxedDouble'
+        description: A value of double data type.
+      isNull:
+        $ref: '#/definitions/BoxedBoolean'
+        description: A NULL value.
+      longValue:
+        $ref: '#/definitions/BoxedLong'
+        description: A value of long data type.
+      stringValue:
+        $ref: '#/definitions/String'
+        description: A value of string data type.
+    type: object
+  FieldList:
+    items:
+      $ref: '#/definitions/Field'
+    type: array
+  ForbiddenException: {}
+  Id:
+    maxLength: 192
+    type: string
+  Integer:
+    type: integer
+  InternalServerErrorException: {}
+  Long:
+    type: integer
+  Metadata:
+    items:
+      $ref: '#/definitions/ColumnMetadata'
+    type: array
+  NotFoundException: {}
+  ParameterName:
+    type: string
+  Record:
+    description: A record returned by a call.
+    properties:
+      values:
+        $ref: '#/definitions/Row'
+        description: The values returned in the record.
+    type: object
+  Records:
+    items:
+      $ref: '#/definitions/Record'
+    type: array
+  RecordsUpdated:
+    type: integer
+  ResultFrame:
+    description: The result set returned by a SQL statement.
+    properties:
+      records:
+        $ref: '#/definitions/Records'
+        description: The records in the result set.
+      resultSetMetadata:
+        $ref: '#/definitions/ResultSetMetadata'
+        description: The result-set metadata in the result set.
+    type: object
+  ResultSetMetadata:
+    description: The metadata of the result set returned by a SQL statement.
+    properties:
+      columnCount:
+        $ref: '#/definitions/Long'
+        description: The number of columns in the result set.
+      columnMetadata:
+        $ref: '#/definitions/Metadata'
+        description: The metadata of the columns in the result set.
+    type: object
+  RollbackTransactionRequest:
+    description: |-
+      The request parameters represent the input of a request to perform a rollback of a
+                  transaction.
     properties:
       resourceArn:
         $ref: '#/definitions/Arn'
@@ -1110,5 +924,191 @@ definitions:
         description: The name or ARN of the secret that enables access to the DB cluster.
       transactionId:
         $ref: '#/definitions/Id'
-        description: The identifier of the transaction to end and commit.
-    description: The request parameters represent the input of a commit transaction request.
+        description: The identifier of the transaction to roll back.
+    required:
+      - resourceArn
+      - secretArn
+      - transactionId
+    type: object
+  RollbackTransactionResponse:
+    description: |-
+      The response elements represent the output of a request to perform a rollback of a
+                  transaction.
+    properties:
+      transactionStatus:
+        $ref: '#/definitions/TransactionStatus'
+        description: The status of the rollback operation.
+    type: object
+  Row:
+    items:
+      $ref: '#/definitions/Value'
+    type: array
+  ServiceUnavailableError: {}
+  SqlParameter:
+    description: A parameter used in a SQL statement.
+    properties:
+      name:
+        $ref: '#/definitions/ParameterName'
+        description: The name of the parameter.
+      value:
+        $ref: '#/definitions/Field'
+        description: The value of the parameter.
+    type: object
+  SqlParameterSets:
+    items:
+      $ref: '#/definitions/SqlParametersList'
+    type: array
+  SqlParametersList:
+    items:
+      $ref: '#/definitions/SqlParameter'
+    type: array
+  SqlRecords:
+    items:
+      $ref: '#/definitions/FieldList'
+    type: array
+  SqlStatement:
+    maxLength: 65536
+    type: string
+  SqlStatementResult:
+    description: The result of a SQL statement.
+    properties:
+      numberOfRecordsUpdated:
+        $ref: '#/definitions/RecordsUpdated'
+        description: The number of records updated by a SQL statement.
+      resultFrame:
+        $ref: '#/definitions/ResultFrame'
+        description: The result set of the SQL statement.
+    type: object
+  SqlStatementResults:
+    items:
+      $ref: '#/definitions/SqlStatementResult'
+    type: array
+  StatementTimeoutException: {}
+  String:
+    type: string
+  StructValue:
+    description: A structure value returned by a call.
+    properties:
+      attributes:
+        $ref: '#/definitions/ArrayValueList'
+        description: The attributes returned in the record.
+    type: object
+  TransactionStatus:
+    maxLength: 128
+    type: string
+  UpdateResult:
+    description: The response elements represent the results of an update.
+    properties:
+      generatedFields:
+        $ref: '#/definitions/FieldList'
+        description: Values for fields generated during the request.
+    type: object
+  UpdateResults:
+    items:
+      $ref: '#/definitions/UpdateResult'
+    type: array
+  Value:
+    description: Contains the value of a column.
+    properties:
+      arrayValues:
+        $ref: '#/definitions/ArrayValueList'
+        description: An array of column values.
+      bigIntValue:
+        $ref: '#/definitions/BoxedLong'
+        description: A value for a column of big integer data type.
+      bitValue:
+        $ref: '#/definitions/BoxedBoolean'
+        description: A value for a column of BIT data type.
+      blobValue:
+        $ref: '#/definitions/Blob'
+        description: A value for a column of BLOB data type.
+      doubleValue:
+        $ref: '#/definitions/BoxedDouble'
+        description: A value for a column of double data type.
+      intValue:
+        $ref: '#/definitions/BoxedInteger'
+        description: A value for a column of integer data type.
+      isNull:
+        $ref: '#/definitions/BoxedBoolean'
+        description: A NULL value.
+      realValue:
+        $ref: '#/definitions/BoxedFloat'
+        description: A value for a column of real data type.
+      stringValue:
+        $ref: '#/definitions/String'
+        description: A value for a column of string data type.
+      structValue:
+        $ref: '#/definitions/StructValue'
+        description: A value for a column of STRUCT data type.
+    type: object
+x-servers:
+  - description: The AWS RDS DataService multi-region endpoint
+    url: 'http://rds-data.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS RDS DataService multi-region endpoint
+    url: 'https://rds-data.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS RDS DataService endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://rds-data.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AWS RDS DataService endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://rds-data.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

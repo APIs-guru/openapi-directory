@@ -144,7 +144,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateLinkServiceListResult'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -391,7 +391,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateLinkServiceListResult'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -545,7 +545,7 @@ paths:
         '204':
           description: Delete successful.
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -627,7 +627,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateLinkService'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -724,7 +724,7 @@ paths:
           name: serviceName
           required: true
           type: string
-        - description: Parameters supplied to the create or update private link service operation
+        - description: Parameters supplied to the create or update private link service operation.
           in: body
           name: parameters
           required: true
@@ -750,7 +750,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateLinkService'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -924,7 +924,7 @@ paths:
         '204':
           description: Delete successful.
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -1013,7 +1013,7 @@ paths:
           schema:
             $ref: '#/definitions/PrivateEndpointConnection'
         default:
-          description: Error
+          description: Error.
           schema:
             description: Common error representation.
             properties:
@@ -1109,6 +1109,10 @@ definitions:
         x-ms-azure-resource: true
     description: PrivateEndpointConnection resource.
     properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        readOnly: true
+        type: string
       name:
         description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
         type: string
@@ -1116,6 +1120,10 @@ definitions:
         $ref: '#/definitions/PrivateEndpointConnectionProperties'
         description: Properties of the private end point connection.
         x-ms-client-flatten: true
+      type:
+        description: The resource type.
+        readOnly: true
+        type: string
   PrivateEndpointConnectionProperties:
     description: Properties of the PrivateEndpointConnectProperties.
     properties:
@@ -1146,7 +1154,7 @@ definitions:
         description: Private endpoint resource.
         properties:
           etag:
-            description: Gets a unique read-only string that changes whenever the resource is updated.
+            description: A unique read-only string that changes whenever the resource is updated.
             type: string
           properties:
             $ref: '#/definitions/PrivateEndpointProperties'
@@ -1155,6 +1163,18 @@ definitions:
       privateLinkServiceConnectionState:
         $ref: '#/definitions/PrivateLinkServiceConnectionState'
         description: A collection of information about the state of the connection between service consumer and provider.
+      provisioningState:
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
   PrivateEndpointProperties: {}
   PrivateLinkService:
     allOf:
@@ -1183,7 +1203,7 @@ definitions:
     description: Private link service resource.
     properties:
       etag:
-        description: Gets a unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is updated.
         type: string
       properties:
         $ref: '#/definitions/PrivateLinkServiceProperties'
@@ -1202,8 +1222,19 @@ definitions:
         description: Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
         type: string
   PrivateLinkServiceIpConfiguration:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
     description: The private link service ip configuration.
     properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        readOnly: true
+        type: string
       name:
         description: The name of private link service ip configuration.
         type: string
@@ -1211,9 +1242,16 @@ definitions:
         $ref: '#/definitions/PrivateLinkServiceIpConfigurationProperties'
         description: Properties of the private link service ip configuration.
         x-ms-client-flatten: true
+      type:
+        description: The resource type.
+        readOnly: true
+        type: string
   PrivateLinkServiceIpConfigurationProperties:
     description: Properties of private link service IP configuration.
     properties:
+      primary:
+        description: Whether the ip configuration is primary or not.
+        type: boolean
       privateIPAddress:
         description: The private IP address of the IP configuration.
         type: string
@@ -1236,58 +1274,17 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: 'Gets the provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
         type: string
-      publicIPAddress:
-        allOf:
-          - description: Common resource representation.
-            properties:
-              id:
-                description: Resource ID.
-                type: string
-              location:
-                description: Resource location.
-                type: string
-              name:
-                description: Resource name.
-                readOnly: true
-                type: string
-              tags:
-                additionalProperties:
-                  type: string
-                description: Resource tags.
-                type: object
-              type:
-                description: Resource type.
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
-        description: Public IP address resource.
-        properties:
-          etag:
-            description: A unique read-only string that changes whenever the resource is updated.
-            type: string
-          properties:
-            $ref: '#/definitions/PublicIPAddressPropertiesFormat'
-            description: Public IP address properties.
-            x-ms-client-flatten: true
-          sku:
-            description: SKU of a public IP address.
-            properties:
-              name:
-                description: Name of a public IP address SKU.
-                enum:
-                  - Basic
-                  - Standard
-                type: string
-                x-ms-enum:
-                  modelAsString: true
-                  name: PublicIPAddressSkuName
-          zones:
-            description: A list of availability zones denoting the IP allocated for the resource needs to come from.
-            items:
-              type: string
-            type: array
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       subnet:
         allOf:
           - description: Reference to another subresource.
@@ -1412,9 +1409,17 @@ definitions:
           $ref: '#/definitions/PrivateEndpointConnection'
         type: array
       provisioningState:
-        description: 'The provisioning state of the private link service. Possible values are: ''Updating'', ''Succeeded'', and ''Failed''.'
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
         readOnly: true
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       visibility:
         allOf:
           - $ref: '#/definitions/ResourceSet'
@@ -1425,7 +1430,6 @@ definitions:
       visible:
         description: Private Link Service Visibility (True/False).
         type: boolean
-  PublicIPAddressPropertiesFormat: {}
   ResourceSet:
     description: The base resource set for visibility and auto-approval.
     properties:

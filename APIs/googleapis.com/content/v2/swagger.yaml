@@ -2436,7 +2436,7 @@ paths:
       - $ref: '#/parameters/userIp'
     post:
       description: |-
-        Notifies that item return and refund was handled directly by merchant outside of Google payments processing (e.g. cash refund done in store).
+        Deprecated. Notifies that item return and refund was handled directly by merchant outside of Google payments processing (e.g. cash refund done in store).
         Note: We recommend calling the returnrefundlineitem method to refund in-store returns. We will issue the refund directly to the customer. This helps to prevent possible differences arising between merchant and Google transaction records. We also recommend having the point of sale system communicate with Google to ensure that customers do not receive a double refund by first refunding via Google then via an in-store return.
       operationId: content.orders.instorerefundlineitem
       parameters:
@@ -4613,7 +4613,7 @@ definitions:
           type: string
         type: array
       includedDestinations:
-        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in the excluded_destination field.
+        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
         items:
           type: string
         type: array
@@ -5462,7 +5462,7 @@ definitions:
         description: The details of the customer who placed the order.
       deliveryDetails:
         $ref: '#/definitions/OrderDeliveryDetails'
-        description: Delivery details for shipments.
+        description: Delivery details for shipments of type delivery.
       id:
         description: The REST ID of the order. Globally unique.
         type: string
@@ -5589,6 +5589,9 @@ definitions:
         type: boolean
       fullName:
         description: Full name of the customer.
+        type: string
+      invoiceReceivingEmail:
+        description: Email address for receiving merchant issued value-added tax or invoice documentation of this order.
         type: string
       marketingRightsInfo:
         $ref: '#/definitions/OrderCustomerMarketingRightsInfo'
@@ -6000,7 +6003,10 @@ definitions:
           - "chronopost" 
           - "gls" 
           - "dpd" 
-          - "bpost"
+          - "bpost" 
+          - "colis prive" 
+          - "boxtal" 
+          - "geodis"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -8381,7 +8387,7 @@ definitions:
         type: array
       shippingCost:
         $ref: '#/definitions/Price'
-        description: 'The price of shipping for all items. Shipping tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
+        description: 'The price of shipping for all items. Shipping tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
       shippingCostTax:
         $ref: '#/definitions/Price'
         description: Deprecated. Ignored if provided.
@@ -8468,7 +8474,7 @@ definitions:
         type: string
       price:
         $ref: '#/definitions/Price'
-        description: 'The price for the product. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied.'
+        description: 'The price for the product. Tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied.'
       targetCountry:
         description: The CLDR territory code of the target country of the product.
         type: string

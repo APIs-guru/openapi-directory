@@ -21,9 +21,9 @@ info:
       version: '2.0'
   x-providerName: sheerseo.com
 consumes:
-  - application/json
+  - application/json; charset=utf-8
 produces:
-  - application/json
+  - application/json; charset=utf-8
 securityDefinitions:
   ApiKeyAuth:
     in: query

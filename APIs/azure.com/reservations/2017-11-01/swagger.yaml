@@ -390,8 +390,7 @@ paths:
                   sku:
                     name: Standard_DS1_v2
                   type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations':
     get:
@@ -620,8 +619,7 @@ paths:
                 sku:
                   name: Standard_DS1_v2
                 type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/revisions':
     get:
@@ -842,8 +840,7 @@ paths:
                   sku:
                     name: Standard_DS1_v2
                   type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations':
     get:

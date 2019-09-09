@@ -1660,7 +1660,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/User'
-        - description: Host of the user in the instance.
+        - description: 'Host of the user in the instance. For a MySQL instance, it''s required; For a PostgreSQL instance, it''s optional.'
           in: query
           name: host
           type: string
@@ -1873,6 +1873,12 @@ definitions:
       description:
         description: 'The description of this run, only applicable to on-demand backups.'
         type: string
+      diskEncryptionConfiguration:
+        $ref: '#/definitions/DiskEncryptionConfiguration'
+        description: Disk encryption configuration specific to a backup. Applies only to Second Generation instances.
+      diskEncryptionStatus:
+        $ref: '#/definitions/DiskEncryptionStatus'
+        description: Disk encryption status specific to a backup. Applies only to Second Generation instances.
       endTime:
         description: 'The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
         format: date-time
@@ -2327,6 +2333,22 @@ definitions:
   ImportContext:
     description: Database instance import context.
     properties:
+      bakImportOptions:
+        description: Import parameters specific to SQL Server .BAK files
+        properties:
+          encryptionOptions:
+            properties:
+              certPath:
+                description: 'Path to the Certificate (.cer) in Cloud Storage, in the form gs://bucketName/fileName. The instance must have write permissions to the bucket and read access to the file.'
+                type: string
+              pvkPassword:
+                description: Password that encrypts the private key
+                type: string
+              pvkPath:
+                description: 'Path to the Certificate Private Key (.pvk) in Cloud Storage, in the form gs://bucketName/fileName. The instance must have write permissions to the bucket and read access to the file.'
+                type: string
+            type: object
+        type: object
       csvImportOptions:
         description: Options for importing data as CSV.
         properties:

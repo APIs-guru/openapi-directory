@@ -23,6 +23,8 @@ info:
 tags:
   - description: Number of the day. This API is free (rate limited).
     name: Number of the day
+  - description: Get random interesting fact about a given number.
+    name: Number Facts
   - description: Generate Random and interesting numbers.
     name: Number Generation
   - description: 'Spell out a number ordinal, cardinal or currency. This API is free (rate limited).'
@@ -395,6 +397,54 @@ paths:
         - X-Mathtools-Api-Secret: []
       tags:
         - Spell
+  /numbers/fact:
+    get:
+      description: Get a random fact about a number
+      parameters:
+        - description: Number value
+          in: query
+          name: number
+          required: true
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 11,
+                        "fact": "11 is the largest known multiplicative persistence."
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }                    
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Number Facts
   /numbers/is-cube:
     get:
       description: Checks whether a given number is a cube number or not.
@@ -1164,6 +1214,300 @@ paths:
         - X-Mathtools-Api-Secret: []
       tags:
         - Prime
+  /numbers/prime/is-fermat-prime:
+    get:
+      description: Checks whether a given number is a known fermat prime number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 257,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }                    
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
+  /numbers/prime/is-fibonacci-prime:
+    get:
+      description: Checks whether a given number is a known fibonacci prime number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 1597,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }                    
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
+  /numbers/prime/is-mersenne-prime:
+    get:
+      description: Checks whether a given number is a known mersenne prime number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 8191,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
+  /numbers/prime/is-partition-prime:
+    get:
+      description: Checks whether a given number is a known partition prime number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 33461,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
+  /numbers/prime/is-pell-prime:
+    get:
+      description: Checks whether a given number is a known pell prime number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 33461,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    } 
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
+  /numbers/prime/is-perfect:
+    get:
+      description: Checks whether a given number is a perfect number or not.
+      parameters:
+        - description: Number to check
+          in: query
+          name: number
+          required: false
+          schema:
+            format: integer
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 1
+                      },
+                      "copyright": {
+                        "copyright": "2019-21 https://math.tools"
+                      },
+                      "contents": {
+                        "number": 8128,
+                        "answer": true
+                      }
+                    }
+          description: 200 Success response
+        '401':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    } 
+          description: 401 Unauthorized response
+      security:
+        - X-Mathtools-Api-Secret: []
+      tags:
+        - Prime
+        - Number Checks
   /numbers/prime/is-prime:
     get:
       description: Checks whether a given number is a known prime number or not.

@@ -71,7 +71,6 @@ definitions:
     required:
       - commandType
     type: object
-    x-ms-discriminator-value: Unknown
   MigrateMISyncCompleteCommandInput:
     description: Input for command that completes online migration for an Azure SQL Database Managed Instance.
     properties:

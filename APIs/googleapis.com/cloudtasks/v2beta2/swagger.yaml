@@ -125,9 +125,7 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.delete
       parameters:
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -151,9 +149,7 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.get
       parameters:
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -353,9 +349,7 @@ paths:
           schema:
             $ref: '#/definitions/AcknowledgeTaskRequest'
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -402,9 +396,7 @@ paths:
           schema:
             $ref: '#/definitions/CancelLeaseRequest'
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -452,9 +444,7 @@ paths:
           schema:
             $ref: '#/definitions/PauseQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -501,9 +491,7 @@ paths:
           schema:
             $ref: '#/definitions/PurgeQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -549,9 +537,7 @@ paths:
           schema:
             $ref: '#/definitions/RenewLeaseRequest'
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -605,9 +591,7 @@ paths:
           schema:
             $ref: '#/definitions/ResumeQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -675,9 +659,7 @@ paths:
           schema:
             $ref: '#/definitions/RunTaskRequest'
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -743,9 +725,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required.
-
-            The location name.
+            Required. The location name.
             For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           in: path
           name: parent
@@ -797,9 +777,7 @@ paths:
           schema:
             $ref: '#/definitions/Queue'
         - description: |-
-            Required.
-
-            The location name in which the queue will be created.
+            Required. The location name in which the queue will be created.
             For example: `projects/PROJECT_ID/locations/LOCATION_ID`
 
             The list of allowed locations can be obtained by calling Cloud
@@ -862,9 +840,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: parent
@@ -931,9 +907,7 @@ paths:
           schema:
             $ref: '#/definitions/CreateTaskRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
 
             The queue must already exist.
@@ -998,9 +972,7 @@ paths:
           schema:
             $ref: '#/definitions/LeaseTasksRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: parent
@@ -1177,9 +1149,7 @@ definitions:
     properties:
       scheduleTime:
         description: |-
-          Required.
-
-          The task's current schedule time, available in the
+          Required. The task's current schedule time, available in the
           schedule_time returned by
           LeaseTasks response or
           RenewLease response. This restriction is
@@ -1567,7 +1537,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1615,9 +1585,7 @@ definitions:
         type: string
       scheduleTime:
         description: |-
-          Required.
-
-          The task's current schedule time, available in the
+          Required. The task's current schedule time, available in the
           schedule_time returned by
           LeaseTasks response or
           RenewLease response. This restriction is
@@ -1650,9 +1618,7 @@ definitions:
       task:
         $ref: '#/definitions/Task'
         description: |-
-          Required.
-
-          The task to add.
+          Required. The task to add.
 
           Task names have the following format:
           `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -1734,7 +1700,24 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: |-
+          OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          `GetIamPolicy`. This field is only used by Cloud IAM.
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: |-
+          Optional. The policy format version to be returned.
+          Acceptable values are 0, 1, and 3.
+          If the value is 0, or the field is omitted, policy format version 1 will be
+          returned.
+        format: int32
+        type: integer
     type: object
   LeaseTasksRequest:
     description: Request message for leasing tasks using LeaseTasks.
@@ -1773,9 +1756,7 @@ definitions:
         type: string
       leaseDuration:
         description: |-
-          Required.
-
-          The duration of the lease.
+          Required. The duration of the lease.
 
           Each task returned in the response will
           have its schedule_time set to the current
@@ -1993,7 +1974,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:
@@ -2242,9 +2223,7 @@ definitions:
     properties:
       leaseDuration:
         description: |-
-          Required.
-
-          The desired new lease duration, starting from now.
+          Required. The desired new lease duration, starting from now.
 
 
           The maximum lease duration is 1 week.
@@ -2272,9 +2251,7 @@ definitions:
         type: string
       scheduleTime:
         description: |-
-          Required.
-
-          The task's current schedule time, available in the
+          Required. The task's current schedule time, available in the
           schedule_time returned by
           LeaseTasks response or
           RenewLease response. This restriction is

@@ -2783,6 +2783,9 @@ definitions:
       project:
         $ref: '#/definitions/Project'
         readOnly: true
+      sslCheckingDisabled:
+        readOnly: true
+        type: boolean
       stats:
         items:
           type: string
@@ -2868,17 +2871,21 @@ definitions:
         type: integer
       project:
         type: string
+      sslCheckingDisabled:
+        type: boolean
     required:
       - project
       - firstUrl
       - concurrency
       - maxUrls
       - includeSubdomain
+      - sslCheckingDisabled
     type: object
   CrawlUrl-Read:
     description: ''
     properties:
       depth: {}
+      error: {}
       id: {}
       statusCode: {}
       title: {}

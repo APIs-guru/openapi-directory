@@ -867,10 +867,8 @@ paths:
             x-ms-client-request-id:
               - 39272b77-a3c6-4cea-8476-9177cb4020d5
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Gets information about the specified job.
@@ -1398,8 +1396,7 @@ paths:
                   name: DataBox
                 tags: {}
                 type: Microsoft.DataBox/jobs
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
     put:
       description: Creates a new job with the specified parameters. Existing job cannot be updated with this API and should instead be updated with the Update job API.
@@ -1484,8 +1481,7 @@ paths:
                   name: DataBox
                 tags: {}
                 type: Microsoft.DataBox/jobs
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp':
     post:
@@ -1578,8 +1574,7 @@ paths:
             x-ms-client-request-id:
               - 71d282dc-56a0-402b-a322-3b50c89711b5
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials':
     post:
       description: This method gets the unencrypted secrets related to the job.

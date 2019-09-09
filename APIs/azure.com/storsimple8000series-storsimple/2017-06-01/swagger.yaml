@@ -1135,8 +1135,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '200':
-              body: ''
+            '200': {}
             '204': {}
     get:
       deprecated: false
@@ -1368,8 +1367,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -1455,9 +1453,15 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"initiatorName\": \"iqn.2017-06.com.contoso:ForTest\",\r\n    \"volumeCount\": 0\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/accessControlRecords/ACRForTest\",\r\n  \"name\": \"ACRForTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/accessControlRecords\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/accessControlRecords/ACRForTest
+                kind: Series8000
+                name: ACRForTest
+                properties:
+                  initiatorName: 'iqn.2017-06.com.contoso:ForTest'
+                  volumeCount: 0
+                type: Microsoft.StorSimple/managers/accessControlRecords
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/alerts':
     get:
@@ -1678,8 +1682,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -1806,9 +1809,27 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"schedules\": [\r\n      {\r\n        \"start\": {\r\n          \"hours\": 10,\r\n          \"minutes\": 0,\r\n          \"seconds\": 0\r\n        },\r\n        \"stop\": {\r\n          \"hours\": 20,\r\n          \"minutes\": 0,\r\n          \"seconds\": 0\r\n        },\r\n        \"rateInMbps\": 10,\r\n        \"days\": [\r\n          \"Saturday\",\r\n          \"Sunday\"\r\n        ]\r\n      }\r\n    ],\r\n    \"volumeCount\": 0\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/bandwidthSettings/BWSForTest\",\r\n  \"name\": \"BWSForTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/bandwidthSettings\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/bandwidthSettings/BWSForTest
+                kind: Series8000
+                name: BWSForTest
+                properties:
+                  schedules:
+                    - days:
+                        - Saturday
+                        - Sunday
+                      rateInMbps: 10
+                      start:
+                        hours: 10
+                        minutes: 0
+                        seconds: 0
+                      stop:
+                        hours: 20
+                        minutes: 0
+                        seconds: 0
+                  volumeCount: 0
+                type: Microsoft.StorSimple/managers/bandwidthSettings
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/clearAlerts':
     post:
@@ -1844,8 +1865,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/cloudApplianceConfigurations':
     get:
       deprecated: false
@@ -1976,8 +1996,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices':
@@ -2124,8 +2143,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -2336,9 +2354,17 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"emailNotification\": \"Enabled\",\r\n    \"alertNotificationCulture\": \"en-US\",\r\n    \"notificationToServiceOwners\": \"Enabled\",\r\n    \"additionalRecipientEmailList\": []\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/alertSettings/default\",\r\n  \"name\": \"default\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/alertSettings\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/alertSettings/default
+                kind: Series8000
+                name: default
+                properties:
+                  additionalRecipientEmailList: []
+                  alertNotificationCulture: en-US
+                  emailNotification: Enabled
+                  notificationToServiceOwners: Enabled
+                type: Microsoft.StorSimple/managers/devices/alertSettings
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/authorizeForServiceEncryptionKeyRollover':
     post:
@@ -2365,8 +2391,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies':
     get:
       deprecated: false
@@ -2462,8 +2487,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -2560,9 +2584,19 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"volumeIds\": [\r\n      \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/Clonedvolume1\",\r\n      \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/volume1\"\r\n    ],\r\n    \"schedulesCount\": 0,\r\n    \"scheduledBackupStatus\": \"Disabled\",\r\n    \"backupPolicyCreationType\": \"BySaaS\"\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/backupPolicies/BkUpPolicy01ForSDKTest\",\r\n  \"name\": \"BkUpPolicy01ForSDKTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/backupPolicies\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/backupPolicies/BkUpPolicy01ForSDKTest
+                kind: Series8000
+                name: BkUpPolicy01ForSDKTest
+                properties:
+                  backupPolicyCreationType: BySaaS
+                  scheduledBackupStatus: Disabled
+                  schedulesCount: 0
+                  volumeIds:
+                    - /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/Clonedvolume1
+                    - /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/volumeContainerForSDKTest/volumes/volume1
+                type: Microsoft.StorSimple/managers/devices/backupPolicies
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/backup':
     post:
@@ -2605,8 +2639,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/schedules':
@@ -2721,8 +2754,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -2846,9 +2878,24 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"scheduleRecurrence\": {\r\n      \"recurrenceType\": \"Weekly\",\r\n      \"recurrenceValue\": 1,\r\n      \"weeklyDaysList\": [\r\n        \"Monday\",\r\n        \"Thursday\",\r\n        \"Friday\"\r\n      ]\r\n    },\r\n    \"backupType\": \"CloudSnapshot\",\r\n    \"retentionCount\": 1,\r\n    \"startTime\": \"2017-06-24T01:00:00Z\",\r\n    \"scheduleStatus\": \"Enabled\"\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/backupPolicies/BkUpPolicy01ForSDKTest/schedules/schedule2\",\r\n  \"name\": \"schedule2\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/backupPolicies/schedules\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/backupPolicies/BkUpPolicy01ForSDKTest/schedules/schedule2
+                kind: Series8000
+                name: schedule2
+                properties:
+                  backupType: CloudSnapshot
+                  retentionCount: 1
+                  scheduleRecurrence:
+                    recurrenceType: Weekly
+                    recurrenceValue: 1
+                    weeklyDaysList:
+                      - Monday
+                      - Thursday
+                      - Friday
+                  scheduleStatus: Enabled
+                  startTime: '2017-06-24T01:00:00Z'
+                type: Microsoft.StorSimple/managers/devices/backupPolicies/schedules
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups':
     get:
@@ -2976,8 +3023,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/elements/{backupElementName}/clone':
@@ -3042,10 +3088,8 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/restore':
     post:
@@ -3083,10 +3127,8 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate':
     post:
@@ -3116,10 +3158,8 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/hardwareComponentGroups':
     get:
@@ -3211,8 +3251,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/installUpdates':
@@ -3242,8 +3281,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs':
@@ -3436,8 +3474,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/listFailoverSets':
@@ -4187,9 +4224,15 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"encryptionStatus\": \"Enabled\",\r\n    \"keyRolloverStatus\": \"NotRequired\"\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/encryptionSettings/default\",\r\n  \"name\": \"default\",\r\n  \"type\": \"Microsoft.StorSimple/managers/encryptionSettings\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/encryptionSettings/default
+                kind: Series8000
+                name: default
+                properties:
+                  encryptionStatus: Enabled
+                  keyRolloverStatus: NotRequired
+                type: Microsoft.StorSimple/managers/encryptionSettings
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publicEncryptionKey':
     post:
@@ -4248,8 +4291,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default':
@@ -4350,9 +4392,19 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"remoteManagementSettings\": {\r\n      \"remoteManagementMode\": \"HttpsAndHttpEnabled\",\r\n      \"remoteManagementCertificate\": \"\"\r\n    },\r\n    \"chapSettings\": {\r\n      \"initiatorUser\": \"test-initiator-user\",\r\n      \"targetUser\": \"test-target-user\"\r\n    }\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/securitySettings/default\",\r\n  \"name\": \"default\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/securitySettings\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/securitySettings/default
+                kind: Series8000
+                name: default
+                properties:
+                  chapSettings:
+                    initiatorUser: test-initiator-user
+                    targetUser: test-target-user
+                  remoteManagementSettings:
+                    remoteManagementCertificate: ''
+                    remoteManagementMode: HttpsAndHttpEnabled
+                type: Microsoft.StorSimple/managers/devices/securitySettings
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/syncRemoteManagementCertificate':
     post:
@@ -4381,8 +4433,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail':
@@ -4419,8 +4470,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '204':
-              body: ''
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default':
     get:
       deprecated: false
@@ -4500,9 +4550,17 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"timeZone\": \"Pacific Standard Time\",\r\n    \"primaryTimeServer\": \"time.windows.com\",\r\n    \"secondaryTimeServer\": [\r\n      \"8.8.8.8\"\r\n    ]\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/timeSettings/default\",\r\n  \"name\": \"default\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/timeSettings\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/timeSettings/default
+                kind: Series8000
+                name: default
+                properties:
+                  primaryTimeServer: time.windows.com
+                  secondaryTimeServer:
+                    - 8.8.8.8
+                  timeZone: Pacific Standard Time
+                type: Microsoft.StorSimple/managers/devices/timeSettings
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/updateSummary/default':
     get:
@@ -4630,8 +4688,7 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
             volumeContainerName: VolumeContainerForSDKTest
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -4730,9 +4787,19 @@ paths:
             volumeContainerName: VolumeContainerForSDKTest
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"encryptionStatus\": \"Enabled\",\r\n    \"volumeCount\": 1,\r\n    \"storageAccountCredentialId\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/storageAccountCredentials/safortestrecording\",\r\n    \"ownerShipStatus\": \"Owned\",\r\n    \"bandwidthSettingId\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/bandwidthSettings/bandwidthSetting1\",\r\n    \"totalCloudStorageUsageInBytes\": 0\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest\",\r\n  \"name\": \"VolumeContainerForSDKTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/volumeContainers\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest
+                kind: Series8000
+                name: VolumeContainerForSDKTest
+                properties:
+                  bandwidthSettingId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/bandwidthSettings/bandwidthSetting1
+                  encryptionStatus: Enabled
+                  ownerShipStatus: Owned
+                  storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/storageAccountCredentials/safortestrecording
+                  totalCloudStorageUsageInBytes: 0
+                  volumeCount: 1
+                type: Microsoft.StorSimple/managers/devices/volumeContainers
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metrics':
     get:
@@ -5155,8 +5222,7 @@ paths:
             volumeContainerName: VolumeContainerForSDKTest
             volumeName: Volume1ForSDKTest
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -5272,9 +5338,22 @@ paths:
             volumeName: Volume1ForSDKTest
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"sizeInBytes\": 5368709120,\r\n    \"volumeType\": \"Tiered\",\r\n    \"volumeContainerId\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest\",\r\n    \"accessControlRecordIds\": [\r\n      \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/accessControlRecords/ACR2\"\r\n    ],\r\n    \"volumeStatus\": \"Offline\",\r\n    \"operationStatus\": \"None\",\r\n    \"backupStatus\": \"Disabled\",\r\n    \"monitoringStatus\": \"Enabled\"\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest/volumes/Volume1ForSDKTest\",\r\n  \"name\": \"Volume1ForSDKTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/devices/volumeContainers/volumes\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest/volumes/Volume1ForSDKTest
+                kind: Series8000
+                name: Volume1ForSDKTest
+                properties:
+                  accessControlRecordIds:
+                    - /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/accessControlRecords/ACR2
+                  backupStatus: Disabled
+                  monitoringStatus: Enabled
+                  operationStatus: None
+                  sizeInBytes: 5368709120
+                  volumeContainerId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/devices/Device05ForSDKTest/volumeContainers/VolumeContainerForSDKTest
+                  volumeStatus: Offline
+                  volumeType: Tiered
+                type: Microsoft.StorSimple/managers/devices/volumeContainers/volumes
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metrics':
     get:
@@ -5730,8 +5809,7 @@ paths:
             sourceDeviceName: Device05ForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{sourceDeviceName}/listFailoverTargets':
@@ -5875,8 +5953,7 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '204':
-              body: ''
+            '204': {}
     get:
       deprecated: false
       description: Returns the extended information of the specified manager name.
@@ -6466,10 +6543,8 @@ paths:
             resourceGroupName: ResourceGroupForSDKTest
             subscriptionId: d3ebfe71-b7a9-4c57-92b9-68a2afde4de5
           responses:
-            '200':
-              body: ''
-            '202':
-              body: ''
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey':
     post:
@@ -6577,8 +6652,7 @@ paths:
             storageAccountCredentialName: SACForTest
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
-            '202':
-              body: ''
+            '202': {}
             '204': {}
       x-ms-long-running-operation: true
     get:
@@ -6670,9 +6744,16 @@ paths:
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
           responses:
             '200':
-              body: "{\r\n  \"properties\": {\r\n    \"endPoint\": \"blob.core.windows.net\",\r\n    \"sslStatus\": \"Enabled\",\r\n    \"volumesCount\": 0\r\n  },\r\n  \"id\": \"/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/storageAccountCredentials/SACForTest\",\r\n  \"name\": \"SACForTest\",\r\n  \"type\": \"Microsoft.StorSimple/managers/storageAccountCredentials\",\r\n  \"kind\": \"Series8000\"\r\n}"
-            '202':
-              body: ''
+              body:
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.StorSimple/managers/ManagerForSDKTest1/storageAccountCredentials/SACForTest
+                kind: Series8000
+                name: SACForTest
+                properties:
+                  endPoint: blob.core.windows.net
+                  sslStatus: Enabled
+                  volumesCount: 0
+                type: Microsoft.StorSimple/managers/storageAccountCredentials
+            '202': {}
       x-ms-long-running-operation: true
 definitions:
   AccessControlRecord:

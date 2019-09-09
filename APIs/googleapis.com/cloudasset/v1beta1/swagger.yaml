@@ -401,12 +401,6 @@ definitions:
         items:
           type: string
         type: array
-      ignoreChildExemptions:
-        description: |-
-          Specifies whether principals can be exempted for the same LogType in
-          lower-level resource policies. If true, any lower-level exemptions will
-          be ignored.
-        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -687,7 +681,15 @@ definitions:
         format: byte
         type: string
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Policies with any conditional bindings must specify version 3. Policies
+          without any conditional bindings may specify any valid value or leave the
+          field unset.
         format: int32
         type: integer
     type: object

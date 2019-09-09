@@ -236,13 +236,10 @@ paths:
             vaultName: NetSDKTestRsVault
           responses:
             '202':
-              body: null
               headers:
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
-            '204':
-              body: null
-              headers: {}
+            '204': {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers':
     get:
       description: Lists the containers that can be registered to Recovery Services Vault.
@@ -274,6 +271,7 @@ paths:
             $filter: backupManagementType eq 'AzureStorage' and workloadType eq 'AzureFileShare'
             api-version: '2017-07-01'
             fabricName: Azure
+            resourceGroupName: testRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testvault
           responses:
@@ -331,30 +329,18 @@ paths:
         Unregister Protection Container:
           parameters:
             api-version: '2016-12-01'
-            backupFabrics: Azure
-            protectionContainers: VMAppContainer;Compute;testRG;testSQL
+            containerName: storagecontainer;Storage;test-rg;teststorage
+            fabricName: Azure
             resourceGroupName: testRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testVault
           responses:
-            '200':
-              body:
-                friendlyName: testVault
-                id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupOperationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01
-                location: null
-                name: testVault
-                providerName: Microsoft.RecoveryServices
-                resourceGroup: testRg
-                resourceName: testVault
-                resourceType: vaults
-                status:
-                  displayName: null
-                  infoText: null
-                  name: null
-                  operationState: InProgress
-                  severity: null
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                type: null
+            '202':
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Retry-After: 60
+            '204': {}
     get:
       description: Gets details of the specific container registered to your Recovery Services Vault.
       operationId: ProtectionContainers_Get
@@ -385,59 +371,43 @@ paths:
           parameters:
             $filter: backupManagementType eq 'AzureWorkload'
             api-version: '2016-12-01'
-            backupFabrics: Azure
-            protectionContainers: VMAppContainer;Compute;testRG;testSQL
+            containerName: VMAppContainer;Compute;testRG;testSQL
+            fabricName: Azure
             resourceGroupName: testRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testVault
           responses:
             '200':
               body:
-                continuationToken: null
-                resultArray:
-                  - backupManagementType: AzureWorkload
-                    backupReadiness: Success
-                    backupReadinessText: Ready
-                    containerId: null
-                    containerName: null
-                    containerType: VMAppContainer
-                    details: 14 DB(s) Found
-                    friendlyName: testSQL
+                id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
+                name: VMAppContainer;Compute;testRG;testSQL
+                properties:
+                  backupManagementType: AzureWorkload
+                  containerType: VMAppContainer
+                  extendedInfo:
                     hostServerName: testsql
-                    id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
-                    inquiryErrorDetails: null
                     inquiryInfo:
-                      errorDetails:
-                        errorCode: Success
-                        errorString: Not Available
+                      errorDetail:
+                        code: Success
+                        message: Not Available
                         recommendations:
                           - Not Available
-                      status: Success
-                      workloadInquiryDetails:
+                      inquiryDetails:
                         - inquiryValidation:
-                            errorDetails:
-                              errorCode: Success
-                              errorString: Not Available
+                            errorDetail:
+                              code: Success
+                              message: Not Available
                               recommendations:
                                 - Not Available
                             status: Success
                           itemCount: 14
                           type: sql
-                    location: null
-                    name: VMAppContainer;Compute;testRG;testSQL
-                    nodeList: []
-                    providerName: Microsoft.RecoveryServices
-                    registrationStatus: Registered
-                    resourceGroup: testRg
-                    resourceName: testVault
-                    resourceType: vaults
-                    sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
-                    sourceResourceRG: testRG
-                    status: null
-                    subscriptionId: 00000000-0000-0000-0000-000000000000
-                    type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
-                    workloadType: null
-                totalCount: 0
+                      status: Success
+                    nodesList: []
+                  friendlyName: testSQL
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
+                  workloadType: null
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
     put:
       description: "Registers the container with Recovery Services vault.\r\nThis is an asynchronous operation. To track the operation status, use location header to call get latest status of\r\nthe operation."
       operationId: ProtectionContainers_Register
@@ -475,23 +445,53 @@ paths:
         RegisterAzure Storage ProtectionContainers:
           parameters:
             api-version: '2017-07-01'
-            containerName: storagecontainer;Storage;test-rg;teststorage
+            containerName: VMAppContainer;Compute;testRG;testSQL
             fabricName: Azure
             parameters:
               properties:
-                backupManagementType: AzureStorage
-                containerType: StorageContainer
-                friendlyName: teststorage
-                sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorage
+                backupManagementType: AzureWorkload
+                containerType: VMAppContainer
+                friendlyName: testSQL
+                sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
             resourceGroupName: test-rg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testvault
           responses:
+            '200':
+              body:
+                id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
+                name: VMAppContainer;Compute;testRG;testSQL
+                properties:
+                  backupManagementType: AzureWorkload
+                  containerType: VMAppContainer
+                  extendedInfo:
+                    hostServerName: testsql
+                    inquiryInfo:
+                      errorDetail:
+                        code: Success
+                        message: Not Available
+                        recommendations:
+                          - Not Available
+                      inquiryDetails:
+                        - inquiryValidation:
+                            errorDetail:
+                              code: Success
+                              message: Not Available
+                              recommendations:
+                                - Not Available
+                            status: Success
+                          itemCount: 14
+                          type: sql
+                      status: Success
+                    nodesList: []
+                  friendlyName: testSQL
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
+                  workloadType: null
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
             '202':
-              body: {}
               headers:
-                Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
-                Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
                 Retry-After: 60
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/inquire':
     post:
@@ -534,7 +534,6 @@ paths:
             vaultName: testvault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/storagecontainer;Storage;test-rg;teststorage/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -581,40 +580,35 @@ paths:
           parameters:
             $filter: backupManagementType eq 'AzureWorkload'
             api-version: '2016-12-01'
-            backupFabrics: Azure
-            protectionContainers: VMAppContainer;Compute;testRG;testSQL
+            containerName: VMAppContainer;Compute;bvtdtestag;sqlserver-1
+            fabricName: Azure
             resourceGroupName: testRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
-            vaultName: testVault
+            vaultName: suchandr-seacan-rsv
           responses:
             '200':
               body:
                 nextLink: null
                 value:
-                  - backupManagementType: AzureWorkload
-                    dataDirectoryPaths:
-                      - logicalName: null
-                        path: 'F:\Data\'
-                        type: Data
-                      - logicalName: null
-                        path: 'F:\Log\'
-                        type: Log
-                    friendlyName: MSSQLSERVER
-                    id: null
-                    location: null
-                    name: null
-                    providerName: null
-                    resourceGroup: null
-                    resourceName: null
-                    resourceType: null
-                    status:
-                      displayName: null
-                      infoText: null
-                      name: null
-                      operationState: null
-                      severity: null
-                    subscriptionId: null
-                    type: null
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRg/providers/Microsoft.RecoveryServices/vaults/suchandr-seacan-rsv/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;bvtdtestag;sqlserver-1/protectableItems/SQLInstance;MSSQLSERVER
+                    name: SQLInstance;MSSQLSERVER
+                    properties:
+                      backupManagementType: AzureWorkload
+                      dataDirectoryPaths:
+                        - path: 'F:\DATA\'
+                          type: Data
+                        - path: 'F:\LOG\'
+                          type: Log
+                      friendlyName: MSSQLSERVER
+                      isAutoProtectable: true
+                      parentName: MSSQLSERVER
+                      protectionState: NotProtected
+                      serverName: sqlserver-1.contoso.com
+                      subWorkloadItemCount: 3
+                      subinquireditemcount: 0
+                      workloadItemType: SQLInstance
+                      workloadType: SQL
+                    type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/items
       x-ms-odata: '#/definitions/BMSWorkloadItemQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -657,16 +651,50 @@ paths:
         Get Azure Storage Protection Container Operation Result:
           parameters:
             api-version: '2017-07-01'
-            containerName: storagecontainer;Storage;test-rg;teststorage
+            containerName: VMAppContainer;Compute;testRG;testSQL
             fabricName: Azure
             operationId: 00000000-0000-0000-0000-000000000000
             resourceGroupName: test-rg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testvault
           responses:
-            '204':
-              body: {}
-              headers: {}
+            '200':
+              body:
+                id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
+                name: VMAppContainer;Compute;testRG;testSQL
+                properties:
+                  backupManagementType: AzureWorkload
+                  containerType: VMAppContainer
+                  extendedInfo:
+                    hostServerName: testsql
+                    inquiryInfo:
+                      errorDetail:
+                        code: Success
+                        message: Not Available
+                        recommendations:
+                          - Not Available
+                      inquiryDetails:
+                        - inquiryValidation:
+                            errorDetail:
+                              code: Success
+                              message: Not Available
+                              recommendations:
+                                - Not Available
+                            status: Success
+                          itemCount: 14
+                          type: sql
+                      status: Success
+                    nodesList: []
+                  friendlyName: testSQL
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
+                  workloadType: null
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
+            '202':
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Retry-After: 60
+            '204': {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}':
     delete:
       description: "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the\r\nrequest, call the GetItemOperationResult API."
@@ -710,11 +738,11 @@ paths:
             vaultName: PySDKBackupTestRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperations/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
+            '204': {}
     get:
       description: "Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API."
       operationId: ProtectedItems_Get
@@ -870,8 +898,28 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: NetSDKTestRsVault
           responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                name: VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                properties:
+                  backupManagementType: AzureIaasVM
+                  containerName: iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                  friendlyName: netvmtestv2vm1
+                  healthStatus: Passed
+                  lastBackupStatus: Completed
+                  lastBackupTime: '2018-01-22T12:25:32.048723Z'
+                  lastRecoveryPoint: null
+                  policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupPolicies/testPolicy1
+                  protectedItemDataId: '636482643132986882'
+                  protectedItemType: Microsoft.Compute/virtualMachines
+                  protectionState: Protected
+                  protectionStatus: Healthy
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  virtualMachineId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  workloadType: VM
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -891,8 +939,28 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: NetSDKTestRsVault
           responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                name: VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                properties:
+                  backupManagementType: AzureIaasVM
+                  containerName: iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                  friendlyName: netvmtestv2vm1
+                  healthStatus: Passed
+                  lastBackupStatus: Completed
+                  lastBackupTime: '2018-01-22T12:25:32.048723Z'
+                  lastRecoveryPoint: null
+                  policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupPolicies/testPolicy1
+                  protectedItemDataId: '636482643132986882'
+                  protectedItemType: Microsoft.Compute/virtualMachines
+                  protectionState: ProtectionStopped
+                  protectionStatus: Healthy
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  virtualMachineId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  workloadType: VM
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -947,7 +1015,6 @@ paths:
             vaultName: linuxRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/linuxRsVaultRG/providers/Microsoft.RecoveryServices/vaults/linuxRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainer;testrg;v1win2012r/protectedItems/VM;iaasvmcontainer;testrg;v1win2012r/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/linuxRsVaultRG/providers/Microsoft.RecoveryServices/vaults/linuxRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainer;testrg;v1win2012r/protectedItems/VM;iaasvmcontainer;testrg;v1win2012r/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -1004,12 +1071,33 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: NetSDKTestRsVault
           responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                name: VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                properties:
+                  backupManagementType: AzureIaasVM
+                  containerName: iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1
+                  friendlyName: netvmtestv2vm1
+                  healthStatus: Passed
+                  lastBackupStatus: Completed
+                  lastBackupTime: '2018-01-22T12:25:32.048723Z'
+                  lastRecoveryPoint: null
+                  policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupPolicies/testPolicy1
+                  protectedItemDataId: '636482643132986882'
+                  protectedItemType: Microsoft.Compute/virtualMachines
+                  protectionState: Protected
+                  protectionStatus: Healthy
+                  sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  virtualMachineId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1
+                  workloadType: VM
+                type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
+            '204': {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}':
     get:
       description: "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed\r\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations\r\ncreate jobs. This method returns the list of jobs associated with the operation."
@@ -1118,44 +1206,46 @@ paths:
           responses:
             '200':
               body:
-                - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382
-                  name: '22244821112382'
-                  properties:
-                    isInstantIlrSessionActive: false
-                    isManagedVirtualMachine: true
-                    isSourceVMEncrypted: false
-                    objectType: IaasVMRecoveryPoint
-                    originalStorageAccountOption: false
-                    recoveryPointAdditionalInfo: ''
-                    recoveryPointTierDetails:
-                      - status: 1
-                        type: 1
-                      - status: 1
-                        type: 2
-                    recoveryPointTime: '2017-12-21T22:48:25.4353958Z'
-                    recoveryPointType: CrashConsistent
-                    sourceVMStorageType: NormalStorage
-                    virtualMachineSize: Standard_D1
-                  type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints
-                - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250
-                  name: '24977149827250'
-                  properties:
-                    isInstantIlrSessionActive: false
-                    isManagedVirtualMachine: true
-                    isSourceVMEncrypted: false
-                    objectType: IaasVMRecoveryPoint
-                    originalStorageAccountOption: false
-                    recoveryPointAdditionalInfo: ''
-                    recoveryPointTierDetails:
-                      - status: 1
-                        type: 1
-                      - status: 1
-                        type: 2
-                    recoveryPointTime: '2017-12-20T22:49:44.3317945Z'
-                    recoveryPointType: CrashConsistent
-                    sourceVMStorageType: NormalStorage
-                    virtualMachineSize: Standard_D1
-                  type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints
+                nextLink: null
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382
+                    name: '22244821112382'
+                    properties:
+                      isInstantIlrSessionActive: false
+                      isManagedVirtualMachine: true
+                      isSourceVMEncrypted: false
+                      objectType: IaasVMRecoveryPoint
+                      originalStorageAccountOption: false
+                      recoveryPointAdditionalInfo: ''
+                      recoveryPointTierDetails:
+                        - status: Valid
+                          type: InstantRP
+                        - status: Valid
+                          type: HardenedRP
+                      recoveryPointTime: '2017-12-21T22:48:25.4353958Z'
+                      recoveryPointType: CrashConsistent
+                      sourceVMStorageType: NormalStorage
+                      virtualMachineSize: Standard_D1
+                    type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250
+                    name: '24977149827250'
+                    properties:
+                      isInstantIlrSessionActive: false
+                      isManagedVirtualMachine: true
+                      isSourceVMEncrypted: false
+                      objectType: IaasVMRecoveryPoint
+                      originalStorageAccountOption: false
+                      recoveryPointAdditionalInfo: ''
+                      recoveryPointTierDetails:
+                        - status: Valid
+                          type: InstantRP
+                        - status: Valid
+                          type: HardenedRP
+                      recoveryPointTime: '2017-12-20T22:49:44.3317945Z'
+                      recoveryPointType: CrashConsistent
+                      sourceVMStorageType: NormalStorage
+                      virtualMachineSize: Standard_D1
+                    type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints
       x-ms-odata: '#/definitions/BMSRPQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1219,8 +1309,8 @@ paths:
                   originalStorageAccountOption: false
                   recoveryPointAdditionalInfo: ''
                   recoveryPointTierDetails:
-                    - status: 1
-                      type: 2
+                    - status: Valid
+                      type: HardenedRP
                   recoveryPointTime: '2017-11-22T22:32:46.6088472Z'
                   recoveryPointType: CrashConsistent
                   sourceVMStorageType: NormalStorage
@@ -1280,12 +1370,12 @@ paths:
                 renewExistingRegistration: true
                 virtualMachineId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pysdktestrg/providers/Microsoft.Compute/virtualMachines/pysdktestv2vm1
             protectedItemName: vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1
+            recoveryPointId: '1'
             resourceGroupName: PythonSDKBackupTestRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: PySDKBackupTestRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -1355,7 +1445,6 @@ paths:
             vaultName: testVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -1388,7 +1477,6 @@ paths:
             vaultName: testVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
                 Location: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
@@ -1434,12 +1522,12 @@ paths:
             containerName: iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1
             fabricName: Azure
             protectedItemName: vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1
+            recoveryPointId: '1'
             resourceGroupName: PythonSDKBackupTestRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: PySDKBackupTestRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
@@ -1478,7 +1566,6 @@ paths:
             vaultName: NetSDKTestRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
@@ -1512,7 +1599,6 @@ paths:
             vaultName: NetSDKTestRsVault
           responses:
             '202':
-              body: {}
               headers:
                 Location: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
                 Retry-After: 60
@@ -1554,9 +1640,12 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: NetSDKTestRsVault
           responses:
-            '204':
-              body: {}
-              headers: {}
+            '200': {}
+            '202':
+              headers:
+                Location: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
+                Retry-After: 60
+            '204': {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}':
     get:
       description: "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the\r\nstatus code in the response would be Accepted. It will continue to be in this state till it reaches completion. On\r\nsuccessful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is\r\npart of the Location header of the operation response."
@@ -1589,12 +1678,13 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: PySDKBackupTestRsVault
           responses:
+            '200': {}
             '202':
-              body: null
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperations/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupOperationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01'
                 Retry-After: 60
+            '204': {}
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}':
     get:
       description: "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed\r\nor failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations\r\ncreate jobs. This method returns the list of jobs when the operation is complete."
@@ -1627,7 +1717,7 @@ paths:
           responses:
             '200':
               body:
-                endTime: '0001-01-01T00:00:00'
+                endTime: '0001-01-01T00:00:00.00000Z'
                 id: 00000000-0000-0000-0000-000000000000
                 name: 00000000-0000-0000-0000-000000000000
                 startTime: '2017-08-03T06:52:53.886027Z'
@@ -1663,8 +1753,8 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: NetSDKTestRsVault
           responses:
-            '200':
-              body: {}
+            '200': {}
+            '204': {}
     get:
       description: "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\r\noperation. Status of the operation can be fetched using GetPolicyOperationResult API."
       operationId: ProtectionPolicies_Get
@@ -1871,7 +1961,6 @@ paths:
                   timeZone: Pacific Standard Time
                 type: Microsoft.RecoveryServices/vaults/backupPolicies
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
@@ -2048,7 +2137,6 @@ paths:
                   workLoadType: SQLDataBase
                 type: Microsoft.RecoveryServices/vaults/backupPolicies
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
@@ -2102,7 +2190,6 @@ paths:
                   timeZone: Pacific Standard Time
                 type: Microsoft.RecoveryServices/vaults/backupPolicies
             '202':
-              body: {}
               headers:
                 Azure-AsyncOperation: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
                 Location: 'https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01'
@@ -2256,11 +2343,9 @@ paths:
                     name: VM;iaasvmcontainer;iaasvm-rg;iaasvm-1
                     properties:
                       backupManagementType: AzureIaasVM
-                      containerName: iaasvmcontainer;iaasvm-rg;iaasvm-1
                       friendlyName: iaasvm-1
                       protectableItemType: Microsoft.ClassicCompute/virtualMachines
                       protectionState: NotProtected
-                      sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1
                       virtualMachineId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1
                       workloadType: VM
                     type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectableItems
@@ -2293,58 +2378,25 @@ paths:
           parameters:
             $filter: backupManagementType eq 'AzureWorkload'
             api-version: '2016-12-01'
-            backupFabrics: Azure
+            fabricName: Azure
             resourceGroupName: testRg
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: testVault
           responses:
             '200':
               body:
-                continuationToken: null
-                resultArray:
-                  - backupManagementType: AzureWorkload
-                    backupReadiness: Success
-                    backupReadinessText: Ready
-                    containerId: null
-                    containerName: null
-                    containerType: VMAppContainer
-                    details: 14 DB(s) Found
-                    friendlyName: testSQL
-                    hostServerName: testsql
-                    id: /Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL
-                    inquiryErrorDetails: null
-                    inquiryInfo:
-                      errorDetails:
-                        errorCode: Success
-                        errorString: Not Available
-                        recommendations:
-                          - Not Available
-                      status: Success
-                      workloadInquiryDetails:
-                        - inquiryValidation:
-                            errorDetails:
-                              errorCode: Success
-                              errorString: Not Available
-                              recommendations:
-                                - Not Available
-                            status: Success
-                          itemCount: 14
-                          type: sql
-                    location: null
-                    name: VMAppContainer;Compute;testRG;testSQL
-                    nodeList: []
-                    providerName: Microsoft.RecoveryServices
-                    registrationStatus: Registered
-                    resourceGroup: testRg
-                    resourceName: testVault
-                    resourceType: vaults
-                    sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL
-                    sourceResourceRG: testRG
-                    status: null
-                    subscriptionId: 00000000-0000-0000-0000-000000000000
+                value:
+                  - id: /subscriptions/172424a4-d65f-421e-a8de-197d98aabeba/resourcegroups/testrg/providers/microsoft.recoveryservices/vaults/suchandr-test-vault-wcus/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;testrg;suchandrtestsa125
+                    name: StorageContainer;Storage;testrg;suchandrtestsa125
+                    properties:
+                      backupManagementType: AzureStorage
+                      containerType: StorageContainer
+                      friendlyName: suchandrtestsa125
+                      healthStatus: Healthy
+                      protectedItemCount: 2
+                      registrationStatus: Registered
+                      sourceResourceId: /subscriptions/172424a4-d65f-421e-a8de-197d98aabeba/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/suchandrtestsa125
                     type: Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers
-                    workloadType: null
-                totalCount: 0
       x-ms-odata: '#/definitions/BMSContainerQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -2512,9 +2564,7 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: PySDKBackupTestRsVault
           responses:
-            '204':
-              body: null
-              headers: {}
+            '204': {}
     put:
       description: Updates vault storage model type.
       operationId: BackupResourceStorageConfigs_Update
@@ -2553,11 +2603,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupstorageconfig/vaultstorageconfig
                 name: vaultstorageconfig
                 properties:
-                  dedupState: Disabled
                   storageModelType: LocallyRedundant
                   storageType: LocallyRedundant
                   storageTypeState: Unlocked
-                  xcoolState: Disabled
                 type: Microsoft.RecoveryServices/vaults/backupstorageconfig
               headers: {}
 definitions:
@@ -4847,9 +4895,6 @@ definitions:
       friendlyName:
         description: Friendly name of this backup item.
         type: string
-      isScheduledForDeferredDelete:
-        description: Specifies if the item is scheduled for deferred deletion.
-        type: boolean
       lastBackupStatus:
         description: Status of last backup operation.
         type: string
@@ -5149,6 +5194,22 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: CreateMode
+      deferredDeleteTimeInUTC:
+        description: Time for deferred deletion in UTC
+        format: date-time
+        type: string
+      deferredDeleteTimeRemaining:
+        description: Time remaining before the DS marked for deferred delete is permanently deleted
+        type: string
+      isDeferredDeleteScheduleUpcoming:
+        description: Flag to identify whether the deferred deleted DS is to be purged soon
+        type: boolean
+      isRehydrate:
+        description: Flag to identify that deferred deleted DS is to be moved into Pause state
+        type: boolean
+      isScheduledForDeferredDelete:
+        description: Flag to identify whether the DS is scheduled for deferred delete
+        type: boolean
       lastRecoveryPoint:
         description: Timestamp when the last (latest) backup copy was created for this backup item.
         format: date-time

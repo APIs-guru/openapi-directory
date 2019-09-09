@@ -48,7 +48,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to Oracle server
         properties:
           dataSource:
@@ -125,7 +124,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to PostgreSQL server
         properties:
           databaseName:
@@ -221,7 +219,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to Oracle server
         properties:
           dataSource:
@@ -310,7 +307,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to PostgreSQL server
         properties:
           databaseName:
@@ -389,6 +385,9 @@ definitions:
   MigrateOracleAzureDbPostgreSqlSyncDatabaseInput:
     description: Database specific information for Oracle to Azure Database for PostgreSQL migration task inputs
     properties:
+      caseManipulation:
+        description: 'How to handle object name casing: either Preserve or ToLower'
+        type: string
       migrationSetting:
         additionalProperties:
           type: string
@@ -444,7 +443,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to Oracle server
         properties:
           dataSource:
@@ -471,7 +469,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Information for connecting to PostgreSQL server
         properties:
           databaseName:

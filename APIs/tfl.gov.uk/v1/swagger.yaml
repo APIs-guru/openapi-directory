@@ -1241,10 +1241,16 @@ paths:
   /Place:
     get:
       deprecated: false
-      operationId: Place_GetByGeoBox
+      operationId: Place_GetByGeo
       parameters:
+        - description: The radius of the bounding circle in metres when only lat/lon are specified.
+          format: double
+          in: query
+          name: radius
+          required: false
+          type: number
         - collectionFormat: multi
-          description: 'an optional list of comma separated property categories to return in the Place''s property bag. If null or empty, all categories of property are returned. Pass the keyword "none" to return no properties (a valid list of categories can be obtained from the /Place/Meta/categories endpoint)'
+          description: 'An optional list of comma separated property categories to return in the Place''s property bag. If null or empty, all categories of property are returned. Pass the keyword "none" to return no properties (a valid list of categories can be obtained from the /Place/Meta/categories endpoint)'
           in: query
           items:
             type: string
@@ -1257,7 +1263,7 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: 'place types to filter on, or null to return all types'
+          description: 'Place types to filter on, or null to return all types'
           in: query
           items:
             type: string
@@ -1277,23 +1283,33 @@ paths:
           type: integer
         - format: double
           in: query
-          name: bbBoxpoints.swLat
-          required: true
+          name: placeGeo.swLat
+          required: false
           type: number
         - format: double
           in: query
-          name: bbBoxpoints.swLon
-          required: true
+          name: placeGeo.swLon
+          required: false
           type: number
         - format: double
           in: query
-          name: bbBoxpoints.neLat
-          required: true
+          name: placeGeo.neLat
+          required: false
           type: number
         - format: double
           in: query
-          name: bbBoxpoints.neLon
-          required: true
+          name: placeGeo.neLon
+          required: false
+          type: number
+        - format: double
+          in: query
+          name: placeGeo.lat
+          required: false
+          type: number
+        - format: double
+          in: query
+          name: placeGeo.lon
+          required: false
           type: number
       produces:
         - application/json
@@ -1307,7 +1323,7 @@ paths:
             items:
               $ref: '#/definitions/Tfl.Api.Presentation.Entities.StopPoint'
             type: array
-      summary: "Gets the places that lie within the bounding box defined by the lat/lon of its north-west and south-east corners. Optionally filters\r\n            on type and can strip properties for a smaller payload."
+      summary: "Gets the places that lie within a geographic region. The geographic region of interest can either be specified\r\n            by using a lat/lon geo-point and a radius in metres to return places within the locus defined by the lat/lon of\r\n            its centre or alternatively, by the use of a bounding box defined by the lat/lon of its north-west and south-east corners.\r\n            Optionally filters on type and can strip properties for a smaller payload."
       tags:
         - Place
   '/Place/Address/Streets/{Postcode}':
@@ -3020,26 +3036,6 @@ definitions:
       - lat
       - lon
     type: object
-  Tfl.Api.Common.GeoPointBBox:
-    properties:
-      neLat:
-        format: double
-        type: number
-      neLon:
-        format: double
-        type: number
-      swLat:
-        format: double
-        type: number
-      swLon:
-        format: double
-        type: number
-    required:
-      - swLat
-      - swLon
-      - neLat
-      - neLon
-    type: object
   Tfl.Api.Common.JourneyPlanner.JpElevation:
     properties:
       distance:
@@ -3061,6 +3057,27 @@ definitions:
         format: double
         type: number
       startLon:
+        format: double
+        type: number
+    type: object
+  Tfl.Api.Common.PlaceGeo:
+    properties:
+      lat:
+        format: double
+        type: number
+      lon:
+        format: double
+        type: number
+      neLat:
+        format: double
+        type: number
+      neLon:
+        format: double
+        type: number
+      swLat:
+        format: double
+        type: number
+      swLon:
         format: double
         type: number
     type: object
@@ -3435,6 +3452,8 @@ definitions:
       boundsId:
         format: int32
         type: integer
+      contactlessPAYGOnlyFare:
+        type: boolean
       displayName:
         type: string
       displayOrder:
@@ -3483,6 +3502,21 @@ definitions:
       via:
         type: string
     type: object
+  Tfl.Api.Presentation.Entities.Fares.FareStation:
+    properties:
+      atcoCode:
+        type: string
+      commonName:
+        type: string
+      fareCategory:
+        enum:
+          - Cash
+          - Oyster
+          - Contactless
+          - ContactlessOnly
+          - All
+        type: string
+    type: object
   Tfl.Api.Presentation.Entities.Fares.FaresMode:
     properties:
       description:
@@ -3517,6 +3551,8 @@ definitions:
       index:
         format: int32
         type: integer
+      journey:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.Journey'
       messages:
         items:
           $ref: '#/definitions/Tfl.Api.Presentation.Entities.Message'
@@ -3525,6 +3561,13 @@ definitions:
         items:
           $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.FareDetails'
         type: array
+    type: object
+  Tfl.Api.Presentation.Entities.Fares.Journey:
+    properties:
+      fromStation:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.FareStation'
+      toStation:
+        $ref: '#/definitions/Tfl.Api.Presentation.Entities.Fares.FareStation'
     type: object
   Tfl.Api.Presentation.Entities.Fares.PassengerType:
     properties:

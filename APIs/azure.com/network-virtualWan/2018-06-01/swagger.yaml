@@ -95,14 +95,14 @@ paths:
                       addressPrefix: 10.10.1.0/24
                       hubVirtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       provisioningState: Succeeded
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
@@ -115,14 +115,14 @@ paths:
                       addressPrefix: 210.10.1.0/24
                       hubVirtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       provisioningState: Succeeded
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
@@ -492,14 +492,14 @@ paths:
                       addressPrefix: 10.10.1.0/24
                       hubVirtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       provisioningState: Succeeded
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
@@ -512,14 +512,14 @@ paths:
                       addressPrefix: 210.10.1.0/24
                       hubVirtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       provisioningState: Succeeded
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
@@ -946,23 +946,23 @@ paths:
             '200':
               body:
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                   name: connection1
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
                   name: connection2
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet2
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}':
@@ -1034,14 +1034,14 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                 name: connection1
                 properties:
                   allowHubToRemoteVnetTransit: true
                   allowRemoteVnetToUseHubVnetGateways: false
                   provisioningState: Succeeded
                   remoteVirtualNetwork:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans':
     get:
       description: Lists all the VirtualWANs in a resource group.
@@ -1947,77 +1947,79 @@ paths:
                 tag2: value2
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/vpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/vpnGateways
       x-ms-long-running-operation: true
     put:
       description: Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.
@@ -2109,71 +2111,73 @@ paths:
                 key1: value1
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                type: Microsoft.Network/vpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                type: Microsoft.Network/vpnGateways
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections':
     get:
@@ -2489,37 +2493,39 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-              name: vpnConnection1
-              properties:
-                connectionBandwidthInMbps: 100
-                connectionStatus: Connected
-                egressBytesTransferred: 0
-                enableBgp: false
-                ingressBytesTransferred: 0
-                ipsecPolicies: []
-                provisioningState: Succeeded
-                remoteVpnSite:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                routingWeight: 0
-                sharedKey: key
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                name: vpnConnection1
+                properties:
+                  connectionBandwidthInMbps: 100
+                  connectionStatus: Connected
+                  egressBytesTransferred: 0
+                  enableBgp: false
+                  ingressBytesTransferred: 0
+                  ipsecPolicies: []
+                  provisioningState: Succeeded
+                  remoteVpnSite:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                  routingWeight: 0
+                  sharedKey: key
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-              name: vpnConnection1
-              properties:
-                connectionBandwidthInMbps: 100
-                connectionStatus: Connected
-                egressBytesTransferred: 0
-                enableBgp: false
-                ingressBytesTransferred: 0
-                ipsecPolicies: []
-                provisioningState: Succeeded
-                remoteVpnSite:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                routingWeight: 0
-                sharedKey: key
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                name: vpnConnection1
+                properties:
+                  connectionBandwidthInMbps: 100
+                  connectionStatus: Connected
+                  egressBytesTransferred: 0
+                  enableBgp: false
+                  ingressBytesTransferred: 0
+                  ipsecPolicies: []
+                  provisioningState: Succeeded
+                  remoteVpnSite:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                  routingWeight: 0
+                  sharedKey: key
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites':
     get:

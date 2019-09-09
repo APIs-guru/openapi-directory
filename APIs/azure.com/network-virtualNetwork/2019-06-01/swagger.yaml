@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualNetwork.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-virtualNetwork
   x-tags:
@@ -1420,6 +1420,63 @@ paths:
                         - westus
                       provisioningState: Succeeded
                     type: Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/UnprepareNetworkPolicies':
+    post:
+      description: Unprepares a subnet by removing network intent policies.
+      operationId: Subnets_UnprepareNetworkPolicies
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - description: The name of the subnet.
+          in: path
+          name: subnetName
+          required: true
+          type: string
+        - description: Parameters supplied to unprepare subnet to remove network intent policies.
+          in: body
+          name: unprepareNetworkPoliciesRequestParameters
+          required: true
+          schema:
+            $ref: '#/definitions/UnprepareNetworkPoliciesRequest'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Unpreparing subnet by removing network intent policies is successful.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+      x-ms-examples:
+        Unprepare Network Policies:
+          parameters:
+            api-version: '2019-06-01'
+            resourceGroupName: rg1
+            subnetName: subnet1
+            subscriptionId: subid
+            unprepareNetworkPoliciesRequestParameters:
+              serviceName: Microsoft.Sql/managedInstances
+            virtualNetworkName: test-vnet
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/usages':
     get:
       description: Lists usage stats.
@@ -2264,6 +2321,12 @@ definitions:
               description: The type of the endpoint service.
               type: string
         type: array
+  UnprepareNetworkPoliciesRequest:
+    description: Details of UnprepareNetworkPolicies for Subnet.
+    properties:
+      serviceName:
+        description: The name of the service for which subnet is being unprepared for.
+        type: string
   VirtualNetwork:
     allOf:
       - description: Common resource representation.

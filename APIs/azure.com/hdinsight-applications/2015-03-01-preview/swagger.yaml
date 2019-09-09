@@ -394,7 +394,6 @@ paths:
                     roles:
                       - edgenode
                     uri: 'https://.../install.sh'
-                provisioningState: ''
                 uninstallScriptActions: []
             resourceGroupName: rg1
             subscriptionId: subid
@@ -478,6 +477,9 @@ definitions:
         description: The destination port to connect to.
         format: int32
         type: integer
+      disableGatewayAuth:
+        description: Disable gateway authentication.
+        type: boolean
       location:
         description: The location of the endpoint.
         type: string
@@ -485,6 +487,9 @@ definitions:
         description: The public port to connect to.
         format: int32
         type: integer
+      subDomainSuffix:
+        description: The subdomain suffix of the application.
+        type: string
     type: object
   ApplicationListResult:
     description: Result of the request to list cluster Applications. It contains a list of operations and a URL link to get the next set of results.

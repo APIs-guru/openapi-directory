@@ -568,6 +568,15 @@ tags:
     x-traitTag: true
   - description: |-
 
+      #### 2.16
+
+        + Starts serializing `subjects` as relationships, to better adhere to JSON-API.
+        Pre-2.16, `subjects` are serialized as attributes.
+
+      #### 2.15
+      + Deprecates ApplicationReset view (/v2/applications/<client_id>/reset/). Instead, to reset the client secret for an OAuth application, PATCH the `client_secret` property on the ApplicationDetail view (/v2/applications/<client_id>/)
+      #### 2.14
+      + Deprecates the `logo_path` field off of the InstitutionSerializer.
 
       #### 2.13
 
@@ -651,6 +660,15 @@ tags:
 
       + Deprecate the `node_links` field in the **Node** and **Registration** serializers in favor of `linked_nodes` and `linked_registrations`.
     name: Changelog
+    x-traitTag: true
+  - description: |-
+      OSF public resources and partner institutions can queried via the `/v2/search/` endpoint. The search endpoint will return a serialized JSON representation of the queried object.
+      OSF search uses the [Lucene search syntax](http://extensions.xwiki.org/xwiki/bin/view/Extension/Search+Application+Query+Syntax) .This gives you many options, but can be very simple as well. Examples of valid searches include:
+
+       - https://osf.io/search/?q=repro*
+       - https://osf.io/search/?q=brian+AND+title:many
+       - https://osf.io/search/?q=tags:(psychology)
+    name: Searching
     x-traitTag: true
 paths:
   /:
@@ -20352,6 +20370,2304 @@ paths:
       tags:
         - Registrations
       x-response-schema: Wiki
+  /search/:
+    get:
+      description: |-
+        OSF search returns JSON serialized objects (including projects, components, registrations, users, files,
+         and institutions) that have been found by the given Elasticsearch query. Each object is serialized with the
+         appropriate serializer for its type (files are serialized as files, users are serialized as users, etc.) and
+         returned collectively.
+
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restract their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          schema:
+            example:
+              data: {}
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+              search_fields:
+                components:
+                  related:
+                    href: 'https://api.osf.io/v2/search/components/?q=%2A'
+                    meta:
+                      total: 31312312
+                files:
+                  related:
+                    href: 'https://api.osf.io/v2/search/files/?q=%2A'
+                    meta:
+                      total: 2337625
+                institutions:
+                  related:
+                    href: 'https://api.osf.io/v2/search/institutions/?q=%2A'
+                    meta:
+                      total: 42
+                projects:
+                  related:
+                    href: 'https://api.osf.io/v2/search/projects/?q=%2A'
+                    meta:
+                      total: 23423421
+                registrations:
+                  related:
+                    href: 'https://api.osf.io/v2/search/registrations/?q=%2A'
+                    meta:
+                      total: 5234231231
+                users:
+                  related:
+                    href: 'https://api.osf.io/v2/search/users/?q=%2A'
+                    meta:
+                      total: 3240450
+            properties:
+              data:
+                description: The search results; each item in this list will be serialized according to its type.
+                items:
+                  type: object
+                title: Data
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                description: Extra information about the request.
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+              search_fields:
+                description: URLs and total counts for different filtered searches.
+                properties:
+                  components:
+                    description: The components returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                  files:
+                    description: The files returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                  institutions:
+                    description: The institutions returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                  projects:
+                    description: The project returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                  registrations:
+                    description: The registrations returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                  users:
+                    description: The users returned by the search.
+                    properties:
+                      related:
+                        properties:
+                          href:
+                            format: URL
+                            type: string
+                          meta:
+                            properties:
+                              total:
+                                type: integer
+                            type: object
+                        type: object
+                    type: object
+                title: Search Fields
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/components/:
+    get:
+      description: |-
+        This endpoint returns components that have been found by the given Elasticsearch query. All components returned are serialized as components.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restrict their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    category: project
+                    collection: false
+                    current_user_can_comment: true
+                    current_user_permissions:
+                      - read
+                    date_created: '2012-04-01T15:49:07.702000'
+                    date_modified: '2016-12-08T21:45:17.058000'
+                    description: ''
+                    fork: false
+                    node_license: null
+                    preprint: false
+                    public: true
+                    registration: false
+                    tags:
+                      - replication
+                      - reproducibility
+                      - open science
+                      - reproduction
+                      - psychological science
+                      - psychology
+                      - metascience
+                      - crowdsource
+                    title: 'Reproducibility Project: Psychology'
+                  id: ezcuj
+                  links:
+                    html: 'https://osf.io/ezcuj/'
+                    self: 'https://api.osf.io/v2/nodes/ezcuj/'
+                  relationships:
+                    affiliated_institutions:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/institutions/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/institutions/'
+                          meta: {}
+                    children:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/children/'
+                          meta: {}
+                    citation:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/citation/'
+                          meta: {}
+                    comments:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/comments/?filter%5Btarget%5D=ezcuj'
+                          meta: {}
+                    contributors:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/contributors/'
+                          meta: {}
+                    draft_registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/draft_registrations/'
+                          meta: {}
+                    files:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/files/'
+                          meta: {}
+                    forks:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/forks/'
+                          meta: {}
+                    identifiers:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/identifiers/'
+                          meta: {}
+                    linked_nodes:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/linked_nodes/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/linked_nodes/'
+                          meta: {}
+                    logs:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/logs/'
+                          meta: {}
+                    node_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/node_links/'
+                          meta: {}
+                    preprints:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/preprints/'
+                          meta: {}
+                    registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/registrations/'
+                          meta: {}
+                    root:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/'
+                          meta: {}
+                    view_only_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/view_only_links/'
+                          meta: {}
+                    wikis:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/wikis/'
+                          meta: {}
+                  type: nodes
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  example:
+                    data:
+                      attributes:
+                        category: software
+                        tags:
+                          - some
+                          - tags
+                        title: An Excellent Project Title
+                      type: nodes
+                  properties:
+                    attributes:
+                      description: The properties of the node entity.
+                      properties:
+                        category:
+                          description: 'The category of the node, as selected by project contributors.'
+                          enum:
+                            - analysis
+                            - communication
+                            - data
+                            - hypothesis
+                            - instrumentation
+                            - methods and measures
+                            - procedure
+                            - project
+                            - software
+                            - other
+                          readOnly: false
+                          type: string
+                        collection:
+                          description: Whether or not this node represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        current_user_can_comment:
+                          description: Whether or not the current user has permission to post comments on this node. Comments on nodes can be set to allow all users to comment (if public) or restricted to only allow comments from contributors.
+                          readOnly: true
+                          type: boolean
+                        current_user_permissions:
+                          description: 'A list of strings representing the permissions for the current user on this node. Valid permissions are "admin", "read", and "write".'
+                          items:
+                            type: string
+                          readOnly: true
+                          type: array
+                        date_created:
+                          description: 'The time at which the node was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_modified:
+                          description: 'The time at which the node was last modified, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: The description of the node.
+                          readOnly: false
+                          type: string
+                        fork:
+                          description: Whether or not this node represents a fork of another node.
+                          readOnly: true
+                          type: boolean
+                        forked_date:
+                          description: 'If this node is a fork of another node, the time at which the node was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        node_license:
+                          description: A dictionary containing the metadata (copyright year and holder) associated with the node license (required for certain license types).
+                          readOnly: false
+                          type: string
+                        preprint:
+                          description: Whether or not the node contains supplemental material for a preprint.
+                          readOnly: true
+                          type: boolean
+                        public:
+                          description: Whether or not the node is publicly visible. This field is only editable by project administrators.
+                          readOnly: false
+                          type: boolean
+                        registration:
+                          description: Whether or not the node represents a registration. This value should always be `false`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        tags:
+                          description: 'A list of strings that describe this node, as entered by project contributors.'
+                          items:
+                            type: string
+                          readOnly: false
+                          type: array
+                        template_from:
+                          description: 'The unique ID of the node from which this node was templated, if this node was created from a template.'
+                          readOnly: false
+                          type: string
+                        title:
+                          description: The title of the node.
+                          readOnly: false
+                          type: string
+                        wiki_enabled:
+                          description: Whether or not the node has its wiki enabled.
+                          readOnly: true
+                          type: boolean
+                      readOnly: false
+                      required:
+                        - title
+                        - category
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The unique identifier of the node entity.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: URLs to alternative representations of the node entity.
+                      properties:
+                        html:
+                          description: A link to the node's page on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        self:
+                          description: A link to the canonical API endpoint of this node.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: URLs to other entities or entity collections that have a relationship to the node entity.
+                      properties:
+                        affiliated_institutions:
+                          description: A link to the list of institutions this node is affiliated with.
+                          readOnly: true
+                          type: string
+                        children:
+                          description: A link to the list of this node's children (components).
+                          readOnly: true
+                          type: string
+                        citation:
+                          description: A link to the citation details of this node.
+                          readOnly: true
+                          type: string
+                        comments:
+                          description: A link to the list of comments on this node.
+                          readOnly: true
+                          type: string
+                        contributors:
+                          description: A link to the list of contributors on this node.
+                          readOnly: true
+                          type: string
+                        draft_registrations:
+                          description: A link to the list of registrations that have been initiated from this node and are still in a draft state.
+                          readOnly: true
+                          type: string
+                        files:
+                          description: A link to the list of storage providers that have been enabled on this node.
+                          readOnly: true
+                          type: string
+                        forked_from:
+                          description: 'A link to the node which this node was forked from, if this node is a fork.'
+                          readOnly: true
+                          type: string
+                        forks:
+                          description: A link to the list of nodes that are forks of this node.
+                          readOnly: true
+                          type: string
+                        identifiers:
+                          description: A link to the list of identifiers for this node (i.e. DOI identifiers).
+                          readOnly: true
+                          type: string
+                        license:
+                          description: A link to the license that has been applied to this node.
+                          readOnly: true
+                          type: string
+                        linked_nodes:
+                          description: A link to the list of nodes that are linked to the current node.
+                          readOnly: true
+                          type: string
+                        logs:
+                          description: A link to the list of log actions pertaining to this node.
+                          readOnly: true
+                          type: string
+                        node_links:
+                          description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
+                          readOnly: true
+                          type: string
+                        parent:
+                          description: 'A link to the node that is the direct parent of the current node, if the current node is a child node.'
+                          readOnly: true
+                          type: string
+                        preprints:
+                          description: A link to the list of preprints for which this node contains supplemental materials.
+                          readOnly: true
+                          type: string
+                        registrations:
+                          description: A link to the list of registrations that have been created from this node.
+                          readOnly: true
+                          type: string
+                        root:
+                          description: 'A link to the node that is the top-level parent of the current node. If the current node is the top-level node, the root is the current node.'
+                          readOnly: true
+                          type: string
+                        template_node:
+                          description: 'A link to the node that the current node was templated from, if the current node was created from a template.'
+                          readOnly: true
+                          type: string
+                        view_only_links:
+                          description: A link to the list of view only links that have been created for this node.
+                          readOnly: true
+                          type: string
+                        wikis:
+                          description: A link to the list of wiki pages for this node.
+                          readOnly: true
+                          type: string
+                      readOnly: false
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the node entity (`nodes`).
+                      readOnly: false
+                      type: string
+                  required:
+                    - type
+                    - attributes
+                  title: Node
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for components
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/files/:
+    get:
+      description: |-
+        This endpoint returns files that have been found by the given Elasticsearch query. All files returned are serialized as files.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restract their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    checkout: null
+                    current_user_can_comment: true
+                    current_version: 1
+                    date_created: '2014-10-17T19:24:12.264Z'
+                    date_modified: '2014-10-17T19:24:12.264Z'
+                    delete_allowed: true
+                    extra:
+                      downloads: 442
+                      hashes:
+                        md5: 44325d4f13b09f3769ede09d7c20a82c
+                        sha256: 2450eb9ff3db92a1bff370368b0552b270bd4b5ca0745b773c37d2662f94df8e
+                    guid: sejcv
+                    kind: file
+                    last_touched: '2015-09-18T01:11:16.328000'
+                    materialized_path: /OSC2012.pdf
+                    name: OSC2012.pdf
+                    path: /553e69248c5e4a219919ea54
+                    provider: osfstorage
+                    size: 216945
+                    tags: []
+                  id: 553e69248c5e4a219919ea54
+                  links:
+                    delete: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                    download: 'https://osf.io/download/sejcv'
+                    info: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
+                    move: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                    render: 'https://mfr.osf.io/render?url=https://osf.io/download/sejcv/?direct%26mode=render'
+                    self: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/'
+                    upload: 'https://files.osf.io/v1/resources/ezcuj/providers/osfstorage/553e69248c5e4a219919ea54'
+                  relationships:
+                    node:
+                      comments:
+                        links:
+                          related:
+                            href: 'https://api.osf.io/v2/nodes/ezcuj/comments/?filter%5Btarget%5D=sejcv'
+                            meta: {}
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/'
+                          meta: {}
+                      versions:
+                        links:
+                          related:
+                            href: 'https://api.osf.io/v2/files/553e69248c5e4a219919ea54/versions/'
+                            meta: {}
+                  type: files
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  properties:
+                    attributes:
+                      description: The properties of the file entity.
+                      properties:
+                        checkout:
+                          description: 'SOON TO BE DEPRECATED, see relationships checkout.'
+                          readOnly: true
+                          type: string
+                        current_user_can_comment:
+                          description: Whether or not the current user is allowed to post comments.
+                          readOnly: true
+                          type: boolean
+                        current_version:
+                          description: Version number of the file.
+                          readOnly: true
+                          type: integer
+                        date_created:
+                          description: 'The time at which the file was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_modified:
+                          description: 'The time at which the file was last modified, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        delete_allowed:
+                          description: Whether or not deletion of the file is allowed.
+                          readOnly: true
+                          type: boolean
+                        extra:
+                          description: 'Extra information, contains `hashes` (`sha256`, `md5`) and `downloads` count.'
+                          readOnly: true
+                          type: object
+                        guid:
+                          description: Global unique identifier (GUID) for this file (if one has been assigned).
+                          readOnly: true
+                          type: string
+                        kind:
+                          description: The kind of files object it is (`file` or `folder`).
+                          readOnly: true
+                          type: string
+                        last_touched:
+                          description: The time at which the file external metadata was last retrieved as an iso8601 formatted timestamp (does not apply to OSF Storage files).
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        materialized_path:
+                          description: Unix-style path to the file relative to the provider root.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Name of the file
+                          readOnly: false
+                          type: string
+                        path:
+                          description: The unique identifier for this file entity for this project and storage provider.
+                          readOnly: true
+                          type: string
+                        provider:
+                          description: 'The id of the file provider (e.g., `osfstorage`)'
+                          readOnly: true
+                          type: string
+                        size:
+                          description: Size of the file in bytes.
+                          readOnly: true
+                          type: integer
+                        tags:
+                          description: 'A list of strings that describe this file, as entered by project contributors.'
+                          items:
+                            type: string
+                          readOnly: true
+                          type: array
+                      readOnly: false
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The identifier of the file entity.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: Links to alternative representations of the file entity.
+                      properties:
+                        delete:
+                          description: The Waterbutler API route for file deletions.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        download:
+                          description: The Waterbutler API route for file downloads.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        html:
+                          description: A link to the file on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        info:
+                          description: A link to the page to view a file's information or a folder's contents.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        move:
+                          description: The Waterbutler API route for file moves.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        new_folder:
+                          description: The Waterbutler API route for creating a new subfolder (does not exist for files).
+                          format: URL
+                          readOnly: true
+                          type: string
+                        render:
+                          description: A Waterbutler API route for rendering the file.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        self:
+                          description: A link to the detail page for the file.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        upload:
+                          description: The Waterbutler API route for file uploads.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: Links to other entities or entity collections that have a relationship to the file entity.
+                      properties:
+                        checkout:
+                          description: A link to the user who checked out the file.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        comments:
+                          description: A link to the comments on the file.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        node:
+                          description: A link to the node the file is on.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        versions:
+                          description: A link to the versions of the file.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the file entity (`files`).
+                      readOnly: true
+                      type: string
+                  title: File
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for files
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/institutions/:
+    get:
+      description: |-
+        This endpoint returns institutions which are utilitizing OSF and that have been found by the given Elasticsearch query. All institutions returned are serialized as institutions.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restrict their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    assets:
+                      logo: /static/img/institutions/shields/cos-shield.png
+                      logo_rounded: /static/img/institutions/shields-rounded-corners/cos-shield.png
+                    auth_url: null
+                    description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
+                    name: Center For Open Science
+                  id: cos
+                  links:
+                    html: 'https://osf.io/institutions/cos/'
+                    self: 'https://api.osf.io/v2/institutions/cos/'
+                  relationships:
+                    nodes:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/institutions/cos/nodes/'
+                          meta: {}
+                    registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/institutions/cos/registrations/'
+                          meta: {}
+                    users:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/institutions/cos/users/'
+                          meta: {}
+                  type: institutions
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 42
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  properties:
+                    attributes:
+                      description: The properties of the institution entity.
+                      properties:
+                        assets:
+                          description: Assets belonging to a specific institution
+                          properties:
+                            logo:
+                              description: Static path to the institution specific normal logo
+                              readOnly: true
+                              type: string
+                            logo_rounded:
+                              description: Static path to the institution specific rounded logo
+                              readOnly: true
+                              type: string
+                          readOnly: true
+                          title: Assets
+                          type: object
+                        auth_url:
+                          description: Url used to authenticate institution specific login.
+                          readOnly: true
+                          type: string
+                        description:
+                          description: Description of the institution.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Full name of the institution.
+                          readOnly: true
+                          type: string
+                      readOnly: false
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The identifier of the institution entity.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: URLs to alternative representations of the institutions entity.
+                      properties:
+                        html:
+                          description: A link to the detail page for the institution on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        self:
+                          description: A link to the detail page for the institution.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: URLs to other entities or entity collections that have a relationship to the institution entity.
+                      properties:
+                        nodes:
+                          description: A relationship to the nodes affiliated with the institution.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        registrations:
+                          description: A relationship to the registrations affiliated with the institution.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        users:
+                          description: A relationship to the users affiliated with the institution.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the institution entity (`institutions`).
+                      readOnly: true
+                      type: string
+                  title: Institution
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for our partner institutions
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/projects/:
+    get:
+      description: |-
+        This endpoint returns projects that have been found by the given Elasticsearch query. All projects returned are serialized as projects.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restrict their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    category: project
+                    collection: false
+                    current_user_can_comment: true
+                    current_user_permissions:
+                      - read
+                    date_created: '2012-04-01T15:49:07.702000'
+                    date_modified: '2016-12-08T21:45:17.058000'
+                    description: ''
+                    fork: false
+                    node_license: null
+                    preprint: false
+                    public: true
+                    registration: false
+                    tags:
+                      - replication
+                      - reproducibility
+                      - open science
+                      - reproduction
+                      - psychological science
+                      - psychology
+                      - metascience
+                      - crowdsource
+                    title: 'Reproducibility Project: Psychology'
+                  id: ezcuj
+                  links:
+                    html: 'https://osf.io/ezcuj/'
+                    self: 'https://api.osf.io/v2/nodes/ezcuj/'
+                  relationships:
+                    affiliated_institutions:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/institutions/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/institutions/'
+                          meta: {}
+                    children:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/children/'
+                          meta: {}
+                    citation:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/citation/'
+                          meta: {}
+                    comments:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/comments/?filter%5Btarget%5D=ezcuj'
+                          meta: {}
+                    contributors:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/contributors/'
+                          meta: {}
+                    draft_registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/draft_registrations/'
+                          meta: {}
+                    files:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/files/'
+                          meta: {}
+                    forks:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/forks/'
+                          meta: {}
+                    identifiers:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/identifiers/'
+                          meta: {}
+                    linked_nodes:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/linked_nodes/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/linked_nodes/'
+                          meta: {}
+                    logs:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/logs/'
+                          meta: {}
+                    node_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/node_links/'
+                          meta: {}
+                    preprints:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/preprints/'
+                          meta: {}
+                    registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/registrations/'
+                          meta: {}
+                    root:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/'
+                          meta: {}
+                    view_only_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/view_only_links/'
+                          meta: {}
+                    wikis:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/wikis/'
+                          meta: {}
+                  type: nodes
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  example:
+                    data:
+                      attributes:
+                        category: software
+                        tags:
+                          - some
+                          - tags
+                        title: An Excellent Project Title
+                      type: nodes
+                  properties:
+                    attributes:
+                      description: The properties of the node entity.
+                      properties:
+                        category:
+                          description: 'The category of the node, as selected by project contributors.'
+                          enum:
+                            - analysis
+                            - communication
+                            - data
+                            - hypothesis
+                            - instrumentation
+                            - methods and measures
+                            - procedure
+                            - project
+                            - software
+                            - other
+                          readOnly: false
+                          type: string
+                        collection:
+                          description: Whether or not this node represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        current_user_can_comment:
+                          description: Whether or not the current user has permission to post comments on this node. Comments on nodes can be set to allow all users to comment (if public) or restricted to only allow comments from contributors.
+                          readOnly: true
+                          type: boolean
+                        current_user_permissions:
+                          description: 'A list of strings representing the permissions for the current user on this node. Valid permissions are "admin", "read", and "write".'
+                          items:
+                            type: string
+                          readOnly: true
+                          type: array
+                        date_created:
+                          description: 'The time at which the node was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_modified:
+                          description: 'The time at which the node was last modified, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: The description of the node.
+                          readOnly: false
+                          type: string
+                        fork:
+                          description: Whether or not this node represents a fork of another node.
+                          readOnly: true
+                          type: boolean
+                        forked_date:
+                          description: 'If this node is a fork of another node, the time at which the node was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        node_license:
+                          description: A dictionary containing the metadata (copyright year and holder) associated with the node license (required for certain license types).
+                          readOnly: false
+                          type: string
+                        preprint:
+                          description: Whether or not the node contains supplemental material for a preprint.
+                          readOnly: true
+                          type: boolean
+                        public:
+                          description: Whether or not the node is publicly visible. This field is only editable by project administrators.
+                          readOnly: false
+                          type: boolean
+                        registration:
+                          description: Whether or not the node represents a registration. This value should always be `false`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        tags:
+                          description: 'A list of strings that describe this node, as entered by project contributors.'
+                          items:
+                            type: string
+                          readOnly: false
+                          type: array
+                        template_from:
+                          description: 'The unique ID of the node from which this node was templated, if this node was created from a template.'
+                          readOnly: false
+                          type: string
+                        title:
+                          description: The title of the node.
+                          readOnly: false
+                          type: string
+                        wiki_enabled:
+                          description: Whether or not the node has its wiki enabled.
+                          readOnly: true
+                          type: boolean
+                      readOnly: false
+                      required:
+                        - title
+                        - category
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The unique identifier of the node entity.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: URLs to alternative representations of the node entity.
+                      properties:
+                        html:
+                          description: A link to the node's page on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        self:
+                          description: A link to the canonical API endpoint of this node.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: URLs to other entities or entity collections that have a relationship to the node entity.
+                      properties:
+                        affiliated_institutions:
+                          description: A link to the list of institutions this node is affiliated with.
+                          readOnly: true
+                          type: string
+                        children:
+                          description: A link to the list of this node's children (components).
+                          readOnly: true
+                          type: string
+                        citation:
+                          description: A link to the citation details of this node.
+                          readOnly: true
+                          type: string
+                        comments:
+                          description: A link to the list of comments on this node.
+                          readOnly: true
+                          type: string
+                        contributors:
+                          description: A link to the list of contributors on this node.
+                          readOnly: true
+                          type: string
+                        draft_registrations:
+                          description: A link to the list of registrations that have been initiated from this node and are still in a draft state.
+                          readOnly: true
+                          type: string
+                        files:
+                          description: A link to the list of storage providers that have been enabled on this node.
+                          readOnly: true
+                          type: string
+                        forked_from:
+                          description: 'A link to the node which this node was forked from, if this node is a fork.'
+                          readOnly: true
+                          type: string
+                        forks:
+                          description: A link to the list of nodes that are forks of this node.
+                          readOnly: true
+                          type: string
+                        identifiers:
+                          description: A link to the list of identifiers for this node (i.e. DOI identifiers).
+                          readOnly: true
+                          type: string
+                        license:
+                          description: A link to the license that has been applied to this node.
+                          readOnly: true
+                          type: string
+                        linked_nodes:
+                          description: A link to the list of nodes that are linked to the current node.
+                          readOnly: true
+                          type: string
+                        logs:
+                          description: A link to the list of log actions pertaining to this node.
+                          readOnly: true
+                          type: string
+                        node_links:
+                          description: A link to the list of nodes that are linked to the current node. This field has been deprecated as of verson 2.1; use the linked_nodes link instead.
+                          readOnly: true
+                          type: string
+                        parent:
+                          description: 'A link to the node that is the direct parent of the current node, if the current node is a child node.'
+                          readOnly: true
+                          type: string
+                        preprints:
+                          description: A link to the list of preprints for which this node contains supplemental materials.
+                          readOnly: true
+                          type: string
+                        registrations:
+                          description: A link to the list of registrations that have been created from this node.
+                          readOnly: true
+                          type: string
+                        root:
+                          description: 'A link to the node that is the top-level parent of the current node. If the current node is the top-level node, the root is the current node.'
+                          readOnly: true
+                          type: string
+                        template_node:
+                          description: 'A link to the node that the current node was templated from, if the current node was created from a template.'
+                          readOnly: true
+                          type: string
+                        view_only_links:
+                          description: A link to the list of view only links that have been created for this node.
+                          readOnly: true
+                          type: string
+                        wikis:
+                          description: A link to the list of wiki pages for this node.
+                          readOnly: true
+                          type: string
+                      readOnly: false
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the node entity (`nodes`).
+                      readOnly: false
+                      type: string
+                  required:
+                    - type
+                    - attributes
+                  title: Node
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for projects
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/registrations/:
+    get:
+      description: |-
+        This endpoint returns registrations that have been found by the given Elasticsearch query. All registrations returned are serialized as registrations.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restrict their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    category: project
+                    collection: false
+                    current_user_can_comment: true
+                    current_user_permissions:
+                      - read
+                    date_created: '2012-04-01T15:49:07.702000'
+                    date_modified: '2016-12-08T21:45:17.058000'
+                    description: ''
+                    fork: false
+                    node_license: null
+                    preprint: false
+                    public: true
+                    registration: false
+                    tags:
+                      - replication
+                      - reproducibility
+                      - open science
+                      - reproduction
+                      - psychological science
+                      - psychology
+                      - metascience
+                      - crowdsource
+                    title: 'Reproducibility Project: Psychology'
+                  id: ezcuj
+                  links:
+                    html: 'https://osf.io/ezcuj/'
+                    self: 'https://api.osf.io/v2/nodes/ezcuj/'
+                  relationships:
+                    affiliated_institutions:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/institutions/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/institutions/'
+                          meta: {}
+                    children:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/children/'
+                          meta: {}
+                    citation:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/citation/'
+                          meta: {}
+                    comments:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/comments/?filter%5Btarget%5D=ezcuj'
+                          meta: {}
+                    contributors:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/contributors/'
+                          meta: {}
+                    draft_registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/draft_registrations/'
+                          meta: {}
+                    files:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/files/'
+                          meta: {}
+                    forks:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/forks/'
+                          meta: {}
+                    identifiers:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/identifiers/'
+                          meta: {}
+                    linked_nodes:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/linked_nodes/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/relationships/linked_nodes/'
+                          meta: {}
+                    logs:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/logs/'
+                          meta: {}
+                    node_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/node_links/'
+                          meta: {}
+                    preprints:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/preprints/'
+                          meta: {}
+                    registrations:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/registrations/'
+                          meta: {}
+                    root:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/'
+                          meta: {}
+                    view_only_links:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/view_only_links/'
+                          meta: {}
+                    wikis:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/nodes/ezcuj/wikis/'
+                          meta: {}
+                  type: nodes
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  properties:
+                    attributes:
+                      description: The properties of the registration entity.
+                      properties:
+                        article_doi:
+                          description: 'The DOI of the associated journal article, as entered by the user, if the resource is published.'
+                          readOnly: false
+                          type: string
+                        category:
+                          description: The category of the registered node.
+                          enum:
+                            - analysis
+                            - communication
+                            - data
+                            - hypothesis
+                            - instrumentation
+                            - methods and measures
+                            - procedure
+                            - project
+                            - software
+                            - other
+                          readOnly: true
+                          type: string
+                        children:
+                          description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                          items:
+                            type: string
+                          readOnly: false
+                          type: array
+                        collection:
+                          description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        current_user_can_comment:
+                          description: Whether or not the current user has permission to post comments on this registration. Comments on registrations can be set to allow all users to comment or restricted to only contributors.
+                          readOnly: true
+                          type: boolean
+                        current_user_permissions:
+                          description: 'A list of strings representing the permissions for the current user on this registration. Valid permissions are "admin", "read", and "write".'
+                          items:
+                            type: string
+                          readOnly: true
+                          type: array
+                        custom_citation:
+                          description: User-entered custom registration citation
+                          readOnly: false
+                          type: string
+                        date_created:
+                          description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_modified:
+                          description: 'The time at which the registered node was last modified, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_registered:
+                          description: 'The time at which this registration was created, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        date_withdrawn:
+                          description: 'The time at which this registration was withdrawn, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: The description of the registered node.
+                          readOnly: false
+                          type: string
+                        draft_registration:
+                          description: Required on POST. The ID of the draft registration from which the registration will be created.
+                          readOnly: false
+                          type: string
+                        embargo_end_date:
+                          description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        fork:
+                          description: Whether or not this registration represents a fork of another node.
+                          readOnly: true
+                          type: boolean
+                        lift_embargo:
+                          description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
+                          format: date-time
+                          readOnly: false
+                          type: string
+                        node_license:
+                          description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
+                          readOnly: false
+                          type: string
+                        pending_embargo_approval:
+                          description: Whether or not the embargo associated with this registration is pending approval from project administrators.
+                          readOnly: true
+                          type: boolean
+                        pending_registration_approval:
+                          description: Whether or not the registration is pending approval from project administrators.
+                          readOnly: true
+                          type: boolean
+                        pending_withdrawal:
+                          description: Whether or not the registration is pending approval for withdrawal from project administrators.
+                          readOnly: false
+                          type: boolean
+                        preprint:
+                          description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                          readOnly: true
+                          type: boolean
+                        public:
+                          description: Whether or not the registration is publicly visible.
+                          readOnly: true
+                          type: boolean
+                        registered_meta:
+                          description: A dictionary with supplemental registration questions and responses.
+                          readOnly: true
+                          type: string
+                        registration:
+                          description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
+                          readOnly: true
+                          type: boolean
+                        registration_choice:
+                          description: 'Required on POST. Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
+                          readOnly: false
+                          type: string
+                        registration_supplement:
+                          description: The title of the registration schema this registration conforms to.
+                          readOnly: true
+                          type: string
+                        tags:
+                          description: A list of strings that describe the registered node.
+                          items:
+                            type: string
+                          readOnly: false
+                          type: array
+                        template_from:
+                          description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
+                          readOnly: true
+                          type: string
+                        title:
+                          description: The title of the registered node.
+                          readOnly: true
+                          type: string
+                        wiki_enabled:
+                          description: Whether or not the registration has its wiki enabled.
+                          readOnly: true
+                          type: boolean
+                        withdrawal_justification:
+                          description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
+                          readOnly: false
+                          type: string
+                        withdrawn:
+                          description: Whether or not this registration has been withdrawn.
+                          readOnly: true
+                          type: boolean
+                      readOnly: false
+                      required:
+                        - draft_registration
+                        - registration_choice
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The unique identifier of the registration.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: URLs to alternative representations of the registrations entity.
+                      properties:
+                        html:
+                          description: A link to the registration's page on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        self:
+                          description: A link to the canonical API endpoint of this registration.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: URLs to other entities or entity collections that have a relationship to the registration entity.
+                      properties:
+                        affiliated_institutions:
+                          description: A link to the list of institutions this registration is affiliated with.
+                          readOnly: false
+                          type: string
+                        children:
+                          description: A link to the list of the registered node's children (components).
+                          readOnly: true
+                          type: string
+                        citation:
+                          description: A link to the citation details of this registration.
+                          readOnly: true
+                          type: string
+                        comments:
+                          description: A link to the list of comments on this registration.
+                          readOnly: true
+                          type: string
+                        contributors:
+                          description: A link to the list of contributors on this registration.
+                          readOnly: true
+                          type: string
+                        files:
+                          description: A link to the list of storage providers that have been enabled on this registration.
+                          readOnly: true
+                          type: string
+                        forks:
+                          description: A link to the list of nodes that are forks of this registration.
+                          readOnly: true
+                          type: string
+                        identifiers:
+                          description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
+                          readOnly: true
+                          type: string
+                        license:
+                          description: A relationship to the license that has been applied to the registration.
+                          readOnly: false
+                          type: string
+                        linked_nodes:
+                          description: A link to the list of nodes that are linked to this registration.
+                          readOnly: true
+                          type: string
+                        logs:
+                          description: A link to the list of log actions pertaining to this registration.
+                          readOnly: true
+                          type: string
+                        node_links:
+                          description: A link to the list of nodes that are linked to this registration. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
+                          readOnly: true
+                          type: string
+                        parent:
+                          description: 'A link to the node that is the direct parent of the current registration, if the current registration is a child registration.'
+                          readOnly: true
+                          type: string
+                        registered_by:
+                          description: A link to the user that initiated this registration.
+                          readOnly: true
+                          type: string
+                        registered_from:
+                          description: A link to the node that this registration was registered from.
+                          readOnly: true
+                          type: string
+                        registration_schema:
+                          description: A link to the metaschema that this registration conforms to.
+                          readOnly: true
+                          type: string
+                        root:
+                          description: 'A link to the node that is the top-level parent of the current registration. If the current registration is the top-level node, the root is the current registration.'
+                          readOnly: true
+                          type: string
+                        view_only_links:
+                          description: A link to the list of view only links that have been created for this registration.
+                          readOnly: true
+                          type: string
+                        wikis:
+                          description: A link to the list of wiki pages for this registration.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the registration entity (`registrations`).
+                      readOnly: true
+                      type: string
+                  required:
+                    - id
+                    - type
+                    - attributes
+                    - relationships
+                    - links
+                  title: Registration
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for registrations
+      tags:
+        - Search
+      x-response-schema: Search
+  /search/users/:
+    get:
+      description: |-
+        This endpoint returns users that have been found by the given Elasticsearch query. All users returned are serialized as users.
+        #### Permissions
+        All accessible public materials are returned.
+        #### Filtering
+        The following query params allows the user to restrict their search.
+
+          - `?q=<Str>` -- Query to search projects, components, registrations, users, and files for.
+          - `?page=<Int>` -- page number of results to view, default 1
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    active: true
+                    date_registered: '2014-06-15T17:39:06.701000'
+                    family_name: Rollins
+                    full_name: Casey Rollins
+                    given_name: Casey
+                    locale: en_US
+                    middle_names: ''
+                    suffix: ''
+                    timezone: America/New_York
+                  id: q7fts
+                  links:
+                    html: 'https://osf.io/q7fts/'
+                    profile_image: 'https://secure.gravatar.com/avatar/e9d9311ab2f5ab7492a86ac9adb5c8e9?d=identicon'
+                    self: 'https://api.osf.io/v2/users/q7fts/'
+                  relationships:
+                    institutions:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/q7fts/institutions/'
+                          meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/users/q7fts/relationships/institutions/'
+                          meta: {}
+                    nodes:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/users/q7fts/nodes/'
+                          meta: {}
+                  type: users
+              links:
+                first: 'https://api.osf.io/v2/search/'
+                last: 'https://api.osf.io/v2/search/?page=269577'
+                next: 'https://api.osf.io/v2/search/?page=3'
+                prev: 'https://api.osf.io/v2/search/'
+                self: 'https://api.osf.io/v2/search/?page=2'
+              meta:
+                per_page: 10
+                total: 2695768
+                version: 2.14
+          schema:
+            properties:
+              data:
+                items:
+                  example:
+                    data:
+                      attributes:
+                        full_name: Casey M. Rollins
+                        middle_names: Marie
+                        social:
+                          github:
+                            - caseyrollins
+                      id: '{user_id}'
+                      type: users
+                  properties:
+                    attributes:
+                      description: The properties of the user entity.
+                      properties:
+                        active:
+                          description: Whether or not the user is an active user.
+                          readOnly: true
+                          type: boolean
+                        date_registered:
+                          description: 'The time at which the user registered their account, as an iso8601 formatted timestamp.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        family_name:
+                          description: 'The family name of the user, used for bibliographic citations.'
+                          readOnly: false
+                          type: string
+                        full_name:
+                          description: 'The full name of the user, used for display on the OSF.'
+                          readOnly: false
+                          type: string
+                        given_name:
+                          description: 'The given name of the user, used for bibliographic citations.'
+                          readOnly: false
+                          type: string
+                        locale:
+                          description: 'The user''s locale, e.g. ''en_US''.'
+                          readOnly: false
+                          type: string
+                        middle_names:
+                          description: 'The middle names of the user, used for bibliographic citations.'
+                          readOnly: false
+                          type: string
+                        social:
+                          description: The social fields associated with a user.
+                          properties:
+                            academiaProfileID:
+                              description: The academiaProfileID for the given user.
+                              type: string
+                            baiduScholar:
+                              description: The baiduScholar for the given user.
+                              type: string
+                            github:
+                              description: The github usernames for the given user.
+                              items:
+                                type: string
+                              type: array
+                            impactStory:
+                              description: The impactStory for the given user.
+                              type: string
+                            linkedIn:
+                              description: The linkedIn profiles for the given user.
+                              items:
+                                type: string
+                              type: array
+                            orcid:
+                              description: The orcid for the given user.
+                              type: string
+                            profileWebsites:
+                              description: The profileWebsites for the given user.
+                              items:
+                                type: string
+                              type: array
+                            researchGate:
+                              description: The researchGate for the given user.
+                              type: string
+                            researcherId:
+                              description: The researcherId for the given user.
+                              type: string
+                            scholar:
+                              description: The google scholar for the given user.
+                              type: string
+                            ssrn:
+                              description: The ssrn for the given user.
+                              type: string
+                            twitter:
+                              description: The twitter handles for the given user.
+                              items:
+                                type: string
+                              type: array
+                          readOnly: false
+                          type: object
+                        suffix:
+                          description: 'The suffix of the user, used for bibliographic citations.'
+                          readOnly: false
+                          type: string
+                        timezone:
+                          description: 'The user''s timezone, e.g. ''Etc/UTC''.'
+                          readOnly: false
+                          type: string
+                      readOnly: false
+                      required:
+                        - active
+                        - date_registered
+                        - full_name
+                      title: Attributes
+                      type: object
+                    id:
+                      description: The unique identifier of the user entity.
+                      readOnly: true
+                      type: string
+                    links:
+                      description: URLs to alternative representations of the user entity.
+                      properties:
+                        html:
+                          description: A link to the user's profile page on the OSF.
+                          format: URL
+                          readOnly: true
+                          type: string
+                        profile_image:
+                          description: A link to the user's profile image.
+                          format: URL
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Links
+                      type: object
+                    relationships:
+                      description: URLs to other entities or entity collections that have a relationship to the user entity.
+                      properties:
+                        default_region:
+                          description: The storage region where the user's files will be stored by default.
+                          readOnly: false
+                          type: string
+                        institutions:
+                          description: A link to the list of institutions the user is affiliated with.
+                          readOnly: true
+                          type: string
+                        nodes:
+                          description: A link to the list of nodes the user is a contributor to.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Relationships
+                      type: object
+                    type:
+                      description: The type identifier of the user entity (`users`).
+                      readOnly: true
+                      type: string
+                  required:
+                    - id
+                    - type
+                    - attributes
+                    - relationships
+                    - links
+                  title: User
+                  type: object
+                type: array
+              links:
+                description: URLs to alternative representations of the search results.
+                properties:
+                  first:
+                    description: A link to the first page of search results.
+                    format: URL
+                    type: string
+                  last:
+                    description: A link to the last page of search results.
+                    format: URL
+                    type: string
+                  next:
+                    description: A link to the next page of search results.
+                    format: URL
+                    type: string
+                  prev:
+                    description: A link to the previous page of search results.
+                    format: URL
+                    type: string
+                  self:
+                    description: A link to the detail page for the log.
+                    format: URL
+                    type: string
+                required:
+                  - self
+                  - first
+                  - last
+                  - prev
+                  - next
+                title: Links
+                type: object
+              meta:
+                properties:
+                  per_page:
+                    description: The number of results returned on a single page.
+                    type: integer
+                  total:
+                    description: The total number of items returned by the search.
+                    type: integer
+                  version:
+                    description: The API version of OSF being used.
+                    type: integer
+                title: Meta
+                type: object
+            title: Search
+            type: object
+      summary: Search the OSF for users
+      tags:
+        - Search
+      x-response-schema: Search
   /taxonomies/:
     get:
       deprecated: true
@@ -24453,6 +26769,7 @@ x-tagGroups:
       - Entities & Entity Collections
       - External Libraries
       - Changelog
+      - Searching
   - name: API Reference
     tags:
       - Addons
@@ -24468,6 +26785,7 @@ x-tagGroups:
       - Preprints
       - Preprint Providers
       - Registrations
+      - Search
       - Taxonomies
       - Users
       - View Only Links

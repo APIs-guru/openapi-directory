@@ -89,41 +89,42 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              value:
-                - aggregationFunction: sum
-                  executionType: any
-                  intervalType: PT1H
-                  numberOfTopQueries: 1
-                  observationEndTime: '2017-07-12T16:21:54.0916567Z'
-                  observationStartTime: '2017-07-11T16:21:54.0916567Z'
-                  observedMetric: cpu
-                  queries:
-                    - intervals:
-                        - executionCount: 12
-                          intervalStartTime: '2017-07-11T16:00:00'
-                          metrics:
-                            - displayName: Cpu
-                              name: cpu
-                              unit: percentage
-                              value: 0.000763888888888889
-                            - displayName: Physical Io Reads
-                              name: io
-                              unit: percentage
-                              value: 0
-                            - displayName: Log Writes
-                              name: logIo
-                              unit: percentage
-                              value: 0
-                            - displayName: Memory consumption
-                              name: memory
-                              unit: KB
-                              value: 0
-                            - displayName: Query duration
-                              name: duration
-                              unit: microseconds
-                              value: 3308
-                      queryId: '19'
-                  type: Microsoft.Sql/servers/databases/topQueries
+              body:
+                value:
+                  - aggregationFunction: sum
+                    executionType: any
+                    intervalType: PT1H
+                    numberOfTopQueries: 1
+                    observationEndTime: '2017-07-12T16:21:54.0916567Z'
+                    observationStartTime: '2017-07-11T16:21:54.0916567Z'
+                    observedMetric: cpu
+                    queries:
+                      - intervals:
+                          - executionCount: 12
+                            intervalStartTime: '2017-07-11T16:00:00'
+                            metrics:
+                              - displayName: Cpu
+                                name: cpu
+                                unit: percentage
+                                value: 0.000763888888888889
+                              - displayName: Physical Io Reads
+                                name: io
+                                unit: percentage
+                                value: 0
+                              - displayName: Log Writes
+                                name: logIo
+                                unit: percentage
+                                value: 0
+                              - displayName: Memory consumption
+                                name: memory
+                                unit: KB
+                                value: 0
+                              - displayName: Query duration
+                                name: duration
+                                unit: microseconds
+                                value: 3308
+                        queryId: '19'
+                    type: Microsoft.Sql/servers/databases/topQueries
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{queryId}/queryText':
@@ -174,10 +175,11 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              value:
-                - name: current
-                  queryText: select 1
-                  type: Microsoft.Sql/servers/databases/topQueries/queryText
+              body:
+                value:
+                  - name: current
+                    queryText: select 1
+                    type: Microsoft.Sql/servers/databases/topQueries/queryText
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{queryId}/statistics':
@@ -228,32 +230,33 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              value:
-                - intervals:
-                    - executionCount: 12
-                      intervalStartTime: '2017-07-11T16:00:00'
-                      metrics:
-                        - displayName: Cpu
-                          name: cpu
-                          unit: percentage
-                          value: 0.000763888888888889
-                        - displayName: Physical Io Reads
-                          name: io
-                          unit: percentage
-                          value: 0
-                        - displayName: Log Writes
-                          name: logIo
-                          unit: percentage
-                          value: 0
-                        - displayName: Memory consumption
-                          name: memory
-                          unit: KB
-                          value: 0
-                        - displayName: Query duration
-                          name: duration
-                          unit: microseconds
-                          value: 3308
-                  queryId: '19'
+              body:
+                value:
+                  - intervals:
+                      - executionCount: 12
+                        intervalStartTime: '2017-07-11T16:00:00'
+                        metrics:
+                          - displayName: Cpu
+                            name: cpu
+                            unit: percentage
+                            value: 0.000763888888888889
+                          - displayName: Physical Io Reads
+                            name: io
+                            unit: percentage
+                            value: 0
+                          - displayName: Log Writes
+                            name: logIo
+                            unit: percentage
+                            value: 0
+                          - displayName: Memory consumption
+                            name: memory
+                            unit: KB
+                            value: 0
+                          - displayName: Query duration
+                            name: duration
+                            unit: microseconds
+                            value: 3308
+                    queryId: '19'
       x-ms-pageable:
         nextLinkName: null
 definitions:

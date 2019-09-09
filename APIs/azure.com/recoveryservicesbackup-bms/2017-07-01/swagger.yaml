@@ -221,8 +221,7 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-000000000000
             vaultName: myVault
           responses:
-            '204':
-              body: {}
+            '204': {}
     get:
       description: "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API."
       operationId: ProtectionIntent_Get
@@ -265,7 +264,6 @@ paths:
                 name: 249D9B07-D2EF-4202-AA64-65F35418564E
                 properties:
                   backupManagementType: AzureWorkload
-                  friendlyName: 249D9B07-D2EF-4202-AA64-65F35418564E
                   itemId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupProtectionContainer/VMAppContainer;Compute;testVmName/backupProtectableItems/SQLInstance;MSSQLSERVER
                   policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy
                 type: Microsoft.RecoveryServices/vaults/backupProtectionIntent
@@ -308,7 +306,6 @@ paths:
             intentObjectName: vm;iaasvmcontainerv2;chamsrgtest;chamscandel
             parameters:
               properties:
-                friendlyName: oneboxTestVmIntent
                 policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy
                 protectionIntentItemType: AzureResourceItem
                 sourceResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/chamsrgtest/providers/Microsoft.Compute/virtualMachines/chamscandel
@@ -322,7 +319,6 @@ paths:
                 name: vm;iaasvmcontainerv2;chamsrgtest;chamscandel
                 properties:
                   backupManagementType: AzureIaasVM
-                  friendlyName: ''
                   policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy
                   protectionState: Protected
                 type: Microsoft.RecoveryServices/vaults/backupProtectionIntent
@@ -593,7 +589,6 @@ paths:
             vaultName: NetSDKTestRsVault
           responses:
             '202':
-              body: null
               headers:
                 Location: 'https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01'
                 Retry-After: 60
@@ -818,14 +813,14 @@ paths:
           responses:
             '200':
               body:
-                - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupFabrics/Azure/backupProtectionIntent/249D9B07-D2EF-4202-AA64-65F35418564E
-                  name: 249D9B07-D2EF-4202-AA64-65F35418564E
-                  properties:
-                    backupManagementType: AzureWorkload
-                    friendlyName: 249D9B07-D2EF-4202-AA64-65F35418564E
-                    itemId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupProtectionContainer/VMAppContainer;Compute;testVmName/backupProtectableItems/SQLInstance;MSSQLSERVER
-                    policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy
-                  type: Microsoft.RecoveryServices/vaults/backupProtectionIntent
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupFabrics/Azure/backupProtectionIntent/249D9B07-D2EF-4202-AA64-65F35418564E
+                    name: 249D9B07-D2EF-4202-AA64-65F35418564E
+                    properties:
+                      backupManagementType: AzureWorkload
+                      itemId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupProtectionContainer/VMAppContainer;Compute;testVmName/backupProtectableItems/SQLInstance;MSSQLSERVER
+                      policyId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy
+                    type: Microsoft.RecoveryServices/vaults/backupProtectionIntent
       x-ms-odata: '#/definitions/ProtectionIntentQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -2602,9 +2597,6 @@ definitions:
       friendlyName:
         description: Friendly name of this backup item.
         type: string
-      isScheduledForDeferredDelete:
-        description: Specifies if the item is scheduled for deferred deletion.
-        type: boolean
       lastBackupStatus:
         description: Status of last backup operation.
         type: string
@@ -2993,6 +2985,22 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: CreateMode
+      deferredDeleteTimeInUTC:
+        description: Time for deferred deletion in UTC
+        format: date-time
+        type: string
+      deferredDeleteTimeRemaining:
+        description: Time remaining before the DS marked for deferred delete is permanently deleted
+        type: string
+      isDeferredDeleteScheduleUpcoming:
+        description: Flag to identify whether the deferred deleted DS is to be purged soon
+        type: boolean
+      isRehydrate:
+        description: Flag to identify that deferred deleted DS is to be moved into Pause state
+        type: boolean
+      isScheduledForDeferredDelete:
+        description: Flag to identify whether the DS is scheduled for deferred delete
+        type: boolean
       lastRecoveryPoint:
         description: Timestamp when the last (latest) backup copy was created for this backup item.
         format: date-time

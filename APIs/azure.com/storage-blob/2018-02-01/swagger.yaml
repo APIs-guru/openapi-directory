@@ -177,10 +177,8 @@ paths:
             resourceGroupName: res4079
             subscriptionId: '{subscription-id}'
           responses:
-            '200':
-              body: ''
-            '204':
-              body: ''
+            '200': {}
+            '204': {}
     get:
       description: 'Gets properties of a specified container. '
       operationId: BlobContainers_Get
@@ -906,22 +904,17 @@ paths:
             containerName: container6185
             monitor: 'true'
             parameters:
-              properties:
-                action: 0
-                breakPeriod: null
-                leaseDuration: -1
-                leaseId: null
-                proposedLeaseId: null
+              action: Acquire
+              breakPeriod: null
+              leaseDuration: -1
+              leaseId: null
+              proposedLeaseId: null
             resourceGroupName: res3376
             subscriptionId: '{subscription-id}'
           responses:
             '200':
               body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185'
-                name: container6185
-                properties:
-                  leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
-                type: Microsoft.Storage/storageAccounts/blobServices/containers
+                leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
         Break a lease on a container:
           parameters:
             accountName: sto328
@@ -929,22 +922,17 @@ paths:
             containerName: container6185
             monitor: 'true'
             parameters:
-              properties:
-                action: 4
-                breakPeriod: null
-                leaseDuration: null
-                leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
-                proposedLeaseId: null
+              action: Break
+              breakPeriod: null
+              leaseDuration: null
+              leaseId: 8698f513-fa75-44a1-b8eb-30ba336af27d
+              proposedLeaseId: null
             resourceGroupName: res3376
             subscriptionId: '{subscription-id}'
           responses:
             '200':
               body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185'
-                name: container6185
-                properties:
-                  leaseTimeSeconds: '0'
-                type: Microsoft.Storage/storageAccounts/blobServices/containers
+                leaseTimeSeconds: '0'
 definitions:
   BlobContainer:
     allOf:

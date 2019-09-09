@@ -65,67 +65,68 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName1
-                  location: westus
-                  name: circuitName1
-                  properties:
-                    allowClassicOperations: false
-                    authorizations:
-                      - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
-                        name: MyAuthorization1
-                        properties:
-                          authorizationKey: authkey
-                          authorizationUseStatus: Available
-                          provisioningState: Succeeded
-                    circuitProvisioningState: Enabled
-                    gatewayManagerEtag: '113'
-                    peerings: []
-                    provisioningState: Succeeded
-                    resourceGuid: 262effd3-248d-4754-9068-0a89260dd918
-                    serviceKey: a1410692-ed3b-4ceb-b94a-b90b95d398d1
-                    serviceProviderProperties:
-                      bandwidthInMbps: 200
-                      peeringLocation: peeringLocation
-                      serviceProviderName: providerName
-                    serviceProviderProvisioningState: Provisioned
-                  sku:
-                    family: MeteredData
-                    name: Standard_MeteredData
-                    tier: Standard
-                  type: Microsoft.Network/expressRouteCircuits
-                - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2
-                  location: westus
-                  name: circuitName2
-                  properties:
-                    allowClassicOperations: false
-                    authorizations:
-                      - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2/authorizations/MyAuthorization2
-                        name: MyAuthorization2
-                        properties:
-                          authorizationKey: authkey
-                          authorizationUseStatus: Available
-                          provisioningState: Succeeded
-                    circuitProvisioningState: Enabled
-                    gatewayManagerEtag: ''
-                    peerings: []
-                    provisioningState: Succeeded
-                    resourceGuid: 47853fd2-9261-4670-b7c3-2debcf9b88da
-                    serviceKey: 6569625a-9ba4-498b-9719-14d778eef609
-                    serviceProviderProperties:
-                      bandwidthInMbps: 200
-                      peeringLocation: peeringLocation
-                      serviceProviderName: providerName
-                    serviceProviderProvisioningState: NotProvisioned
-                  sku:
-                    family: MeteredData
-                    name: Standard_MeteredData
-                    tier: Standard
-                  type: Microsoft.Network/expressRouteCircuits
+              body:
+                value:
+                  - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName1
+                    location: westus
+                    name: circuitName1
+                    properties:
+                      allowClassicOperations: false
+                      authorizations:
+                        - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
+                          name: MyAuthorization1
+                          properties:
+                            authorizationKey: authkey
+                            authorizationUseStatus: Available
+                            provisioningState: Succeeded
+                      circuitProvisioningState: Enabled
+                      gatewayManagerEtag: '113'
+                      peerings: []
+                      provisioningState: Succeeded
+                      resourceGuid: 262effd3-248d-4754-9068-0a89260dd918
+                      serviceKey: a1410692-ed3b-4ceb-b94a-b90b95d398d1
+                      serviceProviderProperties:
+                        bandwidthInMbps: 200
+                        peeringLocation: peeringLocation
+                        serviceProviderName: providerName
+                      serviceProviderProvisioningState: Provisioned
+                    sku:
+                      family: MeteredData
+                      name: Standard_MeteredData
+                      tier: Standard
+                    type: Microsoft.Network/expressRouteCircuits
+                  - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2
+                    location: westus
+                    name: circuitName2
+                    properties:
+                      allowClassicOperations: false
+                      authorizations:
+                        - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2/authorizations/MyAuthorization2
+                          name: MyAuthorization2
+                          properties:
+                            authorizationKey: authkey
+                            authorizationUseStatus: Available
+                            provisioningState: Succeeded
+                      circuitProvisioningState: Enabled
+                      gatewayManagerEtag: ''
+                      peerings: []
+                      provisioningState: Succeeded
+                      resourceGuid: 47853fd2-9261-4670-b7c3-2debcf9b88da
+                      serviceKey: 6569625a-9ba4-498b-9719-14d778eef609
+                      serviceProviderProperties:
+                        bandwidthInMbps: 200
+                        peeringLocation: peeringLocation
+                        serviceProviderName: providerName
+                      serviceProviderProvisioningState: NotProvisioned
+                    sku:
+                      family: MeteredData
+                      name: Standard_MeteredData
+                      tier: Standard
+                    type: Microsoft.Network/expressRouteCircuits
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders':
@@ -157,32 +158,33 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - id: /subscriptions//resourceGroups//providers/Microsoft.Network/expressRouteServiceProviders/
-                  name: providerName
-                  properties:
-                    bandwidthsOffered:
-                      - offerName: 50Mbps
-                        valueInMbps: 50
-                      - offerName: 100Mbps
-                        valueInMbps: 100
-                      - offerName: 200Mbps
-                        valueInMbps: 200
-                      - offerName: 500Mbps
-                        valueInMbps: 500
-                      - offerName: 1Gbps
-                        valueInMbps: 1000
-                      - offerName: 2Gbps
-                        valueInMbps: 2000
-                      - offerName: 5Gbps
-                        valueInMbps: 5000
-                      - offerName: 10Gbps
-                        valueInMbps: 10000
-                    peeringLocations:
-                      - peeringLocation1
-                      - peeringLocation2
-                    provisioningState: Succeeded
-                  type: Microsoft.Network/expressRouteServiceProviders
+              body:
+                value:
+                  - id: /subscriptions//resourceGroups//providers/Microsoft.Network/expressRouteServiceProviders/
+                    name: providerName
+                    properties:
+                      bandwidthsOffered:
+                        - offerName: 50Mbps
+                          valueInMbps: 50
+                        - offerName: 100Mbps
+                          valueInMbps: 100
+                        - offerName: 200Mbps
+                          valueInMbps: 200
+                        - offerName: 500Mbps
+                          valueInMbps: 500
+                        - offerName: 1Gbps
+                          valueInMbps: 1000
+                        - offerName: 2Gbps
+                          valueInMbps: 2000
+                        - offerName: 5Gbps
+                          valueInMbps: 5000
+                        - offerName: 10Gbps
+                          valueInMbps: 10000
+                      peeringLocations:
+                        - peeringLocation1
+                        - peeringLocation2
+                      provisioningState: Succeeded
+                    type: Microsoft.Network/expressRouteServiceProviders
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits':
@@ -220,67 +222,68 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName1
-                  location: westus
-                  name: circuitName1
-                  properties:
-                    allowClassicOperations: false
-                    authorizations:
-                      - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
-                        name: MyAuthorization1
-                        properties:
-                          authorizationKey: authkey
-                          authorizationUseStatus: Available
-                          provisioningState: Succeeded
-                    circuitProvisioningState: Enabled
-                    gatewayManagerEtag: '113'
-                    peerings: []
-                    provisioningState: Succeeded
-                    resourceGuid: 262effd3-248d-4754-9068-0a89260dd918
-                    serviceKey: a1410692-ed3b-4ceb-b94a-b90b95d398d1
-                    serviceProviderProperties:
-                      bandwidthInMbps: 200
-                      peeringLocation: peeringLocation
-                      serviceProviderName: providerName
-                    serviceProviderProvisioningState: Provisioned
-                  sku:
-                    family: MeteredData
-                    name: Standard_MeteredData
-                    tier: Standard
-                  type: Microsoft.Network/expressRouteCircuits
-                - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2
-                  location: westus
-                  name: circuitName2
-                  properties:
-                    allowClassicOperations: false
-                    authorizations:
-                      - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2/authorizations/MyAuthorization2
-                        name: MyAuthorization2
-                        properties:
-                          authorizationKey: authkey
-                          authorizationUseStatus: Available
-                          provisioningState: Succeeded
-                    circuitProvisioningState: Enabled
-                    gatewayManagerEtag: ''
-                    peerings: []
-                    provisioningState: Succeeded
-                    resourceGuid: 47853fd2-9261-4670-b7c3-2debcf9b88da
-                    serviceKey: 6569625a-9ba4-498b-9719-14d778eef609
-                    serviceProviderProperties:
-                      bandwidthInMbps: 200
-                      peeringLocation: peeringLocation
-                      serviceProviderName: providerName
-                    serviceProviderProvisioningState: NotProvisioned
-                  sku:
-                    family: MeteredData
-                    name: Standard_MeteredData
-                    tier: Standard
-                  type: Microsoft.Network/expressRouteCircuits
+              body:
+                value:
+                  - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName1
+                    location: westus
+                    name: circuitName1
+                    properties:
+                      allowClassicOperations: false
+                      authorizations:
+                        - etag: W/"832b28c3-f5fd-4d2a-a2cb-6e4a2fe452b3"
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
+                          name: MyAuthorization1
+                          properties:
+                            authorizationKey: authkey
+                            authorizationUseStatus: Available
+                            provisioningState: Succeeded
+                      circuitProvisioningState: Enabled
+                      gatewayManagerEtag: '113'
+                      peerings: []
+                      provisioningState: Succeeded
+                      resourceGuid: 262effd3-248d-4754-9068-0a89260dd918
+                      serviceKey: a1410692-ed3b-4ceb-b94a-b90b95d398d1
+                      serviceProviderProperties:
+                        bandwidthInMbps: 200
+                        peeringLocation: peeringLocation
+                        serviceProviderName: providerName
+                      serviceProviderProvisioningState: Provisioned
+                    sku:
+                      family: MeteredData
+                      name: Standard_MeteredData
+                      tier: Standard
+                    type: Microsoft.Network/expressRouteCircuits
+                  - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2
+                    location: westus
+                    name: circuitName2
+                    properties:
+                      allowClassicOperations: false
+                      authorizations:
+                        - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName2/authorizations/MyAuthorization2
+                          name: MyAuthorization2
+                          properties:
+                            authorizationKey: authkey
+                            authorizationUseStatus: Available
+                            provisioningState: Succeeded
+                      circuitProvisioningState: Enabled
+                      gatewayManagerEtag: ''
+                      peerings: []
+                      provisioningState: Succeeded
+                      resourceGuid: 47853fd2-9261-4670-b7c3-2debcf9b88da
+                      serviceKey: 6569625a-9ba4-498b-9719-14d778eef609
+                      serviceProviderProperties:
+                        bandwidthInMbps: 200
+                        peeringLocation: peeringLocation
+                        serviceProviderName: providerName
+                      serviceProviderProvisioningState: NotProvisioned
+                    sku:
+                      family: MeteredData
+                      name: Standard_MeteredData
+                      tier: Standard
+                    type: Microsoft.Network/expressRouteCircuits
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}':
@@ -591,7 +594,7 @@ paths:
               properties:
                 bandwidthInGbps: 10
                 expressRoutePort:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
               sku:
                 family: MeteredData
                 name: Premium_MeteredData
@@ -611,7 +614,7 @@ paths:
                   bandwidthInGbps: 10
                   circuitProvisioningState: Enabled
                   expressRoutePort:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                   gatewayManagerEtag: '20'
                   peerings: []
                   provisioningState: Succeeded
@@ -633,7 +636,7 @@ paths:
                   bandwidthInGbps: 10
                   circuitProvisioningState: Enabled
                   expressRoutePort:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                   gatewayManagerEtag: '20'
                   peerings: []
                   provisioningState: Succeeded
@@ -686,14 +689,15 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
-                  name: MyAuthorization1
-                  properties:
-                    authorizationKey: authKey
-                    authorizationUseStatus: Available
-                    provisioningState: Succeeded
+              body:
+                value:
+                  - etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
+                    name: MyAuthorization1
+                    properties:
+                      authorizationKey: authKey
+                      authorizationUseStatus: Available
+                      provisioningState: Succeeded
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}':
@@ -794,13 +798,14 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
-              name: MyAuthorization1
-              properties:
-                authorizationKey: authKey
-                authorizationUseStatus: Available
-                provisioningState: Succeeded
+              body:
+                etag: W/"e33c875f-48df-4a91-b7d3-eb95b5ddbb89"
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/authorizations/MyAuthorization1
+                name: MyAuthorization1
+                properties:
+                  authorizationKey: authKey
+                  authorizationUseStatus: Available
+                  provisioningState: Succeeded
     put:
       description: Creates or updates an authorization in the specified express route circuit.
       operationId: ExpressRouteCircuitAuthorizations_CreateOrUpdate
@@ -918,66 +923,67 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering
-                  name: MicrosoftPeering
-                  properties:
-                    azureASN: 12076
-                    expressRouteConnection: ''
-                    gatewayManagerEtag: '103'
-                    ipv6PeeringConfig:
+              body:
+                value:
+                  - etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering
+                    name: MicrosoftPeering
+                    properties:
+                      azureASN: 12076
+                      expressRouteConnection: ''
+                      gatewayManagerEtag: '103'
+                      ipv6PeeringConfig:
+                        microsoftPeeringConfig:
+                          advertisedCommunities: []
+                          advertisedPublicPrefixes:
+                            - '3FFE:FFFF:0:CD31::/120'
+                          advertisedPublicPrefixesState: ValidationNeeded
+                          customerASN: 23
+                          legacyMode: 0
+                          routingRegistryName: ARIN
+                        primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
+                        secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                        state: Enabled
+                      lastModifiedBy: Customer
                       microsoftPeeringConfig:
                         advertisedCommunities: []
                         advertisedPublicPrefixes:
-                          - '3FFE:FFFF:0:CD31::/120'
+                          - 123.1.0.0/24
                         advertisedPublicPrefixesState: ValidationNeeded
                         customerASN: 23
                         legacyMode: 0
                         routingRegistryName: ARIN
-                      primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
-                      secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                      peerASN: 100
+                      peeringType: MicrosoftPeering
+                      primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
+                      primaryPeerAddressPrefix: 123.0.0.0/30
+                      provisioningState: Succeeded
+                      secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
+                      secondaryPeerAddressPrefix: 123.0.0.4/30
                       state: Enabled
-                    lastModifiedBy: Customer
-                    microsoftPeeringConfig:
-                      advertisedCommunities: []
-                      advertisedPublicPrefixes:
-                        - 123.1.0.0/24
-                      advertisedPublicPrefixesState: ValidationNeeded
-                      customerASN: 23
-                      legacyMode: 0
-                      routingRegistryName: ARIN
-                    peerASN: 100
-                    peeringType: MicrosoftPeering
-                    primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
-                    primaryPeerAddressPrefix: 123.0.0.0/30
-                    provisioningState: Succeeded
-                    secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
-                    secondaryPeerAddressPrefix: 123.0.0.4/30
-                    state: Enabled
-                    vlanId: 300
-                - etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering
-                  name: AzurePrivatePeering
-                  properties:
-                    azureASN: 12076
-                    expressRouteConnection:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName
-                    gatewayManagerEtag: '103'
-                    ipv6PeeringConfig:
-                      primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
-                      secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                      vlanId: 300
+                  - etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering
+                    name: AzurePrivatePeering
+                    properties:
+                      azureASN: 12076
+                      expressRouteConnection:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName
+                      gatewayManagerEtag: '103'
+                      ipv6PeeringConfig:
+                        primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
+                        secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                        state: Enabled
+                      lastModifiedBy: Customer
+                      peerASN: 100
+                      peeringType: AzurePrivatePeering
+                      primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
+                      primaryPeerAddressPrefix: 10.0.0.0/30
+                      provisioningState: Succeeded
+                      secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
+                      secondaryPeerAddressPrefix: 10.0.0.4/30
                       state: Enabled
-                    lastModifiedBy: Customer
-                    peerASN: 100
-                    peeringType: AzurePrivatePeering
-                    primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
-                    primaryPeerAddressPrefix: 10.0.0.0/30
-                    provisioningState: Succeeded
-                    secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
-                    secondaryPeerAddressPrefix: 10.0.0.4/30
-                    state: Enabled
-                    vlanId: 200
+                      vlanId: 200
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}':
@@ -1078,42 +1084,43 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering
-              name: MicrosoftPeering
-              properties:
-                azureASN: 12076
-                gatewayManagerEtag: '103'
-                ipv6PeeringConfig:
+              body:
+                etag: W/"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9"
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering
+                name: MicrosoftPeering
+                properties:
+                  azureASN: 12076
+                  gatewayManagerEtag: '103'
+                  ipv6PeeringConfig:
+                    microsoftPeeringConfig:
+                      advertisedCommunities: []
+                      advertisedPublicPrefixes:
+                        - '3FFE:FFFF:0:CD31::/120'
+                      advertisedPublicPrefixesState: ValidationNeeded
+                      customerASN: 23
+                      legacyMode: 0
+                      routingRegistryName: ARIN
+                    primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
+                    secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                    state: Enabled
+                  lastModifiedBy: Customer
                   microsoftPeeringConfig:
                     advertisedCommunities: []
                     advertisedPublicPrefixes:
-                      - '3FFE:FFFF:0:CD31::/120'
+                      - 123.1.0.0/24
                     advertisedPublicPrefixesState: ValidationNeeded
                     customerASN: 23
                     legacyMode: 0
                     routingRegistryName: ARIN
-                  primaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::/126'
-                  secondaryPeerAddressPrefix: '3FFE:FFFF:0:CD30::4/126'
+                  peerASN: 100
+                  peeringType: MicrosoftPeering
+                  primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
+                  primaryPeerAddressPrefix: 123.0.0.0/30
+                  provisioningState: Succeeded
+                  secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
+                  secondaryPeerAddressPrefix: 123.0.0.4/30
                   state: Enabled
-                lastModifiedBy: Customer
-                microsoftPeeringConfig:
-                  advertisedCommunities: []
-                  advertisedPublicPrefixes:
-                    - 123.1.0.0/24
-                  advertisedPublicPrefixesState: ValidationNeeded
-                  customerASN: 23
-                  legacyMode: 0
-                  routingRegistryName: ARIN
-                peerASN: 100
-                peeringType: MicrosoftPeering
-                primaryAzurePort: A51-TEST-06GMR-CIS-1-PRI-A
-                primaryPeerAddressPrefix: 123.0.0.0/30
-                provisioningState: Succeeded
-                secondaryAzurePort: A51-TEST-06GMR-CIS-2-SEC-A
-                secondaryPeerAddressPrefix: 123.0.0.4/30
-                state: Enabled
-                vlanId: 300
+                  vlanId: 300
     put:
       description: Creates or updates a peering in the specified express route circuits.
       operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
@@ -1282,17 +1289,13 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - age: 0
-                  interface: Microsoft
-                  ipAddress: IPAddress
-                  macAddress: macAddress
-            '202':
-              value:
-                - age: 0
-                  interface: Microsoft
-                  ipAddress: IPAddress
-                  macAddress: macAddress
+              body:
+                value:
+                  - age: 0
+                    interface: Microsoft
+                    ipAddress: IPAddress
+                    macAddress: macAddress
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections':
     get:
@@ -1646,19 +1649,14 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - locPrf: ''
-                  network: ''
-                  nextHop: ''
-                  path: ''
-                  weight: 0
-            '202':
-              value:
-                - locPrf: ''
-                  network: ''
-                  nextHop: ''
-                  path: ''
-                  weight: 0
+              body:
+                value:
+                  - locPrf: ''
+                    network: ''
+                    nextHop: ''
+                    path: ''
+                    weight: 0
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}':
     post:
@@ -1715,19 +1713,14 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - as: 9583
-                  neighbor: 100.65.171.1
-                  statePfxRcd: Idle
-                  upDown: never
-                  v: 4
-            '202':
-              value:
-                - as: 9583
-                  neighbor: 100.65.171.1
-                  statePfxRcd: Idle
-                  upDown: never
-                  v: 4
+              body:
+                value:
+                  - as: 9583
+                    neighbor: 100.65.171.1
+                    statePfxRcd: Idle
+                    upDown: never
+                    v: 4
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats':
     get:
@@ -1776,10 +1769,11 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              primaryBytesIn: 537408
-              primaryBytesOut: 44032550
-              secondaryBytesIn: 0
-              secondaryBytesOut: 39002500
+              body:
+                primaryBytesIn: 537408
+                primaryBytesOut: 44032550
+                secondaryBytesIn: 0
+                secondaryBytesOut: 39002500
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats':
     get:
       description: Gets all the stats from an express route circuit in a resource group.
@@ -1821,10 +1815,11 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              primaryBytesIn: 537408
-              primaryBytesOut: 44032550
-              secondaryBytesIn: 0
-              secondaryBytesOut: 39002500
+              body:
+                primaryBytesIn: 537408
+                primaryBytesOut: 44032550
+                secondaryBytesIn: 0
+                secondaryBytesOut: 39002500
 definitions:
   AuthorizationListResult:
     description: Response for ListAuthorizations API service call retrieves all authorizations that belongs to an ExpressRouteCircuit.

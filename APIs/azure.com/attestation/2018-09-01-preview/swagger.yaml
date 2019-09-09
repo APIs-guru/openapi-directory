@@ -83,8 +83,6 @@ paths:
                     provider: Microsoft Azure Attestation
                     resource: Attestation
                   name: Microsoft.Attestation/attestationProviders/attestation/delete
-      x-ms-pageable:
-        nextLinkName: null
   '/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/attestationProviders':
     get:
       description: Returns a list of attestation providers in a subscription.
@@ -127,8 +125,6 @@ paths:
                     properties:
                       status: Ready
                     type: Microsoft.Attestation/attestationProviders
-      x-ms-pageable:
-        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders':
     get:
       description: Returns attestation providers list in a resource group.
@@ -181,9 +177,6 @@ paths:
                     properties:
                       status: Ready
                     type: Microsoft.Attestation/attestationProviders
-      x-ms-pageable:
-        itemName: keys
-        nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}':
     delete:
       description: Delete Attestation Service.

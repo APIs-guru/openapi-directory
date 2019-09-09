@@ -876,7 +876,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.projects.clearOrgPolicy
+      operationId: cloudresourcemanager.organizations.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -899,7 +899,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -920,7 +920,7 @@ paths:
         an `etag`set because it is a computed `Policy` across multiple resources.
         Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
         not be expanded.
-      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -947,7 +947,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1020,7 +1020,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.projects.getOrgPolicy
+      operationId: cloudresourcemanager.organizations.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1047,7 +1047,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1063,7 +1063,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1090,7 +1090,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1106,7 +1106,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.projects.listOrgPolicies
+      operationId: cloudresourcemanager.organizations.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1133,7 +1133,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1201,7 +1201,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.projects.setOrgPolicy
+      operationId: cloudresourcemanager.organizations.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1224,7 +1224,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1696,7 +1696,7 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0 and 1.
+          Acceptable values are 0, 1, and 3.
           If the value is 0, or the field is omitted, policy format version 1 will be
           returned.
         format: int32

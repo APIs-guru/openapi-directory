@@ -13,7 +13,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: containerregistry
   x-tags:
@@ -1589,7 +1589,7 @@ definitions:
         description: The definition of Azure Monitoring service.
     type: object
   OperationServiceSpecificationDefinition:
-    description: The definition of Azure Monitoring metrics list.
+    description: The definition of Azure Monitoring list.
     properties:
       metricSpecifications:
         description: A list of Azure Monitoring metrics definition.
@@ -1614,6 +1614,7 @@ definitions:
     description: The quarantine policy for a container registry.
     properties:
       status:
+        default: disabled
         description: The value that indicates whether the policy is enabled or not.
         enum:
           - enabled
@@ -1938,7 +1939,8 @@ definitions:
     description: The retention policy for a container registry.
     properties:
       days:
-        description: The number of days to retain manifest before it expires.
+        default: 7
+        description: The number of days to retain an untagged manifest after which it gets purged.
         format: int32
         type: integer
       lastUpdatedTime:
@@ -1947,6 +1949,7 @@ definitions:
         readOnly: true
         type: string
       status:
+        default: disabled
         description: The value that indicates whether the policy is enabled or not.
         enum:
           - enabled
@@ -2058,6 +2061,7 @@ definitions:
     description: The content trust policy for a container registry.
     properties:
       status:
+        default: disabled
         description: The value that indicates whether the policy is enabled or not.
         enum:
           - enabled
@@ -2067,6 +2071,7 @@ definitions:
           modelAsString: true
           name: PolicyStatus
       type:
+        default: Notary
         description: The type of trust policy.
         enum:
           - Notary

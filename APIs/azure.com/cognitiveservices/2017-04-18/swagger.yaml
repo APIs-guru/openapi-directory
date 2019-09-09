@@ -60,42 +60,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  /providers/Microsoft.CognitiveServices/checkDomainAvailability:
-    post:
-      description: Check whether a domain is available.
-      operationId: CheckDomainAvailability
-      parameters:
-        - $ref: '#/parameters/apiVersionParameter'
-        - description: Check Domain Availability parameter.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/CheckDomainAvailabilityParameter'
-          x-ms-client-flatten: true
-      responses:
-        '200':
-          description: OK.
-          schema:
-            $ref: '#/definitions/CheckDomainAvailabilityResult'
-      tags:
-        - CognitiveServicesAccounts
-      x-ms-examples:
-        Check SKU Availability:
-          parameters:
-            api-version: '2017-04-18'
-            location: westus
-            parameters:
-              subdomainName: contosodemoapp1
-              type: Microsoft.CognitiveServices/accounts
-            subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
-          responses:
-            '200':
-              body:
-                isSubdomainAvailable: false
-                reason: Sub domain name 'contosodemoapp1' is not valid
-                subdomainName: contosodemoapp1
-                type: Microsoft.CognitiveServices/accounts
   /providers/Microsoft.CognitiveServices/operations:
     get:
       deprecated: false
@@ -393,6 +357,43 @@ paths:
                     type: Microsoft.CognitiveServices/accounts
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability':
+    post:
+      description: Check whether a domain is available.
+      operationId: CheckDomainAvailability
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Check Domain Availability parameter.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckDomainAvailabilityParameter'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/CheckDomainAvailabilityResult'
+      tags:
+        - CognitiveServicesAccounts
+      x-ms-examples:
+        Check SKU Availability:
+          parameters:
+            api-version: '2017-04-18'
+            location: westus
+            parameters:
+              subdomainName: contosodemoapp1
+              type: Microsoft.CognitiveServices/accounts
+            subscriptionId: f9b96b36-1f5e-4021-8959-51527e26e6d3
+          responses:
+            '200':
+              body:
+                isSubdomainAvailable: false
+                reason: Sub domain name 'contosodemoapp1' is not valid
+                subdomainName: contosodemoapp1
+                type: Microsoft.CognitiveServices/accounts
   '/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/checkSkuAvailability':
     post:
       description: Check available SKUs.

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-12-01/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -1847,14 +1847,15 @@ paths:
             virtualNetworkGatewayName: vpngw
           responses:
             '200':
-              dhGroup: DHGroup2
-              ikeEncryption: AES256
-              ikeIntegrity: SHA384
-              ipsecEncryption: AES256
-              ipsecIntegrity: SHA256
-              pfsGroup: PFS2
-              saDataSizeKilobytes: 429497
-              saLifeTimeSeconds: 86473
+              body:
+                dhGroup: DHGroup2
+                ikeEncryption: AES256
+                ikeIntegrity: SHA384
+                ipsecEncryption: AES256
+                ipsecIntegrity: SHA256
+                pfsGroup: PFS2
+                saDataSizeKilobytes: 429497
+                saLifeTimeSeconds: 86473
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: location

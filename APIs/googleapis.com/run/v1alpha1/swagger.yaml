@@ -686,11 +686,11 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a configuration.
-      operationId: run.namespaces.configurations.get
+      description: Rpc to get information about a revision.
+      operationId: run.namespaces.revisions.get
       parameters:
         - description: |-
-            The name of the configuration being retrieved. If needed, replace
+            The name of the revision being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -701,7 +701,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Configuration'
+            $ref: '#/definitions/Revision'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1075,8 +1075,11 @@ paths:
         - namespaces
   '/v1alpha1/{name}':
     delete:
-      description: Rpc to delete a domain mapping.
-      operationId: run.projects.locations.domainmappings.delete
+      description: |-
+        Rpc to delete a service.
+        This will cause the Service to stop serving traffic and will delete the
+        child entities like Routes, Configurations and Revisions.
+      operationId: run.projects.locations.services.delete
       parameters:
         - description: Cloud Run currently ignores this parameter.
           in: query
@@ -1087,7 +1090,7 @@ paths:
           name: kind
           type: string
         - description: |-
-            The name of the domain mapping being deleted. If needed, replace
+            The name of the service being deleted. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1124,11 +1127,11 @@ paths:
       tags:
         - projects
     get:
-      description: Rpc to get information about a domain mapping.
-      operationId: run.projects.locations.domainmappings.get
+      description: Rpc to get information about a service.
+      operationId: run.projects.locations.services.get
       parameters:
         - description: |-
-            The name of the domain mapping being retrieved. If needed, replace
+            The name of the service being retrieved. If needed, replace
             {namespace_id} with the project ID.
           in: path
           name: name
@@ -1139,7 +1142,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DomainMapping'
+            $ref: '#/definitions/Service'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1888,9 +1891,13 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0 and 1.
-            If the value is 0, or the field is omitted, policy format version 1 will be
-            returned.
+
+            Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+            rejected.
+
+            Requests for policies with any conditional bindings must specify version 3.
+            Policies without any conditional bindings may specify any valid value or
+            leave the field unset.
           in: query
           name: options.requestedPolicyVersion
           type: integer
@@ -2045,7 +2052,7 @@ definitions:
                   {
                     "log_type": "DATA_READ",
                     "exempted_members": [
-                      "user:foo@gmail.com"
+                      "user:jose@example.com"
                     ]
                   },
                   {
@@ -2057,7 +2064,7 @@ definitions:
                 ]
               },
               {
-                "service": "fooservice.googleapis.com"
+                "service": "sampleservice.googleapis.com"
                 "audit_log_configs": [
                   {
                     "log_type": "DATA_READ",
@@ -2065,7 +2072,7 @@ definitions:
                   {
                     "log_type": "DATA_WRITE",
                     "exempted_members": [
-                      "user:bar@gmail.com"
+                      "user:aliya@example.com"
                     ]
                   }
                 ]
@@ -2073,9 +2080,9 @@ definitions:
             ]
           }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-      logging. It also exempts foo@gmail.com from DATA_READ logging, and
-      bar@gmail.com from DATA_WRITE logging.
+      For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts jose@example.com from DATA_READ logging, and
+      aliya@example.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -2099,7 +2106,7 @@ definitions:
               {
                 "log_type": "DATA_READ",
                 "exempted_members": [
-                  "user:foo@gmail.com"
+                  "user:jose@example.com"
                 ]
               },
               {
@@ -2109,7 +2116,7 @@ definitions:
           }
 
       This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
+      jose@example.com from DATA_READ logging.
     properties:
       exemptedMembers:
         description: |-
@@ -2119,12 +2126,6 @@ definitions:
         items:
           type: string
         type: array
-      ignoreChildExemptions:
-        description: |-
-          Specifies whether principals can be exempted for the same LogType in
-          lower-level resource policies. If true, any lower-level exemptions will
-          be ignored.
-        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -2171,7 +2172,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -2225,6 +2226,40 @@ definitions:
       optional:
         description: |-
           Specify whether the ConfigMap must be defined
+          +optional
+        type: boolean
+    type: object
+  ConfigMapKeySelector:
+    description: |-
+      Cloud Run fully managed: not supported
+
+      Cloud Run on GKE: supported
+
+      Selects a key from a ConfigMap.
+    properties:
+      key:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          The key to select.
+        type: string
+      localObjectReference:
+        $ref: '#/definitions/LocalObjectReference'
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          The ConfigMap to select from.
+      optional:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Specify whether the ConfigMap or its key must be defined
           +optional
         type: boolean
     type: object
@@ -2784,6 +2819,42 @@ definitions:
           Defaults to "".
           +optional
         type: string
+      valueFrom:
+        $ref: '#/definitions/EnvVarSource'
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Source for the environment variable's value. Cannot be used if value is not
+          empty. +optional
+    type: object
+  EnvVarSource:
+    description: |-
+      Cloud Run fully managed: not supported
+
+      Cloud Run on GKE: supported
+
+      EnvVarSource represents a source for the value of an EnvVar.
+    properties:
+      configMapKeyRef:
+        $ref: '#/definitions/ConfigMapKeySelector'
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Selects a key of a ConfigMap.
+          +optional
+      secretKeyRef:
+        $ref: '#/definitions/SecretKeySelector'
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Selects a key of a secret in the pod's namespace
+          +optional
     type: object
   EventType:
     properties:
@@ -2800,6 +2871,29 @@ definitions:
         $ref: '#/definitions/EventTypeSpec'
         description: Spec defines the desired state of the EventType.
     type: object
+  EventTypeImporter:
+    properties:
+      apiVersion:
+        description: The API version of the importer CRD.
+        type: string
+      kind:
+        description: The kind of the importer CRD.
+        type: string
+      parameters:
+        description: Parameters required to create an importer for the EventType.
+        items:
+          $ref: '#/definitions/EventTypeParameter'
+        type: array
+    type: object
+  EventTypeParameter:
+    properties:
+      description:
+        description: Description of the parameter. E.g. "Google Cloud Project Id."
+        type: string
+      name:
+        description: Name of the parameter. E.g. googleCloudProject.
+        type: string
+    type: object
   EventTypeSpec:
     properties:
       broker:
@@ -2810,6 +2904,9 @@ definitions:
           Description is a string describing what the EventType is about.
           +optional
         type: string
+      importer:
+        $ref: '#/definitions/EventTypeImporter'
+        description: The importer that provides this EventType to the eventing mesh.
       schema:
         description: |-
           Schema is a URI with the EventType schema. It may be a JSON schema, a
@@ -2871,6 +2968,36 @@ definitions:
           An optional title for the expression, i.e. a short string describing
           its purpose. This can be used e.g. in UIs which allow to enter the
           expression.
+        type: string
+    type: object
+  GoogleRpcStatus:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+      three pieces of data: error code, error message, and error details.
+
+      You can find out more about this error model and how to work with it in the
+      [API Design Guide](https://cloud.google.com/apis/design/errors).
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
         type: string
     type: object
   HTTPGetAction:
@@ -3058,6 +3185,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this Configuration list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3081,6 +3215,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this DomainMapping list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
     type: object
   ListEventTypesResponse:
     description: ListEventTypesResponse is a list of EventType resources.
@@ -3099,6 +3240,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this EventType list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3170,6 +3318,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this revision list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3193,6 +3348,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this Route list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3216,6 +3378,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this Service list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3239,6 +3408,13 @@ definitions:
       metadata:
         $ref: '#/definitions/ListMeta'
         description: Metadata associated with this Trigger list.
+      regionDetails:
+        additionalProperties:
+          $ref: '#/definitions/RegionDetails'
+        description: |-
+          Details for the regions used during a global call including any failures.
+          This is not populated when targeting a specific region.
+        type: object
       unreachable:
         description: Locations that could not be reached.
         items:
@@ -3662,11 +3838,19 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:
-        description: Deprecated.
+        description: |-
+          Specifies the format of the policy.
+
+          Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+          rejected.
+
+          Policies with any conditional bindings must specify version 3. Policies
+          without any conditional bindings may specify any valid value or leave the
+          field unset.
         format: int32
         type: integer
     type: object
@@ -3724,6 +3908,13 @@ definitions:
       string:
         description: 'Stringified version of the quantity, e.g., "800 MiB".'
         type: string
+    type: object
+  RegionDetails:
+    description: Information for a regional call used for a global API.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpcStatus'
+        description: The status indicating why the regional call failed
     type: object
   ResourceRecord:
     description: A DNS resource record.
@@ -3884,12 +4075,16 @@ definitions:
           https://github.com/knative/serving/blob/master/docs/runtime-contract.md
       containerConcurrency:
         description: |-
+          (Optional)
+
           ContainerConcurrency specifies the maximum allowed in-flight (concurrent)
-          requests per container of the Revision. Values are:
-          - `0` thread-safe, the system should manage the max concurrency. This is
-             the default value.
-          - `1` not-thread-safe. Single concurrency
-          - `2-N` thread-safe, max concurrency of N
+          requests per container instance of the Revision.
+
+          Cloud Run fully managed: supported, defaults to 80
+
+          Cloud Run on GKE: supported, defaults to 0, which means concurrency
+          to the application is not limited, and the system decides the
+          target concurrency for the autoscaler.
         format: int32
         type: integer
       containers:
@@ -4193,6 +4388,40 @@ definitions:
       optional:
         description: |-
           Specify whether the Secret must be defined
+          +optional
+        type: boolean
+    type: object
+  SecretKeySelector:
+    description: |-
+      Cloud Run fully managed: not supported
+
+      Cloud Run on GKE: supported
+
+      SecretKeySelector selects a key of a Secret.
+    properties:
+      key:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          The key of the secret to select from.  Must be a valid secret key.
+        type: string
+      localObjectReference:
+        $ref: '#/definitions/LocalObjectReference'
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          The name of the secret in the pod's namespace to select from.
+      optional:
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Specify whether the Secret or its key must be defined
           +optional
         type: boolean
     type: object
@@ -4751,8 +4980,32 @@ definitions:
     type: object
   TriggerFilter:
     properties:
+      attributes:
+        additionalProperties:
+          type: string
+        description: |-
+          Cloud Run fully managed: not supported
+
+          Cloud Run on GKE: supported
+
+          Attributes filters events by exact match on event context attributes.
+          Each key in the map is compared with the equivalent key in the event
+          context. An event passes the filter if all values are equal to the
+          specified values.
+
+          Nested context attributes are not supported as keys.
+          Only string values are supported.
+
+          +optional
+        type: object
       sourceAndType:
         $ref: '#/definitions/TriggerFilterSourceAndType'
+        description: |-
+          SourceAndType filters events based on exact matches on the
+          CloudEvents type and source attributes. This field has been replaced by the
+          Attributes field.
+
+          +optional
     type: object
   TriggerFilterSourceAndType:
     description: |-
@@ -4762,6 +5015,19 @@ definitions:
       source:
         type: string
       type:
+        type: string
+    type: object
+  TriggerImporterSpec:
+    properties:
+      arguments:
+        additionalProperties:
+          type: string
+        description: |-
+          Arguments to use for the importer. These must match the parameters in the
+          EventType's importer.
+        type: object
+      eventTypeName:
+        description: Name of the EventType that this importer provides.
         type: string
     type: object
   TriggerSpec:
@@ -4778,10 +5044,15 @@ definitions:
         $ref: '#/definitions/TriggerFilter'
         description: |-
           Filter is the filter to apply against all events from the Broker. Only
-          events that pass this filter will be sent to the Subscriber. If not
-          specified, will default to allowing all events.
-
-          This must be specified in Cloud Run.
+          events that pass this filter will be sent to the Subscriber.
+      importers:
+        description: |-
+          Specification of the importers that will provide events to the trigger.
+          Note, for Cloud Run, the importers will only be used if a filter is not
+          specified.
+        items:
+          $ref: '#/definitions/TriggerImporterSpec'
+        type: array
       subscriber:
         $ref: '#/definitions/SubscriberSpec'
         description: |-

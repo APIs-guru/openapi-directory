@@ -71,6 +71,11 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The expand expression to apply to the operation.
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -174,8 +179,7 @@ paths:
               body:
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/RequestRateByInterval_20180121-0154_20180123-0154.csv'
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -224,8 +228,7 @@ paths:
               body:
                 properties:
                   output: 'https://crptestar4227.blob.core.windows.net:443/sascontainer/ThrottledRequests_20180121-0154_20180123-0154.csv'
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation

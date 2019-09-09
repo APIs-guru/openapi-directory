@@ -2040,6 +2040,63 @@ paths:
             '202':
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2019-01-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201'
+        ApiManagementCreateApiUsingImportOverrideServiceUrl:
+          parameters:
+            api-version: '2019-01-01'
+            apiId: apidocs
+            parameters:
+              properties:
+                format: swagger-link
+                path: petstoreapi123
+                serviceUrl: 'http://petstore.swagger.wordnik.com/api'
+                value: 'http://apimpimportviaurl.azurewebsites.net/api/apidocs/'
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs
+                name: apidocs
+                properties:
+                  apiRevision: '1'
+                  description: |-
+                    This is a sample server Petstore server.  You can find out more about Swagger 
+                        at <a href="http://swagger.wordnik.com">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,
+                        you can use the api key "special-key" to test the authorization filters
+                  displayName: Swagger Sample App
+                  isCurrent: true
+                  path: petstoreapi123
+                  protocols:
+                    - https
+                  serviceUrl: 'http://petstore.swagger.wordnik.com/api'
+                  subscriptionKeyParameterNames:
+                    header: Ocp-Apim-Subscription-Key
+                    query: subscription-key
+                type: Microsoft.ApiManagement/service/apis
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs
+                name: apidocs
+                properties:
+                  apiRevision: '1'
+                  description: |-
+                    This is a sample server Petstore server.  You can find out more about Swagger 
+                        at <a href="http://swagger.wordnik.com">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,
+                        you can use the api key "special-key" to test the authorization filters
+                  displayName: Swagger Sample App
+                  isCurrent: true
+                  path: petstoreapi123
+                  protocols:
+                    - https
+                  serviceUrl: 'http://petstore.swagger.wordnik.com/api'
+                  subscriptionKeyParameterNames:
+                    header: Ocp-Apim-Subscription-Key
+                    query: subscription-key
+                type: Microsoft.ApiManagement/service/apis
+            '202':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs?api-version=2019-01-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201'
         ApiManagementCreateApiUsingOai3Import:
           parameters:
             api-version: '2019-01-01'
@@ -2390,7 +2447,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -2671,7 +2727,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -2773,7 +2828,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -3032,7 +3086,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -3130,7 +3183,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -3393,7 +3445,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -3993,7 +4044,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -4197,7 +4247,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -4299,7 +4348,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -4479,7 +4527,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -4577,7 +4624,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -4731,7 +4777,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5076,7 +5121,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5249,7 +5293,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5361,7 +5404,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5510,7 +5552,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5618,7 +5659,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -5868,7 +5908,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -6041,7 +6080,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -6153,7 +6191,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -6302,7 +6339,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -6410,7 +6446,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -7118,7 +7153,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -7220,7 +7254,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -7689,7 +7722,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -7787,7 +7819,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -8181,7 +8212,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -9117,7 +9147,6 @@ paths:
             apiId: PetStoreTemplate2
             operationId: newoperations
             parameters:
-              name: newoperation
               properties:
                 description: This can only be done by the logged in user.
                 displayName: createUser2
@@ -9229,7 +9258,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -9387,7 +9415,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -9501,7 +9528,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -9681,7 +9707,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -9791,7 +9816,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -10078,7 +10102,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -10241,7 +10264,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -10347,7 +10369,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -10488,7 +10509,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -10596,7 +10616,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: operationId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -11924,7 +11943,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12112,7 +12130,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12278,7 +12295,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12380,7 +12396,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12523,7 +12538,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12621,7 +12635,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -12766,7 +12779,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -13016,7 +13028,6 @@ paths:
           maxLength: 80
           minLength: 1
           name: apiId
-          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method

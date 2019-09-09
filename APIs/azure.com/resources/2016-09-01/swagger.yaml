@@ -49,6 +49,62 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Resources/calculateTemplateHash:
+    post:
+      description: Calculate the hash of the given template.
+      operationId: Deployments_CalculateTemplateHash
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The template provided to calculate hash.
+          in: body
+          name: template
+          required: true
+          schema:
+            type: object
+      responses:
+        '200':
+          description: OK - Returns the hash.
+          schema:
+            $ref: '#/definitions/TemplateHashResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Deployments
+      x-ms-examples:
+        Calculate template hash:
+          parameters:
+            api-version: '2016-09-01'
+            template:
+              $schema: 'http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview'
+              contentVersion: 1.0.0.0
+              outputs:
+                string:
+                  type: string
+                  value: myvalue
+              parameters:
+                string:
+                  type: string
+              resources: []
+              variables:
+                array:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                bool: true
+                int: 42
+                object:
+                  object:
+                    location: West US
+                    vmSize: Large
+                string: string
+          responses:
+            '200':
+              body:
+                minifiedTemplate: '{"$SCHEMA":"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW","CONTENTVERSION":"1.0.0.0","PARAMETERS":{"STRING":{"TYPE":"STRING"}},"VARIABLES":{"STRING":"STRING","INT":42,"BOOL":TRUE,"ARRAY":[1,2,3,4],"OBJECT":{"OBJECT":{"VMSIZE":"LARGE","LOCATION":"WEST US"}}},"RESOURCES":[],"OUTPUTS":{"STRING":{"TYPE":"STRING","VALUE":"MYVALUE"}}}'
+                templateHash: '695440707931307747'
   '/subscriptions/{subscriptionId}/providers':
     get:
       description: Gets all resource providers for a subscription.
@@ -1304,6 +1360,46 @@ definitions:
       resourceType:
         description: The dependency resource type.
         type: string
+  CloudError:
+    description: An error response for a resource management request.
+    properties:
+      error:
+        description: The resource management error response.
+        properties:
+          additionalInfo:
+            description: The error additional info.
+            items:
+              description: The resource management error additional info.
+              properties:
+                info:
+                  description: The additional info.
+                  readOnly: true
+                  type: object
+                type:
+                  description: The additional info type.
+                  readOnly: true
+                  type: string
+            readOnly: true
+            type: array
+          code:
+            description: The error code.
+            readOnly: true
+            type: string
+          details:
+            description: The error details.
+            items:
+              $ref: '#/definitions/ErrorResponse'
+            readOnly: true
+            type: array
+          message:
+            description: The error message.
+            readOnly: true
+            type: string
+          target:
+            description: The error target.
+            readOnly: true
+            type: string
+    x-ms-external: true
   DebugSetting:
     properties:
       detailLevel:
@@ -1526,6 +1622,7 @@ definitions:
       properties:
         $ref: '#/definitions/DeploymentPropertiesExtended'
         description: The template deployment properties.
+  ErrorResponse: {}
   ExportTemplateRequest:
     description: Export resource group template request parameters.
     properties:
@@ -1921,6 +2018,15 @@ definitions:
         type: string
       resourceType:
         description: The type of the resource.
+        type: string
+  TemplateHashResult:
+    description: Result of the request to calculate template hash. It contains a string of minified template and its hash.
+    properties:
+      minifiedTemplate:
+        description: The minified template string.
+        type: string
+      templateHash:
+        description: The template hash.
         type: string
   TemplateLink:
     description: Entity representing the reference to the template.

@@ -1,0 +1,260 @@
+swagger: '2.0'
+schemes:
+  - https
+host: atmosphere.amentum.space
+basePath: /api
+info:
+  contact:
+    x-twitter: amentumspace
+  description: |
+    Instantly access empirical models of atmospheric density and  composition that are recommended by the Committee on Space Research (COSPAR) for  satellite drag calculations. <br><br>
+    <a href='https://ccmc.gsfc.nasa.gov/modelweb/atmos/nrlmsise00.html'>NRLMSISE-00</a> is recommended for composition calculations and was developed  by the US Naval Research Laboratory. <br><br>
+    <a href='https://sol.spacenvironment.net/jb2008/'>JB2008</a> is a newer model and is
+     recommended for density calculations at altitudes above 80 km. 
+    It was developed by Space Environment Technologies and the US Air Force  Space Command. <br><br>
+    The Atmosphere API wraps the original source code for both. It is free for research and development purposes and rate-limited to
+     1000 calls per day.  <br><br>
+
+     Contact team@amentum.space to discuss high volume annd enterprise support
+     options <br><br>
+
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2019.
+  title: |
+    Atmosphere API - calculate composition and density of the atmosphere
+  version: 0.9.4
+  x-apisguru-categories:
+    - location
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/amentumspace/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://atmosphere.amentum.space/api/swagger.json'
+      version: '2.0'
+  x-providerName: amentum.space
+  x-serviceName: atmosphere
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  AP:
+    description: |
+      The Ap-index provides a daily average level for geomagnetic activity F107, F107A, AP effects can be neglected below 80 km.
+    in: query
+    name: ap
+    required: true
+    type: number
+  Altitude:
+    description: Altitude in (km)
+    in: query
+    name: altitude
+    required: true
+    type: number
+  Day:
+    description: Day in DD format
+    in: query
+    name: day
+    required: true
+    type: integer
+  F107:
+    description: |
+      Daily flux for previous day (SFU). F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1AU. F107, F107A, AP effects can be neglected below 80 km.
+    in: query
+    name: f107
+    required: true
+    type: number
+  F107A:
+    description: |
+      81 day average of F10.7 flux (SFU). F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1AU. F107, F107A, AP effects can be neglected below 80 km.
+    in: query
+    name: f107a
+    required: true
+    type: number
+  GeodeticLatitude:
+    description: GeodeticLatitude (deg) -90 to 90 deg
+    in: query
+    name: geodetic_latitude
+    required: true
+    type: number
+  GeodeticLongitude:
+    description: GeodeticLongitude (deg) 0 to 360 deg
+    in: query
+    name: geodetic_longitude
+    required: true
+    type: number
+  Month:
+    description: Month in MM format
+    in: query
+    name: month
+    required: true
+    type: integer
+  UTC:
+    description: Coordinated Universal Time (hrs)
+    in: query
+    name: utc
+    required: true
+    type: number
+  Year:
+    description: Year in YYYY format
+    in: query
+    name: year
+    required: true
+    type: integer
+paths:
+  /jb2008:
+    get:
+      description: |
+        Computes<br>
+        Exospheric temperature above the input position (K)<br>
+        Temperature at the input position (K)<br>
+        Total mass density at the input position (kg/m3)<br>
+        Valid for altitudes in the interval [80, 40000] km
+      operationId: app.api.endpoints.JB2008.sample_atmosphere
+      parameters:
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/GeodeticLatitude'
+        - $ref: '#/parameters/GeodeticLongitude'
+        - $ref: '#/parameters/UTC'
+      responses:
+        '200':
+          description: Successful atmospheric density calculation
+          schema:
+            properties:
+              at_alt_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              exospheric_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              total_mass_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      summary: Compute the JB2008 atmospheric density for given conditions
+      tags:
+        - Click to view documentation for API endpoints
+  /nrlmsise00:
+    get:
+      description: |
+        Computes <br>
+        Number densities (/m3) of  He, O, N2, O2, Ar, H, N<br>
+        Anomalous oxygen number density (/m3)<br>
+        Exospheric temperature (K)<br>
+        Temperature at altitude (K)<br>
+        Total mass density (kg/m3)<br>
+        Total mass density is the sum of the masses of the species in  equilibrium at the thermospheric temperature T(z) and the mass  density of the anomalous oxygen component.<br>
+        Valid for altitudes in the interval [0, 1000] km
+      operationId: app.api.endpoints.NRLMSISE00.sample_atmosphere
+      parameters:
+        - $ref: '#/parameters/Year'
+        - $ref: '#/parameters/Month'
+        - $ref: '#/parameters/Day'
+        - $ref: '#/parameters/Altitude'
+        - $ref: '#/parameters/GeodeticLatitude'
+        - $ref: '#/parameters/GeodeticLongitude'
+        - $ref: '#/parameters/UTC'
+        - $ref: '#/parameters/F107A'
+        - $ref: '#/parameters/F107'
+        - $ref: '#/parameters/AP'
+      responses:
+        '200':
+          description: Successful atmospheric density calculation
+          schema:
+            properties:
+              Ar_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              H_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              He_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              N2_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              N_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              O2_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              O_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              anomalous_O_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              at_alt_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              exospheric_temp:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+              total_mass_density:
+                properties:
+                  units:
+                    type: string
+                  value:
+                    type: number
+                type: object
+            type: object
+      summary: Compute the NRLSMSIE-00 atmospheric composition and density for given conditions
+      tags:
+        - Click to view documentation for API endpoints

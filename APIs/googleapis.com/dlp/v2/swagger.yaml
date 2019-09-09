@@ -115,6 +115,7 @@ parameters:
     type: string
 tags:
   - name: infoTypes
+  - name: locations
   - name: organizations
   - name: projects
 paths:
@@ -138,6 +139,12 @@ paths:
             en-US strings will be returned.
           in: query
           name: languageCode
+          type: string
+        - description: |-
+            The geographic location to list info types. Reserved for future
+            extensions.
+          in: query
+          name: location
           type: string
       responses:
         '200':
@@ -163,17 +170,59 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v2/locations/{location}/infoTypes':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a list of the sensitive information types that the DLP API
+        supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
+        learn more.
+      operationId: dlp.locations.infoTypes
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2ListInfoTypesRequest'
+        - description: |-
+            The geographic location to list info types. Reserved for future
+            extensions.
+          in: path
+          name: location
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2ListInfoTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - locations
   '/v2/{name}':
     delete:
       description: |-
-        Deletes an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.delete
+        Deletes a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.delete
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be deleted, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -190,17 +239,16 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: |-
-        Gets an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.get
+        Gets a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.get
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be read, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -210,14 +258,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -232,18 +280,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.patch
+        Updates a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.jobTriggers.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateJobTriggerRequest'
         - description: |-
-            Resource name of organization and inspectTemplate to be updated, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -253,14 +300,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2JobTrigger'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{name}:activate':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -492,7 +539,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -542,7 +589,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -561,7 +608,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -586,7 +633,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -775,7 +822,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.list
+      operationId: dlp.projects.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -825,7 +872,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -843,7 +890,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.create
+      operationId: dlp.projects.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -868,7 +915,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -1047,13 +1094,118 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v2/{parent}/locations/{location}/content:inspect':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Finds potentially sensitive info in content.
+        This method has limits on input size, processing time, and output size.
+
+        When no InfoTypes or CustomInfoTypes are specified in this request, the
+        system will automatically choose what detectors to run. By default this may
+        be all types, but may change over time as detectors are updated.
+
+        For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
+        and https://cloud.google.com/dlp/docs/inspecting-text,
+      operationId: dlp.projects.locations.content.inspect
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectContentRequest'
+        - description: |-
+            The geographic location to process content inspection. Reserved for future
+            extensions.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: 'The parent resource name, for example projects/my-project-id.'
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectContentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v2/{parent}/locations/{location}/content:reidentify':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Re-identifies content that has been de-identified.
+        See
+        https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+        to learn more.
+      operationId: dlp.projects.locations.content.reidentify
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2ReidentifyContentRequest'
+        - description: |-
+            The geographic location to process content reidentification.  Reserved for
+            future extensions.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The parent resource name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2ReidentifyContentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v2/{parent}/storedInfoTypes':
     get:
       description: |-
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -1104,7 +1256,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1122,7 +1274,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -1147,7 +1299,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-
@@ -1869,6 +2021,11 @@ definitions:
           custom info type 'Surrogate'. This facilitates reversal of the
           surrogate when it occurs in free text.
 
+          Note: For record transformations where the entire cell in a table is being
+          transformed, surrogates are optional to use. Surrogates are used to denote
+          the location of the token and are necessary for re-identification in free
+          form text.
+
           In order for inspection to work properly, the name of this info type must
           not occur naturally anywhere in your data; otherwise, inspection may either
 
@@ -1881,7 +2038,7 @@ definitions:
           that are highly improbable to exist in your data.
           For example, assuming your data is entered from a regular ASCII keyboard,
           the symbol with the hex code point 29DD might be used like so:
-          ⧝MY_TOKEN_TYPE
+          ⧝MY_TOKEN_TYPE.
     type: object
   GooglePrivacyDlpV2CryptoHashConfig:
     description: |-
@@ -2937,6 +3094,11 @@ definitions:
       item:
         $ref: '#/definitions/GooglePrivacyDlpV2ContentItem'
         description: The item to inspect.
+      location:
+        description: |-
+          The geographic location to process content inspection. Reserved for future
+          extensions.
+        type: string
     type: object
   GooglePrivacyDlpV2InspectContentResponse:
     description: Results of inspecting an item.
@@ -3094,7 +3256,7 @@ definitions:
         description: |-
           Unique resource name for the triggeredJob, assigned by the service when the
           triggeredJob is created, for example
-          `projects/dlp-test-project/triggeredJobs/53234423`.
+          `projects/dlp-test-project/jobTriggers/53234423`.
         type: string
       status:
         description: 'A status for this trigger. [required]'
@@ -3510,6 +3672,21 @@ definitions:
         type: array
       nextPageToken:
         description: The standard List next-page token.
+        type: string
+    type: object
+  GooglePrivacyDlpV2ListInfoTypesRequest:
+    description: Request for the list of infoTypes.
+    properties:
+      filter:
+        description: |-
+          Optional filter to only return infoTypes supported by certain parts of the
+          API. Defaults to supported_by=INSPECT.
+        type: string
+      languageCode:
+        description: |-
+          Optional BCP-47 language code for localized infoType friendly
+          names. If omitted, or if localized strings are not available,
+          en-US strings will be returned.
         type: string
     type: object
   GooglePrivacyDlpV2ListInfoTypesResponse:
@@ -4013,6 +4190,11 @@ definitions:
       item:
         $ref: '#/definitions/GooglePrivacyDlpV2ContentItem'
         description: The item to re-identify. Will be treated as text.
+      location:
+        description: |-
+          The geographic location to process content reidentification.  Reserved for
+          future extensions.
+        type: string
       reidentifyConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyConfig'
         description: |-

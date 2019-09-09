@@ -1556,6 +1556,9 @@ definitions:
       titleTextPosition:
         $ref: '#/definitions/TextPosition'
         description: The axis title text position.
+      viewWindowOptions:
+        $ref: '#/definitions/ChartAxisViewWindowOptions'
+        description: The view window options for this axis.
     type: object
   BasicChartDomain:
     description: |-
@@ -2458,6 +2461,32 @@ definitions:
           - WRAP
         type: string
     type: object
+  ChartAxisViewWindowOptions:
+    description: |-
+      The options that define a "view window" for a chart (such as the visible
+      values in an axis).
+    properties:
+      viewWindowMax:
+        description: |-
+          The maximum numeric value to be shown in this view window. If unset, will
+          automatically determine a maximum value that looks good for the data.
+        format: double
+        type: number
+      viewWindowMin:
+        description: |-
+          The minimum numeric value to be shown in this view window. If unset, will
+          automatically determine a minimum value that looks good for the data.
+        format: double
+        type: number
+      viewWindowMode:
+        description: The view window's mode.
+        enum:
+          - DEFAULT_VIEW_WINDOW_MODE
+          - VIEW_WINDOW_MODE_UNSUPPORTED
+          - EXPLICIT
+          - PRETTY
+        type: string
+    type: object
   ChartData:
     description: The data included in a domain or series.
     properties:
@@ -3061,6 +3090,38 @@ definitions:
       range:
         $ref: '#/definitions/DimensionRange'
         description: The dimensions to delete from the sheet.
+    type: object
+  DeleteDuplicatesRequest:
+    description: |-
+      Removes rows within this range that contain values in the specified columns
+      that are duplicates of values in any previous row. Rows with identical values
+      but different letter cases, formatting, or formulas are considered to be
+      duplicates.
+
+      This request also removes duplicate rows hidden from view (for example, due
+      to a filter). When removing duplicates, the first instance of each duplicate
+      row scanning from the top downwards is kept in the resulting range. Content
+      outside of the specified range isn't removed, and rows considered duplicates
+      do not have to be adjacent to each other in the range.
+    properties:
+      comparisonColumns:
+        description: |-
+          The columns in the range to analyze for duplicate values. If no columns are
+          selected then all columns are analyzed for duplicates.
+        items:
+          $ref: '#/definitions/DimensionRange'
+        type: array
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range to remove duplicates rows from.
+    type: object
+  DeleteDuplicatesResponse:
+    description: The result of removing duplicates in a range.
+    properties:
+      duplicatesRemovedCount:
+        description: The number of duplicate rows removed.
+        format: int32
+        type: integer
     type: object
   DeleteEmbeddedObjectRequest:
     description: Deletes the embedded object with the given ID.
@@ -4730,6 +4791,11 @@ definitions:
       deleteDimensionGroup:
         $ref: '#/definitions/DeleteDimensionGroupRequest'
         description: Deletes a group over the specified range.
+      deleteDuplicates:
+        $ref: '#/definitions/DeleteDuplicatesRequest'
+        description: |-
+          Removes rows containing duplicate values in specified columns of a cell
+          range.
       deleteEmbeddedObject:
         $ref: '#/definitions/DeleteEmbeddedObjectRequest'
         description: 'Deletes an embedded object (e.g, chart, image) in a sheet.'
@@ -4790,6 +4856,9 @@ definitions:
       textToColumns:
         $ref: '#/definitions/TextToColumnsRequest'
         description: Converts a column of text into many columns of text.
+      trimWhitespace:
+        $ref: '#/definitions/TrimWhitespaceRequest'
+        description: 'Trims cells of whitespace (such as spaces, tabs, or new lines).'
       unmergeCells:
         $ref: '#/definitions/UnmergeCellsRequest'
         description: Unmerges merged cells.
@@ -4872,6 +4941,9 @@ definitions:
       deleteDimensionGroup:
         $ref: '#/definitions/DeleteDimensionGroupResponse'
         description: A reply from deleting a dimension group.
+      deleteDuplicates:
+        $ref: '#/definitions/DeleteDuplicatesResponse'
+        description: A reply from removing rows containing duplicate values.
       duplicateFilterView:
         $ref: '#/definitions/DuplicateFilterViewResponse'
         description: A reply from duplicating a filter view.
@@ -4881,6 +4953,9 @@ definitions:
       findReplace:
         $ref: '#/definitions/FindReplaceResponse'
         description: A reply from doing a find/replace.
+      trimWhitespace:
+        $ref: '#/definitions/TrimWhitespaceResponse'
+        description: A reply from trimming whitespace.
       updateConditionalFormatRule:
         $ref: '#/definitions/UpdateConditionalFormatRuleResponse'
         description: A reply from updating a conditional format rule.
@@ -5415,6 +5490,27 @@ definitions:
       textFormat:
         $ref: '#/definitions/TextFormat'
         description: The text format for all labels on the chart.
+    type: object
+  TrimWhitespaceRequest:
+    description: |-
+      Trims the whitespace (such as spaces, tabs, or new lines) in every cell in
+      the specified range. This request removes all whitespace from the start and
+      end of each cell's text, and reduces any subsequence of remaining whitespace
+      characters to a single space. If the resulting trimmed text starts with a '+'
+      or '=' character, the text remains as a string value and isn't interpreted
+      as a formula.
+    properties:
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range whose cells to trim.
+    type: object
+  TrimWhitespaceResponse:
+    description: The result of trimming whitespace in cells.
+    properties:
+      cellsChangedCount:
+        description: The number of cells that were trimmed of whitespace.
+        format: int32
+        type: integer
     type: object
   UnmergeCellsRequest:
     description: Unmerges cells in the given range.

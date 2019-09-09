@@ -72,899 +72,433 @@ paths:
             api-version: '2016-06-01'
           responses:
             '200':
-              value:
-                - display:
-                    description: Gets the operation.
-                    operation: Get Operation
-                    provider: Microsoft Logic
-                    resource: Operation
-                  name: Microsoft.Logic/operations/read
-                - display:
-                    description: Registers the Microsoft.Logic resource provider for a given subscription.
-                    operation: Register Resource Provider
-                    provider: Microsoft Logic
-                    resource: Resource Provider
-                  name: Microsoft.Logic/register/action
-                - display:
-                    description: Validates the workflow.
-                    operation: Validate Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/locations/workflows/validate/action
-                - display:
-                    description: Reads the workflow.
-                    operation: Get Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/read
-                - display:
-                    description: Creates or updates the workflow.
-                    operation: Set Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/write
-                - display:
-                    description: Deletes the workflow.
-                    operation: Delete Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/delete
-                - display:
-                    description: Starts a run of the workflow.
-                    operation: Run Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/run/action
-                - display:
-                    description: Disables the workflow.
-                    operation: Disable Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/disable/action
-                - display:
-                    description: Enables the workflow.
-                    operation: Enable Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/enable/action
-                - display:
-                    description: Suspends the workflow.
-                    operation: Suspend Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/suspend/action
-                - display:
-                    description: Validates the workflow.
-                    operation: Validate Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/validate/action
-                - display:
-                    description: 'Moves Workflow from its existing subscription id, resource group, and/or name to a different subscription id, resource group, and/or name.'
-                    operation: Move Workflow
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/move/action
-                - display:
-                    description: Gets the workflow swagger definitions.
-                    operation: Get workflow swagger
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/listSwagger/action
-                - display:
-                    description: Reads the workflow version.
-                    operation: Get Workflow Version
-                    provider: Microsoft Logic
-                    resource: Workflow Version
-                  name: Microsoft.Logic/workflows/versions/read
-                - display:
-                    description: Gets the callback URL for trigger.
-                    operation: List Trigger Callback URL
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/versions/triggers/listCallbackUrl/action
-                - display:
-                    description: Reads the access key.
-                    operation: Get Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/accessKeys/read
-                - display:
-                    description: Creates or updates the access key.
-                    operation: Set Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/accessKeys/write
-                - display:
-                    description: Deletes the access key.
-                    operation: Delete Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/accessKeys/delete
-                - display:
-                    description: Lists the access key secrets.
-                    operation: List Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/accessKeys/list/action
-                - display:
-                    description: Regenerates the access key secrets.
-                    operation: Regenerate Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/accessKeys/regenerate/action
-                - display:
-                    description: Regenerates the access key secrets.
-                    operation: Regenerate Access Key
-                    provider: Microsoft Logic
-                    resource: Access Key
-                  name: Microsoft.Logic/workflows/regenerateAccessKey/action
-                - display:
-                    description: Gets the callback URL for workflow.
-                    operation: List workflow callback URL
-                    provider: Microsoft Logic
-                    resource: Workflow
-                  name: Microsoft.Logic/workflows/listCallbackUrl/action
-                - display:
-                    description: Reads the trigger.
-                    operation: Get Trigger
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/triggers/read
-                - display:
-                    description: Executes the trigger.
-                    operation: Trigger Run
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/triggers/run/action
-                - display:
-                    description: Resets the trigger.
-                    operation: Trigger Reset
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/triggers/reset/action
-                - display:
-                    description: Sets the trigger state.
-                    operation: Set Trigger State
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/triggers/setState/action
-                - display:
-                    description: Reads the trigger histories.
-                    operation: Get Trigger Histories
-                    provider: Microsoft Logic
-                    resource: Trigger Histories
-                  name: Microsoft.Logic/workflows/triggers/histories/read
-                - display:
-                    description: Resubmits the workflow trigger.
-                    operation: Resubmit trigger
-                    provider: Microsoft Logic
-                    resource: Trigger Histories
-                  name: Microsoft.Logic/workflows/triggers/histories/resubmit/action
-                - display:
-                    description: Gets the callback URL for trigger.
-                    operation: List Trigger Callback URL
-                    provider: Microsoft Logic
-                    resource: Trigger
-                  name: Microsoft.Logic/workflows/triggers/listCallbackUrl/action
-                - display:
-                    description: Reads the workflow run.
-                    operation: Get Workflow Run
-                    provider: Microsoft Logic
-                    resource: Workflow Run
-                  name: Microsoft.Logic/workflows/runs/read
-                - display:
-                    description: Cancels the run of a workflow.
-                    operation: Cancel Workflow Run
-                    provider: Microsoft Logic
-                    resource: Workflow Run
-                  name: Microsoft.Logic/workflows/runs/cancel/action
-                - display:
-                    description: Reads the workflow run operation status.
-                    operation: Get Workflow Run Operation Status
-                    provider: Microsoft Logic
-                    resource: Workflow Run Operation
-                  name: Microsoft.Logic/workflows/runs/operations/read
-                - display:
-                    description: Reads the workflow run action.
-                    operation: Get Workflow Run Action
-                    provider: Microsoft Logic
-                    resource: Workflow Run Action
-                  name: Microsoft.Logic/workflows/runs/actions/read
-                - display:
-                    description: Reads the workflow run action repetition.
-                    operation: Get Workflow Run Action Repetition
-                    provider: Microsoft Logic
-                    resource: Workflow Run Action Repetition
-                  name: Microsoft.Logic/workflows/runs/actions/repetitions/read
-                - display:
-                    description: Reads the workflow run action scope repetition.
-                    operation: Get Workflow Run Action Scope Repetition
-                    provider: Microsoft Logic
-                    resource: Workflow Run Action Scope Repetition
-                  name: Microsoft.Logic/workflows/runs/actions/scoperepetitions/read
-                - display:
-                    description: Reads the workflow run action request history.
-                    operation: Gets the workflow run action request history
-                    provider: Microsoft Logic
-                    resource: Workflow run action request history
-                  name: Microsoft.Logic/workflows/runs/actions/requestHistories/read
-                - display:
-                    description: Reads the workflow run repetition action request history.
-                    operation: Gets the workflow run repetition action request history
-                    provider: Microsoft Logic
-                    resource: Workflow run repetition action request history
-                  name: Microsoft.Logic/workflows/runs/actions/repetitions/requestHistories/read
-                - display:
-                    description: Reads the workflow diagnostic settings.
-                    operation: Get Workflow Diagnostic Setting
-                    provider: Microsoft Logic
-                    resource: Workflow Diagnostic Setting
-                  name: Microsoft.Logic/workflows/providers/Microsoft.Insights/diagnosticSettings/read
-                  origin: System
-                - display:
-                    description: Creates or updates the workflow diagnostic setting.
-                    operation: Set Workflow Diagnostic Setting
-                    provider: Microsoft Logic
-                    resource: Workflow Diagnostic Setting
-                  name: Microsoft.Logic/workflows/providers/Microsoft.Insights/diagnosticSettings/write
-                  origin: System
-                - display:
-                    description: Reads the workflow metric definitions.
-                    operation: Get Workflow Metric Definition
-                    provider: Microsoft Logic
-                    resource: Workflow Metric Definition
-                  name: Microsoft.Logic/workflows/providers/Microsoft.Insights/metricDefinitions/read
-                  origin: System
-                  properties:
-                    serviceSpecification:
-                      metricSpecifications:
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow runs started.
-                          displayName: Runs Started
-                          fillGapWithZero: true
-                          name: RunsStarted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow runs completed.
-                          displayName: Runs Completed
-                          fillGapWithZero: true
-                          name: RunsCompleted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow runs succeeded.
-                          displayName: Runs Succeeded
-                          fillGapWithZero: true
-                          name: RunsSucceeded
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow runs failed.
-                          displayName: Runs Failed
-                          fillGapWithZero: true
-                          name: RunsFailed
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow runs cancelled.
-                          displayName: Runs Cancelled
-                          fillGapWithZero: true
-                          name: RunsCancelled
-                          unit: Count
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of completed workflow runs.
-                          displayName: Run Latency
-                          fillGapWithZero: false
-                          name: RunLatency
-                          unit: Seconds
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of succeeded workflow runs.
-                          displayName: Run Success Latency
-                          fillGapWithZero: false
-                          name: RunSuccessLatency
-                          unit: Seconds
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow action or trigger throttled events.
-                          displayName: Run Throttled Events
-                          fillGapWithZero: true
-                          name: RunThrottledEvents
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Percentage of workflow runs failed.
-                          displayName: Run Failure Percentage
-                          fillGapWithZero: true
-                          name: RunFailurePercentage
-                          unit: Percent
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow actions started.
-                          displayName: 'Actions Started '
-                          fillGapWithZero: true
-                          name: ActionsStarted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow actions completed.
-                          displayName: 'Actions Completed '
-                          fillGapWithZero: true
-                          name: ActionsCompleted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow actions succeeded.
-                          displayName: 'Actions Succeeded '
-                          fillGapWithZero: true
-                          name: ActionsSucceeded
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow actions failed.
-                          displayName: 'Actions Failed '
-                          fillGapWithZero: true
-                          name: ActionsFailed
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow actions skipped.
-                          displayName: 'Actions Skipped '
-                          fillGapWithZero: true
-                          name: ActionsSkipped
-                          unit: Count
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of completed workflow actions.
-                          displayName: 'Action Latency '
-                          fillGapWithZero: false
-                          name: ActionLatency
-                          unit: Seconds
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of succeeded workflow actions.
-                          displayName: 'Action Success Latency '
-                          fillGapWithZero: false
-                          name: ActionSuccessLatency
-                          unit: Seconds
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow action throttled events..
-                          displayName: Action Throttled Events
-                          fillGapWithZero: true
-                          name: ActionThrottledEvents
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers started.
-                          displayName: 'Triggers Started '
-                          fillGapWithZero: true
-                          name: TriggersStarted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers completed.
-                          displayName: 'Triggers Completed '
-                          fillGapWithZero: true
-                          name: TriggersCompleted
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers succeeded.
-                          displayName: 'Triggers Succeeded '
-                          fillGapWithZero: true
-                          name: TriggersSucceeded
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers failed.
-                          displayName: 'Triggers Failed '
-                          fillGapWithZero: true
-                          name: TriggersFailed
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers skipped.
-                          displayName: Triggers Skipped
-                          fillGapWithZero: true
-                          name: TriggersSkipped
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow triggers fired.
-                          displayName: 'Triggers Fired '
-                          fillGapWithZero: true
-                          name: TriggersFired
-                          unit: Count
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of completed workflow triggers.
-                          displayName: 'Trigger Latency '
-                          fillGapWithZero: false
-                          name: TriggerLatency
-                          unit: Seconds
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of fired workflow triggers.
-                          displayName: 'Trigger Fire Latency '
-                          fillGapWithZero: false
-                          name: TriggerFireLatency
-                          unit: Seconds
-                        - aggregationType: Average
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Latency of succeeded workflow triggers.
-                          displayName: 'Trigger Success Latency '
-                          fillGapWithZero: false
-                          name: TriggerSuccessLatency
-                          unit: Seconds
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow trigger throttled events.
-                          displayName: Trigger Throttled Events
-                          fillGapWithZero: true
-                          name: TriggerThrottledEvents
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow action executions getting billed.
-                          displayName: Billable Action Executions
-                          fillGapWithZero: true
-                          name: BillableActionExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow trigger executions getting billed.
-                          displayName: Billable Trigger Executions
-                          fillGapWithZero: true
-                          name: BillableTriggerExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of workflow executions getting billed.
-                          displayName: Total Billable Executions
-                          fillGapWithZero: true
-                          name: TotalBillableExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of native workflow action executions getting billed.
-                          displayName: Billable Native Action Executions
-                          fillGapWithZero: true
-                          name: BillableNativeActionExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of native workflow trigger executions getting billed.
-                          displayName: Billable Native Trigger Executions
-                          fillGapWithZero: true
-                          name: BillableNativeTriggerExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of native workflow executions getting billed.
-                          displayName: Total Native Billable Executions
-                          fillGapWithZero: true
-                          name: TotalBillableNativeExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of standard workflow action executions getting billed.
-                          displayName: Billable Standard Action Executions
-                          fillGapWithZero: true
-                          name: BillableStandardActionExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of standard workflow trigger executions getting billed.
-                          displayName: Billable Standard Trigger Executions
-                          fillGapWithZero: true
-                          name: BillableStandardTriggerExecutions
-                          unit: Count
-                        - aggregationType: Total
-                          availabilities:
-                            - blobDuration: PT1H
-                              timeGrain: PT1M
-                          dimensions: []
-                          displayDescription: Number of standard workflow executions getting billed.
-                          displayName: Total Standard Billable Executions
-                          fillGapWithZero: true
-                          name: TotalBillableStandardExecutions
-                          unit: Count
-                - display:
-                    description: Reads the workflow log definitions.
-                    operation: Get Workflow Log Definition
-                    provider: Microsoft Logic
-                    resource: Workflow Log Definition
-                  name: Microsoft.Logic/workflows/providers/Microsoft.Insights/logDefinitions/read
-                  origin: System
-                  properties:
-                    serviceSpecification:
-                      logSpecifications:
-                        - blobDuration: PT1H
-                          description: Diagnostic events related to workflow runtime executions.
-                          displayName: Workflow runtime diagnostic events
-                          name: WorkflowRuntime
-                - display:
-                    description: Gets the workflow run action expression traces.
-                    operation: List Workflow Run Action Expression Traces
-                    provider: Microsoft Logic
-                    resource: Workflow Run Action
-                  name: Microsoft.Logic/workflows/runs/actions/listExpressionTraces/action
-                - display:
-                    description: Gets the workflow run action repetition expression traces.
-                    operation: List Workflow Run Action Repetition Expression Traces
-                    provider: Microsoft Logic
-                    resource: Workflow Run Action Repetition
-                  name: Microsoft.Logic/workflows/runs/actions/repetitions/listExpressionTraces/action
-                - display:
-                    description: Reads the Integration Account log definitions.
-                    operation: Get Integration Account Log Definition
-                    provider: Microsoft Logic
-                    resource: Integration Account Log Definition
-                  name: Microsoft.Logic/integrationAccounts/providers/Microsoft.Insights/logDefinitions/read
-                  origin: System
-                  properties:
-                    serviceSpecification:
-                      logSpecifications:
-                        - blobDuration: PT1H
-                          description: Track events related to Integration Account.
-                          displayName: Integration Account track events
-                          name: IntegrationAccountTrackingEvents
-                - display:
-                    description: Reads the integration account.
-                    operation: Get Integration Account
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/read
-                - display:
-                    description: Creates or updates the integration account.
-                    operation: Set Integration Account
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/write
-                - display:
-                    description: Deletes the integration account.
-                    operation: Delete Integration Account
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/delete
-                - display:
-                    description: Regenerates the access key secrets.
-                    operation: Regenerate Access Key
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/regenerateAccessKey/action
-                - display:
-                    description: Gets the callback URL for integration account.
-                    operation: List Integration Account Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/listCallbackUrl/action
-                - display:
-                    description: Gets the keys in the key vault.
-                    operation: List Key Vault Keys
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/listKeyVaultKeys/action
-                - display:
-                    description: Logs the tracking events in the integration account.
-                    operation: Log Integration Account Tracking Events
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/logTrackingEvents/action
-                - display:
-                    description: Joins the Integration Account.
-                    operation: Join Integration Account
-                    provider: Microsoft Logic
-                    resource: Integration Account
-                  name: Microsoft.Logic/integrationAccounts/join/action
-                - display:
-                    description: Reads the parter in integration account.
-                    operation: Get Integration Account Partner
-                    provider: Microsoft Logic
-                    resource: Integration Account Partner
-                  name: Microsoft.Logic/integrationAccounts/partners/read
-                - display:
-                    description: Creates or updates the partner in integration account.
-                    operation: Set Integration Account Partner
-                    provider: Microsoft Logic
-                    resource: Integration Account Partner
-                  name: Microsoft.Logic/integrationAccounts/partners/write
-                - display:
-                    description: Deletes the partner in integration account.
-                    operation: Delete Integration Account Partner
-                    provider: Microsoft Logic
-                    resource: Integration Account Partner
-                  name: Microsoft.Logic/integrationAccounts/partners/delete
-                - display:
-                    description: Gets the callback URL for partner content in integration account.
-                    operation: List Integration Account Partner Content Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account Partner
-                  name: Microsoft.Logic/integrationAccounts/partners/listContentCallbackUrl/action
-                - display:
-                    description: Reads the agreement in integration account.
-                    operation: Get Integration Account Agreement
-                    provider: Microsoft Logic
-                    resource: Integration Account Agreement
-                  name: Microsoft.Logic/integrationAccounts/agreements/read
-                - display:
-                    description: Creates or updates the agreement in integration account.
-                    operation: Set Integration Account Agreement
-                    provider: Microsoft Logic
-                    resource: Integration Account Agreement
-                  name: Microsoft.Logic/integrationAccounts/agreements/write
-                - display:
-                    description: Deletes the agreement in integration account.
-                    operation: Delete Integration Account Agreement
-                    provider: Microsoft Logic
-                    resource: Integration Account Agreement
-                  name: Microsoft.Logic/integrationAccounts/agreements/delete
-                - display:
-                    description: Gets the callback URL for agreement content in integration account.
-                    operation: List Integration Account Agreement Content Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account Agreement
-                  name: Microsoft.Logic/integrationAccounts/agreements/listContentCallbackUrl/action
-                - display:
-                    description: Reads the certificate in integration account.
-                    operation: Get Integration Account Certificate
-                    provider: Microsoft Logic
-                    resource: Integration Account Certificate
-                  name: Microsoft.Logic/integrationAccounts/certificates/read
-                - display:
-                    description: Creates or updates the certificate in integration account.
-                    operation: Set Integration Account Certificate
-                    provider: Microsoft Logic
-                    resource: Integration Account Certificate
-                  name: Microsoft.Logic/integrationAccounts/certificates/write
-                - display:
-                    description: Deletes the certificate in integration account.
-                    operation: Delete Integration Account Certificate
-                    provider: Microsoft Logic
-                    resource: Integration Account Certificate
-                  name: Microsoft.Logic/integrationAccounts/certificates/delete
-                - display:
-                    description: Reads the schema in integration account.
-                    operation: Get Integration Account Schema
-                    provider: Microsoft Logic
-                    resource: Integration Account Schema
-                  name: Microsoft.Logic/integrationAccounts/schemas/read
-                - display:
-                    description: Creates or updates the schema in integration account.
-                    operation: Set Integration Account Schema
-                    provider: Microsoft Logic
-                    resource: Integration Account Schema
-                  name: Microsoft.Logic/integrationAccounts/schemas/write
-                - display:
-                    description: Deletes the schema in integration account.
-                    operation: Delete Integration Account Schema
-                    provider: Microsoft Logic
-                    resource: Integration Account Schema
-                  name: Microsoft.Logic/integrationAccounts/schemas/delete
-                - display:
-                    description: Gets the callback URL for schema content in integration account.
-                    operation: List Integration Account Schema Content Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account Schema
-                  name: Microsoft.Logic/integrationAccounts/schemas/listContentCallbackUrl/action
-                - display:
-                    description: Reads the map in integration account.
-                    operation: Get Integration Account Map
-                    provider: Microsoft Logic
-                    resource: Integration Account Map
-                  name: Microsoft.Logic/integrationAccounts/maps/read
-                - display:
-                    description: Creates or updates the map in integration account.
-                    operation: Set Integration Account Map
-                    provider: Microsoft Logic
-                    resource: Integration Account Map
-                  name: Microsoft.Logic/integrationAccounts/maps/write
-                - display:
-                    description: Deletes the map in integration account.
-                    operation: Delete Integration Account Map
-                    provider: Microsoft Logic
-                    resource: Integration Account Map
-                  name: Microsoft.Logic/integrationAccounts/maps/delete
-                - display:
-                    description: Gets the callback URL for map content in integration account.
-                    operation: List Integration Account Map Content Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account Map
-                  name: Microsoft.Logic/integrationAccounts/maps/listContentCallbackUrl/action
-                - display:
-                    description: Reads the assembly in integration account.
-                    operation: Get Integration Account Assembly
-                    provider: Microsoft Logic
-                    resource: Integration Account Assembly
-                  name: Microsoft.Logic/integrationAccounts/assemblies/read
-                - display:
-                    description: Creates or updates the assembly in integration account.
-                    operation: Set Integration Account Assembly
-                    provider: Microsoft Logic
-                    resource: Integration Account Assembly
-                  name: Microsoft.Logic/integrationAccounts/assemblies/write
-                - display:
-                    description: Deletes the assembly in integration account.
-                    operation: Delete Integration Account Assembly
-                    provider: Microsoft Logic
-                    resource: Integration Account Assembly
-                  name: Microsoft.Logic/integrationAccounts/assemblies/delete
-                - display:
-                    description: Gets the callback URL for assembly content in integration account.
-                    operation: List Integration Account Assembly Content Callback URL
-                    provider: Microsoft Logic
-                    resource: Integration Account Assembly
-                  name: Microsoft.Logic/integrationAccounts/assemblies/listContentCallbackUrl/action
-                - display:
-                    description: Reads the batch configuration in integration account.
-                    operation: Get Integration Account Batch Configuration
-                    provider: Microsoft Logic
-                    resource: Integration Account Batch Configuration
-                  name: Microsoft.Logic/integrationAccounts/batchConfigurations/read
-                - display:
-                    description: Creates or updates the batch configuration in integration account.
-                    operation: Set Integration Account Batch Configuration
-                    provider: Microsoft Logic
-                    resource: Integration Account Batch Configuration
-                  name: Microsoft.Logic/integrationAccounts/batchConfigurations/write
-                - display:
-                    description: Deletes the batch configuration in integration account.
-                    operation: Delete Integration Account Batch Configuration
-                    provider: Microsoft Logic
-                    resource: Integration Account Batch Configuration
-                  name: Microsoft.Logic/integrationAccounts/batchConfigurations/delete
-                - display:
-                    description: Reads the batch configuration in integration account.
-                    operation: Get Integration Account Session
-                    provider: Microsoft Logic
-                    resource: Integration Account Session
-                  name: Microsoft.Logic/integrationAccounts/sessions/read
-                - display:
-                    description: Creates or updates the session in integration account.
-                    operation: Set Integration Account Session
-                    provider: Microsoft Logic
-                    resource: Integration Account Session
-                  name: Microsoft.Logic/integrationAccounts/sessions/write
-                - display:
-                    description: Deletes the session in integration account.
-                    operation: Delete Integration Account Session
-                    provider: Microsoft Logic
-                    resource: Integration Account Session
-                  name: Microsoft.Logic/integrationAccounts/sessions/delete
-                - display:
-                    description: Reads the integration service environment.
-                    operation: Get Integration Service Environment
-                    provider: Microsoft Logic
-                    resource: Integration Service Environment
-                  name: Microsoft.Logic/integrationServiceEnvironments/read
-                - display:
-                    description: Creates or updates the integration service environment.
-                    operation: Set Integration Service Environment
-                    provider: Microsoft Logic
-                    resource: Integration Service Environment
-                  name: Microsoft.Logic/integrationServiceEnvironments/write
-                - display:
-                    description: Deletes the integration service environment.
-                    operation: Delete Integration Service Environment
-                    provider: Microsoft Logic
-                    resource: Integration Service Environment
-                  name: Microsoft.Logic/integrationServiceEnvironments/delete
-                - display:
-                    description: Joins the Integration Service Environment.
-                    operation: Join Integration Service Environment
-                    provider: Microsoft Logic
-                    resource: Integration Service Environment
-                  name: Microsoft.Logic/integrationServiceEnvironments/join/action
+              body:
+                value:
+                  - display:
+                      operation: Get Operation
+                      provider: Microsoft Logic
+                      resource: Operation
+                    name: Microsoft.Logic/operations/read
+                  - display:
+                      operation: Register Resource Provider
+                      provider: Microsoft Logic
+                      resource: Resource Provider
+                    name: Microsoft.Logic/register/action
+                  - display:
+                      operation: Validate Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/locations/workflows/validate/action
+                  - display:
+                      operation: Get Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/read
+                  - display:
+                      operation: Set Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/write
+                  - display:
+                      operation: Delete Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/delete
+                  - display:
+                      operation: Run Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/run/action
+                  - display:
+                      operation: Disable Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/disable/action
+                  - display:
+                      operation: Enable Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/enable/action
+                  - display:
+                      operation: Suspend Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/suspend/action
+                  - display:
+                      operation: Validate Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/validate/action
+                  - display:
+                      operation: Move Workflow
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/move/action
+                  - display:
+                      operation: Get workflow swagger
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/listSwagger/action
+                  - display:
+                      operation: Get Workflow Version
+                      provider: Microsoft Logic
+                      resource: Workflow Version
+                    name: Microsoft.Logic/workflows/versions/read
+                  - display:
+                      operation: List Trigger Callback URL
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/versions/triggers/listCallbackUrl/action
+                  - display:
+                      operation: Get Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/accessKeys/read
+                  - display:
+                      operation: Set Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/accessKeys/write
+                  - display:
+                      operation: Delete Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/accessKeys/delete
+                  - display:
+                      operation: List Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/accessKeys/list/action
+                  - display:
+                      operation: Regenerate Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/accessKeys/regenerate/action
+                  - display:
+                      operation: Regenerate Access Key
+                      provider: Microsoft Logic
+                      resource: Access Key
+                    name: Microsoft.Logic/workflows/regenerateAccessKey/action
+                  - display:
+                      operation: List workflow callback URL
+                      provider: Microsoft Logic
+                      resource: Workflow
+                    name: Microsoft.Logic/workflows/listCallbackUrl/action
+                  - display:
+                      operation: Get Trigger
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/triggers/read
+                  - display:
+                      operation: Trigger Run
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/triggers/run/action
+                  - display:
+                      operation: Trigger Reset
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/triggers/reset/action
+                  - display:
+                      operation: Set Trigger State
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/triggers/setState/action
+                  - display:
+                      operation: Get Trigger Histories
+                      provider: Microsoft Logic
+                      resource: Trigger Histories
+                    name: Microsoft.Logic/workflows/triggers/histories/read
+                  - display:
+                      operation: Resubmit trigger
+                      provider: Microsoft Logic
+                      resource: Trigger Histories
+                    name: Microsoft.Logic/workflows/triggers/histories/resubmit/action
+                  - display:
+                      operation: List Trigger Callback URL
+                      provider: Microsoft Logic
+                      resource: Trigger
+                    name: Microsoft.Logic/workflows/triggers/listCallbackUrl/action
+                  - display:
+                      operation: Get Workflow Run
+                      provider: Microsoft Logic
+                      resource: Workflow Run
+                    name: Microsoft.Logic/workflows/runs/read
+                  - display:
+                      operation: Cancel Workflow Run
+                      provider: Microsoft Logic
+                      resource: Workflow Run
+                    name: Microsoft.Logic/workflows/runs/cancel/action
+                  - display:
+                      operation: Get Workflow Run Operation Status
+                      provider: Microsoft Logic
+                      resource: Workflow Run Operation
+                    name: Microsoft.Logic/workflows/runs/operations/read
+                  - display:
+                      operation: Get Workflow Run Action
+                      provider: Microsoft Logic
+                      resource: Workflow Run Action
+                    name: Microsoft.Logic/workflows/runs/actions/read
+                  - display:
+                      operation: Get Workflow Run Action Repetition
+                      provider: Microsoft Logic
+                      resource: Workflow Run Action Repetition
+                    name: Microsoft.Logic/workflows/runs/actions/repetitions/read
+                  - display:
+                      operation: Get Workflow Run Action Scope Repetition
+                      provider: Microsoft Logic
+                      resource: Workflow Run Action Scope Repetition
+                    name: Microsoft.Logic/workflows/runs/actions/scoperepetitions/read
+                  - display:
+                      operation: Gets the workflow run action request history
+                      provider: Microsoft Logic
+                      resource: Workflow run action request history
+                    name: Microsoft.Logic/workflows/runs/actions/requestHistories/read
+                  - display:
+                      operation: Gets the workflow run repetition action request history
+                      provider: Microsoft Logic
+                      resource: Workflow run repetition action request history
+                    name: Microsoft.Logic/workflows/runs/actions/repetitions/requestHistories/read
+                  - display:
+                      operation: Get Workflow Diagnostic Setting
+                      provider: Microsoft Logic
+                      resource: Workflow Diagnostic Setting
+                    name: Microsoft.Logic/workflows/providers/Microsoft.Insights/diagnosticSettings/read
+                  - display:
+                      operation: Set Workflow Diagnostic Setting
+                      provider: Microsoft Logic
+                      resource: Workflow Diagnostic Setting
+                    name: Microsoft.Logic/workflows/providers/Microsoft.Insights/diagnosticSettings/write
+                  - display:
+                      operation: Get Workflow Metric Definition
+                      provider: Microsoft Logic
+                      resource: Workflow Metric Definition
+                    name: Microsoft.Logic/workflows/providers/Microsoft.Insights/metricDefinitions/read
+                  - display:
+                      operation: Get Workflow Log Definition
+                      provider: Microsoft Logic
+                      resource: Workflow Log Definition
+                    name: Microsoft.Logic/workflows/providers/Microsoft.Insights/logDefinitions/read
+                  - display:
+                      operation: List Workflow Run Action Expression Traces
+                      provider: Microsoft Logic
+                      resource: Workflow Run Action
+                    name: Microsoft.Logic/workflows/runs/actions/listExpressionTraces/action
+                  - display:
+                      operation: List Workflow Run Action Repetition Expression Traces
+                      provider: Microsoft Logic
+                      resource: Workflow Run Action Repetition
+                    name: Microsoft.Logic/workflows/runs/actions/repetitions/listExpressionTraces/action
+                  - display:
+                      operation: Get Integration Account Log Definition
+                      provider: Microsoft Logic
+                      resource: Integration Account Log Definition
+                    name: Microsoft.Logic/integrationAccounts/providers/Microsoft.Insights/logDefinitions/read
+                  - display:
+                      operation: Get Integration Account
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/read
+                  - display:
+                      operation: Set Integration Account
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/write
+                  - display:
+                      operation: Delete Integration Account
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/delete
+                  - display:
+                      operation: Regenerate Access Key
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/regenerateAccessKey/action
+                  - display:
+                      operation: List Integration Account Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/listCallbackUrl/action
+                  - display:
+                      operation: List Key Vault Keys
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/listKeyVaultKeys/action
+                  - display:
+                      operation: Log Integration Account Tracking Events
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/logTrackingEvents/action
+                  - display:
+                      operation: Join Integration Account
+                      provider: Microsoft Logic
+                      resource: Integration Account
+                    name: Microsoft.Logic/integrationAccounts/join/action
+                  - display:
+                      operation: Get Integration Account Partner
+                      provider: Microsoft Logic
+                      resource: Integration Account Partner
+                    name: Microsoft.Logic/integrationAccounts/partners/read
+                  - display:
+                      operation: Set Integration Account Partner
+                      provider: Microsoft Logic
+                      resource: Integration Account Partner
+                    name: Microsoft.Logic/integrationAccounts/partners/write
+                  - display:
+                      operation: Delete Integration Account Partner
+                      provider: Microsoft Logic
+                      resource: Integration Account Partner
+                    name: Microsoft.Logic/integrationAccounts/partners/delete
+                  - display:
+                      operation: List Integration Account Partner Content Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account Partner
+                    name: Microsoft.Logic/integrationAccounts/partners/listContentCallbackUrl/action
+                  - display:
+                      operation: Get Integration Account Agreement
+                      provider: Microsoft Logic
+                      resource: Integration Account Agreement
+                    name: Microsoft.Logic/integrationAccounts/agreements/read
+                  - display:
+                      operation: Set Integration Account Agreement
+                      provider: Microsoft Logic
+                      resource: Integration Account Agreement
+                    name: Microsoft.Logic/integrationAccounts/agreements/write
+                  - display:
+                      operation: Delete Integration Account Agreement
+                      provider: Microsoft Logic
+                      resource: Integration Account Agreement
+                    name: Microsoft.Logic/integrationAccounts/agreements/delete
+                  - display:
+                      operation: List Integration Account Agreement Content Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account Agreement
+                    name: Microsoft.Logic/integrationAccounts/agreements/listContentCallbackUrl/action
+                  - display:
+                      operation: Get Integration Account Certificate
+                      provider: Microsoft Logic
+                      resource: Integration Account Certificate
+                    name: Microsoft.Logic/integrationAccounts/certificates/read
+                  - display:
+                      operation: Set Integration Account Certificate
+                      provider: Microsoft Logic
+                      resource: Integration Account Certificate
+                    name: Microsoft.Logic/integrationAccounts/certificates/write
+                  - display:
+                      operation: Delete Integration Account Certificate
+                      provider: Microsoft Logic
+                      resource: Integration Account Certificate
+                    name: Microsoft.Logic/integrationAccounts/certificates/delete
+                  - display:
+                      operation: Get Integration Account Schema
+                      provider: Microsoft Logic
+                      resource: Integration Account Schema
+                    name: Microsoft.Logic/integrationAccounts/schemas/read
+                  - display:
+                      operation: Set Integration Account Schema
+                      provider: Microsoft Logic
+                      resource: Integration Account Schema
+                    name: Microsoft.Logic/integrationAccounts/schemas/write
+                  - display:
+                      operation: Delete Integration Account Schema
+                      provider: Microsoft Logic
+                      resource: Integration Account Schema
+                    name: Microsoft.Logic/integrationAccounts/schemas/delete
+                  - display:
+                      operation: List Integration Account Schema Content Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account Schema
+                    name: Microsoft.Logic/integrationAccounts/schemas/listContentCallbackUrl/action
+                  - display:
+                      operation: Get Integration Account Map
+                      provider: Microsoft Logic
+                      resource: Integration Account Map
+                    name: Microsoft.Logic/integrationAccounts/maps/read
+                  - display:
+                      operation: Set Integration Account Map
+                      provider: Microsoft Logic
+                      resource: Integration Account Map
+                    name: Microsoft.Logic/integrationAccounts/maps/write
+                  - display:
+                      operation: Delete Integration Account Map
+                      provider: Microsoft Logic
+                      resource: Integration Account Map
+                    name: Microsoft.Logic/integrationAccounts/maps/delete
+                  - display:
+                      operation: List Integration Account Map Content Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account Map
+                    name: Microsoft.Logic/integrationAccounts/maps/listContentCallbackUrl/action
+                  - display:
+                      operation: Get Integration Account Assembly
+                      provider: Microsoft Logic
+                      resource: Integration Account Assembly
+                    name: Microsoft.Logic/integrationAccounts/assemblies/read
+                  - display:
+                      operation: Set Integration Account Assembly
+                      provider: Microsoft Logic
+                      resource: Integration Account Assembly
+                    name: Microsoft.Logic/integrationAccounts/assemblies/write
+                  - display:
+                      operation: Delete Integration Account Assembly
+                      provider: Microsoft Logic
+                      resource: Integration Account Assembly
+                    name: Microsoft.Logic/integrationAccounts/assemblies/delete
+                  - display:
+                      operation: List Integration Account Assembly Content Callback URL
+                      provider: Microsoft Logic
+                      resource: Integration Account Assembly
+                    name: Microsoft.Logic/integrationAccounts/assemblies/listContentCallbackUrl/action
+                  - display:
+                      operation: Get Integration Account Batch Configuration
+                      provider: Microsoft Logic
+                      resource: Integration Account Batch Configuration
+                    name: Microsoft.Logic/integrationAccounts/batchConfigurations/read
+                  - display:
+                      operation: Set Integration Account Batch Configuration
+                      provider: Microsoft Logic
+                      resource: Integration Account Batch Configuration
+                    name: Microsoft.Logic/integrationAccounts/batchConfigurations/write
+                  - display:
+                      operation: Delete Integration Account Batch Configuration
+                      provider: Microsoft Logic
+                      resource: Integration Account Batch Configuration
+                    name: Microsoft.Logic/integrationAccounts/batchConfigurations/delete
+                  - display:
+                      operation: Get Integration Account Session
+                      provider: Microsoft Logic
+                      resource: Integration Account Session
+                    name: Microsoft.Logic/integrationAccounts/sessions/read
+                  - display:
+                      operation: Set Integration Account Session
+                      provider: Microsoft Logic
+                      resource: Integration Account Session
+                    name: Microsoft.Logic/integrationAccounts/sessions/write
+                  - display:
+                      operation: Delete Integration Account Session
+                      provider: Microsoft Logic
+                      resource: Integration Account Session
+                    name: Microsoft.Logic/integrationAccounts/sessions/delete
+                  - display:
+                      operation: Get Integration Service Environment
+                      provider: Microsoft Logic
+                      resource: Integration Service Environment
+                    name: Microsoft.Logic/integrationServiceEnvironments/read
+                  - display:
+                      operation: Set Integration Service Environment
+                      provider: Microsoft Logic
+                      resource: Integration Service Environment
+                    name: Microsoft.Logic/integrationServiceEnvironments/write
+                  - display:
+                      operation: Delete Integration Service Environment
+                      provider: Microsoft Logic
+                      resource: Integration Service Environment
+                    name: Microsoft.Logic/integrationServiceEnvironments/delete
+                  - display:
+                      operation: Join Integration Service Environment
+                      provider: Microsoft Logic
+                      resource: Integration Service Environment
+                    name: Microsoft.Logic/integrationServiceEnvironments/join/action
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Logic/integrationAccounts':
@@ -1038,45 +572,32 @@ paths:
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-                  location: brazilsouth
-                  name: test-workflow
-                  properties:
-                    accessControl: {}
-                    accessEndpoint: 'http://tempuri.org'
-                    changedTime: '2018-08-09T22:54:54.3533634Z'
-                    createdTime: '2018-04-25T01:39:21.4365247Z'
-                    definition:
-                      $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                      actions: {}
-                      contentVersion: 1.0.0.0
-                      outputs: {}
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
+                    location: brazilsouth
+                    name: test-workflow
+                    properties:
+                      accessEndpoint: 'http://tempuri.org'
+                      changedTime: '2018-08-09T22:54:54.3533634Z'
+                      createdTime: '2018-04-25T01:39:21.4365247Z'
+                      definition:
+                        $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                        actions: {}
+                        contentVersion: 1.0.0.0
+                        outputs: {}
+                        parameters: {}
+                        triggers: {}
+                      integrationAccount:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                        name: test-integration-account
+                        type: Microsoft.Logic/integrationAccounts
                       parameters: {}
-                      triggers: {}
-                    endpointsConfiguration:
-                      connector:
-                        outgoingIpAddresses:
-                          - address: 40.84.145.61
-                      workflow:
-                        accessEndpointIpAddresses:
-                          - address: 104.210.153.89
-                          - address: 13.85.79.155
-                          - address: 13.65.39.247
-                        outgoingIpAddresses:
-                          - address: 13.84.159.168
-                          - address: 13.65.86.56
-                          - address: 13.65.82.190
-                    integrationAccount:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                      name: test-integration-account
-                      type: Microsoft.Logic/integrationAccounts
-                    parameters: {}
-                    provisioningState: Succeeded
-                    state: Enabled
-                    version: 08586677515911718341
-                  tags: {}
-                  type: Microsoft.Logic/workflows
+                      provisioningState: Succeeded
+                      state: Enabled
+                      version: 08586677515911718341
+                    tags: {}
+                    type: Microsoft.Logic/workflows
       x-ms-odata: '#/definitions/WorkflowFilter'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3029,16 +2550,15 @@ paths:
             batchConfiguration:
               location: westus
               properties:
-                properties:
-                  batchGroupName: DEFAULT
-                  releaseCriteria:
-                    batchSize: 234567
-                    messageCount: 10
-                    recurrence:
-                      frequency: Minute
-                      interval: 1
-                      startTime: '2017-03-24T11:43:00'
-                      timeZone: India Standard Time
+                batchGroupName: DEFAULT
+                releaseCriteria:
+                  batchSize: 234567
+                  messageCount: 10
+                  recurrence:
+                    frequency: Minute
+                    interval: 1
+                    startTime: '2017-03-24T11:43:00'
+                    timeZone: India Standard Time
             batchConfigurationName: testBatchConfiguration
             integrationAccountName: testIntegrationAccount
             resourceGroupName: testResourceGroup
@@ -3396,8 +2916,7 @@ paths:
             api-version: '2016-06-01'
             integrationAccountName: testIntegrationAccount
             listKeyVaultKeys:
-              keyVault:
-                id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.KeyVault/vaults/testKeyVault
+              keyVault: {}
               skipToken: testSkipToken
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -3453,34 +2972,7 @@ paths:
                     message: Some error occurred
                   eventLevel: Informational
                   eventTime: '2016-08-05T01:54:49.505567Z'
-                  record:
-                    agreementProperties:
-                      agreementName: testAgreement
-                      as2From: testas2from
-                      as2To: testas2to
-                      receiverPartnerName: testPartner2
-                      senderPartnerName: testPartner1
-                    messageProperties:
-                      IsMessageEncrypted: false
-                      IsMessageSigned: false
-                      correlationMessageId: Unique message identifier
-                      direction: Receive
-                      dispositionType: received-success
-                      fileName: test
-                      isMdnExpected: true
-                      isMessageCompressed: false
-                      isMessageFailed: false
-                      isNrrEnabled: true
-                      mdnType: Async
-                      messageId: '12345'
                   recordType: AS2Message
-              source:
-                operation:
-                  operationName: httpgetaction
-                runInstance:
-                  runId: 08586772141809790618914792486CU03
-                workflow:
-                  systemId: /locations/westus/scaleunits/test-01/workflows/bf501b3fceaa4a858a166aa64768ced5
               sourceType: Microsoft.Logic/workflows
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -4129,6 +3621,475 @@ paths:
                 sku:
                   name: Standard
                 type: Microsoft.Logic/integrationAccounts
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations':
+    get:
+      description: Gets a list of integration account RosettaNet process configurations.
+      operationId: RosettaNetProcessConfigurations_ListByIntegrationAccounts
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - description: The number of items to be included in the result.
+          format: int32
+          in: query
+          name: $top
+          required: false
+          type: integer
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfigurationListResult'
+      tags:
+        - IntegrationAccountRosettaNetProcessConfigurations
+      x-ms-examples:
+        Get RosettaNetProcessConfigurations by integrationaccount name:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testia123
+            resourceGroupName: testrg123
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123//rosettaNetProcessConfigurations/0A1
+                    name: IntegrationAccountSession1662
+                    properties:
+                      activitySettings:
+                        acknowledgmentOfReceiptSettings:
+                          isNonRepudiationRequired: false
+                          timeToAcknowledgeInSeconds: 36400
+                        activityBehavior:
+                          actionType: SingleAction
+                          isAuthorizationRequired: false
+                          isSecuredTransportRequired: false
+                          nonRepudiationOfOriginAndContent: false
+                          persistentConfidentialityScope: None
+                          responseType: Async
+                          retryCount: 4
+                          timeToPerformInSeconds: 86400
+                        activityType: InformationDistribution
+                      changedTime: '2019-05-22T13:47:26.3328234Z'
+                      createdTime: '2019-05-22T13:47:26.330972Z'
+                      initiatorRoleSettings:
+                        action: Failure Notification Action
+                        businessDocument:
+                          description: An unsolicited formal notification of the failure to perform a business activity.
+                          name: Failure Notification
+                          version: V02.00.00
+                        description: An organizational process that automatically notifies the appropriate Failure Report Administrator of a PIP process failure.
+                        role: PIP Failure Notifier
+                        roleType: Functional
+                        service: PIP Failure Notifier Service
+                        serviceClassification: Business Service
+                      processCode: 0A1
+                      processName: 0A1
+                      processVersion: V02.00.00
+                      responderRoleSettings:
+                        action: Failure Notification Action
+                        businessDocument:
+                          description: An unsolicited formal notification of the failure to perform a business activity.
+                          name: Failure Notification
+                          version: V02.00.00
+                        description: An employee or organizational entity that receives and processes PIP Failure Notifications.
+                        role: Failure Report Administrator
+                        roleType: Organizational
+                        service: Failure Report Administrator Service
+                        serviceClassification: Business Service
+                    type: Microsoft.Logic/integrationAccounts/sessions
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123/rosettaNetProcessConfigurations/3A3
+                    name: 3A3
+                    properties:
+                      activitySettings:
+                        acknowledgmentOfReceiptSettings:
+                          isNonRepudiationRequired: false
+                          timeToAcknowledgeInSeconds: 36400
+                        activityBehavior:
+                          actionType: DoubleAction
+                          isAuthorizationRequired: false
+                          isSecuredTransportRequired: false
+                          nonRepudiationOfOriginAndContent: false
+                          persistentConfidentialityScope: None
+                          responseType: Async
+                          retryCount: 4
+                          timeToPerformInSeconds: 86400
+                        activityType: RequestResponse
+                      changedTime: '2019-05-31T06:46:08.129905Z'
+                      createdTime: '2019-05-31T06:46:08.1261454Z'
+                      initiatorRoleSettings:
+                        action: Shopping Cart Transfer Request Action
+                        businessDocument:
+                          description: Requests a Supplier to confirm the transfer of a shopping cart.
+                          name: Shopping Cart Transfer Request
+                          version: R02.00.00
+                        description: This partner role facilitates the sale of product between partners in the supply chain.
+                        role: Sales Facilitator
+                        roleType: Functional
+                        service: Sales Facilitator Service
+                        serviceClassification: Business Service
+                      processCode: 3A3
+                      processName: 3A3
+                      processVersion: R02.00.00
+                      responderRoleSettings:
+                        action: Shopping Cart Transfer Confirmation Action
+                        businessDocument:
+                          description: Confirms the transfer of a shopping cart from a Sales Facilitator to a Supplier.
+                          name: Shopping Cart Transfer Confirmation
+                          version: R02.00.00
+                        description: This partner role supplies product to customers in the supply chain.
+                        role: Supplier
+                        roleType: Organizational
+                        service: Supplier Service
+                        serviceClassification: Business Service
+                    type: Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations
+              headers:
+                Cache-Control: no-cache
+                Content-Type: application/json; charset=utf-8
+                Date: 'Tue, 28 May 2019 20:43:03 GMT'
+                Expires: -1
+                Pragma: no-cache
+                Vary: Accept-Encoding
+          title: List by integration account rosettanet process configuration examples
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations/{rosettaNetProcessConfigurationName}':
+    delete:
+      description: Deletes an integration account RosettaNet ProcessConfiguration.
+      operationId: RosettaNetProcessConfigurations_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account RosettaNetProcessConfiguration name.
+          in: path
+          name: rosettaNetProcessConfigurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - IntegrationAccountRosettaNetProcessConfigurations
+      x-ms-examples:
+        Delete an RosettaNetProcessConfiguration:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            rosettaNetProcessConfigurationName: 3A4
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets an integration account RosettaNetProcessConfiguration.
+      operationId: RosettaNetProcessConfigurations_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account RosettaNetProcessConfiguration name.
+          in: path
+          name: rosettaNetProcessConfigurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfiguration'
+      tags:
+        - IntegrationAccountRosettaNetProcessConfigurations
+      x-ms-examples:
+        Get RosettaNetProcessConfiguration by name:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testIntegrationAccount
+            resourceGroupName: testResourceGroup
+            rosettaNetProcessConfigurationName: 3A4
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /integrationAccounts/testIntegrationAccount/rosettaNetProcessConfigurations/3A4
+                name: 3A4
+                properties:
+                  activitySettings:
+                    acknowledgmentOfReceiptSettings:
+                      isNonRepudiationRequired: false
+                      timeToAcknowledgeInSeconds: 60
+                    activityBehavior:
+                      actionType: DoubleAction
+                      isAuthorizationRequired: true
+                      isSecuredTransportRequired: true
+                      nonRepudiationOfOriginAndContent: false
+                      persistentConfidentialityScope: Payload
+                      responseType: Async
+                      retryCount: 4
+                      timeToPerformInSeconds: 600
+                    activityType: RequestResponse
+                  changedTime: '2019-05-29T20:09:48.5167814Z'
+                  createdTime: '2019-05-22T13:46:54.6312192Z'
+                  initiatorRoleSettings:
+                    action: Purchase Order Request Action
+                    businessDocument:
+                      description: A request to accept a purchase order for fulfillment.
+                      name: Purchase Order Request
+                      version: V02.02.00
+                    description: An employee or organization that buys products for a partner type in the supply chain.
+                    role: Buyer
+                    roleType: Functional
+                    service: Buyer Service
+                    serviceClassification: Business Service
+                  processCode: 3A4
+                  processName: 3A4
+                  processVersion: V02.02.00
+                  responderRoleSettings:
+                    action: Purchase Order Confirmation Action
+                    businessDocument:
+                      description: 'Formally confirms the status of line item(s) in a Purchase Order. A Purchase Order line item may have one of the following states: accepted, rejected, or pending.'
+                      name: Purchase Order Confirmation
+                      version: V02.02.00
+                    description: An organization that sells products to partners in the supply chain.
+                    role: Seller
+                    roleType: Organizational
+                    service: Seller Service
+                    serviceClassification: Business Service
+                type: Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations
+    put:
+      description: Creates or updates an integration account RosettaNetProcessConfiguration.
+      operationId: RosettaNetProcessConfigurations_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The integration account name.
+          in: path
+          name: integrationAccountName
+          required: true
+          type: string
+        - description: The integration account RosettaNet ProcessConfiguration name.
+          in: path
+          name: rosettaNetProcessConfigurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+        - description: The integration account RosettaNet ProcessConfiguration.
+          in: body
+          name: rosettaNetProcessConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfiguration'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfiguration'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfiguration'
+      tags:
+        - IntegrationAccountRosettaNetProcessConfigurations
+      x-ms-examples:
+        Create or update an RosettaNetProcessConfiguration:
+          parameters:
+            api-version: '2016-06-01'
+            integrationAccountName: testia123
+            resourceGroupName: testrg123
+            rosettaNetProcessConfiguration:
+              properties:
+                activitySettings:
+                  acknowledgmentOfReceiptSettings:
+                    isNonRepudiationRequired: false
+                    timeToAcknowledgeInSeconds: 600
+                  activityBehavior:
+                    actionType: DoubleAction
+                    isAuthorizationRequired: false
+                    isSecuredTransportRequired: false
+                    nonRepudiationOfOriginAndContent: false
+                    persistentConfidentialityScope: None
+                    responseType: Async
+                    retryCount: 2
+                    timeToPerformInSeconds: 7200
+                  activityType: RequestResponse
+                description: Test description
+                initiatorRoleSettings:
+                  action: Purchase Order Request
+                  businessDocument:
+                    description: A request to accept a purchase order for fulfillment..
+                    name: Purchase Order Request
+                    version: V02.02.00
+                  description: This partner role creates a demand for a product or service.
+                  role: Buyer
+                  roleType: Functional
+                  service: Buyer Service
+                  serviceClassification: Business Service
+                processCode: 3A4
+                processName: Request Purchase Order
+                processVersion: V02.02.00
+                responderRoleSettings:
+                  action: Purchase Order Confirmation Action
+                  businessDocument:
+                    description: 'Formally confirms the status of line item(s) in a Purchase Order. A Purchase Order line item may have one of the following states: accepted, rejected, or pending.'
+                    name: Purchase Order Confirmation
+                    version: V02.02.00
+                  description: An organization that sells products to partners in the supply chain.
+                  role: Seller
+                  roleType: Organizational
+                  service: Seller Service
+                  serviceClassification: Business Service
+            rosettaNetProcessConfigurationName: 3A4
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123/rosettaNetProcessConfigurations/3A4
+                name: 3A4
+                properties:
+                  activitySettings:
+                    acknowledgmentOfReceiptSettings:
+                      isNonRepudiationRequired: false
+                      timeToAcknowledgeInSeconds: 600
+                    activityBehavior:
+                      actionType: DoubleAction
+                      isAuthorizationRequired: false
+                      isSecuredTransportRequired: false
+                      nonRepudiationOfOriginAndContent: false
+                      persistentConfidentialityScope: None
+                      responseType: Async
+                      retryCount: 2
+                      timeToPerformInSeconds: 7200
+                    activityType: RequestResponse
+                  changedTime: '2019-02-21T20:41:35.9796534Z'
+                  createdTime: '2018-10-22T19:33:12.3769017Z'
+                  description: Test description
+                  initiatorRoleSettings:
+                    action: Purchase Order Request
+                    businessDocument:
+                      description: A request to accept a purchase order for fulfillment..
+                      name: Purchase Order Request
+                      version: V02.02.00
+                    description: This partner role creates a demand for a product or service.
+                    role: Buyer
+                    roleType: Functional
+                    service: Buyer Service
+                    serviceClassification: Business Service
+                  processCode: 3A4
+                  processName: Request Purchase Order
+                  processVersion: V02.02.00
+                  responderRoleSettings:
+                    action: Purchase Order Confirmation Action
+                    businessDocument:
+                      description: 'Formally confirms the status of line item(s) in a Purchase Order. A Purchase Order line item may have one of the following states: accepted, rejected, or pending.'
+                      name: Purchase Order Confirmation
+                      version: V02.02.00
+                    description: An organization that sells products to partners in the supply chain.
+                    role: Seller
+                    roleType: Organizational
+                    service: Seller Service
+                    serviceClassification: Business Service
+                type: Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations
+              headers:
+                Cache-Control: no-cache
+                Content-Type: application/json; charset=utf-8
+                Date: 'Tue, 21 Feb 2019 20:43:03 GMT'
+                Expires: -1
+                Pragma: no-cache
+                Vary: Accept-Encoding
+            '201':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123/rosettaNetProcessConfigurations/3A4
+                name: 3A4
+                properties:
+                  activitySettings:
+                    acknowledgmentOfReceiptSettings:
+                      isNonRepudiationRequired: false
+                      timeToAcknowledgeInSeconds: 600
+                    activityBehavior:
+                      actionType: DoubleAction
+                      isAuthorizationRequired: false
+                      isSecuredTransportRequired: false
+                      nonRepudiationOfOriginAndContent: false
+                      persistentConfidentialityScope: None
+                      responseType: Async
+                      retryCount: 2
+                      timeToPerformInSeconds: 7200
+                    activityType: RequestResponse
+                  changedTime: '2019-02-21T20:41:35.9796534Z'
+                  createdTime: '2019-02-21T20:41:35.9789189Z'
+                  description: Test description
+                  initiatorRoleSettings:
+                    action: Purchase Order Request
+                    businessDocument:
+                      description: A request to accept a purchase order for fulfillment..
+                      name: Purchase Order Request
+                      version: V02.02.00
+                    description: This partner role creates a demand for a product or service.
+                    role: Buyer
+                    roleType: Functional
+                    service: Buyer Service
+                    serviceClassification: Business Service
+                  processCode: 3A4
+                  processName: Request Purchase Order
+                  processVersion: V02.02.00
+                  responderRoleSettings:
+                    action: Purchase Order Confirmation Action
+                    businessDocument:
+                      description: 'Formally confirms the status of line item(s) in a Purchase Order. A Purchase Order line item may have one of the following states: accepted, rejected, or pending.'
+                      name: Purchase Order Confirmation
+                      version: V02.02.00
+                    description: An organization that sells products to partners in the supply chain.
+                    role: Seller
+                    roleType: Organizational
+                    service: Seller Service
+                    serviceClassification: Business Service
+                type: Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations
+              headers:
+                Cache-Control: no-cache
+                Content-Type: application/json; charset=utf-8
+                Date: 'Tue, 21 Feb 2019 20:43:03 GMT'
+                Expires: -1
+                Pragma: no-cache
+          title: Create or update integration account rosettanet process configuration example
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas':
     get:
       description: Gets a list of integration account schemas.
@@ -4773,25 +4734,10 @@ paths:
           parameters:
             api-version: '2016-06-01'
             location: brazilsouth
+            resourceGroupName: test-resource-group
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            validate:
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-              location: brazilsouth
-              name: test-workflow
-              properties:
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
-                  parameters: {}
-                  triggers: {}
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-              tags: {}
-              type: Microsoft.Logic/workflows
+            workflow:
+              properties: {}
             workflowName: test-workflow
           responses:
             '200': {}
@@ -4833,45 +4779,32 @@ paths:
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-                  location: brazilsouth
-                  name: test-workflow
-                  properties:
-                    accessControl: {}
-                    accessEndpoint: 'http://tempuri.org'
-                    changedTime: '2018-08-09T22:54:54.3533634Z'
-                    createdTime: '2018-04-25T01:39:21.4365247Z'
-                    definition:
-                      $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                      actions: {}
-                      contentVersion: 1.0.0.0
-                      outputs: {}
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
+                    location: brazilsouth
+                    name: test-workflow
+                    properties:
+                      accessEndpoint: 'http://tempuri.org'
+                      changedTime: '2018-08-09T22:54:54.3533634Z'
+                      createdTime: '2018-04-25T01:39:21.4365247Z'
+                      definition:
+                        $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                        actions: {}
+                        contentVersion: 1.0.0.0
+                        outputs: {}
+                        parameters: {}
+                        triggers: {}
+                      integrationAccount:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                        name: test-integration-account
+                        type: Microsoft.Logic/integrationAccounts
                       parameters: {}
-                      triggers: {}
-                    endpointsConfiguration:
-                      connector:
-                        outgoingIpAddresses:
-                          - address: 40.84.145.61
-                      workflow:
-                        accessEndpointIpAddresses:
-                          - address: 104.210.153.89
-                          - address: 13.85.79.155
-                          - address: 13.65.39.247
-                        outgoingIpAddresses:
-                          - address: 13.84.159.168
-                          - address: 13.65.86.56
-                          - address: 13.65.82.190
-                    integrationAccount:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                      name: test-integration-account
-                      type: Microsoft.Logic/integrationAccounts
-                    parameters: {}
-                    provisioningState: Succeeded
-                    state: Enabled
-                    version: 08586677515911718341
-                  tags: {}
-                  type: Microsoft.Logic/workflows
+                      provisioningState: Succeeded
+                      state: Enabled
+                      version: 08586677515911718341
+                    tags: {}
+                    type: Microsoft.Logic/workflows
       x-ms-odata: '#/definitions/WorkflowFilter'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -4941,44 +4874,31 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-              location: brazilsouth
-              name: test-workflow
-              properties:
-                accessControl: {}
-                accessEndpoint: 'http://tempuri.org'
-                changedTime: '2018-08-09T22:54:54.3533634Z'
-                createdTime: '2018-04-25T01:39:21.4365247Z'
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
+                location: brazilsouth
+                name: test-workflow
+                properties:
+                  accessEndpoint: 'http://tempuri.org'
+                  changedTime: '2018-08-09T22:54:54.3533634Z'
+                  createdTime: '2018-04-25T01:39:21.4365247Z'
+                  definition:
+                    $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                    actions: {}
+                    contentVersion: 1.0.0.0
+                    outputs: {}
+                    parameters: {}
+                    triggers: {}
+                  integrationAccount:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                    name: test-integration-account
+                    type: Microsoft.Logic/integrationAccounts
                   parameters: {}
-                  triggers: {}
-                endpointsConfiguration:
-                  connector:
-                    outgoingIpAddresses:
-                      - address: 40.84.145.61
-                  workflow:
-                    accessEndpointIpAddresses:
-                      - address: 104.210.153.89
-                      - address: 13.85.79.155
-                      - address: 13.65.39.247
-                    outgoingIpAddresses:
-                      - address: 13.84.159.168
-                      - address: 13.65.86.56
-                      - address: 13.65.82.190
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-                parameters: {}
-                provisioningState: Succeeded
-                state: Enabled
-                version: 08586677515911718341
-              tags: {}
-              type: Microsoft.Logic/workflows
+                  provisioningState: Succeeded
+                  state: Enabled
+                  version: 08586677515911718341
+                tags: {}
+                type: Microsoft.Logic/workflows
     patch:
       description: Updates a workflow.
       operationId: Workflows_Update
@@ -5041,10 +4961,6 @@ paths:
                         schema: {}
                       kind: Http
                       type: Request
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
                 parameters:
                   $connections:
                     value:
@@ -5056,39 +4972,26 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              properties:
-                accessControl: {}
-                accessEndpoint: 'http://tempuri.org'
-                changedTime: '2018-08-09T22:54:54.3533634Z'
-                createdTime: '2018-04-25T01:39:21.4365247Z'
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
+              body:
+                properties:
+                  accessEndpoint: 'http://tempuri.org'
+                  changedTime: '2018-08-09T22:54:54.3533634Z'
+                  createdTime: '2018-04-25T01:39:21.4365247Z'
+                  definition:
+                    $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                    actions: {}
+                    contentVersion: 1.0.0.0
+                    outputs: {}
+                    parameters: {}
+                    triggers: {}
+                  integrationAccount:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                    name: test-integration-account
+                    type: Microsoft.Logic/integrationAccounts
                   parameters: {}
-                  triggers: {}
-                endpointsConfiguration:
-                  connector:
-                    outgoingIpAddresses:
-                      - address: 40.84.145.61
-                  workflow:
-                    accessEndpointIpAddresses:
-                      - address: 104.210.153.89
-                      - address: 13.85.79.155
-                      - address: 13.65.39.247
-                    outgoingIpAddresses:
-                      - address: 13.84.159.168
-                      - address: 13.65.86.56
-                      - address: 13.65.82.190
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-                parameters: {}
-                provisioningState: Succeeded
-                state: Enabled
-                version: 08586677515911718341
+                  provisioningState: Succeeded
+                  state: Enabled
+                  version: 08586677515911718341
     put:
       description: Creates or updates a workflow.
       operationId: Workflows_CreateOrUpdate
@@ -5155,10 +5058,6 @@ paths:
                         schema: {}
                       kind: Http
                       type: Request
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
                 parameters:
                   $connections:
                     value:
@@ -5170,73 +5069,47 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              properties:
-                accessControl: {}
-                accessEndpoint: 'http://tempuri.org'
-                changedTime: '2018-08-09T22:54:54.3533634Z'
-                createdTime: '2018-04-25T01:39:21.4365247Z'
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
+              body:
+                properties:
+                  accessEndpoint: 'http://tempuri.org'
+                  changedTime: '2018-08-09T22:54:54.3533634Z'
+                  createdTime: '2018-04-25T01:39:21.4365247Z'
+                  definition:
+                    $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                    actions: {}
+                    contentVersion: 1.0.0.0
+                    outputs: {}
+                    parameters: {}
+                    triggers: {}
+                  integrationAccount:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                    name: test-integration-account
+                    type: Microsoft.Logic/integrationAccounts
                   parameters: {}
-                  triggers: {}
-                endpointsConfiguration:
-                  connector:
-                    outgoingIpAddresses:
-                      - address: 40.84.145.61
-                  workflow:
-                    accessEndpointIpAddresses:
-                      - address: 104.210.153.89
-                      - address: 13.85.79.155
-                      - address: 13.65.39.247
-                    outgoingIpAddresses:
-                      - address: 13.84.159.168
-                      - address: 13.65.86.56
-                      - address: 13.65.82.190
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-                parameters: {}
-                provisioningState: Succeeded
-                state: Enabled
-                version: 08586677515911718341
+                  provisioningState: Succeeded
+                  state: Enabled
+                  version: 08586677515911718341
             '201':
-              properties:
-                accessControl: {}
-                accessEndpoint: 'http://tempuri.org'
-                changedTime: '2018-08-09T22:54:54.3533634Z'
-                createdTime: '2018-04-25T01:39:21.4365247Z'
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
+              body:
+                properties:
+                  accessEndpoint: 'http://tempuri.org'
+                  changedTime: '2018-08-09T22:54:54.3533634Z'
+                  createdTime: '2018-04-25T01:39:21.4365247Z'
+                  definition:
+                    $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                    actions: {}
+                    contentVersion: 1.0.0.0
+                    outputs: {}
+                    parameters: {}
+                    triggers: {}
+                  integrationAccount:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                    name: test-integration-account
+                    type: Microsoft.Logic/integrationAccounts
                   parameters: {}
-                  triggers: {}
-                endpointsConfiguration:
-                  connector:
-                    outgoingIpAddresses:
-                      - address: 40.84.145.61
-                  workflow:
-                    accessEndpointIpAddresses:
-                      - address: 104.210.153.89
-                      - address: 13.85.79.155
-                      - address: 13.65.39.247
-                    outgoingIpAddresses:
-                      - address: 13.84.159.168
-                      - address: 13.65.86.56
-                      - address: 13.65.82.190
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-                parameters: {}
-                provisioningState: Succeeded
-                state: Enabled
-                version: 08586677515911718341
+                  provisioningState: Succeeded
+                  state: Enabled
+                  version: 08586677515911718341
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/disable':
     post:
       description: Disables a workflow.
@@ -5340,15 +5213,16 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-              actions: {}
-              contentVersion: 1.0.0.0
-              outputs: {}
-              parameters:
-                $connections:
-                  defaultValue: {}
-                  type: Object
-              triggers: {}
+              body:
+                $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                actions: {}
+                contentVersion: 1.0.0.0
+                outputs: {}
+                parameters:
+                  $connections:
+                    defaultValue: {}
+                    type: Object
+                triggers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listCallbackUrl':
     post:
       description: Get the workflow callback Url.
@@ -5513,7 +5387,16 @@ paths:
           parameters:
             api-version: '2016-06-01'
             move:
-              id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/newResourceGroup/providers/Microsoft.Logic/workflows/newWorkflowName
+              location: brazilsouth
+              properties:
+                definition:
+                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                  actions: {}
+                  contentVersion: 1.0.0.0
+                  outputs: {}
+                  parameters: {}
+                  triggers: {}
+              tags: {}
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             workflowName: testWorkflow
@@ -5603,35 +5486,75 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22
-                  name: 08586676746934337772206998657CU22
-                  properties:
-                    correlation:
-                      clientTrackingId: 08586676746934337772206998657CU22
-                    endTime: '2018-08-10T20:16:32.5779999Z'
-                    outputs: {}
-                    startTime: '2018-08-10T20:16:32.044238Z'
-                    status: Succeeded
-                    trigger:
-                      code: OK
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22
+                    name: 08586676746934337772206998657CU22
+                    properties:
                       correlation:
                         clientTrackingId: 08586676746934337772206998657CU22
-                      endTime: '2018-08-10T20:16:32.0387927Z'
-                      name: Recurrence
-                      scheduledTime: '2018-08-10T20:16:31.6344174Z'
-                      startTime: '2018-08-10T20:16:32.0387927Z'
+                      endTime: '2018-08-10T20:16:32.5779999Z'
+                      outputs: {}
+                      startTime: '2018-08-10T20:16:32.044238Z'
                       status: Succeeded
-                    waitEndTime: '2018-08-10T20:16:32.044238Z'
-                    workflow:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676754160363885
-                      name: 08586676754160363885
-                      type: Microsoft.Logic/workflows/versions
-                  type: Microsoft.Logic/workflows/runs
+                      trigger:
+                        code: OK
+                        correlation:
+                          clientTrackingId: 08586676746934337772206998657CU22
+                        endTime: '2018-08-10T20:16:32.0387927Z'
+                        name: Recurrence
+                        scheduledTime: '2018-08-10T20:16:31.6344174Z'
+                        startTime: '2018-08-10T20:16:32.0387927Z'
+                        status: Succeeded
+                      waitEndTime: '2018-08-10T20:16:32.044238Z'
+                      workflow:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676754160363885
+                        name: 08586676754160363885
+                        type: Microsoft.Logic/workflows/versions
+                    type: Microsoft.Logic/workflows/runs
       x-ms-odata: '#/definitions/WorkflowRunFilter'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}':
+    delete:
+      description: Deletes a workflow run.
+      operationId: WorkflowRuns_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - WorkflowRuns
+      x-ms-examples:
+        Delete a run for a workflow:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: test-resource-group
+            runName: 08586676746934337772206998657CU22
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: test-workflow
+          responses:
+            '200': {}
+            '204': {}
     get:
       description: Gets a workflow run.
       operationId: WorkflowRuns_Get
@@ -5670,30 +5593,31 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22
-              name: 08586676746934337772206998657CU22
-              properties:
-                correlation:
-                  clientTrackingId: 08586676746934337772206998657CU22
-                endTime: '2018-08-10T20:16:32.5779999Z'
-                outputs: {}
-                startTime: '2018-08-10T20:16:32.044238Z'
-                status: Succeeded
-                trigger:
-                  code: OK
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22
+                name: 08586676746934337772206998657CU22
+                properties:
                   correlation:
                     clientTrackingId: 08586676746934337772206998657CU22
-                  endTime: '2018-08-10T20:16:32.0387927Z'
-                  name: Recurrence
-                  scheduledTime: '2018-08-10T20:16:31.6344174Z'
-                  startTime: '2018-08-10T20:16:32.0387927Z'
+                  endTime: '2018-08-10T20:16:32.5779999Z'
+                  outputs: {}
+                  startTime: '2018-08-10T20:16:32.044238Z'
                   status: Succeeded
-                waitEndTime: '2018-08-10T20:16:32.044238Z'
-                workflow:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676754160363885
-                  name: 08586676754160363885
-                  type: Microsoft.Logic/workflows/versions
-              type: Microsoft.Logic/workflows/runs
+                  trigger:
+                    code: OK
+                    correlation:
+                      clientTrackingId: 08586676746934337772206998657CU22
+                    endTime: '2018-08-10T20:16:32.0387927Z'
+                    name: Recurrence
+                    scheduledTime: '2018-08-10T20:16:31.6344174Z'
+                    startTime: '2018-08-10T20:16:32.0387927Z'
+                    status: Succeeded
+                  waitEndTime: '2018-08-10T20:16:32.044238Z'
+                  workflow:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676754160363885
+                    name: 08586676754160363885
+                    type: Microsoft.Logic/workflows/versions
+                type: Microsoft.Logic/workflows/runs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions':
     get:
       description: Gets a list of workflow run actions.
@@ -5744,32 +5668,32 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22/actions/HTTP
-                  name: HTTP
-                  properties:
-                    code: OK
-                    correlation:
-                      actionTrackingId: 56063357-45dd-4278-9be5-8220ce0cc9ca
-                      clientTrackingId: 08586676746934337772206998657CU22
-                    endTime: '2018-08-10T20:16:32.5450625Z'
-                    inputsLink:
-                      contentHash:
-                        algorithm: md5
-                        value: XXUACojv0aBfuP56os3CWw==
-                      contentSize: 46
-                      contentVersion: 5XUACojv0aBfuP56os3CWw==
-                      uri: 'https://tempuri.org'
-                    outputsLink:
-                      contentHash:
-                        algorithm: md5
-                        value: XX6KRrevI6AAxEvo9FeBYQ==
-                      contentSize: 11873
-                      contentVersion: 6X6KRrevI6AAxEvo9FeBYQ==
-                      uri: 'https://tempuri.org'
-                    startTime: '2018-08-10T20:16:32.305236Z'
-                    status: Succeeded
-                  type: Microsoft.Logic/workflows/runs/actions
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22/actions/HTTP
+                    name: HTTP
+                    properties:
+                      code: OK
+                      correlation:
+                        clientTrackingId: 08586676746934337772206998657CU22
+                      endTime: '2018-08-10T20:16:32.5450625Z'
+                      inputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: XXUACojv0aBfuP56os3CWw==
+                        contentSize: 46
+                        contentVersion: 5XUACojv0aBfuP56os3CWw==
+                        uri: 'https://tempuri.org'
+                      outputsLink:
+                        contentHash:
+                          algorithm: md5
+                          value: XX6KRrevI6AAxEvo9FeBYQ==
+                        contentSize: 11873
+                        contentVersion: 6X6KRrevI6AAxEvo9FeBYQ==
+                        uri: 'https://tempuri.org'
+                      startTime: '2018-08-10T20:16:32.305236Z'
+                      status: Succeeded
+                    type: Microsoft.Logic/workflows/runs/actions
       x-ms-odata: '#/definitions/WorkflowRunActionFilter'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -5818,31 +5742,31 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22/actions/HTTP
-              name: HTTP
-              properties:
-                code: OK
-                correlation:
-                  actionTrackingId: 56063357-45dd-4278-9be5-8220ce0cc9ca
-                  clientTrackingId: 08586676746934337772206998657CU22
-                endTime: '2018-08-10T20:16:32.5450625Z'
-                inputsLink:
-                  contentHash:
-                    algorithm: md5
-                    value: XXUACojv0aBfuP56os3CWw==
-                  contentSize: 46
-                  contentVersion: 5XUACojv0aBfuP56os3CWw==
-                  uri: 'https://tempuri.org'
-                outputsLink:
-                  contentHash:
-                    algorithm: md5
-                    value: XX6KRrevI6AAxEvo9FeBYQ==
-                  contentSize: 11873
-                  contentVersion: 6X6KRrevI6AAxEvo9FeBYQ==
-                  uri: 'https://tempuri.org'
-                startTime: '2018-08-10T20:16:32.305236Z'
-                status: Succeeded
-              type: Microsoft.Logic/workflows/runs/actions
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/runs/08586676746934337772206998657CU22/actions/HTTP
+                name: HTTP
+                properties:
+                  code: OK
+                  correlation:
+                    clientTrackingId: 08586676746934337772206998657CU22
+                  endTime: '2018-08-10T20:16:32.5450625Z'
+                  inputsLink:
+                    contentHash:
+                      algorithm: md5
+                      value: XXUACojv0aBfuP56os3CWw==
+                    contentSize: 46
+                    contentVersion: 5XUACojv0aBfuP56os3CWw==
+                    uri: 'https://tempuri.org'
+                  outputsLink:
+                    contentHash:
+                      algorithm: md5
+                      value: XX6KRrevI6AAxEvo9FeBYQ==
+                    contentSize: 11873
+                    contentVersion: 6X6KRrevI6AAxEvo9FeBYQ==
+                    uri: 'https://tempuri.org'
+                  startTime: '2018-08-10T20:16:32.305236Z'
+                  status: Succeeded
+                type: Microsoft.Logic/workflows/runs/actions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces':
     post:
       description: Lists a workflow run expression trace.
@@ -6842,19 +6766,20 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/triggers/manual
-                  name: manual
-                  properties:
-                    changedTime: '2018-08-10T18:47:49.5288666Z'
-                    createdTime: '2018-08-10T17:32:30.2496336Z'
-                    provisioningState: Succeeded
-                    state: Enabled
-                    workflow:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676800160476478
-                      name: 08586676800160476478
-                      type: Microsoft.Logic/workflows/versions
-                  type: Microsoft.Logic/workflows/triggers
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/triggers/manual
+                    name: manual
+                    properties:
+                      changedTime: '2018-08-10T18:47:49.5288666Z'
+                      createdTime: '2018-08-10T17:32:30.2496336Z'
+                      provisioningState: Succeeded
+                      state: Enabled
+                      workflow:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676800160476478
+                        name: 08586676800160476478
+                        type: Microsoft.Logic/workflows/versions
+                    type: Microsoft.Logic/workflows/triggers
       x-ms-odata: '#/definitions/WorkflowTriggerFilter'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -6897,18 +6822,19 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/triggers/manual
-              name: manual
-              properties:
-                changedTime: '2018-08-10T18:47:49.5288666Z'
-                createdTime: '2018-08-10T17:32:30.2496336Z'
-                provisioningState: Succeeded
-                state: Enabled
-                workflow:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676800160476478
-                  name: 08586676800160476478
-                  type: Microsoft.Logic/workflows/versions
-              type: Microsoft.Logic/workflows/triggers
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/triggers/manual
+                name: manual
+                properties:
+                  changedTime: '2018-08-10T18:47:49.5288666Z'
+                  createdTime: '2018-08-10T17:32:30.2496336Z'
+                  provisioningState: Succeeded
+                  state: Enabled
+                  workflow:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676800160476478
+                    name: 08586676800160476478
+                    type: Microsoft.Logic/workflows/versions
+                type: Microsoft.Logic/workflows/triggers
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories':
     get:
       description: Gets a list of workflow trigger histories.
@@ -6959,23 +6885,23 @@ paths:
             workflowName: testWorkflowName
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/triggers/testTriggerName/histories/08586676746934337772206998657CU22
-                  name: 08586676746934337772206998657CU22
-                  properties:
-                    code: OK
-                    correlation:
-                      clientTrackingId: 08586676746934337772206998657CU22
-                    endTime: '2018-08-10T20:16:32.2987996Z'
-                    fired: true
-                    run:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/runs/08586676746934337772206998657CU22
-                      name: 08586676746934337772206998657CU22
-                      type: Microsoft.Logic/workflows/runs
-                    scheduledTime: '2018-08-10T20:16:31.6344174Z'
-                    startTime: '2018-08-10T20:16:32.0387927Z'
-                    status: Succeeded
-                  type: Microsoft.Logic/workflows/triggers/histories
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/triggers/testTriggerName/histories/08586676746934337772206998657CU22
+                    name: 08586676746934337772206998657CU22
+                    properties:
+                      code: OK
+                      correlation:
+                        clientTrackingId: 08586676746934337772206998657CU22
+                      endTime: '2018-08-10T20:16:32.2987996Z'
+                      fired: true
+                      run:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/runs/08586676746934337772206998657CU22
+                        name: 08586676746934337772206998657CU22
+                        type: Microsoft.Logic/workflows/runs
+                      startTime: '2018-08-10T20:16:32.0387927Z'
+                      status: Succeeded
+                    type: Microsoft.Logic/workflows/triggers/histories
       x-ms-odata: '#/definitions/WorkflowTriggerHistoryFilter'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -7024,7 +6950,7 @@ paths:
             workflowName: testWorkflowName
           responses:
             '200':
-              value:
+              body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/triggers/testTriggerName/histories/08586676746934337772206998657CU22
                 name: 08586676746934337772206998657CU22
                 properties:
@@ -7037,7 +6963,6 @@ paths:
                     id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/workflows/testWorkflowName/runs/08586676746934337772206998657CU22
                     name: 08586676746934337772206998657CU22
                     type: Microsoft.Logic/workflows/runs
-                  scheduledTime: '2018-08-10T20:16:31.6344174Z'
                   startTime: '2018-08-10T20:16:32.0387927Z'
                   status: Succeeded
                 type: Microsoft.Logic/workflows/triggers/histories
@@ -7207,7 +7132,8 @@ paths:
             triggerName: manual
             workflowName: test-workflow
           responses:
-            default: {}
+            default:
+              body: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/schemas/json':
     get:
       description: Get the trigger schema as JSON.
@@ -7247,18 +7173,9 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/triggers/manual
-              name: manual
-              properties:
-                changedTime: '2018-08-10T18:47:49.5288666Z'
-                createdTime: '2018-08-10T17:32:30.2496336Z'
-                provisioningState: Succeeded
-                state: Enabled
-                workflow:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/versions/08586676800160476478
-                  name: 08586676800160476478
-                  type: Microsoft.Logic/workflows/versions
-              type: Microsoft.Logic/workflows/triggers
+              body:
+                content: '{}'
+                title: testworkflow
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/setState':
     post:
       description: Sets the state of a workflow trigger.
@@ -7298,8 +7215,7 @@ paths:
             api-version: '2016-06-01'
             resourceGroupName: testResourceGroup
             setState:
-              source:
-                id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sourceResGroup/providers/Microsoft.Logic/workflows/sourceWorkflow/triggers/sourceTrigger
+              source: {}
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             triggerName: testTrigger
             workflowName: testWorkflow
@@ -7340,9 +7256,7 @@ paths:
             resourceGroupName: test-resource-group
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             validate:
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
               location: brazilsouth
-              name: test-workflow
               properties:
                 definition:
                   $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
@@ -7351,12 +7265,7 @@ paths:
                   outputs: {}
                   parameters: {}
                   triggers: {}
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
               tags: {}
-              type: Microsoft.Logic/workflows
             workflowName: test-workflow
           responses:
             '200': {}
@@ -7399,45 +7308,29 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              value:
-                - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-                  location: brazilsouth
-                  name: test-workflow
-                  properties:
-                    accessControl: {}
-                    accessEndpoint: 'http://tempuri.org'
-                    changedTime: '2018-08-09T22:54:54.3533634Z'
-                    createdTime: '2018-04-25T01:39:21.4365247Z'
-                    definition:
-                      $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                      actions: {}
-                      contentVersion: 1.0.0.0
-                      outputs: {}
+              body:
+                value:
+                  - id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
+                    location: brazilsouth
+                    name: test-workflow
+                    properties:
+                      accessEndpoint: 'http://tempuri.org'
+                      definition:
+                        $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                        actions: {}
+                        contentVersion: 1.0.0.0
+                        outputs: {}
+                        parameters: {}
+                        triggers: {}
+                      integrationAccount:
+                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                        name: test-integration-account
+                        type: Microsoft.Logic/integrationAccounts
                       parameters: {}
-                      triggers: {}
-                    endpointsConfiguration:
-                      connector:
-                        outgoingIpAddresses:
-                          - address: 40.84.145.61
-                      workflow:
-                        accessEndpointIpAddresses:
-                          - address: 104.210.153.89
-                          - address: 13.85.79.155
-                          - address: 13.65.39.247
-                        outgoingIpAddresses:
-                          - address: 13.84.159.168
-                          - address: 13.65.86.56
-                          - address: 13.65.82.190
-                    integrationAccount:
-                      id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                      name: test-integration-account
-                      type: Microsoft.Logic/integrationAccounts
-                    parameters: {}
-                    provisioningState: Succeeded
-                    state: Enabled
-                    version: 08586677515911718341
-                  tags: {}
-                  type: Microsoft.Logic/workflows
+                      state: Enabled
+                      version: 08586677515911718341
+                    tags: {}
+                    type: Microsoft.Logic/workflows
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}':
@@ -7479,44 +7372,28 @@ paths:
             workflowName: test-workflow
           responses:
             '200':
-              id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
-              location: brazilsouth
-              name: test-workflow
-              properties:
-                accessControl: {}
-                accessEndpoint: 'http://tempuri.org'
-                changedTime: '2018-08-09T22:54:54.3533634Z'
-                createdTime: '2018-04-25T01:39:21.4365247Z'
-                definition:
-                  $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
-                  actions: {}
-                  contentVersion: 1.0.0.0
-                  outputs: {}
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow
+                location: brazilsouth
+                name: test-workflow
+                properties:
+                  accessEndpoint: 'http://tempuri.org'
+                  definition:
+                    $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+                    actions: {}
+                    contentVersion: 1.0.0.0
+                    outputs: {}
+                    parameters: {}
+                    triggers: {}
+                  integrationAccount:
+                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
+                    name: test-integration-account
+                    type: Microsoft.Logic/integrationAccounts
                   parameters: {}
-                  triggers: {}
-                endpointsConfiguration:
-                  connector:
-                    outgoingIpAddresses:
-                      - address: 40.84.145.61
-                  workflow:
-                    accessEndpointIpAddresses:
-                      - address: 104.210.153.89
-                      - address: 13.85.79.155
-                      - address: 13.65.39.247
-                    outgoingIpAddresses:
-                      - address: 13.84.159.168
-                      - address: 13.65.86.56
-                      - address: 13.65.82.190
-                integrationAccount:
-                  id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account
-                  name: test-integration-account
-                  type: Microsoft.Logic/integrationAccounts
-                parameters: {}
-                provisioningState: Succeeded
-                state: Enabled
-                version: 08586677515911718341
-              tags: {}
-              type: Microsoft.Logic/workflows
+                  state: Enabled
+                  version: 08586677515911718341
+                tags: {}
+                type: Microsoft.Logic/workflows
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}/triggers/{triggerName}/listCallbackUrl':
     post:
       description: Get the callback url for a trigger of a workflow version.
@@ -9132,6 +9009,78 @@ definitions:
   IntegrationAccountProperties:
     properties: {}
     type: object
+  IntegrationAccountRosettaNetProcessConfiguration:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The integration account RosettaNet process configuration.
+    properties:
+      properties:
+        $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfigurationProperties'
+        description: The integration account RosettaNet process configuration properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  IntegrationAccountRosettaNetProcessConfigurationListResult:
+    description: The list of integration account RosettaNet process configuration.
+    properties:
+      nextLink:
+        description: The URL to get the next set of results.
+        type: string
+      value:
+        description: The list of integration account RosettaNet PIP configuration.
+        items:
+          $ref: '#/definitions/IntegrationAccountRosettaNetProcessConfiguration'
+        type: array
+    type: object
+  IntegrationAccountRosettaNetProcessConfigurationProperties:
+    description: The integration account RosettaNet process configuration properties.
+    properties:
+      activitySettings:
+        $ref: '#/definitions/RosettaNetPipActivitySettings'
+        description: The RosettaNet process configuration activity settings.
+      changedTime:
+        description: The changed time.
+        format: date-time
+        readOnly: true
+        type: string
+      createdTime:
+        description: The created time.
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: The integration account RosettaNet ProcessConfiguration properties.
+        type: string
+      initiatorRoleSettings:
+        $ref: '#/definitions/RosettaNetPipRoleSettings'
+        description: The RosettaNet initiator role settings.
+      metadata:
+        additionalProperties:
+          type: string
+        description: The metadata.
+        properties: {}
+        type: object
+      processCode:
+        description: The integration account RosettaNet process code.
+        type: string
+      processName:
+        description: The integration account RosettaNet process name.
+        type: string
+      processVersion:
+        description: The integration account RosettaNet process version.
+        type: string
+      responderRoleSettings:
+        $ref: '#/definitions/RosettaNetPipRoleSettings'
+        description: The RosettaNet responder role settings.
+    required:
+      - processCode
+      - processVersion
+      - processName
+      - activitySettings
+      - initiatorRoleSettings
+      - responderRoleSettings
+    type: object
   IntegrationAccountSchema:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -9389,6 +9338,16 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: MapType
+  MessageEncoding:
+    enum:
+      - NotSpecified
+      - Base64
+      - EightBit
+      - QuotedPrintable
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: MessageEncoding
   MessageFilterType:
     enum:
       - NotSpecified
@@ -9747,6 +9706,172 @@ definitions:
         format: date-time
         type: string
     type: object
+  RosettaNetActionType:
+    enum:
+      - NotSpecified
+      - SingleAction
+      - DoubleAction
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RosettaNetActionType
+  RosettaNetPipAcknowledgmentOfReceiptSettings:
+    description: The integration account RosettaNet ProcessConfiguration Acknowledgement settings.
+    properties:
+      isNonRepudiationRequired:
+        description: The non-repudiation is required or not.
+        type: boolean
+      timeToAcknowledgeInSeconds:
+        description: The time to acknowledge in seconds.
+        type: integer
+    required:
+      - isNonRepudiationRequired
+      - timeToAcknowledgeInSeconds
+    type: object
+  RosettaNetPipActivityBehavior:
+    description: The integration account RosettaNet ProcessConfiguration activity behavior.
+    properties:
+      actionType:
+        $ref: '#/definitions/RosettaNetActionType'
+        description: The value indicating whether the RosettaNet PIP is used for a single action.
+      isAuthorizationRequired:
+        description: The value indicating whether authorization is required.
+        type: boolean
+      isSecuredTransportRequired:
+        description: The value indicating whether secured transport is required.
+        type: boolean
+      nonRepudiationOfOriginAndContent:
+        description: The value indicating whether non-repudiation is for origin and content.
+        type: boolean
+      persistentConfidentialityScope:
+        $ref: '#/definitions/RosettaNetPipConfidentialityScope'
+        description: The persistent confidentiality encryption scope.
+      responseType:
+        $ref: '#/definitions/RosettaNetResponseType'
+        description: The value indicating whether the RosettaNet PIP communication is synchronous.
+      retryCount:
+        description: The value indicating retry count.
+        type: integer
+      timeToPerformInSeconds:
+        description: The time to perform in seconds.
+        type: integer
+    required:
+      - isAuthorizationRequired
+      - persistentConfidentialityScope
+      - isSecuredTransportRequired
+      - actionType
+      - responseType
+      - nonRepudiationOfOriginAndContent
+      - retryCount
+      - timeToPerformInSeconds
+    type: object
+  RosettaNetPipActivitySettings:
+    description: The integration account RosettaNet ProcessConfiguration activity settings.
+    properties:
+      acknowledgmentOfReceiptSettings:
+        $ref: '#/definitions/RosettaNetPipAcknowledgmentOfReceiptSettings'
+        description: The RosettaNet ProcessConfiguration acknowledgement settings.
+      activityBehavior:
+        $ref: '#/definitions/RosettaNetPipActivityBehavior'
+        description: The RosettaNet ProcessConfiguration activity behavior.
+      activityType:
+        $ref: '#/definitions/RosettaNetPipActivityType'
+        description: The RosettaNet ProcessConfiguration activity type.
+    required:
+      - activityType
+      - activityBehavior
+      - acknowledgmentOfReceiptSettings
+    type: object
+  RosettaNetPipActivityType:
+    enum:
+      - NotSpecified
+      - InformationDistribution
+      - BusinessTransaction
+      - Notification
+      - QueryResponse
+      - RequestConfirm
+      - RequestResponse
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RosettaNetPipActivityType
+  RosettaNetPipBusinessDocument:
+    description: The RosettaNet ProcessConfiguration business document settings.
+    properties:
+      description:
+        description: The business document description.
+        type: string
+      name:
+        description: The business document name.
+        type: string
+      version:
+        description: The business document version.
+        type: string
+    required:
+      - name
+      - version
+    type: object
+  RosettaNetPipConfidentialityScope:
+    enum:
+      - NotSpecified
+      - None
+      - Payload
+      - PayloadContainer
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RosettaNetPipConfidentialityScope
+  RosettaNetPipRoleSettings:
+    description: The integration account RosettaNet ProcessConfiguration role settings.
+    properties:
+      action:
+        description: The action name.
+        type: string
+      businessDocument:
+        $ref: '#/definitions/RosettaNetPipBusinessDocument'
+        description: The RosettaNet ProcessConfiguration business document.
+      description:
+        description: The description.
+        type: string
+      role:
+        description: The role name.
+        type: string
+      roleType:
+        $ref: '#/definitions/RosettaNetPipRoleType'
+        description: The RosettaNet ProcessConfiguration role type.
+      service:
+        description: The service name.
+        type: string
+      serviceClassification:
+        description: The service classification name.
+        type: string
+    required:
+      - action
+      - role
+      - roleType
+      - service
+      - serviceClassification
+      - businessDocument
+    type: object
+  RosettaNetPipRoleType:
+    enum:
+      - NotSpecified
+      - Functional
+      - Organizational
+      - Employee
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RosettaNetPipRoleType
+  RosettaNetResponseType:
+    enum:
+      - NotSpecified
+      - Sync
+      - Async
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RosettaNetResponseType
   RunActionCorrelation:
     additionalProperties: false
     allOf:
@@ -10008,7 +10133,7 @@ definitions:
         type: string
       definition:
         $ref: '#/definitions/Object'
-        description: The definition.
+        description: 'The definition. See [Schema reference for Workflow Definition Language in Azure Logic Apps](https://aka.ms/logic-apps-workflow-definition-language).'
       integrationAccount:
         $ref: '#/definitions/ResourceReference'
         description: The integration account.

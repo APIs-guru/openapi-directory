@@ -589,22 +589,23 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"0x8D64F91A9089879"
-                  id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1
-                  name: app1
-                  properties:
-                    allowUpdates: false
-                    defaultVersion: '1'
-                  type: Microsoft.Batch/batchAccounts/applications
-                - etag: W/"0x8D64F91A9089879"
-                  id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app2
-                  name: app1
-                  properties:
-                    allowUpdates: false
-                    defaultVersion: '2.0'
-                    displayName: myAppName
-                  type: Microsoft.Batch/batchAccounts/applications
+              body:
+                value:
+                  - etag: W/"0x8D64F91A9089879"
+                    id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1
+                    name: app1
+                    properties:
+                      allowUpdates: false
+                      defaultVersion: '1'
+                    type: Microsoft.Batch/batchAccounts/applications
+                  - etag: W/"0x8D64F91A9089879"
+                    id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app2
+                    name: app1
+                    properties:
+                      allowUpdates: false
+                      defaultVersion: '2.0'
+                      displayName: myAppName
+                    type: Microsoft.Batch/batchAccounts/applications
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}':
@@ -818,21 +819,22 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - etag: W/"0x8D64FF0B9F47F67"
-                  id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1/versions/1.0
-                  name: '1.0'
-                  properties:
-                    state: Pending
-                  type: Microsoft.Batch/batchAccounts/applications/versions
-                - etag: W/"0x8D64FF0B9F47F67"
-                  id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1/versions/2.0
-                  name: '2.0'
-                  properties:
-                    format: zip
-                    lastActivationTime: '2017-06-27T18:48:09.9330991Z'
-                    state: Active
-                  type: Microsoft.Batch/batchAccounts/applications/versions
+              body:
+                value:
+                  - etag: W/"0x8D64FF0B9F47F67"
+                    id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1/versions/1.0
+                    name: '1.0'
+                    properties:
+                      state: Pending
+                    type: Microsoft.Batch/batchAccounts/applications/versions
+                  - etag: W/"0x8D64FF0B9F47F67"
+                    id: /subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/applications/app1/versions/2.0
+                    name: '2.0'
+                    properties:
+                      format: zip
+                      lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                      state: Active
+                    type: Microsoft.Batch/batchAccounts/applications/versions
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions/{versionName}':

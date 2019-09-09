@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/publicIpPrefix.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-publicIpPrefix
   x-tags:
@@ -67,25 +67,51 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
+                  - etag: W/"00000000-0000-0000-0000-00000000"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                     location: westus
                     name: test-ipprefix
                     properties:
                       ipPrefix: 41.85.154.247/30
+                      ipTags: []
                       prefixLength: 30
                       provisioningState: Succeeded
                       publicIPAddressVersion: IPv4
                       publicIPAddresses:
                         - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1
+                      resourceGuid: 00000000-0000-0000-0000-00000000
+                    sku:
+                      name: Standard
                     type: Microsoft.Network/publicIPPrefixes
-                  - id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPPrefixes/ipprefix01
+                  - etag: W/"00000000-0000-0000-0000-00000000"
+                    id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPPrefixes/ipprefix01
                     location: westus
                     name: ipprefix01
                     properties:
                       ipPrefix: 40.85.154.247/30
+                      ipTags: []
                       prefixLength: 30
                       provisioningState: Succeeded
                       publicIPAddressVersion: IPv4
+                      resourceGuid: 00000000-0000-0000-0000-00000000
+                    sku:
+                      name: Standard
+                    type: Microsoft.Network/publicIPPrefixes
+                  - etag: W/"00000000-0000-0000-0000-00000000"
+                    id: /subscriptions/subid/resourceGroups/rg3/providers/Microsoft.Network/publicIPPrefixes/pfx
+                    location: westus
+                    name: pfx
+                    properties:
+                      ipPrefix: 25.101.84.16/30
+                      ipTags: []
+                      loadBalancerFrontendIpConfiguration:
+                        id: /subscriptions/subid/resourceGroups/rg3/providers/Microsoft.Network/loadBalancers/lb-pfx/frontendIPConfigurations/ipconfig1
+                      prefixLength: 30
+                      provisioningState: Succeeded
+                      publicIPAddressVersion: IPv4
+                      resourceGuid: 00000000-0000-0000-0000-00000000
+                    sku:
+                      name: Standard
                     type: Microsoft.Network/publicIPPrefixes
       x-ms-pageable:
         nextLinkName: nextLink
@@ -126,7 +152,8 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
+                  - etag: W/"00000000-0000-0000-0000-00000000"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                     location: westus
                     name: test-ipprefix
                     properties:
@@ -137,15 +164,23 @@ paths:
                       prefixLength: 30
                       provisioningState: Succeeded
                       publicIPAddressVersion: IPv4
+                      resourceGuid: 00000000-0000-0000-0000-00000000
+                    sku:
+                      name: Standard
                     type: Microsoft.Network/publicIPPrefixes
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipprefix03
+                  - etag: W/"00000000-0000-0000-0000-00000000"
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipprefix03
                     location: westus
                     name: ipprefix03
                     properties:
                       ipPrefix: 40.85.153.2/31
+                      ipTags: []
                       prefixLength: 31
                       provisioningState: Succeeded
                       publicIPAddressVersion: IPv4
+                      resourceGuid: 00000000-0000-0000-0000-00000000
+                    sku:
+                      name: Standard
                     type: Microsoft.Network/publicIPPrefixes
       x-ms-pageable:
         nextLinkName: nextLink
@@ -243,6 +278,7 @@ paths:
           responses:
             '200':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                 location: westus
                 name: test-ipprefix
@@ -254,6 +290,9 @@ paths:
                   publicIPAddressVersion: IPv4
                   publicIPAddresses:
                     - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1
+                  resourceGuid: 00000000-0000-0000-0000-00000000
+                sku:
+                  name: Standard
                 type: Microsoft.Network/publicIPPrefixes
     patch:
       description: Updates public IP prefix tags.
@@ -312,13 +351,19 @@ paths:
           responses:
             '200':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                 location: westus
                 name: test-ipprefix
                 properties:
+                  ipPrefix: 40.85.154.247/30
+                  ipTags: []
                   prefixLength: 30
                   provisioningState: Succeeded
                   publicIPAddressVersion: IPv4
+                  resourceGuid: 00000000-0000-0000-0000-00000000
+                sku:
+                  name: Standard
                 tags:
                   tag1: value1
                   tag2: value2
@@ -384,13 +429,17 @@ paths:
           responses:
             '200':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                 location: westus
                 name: test-ipprefix
                 properties:
+                  ipPrefix: 192.168.254.2/30
+                  ipTags: []
                   prefixLength: 30
                   provisioningState: Succeeded
                   publicIPAddressVersion: IPv4
+                  resourceGuid: 00000000-0000-0000-0000-00000000
                 sku:
                   name: Standard
                 type: Microsoft.Network/publicIPPrefixes
@@ -398,13 +447,17 @@ paths:
                   - '1'
             '201':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ipprefix
                 location: westus
                 name: test-ipprefix
                 properties:
+                  ipPrefix: 192.168.254.2/30
+                  ipTags: []
                   prefixLength: 30
                   provisioningState: Succeeded
                   publicIPAddressVersion: IPv4
+                  resourceGuid: 00000000-0000-0000-0000-00000000
                 sku:
                   name: Standard
                 type: Microsoft.Network/publicIPPrefixes
@@ -414,6 +467,9 @@ paths:
           parameters:
             api-version: '2019-06-01'
             parameters:
+              location: westus
+              properties:
+                prefixLength: 30
               sku:
                 name: Standard
             publicIpPrefixName: test-ipprefix
@@ -422,25 +478,33 @@ paths:
           responses:
             '200':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                 location: westus
                 name: test-ipprefix
                 properties:
+                  ipPrefix: 192.168.254.2/30
+                  ipTags: []
                   prefixLength: 30
                   provisioningState: Succeeded
                   publicIPAddressVersion: IPv4
+                  resourceGuid: 00000000-0000-0000-0000-00000000
                 sku:
                   name: Standard
                 type: Microsoft.Network/publicIPPrefixes
             '201':
               body:
+                etag: W/"00000000-0000-0000-0000-00000000"
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix
                 location: westus
                 name: test-ipprefix
                 properties:
+                  ipPrefix: 192.168.254.2/30
+                  ipTags: []
                   prefixLength: 30
                   provisioningState: Succeeded
                   publicIPAddressVersion: IPv4
+                  resourceGuid: 00000000-0000-0000-0000-00000000
                 sku:
                   name: Standard
                 type: Microsoft.Network/publicIPPrefixes
@@ -518,6 +582,13 @@ definitions:
               description: 'Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc.'
               type: string
         type: array
+      loadBalancerFrontendIpConfiguration:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
       prefixLength:
         description: The Length of the Public IP Prefix.
         format: int32

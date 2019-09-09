@@ -993,7 +993,7 @@ paths:
         - Non-Primary State Tax
   '/v2/companies/{companyId}/employees/{employeeId}/paystatement/details/{year}':
     get:
-      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year.
+      description: Get pay statement details API will return employee pay statement details data currently available in Web Pay for the specified year.
       operationId: Gets employee pay statement detail data based on the specified year
       parameters:
         - description: Bearer + JWT
@@ -1057,12 +1057,12 @@ paths:
       security:
         - paylocity_auth:
             - WebLinkAPI
-      summary: Get employee pay statements for the specified year.
+      summary: Get employee pay statement details data for the specified year.
       tags:
         - PayStatements
   '/v2/companies/{companyId}/employees/{employeeId}/paystatement/details/{year}/{checkDate}':
     get:
-      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year and check date.
+      description: Get pay statement details API will return employee pay statement detail data currently available in Web Pay for the specified year and check date.
       operationId: Gets employee pay statement detail data based on the specified year and check date
       parameters:
         - description: Bearer + JWT
@@ -1131,12 +1131,12 @@ paths:
       security:
         - paylocity_auth:
             - WebLinkAPI
-      summary: Get employee pay statements for the specified year and check date.
+      summary: Get employee pay statement details data for the specified year and check date.
       tags:
         - PayStatements
   '/v2/companies/{companyId}/employees/{employeeId}/paystatement/summary/{year}':
     get:
-      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year.
+      description: Get pay statement summary API will return employee pay statement summary data currently available in Web Pay for the specified year.
       operationId: Gets employee pay statement summary data based on the specified year
       parameters:
         - description: Bearer + JWT
@@ -1200,12 +1200,12 @@ paths:
       security:
         - paylocity_auth:
             - WebLinkAPI
-      summary: Get employee pay statements for the specified year.
+      summary: Get employee pay statement summary data for the specified year.
       tags:
         - PayStatements
   '/v2/companies/{companyId}/employees/{employeeId}/paystatement/summary/{year}/{checkDate}':
     get:
-      description: Get pay statements API will return employee pay statement data currently available in Web Pay for the specified year and check date.
+      description: Get pay statement summary API will return employee pay statement summary data currently available in Web Pay for the specified year and check date.
       operationId: Gets employee pay statement summary data based on the specified year and check date
       parameters:
         - description: Bearer + JWT
@@ -1274,7 +1274,7 @@ paths:
       security:
         - paylocity_auth:
             - WebLinkAPI
-      summary: Get employee pay statements for the specified year and check date.
+      summary: Get employee pay statement summary data for the specified year and check date.
       tags:
         - PayStatements
   '/v2/companies/{companyId}/employees/{employeeId}/primaryStateTax':

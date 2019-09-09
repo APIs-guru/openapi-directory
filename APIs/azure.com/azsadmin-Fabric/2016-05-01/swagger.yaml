@@ -88,78 +88,79 @@ paths:
             api-version: '2016-05-01'
           responses:
             '200':
-              value:
-                - display:
-                    description: Add a Node to a Scale Unit
-                    operation: Add a Node to a Scale Unit
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit
-                  name: Microsoft.Fabric.Admin/scaleUnits/ScaleIn
-                - display:
-                    description: Powers off a Scale Unit Node
-                    operation: Power off Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/PowerOff
-                - display:
-                    description: Powers on a Scale Unit Node
-                    operation: Power on Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/PowerOn
-                - display:
-                    operation: Shut down Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/ShutDown
-                - display:
-                    description: Starts maintenance on a Scale Unit Node
-                    operation: Start maintenance Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/StartMaintenanceMode
-                - display:
-                    description: Stops maintenance on a Scale Unit Node
-                    operation: Stop maintenance Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/StopMaintenanceMode
-                - display:
-                    description: Repairs a Scale Unit Node
-                    operation: Repair Scale Unit Node
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Scale Unit Node
-                  name: Microsoft.Fabric.Admin/scaleUnitNodes/Repair
-                - display:
-                    description: Powers off an Infrastructure Role Instance
-                    operation: Power off Infrastructure Role Instance
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Infrastructure Role Instance
-                  name: Microsoft.Fabric.Admin/infraRoleInstances/PowerOff
-                - display:
-                    description: Powers on an Infrastructure Role Instance
-                    operation: Power on Infrastructure Role Instance
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Infrastructure Role Instance
-                  name: Microsoft.Fabric.Admin/infraRoleInstances/PowerOn
-                - display:
-                    description: Shutdown an Infrastructure Role Instance
-                    operation: Shutdown an Infrastructure Role Instance
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Infrastructure Role Instance
-                  name: Microsoft.Fabric.Admin/infraRoleInstances/Shutdown
-                - display:
-                    description: Reboot an Infrastructure Role Instance
-                    operation: Reboot an Infrastructure Role Instance
-                    provider: Microsoft Fabric Resource Provider
-                    resource: Infrastructure Role Instance
-                  name: Microsoft.Fabric.Admin/infraRoleInstances/Reboot
-                - display:
-                    description: Creates or updates an IP Pool
-                    operation: Create or update IP Pool
-                    provider: Microsoft Fabric Resource Provider
-                    resource: IP Pool
-                  name: Microsoft.Fabric.Admin/ipPools/action
+              body:
+                value:
+                  - display:
+                      description: Add a Node to a Scale Unit
+                      operation: Add a Node to a Scale Unit
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit
+                    name: Microsoft.Fabric.Admin/scaleUnits/ScaleIn
+                  - display:
+                      description: Powers off a Scale Unit Node
+                      operation: Power off Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/PowerOff
+                  - display:
+                      description: Powers on a Scale Unit Node
+                      operation: Power on Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/PowerOn
+                  - display:
+                      operation: Shut down Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/ShutDown
+                  - display:
+                      description: Starts maintenance on a Scale Unit Node
+                      operation: Start maintenance Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/StartMaintenanceMode
+                  - display:
+                      description: Stops maintenance on a Scale Unit Node
+                      operation: Stop maintenance Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/StopMaintenanceMode
+                  - display:
+                      description: Repairs a Scale Unit Node
+                      operation: Repair Scale Unit Node
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Scale Unit Node
+                    name: Microsoft.Fabric.Admin/scaleUnitNodes/Repair
+                  - display:
+                      description: Powers off an Infrastructure Role Instance
+                      operation: Power off Infrastructure Role Instance
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Infrastructure Role Instance
+                    name: Microsoft.Fabric.Admin/infraRoleInstances/PowerOff
+                  - display:
+                      description: Powers on an Infrastructure Role Instance
+                      operation: Power on Infrastructure Role Instance
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Infrastructure Role Instance
+                    name: Microsoft.Fabric.Admin/infraRoleInstances/PowerOn
+                  - display:
+                      description: Shutdown an Infrastructure Role Instance
+                      operation: Shutdown an Infrastructure Role Instance
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Infrastructure Role Instance
+                    name: Microsoft.Fabric.Admin/infraRoleInstances/Shutdown
+                  - display:
+                      description: Reboot an Infrastructure Role Instance
+                      operation: Reboot an Infrastructure Role Instance
+                      provider: Microsoft Fabric Resource Provider
+                      resource: Infrastructure Role Instance
+                    name: Microsoft.Fabric.Admin/infraRoleInstances/Reboot
+                  - display:
+                      description: Creates or updates an IP Pool
+                      operation: Create or update IP Pool
+                      provider: Microsoft Fabric Resource Provider
+                      resource: IP Pool
+                    name: Microsoft.Fabric.Admin/ipPools/action
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:

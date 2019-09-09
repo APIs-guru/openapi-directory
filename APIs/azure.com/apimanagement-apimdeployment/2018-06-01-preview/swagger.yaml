@@ -798,38 +798,39 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: AAAAAAAYRPs=
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
-              location: West US
-              name: apimService1
-              properties:
-                createdAtUtc: '2017-06-29T17:50:42.3191122Z'
-                customProperties:
-                  Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10: 'False'
-                gatewayUrl: 'https://apimService1.azure-api.net'
-                hostnameConfigurations: []
-                managementApiUrl: 'https://apimService1.management.azure-api.net'
-                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
-                portalUrl: 'https://apimService1.portal.azure-api.net'
-                provisioningState: Succeeded
-                publicIPAddresses:
-                  - 40.86.176.232
-                publisherEmail: admin@live.com
-                publisherName: Contoso
-                scmUrl: 'https://apimService1.scm.azure-api.net'
-                targetProvisioningState: ''
-                virtualNetworkType: None
-              sku:
-                capacity: 1
-                name: Standard
-              tags:
-                Owner: sasolank
-                Pool: Manual
-                Reserved: ''
-                TestExpiration: 'Thu, 29 Jun 2017 18:50:40 GMT'
-                TestSuiteExpiration: 'Thu, 29 Jun 2017 18:51:46 GMT'
-                UID: 4f5025fe-0669-4e2e-8320-5199466e5eb3
-              type: Microsoft.ApiManagement/service
+              body:
+                etag: AAAAAAAYRPs=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: West US
+                name: apimService1
+                properties:
+                  createdAtUtc: '2017-06-29T17:50:42.3191122Z'
+                  customProperties:
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10: 'False'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations: []
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publicIPAddresses:
+                    - 40.86.176.232
+                  publisherEmail: admin@live.com
+                  publisherName: Contoso
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  targetProvisioningState: ''
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Standard
+                tags:
+                  Owner: sasolank
+                  Pool: Manual
+                  Reserved: ''
+                  TestExpiration: 'Thu, 29 Jun 2017 18:50:40 GMT'
+                  TestSuiteExpiration: 'Thu, 29 Jun 2017 18:51:46 GMT'
+                  UID: 4f5025fe-0669-4e2e-8320-5199466e5eb3
+                type: Microsoft.ApiManagement/service
             '202':
               etag: AAAAAAAYRPs=
               id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
@@ -870,38 +871,39 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: AAAAAAAYRPs=
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
-              location: West US
-              name: apimService1
-              properties:
-                createdAtUtc: '2017-06-29T17:50:42.3191122Z'
-                customProperties:
-                  Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10: 'False'
-                gatewayUrl: 'https://apimService1.azure-api.net'
-                hostnameConfigurations: []
-                managementApiUrl: 'https://apimService1.management.azure-api.net'
-                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
-                portalUrl: 'https://apimService1.portal.azure-api.net'
-                provisioningState: Succeeded
-                publicIPAddresses:
-                  - 40.86.176.232
-                publisherEmail: foobar@live.com
-                publisherName: Contoso Vnext
-                scmUrl: 'https://apimService1.scm.azure-api.net'
-                targetProvisioningState: ''
-                virtualNetworkType: None
-              sku:
-                capacity: 1
-                name: Standard
-              tags:
-                Owner: sasolank
-                Pool: Manual
-                Reserved: ''
-                TestExpiration: 'Thu, 29 Jun 2017 18:50:40 GMT'
-                TestSuiteExpiration: 'Thu, 29 Jun 2017 18:51:46 GMT'
-                UID: 4f5025fe-0669-4e2e-8320-5199466e5eb3
-              type: Microsoft.ApiManagement/service
+              body:
+                etag: AAAAAAAYRPs=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: West US
+                name: apimService1
+                properties:
+                  createdAtUtc: '2017-06-29T17:50:42.3191122Z'
+                  customProperties:
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10: 'False'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations: []
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publicIPAddresses:
+                    - 40.86.176.232
+                  publisherEmail: foobar@live.com
+                  publisherName: Contoso Vnext
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  targetProvisioningState: ''
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Standard
+                tags:
+                  Owner: sasolank
+                  Pool: Manual
+                  Reserved: ''
+                  TestExpiration: 'Thu, 29 Jun 2017 18:50:40 GMT'
+                  TestSuiteExpiration: 'Thu, 29 Jun 2017 18:51:46 GMT'
+                  UID: 4f5025fe-0669-4e2e-8320-5199466e5eb3
+                type: Microsoft.ApiManagement/service
             '202':
               etag: AAAAAAAYRPs=
               id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
@@ -1396,40 +1398,41 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: AAAAAADauqg=
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
-              location: Central US
-              name: apimService1
-              properties:
-                certificates:
-                  - certificate:
-                      expiry: '2035-12-31T23:00:00-08:00'
-                      subject: CN=*.msitesting.net
-                      thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
-                    storeName: CertificateAuthority
-                createdAtUtc: '2018-02-19T16:42:47.362368Z'
-                gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
-                gatewayUrl: 'https://apimService1.azure-api.net'
-                hostnameConfigurations: []
-                managementApiUrl: 'https://apimService1.management.azure-api.net'
-                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
-                portalUrl: 'https://apimService1.portal.azure-api.net'
-                provisioningState: Succeeded
-                publicIPAddresses:
-                  - 40.69.153.91
-                publisherEmail: apim@autorestsdk.com
-                publisherName: autorestsdk
-                scmUrl: 'https://apimService1.scm.azure-api.net'
-                targetProvisioningState: ''
-                virtualNetworkType: None
-              sku:
-                capacity: 1
-                name: Basic
-              tags:
-                tag1: value1
-                tag2: value2
-                tag3: value3
-              type: Microsoft.ApiManagement/service
+              body:
+                etag: AAAAAADauqg=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: Central US
+                name: apimService1
+                properties:
+                  certificates:
+                    - certificate:
+                        expiry: '2035-12-31T23:00:00-08:00'
+                        subject: CN=*.msitesting.net
+                        thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
+                      storeName: CertificateAuthority
+                  createdAtUtc: '2018-02-19T16:42:47.362368Z'
+                  gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations: []
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publicIPAddresses:
+                    - 40.69.153.91
+                  publisherEmail: apim@autorestsdk.com
+                  publisherName: autorestsdk
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  targetProvisioningState: ''
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Basic
+                tags:
+                  tag1: value1
+                  tag2: value2
+                  tag3: value3
+                type: Microsoft.ApiManagement/service
             '201':
               body:
                 etag: AAAAAADauaY=
@@ -1462,40 +1465,41 @@ paths:
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2018-06-01-preview'
             '202':
-              etag: AAAAAADauqg=
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
-              location: Central US
-              name: apimService1
-              properties:
-                certificates:
-                  - certificate:
-                      expiry: '2035-12-31T23:00:00-08:00'
-                      subject: CN=*.msitesting.net
-                      thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
-                    storeName: CertificateAuthority
-                createdAtUtc: '2018-02-19T16:42:47.362368Z'
-                gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
-                gatewayUrl: 'https://apimService1.azure-api.net'
-                hostnameConfigurations: []
-                managementApiUrl: 'https://apimService1.management.azure-api.net'
-                notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
-                portalUrl: 'https://apimService1.portal.azure-api.net'
-                provisioningState: Succeeded
-                publicIPAddresses:
-                  - 40.69.153.91
-                publisherEmail: apim@autorestsdk.com
-                publisherName: autorestsdk
-                scmUrl: 'https://apimService1.scm.azure-api.net'
-                targetProvisioningState: ''
-                virtualNetworkType: None
-              sku:
-                capacity: 1
-                name: Basic
-              tags:
-                tag1: value1
-                tag2: value2
-                tag3: value3
-              type: Microsoft.ApiManagement/service
+              body:
+                etag: AAAAAADauqg=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: Central US
+                name: apimService1
+                properties:
+                  certificates:
+                    - certificate:
+                        expiry: '2035-12-31T23:00:00-08:00'
+                        subject: CN=*.msitesting.net
+                        thumbprint: 8E989652XXXXXXXXXXXXXXXDB3A2
+                      storeName: CertificateAuthority
+                  createdAtUtc: '2018-02-19T16:42:47.362368Z'
+                  gatewayRegionalUrl: 'https://apimService1-centralus-01.regional.azure-api.net'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations: []
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publicIPAddresses:
+                    - 40.69.153.91
+                  publisherEmail: apim@autorestsdk.com
+                  publisherName: autorestsdk
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  targetProvisioningState: ''
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Basic
+                tags:
+                  tag1: value1
+                  tag2: value2
+                  tag3: value3
+                type: Microsoft.ApiManagement/service
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/applynetworkconfigurationupdates':
     post:

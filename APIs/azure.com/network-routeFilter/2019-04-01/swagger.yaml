@@ -68,7 +68,7 @@ paths:
               body:
                 value:
                   - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                     location: West US
                     name: filterName
                     properties:
@@ -76,7 +76,7 @@ paths:
                       provisioningState: Succeeded
                       rules:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                           name: ruleName
                           properties:
                             access: Allow
@@ -87,7 +87,7 @@ paths:
                             routeFilterRuleType: Community
                     tags:
                       key1: value1
-                    type: Microsofot.Network/routeFilters
+                    type: Microsoft.Network/routeFilters
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters':
@@ -128,7 +128,7 @@ paths:
               body:
                 value:
                   - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                     location: West US
                     name: filterName
                     properties:
@@ -136,7 +136,7 @@ paths:
                       provisioningState: Succeeded
                       rules:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                           name: ruleName
                           properties:
                             access: Allow
@@ -147,7 +147,7 @@ paths:
                             routeFilterRuleType: Community
                     tags:
                       key1: value1
-                    type: Microsofot.Network/routeFilters
+                    type: Microsoft.Network/routeFilters
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}':
@@ -245,7 +245,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                 location: West US
                 name: filterName
                 properties:
@@ -253,7 +253,7 @@ paths:
                   provisioningState: Succeeded
                   rules:
                     - etag: w/\00000000-0000-0000-0000-000000000000\
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                       name: ruleName
                       properties:
                         access: Allow
@@ -264,7 +264,7 @@ paths:
                         routeFilterRuleType: Community
                 tags:
                   key1: value1
-                type: Microsofot.Network/routeFilters
+                type: Microsoft.Network/routeFilters
     patch:
       description: Updates a route filter in a specified resource group.
       operationId: RouteFilters_Update
@@ -316,7 +316,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                 location: West US
                 name: filterName
                 properties:
@@ -324,7 +324,7 @@ paths:
                   provisioningState: Succeeded
                   rules:
                     - etag: w/\00000000-0000-0000-0000-000000000000\
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                       name: ruleName
                       properties:
                         access: Allow
@@ -334,7 +334,7 @@ paths:
                         routeFilterRuleType: Community
                 tags:
                   key1: value1
-                type: Microsofot.Network/routeFilters
+                type: Microsoft.Network/routeFilters
       x-ms-long-running-operation: true
     put:
       description: Creates or updates a route filter in a specified resource group.
@@ -402,7 +402,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                 location: West US
                 name: filterName
                 properties:
@@ -410,7 +410,7 @@ paths:
                   provisioningState: Succeeded
                   rules:
                     - etag: w/\00000000-0000-0000-0000-000000000000\
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                       name: ruleName
                       properties:
                         access: Allow
@@ -421,11 +421,11 @@ paths:
                         routeFilterRuleType: Community
                 tags:
                   key1: value1
-                type: Microsofot.Network/routeFilters
+                type: Microsoft.Network/routeFilters
             '201':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName
                 location: West US
                 name: filterName
                 properties:
@@ -433,7 +433,7 @@ paths:
                   provisioningState: Succeeded
                   rules:
                     - etag: w/\00000000-0000-0000-0000-000000000000\
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                       name: ruleName
                       properties:
                         access: Allow
@@ -444,7 +444,7 @@ paths:
                         routeFilterRuleType: Community
                 tags:
                   key1: value1
-                type: Microsofot.Network/routeFilters
+                type: Microsoft.Network/routeFilters
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -492,7 +492,7 @@ paths:
               body:
                 value:
                   - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                     name: ruleName
                     properties:
                       access: Allow
@@ -605,7 +605,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                 name: ruleName
                 properties:
                   access: Allow
@@ -675,7 +675,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                 name: ruleName
                 properties:
                   access: Allow
@@ -750,7 +750,7 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                 name: ruleName
                 properties:
                   access: Allow
@@ -762,7 +762,7 @@ paths:
             '201':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/routeFilters/filterName/routeFilterRules/ruleName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName
                 name: ruleName
                 properties:
                   access: Allow

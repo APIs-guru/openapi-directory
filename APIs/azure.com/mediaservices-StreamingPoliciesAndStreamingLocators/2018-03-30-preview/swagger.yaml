@@ -332,8 +332,8 @@ paths:
             api-version: 2018-03-30-preview
             parameters:
               properties:
-                AssetName: ClimbingMountRainier
-                StreamingPolicyName: clearStreamingPolicy
+                assetName: ClimbingMountRainier
+                streamingPolicyName: clearStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedClearStreamingLocator
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -358,10 +358,10 @@ paths:
             api-version: 2018-03-30-preview
             parameters:
               properties:
-                AssetName: ClimbingMountRainier
-                EndTime: '2028-12-31T23:59:59.9999999Z'
-                StartTime: '2018-03-01T00:00:00Z'
-                StreamingPolicyName: secureStreamingPolicy
+                assetName: ClimbingMountRainier
+                endTime: '2028-12-31T23:59:59.9999999Z'
+                startTime: '2018-03-01T00:00:00Z'
+                streamingPolicyName: secureStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedSecureStreamingLocator
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -386,18 +386,18 @@ paths:
             api-version: 2018-03-30-preview
             parameters:
               properties:
-                ContentKeys:
-                  - Id: 60000000-0000-0000-0000-000000000001
-                    Label: aesDefaultKey
-                    Value: 1UqLohAfWsEGkULYxHjYZg==
-                  - Id: 60000000-0000-0000-0000-000000000004
-                    Label: cencDefaultKey
-                    Value: 4UqLohAfWsEGkULYxHjYZg==
-                  - Id: 60000000-0000-0000-0000-000000000007
-                    Label: cbcsDefaultKey
-                    Value: 7UqLohAfWsEGkULYxHjYZg==
-                StreamingLocatorId: 90000000-0000-0000-0000-00000000000A
                 assetName: ClimbingMountRainier
+                contentKeys:
+                  - id: 60000000-0000-0000-0000-000000000001
+                    label: aesDefaultKey
+                    value: 1UqLohAfWsEGkULYxHjYZg==
+                  - id: 60000000-0000-0000-0000-000000000004
+                    label: cencDefaultKey
+                    value: 4UqLohAfWsEGkULYxHjYZg==
+                  - id: 60000000-0000-0000-0000-000000000007
+                    label: cbcsDefaultKey
+                    value: 7UqLohAfWsEGkULYxHjYZg==
+                streamingLocatorId: 90000000-0000-0000-0000-00000000000A
                 streamingPolicyName: secureStreamingPolicy
             resourceGroupName: contoso
             streamingLocatorName: UserCreatedSecureStreamingLocatorWithUserDefinedContentKeys

@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: www.googleapis.com
+host: bigquery.googleapis.com
 basePath: /bigquery/v2
 info:
   contact:
@@ -40,6 +40,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
       'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
+      'https://www.googleapis.com/auth/bigquery.readonly': View your data in Google BigQuery
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
@@ -53,6 +54,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
       'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
+      'https://www.googleapis.com/auth/bigquery.readonly': View your data in Google BigQuery
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
@@ -133,6 +135,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -186,6 +192,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -290,6 +300,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -418,6 +432,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -504,6 +522,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -605,6 +627,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -735,6 +761,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -829,6 +859,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -948,6 +982,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -1091,6 +1129,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1185,6 +1227,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: 'If set, retrieves only jobs whose parent is this job. Otherwise, retrieves only jobs which have no parent'
+          in: query
+          name: parentJobId
+          type: string
         - description: Project ID of the jobs to list
           in: path
           name: projectId
@@ -1218,6 +1264,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -1308,6 +1358,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -1402,6 +1456,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1457,6 +1515,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1494,6 +1556,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -1789,6 +1855,49 @@ definitions:
             type: boolean
         type: object
     type: object
+  CategoricalValue:
+    description: Representative value of a categorical feature.
+    properties:
+      categoryCounts:
+        description: |-
+          Counts of all categories for the categorical feature. If there are
+          more than ten categories, we return top ten (by count) and return
+          one more CategoryCount with category "_OTHER_" and count as
+          aggregate counts of remaining categories.
+        items:
+          $ref: '#/definitions/CategoryCount'
+        type: array
+    type: object
+  CategoryCount:
+    description: Represents the count of a single category within the cluster.
+    properties:
+      category:
+        description: The name of category.
+        type: string
+      count:
+        description: |-
+          The count of training samples matching the category within the
+          cluster.
+        format: int64
+        type: string
+    type: object
+  Cluster:
+    description: Message containing the information about one cluster.
+    properties:
+      centroidId:
+        description: Centroid id.
+        format: int64
+        type: string
+      count:
+        description: Count of training data rows that were assigned to this cluster.
+        format: int64
+        type: string
+      featureValues:
+        description: Values of highly variant features for this cluster.
+        items:
+          $ref: '#/definitions/FeatureValue'
+        type: array
+    type: object
   ClusterInfo:
     description: Information about a single cluster for clustering model.
     properties:
@@ -1818,6 +1927,11 @@ definitions:
   ClusteringMetrics:
     description: Evaluation metrics for clustering models.
     properties:
+      clusters:
+        description: '[Beta] Information for all clusters.'
+        items:
+          $ref: '#/definitions/Cluster'
+        type: array
       daviesBouldinIndex:
         description: Davies-Bouldin index.
         format: double
@@ -2053,13 +2167,15 @@ definitions:
         description: Populated for binary classification/classifier models.
       clusteringMetrics:
         $ref: '#/definitions/ClusteringMetrics'
-        description: '[Beta] Populated for clustering models.'
+        description: Populated for clustering models.
       multiClassClassificationMetrics:
         $ref: '#/definitions/MultiClassClassificationMetrics'
         description: Populated for multi-class classification/classifier models.
       regressionMetrics:
         $ref: '#/definitions/RegressionMetrics'
-        description: Populated for regression models.
+        description: |-
+          Populated for regression models and explicit feedback type matrix
+          factorization models.
     type: object
   ExplainQueryStage:
     properties:
@@ -2234,6 +2350,22 @@ definitions:
           type: string
         type: array
     type: object
+  FeatureValue:
+    description: Representative value of a single feature within the cluster.
+    properties:
+      categoricalValue:
+        $ref: '#/definitions/CategoricalValue'
+        description: The categorical feature value.
+      featureColumn:
+        description: The feature column name.
+        type: string
+      numericalValue:
+        description: |-
+          The numerical feature value. This is the centroid value for this
+          feature.
+        format: double
+        type: number
+    type: object
   GetQueryResultsResponse:
     properties:
       cacheHit:
@@ -2294,7 +2426,7 @@ definitions:
   GoogleSheetsOptions:
     properties:
       range:
-        description: '[Beta] [Optional] Range of a sheet to query from. Only used when non-empty. Typical format: sheet_name!top_left_cell_id:bottom_right_cell_id For example: sheet1!A1:B20'
+        description: '[Optional] Range of a sheet to query from. Only used when non-empty. Typical format: sheet_name!top_left_cell_id:bottom_right_cell_id For example: sheet1!A1:B20'
         type: string
       skipLeadingRows:
         description: '[Optional] The number of rows at the top of a sheet that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows that should be skipped. When autodetect is on, behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.'
@@ -2314,7 +2446,7 @@ definitions:
     description: Information about a single iteration of the training run.
     properties:
       clusterInfos:
-        description: '[Beta] Information about top clusters for clustering models.'
+        description: Information about top clusters for clustering models.
         items:
           $ref: '#/definitions/ClusterInfo'
         type: array
@@ -2433,9 +2565,15 @@ definitions:
         default: true
         description: '[Optional] Whether to print out a header row in the results. Default is true.'
         type: boolean
+      sourceModel:
+        $ref: '#/definitions/ModelReference'
+        description: A reference to the model being exported.
       sourceTable:
         $ref: '#/definitions/TableReference'
-        description: '[Required] A reference to the table being exported.'
+        description: A reference to the table being exported.
+      useAvroLogicalTypes:
+        description: '[Optional] If destinationFormat is set to "AVRO", this flag indicates whether to enable extracting applicable column types (such as TIMESTAMP) to their corresponding AVRO logical types (timestamp-micros), instead of only using their raw types (avro-long).'
+        type: boolean
     type: object
   JobConfigurationLoad:
     properties:
@@ -2982,6 +3120,12 @@ definitions:
       description:
         description: '[Optional] A user-friendly description of this model.'
         type: string
+      encryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: |-
+          Custom encryption configuration (e.g., Cloud KMS keys). This shows the
+          encryption configuration of the model data while stored in BigQuery
+          storage.
       etag:
         description: Output only. A hash of this resource.
         type: string
@@ -3072,16 +3216,12 @@ definitions:
         type: array
     type: object
   ModelReference:
-    description: Id path of a model.
     properties:
       datasetId:
         description: '[Required] The ID of the dataset containing this model.'
         type: string
       modelId:
-        description: |-
-          [Required] The ID of the model. The ID must contain only
-          letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
-          length is 1,024 characters.
+        description: '[Required] The ID of the model. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.'
         type: string
       projectId:
         description: '[Required] The ID of the project containing this model.'
@@ -3333,7 +3473,9 @@ definitions:
         type: object
     type: object
   RegressionMetrics:
-    description: Evaluation metrics for regression models.
+    description: |-
+      Evaluation metrics for regression and explicit feedback type matrix
+      factorization models.
     properties:
       meanAbsoluteError:
         description: Mean absolute error.
@@ -3899,7 +4041,7 @@ definitions:
           - AUTO_SPLIT
         type: string
       distanceType:
-        description: '[Beta] Distance type for clustering models.'
+        description: Distance type for clustering models.
         enum:
           - DISTANCE_TYPE_UNSPECIFIED
           - EUCLIDEAN
@@ -3922,6 +4064,18 @@ definitions:
         items:
           type: string
         type: array
+      kmeansInitializationColumn:
+        description: |-
+          The column used to provide the initial centroids for kmeans algorithm
+          when kmeans_initialization_method is CUSTOM.
+        type: string
+      kmeansInitializationMethod:
+        description: The method used to initialize the centroids for kmeans algorithm.
+        enum:
+          - KMEANS_INITIALIZATION_METHOD_UNSPECIFIED
+          - RANDOM
+          - CUSTOM
+        type: string
       l1Regularization:
         description: L1 regularization coefficient.
         format: double
@@ -3975,7 +4129,7 @@ definitions:
           applicable for imported models.
         type: string
       numClusters:
-        description: '[Beta] Number of clusters for clustering models.'
+        description: Number of clusters for clustering models.
         format: int64
         type: string
       optimizationStrategy:

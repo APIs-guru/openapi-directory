@@ -671,6 +671,54 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{name}/keys:upload':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Upload public key for a given service account.
+        This rpc will create a
+        ServiceAccountKey that has the
+        provided public key and returns it.
+      operationId: iam.projects.serviceAccounts.keys.upload
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UploadServiceAccountKeyRequest'
+        - description: |-
+            The resource name of the service account in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ServiceAccountKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/{name}/serviceAccounts':
     get:
       description: Lists ServiceAccounts for a project.
@@ -847,9 +895,10 @@ paths:
             $ref: '#/definitions/EnableServiceAccountRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_UNIQUE_ID}'.
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
-            the account.
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
           in: path
           name: name
           required: true
@@ -1193,7 +1242,7 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0 and 1.
+            Acceptable values are 0, 1, and 3.
             If the value is 0, or the field is omitted, policy format version 1 will be
             returned.
           in: query
@@ -1515,8 +1564,8 @@ definitions:
       condition:
         $ref: '#/definitions/Expr'
         description: |-
-          Unimplemented. The condition that is associated with this binding.
-          This field is logged only for Cloud Audit Logging.
+          The condition that is associated with this binding. This field is logged
+          only for Cloud Audit Logging.
       member:
         description: |-
           A single identity requesting access for a Cloud Platform resource.
@@ -1827,6 +1876,11 @@ definitions:
       onlyInPredefinedRoles:
         description: This permission can ONLY be used in predefined roles.
         type: boolean
+      primaryPermission:
+        description: |-
+          The preferred name for this permission. If present, then this permission is
+          an alias of, and equivalent to, the listed primary_permission.
+        type: string
       stage:
         description: The current launch stage of the permission.
         enum:
@@ -2068,7 +2122,7 @@ definitions:
           When Role is used in CreateRole, the role name must not be set.
 
           When Role is used in output and other input such as UpdateRole, the role
-          name is the complete path, e.g., roles/logging.viewer for curated roles
+          name is the complete path, e.g., roles/logging.viewer for predefined roles
           and organizations/{ORGANIZATION_ID}/roles/logging.viewer for custom roles.
         type: string
       stage:
@@ -2332,4 +2386,16 @@ definitions:
       restoredAccount:
         $ref: '#/definitions/ServiceAccount'
         description: Metadata for the restored service account.
+    type: object
+  UploadServiceAccountKeyRequest:
+    description: The service account key upload request.
+    properties:
+      publicKeyData:
+        description: |-
+          A field that allows clients to upload their own public key. If set,
+          use this public key data to create a service account key for given
+          service account.
+          Please note, the expected format for this field is X509_PEM.
+        format: byte
+        type: string
     type: object

@@ -98,6 +98,15 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  ScopeParameter:
+    in: body
+    name: body
+    required: true
+    schema:
+      items:
+        type: string
+      type: array
+    x-ms-parameter-location: method
   SplitParameter:
     description: Information needed to Split a reservation item
     in: body
@@ -564,8 +573,7 @@ paths:
                   sku:
                     name: Standard_DS1_v2
                   type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations':
     get:
@@ -787,6 +795,7 @@ paths:
                   renewSource: /providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/00238563-7312-4c20-a134-8c030bf938a7
                   reservedResourceType: VirtualMachines
                   skuDescription: D1 v2
+                  term: P1Y
                 sku:
                   name: Standard_DS1_v2
                 type: Microsoft.Capacity/reservationOrders/reservations
@@ -850,8 +859,47 @@ paths:
                 sku:
                   name: Standard_DS1_v2
                 type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
+      x-ms-long-running-operation: true
+  '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/availableScopes':
+    post:
+      description: |
+        Get Available Scopes for `Reservation`.
+      operationId: Reservation_AvailableScopes
+      parameters:
+        - $ref: '#/parameters/ReservationOrderIdParameter'
+        - $ref: '#/parameters/ReservationIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ScopeParameter'
+      responses:
+        '200':
+          description: List of `Subscription`s created after the filter.
+          schema:
+            $ref: '#/definitions/Properties'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Get Available Scopes for `Reservation`.
+      tags:
+        - 'Reservation, AvailableScopes'
+      x-ms-examples:
+        AvailableScopes:
+          parameters:
+            api-version: '2019-04-01'
+            body:
+              properties:
+                scopes:
+                  - /subscriptions/efc7c997-7700-4a74-b731-55aec16c15e9
+            reservationId: 356e7ae4-84d0-4da6-ab4b-d6b94f3557da
+            reservationOrderId: 276e7ae4-84d0-4da6-ab4b-d6b94f3557da
+          responses:
+            '200':
+              body:
+                properties:
+                  scopes:
+                    - scope: /subscriptions/efc7c997-7700-4a74-b731-55aec16c15e9
+                      valid: true
       x-ms-long-running-operation: true
   '/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/revisions':
     get:
@@ -1097,8 +1145,7 @@ paths:
                   sku:
                     name: Standard_DS1_v2
                   type: Microsoft.Capacity/reservationOrders/reservations
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations':
     get:
@@ -1529,6 +1576,11 @@ definitions:
             $ref: '#/definitions/PurchaseRequest'
         type: object
     type: object
+  Properties:
+    properties:
+      properties:
+        $ref: '#/definitions/SubscriptionScopeProperties'
+    type: object
   PurchaseRequest:
     properties:
       location:
@@ -1724,6 +1776,8 @@ definitions:
         type: string
       splitProperties:
         $ref: '#/definitions/ReservationSplitProperties'
+      term:
+        $ref: '#/definitions/ReservationTerm'
     type: object
   ReservationQuantity:
     description: Quantity of the SKUs that are part of the Reservation. Must be greater than zero.
@@ -1805,6 +1859,13 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: ReservedResourceType
+  ScopeProperties:
+    properties:
+      scope:
+        type: string
+      valid:
+        type: boolean
+    type: object
   SkuName:
     properties:
       name:
@@ -1851,4 +1912,11 @@ definitions:
       properties:
         $ref: '#/definitions/SplitProperties'
         x-ms-client-flatten: true
+    type: object
+  SubscriptionScopeProperties:
+    properties:
+      scopes:
+        items:
+          $ref: '#/definitions/ScopeProperties'
+        type: array
     type: object

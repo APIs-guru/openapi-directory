@@ -2101,6 +2101,9 @@ definitions:
       earlyPriceAvailable:
         description: Early Pricing Active
         type: boolean
+      fcAvailable:
+        description: Is tricast betting available
+        type: boolean
       firstFourAvailable:
         description: Is firstFour betting available
         type: boolean
@@ -2171,6 +2174,9 @@ definitions:
       status:
         description: Indicates the status of the Market (A = Active/S = Suspended)
         type: string
+      tcAvailable:
+        description: Is forecast betting available
+        type: boolean
     required:
       - id
       - name

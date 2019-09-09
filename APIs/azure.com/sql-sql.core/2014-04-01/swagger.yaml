@@ -105,33 +105,34 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              value:
-                - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/serviceTierAdvisors/Current
-                  name: Current
-                  properties:
-                    activeTimeRatio: 0
-                    avgDtu: 0
-                    confidence: 1
-                    currentServiceLevelObjective: S0
-                    currentServiceLevelObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
-                    databaseSizeBasedRecommendationServiceLevelObjective: null
-                    databaseSizeBasedRecommendationServiceLevelObjectiveId: null
-                    disasterPlanBasedRecommendationServiceLevelObjective: null
-                    disasterPlanBasedRecommendationServiceLevelObjectiveId: null
-                    maxDtu: 0
-                    maxSizeInGB: 0.0234375
-                    minDtu: 0
-                    observationPeriodEnd: '2017-07-26T13:00:00Z'
-                    observationPeriodStart: '2017-07-12T12:00:00Z'
-                    overallRecommendationServiceLevelObjective: null
-                    overallRecommendationServiceLevelObjectiveId: null
-                    serviceLevelObjectiveUsageMetrics:
-                      - inRangeTimeRatio: 1
-                        serviceLevelObjective: Basic
-                        serviceLevelObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
-                    usageBasedRecommendationServiceLevelObjective: null
-                    usageBasedRecommendationServiceLevelObjectiveId: null
-                  type: Microsoft.Sql/servers/databases/serviceTierAdvisors
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187/serviceTierAdvisors/Current
+                    name: Current
+                    properties:
+                      activeTimeRatio: 0
+                      avgDtu: 0
+                      confidence: 1
+                      currentServiceLevelObjective: S0
+                      currentServiceLevelObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      databaseSizeBasedRecommendationServiceLevelObjective: null
+                      databaseSizeBasedRecommendationServiceLevelObjectiveId: null
+                      disasterPlanBasedRecommendationServiceLevelObjective: null
+                      disasterPlanBasedRecommendationServiceLevelObjectiveId: null
+                      maxDtu: 0
+                      maxSizeInGB: 0.0234375
+                      minDtu: 0
+                      observationPeriodEnd: '2017-07-26T13:00:00Z'
+                      observationPeriodStart: '2017-07-12T12:00:00Z'
+                      overallRecommendationServiceLevelObjective: null
+                      overallRecommendationServiceLevelObjectiveId: null
+                      serviceLevelObjectiveUsageMetrics:
+                        - inRangeTimeRatio: 1
+                          serviceLevelObjective: Basic
+                          serviceLevelObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+                      usageBasedRecommendationServiceLevelObjective: null
+                      usageBasedRecommendationServiceLevelObjectiveId: null
+                    type: Microsoft.Sql/servers/databases/serviceTierAdvisors
       x-ms-pageable:
         nextLinkName: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors/{serviceTierAdvisorName}':

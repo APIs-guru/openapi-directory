@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Service/stable/2019-05-06/searchservice.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: search-searchservice
   x-tags:
@@ -752,18 +752,35 @@ paths:
                   - endTime: '2014-11-26T03:28:12.007Z'
                     errorMessage: null
                     errors:
-                      - errorMessage: Document key cannot be missing or empty.
+                      - details: null
+                        documentationLink: null
+                        errorMessage: Document key cannot be missing or empty.
                         key: ''
+                        name: null
+                        statusCode: 400
+                      - details: The file could not be parsed.
+                        documentationLink: 'https://go.microsoft.com/fwlink/?linkid=2049388'
+                        errorMessage: Could not read the value of column 'foo' at index '0'.
+                        key: document id 1
+                        name: DocumentExtraction.AzureBlob.MyDataSource
                         statusCode: 400
                     finalTrackingState: null
                     initialTrackingState: null
-                    itemsFailed: 1
+                    itemsFailed: 2
                     itemsProcessed: 1
                     startTime: '2014-11-26T03:28:10.125Z'
                     status: transientFailure
                     warnings:
-                      - key: document id
+                      - details: null
+                        documentationLink: null
+                        key: document id
                         message: 'A warning doesn''t stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.'
+                        name: null
+                      - details: 'The skill did something that didn''t break anything, nonetheless something we didn''t expect happened, so it might be worth double checking.'
+                        documentationLink: 'https://go.microsoft.com/fwlink/?linkid=2099692'
+                        key: document id 2
+                        message: Document was truncated to 50000 characters.
+                        name: 'Enrichment.LanguageDetectionSkill.#4'
                 lastResult:
                   endTime: '2014-11-26T03:37:19.012Z'
                   errorMessage: null
@@ -2151,6 +2168,7 @@ paths:
                     usage: 2
                 limits:
                   maxComplexCollectionFieldsPerIndex: 100
+                  maxComplexObjectsInCollectionsPerDocument: 3000
                   maxFieldNestingDepthPerIndex: 10
                   maxFieldsPerIndex: 1000
       x-ms-request-id: request-id
@@ -2193,6 +2211,7 @@ paths:
                           - name: text
                             source: /document/content
                         minimumPrecision: 0.7
+                        name: '#1'
                         outputs:
                           - name: organizations
                             targetName: organizations
@@ -2202,6 +2221,7 @@ paths:
                         inputs:
                           - name: text
                             source: /document/content
+                        name: '#2'
                         outputs:
                           - name: languageCode
                             targetName: languageCode
@@ -2215,6 +2235,7 @@ paths:
                           - name: languageCode
                             source: /document/languageCode
                         maximumPageLength: 4000
+                        name: '#3'
                         outputs:
                           - name: textItems
                             targetName: pages
@@ -2229,9 +2250,28 @@ paths:
                           - name: languageCode
                             source: /document/languageCode
                         maxKeyPhraseCount: null
+                        name: '#4'
                         outputs:
                           - name: keyPhrases
                             targetName: keyPhrases
+                      - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                        batchSize: 1
+                        context: /document
+                        degreeOfParallelism: null
+                        description: null
+                        httpHeaders: {}
+                        httpMethod: POST
+                        inputs:
+                          - name: text
+                            source: /document/pages/*
+                          - name: languageCode
+                            source: /document/languageCode
+                        name: MyCustomWebApiSkill
+                        outputs:
+                          - name: customresult
+                            targetName: result
+                        timeout: PT30S
+                        uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
     post:
       description: Creates a new cognitive skillset in an Azure Search service.
@@ -2304,6 +2344,21 @@ paths:
                   outputs:
                     - name: keyPhrases
                       targetName: keyPhrases
+                - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                  batchSize: 1
+                  httpHeaders: {}
+                  httpMethod: POST
+                  inputs:
+                    - name: text
+                      source: /document/pages/*
+                    - name: languageCode
+                      source: /document/languageCode
+                  name: MyCustomWebApiSkill
+                  outputs:
+                    - name: customresult
+                      targetName: result
+                  timeout: PT30S
+                  uri: 'https://contoso.example.org'
             skillsetName: demoskillset
           responses:
             '201':
@@ -2321,6 +2376,7 @@ paths:
                       - name: text
                         source: /document/content
                     minimumPrecision: 0.7
+                    name: '#1'
                     outputs:
                       - name: organizations
                         targetName: organizations
@@ -2330,6 +2386,7 @@ paths:
                     inputs:
                       - name: text
                         source: /document/content
+                    name: '#2'
                     outputs:
                       - name: languageCode
                         targetName: languageCode
@@ -2343,6 +2400,7 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maximumPageLength: 4000
+                    name: '#3'
                     outputs:
                       - name: textItems
                         targetName: pages
@@ -2357,9 +2415,28 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maxKeyPhraseCount: null
+                    name: '#4'
                     outputs:
                       - name: keyPhrases
                         targetName: keyPhrases
+                  - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                    batchSize: 1
+                    context: /document
+                    degreeOfParallelism: null
+                    description: null
+                    httpHeaders: {}
+                    httpMethod: POST
+                    inputs:
+                      - name: text
+                        source: /document/pages/*
+                      - name: languageCode
+                        source: /document/languageCode
+                    name: MyCustomWebApiSkill
+                    outputs:
+                      - name: customresult
+                        targetName: result
+                    timeout: PT30S
+                    uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
   '/skillsets(''{skillsetName}'')':
     delete:
@@ -2436,6 +2513,7 @@ paths:
                       - name: text
                         source: /document/content
                     minimumPrecision: 0.7
+                    name: '#1'
                     outputs:
                       - name: organizations
                         targetName: organizations
@@ -2445,6 +2523,7 @@ paths:
                     inputs:
                       - name: text
                         source: /document/content
+                    name: '#2'
                     outputs:
                       - name: languageCode
                         targetName: languageCode
@@ -2458,6 +2537,7 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maximumPageLength: 4000
+                    name: '#3'
                     outputs:
                       - name: textItems
                         targetName: pages
@@ -2472,9 +2552,28 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maxKeyPhraseCount: null
+                    name: '#4'
                     outputs:
                       - name: keyPhrases
                         targetName: keyPhrases
+                  - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                    batchSize: 1
+                    context: /document
+                    degreeOfParallelism: null
+                    description: null
+                    httpHeaders: {}
+                    httpMethod: POST
+                    inputs:
+                      - name: text
+                        source: /document/pages/*
+                      - name: languageCode
+                        source: /document/languageCode
+                    name: MyCustomWebApiSkill
+                    outputs:
+                      - name: customresult
+                        targetName: result
+                    timeout: PT30S
+                    uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
     put:
       description: Creates a new cognitive skillset in an Azure Search service or updates the skillset if it already exists.
@@ -2557,6 +2656,21 @@ paths:
                   outputs:
                     - name: keyPhrases
                       targetName: keyPhrases
+                - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                  batchSize: 1
+                  httpHeaders: {}
+                  httpMethod: POST
+                  inputs:
+                    - name: text
+                      source: /document/pages/*
+                    - name: languageCode
+                      source: /document/languageCode
+                  name: MyCustomWebApiSkill
+                  outputs:
+                    - name: customresult
+                      targetName: result
+                  timeout: PT30S
+                  uri: 'https://contoso.example.org'
             skillsetName: demoskillset
           responses:
             '200':
@@ -2574,6 +2688,7 @@ paths:
                       - name: text
                         source: /document/content
                     minimumPrecision: 0.7
+                    name: '#1'
                     outputs:
                       - name: organizations
                         targetName: organizations
@@ -2583,6 +2698,7 @@ paths:
                     inputs:
                       - name: text
                         source: /document/content
+                    name: '#2'
                     outputs:
                       - name: languageCode
                         targetName: languageCode
@@ -2596,6 +2712,7 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maximumPageLength: 4000
+                    name: '#3'
                     outputs:
                       - name: textItems
                         targetName: pages
@@ -2610,9 +2727,28 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maxKeyPhraseCount: null
+                    name: '#4'
                     outputs:
                       - name: keyPhrases
                         targetName: keyPhrases
+                  - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                    batchSize: 1
+                    context: /document
+                    degreeOfParallelism: null
+                    description: null
+                    httpHeaders: {}
+                    httpMethod: POST
+                    inputs:
+                      - name: text
+                        source: /document/pages/*
+                      - name: languageCode
+                        source: /document/languageCode
+                    name: MyCustomWebApiSkill
+                    outputs:
+                      - name: customresult
+                        targetName: result
+                    timeout: PT30S
+                    uri: 'https://contoso.example.org'
             '201':
               body:
                 description: 'Extract entities, detect language and extract key-phrases'
@@ -2628,6 +2764,7 @@ paths:
                       - name: text
                         source: /document/content
                     minimumPrecision: 0.7
+                    name: '#1'
                     outputs:
                       - name: organizations
                         targetName: organizations
@@ -2637,6 +2774,7 @@ paths:
                     inputs:
                       - name: text
                         source: /document/content
+                    name: '#2'
                     outputs:
                       - name: languageCode
                         targetName: languageCode
@@ -2650,6 +2788,7 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maximumPageLength: 4000
+                    name: '#3'
                     outputs:
                       - name: textItems
                         targetName: pages
@@ -2664,9 +2803,28 @@ paths:
                       - name: languageCode
                         source: /document/languageCode
                     maxKeyPhraseCount: null
+                    name: '#4'
                     outputs:
                       - name: keyPhrases
                         targetName: keyPhrases
+                  - '@odata.type': '#Microsoft.Skills.Custom.WebApiSkill'
+                    batchSize: 1
+                    context: /document
+                    degreeOfParallelism: null
+                    description: null
+                    httpHeaders: {}
+                    httpMethod: POST
+                    inputs:
+                      - name: text
+                        source: /document/pages/*
+                      - name: languageCode
+                        source: /document/languageCode
+                    name: MyCustomWebApiSkill
+                    outputs:
+                      - name: customresult
+                        targetName: result
+                    timeout: PT30S
+                    uri: 'https://contoso.example.org'
       x-ms-request-id: request-id
   /synonymmaps:
     get:
@@ -3157,6 +3315,13 @@ definitions:
     required:
       - commonWords
     x-ms-discriminator-value: '#Microsoft.Azure.Search.CommonGramTokenFilter'
+  ConditionalSkill:
+    allOf:
+      - $ref: '#/definitions/Skill'
+    description: A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output.
+    externalDocs:
+      url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-conditional'
+    x-ms-discriminator-value: '#Microsoft.Skills.Util.ConditionalSkill'
   CorsOptions:
     description: Defines options to control Cross-Origin Resource Sharing (CORS) for an index.
     externalDocs:
@@ -3998,24 +4163,43 @@ definitions:
   InputFieldMappingEntry:
     description: Input field mapping for a skill.
     properties:
+      inputs:
+        description: The recursive inputs used when creating a complex type.
+        items:
+          $ref: '#/definitions/InputFieldMappingEntry'
+        type: array
       name:
         description: The name of the input.
         type: string
       source:
         description: The source of the input.
         type: string
+      sourceContext:
+        description: The source context used for selecting recursive inputs.
+        type: string
     required:
       - name
-      - source
   ItemError:
     description: Represents an item- or document-level indexing error.
     properties:
+      details:
+        description: 'Additional, verbose details about the error to assist in debugging the indexer. This may not be always available.'
+        readOnly: true
+        type: string
+      documentationLink:
+        description: A link to a troubleshooting guide for these classes of errors. This may not be always available.
+        readOnly: true
+        type: string
       errorMessage:
         description: The message describing the error that occurred while processing the item.
         readOnly: true
         type: string
       key:
         description: The key of the item for which indexing failed.
+        readOnly: true
+        type: string
+      name:
+        description: 'The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.'
         readOnly: true
         type: string
       statusCode:
@@ -4027,12 +4211,24 @@ definitions:
   ItemWarning:
     description: Represents an item-level warning.
     properties:
+      details:
+        description: 'Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available.'
+        readOnly: true
+        type: string
+      documentationLink:
+        description: A link to a troubleshooting guide for these classes of warnings. This may not be always available.
+        readOnly: true
+        type: string
       key:
         description: The key of the item which generated a warning.
         readOnly: true
         type: string
       message:
         description: The message describing the warning that occurred while processing the item.
+        readOnly: true
+        type: string
+      name:
+        description: 'The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.'
         readOnly: true
         type: string
   KeepTokenFilter:
@@ -4937,6 +5133,11 @@ definitions:
         format: int32
         type: integer
         x-nullable: true
+      maxComplexObjectsInCollectionsPerDocument:
+        description: The maximum number of objects in complex collections allowed per document.
+        format: int32
+        type: integer
+        x-nullable: true
       maxFieldNestingDepthPerIndex:
         description: 'The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3.'
         format: int32
@@ -5018,6 +5219,9 @@ definitions:
         items:
           $ref: '#/definitions/InputFieldMappingEntry'
         type: array
+      name:
+        description: 'The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character ''#''.'
+        type: string
       outputs:
         description: 'The output of a skill is either a field in an Azure Search index, or a value that can be consumed as an input by another skill.'
         items:
@@ -5497,6 +5701,95 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: TextSplitMode
+  TextTranslationSkill:
+    allOf:
+      - $ref: '#/definitions/Skill'
+    description: A skill to translate text from one language to another.
+    externalDocs:
+      url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation'
+    properties:
+      defaultFromLanguageCode:
+        $ref: '#/definitions/TextTranslationSkillLanguage'
+        description: The language code to translate documents from for documents that don't specify the from language explicitly.
+      defaultToLanguageCode:
+        $ref: '#/definitions/TextTranslationSkillLanguage'
+        description: 'The language code to translate documents into for documents that don''t specify the to language explicitly. '
+      suggestedFrom:
+        $ref: '#/definitions/TextTranslationSkillLanguage'
+        description: 'The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en.'
+    required:
+      - defaultToLanguageCode
+    x-ms-discriminator-value: '#Microsoft.Skills.Text.TranslationSkill'
+  TextTranslationSkillLanguage:
+    description: The language codes supported for input text by TextTranslationSkill.
+    enum:
+      - af
+      - ar
+      - bn
+      - bs
+      - bg
+      - yue
+      - ca
+      - zh-Hans
+      - zh-Hant
+      - hr
+      - cs
+      - da
+      - nl
+      - en
+      - et
+      - fj
+      - fil
+      - fi
+      - fr
+      - de
+      - el
+      - ht
+      - he
+      - hi
+      - mww
+      - hu
+      - is
+      - id
+      - it
+      - ja
+      - sw
+      - tlh
+      - ko
+      - lv
+      - lt
+      - mg
+      - ms
+      - mt
+      - nb
+      - fa
+      - pl
+      - pt
+      - otq
+      - ro
+      - ru
+      - sm
+      - sr-Cyrl
+      - sr-Latn
+      - sk
+      - sl
+      - es
+      - sv
+      - ty
+      - ta
+      - te
+      - th
+      - to
+      - tr
+      - uk
+      - ur
+      - vi
+      - cy
+      - yua
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TextTranslationSkillLanguage
   TextWeights:
     description: Defines weights on index fields for which matches should boost scoring in search queries.
     properties:
@@ -5694,21 +5987,24 @@ definitions:
       modelAsString: false
       name: VisualFeature
   WebApiHttpHeaders:
-    properties:
-      headers:
-        additionalProperties:
-          type: string
-        description: A dictionary of http request headers.
-        type: object
+    additionalProperties:
+      type: string
+    description: A dictionary of http request headers.
+    type: object
   WebApiSkill:
     allOf:
       - $ref: '#/definitions/Skill'
     description: 'A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code.'
     externalDocs:
-      url: 'https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-interface'
+      url: 'https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-web-api'
     properties:
       batchSize:
         description: The desired batch size which indicates number of documents.
+        format: int32
+        type: integer
+        x-nullable: true
+      degreeOfParallelism:
+        description: 'If set, the number of parallel calls that can be made to the Web API.'
         format: int32
         type: integer
         x-nullable: true
@@ -5727,8 +6023,6 @@ definitions:
         type: string
     required:
       - uri
-      - httpHeaders
-      - httpMethod
     x-ms-discriminator-value: '#Microsoft.Skills.Custom.WebApiSkill'
   WordDelimiterTokenFilter:
     allOf:

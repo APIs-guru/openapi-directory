@@ -5,9 +5,15 @@ schemes:
 host: api.sportsdata.io
 basePath: /v3/nfl/stats
 info:
+  contact:
+    x-twitter: nfldata
   description: 'NFL rosters, player stats, team stats, and fantasy stats API.'
   title: NFL v3 Stats
   version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://fantasydata.com/downloads/swagger/nfl-v3-stats.json'
@@ -1647,7 +1653,9 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/PlayerSeason'
+            items:
+              $ref: '#/definitions/PlayerSeason'
+            type: array
       summary: Player Season Stats by Player
   '/{format}/PlayerSeasonStatsByTeam/{season}/{team}':
     get:
@@ -3977,6 +3985,8 @@ definitions:
         type: string
       Number:
         type: integer
+      OffensiveFumbleRecoveryTouchdowns:
+        type: number
       OffensiveSnapsPlayed:
         type: integer
       OffensiveTeamSnaps:
@@ -4313,6 +4323,8 @@ definitions:
         type: string
       Number:
         type: integer
+      OffensiveFumbleRecoveryTouchdowns:
+        type: number
       OffensiveSnapsPlayed:
         type: integer
       OffensiveTeamSnaps:

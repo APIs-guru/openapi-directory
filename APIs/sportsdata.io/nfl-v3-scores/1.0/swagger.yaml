@@ -5,9 +5,15 @@ schemes:
 host: api.sportsdata.io
 basePath: /v3/nfl/scores
 info:
+  contact:
+    x-twitter: nfldata
   description: 'NFL schedules, scores, odds, weather, and news API.'
   title: NFL v3 Scores
   version: '1.0'
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/nfldata/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://fantasydata.com/downloads/swagger/nfl-v3-scores.json'
@@ -380,7 +386,7 @@ paths:
               $ref: '#/definitions/News'
             type: array
       summary: News by Team
-  '/{format}/Ping':
+  '/{format}/Ping/{seconds}':
     get:
       description: Ping NFL API
       operationId: XPing
@@ -392,6 +398,11 @@ paths:
             - JSON
           in: path
           name: format
+          required: true
+          type: string
+        - description: Number of seconds to sleep before responding
+          in: path
+          name: seconds
           required: true
           type: string
       responses:

@@ -121,7 +121,7 @@ paths:
       x-ms-examples:
         HybridUseBenefitListResult:
           parameters:
-            $filter: SQLBYOLEnterpriseForADH
+            $filter: SQL_Server_EE_AHB
             api-version: 2019-06-01-preview
             scope: 'subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}'
           responses:
@@ -129,14 +129,14 @@ paths:
               body:
                 value:
                   - etag: 1
-                    id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/94f46eda-45f8-493a-8425-251921463a89'
-                    name: SQL BYOL Enterprise for Azure Dedicated Host
+                    id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/SQL_hostGroup_hostName'
+                    name: SQL_hostGroup_hostName
                     properties:
                       createdDate: '2019-06-05T21:50:07.846Z'
                       lastUpdatedDate: '2019-06-05T21:50:07.846Z'
                       provisioningState: Succeeded
                     sku:
-                      name: SQLBYOLEnterpriseForADH
+                      name: SQL_Server_EE_AHB
                     type: Microsoft.SoftwarePlans/hybridUseBenefits
       x-ms-pageable:
         nextLinkName: nextLink
@@ -196,14 +196,14 @@ paths:
             '200':
               body:
                 etag: 1
-                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/{guid}'
-                name: SQL BYOL Enterprise for Azure Dedicated Host
+                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/SQL_{hostGroupName}_{hostName}'
+                name: 'SQL_{hostGroupName}_{hostName}'
                 properties:
                   createdDate: '2019-06-05T21:50:07.846Z'
                   lastUpdatedDate: '2019-06-05T21:50:07.846Z'
                   provisioningState: Succeeded
                 sku:
-                  name: SQLBYOLEnterpriseForADH
+                  name: SQL_Server_EE_AHB
                 type: Microsoft.SoftwarePlans/hybridUseBenefits
     patch:
       description: Updates an existing hybrid use benefit
@@ -238,8 +238,8 @@ paths:
             '200':
               body:
                 etag: 1
-                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/94f46eda-45f8-493a-8425-251921463a89'
-                name: SQL BYOL Enterprise for Azure Dedicated Host
+                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/SQL_{hostGroupName}_{hostName}'
+                name: 'SQL_{hostGroupName}_{hostName}'
                 properties:
                   createdDate: '2019-06-05T21:50:07.846Z'
                   lastUpdatedDate: '2019-06-05T21:50:07.846Z'
@@ -272,7 +272,7 @@ paths:
             api-version: 2019-06-01-preview
             body:
               sku:
-                name: SQLBYOLEnterpriseForADH
+                name: SQL_Server_Perpetual
               type: Microsoft.SoftwarePlan/hybridUseBenefits
             planId: 94f46eda-45f8-493a-8425-251921463a89
             scope: 'subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}'
@@ -280,14 +280,14 @@ paths:
             '200':
               body:
                 etag: 1
-                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/94f46eda-45f8-493a-8425-251921463a89'
-                name: SQL BYOL Enterprise for Azure Dedicated Host
+                id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/SQL_{hostGroupName}_{hostName}'
+                name: 'SQL_{hostGroupName}_{hostName}'
                 properties:
                   createdDate: '2019-06-05T21:50:07.846Z'
                   lastUpdatedDate: '2019-06-05T21:50:07.846Z'
                   provisioningState: Succeeded
                 sku:
-                  name: SQLBYOLEnterpriseForADH
+                  name: SQL_Server_Perpetual
                 type: Microsoft.SoftwarePlans/hybridUseBenefits
   '/{scope}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/{planId}/revisions':
     get:
@@ -319,14 +319,14 @@ paths:
               body:
                 value:
                   - etag: 1
-                    id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/94f46eda-45f8-493a-8425-251921463a89'
-                    name: SQL BYOL Enterprise for Azure Dedicated Host
+                    id: '/subscriptions/{sub-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/HostGroups/{host-group-name}/hosts/{host-name}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/SQL_{hostGroupName}_{hostName}'
+                    name: 'SQL_{hostGroupName}_{hostName}'
                     properties:
                       createdDate: '2019-06-05T21:50:07.846Z'
                       lastUpdatedDate: '2019-06-05T21:50:07.846Z'
                       provisioningState: Succeeded
                     sku:
-                      name: SQLBYOLEnterpriseForADH
+                      name: SQL_Server_EE_AHB
                     type: Microsoft.SoftwarePlans/hybridUseBenefits
       x-ms-pageable:
         nextLinkName: nextLink

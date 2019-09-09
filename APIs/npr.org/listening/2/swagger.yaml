@@ -701,6 +701,9 @@ definitions:
       song:
         description: The song title associated with the media
         type: string
+      streamGuid:
+        description: The full GUID of the live stream returned within the recommendation
+        type: string
       title:
         description: The title of this media
         type: string
@@ -777,6 +780,11 @@ definitions:
         type: array
       recommendations:
         description: This is the URL that should be POSTed with the ratings JSON when this audio starts to play
+        items:
+          $ref: '#/definitions/OtherLink'
+        type: array
+      stream-metadata:
+        description: Links that can be polled to retreive current program metadata for a given stream
         items:
           $ref: '#/definitions/OtherLink'
         type: array
@@ -1154,6 +1162,10 @@ definitions:
           linkText:
             description: 'Text recommended to accompany the link. For example, ''Read Story'' with a full story link, or ''Read Transcript'' with a transcript link.'
             type: string
+          pollInterval:
+            description: 'When present, the recommended number of seconds between requests to the given URL'
+            format: int32
+            type: integer
         required:
           - content-type
     description: An individual link from a list of links

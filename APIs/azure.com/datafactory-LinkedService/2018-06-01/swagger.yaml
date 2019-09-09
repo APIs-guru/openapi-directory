@@ -726,6 +726,71 @@ definitions:
     required:
       - mlEndpoint
       - apiKey
+  AzureMariaDBLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Azure Database for MariaDB linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMariaDBLinkedServiceTypeProperties'
+        description: Azure Database for MariaDB linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureMariaDB
+  AzureMariaDBLinkedServiceTypeProperties:
+    description: Azure Database for MariaDB linked service properties.
+    properties:
+      connectionString:
+        description: 'An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      pwd:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Key Vault secret reference.
+        properties:
+          secretName:
+            description: 'The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string).'
+            type: object
+          secretVersion:
+            description: 'The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string).'
+            type: object
+          store:
+            description: Linked service reference type.
+            properties:
+              parameters:
+                additionalProperties:
+                  type: object
+                description: An object mapping parameter names to argument values.
+                type: object
+              referenceName:
+                description: Reference LinkedService name.
+                type: string
+              type:
+                description: Linked service reference type.
+                enum:
+                  - LinkedServiceReference
+                type: string
+            required:
+              - type
+              - referenceName
+        required:
+          - store
+          - secretName
+        type: object
+        x-ms-discriminator-value: AzureKeyVaultSecret
   AzureMySqlLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'

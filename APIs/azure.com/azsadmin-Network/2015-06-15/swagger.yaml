@@ -93,6 +93,85 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  /providers/Microsoft.Network.Admin/locations:
+    get:
+      description: Returns the list of supported locations
+      operationId: OnPremLocations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LocationsList'
+      tags:
+        - Network
+      x-ms-examples:
+        Returns the list of supported locations.:
+          parameters:
+            api-version: '2015-06-15'
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value: []
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Network.Admin/locations/{location}/operationResults':
+    get:
+      description: Returns the list of operation results for a location
+      operationId: LocationsOperationResults_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/LocationParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationResultList'
+      tags:
+        - Network
+      x-ms-examples:
+        Returns the list of operation results for a location:
+          parameters:
+            api-version: '2015-06-15'
+            location: westus
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value: []
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Network.Admin/locations/{location}/operations':
+    get:
+      description: Returns the list of support REST operations.
+      operationId: LocationsOperations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/LocationParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationList'
+      tags:
+        - Network
+      x-ms-examples:
+        Returns the list of support REST operations.:
+          parameters:
+            api-version: '2015-06-15'
+            location: westus
+            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value: []
+      x-ms-pageable:
+        nextLinkName: nextLink
   /providers/Microsoft.Network.Admin/operations:
     get:
       description: Returns the list of support REST operations.
@@ -109,7 +188,7 @@ paths:
       x-ms-examples:
         Returns the list of support REST operations.:
           parameters:
-            api-version: '2016-05-01'
+            api-version: '2015-06-15'
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
@@ -277,6 +356,26 @@ definitions:
         description: 'The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.'
         readOnly: true
         type: string
+  Location:
+    description: Describes the supported Location
+    properties:
+      name:
+        description: The name of the location the operation is being held.
+        readOnly: true
+        type: string
+  LocationsList:
+    description: List of Locations
+    properties:
+      nextLink:
+        description: URI to the next page of locations.
+        readOnly: true
+        type: string
+      value:
+        description: Array of locations
+        items:
+          $ref: '#/definitions/Location'
+        readOnly: true
+        type: array
   Operation:
     description: Describes the supported REST operation.
     properties:
@@ -299,6 +398,26 @@ definitions:
         description: Array of operations
         items:
           $ref: '#/definitions/Operation'
+        readOnly: true
+        type: array
+  OperationResult:
+    description: Describes results of a given operation
+    properties:
+      name:
+        description: The name of the operation being performed on this particular object.
+        readOnly: true
+        type: string
+  OperationResultList:
+    description: List of Operation Results
+    properties:
+      nextLink:
+        description: URI to the next page of operations.
+        readOnly: true
+        type: string
+      value:
+        description: Array of operation results
+        items:
+          $ref: '#/definitions/OperationResult'
         readOnly: true
         type: array
   ProvisionedResource:

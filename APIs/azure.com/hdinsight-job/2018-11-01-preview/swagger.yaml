@@ -224,72 +224,73 @@ paths:
             user.name: admin
           responses:
             '200':
-              callback: null
-              completed: null
-              exitValue: null
-              id: job_1542085634998_0007
-              msg: null
-              parentId: null
-              percentComplete: null
-              profile:
-                jobFile: /mapreducestaging/testuser11750/.staging/job_1542085634998_0007/job.xml
-                jobID:
-                  id: 7
-                  jtIdentifier: '1542085634998'
-                jobId: job_1542085634998_0007
-                jobName: TempletonControllerJob
-                queueName: default
-                url: 'http://hn0-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:8088/cluster/app/application_1542085634998_0007'
-                user: testuser11750
-              status:
-                cleanupProgress: 0
-                failureInfo: NA
-                finishTime: 1542087305443
-                historyFile: ''
-                jobACLs: {}
-                jobComplete: true
-                jobFile: /mapreducestaging/testuser11750/.staging/job_1542085634998_0007/job.xml
-                jobID:
-                  id: 7
-                  jtIdentifier: '1542085634998'
-                jobId: job_1542085634998_0007
-                jobName: TempletonControllerJob
-                jobPriority: NORMAL
-                mapProgress: 0
-                neededMem: 0
-                numReservedSlots: 0
-                numUsedSlots: 0
-                priority: NORMAL
-                queue: default
-                reduceProgress: 0
-                reservedMem: 0
-                retired: false
-                runState: 5
-                schedulingInfo: NA
-                setupProgress: 0
-                startTime: 1542087304445
-                state: KILLED
-                trackingUrl: 'http://hn0-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:8088/cluster/app/application_1542085634998_0007'
-                uber: false
-                usedMem: 0
-                username: testuser11750
-              user: testuser11750
-              userargs:
-                arg:
-                  - '10'
-                  - '1000'
+              body:
                 callback: null
-                class: pi
-                define:
-                  - mapreduce.map.maxattempts=10
-                  - mapreduce.reduce.maxattempts=10
-                  - mapreduce.task.timeout=60000
-                enablejobreconnect: null
-                enablelog: 'false'
-                files: null
-                jar: /example/jars/hadoop-mapreduce-examples.jar
-                libjars: null
-                statusdir: 2018-11-13T05-35-01-6f79af0f-6157-494a-a03e-eabb190a0c10
+                completed: null
+                exitValue: null
+                id: job_1542085634998_0007
+                msg: null
+                parentId: null
+                percentComplete: null
+                profile:
+                  jobFile: /mapreducestaging/testuser11750/.staging/job_1542085634998_0007/job.xml
+                  jobID:
+                    id: 7
+                    jtIdentifier: '1542085634998'
+                  jobId: job_1542085634998_0007
+                  jobName: TempletonControllerJob
+                  queueName: default
+                  url: 'http://hn0-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:8088/cluster/app/application_1542085634998_0007'
+                  user: testuser11750
+                status:
+                  cleanupProgress: 0
+                  failureInfo: NA
+                  finishTime: 1542087305443
+                  historyFile: ''
+                  jobACLs: {}
+                  jobComplete: true
+                  jobFile: /mapreducestaging/testuser11750/.staging/job_1542085634998_0007/job.xml
+                  jobID:
+                    id: 7
+                    jtIdentifier: '1542085634998'
+                  jobId: job_1542085634998_0007
+                  jobName: TempletonControllerJob
+                  jobPriority: NORMAL
+                  mapProgress: 0
+                  neededMem: 0
+                  numReservedSlots: 0
+                  numUsedSlots: 0
+                  priority: NORMAL
+                  queue: default
+                  reduceProgress: 0
+                  reservedMem: 0
+                  retired: false
+                  runState: 5
+                  schedulingInfo: NA
+                  setupProgress: 0
+                  startTime: 1542087304445
+                  state: KILLED
+                  trackingUrl: 'http://hn0-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:8088/cluster/app/application_1542085634998_0007'
+                  uber: false
+                  usedMem: 0
+                  username: testuser11750
+                user: testuser11750
+                userargs:
+                  arg:
+                    - '10'
+                    - '1000'
+                  callback: null
+                  class: pi
+                  define:
+                    - mapreduce.map.maxattempts=10
+                    - mapreduce.reduce.maxattempts=10
+                    - mapreduce.task.timeout=60000
+                  enablejobreconnect: null
+                  enablelog: 'false'
+                  files: null
+                  jar: /example/jars/hadoop-mapreduce-examples.jar
+                  libjars: null
+                  statusdir: 2018-11-13T05-35-01-6f79af0f-6157-494a-a03e-eabb190a0c10
     get:
       consumes:
         - application/json
@@ -329,65 +330,66 @@ paths:
             user.name: admin
           responses:
             '200':
-              callback: null
-              completed: done
-              exitValue: 0
-              id: job_1542085634998_0024
-              msg: null
-              parentId: null
-              percentComplete: null
-              profile:
-                jobFile: 'wasb://testcontainer11549@testazureblob1114.blob.core.windows.net/mr-history/done/2018/11/13/000000/job_1542085634998_0024_conf.xml'
-                jobID:
-                  id: 24
-                  jtIdentifier: '1542085634998'
-                jobId: job_1542085634998_0024
-                jobName: TempletonControllerJob
-                queueName: default
-                url: null
-                user: testuser11750
-              status:
-                cleanupProgress: 0
-                failureInfo: NA
-                finishTime: 1542088277769
-                historyFile: ''
-                jobACLs: {}
-                jobComplete: true
-                jobFile: 'wasb://testcontainer11549@testazureblob1114.blob.core.windows.net/mr-history/done/2018/11/13/000000/job_1542085634998_0024_conf.xml'
-                jobID:
-                  id: 24
-                  jtIdentifier: '1542085634998'
-                jobId: job_1542085634998_0024
-                jobName: TempletonControllerJob
-                jobPriority: NORMAL
-                mapProgress: 1
-                neededMem: 0
-                numReservedSlots: 0
-                numUsedSlots: 0
-                priority: NORMAL
-                queue: default
-                reduceProgress: 1
-                reservedMem: 0
-                retired: false
-                runState: 2
-                schedulingInfo: NA
-                setupProgress: 0
-                startTime: 1542088206436
-                state: SUCCEEDED
-                trackingUrl: 'hn1-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:19888/jobhistory/job/job_1542085634998_0024'
-                uber: false
-                usedMem: 0
-                username: testuser11750
-              user: testuser11750
-              userargs:
+              body:
                 callback: null
-                define: []
-                enablejobreconnect: null
-                enablelog: 'false'
-                execute: select querydwelltime+2 from hivesampletable where clientid = 8
-                file: null
-                files: null
-                statusdir: 2018-11-13T05-49-52-4418fce1-e92e-4732-bc12-f2a3b8ef4432
+                completed: done
+                exitValue: 0
+                id: job_1542085634998_0024
+                msg: null
+                parentId: null
+                percentComplete: null
+                profile:
+                  jobFile: 'wasb://testcontainer11549@testazureblob1114.blob.core.windows.net/mr-history/done/2018/11/13/000000/job_1542085634998_0024_conf.xml'
+                  jobID:
+                    id: 24
+                    jtIdentifier: '1542085634998'
+                  jobId: job_1542085634998_0024
+                  jobName: TempletonControllerJob
+                  queueName: default
+                  url: null
+                  user: testuser11750
+                status:
+                  cleanupProgress: 0
+                  failureInfo: NA
+                  finishTime: 1542088277769
+                  historyFile: ''
+                  jobACLs: {}
+                  jobComplete: true
+                  jobFile: 'wasb://testcontainer11549@testazureblob1114.blob.core.windows.net/mr-history/done/2018/11/13/000000/job_1542085634998_0024_conf.xml'
+                  jobID:
+                    id: 24
+                    jtIdentifier: '1542085634998'
+                  jobId: job_1542085634998_0024
+                  jobName: TempletonControllerJob
+                  jobPriority: NORMAL
+                  mapProgress: 1
+                  neededMem: 0
+                  numReservedSlots: 0
+                  numUsedSlots: 0
+                  priority: NORMAL
+                  queue: default
+                  reduceProgress: 1
+                  reservedMem: 0
+                  retired: false
+                  runState: 2
+                  schedulingInfo: NA
+                  setupProgress: 0
+                  startTime: 1542088206436
+                  state: SUCCEEDED
+                  trackingUrl: 'hn1-testcl.422g4qa5a0lehgxxtnagxxuu2h.ex.internal.cloudapp.net:19888/jobhistory/job/job_1542085634998_0024'
+                  uber: false
+                  usedMem: 0
+                  username: testuser11750
+                user: testuser11750
+                userargs:
+                  callback: null
+                  define: []
+                  enablejobreconnect: null
+                  enablelog: 'false'
+                  execute: select querydwelltime+2 from hivesampletable where clientid = 8
+                  file: null
+                  files: null
+                  statusdir: 2018-11-13T05-49-52-4418fce1-e92e-4732-bc12-f2a3b8ef4432
   /templeton/v1/jobs?op=LISTAFTERID:
     get:
       consumes:

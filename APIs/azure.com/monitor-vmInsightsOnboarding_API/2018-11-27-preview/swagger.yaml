@@ -153,24 +153,25 @@ paths:
             resourceUri: subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87
           responses:
             '200':
-              id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
-              name: default
-              properties:
-                data:
-                  - workspace:
-                      id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourcegroups/monitoring/providers/microsoft.operationalinsights/workspaces/vm-monitoring-secondary
-                      location: eastus
-                      properties:
-                        customerId: f096d163-206e-4abf-9db3-2c62af003d68
-                  - workspace:
-                      id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourcegroups/monitoring/providers/microsoft.operationalinsights/workspaces/vm-monitoring
-                      location: eastus
-                      properties:
-                        customerId: c7f8f44d-d8ee-4b79-9d9a-4d8a1f2a112a
-                dataStatus: present
-                onboardingStatus: onboarded
-                resourceId: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87
-              type: Microsoft.Insights/vmInsightsOnboardingStatuses
+              body:
+                id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
+                name: default
+                properties:
+                  data:
+                    - workspace:
+                        id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourcegroups/monitoring/providers/microsoft.operationalinsights/workspaces/vm-monitoring-secondary
+                        location: eastus
+                        properties:
+                          customerId: f096d163-206e-4abf-9db3-2c62af003d68
+                    - workspace:
+                        id: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourcegroups/monitoring/providers/microsoft.operationalinsights/workspaces/vm-monitoring
+                        location: eastus
+                        properties:
+                          customerId: c7f8f44d-d8ee-4b79-9d9a-4d8a1f2a112a
+                  dataStatus: present
+                  onboardingStatus: onboarded
+                  resourceId: /subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87
+                type: Microsoft.Insights/vmInsightsOnboardingStatuses
 definitions:
   DataContainer:
     description: Information about a container with data for a given resource.

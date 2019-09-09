@@ -238,43 +238,6 @@ paths:
       summary: Tax rates by geolocation based on Customer IP address
       tags:
         - Tax service
-  /v1/tax/rates:
-    get:
-      description: This method returns all tax rates configured on Member's account
-      parameters:
-        - description: 'Domain name: api.taxrates.io'
-          in: query
-          name: domain
-          required: true
-          type: string
-        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
-          in: query
-          name: filter
-          required: false
-          type: string
-        - description: You must provide a zip code if one of your selected countries is United States and you've had selected a state on your Taxrates.io member's dashboard.
-          in: query
-          name: zip
-          required: false
-          type: string
-      responses:
-        '200':
-          description: An array of tax rates
-          schema:
-            items:
-              $ref: '#/definitions/Rates'
-            type: array
-        '404':
-          description: No configured tax rates found. Have you added any country to your account?
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      security:
-        - Bearer: []
-      summary: Get all tax rates
-      tags:
-        - Tax service
   /v3/tax/rates:
     get:
       description: This method returns all tax rates configured on Member's account using cursor. Use X-Cursor-Next header to recursively read all rates. Max limit is 500 records per request.

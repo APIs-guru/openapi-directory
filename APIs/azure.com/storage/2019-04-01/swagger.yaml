@@ -5109,7 +5109,7 @@ paths:
             $ref: '#/definitions/ManagementPolicy'
       responses:
         '200':
-          description: OK -- Get managementpolicy successfully.
+          description: OK -- Put managementpolicy successfully.
           schema:
             $ref: '#/definitions/ManagementPolicy'
       tags:
@@ -6312,7 +6312,7 @@ definitions:
         description: 'User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.'
       encryption:
         $ref: '#/definitions/Encryption'
-        description: Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted.
+        description: Not applicable. Azure Storage encryption is enabled for all storage accounts and cannot be disabled.
       isHnsEnabled:
         description: Account HierarchicalNamespace enabled if sets to true.
         type: boolean

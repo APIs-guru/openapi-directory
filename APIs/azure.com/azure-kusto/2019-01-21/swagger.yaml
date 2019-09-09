@@ -1478,10 +1478,10 @@ definitions:
         description: The default capacity that would be used.
         type: integer
       maximum:
-        description: Maximum allowed capacity.
+        description: Maximum allowed instances count.
         type: integer
       minimum:
-        description: Minimum allowed capacity.
+        description: Minimum allowed instances count.
         type: integer
       scaleType:
         description: Scale type.
@@ -1504,7 +1504,7 @@ definitions:
     properties:
       capacity:
         $ref: '#/definitions/AzureCapacity'
-        description: The SKU capacity.
+        description: The number of instances of the cluster.
       resourceType:
         description: Resource Namespace and Type.
         type: string
@@ -1515,18 +1515,23 @@ definitions:
     description: Azure SKU definition.
     properties:
       capacity:
-        description: SKU capacity.
+        description: The number of instances of the cluster.
         type: integer
       name:
         description: SKU name.
         enum:
-          - D13_v2
-          - D14_v2
-          - L8
-          - L16
-          - D11_v2
-          - D12_v2
-          - L4
+          - Standard_DS13_v2+1TB_PS
+          - Standard_DS13_v2+2TB_PS
+          - Standard_DS14_v2+3TB_PS
+          - Standard_DS14_v2+4TB_PS
+          - Standard_D13_v2
+          - Standard_D14_v2
+          - Standard_L8s
+          - Standard_L16s
+          - Standard_D11_v2
+          - Standard_D12_v2
+          - Standard_L4s
+          - Dev(No SLA)_Standard_D11_v2
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1534,6 +1539,7 @@ definitions:
       tier:
         description: SKU tier.
         enum:
+          - Basic
           - Standard
         type: string
         x-ms-enum:

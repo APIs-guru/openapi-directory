@@ -1,168 +1,117 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: entitlement.marketplace.amazonaws.com
+basePath: /
 info:
-  version: '2017-01-11'
-  x-release: v4
-  title: AWS Marketplace Entitlement Service
-  description: '<fullname>AWS Marketplace Entitlement Service</fullname> <p>This reference provides descriptions of the AWS Marketplace Entitlement Service API.</p> <p>AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to a given product. An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.</p> <p> <b>Getting Entitlement Records</b> </p> <ul> <li> <p> <i>GetEntitlements</i>- Gets the entitlements for a Marketplace product.</p> </li> </ul>'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: '<fullname>AWS Marketplace Entitlement Service</fullname> <p>This reference provides descriptions of the AWS Marketplace Entitlement Service API.</p> <p>AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to a given product. An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.</p> <p> <b>Getting Entitlement Records</b> </p> <ul> <li> <p> <i>GetEntitlements</i>- Gets the entitlements for a Marketplace product.</p> </li> </ul>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: entitlement.marketplace
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/entitlement.marketplace-2017-01-11.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS Marketplace Entitlement Service
+  version: '2017-01-11'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/entitlement.marketplace-2017-01-11.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: entitlement.marketplace
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/marketplace/'
-host: entitlement.marketplace.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://entitlement.marketplace.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Marketplace Entitlement Service multi-region endpoint
-  - url: 'https://entitlement.marketplace.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Marketplace Entitlement Service multi-region endpoint
-  - url: 'http://entitlement.marketplace.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Marketplace Entitlement Service endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://entitlement.marketplace.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Marketplace Entitlement Service endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=AWSMPEntitlementService.GetEntitlements':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: GetEntitlements
       description: GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
+      operationId: GetEntitlements
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEntitlementsRequest'
+        - enum:
+            - AWSMPEntitlementService.GetEntitlements
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -180,29 +129,90 @@ paths:
           description: InternalServiceErrorException
           schema:
             $ref: '#/definitions/InternalServiceErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEntitlementsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSMPEntitlementService.GetEntitlements
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  GetEntitlementsResult:
+  Boolean:
+    type: boolean
+  Double:
+    format: double
+    type: number
+  Entitlement:
+    description: 'An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.'
+    properties:
+      CustomerIdentifier:
+        $ref: '#/definitions/NonEmptyString'
+        description: The customer identifier is a handle to each unique customer in an application. Customer identifiers are obtained through the ResolveCustomer operation in AWS Marketplace Metering Service.
+      Dimension:
+        $ref: '#/definitions/NonEmptyString'
+        description: The dimension for which the given entitlement applies. Dimensions represent categories of capacity in a product and are specified when the product is listed in AWS Marketplace.
+      ExpirationDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The expiration date represents the minimum date through which this entitlement is expected to remain valid. For contractual products listed on AWS Marketplace, the expiration date is the date at which the customer will renew or cancel their contract. Customers who are opting to renew their contract will still have entitlements with an expiration date.'
+      ProductCode:
+        $ref: '#/definitions/ProductCode'
+        description: The product code for which the given entitlement applies. Product codes are provided by AWS Marketplace when the product listing is created.
+      Value:
+        $ref: '#/definitions/EntitlementValue'
+        description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
     type: object
+  EntitlementList:
+    items:
+      $ref: '#/definitions/Entitlement'
+    minItems: 0
+    type: array
+  EntitlementValue:
+    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
+    properties:
+      BooleanValue:
+        $ref: '#/definitions/Boolean'
+        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
+      DoubleValue:
+        $ref: '#/definitions/Double'
+        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
+      IntegerValue:
+        $ref: '#/definitions/Integer'
+        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
+      StringValue:
+        $ref: '#/definitions/String'
+        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
+    type: object
+  ErrorMessage:
+    type: string
+  FilterValue:
+    type: string
+  FilterValueList:
+    items:
+      $ref: '#/definitions/FilterValue'
+    minItems: 1
+    type: array
+  GetEntitlementFilterName:
+    enum:
+      - CUSTOMER_IDENTIFIER
+      - DIMENSION
+    type: string
+  GetEntitlementFilters:
+    additionalProperties:
+      $ref: '#/definitions/FilterValueList'
+    type: object
+  GetEntitlementsRequest:
+    description: The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
+    properties:
+      Filter:
+        $ref: '#/definitions/GetEntitlementFilters'
+        description: 'Filter is used to return entitlements for a specific customer or for a specific dimension. Filters are described as keys mapped to a lists of values. Filtered requests are <i>unioned</i> for each value in the value list, and then <i>intersected</i> for each filter key.'
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of items to retrieve from the GetEntitlements operation. For pagination, use the NextToken field in subsequent calls to GetEntitlements.'
+      NextToken:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.'
+      ProductCode:
+        $ref: '#/definitions/ProductCode'
+        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code will be provided by AWS Marketplace when the product listing is created.
+    required:
+      - ProductCode
+    type: object
+  GetEntitlementsResult:
+    description: The GetEntitlementsRequest contains results from the GetEntitlements operation.
     properties:
       Entitlements:
         $ref: '#/definitions/EntitlementList'
@@ -210,117 +220,107 @@ definitions:
       NextToken:
         $ref: '#/definitions/NonEmptyString'
         description: 'For paginated results, use NextToken in subsequent calls to GetEntitlements. If the result contains an empty set of entitlements, NextToken might still be present and should be used.'
-    description: The GetEntitlementsRequest contains results from the GetEntitlements operation.
-  GetEntitlementsRequest:
     type: object
-    required:
-      - ProductCode
-    properties:
-      ProductCode:
-        $ref: '#/definitions/ProductCode'
-        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code will be provided by AWS Marketplace when the product listing is created.
-      Filter:
-        $ref: '#/definitions/GetEntitlementFilters'
-        description: 'Filter is used to return entitlements for a specific customer or for a specific dimension. Filters are described as keys mapped to a lists of values. Filtered requests are <i>unioned</i> for each value in the value list, and then <i>intersected</i> for each filter key.'
-      NextToken:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.'
-      MaxResults:
-        $ref: '#/definitions/Integer'
-        description: 'The maximum number of items to retrieve from the GetEntitlements operation. For pagination, use the NextToken field in subsequent calls to GetEntitlements.'
-    description: The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
-  InvalidParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: One or more parameters in your request was invalid.
-  ThrottlingException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The calls to the GetEntitlements API are throttled.
-  InternalServiceErrorException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.'
-  Boolean:
-    type: boolean
-  Double:
-    type: number
-    format: double
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  EntitlementValue:
-    type: object
-    properties:
-      IntegerValue:
-        $ref: '#/definitions/Integer'
-        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
-      DoubleValue:
-        $ref: '#/definitions/Double'
-        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
-      BooleanValue:
-        $ref: '#/definitions/Boolean'
-        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
-      StringValue:
-        $ref: '#/definitions/String'
-        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
-    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
-  Timestamp:
-    type: string
-    format: date-time
-  Entitlement:
-    type: object
-    properties:
-      ProductCode:
-        $ref: '#/definitions/ProductCode'
-        description: The product code for which the given entitlement applies. Product codes are provided by AWS Marketplace when the product listing is created.
-      Dimension:
-        $ref: '#/definitions/NonEmptyString'
-        description: The dimension for which the given entitlement applies. Dimensions represent categories of capacity in a product and are specified when the product is listed in AWS Marketplace.
-      CustomerIdentifier:
-        $ref: '#/definitions/NonEmptyString'
-        description: The customer identifier is a handle to each unique customer in an application. Customer identifiers are obtained through the ResolveCustomer operation in AWS Marketplace Metering Service.
-      Value:
-        $ref: '#/definitions/EntitlementValue'
-        description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
-      ExpirationDate:
-        $ref: '#/definitions/Timestamp'
-        description: 'The expiration date represents the minimum date through which this entitlement is expected to remain valid. For contractual products listed on AWS Marketplace, the expiration date is the date at which the customer will renew or cancel their contract. Customers who are opting to renew their contract will still have entitlements with an expiration date.'
-    description: 'An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.'
-  EntitlementList:
-    type: array
-    items:
-      $ref: '#/definitions/Entitlement'
-    minItems: 0
   Integer:
     type: integer
+  InternalServiceErrorException:
+    description: 'An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.'
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    type: object
+  InvalidParameterException:
+    description: One or more parameters in your request was invalid.
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    type: object
+  NonEmptyString:
+    pattern: \S+
+    type: string
+  ProductCode:
+    maxLength: 255
+    minLength: 1
+    type: string
   String:
     type: string
-  ErrorMessage:
-    type: string
-  FilterValue:
-    type: string
-  FilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
-    minItems: 1
-  GetEntitlementFilterName:
-    type: string
-    enum:
-      - CUSTOMER_IDENTIFIER
-      - DIMENSION
-  GetEntitlementFilters:
+  ThrottlingException:
+    description: The calls to the GetEntitlements API are throttled.
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
     type: object
-    additionalProperties:
-      $ref: '#/definitions/FilterValueList'
+  Timestamp:
+    format: date-time
+    type: string
+x-servers:
+  - description: The AWS Marketplace Entitlement Service multi-region endpoint
+    url: 'http://entitlement.marketplace.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Marketplace Entitlement Service multi-region endpoint
+    url: 'https://entitlement.marketplace.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Marketplace Entitlement Service endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://entitlement.marketplace.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AWS Marketplace Entitlement Service endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://entitlement.marketplace.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

@@ -643,26 +643,17 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Step'
-        - description: |-
-            A Execution id.
-
-            Required.
+        - description: Required. An Execution id.
           in: path
           name: executionId
           required: true
           type: string
-        - description: |-
-            A History id.
-
-            Required.
+        - description: Required. A History id.
           in: path
           name: historyId
           required: true
           type: string
-        - description: |-
-            A Project id.
-
-            Required.
+        - description: Required. A Project id.
           in: path
           name: projectId
           required: true
@@ -1771,7 +1762,7 @@ definitions:
 
       duration.seconds = end.seconds - start.seconds; duration.nanos = end.nanos - start.nanos;
 
-      if (duration.seconds  0) { duration.seconds += 1; duration.nanos -= 1000000000; } else if (durations.seconds > 0 && duration.nanos < 0) { duration.seconds -= 1; duration.nanos += 1000000000; }
+      if (duration.seconds  0) { duration.seconds += 1; duration.nanos -= 1000000000; } else if (duration.seconds > 0 && duration.nanos < 0) { duration.seconds -= 1; duration.nanos += 1000000000; }
 
       Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.
 
@@ -2453,6 +2444,8 @@ definitions:
       Here is an example, let's consider that we have a continuous build is executing a test runner for each iteration. The workflow would look like: - user creates a Execution with id 1 - user creates an TestExecutionStep with id 100 for Execution 1 - user update TestExecutionStep with id 100 to add a raw xml log + the service parses the xml logs and returns a TestExecutionStep with updated TestResult(s). - user update the status of TestExecutionStep with id 100 to COMPLETE
 
       A Step can be updated until its state is set to COMPLETE at which points it becomes immutable.
+
+      Next tag: 23
     properties:
       completionTime:
         $ref: '#/definitions/Timestamp'
@@ -2607,6 +2600,12 @@ definitions:
     type: object
   TestCase:
     properties:
+      elapsedTime:
+        $ref: '#/definitions/Duration'
+        description: |-
+          The elapsed run time of the test case.
+
+          Required.
       endTime:
         $ref: '#/definitions/Timestamp'
         description: |-
@@ -2754,6 +2753,7 @@ definitions:
         enum:
           - anr
           - availableDeepLinks
+          - blankScreen
           - compatibleWithOrchestrator
           - completeRoboScriptExecution
           - crashDialogError
@@ -2770,9 +2770,11 @@ definitions:
           - nativeCrash
           - nonSdkApiUsageReport
           - nonSdkApiUsageViolation
+          - overlappingUiElements
           - performedGoogleLogin
           - performedMonkeyActions
           - startActivityNotFound
+          - uiElementsTooDeep
           - unspecifiedType
           - unusedRoboDirective
           - usedRoboDirective

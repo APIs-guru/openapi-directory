@@ -121,6 +121,10 @@ paths:
                     location: eastus
                     name: mySignalRService
                     properties:
+                      cors:
+                        allowedOrigins:
+                          - 'https://foo.com'
+                          - 'https://bar.com'
                       externalIP: 10.0.0.1
                       features:
                         - flag: ServiceMode
@@ -257,6 +261,10 @@ paths:
                     location: eastus
                     name: mySignalRService
                     properties:
+                      cors:
+                        allowedOrigins:
+                          - 'https://foo.com'
+                          - 'https://bar.com'
                       externalIP: 10.0.0.1
                       features:
                         - flag: ServiceMode
@@ -409,6 +417,10 @@ paths:
                 location: eastus
                 name: mySignalRService
                 properties:
+                  cors:
+                    allowedOrigins:
+                      - 'https://foo.com'
+                      - 'https://bar.com'
                   externalIP: 10.0.0.1
                   features:
                     - flag: ServiceMode
@@ -457,6 +469,10 @@ paths:
             api-version: '2018-10-01'
             parameters:
               properties:
+                cors:
+                  allowedOrigins:
+                    - 'https://foo.com'
+                    - 'https://bar.com'
                 features:
                   - flag: ServiceMode
                     properties: {}
@@ -478,6 +494,10 @@ paths:
                 location: eastus
                 name: mySignalRService
                 properties:
+                  cors:
+                    allowedOrigins:
+                      - 'https://foo.com'
+                      - 'https://bar.com'
                   externalIP: 10.0.0.1
                   features:
                     - flag: ServiceMode
@@ -531,6 +551,10 @@ paths:
             parameters:
               location: eastus
               properties:
+                cors:
+                  allowedOrigins:
+                    - 'https://foo.com'
+                    - 'https://bar.com'
                 features:
                   - flag: ServiceMode
                     properties: {}
@@ -552,6 +576,10 @@ paths:
                 location: eastus
                 name: mySignalRService
                 properties:
+                  cors:
+                    allowedOrigins:
+                      - 'https://foo.com'
+                      - 'https://bar.com'
                   externalIP: 10.0.0.1
                   features:
                     - flag: ServiceMode
@@ -802,9 +830,21 @@ definitions:
           $ref: '#/definitions/MetricSpecification'
         type: array
     type: object
+  SignalRCorsSettings:
+    description: Cross-Origin Resource Sharing (CORS) settings.
+    properties:
+      allowedOrigins:
+        description: 'Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use "*" to allow all. If omitted, allow all by default.'
+        items:
+          type: string
+        type: array
+    type: object
   SignalRCreateOrUpdateProperties:
     description: Settings used to provision or configure the resource.
     properties:
+      cors:
+        $ref: '#/definitions/SignalRCorsSettings'
+        description: Cross-Origin Resource Sharing (CORS) settings.
       features:
         description: "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags."
         items:

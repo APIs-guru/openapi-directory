@@ -167,6 +167,39 @@ definitions:
       variableName:
         description: Name of the variable whose value needs to be appended to.
         type: string
+  AvroSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Avro sink.
+    properties:
+      formatSettings:
+        $ref: '#/definitions/AvroWriteSettings'
+        description: Avro format settings.
+      storeSettings:
+        $ref: '#/definitions/StoreWriteSettings'
+        description: Avro store settings.
+    type: object
+  AvroSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Avro source.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreReadSettings'
+        description: Avro store settings.
+    type: object
+  AvroWriteSettings:
+    allOf:
+      - $ref: '#/definitions/FormatWriteSettings'
+    description: Avro write settings.
+    properties:
+      recordName:
+        description: 'Top level record name in write result, which is required in AVRO spec.'
+        type: string
+      recordNamespace:
+        description: Record namespace in the write result.
+        type: string
+    type: object
   AzureBlobFSReadSettings:
     allOf:
       - $ref: '#/definitions/StoreReadSettings'
@@ -219,6 +252,10 @@ definitions:
     allOf:
       - $ref: '#/definitions/StoreWriteSettings'
     description: Azure blobFS write settings.
+    properties:
+      blockSizeInMB:
+        description: 'Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).'
+        type: object
     type: object
   AzureBlobStorageReadSettings:
     allOf:
@@ -248,7 +285,34 @@ definitions:
     allOf:
       - $ref: '#/definitions/StoreWriteSettings'
     description: Azure blob write settings.
+    properties:
+      blockSizeInMB:
+        description: 'Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).'
+        type: object
     type: object
+  AzureDataExplorerCommandActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Azure Data Explorer command activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureDataExplorerCommandActivityTypeProperties'
+        description: Azure Data Explorer command activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AzureDataExplorerCommand
+  AzureDataExplorerCommandActivityTypeProperties:
+    description: Azure Data Explorer command activity properties.
+    properties:
+      command:
+        description: 'A control command, according to the Azure Data Explorer command syntax. Type: string (or Expression with resultType string).'
+        type: object
+      commandTimeout:
+        description: 'Control command timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..)'
+        type: object
+    required:
+      - command
   AzureDataExplorerSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -479,6 +543,24 @@ definitions:
       - linkedServiceName
       - filePath
     type: object
+  AzureMariaDBSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure MariaDB source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AzureMySqlSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure MySql sink.
+    properties:
+      preCopyScript:
+        description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   AzureMySqlSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -549,6 +631,9 @@ definitions:
       storedProcedureTableTypeParameterName:
         description: 'The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).'
         type: object
+      tableOption:
+        description: 'The option to handle sink table, such as autoCreate. For now only ''autoCreate'' value is supported. Type: string (or Expression with resultType string).'
+        type: object
     type: object
   AzureSqlSource:
     allOf:
@@ -606,7 +691,7 @@ definitions:
     description: A copy activity Binary sink.
     properties:
       storeSettings:
-        $ref: '#/definitions/StoreReadSettings'
+        $ref: '#/definitions/StoreWriteSettings'
         description: Binary store settings.
     type: object
   BinarySource:
@@ -906,7 +991,7 @@ definitions:
     description: A copy activity source for a CosmosDB (MongoDB API) database.
     properties:
       batchSize:
-        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
+        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property''s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
         type: object
       cursorMethods:
         $ref: '#/definitions/MongoDbCursorMethodsProperties'
@@ -2404,6 +2489,42 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  JsonSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Json sink.
+    properties:
+      formatSettings:
+        $ref: '#/definitions/JsonWriteSettings'
+        description: Json format settings.
+      storeSettings:
+        $ref: '#/definitions/StoreWriteSettings'
+        description: Json store settings.
+    type: object
+  JsonSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Json source.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreReadSettings'
+        description: Json store settings.
+    type: object
+  JsonWriteSettings:
+    allOf:
+      - $ref: '#/definitions/FormatWriteSettings'
+    description: Json write settings.
+    properties:
+      filePattern:
+        description: File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.
+        enum:
+          - setOfObjects
+          - arrayOfObjects
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWriteFilePattern
+    type: object
   LogStorageSettings:
     additionalProperties:
       type: object
@@ -2555,7 +2676,7 @@ definitions:
     description: A copy activity source for a MongoDB database.
     properties:
       batchSize:
-        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
+        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property''s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
         type: object
       cursorMethods:
         $ref: '#/definitions/MongoDbCursorMethodsProperties'
@@ -2638,8 +2759,26 @@ definitions:
   Office365Source:
     allOf:
       - $ref: '#/definitions/CopySource'
-    description: A copy activity source for an Office365 service.
-    properties: {}
+    description: A copy activity source for an Office 365 service.
+    properties:
+      allowedGroups:
+        description: 'The groups containing all the users. Type: array of strings (or Expression with resultType array of strings).'
+        type: object
+      dateFilterColumn:
+        description: 'The Column to apply the <paramref name="StartTime"/> and <paramref name="EndTime"/>. Type: string (or Expression with resultType string).'
+        type: object
+      endTime:
+        description: 'End time of the requested range for this dataset. Type: string (or Expression with resultType string).'
+        type: object
+      outputColumns:
+        description: 'The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { "name": "Id" }, { "name": "CreatedDateTime" } ]'
+        type: object
+      startTime:
+        description: 'Start time of the requested range for this dataset. Type: string (or Expression with resultType string).'
+        type: object
+      userScopeFilterUri:
+        description: 'The user scope uri. Type: string (or Expression with resultType string).'
+        type: object
     type: object
   OraclePartitionSettings:
     description: The settings that will be leveraged for Oracle source partitioning.
@@ -2702,6 +2841,24 @@ definitions:
       queryTimeout:
         description: 'Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
         type: object
+    type: object
+  OrcSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity ORC sink.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreWriteSettings'
+        description: ORC store settings.
+    type: object
+  OrcSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity ORC source.
+    properties:
+      storeSettings:
+        $ref: '#/definitions/StoreReadSettings'
+        description: ORC store settings.
     type: object
   ParquetSink:
     allOf:
@@ -2791,6 +2948,12 @@ definitions:
             - type
           type: object
         description: Definition of all parameters for an entity.
+        type: object
+      runDimensions:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Dimensions emitted by Pipeline.
         type: object
       variables:
         additionalProperties:
@@ -2935,11 +3098,23 @@ definitions:
       - $ref: '#/definitions/CopySource'
     description: A copy activity Rest service source.
     properties:
+      additionalHeaders:
+        description: 'The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string).'
+        type: object
       httpRequestTimeout:
         description: 'The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
         type: object
+      paginationRules:
+        description: 'The pagination rules to compose next page requests. Type: string (or Expression with resultType string).'
+        type: object
+      requestBody:
+        description: 'The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string).'
+        type: object
       requestInterval:
         description: 'The time to await before sending next page request. '
+        type: object
+      requestMethod:
+        description: 'The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string).'
         type: object
     type: object
   SSISAccessCredential:
@@ -3208,6 +3383,15 @@ definitions:
           modelAsString: true
           name: SalesforceSourceReadBehavior
     type: object
+  SapBwSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for SapBW server via MDX.
+    properties:
+      query:
+        description: 'MDX query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   SapCloudForCustomerSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -3257,7 +3441,13 @@ definitions:
     allOf:
       - $ref: '#/definitions/CopySource'
     description: A copy activity source for SAP Business Warehouse Open Hub Destination source.
-    properties: {}
+    properties:
+      baseRequestId:
+        description: 'The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer ).'
+        type: object
+      excludeLastRequest:
+        description: 'Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
     type: object
   SapTablePartitionSettings:
     description: The settings that will be leveraged for SAP table source partitioning.
@@ -3398,6 +3588,9 @@ definitions:
       preCopyScript:
         description: 'SQL pre-copy script. Type: string (or Expression with resultType string).'
         type: object
+      tableOption:
+        description: 'The option to handle sink table, such as autoCreate. For now only ''autoCreate'' value is supported. Type: string (or Expression with resultType string).'
+        type: object
     type: object
   SqlDWSource:
     allOf:
@@ -3435,6 +3628,9 @@ definitions:
         type: object
       storedProcedureTableTypeParameterName:
         description: 'The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).'
+        type: object
+      tableOption:
+        description: 'The option to handle sink table, such as autoCreate. For now only ''autoCreate'' value is supported. Type: string (or Expression with resultType string).'
         type: object
     type: object
   SqlMISource:
@@ -3478,6 +3674,9 @@ definitions:
         type: object
       storedProcedureTableTypeParameterName:
         description: 'The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).'
+        type: object
+      tableOption:
+        description: 'The option to handle sink table, such as autoCreate. For now only ''autoCreate'' value is supported. Type: string (or Expression with resultType string).'
         type: object
     type: object
   SqlServerSource:
@@ -3547,6 +3746,9 @@ definitions:
         type: object
       storedProcedureTableTypeParameterName:
         description: 'The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).'
+        type: object
+      tableOption:
+        description: 'The option to handle sink table, such as autoCreate. For now only ''autoCreate'' value is supported. Type: string (or Expression with resultType string).'
         type: object
     type: object
   SqlSource:
@@ -3626,6 +3828,7 @@ definitions:
     additionalProperties:
       type: object
     description: Connector write settings.
+    discriminator: type
     properties:
       copyBehavior:
         description: The type of copy behavior for copy sink.

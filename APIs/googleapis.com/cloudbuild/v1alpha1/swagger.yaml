@@ -828,7 +828,11 @@ definitions:
     description: Location of the source in a Google Cloud Source Repository.
     properties:
       branchName:
-        description: Name of the branch to build.
+        description: |-
+          Regex matching branches to build.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
         type: string
       commitSha:
         description: Explicit commit SHA to build.
@@ -851,7 +855,11 @@ definitions:
           assumed.
         type: string
       tagName:
-        description: Name of the tag to build.
+        description: |-
+          Regex matching tags to build.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
         type: string
     type: object
   Results:

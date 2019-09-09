@@ -4042,20 +4042,21 @@ paths:
             workspaceName: D6F79F14-E563-469B-84B5-9286D2803B2F
           responses:
             '200':
-              id: /subscriptions/63BE4E24-FDF0-4E9C-9342-6A5D5A359722/resourceGroups/rg-sm/providers/Microsoft.OperationalInsights/workspaces/D6F79F14-E563-469B-84B5-9286D2803B2F/machines/m-999066c5-38c5-4f2f-9ce0-51d738cdc432/ports/b-c0a80101_8000
-              kind: port
-              name: b-c0a80101_8000
-              properties:
-                displayName: ':8000'
-                ipAddress: 192.168.1.1
-                machine:
-                  id: /subscriptions/63BE4E24-FDF0-4E9C-9342-6A5D5A359722/resourceGroups/rg-sm/providers/Microsoft.OperationalInsights/workspaces/D6F79F14-E563-469B-84B5-9286D2803B2F/machines/m-999066c5-38c5-4f2f-9ce0-51d738cdc432
-                  kind: 'ref:machine'
-                  name: m-999066c5-38c5-4f2f-9ce0-51d738cdc432
-                  type: Microsoft.OperationalInsights/workspaces/features/machines
-                monitoringState: monitored
-                portNumber: 8000
-              type: Microsoft.OperationalInsights/workspaces/features/machines/ports
+              body:
+                id: /subscriptions/63BE4E24-FDF0-4E9C-9342-6A5D5A359722/resourceGroups/rg-sm/providers/Microsoft.OperationalInsights/workspaces/D6F79F14-E563-469B-84B5-9286D2803B2F/machines/m-999066c5-38c5-4f2f-9ce0-51d738cdc432/ports/b-c0a80101_8000
+                kind: port
+                name: b-c0a80101_8000
+                properties:
+                  displayName: ':8000'
+                  ipAddress: 192.168.1.1
+                  machine:
+                    id: /subscriptions/63BE4E24-FDF0-4E9C-9342-6A5D5A359722/resourceGroups/rg-sm/providers/Microsoft.OperationalInsights/workspaces/D6F79F14-E563-469B-84B5-9286D2803B2F/machines/m-999066c5-38c5-4f2f-9ce0-51d738cdc432
+                    kind: 'ref:machine'
+                    name: m-999066c5-38c5-4f2f-9ce0-51d738cdc432
+                    type: Microsoft.OperationalInsights/workspaces/features/machines
+                  monitoringState: monitored
+                  portNumber: 8000
+                type: Microsoft.OperationalInsights/workspaces/features/machines/ports
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports/{portName}/acceptingProcesses':
     get:
       description: Returns a collection of processes accepting on the specified port

@@ -2151,7 +2151,8 @@ definitions:
           Values for solution types:  
           - "eventHangout": unset.
           - "eventNamedHangout": the name of the Hangout.
-          - "hangoutsMeet": the 10-letter meeting code, for example "aaa-bbbb-ccc".  Optional.
+          - "hangoutsMeet": the 10-letter meeting code, for example "aaa-bbbb-ccc".
+          - "addOn": defined by 3P conference provider.  Optional.
         type: string
       conferenceSolution:
         $ref: '#/definitions/ConferenceSolution'

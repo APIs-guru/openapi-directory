@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/expressRouteCircuit.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-expressRouteCircuit
   x-tags:
@@ -592,7 +592,7 @@ paths:
               properties:
                 bandwidthInGbps: 10
                 expressRoutePort:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
               sku:
                 family: MeteredData
                 name: Premium_MeteredData
@@ -612,7 +612,7 @@ paths:
                   bandwidthInGbps: 10
                   circuitProvisioningState: Enabled
                   expressRoutePort:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                   gatewayManagerEtag: '20'
                   peerings: []
                   provisioningState: Succeeded
@@ -634,7 +634,7 @@ paths:
                   bandwidthInGbps: 10
                   circuitProvisioningState: Enabled
                   expressRoutePort:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                   gatewayManagerEtag: '20'
                   peerings: []
                   provisioningState: Succeeded

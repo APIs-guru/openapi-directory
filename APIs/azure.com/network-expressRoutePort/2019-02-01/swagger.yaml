@@ -67,7 +67,7 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                     location: westus
                     name: portName
                     properties:
@@ -77,7 +77,7 @@ paths:
                       encapsulation: QinQ
                       etherType: '0x8100'
                       links:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                           name: link1
                           properties:
                             adminState: Disabled
@@ -87,7 +87,7 @@ paths:
                             provisioningState: Succeeded
                             rackId: rackId1
                             routerName: router1
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                           name: link2
                           properties:
                             adminState: Disabled
@@ -101,7 +101,7 @@ paths:
                       peeringLocation: peeringLocationName
                       provisionedBandwidthInGbps: 0
                       provisioningState: Succeeded
-                    type: Microsofot.Network/expressRoutePorts
+                    type: Microsoft.Network/expressRoutePorts
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/ExpressRoutePortsLocations':
@@ -135,7 +135,7 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/providers/Microsofot.Network/expressRoutePortsLocations/locationName
+                  - id: /subscriptions/subid/providers/Microsoft.Network/expressRoutePortsLocations/locationName
                     location: westus
                     name: locationName
                     properties:
@@ -143,7 +143,7 @@ paths:
                       availableBandwidths: []
                       contact: email@address.com
                       provisioningState: Succeeded
-                    type: Microsofot.Network/expressRoutePortsLocations
+                    type: Microsoft.Network/expressRoutePortsLocations
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/ExpressRoutePortsLocations/{locationName}':
@@ -182,7 +182,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/providers/Microsofot.Network/expressRoutePortsLocations/locationName
+                id: /subscriptions/subid/providers/Microsoft.Network/expressRoutePortsLocations/locationName
                 location: westus
                 name: locationName
                 properties:
@@ -192,7 +192,7 @@ paths:
                       valueInGbps: 100
                   contact: email@address.com
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePortsLocations
+                type: Microsoft.Network/expressRoutePortsLocations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts':
     get:
       description: List all the ExpressRoutePort resources in the specified resource group.
@@ -230,7 +230,7 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                     location: westus
                     name: portName
                     properties:
@@ -240,7 +240,7 @@ paths:
                       encapsulation: QinQ
                       etherType: '0x8100'
                       links:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                           name: link1
                           properties:
                             adminState: Disabled
@@ -250,7 +250,7 @@ paths:
                             provisioningState: Succeeded
                             rackId: rackId1
                             routerName: router1
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                           name: link2
                           properties:
                             adminState: Disabled
@@ -264,7 +264,7 @@ paths:
                       peeringLocation: peeringLocationName
                       provisionedBandwidthInGbps: 0
                       provisioningState: Succeeded
-                    type: Microsofot.Network/expressRoutePorts
+                    type: Microsoft.Network/expressRoutePorts
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}':
@@ -356,7 +356,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -366,7 +366,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Disabled
@@ -376,7 +376,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -390,7 +390,7 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
     patch:
       description: Update ExpressRoutePort tags
       operationId: ExpressRoutePorts_UpdateTags
@@ -448,7 +448,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -458,7 +458,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Disabled
@@ -468,7 +468,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -482,7 +482,7 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
       x-ms-long-running-operation: true
     put:
       description: Creates or updates the specified ExpressRoutePort resource.
@@ -541,7 +541,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -551,7 +551,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Disabled
@@ -561,7 +561,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -575,10 +575,10 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -588,7 +588,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Disabled
@@ -598,7 +598,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -612,7 +612,7 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
         ExpressRoutePortUpdateLink:
           parameters:
             api-version: '2019-02-01'
@@ -632,7 +632,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -642,7 +642,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Enabled
@@ -652,7 +652,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -666,10 +666,10 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName
                 location: westus
                 name: portName
                 properties:
@@ -679,7 +679,7 @@ paths:
                   encapsulation: QinQ
                   etherType: '0x8100'
                   links:
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                       name: link1
                       properties:
                         adminState: Enabled
@@ -689,7 +689,7 @@ paths:
                         provisioningState: Succeeded
                         rackId: rackId1
                         routerName: router1
-                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                    - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                       name: link2
                       properties:
                         adminState: Disabled
@@ -703,7 +703,7 @@ paths:
                   peeringLocation: peeringLocationName
                   provisionedBandwidthInGbps: 0
                   provisioningState: Succeeded
-                type: Microsofot.Network/expressRoutePorts
+                type: Microsoft.Network/expressRoutePorts
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -750,7 +750,7 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link1
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1
                     name: link1
                     properties:
                       adminState: Disabled
@@ -760,7 +760,7 @@ paths:
                       provisioningState: Succeeded
                       rackId: rackId1
                       routerName: router1
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/link2
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2
                     name: link2
                     properties:
                       adminState: Disabled
@@ -820,7 +820,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRoutePorts/portName/links/linkName
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/linkName
                 name: linkName
                 properties:
                   adminState: Disabled

@@ -474,6 +474,47 @@ paths:
       summary: Gets the Values for a folder or a meter
       tags:
         - Folder
+  /api/FolderMenu:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: FolderMenu_Get
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FolderMenuConfiguration'
+      summary: Gets the folder menu items (each item might contain child items)
+      tags:
+        - FolderMenu
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: FolderMenu_Post
+      parameters:
+        - description: ''
+          in: body
+          name: folderMenuConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/FolderMenuConfiguration'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Creates and updates the folder menu items
+      tags:
+        - FolderMenu
   /api/MBus:
     post:
       consumes:
@@ -1182,6 +1223,31 @@ definitions:
         description: The ID of the device
         type: string
     type: object
+  AutoExportSettings:
+    description: Settings for the auto export functionality of a meter
+    properties:
+      ExportFormat:
+        description: The export format
+        type: string
+      ExportInterval:
+        description: The export interval of the auto export
+        enum:
+          - NoExport
+          - Hourly
+          - Daily
+          - Weekly
+          - Monthly
+          - QuaterYearly
+          - HalfYearly
+          - Yearly
+        type: string
+      MeterPointId:
+        description: The meter point id set by the user
+        type: string
+      UploadType:
+        description: The upload type
+        type: string
+    type: object
   CustomDeviceToPost:
     description: Container Class for the Web API
     properties:
@@ -1682,6 +1748,66 @@ definitions:
         description: The Flow Rate for Water (m3/h)
         format: double
         type: number
+    type: object
+  FolderMenuConfiguration:
+    description: Container Class for the Web API representing a folder menu and it's items
+    properties:
+      Items:
+        items:
+          $ref: '#/definitions/FolderMenuItem'
+        type: array
+      TimeZoneName:
+        description: The time zone name (usually taken from the browser)
+        type: string
+    type: object
+  FolderMenuItem:
+    description: A folder menu item
+    properties:
+      AutoExportSettings:
+        $ref: '#/definitions/AutoExportSettings'
+        description: Optional auto export settings for meters.
+      Children:
+        description: Children folder menu items (sub folder menu items)
+        items:
+          $ref: '#/definitions/FolderMenuItem'
+        type: array
+      FolderType:
+        description: The folder type of the item
+        enum:
+          - Folder
+          - Location
+          - Factory
+          - House
+          - Office
+          - Machine
+          - VirtualMeter
+          - ElecticityFolder
+          - WaterFolder
+          - HeatFolder
+          - GasFolder
+          - TemperatureFolder
+          - Sun
+          - Light
+          - Ice
+          - Sofa
+          - Food
+          - Coffee
+          - Car
+          - ChargingStation
+          - Meter
+          - User
+          - Trash
+          - GridPhotovoltaicPowerSystem
+        type: string
+      Id:
+        description: The id of the folder menu item
+        type: string
+      MeterSerialNumber:
+        description: "The serial number if the folder menu item is a meter. \r\n            Serial number is handled as a string, as javascript on client side cannot handle long integers properly."
+        type: string
+      Name:
+        description: The Name of the item
+        type: string
     type: object
   InputConfigurationContainer:
     description: Configuration for the input of a meter (digital inputs)

@@ -114,12 +114,8 @@ paths:
             api-version: '2017-04-01'
             name: mysetting
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Gets the active diagnostic setting for AadIam.
       operationId: DiagnosticSettings_Get

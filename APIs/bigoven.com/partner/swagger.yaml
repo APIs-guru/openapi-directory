@@ -711,6 +711,62 @@ paths:
       summary: Get a list of recipe categories (the ID field can be used for include_cat in search parameters)
       tags:
         - Recipe
+  /recipe/get/saved/step:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_GetStep
+      parameters:
+        - description: ''
+          in: query
+          name: userName
+          required: true
+          type: string
+        - description: ''
+          format: int32
+          in: query
+          name: recipeId
+          required: true
+          type: integer
+        - description: ''
+          format: int32
+          in: query
+          name: stepId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      summary: Gets recipe single step as text
+      tags:
+        - Recipe
+  /recipe/get/step/number:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_GetStepNumber
+      parameters:
+        - description: ''
+          in: query
+          name: userName
+          required: true
+          type: string
+        - description: ''
+          format: int32
+          in: query
+          name: recipeId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Web.Mvc.JsonResult'
+      summary: Returns stored step number and number of steps in recipe
+      tags:
+        - Recipe
   /recipe/photos/pending:
     get:
       consumes: []
@@ -724,6 +780,37 @@ paths:
       summary: Gets the pending by user.
       tags:
         - Images
+  /recipe/post/step:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_GetSteps
+      parameters:
+        - description: ''
+          in: query
+          name: userName
+          required: true
+          type: string
+        - description: ''
+          format: int32
+          in: query
+          name: recipeId
+          required: true
+          type: integer
+        - description: ''
+          format: int32
+          in: query
+          name: stepId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Web.Mvc.JsonResult'
+      summary: Stores recipe step number
+      tags:
+        - Recipe
   '/recipe/review/replies/{replyId}':
     delete:
       consumes: []
@@ -880,37 +967,6 @@ paths:
       summary: 'POST a reply to a given review. The date will be set by server. Note that replies no longer have star ratings, only top-level reviews do.'
       tags:
         - Review
-  /recipe/saved/step:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: Recipe_GetSteps
-      parameters:
-        - description: ''
-          in: query
-          name: userId
-          required: true
-          type: string
-        - description: ''
-          format: int32
-          in: query
-          name: recipeId
-          required: true
-          type: integer
-        - description: ''
-          format: int32
-          in: query
-          name: intStep
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: string
-      summary: Returns recipe single step as a string.
-      tags:
-        - Recipe
   /recipe/scan:
     post:
       consumes: []
@@ -3408,4 +3464,84 @@ definitions:
     type: object
   System.Object:
     properties: {}
+    type: object
+  System.Text.DecoderFallback:
+    properties:
+      MaxCharCount:
+        format: int32
+        readOnly: true
+        type: integer
+    type: object
+  System.Text.EncoderFallback:
+    properties:
+      MaxCharCount:
+        format: int32
+        readOnly: true
+        type: integer
+    type: object
+  System.Text.Encoding:
+    properties:
+      BodyName:
+        readOnly: true
+        type: string
+      CodePage:
+        format: int32
+        readOnly: true
+        type: integer
+      DecoderFallback:
+        $ref: '#/definitions/System.Text.DecoderFallback'
+      EncoderFallback:
+        $ref: '#/definitions/System.Text.EncoderFallback'
+      EncodingName:
+        readOnly: true
+        type: string
+      HeaderName:
+        readOnly: true
+        type: string
+      IsBrowserDisplay:
+        readOnly: true
+        type: boolean
+      IsBrowserSave:
+        readOnly: true
+        type: boolean
+      IsMailNewsDisplay:
+        readOnly: true
+        type: boolean
+      IsMailNewsSave:
+        readOnly: true
+        type: boolean
+      IsReadOnly:
+        readOnly: true
+        type: boolean
+      IsSingleByte:
+        readOnly: true
+        type: boolean
+      WebName:
+        readOnly: true
+        type: string
+      WindowsCodePage:
+        format: int32
+        readOnly: true
+        type: integer
+    type: object
+  System.Web.Mvc.JsonResult:
+    properties:
+      ContentEncoding:
+        $ref: '#/definitions/System.Text.Encoding'
+      ContentType:
+        type: string
+      Data:
+        $ref: '#/definitions/System.Object'
+      JsonRequestBehavior:
+        enum:
+          - 0
+          - 1
+        format: int32
+        type: integer
+      MaxJsonLength:
+        format: int32
+        type: integer
+      RecursionLimit:
+        format: int32
+        type: integer
     type: object

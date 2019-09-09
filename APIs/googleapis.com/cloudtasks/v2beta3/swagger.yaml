@@ -125,9 +125,7 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.delete
       parameters:
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -151,9 +149,7 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.get
       parameters:
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -347,9 +343,7 @@ paths:
           schema:
             $ref: '#/definitions/PauseQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -396,9 +390,7 @@ paths:
           schema:
             $ref: '#/definitions/PurgeQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -452,9 +444,7 @@ paths:
           schema:
             $ref: '#/definitions/ResumeQueueRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: name
@@ -519,9 +509,7 @@ paths:
           schema:
             $ref: '#/definitions/RunTaskRequest'
         - description: |-
-            Required.
-
-            The task name. For example:
+            Required. The task name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           in: path
           name: name
@@ -587,9 +575,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required.
-
-            The location name.
+            Required. The location name.
             For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           in: path
           name: parent
@@ -641,9 +627,7 @@ paths:
           schema:
             $ref: '#/definitions/Queue'
         - description: |-
-            Required.
-
-            The location name in which the queue will be created.
+            Required. The location name in which the queue will be created.
             For example: `projects/PROJECT_ID/locations/LOCATION_ID`
 
             The list of allowed locations can be obtained by calling Cloud
@@ -706,9 +690,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           in: path
           name: parent
@@ -773,9 +755,7 @@ paths:
           schema:
             $ref: '#/definitions/CreateTaskRequest'
         - description: |-
-            Required.
-
-            The queue name. For example:
+            Required. The queue name. For example:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
 
             The queue must already exist.
@@ -1274,7 +1254,7 @@ definitions:
              who is authenticated with a Google account or a service account.
 
           * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` .
+             account. For example, `alice@example.com` .
 
 
           * `serviceAccount:{emailid}`: An email address that represents a service
@@ -1321,9 +1301,7 @@ definitions:
       task:
         $ref: '#/definitions/Task'
         description: |-
-          Required.
-
-          The task to add.
+          Required. The task to add.
 
           Task names have the following format:
           `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -1405,7 +1383,24 @@ definitions:
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
-    properties: {}
+    properties:
+      options:
+        $ref: '#/definitions/GetPolicyOptions'
+        description: |-
+          OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          `GetIamPolicy`. This field is only used by Cloud IAM.
+    type: object
+  GetPolicyOptions:
+    description: Encapsulates settings provided to GetIamPolicy.
+    properties:
+      requestedPolicyVersion:
+        description: |-
+          Optional. The policy format version to be returned.
+          Acceptable values are 0, 1, and 3.
+          If the value is 0, or the field is omitted, policy format version 1 will be
+          returned.
+        format: int32
+        type: integer
     type: object
   HttpRequest:
     description: |-
@@ -1426,7 +1421,7 @@ definitions:
 
        System throttling happens because:
 
-        * Cloud Tasks backoffs on all errors. Normally the backoff specified in
+        * Cloud Tasks backs off on all errors. Normally the backoff specified in
           rate limits will be used. But if the worker returns
           `429` (Too Many Requests), `503` (Service Unavailable), or the rate of
           errors is high, Cloud Tasks will use a higher backoff rate. The retry
@@ -1725,7 +1720,7 @@ definitions:
           ensure that their change will be applied to the same version of the policy.
 
           If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
+          policy is overwritten.
         format: byte
         type: string
       version:

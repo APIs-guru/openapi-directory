@@ -242,6 +242,8 @@ paths:
                   - VIRTUAL_NETWORK_ENABLED
                   - VMSIZES_AUX
                 quota:
+                  cores_used: 0
+                  max_cores_allowed: 3000
                   regionalQuotas:
                     - cores_available: 1000
                       cores_used: 0
@@ -2143,6 +2145,7 @@ definitions:
           $ref: '#/definitions/VmSizesCapability'
         description: The virtual machine sizes.
         type: object
+    readOnly: true
   DiskBillingMeters:
     description: The disk billing meters.
     properties:
@@ -2174,16 +2177,25 @@ definitions:
   QuotaCapability:
     description: The regional quota capability.
     properties:
+      cores_used:
+        description: The number of cores used in the subscription.
+        format: int64
+        type: integer
+      max_cores_allowed:
+        description: The number of cores that the subscription allowed.
+        format: int64
+        type: integer
       regionalQuotas:
         description: The list of region quota capabilities.
         items:
           $ref: '#/definitions/RegionalQuotaCapability'
         type: array
+    readOnly: true
   RegionalQuotaCapability:
     description: The regional quota capacity.
     properties:
       cores_available:
-        description: The number of courses available in the region.
+        description: The number of cores available in the region.
         format: int64
         type: integer
       cores_used:
@@ -2193,6 +2205,7 @@ definitions:
       region_name:
         description: The region name.
         type: string
+    readOnly: true
   RegionsCapability:
     description: The regions capability.
     properties:
@@ -2201,6 +2214,7 @@ definitions:
         items:
           type: string
         type: array
+    readOnly: true
   Usage:
     description: The details about the usage of a particular limited resource.
     properties:
@@ -2241,6 +2255,7 @@ definitions:
       isDefault:
         description: Whether or not the version is the default version.
         type: string
+    readOnly: true
   VersionsCapability:
     description: The version capability.
     properties:
@@ -2249,6 +2264,7 @@ definitions:
         items:
           $ref: '#/definitions/VersionSpec'
         type: array
+    readOnly: true
   VmSizeCompatibilityFilter:
     description: The virtual machine type compatibility filter.
     properties:
@@ -2280,6 +2296,7 @@ definitions:
         items:
           type: string
         type: array
+    readOnly: true
   VmSizeCompatibilityFilterV2:
     description: 'This class represent a single filter object that defines a multidimensional set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and ClusterVersions. The constraint should be defined based on the following: FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of exclusion/inclusion) and the ordering of the Filters. Later filters override previous settings if conflicted.'
     properties:
@@ -2337,3 +2354,4 @@ definitions:
         items:
           type: string
         type: array
+    readOnly: true

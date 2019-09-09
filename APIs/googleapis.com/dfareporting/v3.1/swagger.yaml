@@ -115,7 +115,6 @@ tags:
   - name: creativeGroups
   - name: creatives
   - name: dimensionValues
-  - name: directorySiteContacts
   - name: directorySites
   - name: dynamicTargetingKeys
   - name: eventTags
@@ -1285,6 +1284,13 @@ paths:
           in: query
           name: archived
           type: boolean
+        - collectionFormat: multi
+          description: Select only landing pages that are associated with these campaigns.
+          in: query
+          items:
+            type: string
+          name: campaignIds
+          type: array
         - collectionFormat: multi
           description: Select only landing pages with these IDs.
           in: query
@@ -3650,116 +3656,6 @@ paths:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - dimensionValues
-  '/userprofiles/{profileId}/directorySiteContacts':
-    get:
-      description: 'Retrieves a list of directory site contacts, possibly filtered. This method supports paging.'
-      operationId: dfareporting.directorySiteContacts.list
-      parameters:
-        - collectionFormat: multi
-          description: Select only directory site contacts with these directory site IDs. This is a required field.
-          in: query
-          items:
-            type: string
-          name: directorySiteIds
-          type: array
-        - collectionFormat: multi
-          description: Select only directory site contacts with these IDs.
-          in: query
-          items:
-            type: string
-          name: ids
-          type: array
-        - default: 1000
-          description: Maximum number of results to return.
-          in: query
-          maximum: 1000
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: Value of the nextPageToken from the previous result page.
-          in: query
-          name: pageToken
-          type: string
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: 'Allows searching for objects by name, ID or email. Wildcards (*) are allowed. For example, "directory site contact*2015" will return objects with names like "directory site contact June 2015", "directory site contact April 2015", or simply "directory site contact 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "directory site contact" will match objects with name "my directory site contact", "directory site contact 2015", or simply "directory site contact".'
-          in: query
-          name: searchString
-          type: string
-        - default: ID
-          description: Field by which to sort the list.
-          enum:
-            - ID
-            - NAME
-          in: query
-          name: sortField
-          type: string
-        - default: ASCENDING
-          description: Order of sorted results.
-          enum:
-            - ASCENDING
-            - DESCENDING
-          in: query
-          name: sortOrder
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DirectorySiteContactsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-      tags:
-        - directorySiteContacts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/userprofiles/{profileId}/directorySiteContacts/{id}':
-    get:
-      description: Gets one directory site contact by ID.
-      operationId: dfareporting.directorySiteContacts.get
-      parameters:
-        - description: Directory site contact ID.
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DirectorySiteContact'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-      tags:
-        - directorySiteContacts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/directorySites':
     get:
       description: 'Retrieves a list of directory sites, possibly filtered. This method supports paging.'
@@ -3781,10 +3677,6 @@ paths:
           in: query
           name: active
           type: boolean
-        - description: Select only directory sites with this country ID.
-          in: query
-          name: countryId
-          type: string
         - description: Select only directory sites with this Ad Manager network code.
           in: query
           name: dfpNetworkCode
@@ -3806,10 +3698,6 @@ paths:
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
-          type: string
-        - description: Select only directory sites with this parent ID.
-          in: query
-          name: parentId
           type: string
         - description: User profile ID associated with this request.
           in: path
@@ -9597,9 +9485,6 @@ definitions:
       lastModifiedInfo:
         $ref: '#/definitions/LastModifiedInfo'
         description: Information about the most recent modification of this campaign. This is a read-only field.
-      lookbackConfiguration:
-        $ref: '#/definitions/LookbackConfiguration'
-        description: Lookback window settings for the campaign.
       name:
         description: Name of this campaign. This is a required field and must be less than 256 characters long and unique among campaigns of the same advertiser.
         type: string
@@ -9947,7 +9832,7 @@ definitions:
     description: A Conversion represents when a user successfully performs a desired action after seeing an ad.
     properties:
       childDirectedTreatment:
-        description: Whether the conversion was directed toward children.
+        description: 'Whether this particular request may come from a user under the age of 13, under COPPA compliance.'
         type: boolean
       customVariables:
         description: Custom floodlight variables.
@@ -9983,6 +9868,9 @@ definitions:
       mobileDeviceId:
         description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[] and gclid. This or encryptedUserId or encryptedUserIdCandidates[] or gclid is a required field.'
         type: string
+      nonPersonalizedAd:
+        description: Whether the conversion was for a non personalized ad.
+        type: boolean
       ordinal:
         description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
         type: string
@@ -9994,6 +9882,9 @@ definitions:
         description: 'The timestamp of conversion, in Unix epoch micros. This is a required field.'
         format: int64
         type: string
+      treatmentForUnderage:
+        description: 'Whether this particular request may come from a user under the age of 16 (may differ by country), under compliance with the European Union''s General Data Protection Regulation (GDPR).'
+        type: boolean
       value:
         description: The value of the conversion.
         format: double
@@ -10149,6 +10040,11 @@ definitions:
         description: 'Keywords for a Rich Media creative. Keywords let you customize the creative settings of a Rich Media ad running on your site without having to contact the advertiser. You can use keywords to dynamically change the look or functionality of a creative. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.'
         items:
           type: string
+        type: array
+      additionalSizes:
+        description: Additional sizes associated with a responsive creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. Applicable to DISPLAY creatives when the primary asset type is HTML_IMAGE.
+        items:
+          $ref: '#/definitions/Size'
         type: array
       advertiserId:
         description: Advertiser ID of this creative. This is a required field. Applicable to all creative types.
@@ -10377,10 +10273,6 @@ definitions:
       overrideCss:
         description: 'Override CSS value for rich media creatives. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
-      politeLoadAssetId:
-        description: 'The asset ID of the polite load image asset. Applicable to the creative type: DISPLAY.'
-        format: int64
-        type: string
       progressOffset:
         $ref: '#/definitions/VideoOffset'
         description: 'Amount of time to play the video before counting a view. Applicable to the following creative types: all INSTREAM_VIDEO.'
@@ -10501,6 +10393,11 @@ definitions:
       active:
         description: 'Whether the video or audio asset is active. This is a read-only field for VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative types: INSTREAM_AUDIO, INSTREAM_VIDEO and all VPAID.'
         type: boolean
+      additionalSizes:
+        description: Additional sizes associated with this creative asset. HTML5 asset generated by compatible software such as GWD will be able to support more sizes this creative asset can render.
+        items:
+          $ref: '#/definitions/Size'
+        type: array
       alignment:
         description: 'Possible alignments for an asset. This is a read-only field. Applicable to the following creative types: RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.'
         enum:
@@ -11305,16 +11202,6 @@ definitions:
           - WEIGHT_STRATEGY_OPTIMIZED
         type: string
     type: object
-  CreativeSettings:
-    description: Creative Settings
-    properties:
-      iFrameFooter:
-        description: Header text for iFrames for this site. Must be less than or equal to 2000 characters long.
-        type: string
-      iFrameHeader:
-        description: Header text for iFrames for this site. Must be less than or equal to 2000 characters long.
-        type: string
-    type: object
   CreativesListResponse:
     description: Creative List Response
     properties:
@@ -11749,73 +11636,6 @@ definitions:
       active:
         description: Whether this directory site is active.
         type: boolean
-      contactAssignments:
-        description: Directory site contacts.
-        items:
-          $ref: '#/definitions/DirectorySiteContactAssignment'
-        type: array
-      countryId:
-        description: Country ID of this directory site. This is a read-only field.
-        format: int64
-        type: string
-      currencyId:
-        description: |-
-          Currency ID of this directory site. This is a read-only field.
-          Possible values are: 
-          - "1" for USD 
-          - "2" for GBP 
-          - "3" for ESP 
-          - "4" for SEK 
-          - "5" for CAD 
-          - "6" for JPY 
-          - "7" for DEM 
-          - "8" for AUD 
-          - "9" for FRF 
-          - "10" for ITL 
-          - "11" for DKK 
-          - "12" for NOK 
-          - "13" for FIM 
-          - "14" for ZAR 
-          - "15" for IEP 
-          - "16" for NLG 
-          - "17" for EUR 
-          - "18" for KRW 
-          - "19" for TWD 
-          - "20" for SGD 
-          - "21" for CNY 
-          - "22" for HKD 
-          - "23" for NZD 
-          - "24" for MYR 
-          - "25" for BRL 
-          - "26" for PTE 
-          - "27" for MXP 
-          - "28" for CLP 
-          - "29" for TRY 
-          - "30" for ARS 
-          - "31" for PEN 
-          - "32" for ILS 
-          - "33" for CHF 
-          - "34" for VEF 
-          - "35" for COP 
-          - "36" for GTQ 
-          - "37" for PLN 
-          - "39" for INR 
-          - "40" for THB 
-          - "41" for IDR 
-          - "42" for CZK 
-          - "43" for RON 
-          - "44" for HUF 
-          - "45" for RUB 
-          - "46" for AED 
-          - "47" for BGN 
-          - "48" for HRK 
-          - "49" for MXN 
-          - "50" for NGN
-        format: int64
-        type: string
-      description:
-        description: Description of this directory site. This is a read-only field.
-        type: string
       id:
         description: 'ID of this directory site. This is a read-only, auto-generated field.'
         format: int64
@@ -11862,90 +11682,11 @@ definitions:
       name:
         description: Name of this directory site.
         type: string
-      parentId:
-        description: Parent directory site ID.
-        format: int64
-        type: string
       settings:
         $ref: '#/definitions/DirectorySiteSettings'
         description: Directory site settings.
       url:
         description: URL of this directory site.
-        type: string
-    type: object
-  DirectorySiteContact:
-    description: Contains properties of a Site Directory contact.
-    properties:
-      address:
-        description: Address of this directory site contact.
-        type: string
-      email:
-        description: Email address of this directory site contact.
-        type: string
-      firstName:
-        description: First name of this directory site contact.
-        type: string
-      id:
-        description: 'ID of this directory site contact. This is a read-only, auto-generated field.'
-        format: int64
-        type: string
-      kind:
-        default: 'dfareporting#directorySiteContact'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#directorySiteContact".'
-        type: string
-      lastName:
-        description: Last name of this directory site contact.
-        type: string
-      phone:
-        description: Phone number of this directory site contact.
-        type: string
-      role:
-        description: Directory site contact role.
-        enum:
-          - ADMIN
-          - EDIT
-          - VIEW
-        type: string
-      title:
-        description: Title or designation of this directory site contact.
-        type: string
-      type:
-        description: Directory site contact type.
-        enum:
-          - BILLING
-          - OTHER
-          - SALES
-          - TECHNICAL
-        type: string
-    type: object
-  DirectorySiteContactAssignment:
-    description: Directory Site Contact Assignment
-    properties:
-      contactId:
-        description: 'ID of this directory site contact. This is a read-only, auto-generated field.'
-        format: int64
-        type: string
-      visibility:
-        description: Visibility of this directory site contact assignment. When set to PUBLIC this contact assignment is visible to all account and agency users; when set to PRIVATE it is visible only to the site.
-        enum:
-          - PRIVATE
-          - PUBLIC
-        type: string
-    type: object
-  DirectorySiteContactsListResponse:
-    description: Directory Site Contact List Response
-    properties:
-      directorySiteContacts:
-        description: Directory site contact collection
-        items:
-          $ref: '#/definitions/DirectorySiteContact'
-        type: array
-      kind:
-        default: 'dfareporting#directorySiteContactsListResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#directorySiteContactsListResponse".'
-        type: string
-      nextPageToken:
-        description: Pagination token to be used for the next list operation.
         type: string
     type: object
   DirectorySiteSettings:
@@ -11962,15 +11703,6 @@ definitions:
         type: boolean
       interstitialPlacementAccepted:
         description: Whether this site accepts interstitial ads.
-        type: boolean
-      nielsenOcrOptOut:
-        description: Whether this directory site has disabled Nielsen OCR reach ratings.
-        type: boolean
-      verificationTagOptOut:
-        description: Whether this directory site has disabled generation of Verification ins tags.
-        type: boolean
-      videoActiveViewOptOut:
-        description: Whether this directory site has disabled active view for in-stream video creatives. This is a read-only field.
         type: boolean
     type: object
   DirectorySitesListResponse:
@@ -12349,9 +12081,6 @@ definitions:
           - IFRAME
           - IMAGE
         type: string
-      hidden:
-        description: Whether this activity is archived.
-        type: boolean
       id:
         description: 'ID of this floodlight activity. This is a read-only, auto-generated field.'
         format: int64
@@ -13559,6 +13288,11 @@ definitions:
       adBlockingOptOut:
         description: 'Whether this placement opts out of ad blocking. When true, ad blocking is disabled for this placement. When false, the campaign and site settings take effect.'
         type: boolean
+      additionalSizes:
+        description: 'Additional sizes associated with this placement. When inserting or updating a placement, only the size ID field is used.'
+        items:
+          $ref: '#/definitions/Size'
+        type: array
       advertiserId:
         description: Advertiser ID of this placement. This field can be left blank.
         format: int64
@@ -14105,9 +13839,6 @@ definitions:
           - CAP_COST_MONTHLY
           - CAP_COST_NONE
         type: string
-      disregardOverdelivery:
-        description: Whether cap costs are ignored by ad serving.
-        type: boolean
       endDate:
         description: 'Placement end date. This date must be later than, or the same day as, the placement start date, but not later than the campaign end date. If, for example, you set 6/25/2015 as both the start and end dates, the effective placement date is just that day only, 6/25/2015. The hours, minutes, and seconds of the end date should not be set, as doing so will result in an error. This field is required on insertion.'
         format: date
@@ -15009,15 +14740,9 @@ definitions:
       adBlockingOptOut:
         description: 'Whether this site opts out of ad blocking. When true, ad blocking is disabled for all placements under the site, regardless of the individual placement settings. When false, the campaign and placement settings take effect.'
         type: boolean
-      creativeSettings:
-        $ref: '#/definitions/CreativeSettings'
-        description: Site-wide creative settings.
       disableNewCookie:
         description: Whether new cookies are disabled for this site.
         type: boolean
-      lookbackConfiguration:
-        $ref: '#/definitions/LookbackConfiguration'
-        description: Lookback window settings for this site.
       tagSetting:
         $ref: '#/definitions/TagSetting'
         description: Configuration settings for dynamic and image floodlight tags.

@@ -3247,6 +3247,9 @@ definitions:
     type: object
   Billbee.Interfaces.Shipping.ProductService:
     properties:
+      CanBeConfigured:
+        readOnly: true
+        type: boolean
       DisplayName:
         readOnly: true
         type: string

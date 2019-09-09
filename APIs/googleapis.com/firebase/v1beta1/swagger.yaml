@@ -298,15 +298,15 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the WebApp identified by the specified resource name.
-      operationId: firebase.projects.webApps.get
+      description: Gets the AndroidApp identified by the specified resource name.
+      operationId: firebase.projects.androidApps.get
       parameters:
         - description: |-
             The fully qualified resource name of the App, in the format:
-            <br><code>projects/<var>projectId</var>/webApps/<var>appId</var></code>
+            <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
             <br>As an <var>appId</var> is a unique identifier, the Unique Resource
             from Sub-Collection access pattern may be used here, in the format:
-            <br><code>projects/-/webApps/<var>appId</var></code>
+            <br><code>projects/-/androidApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -316,7 +316,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/AndroidApp'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -350,17 +350,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the attributes of the WebApp identified by the specified
+        Updates the attributes of the AndroidApp identified by the specified
         resource name.
-      operationId: firebase.projects.webApps.patch
+      operationId: firebase.projects.androidApps.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/AndroidApp'
         - description: |-
-            The fully qualified resource name of the App, for example:
-            <br><code>projects/<var>projectId</var>/webApps/<var>appId</var></code>
+            The fully qualified resource name of the App, in the format:
+            <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -368,8 +368,8 @@ paths:
           x-reservedExpansion: true
         - description: |-
             Specifies which fields to update.
-            <br>Note that the fields `name`, `appId`, and `projectId` are all
-            immutable.
+            <br>Note that the fields `name`, `appId`, `projectId`, and `packageName`
+            are all immutable.
           in: query
           name: updateMask
           type: string
@@ -377,7 +377,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/AndroidApp'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -964,6 +964,156 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
+  '/v1beta1/{parent}:addGoogleAnalytics':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Links a FirebaseProject with an existing
+        [Google Analytics account](http://www.google.com/analytics/).
+        <br>
+        <br>Using this call, you can either:
+        <ul>
+        <li>Provision a new Google Analytics property and associate the new
+        property with your `FirebaseProject`.</li>
+        <li>Associate an existing Google Analytics property with your
+        `FirebaseProject`.</li>
+        </ul>
+        <br>
+        Note that when you call `AddGoogleAnalytics`:
+        <ul>
+        <li>Any Firebase Apps already in your `FirebaseProject` are
+        automatically provisioned as new <em>data streams</em> in the Google
+        Analytics property.</li>
+        <li>Any <em>data streams</em> already in the Google Analytics property are
+        automatically associated with their corresponding Firebase Apps (only
+        applies when an app's `packageName` or `bundleId` match those for an
+        existing data stream).</li>
+        </ul>
+        Learn more about the hierarchy and structure of Google Analytics
+        accounts in the
+        [Analytics
+        documentation](https://support.google.com/analytics/answer/9303323).
+        <br>
+        <br>The result of this call is an [`Operation`](../../v1beta1/operations).
+        Poll the `Operation` to track the provisioning process by calling
+        GetOperation until
+        [`done`](../../v1beta1/operations#Operation.FIELDS.done) is `true`. When
+        `done` is `true`, the `Operation` has either succeeded or failed. If the
+        `Operation` succeeded, its
+        [`response`](../../v1beta1/operations#Operation.FIELDS.response) is set to
+        an AnalyticsDetails; if the `Operation` failed, its
+        [`error`](../../v1beta1/operations#Operation.FIELDS.error) is set to a
+        google.rpc.Status.
+        <br>
+        <br>To call `AddGoogleAnalytics`, a member must be an Owner for
+        the existing `FirebaseProject` and have the
+        [`Edit` permission](https://support.google.com/analytics/answer/2884495)
+        for the Google Analytics account.
+        <br>
+        <br>If a `FirebaseProject` already has Google Analytics enabled, and you
+        call `AddGoogleAnalytics` using an `analyticsPropertyId` that's different
+        from the currently associated property, then the call will fail. Analytics
+        may have already been enabled in the Firebase console or by specifying
+        `timeZone` and `regionCode` in the call to
+        [`AddFirebase`](../../v1beta1/projects/addFirebase).
+      operationId: firebase.projects.addGoogleAnalytics
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddGoogleAnalyticsRequest'
+        - description: |-
+            The parent `FirebaseProject` to link to an existing Google Analytics
+            account, in the format:
+            <br><code>projects/<var>projectId</var></code>
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - projects
+  '/v1beta1/{parent}:removeAnalytics':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Unlinks the specified `FirebaseProject` from its Google Analytics account.
+        <br>
+        <br>This call removes the association of the specified `FirebaseProject`
+        with its current Google Analytics property. However, this call does not
+        delete the Google Analytics resources, such as the Google Analytics
+        property or any data streams.
+        <br>
+        <br>These resources may be re-associated later to the `FirebaseProject` by
+        calling
+        [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics) and
+        specifying the same `analyticsPropertyId`.
+        <br>
+        <br>To call `RemoveAnalytics`, a member must be an Owner for
+        the `FirebaseProject`.
+      operationId: firebase.projects.removeAnalytics
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemoveAnalyticsRequest'
+        - description: |-
+            The parent `FirebaseProject` to unlink from its Google Analytics account,
+            in the format:
+            <br><code>projects/<var>projectId</var></code>
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1beta1/{parent}:searchApps':
     get:
       description: |-
@@ -1075,8 +1225,6 @@ paths:
         <br>This method does not modify any billing account information on the
         underlying GCP `Project`.
         <br>
-        <br>All fields listed in the [request body](#request-body) are required.
-        <br>
         <br>To call `AddFirebase`, a member must be an Editor or Owner for the
         existing GCP `Project`. Service accounts cannot call `AddFirebase`.
       operationId: firebase.projects.addFirebase
@@ -1121,7 +1269,7 @@ definitions:
         description: |-
           Deprecated. Instead, to set your project's default GCP resource location,
           call [`FinalizeDefaultLocation`](../projects.defaultLocation/finalize)
-          after you add Firebase services to your project.
+          after you add Firebase resources to your project.
           <br>
           <br>The ID of the project's default GCP resource location. The location
           must be one of the available
@@ -1130,7 +1278,11 @@ definitions:
         type: string
       regionCode:
         description: |-
-          The region code (CLDR) that the account will use for Firebase Analytics
+          Deprecated. Instead, to link your Project with a Google Analytics account,
+          call [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics)
+          after you add Firebase resources to your Project.
+          <br>
+          <br>The region code (CLDR) that the account will use for Firebase Analytics
           data.
           <br>For example: US, GB, or DE
           <br>
@@ -1138,8 +1290,30 @@ definitions:
         type: string
       timeZone:
         description: |-
-          The time zone that the account will use for Firebase Analytics data.
+          Deprecated. Instead, to link your Project with a Google Analytics account,
+          call [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics)
+          after you add Firebase resources to your Project.
+          <br>
+          <br>The time zone that the account will use for Firebase Analytics data.
           <br>For example: America/Los_Angeles or Africa/Abidjan
+        type: string
+    type: object
+  AddGoogleAnalyticsRequest:
+    properties:
+      analyticsAccountId:
+        description: |-
+          The ID for the existing
+          [Google Analytics account](http://www.google.com/analytics/) that you
+          want to link with your `FirebaseProject`.
+          <br>
+          <br>Specifying this field will provision a new Google Analytics
+          property in your Google Analytics account and associate the new property
+          with your `FirebaseProject`.
+        type: string
+      analyticsPropertyId:
+        description: |-
+          The ID for the existing Google Analytics property that you want to
+          associate with your `FirebaseProject`.
         type: string
     type: object
   AdminSdkConfig:
@@ -1165,6 +1339,44 @@ definitions:
         type: string
       storageBucket:
         description: The default Cloud Storage for Firebase storage bucket name.
+        type: string
+    type: object
+  AnalyticsDetails:
+    properties:
+      analyticsProperty:
+        $ref: '#/definitions/AnalyticsProperty'
+        description: |-
+          The Analytics Property object associated with the specified
+          `FirebaseProject`.
+          <br>
+          <br>This object contains the details of the Google Analytics property
+          associated with the specified `FirebaseProject`.
+      streamMappings:
+        description: |-
+          A map of `AppId` to `StreamId` for each Firebase App in the specified
+          `FirebaseProject`. Each `AppId` and `StreamId` appears only once.
+        items:
+          $ref: '#/definitions/StreamMapping'
+        type: array
+    type: object
+  AnalyticsProperty:
+    description: Details of a Google Analytics property
+    properties:
+      displayName:
+        description: |-
+          The display name of the Google Analytics property associated with the
+          specified `FirebaseProject`.
+        type: string
+      id:
+        description: |-
+          The globally unique, Google-assigned identifier of the Google Analytics
+          property associated with the specified `FirebaseProject`.
+          <br>
+          <br>If you called
+          [`AddGoogleAnalytics`](../../v1beta1/projects/addGoogleAnalytics) to link
+          your `FirebaseProject` with a Google Analytics account, the value in this
+          `id` field is the same as the ID of the property either specified or
+          provisioned with that call to `AddGoogleAnalytics`.
         type: string
     type: object
   AndroidApp:
@@ -1588,13 +1800,28 @@ definitions:
           means that the project does not yet have a default GCP resource location.
           To set your project's default GCP resource location, call
           [`FinalizeDefaultLocation`](../projects.defaultLocation/finalize) after you
-          add Firebase services to your project.
+          add Firebase resources to your project.
         type: string
       project:
         description: |-
           The resource name of the GCP `Project` to which Firebase resources can be
           added, in the format:
           <br><code>projects/<var>projectId</var></code>
+        type: string
+    type: object
+  RemoveAnalyticsRequest:
+    properties:
+      analyticsPropertyId:
+        description: |-
+          Optional. The ID of the Google Analytics property associated with the
+          specified `FirebaseProject`.
+          <ul>
+          <li>If not set, then the Google Analytics property that is currently
+          associated with the specified `FirebaseProject` is removed.</li>
+          <li>If set, and the specified `FirebaseProject` is currently associated
+          with a <em>different</em> Google Analytics property, then the response is a
+          `412 Precondition Failed` error.</li>
+          </ul>
         type: string
     type: object
   SearchFirebaseAppsResponse:
@@ -1712,6 +1939,28 @@ definitions:
         description: |-
           The following are usually only present when code != 0
           Space to which this status belongs
+        type: string
+    type: object
+  StreamMapping:
+    description: A mapping of a Firebase App to a Google Analytics data stream
+    properties:
+      app:
+        description: |-
+          The fully qualified resource name of the Firebase App associated with the
+          Google Analytics data stream, in the format:
+          <br><code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
+          or
+          <br><code>projects/<var>projectId</var>/androidApps/<var>appId</var></code>
+        type: string
+      streamId:
+        description: |-
+          The unique Google-assigned identifier of the Google Analytics data stream
+          associated with the Firebase App.
+          <br>
+          <br>Learn more about Google Analytics data streams in the
+          [Analytics
+          documentation](https://support.google.com/analytics/answer/9303323).
+        format: int64
         type: string
     type: object
   TypedMessage:

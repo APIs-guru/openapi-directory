@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-12-01/virtualWan.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualWan
   x-tags:
@@ -194,14 +194,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -214,14 +214,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -853,57 +853,59 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
-              location: West US
-              name: p2sVpnGateway1
-              properties:
-                p2SVpnServerConfiguration:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-                vpnClientAddressPool:
-                  addressPrefixes:
-                    - 101.3.0.0/16
-                vpnClientConnectionHealth:
-                  allocatedIpAddresses:
-                    - 1.1.1.1
-                    - 2.2.2.2
-                  totalEgressBytesTransferred: 3000
-                  totalIngressBytesTransferred: 2000
-                  vpnClientConnectionsCount: 2
-                vpnGatewayScaleUnit: 1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/p2sVpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
+                location: West US
+                name: p2sVpnGateway1
+                properties:
+                  p2SVpnServerConfiguration:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                  vpnClientAddressPool:
+                    addressPrefixes:
+                      - 101.3.0.0/16
+                  vpnClientConnectionHealth:
+                    allocatedIpAddresses:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                    totalEgressBytesTransferred: 3000
+                    totalIngressBytesTransferred: 2000
+                    vpnClientConnectionsCount: 2
+                  vpnGatewayScaleUnit: 1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/p2sVpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
-              location: West US
-              name: p2sVpnGateway1
-              properties:
-                p2SVpnServerConfiguration:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-                vpnClientAddressPool:
-                  addressPrefixes:
-                    - 101.3.0.0/16
-                vpnClientConnectionHealth:
-                  allocatedIpAddresses:
-                    - 1.1.1.1
-                    - 2.2.2.2
-                  totalEgressBytesTransferred: 3000
-                  totalIngressBytesTransferred: 2000
-                  vpnClientConnectionsCount: 2
-                vpnGatewayScaleUnit: 1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/p2sVpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
+                location: West US
+                name: p2sVpnGateway1
+                properties:
+                  p2SVpnServerConfiguration:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                  vpnClientAddressPool:
+                    addressPrefixes:
+                      - 101.3.0.0/16
+                  vpnClientConnectionHealth:
+                    allocatedIpAddresses:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                    totalEgressBytesTransferred: 3000
+                    totalIngressBytesTransferred: 2000
+                    vpnClientConnectionsCount: 2
+                  vpnGatewayScaleUnit: 1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/p2sVpnGateways
       x-ms-long-running-operation: true
     put:
       description: Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
@@ -988,47 +990,49 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
-              location: West US
-              name: p2sVpnGateway1
-              properties:
-                p2SVpnServerConfiguration:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-                vpnClientAddressPool:
-                  addressPrefixes:
-                    - 101.3.0.0/16
-                vpnClientConnectionHealth:
-                  allocatedIpAddresses: []
-                  totalEgressBytesTransferred: 0
-                  totalIngressBytesTransferred: 0
-                  vpnClientConnectionsCount: 0
-                vpnGatewayScaleUnit: 1
-              type: Microsoft.Network/p2sVpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
+                location: West US
+                name: p2sVpnGateway1
+                properties:
+                  p2SVpnServerConfiguration:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                  vpnClientAddressPool:
+                    addressPrefixes:
+                      - 101.3.0.0/16
+                  vpnClientConnectionHealth:
+                    allocatedIpAddresses: []
+                    totalEgressBytesTransferred: 0
+                    totalIngressBytesTransferred: 0
+                    vpnClientConnectionsCount: 0
+                  vpnGatewayScaleUnit: 1
+                type: Microsoft.Network/p2sVpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
-              location: West US
-              name: p2sVpnGateway1
-              properties:
-                p2SVpnServerConfiguration:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-                vpnClientAddressPool:
-                  addressPrefixes:
-                    - 101.3.0.0/16
-                vpnClientConnectionHealth:
-                  allocatedIpAddresses: []
-                  totalEgressBytesTransferred: 0
-                  totalIngressBytesTransferred: 0
-                  vpnClientConnectionsCount: 0
-                vpnGatewayScaleUnit: 1
-              type: Microsoft.Network/p2sVpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1
+                location: West US
+                name: p2sVpnGateway1
+                properties:
+                  p2SVpnServerConfiguration:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                  vpnClientAddressPool:
+                    addressPrefixes:
+                      - 101.3.0.0/16
+                  vpnClientConnectionHealth:
+                    allocatedIpAddresses: []
+                    totalEgressBytesTransferred: 0
+                    totalIngressBytesTransferred: 0
+                    vpnClientConnectionsCount: 0
+                  vpnGatewayScaleUnit: 1
+                type: Microsoft.Network/p2sVpnGateways
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile':
     post:
@@ -1150,14 +1154,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/connection1
                           name: connection1
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/SpokeVnet1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/SpokeVnet1
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -1170,14 +1174,14 @@ paths:
                       provisioningState: Succeeded
                       virtualNetworkConnections:
                         - etag: w/\00000000-0000-0000-0000-000000000000\
-                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2/hubVirtualNetworkConnections/connection2
                           name: connection2
                           properties:
                             allowHubToRemoteVnetTransit: true
                             allowRemoteVnetToUseHubVnetGateways: false
                             provisioningState: Succeeded
                             remoteVirtualNetwork:
-                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsofot.Network/virtualNetworks/SpokeVnet2
+                              id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/SpokeVnet2
                       virtualWan:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1
                     type: Microsoft.Network/virtualHubs
@@ -1603,23 +1607,23 @@ paths:
             '200':
               body:
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                   name: connection1
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
                 - etag: w/\00000000-0000-0000-0000-000000000000\
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection2
                   name: connection2
                   properties:
                     allowHubToRemoteVnetTransit: true
                     allowRemoteVnetToUseHubVnetGateways: false
                     provisioningState: Succeeded
                     remoteVirtualNetwork:
-                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet2
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}':
@@ -1691,14 +1695,14 @@ paths:
             '200':
               body:
                 etag: w/\00000000-0000-0000-0000-000000000000\
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/virtualHubVnetConnections/connection1
                 name: connection1
                 properties:
                   allowHubToRemoteVnetTransit: true
                   allowRemoteVnetToUseHubVnetGateways: false
                   provisioningState: Succeeded
                   remoteVirtualNetwork:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/virtualNetworks/vnet1
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans':
     get:
       description: Lists all the VirtualWANs in a resource group.
@@ -2378,8 +2382,8 @@ paths:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
                         name: p2sVpnServerConfigRadiusClientRootCert1
                         properties:
-                          Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                           provisioningState: Succeeded
+                          thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                         type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
                     p2SVpnServerConfigRadiusServerRootCertificates:
                       - etag: w/\00000000-0000-0000-0000-000000000000\
@@ -2394,8 +2398,8 @@ paths:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/VpnClientRevokedCert2
                         name: p2sVpnServerConfigVpnClientRevokedCert1
                         properties:
-                          Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                           provisioningState: Succeeded
+                          thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
                         type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
                     p2SVpnServerConfigVpnClientRootCertificates:
                       - etag: w/\00000000-0000-0000-0000-000000000000\
@@ -2559,57 +2563,58 @@ paths:
             virtualWanName: virtualWan1
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
-              name: p2sVpnServerConfiguration1
-              properties:
-                p2SVpnServerConfigRadiusClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
-                    name: p2sVpnServerConfigRadiusClientRootCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
-                p2SVpnServerConfigRadiusServerRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCer1
-                    name: p2sVpnServerConfigRadiusServerRootCer1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
-                p2SVpnServerConfigVpnClientRevokedCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
-                    name: p2sVpnServerConfigVpnClientRevokedCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
-                p2SVpnServerConfigVpnClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
-                    name: p2sVpnServerConfigVpnClientRootCert1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
-                provisioningState: Succeeded
-                radiusServerAddress: 8.9.9.9
-                radiusServerSecret: 123_abc
-                vpnClientIpsecPolicies:
-                  - dhGroup: DHGroup14
-                    ikeEncryption: AES256
-                    ikeIntegrity: SHA384
-                    ipsecEncryption: AES256
-                    ipsecIntegrity: SHA256
-                    pfsGroup: PFS14
-                    saDataSizeKilobytes: 429497
-                    saLifeTimeSeconds: 86472
-                vpnProtocols:
-                  - IkeV2
-              type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
+                name: p2sVpnServerConfiguration1
+                properties:
+                  p2SVpnServerConfigRadiusClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
+                      name: p2sVpnServerConfigRadiusClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
+                  p2SVpnServerConfigRadiusServerRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCer1
+                      name: p2sVpnServerConfigRadiusServerRootCer1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
+                  p2SVpnServerConfigVpnClientRevokedCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
+                      name: p2sVpnServerConfigVpnClientRevokedCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
+                  p2SVpnServerConfigVpnClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
+                      name: p2sVpnServerConfigVpnClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
+                  provisioningState: Succeeded
+                  radiusServerAddress: 8.9.9.9
+                  radiusServerSecret: 123_abc
+                  vpnClientIpsecPolicies:
+                    - dhGroup: DHGroup14
+                      ikeEncryption: AES256
+                      ikeIntegrity: SHA384
+                      ipsecEncryption: AES256
+                      ipsecIntegrity: SHA256
+                      pfsGroup: PFS14
+                      saDataSizeKilobytes: 429497
+                      saLifeTimeSeconds: 86472
+                  vpnProtocols:
+                    - IkeV2
+                type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
     put:
       description: Creates a P2SVpnServerConfiguration to associate with a VirtualWan if it doesn't exist else updates the existing P2SVpnServerConfiguration.
       operationId: P2sVpnServerConfigurations_CreateOrUpdate
@@ -2717,109 +2722,111 @@ paths:
             virtualWanName: virtualWan1
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
-              name: p2sVpnServerConfiguration1
-              properties:
-                p2SVpnServerConfigRadiusClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
-                    name: p2sVpnServerConfigRadiusClientRootCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
-                p2SVpnServerConfigRadiusServerRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCert1
-                    name: p2sVpnServerConfigRadiusServerRootCert1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
-                p2SVpnServerConfigVpnClientRevokedCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
-                    name: p2sVpnServerConfigVpnClientRevokedCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
-                p2SVpnServerConfigVpnClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
-                    name: p2sVpnServerConfigVpnClientRootCert1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
-                provisioningState: Succeeded
-                radiusServerAddress: 8.9.9.9
-                radiusServerSecret: 123_abc
-                vpnClientIpsecPolicies:
-                  - dhGroup: DHGroup14
-                    ikeEncryption: AES256
-                    ikeIntegrity: SHA384
-                    ipsecEncryption: AES256
-                    ipsecIntegrity: SHA256
-                    pfsGroup: PFS14
-                    saDataSizeKilobytes: 429497
-                    saLifeTimeSeconds: 86472
-                vpnProtocols:
-                  - IkeV2
-              type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
+                name: p2sVpnServerConfiguration1
+                properties:
+                  p2SVpnServerConfigRadiusClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
+                      name: p2sVpnServerConfigRadiusClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
+                  p2SVpnServerConfigRadiusServerRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCert1
+                      name: p2sVpnServerConfigRadiusServerRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
+                  p2SVpnServerConfigVpnClientRevokedCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
+                      name: p2sVpnServerConfigVpnClientRevokedCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
+                  p2SVpnServerConfigVpnClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
+                      name: p2sVpnServerConfigVpnClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
+                  provisioningState: Succeeded
+                  radiusServerAddress: 8.9.9.9
+                  radiusServerSecret: 123_abc
+                  vpnClientIpsecPolicies:
+                    - dhGroup: DHGroup14
+                      ikeEncryption: AES256
+                      ikeIntegrity: SHA384
+                      ipsecEncryption: AES256
+                      ipsecIntegrity: SHA256
+                      pfsGroup: PFS14
+                      saDataSizeKilobytes: 429497
+                      saLifeTimeSeconds: 86472
+                  vpnProtocols:
+                    - IkeV2
+                type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
-              name: p2sVpnServerConfiguration1
-              properties:
-                p2SVpnServerConfigRadiusClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
-                    name: p2sVpnServerConfigRadiusClientRootCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
-                p2SVpnServerConfigRadiusServerRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCert1
-                    name: p2sVpnServerConfigRadiusServerRootCert1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
-                p2SVpnServerConfigVpnClientRevokedCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
-                    name: p2sVpnServerConfigVpnClientRevokedCert1
-                    properties:
-                      Thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
-                      provisioningState: Succeeded
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
-                p2SVpnServerConfigVpnClientRootCertificates:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
-                    name: p2sVpnServerConfigVpnClientRootCert1
-                    properties:
-                      provisioningState: Succeeded
-                      publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
-                    type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
-                provisioningState: Succeeded
-                radiusServerAddress: 8.9.9.9
-                radiusServerSecret: 123_abc
-                vpnClientIpsecPolicies:
-                  - dhGroup: DHGroup14
-                    ikeEncryption: AES256
-                    ikeIntegrity: SHA384
-                    ipsecEncryption: AES256
-                    ipsecIntegrity: SHA256
-                    pfsGroup: PFS14
-                    saDataSizeKilobytes: 429497
-                    saLifeTimeSeconds: 86472
-                vpnProtocols:
-                  - IkeV2
-              type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations//p2sVpnServerConfiguration1
+                name: p2sVpnServerConfiguration1
+                properties:
+                  p2SVpnServerConfigRadiusClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusClientRootCertificates/p2sVpnServerConfigRadiusClientRootCert1
+                      name: p2sVpnServerConfigRadiusClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusClientRootCertificates
+                  p2SVpnServerConfigRadiusServerRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigRadiusServerRootCertificates/p2sVpnServerConfigRadiusServerRootCert1
+                      name: p2sVpnServerConfigRadiusServerRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuM
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigRadiusServerRootCertificates
+                  p2SVpnServerConfigVpnClientRevokedCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRevokedCertificates/p2sVpnServerConfigVpnClientRevokedCert1
+                      name: p2sVpnServerConfigVpnClientRevokedCert1
+                      properties:
+                        provisioningState: Succeeded
+                        thumbprint: 83FFBFC8848B5A5836C94D0112367E16148A286F
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRevokedCertificates
+                  p2SVpnServerConfigVpnClientRootCertificates:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1/p2sVpnServerConfigVpnClientRootCertificates/p2sVpnServerConfigVpnClientRootCert1
+                      name: p2sVpnServerConfigVpnClientRootCert1
+                      properties:
+                        provisioningState: Succeeded
+                        publicCertData: MIIC5zCCAc+gAwIBAgIQErQ0Hk4aDJxIA+Q5RagB+jANBgkqhkiG9w0BAQsFADAWMRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzEyMTQyMTA3MzhaFw0xODEyMTQyMTI3MzhaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP7/NQXmW7cQ/ZR1mv3Y3I29Lt7HTOqzo/1KUOoVH3NItbQIRAQbwKy3UWrOFz4eGNX2GWtNRMdCyWsKeqy9Ltsdfcm1IbKXkl84DFeU/ZacXu4Dl3xX3gV5du4TLZjEowJELyur11Ea2YcjPRQ/FzAF9/hGuboS1HZQEPLx4FdUs9OxCYOtc0MxBCwLfVTTRqarb0Ne+arNYd4kCzIhAke1nOyKAJBda5ZL+VHy3S5S8qGlD46jm8HXugmAkUygS4oIIXOmj/1O9sNAi3LN60zufSzCmP8Rm/iUGX+DHAGGiXxwZOKQLEDaZXKqoHjMPP0XudmSWwOIbyeQVrLhkwIDAQABozEwLzAOBgNVHQ8BAf8EBAMCAgQwHQYDVR0OBBYEFEfeNU2trYxNLF9ONmuJUsT13pKDMA0GCSqGSIb3DQEBCwUAA4IBAQBmM6RJzsGGipxyMhimHKN2xlkejhVsgBoTAhOU0llW9aUSwINJ9zFUGgI8IzUFy1VG776fchHp0LMRmPSIUYk5btEPxbsrPtumPuMH8EQGrS+Rt4pD+78c8H1fEPkq5CmDl/PKu4JoFGv+aFcE+Od0hlILstIF10Qysf++QXDolKfzJa/56bgMeYKFiju73loiRM57ns8ddXpfLl792UVpRkFU62LNns6Y1LKTwapmUF4IvIuAIzd6LZNOQng64LAKXtKnViJ1JQiXwf4CEzhgvAti3/ejpb3U90hsrUcyZi6wBv9bZLcAJRWpz61JNYliM1d1grSwQDKGXNQE4xuN
+                      type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations/p2sVpnServerConfigVpnClientRootCertificates
+                  provisioningState: Succeeded
+                  radiusServerAddress: 8.9.9.9
+                  radiusServerSecret: 123_abc
+                  vpnClientIpsecPolicies:
+                    - dhGroup: DHGroup14
+                      ikeEncryption: AES256
+                      ikeIntegrity: SHA384
+                      ipsecEncryption: AES256
+                      ipsecIntegrity: SHA256
+                      pfsGroup: PFS14
+                      saDataSizeKilobytes: 429497
+                      saLifeTimeSeconds: 86472
+                  vpnProtocols:
+                    - IkeV2
+                type: Microsoft.Network/virtualWans/p2sVpnServerConfigurations
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways':
     get:
@@ -3176,77 +3183,79 @@ paths:
                 tag2: value2
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/vpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidthInMbps: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                policies:
-                  allowBranchToBranchTraffic: true
-                  allowVnetToVnetTraffic: false
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              tags:
-                key1: value1
-                key2: value2
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidthInMbps: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  policies:
+                    allowBranchToBranchTraffic: true
+                    allowVnetToVnetTraffic: false
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                tags:
+                  key1: value1
+                  key2: value2
+                type: Microsoft.Network/vpnGateways
       x-ms-long-running-operation: true
     put:
       description: Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.
@@ -3335,65 +3344,67 @@ paths:
                 key1: value1
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidth: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidth: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                type: Microsoft.Network/vpnGateways
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
-              location: West US
-              name: gateway1
-              properties:
-                bgpSettings:
-                  asn: 65515
-                  bgpPeeringAddress: 10.0.1.30
-                  peerWeight: 0
-                connections:
-                  - etag: w/\00000000-0000-0000-0000-000000000000\
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-                    name: vpnConnection1
-                    properties:
-                      connectionBandwidth: 100
-                      connectionStatus: Connected
-                      egressBytesTransferred: 0
-                      enableBgp: false
-                      ingressBytesTransferred: 0
-                      ipsecPolicies: []
-                      provisioningState: Succeeded
-                      remoteVpnSite:
-                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                      routingWeight: 0
-                      sharedKey: key
-                provisioningState: Succeeded
-                virtualHub:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
-              type: Microsoft.Network/vpnGateways
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1
+                location: West US
+                name: gateway1
+                properties:
+                  bgpSettings:
+                    asn: 65515
+                    bgpPeeringAddress: 10.0.1.30
+                    peerWeight: 0
+                  connections:
+                    - etag: w/\00000000-0000-0000-0000-000000000000\
+                      id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                      name: vpnConnection1
+                      properties:
+                        connectionBandwidth: 100
+                        connectionStatus: Connected
+                        egressBytesTransferred: 0
+                        enableBgp: false
+                        ingressBytesTransferred: 0
+                        ipsecPolicies: []
+                        provisioningState: Succeeded
+                        remoteVpnSite:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                        routingWeight: 0
+                        sharedKey: key
+                  provisioningState: Succeeded
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1
+                type: Microsoft.Network/vpnGateways
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections':
     get:
@@ -3712,39 +3723,41 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-              name: vpnConnection1
-              properties:
-                connectionBandwidth: 100
-                connectionStatus: Connected
-                egressBytesTransferred: 0
-                enableBgp: false
-                ingressBytesTransferred: 0
-                ipsecPolicies: []
-                provisioningState: Succeeded
-                remoteVpnSite:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                routingWeight: 0
-                sharedKey: key
-                vpnConnectionProtocolType: IKEv1
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                name: vpnConnection1
+                properties:
+                  connectionBandwidth: 100
+                  connectionStatus: Connected
+                  egressBytesTransferred: 0
+                  enableBgp: false
+                  ingressBytesTransferred: 0
+                  ipsecPolicies: []
+                  provisioningState: Succeeded
+                  remoteVpnSite:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                  routingWeight: 0
+                  sharedKey: key
+                  vpnConnectionProtocolType: IKEv1
             '201':
-              etag: w/\00000000-0000-0000-0000-000000000000\
-              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
-              name: vpnConnection1
-              properties:
-                connectionBandwidth: 100
-                connectionStatus: Connected
-                egressBytesTransferred: 0
-                enableBgp: false
-                ingressBytesTransferred: 0
-                ipsecPolicies: []
-                provisioningState: Succeeded
-                remoteVpnSite:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
-                routingWeight: 0
-                sharedKey: key
-                vpnConnectionProtocolType: IKEv1
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1
+                name: vpnConnection1
+                properties:
+                  connectionBandwidth: 100
+                  connectionStatus: Connected
+                  egressBytesTransferred: 0
+                  enableBgp: false
+                  ingressBytesTransferred: 0
+                  ipsecPolicies: []
+                  provisioningState: Succeeded
+                  remoteVpnSite:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1
+                  routingWeight: 0
+                  sharedKey: key
+                  vpnConnectionProtocolType: IKEv1
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites':
     get:

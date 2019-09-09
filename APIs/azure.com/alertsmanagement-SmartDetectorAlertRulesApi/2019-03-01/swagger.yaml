@@ -96,7 +96,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MyAlertRule
                     name: MyAlertRule
@@ -158,7 +158,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MyAlertRule
                     name: MyAlertRule
@@ -220,10 +220,8 @@ paths:
             resourceGroupName: MyAlertRules
             subscriptionId: b368ca2f-e298-46b7-b0ab-012281956afa
           responses:
-            '200':
-              body: null
-            '204':
-              body: null
+            '200': {}
+            '204': {}
     get:
       description: Get a specific Smart Detector alert rule.
       operationId: SmartDetectorAlertRules_Get

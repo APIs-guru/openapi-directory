@@ -122,10 +122,12 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the existing domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.delete
+      description: Deletes the specified version.
+      operationId: firebasehosting.sites.versions.delete
       parameters:
-        - description: Required. The name of the domain association to delete.
+        - description: |-
+            Required. The name of the version to be deleted, in the format:
+            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
           in: path
           name: name
           required: true
@@ -815,8 +817,8 @@ definitions:
     properties:
       glob:
         description: |-
-          Required. The user-supplied
-          [glob pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          The user-supplied [glob
+          pattern](/docs/hosting/full-config#glob_pattern_matching) to match
           against the request URL path.
         type: string
       headers:
@@ -824,6 +826,11 @@ definitions:
           type: string
         description: Required. The additional headers to add to the response.
         type: object
+      regex:
+        description: |-
+          The user-supplied RE2 regular expression to match against the request
+          URL path.
+        type: string
     type: object
   ListDomainsResponse:
     properties:
@@ -899,8 +906,8 @@ definitions:
     properties:
       glob:
         description: |-
-          Required. The user-supplied
-          [glob pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          The user-supplied [glob
+          pattern](/docs/hosting/full-config#glob_pattern_matching) to match
           against the request URL path.
         type: string
       location:
@@ -913,6 +920,11 @@ definitions:
           <code>"glob": "/:capture*",
           <br>"statusCode": 301,
           <br>"location": "https://example.com/foo/:capture"</code>
+        type: string
+      regex:
+        description: |-
+          The user-supplied RE2 regular expression to match against the request
+          URL path.
         type: string
       statusCode:
         description: |-
@@ -959,7 +971,7 @@ definitions:
         type: string
       version:
         $ref: '#/definitions/Version'
-        description: Output only.  The configuration and content that was released.
+        description: Output only. The configuration and content that was released.
     type: object
   Rewrite:
     description: |-
@@ -978,12 +990,17 @@ definitions:
         type: string
       glob:
         description: |-
-          Required. The user-supplied
-          [glob pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          The user-supplied [glob
+          pattern](/docs/hosting/full-config#glob_pattern_matching) to match
           against the request URL path.
         type: string
       path:
         description: The URL path to rewrite the request to.
+        type: string
+      regex:
+        description: |-
+          The user-supplied RE2 regular expression to match against the request
+          URL path.
         type: string
       run:
         $ref: '#/definitions/CloudRunRewrite'

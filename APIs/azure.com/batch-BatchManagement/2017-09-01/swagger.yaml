@@ -569,25 +569,26 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - allowUpdates: false
-                  defaultVersion: '1'
-                  displayName: myAppName
-                  id: app1
-                  packages:
-                    - format: zip
-                      lastActivationTime: '2017-06-27T18:48:09.9330991Z'
-                      state: active
-                      version: '1'
-                - allowUpdates: false
-                  defaultVersion: '1'
-                  displayName: myAppName
-                  id: app2
-                  packages:
-                    - format: zip
-                      lastActivationTime: '2017-06-27T18:48:09.9330991Z'
-                      state: active
-                      version: '1'
+              body:
+                value:
+                  - allowUpdates: false
+                    defaultVersion: '1'
+                    displayName: myAppName
+                    id: app1
+                    packages:
+                      - format: zip
+                        lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                        state: Active
+                        version: '1'
+                  - allowUpdates: false
+                    defaultVersion: '1'
+                    displayName: myAppName
+                    id: app2
+                    packages:
+                      - format: zip
+                        lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                        state: Active
+                        version: '1'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}':
@@ -657,16 +658,17 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              allowUpdates: false
-              defaultVersion: '1'
-              displayName: myAppName
-              id: app1
-              packages:
-                - format: zip
-                  id: app1
-                  lastActivationTime: '2017-06-27T18:48:09.9330991Z'
-                  state: active
-                  version: '1'
+              body:
+                allowUpdates: false
+                defaultVersion: '1'
+                displayName: myAppName
+                id: app1
+                packages:
+                  - format: zip
+                    id: app1
+                    lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                    state: Active
+                    version: '1'
     patch:
       description: Updates settings for the specified application.
       operationId: Application_Update
@@ -752,10 +754,11 @@ paths:
             subscriptionId: subid
           responses:
             '201':
-              allowUpdates: false
-              displayName: myAppName
-              id: app1
-              packages: []
+              body:
+                allowUpdates: false
+                displayName: myAppName
+                id: app1
+                packages: []
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}':
     delete:
       description: Deletes an application package record and its associated binary file.
@@ -835,11 +838,12 @@ paths:
             version: '1'
           responses:
             '200':
-              format: zip
-              id: app1
-              lastActivationTime: '2017-06-27T18:48:09.9330991Z'
-              state: active
-              version: '1'
+              body:
+                format: zip
+                id: app1
+                lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                state: Active
+                version: '1'
     put:
       description: Creates an application package record.
       operationId: ApplicationPackage_Create
@@ -880,12 +884,13 @@ paths:
             version: '1'
           responses:
             '201':
-              format: zip
-              id: app1
-              state: active
-              storageUrl: 'http://mystorage1.blob.core.windows.net/myapp?mysas'
-              storageUrlExpiry: '2017-06-27T18:48:09.9330991Z'
-              version: '1'
+              body:
+                format: zip
+                id: app1
+                state: Active
+                storageUrl: 'http://mystorage1.blob.core.windows.net/myapp?mysas'
+                storageUrlExpiry: '2017-06-27T18:48:09.9330991Z'
+                version: '1'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate':
     post:
       description: Activates the specified application package.

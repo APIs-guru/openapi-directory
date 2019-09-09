@@ -3,8 +3,8 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: Use this API to manage Microsoft Healthcare services in your Azure subscription.
-  title: HealthcareClient
+  description: Use this API to manage Microsoft HealthcareApis services in your Azure subscription.
+  title: HealthcareApisClient
   version: 2018-08-20-preview
   x-apisguru-categories:
     - cloud
@@ -781,9 +781,11 @@ definitions:
         readOnly: true
         type: string
       kind:
-        description: 'The kind of the service. Valid values are: fhir.'
+        description: 'The kind of the service. Valid values are: fhir, fhir-Stu3 and fhir-R4.'
         enum:
           - fhir
+          - fhir-Stu3
+          - fhir-R4
         readOnly: false
         type: string
         x-ms-enum:

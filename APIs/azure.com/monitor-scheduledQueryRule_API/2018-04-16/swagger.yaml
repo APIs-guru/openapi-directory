@@ -282,12 +282,8 @@ paths:
             ruleName: logalertfoo
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Gets an Log Search rule
       operationId: ScheduledQueryRules_Get

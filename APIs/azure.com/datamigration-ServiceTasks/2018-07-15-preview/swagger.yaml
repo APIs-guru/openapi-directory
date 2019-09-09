@@ -82,7 +82,6 @@ definitions:
               required:
                 - commandType
               type: object
-              x-ms-discriminator-value: Unknown
             readOnly: true
             type: array
           errors:
@@ -126,7 +125,6 @@ definitions:
         required:
           - taskType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the task that checks for OCI drivers.
     properties:
       input:
@@ -262,7 +260,6 @@ definitions:
               required:
                 - commandType
               type: object
-              x-ms-discriminator-value: Unknown
             readOnly: true
             type: array
           errors:
@@ -306,7 +303,6 @@ definitions:
         required:
           - taskType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the task that installs an OCI driver.
     properties:
       input:
@@ -407,7 +403,6 @@ definitions:
               required:
                 - commandType
               type: object
-              x-ms-discriminator-value: Unknown
             readOnly: true
             type: array
           errors:
@@ -451,7 +446,6 @@ definitions:
         required:
           - taskType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the task that uploads an OCI driver.
     properties:
       input:

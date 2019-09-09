@@ -202,10 +202,15 @@ paths:
             api-version: 2018-06-01-preview
             liveEventName: myLiveEvent1
             parameters:
-              Id: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1
               Location: West US
               Name: myLiveEvent1
-              Properties:
+              Tags:
+                DynamicProperties:
+                  tag1: value1
+                  tag2: value2
+              Type: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourcegroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents
+              id: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1
+              properties:
                 Created: '2018-03-02T18:25:07.5748853-08:00'
                 CrossSiteAccessPolicies: null
                 Description: test event updated
@@ -227,16 +232,11 @@ paths:
                           SubnetPrefixLength: null
                   Endpoints: []
                   PreviewLocator: null
-                  StreamingPolicyName: null
+                  streamingPolicyName: null
                 ProvisioningState: null
                 ResourceState: Stopped
                 StreamOptions: []
                 VanityUrl: false
-              Tags:
-                DynamicProperties:
-                  tag1: value1
-                  tag2: value2
-              Type: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourcegroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents
             resourceGroupName: mediaresources
             subscriptionId: 0a6ec948-5a62-437d-b9df-934dc7c1b722
           responses:
@@ -1030,10 +1030,15 @@ paths:
             accountName: slitestmedia10
             api-version: 2018-06-01-preview
             parameters:
-              Id: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints/myStreamingEndpoint1
               Location: West US
               Name: myStreamingEndpoint1
-              Properties:
+              Tags:
+                DynamicProperties:
+                  tag1: value1
+                  tag2: value2
+              Type: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourcegroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints
+              id: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints/myStreamingEndpoint1
+              properties:
                 AccessControl: null
                 AvailabilitySetName: availableset
                 CdnEnabled: false
@@ -1050,11 +1055,6 @@ paths:
                 ProvisioningState: null
                 ResourceState: Stopped
                 ScaleUnits: 1
-              Tags:
-                DynamicProperties:
-                  tag1: value1
-                  tag2: value2
-              Type: /subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourcegroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints
             resourceGroupName: mediaresources
             streamingEndpointName: myStreamingEndpoint1
             subscriptionId: 0a6ec948-5a62-437d-b9df-934dc7c1b722

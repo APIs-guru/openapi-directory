@@ -370,28 +370,29 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              etag: '"636265044994500000"'
-              id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial
-              location: East US 2
-              name: Get-AzureVMTutorial
-              properties:
-                creationTime: '2017-03-30T21:01:33.777+00:00'
-                description: Updated Description of the Runbook
-                jobCount: 0
-                lastModifiedBy: myEmaild@microsoft.com
-                lastModifiedTime: '2017-03-30T21:01:39.45+00:00'
-                logActivityTrace: 1
-                logProgress: true
-                logVerbose: false
-                outputTypes: []
-                parameters: {}
-                provisioningState: Succeeded
-                runbookType: PowerShellWorkflow
-                state: Published
-              tags:
-                tag01: value01
-                tag02: value02
-              type: Microsoft.Automation/AutomationAccounts/Runbooks
+              body:
+                etag: '"636265044994500000"'
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial
+                location: East US 2
+                name: Get-AzureVMTutorial
+                properties:
+                  creationTime: '2017-03-30T21:01:33.777+00:00'
+                  description: Updated Description of the Runbook
+                  jobCount: 0
+                  lastModifiedBy: myEmaild@microsoft.com
+                  lastModifiedTime: '2017-03-30T21:01:39.45+00:00'
+                  logActivityTrace: 1
+                  logProgress: true
+                  logVerbose: false
+                  outputTypes: []
+                  parameters: {}
+                  provisioningState: Succeeded
+                  runbookType: PowerShellWorkflow
+                  state: Published
+                tags:
+                  tag01: value01
+                  tag02: value02
+                type: Microsoft.Automation/AutomationAccounts/Runbooks
     put:
       description: Create the runbook identified by runbook name.
       externalDocs:
@@ -1395,7 +1396,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourcegroups/mygroup/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobs/jobName/streams/24456a8a-2857-4af6-932c-3455f38bd05e_00636535675981232703_00000000000000000001
                     properties:

@@ -133,6 +133,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
 definitions:
+  GoogleprotobufListValue:
+    items:
+      $ref: '#/definitions/GoogleprotobufValue'
+    type: array
   GoogleprotobufValue: {}
   LighthouseAuditResultV5:
     properties:
@@ -330,9 +334,8 @@ definitions:
         description: The original requested url.
         type: string
       runWarnings:
+        $ref: '#/definitions/GoogleprotobufListValue'
         description: 'List of all run warnings in the LHR. Will always output to at least `[]`.'
-        items: {}
-        type: array
       runtimeError:
         description: 'A top-level error message that, if present, indicates a serious enough problem that this Lighthouse result may need to be discarded.'
         properties:

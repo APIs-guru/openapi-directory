@@ -1139,10 +1139,8 @@ paths:
             x-ms-client-request-id:
               - 13e52cec-60dd-4733-90b2-6781ec82e368
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Gets information about the specified data manager resource.
@@ -1249,8 +1247,7 @@ paths:
                 tags:
                   updateDateTime: '4/10/2019 2:53:54 PM'
                 type: Microsoft.HybridData/dataManagers
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
     put:
       description: "Creates a new data manager resource with the specified parameters. Existing resources cannot be updated with this API\r\nand should instead be updated with the Update data manager resource API."
@@ -1307,8 +1304,7 @@ paths:
                 sku: {}
                 tags: {}
                 type: Microsoft.HybridData/dataManagers
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices':
     get:
@@ -1345,7 +1341,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation
                     name: DataTransformation
@@ -1501,7 +1497,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation/jobDefinitions/jobdeffromtestcode1
                     name: jobdeffromtestcode1
@@ -1573,10 +1569,8 @@ paths:
             x-ms-client-request-id:
               - 5de5bf1a-fb62-4e6a-9345-3be7f0dde32b
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: This method gets job definition object by name.
@@ -1744,8 +1738,7 @@ paths:
                   state: Enabled
                   userConfirmation: Required
                 type: Microsoft.HybridData/dataManagers/dataServices/jobDefinitions
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs':
     get:
@@ -1799,7 +1792,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation/jobDefinitions/jobdeffromtestcode1/jobs/8ae39e0e-df7b-453e-8599-db47a277e543
                     name: 8ae39e0e-df7b-453e-8599-db47a277e543
@@ -1957,10 +1950,8 @@ paths:
             x-ms-client-request-id:
               - bb953bea-ccbe-48f4-8ba6-72183ee60a38
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume':
     post:
@@ -2013,10 +2004,8 @@ paths:
             x-ms-client-request-id:
               - 3ef168d6-e765-4974-9c1e-6949844ffbd7
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run':
     post:
@@ -2087,10 +2076,8 @@ paths:
             x-ms-client-request-id:
               - 18818f84-7985-4ca0-9a9c-1ee622a5299c
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs':
     get:
@@ -2138,7 +2125,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation/jobDefinitions/jobdeffromtestcode1/jobs/8ae39e0e-df7b-453e-8599-db47a277e543
                     name: 8ae39e0e-df7b-453e-8599-db47a277e543
@@ -2211,7 +2198,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataStoreTypes/StorSimple8000Series
                     name: StorSimple8000Series
@@ -2387,7 +2374,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataStores/TestAzureStorage1
                     name: TestAzureStorage1
@@ -2450,10 +2437,8 @@ paths:
             x-ms-client-request-id:
               - 0f186b6f-cd79-4a51-bf43-4c529811a92e
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
         DataStores_Delete_DataSourceDELETE161:
           parameters:
             User-Agent:
@@ -2471,10 +2456,8 @@ paths:
             x-ms-client-request-id:
               - aeacf9e2-f38f-4516-865b-efa059412796
           responses:
-            '202':
-              body: ''
-            '204':
-              body: ''
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: This method gets the data store/repository by name.
@@ -2631,8 +2614,7 @@ paths:
                   repositoryId: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.Storage/storageAccounts/dmsdatasink
                   state: Enabled
                 type: Microsoft.HybridData/dataManagers/dataStores
-            '202':
-              body: ''
+            '202': {}
         DataStores_CreateOrUpdate_DataSourcePUT162:
           parameters:
             Content-Length:
@@ -2678,8 +2660,7 @@ paths:
                   repositoryId: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/dmsdatasource/providers/Microsoft.StorSimple/managers/dmsdatasource
                   state: Enabled
                 type: Microsoft.HybridData/dataManagers/dataStores
-            '202':
-              body: ''
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/jobDefinitions':
     get:
@@ -2721,7 +2702,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation/jobDefinitions/jobdeffromtestcode1
                     name: jobdeffromtestcode1
@@ -2788,7 +2769,7 @@ paths:
           responses:
             '200':
               body:
-                nextLink: ''
+                nextLink: null
                 value:
                   - id: /subscriptions/6e0219f5-327a-4365-904f-05eed4227ad7/resourceGroups/ResourceGroupForSDKTest/providers/Microsoft.HybridData/dataManagers/TestAzureSDKOperations/dataServices/DataTransformation/jobDefinitions/jobdeffromtestcode1/jobs/8ae39e0e-df7b-453e-8599-db47a277e543
                     name: 8ae39e0e-df7b-453e-8599-db47a277e543

@@ -121,15 +121,16 @@ paths:
             api-version: '2019-04-01'
           responses:
             '200':
-              nextLink: string
-              value:
-                - display:
-                    description: Creates a new dedicated cloud node
-                    operation: Create Dedicated Cloud Node
-                    provider: VMware Solution by CloudSimple
-                    resource: Dedicated Cloud Nodes
-                  name: Microsoft.VMwareCloudSimple/dedicatedCloudNodes/write
-                  origin: 'user,system'
+              body:
+                nextLink: string
+                value:
+                  - display:
+                      description: Creates a new dedicated cloud node
+                      operation: Create Dedicated Cloud Node
+                      provider: VMware Solution by CloudSimple
+                      resource: Dedicated Cloud Nodes
+                    name: Microsoft.VMwareCloudSimple/dedicatedCloudNodes/write
+                    origin: 'user,system'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes':
@@ -171,45 +172,46 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-2'
-                  location: westus2
-                  name: node-2
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    cloudRackName: cloud_rack_1
-                    created: '2019-05-21T07:32:12.134Z'
-                    placementGroupId: n2
-                    placementGroupName: Placement Group 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    privateCloudName: private_cloud_name
-                    purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
-                    skuDescription:
-                      id: general
-                      name: CS28-Node
-                    status: used
-                    vmwareClusterName: Cluster
-                  sku:
-                    name: VMware_CloudSimple_CS28
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-1'
-                  location: westus2
-                  name: node1
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    created: '2019-05-22T11:57:43.891Z'
-                    placementGroupId: n1
-                    placementGroupName: Placement Group 1
-                    purchaseId: eb9d2e22-c787-4723-aa4f-3760b53a0a4d
-                    skuDescription:
-                      id: general
-                      name: CS28-Node
-                    status: unused
-                  sku:
-                    name: VMware_CloudSimple_CS28
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-2'
+                    location: westus2
+                    name: node-2
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      cloudRackName: cloud_rack_1
+                      created: '2019-05-21T07:32:12.134Z'
+                      placementGroupId: n2
+                      placementGroupName: Placement Group 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      privateCloudName: private_cloud_name
+                      purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
+                      skuDescription:
+                        id: general
+                        name: CS28-Node
+                      status: used
+                      vmwareClusterName: Cluster
+                    sku:
+                      name: VMware_CloudSimple_CS28
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-1'
+                    location: westus2
+                    name: node1
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      created: '2019-05-22T11:57:43.891Z'
+                      placementGroupId: n1
+                      placementGroupName: Placement Group 1
+                      purchaseId: eb9d2e22-c787-4723-aa4f-3760b53a0a4d
+                      skuDescription:
+                        id: general
+                        name: CS28-Node
+                      status: unused
+                    sku:
+                      name: VMware_CloudSimple_CS28
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices':
@@ -251,23 +253,24 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-east'
-                  location: eastus
-                  name: service-east
-                  properties:
-                    gatewaySubnet: 10.101.201.0/28
-                    isAccountOnboarded: onBoarded
-                    serviceURL: 'https://eastus-he.azure.cloudsimple.com'
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-west'
-                  location: westus
-                  name: service-west
-                  properties:
-                    gatewaySubnet: 10.0.0.0/28
-                    isAccountOnboarded: onBoarded
-                    serviceURL: 'https://westus-he.azure.cloudsimple.com'
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-east'
+                    location: eastus
+                    name: service-east
+                    properties:
+                      gatewaySubnet: 10.101.201.0/28
+                      isAccountOnboarded: onBoarded
+                      serviceURL: 'https://eastus-he.azure.cloudsimple.com'
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-west'
+                    location: westus
+                    name: service-west
+                    properties:
+                      gatewaySubnet: 10.0.0.0/28
+                      isAccountOnboarded: onBoarded
+                      serviceURL: 'https://westus-he.azure.cloudsimple.com'
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/availabilities':
@@ -302,19 +305,20 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - currentValue: 1
-                  limit: 5
-                  name:
-                    localizedValue: CS28-Node
-                    value: general
-                  unit: Count
-                - currentValue: 0
-                  limit: 5
-                  name:
-                    localizedValue: CS36-Node
-                    value: large
-                  unit: Count
+              body:
+                value:
+                  - currentValue: 1
+                    limit: 5
+                    name:
+                      localizedValue: CS28-Node
+                      value: general
+                    unit: Count
+                  - currentValue: 0
+                    limit: 5
+                    name:
+                      localizedValue: CS36-Node
+                      value: large
+                    unit: Count
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/operationResults/{operationId}':
@@ -366,14 +370,15 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              endTime: '2019-05-23T12:11:00.655Z'
-              error:
-                code: InternalError
-                message: Internal Service error
-              id: '/subscriptions/{subscription-id}/providers/microsoft.vmwarecloudsimple/locations/westus2/operationresults/d030bb3f-7d53-11e9-8e09-9a86872085ff'
-              name: d030bb3f-7d53-11e9-8e09-9a86872085ff
-              startTime: '2019-05-23T12:10:54.012Z'
-              status: Failed
+              body:
+                endTime: '2019-05-23T12:11:00.655Z'
+                error:
+                  code: InternalError
+                  message: Internal Service error
+                id: '/subscriptions/{subscription-id}/providers/microsoft.vmwarecloudsimple/locations/westus2/operationresults/d030bb3f-7d53-11e9-8e09-9a86872085ff'
+                name: d030bb3f-7d53-11e9-8e09-9a86872085ff
+                startTime: '2019-05-23T12:10:54.012Z'
+                status: Failed
             '202': {}
             '204': {}
         GetOperationResult:
@@ -385,11 +390,12 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              endTime: '2019-05-23T12:05:55.660Z'
-              id: '/subscriptions/{subscription-id}/providers/microsoft.vmwarecloudsimple/locations/westus2/operationresults/f8e1c8f1-7d52-11e9-8e07-9a86872085ff'
-              name: f8e1c8f1-7d52-11e9-8e07-9a86872085ff
-              startTime: '2019-05-23T12:04:52.784Z'
-              status: Succeeded
+              body:
+                endTime: '2019-05-23T12:05:55.660Z'
+                id: '/subscriptions/{subscription-id}/providers/microsoft.vmwarecloudsimple/locations/westus2/operationresults/f8e1c8f1-7d52-11e9-8e07-9a86872085ff'
+                name: f8e1c8f1-7d52-11e9-8e07-9a86872085ff
+                startTime: '2019-05-23T12:04:52.784Z'
+                status: Succeeded
             '202': {}
             '204': {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds':
@@ -420,34 +426,35 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/eastus/privateClouds/myPrivateCloud'
-                  location: eastus
-                  name: myPrivateCloud
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    clustersNumber: 1
-                    createdBy: john.doe@cloudsimple.com
-                    createdOn: '2019-05-21T07:32:59.491Z'
-                    dnsServers:
-                      - 100.100.100.8
-                      - 100.100.100.9
-                    expires: n/a
-                    nsxType: Advanced
-                    placementGroupId: n2
-                    placementGroupName: Placement Group 2
-                    privateCloudId: private-cloud-id
-                    state: operational
-                    totalCpuCores: 84
-                    totalNodes: 3
-                    totalRam: 768
-                    totalStorage: 16.875
-                    type: vSphere
-                    vSphereVersion: 6.7u1
-                    vcenterFqdn: vcsa-eastus.az.cloudsimple.io
-                    vcenterRefid: 100.100.100.6
-                  type: Microsoft.VMwareCloudSimple/privateClouds
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/eastus/privateClouds/myPrivateCloud'
+                    location: eastus
+                    name: myPrivateCloud
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      clustersNumber: 1
+                      createdBy: john.doe@cloudsimple.com
+                      createdOn: '2019-05-21T07:32:59.491Z'
+                      dnsServers:
+                        - 100.100.100.8
+                        - 100.100.100.9
+                      expires: n/a
+                      nsxType: Advanced
+                      placementGroupId: n2
+                      placementGroupName: Placement Group 2
+                      privateCloudId: private-cloud-id
+                      state: operational
+                      totalCpuCores: 84
+                      totalNodes: 3
+                      totalRam: 768
+                      totalStorage: 16.875
+                      type: vSphere
+                      vSphereVersion: 6.7u1
+                      vcenterFqdn: vcsa-eastus.az.cloudsimple.io
+                      vcenterRefid: 100.100.100.6
+                    type: Microsoft.VMwareCloudSimple/privateClouds
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}':
@@ -480,112 +487,113 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-              location: westus2
-              name: myPrivateCloud
-              properties:
-                availabilityZoneId: az1
-                availabilityZoneName: Availability Zone 1
-                clustersNumber: 1
-                createdBy: john.doe@cloudsimple.com
-                createdOn: '2019-05-22T09:55:36.627Z'
-                dnsServers:
-                  - 100.0.0.8
-                  - 100.0.0.9
-                expires: n/a
-                nsxType: Advanced
-                placementGroupId: n1
-                placementGroupName: Placement Group 1
-                privateCloudId: '{pc-id}'
-                resourcePools:
-                  - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-                    location: westus2
-                    name: Workload
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    properties:
-                      fullName: myPrivateCloud/Datacenter/Cluster/Workload
-                    type: Microsoft.VMwareCloudSimple/resourcePools
-                state: operational
-                totalCpuCores: 28
-                totalNodes: 1
-                totalRam: 256
-                totalStorage: 5.625
-                type: vSphere
-                vSphereVersion: 6.7u1
-                vcenterFqdn: vcsa-4-westus2.az.cloudsimple.io
-                vcenterRefid: 100.0.0.6
-                virtualMachineTemplates:
-                  - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    location: westus2
-                    name: centos-template
-                    properties:
-                      amountOfRam: 4096
-                      controllers:
-                        - id: '1000'
-                          name: SCSI controller 0
-                          subType: LSI_PARALEL
-                          type: SCSI
-                      disks:
-                        - controllerId: '1000'
-                          independenceMode: persistent
-                          totalSize: 10485760
-                          virtualDiskId: '2000'
-                          virtualDiskName: Hard disk 1
-                      guestOS: Other (32-bit)
-                      guestOSType: other
-                      nics:
-                        - ipAddresses: null
-                          macAddress: '00:50:56:a6:7e:93'
-                          network:
-                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                          nicType: E1000
-                          powerOnBoot: true
-                          virtualNicId: '4000'
-                          virtualNicName: Network adapter 1
-                      numberOfCores: 2
-                      path: Datacenter/Workload VMs
+              body:
+                id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                location: westus2
+                name: myPrivateCloud
+                properties:
+                  availabilityZoneId: az1
+                  availabilityZoneName: Availability Zone 1
+                  clustersNumber: 1
+                  createdBy: john.doe@cloudsimple.com
+                  createdOn: '2019-05-22T09:55:36.627Z'
+                  dnsServers:
+                    - 100.0.0.8
+                    - 100.0.0.9
+                  expires: n/a
+                  nsxType: Advanced
+                  placementGroupId: n1
+                  placementGroupName: Placement Group 1
+                  privateCloudId: '{pc-id}'
+                  resourcePools:
+                    - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                      location: westus2
+                      name: Workload
                       privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                      vSphereNetworks: null
-                      vSphereTags: null
-                      vmwaretools: '10309'
-                    type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
-                virtualNetworks:
-                  - assignable: false
-                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                    location: westus2
-                    name: Datacenter/CS-Management
-                    properties:
-                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    type: Microsoft.VMwareCloudSimple/virtualNetworks
-                  - assignable: true
-                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-20'
-                    location: westus2
-                    name: Datacenter/CS-Rescue
-                    properties:
-                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    type: Microsoft.VMwareCloudSimple/virtualNetworks
-                  - assignable: false
-                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-21'
-                    location: westus2
-                    name: Datacenter/CS-VSAN
-                    properties:
-                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    type: Microsoft.VMwareCloudSimple/virtualNetworks
-                  - assignable: false
-                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-22'
-                    location: westus2
-                    name: Datacenter/CS-VMotion
-                    properties:
-                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    type: Microsoft.VMwareCloudSimple/virtualNetworks
-                  - assignable: true
-                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-35'
-                    location: westus2
-                    name: Datacenter/net-01
-                    properties:
-                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    type: Microsoft.VMwareCloudSimple/virtualNetworks
-              type: Microsoft.VMwareCloudSimple/privateClouds
+                      properties:
+                        fullName: myPrivateCloud/Datacenter/Cluster/Workload
+                      type: Microsoft.VMwareCloudSimple/resourcePools
+                  state: operational
+                  totalCpuCores: 28
+                  totalNodes: 1
+                  totalRam: 256
+                  totalStorage: 5.625
+                  type: vSphere
+                  vSphereVersion: 6.7u1
+                  vcenterFqdn: vcsa-4-westus2.az.cloudsimple.io
+                  vcenterRefid: 100.0.0.6
+                  virtualMachineTemplates:
+                    - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      location: westus2
+                      name: centos-template
+                      properties:
+                        amountOfRam: 4096
+                        controllers:
+                          - id: '1000'
+                            name: SCSI controller 0
+                            subType: LSI_PARALEL
+                            type: SCSI
+                        disks:
+                          - controllerId: '1000'
+                            independenceMode: persistent
+                            totalSize: 10485760
+                            virtualDiskId: '2000'
+                            virtualDiskName: Hard disk 1
+                        guestOS: Other (32-bit)
+                        guestOSType: other
+                        nics:
+                          - ipAddresses: null
+                            macAddress: '00:50:56:a6:7e:93'
+                            network:
+                              id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                            nicType: E1000
+                            powerOnBoot: true
+                            virtualNicId: '4000'
+                            virtualNicName: Network adapter 1
+                        numberOfCores: 2
+                        path: Datacenter/Workload VMs
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                        vSphereNetworks: null
+                        vSphereTags: null
+                        vmwaretools: '10309'
+                      type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
+                  virtualNetworks:
+                    - assignable: false
+                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                      location: westus2
+                      name: Datacenter/CS-Management
+                      properties:
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      type: Microsoft.VMwareCloudSimple/virtualNetworks
+                    - assignable: true
+                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-20'
+                      location: westus2
+                      name: Datacenter/CS-Rescue
+                      properties:
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      type: Microsoft.VMwareCloudSimple/virtualNetworks
+                    - assignable: false
+                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-21'
+                      location: westus2
+                      name: Datacenter/CS-VSAN
+                      properties:
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      type: Microsoft.VMwareCloudSimple/virtualNetworks
+                    - assignable: false
+                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-22'
+                      location: westus2
+                      name: Datacenter/CS-VMotion
+                      properties:
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      type: Microsoft.VMwareCloudSimple/virtualNetworks
+                    - assignable: true
+                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-35'
+                      location: westus2
+                      name: Datacenter/net-01
+                      properties:
+                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      type: Microsoft.VMwareCloudSimple/virtualNetworks
+                type: Microsoft.VMwareCloudSimple/privateClouds
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools':
     get:
       description: Returns list of resource pools in region for private cloud
@@ -616,14 +624,15 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-                  location: westus2
-                  name: Workload
-                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  properties:
-                    fullName: myPrivateCloud/Datacenter/Cluster/Workload
-                  type: Microsoft.VMwareCloudSimple/resourcePools
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                    location: westus2
+                    name: Workload
+                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    properties:
+                      fullName: myPrivateCloud/Datacenter/Cluster/Workload
+                    type: Microsoft.VMwareCloudSimple/resourcePools
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools/{resourcePoolName}':
@@ -662,13 +671,14 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-              location: westus2
-              name: Workload
-              privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-              properties:
-                fullName: myPrivateCloud/Datacenter/Cluster/Workload
-              type: Microsoft.VMwareCloudSimple/resourcePools
+              body:
+                id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                location: westus2
+                name: Workload
+                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                properties:
+                  fullName: myPrivateCloud/Datacenter/Cluster/Workload
+                type: Microsoft.VMwareCloudSimple/resourcePools
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates':
     get:
       description: Returns list of virtual machine templates in region for private cloud
@@ -705,41 +715,42 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                  location: westus2
-                  name: centos-template
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:7e:93'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    path: Datacenter/Workload VMs
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    vSphereNetworks: null
-                    vSphereTags: null
-                    vmwaretools: '10309'
-                  type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                    location: westus2
+                    name: centos-template
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:7e:93'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      path: Datacenter/Workload VMs
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      vSphereNetworks: null
+                      vSphereTags: null
+                      vmwaretools: '10309'
+                    type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates/{virtualMachineTemplateName}':
@@ -778,40 +789,41 @@ paths:
             virtualMachineTemplateName: vm-34
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-              location: westus2
-              name: centos-template
-              properties:
-                amountOfRam: 4096
-                controllers:
-                  - id: '1000'
-                    name: SCSI controller 0
-                    subType: LSI_PARALEL
-                    type: SCSI
-                disks:
-                  - controllerId: '1000'
-                    independenceMode: persistent
-                    totalSize: 10485760
-                    virtualDiskId: '2000'
-                    virtualDiskName: Hard disk 1
-                guestOS: Other (32-bit)
-                guestOSType: other
-                nics:
-                  - ipAddresses: null
-                    macAddress: '00:50:56:a6:7e:93'
-                    network:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                    nicType: E1000
-                    powerOnBoot: true
-                    virtualNicId: '4000'
-                    virtualNicName: Network adapter 1
-                numberOfCores: 2
-                path: Datacenter/Workload VMs
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                vSphereNetworks: null
-                vSphereTags: null
-                vmwaretools: '10309'
-              type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
+              body:
+                id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                location: westus2
+                name: centos-template
+                properties:
+                  amountOfRam: 4096
+                  controllers:
+                    - id: '1000'
+                      name: SCSI controller 0
+                      subType: LSI_PARALEL
+                      type: SCSI
+                  disks:
+                    - controllerId: '1000'
+                      independenceMode: persistent
+                      totalSize: 10485760
+                      virtualDiskId: '2000'
+                      virtualDiskName: Hard disk 1
+                  guestOS: Other (32-bit)
+                  guestOSType: other
+                  nics:
+                    - ipAddresses: null
+                      macAddress: '00:50:56:a6:7e:93'
+                      network:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                      nicType: E1000
+                      powerOnBoot: true
+                      virtualNicId: '4000'
+                      virtualNicName: Network adapter 1
+                  numberOfCores: 2
+                  path: Datacenter/Workload VMs
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                  vSphereNetworks: null
+                  vSphereTags: null
+                  vmwaretools: '10309'
+                type: Microsoft.VMwareCloudSimple/virtualMachineTemplates
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks':
     get:
       description: Return list of virtual networks in location for private cloud
@@ -848,42 +860,43 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - assignable: false
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                  location: westus2
-                  name: Datacenter/CS-Management
-                  properties:
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  type: Microsoft.VMwareCloudSimple/virtualNetworks
-                - assignable: true
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-20'
-                  location: westus2
-                  name: Datacenter/CS-Rescue
-                  properties:
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  type: Microsoft.VMwareCloudSimple/virtualNetworks
-                - assignable: false
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-21'
-                  location: westus2
-                  name: Datacenter/CS-VSAN
-                  properties:
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  type: Microsoft.VMwareCloudSimple/virtualNetworks
-                - assignable: false
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-22'
-                  location: westus2
-                  name: Datacenter/CS-VMotion
-                  properties:
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  type: Microsoft.VMwareCloudSimple/virtualNetworks
-                - assignable: true
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-35'
-                  location: westus2
-                  name: Datacenter/net-01
-                  properties:
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  type: Microsoft.VMwareCloudSimple/virtualNetworks
+              body:
+                value:
+                  - assignable: false
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                    location: westus2
+                    name: Datacenter/CS-Management
+                    properties:
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    type: Microsoft.VMwareCloudSimple/virtualNetworks
+                  - assignable: true
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-20'
+                    location: westus2
+                    name: Datacenter/CS-Rescue
+                    properties:
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    type: Microsoft.VMwareCloudSimple/virtualNetworks
+                  - assignable: false
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-21'
+                    location: westus2
+                    name: Datacenter/CS-VSAN
+                    properties:
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    type: Microsoft.VMwareCloudSimple/virtualNetworks
+                  - assignable: false
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-22'
+                    location: westus2
+                    name: Datacenter/CS-VMotion
+                    properties:
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    type: Microsoft.VMwareCloudSimple/virtualNetworks
+                  - assignable: true
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-35'
+                    location: westus2
+                    name: Datacenter/net-01
+                    properties:
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    type: Microsoft.VMwareCloudSimple/virtualNetworks
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks/{virtualNetworkName}':
@@ -922,13 +935,14 @@ paths:
             virtualNetworkName: dvportgroup-19
           responses:
             '200':
-              assignable: false
-              id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-              location: westus2
-              name: Datacenter/CS-Management
-              properties:
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-              type: Microsoft.VMwareCloudSimple/virtualNetworks
+              body:
+                assignable: false
+                id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                location: westus2
+                name: Datacenter/CS-Management
+                properties:
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                type: Microsoft.VMwareCloudSimple/virtualNetworks
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/usages':
     get:
       description: Returns list of usage in region
@@ -961,23 +975,24 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - dedicatedAvailabilityZoneId: az1
-                  dedicatedAvailabilityZoneName: Availability Zone 1
-                  dedicatedPlacementGroupId: n1
-                  dedicatedPlacementGroupName: Placement Group 1
-                  limit: 0
-                  resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                  skuId: general
-                  skuName: CS28-Node
-                - dedicatedAvailabilityZoneId: az1
-                  dedicatedAvailabilityZoneName: Availability Zone 1
-                  dedicatedPlacementGroupId: n1
-                  dedicatedPlacementGroupName: Placement Group 1
-                  limit: 0
-                  resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                  skuId: large
-                  skuName: CS36-Node
+              body:
+                value:
+                  - dedicatedAvailabilityZoneId: az1
+                    dedicatedAvailabilityZoneName: Availability Zone 1
+                    dedicatedPlacementGroupId: n1
+                    dedicatedPlacementGroupName: Placement Group 1
+                    limit: 0
+                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                    skuId: general
+                    skuName: CS28-Node
+                  - dedicatedAvailabilityZoneId: az1
+                    dedicatedAvailabilityZoneName: Availability Zone 1
+                    dedicatedPlacementGroupId: n1
+                    dedicatedPlacementGroupName: Placement Group 1
+                    limit: 0
+                    resourceType: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                    skuId: large
+                    skuName: CS36-Node
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/virtualMachines':
@@ -1020,121 +1035,122 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-1'
-                  location: westus2
-                  name: virtualMachine-1
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:d0:e1'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    resourcePool:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
-                    templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    vSphereNetworks: null
-                    vmId: vm-100
-                    vmwaretools: '10309'
-                  tags:
-                    inUse: 'true'
-                  type: Microsoft.VMwareCloudSimple/virtualMachines
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-2'
-                  location: westus2
-                  name: virtualMachine-2
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:33:12'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    resourcePool:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
-                    templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    vSphereNetworks: null
-                    vmId: vm-101
-                    vmwaretools: '10309'
-                  tags:
-                    inUse: 'true'
-                  type: Microsoft.VMwareCloudSimple/virtualMachines
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-3'
-                  location: westus2
-                  name: virtualMachine-3
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:63:f3'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    resourcePool:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
-                    templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    vSphereNetworks: null
-                    vmId: vm-102
-                    vmwaretools: '10309'
-                  tags:
-                    inUse: 'true'
-                  type: Microsoft.VMwareCloudSimple/virtualMachines
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-1'
+                    location: westus2
+                    name: virtualMachine-1
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:d0:e1'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      resourcePool:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
+                      templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      vSphereNetworks: null
+                      vmId: vm-100
+                      vmwaretools: '10309'
+                    tags:
+                      inUse: 'true'
+                    type: Microsoft.VMwareCloudSimple/virtualMachines
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-2'
+                    location: westus2
+                    name: virtualMachine-2
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:33:12'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      resourcePool:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
+                      templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      vSphereNetworks: null
+                      vmId: vm-101
+                      vmwaretools: '10309'
+                    tags:
+                      inUse: 'true'
+                    type: Microsoft.VMwareCloudSimple/virtualMachines
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-3'
+                    location: westus2
+                    name: virtualMachine-3
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:63:f3'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      resourcePool:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
+                      templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      vSphereNetworks: null
+                      vmId: vm-102
+                      vmwaretools: '10309'
+                    tags:
+                      inUse: 'true'
+                    type: Microsoft.VMwareCloudSimple/virtualMachines
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes':
@@ -1178,70 +1194,71 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-east-1'
-                  location: eastus
-                  name: node-east-1
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    cloudRackName: cloud_rack_1
-                    created: '2019-05-21T07:32:12.134Z'
-                    placementGroupId: n2
-                    placementGroupName: Placement Group 2
-                    privateCloudId: private_cloud_id
-                    privateCloudName: private_cloud_name
-                    purchaseId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    skuDescription:
-                      id: general
-                      name: CS28-Node
-                    status: used
-                    vmwareClusterName: Cluster
-                  sku:
-                    name: VMware_CloudSimple_CS28
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-east-2'
-                  location: eastus
-                  name: node-east-2
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    cloudRackName: cloud_rack_1
-                    created: '2019-05-21T07:32:12.114Z'
-                    placementGroupId: n2
-                    placementGroupName: Placement Group 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    privateCloudName: private_cloud_name
-                    purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
-                    skuDescription:
-                      id: general
-                      name: CS28-Node
-                    status: used
-                    vmwareClusterName: Cluster
-                  sku:
-                    name: VMware_CloudSimple_CS28
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
-                - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
-                  location: eastus
-                  name: myNode
-                  properties:
-                    availabilityZoneId: az1
-                    availabilityZoneName: Availability Zone 1
-                    cloudRackName: cloud_rack_1
-                    created: '2019-05-08T09:35:47.961Z'
-                    placementGroupId: n2
-                    placementGroupName: Placement Group 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    privateCloudName: myPrivateCloud
-                    purchaseId: b3fcd958-f19c-4421-ab46-e4fa9cc8514e
-                    skuDescription:
-                      id: general
-                      name: CS28-Node
-                    status: used
-                    vmwareClusterName: Cluster
-                  sku:
-                    name: VMware_CloudSimple_CS28
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-east-1'
+                    location: eastus
+                    name: node-east-1
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      cloudRackName: cloud_rack_1
+                      created: '2019-05-21T07:32:12.134Z'
+                      placementGroupId: n2
+                      placementGroupName: Placement Group 2
+                      privateCloudId: private_cloud_id
+                      privateCloudName: private_cloud_name
+                      purchaseId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      skuDescription:
+                        id: general
+                        name: CS28-Node
+                      status: used
+                      vmwareClusterName: Cluster
+                    sku:
+                      name: VMware_CloudSimple_CS28
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                  - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/node-east-2'
+                    location: eastus
+                    name: node-east-2
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      cloudRackName: cloud_rack_1
+                      created: '2019-05-21T07:32:12.114Z'
+                      placementGroupId: n2
+                      placementGroupName: Placement Group 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      privateCloudName: private_cloud_name
+                      purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
+                      skuDescription:
+                        id: general
+                        name: CS28-Node
+                      status: used
+                      vmwareClusterName: Cluster
+                    sku:
+                      name: VMware_CloudSimple_CS28
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+                  - id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
+                    location: eastus
+                    name: myNode
+                    properties:
+                      availabilityZoneId: az1
+                      availabilityZoneName: Availability Zone 1
+                      cloudRackName: cloud_rack_1
+                      created: '2019-05-08T09:35:47.961Z'
+                      placementGroupId: n2
+                      placementGroupName: Placement Group 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      privateCloudName: myPrivateCloud
+                      purchaseId: b3fcd958-f19c-4421-ab46-e4fa9cc8514e
+                      skuDescription:
+                        id: general
+                        name: CS28-Node
+                      status: used
+                      vmwareClusterName: Cluster
+                    sku:
+                      name: VMware_CloudSimple_CS28
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/{dedicatedCloudNodeName}':
@@ -1314,27 +1331,28 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
-              location: eastus
-              name: myNode
-              properties:
-                availabilityZoneId: az1
-                availabilityZoneName: Availability Zone 1
-                cloudRackName: cloud_rack_1
-                created: '2019-05-21T07:32:12.114Z'
-                placementGroupId: n2
-                placementGroupName: Placement Group 2
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                privateCloudName: private_cloud_name
-                purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
-                skuDescription:
-                  id: general
-                  name: CS28-Node
-                status: used
-                vmwareClusterName: Cluster
-              sku:
-                name: VMware_CloudSimple_CS28
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+              body:
+                id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
+                location: eastus
+                name: myNode
+                properties:
+                  availabilityZoneId: az1
+                  availabilityZoneName: Availability Zone 1
+                  cloudRackName: cloud_rack_1
+                  created: '2019-05-21T07:32:12.114Z'
+                  placementGroupId: n2
+                  placementGroupName: Placement Group 2
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                  privateCloudName: private_cloud_name
+                  purchaseId: 225fadec-3bbe-4e61-a119-ff102da67d0d
+                  skuDescription:
+                    id: general
+                    name: CS28-Node
+                  status: used
+                  vmwareClusterName: Cluster
+                sku:
+                  name: VMware_CloudSimple_CS28
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
     patch:
       description: Patches dedicated node properties
       operationId: dedicatedCloudNode_Update
@@ -1379,21 +1397,22 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
-              location: westus
-              name: myNode
-              properties:
-                availabilityZoneId: az1
-                created: '2019-05-21T13:43:26.441Z'
-                placementGroupId: n1
-                purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
-                skuDescription:
-                  id: general
-                  name: CS28-Node
-                status: unused
-              tags:
-                myTag: tagValue
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
+                location: westus
+                name: myNode
+                properties:
+                  availabilityZoneId: az1
+                  created: '2019-05-21T13:43:26.441Z'
+                  placementGroupId: n1
+                  purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
+                  skuDescription:
+                    id: general
+                    name: CS28-Node
+                  status: unused
+                tags:
+                  myTag: tagValue
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
     put:
       description: Returns dedicated cloud node by its name
       operationId: dedicatedCloudNode_CreateOrUpdate
@@ -1455,22 +1474,23 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
-              location: westus
-              name: myNode
-              properties:
-                availabilityZoneId: az1
-                created: '2019-05-21T13:43:26.441Z'
-                placementGroupId: n1
-                provisioningState: Accepted
-                purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
-                skuDescription:
-                  id: general
-                  name: CS28-Node
-                status: unused
-              sku:
-                name: VMware_CloudSimple_CS28
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode'
+                location: westus
+                name: myNode
+                properties:
+                  availabilityZoneId: az1
+                  created: '2019-05-21T13:43:26.441Z'
+                  placementGroupId: n1
+                  provisioningState: Accepted
+                  purchaseId: 56acbd46-3d36-4bbf-9b08-57c30fdf6932
+                  skuDescription:
+                    id: general
+                    name: CS28-Node
+                  status: unused
+                sku:
+                  name: VMware_CloudSimple_CS28
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudNodes
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices':
     get:
@@ -1513,23 +1533,24 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-east'
-                  location: eastus
-                  name: service-east
-                  properties:
-                    gatewaySubnet: 10.101.201.0/28
-                    isAccountOnboarded: onBoarded
-                    serviceURL: 'https://eastus-he.azure.cloudsimple.com'
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-west'
-                  location: westus
-                  name: service-west
-                  properties:
-                    gatewaySubnet: 10.0.0.0/28
-                    isAccountOnboarded: onBoarded
-                    serviceURL: 'https://westus-he.azure.cloudsimple.com'
-                  type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-east'
+                    location: eastus
+                    name: service-east
+                    properties:
+                      gatewaySubnet: 10.101.201.0/28
+                      isAccountOnboarded: onBoarded
+                      serviceURL: 'https://eastus-he.azure.cloudsimple.com'
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-west'
+                    location: westus
+                    name: service-west
+                    properties:
+                      gatewaySubnet: 10.0.0.0/28
+                      isAccountOnboarded: onBoarded
+                      serviceURL: 'https://westus-he.azure.cloudsimple.com'
+                    type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/{dedicatedCloudServiceName}':
@@ -1607,15 +1628,16 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
-              location: westus
-              name: myService
-              properties:
-                gatewaySubnet: 10.0.10.0/28
-                isAccountOnboarded: notOnBoarded
-                nodes: 1
-                serviceURL: 'https://westus-he.azure.cloudsimple.com'
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
+                location: westus
+                name: myService
+                properties:
+                  gatewaySubnet: 10.0.10.0/28
+                  isAccountOnboarded: notOnBoarded
+                  nodes: 1
+                  serviceURL: 'https://westus-he.azure.cloudsimple.com'
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
     patch:
       description: Patch dedicated cloud service's properties
       operationId: dedicatedCloudService_Update
@@ -1658,16 +1680,17 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
-              location: westus2
-              name: myService
-              properties:
-                gatewaySubnet: 10.0.0.0/28
-                isAccountOnboarded: onBoarded
-                serviceURL: 'https://westus-he.azure.cloudsimple.com'
-              tags:
-                myTag: tagValue
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
+                location: westus2
+                name: myService
+                properties:
+                  gatewaySubnet: 10.0.0.0/28
+                  isAccountOnboarded: onBoarded
+                  serviceURL: 'https://westus-he.azure.cloudsimple.com'
+                tags:
+                  myTag: tagValue
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
     put:
       description: Create dedicate cloud service
       operationId: dedicatedCloudService_CreateOrUpdate
@@ -1713,13 +1736,14 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
-              location: westus
-              name: myService
-              properties:
-                gatewaySubnet: 10.0.10.0/28
-                isAccountOnboarded: notOnBoarded
-              type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService'
+                location: westus
+                name: myService
+                properties:
+                  gatewaySubnet: 10.0.10.0/28
+                  isAccountOnboarded: notOnBoarded
+                type: Microsoft.VMwareCloudSimple/dedicatedCloudServices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines':
     get:
       description: Returns list of virtual machine within resource group
@@ -1762,83 +1786,84 @@ paths:
             subscriptionId: '{subscription-id}'
           responses:
             '200':
-              value:
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-2'
-                  location: westus2
-                  name: virtualMachine-2
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:33:12'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    resourcePool:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
-                    templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    vSphereNetworks: null
-                    vmId: vm-101
-                    vmwaretools: '10309'
-                  tags:
-                    inUse: 'true'
-                  type: Microsoft.VMwareCloudSimple/virtualMachines
-                - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-3'
-                  location: westus2
-                  name: virtualMachine-3
-                  properties:
-                    amountOfRam: 4096
-                    controllers:
-                      - id: '1000'
-                        name: SCSI controller 0
-                        subType: LSI_PARALEL
-                        type: SCSI
-                    disks:
-                      - controllerId: '1000'
-                        independenceMode: persistent
-                        totalSize: 10485760
-                        virtualDiskId: '2000'
-                        virtualDiskName: Hard disk 1
-                    guestOS: Other (32-bit)
-                    guestOSType: other
-                    nics:
-                      - ipAddresses: null
-                        macAddress: '00:50:56:a6:63:f3'
-                        network:
-                          id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                        nicType: E1000
-                        powerOnBoot: true
-                        virtualNicId: '4000'
-                        virtualNicName: Network adapter 1
-                    numberOfCores: 2
-                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                    resourcePool:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
-                    templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                    vSphereNetworks: null
-                    vmId: vm-102
-                    vmwaretools: '10309'
-                  tags:
-                    inUse: 'true'
-                  type: Microsoft.VMwareCloudSimple/virtualMachines
+              body:
+                value:
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-2'
+                    location: westus2
+                    name: virtualMachine-2
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:33:12'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      resourcePool:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
+                      templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      vSphereNetworks: null
+                      vmId: vm-101
+                      vmwaretools: '10309'
+                    tags:
+                      inUse: 'true'
+                    type: Microsoft.VMwareCloudSimple/virtualMachines
+                  - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/virtualMachine-3'
+                    location: westus2
+                    name: virtualMachine-3
+                    properties:
+                      amountOfRam: 4096
+                      controllers:
+                        - id: '1000'
+                          name: SCSI controller 0
+                          subType: LSI_PARALEL
+                          type: SCSI
+                      disks:
+                        - controllerId: '1000'
+                          independenceMode: persistent
+                          totalSize: 10485760
+                          virtualDiskId: '2000'
+                          virtualDiskName: Hard disk 1
+                      guestOS: Other (32-bit)
+                      guestOSType: other
+                      nics:
+                        - ipAddresses: null
+                          macAddress: '00:50:56:a6:63:f3'
+                          network:
+                            id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                          nicType: E1000
+                          powerOnBoot: true
+                          virtualNicId: '4000'
+                          virtualNicName: Network adapter 1
+                      numberOfCores: 2
+                      privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                      resourcePool:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/rp-test/resourcepools/resgroup-26'
+                      templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                      vSphereNetworks: null
+                      vmId: vm-102
+                      vmwaretools: '10309'
+                    tags:
+                      inUse: 'true'
+                    type: Microsoft.VMwareCloudSimple/virtualMachines
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}':
@@ -1924,59 +1949,60 @@ paths:
             virtualMachineName: myVirtualMachine
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
-              location: westus2
-              name: myVirtualMachine
-              properties:
-                amountOfRam: 4096
-                controllers:
-                  - id: '1000'
-                    name: SCSI controller 0
-                    subType: LSI_PARALEL
-                    type: SCSI
-                disks:
-                  - controllerId: '1000'
-                    independenceMode: persistent
-                    totalSize: 10485760
-                    virtualDiskId: '2000'
-                    virtualDiskName: Hard disk 1
-                folder: Datacenter/Workload VMs
-                guestOS: Other (32-bit)
-                guestOSType: other
-                nics:
-                  - ipAddresses: null
-                    macAddress: '00:50:56:a6:d0:e1'
-                    network:
-                      assignable: false
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualnetworks/dvportgroup-19'
-                      location: westus2
-                      name: Datacenter/CS-Management
-                      properties:
-                        privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                      type: Microsoft.VMwareCloudSimple/virtualNetworks
-                    nicType: E1000
-                    powerOnBoot: true
-                    virtualNicId: '4000'
-                    virtualNicName: Network adapter 1
-                numberOfCores: 2
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                provisioningState: Succeeded
-                resourcePool:
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcepools/resgroup-26'
-                  location: westus2
-                  name: Workload
+              body:
+                id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
+                location: westus2
+                name: myVirtualMachine
+                properties:
+                  amountOfRam: 4096
+                  controllers:
+                    - id: '1000'
+                      name: SCSI controller 0
+                      subType: LSI_PARALEL
+                      type: SCSI
+                  disks:
+                    - controllerId: '1000'
+                      independenceMode: persistent
+                      totalSize: 10485760
+                      virtualDiskId: '2000'
+                      virtualDiskName: Hard disk 1
+                  folder: Datacenter/Workload VMs
+                  guestOS: Other (32-bit)
+                  guestOSType: other
+                  nics:
+                    - ipAddresses: null
+                      macAddress: '00:50:56:a6:d0:e1'
+                      network:
+                        assignable: false
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualnetworks/dvportgroup-19'
+                        location: westus2
+                        name: Datacenter/CS-Management
+                        properties:
+                          privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                        type: Microsoft.VMwareCloudSimple/virtualNetworks
+                      nicType: E1000
+                      powerOnBoot: true
+                      virtualNicId: '4000'
+                      virtualNicName: Network adapter 1
+                  numberOfCores: 2
                   privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                  properties:
-                    fullName: Datacenter/Cluster/Workload
-                  type: Microsoft.VMwareCloudSimple/resourcePools
-                status: running
-                templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualmachinetemplates/vm-34'
-                vSphereNetworks: null
-                vmId: vm-100
-                vmwaretools: '10309'
-              tags:
-                inUse: 'true'
-              type: Microsoft.VMwareCloudSimple/virtualMachines
+                  provisioningState: Succeeded
+                  resourcePool:
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcepools/resgroup-26'
+                    location: westus2
+                    name: Workload
+                    privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                    properties:
+                      fullName: Datacenter/Cluster/Workload
+                    type: Microsoft.VMwareCloudSimple/resourcePools
+                  status: running
+                  templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualmachinetemplates/vm-34'
+                  vSphereNetworks: null
+                  vmId: vm-100
+                  vmwaretools: '10309'
+                tags:
+                  inUse: 'true'
+                type: Microsoft.VMwareCloudSimple/virtualMachines
     patch:
       description: Patch virtual machine properties
       operationId: virtualMachine_Update
@@ -2019,45 +2045,46 @@ paths:
                 myTag: tagValue
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
-              location: westus2
-              name: myVirtualMachine
-              properties:
-                amountOfRam: 4096
-                controllers:
-                  - id: '1000'
-                    name: SCSI controller 0
-                    subType: LSI_PARALEL
-                    type: SCSI
-                disks:
-                  - controllerId: '1000'
-                    independenceMode: persistent
-                    totalSize: 10485760
-                    virtualDiskId: '2000'
-                    virtualDiskName: Hard disk 1
-                guestOS: Other (32-bit)
-                guestOSType: other
-                nics:
-                  - ipAddresses: null
-                    network:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                    nicType: E1000
-                    powerOnBoot: true
-                    virtualNicId: '4000'
-                    virtualNicName: Network adapter 1
-                numberOfCores: 2
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                provisioningState: Succeeded
-                resourcePool:
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-                status: running
-                templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                vSphereNetworks: null
-                vmId: vm-106
-                vmwaretools: '10309'
-              tags:
-                myTag: tagValue
-              type: Microsoft.VMwareCloudSimple/virtualMachines
+              body:
+                id: '/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
+                location: westus2
+                name: myVirtualMachine
+                properties:
+                  amountOfRam: 4096
+                  controllers:
+                    - id: '1000'
+                      name: SCSI controller 0
+                      subType: LSI_PARALEL
+                      type: SCSI
+                  disks:
+                    - controllerId: '1000'
+                      independenceMode: persistent
+                      totalSize: 10485760
+                      virtualDiskId: '2000'
+                      virtualDiskName: Hard disk 1
+                  guestOS: Other (32-bit)
+                  guestOSType: other
+                  nics:
+                    - ipAddresses: null
+                      network:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                      nicType: E1000
+                      powerOnBoot: true
+                      virtualNicId: '4000'
+                      virtualNicName: Network adapter 1
+                  numberOfCores: 2
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                  provisioningState: Succeeded
+                  resourcePool:
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                  status: running
+                  templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                  vSphereNetworks: null
+                  vmId: vm-106
+                  vmwaretools: '10309'
+                tags:
+                  myTag: tagValue
+                type: Microsoft.VMwareCloudSimple/virtualMachines
       x-ms-long-running-operation: true
     put:
       description: Create Or Update Virtual Machine
@@ -2133,69 +2160,71 @@ paths:
                 templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
           responses:
             '200':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
-              location: westus2
-              name: myVirtualMachine
-              properties:
-                amountOfRam: 4096
-                controllers: []
-                disks:
-                  - controllerId: '1000'
-                    independenceMode: persistent
-                    totalSize: 10485760
-                    virtualDiskId: '2000'
-                    virtualDiskName: Hard disk 1
-                guestOS: Other (32-bit)
-                guestOSType: other
-                nics:
-                  - ipAddresses: null
-                    network:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                    nicType: E1000
-                    powerOnBoot: true
-                    virtualNicId: '4000'
-                    virtualNicName: Network adapter 1
-                numberOfCores: 2
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                provisioningState: Created
-                resourcePool:
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-                templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                vSphereNetworks: null
-                vmwaretools: '0'
-              type: Microsoft.VMwareCloudSimple/virtualMachines
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
+                location: westus2
+                name: myVirtualMachine
+                properties:
+                  amountOfRam: 4096
+                  controllers: []
+                  disks:
+                    - controllerId: '1000'
+                      independenceMode: persistent
+                      totalSize: 10485760
+                      virtualDiskId: '2000'
+                      virtualDiskName: Hard disk 1
+                  guestOS: Other (32-bit)
+                  guestOSType: other
+                  nics:
+                    - ipAddresses: null
+                      network:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                      nicType: E1000
+                      powerOnBoot: true
+                      virtualNicId: '4000'
+                      virtualNicName: Network adapter 1
+                  numberOfCores: 2
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                  provisioningState: Created
+                  resourcePool:
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                  templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                  vSphereNetworks: null
+                  vmwaretools: '0'
+                type: Microsoft.VMwareCloudSimple/virtualMachines
             '201':
-              id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
-              location: westus2
-              name: myVirtualMachine
-              properties:
-                amountOfRam: 4096
-                controllers: []
-                disks:
-                  - controllerId: '1000'
-                    independenceMode: persistent
-                    totalSize: 10485760
-                    virtualDiskId: '2000'
-                    virtualDiskName: Hard disk 1
-                guestOS: Other (32-bit)
-                guestOSType: other
-                nics:
-                  - ipAddresses: null
-                    network:
-                      id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
-                    nicType: E1000
-                    powerOnBoot: true
-                    virtualNicId: '4000'
-                    virtualNicName: Network adapter 1
-                numberOfCores: 2
-                privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
-                provisioningState: Created
-                resourcePool:
-                  id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
-                templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
-                vSphereNetworks: null
-                vmwaretools: '0'
-              type: Microsoft.VMwareCloudSimple/virtualMachines
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine'
+                location: westus2
+                name: myVirtualMachine
+                properties:
+                  amountOfRam: 4096
+                  controllers: []
+                  disks:
+                    - controllerId: '1000'
+                      independenceMode: persistent
+                      totalSize: 10485760
+                      virtualDiskId: '2000'
+                      virtualDiskName: Hard disk 1
+                  guestOS: Other (32-bit)
+                  guestOSType: other
+                  nics:
+                    - ipAddresses: null
+                      network:
+                        id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19'
+                      nicType: E1000
+                      powerOnBoot: true
+                      virtualNicId: '4000'
+                      virtualNicName: Network adapter 1
+                  numberOfCores: 2
+                  privateCloudId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud'
+                  provisioningState: Created
+                  resourcePool:
+                    id: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26'
+                  templateId: '/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34'
+                  vSphereNetworks: null
+                  vmwaretools: '0'
+                type: Microsoft.VMwareCloudSimple/virtualMachines
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/start':
     post:

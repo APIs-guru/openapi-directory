@@ -269,8 +269,8 @@ paths:
   '/v1alpha2/{name}/$everything':
     get:
       description: |-
-        Retrieves all the resources in the patient compartment for a `Patient`
-        resource.
+        Retrieves all the resources directly referenced by a patient, as well as
+        all of the resources in the patient compartment.
 
         Implements the FHIR extended operation
         [Patient-everything](http://hl7.org/implement/standards/fhir/STU3/patient-operations.html#everything).
@@ -284,6 +284,10 @@ paths:
         GCP error might be returned instead.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.Patient-everything
       parameters:
+        - description: Maximum number of resources in a page. Defaults to 100.
+          in: query
+          name: _count
+          type: integer
         - description: |-
             The response includes records prior to the end date. If no end date is
             provided, all records subsequent to the start date are in scope.
@@ -296,6 +300,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Used to retrieve the next or previous page of results
+            when using pagination. Value should be set to the value of page_token set
+            in next or previous page links' url. Next and previous page are returned
+            in the response bundle's links field, where `link.relation` is "previous"
+            or "next".
+
+            Omit `page_token` if no previous request has been made.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             The response includes records subsequent to the start date. If no start
             date is provided, all records prior to the end date are in scope.
@@ -708,7 +723,8 @@ paths:
         Imports data into the DICOM store by copying it from the specified source.
         For errors, the Operation will be populated with error details (in the form
         of ImportDicomDataErrorDetails in error.details), which will hold
-        finer-grained error information.
+        finer-grained error information. Errors are also logged to Stackdriver
+        (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)).
         The metadata field type is
         OperationMetadata.
       operationId: healthcare.projects.locations.datasets.dicomStores.import
@@ -1118,14 +1134,15 @@ paths:
         - projects
     get:
       description: |-
-        RetrieveFrames returns instances associated with the given study, series,
-        SOP Instance UID and frame numbers. See
+        RetrieveRenderedFrames returns instances associated with the given study,
+        series, SOP Instance UID and frame numbers in an acceptable Rendered Media
+        Type. See
         http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-      operationId: healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.series.instances.frames.retrieveFrames
+      operationId: healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.series.instances.frames.rendered
       parameters:
         - description: |-
-            The path of the RetrieveFrames DICOMweb request (e.g.,
-            `studies/{study_id}/series/{series_id}/instances/{instance_id}/frames/{frame_list}`).
+            The path of the RetrieveRenderedFrames DICOMweb request (e.g.,
+            `studies/{study_id}/series/{series_id}/instances/{instance_id}/frames/{frame_list}/rendered`).
           in: path
           name: dicomWebPath
           required: true
@@ -1376,6 +1393,14 @@ paths:
         be overridden by the `_count` parameter up to a maximum limit of 1000. If
         there are additional results, the returned `Bundle` will contain
         pagination links.
+
+        Resources with a total size larger than 5MB or a field count larger than
+        50,000 might not be fully searchable as the server might trim its generated
+        search index in those cases.
+
+        Note: FHIR resources are indexed asynchronously, so there might be a slight
+        delay between the time a resource is created or changes and when the change
+        is reflected in search results.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.search
       parameters:
         - in: body
@@ -1808,7 +1833,12 @@ paths:
         - projects
   '/v1alpha2/{parent}/messages':
     get:
-      description: Lists all the messages in the given HL7v2 store with support for filtering.
+      description: |-
+        Lists all the messages in the given HL7v2 store with support for filtering.
+
+        Note: HL7v2 messages are indexed asynchronously, so there might be a slight
+        delay between the time a message is created and when it can be found
+        through a filter.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.list
       parameters:
         - description: |-
@@ -1822,7 +1852,7 @@ paths:
             *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in
             the dataset's time_zone, from the MSH-7 segment; for example
             `send_date < "2017-01-02"`
-            *  `send_time`, the timestamp of when the message was sent, using the
+            *  `send_time`, the timestamp when the message was sent, using the
             RFC3339 time format for comparisons, from the MSH-7 segment; for example
             `send_time < "2017-01-02T00:00:00-05:00"`
             *  `send_facility`, the care center that the message came from, from the
@@ -1994,7 +2024,7 @@ paths:
       parameters:
         - description: |-
             Optional. The policy format version to be returned.
-            Acceptable values are 0 and 1.
+            Acceptable values are 0, 1, and 3.
             If the value is 0, or the field is omitted, policy format version 1 will be
             returned.
           in: query
@@ -2217,7 +2247,7 @@ definitions:
         description: Details of the source.
       imageAnnotation:
         $ref: '#/definitions/ImageAnnotation'
-        description: 'Annnotations for images, e.g., bounding polygons.'
+        description: 'Annotations for images, e.g., bounding polygons.'
       name:
         description: |-
           Output only. Resource name of the Annotation, of the form
@@ -2361,12 +2391,6 @@ definitions:
         items:
           type: string
         type: array
-      ignoreChildExemptions:
-        description: |-
-          Specifies whether principals can be exempted for the same LogType in
-          lower-level resource policies. If true, any lower-level exemptions will
-          be ignored.
-        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -2461,8 +2485,8 @@ definitions:
       cryptoKey:
         description: |-
           An AES 128/192/256 bit key. Causes the hash to be computed based on this
-          key. A default key is generated for each DeidentifyDataset operation and is
-          used wherever crypto_key is not specified.
+          key. A default key is generated for each Deidentify operation and is used
+          wherever crypto_key is not specified.
         format: byte
         type: string
     type: object
@@ -2496,8 +2520,7 @@ definitions:
         description: |-
           An AES 128/192/256 bit key. Causes the shift to be computed based on this
           key and the patient ID. A default key is generated for each
-          DeidentifyDataset operation and is used wherever crypto_key is not
-          specified.
+          Deidentify operation and is used wherever crypto_key is not specified.
         format: byte
         type: string
     type: object
@@ -2917,7 +2940,7 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0 and 1.
+          Acceptable values are 0, 1, and 3.
           If the value is 0, or the field is omitted, policy format version 1 will be
           returned.
         format: int32
@@ -4034,11 +4057,6 @@ definitions:
     type: object
   TextConfig:
     properties:
-      experimentalConfig:
-        description: |-
-          Experimental de-identification config to use. For internal use only.
-          If not specified, it is ignored and standard DLP is used.
-        type: string
       transformations:
         description: The transformations to apply to the detected data.
         items:

@@ -189,9 +189,10 @@ paths:
               type: /providers/Microsoft.Management/managementGroups
           responses:
             '200':
-              message: <error message>
-              nameAvailable: true|false
-              reason: Invalid|AlreadyExists
+              body:
+                message: <error message>
+                nameAvailable: false
+                reason: AlreadyExists
   /providers/Microsoft.Management/getEntities:
     post:
       description: |
@@ -542,7 +543,7 @@ paths:
           parameters:
             Cache-Control: no-cache
             api-version: 2018-01-01-preview
-            createGroupRequest:
+            createManagementGroupRequest:
               properties:
                 displayName: ChildGroup
                 parent:

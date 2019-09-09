@@ -72,7 +72,7 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/subid/providers/Microsofot.Network/bgpServiceCommunities/skype
+                  - id: /subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/skype
                     name: skype
                     properties:
                       bgpCommunities:
@@ -85,8 +85,8 @@ paths:
                           serviceGroup: O365
                           serviceSupportedRegion: Global
                       serviceName: skype
-                    type: Microsofot.Network/bgpServiceCommunities
-                  - id: /subscriptions/subid/providers/Microsofot.Network/bgpServiceCommunities/exchange
+                    type: Microsoft.Network/bgpServiceCommunities
+                  - id: /subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/exchange
                     name: exchange
                     properties:
                       bgpCommunities:
@@ -99,7 +99,7 @@ paths:
                           serviceGroup: O365
                           serviceSupportedRegion: Global
                       serviceName: exchange
-                    type: Microsofot.Network/bgpServiceCommunities
+                    type: Microsoft.Network/bgpServiceCommunities
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:

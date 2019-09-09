@@ -1,169 +1,118 @@
 swagger: '2.0'
+schemes:
+  - https
+  - http
+host: cloud9.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
 info:
-  version: '2017-09-23'
-  x-release: v4
-  title: AWS Cloud9
-  description: '<fullname>AWS Cloud9</fullname> <p>AWS Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.</p> <p>For more information about AWS Cloud9, see the <a href="https://docs.aws.amazon.com/cloud9/latest/user-guide">AWS Cloud9 User Guide</a>.</p> <p>AWS Cloud9 supports these operations:</p> <ul> <li> <p> <code>CreateEnvironmentEC2</code>: Creates an AWS Cloud9 development environment, launches an Amazon EC2 instance, and then connects from the instance to the environment.</p> </li> <li> <p> <code>CreateEnvironmentMembership</code>: Adds an environment member to an environment.</p> </li> <li> <p> <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.</p> </li> <li> <p> <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an environment.</p> </li> <li> <p> <code>DescribeEnvironmentMemberships</code>: Gets information about environment members for an environment.</p> </li> <li> <p> <code>DescribeEnvironments</code>: Gets information about environments.</p> </li> <li> <p> <code>DescribeEnvironmentStatus</code>: Gets status information for an environment.</p> </li> <li> <p> <code>ListEnvironments</code>: Gets a list of environment identifiers.</p> </li> <li> <p> <code>UpdateEnvironment</code>: Changes the settings of an existing environment.</p> </li> <li> <p> <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing environment member for an environment.</p> </li> </ul>'
-  x-logo:
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-    backgroundColor: '#FFFFFF'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    name: Mike Ralphson
     email: mike.ralphson@gmail.com
+    name: Mike Ralphson
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
+  description: '<fullname>AWS Cloud9</fullname> <p>AWS Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.</p> <p>For more information about AWS Cloud9, see the <a href="https://docs.aws.amazon.com/cloud9/latest/user-guide">AWS Cloud9 User Guide</a>.</p> <p>AWS Cloud9 supports these operations:</p> <ul> <li> <p> <code>CreateEnvironmentEC2</code>: Creates an AWS Cloud9 development environment, launches an Amazon EC2 instance, and then connects from the instance to the environment.</p> </li> <li> <p> <code>CreateEnvironmentMembership</code>: Adds an environment member to an environment.</p> </li> <li> <p> <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.</p> </li> <li> <p> <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an environment.</p> </li> <li> <p> <code>DescribeEnvironmentMemberships</code>: Gets information about environment members for an environment.</p> </li> <li> <p> <code>DescribeEnvironments</code>: Gets information about environments.</p> </li> <li> <p> <code>DescribeEnvironmentStatus</code>: Gets status information for an environment.</p> </li> <li> <p> <code>ListEnvironments</code>: Gets a list of environment identifiers.</p> </li> <li> <p> <code>UpdateEnvironment</code>: Changes the settings of an existing environment.</p> </li> <li> <p> <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing environment member for an environment.</p> </li> </ul>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  x-providerName: amazonaws.com
-  x-serviceName: cloud9
-  x-origin:
-    - contentType: application/json
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloud9-2017-09-23.normal.json'
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      x-apisguru-direct: true
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  title: AWS Cloud9
+  version: '2017-09-23'
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+  x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloud9-2017-09-23.normal.json'
+      x-apisguru-direct: true
   x-preferred: true
+  x-providerName: amazonaws.com
+  x-release: v4
+  x-serviceName: cloud9
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/cloud9/'
-host: cloud9.amazonaws.com
-basePath: /
-schemes:
-  - https
-  - http
-x-servers:
-  - url: 'http://cloud9.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Cloud9 multi-region endpoint
-  - url: 'https://cloud9.{region}.amazonaws.com'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-        default: us-east-1
-    description: The AWS Cloud9 multi-region endpoint
-  - url: 'http://cloud9.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Cloud9 endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://cloud9.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The AWS Cloud9 endpoint for China (Beijing) and China (Ningxia)
-x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  X-Amz-Content-Sha256:
-    name: X-Amz-Content-Sha256
-    in: header
-    type: string
-    required: false
-  X-Amz-Date:
-    name: X-Amz-Date
-    in: header
-    type: string
-    required: false
-  X-Amz-Algorithm:
-    name: X-Amz-Algorithm
-    in: header
-    type: string
-    required: false
-  X-Amz-Credential:
-    name: X-Amz-Credential
-    in: header
-    type: string
-    required: false
-  X-Amz-Security-Token:
-    name: X-Amz-Security-Token
-    in: header
-    type: string
-    required: false
-  X-Amz-Signature:
-    name: X-Amz-Signature
-    in: header
-    type: string
-    required: false
-  X-Amz-SignedHeaders:
-    name: X-Amz-SignedHeaders
-    in: header
-    type: string
-    required: false
 securityDefinitions:
   hmac:
-    type: apiKey
-    name: Authorization
-    in: header
     description: Amazon Signature authorization v4
+    in: header
+    name: Authorization
+    type: apiKey
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
+parameters:
+  X-Amz-Algorithm:
+    in: header
+    name: X-Amz-Algorithm
+    required: false
+    type: string
+  X-Amz-Content-Sha256:
+    in: header
+    name: X-Amz-Content-Sha256
+    required: false
+    type: string
+  X-Amz-Credential:
+    in: header
+    name: X-Amz-Credential
+    required: false
+    type: string
+  X-Amz-Date:
+    in: header
+    name: X-Amz-Date
+    required: false
+    type: string
+  X-Amz-Security-Token:
+    in: header
+    name: X-Amz-Security-Token
+    required: false
+    type: string
+  X-Amz-Signature:
+    in: header
+    name: X-Amz-Signature
+    required: false
+    type: string
+  X-Amz-SignedHeaders:
+    in: header
+    name: X-Amz-SignedHeaders
+    required: false
+    type: string
 paths:
   '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2':
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: CreateEnvironmentEC2
       description: 'Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.'
+      operationId: CreateEnvironmentEC2
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateEnvironmentEC2Request'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -197,18 +146,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateEnvironmentEC2Request'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -217,10 +155,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership':
     post:
-      operationId: CreateEnvironmentMembership
       description: Adds an environment member to an AWS Cloud9 development environment.
+      operationId: CreateEnvironmentMembership
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateEnvironmentMembershipRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -254,18 +203,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateEnvironmentMembershipRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironment':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -274,10 +212,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironment':
     post:
-      operationId: DeleteEnvironment
       description: 'Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.'
+      operationId: DeleteEnvironment
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEnvironmentRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.DeleteEnvironment
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -311,18 +260,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEnvironmentRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.DeleteEnvironment
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -331,10 +269,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership':
     post:
-      operationId: DeleteEnvironmentMembership
       description: Deletes an environment member from an AWS Cloud9 development environment.
+      operationId: DeleteEnvironmentMembership
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteEnvironmentMembershipRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -368,18 +317,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteEnvironmentMembershipRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -388,10 +326,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships':
     post:
-      operationId: DescribeEnvironmentMemberships
       description: Gets information about environment members for an AWS Cloud9 development environment.
+      operationId: DescribeEnvironmentMemberships
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentMembershipsRequest'
+        - description: Pagination limit
+          in: query
+          name: maxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: nextToken
+          required: false
+          type: string
+        - enum:
+            - AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -425,28 +384,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeEnvironmentMembershipsRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -455,10 +393,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus':
     post:
-      operationId: DescribeEnvironmentStatus
       description: Gets status information for an AWS Cloud9 development environment.
+      operationId: DescribeEnvironmentStatus
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentStatusRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -492,18 +441,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeEnvironmentStatusRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironments':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -512,10 +450,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironments':
     post:
-      operationId: DescribeEnvironments
       description: Gets information about AWS Cloud9 development environments.
+      operationId: DescribeEnvironments
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEnvironmentsRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.DescribeEnvironments
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -549,18 +498,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeEnvironmentsRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.DescribeEnvironments
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListEnvironments':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -569,10 +507,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListEnvironments':
     post:
-      operationId: ListEnvironments
       description: Gets a list of AWS Cloud9 development environment identifiers.
+      operationId: ListEnvironments
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEnvironmentsRequest'
+        - description: Pagination limit
+          in: query
+          name: maxResults
+          required: false
+          type: string
+        - description: Pagination token
+          in: query
+          name: nextToken
+          required: false
+          type: string
+        - enum:
+            - AWSCloud9WorkspaceManagementService.ListEnvironments
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -606,28 +565,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListEnvironmentsRequest'
-        - name: maxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: nextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.ListEnvironments
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironment':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -636,10 +574,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironment':
     post:
-      operationId: UpdateEnvironment
       description: Changes the settings of an existing AWS Cloud9 development environment.
+      operationId: UpdateEnvironment
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEnvironmentRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.UpdateEnvironment
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -673,18 +622,7 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateEnvironmentRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.UpdateEnvironment
+  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership':
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -693,10 +631,21 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership':
     post:
-      operationId: UpdateEnvironmentMembership
       description: Changes the settings of an existing environment member for an AWS Cloud9 development environment.
+      operationId: UpdateEnvironmentMembership
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEnvironmentMembershipRequest'
+        - enum:
+            - AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership
+          in: header
+          name: X-Amz-Target
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -730,71 +679,73 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateEnvironmentMembershipRequest'
-        - name: X-Amz-Target
-          in: header
-          required: true
-          type: string
-          enum:
-            - AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  CreateEnvironmentEC2Result:
+  AutomaticStopTimeMinutes:
+    maximum: 20160
+    type: integer
+  BadRequestException: {}
+  BoundedEnvironmentIdList:
+    items:
+      $ref: '#/definitions/EnvironmentId'
+    maxItems: 25
+    minItems: 1
+    type: array
+  ClientRequestToken:
+    pattern: '[\x20-\x7E]{10,128}'
+    type: string
+  ConflictException: {}
+  CreateEnvironmentEC2Request:
+    properties:
+      automaticStopTimeMinutes:
+        $ref: '#/definitions/AutomaticStopTimeMinutes'
+        description: The number of minutes until the running instance is shut down after the environment has last been used.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: '<p>A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation completes no more than one time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Client Tokens</a> in the <i>Amazon EC2 API Reference</i>.</p>'
+      description:
+        $ref: '#/definitions/EnvironmentDescription'
+        description: The description of the environment to create.
+      instanceType:
+        $ref: '#/definitions/InstanceType'
+        description: 'The type of instance to connect to the environment (for example, <code>t2.micro</code>).'
+      name:
+        $ref: '#/definitions/EnvironmentName'
+        description: <p>The name of the environment to create.</p> <p>This name is visible to other AWS IAM users in the same AWS account.</p>
+      ownerArn:
+        $ref: '#/definitions/UserArn'
+        description: 'The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment''s creator.'
+      subnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
+    required:
+      - name
+      - instanceType
     type: object
+  CreateEnvironmentEC2Result:
     example:
       environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
         description: The ID of the environment that was created.
-  CreateEnvironmentEC2Request:
     type: object
-    required:
-      - name
-      - instanceType
+  CreateEnvironmentMembershipRequest:
     properties:
-      name:
-        $ref: '#/definitions/EnvironmentName'
-        description: <p>The name of the environment to create.</p> <p>This name is visible to other AWS IAM users in the same AWS account.</p>
-      description:
-        $ref: '#/definitions/EnvironmentDescription'
-        description: The description of the environment to create.
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: '<p>A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation completes no more than one time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Client Tokens</a> in the <i>Amazon EC2 API Reference</i>.</p>'
-      instanceType:
-        $ref: '#/definitions/InstanceType'
-        description: 'The type of instance to connect to the environment (for example, <code>t2.micro</code>).'
-      subnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
-      automaticStopTimeMinutes:
-        $ref: '#/definitions/AutomaticStopTimeMinutes'
-        description: The number of minutes until the running instance is shut down after the environment has last been used.
-      ownerArn:
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment that contains the environment member you want to add.
+      permissions:
+        $ref: '#/definitions/MemberPermissions'
+        description: '<p>The type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
+      userArn:
         $ref: '#/definitions/UserArn'
-        description: 'The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment''s creator.'
-  BadRequestException: {}
-  ConflictException: {}
-  NotFoundException: {}
-  ForbiddenException: {}
-  TooManyRequestsException: {}
-  LimitExceededException: {}
-  InternalServerErrorException: {}
-  CreateEnvironmentMembershipResult:
+        description: The Amazon Resource Name (ARN) of the environment member you want to add.
+    required:
+      - environmentId
+      - userArn
+      - permissions
     type: object
+  CreateEnvironmentMembershipResult:
     example:
       membership:
         environmentId: 8d9967e2f0624182b74e7690ad69ebEX
@@ -805,43 +756,8 @@ definitions:
       membership:
         $ref: '#/definitions/EnvironmentMember'
         description: Information about the environment member that was added.
-  CreateEnvironmentMembershipRequest:
     type: object
-    required:
-      - environmentId
-      - userArn
-      - permissions
-    properties:
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment that contains the environment member you want to add.
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the environment member you want to add.
-      permissions:
-        $ref: '#/definitions/MemberPermissions'
-        description: '<p>The type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
-  DeleteEnvironmentResult:
-    type: object
-    example: {}
-    properties: {}
-  DeleteEnvironmentRequest:
-    type: object
-    required:
-      - environmentId
-    properties:
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment to delete.
-  DeleteEnvironmentMembershipResult:
-    type: object
-    example: {}
-    properties: {}
   DeleteEnvironmentMembershipRequest:
-    type: object
-    required:
-      - environmentId
-      - userArn
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
@@ -849,8 +765,45 @@ definitions:
       userArn:
         $ref: '#/definitions/UserArn'
         description: The Amazon Resource Name (ARN) of the environment member to delete from the environment.
-  DescribeEnvironmentMembershipsResult:
+    required:
+      - environmentId
+      - userArn
     type: object
+  DeleteEnvironmentMembershipResult:
+    example: {}
+    properties: {}
+    type: object
+  DeleteEnvironmentRequest:
+    properties:
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment to delete.
+    required:
+      - environmentId
+    type: object
+  DeleteEnvironmentResult:
+    example: {}
+    properties: {}
+    type: object
+  DescribeEnvironmentMembershipsRequest:
+    properties:
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment to get environment member information about.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of environment members to get information about.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
+      permissions:
+        $ref: '#/definitions/PermissionsList'
+        description: '<p>The type of environment member permissions to get information about. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul> <p>If no value is specified, information about all environment members are returned.</p>'
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: 'The Amazon Resource Name (ARN) of an individual environment member to get information about. If no value is specified, information about all environment members are returned.'
+    type: object
+  DescribeEnvironmentMembershipsResult:
     example:
       memberships:
         - environmentId: 10a75714bd494714929e7f5ec4125aEX
@@ -870,113 +823,232 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
-  DescribeEnvironmentMembershipsRequest:
     type: object
-    properties:
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: 'The Amazon Resource Name (ARN) of an individual environment member to get information about. If no value is specified, information about all environment members are returned.'
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment to get environment member information about.
-      permissions:
-        $ref: '#/definitions/PermissionsList'
-        description: '<p>The type of environment member permissions to get information about. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul> <p>If no value is specified, information about all environment members are returned.</p>'
-      nextToken:
-        $ref: '#/definitions/String'
-        description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of environment members to get information about.
-  DescribeEnvironmentStatusResult:
-    type: object
-    example:
-      message: Environment is ready to use
-      status: ready
-    properties:
-      status:
-        $ref: '#/definitions/EnvironmentStatus'
-        description: '<p>The status of the environment. Available values include:</p> <ul> <li> <p> <code>connecting</code>: The environment is connecting.</p> </li> <li> <p> <code>creating</code>: The environment is being created.</p> </li> <li> <p> <code>deleting</code>: The environment is being deleted.</p> </li> <li> <p> <code>error</code>: The environment is in an error state.</p> </li> <li> <p> <code>ready</code>: The environment is ready.</p> </li> <li> <p> <code>stopped</code>: The environment is stopped.</p> </li> <li> <p> <code>stopping</code>: The environment is stopping.</p> </li> </ul>'
-      message:
-        $ref: '#/definitions/String'
-        description: Any informational message about the status of the environment.
   DescribeEnvironmentStatusRequest:
-    type: object
-    required:
-      - environmentId
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
         description: The ID of the environment to get status information about.
-  DescribeEnvironmentsResult:
-    type: object
-    example:
-      environments:
-        - name: my-demo-environment
-          type: ec2
-          arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX'
-          description: This is my demonstration environment.
-          id: 8d9967e2f0624182b74e7690ad69ebEX
-          ownerArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
-        - name: another-demo-environment
-          type: ssh
-          arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX'
-          id: 349c86d4579e4e7298d500ff57a6b2EX
-          ownerArn: 'arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser'
-    properties:
-      environments:
-        $ref: '#/definitions/EnvironmentList'
-        description: Information about the environments that are returned.
-  DescribeEnvironmentsRequest:
-    type: object
     required:
-      - environmentIds
+      - environmentId
+    type: object
+  DescribeEnvironmentStatusResult:
+    example:
+      message: Environment is ready to use
+      status: ready
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: Any informational message about the status of the environment.
+      status:
+        $ref: '#/definitions/EnvironmentStatus'
+        description: '<p>The status of the environment. Available values include:</p> <ul> <li> <p> <code>connecting</code>: The environment is connecting.</p> </li> <li> <p> <code>creating</code>: The environment is being created.</p> </li> <li> <p> <code>deleting</code>: The environment is being deleted.</p> </li> <li> <p> <code>error</code>: The environment is in an error state.</p> </li> <li> <p> <code>ready</code>: The environment is ready.</p> </li> <li> <p> <code>stopped</code>: The environment is stopped.</p> </li> <li> <p> <code>stopping</code>: The environment is stopping.</p> </li> </ul>'
+    type: object
+  DescribeEnvironmentsRequest:
     properties:
       environmentIds:
         $ref: '#/definitions/BoundedEnvironmentIdList'
         description: The IDs of individual environments to get information about.
-  ListEnvironmentsResult:
+    required:
+      - environmentIds
     type: object
+  DescribeEnvironmentsResult:
+    example:
+      environments:
+        - arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX'
+          description: This is my demonstration environment.
+          id: 8d9967e2f0624182b74e7690ad69ebEX
+          name: my-demo-environment
+          ownerArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
+          type: ec2
+        - arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX'
+          id: 349c86d4579e4e7298d500ff57a6b2EX
+          name: another-demo-environment
+          ownerArn: 'arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser'
+          type: ssh
+    properties:
+      environments:
+        $ref: '#/definitions/EnvironmentList'
+        description: Information about the environments that are returned.
+    type: object
+  Environment:
+    description: Information about an AWS Cloud9 development environment.
+    properties:
+      arn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the environment.
+      description:
+        $ref: '#/definitions/EnvironmentDescription'
+        description: The description for the environment.
+      id:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment.
+      lifecycle:
+        $ref: '#/definitions/EnvironmentLifecycle'
+        description: The state of the environment in its creation or deletion lifecycle.
+      name:
+        $ref: '#/definitions/EnvironmentName'
+        description: The name of the environment.
+      ownerArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the environment owner.
+      type:
+        $ref: '#/definitions/EnvironmentType'
+        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
+    type: object
+  EnvironmentDescription:
+    format: password
+    maxLength: 200
+    type: string
+  EnvironmentId:
+    pattern: '^[a-zA-Z0-9]{8,32}$'
+    type: string
+  EnvironmentIdList:
+    items:
+      $ref: '#/definitions/EnvironmentId'
+    type: array
+  EnvironmentLifecycle:
+    description: Information about the current creation or deletion lifecycle state of an AWS Cloud9 development environment.
+    properties:
+      failureResource:
+        $ref: '#/definitions/String'
+        description: 'If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.'
+      reason:
+        $ref: '#/definitions/String'
+        description: Any informational message about the lifecycle state of the environment.
+      status:
+        $ref: '#/definitions/EnvironmentLifecycleStatus'
+        description: '<p>The current creation or deletion lifecycle state of the environment.</p> <ul> <li> <p> <code>CREATED</code>: The environment was successfully created.</p> </li> <li> <p> <code>DELETE_FAILED</code>: The environment failed to delete.</p> </li> <li> <p> <code>DELETING</code>: The environment is in the process of being deleted.</p> </li> </ul>'
+    type: object
+  EnvironmentLifecycleStatus:
+    enum:
+      - CREATED
+      - DELETING
+      - DELETE_FAILED
+    type: string
+  EnvironmentList:
+    items:
+      $ref: '#/definitions/Environment'
+    type: array
+  EnvironmentMember:
+    description: Information about an environment member for an AWS Cloud9 development environment.
+    properties:
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment for the environment member.
+      lastAccess:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time, expressed in epoch time format, when the environment member last opened the environment.'
+      permissions:
+        $ref: '#/definitions/Permissions'
+        description: '<p>The type of environment member permissions associated with this environment member. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the environment member.
+      userId:
+        $ref: '#/definitions/String'
+        description: The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
+    type: object
+  EnvironmentMembersList:
+    items:
+      $ref: '#/definitions/EnvironmentMember'
+    type: array
+  EnvironmentName:
+    maxLength: 60
+    minLength: 1
+    type: string
+  EnvironmentStatus:
+    enum:
+      - error
+      - creating
+      - connecting
+      - ready
+      - stopping
+      - stopped
+      - deleting
+    type: string
+  EnvironmentType:
+    enum:
+      - ssh
+      - ec2
+    type: string
+  ForbiddenException: {}
+  InstanceType:
+    maxLength: 20
+    minLength: 5
+    pattern: '^[a-z][1-9][.][a-z0-9]+$'
+    type: string
+  InternalServerErrorException: {}
+  LimitExceededException: {}
+  ListEnvironmentsRequest:
+    properties:
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of environments to get identifiers for.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
+    type: object
+  ListEnvironmentsResult:
     example:
       environmentIds:
         - 349c86d4579e4e7298d500ff57a6b2EX
         - 45a3da47af0840f2b0c0824f5ee232EX
     properties:
-      nextToken:
-        $ref: '#/definitions/String'
-        description: 'If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
       environmentIds:
         $ref: '#/definitions/EnvironmentIdList'
         description: The list of environment identifiers.
-  ListEnvironmentsRequest:
-    type: object
-    properties:
       nextToken:
         $ref: '#/definitions/String'
-        description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: The maximum number of environments to get identifiers for.
-  UpdateEnvironmentResult:
+        description: 'If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
     type: object
-    example: {}
-    properties: {}
-  UpdateEnvironmentRequest:
-    type: object
-    required:
-      - environmentId
+  MaxResults:
+    maximum: 25
+    minimum: 0
+    type: integer
+  MemberPermissions:
+    enum:
+      - read-write
+      - read-only
+    type: string
+  NotFoundException: {}
+  Permissions:
+    enum:
+      - owner
+      - read-write
+      - read-only
+    type: string
+  PermissionsList:
+    items:
+      $ref: '#/definitions/Permissions'
+    type: array
+  String:
+    type: string
+  SubnetId:
+    maxLength: 30
+    minLength: 5
+    type: string
+  Timestamp:
+    format: date-time
+    type: string
+  TooManyRequestsException: {}
+  UpdateEnvironmentMembershipRequest:
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment to change settings.
-      name:
-        $ref: '#/definitions/EnvironmentName'
-        description: A replacement name for the environment.
-      description:
-        $ref: '#/definitions/EnvironmentDescription'
-        description: Any new or replacement description for the environment.
-  UpdateEnvironmentMembershipResult:
+        description: The ID of the environment for the environment member whose settings you want to change.
+      permissions:
+        $ref: '#/definitions/MemberPermissions'
+        description: '<p>The replacement type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the environment member whose settings you want to change.
+    required:
+      - environmentId
+      - userArn
+      - permissions
     type: object
+  UpdateEnvironmentMembershipResult:
     example:
       membership:
         environmentId: 8d9967e2f0624182b74e7690ad69eb31
@@ -987,168 +1059,96 @@ definitions:
       membership:
         $ref: '#/definitions/EnvironmentMember'
         description: Information about the environment member whose settings were changed.
-  UpdateEnvironmentMembershipRequest:
     type: object
-    required:
-      - environmentId
-      - userArn
-      - permissions
+  UpdateEnvironmentRequest:
     properties:
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment for the environment member whose settings you want to change.
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the environment member whose settings you want to change.
-      permissions:
-        $ref: '#/definitions/MemberPermissions'
-        description: '<p>The replacement type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
-  AutomaticStopTimeMinutes:
-    type: integer
-    maximum: 20160
-  EnvironmentId:
-    type: string
-    pattern: '^[a-zA-Z0-9]{8,32}$'
-  BoundedEnvironmentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentId'
-    minItems: 1
-    maxItems: 25
-  ClientRequestToken:
-    type: string
-    pattern: '[\x20-\x7E]{10,128}'
-  EnvironmentName:
-    type: string
-    minLength: 1
-    maxLength: 60
-  EnvironmentDescription:
-    type: string
-    maxLength: 200
-    format: password
-  InstanceType:
-    type: string
-    pattern: '^[a-z][1-9][.][a-z0-9]+$'
-    minLength: 5
-    maxLength: 20
-  SubnetId:
-    type: string
-    minLength: 5
-    maxLength: 30
-  UserArn:
-    type: string
-    pattern: 'arn:aws:(iam|sts)::\d+:(root|user|federated-user|assumed-role)\/?\S*'
-  MemberPermissions:
-    type: string
-    enum:
-      - read-write
-      - read-only
-  EnvironmentMember:
-    type: object
-    properties:
-      permissions:
-        $ref: '#/definitions/Permissions'
-        description: '<p>The type of environment member permissions associated with this environment member. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
-      userId:
-        $ref: '#/definitions/String'
-        description: The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the environment member.
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment for the environment member.
-      lastAccess:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time, expressed in epoch time format, when the environment member last opened the environment.'
-    description: Information about an environment member for an AWS Cloud9 development environment.
-  PermissionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Permissions'
-  String:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 25
-  EnvironmentMembersList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentMember'
-  EnvironmentStatus:
-    type: string
-    enum:
-      - error
-      - creating
-      - connecting
-      - ready
-      - stopping
-      - stopped
-      - deleting
-  EnvironmentList:
-    type: array
-    items:
-      $ref: '#/definitions/Environment'
-  EnvironmentType:
-    type: string
-    enum:
-      - ssh
-      - ec2
-  EnvironmentLifecycle:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/EnvironmentLifecycleStatus'
-        description: '<p>The current creation or deletion lifecycle state of the environment.</p> <ul> <li> <p> <code>CREATED</code>: The environment was successfully created.</p> </li> <li> <p> <code>DELETE_FAILED</code>: The environment failed to delete.</p> </li> <li> <p> <code>DELETING</code>: The environment is in the process of being deleted.</p> </li> </ul>'
-      reason:
-        $ref: '#/definitions/String'
-        description: Any informational message about the lifecycle state of the environment.
-      failureResource:
-        $ref: '#/definitions/String'
-        description: 'If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.'
-    description: Information about the current creation or deletion lifecycle state of an AWS Cloud9 development environment.
-  Environment:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment.
-      name:
-        $ref: '#/definitions/EnvironmentName'
-        description: The name of the environment.
       description:
         $ref: '#/definitions/EnvironmentDescription'
-        description: The description for the environment.
-      type:
-        $ref: '#/definitions/EnvironmentType'
-        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the environment.
-      ownerArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the environment owner.
-      lifecycle:
-        $ref: '#/definitions/EnvironmentLifecycle'
-        description: The state of the environment in its creation or deletion lifecycle.
-    description: Information about an AWS Cloud9 development environment.
-  EnvironmentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentId'
-  EnvironmentLifecycleStatus:
+        description: Any new or replacement description for the environment.
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment to change settings.
+      name:
+        $ref: '#/definitions/EnvironmentName'
+        description: A replacement name for the environment.
+    required:
+      - environmentId
+    type: object
+  UpdateEnvironmentResult:
+    example: {}
+    properties: {}
+    type: object
+  UserArn:
+    pattern: 'arn:aws:(iam|sts)::\d+:(root|user|federated-user|assumed-role)\/?\S*'
     type: string
-    enum:
-      - CREATED
-      - DELETING
-      - DELETE_FAILED
-  Permissions:
-    type: string
-    enum:
-      - owner
-      - read-write
-      - read-only
-  Timestamp:
-    type: string
-    format: date-time
+x-servers:
+  - description: The AWS Cloud9 multi-region endpoint
+    url: 'http://cloud9.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Cloud9 multi-region endpoint
+    url: 'https://cloud9.{region}.amazonaws.com'
+    variables:
+      region:
+        default: us-east-1
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+  - description: The AWS Cloud9 endpoint for China (Beijing) and China (Ningxia)
+    url: 'http://cloud9.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+  - description: The AWS Cloud9 endpoint for China (Beijing) and China (Ningxia)
+    url: 'https://cloud9.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        default: cn-north-1
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1

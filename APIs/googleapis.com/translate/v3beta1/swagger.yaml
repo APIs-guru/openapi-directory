@@ -190,6 +190,57 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v3beta1/{name}/locations':
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: translate.projects.locations.list
+      parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: 'The resource that owns the locations collection, if applicable.'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLocationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-translation'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-translation'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3beta1/{name}/operations':
     get:
       description: |-
@@ -477,7 +528,8 @@ paths:
           name: model
           type: string
         - description: |-
-            Required. Target project or location to make a call.
+            Required. Project or location to make a call. Must refer to a caller's
+            project.
 
             Format: `projects/{project-id}` or
             `projects/{project-id}/locations/{location-id}`.
@@ -551,7 +603,7 @@ paths:
           schema:
             $ref: '#/definitions/BatchTranslateTextRequest'
         - description: |-
-            Required. Location to make a regional call.
+            Required. Location to make a call. Must refer to a caller's project.
 
             Format: `projects/{project-id}/locations/{location-id}`.
 
@@ -599,7 +651,8 @@ paths:
           schema:
             $ref: '#/definitions/DetectLanguageRequest'
         - description: |-
-            Required. Target project or location to make a call.
+            Required. Project or location to make a call. Must refer to a caller's
+            project.
 
             Format: `projects/{project-id}/locations/{location-id}` or
             `projects/{project-id}`.
@@ -652,7 +705,8 @@ paths:
           schema:
             $ref: '#/definitions/TranslateTextRequest'
         - description: |-
-            Required. Target project or location to make a call.
+            Required. Project or location to make a call. Must refer to a caller's
+            project.
 
             Format: `projects/{project-id}` or
             `projects/{project-id}/locations/{location-id}`.
@@ -958,6 +1012,18 @@ definitions:
           `ListGlossaries` method to retrieve the next page of results.
         type: string
     type: object
+  ListLocationsResponse:
+    description: The response message for Locations.ListLocations.
+    properties:
+      locations:
+        description: A list of locations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+    type: object
   ListOperationsResponse:
     description: The response message for Operations.ListOperations.
     properties:
@@ -969,6 +1035,38 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  Location:
+    description: A resource that represents Google Cloud Platform location.
+    properties:
+      displayName:
+        description: |-
+          The friendly name for this location, typically a nearby city name.
+          For example, "Tokyo".
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Cross-service attributes for the location. For example
+
+              {"cloud.googleapis.com/region": "us-east1"}
+        type: object
+      locationId:
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
+        type: string
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata. For example the available capacity at the given
+          location.
+        type: object
+      name:
+        description: |-
+          Resource name for the location, which may vary between implementations.
+          For example: `"projects/example-project/locations/us-east1"`
+        type: string
     type: object
   Operation:
     description: |-

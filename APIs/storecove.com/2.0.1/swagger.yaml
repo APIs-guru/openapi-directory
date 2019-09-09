@@ -329,7 +329,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get Invoice as UBL
+      summary: Get Purchase invoice data
       tags:
         - PurchaseInvoices
   /shop_account_requests:
@@ -699,6 +699,23 @@ definitions:
       party:
         $ref: '#/definitions/SupplierParty'
     title: Supplier
+    type: object
+  AdditionalItemProperty:
+    description: An additional property for the item
+    properties:
+      name:
+        description: The name of the property.
+        minLength: 1
+        title: Name
+        type: string
+      value:
+        description: The value of the property.
+        title: Value
+        type: string
+    required:
+      - name
+      - value
+    title: Additional Item Property
     type: object
   Address:
     description: The address
@@ -1304,10 +1321,10 @@ definitions:
       source:
         type: string
   Invoice:
-    description: The invoice to send
+    description: 'The invoice to send.  Provide either invoice, or incoiceData, but not both.'
     properties:
       accountingCost:
-        description: 'The buyer''s accounting cost centre for this invoice, expressed as text.'
+        description: 'DEPRECATED. Use accountingCostCode. The buyer''s accounting cost centre for this invoice, expressed as text.'
         minLength: 1
         title: Accounting Cost
         type: string
@@ -1481,6 +1498,22 @@ definitions:
       - amountIncludingVat
     title: Invoice
     type: object
+  InvoiceData:
+    description: 'The invoice to send, in base64 encoded format. Provide either invoice, or incoiceData, but not both.'
+    properties:
+      conversionStrategy:
+        description: How to interpret the document.
+        enum:
+          - ubl
+        title: Conversion Strategy
+        type: string
+      document:
+        description: The base64 encoded version of the document.
+        minLength: 5
+        title: Document
+        type: string
+    title: Invoice Data
+    type: object
   InvoiceLine:
     properties:
       accountingCost:
@@ -1490,6 +1523,13 @@ definitions:
         type: string
       accountingCostCode:
         $ref: '#/definitions/AccountingCostCode'
+      additionalItemProperties:
+        description: An array of additional item properties.
+        items:
+          $ref: '#/definitions/AdditionalItemProperty'
+        minItems: 1
+        title: Additional Item Properties
+        type: array
       allowanceCharge:
         description: The discount or surcharge on this item. Should be negative for discounts
         title: allowanceCharge
@@ -1498,6 +1538,11 @@ definitions:
         description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge.
         title: amountExcludingVat
         type: number
+      buyersItemIdentification:
+        description: The ID the buyer assigned to this item.
+        minLength: 1
+        title: Buyers Item Identification
+        type: string
       delivery:
         $ref: '#/definitions/Delivery'
         description: The delivery of the invoice line.
@@ -2657,7 +2702,7 @@ definitions:
     title: Invoice line
     type: object
   InvoiceRecipient:
-    description: 'Ids that identify this invoice recipient. When sending invoices with VAT (or with a taxExemptReason), a receiver VAT number is required. Only within the NL legal domain is it allowed to send invoices with VAT but without a VAT number.'
+    description: 'The different ways to send the invoice to the recipient. The publicIdentifiers are used to send via the Peppol network, if the recipient is not registered on the Peppol network, the invoice will be sent to the email addresses in the emails property. This property is only mandatory when sending the invoice data using the <<_openapi_invoice>> property, not when sending using the <<_openapi_invoicedata>> property, in which case this information will be extracted from the <<_openapi_invoicedata>> object. If you do specify an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>> object, the data from the two will be merged.'
     properties:
       emails:
         description: The email addresses the invoice should be sent to if none of the other identifiers can be used
@@ -2703,6 +2748,8 @@ definitions:
         type: string
       invoice:
         $ref: '#/definitions/Invoice'
+      invoiceData:
+        $ref: '#/definitions/InvoiceData'
       invoiceRecipient:
         $ref: '#/definitions/InvoiceRecipient'
       legalEntityId:
@@ -2723,9 +2770,6 @@ definitions:
         description: DEPRECATED.
         title: Supplier id
         type: integer
-    required:
-      - invoiceRecipient
-      - invoice
     title: Invoice submission
     type: object
   InvoiceSubmissionResult:
@@ -3081,6 +3125,10 @@ definitions:
         description: The start date of the period this invoice relates to. Format "YYYY-MM-DD".
         title: Start of Period
         type: string
+      prepaid_amount:
+        description: The amount already paid.
+        title: Prepaid Amount
+        type: number
       sender:
         $ref: '#/definitions/PurchaseInvoiceSender'
         description: The organzation that sent the invoice.

@@ -500,8 +500,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             faceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: |
         Retrieve a face list’s faceListId, name, userData, recognitionModel and faces in the face list.
@@ -570,8 +569,7 @@ paths:
               userData: User-provided data attached to the face list.
             faceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
     put:
       consumes:
         - application/json
@@ -607,8 +605,7 @@ paths:
               userData: User-provided data attached to the face list.
             faceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/facelists/{faceListId}/persistedfaces':
     post:
       consumes:
@@ -703,8 +700,7 @@ paths:
             faceListId: sample_face_list
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
           responses:
-            '200':
-              body: ''
+            '200': {}
   /findsimilars:
     post:
       consumes:
@@ -932,8 +928,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             largeFaceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve a large face list’s largeFaceListId, name, userData and recognitionModel.'
       operationId: LargeFaceList_Get
@@ -998,8 +993,7 @@ paths:
               userData: User-provided data attached to the large face list.
             largeFaceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
     put:
       consumes:
         - application/json
@@ -1035,8 +1029,7 @@ paths:
               userData: User-provided data attached to the large face list.
             largeFaceListId: sample_face_list
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/largefacelists/{largeFaceListId}/persistedfaces':
     get:
       description: 'List all faces in a large face list, and retrieve face information (including userData and persistedFaceIds of registered faces of the face).'
@@ -1179,8 +1172,7 @@ paths:
             largeFaceListId: sample_face_list
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: Retrieve information about a persisted face (specified by persistedFaceId and its belonging largeFaceListId).
       operationId: LargeFaceList_GetFace
@@ -1244,8 +1236,7 @@ paths:
             largeFaceListId: abc
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/largefacelists/{largeFaceListId}/train':
     post:
       description: 'Queue a large face list training task, the training task may not be started immediately.'
@@ -1269,8 +1260,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             largeFaceListId: abc
           responses:
-            '202':
-              body: ''
+            '202': {}
   '/largefacelists/{largeFaceListId}/training':
     get:
       description: Retrieve the training status of a large face list (completed or ongoing).
@@ -1383,8 +1373,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             largePersonGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: |
         Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use [LargePersonGroup Person - List](/docs/services/563879b61984550e40cbbe8d/operations/599adda06ac60f11b48b5aa1) instead to retrieve person information under the large person group.
@@ -1450,8 +1439,7 @@ paths:
               userData: user-provided data attached to the large person group.
             largePersonGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
     put:
       consumes:
         - application/json
@@ -1485,8 +1473,7 @@ paths:
               userData: User-provided data attached to the large person group.
             largePersonGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/largepersongroups/{largePersonGroupId}/persons':
     get:
       description: 'List all persons in a large person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).'
@@ -1603,8 +1590,7 @@ paths:
             largePersonGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve a person''s name and userData, and the persisted faceIds representing the registered person face feature.'
       operationId: LargePersonGroupPerson_Get
@@ -1674,8 +1660,7 @@ paths:
             largePersonGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces':
     post:
       consumes:
@@ -1774,8 +1759,7 @@ paths:
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging largePersonGroupId).'
       operationId: LargePersonGroupPerson_GetFace
@@ -1843,8 +1827,7 @@ paths:
             persistedFaceId: 62004fa7-1ac0-478e-9d5a-b38f9e7fbc68
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/largepersongroups/{largePersonGroupId}/train':
     post:
       description: 'Queue a large person group training task, the training task may not be started immediately.'
@@ -1868,8 +1851,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             largePersonGroupId: abc
           responses:
-            '202':
-              body: ''
+            '202': {}
   '/largepersongroups/{largePersonGroupId}/training':
     get:
       description: Retrieve the training status of a large person group (completed or ongoing).
@@ -2014,8 +1996,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use [PersonGroup Person - List](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395241).'
       operationId: PersonGroup_Get
@@ -2080,8 +2061,7 @@ paths:
               userData: user-provided data attached to the person group.
             personGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
     put:
       consumes:
         - application/json
@@ -2115,8 +2095,7 @@ paths:
               userData: user-provided data attached to the person group.
             personGroupId: abc
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/persongroups/{personGroupId}/persons':
     get:
       description: 'List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).'
@@ -2233,8 +2212,7 @@ paths:
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve a person''s information, including registered persisted faces, name and userData.'
       operationId: PersonGroupPerson_Get
@@ -2304,8 +2282,7 @@ paths:
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/persongroups/{personGroupId}/persons/{personId}/persistedfaces':
     post:
       consumes:
@@ -2404,8 +2381,7 @@ paths:
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).'
       operationId: PersonGroupPerson_GetFace
@@ -2481,8 +2457,7 @@ paths:
             personGroupId: abc
             personId: 25985303-c537-4467-b41d-bdb45cd95ca1
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/persongroups/{personGroupId}/train':
     post:
       description: 'Queue a person group training task, the training task may not be started immediately.'
@@ -2506,8 +2481,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             personGroupId: abc
           responses:
-            '202':
-              body: ''
+            '202': {}
   '/persongroups/{personGroupId}/training':
     get:
       description: Retrieve the training status of a person group (completed or ongoing).
@@ -2647,7 +2621,6 @@ paths:
               userData: User-provided data attached to the snapshot.
           responses:
             '202':
-              body: ''
               header:
                 Operation-Location: /operations/a63a3bdd-a1db-4d05-87b8-dbad6850062a
   '/snapshots/{snapshotId}':
@@ -2671,8 +2644,7 @@ paths:
             Ocp-Apim-Subscription-Key: '{API key}'
             snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
           responses:
-            '200':
-              body: ''
+            '200': {}
     get:
       description: 'Retrieve information about a snapshot. Snapshot is only accessible to the source subscription who took it, and target subscriptions included in the applyScope in Snapshot - Take.'
       operationId: Snapshot_Get
@@ -2741,8 +2713,7 @@ paths:
               userData: User-provided data attached to the snapshot.
             snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
           responses:
-            '200':
-              body: ''
+            '200': {}
   '/snapshots/{snapshotId}/apply':
     post:
       consumes:
@@ -2792,7 +2763,6 @@ paths:
             snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
           responses:
             '202':
-              body: ''
               header:
                 Operation-Location: /operations/84276574-2a2a-4540-a1b0-f65d834d225b
   /verify:

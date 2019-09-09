@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/azureFirewall.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-azureFirewall
   x-tags:
@@ -1097,6 +1097,66 @@ paths:
                   - '1'
                   - '2'
                   - '3'
+        Create Azure Firewall in virtual Hub:
+          parameters:
+            api-version: '2019-06-01'
+            azureFirewallName: azurefirewall
+            parameters:
+              location: West US
+              properties:
+                firewallPolicy:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/policy1
+                threatIntelMode: Alert
+                virtualHub:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1
+              tags:
+                key1: value1
+              zones: []
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall
+                location: West US
+                name: azurefirewall
+                properties:
+                  firewallPolicy:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/policy1
+                  hubIpAddresses:
+                    privateIPAddress: 10.0.0.0
+                    publicIPAddresses:
+                      - address: 13.73.240.12
+                  provisioningState: Succeeded
+                  threatIntelMode: Alert
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1
+                tags:
+                  key1: value1
+                type: Microsoft.Network/azureFirewalls
+                zones: []
+            '201':
+              body:
+                etag: w/\00000000-0000-0000-0000-000000000000\
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall
+                location: West US
+                name: azurefirewall
+                properties:
+                  firewallPolicy:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/policy1
+                  hubIpAddresses:
+                    privateIPAddress: 10.0.0.0
+                    publicIPAddresses:
+                      - address: 13.73.240.12
+                  provisioningState: Succeeded
+                  threatIntelMode: Alert
+                  virtualHub:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1
+                tags:
+                  key1: value1
+                type: Microsoft.Network/azureFirewalls
+                zones: []
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: azure-async-operation
@@ -1511,6 +1571,17 @@ definitions:
         items:
           $ref: '#/definitions/AzureFirewallApplicationRuleCollection'
         type: array
+      firewallPolicy:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      hubIpAddresses:
+        $ref: '#/definitions/HubIPAddresses'
+        description: IP addresses associated with AzureFirewall.
+        readOnly: true
       ipConfigurations:
         description: IP configuration of the Azure Firewall resource.
         items:
@@ -1541,6 +1612,19 @@ definitions:
       threatIntelMode:
         $ref: '#/definitions/AzureFirewallThreatIntelMode'
         description: The operation mode for Threat Intelligence.
+      virtualHub:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+  AzureFirewallPublicIPAddress:
+    description: Public IP Address associated with azure firewall.
+    properties:
+      address:
+        description: Public IP Address value.
+        type: string
   AzureFirewallRCAction:
     description: Properties of the AzureFirewallRCAction.
     properties:
@@ -1566,3 +1650,14 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: AzureFirewallThreatIntelMode
+  HubIPAddresses:
+    description: IP addresses associated with azure firewall.
+    properties:
+      privateIPAddress:
+        description: Private IP Address associated with azure firewall.
+        type: string
+      publicIPAddresses:
+        description: List of Public IP addresses associated with azure firewall.
+        items:
+          $ref: '#/definitions/AzureFirewallPublicIPAddress'
+        type: array

@@ -223,9 +223,10 @@ paths:
               type: /providers/Microsoft.Management/managementGroups
           responses:
             '200':
-              message: <error message>
-              nameAvailable: true|false
-              reason: Invalid|AlreadyExists
+              body:
+                message: <error message>
+                nameAvailable: false
+                reason: AlreadyExists
   /providers/Microsoft.Management/getEntities:
     post:
       description: 'List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.'
@@ -773,8 +774,9 @@ paths:
             startTenantBackfillRequest: {}
           responses:
             '200':
-              status: Started
-              tenantId: 20000000-0000-0000-0000-000000000000
+              body:
+                status: Started
+                tenantId: 20000000-0000-0000-0000-000000000000
   /providers/Microsoft.Management/tenantBackfillStatus:
     post:
       description: Gets tenant backfill status
@@ -799,8 +801,9 @@ paths:
             tenantBackfillStatusRequest: {}
           responses:
             '200':
-              status: Started
-              tenantId: 20000000-0000-0000-0000-000000000000
+              body:
+                status: Started
+                tenantId: 20000000-0000-0000-0000-000000000000
 definitions:
   CheckNameAvailabilityRequest:
     description: Management group name availability check parameters.

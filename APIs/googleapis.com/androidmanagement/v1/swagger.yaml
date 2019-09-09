@@ -232,14 +232,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets a web app.
-      operationId: androidmanagement.enterprises.webApps.get
+      description: Gets info about an application.
+      operationId: androidmanagement.enterprises.applications.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.'
+        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/WebApp'
+            $ref: '#/definitions/Application'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -715,9 +715,10 @@ definitions:
           - BLOCKED
           - AVAILABLE
           - REQUIRED_FOR_SETUP
+          - KIOSK
         type: string
       lockTaskAllowed:
-        description: Whether the app is allowed to lock itself in full-screen mode.
+        description: Whether the app is allowed to lock itself in full-screen mode. DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to to configure a dedicated device.
         type: boolean
       managedConfiguration:
         additionalProperties:
@@ -997,6 +998,9 @@ definitions:
         items:
           type: string
         type: array
+      securityPosture:
+        $ref: '#/definitions/SecurityPosture'
+        description: Device's security posture value that reflects how secure the device is.
       softwareInfo:
         $ref: '#/definitions/SoftwareInfo'
         description: Detailed information about the device software. This information is only available if softwareInfoEnabled is true in the device's policy.
@@ -1673,7 +1677,7 @@ definitions:
         type: string
     type: object
   PersistentPreferredActivity:
-    description: A default activity for handling intents that match a particular intent filter.
+    description: 'A default activity for handling intents that match a particular intent filter. Note: To set up a kiosk, use InstallType to KIOSK rather than use persistent preferred activities.'
     properties:
       actions:
         description: 'The intent actions to match in the filter. If any actions are included in the filter, then an intent''s action must be one of those values for it to match. If no actions are included, the intent action is ignored.'
@@ -1828,7 +1832,7 @@ definitions:
           type: string
         type: array
       kioskCustomLauncherEnabled:
-        description: Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. The apps appear on a single page in alphabetical order. It is recommended to also use status_bar_disabled to block access to device settings.
+        description: Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. The status bar is disabled when this is set.
         type: boolean
       locationMode:
         description: The degree of location detection enabled. The user may change the value unless the user is otherwise blocked from accessing device settings.
@@ -1951,7 +1955,7 @@ definitions:
         description: Whether sending and receiving SMS messages is disabled.
         type: boolean
       statusBarDisabled:
-        description: 'Whether the status bar is disabled. This disables notifications, quick settings, and other screen overlays that allow escape from full-screen mode.'
+        description: 'Whether the status bar is disabled. This disables notifications, quick settings, and other screen overlays that allow escape from full-screen mode. DEPRECATED. To disable the status bar on a kiosk device, use InstallType KIOSK or kioskCustomLauncherEnabled.'
         type: boolean
       statusReportingSettings:
         $ref: '#/definitions/StatusReportingSettings'
@@ -2011,6 +2015,22 @@ definitions:
         $ref: '#/definitions/WipeAction'
         description: 'An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.'
     type: object
+  PostureDetail:
+    description: Detail that provides further information if the device is not in the most secure state.
+    properties:
+      advice:
+        description: Corresponding pieces of advice to mitigate the security risk.
+        items:
+          $ref: '#/definitions/UserFacingMessage'
+        type: array
+      securityRisk:
+        description: The risk that makes the device not in the most secure state.
+        enum:
+          - SECURITY_RISK_UNSPECIFIED
+          - UNKNOWN_OS
+          - COMPROMISED_OS
+        type: string
+    type: object
   PowerManagementEvent:
     description: A power management event.
     properties:
@@ -2053,6 +2073,23 @@ definitions:
         description: The port of the direct proxy.
         format: int32
         type: integer
+    type: object
+  SecurityPosture:
+    description: . Device's security posture value that reflects how secure the device is.
+    properties:
+      devicePosture:
+        description: Device's security posture value.
+        enum:
+          - POSTURE_UNSPECIFIED
+          - SECURE
+          - AT_RISK
+          - POTENTIALLY_COMPROMISED
+        type: string
+      postureDetails:
+        description: Details that provide further information if the device is not in the most secure state.
+        items:
+          $ref: '#/definitions/PostureDetail'
+        type: array
     type: object
   SetupAction:
     description: An action executed during setup.
@@ -2173,6 +2210,9 @@ definitions:
         type: boolean
       softwareInfoEnabled:
         description: Whether software info reporting is enabled.
+        type: boolean
+      systemPropertiesEnabled:
+        description: Whether system properties reporting is enabled.
         type: boolean
     type: object
   SystemUpdate:

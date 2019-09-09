@@ -1087,12 +1087,6 @@ definitions:
         items:
           type: string
         type: array
-      ignoreChildExemptions:
-        description: |-
-          Specifies whether principals can be exempted for the same LogType in
-          lower-level resource policies. If true, any lower-level exemptions will
-          be ignored.
-        type: boolean
       logType:
         description: The log type that this config enables.
         enum:
@@ -1287,7 +1281,7 @@ definitions:
       requestedPolicyVersion:
         description: |-
           Optional. The policy format version to be returned.
-          Acceptable values are 0 and 1.
+          Acceptable values are 0, 1, and 3.
           If the value is 0, or the field is omitted, policy format version 1 will be
           returned.
         format: int32

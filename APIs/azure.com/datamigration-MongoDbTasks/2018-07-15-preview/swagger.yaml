@@ -71,7 +71,6 @@ definitions:
         required:
           - commandType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the command that cancels a migration in whole or in part
     properties:
       input:
@@ -279,7 +278,6 @@ definitions:
         required:
           - commandType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the command that finishes a migration in whole or in part
     properties:
       input:
@@ -349,7 +347,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Describes a connection to a MongoDB data source
         properties:
           connectionString:
@@ -375,7 +372,6 @@ definitions:
             required:
               - type
             type: object
-            x-ms-discriminator-value: Unknown
         description: Describes a connection to a MongoDB data source
         properties:
           connectionString:
@@ -549,7 +545,6 @@ definitions:
         required:
           - commandType
         type: object
-        x-ms-discriminator-value: Unknown
     description: Properties for the command that restarts a migration in whole or in part
     properties:
       input:

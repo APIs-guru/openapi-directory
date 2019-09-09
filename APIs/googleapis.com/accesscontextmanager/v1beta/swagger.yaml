@@ -193,17 +193,17 @@ paths:
   '/v1beta/{name}':
     delete:
       description: |-
-        Delete an Access Level by resource
+        Delete an Service Perimeter by resource
         name. The longrunning operation from this RPC will have a successful status
-        once the Access Level has been removed
-        from long-lasting storage.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.delete
+        once the Service Perimeter has been
+        removed from long-lasting storage.
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.delete
       parameters:
         - description: |-
-            Required. Resource name for the Access Level.
+            Required. Resource name for the Service Perimeter.
 
             Format:
-            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
           in: path
           name: name
           required: true
@@ -223,9 +223,9 @@ paths:
         - accessPolicies
     get:
       description: |-
-        Get an Access Level by resource
+        Get an Service Perimeter by resource
         name.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.get
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.get
       parameters:
         - description: |-
             Whether to return `BasicLevels` in the Cloud Common Expression
@@ -243,10 +243,10 @@ paths:
           name: accessLevelFormat
           type: string
         - description: |-
-            Required. Resource name for the Access Level.
+            Required. Resource name for the Service Perimeter.
 
             Format:
-            `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+            `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`
           in: path
           name: name
           required: true
@@ -256,7 +256,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AccessLevel'
+            $ref: '#/definitions/ServicePerimeter'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -278,21 +278,21 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Update an Access Level. The longrunning
-        operation from this RPC will have a successful status once the changes to
-        the Access Level have propagated
-        to long-lasting storage. Access Levels containing
+        Update an Service Perimeter. The
+        longrunning operation from this RPC will have a successful status once the
+        changes to the Service Perimeter have
+        propagated to long-lasting storage. Service Perimeter containing
         errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.patch
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AccessLevel'
+            $ref: '#/definitions/ServicePerimeter'
         - description: |-
-            Required. Resource name for the Access Level. The `short_name` component
-            must begin with a letter and only include alphanumeric and '_'. Format:
-            `accessPolicies/{policy_id}/accessLevels/{short_name}`
+            Required. Resource name for the ServicePerimeter.  The `short_name`
+            component must begin with a letter and only include alphanumeric and '_'.
+            Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
           in: path
           name: name
           required: true

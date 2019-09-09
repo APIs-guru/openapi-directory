@@ -514,21 +514,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 9693bca3-4ee7-4501-865e-8411952d196b
-                x-ms-ratelimit-remaining-subscription-writes: '1177'
-                x-ms-request-id: 00d8b4cd-058f-4da8-a3a9-7a7a9ae772f0
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
-                x-ms-correlation-request-id: 95fce457-ddee-44a2-84a1-05c33b32d807
-                x-ms-ratelimit-remaining-subscription-writes: '1176'
-                x-ms-request-id: 95fce457-ddee-44a2-84a1-05c33b32d807
+            '200': {}
+            '204': {}
     get:
       description: Gets a factory.
       operationId: Factories_Get
@@ -725,14 +712,7 @@ paths:
             runId: 39692ed9-c722-4d33-b8e1-1f4a9deac57f
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Mon, 02 Oct 2017 17:27:33 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: d0b45db5-c155-4991-95d9-22655c72c986
-                x-ms-ratelimit-remaining-subscription-writes: '1113'
-                x-ms-request-id: fd3867ea-c65c-470d-a17b-d83c8864cf90
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets':
     get:
       description: Lists datasets.
@@ -825,22 +805,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: d56bf687-df32-4313-87ec-ff22ba9bd192
-                x-ms-ratelimit-remaining-subscription-writes: '1183'
-                x-ms-request-id: 70d3cf1f-bf14-40f5-bb56-1550a317ce8b
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 9b926944-88d9-4d77-b1a8-5540c803f933
-                x-ms-ratelimit-remaining-subscription-writes: '1182'
-                x-ms-request-id: a2347ff3-4018-4815-b58a-9fbe3cdcab52
+            '200': {}
+            '204': {}
     get:
       description: Gets a dataset.
       operationId: Datasets_Get
@@ -1141,22 +1107,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: f931d2aa-0021-43ee-8005-2653da5e86d4
-                x-ms-ratelimit-remaining-subscription-writes: '1179'
-                x-ms-request-id: 6d1ee741-7850-484b-99cd-b42ef08fd18c
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 543d80b4-c9d0-418d-bf16-d2434abac0cb
-                x-ms-ratelimit-remaining-subscription-writes: '1178'
-                x-ms-request-id: afb27d48-0c81-4e62-92c4-6fcb8c35c8a2
+            '200': {}
+            '204': {}
     get:
       description: Gets an integration runtime.
       operationId: IntegrationRuntimes_Get
@@ -1670,18 +1622,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: 75a166f9-75ed-48d9-bc9b-08682dfdd0eb
-            '204':
-              body: null
-              headers:
-                Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: d05cec68-ec62-4e95-97b6-9572eeab8ef2
+            '200': {}
+            '204': {}
     patch:
       description: Updates a self-hosted integration runtime node.
       operationId: IntegrationRuntimeNodes_Update
@@ -2105,18 +2047,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Tue, 28 Nov 2017 06:05:42 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: f1b13f98-0659-4eaa-a676-29912ae0a4f3
-            '204':
-              body: null
-              headers:
-                Date: 'Tue, 28 Nov 2017 06:05:44 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: 3d15a37e-f3f2-4e21-a90a-316f695a3f90
+            '200': {}
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/start':
     post:
       description: Starts a ManagedReserved type integration runtime.
@@ -2176,14 +2108,7 @@ paths:
                 Date: 'Tue, 28 Nov 2017 07:39:18 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: a0190274-060e-43a0-84ea-403d1c0c4a06
-            '202':
-              body: null
-              headers:
-                Date: 'Tue, 28 Nov 2017 07:17:56 GMT'
-                Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/start/operationresults/9a070152cddb4c839d482ccfb76a7537?api-version=2017-09-01-preview'
-                Retry-After: '15'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: aa8a8ed1-7b2e-40eb-b734-9b7a5f393aed
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/stop':
     post:
@@ -2215,20 +2140,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Tue, 28 Nov 2017 07:40:23 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: bcff281c-ae61-4e2d-8a0c-044e34c1d04a
-            '202':
-              body: null
-              headers:
-                Date: 'Tue, 28 Nov 2017 07:39:21 GMT'
-                Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/stop/operationresults/50799841b7f94497ae43291b791db7e0?api-version=2017-09-01-preview'
-                Retry-After: '15'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: b36c64a2-3306-4374-b93f-ec91dbb3bf26
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials':
     post:
@@ -2258,12 +2171,7 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Sun, 20 Aug 2017 08:46:58 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: 05bae251-45ef-4bca-9710-ecfc0181755b
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade':
     post:
       description: Upgrade self-hosted integration runtime to latest version if availability.
@@ -2292,12 +2200,7 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Tue, 14 Nov 2017 03:42:42 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-request-id: 599429b9-3add-4d0c-973b-91ddaf3364e7
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices':
     get:
       description: Lists linked services.
@@ -2377,22 +2280,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: af89dcb6-8a1e-498a-9b0c-3e866bd80f39
-                x-ms-ratelimit-remaining-subscription-writes: '1181'
-                x-ms-request-id: 7383dae8-e077-4472-8f2e-91e1163dcbb2
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 3adc7b84-2fbe-4409-9481-bf2bd489f49f
-                x-ms-ratelimit-remaining-subscription-writes: '1180'
-                x-ms-request-id: 097cab57-d2b8-442d-90f0-2deb5e3733e5
+            '200': {}
+            '204': {}
     get:
       description: Gets a linked service.
       operationId: LinkedServices_Get
@@ -2903,22 +2792,8 @@ paths:
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 332e562a-b3f8-4f5d-852d-8bb1bfc6a798
-                x-ms-ratelimit-remaining-subscription-writes: '1185'
-                x-ms-request-id: 74ec3492-79c4-4028-9db1-fe7054e794d4
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 5ba4c3d0-6e6a-465d-8ffd-592c38380527
-                x-ms-ratelimit-remaining-subscription-writes: '1184'
-                x-ms-request-id: 86b4c1f6-9944-4cef-8147-170c856da5ec
+            '200': {}
+            '204': {}
     get:
       description: Gets a pipeline.
       operationId: Pipelines_Get
@@ -3344,22 +3219,8 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
             triggerName: exampleTrigger
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: 19402448-85f2-4872-b998-9c6c1e17f04d
-                x-ms-ratelimit-remaining-subscription-writes: '1187'
-                x-ms-request-id: 797186e9-af57-4d6c-8b4b-c363df9e9bf1
-            '204':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: d66d750a-c28f-4be6-852a-30a67be744a1
-                x-ms-ratelimit-remaining-subscription-writes: '1186'
-                x-ms-request-id: 7d968b21-a030-4ba9-961b-7bbc799c0810
+            '200': {}
+            '204': {}
     get:
       description: Gets a trigger.
       operationId: Triggers_Get
@@ -3588,14 +3449,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
             triggerName: exampleTrigger
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 17:58:23 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: a28c76fa-3343-4bfb-9508-c92e2f374e79
-                x-ms-ratelimit-remaining-subscription-writes: '1196'
-                x-ms-request-id: 13c76ae4-02b3-49a2-9f2a-d2c9f8511507
+            '200': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/stop':
     post:
@@ -3625,14 +3479,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
             triggerName: exampleTrigger
           responses:
-            '200':
-              body: null
-              headers:
-                Date: 'Wed, 13 Sep 2017 18:04:25 GMT'
-                X-Content-Type-Options: nosniff
-                x-ms-correlation-request-id: c1f7bc90-6b21-464f-9c00-6e3869c0e63c
-                x-ms-ratelimit-remaining-subscription-writes: '1188'
-                x-ms-request-id: 601d7eac-1d85-4196-a70b-76b9b906d6dd
+            '200': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerruns':
     get:

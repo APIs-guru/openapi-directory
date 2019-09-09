@@ -303,6 +303,11 @@ definitions:
           - STARTING
           - RUNNING
         type: string
+      webHost:
+        description: |-
+          Output only. Host to which clients can connect to initiate HTTPS or WSS
+          connections with the environment.
+        type: string
     type: object
   ListOperationsResponse:
     description: The response message for Operations.ListOperations.

@@ -2100,7 +2100,7 @@ paths:
       description: 'Lists the purchases that were canceled, refunded or charged-back.'
       operationId: androidpublisher.purchases.voidedpurchases.list
       parameters:
-        - description: 'The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
+        - description: 'The time, in milliseconds since the Epoch, of the newest voided purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
           in: query
           name: endTime
           type: string
@@ -2115,13 +2115,20 @@ paths:
         - in: query
           name: startIndex
           type: integer
-        - description: 'The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
+        - description: 'The time, in milliseconds since the Epoch, of the oldest voided purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
           in: query
           name: startTime
           type: string
         - in: query
           name: token
           type: string
+        - description: |-
+            The type of voided purchases that you want to see in the response. Possible values are:  
+            - 0: Only voided in-app product purchases will be returned in the response. This is the default value.
+            - 1: Both voided in-app purchases and voided subscription purchases will be returned in the response.  Note: Before requesting to receive voided subscription purchases, you must switch to use orderId in the response which uniquely identifies one-time purchases and subscriptions. Otherwise, you will receive multiple subscription orders with the same PurchaseToken, because subscription renewal orders share the same PurchaseToken.
+          in: query
+          name: type
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -2527,6 +2534,9 @@ definitions:
         type: string
       sha1:
         description: A sha1 hash of the image that was uploaded.
+        type: string
+      sha256:
+        description: A sha256 hash of the image that was uploaded.
         type: string
       url:
         description: A URL that will serve a preview of the image.
@@ -3140,13 +3150,37 @@ definitions:
         default: 'androidpublisher#voidedPurchase'
         description: This kind represents a voided purchase object in the androidpublisher service.
         type: string
+      orderId:
+        description: 'The order id which uniquely identifies a one-time purchase, subscription purchase, or subscription renewal.'
+        type: string
       purchaseTimeMillis:
         description: 'The time at which the purchase was made, in milliseconds since the epoch (Jan 1, 1970).'
         format: int64
         type: string
       purchaseToken:
-        description: The token that was generated when a purchase was made. This uniquely identifies a purchase.
+        description: The token which uniquely identifies a one-time purchase or subscription. To uniquely identify subscription renewals use order_id (available starting from version 3 of the API).
         type: string
+      voidedReason:
+        description: |-
+          The reason why the purchase was voided, possible values are:  
+          - Other 
+          - Remorse 
+          - Not_received 
+          - Defective 
+          - Accidental_purchase 
+          - Fraud 
+          - Friendly_fraud 
+          - Chargeback
+        format: int32
+        type: integer
+      voidedSource:
+        description: |-
+          The initiator of voided purchase, possible values are:  
+          - User 
+          - Developer 
+          - Google
+        format: int32
+        type: integer
       voidedTimeMillis:
         description: 'The time at which the purchase was canceled/refunded/charged-back, in milliseconds since the epoch (Jan 1, 1970).'
         format: int64

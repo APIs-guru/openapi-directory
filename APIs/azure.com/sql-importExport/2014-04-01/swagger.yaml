@@ -101,19 +101,20 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/importExportOperationResult/f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-              name: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-              properties:
-                blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
-                databaseName: testdb
-                errorMessage: null
-                lastModifiedTime: '3/1/2017 12:16:33 AM'
-                queuedTime: '3/1/2017 12:14:25 AM'
-                requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-                requestType: Export
-                serverName: test
-                status: Completed
-              type: Microsoft.Sql/servers/importExportOperationResults
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/importExportOperationResult/f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                name: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                properties:
+                  blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
+                  databaseName: testdb
+                  errorMessage: null
+                  lastModifiedTime: '3/1/2017 12:16:33 AM'
+                  queuedTime: '3/1/2017 12:14:25 AM'
+                  requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                  requestType: Export
+                  serverName: test
+                  status: Completed
+                type: Microsoft.Sql/servers/importExportOperationResults
             '202': {}
         Export a database into a new bacpac file with storage key:
           parameters:
@@ -131,19 +132,20 @@ paths:
             subscriptionId: 00000000-1111-2222-3333-444444444444
           responses:
             '200':
-              id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/importExportOperationResult/f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-              name: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-              properties:
-                blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
-                databaseName: testdb
-                errorMessage: null
-                lastModifiedTime: '3/1/2017 12:16:33 AM'
-                queuedTime: '3/1/2017 12:14:25 AM'
-                requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
-                requestType: Export
-                serverName: test
-                status: Completed
-              type: Microsoft.Sql/servers/importExportOperationResults
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/importExportOperationResult/f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                name: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                properties:
+                  blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
+                  databaseName: testdb
+                  errorMessage: null
+                  lastModifiedTime: '3/1/2017 12:16:33 AM'
+                  queuedTime: '3/1/2017 12:14:25 AM'
+                  requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
+                  requestType: Export
+                  serverName: test
+                  status: Completed
+                type: Microsoft.Sql/servers/importExportOperationResults
             '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}':

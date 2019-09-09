@@ -286,12 +286,8 @@ paths:
             ruleName: chiricutin
             subscriptionId: 14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7
           responses:
-            '200':
-              body: null
-              headers: {}
-            '204':
-              body: null
-              headers: {}
+            '200': {}
+            '204': {}
     get:
       description: Retrieve an alert rule definition.
       operationId: MetricAlerts_Get

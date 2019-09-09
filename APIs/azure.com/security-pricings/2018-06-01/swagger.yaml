@@ -54,7 +54,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings':
     get:
-      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
+      description: Lists Security Center pricing configurations in the subscription.
       operationId: Pricings_List
       parameters:
         - description: API version for the operation
@@ -126,7 +126,7 @@ paths:
                     type: Microsoft.Security/pricings
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}':
     get:
-      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
+      description: Gets a provided Security Center pricing configuration in the subscription.
       operationId: Pricings_Get
       parameters:
         - description: API version for the operation
@@ -183,7 +183,7 @@ paths:
                   pricingTier: Standard
                 type: Microsoft.Security/pricings
     put:
-      description: 'A given security pricing configuration in the subscription. Azure Security Center is available in two pricing tiers: Free and Standard, on multiple resource types, including Virtual machines, SQL Servers, App service plans and Storage accounts.'
+      description: Updates a provided Security Center pricing configuration in the subscription.
       operationId: Pricings_Update
       parameters:
         - description: API version for the operation
@@ -265,7 +265,7 @@ definitions:
             type: string
         type: object
         x-ms-azure-resource: true
-    description: Pricing tier will be applied for the scope based on the resource ID
+    description: 'Azure Security Center is provided in two pricing tiers: free and standard, with the standard tier available with a trial period. The standard tier offers advanced security capabilities, while the free tier offers basic security features.'
     properties:
       properties:
         $ref: '#/definitions/PricingProperties'
@@ -273,7 +273,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   PricingList:
-    description: List of pricing configurations response
+    description: List of pricing configurations response.
     properties:
       value:
         description: List of pricing configurations

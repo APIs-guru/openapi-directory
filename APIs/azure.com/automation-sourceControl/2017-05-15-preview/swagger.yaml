@@ -99,67 +99,68 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              value:
-                - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl1
-                  name: sampleSourceControl1
-                  properties:
-                    autoSync: true
-                    branch: master
-                    creationTime: '2017-03-28T22:59:00.937+00:00'
-                    description: my description
-                    lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                    path: /sampleFolder/sampleFolder2
-                    publishRunbook: true
-                    repoUrl: 'https://github.com/SampleUserRepro/PowerShell-1'
-                    sourceType: GitHub
-                - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl2
-                  name: sampleSourceControl2
-                  properties:
-                    autoSync: true
-                    branch: master
-                    creationTime: '2017-03-28T22:59:00.937+00:00'
-                    description: my description
-                    lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                    path: /sampleFolder/sampleFolder2
-                    publishRunbook: true
-                    repoUrl: 'https://github.com/SampleUserRepro/PowerShell-2'
-                    sourceType: GitHub
-                - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl3
-                  name: sampleSourceControl3
-                  properties:
-                    autoSync: true
-                    branch: master
-                    creationTime: '2017-03-28T22:59:00.937+00:00'
-                    description: my description
-                    lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                    path: /sampleFolder/sampleFolder2
-                    publishRunbook: true
-                    repoUrl: 'https://github.com/SampleUserRepro/PowerShell-3'
-                    sourceType: GitHub
-                - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl4
-                  name: sampleSourceControl4
-                  properties:
-                    autoSync: true
-                    branch: master
-                    creationTime: '2017-03-28T22:59:00.937+00:00'
-                    description: my description
-                    lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                    path: /sampleFolder/sampleFolder2
-                    publishRunbook: true
-                    repoUrl: 'https://github.com/SampleUserRepro/PowerShell-4'
-                    sourceType: GitHub
-                - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl5
-                  name: sampleSourceControl5
-                  properties:
-                    autoSync: true
-                    branch: master
-                    creationTime: '2017-03-28T22:59:00.937+00:00'
-                    description: my description
-                    lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                    path: /sampleFolder/sampleFolder2
-                    publishRunbook: true
-                    repoUrl: 'https://github.com/SampleUserRepro/PowerShell-5'
-                    sourceType: GitHub
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl1
+                    name: sampleSourceControl1
+                    properties:
+                      autoSync: true
+                      branch: master
+                      creationTime: '2017-03-28T22:59:00.937+00:00'
+                      description: my description
+                      folderPath: /sampleFolder/sampleFolder2
+                      lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                      publishRunbook: true
+                      repoUrl: 'https://github.com/SampleUserRepro/PowerShell-1'
+                      sourceType: GitHub
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl2
+                    name: sampleSourceControl2
+                    properties:
+                      autoSync: true
+                      branch: master
+                      creationTime: '2017-03-28T22:59:00.937+00:00'
+                      description: my description
+                      folderPath: /sampleFolder/sampleFolder2
+                      lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                      publishRunbook: true
+                      repoUrl: 'https://github.com/SampleUserRepro/PowerShell-2'
+                      sourceType: GitHub
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl3
+                    name: sampleSourceControl3
+                    properties:
+                      autoSync: true
+                      branch: master
+                      creationTime: '2017-03-28T22:59:00.937+00:00'
+                      description: my description
+                      folderPath: /sampleFolder/sampleFolder2
+                      lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                      publishRunbook: true
+                      repoUrl: 'https://github.com/SampleUserRepro/PowerShell-3'
+                      sourceType: GitHub
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl4
+                    name: sampleSourceControl4
+                    properties:
+                      autoSync: true
+                      branch: master
+                      creationTime: '2017-03-28T22:59:00.937+00:00'
+                      description: my description
+                      folderPath: /sampleFolder/sampleFolder2
+                      lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                      publishRunbook: true
+                      repoUrl: 'https://github.com/SampleUserRepro/PowerShell-4'
+                      sourceType: GitHub
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl5
+                    name: sampleSourceControl5
+                    properties:
+                      autoSync: true
+                      branch: master
+                      creationTime: '2017-03-28T22:59:00.937+00:00'
+                      description: my description
+                      folderPath: /sampleFolder/sampleFolder2
+                      lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                      publishRunbook: true
+                      repoUrl: 'https://github.com/SampleUserRepro/PowerShell-5'
+                      sourceType: GitHub
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}':
@@ -291,18 +292,19 @@ paths:
             subscriptionId: subid
           responses:
             '200':
-              id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl
-              name: sampleSourceControl
-              properties:
-                autoSync: true
-                branch: master
-                creationTime: '2017-03-28T22:59:00.937+00:00'
-                description: my description
-                lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
-                path: /folderOne/folderTwo
-                publishRunbook: true
-                repoUrl: 'https://github.com/SampleUserRepro/PowerShell'
-                sourceType: GitHub
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl
+                name: sampleSourceControl
+                properties:
+                  autoSync: true
+                  branch: master
+                  creationTime: '2017-03-28T22:59:00.937+00:00'
+                  description: my description
+                  folderPath: /folderOne/folderTwo
+                  lastModifiedTime: '2017-03-28T22:59:00.937+00:00'
+                  publishRunbook: true
+                  repoUrl: 'https://github.com/SampleUserRepro/PowerShell'
+                  sourceType: GitHub
     patch:
       description: Update a source control.
       externalDocs:
