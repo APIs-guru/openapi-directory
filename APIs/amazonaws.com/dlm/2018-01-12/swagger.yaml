@@ -1,135 +1,241 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: dlm.amazonaws.com
-basePath: /
 info:
+  version: '2018-01-12'
+  x-release: v4
+  title: Amazon Data Lifecycle Manager
+  description: '<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Data Lifecycle Manager
-  version: '2018-01-12'
+  x-providerName: amazonaws.com
+  x-serviceName: dlm
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dlm-2018-01-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dlm-2018-01-12.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: dlm
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/dlm/'
+host: dlm.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://dlm.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon DLM multi-region endpoint
+  - url: 'https://dlm.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon DLM multi-region endpoint
+  - url: 'http://dlm.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DLM endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://dlm.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DLM endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   /policies:
-    get:
-      description: '<p>Gets summary information about all or the specified data lifecycle policies.</p> <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>'
-      operationId: GetLifecyclePolicies
+    post:
+      operationId: CreateLifecyclePolicy
+      description: Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLifecyclePolicyResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
       parameters:
-        - description: The identifiers of the data lifecycle policies.
-          in: query
-          items:
-            type: string
-          name: policyIds
-          required: false
-          type: array
-        - description: The activation state.
-          enum:
-            - ENABLED
-            - DISABLED
-            - ERROR
-          in: query
-          name: state
-          required: false
-          type: string
-        - description: The resource type.
-          in: query
-          items:
-            type: string
-          name: resourceTypes
-          required: false
-          type: array
-        - description: <p>The target tag for a policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p>
-          in: query
-          items:
-            type: string
-          name: targetTags
-          required: false
-          type: array
-        - description: <p>The tags to add to objects created by the policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p> <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>
-          in: query
-          items:
-            type: string
-          name: tagsToAdd
-          required: false
-          type: array
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - ExecutionRoleArn
+              - Description
+              - State
+              - PolicyDetails
+            properties:
+              ExecutionRoleArn:
+                description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+                type: string
+              Description:
+                description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
+                type: string
+                minLength: 0
+                maxLength: 500
+              State:
+                description: The desired activation state of the lifecycle policy after creation.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              PolicyDetails:
+                description: Specifies the configuration of a lifecycle policy.
+                type: object
+                properties:
+                  PolicyType:
+                    $ref: '#/definitions/PolicyTypeValues'
+                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+                  ResourceTypes:
+                    $ref: '#/definitions/ResourceTypeValuesList'
+                    description: The resource type.
+                  TargetTags:
+                    $ref: '#/definitions/TargetTagList'
+                    description: The single tag that identifies targeted resources for this policy.
+                  Schedules:
+                    $ref: '#/definitions/ScheduleList'
+                    description: The schedule of policy-defined actions.
+                  Parameters:
+                    $ref: '#/definitions/Parameters'
+                    description: 'A set of optional parameters that can be provided by the policy. '
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLifecyclePolicies
+      description: '<p>Gets summary information about all or the specified data lifecycle policies.</p> <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>'
       responses:
         '200':
           description: Success
@@ -151,80 +257,71 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
-      operationId: CreateLifecyclePolicy
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Description:
-                description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
-                maxLength: 500
-                minLength: 0
-                type: string
-              ExecutionRoleArn:
-                description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
-                type: string
-              PolicyDetails:
-                description: Specifies the configuration of a lifecycle policy.
-                properties:
-                  Parameters:
-                    $ref: '#/definitions/Parameters'
-                    description: 'A set of optional parameters that can be provided by the policy. '
-                  PolicyType:
-                    $ref: '#/definitions/PolicyTypeValues'
-                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
-                  ResourceTypes:
-                    $ref: '#/definitions/ResourceTypeValuesList'
-                    description: The resource type.
-                  Schedules:
-                    $ref: '#/definitions/ScheduleList'
-                    description: The schedule of policy-defined actions.
-                  TargetTags:
-                    $ref: '#/definitions/TargetTagList'
-                    description: The single tag that identifies targeted resources for this policy.
-                type: object
-              State:
-                description: The desired activation state of the lifecycle policy after creation.
-                enum:
-                  - ENABLED
-                  - DISABLED
-                type: string
-            required:
-              - ExecutionRoleArn
-              - Description
-              - State
-              - PolicyDetails
-            type: object
+        - name: policyIds
+          in: query
+          required: false
+          description: The identifiers of the data lifecycle policies.
+          type: array
+          items:
+            type: string
+        - name: state
+          in: query
+          required: false
+          description: The activation state.
+          type: string
+          enum:
+            - ENABLED
+            - DISABLED
+            - ERROR
+        - name: resourceTypes
+          in: query
+          required: false
+          description: The resource type.
+          type: array
+          items:
+            type: string
+        - name: targetTags
+          in: query
+          required: false
+          description: <p>The target tag for a policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p>
+          type: array
+          items:
+            type: string
+        - name: tagsToAdd
+          in: query
+          required: false
+          description: <p>The tags to add to objects created by the policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p> <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>
+          type: array
+          items:
+            type: string
+  '/policies/{policyId}/':
+    delete:
+      operationId: DeleteLifecyclePolicy
+      description: Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/CreateLifecyclePolicyResponse'
+            $ref: '#/definitions/DeleteLifecyclePolicyResponse'
         '480':
-          description: InvalidRequestException
+          description: ResourceNotFoundException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
+            $ref: '#/definitions/ResourceNotFoundException'
         '481':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
-        '482':
           description: InternalServerException
           schema:
             $ref: '#/definitions/InternalServerException'
-  '/policies/{policyId}':
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          description: The identifier of the lifecycle policy.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -233,54 +330,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    patch:
-      description: Updates the specified lifecycle policy.
-      operationId: UpdateLifecyclePolicy
-      parameters:
-        - description: The identifier of the lifecycle policy.
-          in: path
-          name: policyId
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
+    get:
+      operationId: GetLifecyclePolicy
+      description: Gets detailed information about the specified lifecycle policy.
+      responses:
+        '200':
+          description: Success
           schema:
-            properties:
-              Description:
-                description: A description of the lifecycle policy.
-                maxLength: 500
-                minLength: 0
-                type: string
-              ExecutionRoleArn:
-                description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
-                type: string
-              PolicyDetails:
-                description: Specifies the configuration of a lifecycle policy.
-                properties:
-                  Parameters:
-                    $ref: '#/definitions/Parameters'
-                    description: 'A set of optional parameters that can be provided by the policy. '
-                  PolicyType:
-                    $ref: '#/definitions/PolicyTypeValues'
-                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
-                  ResourceTypes:
-                    $ref: '#/definitions/ResourceTypeValuesList'
-                    description: The resource type.
-                  Schedules:
-                    $ref: '#/definitions/ScheduleList'
-                    description: The schedule of policy-defined actions.
-                  TargetTags:
-                    $ref: '#/definitions/TargetTagList'
-                    description: The single tag that identifies targeted resources for this policy.
-                type: object
-              State:
-                description: The desired activation state of the lifecycle policy after creation.
-                enum:
-                  - ENABLED
-                  - DISABLED
-                type: string
-            type: object
+            $ref: '#/definitions/GetLifecyclePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          description: The identifier of the lifecycle policy.
+          type: string
+  '/policies/{policyId}':
+    patch:
+      operationId: UpdateLifecyclePolicy
+      description: Updates the specified lifecycle policy.
       responses:
         '200':
           description: Success
@@ -302,59 +381,51 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
-  '/policies/{policyId}/':
-    delete:
-      description: Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
-      operationId: DeleteLifecyclePolicy
       parameters:
-        - description: The identifier of the lifecycle policy.
+        - name: policyId
           in: path
-          name: policyId
           required: true
+          description: The identifier of the lifecycle policy.
           type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DeleteLifecyclePolicyResponse'
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InternalServerException
-          schema:
-            $ref: '#/definitions/InternalServerException'
-        '482':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
-    get:
-      description: Gets detailed information about the specified lifecycle policy.
-      operationId: GetLifecyclePolicy
-      parameters:
-        - description: The identifier of the lifecycle policy.
-          in: path
-          name: policyId
+        - name: body
+          in: body
           required: true
-          type: string
-      responses:
-        '200':
-          description: Success
           schema:
-            $ref: '#/definitions/GetLifecyclePolicyResponse'
-        '480':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '481':
-          description: InternalServerException
-          schema:
-            $ref: '#/definitions/InternalServerException'
-        '482':
-          description: LimitExceededException
-          schema:
-            $ref: '#/definitions/LimitExceededException'
+            type: object
+            properties:
+              ExecutionRoleArn:
+                description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+                type: string
+              State:
+                description: The desired activation state of the lifecycle policy after creation.
+                type: string
+                enum:
+                  - ENABLED
+                  - DISABLED
+              Description:
+                description: A description of the lifecycle policy.
+                type: string
+                minLength: 0
+                maxLength: 500
+              PolicyDetails:
+                description: Specifies the configuration of a lifecycle policy.
+                type: object
+                properties:
+                  PolicyType:
+                    $ref: '#/definitions/PolicyTypeValues'
+                    description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+                  ResourceTypes:
+                    $ref: '#/definitions/ResourceTypeValuesList'
+                    description: The resource type.
+                  TargetTags:
+                    $ref: '#/definitions/TargetTagList'
+                    description: The single tag that identifies targeted resources for this policy.
+                  Schedules:
+                    $ref: '#/definitions/ScheduleList'
+                    description: The schedule of policy-defined actions.
+                  Parameters:
+                    $ref: '#/definitions/Parameters'
+                    description: 'A set of optional parameters that can be provided by the policy. '
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -364,40 +435,145 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateLifecyclePolicyResponse:
+    type: object
+    properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The identifier of the lifecycle policy.
+  PolicyTypeValues:
+    type: string
+    enum:
+      - EBS_SNAPSHOT_MANAGEMENT
+  ResourceTypeValuesList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTypeValues'
+    minItems: 1
+    maxItems: 1
+  TargetTagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  ScheduleList:
+    type: array
+    items:
+      $ref: '#/definitions/Schedule'
+    minItems: 1
+    maxItems: 1
+  Parameters:
+    type: object
+    properties:
+      ExcludeBootVolume:
+        $ref: '#/definitions/ExcludeBootVolume'
+        description: 'When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.'
+    description: Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.
+  InvalidRequestException: {}
+  LimitExceededException: {}
+  InternalServerException: {}
+  DeleteLifecyclePolicyResponse:
+    type: object
+    properties: {}
+  ResourceNotFoundException: {}
+  GetLifecyclePoliciesResponse:
+    type: object
+    properties:
+      Policies:
+        $ref: '#/definitions/LifecyclePolicySummaryList'
+        description: Summary information about the lifecycle policies.
+  PolicyId:
+    type: string
+  ResourceTypeValues:
+    type: string
+    enum:
+      - VOLUME
+      - INSTANCE
+  TagFilter:
+    type: string
+  GetLifecyclePolicyResponse:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/LifecyclePolicy'
+        description: Detailed information about the lifecycle policy.
+  UpdateLifecyclePolicyResponse:
+    type: object
+    properties: {}
   CopyTags:
     type: boolean
   Count:
-    maximum: 1000
-    minimum: 1
     type: integer
-  CreateLifecyclePolicyRequest:
+    minimum: 1
+    maximum: 1000
+  ExecutionRoleArn:
+    type: string
+  PolicyDescription:
+    type: string
+    minLength: 0
+    maxLength: 500
+  SettablePolicyStateValues:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  PolicyDetails:
+    type: object
     properties:
-      Description:
-        $ref: '#/definitions/PolicyDescription'
-        description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
-      ExecutionRoleArn:
-        $ref: '#/definitions/ExecutionRoleArn'
-        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
-      PolicyDetails:
-        $ref: '#/definitions/PolicyDetails'
-        description: <p>The configuration details of the lifecycle policy.</p> <p>Target tags cannot be re-used across lifecycle policies.</p>
-      State:
-        $ref: '#/definitions/SettablePolicyStateValues'
-        description: The desired activation state of the lifecycle policy after creation.
+      PolicyType:
+        $ref: '#/definitions/PolicyTypeValues'
+        description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+      ResourceTypes:
+        $ref: '#/definitions/ResourceTypeValuesList'
+        description: The resource type.
+      TargetTags:
+        $ref: '#/definitions/TargetTagList'
+        description: The single tag that identifies targeted resources for this policy.
+      Schedules:
+        $ref: '#/definitions/ScheduleList'
+        description: The schedule of policy-defined actions.
+      Parameters:
+        $ref: '#/definitions/Parameters'
+        description: 'A set of optional parameters that can be provided by the policy. '
+    description: Specifies the configuration of a lifecycle policy.
+  CreateLifecyclePolicyRequest:
+    type: object
     required:
       - ExecutionRoleArn
       - Description
       - State
       - PolicyDetails
-    type: object
-  CreateLifecyclePolicyResponse:
     properties:
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: The identifier of the lifecycle policy.
-    type: object
+      ExecutionRoleArn:
+        $ref: '#/definitions/ExecutionRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
+      State:
+        $ref: '#/definitions/SettablePolicyStateValues'
+        description: The desired activation state of the lifecycle policy after creation.
+      PolicyDetails:
+        $ref: '#/definitions/PolicyDetails'
+        description: <p>The configuration details of the lifecycle policy.</p> <p>Target tags cannot be re-used across lifecycle policies.</p>
+  Interval:
+    type: integer
+    minimum: 1
+  IntervalUnitValues:
+    type: string
+    enum:
+      - HOURS
+  TimesList:
+    type: array
+    items:
+      $ref: '#/definitions/Time'
+    maxItems: 1
   CreateRule:
-    description: Specifies when to create snapshots of EBS volumes.
+    type: object
+    required:
+      - Interval
+      - IntervalUnit
     properties:
       Interval:
         $ref: '#/definitions/Interval'
@@ -408,198 +584,139 @@ definitions:
       Times:
         $ref: '#/definitions/TimesList'
         description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
-    required:
-      - Interval
-      - IntervalUnit
-    type: object
+    description: Specifies when to create snapshots of EBS volumes.
   DeleteLifecyclePolicyRequest:
-    properties: {}
     type: object
-  DeleteLifecyclePolicyResponse:
     properties: {}
-    type: object
   ExcludeBootVolume:
     type: boolean
-  ExecutionRoleArn:
-    type: string
-  GetLifecyclePoliciesRequest:
-    properties: {}
-    type: object
-  GetLifecyclePoliciesResponse:
-    properties:
-      Policies:
-        $ref: '#/definitions/LifecyclePolicySummaryList'
-        description: Summary information about the lifecycle policies.
-    type: object
-  GetLifecyclePolicyRequest:
-    properties: {}
-    type: object
-  GetLifecyclePolicyResponse:
-    properties:
-      Policy:
-        $ref: '#/definitions/LifecyclePolicy'
-        description: Detailed information about the lifecycle policy.
-    type: object
+  PolicyIdList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyId'
   GettablePolicyStateValues:
+    type: string
     enum:
       - ENABLED
       - DISABLED
       - ERROR
-    type: string
-  InternalServerException: {}
-  Interval:
-    minimum: 1
-    type: integer
-  IntervalUnitValues:
-    enum:
-      - HOURS
-    type: string
-  InvalidRequestException: {}
+  TargetTagsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 1
+    maxItems: 50
+  TagsToAddFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 0
+    maxItems: 50
+  GetLifecyclePoliciesRequest:
+    type: object
+    properties: {}
+  LifecyclePolicySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecyclePolicySummary'
+  GetLifecyclePolicyRequest:
+    type: object
+    properties: {}
   LifecyclePolicy:
-    description: Detailed information about a lifecycle policy.
+    type: object
     properties:
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The identifier of the lifecycle policy.
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: The description of the lifecycle policy.
+      State:
+        $ref: '#/definitions/GettablePolicyStateValues'
+        description: The activation state of the lifecycle policy.
+      ExecutionRoleArn:
+        $ref: '#/definitions/ExecutionRoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
       DateCreated:
         $ref: '#/definitions/Timestamp'
         description: The local date and time when the lifecycle policy was created.
       DateModified:
         $ref: '#/definitions/Timestamp'
         description: The local date and time when the lifecycle policy was last modified.
-      Description:
-        $ref: '#/definitions/PolicyDescription'
-        description: The description of the lifecycle policy.
-      ExecutionRoleArn:
-        $ref: '#/definitions/ExecutionRoleArn'
-        description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
       PolicyDetails:
         $ref: '#/definitions/PolicyDetails'
         description: The configuration of the lifecycle policy
+    description: Detailed information about a lifecycle policy.
+  Timestamp:
+    type: string
+    format: date-time
+  LifecyclePolicySummary:
+    type: object
+    properties:
       PolicyId:
         $ref: '#/definitions/PolicyId'
         description: The identifier of the lifecycle policy.
-      State:
-        $ref: '#/definitions/GettablePolicyStateValues'
-        description: The activation state of the lifecycle policy.
-    type: object
-  LifecyclePolicySummary:
-    description: Summary information about a lifecycle policy.
-    properties:
       Description:
         $ref: '#/definitions/PolicyDescription'
         description: The description of the lifecycle policy.
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: The identifier of the lifecycle policy.
       State:
         $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
-    type: object
-  LifecyclePolicySummaryList:
-    items:
-      $ref: '#/definitions/LifecyclePolicySummary'
-    type: array
-  LimitExceededException: {}
-  Parameters:
-    description: Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.
-    properties:
-      ExcludeBootVolume:
-        $ref: '#/definitions/ExcludeBootVolume'
-        description: 'When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.'
-    type: object
-  PolicyDescription:
-    maxLength: 500
-    minLength: 0
-    type: string
-  PolicyDetails:
-    description: Specifies the configuration of a lifecycle policy.
-    properties:
-      Parameters:
-        $ref: '#/definitions/Parameters'
-        description: 'A set of optional parameters that can be provided by the policy. '
-      PolicyType:
-        $ref: '#/definitions/PolicyTypeValues'
-        description: This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
-      ResourceTypes:
-        $ref: '#/definitions/ResourceTypeValuesList'
-        description: The resource type.
-      Schedules:
-        $ref: '#/definitions/ScheduleList'
-        description: The schedule of policy-defined actions.
-      TargetTags:
-        $ref: '#/definitions/TargetTagList'
-        description: The single tag that identifies targeted resources for this policy.
-    type: object
-  PolicyId:
-    type: string
-  PolicyIdList:
-    items:
-      $ref: '#/definitions/PolicyId'
-    type: array
-  PolicyTypeValues:
-    enum:
-      - EBS_SNAPSHOT_MANAGEMENT
-    type: string
-  ResourceNotFoundException: {}
-  ResourceTypeValues:
-    enum:
-      - VOLUME
-      - INSTANCE
-    type: string
-  ResourceTypeValuesList:
-    items:
-      $ref: '#/definitions/ResourceTypeValues'
-    maxItems: 1
-    minItems: 1
-    type: array
+    description: Summary information about a lifecycle policy.
   RetainRule:
-    description: Specifies the number of snapshots to keep for each EBS volume.
+    type: object
+    required:
+      - Count
     properties:
       Count:
         $ref: '#/definitions/Count'
         description: 'The number of snapshots to keep for each volume, up to a maximum of 1000.'
-    required:
-      - Count
-    type: object
+    description: Specifies the number of snapshots to keep for each EBS volume.
+  ScheduleName:
+    type: string
+    minLength: 0
+    maxLength: 500
+  TagsToAddList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
+  VariableTagsList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   Schedule:
-    description: Specifies a schedule.
+    type: object
     properties:
-      CopyTags:
-        $ref: '#/definitions/CopyTags'
-        description: Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
-      CreateRule:
-        $ref: '#/definitions/CreateRule'
-        description: The create rule.
       Name:
         $ref: '#/definitions/ScheduleName'
         description: The name of the schedule.
-      RetainRule:
-        $ref: '#/definitions/RetainRule'
-        description: The retain rule.
+      CopyTags:
+        $ref: '#/definitions/CopyTags'
+        description: Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
       TagsToAdd:
         $ref: '#/definitions/TagsToAddList'
         description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
       VariableTags:
         $ref: '#/definitions/VariableTagsList'
         description: 'A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.'
-    type: object
-  ScheduleList:
-    items:
-      $ref: '#/definitions/Schedule'
-    maxItems: 1
-    minItems: 1
-    type: array
-  ScheduleName:
-    maxLength: 500
-    minLength: 0
-    type: string
-  SettablePolicyStateValues:
-    enum:
-      - ENABLED
-      - DISABLED
-    type: string
+      CreateRule:
+        $ref: '#/definitions/CreateRule'
+        description: The create rule.
+      RetainRule:
+        $ref: '#/definitions/RetainRule'
+        description: The retain rule.
+    description: Specifies a schedule.
   String:
     type: string
   Tag:
-    description: Specifies a tag for a resource.
+    type: object
+    required:
+      - Key
+      - Value
     properties:
       Key:
         $ref: '#/definitions/String'
@@ -607,139 +724,22 @@ definitions:
       Value:
         $ref: '#/definitions/String'
         description: The tag value.
-    required:
-      - Key
-      - Value
-    type: object
-  TagFilter:
-    type: string
-  TagsToAddFilterList:
-    items:
-      $ref: '#/definitions/TagFilter'
-    maxItems: 50
-    minItems: 0
-    type: array
-  TagsToAddList:
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-    minItems: 0
-    type: array
-  TargetTagList:
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-    minItems: 1
-    type: array
-  TargetTagsFilterList:
-    items:
-      $ref: '#/definitions/TagFilter'
-    maxItems: 50
-    minItems: 1
-    type: array
+    description: Specifies a tag for a resource.
   Time:
+    type: string
     pattern: '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
-    type: string
-  TimesList:
-    items:
-      $ref: '#/definitions/Time'
-    maxItems: 1
-    type: array
-  Timestamp:
-    format: date-time
-    type: string
   UpdateLifecyclePolicyRequest:
+    type: object
     properties:
-      Description:
-        $ref: '#/definitions/PolicyDescription'
-        description: A description of the lifecycle policy.
       ExecutionRoleArn:
         $ref: '#/definitions/ExecutionRoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
-      PolicyDetails:
-        $ref: '#/definitions/PolicyDetails'
-        description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across policies.</p>
       State:
         $ref: '#/definitions/SettablePolicyStateValues'
         description: The desired activation state of the lifecycle policy after creation.
-    type: object
-  UpdateLifecyclePolicyResponse:
-    properties: {}
-    type: object
-  VariableTagsList:
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-    minItems: 0
-    type: array
-x-servers:
-  - description: The Amazon DLM multi-region endpoint
-    url: 'http://dlm.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon DLM multi-region endpoint
-    url: 'https://dlm.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon DLM endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://dlm.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon DLM endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://dlm.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+      Description:
+        $ref: '#/definitions/PolicyDescription'
+        description: A description of the lifecycle policy.
+      PolicyDetails:
+        $ref: '#/definitions/PolicyDetails'
+        description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across policies.</p>

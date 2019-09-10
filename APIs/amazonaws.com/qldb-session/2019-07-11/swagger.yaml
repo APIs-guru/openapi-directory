@@ -1,0 +1,438 @@
+swagger: '2.0'
+info:
+  version: '2019-07-11'
+  x-release: v4
+  title: Amazon QLDB Session
+  description: The transactional data APIs for Amazon QLDB
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: qldb-session
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/qldb-session-2019-07-11.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/qldb/'
+host: session.qldb.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://session.qldb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The QLDB Session multi-region endpoint
+  - url: 'https://session.qldb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The QLDB Session multi-region endpoint
+  - url: 'http://session.qldb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The QLDB Session endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://session.qldb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The QLDB Session endpoint for China (Beijing) and China (Ningxia)
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/#X-Amz-Target=QLDBSession.SendCommand':
+    post:
+      operationId: SendCommand
+      description: Sends a command to an Amazon QLDB ledger.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendCommandResult'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InvalidSessionException
+          schema:
+            $ref: '#/definitions/InvalidSessionException'
+        '482':
+          description: OccConflictException
+          schema:
+            $ref: '#/definitions/OccConflictException'
+        '483':
+          description: RateExceededException
+          schema:
+            $ref: '#/definitions/RateExceededException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendCommandRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - QLDBSession.SendCommand
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  SendCommandResult:
+    type: object
+    properties:
+      StartSession:
+        $ref: '#/definitions/StartSessionResult'
+        description: Contains the details of the started session that includes a session token. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
+      StartTransaction:
+        $ref: '#/definitions/StartTransactionResult'
+        description: Contains the details of the started transaction.
+      EndSession:
+        $ref: '#/definitions/EndSessionResult'
+        description: Contains the details of the ended session.
+      CommitTransaction:
+        $ref: '#/definitions/CommitTransactionResult'
+        description: Contains the details of the committed transaction.
+      AbortTransaction:
+        $ref: '#/definitions/AbortTransactionResult'
+        description: Contains the details of the aborted transaction.
+      ExecuteStatement:
+        $ref: '#/definitions/ExecuteStatementResult'
+        description: Contains the details of the executed statement.
+      FetchPage:
+        $ref: '#/definitions/FetchPageResult'
+        description: Contains the details of the fetched page.
+  SendCommandRequest:
+    type: object
+    properties:
+      SessionToken:
+        $ref: '#/definitions/SessionToken'
+        description: '<p>Specifies the session token for the current command. A session token is constant throughout the life of the session.</p> <p>To obtain a session token, run the <code>StartSession</code> command. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.</p>'
+      StartSession:
+        $ref: '#/definitions/StartSessionRequest'
+        description: Command to start a new session. A session token is obtained as part of the response.
+      StartTransaction:
+        $ref: '#/definitions/StartTransactionRequest'
+        description: Command to start a new transaction.
+      EndSession:
+        $ref: '#/definitions/EndSessionRequest'
+        description: Command to end the current session.
+      CommitTransaction:
+        $ref: '#/definitions/CommitTransactionRequest'
+        description: Command to commit the specified transaction.
+      AbortTransaction:
+        $ref: '#/definitions/AbortTransactionRequest'
+        description: Command to abort the current transaction.
+      ExecuteStatement:
+        $ref: '#/definitions/ExecuteStatementRequest'
+        description: Command to execute a statement in the specified transaction.
+      FetchPage:
+        $ref: '#/definitions/FetchPageRequest'
+        description: Command to fetch a page.
+  BadRequestException: {}
+  InvalidSessionException: {}
+  OccConflictException: {}
+  RateExceededException: {}
+  LimitExceededException: {}
+  AbortTransactionRequest:
+    type: object
+    properties: {}
+    description: Contains the details of the transaction to abort.
+  AbortTransactionResult:
+    type: object
+    properties: {}
+    description: Contains the details of the aborted transaction.
+  CommitDigest:
+    type: string
+  TransactionId:
+    type: string
+    pattern: '^[A-Za-z-0-9]+$'
+    minLength: 22
+    maxLength: 22
+  CommitTransactionRequest:
+    type: object
+    required:
+      - TransactionId
+      - CommitDigest
+    properties:
+      TransactionId:
+        $ref: '#/definitions/TransactionId'
+        description: Specifies the transaction id of the transaction to commit.
+      CommitDigest:
+        $ref: '#/definitions/CommitDigest'
+        description: 'Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates <code>CommitDigest</code> and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.'
+    description: Contains the details of the transaction to commit.
+  CommitTransactionResult:
+    type: object
+    properties:
+      TransactionId:
+        $ref: '#/definitions/TransactionId'
+        description: The transaction id of the committed transaction.
+      CommitDigest:
+        $ref: '#/definitions/CommitDigest'
+        description: The commit digest of the committed transaction.
+    description: Contains the details of the committed transaction.
+  EndSessionRequest:
+    type: object
+    properties: {}
+    description: Specifies a request to end the session.
+  EndSessionResult:
+    type: object
+    properties: {}
+    description: Contains the details of the ended session.
+  Statement:
+    type: string
+    minLength: 1
+    maxLength: 100000
+  StatementParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ValueHolder'
+  ExecuteStatementRequest:
+    type: object
+    required:
+      - TransactionId
+      - Statement
+    properties:
+      TransactionId:
+        $ref: '#/definitions/TransactionId'
+        description: Specifies the transaction id of the request.
+      Statement:
+        $ref: '#/definitions/Statement'
+        description: Specifies the statement of the request.
+      Parameters:
+        $ref: '#/definitions/StatementParameters'
+        description: Specifies the parameters for the parameterized statement in the request.
+    description: Specifies a request to execute a statement.
+  Page:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ValueHolders'
+        description: A structure that contains values in multiple encoding formats.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: The token of the next page.
+    description: Contains details of the fetched page.
+  ExecuteStatementResult:
+    type: object
+    properties:
+      FirstPage:
+        $ref: '#/definitions/Page'
+        description: Contains the details of the first fetched page.
+    description: Contains the details of the executed statement.
+  PageToken:
+    type: string
+    pattern: '^[A-Za-z-0-9+/=]+$'
+    minLength: 4
+    maxLength: 1024
+  FetchPageRequest:
+    type: object
+    required:
+      - TransactionId
+      - NextPageToken
+    properties:
+      TransactionId:
+        $ref: '#/definitions/TransactionId'
+        description: Specifies the transaction id of the page to be fetched.
+      NextPageToken:
+        $ref: '#/definitions/PageToken'
+        description: Specifies the next page token of the page to be fetched.
+    description: Specifies the details of the page to be fetched.
+  FetchPageResult:
+    type: object
+    properties:
+      Page:
+        $ref: '#/definitions/Page'
+        description: Contains details of the fetched page.
+    description: Contains the page that was fetched.
+  IonBinary:
+    type: string
+    minLength: 1
+    maxLength: 131072
+  IonText:
+    type: string
+    minLength: 1
+    maxLength: 1048576
+  LedgerName:
+    type: string
+    pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
+    minLength: 1
+    maxLength: 32
+  ValueHolders:
+    type: array
+    items:
+      $ref: '#/definitions/ValueHolder'
+  SessionToken:
+    type: string
+    pattern: '^[A-Za-z-0-9+/=]+$'
+    minLength: 4
+    maxLength: 1024
+  StartSessionRequest:
+    type: object
+    required:
+      - LedgerName
+    properties:
+      LedgerName:
+        $ref: '#/definitions/LedgerName'
+        description: The name of the ledger to start a new session against.
+    description: Specifies a request to start a a new session.
+  StartTransactionRequest:
+    type: object
+    properties: {}
+    description: Specifies a request to start a transaction.
+  StartSessionResult:
+    type: object
+    properties:
+      SessionToken:
+        $ref: '#/definitions/SessionToken'
+        description: Session token of the started session. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
+    description: Contains the details of the started session.
+  StartTransactionResult:
+    type: object
+    properties:
+      TransactionId:
+        $ref: '#/definitions/TransactionId'
+        description: The transaction id of the started transaction.
+    description: Contains the details of the started transaction.
+  ValueHolder:
+    type: object
+    properties:
+      IonBinary:
+        $ref: '#/definitions/IonBinary'
+        description: 'An Amazon Ion binary value contained in a <code>ValueHolder</code> structure. '
+      IonText:
+        $ref: '#/definitions/IonText'
+        description: 'An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure. '
+    description: A structure that can contains values in multiple encoding formats.

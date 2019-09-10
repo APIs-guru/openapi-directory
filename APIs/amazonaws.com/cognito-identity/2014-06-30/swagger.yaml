@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: cognito-identity.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2014-06-30'
+  x-release: v4
+  title: Amazon Cognito Identity
+  description: '<fullname>Amazon Cognito Federated Identities</fullname> <p>Amazon Cognito Federated Identities is a web service that delivers scoped temporary credentials to mobile devices and other untrusted environments. It uniquely identifies a device and supplies the user with a consistent identity over the lifetime of an application.</p> <p>Using Amazon Cognito Federated Identities, you can enable authentication with one or more third-party identity providers (Facebook, Google, or Login with Amazon) or an Amazon Cognito user pool, and you can also choose to support unauthenticated access from your app. Cognito delivers a unique identifier for each user and acts as an OpenID token provider trusted by AWS Security Token Service (STS) to access temporary, limited-privilege AWS credentials.</p> <p>For a description of the authentication flow from the Amazon Cognito Developer Guide see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Authentication Flow</a>.</p> <p>For more information see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html">Amazon Cognito Federated Identities</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon Cognito Federated Identities</fullname> <p>Amazon Cognito Federated Identities is a web service that delivers scoped temporary credentials to mobile devices and other untrusted environments. It uniquely identifies a device and supplies the user with a consistent identity over the lifetime of an application.</p> <p>Using Amazon Cognito Federated Identities, you can enable authentication with one or more third-party identity providers (Facebook, Google, or Login with Amazon) or an Amazon Cognito user pool, and you can also choose to support unauthenticated access from your app. Cognito delivers a unique identifier for each user and acts as an OpenID token provider trusted by AWS Security Token Service (STS) to access temporary, limited-privilege AWS credentials.</p> <p>For a description of the authentication flow from the Amazon Cognito Developer Guide see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Authentication Flow</a>.</p> <p>For more information see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html">Amazon Cognito Federated Identities</a>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Cognito Identity
-  version: '2014-06-30'
+  x-providerName: amazonaws.com
+  x-serviceName: cognito-identity
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cognito-identity-2014-06-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cognito-identity-2014-06-30.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: cognito-identity
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/cognito-identity/'
+host: cognito-identity.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://cognito-identity.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Cognito Identity multi-region endpoint
+  - url: 'https://cognito-identity.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Cognito Identity multi-region endpoint
+  - url: 'http://cognito-identity.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Cognito Identity endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cognito-identity.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Cognito Identity endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSCognitoIdentityService.CreateIdentityPool':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows:</p> <ul> <li> <p>Facebook: <code>graph.facebook.com</code> </p> </li> <li> <p>Google: <code>accounts.google.com</code> </p> </li> <li> <p>Amazon: <code>www.amazon.com</code> </p> </li> <li> <p>Twitter: <code>api.twitter.com</code> </p> </li> <li> <p>Digits: <code>www.digits.com</code> </p> </li> </ul> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: CreateIdentityPool
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateIdentityPoolInput'
-        - enum:
-            - AWSCognitoIdentityService.CreateIdentityPool
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows:</p> <ul> <li> <p>Facebook: <code>graph.facebook.com</code> </p> </li> <li> <p>Google: <code>accounts.google.com</code> </p> </li> <li> <p>Amazon: <code>www.amazon.com</code> </p> </li> <li> <p>Twitter: <code>api.twitter.com</code> </p> </li> <li> <p>Digits: <code>www.digits.com</code> </p> </li> </ul> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -142,7 +193,18 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.DeleteIdentities':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateIdentityPoolInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.CreateIdentityPool
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -151,21 +213,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.DeleteIdentities':
     post:
-      description: <p>Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: DeleteIdentities
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteIdentitiesInput'
-        - enum:
-            - AWSCognitoIdentityService.DeleteIdentities
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -183,7 +234,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.DeleteIdentityPool':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIdentitiesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.DeleteIdentities
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -192,21 +254,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.DeleteIdentityPool':
     post:
-      description: '<p>Deletes an identity pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: DeleteIdentityPool
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteIdentityPoolInput'
-        - enum:
-            - AWSCognitoIdentityService.DeleteIdentityPool
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Deletes an identity pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -230,7 +281,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.DescribeIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIdentityPoolInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.DeleteIdentityPool
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -239,21 +301,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.DescribeIdentity':
     post:
-      description: '<p>Returns metadata related to the given identity, including when the identity was created and any associated linked logins.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: DescribeIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.DescribeIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns metadata related to the given identity, including when the identity was created and any associated linked logins.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -279,7 +330,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.DescribeIdentityPool':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.DescribeIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -288,21 +350,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.DescribeIdentityPool':
     post:
-      description: '<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: DescribeIdentityPool
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeIdentityPoolInput'
-        - enum:
-            - AWSCognitoIdentityService.DescribeIdentityPool
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -328,7 +379,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.GetCredentialsForIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeIdentityPoolInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.DescribeIdentityPool
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -337,21 +399,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.GetCredentialsForIdentity':
     post:
-      description: '<p>Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
       operationId: GetCredentialsForIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetCredentialsForIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.GetCredentialsForIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -389,7 +440,18 @@ paths:
           description: ExternalServiceException
           schema:
             $ref: '#/definitions/ExternalServiceException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.GetId':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCredentialsForIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.GetCredentialsForIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -398,21 +460,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.GetId':
     post:
-      description: <p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p> <p>This is a public API. You do not need any credentials to call this API.</p>
       operationId: GetId
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIdInput'
-        - enum:
-            - AWSCognitoIdentityService.GetId
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p> <p>This is a public API. You do not need any credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -450,7 +501,18 @@ paths:
           description: ExternalServiceException
           schema:
             $ref: '#/definitions/ExternalServiceException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.GetIdentityPoolRoles':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIdInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.GetId
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -459,21 +521,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.GetIdentityPoolRoles':
     post:
-      description: <p>Gets the roles for an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: GetIdentityPoolRoles
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetIdentityPoolRolesInput'
-        - enum:
-            - AWSCognitoIdentityService.GetIdentityPoolRoles
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Gets the roles for an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -503,7 +554,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.GetOpenIdToken':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIdentityPoolRolesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.GetIdentityPoolRoles
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -512,21 +574,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.GetOpenIdToken':
     post:
-      description: '<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenId token is valid for 10 minutes.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
       operationId: GetOpenIdToken
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetOpenIdTokenInput'
-        - enum:
-            - AWSCognitoIdentityService.GetOpenIdToken
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenId token is valid for 10 minutes.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -560,7 +611,18 @@ paths:
           description: ExternalServiceException
           schema:
             $ref: '#/definitions/ExternalServiceException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.GetOpenIdTokenForDeveloperIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOpenIdTokenInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.GetOpenIdToken
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -569,21 +631,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.GetOpenIdTokenForDeveloperIdentity':
     post:
-      description: '<p>Registers (or retrieves) a Cognito <code>IdentityId</code> and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the <code>Logins</code> map, which is linked to the identity pool. The developer provider is the "domain" by which Cognito will refer to your users.</p> <p>You can use <code>GetOpenIdTokenForDeveloperIdentity</code> to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the <code>IdentityId</code> should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing <code>IdentityId</code>. This API will create the identity in the specified <code>IdentityPoolId</code>.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: GetOpenIdTokenForDeveloperIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetOpenIdTokenForDeveloperIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.GetOpenIdTokenForDeveloperIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Registers (or retrieves) a Cognito <code>IdentityId</code> and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the <code>Logins</code> map, which is linked to the identity pool. The developer provider is the "domain" by which Cognito will refer to your users.</p> <p>You can use <code>GetOpenIdTokenForDeveloperIdentity</code> to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the <code>IdentityId</code> should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing <code>IdentityId</code>. This API will create the identity in the specified <code>IdentityPoolId</code>.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -617,7 +668,18 @@ paths:
           description: DeveloperUserAlreadyRegisteredException
           schema:
             $ref: '#/definitions/DeveloperUserAlreadyRegisteredException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.ListIdentities':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOpenIdTokenForDeveloperIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.GetOpenIdTokenForDeveloperIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -626,21 +688,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.ListIdentities':
     post:
-      description: <p>Lists the identities in an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: ListIdentities
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListIdentitiesInput'
-        - enum:
-            - AWSCognitoIdentityService.ListIdentities
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Lists the identities in an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -666,7 +717,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.ListIdentityPools':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListIdentitiesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.ListIdentities
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -675,21 +737,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.ListIdentityPools':
     post:
-      description: <p>Lists all of the Cognito identity pools registered for your account.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: ListIdentityPools
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListIdentityPoolsInput'
-        - enum:
-            - AWSCognitoIdentityService.ListIdentityPools
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Lists all of the Cognito identity pools registered for your account.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -715,7 +766,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.ListTagsForResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListIdentityPoolsInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.ListIdentityPools
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -724,21 +786,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.ListTagsForResource':
     post:
-      description: '<p>Lists the tags that are assigned to an Amazon Cognito identity pool.</p> <p>A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>You can use this action up to 10 times per second, per account.</p>'
       operationId: ListTagsForResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListTagsForResourceInput'
-        - enum:
-            - AWSCognitoIdentityService.ListTagsForResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Lists the tags that are assigned to an Amazon Cognito identity pool.</p> <p>A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>You can use this action up to 10 times per second, per account.</p>'
       responses:
         '200':
           description: Success
@@ -764,7 +815,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.LookupDeveloperIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.ListTagsForResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -773,21 +835,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.LookupDeveloperIdentity':
     post:
-      description: '<p>Retrieves the <code>IdentityID</code> associated with a <code>DeveloperUserIdentifier</code> or the list of <code>DeveloperUserIdentifier</code> values associated with an <code>IdentityId</code> for an existing identity. Either <code>IdentityID</code> or <code>DeveloperUserIdentifier</code> must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, <code>DeveloperUserIdentifier</code> will be matched against <code>IdentityID</code>. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a <code>ResourceConflictException</code> is thrown.</p> <p> <code>LookupDeveloperIdentity</code> is intended for low-throughput control plane operations: for example, to enable customer service to locate an identity ID by username. If you are using it for higher-volume operations such as user authentication, your requests are likely to be throttled. <a>GetOpenIdTokenForDeveloperIdentity</a> is a better option for higher-volume operations for user authentication.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: LookupDeveloperIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LookupDeveloperIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.LookupDeveloperIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Retrieves the <code>IdentityID</code> associated with a <code>DeveloperUserIdentifier</code> or the list of <code>DeveloperUserIdentifier</code> values associated with an <code>IdentityId</code> for an existing identity. Either <code>IdentityID</code> or <code>DeveloperUserIdentifier</code> must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, <code>DeveloperUserIdentifier</code> will be matched against <code>IdentityID</code>. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a <code>ResourceConflictException</code> is thrown.</p> <p> <code>LookupDeveloperIdentity</code> is intended for low-throughput control plane operations: for example, to enable customer service to locate an identity ID by username. If you are using it for higher-volume operations such as user authentication, your requests are likely to be throttled. <a>GetOpenIdTokenForDeveloperIdentity</a> is a better option for higher-volume operations for user authentication.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -817,7 +868,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.MergeDeveloperIdentities':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LookupDeveloperIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.LookupDeveloperIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -826,21 +888,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.MergeDeveloperIdentities':
     post:
-      description: '<p>Merges two users having different <code>IdentityId</code>s, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (<code>SourceUserIdentifier</code>) with the <code>IdentityId</code> of the <code>DestinationUserIdentifier</code>. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown.</p> <p>The number of linked logins is limited to 20. So, the number of linked logins for the source user, <code>SourceUserIdentifier</code>, and the destination user, <code>DestinationUserIdentifier</code>, together should not be larger than 20. Otherwise, an exception will be thrown.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: MergeDeveloperIdentities
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MergeDeveloperIdentitiesInput'
-        - enum:
-            - AWSCognitoIdentityService.MergeDeveloperIdentities
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Merges two users having different <code>IdentityId</code>s, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (<code>SourceUserIdentifier</code>) with the <code>IdentityId</code> of the <code>DestinationUserIdentifier</code>. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown.</p> <p>The number of linked logins is limited to 20. So, the number of linked logins for the source user, <code>SourceUserIdentifier</code>, and the destination user, <code>DestinationUserIdentifier</code>, together should not be larger than 20. Otherwise, an exception will be thrown.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -870,7 +921,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.SetIdentityPoolRoles':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MergeDeveloperIdentitiesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.MergeDeveloperIdentities
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -879,21 +941,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.SetIdentityPoolRoles':
     post:
-      description: <p>Sets the roles for an identity pool. These roles are used when making calls to <a>GetCredentialsForIdentity</a> action.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: SetIdentityPoolRoles
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/SetIdentityPoolRolesInput'
-        - enum:
-            - AWSCognitoIdentityService.SetIdentityPoolRoles
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Sets the roles for an identity pool. These roles are used when making calls to <a>GetCredentialsForIdentity</a> action.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -925,7 +976,18 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.TagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetIdentityPoolRolesInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.SetIdentityPoolRoles
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -934,21 +996,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.TagResource':
     post:
-      description: '<p>Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both identity pools. The value of this key might be <code>Test</code> for one identity pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.</p>'
       operationId: TagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/TagResourceInput'
-        - enum:
-            - AWSCognitoIdentityService.TagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both identity pools. The value of this key might be <code>Test</code> for one identity pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.</p>'
       responses:
         '200':
           description: Success
@@ -974,7 +1025,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.UnlinkDeveloperIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.TagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -983,21 +1045,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.UnlinkDeveloperIdentity':
     post:
-      description: '<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       operationId: UnlinkDeveloperIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UnlinkDeveloperIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.UnlinkDeveloperIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p> <p>You must use AWS Developer credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -1025,7 +1076,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.UnlinkIdentity':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnlinkDeveloperIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.UnlinkDeveloperIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1034,21 +1096,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.UnlinkIdentity':
     post:
-      description: <p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p> <p>This is a public API. You do not need any credentials to call this API.</p>
       operationId: UnlinkIdentity
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UnlinkIdentityInput'
-        - enum:
-            - AWSCognitoIdentityService.UnlinkIdentity
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p> <p>This is a public API. You do not need any credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -1080,7 +1131,18 @@ paths:
           description: ExternalServiceException
           schema:
             $ref: '#/definitions/ExternalServiceException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.UntagResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnlinkIdentityInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.UnlinkIdentity
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1089,21 +1151,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.UntagResource':
     post:
-      description: 'Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account'
       operationId: UntagResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UntagResourceInput'
-        - enum:
-            - AWSCognitoIdentityService.UntagResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account'
       responses:
         '200':
           description: Success
@@ -1129,7 +1180,18 @@ paths:
           description: InternalErrorException
           schema:
             $ref: '#/definitions/InternalErrorException'
-  '/#X-Amz-Target=AWSCognitoIdentityService.UpdateIdentityPool':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceInput'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.UntagResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1138,21 +1200,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSCognitoIdentityService.UpdateIdentityPool':
     post:
-      description: <p>Updates an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       operationId: UpdateIdentityPool
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/IdentityPool'
-        - enum:
-            - AWSCognitoIdentityService.UpdateIdentityPool
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: <p>Updates an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>
       responses:
         '200':
           description: Success
@@ -1190,202 +1241,197 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/IdentityPool'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSCognitoIdentityService.UpdateIdentityPool
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  ARNString:
-    maxLength: 2048
-    minLength: 20
-    type: string
-  AccessKeyString:
-    type: string
-  AccountId:
-    maxLength: 15
-    minLength: 1
-    pattern: \d+
-    type: string
-  AmbiguousRoleResolutionType:
-    enum:
-      - AuthenticatedRole
-      - Deny
-    type: string
-  ClaimName:
-    maxLength: 64
-    minLength: 1
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    type: string
-  ClaimValue:
-    maxLength: 128
-    minLength: 1
-    type: string
-  CognitoIdentityProvider:
-    description: A provider representing an Amazon Cognito user pool and its client ID.
-    properties:
-      ClientId:
-        $ref: '#/definitions/CognitoIdentityProviderClientId'
-        description: The client ID for the Amazon Cognito user pool.
-      ProviderName:
-        $ref: '#/definitions/CognitoIdentityProviderName'
-        description: 'The provider name for an Amazon Cognito user pool. For example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.'
-      ServerSideTokenCheck:
-        $ref: '#/definitions/CognitoIdentityProviderTokenCheck'
-        description: '<p>TRUE if server-side token validation is enabled for the identity provider’s token.</p> <p>Once you set <code>ServerSideTokenCheck</code> to TRUE for an identity pool, that identity pool will check with the integrated user pools to make sure that the user has not been globally signed out or deleted before the identity pool provides an OIDC token or AWS credentials for the user.</p> <p>If the user is signed out or deleted, the identity pool will return a 400 Not Authorized error.</p>'
+  IdentityPool:
     type: object
-  CognitoIdentityProviderClientId:
-    maxLength: 128
-    minLength: 1
-    pattern: '[\w_]+'
-    type: string
-  CognitoIdentityProviderList:
-    items:
-      $ref: '#/definitions/CognitoIdentityProvider'
-    type: array
-  CognitoIdentityProviderName:
-    maxLength: 128
-    minLength: 1
-    pattern: '[\w._:/-]+'
-    type: string
-  CognitoIdentityProviderTokenCheck:
-    type: boolean
-  ConcurrentModificationException: {}
-  CreateIdentityPoolInput:
-    description: Input to the CreateIdentityPool action.
+    required:
+      - IdentityPoolId
+      - IdentityPoolName
+      - AllowUnauthenticatedIdentities
     properties:
-      AllowUnauthenticatedIdentities:
-        $ref: '#/definitions/IdentityPoolUnauthenticated'
-        description: TRUE if the identity pool supports unauthenticated logins.
-      CognitoIdentityProviders:
-        $ref: '#/definitions/CognitoIdentityProviderList'
-        description: An array of Amazon Cognito user pools and their client IDs.
-      DeveloperProviderName:
-        $ref: '#/definitions/DeveloperProviderName'
-        description: '<p>The "domain" by which Cognito will refer to your users. This name acts as a placeholder that allows your backend and the Cognito service to communicate about the developer provider. For the <code>DeveloperProviderName</code>, you can use letters as well as period (<code>.</code>), underscore (<code>_</code>), and dash (<code>-</code>).</p> <p>Once you have set a developer provider name, you cannot change it. Please take care in setting this parameter.</p>'
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'An identity pool ID in the format REGION:GUID.'
       IdentityPoolName:
         $ref: '#/definitions/IdentityPoolName'
         description: A string that you provide.
-      IdentityPoolTags:
-        $ref: '#/definitions/IdentityPoolTagsType'
-        description: 'Tags to assign to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.'
-      OpenIdConnectProviderARNs:
-        $ref: '#/definitions/OIDCProviderList'
-        description: A list of OpendID Connect provider ARNs.
-      SamlProviderARNs:
-        $ref: '#/definitions/SAMLProviderList'
-        description: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
+      AllowUnauthenticatedIdentities:
+        $ref: '#/definitions/IdentityPoolUnauthenticated'
+        description: TRUE if the identity pool supports unauthenticated logins.
       SupportedLoginProviders:
         $ref: '#/definitions/IdentityProviders'
         description: 'Optional key:value pairs mapping provider names to provider app IDs.'
+      DeveloperProviderName:
+        $ref: '#/definitions/DeveloperProviderName'
+        description: The "domain" by which Cognito will refer to your users.
+      OpenIdConnectProviderARNs:
+        $ref: '#/definitions/OIDCProviderList'
+        description: A list of OpendID Connect provider ARNs.
+      CognitoIdentityProviders:
+        $ref: '#/definitions/CognitoIdentityProviderList'
+        description: A list representing an Amazon Cognito user pool and its client ID.
+      SamlProviderARNs:
+        $ref: '#/definitions/SAMLProviderList'
+        description: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
+      IdentityPoolTags:
+        $ref: '#/definitions/IdentityPoolTagsType'
+        description: 'The tags that are assigned to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.'
+    description: An object representing an Amazon Cognito identity pool.
+  CreateIdentityPoolInput:
+    type: object
     required:
       - IdentityPoolName
       - AllowUnauthenticatedIdentities
-    type: object
-  Credentials:
-    description: Credentials for the provided identity ID.
     properties:
-      AccessKeyId:
-        $ref: '#/definitions/AccessKeyString'
-        description: The Access Key portion of the credentials.
-      Expiration:
-        $ref: '#/definitions/DateType'
-        description: The date at which these credentials will expire.
-      SecretKey:
-        $ref: '#/definitions/SecretKeyString'
-        description: The Secret Access Key portion of the credentials
-      SessionToken:
-        $ref: '#/definitions/SessionTokenString'
-        description: The Session Token portion of the credentials
-    type: object
-  DateType:
-    format: date-time
-    type: string
-  DeleteIdentitiesInput:
-    description: Input to the <code>DeleteIdentities</code> action.
-    properties:
-      IdentityIdsToDelete:
-        $ref: '#/definitions/IdentityIdList'
-        description: A list of 1-60 identities that you want to delete.
-    required:
-      - IdentityIdsToDelete
-    type: object
+      IdentityPoolName:
+        $ref: '#/definitions/IdentityPoolName'
+        description: A string that you provide.
+      AllowUnauthenticatedIdentities:
+        $ref: '#/definitions/IdentityPoolUnauthenticated'
+        description: TRUE if the identity pool supports unauthenticated logins.
+      SupportedLoginProviders:
+        $ref: '#/definitions/IdentityProviders'
+        description: 'Optional key:value pairs mapping provider names to provider app IDs.'
+      DeveloperProviderName:
+        $ref: '#/definitions/DeveloperProviderName'
+        description: '<p>The "domain" by which Cognito will refer to your users. This name acts as a placeholder that allows your backend and the Cognito service to communicate about the developer provider. For the <code>DeveloperProviderName</code>, you can use letters as well as period (<code>.</code>), underscore (<code>_</code>), and dash (<code>-</code>).</p> <p>Once you have set a developer provider name, you cannot change it. Please take care in setting this parameter.</p>'
+      OpenIdConnectProviderARNs:
+        $ref: '#/definitions/OIDCProviderList'
+        description: A list of OpendID Connect provider ARNs.
+      CognitoIdentityProviders:
+        $ref: '#/definitions/CognitoIdentityProviderList'
+        description: An array of Amazon Cognito user pools and their client IDs.
+      SamlProviderARNs:
+        $ref: '#/definitions/SAMLProviderList'
+        description: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
+      IdentityPoolTags:
+        $ref: '#/definitions/IdentityPoolTagsType'
+        description: 'Tags to assign to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.'
+    description: Input to the CreateIdentityPool action.
+  InvalidParameterException: {}
+  NotAuthorizedException: {}
+  ResourceConflictException: {}
+  TooManyRequestsException: {}
+  InternalErrorException: {}
+  LimitExceededException: {}
   DeleteIdentitiesResponse:
-    description: Returned in response to a successful <code>DeleteIdentities</code> operation.
+    type: object
     properties:
       UnprocessedIdentityIds:
         $ref: '#/definitions/UnprocessedIdentityIdList'
         description: 'An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.'
+    description: Returned in response to a successful <code>DeleteIdentities</code> operation.
+  DeleteIdentitiesInput:
     type: object
+    required:
+      - IdentityIdsToDelete
+    properties:
+      IdentityIdsToDelete:
+        $ref: '#/definitions/IdentityIdList'
+        description: A list of 1-60 identities that you want to delete.
+    description: Input to the <code>DeleteIdentities</code> action.
   DeleteIdentityPoolInput:
-    description: Input to the DeleteIdentityPool action.
+    type: object
+    required:
+      - IdentityPoolId
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-    required:
-      - IdentityPoolId
+    description: Input to the DeleteIdentityPool action.
+  ResourceNotFoundException: {}
+  IdentityDescription:
     type: object
-  DescribeIdentityInput:
-    description: Input to the <code>DescribeIdentity</code> action.
     properties:
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
+      Logins:
+        $ref: '#/definitions/LoginsList'
+        description: The provider names.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: Date on which the identity was created.
+      LastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: Date on which the identity was last modified.
+    description: A description of the identity.
+  DescribeIdentityInput:
+    type: object
     required:
       - IdentityId
-    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+    description: Input to the <code>DescribeIdentity</code> action.
   DescribeIdentityPoolInput:
-    description: Input to the DescribeIdentityPool action.
+    type: object
+    required:
+      - IdentityPoolId
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-    required:
-      - IdentityPoolId
+    description: Input to the DescribeIdentityPool action.
+  GetCredentialsForIdentityResponse:
     type: object
-  DeveloperProviderName:
-    maxLength: 128
-    minLength: 1
-    pattern: '[\w._-]+'
-    type: string
-  DeveloperUserAlreadyRegisteredException: {}
-  DeveloperUserIdentifier:
-    maxLength: 1024
-    minLength: 1
-    type: string
-  DeveloperUserIdentifierList:
-    items:
-      $ref: '#/definitions/DeveloperUserIdentifier'
-    type: array
-  ErrorCode:
-    enum:
-      - AccessDenied
-      - InternalServerError
-    type: string
-  ExternalServiceException: {}
-  GetCredentialsForIdentityInput:
-    description: Input to the <code>GetCredentialsForIdentity</code> action.
     properties:
-      CustomRoleArn:
-        $ref: '#/definitions/ARNString'
-        description: 'The Amazon Resource Name (ARN) of the role to be assumed when multiple roles were received in the token from the identity provider. For example, a SAML-based identity provider. This parameter is optional for identity providers that do not support role customization.'
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+      Credentials:
+        $ref: '#/definitions/Credentials'
+        description: Credentials for the provided identity ID.
+    description: Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.
+  GetCredentialsForIdentityInput:
+    type: object
+    required:
+      - IdentityId
+    properties:
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
       Logins:
         $ref: '#/definitions/LoginsMap'
         description: '<p>A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier".</p> <p>Logins should not be specified when trying to get credentials for an unauthenticated identity.</p> <p>The Logins parameter is required when using identities associated with external identity providers such as FaceBook. For examples of <code>Logins</code> maps, see the code examples in the <a href="http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html">External Identity Providers</a> section of the Amazon Cognito Developer Guide.</p>'
-    required:
-      - IdentityId
+      CustomRoleArn:
+        $ref: '#/definitions/ARNString'
+        description: 'The Amazon Resource Name (ARN) of the role to be assumed when multiple roles were received in the token from the identity provider. For example, a SAML-based identity provider. This parameter is optional for identity providers that do not support role customization.'
+    description: Input to the <code>GetCredentialsForIdentity</code> action.
+  InvalidIdentityPoolConfigurationException: {}
+  ExternalServiceException: {}
+  GetIdResponse:
     type: object
-  GetCredentialsForIdentityResponse:
-    description: Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.
     properties:
-      Credentials:
-        $ref: '#/definitions/Credentials'
-        description: Credentials for the provided identity ID.
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
-    type: object
+    description: Returned in response to a GetId request.
   GetIdInput:
-    description: Input to the GetId action.
+    type: object
+    required:
+      - IdentityPoolId
     properties:
       AccountId:
         $ref: '#/definitions/AccountId'
@@ -1396,81 +1442,31 @@ definitions:
       Logins:
         $ref: '#/definitions/LoginsMap'
         description: '<p>A set of optional name-value pairs that map provider names to provider tokens. The available provider names for <code>Logins</code> are as follows:</p> <ul> <li> <p>Facebook: <code>graph.facebook.com</code> </p> </li> <li> <p>Amazon Cognito user pool: <code>cognito-idp.&lt;region&gt;.amazonaws.com/&lt;YOUR_USER_POOL_ID&gt;</code>, for example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>. </p> </li> <li> <p>Google: <code>accounts.google.com</code> </p> </li> <li> <p>Amazon: <code>www.amazon.com</code> </p> </li> <li> <p>Twitter: <code>api.twitter.com</code> </p> </li> <li> <p>Digits: <code>www.digits.com</code> </p> </li> </ul>'
-    required:
-      - IdentityPoolId
-    type: object
-  GetIdResponse:
-    description: Returned in response to a GetId request.
-    properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
-    type: object
-  GetIdentityPoolRolesInput:
-    description: Input to the <code>GetIdentityPoolRoles</code> action.
-    properties:
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'An identity pool ID in the format REGION:GUID.'
-    required:
-      - IdentityPoolId
-    type: object
+    description: Input to the GetId action.
   GetIdentityPoolRolesResponse:
-    description: Returned in response to a successful <code>GetIdentityPoolRoles</code> operation.
+    type: object
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-      RoleMappings:
-        $ref: '#/definitions/RoleMappingMap'
-        description: 'How users for a specific identity provider are to mapped to roles. This is a String-to-<a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".'
       Roles:
         $ref: '#/definitions/RolesMap'
         description: The map of roles associated with this pool. Currently only authenticated and unauthenticated roles are supported.
+      RoleMappings:
+        $ref: '#/definitions/RoleMappingMap'
+        description: 'How users for a specific identity provider are to mapped to roles. This is a String-to-<a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".'
+    description: Returned in response to a successful <code>GetIdentityPoolRoles</code> operation.
+  GetIdentityPoolRolesInput:
     type: object
-  GetOpenIdTokenForDeveloperIdentityInput:
-    description: Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
+    required:
+      - IdentityPoolId
     properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-      Logins:
-        $ref: '#/definitions/LoginsMap'
-        description: 'A set of optional name-value pairs that map provider names to provider tokens. Each name-value pair represents a user from a public provider or developer provider. If the user is from a developer provider, the name-value pair will follow the syntax <code>"developer_provider_name": "developer_user_identifier"</code>. The developer provider is the "domain" by which Cognito will refer to your users; you provided this domain while creating/updating the identity pool. The developer user identifier is an identifier from your backend that uniquely identifies a user. When you create an identity pool, you can specify the supported logins.'
-      TokenDuration:
-        $ref: '#/definitions/TokenDuration'
-        description: 'The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don''t provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token''s duration.'
-    required:
-      - IdentityPoolId
-      - Logins
-    type: object
-  GetOpenIdTokenForDeveloperIdentityResponse:
-    description: Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code> request.
-    properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
-      Token:
-        $ref: '#/definitions/OIDCToken'
-        description: An OpenID token.
-    type: object
-  GetOpenIdTokenInput:
-    description: Input to the GetOpenIdToken action.
-    properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
-      Logins:
-        $ref: '#/definitions/LoginsMap'
-        description: 'A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider''s authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenId Connect provider, always include the <code>id_token</code>.'
-    required:
-      - IdentityId
-    type: object
+    description: Input to the <code>GetIdentityPoolRoles</code> action.
   GetOpenIdTokenResponse:
-    description: Returned in response to a successful GetOpenIdToken request.
+    type: object
     properties:
       IdentityId:
         $ref: '#/definitions/IdentityId'
@@ -1478,177 +1474,83 @@ definitions:
       Token:
         $ref: '#/definitions/OIDCToken'
         description: 'An OpenID token, valid for 10 minutes.'
+    description: Returned in response to a successful GetOpenIdToken request.
+  GetOpenIdTokenInput:
     type: object
-  HideDisabled:
-    type: boolean
-  IdentitiesList:
-    items:
-      $ref: '#/definitions/IdentityDescription'
-    type: array
-  IdentityDescription:
-    description: A description of the identity.
+    required:
+      - IdentityId
     properties:
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: Date on which the identity was created.
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
-      LastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: Date on which the identity was last modified.
       Logins:
-        $ref: '#/definitions/LoginsList'
-        description: The provider names.
+        $ref: '#/definitions/LoginsMap'
+        description: 'A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider''s authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenId Connect provider, always include the <code>id_token</code>.'
+    description: Input to the GetOpenIdToken action.
+  GetOpenIdTokenForDeveloperIdentityResponse:
     type: object
-  IdentityId:
-    maxLength: 55
-    minLength: 1
-    pattern: '[\w-]+:[0-9a-f-]+'
-    type: string
-  IdentityIdList:
-    items:
-      $ref: '#/definitions/IdentityId'
-    maxItems: 60
-    minItems: 1
-    type: array
-  IdentityPool:
-    description: An object representing an Amazon Cognito identity pool.
     properties:
-      AllowUnauthenticatedIdentities:
-        $ref: '#/definitions/IdentityPoolUnauthenticated'
-        description: TRUE if the identity pool supports unauthenticated logins.
-      CognitoIdentityProviders:
-        $ref: '#/definitions/CognitoIdentityProviderList'
-        description: A list representing an Amazon Cognito user pool and its client ID.
-      DeveloperProviderName:
-        $ref: '#/definitions/DeveloperProviderName'
-        description: The "domain" by which Cognito will refer to your users.
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'An identity pool ID in the format REGION:GUID.'
-      IdentityPoolName:
-        $ref: '#/definitions/IdentityPoolName'
-        description: A string that you provide.
-      IdentityPoolTags:
-        $ref: '#/definitions/IdentityPoolTagsType'
-        description: 'The tags that are assigned to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.'
-      OpenIdConnectProviderARNs:
-        $ref: '#/definitions/OIDCProviderList'
-        description: A list of OpendID Connect provider ARNs.
-      SamlProviderARNs:
-        $ref: '#/definitions/SAMLProviderList'
-        description: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
-      SupportedLoginProviders:
-        $ref: '#/definitions/IdentityProviders'
-        description: 'Optional key:value pairs mapping provider names to provider app IDs.'
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+      Token:
+        $ref: '#/definitions/OIDCToken'
+        description: An OpenID token.
+    description: Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code> request.
+  GetOpenIdTokenForDeveloperIdentityInput:
+    type: object
     required:
       - IdentityPoolId
-      - IdentityPoolName
-      - AllowUnauthenticatedIdentities
-    type: object
-  IdentityPoolId:
-    maxLength: 55
-    minLength: 1
-    pattern: '[\w-]+:[0-9a-f-]+'
-    type: string
-  IdentityPoolName:
-    maxLength: 128
-    minLength: 1
-    pattern: '[\w ]+'
-    type: string
-  IdentityPoolShortDescription:
-    description: A description of the identity pool.
+      - Logins
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-      IdentityPoolName:
-        $ref: '#/definitions/IdentityPoolName'
-        description: A string that you provide.
-    type: object
-  IdentityPoolTagsListType:
-    items:
-      $ref: '#/definitions/TagKeysType'
-    type: array
-  IdentityPoolTagsType:
-    additionalProperties:
-      $ref: '#/definitions/TagValueType'
-    type: object
-  IdentityPoolUnauthenticated:
-    type: boolean
-  IdentityPoolsList:
-    items:
-      $ref: '#/definitions/IdentityPoolShortDescription'
-    type: array
-  IdentityProviderId:
-    maxLength: 128
-    minLength: 1
-    pattern: '[\w.;_/-]+'
-    type: string
-  IdentityProviderName:
-    maxLength: 128
-    minLength: 1
-    type: string
-  IdentityProviderToken:
-    maxLength: 50000
-    minLength: 1
-    type: string
-  IdentityProviders:
-    additionalProperties:
-      $ref: '#/definitions/IdentityProviderId'
-    maxProperties: 10
-    type: object
-  InternalErrorException: {}
-  InvalidIdentityPoolConfigurationException: {}
-  InvalidParameterException: {}
-  LimitExceededException: {}
-  ListIdentitiesInput:
-    description: Input to the ListIdentities action.
-    properties:
-      HideDisabled:
-        $ref: '#/definitions/HideDisabled'
-        description: 'An optional boolean parameter that allows you to hide disabled identities. If omitted, the ListIdentities API will include disabled identities in the response.'
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'An identity pool ID in the format REGION:GUID.'
-      MaxResults:
-        $ref: '#/definitions/QueryLimit'
-        description: The maximum number of identities to return.
-      NextToken:
-        $ref: '#/definitions/PaginationKey'
-        description: A pagination token.
-    required:
-      - IdentityPoolId
-      - MaxResults
-    type: object
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+      Logins:
+        $ref: '#/definitions/LoginsMap'
+        description: 'A set of optional name-value pairs that map provider names to provider tokens. Each name-value pair represents a user from a public provider or developer provider. If the user is from a developer provider, the name-value pair will follow the syntax <code>"developer_provider_name": "developer_user_identifier"</code>. The developer provider is the "domain" by which Cognito will refer to your users; you provided this domain while creating/updating the identity pool. The developer user identifier is an identifier from your backend that uniquely identifies a user. When you create an identity pool, you can specify the supported logins.'
+      TokenDuration:
+        $ref: '#/definitions/TokenDuration'
+        description: 'The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don''t provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token''s duration.'
+    description: Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
+  DeveloperUserAlreadyRegisteredException: {}
   ListIdentitiesResponse:
-    description: The response to a ListIdentities request.
+    type: object
     properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'An identity pool ID in the format REGION:GUID.'
       Identities:
         $ref: '#/definitions/IdentitiesList'
         description: An object containing a set of identities and associated mappings.
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'An identity pool ID in the format REGION:GUID.'
       NextToken:
         $ref: '#/definitions/PaginationKey'
         description: A pagination token.
+    description: The response to a ListIdentities request.
+  ListIdentitiesInput:
     type: object
-  ListIdentityPoolsInput:
-    description: Input to the ListIdentityPools action.
+    required:
+      - IdentityPoolId
+      - MaxResults
     properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'An identity pool ID in the format REGION:GUID.'
       MaxResults:
         $ref: '#/definitions/QueryLimit'
         description: The maximum number of identities to return.
       NextToken:
         $ref: '#/definitions/PaginationKey'
         description: A pagination token.
-    required:
-      - MaxResults
-    type: object
+      HideDisabled:
+        $ref: '#/definitions/HideDisabled'
+        description: 'An optional boolean parameter that allows you to hide disabled identities. If omitted, the ListIdentities API will include disabled identities in the response.'
+    description: Input to the ListIdentities action.
   ListIdentityPoolsResponse:
-    description: The result of a successful ListIdentityPools action.
+    type: object
     properties:
       IdentityPools:
         $ref: '#/definitions/IdentityPoolsList'
@@ -1656,101 +1558,85 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationKey'
         description: A pagination token.
+    description: The result of a successful ListIdentityPools action.
+  ListIdentityPoolsInput:
     type: object
-  ListTagsForResourceInput:
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ARNString'
-        description: The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
     required:
-      - ResourceArn
-    type: object
+      - MaxResults
+    properties:
+      MaxResults:
+        $ref: '#/definitions/QueryLimit'
+        description: The maximum number of identities to return.
+      NextToken:
+        $ref: '#/definitions/PaginationKey'
+        description: A pagination token.
+    description: Input to the ListIdentityPools action.
   ListTagsForResourceResponse:
+    type: object
     properties:
       Tags:
         $ref: '#/definitions/IdentityPoolTagsType'
         description: The tags that are assigned to the identity pool.
+  ListTagsForResourceInput:
     type: object
-  LoginsList:
-    items:
-      $ref: '#/definitions/IdentityProviderName'
-    type: array
-  LoginsMap:
-    additionalProperties:
-      $ref: '#/definitions/IdentityProviderToken'
-    maxProperties: 10
-    type: object
-  LookupDeveloperIdentityInput:
-    description: Input to the <code>LookupDeveloperIdentityInput</code> action.
+    required:
+      - ResourceArn
     properties:
-      DeveloperUserIdentifier:
-        $ref: '#/definitions/DeveloperUserIdentifier'
-        description: 'A unique ID used by your backend authentication process to identify a user. Typically, a developer identity provider would issue many developer user identifiers, in keeping with the number of users.'
+      ResourceArn:
+        $ref: '#/definitions/ARNString'
+        description: The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+  LookupDeveloperIdentityResponse:
+    type: object
+    properties:
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
+      DeveloperUserIdentifierList:
+        $ref: '#/definitions/DeveloperUserIdentifierList'
+        description: This is the list of developer user identifiers associated with an identity ID. Cognito supports the association of multiple developer user identifiers with an identity ID.
+      NextToken:
+        $ref: '#/definitions/PaginationKey'
+        description: 'A pagination token. The first call you make will have <code>NextToken</code> set to null. After that the service will return <code>NextToken</code> values as needed. For example, let''s say you make a request with <code>MaxResults</code> set to 10, and there are 20 matches in the database. The service will return a pagination token as a part of the response. This token can be used to call the API again and get results starting from the 11th match.'
+    description: Returned in response to a successful <code>LookupDeveloperIdentity</code> action.
+  LookupDeveloperIdentityInput:
+    type: object
+    required:
+      - IdentityPoolId
+    properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+      DeveloperUserIdentifier:
+        $ref: '#/definitions/DeveloperUserIdentifier'
+        description: 'A unique ID used by your backend authentication process to identify a user. Typically, a developer identity provider would issue many developer user identifiers, in keeping with the number of users.'
       MaxResults:
         $ref: '#/definitions/QueryLimit'
         description: The maximum number of identities to return.
       NextToken:
         $ref: '#/definitions/PaginationKey'
         description: 'A pagination token. The first call you make will have <code>NextToken</code> set to null. After that the service will return <code>NextToken</code> values as needed. For example, let''s say you make a request with <code>MaxResults</code> set to 10, and there are 20 matches in the database. The service will return a pagination token as a part of the response. This token can be used to call the API again and get results starting from the 11th match.'
-    required:
-      - IdentityPoolId
+    description: Input to the <code>LookupDeveloperIdentityInput</code> action.
+  MergeDeveloperIdentitiesResponse:
     type: object
-  LookupDeveloperIdentityResponse:
-    description: Returned in response to a successful <code>LookupDeveloperIdentity</code> action.
     properties:
-      DeveloperUserIdentifierList:
-        $ref: '#/definitions/DeveloperUserIdentifierList'
-        description: This is the list of developer user identifiers associated with an identity ID. Cognito supports the association of multiple developer user identifiers with an identity ID.
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
-      NextToken:
-        $ref: '#/definitions/PaginationKey'
-        description: 'A pagination token. The first call you make will have <code>NextToken</code> set to null. After that the service will return <code>NextToken</code> values as needed. For example, let''s say you make a request with <code>MaxResults</code> set to 10, and there are 20 matches in the database. The service will return a pagination token as a part of the response. This token can be used to call the API again and get results starting from the 11th match.'
-    type: object
-  MappingRule:
-    description: 'A rule that maps a claim name, a claim value, and a match type to a role ARN.'
-    properties:
-      Claim:
-        $ref: '#/definitions/ClaimName'
-        description: 'The claim name that must be present in the token, for example, "isAdmin" or "paid".'
-      MatchType:
-        $ref: '#/definitions/MappingRuleMatchType'
-        description: The match condition that specifies how closely the claim value in the IdP token must match <code>Value</code>.
-      RoleARN:
-        $ref: '#/definitions/ARNString'
-        description: The role ARN.
-      Value:
-        $ref: '#/definitions/ClaimValue'
-        description: 'A brief string that the claim must match, for example, "paid" or "yes".'
-    required:
-      - Claim
-      - MatchType
-      - Value
-      - RoleARN
-    type: object
-  MappingRuleMatchType:
-    enum:
-      - Equals
-      - Contains
-      - StartsWith
-      - NotEqual
-    type: string
-  MappingRulesList:
-    items:
-      $ref: '#/definitions/MappingRule'
-    maxItems: 25
-    minItems: 1
-    type: array
+    description: Returned in response to a successful <code>MergeDeveloperIdentities</code> action.
   MergeDeveloperIdentitiesInput:
-    description: Input to the <code>MergeDeveloperIdentities</code> action.
+    type: object
+    required:
+      - SourceUserIdentifier
+      - DestinationUserIdentifier
+      - DeveloperProviderName
+      - IdentityPoolId
     properties:
+      SourceUserIdentifier:
+        $ref: '#/definitions/DeveloperUserIdentifier'
+        description: User identifier for the source user. The value should be a <code>DeveloperUserIdentifier</code>.
       DestinationUserIdentifier:
         $ref: '#/definitions/DeveloperUserIdentifier'
         description: User identifier for the destination user. The value should be a <code>DeveloperUserIdentifier</code>.
@@ -1760,110 +1646,31 @@ definitions:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-      SourceUserIdentifier:
-        $ref: '#/definitions/DeveloperUserIdentifier'
-        description: User identifier for the source user. The value should be a <code>DeveloperUserIdentifier</code>.
-    required:
-      - SourceUserIdentifier
-      - DestinationUserIdentifier
-      - DeveloperProviderName
-      - IdentityPoolId
-    type: object
-  MergeDeveloperIdentitiesResponse:
-    description: Returned in response to a successful <code>MergeDeveloperIdentities</code> action.
-    properties:
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
-    type: object
-  NotAuthorizedException: {}
-  OIDCProviderList:
-    items:
-      $ref: '#/definitions/ARNString'
-    type: array
-  OIDCToken:
-    type: string
-  PaginationKey:
-    minLength: 1
-    pattern: '[\S]+'
-    type: string
-  QueryLimit:
-    maximum: 60
-    minimum: 1
-    type: integer
-  ResourceConflictException: {}
-  ResourceNotFoundException: {}
-  RoleMapping:
-    description: A role mapping.
-    properties:
-      AmbiguousRoleResolution:
-        $ref: '#/definitions/AmbiguousRoleResolutionType'
-        description: '<p>If you specify Token or Rules as the <code>Type</code>, <code>AmbiguousRoleResolution</code> is required.</p> <p>Specifies the action to be taken if either no rules match the claim value for the <code>Rules</code> type, or there is no <code>cognito:preferred_role</code> claim and there are multiple <code>cognito:roles</code> matches for the <code>Token</code> type.</p>'
-      RulesConfiguration:
-        $ref: '#/definitions/RulesConfigurationType'
-        description: '<p>The rules to be used for mapping users to roles.</p> <p>If you specify Rules as the role mapping type, <code>RulesConfiguration</code> is required.</p>'
-      Type:
-        $ref: '#/definitions/RoleMappingType'
-        description: 'The role mapping type. Token will use <code>cognito:roles</code> and <code>cognito:preferred_role</code> claims from the Cognito identity provider token to map groups to roles. Rules will attempt to match claims from the token to map to a role.'
-    required:
-      - Type
-    type: object
-  RoleMappingMap:
-    additionalProperties:
-      $ref: '#/definitions/RoleMapping'
-    maxProperties: 10
-    type: object
-  RoleMappingType:
-    enum:
-      - Token
-      - Rules
-    type: string
-  RoleType:
-    pattern: (un)?authenticated
-    type: string
-  RolesMap:
-    additionalProperties:
-      $ref: '#/definitions/ARNString'
-    maxProperties: 2
-    type: object
-  RulesConfigurationType:
-    description: A container for rules.
-    properties:
-      Rules:
-        $ref: '#/definitions/MappingRulesList'
-        description: <p>An array of rules. You can specify up to 25 rules per identity provider.</p> <p>Rules are evaluated in order. The first one to match specifies the role.</p>
-    required:
-      - Rules
-    type: object
-  SAMLProviderList:
-    items:
-      $ref: '#/definitions/ARNString'
-    type: array
-  SecretKeyString:
-    type: string
-  SessionTokenString:
-    type: string
+    description: Input to the <code>MergeDeveloperIdentities</code> action.
   SetIdentityPoolRolesInput:
-    description: Input to the <code>SetIdentityPoolRoles</code> action.
+    type: object
+    required:
+      - IdentityPoolId
+      - Roles
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
-      RoleMappings:
-        $ref: '#/definitions/RoleMappingMap'
-        description: '<p>How users for a specific identity provider are to mapped to roles. This is a string to <a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".</p> <p>Up to 25 rules can be specified per identity provider.</p>'
       Roles:
         $ref: '#/definitions/RolesMap'
         description: 'The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.'
-    required:
-      - IdentityPoolId
-      - Roles
+      RoleMappings:
+        $ref: '#/definitions/RoleMappingMap'
+        description: '<p>How users for a specific identity provider are to mapped to roles. This is a string to <a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".</p> <p>Up to 25 rules can be specified per identity provider.</p>'
+    description: Input to the <code>SetIdentityPoolRoles</code> action.
+  ConcurrentModificationException: {}
+  TagResourceResponse:
     type: object
-  TagKeysType:
-    maxLength: 128
-    minLength: 1
-    type: string
+    properties: {}
   TagResourceInput:
+    type: object
+    required:
+      - ResourceArn
     properties:
       ResourceArn:
         $ref: '#/definitions/ARNString'
@@ -1871,44 +1678,33 @@ definitions:
       Tags:
         $ref: '#/definitions/IdentityPoolTagsType'
         description: The tags to assign to the identity pool.
-    required:
-      - ResourceArn
-    type: object
-  TagResourceResponse:
-    properties: {}
-    type: object
-  TagValueType:
-    maxLength: 256
-    minLength: 0
-    type: string
-  TokenDuration:
-    maximum: 86400
-    minimum: 1
-    type: integer
-  TooManyRequestsException: {}
   UnlinkDeveloperIdentityInput:
-    description: Input to the <code>UnlinkDeveloperIdentity</code> action.
+    type: object
+    required:
+      - IdentityId
+      - IdentityPoolId
+      - DeveloperProviderName
+      - DeveloperUserIdentifier
     properties:
-      DeveloperProviderName:
-        $ref: '#/definitions/DeveloperProviderName'
-        description: The "domain" by which Cognito will refer to your users.
-      DeveloperUserIdentifier:
-        $ref: '#/definitions/DeveloperUserIdentifier'
-        description: A unique ID used by your backend authentication process to identify a user.
       IdentityId:
         $ref: '#/definitions/IdentityId'
         description: 'A unique identifier in the format REGION:GUID.'
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'An identity pool ID in the format REGION:GUID.'
+      DeveloperProviderName:
+        $ref: '#/definitions/DeveloperProviderName'
+        description: The "domain" by which Cognito will refer to your users.
+      DeveloperUserIdentifier:
+        $ref: '#/definitions/DeveloperUserIdentifier'
+        description: A unique ID used by your backend authentication process to identify a user.
+    description: Input to the <code>UnlinkDeveloperIdentity</code> action.
+  UnlinkIdentityInput:
+    type: object
     required:
       - IdentityId
-      - IdentityPoolId
-      - DeveloperProviderName
-      - DeveloperUserIdentifier
-    type: object
-  UnlinkIdentityInput:
-    description: Input to the UnlinkIdentity action.
+      - Logins
+      - LoginsToRemove
     properties:
       IdentityId:
         $ref: '#/definitions/IdentityId'
@@ -1919,27 +1715,14 @@ definitions:
       LoginsToRemove:
         $ref: '#/definitions/LoginsList'
         description: Provider names to unlink from this identity.
-    required:
-      - IdentityId
-      - Logins
-      - LoginsToRemove
+    description: Input to the UnlinkIdentity action.
+  UntagResourceResponse:
     type: object
-  UnprocessedIdentityId:
-    description: 'An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.'
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The error code indicating the type of error that occurred.
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A unique identifier in the format REGION:GUID.'
-    type: object
-  UnprocessedIdentityIdList:
-    items:
-      $ref: '#/definitions/UnprocessedIdentityId'
-    maxItems: 60
-    type: array
+    properties: {}
   UntagResourceInput:
+    type: object
+    required:
+      - ResourceArn
     properties:
       ResourceArn:
         $ref: '#/definitions/ARNString'
@@ -1947,80 +1730,297 @@ definitions:
       TagKeys:
         $ref: '#/definitions/IdentityPoolTagsListType'
         description: The keys of the tags to remove from the user pool.
+  ARNString:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  AccessKeyString:
+    type: string
+  AccountId:
+    type: string
+    pattern: \d+
+    minLength: 1
+    maxLength: 15
+  AmbiguousRoleResolutionType:
+    type: string
+    enum:
+      - AuthenticatedRole
+      - Deny
+  ClaimName:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 64
+  ClaimValue:
+    type: string
+    minLength: 1
+    maxLength: 128
+  CognitoIdentityProviderName:
+    type: string
+    pattern: '[\w._:/-]+'
+    minLength: 1
+    maxLength: 128
+  CognitoIdentityProviderClientId:
+    type: string
+    pattern: '[\w_]+'
+    minLength: 1
+    maxLength: 128
+  CognitoIdentityProviderTokenCheck:
+    type: boolean
+  CognitoIdentityProvider:
+    type: object
+    properties:
+      ProviderName:
+        $ref: '#/definitions/CognitoIdentityProviderName'
+        description: 'The provider name for an Amazon Cognito user pool. For example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.'
+      ClientId:
+        $ref: '#/definitions/CognitoIdentityProviderClientId'
+        description: The client ID for the Amazon Cognito user pool.
+      ServerSideTokenCheck:
+        $ref: '#/definitions/CognitoIdentityProviderTokenCheck'
+        description: '<p>TRUE if server-side token validation is enabled for the identity provider’s token.</p> <p>Once you set <code>ServerSideTokenCheck</code> to TRUE for an identity pool, that identity pool will check with the integrated user pools to make sure that the user has not been globally signed out or deleted before the identity pool provides an OIDC token or AWS credentials for the user.</p> <p>If the user is signed out or deleted, the identity pool will return a 400 Not Authorized error.</p>'
+    description: A provider representing an Amazon Cognito user pool and its client ID.
+  CognitoIdentityProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/CognitoIdentityProvider'
+  IdentityPoolName:
+    type: string
+    pattern: '[\w ]+'
+    minLength: 1
+    maxLength: 128
+  IdentityPoolUnauthenticated:
+    type: boolean
+  IdentityProviders:
+    type: object
+    maxProperties: 10
+    additionalProperties:
+      $ref: '#/definitions/IdentityProviderId'
+  DeveloperProviderName:
+    type: string
+    pattern: '[\w._-]+'
+    minLength: 1
+    maxLength: 128
+  OIDCProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/ARNString'
+  SAMLProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/ARNString'
+  IdentityPoolTagsType:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TagValueType'
+  SecretKeyString:
+    type: string
+  SessionTokenString:
+    type: string
+  DateType:
+    type: string
+    format: date-time
+  Credentials:
+    type: object
+    properties:
+      AccessKeyId:
+        $ref: '#/definitions/AccessKeyString'
+        description: The Access Key portion of the credentials.
+      SecretKey:
+        $ref: '#/definitions/SecretKeyString'
+        description: The Secret Access Key portion of the credentials
+      SessionToken:
+        $ref: '#/definitions/SessionTokenString'
+        description: The Session Token portion of the credentials
+      Expiration:
+        $ref: '#/definitions/DateType'
+        description: The date at which these credentials will expire.
+    description: Credentials for the provided identity ID.
+  IdentityIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityId'
+    minItems: 1
+    maxItems: 60
+  UnprocessedIdentityIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedIdentityId'
+    maxItems: 60
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  IdentityId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  DeveloperUserIdentifier:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  DeveloperUserIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/DeveloperUserIdentifier'
+  ErrorCode:
+    type: string
+    enum:
+      - AccessDenied
+      - InternalServerError
+  LoginsMap:
+    type: object
+    maxProperties: 10
+    additionalProperties:
+      $ref: '#/definitions/IdentityProviderToken'
+  RolesMap:
+    type: object
+    maxProperties: 2
+    additionalProperties:
+      $ref: '#/definitions/ARNString'
+  RoleMappingMap:
+    type: object
+    maxProperties: 10
+    additionalProperties:
+      $ref: '#/definitions/RoleMapping'
+  TokenDuration:
+    type: integer
+    minimum: 1
+    maximum: 86400
+  OIDCToken:
+    type: string
+  HideDisabled:
+    type: boolean
+  IdentitiesList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityDescription'
+  LoginsList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityProviderName'
+  IdentityPoolShortDescription:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'An identity pool ID in the format REGION:GUID.'
+      IdentityPoolName:
+        $ref: '#/definitions/IdentityPoolName'
+        description: A string that you provide.
+    description: A description of the identity pool.
+  TagKeysType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  IdentityPoolTagsListType:
+    type: array
+    items:
+      $ref: '#/definitions/TagKeysType'
+  TagValueType:
+    type: string
+    minLength: 0
+    maxLength: 256
+  IdentityPoolsList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityPoolShortDescription'
+  IdentityProviderId:
+    type: string
+    pattern: '[\w.;_/-]+'
+    minLength: 1
+    maxLength: 128
+  IdentityProviderName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  IdentityProviderToken:
+    type: string
+    minLength: 1
+    maxLength: 50000
+  QueryLimit:
+    type: integer
+    minimum: 1
+    maximum: 60
+  PaginationKey:
+    type: string
+    pattern: '[\S]+'
+    minLength: 1
+  MappingRuleMatchType:
+    type: string
+    enum:
+      - Equals
+      - Contains
+      - StartsWith
+      - NotEqual
+  MappingRule:
+    type: object
     required:
-      - ResourceArn
+      - Claim
+      - MatchType
+      - Value
+      - RoleARN
+    properties:
+      Claim:
+        $ref: '#/definitions/ClaimName'
+        description: 'The claim name that must be present in the token, for example, "isAdmin" or "paid".'
+      MatchType:
+        $ref: '#/definitions/MappingRuleMatchType'
+        description: The match condition that specifies how closely the claim value in the IdP token must match <code>Value</code>.
+      Value:
+        $ref: '#/definitions/ClaimValue'
+        description: 'A brief string that the claim must match, for example, "paid" or "yes".'
+      RoleARN:
+        $ref: '#/definitions/ARNString'
+        description: The role ARN.
+    description: 'A rule that maps a claim name, a claim value, and a match type to a role ARN.'
+  MappingRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/MappingRule'
+    minItems: 1
+    maxItems: 25
+  RoleMappingType:
+    type: string
+    enum:
+      - Token
+      - Rules
+  RulesConfigurationType:
     type: object
-  UntagResourceResponse:
-    properties: {}
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/MappingRulesList'
+        description: <p>An array of rules. You can specify up to 25 rules per identity provider.</p> <p>Rules are evaluated in order. The first one to match specifies the role.</p>
+    description: A container for rules.
+  RoleMapping:
     type: object
-x-servers:
-  - description: The Amazon Cognito Identity multi-region endpoint
-    url: 'http://cognito-identity.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Cognito Identity multi-region endpoint
-    url: 'https://cognito-identity.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Cognito Identity endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://cognito-identity.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Cognito Identity endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://cognito-identity.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/RoleMappingType'
+        description: 'The role mapping type. Token will use <code>cognito:roles</code> and <code>cognito:preferred_role</code> claims from the Cognito identity provider token to map groups to roles. Rules will attempt to match claims from the token to map to a role.'
+      AmbiguousRoleResolution:
+        $ref: '#/definitions/AmbiguousRoleResolutionType'
+        description: '<p>If you specify Token or Rules as the <code>Type</code>, <code>AmbiguousRoleResolution</code> is required.</p> <p>Specifies the action to be taken if either no rules match the claim value for the <code>Rules</code> type, or there is no <code>cognito:preferred_role</code> claim and there are multiple <code>cognito:roles</code> matches for the <code>Token</code> type.</p>'
+      RulesConfiguration:
+        $ref: '#/definitions/RulesConfigurationType'
+        description: '<p>The rules to be used for mapping users to roles.</p> <p>If you specify Rules as the role mapping type, <code>RulesConfiguration</code> is required.</p>'
+    description: A role mapping.
+  RoleType:
+    type: string
+    pattern: (un)?authenticated
+  UnprocessedIdentityId:
+    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A unique identifier in the format REGION:GUID.'
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The error code indicating the type of error that occurred.
+    description: 'An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.'

@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: lakeformation.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2017-03-31'
+  x-release: v4
+  title: AWS Lake Formation
+  description: <fullname>AWS Lake Formation</fullname> <p>Defines the public endpoint for the AWS Lake Formation service.</p>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: <fullname>AWS Lake Formation</fullname> <p>Defines the public endpoint for the AWS Lake Formation service.</p>
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS Lake Formation
-  version: '2017-03-31'
+  x-providerName: amazonaws.com
+  x-serviceName: lakeformation
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lakeformation-2017-03-31.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lakeformation-2017-03-31.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: lakeformation
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/lakeformation/'
+host: lakeformation.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://lakeformation.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS Lake Formation multi-region endpoint
+  - url: 'https://lakeformation.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS Lake Formation multi-region endpoint
+  - url: 'http://lakeformation.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Lake Formation endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://lakeformation.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Lake Formation endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSLakeFormation.BatchGrantPermissions':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: Batch operation to grant permissions to the principal.
       operationId: BatchGrantPermissions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/BatchGrantPermissionsRequest'
-        - enum:
-            - AWSLakeFormation.BatchGrantPermissions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Batch operation to grant permissions to the principal.
       responses:
         '200':
           description: Success
@@ -126,7 +177,18 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
-  '/#X-Amz-Target=AWSLakeFormation.BatchRevokePermissions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGrantPermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.BatchGrantPermissions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -135,21 +197,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.BatchRevokePermissions':
     post:
-      description: Batch operation to revoke permissions from the principal.
       operationId: BatchRevokePermissions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/BatchRevokePermissionsRequest'
-        - enum:
-            - AWSLakeFormation.BatchRevokePermissions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Batch operation to revoke permissions from the principal.
       responses:
         '200':
           description: Success
@@ -163,7 +214,18 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
-  '/#X-Amz-Target=AWSLakeFormation.DeregisterResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchRevokePermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.BatchRevokePermissions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -172,21 +234,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.DeregisterResource':
     post:
-      description: '<p>Deregisters the resource as managed by the Data Catalog.</p> <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>'
       operationId: DeregisterResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeregisterResourceRequest'
-        - enum:
-            - AWSLakeFormation.DeregisterResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Deregisters the resource as managed by the Data Catalog.</p> <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>'
       responses:
         '200':
           description: Success
@@ -208,7 +259,18 @@ paths:
           description: EntityNotFoundException
           schema:
             $ref: '#/definitions/EntityNotFoundException'
-  '/#X-Amz-Target=AWSLakeFormation.DescribeResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.DeregisterResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -217,21 +279,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.DescribeResource':
     post:
-      description: Retrieves the current data access role for the given resource registered in AWS Lake Formation.
       operationId: DescribeResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeResourceRequest'
-        - enum:
-            - AWSLakeFormation.DescribeResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Retrieves the current data access role for the given resource registered in AWS Lake Formation.
       responses:
         '200':
           description: Success
@@ -253,7 +304,18 @@ paths:
           description: EntityNotFoundException
           schema:
             $ref: '#/definitions/EntityNotFoundException'
-  '/#X-Amz-Target=AWSLakeFormation.GetDataLakeSettings':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.DescribeResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -262,21 +324,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.GetDataLakeSettings':
     post:
-      description: The AWS Lake Formation principal.
       operationId: GetDataLakeSettings
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetDataLakeSettingsRequest'
-        - enum:
-            - AWSLakeFormation.GetDataLakeSettings
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: The AWS Lake Formation principal.
       responses:
         '200':
           description: Success
@@ -294,7 +345,18 @@ paths:
           description: EntityNotFoundException
           schema:
             $ref: '#/definitions/EntityNotFoundException'
-  '/#X-Amz-Target=AWSLakeFormation.GetEffectivePermissionsForPath':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDataLakeSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.GetDataLakeSettings
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -303,31 +365,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.GetEffectivePermissionsForPath':
     post:
-      description: Returns the permissions for a specified table or database resource located at a path in Amazon S3.
       operationId: GetEffectivePermissionsForPath
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetEffectivePermissionsForPathRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - AWSLakeFormation.GetEffectivePermissionsForPath
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns the permissions for a specified table or database resource located at a path in Amazon S3.
       responses:
         '200':
           description: Success
@@ -349,7 +390,28 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-  '/#X-Amz-Target=AWSLakeFormation.GrantPermissions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEffectivePermissionsForPathRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.GetEffectivePermissionsForPath
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -358,21 +420,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.GrantPermissions':
     post:
-      description: '<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       operationId: GrantPermissions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GrantPermissionsRequest'
-        - enum:
-            - AWSLakeFormation.GrantPermissions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       responses:
         '200':
           description: Success
@@ -390,7 +441,18 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
-  '/#X-Amz-Target=AWSLakeFormation.ListPermissions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GrantPermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.GrantPermissions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -399,31 +461,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.ListPermissions':
     post:
-      description: '<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p> <p>This operation returns only those permissions that have been explicitly granted.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       operationId: ListPermissions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListPermissionsRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - AWSLakeFormation.ListPermissions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p> <p>This operation returns only those permissions that have been explicitly granted.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       responses:
         '200':
           description: Success
@@ -441,7 +482,28 @@ paths:
           description: InternalServiceException
           schema:
             $ref: '#/definitions/InternalServiceException'
-  '/#X-Amz-Target=AWSLakeFormation.ListResources':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPermissionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.ListPermissions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -450,31 +512,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.ListResources':
     post:
-      description: Lists the resources registered to be managed by the Data Catalog.
       operationId: ListResources
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListResourcesRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - AWSLakeFormation.ListResources
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Lists the resources registered to be managed by the Data Catalog.
       responses:
         '200':
           description: Success
@@ -492,7 +533,28 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
-  '/#X-Amz-Target=AWSLakeFormation.PutDataLakeSettings':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourcesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.ListResources
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -501,21 +563,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.PutDataLakeSettings':
     post:
-      description: The AWS Lake Formation principal.
       operationId: PutDataLakeSettings
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutDataLakeSettingsRequest'
-        - enum:
-            - AWSLakeFormation.PutDataLakeSettings
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: The AWS Lake Formation principal.
       responses:
         '200':
           description: Success
@@ -529,7 +580,18 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
-  '/#X-Amz-Target=AWSLakeFormation.RegisterResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutDataLakeSettingsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.PutDataLakeSettings
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -538,21 +600,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.RegisterResource':
     post:
-      description: '<p>Registers the resource as managed by the Data Catalog.</p> <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>'
       operationId: RegisterResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/RegisterResourceRequest'
-        - enum:
-            - AWSLakeFormation.RegisterResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Registers the resource as managed by the Data Catalog.</p> <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>'
       responses:
         '200':
           description: Success
@@ -574,7 +625,18 @@ paths:
           description: AlreadyExistsException
           schema:
             $ref: '#/definitions/AlreadyExistsException'
-  '/#X-Amz-Target=AWSLakeFormation.RevokePermissions':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.RegisterResource
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -583,21 +645,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.RevokePermissions':
     post:
-      description: Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
       operationId: RevokePermissions
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/RevokePermissionsRequest'
-        - enum:
-            - AWSLakeFormation.RevokePermissions
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
       responses:
         '200':
           description: Success
@@ -615,7 +666,18 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
-  '/#X-Amz-Target=AWSLakeFormation.UpdateResource':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RevokePermissionsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.RevokePermissions
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -624,21 +686,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSLakeFormation.UpdateResource':
     post:
-      description: 'Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. '
       operationId: UpdateResource
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateResourceRequest'
-        - enum:
-            - AWSLakeFormation.UpdateResource
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. '
       responses:
         '200':
           description: Success
@@ -660,9 +711,37 @@ paths:
           description: EntityNotFoundException
           schema:
             $ref: '#/definitions/EntityNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResourceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSLakeFormation.UpdateResource
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AlreadyExistsException: {}
+  BatchGrantPermissionsResponse:
+    type: object
+    properties:
+      Failures:
+        $ref: '#/definitions/BatchPermissionsFailureList'
+        description: A list of failures to grant permissions to the resources.
   BatchGrantPermissionsRequest:
+    type: object
+    required:
+      - Entries
     properties:
       CatalogId:
         $ref: '#/definitions/CatalogIdString'
@@ -670,55 +749,18 @@ definitions:
       Entries:
         $ref: '#/definitions/BatchPermissionsRequestEntryList'
         description: A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.
-    required:
-      - Entries
+  InvalidInputException: {}
+  OperationTimeoutException: {}
+  BatchRevokePermissionsResponse:
     type: object
-  BatchGrantPermissionsResponse:
     properties:
       Failures:
         $ref: '#/definitions/BatchPermissionsFailureList'
-        description: A list of failures to grant permissions to the resources.
-    type: object
-  BatchPermissionsFailureEntry:
-    description: A list of failures when performing a batch grant or batch revoke operation.
-    properties:
-      Error:
-        $ref: '#/definitions/ErrorDetail'
-        description: An error message that applies to the failure of the entry.
-      RequestEntry:
-        $ref: '#/definitions/BatchPermissionsRequestEntry'
-        description: An identifier for an entry of the batch request.
-    type: object
-  BatchPermissionsFailureList:
-    items:
-      $ref: '#/definitions/BatchPermissionsFailureEntry'
-    type: array
-  BatchPermissionsRequestEntry:
-    description: A permission to a resource granted by batch operation to the principal.
-    properties:
-      Id:
-        $ref: '#/definitions/Identifier'
-        description: A unique identifier for the batch permissions request entry.
-      Permissions:
-        $ref: '#/definitions/PermissionList'
-        description: The permissions to be granted.
-      PermissionsWithGrantOption:
-        $ref: '#/definitions/PermissionList'
-        description: Indicates if the option to pass permissions is granted.
-      Principal:
-        $ref: '#/definitions/DataLakePrincipal'
-        description: The principal to be granted a permission.
-      Resource:
-        $ref: '#/definitions/Resource'
-        description: The resource to which the principal is to be granted a permission.
-    required:
-      - Id
-    type: object
-  BatchPermissionsRequestEntryList:
-    items:
-      $ref: '#/definitions/BatchPermissionsRequestEntry'
-    type: array
+        description: A list of failures to revoke permissions to the resources.
   BatchRevokePermissionsRequest:
+    type: object
+    required:
+      - Entries
     properties:
       CatalogId:
         $ref: '#/definitions/CatalogIdString'
@@ -726,36 +768,330 @@ definitions:
       Entries:
         $ref: '#/definitions/BatchPermissionsRequestEntryList'
         description: A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.
-    required:
-      - Entries
+  DeregisterResourceResponse:
     type: object
-  BatchRevokePermissionsResponse:
-    properties:
-      Failures:
-        $ref: '#/definitions/BatchPermissionsFailureList'
-        description: A list of failures to revoke permissions to the resources.
-    type: object
-  CatalogIdString:
-    maxLength: 255
-    minLength: 1
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  CatalogResource:
-    description: A structure for the catalog object.
     properties: {}
+  DeregisterResourceRequest:
     type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArnString'
+        description: The Amazon Resource Name (ARN) of the resource that you want to deregister.
+  InternalServiceException: {}
+  EntityNotFoundException: {}
+  DescribeResourceResponse:
+    type: object
+    properties:
+      ResourceInfo:
+        $ref: '#/definitions/ResourceInfo'
+        description: A structure containing information about an AWS Lake Formation resource.
+  DescribeResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArnString'
+        description: The resource ARN.
+  GetDataLakeSettingsResponse:
+    type: object
+    properties:
+      DataLakeSettings:
+        $ref: '#/definitions/DataLakeSettings'
+        description: 'A list of AWS Lake Formation principals. '
+  GetDataLakeSettingsRequest:
+    type: object
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+  GetEffectivePermissionsForPathResponse:
+    type: object
+    properties:
+      Permissions:
+        $ref: '#/definitions/PrincipalResourcePermissionsList'
+        description: A list of the permissions for the specified table or database resource located at the path in Amazon S3.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve this list.'
+  GetEffectivePermissionsForPathRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      ResourceArn:
+        $ref: '#/definitions/ResourceArnString'
+        description: The Amazon Resource Name (ARN) of the resource for which you want to get permissions.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve this list.'
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return.
+  GrantPermissionsResponse:
+    type: object
+    properties: {}
+  GrantPermissionsRequest:
+    type: object
+    required:
+      - Principal
+      - Resource
+      - Permissions
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      Principal:
+        $ref: '#/definitions/DataLakePrincipal'
+        description: '<p>The principal to be granted the permissions on the resource. Supported principals are IAM users or IAM roles, and they are defined by their principal type and their ARN.</p> <p>Note that if you define a resource with a particular ARN, then later delete, and recreate a resource with that same ARN, the resource maintains the permissions already granted. </p>'
+      Resource:
+        $ref: '#/definitions/Resource'
+        description: 'The resource to which permissions are to be granted. Resources in AWS Lake Formation are the Data Catalog, databases, and tables.'
+      Permissions:
+        $ref: '#/definitions/PermissionList'
+        description: 'The permissions granted to the principal on the resource. AWS Lake Formation defines privileges to grant and revoke access to metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. AWS Lake Formation requires that each principal be authorized to perform a specific task on AWS Lake Formation resources. '
+      PermissionsWithGrantOption:
+        $ref: '#/definitions/PermissionList'
+        description: Indicates a list of the granted permissions that the principal may pass to other users. These permissions may only be a subset of the permissions granted in the <code>Privileges</code>.
+  ConcurrentModificationException: {}
+  ListPermissionsResponse:
+    type: object
+    properties:
+      PrincipalResourcePermissions:
+        $ref: '#/definitions/PrincipalResourcePermissionsList'
+        description: A list of principals and their permissions on the resource for the specified principal and resource types.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve this list.'
+  ListPermissionsRequest:
+    type: object
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      Principal:
+        $ref: '#/definitions/DataLakePrincipal'
+        description: Specifies a principal to filter the permissions returned.
+      ResourceType:
+        $ref: '#/definitions/DataLakeResourceType'
+        description: Specifies a resource type to filter the permissions returned.
+      Resource:
+        $ref: '#/definitions/Resource'
+        description: '<p>A resource where you will get a list of the principal permissions.</p> <p>This operation does not support getting privileges on a table with columns. Instead, call this operation on the table, and the operation returns the table and the table w columns.</p>'
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve this list.'
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return.
+  ListResourcesResponse:
+    type: object
+    properties:
+      ResourceInfoList:
+        $ref: '#/definitions/ResourceInfoList'
+        description: A summary of the data lake resources.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve these resources.'
+  ListResourcesRequest:
+    type: object
+    properties:
+      FilterConditionList:
+        $ref: '#/definitions/FilterConditionList'
+        description: Any applicable row-level and/or column-level filtering conditions for the resources.
+      MaxResults:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of resource results.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'A continuation token, if this is not the first call to retrieve these resources.'
+  PutDataLakeSettingsResponse:
+    type: object
+    properties: {}
+  PutDataLakeSettingsRequest:
+    type: object
+    required:
+      - DataLakeSettings
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      DataLakeSettings:
+        $ref: '#/definitions/DataLakeSettings'
+        description: A list of AWS Lake Formation principals.
+  RegisterResourceResponse:
+    type: object
+    properties: {}
+  RegisterResourceRequest:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArnString'
+        description: The Amazon Resource Name (ARN) of the resource that you want to register.
+      UseServiceLinkedRole:
+        $ref: '#/definitions/NullableBoolean'
+        description: 'Designates a trusted caller, an IAM principal, by registering this caller with the Data Catalog. '
+      RoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: The identifier for the role.
+  AlreadyExistsException: {}
+  RevokePermissionsResponse:
+    type: object
+    properties: {}
+  RevokePermissionsRequest:
+    type: object
+    required:
+      - Principal
+      - Resource
+      - Permissions
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      Principal:
+        $ref: '#/definitions/DataLakePrincipal'
+        description: The principal to be revoked permissions on the resource.
+      Resource:
+        $ref: '#/definitions/Resource'
+        description: The resource to which permissions are to be revoked.
+      Permissions:
+        $ref: '#/definitions/PermissionList'
+        description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
+      PermissionsWithGrantOption:
+        $ref: '#/definitions/PermissionList'
+        description: Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.
+  UpdateResourceResponse:
+    type: object
+    properties: {}
+  UpdateResourceRequest:
+    type: object
+    required:
+      - RoleArn
+      - ResourceArn
+    properties:
+      RoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: The new role to use for the given resource registered in AWS Lake Formation.
+      ResourceArn:
+        $ref: '#/definitions/ResourceArnString'
+        description: The resource ARN.
+  CatalogIdString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  BatchPermissionsRequestEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchPermissionsRequestEntry'
+  BatchPermissionsFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchPermissionsFailureEntry'
+  BatchPermissionsRequestEntry:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/Identifier'
+        description: A unique identifier for the batch permissions request entry.
+      Principal:
+        $ref: '#/definitions/DataLakePrincipal'
+        description: The principal to be granted a permission.
+      Resource:
+        $ref: '#/definitions/Resource'
+        description: The resource to which the principal is to be granted a permission.
+      Permissions:
+        $ref: '#/definitions/PermissionList'
+        description: The permissions to be granted.
+      PermissionsWithGrantOption:
+        $ref: '#/definitions/PermissionList'
+        description: Indicates if the option to pass permissions is granted.
+    description: A permission to a resource granted by batch operation to the principal.
+  ErrorDetail:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/NameString'
+        description: The code associated with this error.
+      ErrorMessage:
+        $ref: '#/definitions/DescriptionString'
+        description: A message describing the error.
+    description: Contains details about an error.
+  BatchPermissionsFailureEntry:
+    type: object
+    properties:
+      RequestEntry:
+        $ref: '#/definitions/BatchPermissionsRequestEntry'
+        description: An identifier for an entry of the batch request.
+      Error:
+        $ref: '#/definitions/ErrorDetail'
+        description: An error message that applies to the failure of the entry.
+    description: A list of failures when performing a batch grant or batch revoke operation.
+  Identifier:
+    type: string
+    minLength: 1
+    maxLength: 255
+  DataLakePrincipal:
+    type: object
+    properties:
+      DataLakePrincipalIdentifier:
+        $ref: '#/definitions/DataLakePrincipalString'
+        description: An identifier for the AWS Lake Formation principal.
+    description: The AWS Lake Formation principal.
+  Resource:
+    type: object
+    properties:
+      Catalog:
+        $ref: '#/definitions/CatalogResource'
+        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
+      Database:
+        $ref: '#/definitions/DatabaseResource'
+        description: 'The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal. '
+      Table:
+        $ref: '#/definitions/TableResource'
+        description: 'The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. '
+      TableWithColumns:
+        $ref: '#/definitions/TableWithColumnsResource'
+        description: The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.
+      DataLocation:
+        $ref: '#/definitions/DataLocationResource'
+        description: 'The location of an Amazon S3 path where permissions are granted or revoked. '
+    description: A structure for the resource.
+  PermissionList:
+    type: array
+    items:
+      $ref: '#/definitions/Permission'
+  CatalogResource:
+    type: object
+    properties: {}
+    description: A structure for the catalog object.
+  NameString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   ColumnNames:
+    type: array
     items:
       $ref: '#/definitions/NameString'
-    type: array
   ColumnWildcard:
-    description: 'A wildcard object, consisting of an optional list of excluded column names or indexes.'
+    type: object
     properties:
       ExcludedColumnNames:
         $ref: '#/definitions/ColumnNames'
         description: Excludes column names. Any column with this name will be excluded.
-    type: object
+    description: 'A wildcard object, consisting of an optional list of excluded column names or indexes.'
   ComparisonOperator:
+    type: string
     enum:
       - EQ
       - NE
@@ -768,268 +1104,131 @@ definitions:
       - BEGINS_WITH
       - IN
       - BETWEEN
+  DataLakePrincipalString:
     type: string
-  ConcurrentModificationException: {}
-  DataLakePrincipal:
-    description: The AWS Lake Formation principal.
-    properties:
-      DataLakePrincipalIdentifier:
-        $ref: '#/definitions/DataLakePrincipalString'
-        description: An identifier for the AWS Lake Formation principal.
-    type: object
+    minLength: 1
+    maxLength: 255
   DataLakePrincipalList:
+    type: array
     items:
       $ref: '#/definitions/DataLakePrincipal'
-    maxItems: 10
     minItems: 0
-    type: array
-  DataLakePrincipalString:
-    maxLength: 255
-    minLength: 1
-    type: string
+    maxItems: 10
   DataLakeResourceType:
+    type: string
     enum:
       - CATALOG
       - DATABASE
       - TABLE
       - DATA_LOCATION
-    type: string
+  PrincipalPermissionsList:
+    type: array
+    items:
+      $ref: '#/definitions/PrincipalPermissions'
   DataLakeSettings:
-    description: The AWS Lake Formation principal.
+    type: object
     properties:
+      DataLakeAdmins:
+        $ref: '#/definitions/DataLakePrincipalList'
+        description: A list of AWS Lake Formation principals.
       CreateDatabaseDefaultPermissions:
         $ref: '#/definitions/PrincipalPermissionsList'
         description: A list of up to three principal permissions entries for default create database permissions.
       CreateTableDefaultPermissions:
         $ref: '#/definitions/PrincipalPermissionsList'
         description: A list of up to three principal permissions entries for default create table permissions.
-      DataLakeAdmins:
-        $ref: '#/definitions/DataLakePrincipalList'
-        description: A list of AWS Lake Formation principals.
-    type: object
+    description: The AWS Lake Formation principal.
+  ResourceArnString:
+    type: string
   DataLocationResource:
-    description: 'A structure for a data location object where permissions are granted or revoked. '
+    type: object
+    required:
+      - ResourceArn
     properties:
       ResourceArn:
         $ref: '#/definitions/ResourceArnString'
         description: The Amazon Resource Name (ARN) that uniquely identifies the data location resource.
-    required:
-      - ResourceArn
-    type: object
+    description: 'A structure for a data location object where permissions are granted or revoked. '
   DatabaseResource:
-    description: A structure for the database object.
+    type: object
+    required:
+      - Name
     properties:
       Name:
         $ref: '#/definitions/NameString'
         description: The name of the database resource. Unique to the Data Catalog.
-    required:
-      - Name
+    description: A structure for the database object.
+  ResourceInfo:
     type: object
-  DeregisterResourceRequest:
     properties:
       ResourceArn:
         $ref: '#/definitions/ResourceArnString'
-        description: The Amazon Resource Name (ARN) of the resource that you want to deregister.
-    required:
-      - ResourceArn
-    type: object
-  DeregisterResourceResponse:
-    properties: {}
-    type: object
-  DescribeResourceRequest:
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArnString'
-        description: The resource ARN.
-    required:
-      - ResourceArn
-    type: object
-  DescribeResourceResponse:
-    properties:
-      ResourceInfo:
-        $ref: '#/definitions/ResourceInfo'
-        description: A structure containing information about an AWS Lake Formation resource.
-    type: object
+        description: The Amazon Resource Name (ARN) of the resource.
+      RoleArn:
+        $ref: '#/definitions/IAMRoleArn'
+        description: The IAM role that registered a resource.
+      LastModified:
+        $ref: '#/definitions/LastModifiedTimestamp'
+        description: The date and time the resource was last modified.
+    description: A structure containing information about an AWS Lake Formation resource.
   DescriptionString:
-    maxLength: 2048
-    minLength: 0
     type: string
+    minLength: 0
+    maxLength: 2048
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  EntityNotFoundException: {}
-  ErrorDetail:
-    description: Contains details about an error.
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/NameString'
-        description: The code associated with this error.
-      ErrorMessage:
-        $ref: '#/definitions/DescriptionString'
-        description: A message describing the error.
-    type: object
   FieldNameString:
+    type: string
     enum:
       - RESOURCE_ARN
       - ROLE_ARN
       - LAST_MODIFIED
-    type: string
+  StringValueList:
+    type: array
+    items:
+      $ref: '#/definitions/StringValue'
   FilterCondition:
-    description: This structure describes the filtering of columns in a table based on a filter condition.
+    type: object
     properties:
-      ComparisonOperator:
-        $ref: '#/definitions/ComparisonOperator'
-        description: The comparison operator used in the filter condition.
       Field:
         $ref: '#/definitions/FieldNameString'
         description: The field to filter in the filter condition.
+      ComparisonOperator:
+        $ref: '#/definitions/ComparisonOperator'
+        description: The comparison operator used in the filter condition.
       StringValueList:
         $ref: '#/definitions/StringValueList'
         description: A string with values used in evaluating the filter condition.
-    type: object
+    description: This structure describes the filtering of columns in a table based on a filter condition.
   FilterConditionList:
+    type: array
     items:
       $ref: '#/definitions/FilterCondition'
-    maxItems: 20
     minItems: 1
+    maxItems: 20
+  Token:
+    type: string
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  PrincipalResourcePermissionsList:
     type: array
-  GetDataLakeSettingsRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-    type: object
-  GetDataLakeSettingsResponse:
-    properties:
-      DataLakeSettings:
-        $ref: '#/definitions/DataLakeSettings'
-        description: 'A list of AWS Lake Formation principals. '
-    type: object
-  GetEffectivePermissionsForPathRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-      MaxResults:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve this list.'
-      ResourceArn:
-        $ref: '#/definitions/ResourceArnString'
-        description: The Amazon Resource Name (ARN) of the resource for which you want to get permissions.
-    required:
-      - ResourceArn
-    type: object
-  GetEffectivePermissionsForPathResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve this list.'
-      Permissions:
-        $ref: '#/definitions/PrincipalResourcePermissionsList'
-        description: A list of the permissions for the specified table or database resource located at the path in Amazon S3.
-    type: object
-  GrantPermissionsRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-      Permissions:
-        $ref: '#/definitions/PermissionList'
-        description: 'The permissions granted to the principal on the resource. AWS Lake Formation defines privileges to grant and revoke access to metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. AWS Lake Formation requires that each principal be authorized to perform a specific task on AWS Lake Formation resources. '
-      PermissionsWithGrantOption:
-        $ref: '#/definitions/PermissionList'
-        description: Indicates a list of the granted permissions that the principal may pass to other users. These permissions may only be a subset of the permissions granted in the <code>Privileges</code>.
-      Principal:
-        $ref: '#/definitions/DataLakePrincipal'
-        description: '<p>The principal to be granted the permissions on the resource. Supported principals are IAM users or IAM roles, and they are defined by their principal type and their ARN.</p> <p>Note that if you define a resource with a particular ARN, then later delete, and recreate a resource with that same ARN, the resource maintains the permissions already granted. </p>'
-      Resource:
-        $ref: '#/definitions/Resource'
-        description: 'The resource to which permissions are to be granted. Resources in AWS Lake Formation are the Data Catalog, databases, and tables.'
-    required:
-      - Principal
-      - Resource
-      - Permissions
-    type: object
-  GrantPermissionsResponse:
-    properties: {}
-    type: object
+    items:
+      $ref: '#/definitions/PrincipalResourcePermissions'
   IAMRoleArn:
+    type: string
     pattern: 'arn:aws:iam::[0-9]*:role/.*'
-    type: string
-  Identifier:
-    maxLength: 255
-    minLength: 1
-    type: string
-  InternalServiceException: {}
-  InvalidInputException: {}
   LastModifiedTimestamp:
+    type: string
     format: date-time
-    type: string
-  ListPermissionsRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-      MaxResults:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of results to return.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve this list.'
-      Principal:
-        $ref: '#/definitions/DataLakePrincipal'
-        description: Specifies a principal to filter the permissions returned.
-      Resource:
-        $ref: '#/definitions/Resource'
-        description: '<p>A resource where you will get a list of the principal permissions.</p> <p>This operation does not support getting privileges on a table with columns. Instead, call this operation on the table, and the operation returns the table and the table w columns.</p>'
-      ResourceType:
-        $ref: '#/definitions/DataLakeResourceType'
-        description: Specifies a resource type to filter the permissions returned.
-    type: object
-  ListPermissionsResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve this list.'
-      PrincipalResourcePermissions:
-        $ref: '#/definitions/PrincipalResourcePermissionsList'
-        description: A list of principals and their permissions on the resource for the specified principal and resource types.
-    type: object
-  ListResourcesRequest:
-    properties:
-      FilterConditionList:
-        $ref: '#/definitions/FilterConditionList'
-        description: Any applicable row-level and/or column-level filtering conditions for the resources.
-      MaxResults:
-        $ref: '#/definitions/PageSize'
-        description: The maximum number of resource results.
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve these resources.'
-    type: object
-  ListResourcesResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/Token'
-        description: 'A continuation token, if this is not the first call to retrieve these resources.'
-      ResourceInfoList:
-        $ref: '#/definitions/ResourceInfoList'
-        description: A summary of the data lake resources.
-    type: object
-  NameString:
-    maxLength: 255
-    minLength: 1
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  ResourceInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceInfo'
   NullableBoolean:
     type: boolean
-  OperationTimeoutException: {}
-  PageSize:
-    maximum: 1000
-    minimum: 1
-    type: integer
   Permission:
+    type: string
     enum:
       - ALL
       - SELECT
@@ -1040,147 +1239,37 @@ definitions:
       - CREATE_DATABASE
       - CREATE_TABLE
       - DATA_LOCATION_ACCESS
-    type: string
-  PermissionList:
-    items:
-      $ref: '#/definitions/Permission'
-    type: array
   PrincipalPermissions:
-    description: Permissions granted to a principal.
+    type: object
     properties:
-      Permissions:
-        $ref: '#/definitions/PermissionList'
-        description: The permissions that are granted to the principal.
       Principal:
         $ref: '#/definitions/DataLakePrincipal'
         description: The principal who is granted permissions.
-    type: object
-  PrincipalPermissionsList:
-    items:
-      $ref: '#/definitions/PrincipalPermissions'
-    type: array
-  PrincipalResourcePermissions:
-    description: The permissions granted or revoked on a resource.
-    properties:
       Permissions:
         $ref: '#/definitions/PermissionList'
-        description: The permissions to be granted or revoked on the resource.
-      PermissionsWithGrantOption:
-        $ref: '#/definitions/PermissionList'
-        description: Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).
+        description: The permissions that are granted to the principal.
+    description: Permissions granted to a principal.
+  PrincipalResourcePermissions:
+    type: object
+    properties:
       Principal:
         $ref: '#/definitions/DataLakePrincipal'
         description: The Data Lake principal to be granted or revoked permissions.
       Resource:
         $ref: '#/definitions/Resource'
         description: The resource where permissions are to be granted or revoked.
-    type: object
-  PrincipalResourcePermissionsList:
-    items:
-      $ref: '#/definitions/PrincipalResourcePermissions'
-    type: array
-  PutDataLakeSettingsRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-      DataLakeSettings:
-        $ref: '#/definitions/DataLakeSettings'
-        description: A list of AWS Lake Formation principals.
-    required:
-      - DataLakeSettings
-    type: object
-  PutDataLakeSettingsResponse:
-    properties: {}
-    type: object
-  RegisterResourceRequest:
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArnString'
-        description: The Amazon Resource Name (ARN) of the resource that you want to register.
-      RoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: The identifier for the role.
-      UseServiceLinkedRole:
-        $ref: '#/definitions/NullableBoolean'
-        description: 'Designates a trusted caller, an IAM principal, by registering this caller with the Data Catalog. '
-    required:
-      - ResourceArn
-    type: object
-  RegisterResourceResponse:
-    properties: {}
-    type: object
-  Resource:
-    description: A structure for the resource.
-    properties:
-      Catalog:
-        $ref: '#/definitions/CatalogResource'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
-      DataLocation:
-        $ref: '#/definitions/DataLocationResource'
-        description: 'The location of an Amazon S3 path where permissions are granted or revoked. '
-      Database:
-        $ref: '#/definitions/DatabaseResource'
-        description: 'The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal. '
-      Table:
-        $ref: '#/definitions/TableResource'
-        description: 'The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. '
-      TableWithColumns:
-        $ref: '#/definitions/TableWithColumnsResource'
-        description: The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.
-    type: object
-  ResourceArnString:
-    type: string
-  ResourceInfo:
-    description: A structure containing information about an AWS Lake Formation resource.
-    properties:
-      LastModified:
-        $ref: '#/definitions/LastModifiedTimestamp'
-        description: The date and time the resource was last modified.
-      ResourceArn:
-        $ref: '#/definitions/ResourceArnString'
-        description: The Amazon Resource Name (ARN) of the resource.
-      RoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: The IAM role that registered a resource.
-    type: object
-  ResourceInfoList:
-    items:
-      $ref: '#/definitions/ResourceInfo'
-    type: array
-  RevokePermissionsRequest:
-    properties:
-      CatalogId:
-        $ref: '#/definitions/CatalogIdString'
-        description: 'The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. '
       Permissions:
         $ref: '#/definitions/PermissionList'
-        description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
+        description: The permissions to be granted or revoked on the resource.
       PermissionsWithGrantOption:
         $ref: '#/definitions/PermissionList'
-        description: Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.
-      Principal:
-        $ref: '#/definitions/DataLakePrincipal'
-        description: The principal to be revoked permissions on the resource.
-      Resource:
-        $ref: '#/definitions/Resource'
-        description: The resource to which permissions are to be revoked.
-    required:
-      - Principal
-      - Resource
-      - Permissions
-    type: object
-  RevokePermissionsResponse:
-    properties: {}
-    type: object
-  StringValue:
-    type: string
-  StringValueList:
-    items:
-      $ref: '#/definitions/StringValue'
-    type: array
+        description: Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).
+    description: The permissions granted or revoked on a resource.
   TableResource:
-    description: 'A structure for the table object. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. '
+    type: object
+    required:
+      - DatabaseName
+      - Name
     properties:
       DatabaseName:
         $ref: '#/definitions/NameString'
@@ -1188,111 +1277,22 @@ definitions:
       Name:
         $ref: '#/definitions/NameString'
         description: The name of the table.
-    required:
-      - DatabaseName
-      - Name
-    type: object
+    description: 'A structure for the table object. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. '
   TableWithColumnsResource:
-    description: '<p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p> <p>This object must take a value for at least one of <code>ColumnsNames</code>, <code>ColumnsIndexes</code>, or <code>ColumnsWildcard</code>.</p>'
+    type: object
     properties:
-      ColumnNames:
-        $ref: '#/definitions/ColumnNames'
-        description: The list of column names for the table. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.
-      ColumnWildcard:
-        $ref: '#/definitions/ColumnWildcard'
-        description: A wildcard specified by a <code>ColumnWildcard</code> object. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.
       DatabaseName:
         $ref: '#/definitions/NameString'
         description: 'The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal. '
       Name:
         $ref: '#/definitions/NameString'
         description: 'The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. '
-    type: object
-  Token:
+      ColumnNames:
+        $ref: '#/definitions/ColumnNames'
+        description: The list of column names for the table. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.
+      ColumnWildcard:
+        $ref: '#/definitions/ColumnWildcard'
+        description: A wildcard specified by a <code>ColumnWildcard</code> object. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.
+    description: '<p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p> <p>This object must take a value for at least one of <code>ColumnsNames</code>, <code>ColumnsIndexes</code>, or <code>ColumnsWildcard</code>.</p>'
+  StringValue:
     type: string
-  UpdateResourceRequest:
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArnString'
-        description: The resource ARN.
-      RoleArn:
-        $ref: '#/definitions/IAMRoleArn'
-        description: The new role to use for the given resource registered in AWS Lake Formation.
-    required:
-      - RoleArn
-      - ResourceArn
-    type: object
-  UpdateResourceResponse:
-    properties: {}
-    type: object
-x-servers:
-  - description: The AWS Lake Formation multi-region endpoint
-    url: 'http://lakeformation.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS Lake Formation multi-region endpoint
-    url: 'https://lakeformation.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS Lake Formation endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://lakeformation.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The AWS Lake Formation endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://lakeformation.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1

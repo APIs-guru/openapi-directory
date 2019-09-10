@@ -1,94 +1,208 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: personalize-events.amazonaws.com
-basePath: /
 info:
+  version: '2018-03-22'
+  x-release: v4
+  title: Amazon Personalize Events
+  description: <p/>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: <p/>
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Personalize Events
-  version: '2018-03-22'
+  x-providerName: amazonaws.com
+  x-serviceName: personalize-events
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/personalize-events-2018-03-22.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/personalize-events-2018-03-22.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: personalize-events
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/personalize-events/'
+host: personalize-events.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://personalize-events.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Personalize Events multi-region endpoint
+  - url: 'https://personalize-events.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Personalize Events multi-region endpoint
+  - url: 'http://personalize-events.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Personalize Events endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://personalize-events.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Personalize Events endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   /events:
+    post:
+      operationId: PutEvents
+      description: Records user interaction event data.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - trackingId
+              - sessionId
+              - eventList
+            properties:
+              trackingId:
+                description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
+                type: string
+                minLength: 1
+                maxLength: 256
+              userId:
+                description: The user associated with the event.
+                type: string
+                minLength: 1
+                maxLength: 256
+              sessionId:
+                description: The session ID associated with the user's visit.
+                type: string
+                minLength: 1
+                maxLength: 256
+              eventList:
+                description: A list of event data from the session.
+                type: array
+                items:
+                  $ref: '#/definitions/Event'
+                minItems: 1
+                maxItems: 10
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -97,55 +211,13 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Records user interaction event data.
-      operationId: PutEvents
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              eventList:
-                description: A list of event data from the session.
-                items:
-                  $ref: '#/definitions/Event'
-                maxItems: 10
-                minItems: 1
-                type: array
-              sessionId:
-                description: The session ID associated with the user's visit.
-                maxLength: 256
-                minLength: 1
-                type: string
-              trackingId:
-                description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
-                maxLength: 256
-                minLength: 1
-                type: string
-              userId:
-                description: The user associated with the event.
-                maxLength: 256
-                minLength: 1
-                type: string
-            required:
-              - trackingId
-              - sessionId
-              - eventList
-            type: object
-      responses:
-        '200':
-          description: Success
-        '480':
-          description: InvalidInputException
-          schema:
-            $ref: '#/definitions/InvalidInputException'
 definitions:
-  Date:
-    format: date-time
-    type: string
   Event:
-    description: Represents user interaction event information sent using the <code>PutEvents</code> API.
+    type: object
+    required:
+      - eventType
+      - properties
+      - sentAt
     properties:
       eventId:
         $ref: '#/definitions/StringType'
@@ -159,117 +231,45 @@ definitions:
       sentAt:
         $ref: '#/definitions/Date'
         description: The timestamp on the client side when the event occurred.
-    required:
-      - eventType
-      - properties
-      - sentAt
-    type: object
+    description: Represents user interaction event information sent using the <code>PutEvents</code> API.
+  InvalidInputException: {}
+  Date:
+    type: string
+    format: date-time
+  StringType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  EventPropertiesJSON:
+    type: string
+    minLength: 1
+    maxLength: 1024
   EventList:
+    type: array
     items:
       $ref: '#/definitions/Event'
-    maxItems: 10
     minItems: 1
-    type: array
-  EventPropertiesJSON:
-    maxLength: 1024
-    minLength: 1
+    maxItems: 10
+  UserId:
     type: string
-  InvalidInputException: {}
+    minLength: 1
+    maxLength: 256
   PutEventsRequest:
+    type: object
+    required:
+      - trackingId
+      - sessionId
+      - eventList
     properties:
-      eventList:
-        $ref: '#/definitions/EventList'
-        description: A list of event data from the session.
-      sessionId:
-        $ref: '#/definitions/StringType'
-        description: The session ID associated with the user's visit.
       trackingId:
         $ref: '#/definitions/StringType'
         description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
       userId:
         $ref: '#/definitions/UserId'
         description: The user associated with the event.
-    required:
-      - trackingId
-      - sessionId
-      - eventList
-    type: object
-  StringType:
-    maxLength: 256
-    minLength: 1
-    type: string
-  UserId:
-    maxLength: 256
-    minLength: 1
-    type: string
-x-servers:
-  - description: The Amazon Personalize Events multi-region endpoint
-    url: 'http://personalize-events.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Personalize Events multi-region endpoint
-    url: 'https://personalize-events.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Personalize Events endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://personalize-events.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Personalize Events endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://personalize-events.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+      sessionId:
+        $ref: '#/definitions/StringType'
+        description: The session ID associated with the user's visit.
+      eventList:
+        $ref: '#/definitions/EventList'
+        description: A list of event data from the session.

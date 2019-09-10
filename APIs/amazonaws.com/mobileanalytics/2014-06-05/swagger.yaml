@@ -1,94 +1,200 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: mobileanalytics.amazonaws.com
-basePath: /
 info:
+  version: '2014-06-05'
+  x-release: v4
+  title: Amazon Mobile Analytics
+  description: 'Amazon Mobile Analytics is a service for collecting, visualizing, and understanding app usage data at scale.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: 'Amazon Mobile Analytics is a service for collecting, visualizing, and understanding app usage data at scale.'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Mobile Analytics
-  version: '2014-06-05'
+  x-providerName: amazonaws.com
+  x-serviceName: mobileanalytics
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobileanalytics-2014-06-05.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobileanalytics-2014-06-05.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: mobileanalytics
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/mobileanalytics/'
+host: mobileanalytics.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://mobileanalytics.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Mobile Analytics multi-region endpoint
+  - url: 'https://mobileanalytics.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Mobile Analytics multi-region endpoint
+  - url: 'http://mobileanalytics.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Mobile Analytics endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://mobileanalytics.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Mobile Analytics endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/2014-06-05/events#x-amz-Client-Context':
+    post:
+      operationId: PutEvents
+      description: 'The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.'
+      responses:
+        '202':
+          description: Success
+        '400':
+          description: BadRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: x-amz-Client-Context
+          in: header
+          required: true
+          description: 'The client context including the client ID, app title, app version and package name.'
+          type: string
+        - name: x-amz-Client-Context-Encoding
+          in: header
+          required: false
+          description: The encoding used for the client context.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - events
+            properties:
+              events:
+                description: An array of Event JSON objects
+                type: array
+                items:
+                  $ref: '#/definitions/Event'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -97,204 +203,98 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: 'The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.'
-      operationId: PutEvents
-      parameters:
-        - description: 'The client context including the client ID, app title, app version and package name.'
-          in: header
-          name: x-amz-Client-Context
-          required: true
-          type: string
-        - description: The encoding used for the client context.
-          in: header
-          name: x-amz-Client-Context-Encoding
-          required: false
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              events:
-                description: An array of Event JSON objects
-                items:
-                  $ref: '#/definitions/Event'
-                type: array
-            required:
-              - events
-            type: object
-      responses:
-        '202':
-          description: Success
-        '400':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-          x-aws-exception: true
 definitions:
+  Event:
+    type: object
+    required:
+      - eventType
+      - timestamp
+    properties:
+      eventType:
+        $ref: '#/definitions/String50Chars'
+        description: A name signifying an event that occurred in your app. This is used for grouping and aggregating like events together for reporting purposes.
+      timestamp:
+        $ref: '#/definitions/ISO8601Timestamp'
+        description: 'The time the event occurred in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+      session:
+        $ref: '#/definitions/Session'
+        description: 'The session the event occured within. '
+      version:
+        $ref: '#/definitions/String10Chars'
+        description: The version of the event.
+      attributes:
+        $ref: '#/definitions/MapOfStringToString'
+        description: <p>A collection of key-value pairs that give additional context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>
+      metrics:
+        $ref: '#/definitions/MapOfStringToNumber'
+        description: '<p>A collection of key-value pairs that gives additional, measurable context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>'
+    description: A JSON object representing a batch of unique event occurrences in your app.
   BadRequestException:
-    description: An exception object returned when a request fails.
+    type: object
     properties:
       message:
         $ref: '#/definitions/String'
         description: A text description associated with the BadRequestException object.
-    type: object
+    description: An exception object returned when a request fails.
+  String:
+    type: string
   Double:
-    format: double
     type: number
-  Event:
-    description: A JSON object representing a batch of unique event occurrences in your app.
-    properties:
-      attributes:
-        $ref: '#/definitions/MapOfStringToString'
-        description: <p>A collection of key-value pairs that give additional context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>
-      eventType:
-        $ref: '#/definitions/String50Chars'
-        description: A name signifying an event that occurred in your app. This is used for grouping and aggregating like events together for reporting purposes.
-      metrics:
-        $ref: '#/definitions/MapOfStringToNumber'
-        description: '<p>A collection of key-value pairs that gives additional, measurable context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>'
-      session:
-        $ref: '#/definitions/Session'
-        description: 'The session the event occured within. '
-      timestamp:
-        $ref: '#/definitions/ISO8601Timestamp'
-        description: 'The time the event occurred in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
-      version:
-        $ref: '#/definitions/String10Chars'
-        description: The version of the event.
-    required:
-      - eventType
-      - timestamp
-    type: object
-  EventListDefinition:
-    items:
-      $ref: '#/definitions/Event'
-    type: array
+    format: double
+  String50Chars:
+    type: string
+    minLength: 1
+    maxLength: 50
   ISO8601Timestamp:
     type: string
-  Long:
-    type: integer
-  MapOfStringToNumber:
-    additionalProperties:
-      $ref: '#/definitions/Double'
-    maxProperties: 50
-    minProperties: 0
-    type: object
-  MapOfStringToString:
-    additionalProperties:
-      $ref: '#/definitions/String0to1000Chars'
-    maxProperties: 50
-    minProperties: 0
-    type: object
-  PutEventsInput:
-    description: A container for the data needed for a PutEvent operation
-    properties:
-      events:
-        $ref: '#/definitions/EventListDefinition'
-        description: An array of Event JSON objects
-    required:
-      - events
-    type: object
   Session:
-    description: Describes the session. Session information is required on ALL events.
+    type: object
     properties:
-      duration:
-        $ref: '#/definitions/Long'
-        description: The duration of the session.
       id:
         $ref: '#/definitions/String50Chars'
         description: A unique identifier for the session
+      duration:
+        $ref: '#/definitions/Long'
+        description: The duration of the session.
       startTimestamp:
         $ref: '#/definitions/ISO8601Timestamp'
         description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
       stopTimestamp:
         $ref: '#/definitions/ISO8601Timestamp'
         description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
-    type: object
-  String:
-    type: string
-  String0to1000Chars:
-    maxLength: 1000
-    minLength: 0
-    type: string
+    description: Describes the session. Session information is required on ALL events.
   String10Chars:
+    type: string
+    minLength: 1
     maxLength: 10
-    minLength: 1
+  MapOfStringToString:
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/String0to1000Chars'
+  MapOfStringToNumber:
+    type: object
+    minProperties: 0
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/Double'
+  EventListDefinition:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  Long:
+    type: integer
+  String0to1000Chars:
     type: string
-  String50Chars:
-    maxLength: 50
-    minLength: 1
-    type: string
-x-servers:
-  - description: The Amazon Mobile Analytics multi-region endpoint
-    url: 'http://mobileanalytics.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Mobile Analytics multi-region endpoint
-    url: 'https://mobileanalytics.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Mobile Analytics endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://mobileanalytics.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Mobile Analytics endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://mobileanalytics.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    minLength: 0
+    maxLength: 1000
+  PutEventsInput:
+    type: object
+    required:
+      - events
+    properties:
+      events:
+        $ref: '#/definitions/EventListDefinition'
+        description: An array of Event JSON objects
+    description: A container for the data needed for a PutEvent operation

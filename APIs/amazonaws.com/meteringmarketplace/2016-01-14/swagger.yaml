@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: metering.marketplace.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2016-01-14'
+  x-release: v4
+  title: AWSMarketplace Metering
+  description: '<fullname>AWS Marketplace Metering Service</fullname> <p>This reference provides descriptions of the low-level AWS Marketplace Metering Service API.</p> <p>AWS Marketplace sellers can use this API to submit usage data for custom usage dimensions.</p> <p> <b>Submitting Metering Records</b> </p> <ul> <li> <p> <i>MeterUsage</i>- Submits the metering record for a Marketplace product. MeterUsage is called from an EC2 instance.</p> </li> <li> <p> <i>BatchMeterUsage</i>- Submits the metering record for a set of customers. BatchMeterUsage is called from a software-as-a-service (SaaS) application.</p> </li> </ul> <p> <b>Accepting New Customers</b> </p> <ul> <li> <p> <i>ResolveCustomer</i>- Called by a SaaS application during the registration process. When a buyer visits your website during the registration process, the buyer submits a Registration Token through the browser. The Registration Token is resolved through this API to obtain a CustomerIdentifier and Product Code.</p> </li> </ul> <p> <b>Entitlement and Metering for Paid Container Products</b> </p> <ul> <li> <p> Paid container software products sold through AWS Marketplace must integrate with the AWS Marketplace Metering Service and call the RegisterUsage operation for software entitlement and metering. Calling RegisterUsage from containers running outside of Amazon Elastic Container Service (Amazon ECR) isn''t supported. Free and BYOL products for ECS aren''t required to call RegisterUsage, but you can do so if you want to receive usage data in your seller reports. For more information on using the RegisterUsage operation, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html">Container-Based Products</a>. </p> </li> </ul> <p>BatchMeterUsage API calls are captured by AWS CloudTrail. You can use Cloudtrail to verify that the SaaS metering records that you sent are accurate by searching for records with the eventName of BatchMeterUsage. You can also use CloudTrail to audit records over time. For more information, see the <i> <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html">AWS CloudTrail User Guide</a> </i>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>AWS Marketplace Metering Service</fullname> <p>This reference provides descriptions of the low-level AWS Marketplace Metering Service API.</p> <p>AWS Marketplace sellers can use this API to submit usage data for custom usage dimensions.</p> <p> <b>Submitting Metering Records</b> </p> <ul> <li> <p> <i>MeterUsage</i>- Submits the metering record for a Marketplace product. MeterUsage is called from an EC2 instance.</p> </li> <li> <p> <i>BatchMeterUsage</i>- Submits the metering record for a set of customers. BatchMeterUsage is called from a software-as-a-service (SaaS) application.</p> </li> </ul> <p> <b>Accepting New Customers</b> </p> <ul> <li> <p> <i>ResolveCustomer</i>- Called by a SaaS application during the registration process. When a buyer visits your website during the registration process, the buyer submits a Registration Token through the browser. The Registration Token is resolved through this API to obtain a CustomerIdentifier and Product Code.</p> </li> </ul> <p> <b>Entitlement and Metering for Paid Container Products</b> </p> <ul> <li> <p> Paid container software products sold through AWS Marketplace must integrate with the AWS Marketplace Metering Service and call the RegisterUsage operation for software entitlement and metering. Calling RegisterUsage from containers running outside of Amazon Elastic Container Service (Amazon ECR) isn''t supported. Free and BYOL products for ECS aren''t required to call RegisterUsage, but you can do so if you want to receive usage data in your seller reports. For more information on using the RegisterUsage operation, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html">Container-Based Products</a>. </p> </li> </ul> <p>BatchMeterUsage API calls are captured by AWS CloudTrail. You can use Cloudtrail to verify that the SaaS metering records that you sent are accurate by searching for records with the eventName of BatchMeterUsage. You can also use CloudTrail to audit records over time. For more information, see the <i> <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html">AWS CloudTrail User Guide</a> </i>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWSMarketplace Metering
-  version: '2016-01-14'
+  x-providerName: amazonaws.com
+  x-serviceName: meteringmarketplace
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/meteringmarketplace-2016-01-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/meteringmarketplace-2016-01-14.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: meteringmarketplace
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/marketplace/'
+host: metering.marketplace.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://metering.marketplace.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWSMarketplace Metering multi-region endpoint
+  - url: 'https://metering.marketplace.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWSMarketplace Metering multi-region endpoint
+  - url: 'http://metering.marketplace.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWSMarketplace Metering endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://metering.marketplace.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWSMarketplace Metering endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=AWSMPMeteringService.BatchMeterUsage':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers.</p> <p>For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records.</p> <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage.</p> <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>'
       operationId: BatchMeterUsage
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/BatchMeterUsageRequest'
-        - enum:
-            - AWSMPMeteringService.BatchMeterUsage
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers.</p> <p>For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records.</p> <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage.</p> <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>'
       responses:
         '200':
           description: Success
@@ -146,7 +197,18 @@ paths:
           description: DisabledApiException
           schema:
             $ref: '#/definitions/DisabledApiException'
-  '/#X-Amz-Target=AWSMPMeteringService.MeterUsage':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchMeterUsageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMPMeteringService.BatchMeterUsage
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -155,21 +217,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSMPMeteringService.MeterUsage':
     post:
-      description: '<p>API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID.</p> <p>MeterUsage is authenticated on the buyer''s AWS account, generally when running from an EC2 instance on the AWS Marketplace.</p>'
       operationId: MeterUsage
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MeterUsageRequest'
-        - enum:
-            - AWSMPMeteringService.MeterUsage
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID.</p> <p>MeterUsage is authenticated on the buyer''s AWS account, generally when running from an EC2 instance on the AWS Marketplace.</p>'
       responses:
         '200':
           description: Success
@@ -203,7 +254,18 @@ paths:
           description: ThrottlingException
           schema:
             $ref: '#/definitions/ThrottlingException'
-  '/#X-Amz-Target=AWSMPMeteringService.RegisterUsage':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MeterUsageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMPMeteringService.MeterUsage
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -212,21 +274,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSMPMeteringService.RegisterUsage':
     post:
-      description: '<p>Paid container software products sold through AWS Marketplace must integrate with the AWS Marketplace Metering Service and call the RegisterUsage operation for software entitlement and metering. Calling RegisterUsage from containers running outside of ECS is not currently supported. Free and BYOL products for ECS aren''t required to call RegisterUsage, but you may choose to do so if you would like to receive usage data in your seller reports. The sections below explain the behavior of RegisterUsage. RegisterUsage performs two primary functions: metering and entitlement.</p> <ul> <li> <p> <i>Entitlement</i>: RegisterUsage allows you to verify that the customer running your paid software is subscribed to your product on AWS Marketplace, enabling you to guard against unauthorized use. Your container image that integrates with RegisterUsage is only required to guard against unauthorized use at container startup, as such a CustomerNotSubscribedException/PlatformNotSupportedException will only be thrown on the initial call to RegisterUsage. Subsequent calls from the same Amazon ECS task instance (e.g. task-id) will not throw a CustomerNotSubscribedException, even if the customer unsubscribes while the Amazon ECS task is still running.</p> </li> <li> <p> <i>Metering</i>: RegisterUsage meters software use per ECS task, per hour, with usage prorated to the second. A minimum of 1 minute of usage applies to tasks that are short lived. For example, if a customer has a 10 node ECS cluster and creates an ECS service configured as a Daemon Set, then ECS will launch a task on all 10 cluster nodes and the customer will be charged: (10 * hourly_rate). Metering for software use is automatically handled by the AWS Marketplace Metering Control Plane -- your software is not required to perform any metering specific actions, other than call RegisterUsage once for metering of software use to commence. The AWS Marketplace Metering Control Plane will also continue to bill customers for running ECS tasks, regardless of the customers subscription state, removing the need for your software to perform entitlement checks at runtime.</p> </li> </ul>'
       operationId: RegisterUsage
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/RegisterUsageRequest'
-        - enum:
-            - AWSMPMeteringService.RegisterUsage
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Paid container software products sold through AWS Marketplace must integrate with the AWS Marketplace Metering Service and call the RegisterUsage operation for software entitlement and metering. Calling RegisterUsage from containers running outside of ECS is not currently supported. Free and BYOL products for ECS aren''t required to call RegisterUsage, but you may choose to do so if you would like to receive usage data in your seller reports. The sections below explain the behavior of RegisterUsage. RegisterUsage performs two primary functions: metering and entitlement.</p> <ul> <li> <p> <i>Entitlement</i>: RegisterUsage allows you to verify that the customer running your paid software is subscribed to your product on AWS Marketplace, enabling you to guard against unauthorized use. Your container image that integrates with RegisterUsage is only required to guard against unauthorized use at container startup, as such a CustomerNotSubscribedException/PlatformNotSupportedException will only be thrown on the initial call to RegisterUsage. Subsequent calls from the same Amazon ECS task instance (e.g. task-id) will not throw a CustomerNotSubscribedException, even if the customer unsubscribes while the Amazon ECS task is still running.</p> </li> <li> <p> <i>Metering</i>: RegisterUsage meters software use per ECS task, per hour, with usage prorated to the second. A minimum of 1 minute of usage applies to tasks that are short lived. For example, if a customer has a 10 node ECS cluster and creates an ECS service configured as a Daemon Set, then ECS will launch a task on all 10 cluster nodes and the customer will be charged: (10 * hourly_rate). Metering for software use is automatically handled by the AWS Marketplace Metering Control Plane -- your software is not required to perform any metering specific actions, other than call RegisterUsage once for metering of software use to commence. The AWS Marketplace Metering Control Plane will also continue to bill customers for running ECS tasks, regardless of the customers subscription state, removing the need for your software to perform entitlement checks at runtime.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -264,7 +315,18 @@ paths:
           description: DisabledApiException
           schema:
             $ref: '#/definitions/DisabledApiException'
-  '/#X-Amz-Target=AWSMPMeteringService.ResolveCustomer':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUsageRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMPMeteringService.RegisterUsage
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -273,21 +335,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSMPMeteringService.ResolveCustomer':
     post:
-      description: 'ResolveCustomer is called by a SaaS application during the registration process. When a buyer visits your website during the registration process, the buyer submits a registration token through their browser. The registration token is resolved through this API to obtain a CustomerIdentifier and product code.'
       operationId: ResolveCustomer
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ResolveCustomerRequest'
-        - enum:
-            - AWSMPMeteringService.ResolveCustomer
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'ResolveCustomer is called by a SaaS application during the registration process. When a buyer visits your website during the registration process, the buyer submits a registration token through their browser. The registration token is resolved through this API to obtain a CustomerIdentifier and product code.'
       responses:
         '200':
           description: Success
@@ -313,22 +364,29 @@ paths:
           description: DisabledApiException
           schema:
             $ref: '#/definitions/DisabledApiException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResolveCustomerRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - AWSMPMeteringService.ResolveCustomer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  BatchMeterUsageRequest:
-    description: 'A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.'
-    properties:
-      ProductCode:
-        $ref: '#/definitions/ProductCode'
-        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
-      UsageRecords:
-        $ref: '#/definitions/UsageRecordList'
-        description: The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
-    required:
-      - UsageRecords
-      - ProductCode
-    type: object
   BatchMeterUsageResult:
-    description: Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
+    type: object
     properties:
       Results:
         $ref: '#/definitions/UsageRecordResultList'
@@ -336,30 +394,40 @@ definitions:
       UnprocessedRecords:
         $ref: '#/definitions/UsageRecordList'
         description: Contains all UsageRecords that were not processed by BatchMeterUsage. This is a list of UsageRecords. You can retry the failed request by making another BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.
+    description: Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
+  BatchMeterUsageRequest:
     type: object
-  Boolean:
-    type: boolean
-  CustomerIdentifier:
-    maxLength: 255
-    minLength: 1
-    type: string
-  CustomerNotEntitledException: {}
-  DisabledApiException: {}
-  DuplicateRequestException: {}
-  ExpiredTokenException: {}
-  InternalServiceErrorException: {}
-  InvalidCustomerIdentifierException: {}
-  InvalidEndpointRegionException: {}
-  InvalidProductCodeException: {}
-  InvalidPublicKeyVersionException: {}
-  InvalidRegionException: {}
-  InvalidTokenException: {}
-  InvalidUsageDimensionException: {}
-  MeterUsageRequest:
+    required:
+      - UsageRecords
+      - ProductCode
     properties:
-      DryRun:
-        $ref: '#/definitions/Boolean'
-        description: 'Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not specified.'
+      UsageRecords:
+        $ref: '#/definitions/UsageRecordList'
+        description: The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
+      ProductCode:
+        $ref: '#/definitions/ProductCode'
+        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
+    description: 'A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.'
+  InternalServiceErrorException: {}
+  InvalidProductCodeException: {}
+  InvalidUsageDimensionException: {}
+  InvalidCustomerIdentifierException: {}
+  TimestampOutOfBoundsException: {}
+  ThrottlingException: {}
+  DisabledApiException: {}
+  MeterUsageResult:
+    type: object
+    properties:
+      MeteringRecordId:
+        $ref: '#/definitions/String'
+        description: Metering record id.
+  MeterUsageRequest:
+    type: object
+    required:
+      - ProductCode
+      - Timestamp
+      - UsageDimension
+    properties:
       ProductCode:
         $ref: '#/definitions/ProductCode'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
@@ -372,44 +440,13 @@ definitions:
       UsageQuantity:
         $ref: '#/definitions/UsageQuantity'
         description: Consumption value for the hour. Defaults to <code>0</code> if not specified.
-    required:
-      - ProductCode
-      - Timestamp
-      - UsageDimension
-    type: object
-  MeterUsageResult:
-    properties:
-      MeteringRecordId:
-        $ref: '#/definitions/String'
-        description: Metering record id.
-    type: object
-  NonEmptyString:
-    pattern: \S+
-    type: string
-  Nonce:
-    maxLength: 255
-    type: string
-  PlatformNotSupportedException: {}
-  ProductCode:
-    maxLength: 255
-    minLength: 1
-    type: string
-  RegisterUsageRequest:
-    properties:
-      Nonce:
-        $ref: '#/definitions/Nonce'
-        description: (Optional) To scope down the registration to a specific running software instance and guard against replay attacks.
-      ProductCode:
-        $ref: '#/definitions/ProductCode'
-        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
-      PublicKeyVersion:
-        $ref: '#/definitions/VersionInteger'
-        description: Public Key Version provided by AWS Marketplace
-    required:
-      - ProductCode
-      - PublicKeyVersion
-    type: object
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not specified.'
+  InvalidEndpointRegionException: {}
+  DuplicateRequestException: {}
   RegisterUsageResult:
+    type: object
     properties:
       PublicKeyRotationTimestamp:
         $ref: '#/definitions/Timestamp'
@@ -417,18 +454,27 @@ definitions:
       Signature:
         $ref: '#/definitions/NonEmptyString'
         description: JWT Token
+  RegisterUsageRequest:
     type: object
-  ResolveCustomerRequest:
-    description: Contains input to the ResolveCustomer operation.
-    properties:
-      RegistrationToken:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.'
     required:
-      - RegistrationToken
-    type: object
+      - ProductCode
+      - PublicKeyVersion
+    properties:
+      ProductCode:
+        $ref: '#/definitions/ProductCode'
+        description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
+      PublicKeyVersion:
+        $ref: '#/definitions/VersionInteger'
+        description: Public Key Version provided by AWS Marketplace
+      Nonce:
+        $ref: '#/definitions/Nonce'
+        description: (Optional) To scope down the registration to a specific running software instance and guard against replay attacks.
+  InvalidRegionException: {}
+  InvalidPublicKeyVersionException: {}
+  PlatformNotSupportedException: {}
+  CustomerNotEntitledException: {}
   ResolveCustomerResult:
-    description: The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
+    type: object
     properties:
       CustomerIdentifier:
         $ref: '#/definitions/CustomerIdentifier'
@@ -436,25 +482,70 @@ definitions:
       ProductCode:
         $ref: '#/definitions/ProductCode'
         description: The product code is returned to confirm that the buyer is registering for your product. Subsequent BatchMeterUsage calls should be made using this product code.
+    description: The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
+  ResolveCustomerRequest:
     type: object
+    required:
+      - RegistrationToken
+    properties:
+      RegistrationToken:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.'
+    description: Contains input to the ResolveCustomer operation.
+  InvalidTokenException: {}
+  ExpiredTokenException: {}
+  UsageRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecord'
+    minItems: 0
+    maxItems: 25
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  UsageRecordResultList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecordResult'
+  Boolean:
+    type: boolean
+  CustomerIdentifier:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Timestamp:
+    type: string
+    format: date-time
+  UsageDimension:
+    type: string
+    minLength: 1
+    maxLength: 255
+  UsageQuantity:
+    type: integer
+    minimum: 0
+    maximum: 2147483647
   String:
     type: string
-  ThrottlingException: {}
-  Timestamp:
-    format: date-time
+  NonEmptyString:
     type: string
-  TimestampOutOfBoundsException: {}
-  UsageDimension:
+    pattern: \S+
+  Nonce:
+    type: string
     maxLength: 255
-    minLength: 1
-    type: string
-  UsageQuantity:
-    maximum: 2147483647
-    minimum: 0
+  VersionInteger:
     type: integer
+    minimum: 1
   UsageRecord:
-    description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
+    type: object
+    required:
+      - Timestamp
+      - CustomerIdentifier
+      - Dimension
     properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: '<p>Timestamp, in UTC, for which the usage is being reported.</p> <p>Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.</p>'
       CustomerIdentifier:
         $ref: '#/definitions/CustomerIdentifier'
         description: The CustomerIdentifier is obtained through the ResolveCustomer operation and represents an individual buyer in your application.
@@ -464,114 +555,23 @@ definitions:
       Quantity:
         $ref: '#/definitions/UsageQuantity'
         description: The quantity of usage consumed by the customer for the given dimension and time. Defaults to <code>0</code> if not specified.
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: '<p>Timestamp, in UTC, for which the usage is being reported.</p> <p>Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.</p>'
-    required:
-      - Timestamp
-      - CustomerIdentifier
-      - Dimension
-    type: object
-  UsageRecordList:
-    items:
-      $ref: '#/definitions/UsageRecord'
-    maxItems: 25
-    minItems: 0
-    type: array
+    description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
+  UsageRecordResultStatus:
+    type: string
+    enum:
+      - Success
+      - CustomerNotSubscribed
+      - DuplicateRecord
   UsageRecordResult:
-    description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.
+    type: object
     properties:
+      UsageRecord:
+        $ref: '#/definitions/UsageRecord'
+        description: The UsageRecord that was part of the BatchMeterUsage request.
       MeteringRecordId:
         $ref: '#/definitions/String'
         description: The MeteringRecordId is a unique identifier for this metering event.
       Status:
         $ref: '#/definitions/UsageRecordResultStatus'
         description: '<p>The UsageRecordResult Status indicates the status of an individual UsageRecord processed by BatchMeterUsage.</p> <ul> <li> <p> <i>Success</i>- The UsageRecord was accepted and honored by BatchMeterUsage.</p> </li> <li> <p> <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is not subscribed to your product. The UsageRecord was not honored. Future UsageRecords for this customer will fail until the customer subscribes to your product.</p> </li> <li> <p> <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.</p> </li> </ul>'
-      UsageRecord:
-        $ref: '#/definitions/UsageRecord'
-        description: The UsageRecord that was part of the BatchMeterUsage request.
-    type: object
-  UsageRecordResultList:
-    items:
-      $ref: '#/definitions/UsageRecordResult'
-    type: array
-  UsageRecordResultStatus:
-    enum:
-      - Success
-      - CustomerNotSubscribed
-      - DuplicateRecord
-    type: string
-  VersionInteger:
-    minimum: 1
-    type: integer
-x-servers:
-  - description: The AWSMarketplace Metering multi-region endpoint
-    url: 'http://metering.marketplace.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWSMarketplace Metering multi-region endpoint
-    url: 'https://metering.marketplace.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWSMarketplace Metering endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://metering.marketplace.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The AWSMarketplace Metering endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://metering.marketplace.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.

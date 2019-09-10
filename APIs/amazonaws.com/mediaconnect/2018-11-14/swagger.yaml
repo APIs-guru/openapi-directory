@@ -1,824 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: mediaconnect.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2018-11-14'
+  x-release: v4
+  title: AWS MediaConnect
+  description: API for AWS Elemental MediaConnect
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: API for AWS Elemental MediaConnect
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: AWS MediaConnect
-  version: '2018-11-14'
+  x-providerName: amazonaws.com
+  x-serviceName: mediaconnect
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediaconnect-2018-11-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediaconnect-2018-11-14.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: mediaconnect
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/mediaconnect/'
+host: mediaconnect.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://mediaconnect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS MediaConnect multi-region endpoint
+  - url: 'https://mediaconnect.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The AWS MediaConnect multi-region endpoint
+  - url: 'http://mediaconnect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://mediaconnect.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
-  '/tags/{resourceArn}':
-    get:
-      description: List all tags on an AWS Elemental MediaConnect resource
-      operationId: ListTagsForResource
-      parameters:
-        - description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags.
-          in: path
-          name: resourceArn
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListTagsForResourceResponse'
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: 'Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
-      operationId: TagResource
-      parameters:
-        - description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags.
-          in: path
-          name: resourceArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              tags:
-                additionalProperties:
-                  $ref: '#/definitions/__string'
-                description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-                type: object
-            required:
-              - tags
-            type: object
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-  '/tags/{resourceArn}#tagKeys':
-    delete:
-      description: Deletes specified tags from a resource.
-      operationId: UntagResource
-      parameters:
-        - description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.
-          in: path
-          name: resourceArn
-          required: true
-          type: string
-        - description: The keys of the tags to be removed.
-          in: query
-          items:
-            type: string
-          name: tagKeys
-          required: true
-          type: array
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /v1/entitlements:
-    get:
-      description: Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
-      operationId: ListEntitlements
-      parameters:
-        - description: 'The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.'
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListEntitlementsResponse'
-        '480':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '481':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /v1/flows:
-    get:
-      description: Displays a list of flows that are associated with this account. This request returns a paginated result.
-      operationId: ListFlows
-      parameters:
-        - description: 'The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListFlowsResponse'
-        '480':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '481':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
-      operationId: CreateFlow
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              availabilityZone:
-                description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
-                type: string
-              entitlements:
-                description: The entitlements that you want to grant on a flow.
-                items:
-                  $ref: '#/definitions/GrantEntitlementRequest'
-                type: array
-              name:
-                description: The name of the flow.
-                type: string
-              outputs:
-                description: The outputs that you want to add to this flow.
-                items:
-                  $ref: '#/definitions/AddOutputRequest'
-                type: array
-              source:
-                description: The settings for the source of the flow.
-                properties:
-                  Decryption:
-                    $ref: '#/definitions/Encryption'
-                    description: The type of encryption that is used on the content ingested from this source.
-                  Description:
-                    $ref: '#/definitions/__string'
-                    description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
-                  EntitlementArn:
-                    $ref: '#/definitions/__string'
-                    description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
-                  IngestPort:
-                    $ref: '#/definitions/__integer'
-                    description: The port that the flow will be listening on for incoming content.
-                  MaxBitrate:
-                    $ref: '#/definitions/__integer'
-                    description: The smoothing max bitrate for RTP and RTP-FEC streams.
-                  MaxLatency:
-                    $ref: '#/definitions/__integer'
-                    description: The maximum latency in milliseconds for Zixi-based streams.
-                  Name:
-                    $ref: '#/definitions/__string'
-                    description: The name of the source.
-                  Protocol:
-                    $ref: '#/definitions/Protocol'
-                    description: The protocol that is used by the source.
-                  StreamId:
-                    $ref: '#/definitions/__string'
-                    description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-                  WhitelistCidr:
-                    $ref: '#/definitions/__string'
-                    description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-                type: object
-            required:
-              - name
-              - source
-            type: object
-      responses:
-        '201':
-          description: Success
-          schema:
-            $ref: '#/definitions/CreateFlowResponse'
-        '480':
-          description: CreateFlow420Exception
-          schema:
-            $ref: '#/definitions/CreateFlow420Exception'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-  '/v1/flows/start/{flowArn}':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Starts a flow.
-      operationId: StartFlow
-      parameters:
-        - description: The ARN of the flow that you want to start.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/StartFlowResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-  '/v1/flows/stop/{flowArn}':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Stops a flow.
-      operationId: StopFlow
-      parameters:
-        - description: The ARN of the flow that you want to stop.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/StopFlowResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-  '/v1/flows/{flowArn}':
-    delete:
-      description: 'Deletes a flow. Before you can delete a flow, you must stop the flow.'
-      operationId: DeleteFlow
-      parameters:
-        - description: The ARN of the flow that you want to delete.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/DeleteFlowResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-    get:
-      description: 'Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.'
-      operationId: DescribeFlow
-      parameters:
-        - description: The ARN of the flow that you want to describe.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeFlowResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/flows/{flowArn}/entitlements':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: Grants entitlements to an existing flow.
-      operationId: GrantFlowEntitlements
-      parameters:
-        - description: The flow that you want to grant entitlements on.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              entitlements:
-                description: The list of entitlements that you want to grant.
-                items:
-                  $ref: '#/definitions/GrantEntitlementRequest'
-                type: array
-            required:
-              - entitlements
-            type: object
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GrantFlowEntitlementsResponse'
-        '480':
-          description: GrantFlowEntitlements420Exception
-          schema:
-            $ref: '#/definitions/GrantFlowEntitlements420Exception'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-  '/v1/flows/{flowArn}/entitlements/{entitlementArn}':
-    delete:
-      description: 'Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.'
-      operationId: RevokeFlowEntitlement
-      parameters:
-        - description: The ARN of the entitlement that you want to revoke.
-          in: path
-          name: entitlementArn
-          required: true
-          type: string
-        - description: The flow that you want to revoke an entitlement from.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/RevokeFlowEntitlementResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: 'You can change an entitlement''s description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.'
-      operationId: UpdateFlowEntitlement
-      parameters:
-        - description: The ARN of the entitlement that you want to update.
-          in: path
-          name: entitlementArn
-          required: true
-          type: string
-        - description: The flow that is associated with the entitlement that you want to update.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              description:
-                description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
-                type: string
-              encryption:
-                description: Information about the encryption of the flow.
-                properties:
-                  Algorithm:
-                    $ref: '#/definitions/Algorithm'
-                    description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
-                  ConstantInitializationVector:
-                    $ref: '#/definitions/__string'
-                    description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
-                  DeviceId:
-                    $ref: '#/definitions/__string'
-                    description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  KeyType:
-                    $ref: '#/definitions/KeyType'
-                    description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
-                  Region:
-                    $ref: '#/definitions/__string'
-                    description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  ResourceId:
-                    $ref: '#/definitions/__string'
-                    description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  RoleArn:
-                    $ref: '#/definitions/__string'
-                    description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-                  SecretArn:
-                    $ref: '#/definitions/__string'
-                    description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
-                  Url:
-                    $ref: '#/definitions/__string'
-                    description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                type: object
-              subscribers:
-                description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
-                items:
-                  $ref: '#/definitions/__string'
-                type: array
-            type: object
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateFlowEntitlementResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '484':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '485':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
   '/v1/flows/{flowArn}/outputs':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: Adds outputs to an existing flow. You can create up to 20 outputs per flow.
       operationId: AddFlowOutputs
-      parameters:
-        - description: The flow that you want to add outputs to.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              outputs:
-                description: A list of outputs that you want to add.
-                items:
-                  $ref: '#/definitions/AddOutputRequest'
-                type: array
-            required:
-              - outputs
-            type: object
+      description: Adds outputs to an existing flow. You can create up to 20 outputs per flow.
       responses:
         '201':
           description: Success
@@ -852,21 +197,462 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to add outputs to.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - outputs
+            properties:
+              outputs:
+                description: A list of outputs that you want to add.
+                type: array
+                items:
+                  $ref: '#/definitions/AddOutputRequest'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/flows:
+    post:
+      operationId: CreateFlow
+      description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFlowResponse'
+        '480':
+          description: CreateFlow420Exception
+          schema:
+            $ref: '#/definitions/CreateFlow420Exception'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - source
+            properties:
+              availabilityZone:
+                description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
+                type: string
+              entitlements:
+                description: The entitlements that you want to grant on a flow.
+                type: array
+                items:
+                  $ref: '#/definitions/GrantEntitlementRequest'
+              name:
+                description: The name of the flow.
+                type: string
+              outputs:
+                description: The outputs that you want to add to this flow.
+                type: array
+                items:
+                  $ref: '#/definitions/AddOutputRequest'
+              source:
+                description: The settings for the source of the flow.
+                type: object
+                properties:
+                  Decryption:
+                    $ref: '#/definitions/Encryption'
+                    description: The type of encryption that is used on the content ingested from this source.
+                  Description:
+                    $ref: '#/definitions/__string'
+                    description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+                  EntitlementArn:
+                    $ref: '#/definitions/__string'
+                    description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
+                  IngestPort:
+                    $ref: '#/definitions/__integer'
+                    description: The port that the flow will be listening on for incoming content.
+                  MaxBitrate:
+                    $ref: '#/definitions/__integer'
+                    description: The smoothing max bitrate for RTP and RTP-FEC streams.
+                  MaxLatency:
+                    $ref: '#/definitions/__integer'
+                    description: The maximum latency in milliseconds for Zixi-based streams.
+                  Name:
+                    $ref: '#/definitions/__string'
+                    description: The name of the source.
+                  Protocol:
+                    $ref: '#/definitions/Protocol'
+                    description: The protocol that is used by the source.
+                  StreamId:
+                    $ref: '#/definitions/__string'
+                    description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                  WhitelistCidr:
+                    $ref: '#/definitions/__string'
+                    description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFlows
+      description: Displays a list of flows that are associated with this account. This request returns a paginated result.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFlowsResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/v1/flows/{flowArn}':
+    delete:
+      operationId: DeleteFlow
+      description: 'Deletes a flow. Before you can delete a flow, you must stop the flow.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFlowResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The ARN of the flow that you want to delete.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeFlow
+      description: 'Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFlowResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The ARN of the flow that you want to describe.
+          type: string
+  '/v1/flows/{flowArn}/entitlements':
+    post:
+      operationId: GrantFlowEntitlements
+      description: Grants entitlements to an existing flow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GrantFlowEntitlementsResponse'
+        '480':
+          description: GrantFlowEntitlements420Exception
+          schema:
+            $ref: '#/definitions/GrantFlowEntitlements420Exception'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to grant entitlements on.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - entitlements
+            properties:
+              entitlements:
+                description: The list of entitlements that you want to grant.
+                type: array
+                items:
+                  $ref: '#/definitions/GrantEntitlementRequest'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /v1/entitlements:
+    get:
+      operationId: ListEntitlements
+      description: Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEntitlementsResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.'
+          type: integer
+          minimum: 1
+          maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: List all tags on an AWS Elemental MediaConnect resource
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
   '/v1/flows/{flowArn}/outputs/{outputArn}':
     delete:
-      description: 'Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.'
       operationId: RemoveFlowOutput
-      parameters:
-        - description: The flow that you want to remove an output from.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-        - description: The ARN of the output that you want to remove.
-          in: path
-          name: outputArn
-          required: true
-          type: string
+      description: 'Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.'
       responses:
         '202':
           description: Success
@@ -896,6 +682,17 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to remove an output from.
+          type: string
+        - name: outputArn
+          in: path
+          required: true
+          description: The ARN of the output that you want to remove.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -905,90 +702,8 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      description: Updates an existing flow output.
       operationId: UpdateFlowOutput
-      parameters:
-        - description: The flow that is associated with the output that you want to update.
-          in: path
-          name: flowArn
-          required: true
-          type: string
-        - description: The ARN of the output that you want to update.
-          in: path
-          name: outputArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              cidrAllowList:
-                description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-                items:
-                  $ref: '#/definitions/__string'
-                type: array
-              description:
-                description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
-                type: string
-              destination:
-                description: The IP address where you want to send the output.
-                type: string
-              encryption:
-                description: Information about the encryption of the flow.
-                properties:
-                  Algorithm:
-                    $ref: '#/definitions/Algorithm'
-                    description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
-                  ConstantInitializationVector:
-                    $ref: '#/definitions/__string'
-                    description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
-                  DeviceId:
-                    $ref: '#/definitions/__string'
-                    description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  KeyType:
-                    $ref: '#/definitions/KeyType'
-                    description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
-                  Region:
-                    $ref: '#/definitions/__string'
-                    description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  ResourceId:
-                    $ref: '#/definitions/__string'
-                    description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                  RoleArn:
-                    $ref: '#/definitions/__string'
-                    description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-                  SecretArn:
-                    $ref: '#/definitions/__string'
-                    description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
-                  Url:
-                    $ref: '#/definitions/__string'
-                    description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                type: object
-              maxLatency:
-                description: The maximum latency in milliseconds for Zixi-based streams.
-                type: integer
-              port:
-                description: The port to use when content is distributed to this output.
-                type: integer
-              protocol:
-                description: The protocol to use for the output.
-                enum:
-                  - zixi-push
-                  - rtp-fec
-                  - rtp
-                  - zixi-pull
-                type: string
-              remoteId:
-                description: The remote ID for the Zixi-pull stream.
-                type: string
-              smoothingLatency:
-                description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
-                type: integer
-              streamId:
-                description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-                type: string
-            type: object
+      description: Updates an existing flow output.
       responses:
         '202':
           description: Success
@@ -1018,36 +733,37 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/v1/flows/{flowArn}/source/{sourceArn}':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: Updates the source of a flow.
-      operationId: UpdateFlowSource
       parameters:
-        - description: The flow that is associated with the source that you want to update.
+        - name: flowArn
           in: path
-          name: flowArn
           required: true
+          description: The flow that is associated with the output that you want to update.
           type: string
-        - description: The ARN of the source that you want to update.
+        - name: outputArn
           in: path
-          name: sourceArn
           required: true
+          description: The ARN of the output that you want to update.
           type: string
-        - in: body
-          name: body
+        - name: body
+          in: body
           required: true
           schema:
+            type: object
             properties:
-              decryption:
+              cidrAllowList:
+                description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              description:
+                description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
+                type: string
+              destination:
+                description: The IP address where you want to send the output.
+                type: string
+              encryption:
                 description: Information about the encryption of the flow.
+                type: object
                 properties:
                   Algorithm:
                     $ref: '#/definitions/Algorithm'
@@ -1076,37 +792,307 @@ paths:
                   Url:
                     $ref: '#/definitions/__string'
                     description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-                type: object
-              description:
-                description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
-                type: string
-              entitlementArn:
-                description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
-                type: string
-              ingestPort:
-                description: The port that the flow will be listening on for incoming content.
-                type: integer
-              maxBitrate:
-                description: The smoothing max bitrate for RTP and RTP-FEC streams.
-                type: integer
               maxLatency:
                 description: The maximum latency in milliseconds for Zixi-based streams.
                 type: integer
+              port:
+                description: The port to use when content is distributed to this output.
+                type: integer
               protocol:
-                description: The protocol that is used by the source.
+                description: The protocol to use for the output.
+                type: string
                 enum:
                   - zixi-push
                   - rtp-fec
                   - rtp
                   - zixi-pull
+              remoteId:
+                description: The remote ID for the Zixi-pull stream.
                 type: string
+              smoothingLatency:
+                description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+                type: integer
               streamId:
                 description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                 type: string
-              whitelistCidr:
-                description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-                type: string
+  '/v1/flows/{flowArn}/entitlements/{entitlementArn}':
+    delete:
+      operationId: RevokeFlowEntitlement
+      description: 'Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/RevokeFlowEntitlementResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: entitlementArn
+          in: path
+          required: true
+          description: The ARN of the entitlement that you want to revoke.
+          type: string
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to revoke an entitlement from.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFlowEntitlement
+      description: 'You can change an entitlement''s description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFlowEntitlementResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: entitlementArn
+          in: path
+          required: true
+          description: The ARN of the entitlement that you want to update.
+          type: string
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that is associated with the entitlement that you want to update.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
             type: object
+            properties:
+              description:
+                description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
+                type: string
+              encryption:
+                description: Information about the encryption of the flow.
+                type: object
+                properties:
+                  Algorithm:
+                    $ref: '#/definitions/Algorithm'
+                    description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
+                  ConstantInitializationVector:
+                    $ref: '#/definitions/__string'
+                    description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
+                  DeviceId:
+                    $ref: '#/definitions/__string'
+                    description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  KeyType:
+                    $ref: '#/definitions/KeyType'
+                    description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+                  Region:
+                    $ref: '#/definitions/__string'
+                    description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  ResourceId:
+                    $ref: '#/definitions/__string'
+                    description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+                  SecretArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+                  Url:
+                    $ref: '#/definitions/__string'
+                    description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+              subscribers:
+                description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+  '/v1/flows/start/{flowArn}':
+    post:
+      operationId: StartFlow
+      description: Starts a flow.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartFlowResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The ARN of the flow that you want to start.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/flows/stop/{flowArn}':
+    post:
+      operationId: StopFlow
+      description: Stops a flow.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopFlowResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The ARN of the flow that you want to stop.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to be removed.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/flows/{flowArn}/source/{sourceArn}':
+    put:
+      operationId: UpdateFlowSource
+      description: Updates the source of a flow.
       responses:
         '202':
           description: Success
@@ -1136,18 +1122,94 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that is associated with the source that you want to update.
+          type: string
+        - name: sourceArn
+          in: path
+          required: true
+          description: The ARN of the source that you want to update.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              decryption:
+                description: Information about the encryption of the flow.
+                type: object
+                properties:
+                  Algorithm:
+                    $ref: '#/definitions/Algorithm'
+                    description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
+                  ConstantInitializationVector:
+                    $ref: '#/definitions/__string'
+                    description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
+                  DeviceId:
+                    $ref: '#/definitions/__string'
+                    description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  KeyType:
+                    $ref: '#/definitions/KeyType'
+                    description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+                  Region:
+                    $ref: '#/definitions/__string'
+                    description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  ResourceId:
+                    $ref: '#/definitions/__string'
+                    description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                  RoleArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+                  SecretArn:
+                    $ref: '#/definitions/__string'
+                    description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+                  Url:
+                    $ref: '#/definitions/__string'
+                    description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+              description:
+                description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+                type: string
+              entitlementArn:
+                description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
+                type: string
+              ingestPort:
+                description: The port that the flow will be listening on for incoming content.
+                type: integer
+              maxBitrate:
+                description: The smoothing max bitrate for RTP and RTP-FEC streams.
+                type: integer
+              maxLatency:
+                description: The maximum latency in milliseconds for Zixi-based streams.
+                type: integer
+              protocol:
+                description: The protocol that is used by the source.
+                type: string
+                enum:
+                  - zixi-push
+                  - rtp-fec
+                  - rtp
+                  - zixi-pull
+              streamId:
+                description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                type: string
+              whitelistCidr:
+                description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AddFlowOutputs420Exception: {}
-  AddFlowOutputsRequest:
-    description: A request to add outputs to the specified flow.
-    properties:
-      Outputs:
-        $ref: '#/definitions/__listOfAddOutputRequest'
-        description: A list of outputs that you want to add.
-    required:
-      - Outputs
-    type: object
   AddFlowOutputsResponse:
+    type: object
     properties:
       FlowArn:
         $ref: '#/definitions/__string'
@@ -1155,9 +1217,10 @@ definitions:
       Outputs:
         $ref: '#/definitions/__listOfOutput'
         description: The details of the newly added outputs.
-    type: object
   AddOutputRequest:
-    description: The output that you want to add to this flow.
+    type: object
+    required:
+      - Protocol
     properties:
       CidrAllowList:
         $ref: '#/definitions/__listOf__string'
@@ -1192,67 +1255,42 @@ definitions:
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-    required:
-      - Protocol
-    type: object
-  Algorithm:
-    enum:
-      - aes128
-      - aes192
-      - aes256
-    type: string
+    description: The output that you want to add to this flow.
+  AddFlowOutputs420Exception: {}
   BadRequestException: {}
-  CreateFlow420Exception: {}
-  CreateFlowRequest:
-    description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
+  InternalServerErrorException: {}
+  ForbiddenException: {}
+  NotFoundException: {}
+  ServiceUnavailableException: {}
+  TooManyRequestsException: {}
+  CreateFlowResponse:
+    type: object
     properties:
-      AvailabilityZone:
+      Flow:
+        $ref: '#/definitions/Flow'
+  GrantEntitlementRequest:
+    type: object
+    required:
+      - Subscribers
+    properties:
+      Description:
         $ref: '#/definitions/__string'
-        description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
-      Entitlements:
-        $ref: '#/definitions/__listOfGrantEntitlementRequest'
-        description: The entitlements that you want to grant on a flow.
+        description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+        description: The type of encryption that will be used on the output that is associated with this entitlement.
       Name:
         $ref: '#/definitions/__string'
-        description: The name of the flow.
-      Outputs:
-        $ref: '#/definitions/__listOfAddOutputRequest'
-        description: The outputs that you want to add to this flow.
-      Source:
-        $ref: '#/definitions/SetSourceRequest'
-    required:
-      - Source
-      - Name
-    type: object
-  CreateFlowResponse:
-    properties:
-      Flow:
-        $ref: '#/definitions/Flow'
-    type: object
-  DeleteFlowRequest:
-    properties: {}
-    type: object
-  DeleteFlowResponse:
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that was deleted.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the flow when the DeleteFlow process begins.
-    type: object
-  DescribeFlowRequest:
-    properties: {}
-    type: object
-  DescribeFlowResponse:
-    properties:
-      Flow:
-        $ref: '#/definitions/Flow'
-      Messages:
-        $ref: '#/definitions/Messages'
-    type: object
+        description: The name of the entitlement. This value must be unique within the current flow.
+      Subscribers:
+        $ref: '#/definitions/__listOf__string'
+        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.
+    description: The entitlements that you want to grant on a flow.
   Encryption:
-    description: Information about the encryption of the flow.
+    type: object
+    required:
+      - Algorithm
+      - RoleArn
     properties:
       Algorithm:
         $ref: '#/definitions/Algorithm'
@@ -1281,101 +1319,37 @@ definitions:
       Url:
         $ref: '#/definitions/__string'
         description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-    required:
-      - Algorithm
-      - RoleArn
+    description: Information about the encryption of the flow.
+  __string:
+    type: string
+  __integer:
+    type: integer
+  Protocol:
+    type: string
+    enum:
+      - zixi-push
+      - rtp-fec
+      - rtp
+      - zixi-pull
+  CreateFlow420Exception: {}
+  DeleteFlowResponse:
     type: object
-  Entitlement:
-    description: The settings for a flow entitlement.
     properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the entitlement.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-        description: The type of encryption that will be used on the output that is associated with this entitlement.
-      EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the entitlement.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the entitlement.
-      Subscribers:
-        $ref: '#/definitions/__listOf__string'
-        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
-    required:
-      - EntitlementArn
-      - Subscribers
-      - Name
-    type: object
-  Flow:
-    description: 'The settings for a flow, including its source, outputs, and entitlements.'
-    properties:
-      AvailabilityZone:
-        $ref: '#/definitions/__string'
-        description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the flow. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
-      EgressIp:
-        $ref: '#/definitions/__string'
-        description: The IP address from which video will be sent to output destinations.
-      Entitlements:
-        $ref: '#/definitions/__listOfEntitlement'
-        description: The entitlements in this flow.
       FlowArn:
         $ref: '#/definitions/__string'
-        description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the flow.
-      Outputs:
-        $ref: '#/definitions/__listOfOutput'
-        description: The outputs in this flow.
-      Source:
-        $ref: '#/definitions/Source'
+        description: The ARN of the flow that was deleted.
       Status:
         $ref: '#/definitions/Status'
-        description: The current status of the flow.
-    required:
-      - Status
-      - Entitlements
-      - Outputs
-      - AvailabilityZone
-      - FlowArn
-      - Source
-      - Name
+        description: The status of the flow when the DeleteFlow process begins.
+  DescribeFlowResponse:
     type: object
-  ForbiddenException: {}
-  GrantEntitlementRequest:
-    description: The entitlements that you want to grant on a flow.
     properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-        description: The type of encryption that will be used on the output that is associated with this entitlement.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the entitlement. This value must be unique within the current flow.
-      Subscribers:
-        $ref: '#/definitions/__listOf__string'
-        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.
-    required:
-      - Subscribers
-    type: object
-  GrantFlowEntitlements420Exception: {}
-  GrantFlowEntitlementsRequest:
-    description: A request to grant entitlements on a flow.
-    properties:
-      Entitlements:
-        $ref: '#/definitions/__listOfGrantEntitlementRequest'
-        description: The list of entitlements that you want to grant.
-    required:
-      - Entitlements
-    type: object
+      Flow:
+        $ref: '#/definitions/Flow'
+      Messages:
+        $ref: '#/definitions/Messages'
   GrantFlowEntitlementsResponse:
+    type: object
     properties:
       Entitlements:
         $ref: '#/definitions/__listOfEntitlement'
@@ -1383,17 +1357,9 @@ definitions:
       FlowArn:
         $ref: '#/definitions/__string'
         description: The ARN of the flow that these entitlements were granted to.
-    type: object
-  InternalServerErrorException: {}
-  KeyType:
-    enum:
-      - speke
-      - static-key
-    type: string
-  ListEntitlementsRequest:
-    properties: {}
-    type: object
+  GrantFlowEntitlements420Exception: {}
   ListEntitlementsResponse:
+    type: object
     properties:
       Entitlements:
         $ref: '#/definitions/__listOfListedEntitlement'
@@ -1401,11 +1367,8 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
-    type: object
-  ListFlowsRequest:
-    properties: {}
-    type: object
   ListFlowsResponse:
+    type: object
     properties:
       Flows:
         $ref: '#/definitions/__listOfListedFlow'
@@ -1413,117 +1376,14 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
-    type: object
-  ListTagsForResourceRequest:
-    properties: {}
-    type: object
   ListTagsForResourceResponse:
+    type: object
     properties:
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-    type: object
-  ListedEntitlement:
-    description: An entitlement that has been granted to you from other AWS accounts.
-    properties:
-      EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the entitlement.
-      EntitlementName:
-        $ref: '#/definitions/__string'
-        description: The name of the entitlement.
-    required:
-      - EntitlementArn
-      - EntitlementName
-    type: object
-  ListedFlow:
-    description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
-    properties:
-      AvailabilityZone:
-        $ref: '#/definitions/__string'
-        description: The Availability Zone that the flow was created in.
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the flow.
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the flow.
-      SourceType:
-        $ref: '#/definitions/SourceType'
-        description: The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
-      Status:
-        $ref: '#/definitions/Status'
-        description: The current status of the flow.
-    required:
-      - Status
-      - Description
-      - SourceType
-      - AvailabilityZone
-      - FlowArn
-      - Name
-    type: object
-  MaxResults:
-    maximum: 1000
-    minimum: 1
-    type: integer
-  Messages:
-    description: Messages that provide the state of the flow.
-    properties:
-      Errors:
-        $ref: '#/definitions/__listOf__string'
-        description: A list of errors that might have been generated from processes on this flow.
-    required:
-      - Errors
-    type: object
-  NotFoundException: {}
-  Output:
-    description: The settings for an output.
-    properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the output.
-      Destination:
-        $ref: '#/definitions/__string'
-        description: The address where you want to send the output.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-        description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
-      EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.
-      MediaLiveInputArn:
-        $ref: '#/definitions/__string'
-        description: The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the output. This value must be unique within the current flow.
-      OutputArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the output.
-      Port:
-        $ref: '#/definitions/__integer'
-        description: The port to use when content is distributed to this output.
-      Transport:
-        $ref: '#/definitions/Transport'
-        description: Attributes related to the transport stream that are used in the output.
-    required:
-      - OutputArn
-      - Name
-    type: object
-  Protocol:
-    enum:
-      - zixi-push
-      - rtp-fec
-      - rtp
-      - zixi-pull
-    type: string
-  RemoveFlowOutputRequest:
-    properties: {}
-    type: object
   RemoveFlowOutputResponse:
+    type: object
     properties:
       FlowArn:
         $ref: '#/definitions/__string'
@@ -1531,11 +1391,8 @@ definitions:
       OutputArn:
         $ref: '#/definitions/__string'
         description: The ARN of the output that was removed.
-    type: object
-  RevokeFlowEntitlementRequest:
-    properties: {}
-    type: object
   RevokeFlowEntitlementResponse:
+    type: object
     properties:
       EntitlementArn:
         $ref: '#/definitions/__string'
@@ -1543,10 +1400,87 @@ definitions:
       FlowArn:
         $ref: '#/definitions/__string'
         description: The ARN of the flow that the entitlement was revoked from.
+  StartFlowResponse:
     type: object
-  ServiceUnavailableException: {}
+    properties:
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow that you started.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the flow when the StartFlow process begins.
+  StopFlowResponse:
+    type: object
+    properties:
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow that you stopped.
+      Status:
+        $ref: '#/definitions/Status'
+        description: The status of the flow when the StopFlow process begins.
+  UpdateFlowEntitlementResponse:
+    type: object
+    properties:
+      Entitlement:
+        $ref: '#/definitions/Entitlement'
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow that this entitlement was granted on.
+  Algorithm:
+    type: string
+    enum:
+      - aes128
+      - aes192
+      - aes256
+  KeyType:
+    type: string
+    enum:
+      - speke
+      - static-key
+  UpdateFlowOutputResponse:
+    type: object
+    properties:
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow that is associated with the updated output.
+      Output:
+        $ref: '#/definitions/Output'
+  UpdateFlowSourceResponse:
+    type: object
+    properties:
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow that you want to update.
+      Source:
+        $ref: '#/definitions/Source'
+        description: The settings for the source of the flow.
+  __listOfAddOutputRequest:
+    type: array
+    items:
+      $ref: '#/definitions/AddOutputRequest'
+  AddFlowOutputsRequest:
+    type: object
+    required:
+      - Outputs
+    properties:
+      Outputs:
+        $ref: '#/definitions/__listOfAddOutputRequest'
+        description: A list of outputs that you want to add.
+    description: A request to add outputs to the specified flow.
+  __listOfOutput:
+    type: array
+    items:
+      $ref: '#/definitions/Output'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  __listOfGrantEntitlementRequest:
+    type: array
+    items:
+      $ref: '#/definitions/GrantEntitlementRequest'
   SetSourceRequest:
-    description: The settings for the source of the flow.
+    type: object
     properties:
       Decryption:
         $ref: '#/definitions/Encryption'
@@ -1578,9 +1512,123 @@ definitions:
       WhitelistCidr:
         $ref: '#/definitions/__string'
         description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-    type: object
-  Source:
     description: The settings for the source of the flow.
+  CreateFlowRequest:
+    type: object
+    required:
+      - Source
+      - Name
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/__string'
+        description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
+      Entitlements:
+        $ref: '#/definitions/__listOfGrantEntitlementRequest'
+        description: The entitlements that you want to grant on a flow.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the flow.
+      Outputs:
+        $ref: '#/definitions/__listOfAddOutputRequest'
+        description: The outputs that you want to add to this flow.
+      Source:
+        $ref: '#/definitions/SetSourceRequest'
+    description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
+  Flow:
+    type: object
+    required:
+      - Status
+      - Entitlements
+      - Outputs
+      - AvailabilityZone
+      - FlowArn
+      - Source
+      - Name
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/__string'
+        description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the flow. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+      EgressIp:
+        $ref: '#/definitions/__string'
+        description: The IP address from which video will be sent to output destinations.
+      Entitlements:
+        $ref: '#/definitions/__listOfEntitlement'
+        description: The entitlements in this flow.
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the flow.
+      Outputs:
+        $ref: '#/definitions/__listOfOutput'
+        description: The outputs in this flow.
+      Source:
+        $ref: '#/definitions/Source'
+      Status:
+        $ref: '#/definitions/Status'
+        description: The current status of the flow.
+    description: 'The settings for a flow, including its source, outputs, and entitlements.'
+  DeleteFlowRequest:
+    type: object
+    properties: {}
+  Status:
+    type: string
+    enum:
+      - STANDBY
+      - ACTIVE
+      - UPDATING
+      - DELETING
+      - STARTING
+      - STOPPING
+      - ERROR
+  DescribeFlowRequest:
+    type: object
+    properties: {}
+  Messages:
+    type: object
+    required:
+      - Errors
+    properties:
+      Errors:
+        $ref: '#/definitions/__listOf__string'
+        description: A list of errors that might have been generated from processes on this flow.
+    description: Messages that provide the state of the flow.
+  Entitlement:
+    type: object
+    required:
+      - EntitlementArn
+      - Subscribers
+      - Name
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the entitlement.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+        description: The type of encryption that will be used on the output that is associated with this entitlement.
+      EntitlementArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the entitlement.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the entitlement.
+      Subscribers:
+        $ref: '#/definitions/__listOf__string'
+        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
+    description: The settings for a flow entitlement.
+  __listOfEntitlement:
+    type: array
+    items:
+      $ref: '#/definitions/Entitlement'
+  Source:
+    type: object
+    required:
+      - SourceArn
+      - Name
     properties:
       Decryption:
         $ref: '#/definitions/Encryption'
@@ -1609,61 +1657,92 @@ definitions:
       WhitelistCidr:
         $ref: '#/definitions/__string'
         description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-    required:
-      - SourceArn
-      - Name
+    description: The settings for the source of the flow.
+  GrantFlowEntitlementsRequest:
     type: object
+    required:
+      - Entitlements
+    properties:
+      Entitlements:
+        $ref: '#/definitions/__listOfGrantEntitlementRequest'
+        description: The list of entitlements that you want to grant.
+    description: A request to grant entitlements on a flow.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ListEntitlementsRequest:
+    type: object
+    properties: {}
+  __listOfListedEntitlement:
+    type: array
+    items:
+      $ref: '#/definitions/ListedEntitlement'
+  ListFlowsRequest:
+    type: object
+    properties: {}
+  __listOfListedFlow:
+    type: array
+    items:
+      $ref: '#/definitions/ListedFlow'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  __mapOf__string:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
+  ListedEntitlement:
+    type: object
+    required:
+      - EntitlementArn
+      - EntitlementName
+    properties:
+      EntitlementArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the entitlement.
+      EntitlementName:
+        $ref: '#/definitions/__string'
+        description: The name of the entitlement.
+    description: An entitlement that has been granted to you from other AWS accounts.
   SourceType:
+    type: string
     enum:
       - OWNED
       - ENTITLED
-    type: string
-  StartFlowRequest:
-    properties: {}
+  ListedFlow:
     type: object
-  StartFlowResponse:
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that you started.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the flow when the StartFlow process begins.
-    type: object
-  Status:
-    enum:
-      - STANDBY
-      - ACTIVE
-      - UPDATING
-      - DELETING
-      - STARTING
-      - STOPPING
-      - ERROR
-    type: string
-  StopFlowRequest:
-    properties: {}
-    type: object
-  StopFlowResponse:
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that you stopped.
-      Status:
-        $ref: '#/definitions/Status'
-        description: The status of the flow when the StopFlow process begins.
-    type: object
-  TagResourceRequest:
-    description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     required:
-      - Tags
-    type: object
-  TooManyRequestsException: {}
+      - Status
+      - Description
+      - SourceType
+      - AvailabilityZone
+      - FlowArn
+      - Name
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/__string'
+        description: The Availability Zone that the flow was created in.
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the flow.
+      FlowArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the flow.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the flow.
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
+      Status:
+        $ref: '#/definitions/Status'
+        description: The current status of the flow.
+    description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
   Transport:
-    description: Attributes related to the transport stream that are used in a source or output.
+    type: object
+    required:
+      - Protocol
     properties:
       CidrAllowList:
         $ref: '#/definitions/__listOf__string'
@@ -1686,14 +1765,67 @@ definitions:
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+    description: Attributes related to the transport stream that are used in a source or output.
+  Output:
+    type: object
     required:
-      - Protocol
+      - OutputArn
+      - Name
+    properties:
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the output.
+      Destination:
+        $ref: '#/definitions/__string'
+        description: The address where you want to send the output.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+        description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+      EntitlementArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.
+      MediaLiveInputArn:
+        $ref: '#/definitions/__string'
+        description: The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the output. This value must be unique within the current flow.
+      OutputArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the output.
+      Port:
+        $ref: '#/definitions/__integer'
+        description: The port to use when content is distributed to this output.
+      Transport:
+        $ref: '#/definitions/Transport'
+        description: Attributes related to the transport stream that are used in the output.
+    description: The settings for an output.
+  RemoveFlowOutputRequest:
     type: object
-  UntagResourceRequest:
     properties: {}
+  RevokeFlowEntitlementRequest:
     type: object
+    properties: {}
+  StartFlowRequest:
+    type: object
+    properties: {}
+  StopFlowRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateEncryption:
-    description: Information about the encryption of the flow.
+    type: object
     properties:
       Algorithm:
         $ref: '#/definitions/Algorithm'
@@ -1722,9 +1854,9 @@ definitions:
       Url:
         $ref: '#/definitions/__string'
         description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-    type: object
+    description: Information about the encryption of the flow.
   UpdateFlowEntitlementRequest:
-    description: The entitlement fields that you want to update.
+    type: object
     properties:
       Description:
         $ref: '#/definitions/__string'
@@ -1735,17 +1867,9 @@ definitions:
       Subscribers:
         $ref: '#/definitions/__listOf__string'
         description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
-    type: object
-  UpdateFlowEntitlementResponse:
-    properties:
-      Entitlement:
-        $ref: '#/definitions/Entitlement'
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that this entitlement was granted on.
-    type: object
+    description: The entitlement fields that you want to update.
   UpdateFlowOutputRequest:
-    description: The fields that you want to update in the output.
+    type: object
     properties:
       CidrAllowList:
         $ref: '#/definitions/__listOf__string'
@@ -1777,17 +1901,9 @@ definitions:
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-    type: object
-  UpdateFlowOutputResponse:
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that is associated with the updated output.
-      Output:
-        $ref: '#/definitions/Output'
-    type: object
+    description: The fields that you want to update in the output.
   UpdateFlowSourceRequest:
-    description: A request to update the source of a flow.
+    type: object
     properties:
       Decryption:
         $ref: '#/definitions/UpdateEncryption'
@@ -1816,120 +1932,4 @@ definitions:
       WhitelistCidr:
         $ref: '#/definitions/__string'
         description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-    type: object
-  UpdateFlowSourceResponse:
-    properties:
-      FlowArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the flow that you want to update.
-      Source:
-        $ref: '#/definitions/Source'
-        description: The settings for the source of the flow.
-    type: object
-  __integer:
-    type: integer
-  __listOfAddOutputRequest:
-    items:
-      $ref: '#/definitions/AddOutputRequest'
-    type: array
-  __listOfEntitlement:
-    items:
-      $ref: '#/definitions/Entitlement'
-    type: array
-  __listOfGrantEntitlementRequest:
-    items:
-      $ref: '#/definitions/GrantEntitlementRequest'
-    type: array
-  __listOfListedEntitlement:
-    items:
-      $ref: '#/definitions/ListedEntitlement'
-    type: array
-  __listOfListedFlow:
-    items:
-      $ref: '#/definitions/ListedFlow'
-    type: array
-  __listOfOutput:
-    items:
-      $ref: '#/definitions/Output'
-    type: array
-  __listOf__string:
-    items:
-      $ref: '#/definitions/__string'
-    type: array
-  __mapOf__string:
-    additionalProperties:
-      $ref: '#/definitions/__string'
-    type: object
-  __string:
-    type: string
-x-servers:
-  - description: The AWS MediaConnect multi-region endpoint
-    url: 'http://mediaconnect.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS MediaConnect multi-region endpoint
-    url: 'https://mediaconnect.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://mediaconnect.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://mediaconnect.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    description: A request to update the source of a flow.

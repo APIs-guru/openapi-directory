@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: macie.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2017-12-19'
+  x-release: v4
+  title: Amazon Macie
+  description: '<fullname>Amazon Macie</fullname> <p>Amazon Macie is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. For more information, see the <a href="https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html">Macie User Guide</a>. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon Macie</fullname> <p>Amazon Macie is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. For more information, see the <a href="https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html">Macie User Guide</a>. </p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Macie
-  version: '2017-12-19'
+  x-providerName: amazonaws.com
+  x-serviceName: macie
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/macie-2017-12-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/macie-2017-12-19.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: macie
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/macie/'
+host: macie.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://macie.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Macie multi-region endpoint
+  - url: 'https://macie.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Macie multi-region endpoint
+  - url: 'http://macie.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Macie endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://macie.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Macie endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=MacieService.AssociateMemberAccount':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: Associates a specified AWS account with Amazon Macie as a member account.
       operationId: AssociateMemberAccount
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateMemberAccountRequest'
-        - enum:
-            - MacieService.AssociateMemberAccount
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Associates a specified AWS account with Amazon Macie as a member account.
       responses:
         '200':
           description: Success
@@ -128,7 +179,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=MacieService.AssociateS3Resources':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateMemberAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.AssociateMemberAccount
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -137,21 +199,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.AssociateS3Resources':
     post:
-      description: 'Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn''t specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. '
       operationId: AssociateS3Resources
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateS3ResourcesRequest'
-        - enum:
-            - MacieService.AssociateS3Resources
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn''t specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. '
       responses:
         '200':
           description: Success
@@ -173,7 +224,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=MacieService.DisassociateMemberAccount':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.AssociateS3Resources
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -182,21 +244,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.DisassociateMemberAccount':
     post:
-      description: Removes the specified member account from Amazon Macie.
       operationId: DisassociateMemberAccount
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateMemberAccountRequest'
-        - enum:
-            - MacieService.DisassociateMemberAccount
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Removes the specified member account from Amazon Macie.
       responses:
         '200':
           description: Success
@@ -208,7 +259,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=MacieService.DisassociateS3Resources':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateMemberAccountRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.DisassociateMemberAccount
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -217,21 +279,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.DisassociateS3Resources':
     post:
-      description: 'Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn''t specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.'
       operationId: DisassociateS3Resources
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateS3ResourcesRequest'
-        - enum:
-            - MacieService.DisassociateS3Resources
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn''t specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.'
       responses:
         '200':
           description: Success
@@ -249,7 +300,18 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=MacieService.ListMemberAccounts':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.DisassociateS3Resources
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -258,31 +320,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.ListMemberAccounts':
     post:
-      description: Lists all Amazon Macie member accounts for the current Amazon Macie master account.
       operationId: ListMemberAccounts
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListMemberAccountsRequest'
-        - description: Pagination limit
-          in: query
-          name: maxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - enum:
-            - MacieService.ListMemberAccounts
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Lists all Amazon Macie member accounts for the current Amazon Macie master account.
       responses:
         '200':
           description: Success
@@ -296,7 +337,28 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
-  '/#X-Amz-Target=MacieService.ListS3Resources':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMemberAccountsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.ListMemberAccounts
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -305,31 +367,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.ListS3Resources':
     post:
-      description: 'Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn''t specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. '
       operationId: ListS3Resources
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListS3ResourcesRequest'
-        - description: Pagination limit
-          in: query
-          name: maxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - enum:
-            - MacieService.ListS3Resources
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn''t specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. '
       responses:
         '200':
           description: Success
@@ -347,7 +388,28 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
-  '/#X-Amz-Target=MacieService.UpdateS3Resources':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListS3ResourcesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.ListS3Resources
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -356,21 +418,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MacieService.UpdateS3Resources':
     post:
-      description: 'Updates the classification types for the specified S3 resources. If memberAccountId isn''t specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. '
       operationId: UpdateS3Resources
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateS3ResourcesRequest'
-        - enum:
-            - MacieService.UpdateS3Resources
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Updates the classification types for the specified S3 resources. If memberAccountId isn''t specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. '
       responses:
         '200':
           description: Success
@@ -388,27 +439,73 @@ paths:
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateS3ResourcesRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - MacieService.UpdateS3Resources
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSAccountId:
-    pattern: '[0-9]{12}'
-    type: string
-  AccessDeniedException:
-    description: You do not have required permissions to access the requested resource.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-    type: object
   AssociateMemberAccountRequest:
+    type: object
+    required:
+      - memberAccountId
     properties:
       memberAccountId:
         $ref: '#/definitions/AWSAccountId'
         description: The ID of the AWS account that you want to associate with Amazon Macie as a member account.
-    required:
-      - memberAccountId
+  InvalidInputException:
     type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+      fieldName:
+        $ref: '#/definitions/FieldName'
+    description: 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter. '
+  LimitExceededException:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+    description: 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded. '
+  InternalException:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+    description: Internal server error.
+  AssociateS3ResourcesResult:
+    type: object
+    properties:
+      failedS3Resources:
+        $ref: '#/definitions/FailedS3Resources'
+        description: 'S3 resources that couldn''t be associated with Amazon Macie. An error code and an error message are provided for each failed item. '
   AssociateS3ResourcesRequest:
+    type: object
+    required:
+      - s3Resources
     properties:
       memberAccountId:
         $ref: '#/definitions/AWSAccountId'
@@ -416,132 +513,41 @@ definitions:
       s3Resources:
         $ref: '#/definitions/S3ResourcesClassification'
         description: 'The S3 resources that you want to associate with Amazon Macie for monitoring and data classification. '
-    required:
-      - s3Resources
+  AccessDeniedException:
     type: object
-  AssociateS3ResourcesResult:
     properties:
-      failedS3Resources:
-        $ref: '#/definitions/FailedS3Resources'
-        description: 'S3 resources that couldn''t be associated with Amazon Macie. An error code and an error message are provided for each failed item. '
-    type: object
-  BucketName:
-    maxLength: 500
-    type: string
-  ClassificationType:
-    description: 'The classification type that Amazon Macie applies to the associated S3 resources. '
-    properties:
-      continuous:
-        $ref: '#/definitions/S3ContinuousClassificationType'
-        description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
-      oneTime:
-        $ref: '#/definitions/S3OneTimeClassificationType'
-        description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
-    required:
-      - oneTime
-      - continuous
-    type: object
-  ClassificationTypeUpdate:
-    description: 'The classification type that Amazon Macie applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. '
-    properties:
-      continuous:
-        $ref: '#/definitions/S3ContinuousClassificationType'
-        description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
-      oneTime:
-        $ref: '#/definitions/S3OneTimeClassificationType'
-        description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
-    type: object
-  DisassociateMemberAccountRequest:
-    properties:
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: The ID of the member account that you want to remove from Amazon Macie.
-    required:
-      - memberAccountId
-    type: object
-  DisassociateS3ResourcesRequest:
-    properties:
-      associatedS3Resources:
-        $ref: '#/definitions/S3Resources'
-        description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie. '
-      memberAccountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: 'The ID of the Amazon Macie member account whose resources you want to remove from being monitored by Amazon Macie. '
-    required:
-      - associatedS3Resources
-    type: object
-  DisassociateS3ResourcesResult:
-    properties:
-      failedS3Resources:
-        $ref: '#/definitions/FailedS3Resources'
-        description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie. An error code and an error message are provided for each failed item. '
-    type: object
-  ErrorCode:
-    description: Error code for the exception
-    maxLength: 10
-    type: string
-  ExceptionMessage:
-    maxLength: 10000
-    type: string
-  FailedS3Resource:
-    description: Includes details about the failed S3 resources.
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The status code of a failed item.
-      errorMessage:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message of a failed item.
-      failedItem:
-        $ref: '#/definitions/S3Resource'
-        description: The failed S3 resources.
-    type: object
-  FailedS3Resources:
-    items:
-      $ref: '#/definitions/FailedS3Resource'
-    type: array
-  FieldName:
-    description: Field that has invalid input
-    maxLength: 1000
-    type: string
-  InternalException:
-    description: Internal server error.
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    type: object
-  InvalidInputException:
-    description: 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter. '
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
-      fieldName:
-        $ref: '#/definitions/FieldName'
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    type: object
-  LimitExceededException:
-    description: 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error code describes the limit exceeded. '
-    properties:
-      errorCode:
-        $ref: '#/definitions/ErrorCode'
       message:
         $ref: '#/definitions/ExceptionMessage'
       resourceType:
         $ref: '#/definitions/ResourceType'
+    description: You do not have required permissions to access the requested resource.
+  DisassociateMemberAccountRequest:
     type: object
-  ListMemberAccountsRequest:
+    required:
+      - memberAccountId
     properties:
-      maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: The ID of the member account that you want to remove from Amazon Macie.
+  DisassociateS3ResourcesResult:
     type: object
+    properties:
+      failedS3Resources:
+        $ref: '#/definitions/FailedS3Resources'
+        description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie. An error code and an error message are provided for each failed item. '
+  DisassociateS3ResourcesRequest:
+    type: object
+    required:
+      - associatedS3Resources
+    properties:
+      memberAccountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: 'The ID of the Amazon Macie member account whose resources you want to remove from being monitored by Amazon Macie. '
+      associatedS3Resources:
+        $ref: '#/definitions/S3Resources'
+        description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie. '
   ListMemberAccountsResult:
+    type: object
     properties:
       memberAccounts:
         $ref: '#/definitions/MemberAccounts'
@@ -549,118 +555,46 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+  ListMemberAccountsRequest:
     type: object
-  ListS3ResourcesRequest:
     properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+  ListS3ResourcesResult:
+    type: object
+    properties:
+      s3Resources:
+        $ref: '#/definitions/S3ResourcesClassification'
+        description: A list of the associated S3 resources returned by the action.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+  ListS3ResourcesRequest:
+    type: object
+    properties:
       memberAccountId:
         $ref: '#/definitions/AWSAccountId'
         description: 'The Amazon Macie member account ID whose associated S3 resources you want to list. '
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+  UpdateS3ResourcesResult:
     type: object
-  ListS3ResourcesResult:
     properties:
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
-      s3Resources:
-        $ref: '#/definitions/S3ResourcesClassification'
-        description: A list of the associated S3 resources returned by the action.
-    type: object
-  MaxResults:
-    maximum: 250
-    type: integer
-  MemberAccount:
-    description: Contains information about the Amazon Macie member account.
-    properties:
-      accountId:
-        $ref: '#/definitions/AWSAccountId'
-        description: The AWS account ID of the Amazon Macie member account.
-    type: object
-  MemberAccounts:
-    items:
-      $ref: '#/definitions/MemberAccount'
-    type: array
-  NextToken:
-    maxLength: 500
-    type: string
-  Prefix:
-    maxLength: 10000
-    type: string
-  ResourceType:
-    description: Resource type that caused the exception
-    maxLength: 1000
-    type: string
-  S3ContinuousClassificationType:
-    enum:
-      - FULL
-    type: string
-  S3OneTimeClassificationType:
-    enum:
-      - FULL
-      - NONE
-    type: string
-  S3Resource:
-    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the S3 bucket.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: 'The prefix of the S3 bucket. '
-    required:
-      - bucketName
-    type: object
-  S3ResourceClassification:
-    description: 'The S3 resources that you want to associate with Amazon Macie for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. '
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the S3 bucket that you want to associate with Amazon Macie.
-      classificationType:
-        $ref: '#/definitions/ClassificationType'
-        description: 'The classification type that you want to specify for the resource associated with Amazon Macie. '
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix of the S3 bucket that you want to associate with Amazon Macie.
-    required:
-      - bucketName
-      - classificationType
-    type: object
-  S3ResourceClassificationUpdate:
-    description: 'The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. '
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the S3 bucket whose classification types you want to update.
-      classificationTypeUpdate:
-        $ref: '#/definitions/ClassificationTypeUpdate'
-        description: 'The classification type that you want to update for the resource associated with Amazon Macie. '
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: The prefix of the S3 bucket whose classification types you want to update.
-    required:
-      - bucketName
-      - classificationTypeUpdate
-    type: object
-  S3Resources:
-    items:
-      $ref: '#/definitions/S3Resource'
-    type: array
-  S3ResourcesClassification:
-    items:
-      $ref: '#/definitions/S3ResourceClassification'
-    type: array
-  S3ResourcesClassificationUpdate:
-    items:
-      $ref: '#/definitions/S3ResourceClassificationUpdate'
-    type: array
+      failedS3Resources:
+        $ref: '#/definitions/FailedS3Resources'
+        description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '
   UpdateS3ResourcesRequest:
+    type: object
+    required:
+      - s3ResourcesUpdate
     properties:
       memberAccountId:
         $ref: '#/definitions/AWSAccountId'
@@ -668,83 +602,149 @@ definitions:
       s3ResourcesUpdate:
         $ref: '#/definitions/S3ResourcesClassificationUpdate'
         description: The S3 resources whose classification types you want to update.
+  AWSAccountId:
+    type: string
+    pattern: '[0-9]{12}'
+  ExceptionMessage:
+    type: string
+    maxLength: 10000
+  ResourceType:
+    type: string
+    description: Resource type that caused the exception
+    maxLength: 1000
+  S3ResourcesClassification:
+    type: array
+    items:
+      $ref: '#/definitions/S3ResourceClassification'
+  FailedS3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/FailedS3Resource'
+  BucketName:
+    type: string
+    maxLength: 500
+  S3OneTimeClassificationType:
+    type: string
+    enum:
+      - FULL
+      - NONE
+  S3ContinuousClassificationType:
+    type: string
+    enum:
+      - FULL
+  ClassificationType:
+    type: object
     required:
-      - s3ResourcesUpdate
-    type: object
-  UpdateS3ResourcesResult:
+      - oneTime
+      - continuous
     properties:
-      failedS3Resources:
-        $ref: '#/definitions/FailedS3Resources'
-        description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '
+      oneTime:
+        $ref: '#/definitions/S3OneTimeClassificationType'
+        description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
+      continuous:
+        $ref: '#/definitions/S3ContinuousClassificationType'
+        description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
+    description: 'The classification type that Amazon Macie applies to the associated S3 resources. '
+  ClassificationTypeUpdate:
     type: object
-x-servers:
-  - description: The Amazon Macie multi-region endpoint
-    url: 'http://macie.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Macie multi-region endpoint
-    url: 'https://macie.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Macie endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://macie.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Macie endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://macie.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    properties:
+      oneTime:
+        $ref: '#/definitions/S3OneTimeClassificationType'
+        description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
+      continuous:
+        $ref: '#/definitions/S3ContinuousClassificationType'
+        description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
+    description: 'The classification type that Amazon Macie applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. '
+  S3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/S3Resource'
+  ErrorCode:
+    type: string
+    description: Error code for the exception
+    maxLength: 10
+  S3Resource:
+    type: object
+    required:
+      - bucketName
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the S3 bucket.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: 'The prefix of the S3 bucket. '
+    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
+  FailedS3Resource:
+    type: object
+    properties:
+      failedItem:
+        $ref: '#/definitions/S3Resource'
+        description: The failed S3 resources.
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The status code of a failed item.
+      errorMessage:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The error message of a failed item.
+    description: Includes details about the failed S3 resources.
+  FieldName:
+    type: string
+    description: Field that has invalid input
+    maxLength: 1000
+  NextToken:
+    type: string
+    maxLength: 500
+  MaxResults:
+    type: integer
+    maximum: 250
+  MemberAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/MemberAccount'
+  MemberAccount:
+    type: object
+    properties:
+      accountId:
+        $ref: '#/definitions/AWSAccountId'
+        description: The AWS account ID of the Amazon Macie member account.
+    description: Contains information about the Amazon Macie member account.
+  Prefix:
+    type: string
+    maxLength: 10000
+  S3ResourceClassification:
+    type: object
+    required:
+      - bucketName
+      - classificationType
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the S3 bucket that you want to associate with Amazon Macie.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix of the S3 bucket that you want to associate with Amazon Macie.
+      classificationType:
+        $ref: '#/definitions/ClassificationType'
+        description: 'The classification type that you want to specify for the resource associated with Amazon Macie. '
+    description: 'The S3 resources that you want to associate with Amazon Macie for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. '
+  S3ResourceClassificationUpdate:
+    type: object
+    required:
+      - bucketName
+      - classificationTypeUpdate
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the S3 bucket whose classification types you want to update.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix of the S3 bucket whose classification types you want to update.
+      classificationTypeUpdate:
+        $ref: '#/definitions/ClassificationTypeUpdate'
+        description: 'The classification type that you want to update for the resource associated with Amazon Macie. '
+    description: 'The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. '
+  S3ResourcesClassificationUpdate:
+    type: array
+    items:
+      $ref: '#/definitions/S3ResourceClassificationUpdate'

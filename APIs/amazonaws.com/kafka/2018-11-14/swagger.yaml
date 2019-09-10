@@ -1,321 +1,175 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: kafka.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
-  contact:
-    email: mike.ralphson@gmail.com
-    name: Mike Ralphson
-    url: 'https://github.com/mermade/aws2openapi'
-    x-twitter: PermittedSoc
+  version: '2018-11-14'
+  x-release: v4
+  title: Managed Streaming for Kafka
   description: |2-
 
                    <p>The operations for managing an Amazon MSK cluster.</p>
                 
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Managed Streaming for Kafka
-  version: '2018-11-14'
+  x-providerName: amazonaws.com
+  x-serviceName: kafka
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kafka-2018-11-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kafka-2018-11-14.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: kafka
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/kafka/'
+host: kafka.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://kafka.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Kafka multi-region endpoint
+  - url: 'https://kafka.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Kafka multi-region endpoint
+  - url: 'http://kafka.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Kafka endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://kafka.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Kafka endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   /v1/clusters:
-    get:
-      description: |2-
-
-                    <p>Returns a list of all the MSK clusters in the current Region.</p>
-                 
-      operationId: ListClusters
-      parameters:
-        - description: |2-
-
-                        <p>Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.</p>
-                     
-          in: query
-          name: clusterNameFilter
-          required: false
-          type: string
-        - description: |2-
-
-                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
-                     
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: |2-
-
-                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
-                        To get the next batch, provide this token in your next request.</p>
-                     
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListClustersResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
+      operationId: CreateCluster
       description: |2-
 
                     <p>Creates a new MSK cluster.</p>
                  
-      operationId: CreateCluster
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              brokerNodeGroupInfo:
-                description: |2-
-
-                              <p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>
-                           
-                properties:
-                  BrokerAZDistribution:
-                    $ref: '#/definitions/BrokerAZDistribution'
-                    description: |2-
-
-                                  <p>The distribution of broker nodes across Availability Zones.</p>
-                               
-                  ClientSubnets:
-                    $ref: '#/definitions/__listOf__string'
-                    description: |2-
-
-                                  <p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>
-                               
-                  InstanceType:
-                    $ref: '#/definitions/__stringMin5Max32'
-                    description: |2-
-
-                                  <p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
-                      kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>
-                               
-                  SecurityGroups:
-                    $ref: '#/definitions/__listOf__string'
-                    description: |2-
-
-                                  <p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>
-                               
-                  StorageInfo:
-                    $ref: '#/definitions/StorageInfo'
-                    description: |2-
-
-                                  <p>Contains information about storage volumes attached to MSK broker nodes.</p>
-                               
-                type: object
-              clientAuthentication:
-                description: |2-
-
-                              <p>Includes all client authentication information.</p>
-                           
-                properties:
-                  Tls:
-                    $ref: '#/definitions/Tls'
-                    description: |2-
-
-                                  <p>Details for ClientAuthentication using TLS.</p>
-                               
-                type: object
-              clusterName:
-                description: |2-
-
-                              <p>The name of the cluster.</p>
-                           
-                maxLength: 64
-                minLength: 1
-                type: string
-              configurationInfo:
-                description: |2-
-
-                              <p>Specifies the configuration to use for the brokers.</p>
-                           
-                properties:
-                  Arn:
-                    $ref: '#/definitions/__string'
-                    description: |2-
-
-                                  <p>ARN of the configuration to use.</p>
-                               
-                  Revision:
-                    $ref: '#/definitions/__long'
-                    description: |2-
-
-                                  <p>The revision of the configuration to use.</p>
-                               
-                type: object
-              encryptionInfo:
-                description: |2-
-
-                              <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
-                           
-                properties:
-                  EncryptionAtRest:
-                    $ref: '#/definitions/EncryptionAtRest'
-                    description: |2-
-
-                                  <p>The data-volume encryption details.</p>
-                               
-                  EncryptionInTransit:
-                    $ref: '#/definitions/EncryptionInTransit'
-                    description: |2-
-
-                                  <p>The details for encryption in transit.</p>
-                               
-                type: object
-              enhancedMonitoring:
-                description: |2-
-
-                              <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
-                           
-                enum:
-                  - DEFAULT
-                  - PER_BROKER
-                  - PER_TOPIC_PER_BROKER
-                type: string
-              kafkaVersion:
-                description: |2-
-
-                              <p>The version of Apache Kafka.</p>
-                           
-                maxLength: 128
-                minLength: 1
-                type: string
-              numberOfBrokerNodes:
-                description: |2-
-
-                              <p>The number of broker nodes in the cluster.</p>
-                           
-                maximum: 15
-                minimum: 1
-                type: integer
-              tags:
-                additionalProperties:
-                  $ref: '#/definitions/__string'
-                description: |2-
-
-                              <p>Create tags when creating the cluster.</p>
-                           
-                type: object
-            required:
-              - brokerNodeGroupInfo
-              - clusterName
-              - configurationInfo
-              - kafkaVersion
-              - numberOfBrokerNodes
-            type: object
       responses:
         '200':
           description: Success
@@ -349,182 +203,84 @@ paths:
           description: ConflictException
           schema:
             $ref: '#/definitions/ConflictException'
-  '/v1/clusters/{clusterArn}':
-    delete:
-      description: |2-
-
-                    <p>Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.</p>
-                 
-      operationId: DeleteCluster
       parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-        - description: |2-
-
-                        <p>The current version of the MSK cluster.</p>
-                     
-          in: query
-          name: currentVersion
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DeleteClusterResponse'
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    get:
-      description: |2-
-
-                    <p>Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.</p>
-                 
-      operationId: DescribeCluster
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeClusterResponse'
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '484':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/clusters/{clusterArn}/bootstrap-brokers':
-    get:
-      description: |2-
-
-                    <p>A list of brokers that a client application can use to bootstrap.</p>
-                 
-      operationId: GetBootstrapBrokers
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetBootstrapBrokersResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ConflictException
-          schema:
-            $ref: '#/definitions/ConflictException'
-        '484':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/clusters/{clusterArn}/configuration':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: |2-
-
-                    <p>Updates the cluster with the configuration that is specified in the request body.</p>
-                 
-      operationId: UpdateClusterConfiguration
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-        - in: body
-          name: body
+        - name: body
+          in: body
           required: true
           schema:
+            type: object
+            required:
+              - brokerNodeGroupInfo
+              - clusterName
+              - configurationInfo
+              - kafkaVersion
+              - numberOfBrokerNodes
             properties:
+              brokerNodeGroupInfo:
+                description: |2-
+
+                              <p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>
+                           
+                type: object
+                properties:
+                  BrokerAZDistribution:
+                    $ref: '#/definitions/BrokerAZDistribution'
+                    description: |2-
+
+                                  <p>The distribution of broker nodes across Availability Zones.</p>
+                               
+                  ClientSubnets:
+                    $ref: '#/definitions/__listOf__string'
+                    description: |2-
+
+                                  <p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>
+                               
+                  InstanceType:
+                    $ref: '#/definitions/__stringMin5Max32'
+                    description: |2-
+
+                                  <p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+                      kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>
+                               
+                  SecurityGroups:
+                    $ref: '#/definitions/__listOf__string'
+                    description: |2-
+
+                                  <p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>
+                               
+                  StorageInfo:
+                    $ref: '#/definitions/StorageInfo'
+                    description: |2-
+
+                                  <p>Contains information about storage volumes attached to MSK broker nodes.</p>
+                               
+              clientAuthentication:
+                description: |2-
+
+                              <p>Includes all client authentication information.</p>
+                           
+                type: object
+                properties:
+                  Tls:
+                    $ref: '#/definitions/Tls'
+                    description: |2-
+
+                                  <p>Details for ClientAuthentication using TLS.</p>
+                               
+              clusterName:
+                description: |2-
+
+                              <p>The name of the cluster.</p>
+                           
+                type: string
+                minLength: 1
+                maxLength: 64
               configurationInfo:
                 description: |2-
 
                               <p>Specifies the configuration to use for the brokers.</p>
                            
+                type: object
                 properties:
                   Arn:
                     $ref: '#/definitions/__string'
@@ -538,380 +294,139 @@ paths:
 
                                   <p>The revision of the configuration to use.</p>
                                
+              encryptionInfo:
+                description: |2-
+
+                              <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
+                           
                 type: object
-              currentVersion:
+                properties:
+                  EncryptionAtRest:
+                    $ref: '#/definitions/EncryptionAtRest'
+                    description: |2-
+
+                                  <p>The data-volume encryption details.</p>
+                               
+                  EncryptionInTransit:
+                    $ref: '#/definitions/EncryptionInTransit'
+                    description: |2-
+
+                                  <p>The details for encryption in transit.</p>
+                               
+              enhancedMonitoring:
                 description: |2-
 
-                              <p>The version of the cluster that needs to be updated.</p>
+                              <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
                            
                 type: string
-            required:
-              - configurationInfo
-              - currentVersion
-            type: object
+                enum:
+                  - DEFAULT
+                  - PER_BROKER
+                  - PER_TOPIC_PER_BROKER
+              kafkaVersion:
+                description: |2-
+
+                              <p>The version of Apache Kafka.</p>
+                           
+                type: string
+                minLength: 1
+                maxLength: 128
+              numberOfBrokerNodes:
+                description: |2-
+
+                              <p>The number of broker nodes in the cluster.</p>
+                           
+                type: integer
+                minimum: 1
+                maximum: 15
+              tags:
+                description: |2-
+
+                              <p>Create tags when creating the cluster.</p>
+                           
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListClusters
+      description: |2-
+
+                    <p>Returns a list of all the MSK clusters in the current Region.</p>
+                 
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/UpdateClusterConfigurationResponse'
+            $ref: '#/definitions/ListClustersResponse'
         '480':
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
         '481':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
         '483':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-  '/v1/clusters/{clusterArn}/nodes':
-    get:
-      description: |2-
-
-                    <p>Returns a list of the broker nodes in the cluster.</p>
-                 
-      operationId: ListNodes
       parameters:
-        - description: |2-
+        - name: clusterNameFilter
+          in: query
+          required: false
+          description: |2-
 
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                        <p>Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.</p>
                      
-          in: path
-          name: clusterArn
-          required: true
           type: string
-        - description: |2-
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
 
                         <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
                      
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          required: false
           type: integer
-        - description: |2-
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
 
                         <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
                         To get the next batch, provide this token in your next request.</p>
                      
+          type: string
+        - name: MaxResults
+          type: string
           in: query
-          name: nextToken
+          description: Pagination limit
           required: false
+        - name: NextToken
           type: string
-        - description: Pagination limit
           in: query
-          name: MaxResults
+          description: Pagination token
           required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListNodesResponse'
-        '480':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/clusters/{clusterArn}/nodes/storage':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: |2-
-
-                    <p>Updates the EBS storage associated with MSK brokers.</p>
-                 
-      operationId: UpdateBrokerStorage
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              currentVersion:
-                description: |2-
-
-                              <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
-                           
-                type: string
-              targetBrokerEBSVolumeInfo:
-                description: |2-
-
-                              <p>Describes the target volume size and the ID of the broker to apply the update to.</p>
-                           
-                items:
-                  $ref: '#/definitions/BrokerEBSVolumeInfo'
-                type: array
-            required:
-              - currentVersion
-              - targetBrokerEBSVolumeInfo
-            type: object
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateBrokerStorageResponse'
-        '480':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '484':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-  '/v1/clusters/{clusterArn}/operations':
-    get:
-      description: |2-
-
-                    <p>Returns a list of all the operations that have been performed on the specified MSK cluster.</p>
-                 
-      operationId: ListClusterOperations
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
-                     
-          in: path
-          name: clusterArn
-          required: true
-          type: string
-        - description: |2-
-
-                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
-                     
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: |2-
-
-                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
-                        To get the next batch, provide this token in your next request.</p>
-                     
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListClusterOperationsResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /v1/configurations:
-    get:
-      description: |2-
-
-                    <p>Returns a list of all the MSK configurations in this Region.</p>
-                 
-      operationId: ListConfigurations
-      parameters:
-        - description: |2-
-
-                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
-                     
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: |2-
-
-                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
-                        To get the next batch, provide this token in your next request.</p>
-                     
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListConfigurationsResponse'
-        '480':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '481':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '484':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
+      operationId: CreateConfiguration
       description: |2-
 
                     <p>Creates a new MSK configuration.</p>
                  
-      operationId: CreateConfiguration
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              description:
-                description: |2-
-
-                              <p>The description of the configuration.</p>
-                           
-                type: string
-              kafkaVersions:
-                description: |2-
-
-                              <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
-                           
-                items:
-                  $ref: '#/definitions/__string'
-                type: array
-              name:
-                description: |2-
-
-                              <p>The name of the configuration.</p>
-                           
-                type: string
-              serverProperties:
-                description: |2-
-
-                              <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
-                                 When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
-                           
-                type: string
-            required:
-              - kafkaVersions
-              - name
-              - serverProperties
-            type: object
       responses:
         '200':
           description: Success
@@ -945,22 +460,262 @@ paths:
           description: ConflictException
           schema:
             $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - kafkaVersions
+              - name
+              - serverProperties
+            properties:
+              description:
+                description: |2-
+
+                              <p>The description of the configuration.</p>
+                           
+                type: string
+              kafkaVersions:
+                description: |2-
+
+                              <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
+                           
+                type: array
+                items:
+                  $ref: '#/definitions/__string'
+              name:
+                description: |2-
+
+                              <p>The name of the configuration.</p>
+                           
+                type: string
+              serverProperties:
+                description: |2-
+
+                              <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+                                 When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
+                           
+                type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfigurations
+      description: |2-
+
+                    <p>Returns a list of all the MSK configurations in this Region.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigurationsResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  '/v1/clusters/{clusterArn}':
+    delete:
+      operationId: DeleteCluster
+      description: |2-
+
+                    <p>Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteClusterResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: currentVersion
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The current version of the MSK cluster.</p>
+                     
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeCluster
+      description: |2-
+
+                    <p>Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClusterResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+  '/v1/operations/{clusterOperationArn}':
+    get:
+      operationId: DescribeClusterOperation
+      description: |2-
+
+                    <p>Returns a description of the cluster operation specified by the ARN.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClusterOperationResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterOperationArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>
+                     
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/configurations/{arn}':
     get:
+      operationId: DescribeConfiguration
       description: |2-
 
                     <p>Returns a description of this MSK configuration.</p>
                  
-      operationId: DescribeConfiguration
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
-                     
-          in: path
-          name: arn
-          required: true
-          type: string
       responses:
         '200':
           description: Success
@@ -990,88 +745,15 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/configurations/{arn}/revisions':
-    get:
-      description: |2-
-
-                    <p>Returns a list of all the MSK configurations in this Region.</p>
-                 
-      operationId: ListConfigurationRevisions
       parameters:
-        - description: |2-
+        - name: arn
+          in: path
+          required: true
+          description: |2-
 
                         <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
                      
-          in: path
-          name: arn
-          required: true
           type: string
-        - description: |2-
-
-                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
-                     
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          required: false
-          type: integer
-        - description: |2-
-
-                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
-                        To get the next batch, provide this token in your next request.</p>
-                     
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListConfigurationRevisionsResponse'
-        '480':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '481':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '482':
-          description: InternalServerErrorException
-          schema:
-            $ref: '#/definitions/InternalServerErrorException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1082,28 +764,11 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/configurations/{arn}/revisions/{revision}':
     get:
+      operationId: DescribeConfigurationRevision
       description: |2-
 
                     <p>Returns a description of this revision of the configuration.</p>
                  
-      operationId: DescribeConfigurationRevision
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
-                     
-          in: path
-          name: arn
-          required: true
-          type: string
-        - description: |2-
-
-                        <p>A string that uniquely identifies a revision of an MSK configuration.</p>
-                     
-          in: path
-          name: revision
-          required: true
-          type: integer
       responses:
         '200':
           description: Success
@@ -1133,6 +798,23 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
+                     
+          type: string
+        - name: revision
+          in: path
+          required: true
+          description: |2-
+
+                        <p>A string that uniquely identifies a revision of an MSK configuration.</p>
+                     
+          type: integer
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1141,27 +823,223 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/v1/operations/{clusterOperationArn}':
+  '/v1/clusters/{clusterArn}/bootstrap-brokers':
     get:
+      operationId: GetBootstrapBrokers
       description: |2-
 
-                    <p>Returns a description of the cluster operation specified by the ARN.</p>
+                    <p>A list of brokers that a client application can use to bootstrap.</p>
                  
-      operationId: DescribeClusterOperation
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>
-                     
-          in: path
-          name: clusterOperationArn
-          required: true
-          type: string
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/DescribeClusterOperationResponse'
+            $ref: '#/definitions/GetBootstrapBrokersResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/operations':
+    get:
+      operationId: ListClusterOperations
+      description: |2-
+
+                    <p>Returns a list of all the operations that have been performed on the specified MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListClusterOperationsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/configurations/{arn}/revisions':
+    get:
+      operationId: ListConfigurationRevisions
+      description: |2-
+
+                    <p>Returns a list of all the MSK configurations in this Region.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigurationRevisionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
+                     
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/nodes':
+    get:
+      operationId: ListNodes
+      description: |2-
+
+                    <p>Returns a list of the broker nodes in the cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListNodesResponse'
         '480':
           description: NotFoundException
           schema:
@@ -1171,17 +1049,51 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestException'
         '482':
-          description: UnauthorizedException
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '483':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
-        '484':
+        '483':
           description: ForbiddenException
           schema:
             $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          type: integer
+          minimum: 1
+          maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          type: string
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1192,20 +1104,11 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/tags/{resourceArn}':
     get:
+      operationId: ListTagsForResource
       description: |2-
 
                     <p>Returns a list of the tags associated with the specified resource.</p>
                  
-      operationId: ListTagsForResource
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
-                     
-          in: path
-          name: resourceArn
-          required: true
-          type: string
       responses:
         '200':
           description: Success
@@ -1223,6 +1126,15 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
+                     
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1232,36 +1144,11 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
+      operationId: TagResource
       description: |2-
 
                     <p>Adds tags to the specified MSK resource.</p>
                  
-      operationId: TagResource
-      parameters:
-        - description: |2-
-
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
-                     
-          in: path
-          name: resourceArn
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              tags:
-                additionalProperties:
-                  $ref: '#/definitions/__string'
-                description: |2-
-
-                              <p>The key-value pair for the resource tag.</p>
-                           
-                type: object
-            required:
-              - tags
-            type: object
       responses:
         '204':
           description: Success
@@ -1277,23 +1164,66 @@ paths:
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
+                     
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: |2-
+
+                              <p>The key-value pair for the resource tag.</p>
+                           
+                type: object
+                additionalProperties:
+                  $ref: '#/definitions/__string'
   '/v1/tags/{resourceArn}#tagKeys':
     delete:
+      operationId: UntagResource
       description: |2-
 
                     <p>Removes the tags associated with the keys that are provided in the query.</p>
                  
-      operationId: UntagResource
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
       parameters:
-        - description: |2-
+        - name: resourceArn
+          in: path
+          required: true
+          description: |2-
 
                         <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
                      
-          in: path
-          name: resourceArn
-          required: true
           type: string
-        - description: |2-
+        - name: tagKeys
+          in: query
+          required: true
+          description: |2-
 
                         <p>Tag keys must be unique for a given cluster. In addition, the following restrictions apply:</p>
                         <ul>
@@ -1316,27 +1246,168 @@ paths:
                            </li>
                         </ul>
                      
-          in: query
+          type: array
           items:
             type: string
-          name: tagKeys
-          required: true
-          type: array
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/nodes/storage':
+    put:
+      operationId: UpdateBrokerStorage
+      description: |2-
+
+                    <p>Updates the EBS storage associated with MSK brokers.</p>
+                 
       responses:
-        '204':
+        '200':
           description: Success
-        '480':
-          description: NotFoundException
           schema:
-            $ref: '#/definitions/NotFoundException'
+            $ref: '#/definitions/UpdateBrokerStorageResponse'
+        '480':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
         '481':
           description: BadRequestException
           schema:
             $ref: '#/definitions/BadRequestException'
         '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: InternalServerErrorException
           schema:
             $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - currentVersion
+              - targetBrokerEBSVolumeInfo
+            properties:
+              currentVersion:
+                description: |2-
+
+                              <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
+                           
+                type: string
+              targetBrokerEBSVolumeInfo:
+                description: |2-
+
+                              <p>Describes the target volume size and the ID of the broker to apply the update to.</p>
+                           
+                type: array
+                items:
+                  $ref: '#/definitions/BrokerEBSVolumeInfo'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/configuration':
+    put:
+      operationId: UpdateClusterConfiguration
+      description: |2-
+
+                    <p>Updates the cluster with the configuration that is specified in the request body.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateClusterConfigurationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - configurationInfo
+              - currentVersion
+            properties:
+              configurationInfo:
+                description: |2-
+
+                              <p>Specifies the configuration to use for the brokers.</p>
+                           
+                type: object
+                properties:
+                  Arn:
+                    $ref: '#/definitions/__string'
+                    description: |2-
+
+                                  <p>ARN of the configuration to use.</p>
+                               
+                  Revision:
+                    $ref: '#/definitions/__long'
+                    description: |2-
+
+                                  <p>The revision of the configuration to use.</p>
+                               
+              currentVersion:
+                description: |2-
+
+                              <p>The version of the cluster that needs to be updated.</p>
+                           
+                type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1346,20 +1417,378 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  BadRequestException: {}
+  CreateClusterResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      ClusterName:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The name of the MSK cluster.</p>
+                   
+      State:
+        $ref: '#/definitions/ClusterState'
+        description: |2-
+
+                      <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
+                   
   BrokerAZDistribution:
+    type: string
+    enum:
+      - DEFAULT
     description: |2-
 
                   <p>The distribution of broker nodes across Availability Zones. By default, broker nodes are distributed among three Availability Zones. Currently, the only supported value is DEFAULT. You can either specify this value explicitly or leave it out.</p>
                
-    enum:
-      - DEFAULT
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  __stringMin5Max32:
     type: string
-  BrokerEBSVolumeInfo:
+    minLength: 5
+    maxLength: 32
+  StorageInfo:
+    type: object
+    properties:
+      EbsStorageInfo:
+        $ref: '#/definitions/EBSStorageInfo'
+        description: |2-
+
+                      <p>EBS volume information.</p>
+                   
     description: |2-
 
-                  <p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>
+                  <p>Contains information about storage volumes attached to MSK broker nodes.</p>
                
+  Tls:
+    type: object
+    properties:
+      CertificateAuthorityArnList:
+        $ref: '#/definitions/__listOf__string'
+        description: |2-
+
+                      <p>List of ACM Certificate Authority ARNs.</p>
+                   
+    description: |2-
+
+                  <p>Details for client authentication using TLS.</p>
+               
+  __string:
+    type: string
+  __long:
+    type: integer
+  EncryptionAtRest:
+    type: object
+    required:
+      - DataVolumeKMSKeyId
+    properties:
+      DataVolumeKMSKeyId:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The ARN of the AWS KMS key for encrypting data at rest. If you don't specify a KMS key, MSK creates one for you and uses it.</p>
+                   
+    description: |2-
+
+                  <p>The data-volume encryption details.</p>
+               
+  EncryptionInTransit:
+    type: object
+    properties:
+      ClientBroker:
+        $ref: '#/definitions/ClientBroker'
+        description: |2-
+
+                      <p>Indicates the encryption setting for data in transit between clients and brokers. The following are the possible values.</p>
+                      <p>
+                         TLS means that client-broker communication is enabled with TLS only.</p>
+                      <p>
+                         TLS_PLAINTEXT means that client-broker communication is enabled for both TLS-encrypted, as well as plaintext data.</p>
+                      <p>
+                         PLAINTEXT means that client-broker communication is enabled in plaintext only.</p>
+                      <p>The default value is TLS_PLAINTEXT.</p>
+                   
+      InCluster:
+        $ref: '#/definitions/__boolean'
+        description: |2-
+
+                      <p>When set to true, it indicates that data communication among the broker nodes of the cluster is encrypted. When set to false, the communication happens in plaintext.</p>
+                      <p>The default value is true.</p>
+                   
+    description: |2-
+
+                  <p>The settings for encrypting data in transit.</p>
+               
+  BadRequestException: {}
+  InternalServerErrorException: {}
+  UnauthorizedException: {}
+  ForbiddenException: {}
+  ServiceUnavailableException: {}
+  TooManyRequestsException: {}
+  ConflictException: {}
+  CreateConfigurationResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
+                   
+      CreationTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: |2-
+
+                      <p>The time when the configuration was created.</p>
+                   
+      LatestRevision:
+        $ref: '#/definitions/ConfigurationRevision'
+        description: |2-
+
+                      <p>Latest revision of the configuration.</p>
+                   
+      Name:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The name of the configuration.</p>
+                   
+  DeleteClusterResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      State:
+        $ref: '#/definitions/ClusterState'
+        description: |2-
+
+                      <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
+                   
+  NotFoundException: {}
+  DescribeClusterResponse:
+    type: object
+    properties:
+      ClusterInfo:
+        $ref: '#/definitions/ClusterInfo'
+        description: |2-
+
+                      <p>The cluster information.</p>
+                   
+  DescribeClusterOperationResponse:
+    type: object
+    properties:
+      ClusterOperationInfo:
+        $ref: '#/definitions/ClusterOperationInfo'
+        description: |2-
+
+                      <p>Cluster operation information</p>
+                   
+  DescribeConfigurationResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
+                   
+      CreationTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: |2-
+
+                      <p>The time when the configuration was created.</p>
+                   
+      Description:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The description of the configuration.</p>
+                   
+      KafkaVersions:
+        $ref: '#/definitions/__listOf__string'
+        description: |2-
+
+                      <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
+                   
+      LatestRevision:
+        $ref: '#/definitions/ConfigurationRevision'
+        description: |2-
+
+                      <p>Latest revision of the configuration.</p>
+                   
+      Name:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The name of the configuration.</p>
+                   
+  DescribeConfigurationRevisionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
+                   
+      CreationTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: |2-
+
+                      <p>The time when the configuration was created.</p>
+                   
+      Description:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The description of the configuration.</p>
+                   
+      Revision:
+        $ref: '#/definitions/__long'
+        description: |2-
+
+                      <p>The revision number.</p>
+                   
+      ServerProperties:
+        $ref: '#/definitions/__blob'
+        description: |2-
+
+                      <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+                         When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
+                   
+  GetBootstrapBrokersResponse:
+    type: object
+    properties:
+      BootstrapBrokerString:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>A string containing one or more hostname:port pairs.</p>
+                   
+      BootstrapBrokerStringTls:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>
+                   
+  ListClusterOperationsResponse:
+    type: object
+    properties:
+      ClusterOperationInfoList:
+        $ref: '#/definitions/__listOfClusterOperationInfo'
+        description: |2-
+
+                      <p>An array of cluster operation information objects.</p>
+                   
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>
+                   
+  ListClustersResponse:
+    type: object
+    properties:
+      ClusterInfoList:
+        $ref: '#/definitions/__listOfClusterInfo'
+        description: |2-
+
+                      <p>Information on each of the MSK clusters in the response.</p>
+                   
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+                         To get another batch of clusters, provide this token in your next request.</p>
+                   
+  ListConfigurationRevisionsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>Paginated results marker.</p>
+                   
+      Revisions:
+        $ref: '#/definitions/__listOfConfigurationRevision'
+        description: |2-
+
+                      <p>List of ConfigurationRevision objects.</p>
+                   
+  ListConfigurationsResponse:
+    type: object
+    properties:
+      Configurations:
+        $ref: '#/definitions/__listOfConfiguration'
+        description: |2-
+
+                      <p>An array of MSK configurations.</p>
+                   
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
+                         To get another batch of configurations, provide this token in your next request.</p>
+                   
+  ListNodesResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
+                         To get another batch of nodes, provide this token in your next request.</p>
+                   
+      NodeInfoList:
+        $ref: '#/definitions/__listOfNodeInfo'
+        description: |2-
+
+                      <p>List containing a NodeInfo object.</p>
+                   
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: |2-
+
+                      <p>The key-value pair for the resource tag.</p>
+                   
+  UpdateBrokerStorageResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      ClusterOperationArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                   
+  BrokerEBSVolumeInfo:
+    type: object
+    required:
+      - VolumeSizeGB
+      - KafkaBrokerNodeId
     properties:
       KafkaBrokerNodeId:
         $ref: '#/definitions/__string'
@@ -1373,15 +1802,32 @@ definitions:
 
                       <p>Size of the EBS volume to update.</p>
                    
-    required:
-      - VolumeSizeGB
-      - KafkaBrokerNodeId
-    type: object
-  BrokerNodeGroupInfo:
     description: |2-
 
-                  <p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>
+                  <p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>
                
+  UpdateClusterConfigurationResponse:
+    type: object
+    properties:
+      ClusterArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                   
+      ClusterOperationArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                   
+  __integer:
+    type: integer
+  BrokerNodeGroupInfo:
+    type: object
+    required:
+      - ClientSubnets
+      - InstanceType
     properties:
       BrokerAZDistribution:
         $ref: '#/definitions/BrokerAZDistribution'
@@ -1414,15 +1860,40 @@ definitions:
 
                       <p>Contains information about storage volumes attached to MSK broker nodes.</p>
                    
-    required:
-      - ClientSubnets
-      - InstanceType
-    type: object
-  BrokerNodeInfo:
     description: |2-
 
-                  <p>BrokerNodeInfo</p>
+                  <p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>
                
+  __double:
+    type: number
+    format: double
+  BrokerSoftwareInfo:
+    type: object
+    properties:
+      ConfigurationArn:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The Amazon Resource Name (ARN) of the configuration used for the cluster. This field isn't visible in this preview release.</p>
+                   
+      ConfigurationRevision:
+        $ref: '#/definitions/__long'
+        description: |2-
+
+                      <p>The revision of the configuration to use. This field isn't visible in this preview release.</p>
+                   
+      KafkaVersion:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The version of Apache Kafka.</p>
+                   
+    description: |2-
+
+                  <p>Information about the current software installed on the cluster.</p>
+               
+  BrokerNodeInfo:
+    type: object
     properties:
       AttachedENIId:
         $ref: '#/definitions/__string'
@@ -1460,37 +1931,12 @@ definitions:
 
                       <p>Endpoints for accessing the broker.</p>
                    
-    type: object
-  BrokerSoftwareInfo:
     description: |2-
 
-                  <p>Information about the current software installed on the cluster.</p>
+                  <p>BrokerNodeInfo</p>
                
-    properties:
-      ConfigurationArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the configuration used for the cluster. This field isn't visible in this preview release.</p>
-                   
-      ConfigurationRevision:
-        $ref: '#/definitions/__long'
-        description: |2-
-
-                      <p>The revision of the configuration to use. This field isn't visible in this preview release.</p>
-                   
-      KafkaVersion:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The version of Apache Kafka.</p>
-                   
-    type: object
   ClientAuthentication:
-    description: |2-
-
-                  <p>Includes all client authentication information.</p>
-               
+    type: object
     properties:
       Tls:
         $ref: '#/definitions/Tls'
@@ -1498,22 +1944,70 @@ definitions:
 
                       <p>Details for ClientAuthentication using TLS.</p>
                    
-    type: object
-  ClientBroker:
     description: |2-
 
-                  <p>Client-broker encryption in transit setting.</p>
+                  <p>Includes all client authentication information.</p>
                
+  ClientBroker:
+    type: string
     enum:
       - TLS
       - TLS_PLAINTEXT
       - PLAINTEXT
-    type: string
-  ClusterInfo:
     description: |2-
 
-                  <p>Returns information about a cluster.</p>
+                  <p>Client-broker encryption in transit setting.</p>
                
+  __timestampIso8601:
+    type: string
+    format: date-time
+  EncryptionInfo:
+    type: object
+    properties:
+      EncryptionAtRest:
+        $ref: '#/definitions/EncryptionAtRest'
+        description: |2-
+
+                      <p>The data-volume encryption details.</p>
+                   
+      EncryptionInTransit:
+        $ref: '#/definitions/EncryptionInTransit'
+        description: |2-
+
+                      <p>The details for encryption in transit.</p>
+                   
+    description: |2-
+
+                  <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
+               
+  EnhancedMonitoring:
+    type: string
+    enum:
+      - DEFAULT
+      - PER_BROKER
+      - PER_TOPIC_PER_BROKER
+    description: |2-
+
+                  <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
+               
+  ClusterState:
+    type: string
+    enum:
+      - ACTIVE
+      - CREATING
+      - UPDATING
+      - DELETING
+      - FAILED
+    description: |2-
+
+                  <p>The state of a Kafka cluster.</p>
+               
+  __mapOf__string:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/__string'
+  ClusterInfo:
+    type: object
     properties:
       ActiveOperationArn:
         $ref: '#/definitions/__string'
@@ -1599,12 +2093,56 @@ definitions:
 
                       <p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>
                    
-    type: object
-  ClusterOperationInfo:
     description: |2-
 
-                  <p>Returns information about a cluster operation.</p>
+                  <p>Returns information about a cluster.</p>
                
+  ErrorInfo:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>A number describing the error programmatically.</p>
+                   
+      ErrorString:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>An optional field to provide more details about the error.</p>
+                   
+    description: |2-
+
+                  <p>Returns information about an error state of the cluster.</p>
+               
+  MutableClusterInfo:
+    type: object
+    properties:
+      BrokerEBSVolumeInfo:
+        $ref: '#/definitions/__listOfBrokerEBSVolumeInfo'
+        description: |2-
+
+                      <p>Specifies the size of the EBS volume and the ID of the associated broker.</p>
+                   
+      ConfigurationInfo:
+        $ref: '#/definitions/ConfigurationInfo'
+        description: |2-
+
+                      <p>Information about the changes in the configuration of the brokers.</p>
+                   
+      NumberOfBrokerNodes:
+        $ref: '#/definitions/__integer'
+        description: |2-
+
+                      <p>The number of broker nodes in the cluster.</p>
+                   
+    description: |2-
+
+                  <p>Information about cluster attributes that can be updated via update APIs.</p>
+               
+  ClusterOperationInfo:
+    type: object
     properties:
       ClientRequestId:
         $ref: '#/definitions/__string'
@@ -1666,24 +2204,47 @@ definitions:
 
                       <p>Information about cluster attributes after a cluster is updated.</p>
                    
+    description: |2-
+
+                  <p>Returns information about a cluster operation.</p>
+               
+  ConfigurationRevision:
     type: object
-  ClusterState:
+    required:
+      - Revision
+      - CreationTime
+    properties:
+      CreationTime:
+        $ref: '#/definitions/__timestampIso8601'
+        description: |2-
+
+                      <p>The time when the configuration revision was created.</p>
+                   
+      Description:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The description of the configuration revision.</p>
+                   
+      Revision:
+        $ref: '#/definitions/__long'
+        description: |2-
+
+                      <p>The revision number.</p>
+                   
     description: |2-
 
-                  <p>The state of a Kafka cluster.</p>
+                  <p>Describes a configuration revision.</p>
                
-    enum:
-      - ACTIVE
-      - CREATING
-      - UPDATING
-      - DELETING
-      - FAILED
-    type: string
   Configuration:
-    description: |2-
-
-                  <p>Represents an MSK Configuration.</p>
-               
+    type: object
+    required:
+      - Description
+      - LatestRevision
+      - CreationTime
+      - KafkaVersions
+      - Arn
+      - Name
     properties:
       Arn:
         $ref: '#/definitions/__string'
@@ -1721,19 +2282,15 @@ definitions:
 
                       <p>The name of the configuration.</p>
                    
-    required:
-      - Description
-      - LatestRevision
-      - CreationTime
-      - KafkaVersions
-      - Arn
-      - Name
-    type: object
-  ConfigurationInfo:
     description: |2-
 
-                  <p>Specifies the configuration to use for the brokers.</p>
+                  <p>Represents an MSK Configuration.</p>
                
+  ConfigurationInfo:
+    type: object
+    required:
+      - Revision
+      - Arn
     properties:
       Arn:
         $ref: '#/definitions/__string'
@@ -1747,40 +2304,29 @@ definitions:
 
                       <p>The revision of the configuration to use.</p>
                    
-    required:
-      - Revision
-      - Arn
-    type: object
-  ConfigurationRevision:
     description: |2-
 
-                  <p>Describes a configuration revision.</p>
+                  <p>Specifies the configuration to use for the brokers.</p>
                
-    properties:
-      CreationTime:
-        $ref: '#/definitions/__timestampIso8601'
-        description: |2-
-
-                      <p>The time when the configuration revision was created.</p>
-                   
-      Description:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The description of the configuration revision.</p>
-                   
-      Revision:
-        $ref: '#/definitions/__long'
-        description: |2-
-
-                      <p>The revision number.</p>
-                   
-    required:
-      - Revision
-      - CreationTime
-    type: object
-  ConflictException: {}
+  __stringMin1Max64:
+    type: string
+    minLength: 1
+    maxLength: 64
+  __stringMin1Max128:
+    type: string
+    minLength: 1
+    maxLength: 128
+  __integerMin1Max15:
+    type: integer
+    minimum: 1
+    maximum: 15
   CreateClusterRequest:
+    type: object
+    required:
+      - BrokerNodeGroupInfo
+      - KafkaVersion
+      - NumberOfBrokerNodes
+      - ClusterName
     properties:
       BrokerNodeGroupInfo:
         $ref: '#/definitions/BrokerNodeGroupInfo'
@@ -1836,151 +2382,15 @@ definitions:
 
                       <p>Create tags when creating the cluster.</p>
                    
-    required:
-      - BrokerNodeGroupInfo
-      - KafkaVersion
-      - NumberOfBrokerNodes
-      - ClusterName
-    type: object
-  CreateClusterResponse:
-    properties:
-      ClusterArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
-                   
-      ClusterName:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The name of the MSK cluster.</p>
-                   
-      State:
-        $ref: '#/definitions/ClusterState'
-        description: |2-
-
-                      <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
-                   
-    type: object
+  __blob:
+    type: string
   CreateConfigurationRequest:
-    properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The description of the configuration.</p>
-                   
-      KafkaVersions:
-        $ref: '#/definitions/__listOf__string'
-        description: |2-
-
-                      <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
-                   
-      Name:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The name of the configuration.</p>
-                   
-      ServerProperties:
-        $ref: '#/definitions/__blob'
-        description: |2-
-
-                      <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
-                         When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
-                   
+    type: object
     required:
       - ServerProperties
       - KafkaVersions
       - Name
-    type: object
-  CreateConfigurationResponse:
     properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
-                   
-      CreationTime:
-        $ref: '#/definitions/__timestampIso8601'
-        description: |2-
-
-                      <p>The time when the configuration was created.</p>
-                   
-      LatestRevision:
-        $ref: '#/definitions/ConfigurationRevision'
-        description: |2-
-
-                      <p>Latest revision of the configuration.</p>
-                   
-      Name:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The name of the configuration.</p>
-                   
-    type: object
-  DeleteClusterRequest:
-    properties: {}
-    type: object
-  DeleteClusterResponse:
-    properties:
-      ClusterArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
-                   
-      State:
-        $ref: '#/definitions/ClusterState'
-        description: |2-
-
-                      <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
-                   
-    type: object
-  DescribeClusterOperationRequest:
-    properties: {}
-    type: object
-  DescribeClusterOperationResponse:
-    properties:
-      ClusterOperationInfo:
-        $ref: '#/definitions/ClusterOperationInfo'
-        description: |2-
-
-                      <p>Cluster operation information</p>
-                   
-    type: object
-  DescribeClusterRequest:
-    properties: {}
-    type: object
-  DescribeClusterResponse:
-    properties:
-      ClusterInfo:
-        $ref: '#/definitions/ClusterInfo'
-        description: |2-
-
-                      <p>The cluster information.</p>
-                   
-    type: object
-  DescribeConfigurationRequest:
-    properties: {}
-    type: object
-  DescribeConfigurationResponse:
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
-                   
-      CreationTime:
-        $ref: '#/definitions/__timestampIso8601'
-        description: |2-
-
-                      <p>The time when the configuration was created.</p>
-                   
       Description:
         $ref: '#/definitions/__string'
         description: |2-
@@ -1993,47 +2403,11 @@ definitions:
 
                       <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
                    
-      LatestRevision:
-        $ref: '#/definitions/ConfigurationRevision'
-        description: |2-
-
-                      <p>Latest revision of the configuration.</p>
-                   
       Name:
         $ref: '#/definitions/__string'
         description: |2-
 
                       <p>The name of the configuration.</p>
-                   
-    type: object
-  DescribeConfigurationRevisionRequest:
-    properties: {}
-    type: object
-  DescribeConfigurationRevisionResponse:
-    properties:
-      Arn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the configuration.</p>
-                   
-      CreationTime:
-        $ref: '#/definitions/__timestampIso8601'
-        description: |2-
-
-                      <p>The time when the configuration was created.</p>
-                   
-      Description:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The description of the configuration.</p>
-                   
-      Revision:
-        $ref: '#/definitions/__long'
-        description: |2-
-
-                      <p>The revision number.</p>
                    
       ServerProperties:
         $ref: '#/definitions/__blob'
@@ -2042,12 +2416,27 @@ definitions:
                       <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
                          When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
                    
+  DeleteClusterRequest:
     type: object
+    properties: {}
+  DescribeClusterOperationRequest:
+    type: object
+    properties: {}
+  DescribeClusterRequest:
+    type: object
+    properties: {}
+  DescribeConfigurationRequest:
+    type: object
+    properties: {}
+  DescribeConfigurationRevisionRequest:
+    type: object
+    properties: {}
+  __integerMin1Max16384:
+    type: integer
+    minimum: 1
+    maximum: 16384
   EBSStorageInfo:
-    description: |2-
-
-                  <p>Contains information about the EBS storage volumes attached to Kafka broker nodes.</p>
-               
+    type: object
     properties:
       VolumeSize:
         $ref: '#/definitions/__integerMin1Max16384'
@@ -2055,256 +2444,108 @@ definitions:
 
                       <p>The size in GiB of the EBS volume for the data drive on each broker node.</p>
                    
-    type: object
-  EncryptionAtRest:
     description: |2-
 
-                  <p>The data-volume encryption details.</p>
+                  <p>Contains information about the EBS storage volumes attached to Kafka broker nodes.</p>
                
-    properties:
-      DataVolumeKMSKeyId:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The ARN of the AWS KMS key for encrypting data at rest. If you don't specify a KMS key, MSK creates one for you and uses it.</p>
-                   
-    required:
-      - DataVolumeKMSKeyId
-    type: object
-  EncryptionInTransit:
-    description: |2-
-
-                  <p>The settings for encrypting data in transit.</p>
-               
-    properties:
-      ClientBroker:
-        $ref: '#/definitions/ClientBroker'
-        description: |2-
-
-                      <p>Indicates the encryption setting for data in transit between clients and brokers. The following are the possible values.</p>
-                      <p>
-                         TLS means that client-broker communication is enabled with TLS only.</p>
-                      <p>
-                         TLS_PLAINTEXT means that client-broker communication is enabled for both TLS-encrypted, as well as plaintext data.</p>
-                      <p>
-                         PLAINTEXT means that client-broker communication is enabled in plaintext only.</p>
-                      <p>The default value is TLS_PLAINTEXT.</p>
-                   
-      InCluster:
-        $ref: '#/definitions/__boolean'
-        description: |2-
-
-                      <p>When set to true, it indicates that data communication among the broker nodes of the cluster is encrypted. When set to false, the communication happens in plaintext.</p>
-                      <p>The default value is true.</p>
-                   
-    type: object
-  EncryptionInfo:
-    description: |2-
-
-                  <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
-               
-    properties:
-      EncryptionAtRest:
-        $ref: '#/definitions/EncryptionAtRest'
-        description: |2-
-
-                      <p>The data-volume encryption details.</p>
-                   
-      EncryptionInTransit:
-        $ref: '#/definitions/EncryptionInTransit'
-        description: |2-
-
-                      <p>The details for encryption in transit.</p>
-                   
-    type: object
-  EnhancedMonitoring:
-    description: |2-
-
-                  <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
-               
-    enum:
-      - DEFAULT
-      - PER_BROKER
-      - PER_TOPIC_PER_BROKER
-    type: string
-  ErrorInfo:
-    description: |2-
-
-                  <p>Returns information about an error state of the cluster.</p>
-               
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>A number describing the error programmatically.</p>
-                   
-      ErrorString:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>An optional field to provide more details about the error.</p>
-                   
-    type: object
-  ForbiddenException: {}
+  __boolean:
+    type: boolean
   GetBootstrapBrokersRequest:
+    type: object
     properties: {}
-    type: object
-  GetBootstrapBrokersResponse:
-    properties:
-      BootstrapBrokerString:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>A string containing one or more hostname:port pairs.</p>
-                   
-      BootstrapBrokerStringTls:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>
-                   
-    type: object
-  InternalServerErrorException: {}
-  ListClusterOperationsRequest:
-    properties: {}
-    type: object
-  ListClusterOperationsResponse:
-    properties:
-      ClusterOperationInfoList:
-        $ref: '#/definitions/__listOfClusterOperationInfo'
-        description: |2-
-
-                      <p>An array of cluster operation information objects.</p>
-                   
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>
-                   
-    type: object
-  ListClustersRequest:
-    properties: {}
-    type: object
-  ListClustersResponse:
-    properties:
-      ClusterInfoList:
-        $ref: '#/definitions/__listOfClusterInfo'
-        description: |2-
-
-                      <p>Information on each of the MSK clusters in the response.</p>
-                   
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
-                         To get another batch of clusters, provide this token in your next request.</p>
-                   
-    type: object
-  ListConfigurationRevisionsRequest:
-    properties: {}
-    type: object
-  ListConfigurationRevisionsResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>Paginated results marker.</p>
-                   
-      Revisions:
-        $ref: '#/definitions/__listOfConfigurationRevision'
-        description: |2-
-
-                      <p>List of ConfigurationRevision objects.</p>
-                   
-    type: object
-  ListConfigurationsRequest:
-    properties: {}
-    type: object
-  ListConfigurationsResponse:
-    properties:
-      Configurations:
-        $ref: '#/definitions/__listOfConfiguration'
-        description: |2-
-
-                      <p>An array of MSK configurations.</p>
-                   
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
-                         To get another batch of configurations, provide this token in your next request.</p>
-                   
-    type: object
-  ListNodesRequest:
-    properties: {}
-    type: object
-  ListNodesResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
-                         To get another batch of nodes, provide this token in your next request.</p>
-                   
-      NodeInfoList:
-        $ref: '#/definitions/__listOfNodeInfo'
-        description: |2-
-
-                      <p>List containing a NodeInfo object.</p>
-                   
-    type: object
-  ListTagsForResourceRequest:
-    properties: {}
-    type: object
-  ListTagsForResourceResponse:
-    properties:
-      Tags:
-        $ref: '#/definitions/__mapOf__string'
-        description: |2-
-
-                      <p>The key-value pair for the resource tag.</p>
-                   
-    type: object
   MaxResults:
-    maximum: 100
-    minimum: 1
     type: integer
-  MutableClusterInfo:
-    description: |2-
-
-                  <p>Information about cluster attributes that can be updated via update APIs.</p>
-               
-    properties:
-      BrokerEBSVolumeInfo:
-        $ref: '#/definitions/__listOfBrokerEBSVolumeInfo'
-        description: |2-
-
-                      <p>Specifies the size of the EBS volume and the ID of the associated broker.</p>
-                   
-      ConfigurationInfo:
-        $ref: '#/definitions/ConfigurationInfo'
-        description: |2-
-
-                      <p>Information about the changes in the configuration of the brokers.</p>
-                   
-      NumberOfBrokerNodes:
-        $ref: '#/definitions/__integer'
-        description: |2-
-
-                      <p>The number of broker nodes in the cluster.</p>
-                   
+    minimum: 1
+    maximum: 100
+  ListClusterOperationsRequest:
     type: object
-  NodeInfo:
+    properties: {}
+  __listOfClusterOperationInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterOperationInfo'
+  ListClustersRequest:
+    type: object
+    properties: {}
+  __listOfClusterInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterInfo'
+  ListConfigurationRevisionsRequest:
+    type: object
+    properties: {}
+  __listOfConfigurationRevision:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationRevision'
+  ListConfigurationsRequest:
+    type: object
+    properties: {}
+  __listOfConfiguration:
+    type: array
+    items:
+      $ref: '#/definitions/Configuration'
+  ListNodesRequest:
+    type: object
+    properties: {}
+  __listOfNodeInfo:
+    type: array
+    items:
+      $ref: '#/definitions/NodeInfo'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  __listOfBrokerEBSVolumeInfo:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerEBSVolumeInfo'
+  NodeType:
+    type: string
+    enum:
+      - BROKER
     description: |2-
 
-                  <p>The node information object.</p>
+                  <p>The broker or Zookeeper node.</p>
                
+  ZookeeperNodeInfo:
+    type: object
+    properties:
+      AttachedENIId:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The attached elastic network interface of the broker.</p>
+                   
+      ClientVpcIpAddress:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The virtual private cloud (VPC) IP address of the client.</p>
+                   
+      Endpoints:
+        $ref: '#/definitions/__listOf__string'
+        description: |2-
+
+                      <p>Endpoints for accessing the ZooKeeper.</p>
+                   
+      ZookeeperId:
+        $ref: '#/definitions/__double'
+        description: |2-
+
+                      <p>The role-specific ID for Zookeeper.</p>
+                   
+      ZookeeperVersion:
+        $ref: '#/definitions/__string'
+        description: |2-
+
+                      <p>The version of Zookeeper.</p>
+                   
+    description: |2-
+
+                  <p>Zookeeper node information.</p>
+               
+  NodeInfo:
+    type: object
     properties:
       AddedToClusterTime:
         $ref: '#/definitions/__string'
@@ -2342,31 +2583,14 @@ definitions:
 
                       <p>The ZookeeperNodeInfo.</p>
                    
-    type: object
-  NodeType:
     description: |2-
 
-                  <p>The broker or Zookeeper node.</p>
+                  <p>The node information object.</p>
                
-    enum:
-      - BROKER
-    type: string
-  NotFoundException: {}
-  ServiceUnavailableException: {}
-  StorageInfo:
-    description: |2-
-
-                  <p>Contains information about storage volumes attached to MSK broker nodes.</p>
-               
-    properties:
-      EbsStorageInfo:
-        $ref: '#/definitions/EBSStorageInfo'
-        description: |2-
-
-                      <p>EBS volume information.</p>
-                   
-    type: object
   TagResourceRequest:
+    type: object
+    required:
+      - Tags
     properties:
       Tags:
         $ref: '#/definitions/__mapOf__string'
@@ -2374,28 +2598,14 @@ definitions:
 
                       <p>The key-value pair for the resource tag.</p>
                    
-    required:
-      - Tags
-    type: object
-  Tls:
-    description: |2-
-
-                  <p>Details for client authentication using TLS.</p>
-               
-    properties:
-      CertificateAuthorityArnList:
-        $ref: '#/definitions/__listOf__string'
-        description: |2-
-
-                      <p>List of ACM Certificate Authority ARNs.</p>
-                   
-    type: object
-  TooManyRequestsException: {}
-  UnauthorizedException: {}
   UntagResourceRequest:
-    properties: {}
     type: object
+    properties: {}
   UpdateBrokerStorageRequest:
+    type: object
+    required:
+      - TargetBrokerEBSVolumeInfo
+      - CurrentVersion
     properties:
       CurrentVersion:
         $ref: '#/definitions/__string'
@@ -2409,26 +2619,11 @@ definitions:
 
                       <p>Describes the target volume size and the ID of the broker to apply the update to.</p>
                    
-    required:
-      - TargetBrokerEBSVolumeInfo
-      - CurrentVersion
-    type: object
-  UpdateBrokerStorageResponse:
-    properties:
-      ClusterArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
-                   
-      ClusterOperationArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
-                   
-    type: object
   UpdateClusterConfigurationRequest:
+    type: object
+    required:
+      - CurrentVersion
+      - ConfigurationInfo
     properties:
       ConfigurationInfo:
         $ref: '#/definitions/ConfigurationInfo'
@@ -2442,198 +2637,3 @@ definitions:
 
                       <p>The version of the cluster that needs to be updated.</p>
                    
-    required:
-      - CurrentVersion
-      - ConfigurationInfo
-    type: object
-  UpdateClusterConfigurationResponse:
-    properties:
-      ClusterArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster.</p>
-                   
-      ClusterOperationArn:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
-                   
-    type: object
-  ZookeeperNodeInfo:
-    description: |2-
-
-                  <p>Zookeeper node information.</p>
-               
-    properties:
-      AttachedENIId:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The attached elastic network interface of the broker.</p>
-                   
-      ClientVpcIpAddress:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The virtual private cloud (VPC) IP address of the client.</p>
-                   
-      Endpoints:
-        $ref: '#/definitions/__listOf__string'
-        description: |2-
-
-                      <p>Endpoints for accessing the ZooKeeper.</p>
-                   
-      ZookeeperId:
-        $ref: '#/definitions/__double'
-        description: |2-
-
-                      <p>The role-specific ID for Zookeeper.</p>
-                   
-      ZookeeperVersion:
-        $ref: '#/definitions/__string'
-        description: |2-
-
-                      <p>The version of Zookeeper.</p>
-                   
-    type: object
-  __blob:
-    type: string
-  __boolean:
-    type: boolean
-  __double:
-    format: double
-    type: number
-  __integer:
-    type: integer
-  __integerMin1Max15:
-    maximum: 15
-    minimum: 1
-    type: integer
-  __integerMin1Max16384:
-    maximum: 16384
-    minimum: 1
-    type: integer
-  __listOfBrokerEBSVolumeInfo:
-    items:
-      $ref: '#/definitions/BrokerEBSVolumeInfo'
-    type: array
-  __listOfClusterInfo:
-    items:
-      $ref: '#/definitions/ClusterInfo'
-    type: array
-  __listOfClusterOperationInfo:
-    items:
-      $ref: '#/definitions/ClusterOperationInfo'
-    type: array
-  __listOfConfiguration:
-    items:
-      $ref: '#/definitions/Configuration'
-    type: array
-  __listOfConfigurationRevision:
-    items:
-      $ref: '#/definitions/ConfigurationRevision'
-    type: array
-  __listOfNodeInfo:
-    items:
-      $ref: '#/definitions/NodeInfo'
-    type: array
-  __listOf__string:
-    items:
-      $ref: '#/definitions/__string'
-    type: array
-  __long:
-    type: integer
-  __mapOf__string:
-    additionalProperties:
-      $ref: '#/definitions/__string'
-    type: object
-  __string:
-    type: string
-  __stringMin1Max128:
-    maxLength: 128
-    minLength: 1
-    type: string
-  __stringMin1Max64:
-    maxLength: 64
-    minLength: 1
-    type: string
-  __stringMin5Max32:
-    maxLength: 32
-    minLength: 5
-    type: string
-  __timestampIso8601:
-    format: date-time
-    type: string
-x-servers:
-  - description: The Kafka multi-region endpoint
-    url: 'http://kafka.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Kafka multi-region endpoint
-    url: 'https://kafka.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Kafka endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://kafka.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Kafka endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://kafka.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1

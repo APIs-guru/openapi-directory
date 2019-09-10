@@ -1,285 +1,168 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: elasticfilesystem.amazonaws.com
-basePath: /
 info:
+  version: '2015-02-01'
+  x-release: v4
+  title: Amazon Elastic File System
+  description: '<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href="https://docs.aws.amazon.com/efs/latest/ug/api-reference.html">User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href="https://docs.aws.amazon.com/efs/latest/ug/api-reference.html">User Guide</a>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Elastic File System
-  version: '2015-02-01'
+  x-providerName: amazonaws.com
+  x-serviceName: elasticfilesystem
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticfilesystem-2015-02-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticfilesystem-2015-02-01.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: elasticfilesystem
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/elasticfilesystem/'
+host: elasticfilesystem.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://elasticfilesystem.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The EFS multi-region endpoint
+  - url: 'https://elasticfilesystem.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The EFS multi-region endpoint
+  - url: 'http://elasticfilesystem.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EFS endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://elasticfilesystem.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EFS endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
-  '/2015-02-01/create-tags/{FileSystemId}':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: '<p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>'
-      operationId: CreateTags
-      parameters:
-        - description: 'The ID of the file system whose tags you want to modify (String). This operation modifies the tags only, not the file system.'
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Tags:
-                description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
-                items:
-                  $ref: '#/definitions/Tag'
-                type: array
-            required:
-              - Tags
-            type: object
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
-  '/2015-02-01/delete-tags/{FileSystemId}':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: '<p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn''t exist, Amazon EFS ignores it and doesn''t cause an error. For more information about tags and related restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>'
-      operationId: DeleteTags
-      parameters:
-        - description: The ID of the file system whose tags you want to delete (String).
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              TagKeys:
-                description: A list of tag keys to delete.
-                items:
-                  $ref: '#/definitions/TagKey'
-                type: array
-            required:
-              - TagKeys
-            type: object
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
   /2015-02-01/file-systems:
-    get:
-      description: '<p>Returns the description of a specific Amazon EFS file system if either the file system <code>CreationToken</code> or the <code>FileSystemId</code> is provided. Otherwise, it returns descriptions of all file systems owned by the caller''s AWS account in the AWS Region of the endpoint that you''re calling.</p> <p>When retrieving all file system descriptions, you can optionally specify the <code>MaxItems</code> parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a <code>NextMarker</code>, an opaque token, in the response. In this case, you should send a subsequent request with the <code>Marker</code> request parameter set to the value of <code>NextMarker</code>. </p> <p>To retrieve a list of your file system descriptions, this operation is used in an iterative process, where <code>DescribeFileSystems</code> is called first without the <code>Marker</code> and then the operation continues to call it with the <code>Marker</code> parameter set to the value of the <code>NextMarker</code> from the previous response until the response has no <code>NextMarker</code>. </p> <p> The order of file systems returned in the response of one <code>DescribeFileSystems</code> call and the order of file systems returned across the responses of a multi-call iteration is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeFileSystems</code> action. </p>'
-      operationId: DescribeFileSystems
-      parameters:
-        - description: '(Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 file systems. '
-          in: query
-          minimum: 1
-          name: MaxItems
-          required: false
-          type: integer
-        - description: '(Optional) Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If present, specifies to continue the list from where the returning call had left off. '
-          in: query
-          name: Marker
-          required: false
-          type: string
-        - description: (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
-          in: query
-          maxLength: 64
-          minLength: 1
-          name: CreationToken
-          required: false
-          type: string
-        - description: (Optional) ID of the file system whose description you want to retrieve (String).
-          in: query
-          name: FileSystemId
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeFileSystemsResponse'
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller''s AWS account with the specified creation token, this operation does the following:</p> <ul> <li> <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state <code>creating</code>.</p> </li> <li> <p>Returns with the description of the created file system.</p> </li> </ul> <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the ID of the existing file system.</p> <note> <p>For basic use cases, you can use a randomly generated UUID for the creation token.</p> </note> <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p> <note> <p>The <code>CreateFileSystem</code> call returns while the file system''s lifecycle state is still <code>creating</code>. You can check the file system creation status by calling the <a>DescribeFileSystems</a> operation, which among other things returns the file system state.</p> </note> <p>This operation also takes an optional <code>PerformanceMode</code> parameter that you choose for your file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can''t be changed after the file system has been created. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html">Amazon EFS: Performance Modes</a>.</p> <p>After the file system is fully created, Amazon EFS sets its lifecycle state to <code>available</code>, at which point you can create one or more mount targets for the file system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How it Works</a>. </p> <p> This operation requires permissions for the <code>elasticfilesystem:CreateFileSystem</code> action. </p>'
       operationId: CreateFileSystem
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              CreationToken:
-                description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
-                maxLength: 64
-                minLength: 1
-                type: string
-              Encrypted:
-                description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
-                type: boolean
-              KmsKeyId:
-                description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
-                maxLength: 2048
-                minLength: 1
-                type: string
-              PerformanceMode:
-                description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
-                enum:
-                  - generalPurpose
-                  - maxIO
-                type: string
-              ProvisionedThroughputInMibps:
-                description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
-                format: double
-                minimum: 1
-                type: number
-              Tags:
-                description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
-                items:
-                  $ref: '#/definitions/Tag'
-                type: array
-              ThroughputMode:
-                description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
-                enum:
-                  - bursting
-                  - provisioned
-                type: string
-            required:
-              - CreationToken
-            type: object
+      description: '<p>Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller''s AWS account with the specified creation token, this operation does the following:</p> <ul> <li> <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state <code>creating</code>.</p> </li> <li> <p>Returns with the description of the created file system.</p> </li> </ul> <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the ID of the existing file system.</p> <note> <p>For basic use cases, you can use a randomly generated UUID for the creation token.</p> </note> <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p> <note> <p>The <code>CreateFileSystem</code> call returns while the file system''s lifecycle state is still <code>creating</code>. You can check the file system creation status by calling the <a>DescribeFileSystems</a> operation, which among other things returns the file system state.</p> </note> <p>This operation also takes an optional <code>PerformanceMode</code> parameter that you choose for your file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can''t be changed after the file system has been created. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html">Amazon EFS: Performance Modes</a>.</p> <p>After the file system is fully created, Amazon EFS sets its lifecycle state to <code>available</code>, at which point you can create one or more mount targets for the file system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How it Works</a>. </p> <p> This operation requires permissions for the <code>elasticfilesystem:CreateFileSystem</code> action. </p>'
       responses:
         '201':
           description: Success
@@ -309,129 +192,50 @@ paths:
           description: ThroughputLimitExceeded
           schema:
             $ref: '#/definitions/ThroughputLimitExceeded'
-  '/2015-02-01/file-systems/{FileSystemId}':
-    delete:
-      description: '<p>Deletes a file system, permanently severing access to its contents. Upon return, the file system no longer exists and you can''t access any contents of the deleted file system.</p> <p> You can''t delete a file system that is in use. That is, if the file system has any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p> <note> <p>The <code>DeleteFileSystem</code> call returns while the file system state is still <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code> error.</p> </note> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteFileSystem</code> action.</p>'
-      operationId: DeleteFileSystem
       parameters:
-        - description: The ID of the file system you want to delete.
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-      responses:
-        '204':
-          description: Success
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
-        '483':
-          description: FileSystemInUse
-          schema:
-            $ref: '#/definitions/FileSystemInUse'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: Updates the throughput mode or the amount of provisioned throughput of an existing file system.
-      operationId: UpdateFileSystem
-      parameters:
-        - description: The ID of the file system that you want to update.
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-        - in: body
-          name: body
+        - name: body
+          in: body
           required: true
           schema:
+            type: object
+            required:
+              - CreationToken
             properties:
-              ProvisionedThroughputInMibps:
-                description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '
-                format: double
-                minimum: 1
-                type: number
+              CreationToken:
+                description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
+                type: string
+                minLength: 1
+                maxLength: 64
+              PerformanceMode:
+                description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
+                type: string
+                enum:
+                  - generalPurpose
+                  - maxIO
+              Encrypted:
+                description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
+                type: boolean
+              KmsKeyId:
+                description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
+                type: string
+                minLength: 1
+                maxLength: 2048
               ThroughputMode:
-                description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.'
+                description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
+                type: string
                 enum:
                   - bursting
                   - provisioned
-                type: string
-            type: object
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/FileSystemDescription'
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
-        '482':
-          description: IncorrectFileSystemLifeCycleState
-          schema:
-            $ref: '#/definitions/IncorrectFileSystemLifeCycleState'
-        '483':
-          description: InsufficientThroughputCapacity
-          schema:
-            $ref: '#/definitions/InsufficientThroughputCapacity'
-        '484':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '485':
-          description: ThroughputLimitExceeded
-          schema:
-            $ref: '#/definitions/ThroughputLimitExceeded'
-        '486':
-          description: TooManyRequests
-          schema:
-            $ref: '#/definitions/TooManyRequests'
-  '/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration':
-    get:
-      description: '<p>Returns the current <code>LifecycleConfiguration</code> object for the specified Amazon EFS file system. EFS lifecycle management uses the <code>LifecycleConfiguration</code> object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a <code>LifecycleConfiguration</code> object, the call returns an empty array in the response.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DescribeLifecycleConfiguration</code> operation.</p>'
-      operationId: DescribeLifecycleConfiguration
-      parameters:
-        - description: The ID of the file system whose <code>LifecycleConfiguration</code> object you want to retrieve (String).
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/LifecycleConfigurationDescription'
-        '480':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '481':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
+              ProvisionedThroughputInMibps:
+                description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+                type: number
+                format: double
+                minimum: 1
+              Tags:
+                description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -440,33 +244,14 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      description: '<p>Enables lifecycle management by creating a new <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A <code>LifecycleConfiguration</code> applies to all files in a file system.</p> <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a <code>LifecycleConfiguration</code> object already exists for the specified file system, a <code>PutLifecycleConfiguration</code> call modifies the existing configuration. A <code>PutLifecycleConfiguration</code> call with an empty <code>LifecyclePolicies</code> array in the request body deletes any existing <code>LifecycleConfiguration</code> and disables lifecycle management.</p> <p>In the request, specify the following: </p> <ul> <li> <p>The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.</p> </li> <li> <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that define when files are moved to the IA storage class. The array can contain only one <code>LifecyclePolicy</code> item.</p> </li> </ul> <p>This operation requires permissions for the <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p> <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. </p>'
-      operationId: PutLifecycleConfiguration
-      parameters:
-        - description: The ID of the file system for which you are creating the <code>LifecycleConfiguration</code> object (String).
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              LifecyclePolicies:
-                description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
-                items:
-                  $ref: '#/definitions/LifecyclePolicy'
-                type: array
-            required:
-              - LifecyclePolicies
-            type: object
+    get:
+      operationId: DescribeFileSystems
+      description: '<p>Returns the description of a specific Amazon EFS file system if either the file system <code>CreationToken</code> or the <code>FileSystemId</code> is provided. Otherwise, it returns descriptions of all file systems owned by the caller''s AWS account in the AWS Region of the endpoint that you''re calling.</p> <p>When retrieving all file system descriptions, you can optionally specify the <code>MaxItems</code> parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a <code>NextMarker</code>, an opaque token, in the response. In this case, you should send a subsequent request with the <code>Marker</code> request parameter set to the value of <code>NextMarker</code>. </p> <p>To retrieve a list of your file system descriptions, this operation is used in an iterative process, where <code>DescribeFileSystems</code> is called first without the <code>Marker</code> and then the operation continues to call it with the <code>Marker</code> parameter set to the value of the <code>NextMarker</code> from the previous response until the response has no <code>NextMarker</code>. </p> <p> The order of file systems returned in the response of one <code>DescribeFileSystems</code> call and the order of file systems returned across the responses of a multi-call iteration is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeFileSystems</code> action. </p>'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/LifecycleConfigurationDescription'
+            $ref: '#/definitions/DescribeFileSystemsResponse'
         '480':
           description: BadRequest
           schema:
@@ -479,93 +264,34 @@ paths:
           description: FileSystemNotFound
           schema:
             $ref: '#/definitions/FileSystemNotFound'
-        '483':
-          description: IncorrectFileSystemLifeCycleState
-          schema:
-            $ref: '#/definitions/IncorrectFileSystemLifeCycleState'
-  /2015-02-01/mount-targets:
-    get:
-      description: '<p>Returns the descriptions of all the current mount targets, or a specific mount target, for a file system. When requesting all of the current mount targets, the order of mount targets returned in the response is unspecified.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DescribeMountTargets</code> action, on either the file system ID that you specify in <code>FileSystemId</code>, or on the file system of the mount target that you specify in <code>MountTargetId</code>.</p>'
-      operationId: DescribeMountTargets
       parameters:
-        - description: '(Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 mount targets.'
+        - name: MaxItems
           in: query
-          minimum: 1
-          name: MaxItems
           required: false
+          description: '(Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 file systems. '
           type: integer
-        - description: '(Optional) Opaque pagination token returned from a previous <code>DescribeMountTargets</code> operation (String). If present, it specifies to continue the list from where the previous returning call left off.'
+          minimum: 1
+        - name: Marker
           in: query
-          name: Marker
           required: false
+          description: '(Optional) Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If present, specifies to continue the list from where the returning call had left off. '
           type: string
-        - description: (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if <code>MountTargetId</code> is not included.
+        - name: CreationToken
           in: query
-          name: FileSystemId
           required: false
+          description: (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
           type: string
-        - description: (Optional) ID of the mount target that you want to have described (String). It must be included in your request if <code>FileSystemId</code> is not included.
+          minLength: 1
+          maxLength: 64
+        - name: FileSystemId
           in: query
-          name: MountTargetId
           required: false
+          description: (Optional) ID of the file system whose description you want to retrieve (String).
           type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeMountTargetsResponse'
-        '480':
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/BadRequest'
-        '481':
-          description: InternalServerError
-          schema:
-            $ref: '#/definitions/InternalServerError'
-        '482':
-          description: FileSystemNotFound
-          schema:
-            $ref: '#/definitions/FileSystemNotFound'
-        '483':
-          description: MountTargetNotFound
-          schema:
-            $ref: '#/definitions/MountTargetNotFound'
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-02-01/mount-targets:
     post:
-      description: '<p>Creates a mount target for a file system. You can then mount the file system on EC2 instances by using the mount target.</p> <p>You can create one mount target in each Availability Zone in your VPC. All EC2 instances in a VPC within a given Availability Zone share a single mount target for a given file system. If you have multiple subnets in an Availability Zone, you create a mount target in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target in order to access their file system. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How it Works</a>. </p> <p>In the request, you also specify a file system ID for which you are creating the mount target and the file system''s lifecycle state must be <code>available</code>. For more information, see <a>DescribeFileSystems</a>.</p> <p>In the request, you also provide a subnet ID, which determines the following:</p> <ul> <li> <p>VPC in which Amazon EFS creates the mount target</p> </li> <li> <p>Availability Zone in which Amazon EFS creates the mount target</p> </li> <li> <p>IP address range from which Amazon EFS selects the IP address of the mount target (if you don''t specify an IP address in the request)</p> </li> </ul> <p>After creating the mount target, Amazon EFS returns a response that includes, a <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when mounting the file system in an EC2 instance. You can also use the mount target''s DNS name when mounting the file system. The EC2 instance on which you mount the file system by using the mount target can resolve the mount target''s DNS name to its IP address. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation">How it Works: Implementation Overview</a>. </p> <p>Note that you can create mount targets for a file system in only one VPC, and there can be only one mount target per Availability Zone. That is, if the file system already has one or more mount targets created for it, the subnet specified in the request to add another mount target must meet the following requirements:</p> <ul> <li> <p>Must belong to the same VPC as the subnets of the existing mount targets</p> </li> <li> <p>Must not be in the same Availability Zone as any of the subnets of the existing mount targets</p> </li> </ul> <p>If the request satisfies the requirements, Amazon EFS does the following:</p> <ul> <li> <p>Creates a new mount target in the specified subnet.</p> </li> <li> <p>Also creates a new network interface in the subnet as follows:</p> <ul> <li> <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP address to the network interface. Otherwise, Amazon EFS assigns a free address in the subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call does when a request does not specify a primary private IP address).</p> </li> <li> <p>If the request provides <code>SecurityGroups</code>, this network interface is associated with those security groups. Otherwise, it belongs to the default security group for the subnet''s VPC.</p> </li> <li> <p>Assigns the description <code>Mount target <i>fsmt-id</i> for file system <i>fs-id</i> </code> where <code> <i>fsmt-id</i> </code> is the mount target ID, and <code> <i>fs-id</i> </code> is the <code>FileSystemId</code>.</p> </li> <li> <p>Sets the <code>requesterManaged</code> property of the network interface to <code>true</code>, and the <code>requesterId</code> value to <code>EFS</code>.</p> </li> </ul> <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network interface. After the network interface is created, Amazon EFS sets the <code>NetworkInterfaceId</code> field in the mount target''s description to the network interface ID, and the <code>IpAddress</code> field to its address. If network interface creation fails, the entire <code>CreateMountTarget</code> operation fails.</p> </li> </ul> <note> <p>The <code>CreateMountTarget</code> call returns only after creating the network interface, but while the mount target state is still <code>creating</code>, you can check the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount target state.</p> </note> <p>We recommend that you create a mount target in each of the Availability Zones. There are cost considerations for using a file system in an Availability Zone through a mount target created in another Availability Zone. For more information, see <a href="http://aws.amazon.com/efs/">Amazon EFS</a>. In addition, by always using a mount target local to the instance''s Availability Zone, you eliminate a partial failure scenario. If the Availability Zone in which your mount target is created goes down, then you can''t access your file system through that mount target. </p> <p>This operation requires permissions for the following action on the file system:</p> <ul> <li> <p> <code>elasticfilesystem:CreateMountTarget</code> </p> </li> </ul> <p>This operation also requires permissions for the following Amazon EC2 actions:</p> <ul> <li> <p> <code>ec2:DescribeSubnets</code> </p> </li> <li> <p> <code>ec2:DescribeNetworkInterfaces</code> </p> </li> <li> <p> <code>ec2:CreateNetworkInterface</code> </p> </li> </ul>'
       operationId: CreateMountTarget
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              FileSystemId:
-                description: The ID of the file system for which to create the mount target.
-                type: string
-              IpAddress:
-                description: Valid IPv4 address within the address range of the specified subnet.
-                type: string
-              SecurityGroups:
-                description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
-                items:
-                  $ref: '#/definitions/SecurityGroup'
-                maxItems: 5
-                type: array
-              SubnetId:
-                description: The ID of the subnet to add the mount target in.
-                type: string
-            required:
-              - FileSystemId
-              - SubnetId
-            type: object
+      description: '<p>Creates a mount target for a file system. You can then mount the file system on EC2 instances by using the mount target.</p> <p>You can create one mount target in each Availability Zone in your VPC. All EC2 instances in a VPC within a given Availability Zone share a single mount target for a given file system. If you have multiple subnets in an Availability Zone, you create a mount target in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target in order to access their file system. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How it Works</a>. </p> <p>In the request, you also specify a file system ID for which you are creating the mount target and the file system''s lifecycle state must be <code>available</code>. For more information, see <a>DescribeFileSystems</a>.</p> <p>In the request, you also provide a subnet ID, which determines the following:</p> <ul> <li> <p>VPC in which Amazon EFS creates the mount target</p> </li> <li> <p>Availability Zone in which Amazon EFS creates the mount target</p> </li> <li> <p>IP address range from which Amazon EFS selects the IP address of the mount target (if you don''t specify an IP address in the request)</p> </li> </ul> <p>After creating the mount target, Amazon EFS returns a response that includes, a <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when mounting the file system in an EC2 instance. You can also use the mount target''s DNS name when mounting the file system. The EC2 instance on which you mount the file system by using the mount target can resolve the mount target''s DNS name to its IP address. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation">How it Works: Implementation Overview</a>. </p> <p>Note that you can create mount targets for a file system in only one VPC, and there can be only one mount target per Availability Zone. That is, if the file system already has one or more mount targets created for it, the subnet specified in the request to add another mount target must meet the following requirements:</p> <ul> <li> <p>Must belong to the same VPC as the subnets of the existing mount targets</p> </li> <li> <p>Must not be in the same Availability Zone as any of the subnets of the existing mount targets</p> </li> </ul> <p>If the request satisfies the requirements, Amazon EFS does the following:</p> <ul> <li> <p>Creates a new mount target in the specified subnet.</p> </li> <li> <p>Also creates a new network interface in the subnet as follows:</p> <ul> <li> <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP address to the network interface. Otherwise, Amazon EFS assigns a free address in the subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call does when a request does not specify a primary private IP address).</p> </li> <li> <p>If the request provides <code>SecurityGroups</code>, this network interface is associated with those security groups. Otherwise, it belongs to the default security group for the subnet''s VPC.</p> </li> <li> <p>Assigns the description <code>Mount target <i>fsmt-id</i> for file system <i>fs-id</i> </code> where <code> <i>fsmt-id</i> </code> is the mount target ID, and <code> <i>fs-id</i> </code> is the <code>FileSystemId</code>.</p> </li> <li> <p>Sets the <code>requesterManaged</code> property of the network interface to <code>true</code>, and the <code>requesterId</code> value to <code>EFS</code>.</p> </li> </ul> <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network interface. After the network interface is created, Amazon EFS sets the <code>NetworkInterfaceId</code> field in the mount target''s description to the network interface ID, and the <code>IpAddress</code> field to its address. If network interface creation fails, the entire <code>CreateMountTarget</code> operation fails.</p> </li> </ul> <note> <p>The <code>CreateMountTarget</code> call returns only after creating the network interface, but while the mount target state is still <code>creating</code>, you can check the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount target state.</p> </note> <p>We recommend that you create a mount target in each of the Availability Zones. There are cost considerations for using a file system in an Availability Zone through a mount target created in another Availability Zone. For more information, see <a href="http://aws.amazon.com/efs/">Amazon EFS</a>. In addition, by always using a mount target local to the instance''s Availability Zone, you eliminate a partial failure scenario. If the Availability Zone in which your mount target is created goes down, then you can''t access your file system through that mount target. </p> <p>This operation requires permissions for the following action on the file system:</p> <ul> <li> <p> <code>elasticfilesystem:CreateMountTarget</code> </p> </li> </ul> <p>This operation also requires permissions for the following Amazon EC2 actions:</p> <ul> <li> <p> <code>ec2:DescribeSubnets</code> </p> </li> <li> <p> <code>ec2:DescribeNetworkInterfaces</code> </p> </li> <li> <p> <code>ec2:CreateNetworkInterface</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -619,16 +345,231 @@ paths:
           description: UnsupportedAvailabilityZone
           schema:
             $ref: '#/definitions/UnsupportedAvailabilityZone'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - FileSystemId
+              - SubnetId
+            properties:
+              FileSystemId:
+                description: The ID of the file system for which to create the mount target.
+                type: string
+              SubnetId:
+                description: The ID of the subnet to add the mount target in.
+                type: string
+              IpAddress:
+                description: Valid IPv4 address within the address range of the specified subnet.
+                type: string
+              SecurityGroups:
+                description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
+                type: array
+                items:
+                  $ref: '#/definitions/SecurityGroup'
+                maxItems: 5
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeMountTargets
+      description: '<p>Returns the descriptions of all the current mount targets, or a specific mount target, for a file system. When requesting all of the current mount targets, the order of mount targets returned in the response is unspecified.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DescribeMountTargets</code> action, on either the file system ID that you specify in <code>FileSystemId</code>, or on the file system of the mount target that you specify in <code>MountTargetId</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMountTargetsResponse'
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+        '483':
+          description: MountTargetNotFound
+          schema:
+            $ref: '#/definitions/MountTargetNotFound'
+      parameters:
+        - name: MaxItems
+          in: query
+          required: false
+          description: '(Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 mount targets.'
+          type: integer
+          minimum: 1
+        - name: Marker
+          in: query
+          required: false
+          description: '(Optional) Opaque pagination token returned from a previous <code>DescribeMountTargets</code> operation (String). If present, it specifies to continue the list from where the previous returning call left off.'
+          type: string
+        - name: FileSystemId
+          in: query
+          required: false
+          description: (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if <code>MountTargetId</code> is not included.
+          type: string
+        - name: MountTargetId
+          in: query
+          required: false
+          description: (Optional) ID of the mount target that you want to have described (String). It must be included in your request if <code>FileSystemId</code> is not included.
+          type: string
+  '/2015-02-01/create-tags/{FileSystemId}':
+    post:
+      operationId: CreateTags
+      description: '<p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: 'The ID of the file system whose tags you want to modify (String). This operation modifies the tags only, not the file system.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Tags
+            properties:
+              Tags:
+                description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-02-01/file-systems/{FileSystemId}':
+    delete:
+      operationId: DeleteFileSystem
+      description: '<p>Deletes a file system, permanently severing access to its contents. Upon return, the file system no longer exists and you can''t access any contents of the deleted file system.</p> <p> You can''t delete a file system that is in use. That is, if the file system has any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p> <note> <p>The <code>DeleteFileSystem</code> call returns while the file system state is still <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code> error.</p> </note> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteFileSystem</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+        '483':
+          description: FileSystemInUse
+          schema:
+            $ref: '#/definitions/FileSystemInUse'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system you want to delete.
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFileSystem
+      description: Updates the throughput mode or the amount of provisioned throughput of an existing file system.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/FileSystemDescription'
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+        '482':
+          description: IncorrectFileSystemLifeCycleState
+          schema:
+            $ref: '#/definitions/IncorrectFileSystemLifeCycleState'
+        '483':
+          description: InsufficientThroughputCapacity
+          schema:
+            $ref: '#/definitions/InsufficientThroughputCapacity'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '485':
+          description: ThroughputLimitExceeded
+          schema:
+            $ref: '#/definitions/ThroughputLimitExceeded'
+        '486':
+          description: TooManyRequests
+          schema:
+            $ref: '#/definitions/TooManyRequests'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system that you want to update.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              ThroughputMode:
+                description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.'
+                type: string
+                enum:
+                  - bursting
+                  - provisioned
+              ProvisionedThroughputInMibps:
+                description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '
+                type: number
+                format: double
+                minimum: 1
   '/2015-02-01/mount-targets/{MountTargetId}':
     delete:
-      description: '<p>Deletes the specified mount target.</p> <p>This operation forcibly breaks any mounts of the file system by using the mount target that is being deleted, which might disrupt instances or applications using those mounts. To avoid applications getting cut off abruptly, you might consider unmounting any mounts of the mount target, if feasible. The operation also deletes the associated network interface. Uncommitted writes might be lost, but breaking a mount target using this operation does not corrupt the file system itself. The file system you created remains. You can mount an EC2 instance in your VPC by using another mount target.</p> <p>This operation requires permissions for the following action on the file system:</p> <ul> <li> <p> <code>elasticfilesystem:DeleteMountTarget</code> </p> </li> </ul> <note> <p>The <code>DeleteMountTarget</code> call returns while the mount target state is still <code>deleting</code>. You can check the mount target deletion by calling the <a>DescribeMountTargets</a> operation, which returns a list of mount target descriptions for the given file system. </p> </note> <p>The operation also requires permissions for the following Amazon EC2 action on the mount target''s network interface:</p> <ul> <li> <p> <code>ec2:DeleteNetworkInterface</code> </p> </li> </ul>'
       operationId: DeleteMountTarget
-      parameters:
-        - description: The ID of the mount target to delete (String).
-          in: path
-          name: MountTargetId
-          required: true
-          type: string
+      description: '<p>Deletes the specified mount target.</p> <p>This operation forcibly breaks any mounts of the file system by using the mount target that is being deleted, which might disrupt instances or applications using those mounts. To avoid applications getting cut off abruptly, you might consider unmounting any mounts of the mount target, if feasible. The operation also deletes the associated network interface. Uncommitted writes might be lost, but breaking a mount target using this operation does not corrupt the file system itself. The file system you created remains. You can mount an EC2 instance in your VPC by using another mount target.</p> <p>This operation requires permissions for the following action on the file system:</p> <ul> <li> <p> <code>elasticfilesystem:DeleteMountTarget</code> </p> </li> </ul> <note> <p>The <code>DeleteMountTarget</code> call returns while the mount target state is still <code>deleting</code>. You can check the mount target deletion by calling the <a>DescribeMountTargets</a> operation, which returns a list of mount target descriptions for the given file system. </p> </note> <p>The operation also requires permissions for the following Amazon EC2 action on the mount target''s network interface:</p> <ul> <li> <p> <code>ec2:DeleteNetworkInterface</code> </p> </li> </ul>'
       responses:
         '204':
           description: Success
@@ -648,6 +589,12 @@ paths:
           description: MountTargetNotFound
           schema:
             $ref: '#/definitions/MountTargetNotFound'
+      parameters:
+        - name: MountTargetId
+          in: path
+          required: true
+          description: The ID of the mount target to delete (String).
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -656,16 +603,134 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-02-01/delete-tags/{FileSystemId}':
+    post:
+      operationId: DeleteTags
+      description: '<p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn''t exist, Amazon EFS ignores it and doesn''t cause an error. For more information about tags and related restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system whose tags you want to delete (String).
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - TagKeys
+            properties:
+              TagKeys:
+                description: A list of tag keys to delete.
+                type: array
+                items:
+                  $ref: '#/definitions/TagKey'
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration':
+    get:
+      operationId: DescribeLifecycleConfiguration
+      description: '<p>Returns the current <code>LifecycleConfiguration</code> object for the specified Amazon EFS file system. EFS lifecycle management uses the <code>LifecycleConfiguration</code> object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a <code>LifecycleConfiguration</code> object, the call returns an empty array in the response.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DescribeLifecycleConfiguration</code> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LifecycleConfigurationDescription'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system whose <code>LifecycleConfiguration</code> object you want to retrieve (String).
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutLifecycleConfiguration
+      description: '<p>Enables lifecycle management by creating a new <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A <code>LifecycleConfiguration</code> applies to all files in a file system.</p> <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a <code>LifecycleConfiguration</code> object already exists for the specified file system, a <code>PutLifecycleConfiguration</code> call modifies the existing configuration. A <code>PutLifecycleConfiguration</code> call with an empty <code>LifecyclePolicies</code> array in the request body deletes any existing <code>LifecycleConfiguration</code> and disables lifecycle management.</p> <p>In the request, specify the following: </p> <ul> <li> <p>The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.</p> </li> <li> <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that define when files are moved to the IA storage class. The array can contain only one <code>LifecyclePolicy</code> item.</p> </li> </ul> <p>This operation requires permissions for the <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p> <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LifecycleConfigurationDescription'
+        '480':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: FileSystemNotFound
+          schema:
+            $ref: '#/definitions/FileSystemNotFound'
+        '483':
+          description: IncorrectFileSystemLifeCycleState
+          schema:
+            $ref: '#/definitions/IncorrectFileSystemLifeCycleState'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system for which you are creating the <code>LifecycleConfiguration</code> object (String).
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - LifecyclePolicies
+            properties:
+              LifecyclePolicies:
+                description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+                type: array
+                items:
+                  $ref: '#/definitions/LifecyclePolicy'
   '/2015-02-01/mount-targets/{MountTargetId}/security-groups':
     get:
-      description: '<p>Returns the security groups currently in effect for a mount target. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not <code>deleted</code>.</p> <p>This operation requires permissions for the following actions:</p> <ul> <li> <p> <code>elasticfilesystem:DescribeMountTargetSecurityGroups</code> action on the mount target''s file system. </p> </li> <li> <p> <code>ec2:DescribeNetworkInterfaceAttribute</code> action on the mount target''s network interface. </p> </li> </ul>'
       operationId: DescribeMountTargetSecurityGroups
-      parameters:
-        - description: The ID of the mount target whose security groups you want to retrieve.
-          in: path
-          name: MountTargetId
-          required: true
-          type: string
+      description: '<p>Returns the security groups currently in effect for a mount target. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not <code>deleted</code>.</p> <p>This operation requires permissions for the following actions:</p> <ul> <li> <p> <code>elasticfilesystem:DescribeMountTargetSecurityGroups</code> action on the mount target''s file system. </p> </li> <li> <p> <code>ec2:DescribeNetworkInterfaceAttribute</code> action on the mount target''s network interface. </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -687,6 +752,12 @@ paths:
           description: IncorrectMountTargetState
           schema:
             $ref: '#/definitions/IncorrectMountTargetState'
+      parameters:
+        - name: MountTargetId
+          in: path
+          required: true
+          description: The ID of the mount target whose security groups you want to retrieve.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -696,26 +767,8 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
-      description: '<p>Modifies the set of security groups in effect for a mount target.</p> <p>When you create a mount target, Amazon EFS also creates a new network interface. For more information, see <a>CreateMountTarget</a>. This operation replaces the security groups in effect for the network interface associated with a mount target, with the <code>SecurityGroups</code> provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not <code>deleted</code>. </p> <p>The operation requires permissions for the following actions:</p> <ul> <li> <p> <code>elasticfilesystem:ModifyMountTargetSecurityGroups</code> action on the mount target''s file system. </p> </li> <li> <p> <code>ec2:ModifyNetworkInterfaceAttribute</code> action on the mount target''s network interface. </p> </li> </ul>'
       operationId: ModifyMountTargetSecurityGroups
-      parameters:
-        - description: The ID of the mount target whose security groups you want to modify.
-          in: path
-          name: MountTargetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              SecurityGroups:
-                description: An array of up to five VPC security group IDs.
-                items:
-                  $ref: '#/definitions/SecurityGroup'
-                maxItems: 5
-                type: array
-            type: object
+      description: '<p>Modifies the set of security groups in effect for a mount target.</p> <p>When you create a mount target, Amazon EFS also creates a new network interface. For more information, see <a>CreateMountTarget</a>. This operation replaces the security groups in effect for the network interface associated with a mount target, with the <code>SecurityGroups</code> provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not <code>deleted</code>. </p> <p>The operation requires permissions for the following actions:</p> <ul> <li> <p> <code>elasticfilesystem:ModifyMountTargetSecurityGroups</code> action on the mount target''s file system. </p> </li> <li> <p> <code>ec2:ModifyNetworkInterfaceAttribute</code> action on the mount target''s network interface. </p> </li> </ul>'
       responses:
         '204':
           description: Success
@@ -743,27 +796,28 @@ paths:
           description: SecurityGroupNotFound
           schema:
             $ref: '#/definitions/SecurityGroupNotFound'
+      parameters:
+        - name: MountTargetId
+          in: path
+          required: true
+          description: The ID of the mount target whose security groups you want to modify.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              SecurityGroups:
+                description: An array of up to five VPC security group IDs.
+                type: array
+                items:
+                  $ref: '#/definitions/SecurityGroup'
+                maxItems: 5
   '/2015-02-01/tags/{FileSystemId}/':
     get:
-      description: '<p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>'
       operationId: DescribeTags
-      parameters:
-        - description: '(Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 tags.'
-          in: query
-          minimum: 1
-          name: MaxItems
-          required: false
-          type: integer
-        - description: '(Optional) An opaque pagination token returned from a previous <code>DescribeTags</code> operation (String). If present, it specifies to continue the list from where the previous call left off.'
-          in: query
-          name: Marker
-          required: false
-          type: string
-        - description: The ID of the file system whose tag set you want to retrieve.
-          in: path
-          name: FileSystemId
-          required: true
-          type: string
+      description: '<p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -781,6 +835,23 @@ paths:
           description: FileSystemNotFound
           schema:
             $ref: '#/definitions/FileSystemNotFound'
+      parameters:
+        - name: MaxItems
+          in: query
+          required: false
+          description: '(Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 tags.'
+          type: integer
+          minimum: 1
+        - name: Marker
+          in: query
+          required: false
+          description: '(Optional) An opaque pagination token returned from a previous <code>DescribeTags</code> operation (String). If present, it specifies to continue the list from where the previous call left off.'
+          type: string
+        - name: FileSystemId
+          in: path
+          required: true
+          description: The ID of the file system whose tag set you want to retrieve.
+          type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -790,90 +861,153 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AwsAccountId:
-    type: string
-  BadRequest: {}
-  CreateFileSystemRequest:
+  FileSystemDescription:
+    type: object
+    required:
+      - OwnerId
+      - CreationToken
+      - FileSystemId
+      - CreationTime
+      - LifeCycleState
+      - NumberOfMountTargets
+      - SizeInBytes
+      - PerformanceMode
+      - Tags
+    example:
+      CreationTime: '1481841524.0'
+      CreationToken: tokenstring
+      FileSystemId: fs-01234567
+      LifeCycleState: creating
+      NumberOfMountTargets: 0
+      OwnerId: 012345678912
+      PerformanceMode: generalPurpose
+      SizeInBytes:
+        Value: 0
+      Tags:
+        - Key: Name
+          Value: MyFileSystem
     properties:
+      OwnerId:
+        $ref: '#/definitions/AwsAccountId'
+        description: 'The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.'
       CreationToken:
         $ref: '#/definitions/CreationToken'
-        description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
-      Encrypted:
-        $ref: '#/definitions/Encrypted'
-        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
-      PerformanceMode:
-        $ref: '#/definitions/PerformanceMode'
-        description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
-      ThroughputMode:
-        $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
-    required:
-      - CreationToken
-    type: object
-  CreateMountTargetRequest:
-    description: <p/>
-    properties:
+        description: The opaque string specified in the request.
       FileSystemId:
         $ref: '#/definitions/FileSystemId'
-        description: The ID of the file system for which to create the mount target.
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: Valid IPv4 address within the address range of the specified subnet.
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of the subnet to add the mount target in.
-    required:
-      - FileSystemId
-      - SubnetId
-    type: object
-  CreateTagsRequest:
-    description: <p/>
-    properties:
+        description: 'The ID of the file system, assigned by Amazon EFS.'
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).'
+      LifeCycleState:
+        $ref: '#/definitions/LifeCycleState'
+        description: The lifecycle phase of the file system.
+      Name:
+        $ref: '#/definitions/TagValue'
+        description: 'You can add tags to a file system, including a <code>Name</code> tag. For more information, see <a>CreateFileSystem</a>. If the file system has a <code>Name</code> tag, Amazon EFS returns the value in this field. '
+      NumberOfMountTargets:
+        $ref: '#/definitions/MountTargetCount'
+        description: 'The current number of mount targets that the file system has. For more information, see <a>CreateMountTarget</a>.'
+      SizeInBytes:
+        $ref: '#/definitions/FileSystemSize'
+        description: 'The latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. The <code>Timestamp</code> value is the integer number of seconds since 1970-01-01T00:00:00Z. The <code>SizeInBytes</code> value doesn''t represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, <code>SizeInBytes</code> represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. '
+      PerformanceMode:
+        $ref: '#/definitions/PerformanceMode'
+        description: The performance mode of the file system.
+      Encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'A Boolean value that, if true, indicates that the file system is encrypted.'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+      ThroughputMode:
+        $ref: '#/definitions/ThroughputMode'
+        description: 'The throughput mode for a file system. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. '
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
       Tags:
         $ref: '#/definitions/Tags'
-        description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+        description: 'The tags associated with the file system, presented as an array of <code>Tag</code> objects.'
+    description: A description of the file system.
+  Tag:
+    type: object
     required:
-      - Tags
-    type: object
-  CreationToken:
-    maxLength: 64
-    minLength: 1
-    type: string
-  DeleteFileSystemRequest:
-    description: <p/>
-    properties: {}
-    type: object
-  DeleteMountTargetRequest:
-    description: <p/>
-    properties: {}
-    type: object
-  DeleteTagsRequest:
-    description: <p/>
+      - Key
+      - Value
     properties:
-      TagKeys:
-        $ref: '#/definitions/TagKeys'
-        description: A list of tag keys to delete.
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'The tag key (String). The key can''t start with <code>aws:</code>.'
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value of the tag key.
+    description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> '
+  BadRequest: {}
+  InternalServerError: {}
+  FileSystemAlreadyExists: {}
+  FileSystemLimitExceeded: {}
+  InsufficientThroughputCapacity: {}
+  ThroughputLimitExceeded: {}
+  MountTargetDescription:
+    type: object
     required:
-      - TagKeys
-    type: object
+      - MountTargetId
+      - FileSystemId
+      - SubnetId
+      - LifeCycleState
+    example:
+      FileSystemId: fs-01234567
+      IpAddress: 192.0.0.2
+      LifeCycleState: creating
+      MountTargetId: fsmt-12340abc
+      NetworkInterfaceId: eni-cedf6789
+      OwnerId: 012345678912
+      SubnetId: subnet-1234abcd
+    properties:
+      OwnerId:
+        $ref: '#/definitions/AwsAccountId'
+        description: AWS account ID that owns the resource.
+      MountTargetId:
+        $ref: '#/definitions/MountTargetId'
+        description: System-assigned mount target ID.
+      FileSystemId:
+        $ref: '#/definitions/FileSystemId'
+        description: The ID of the file system for which the mount target is intended.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the mount target's subnet.
+      LifeCycleState:
+        $ref: '#/definitions/LifeCycleState'
+        description: Lifecycle state of the mount target.
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: Address at which the file system can be mounted by using the mount target.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: The ID of the network interface that Amazon EFS created when it created the mount target.
+    description: Provides a description of a mount target.
+  SecurityGroup:
+    type: string
+  FileSystemNotFound: {}
+  IncorrectFileSystemLifeCycleState: {}
+  MountTargetConflict: {}
+  SubnetNotFound: {}
+  NoFreeAddressesInSubnet: {}
+  IpAddressInUse: {}
+  NetworkInterfaceLimitExceeded: {}
+  SecurityGroupLimitExceeded: {}
+  SecurityGroupNotFound: {}
+  UnsupportedAvailabilityZone: {}
+  FileSystemInUse: {}
   DependencyTimeout: {}
-  DescribeFileSystemsRequest:
-    description: <p/>
-    properties: {}
-    type: object
+  MountTargetNotFound: {}
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
   DescribeFileSystemsResponse:
+    type: object
     example:
       FileSystems:
         - CreationTime: '1481841524.0'
@@ -890,24 +1024,28 @@ definitions:
             - Key: Name
               Value: MyFileSystem
     properties:
-      FileSystems:
-        $ref: '#/definitions/FileSystemDescriptions'
-        description: An array of file system descriptions.
       Marker:
         $ref: '#/definitions/Marker'
         description: Present if provided by caller in the request (String).
+      FileSystems:
+        $ref: '#/definitions/FileSystemDescriptions'
+        description: An array of file system descriptions.
       NextMarker:
         $ref: '#/definitions/Marker'
         description: Present if there are more file systems than returned in the response (String). You can use the <code>NextMarker</code> in the subsequent request to fetch the descriptions.
+  LifecycleConfigurationDescription:
     type: object
-  DescribeLifecycleConfigurationRequest:
-    properties: {}
-    type: object
-  DescribeMountTargetSecurityGroupsRequest:
-    description: <p/>
-    properties: {}
-    type: object
+    example:
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
+    properties:
+      LifecyclePolicies:
+        $ref: '#/definitions/LifecyclePolicies'
+        description: 'An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.'
   DescribeMountTargetSecurityGroupsResponse:
+    type: object
+    required:
+      - SecurityGroups
     example:
       SecurityGroups:
         - sg-fghi4567
@@ -915,15 +1053,9 @@ definitions:
       SecurityGroups:
         $ref: '#/definitions/SecurityGroups'
         description: An array of security groups.
-    required:
-      - SecurityGroups
-    type: object
-  DescribeMountTargetsRequest:
-    description: <p/>
-    properties: {}
-    type: object
+  IncorrectMountTargetState: {}
   DescribeMountTargetsResponse:
-    description: <p/>
+    type: object
     example:
       MountTargets:
         - FileSystemId: fs-01234567
@@ -943,13 +1075,11 @@ definitions:
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'If a value is present, there are more mount targets to return. In a subsequent request, you can provide <code>Marker</code> in your request with this value to retrieve the next set of mount targets.'
-    type: object
-  DescribeTagsRequest:
     description: <p/>
-    properties: {}
-    type: object
   DescribeTagsResponse:
-    description: <p/>
+    type: object
+    required:
+      - Tags
     example:
       Tags:
         - Key: Name
@@ -958,376 +1088,246 @@ definitions:
       Marker:
         $ref: '#/definitions/Marker'
         description: 'If the request included a <code>Marker</code>, the response returns that value in this field.'
-      NextMarker:
-        $ref: '#/definitions/Marker'
-        description: 'If a value is present, there are more tags to return. In a subsequent request, you can provide the value of <code>NextMarker</code> as the value of the <code>Marker</code> parameter in your next request to retrieve the next set of tags.'
       Tags:
         $ref: '#/definitions/Tags'
         description: 'Returns tags associated with the file system as an array of <code>Tag</code> objects. '
-    required:
-      - Tags
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'If a value is present, there are more tags to return. In a subsequent request, you can provide the value of <code>NextMarker</code> as the value of the <code>Marker</code> parameter in your next request to retrieve the next set of tags.'
+    description: <p/>
+  LifecyclePolicy:
     type: object
+    properties:
+      TransitionToIA:
+        $ref: '#/definitions/TransitionToIARules'
+        description: ' A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don''t count as file access events.'
+    description: Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
+  TooManyRequests: {}
+  AwsAccountId:
+    type: string
+  CreationToken:
+    type: string
+    minLength: 1
+    maxLength: 64
+  PerformanceMode:
+    type: string
+    enum:
+      - generalPurpose
+      - maxIO
   Encrypted:
     type: boolean
-  FileSystemAlreadyExists: {}
-  FileSystemDescription:
-    description: A description of the file system.
-    example:
-      CreationTime: '1481841524.0'
-      CreationToken: tokenstring
-      FileSystemId: fs-01234567
-      LifeCycleState: creating
-      NumberOfMountTargets: 0
-      OwnerId: 012345678912
-      PerformanceMode: generalPurpose
-      SizeInBytes:
-        Value: 0
-      Tags:
-        - Key: Name
-          Value: MyFileSystem
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ThroughputMode:
+    type: string
+    enum:
+      - bursting
+      - provisioned
+  ProvisionedThroughputInMibps:
+    type: number
+    format: double
+    minimum: 1
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  CreateFileSystemRequest:
+    type: object
+    required:
+      - CreationToken
     properties:
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).'
       CreationToken:
         $ref: '#/definitions/CreationToken'
-        description: The opaque string specified in the request.
-      Encrypted:
-        $ref: '#/definitions/Encrypted'
-        description: 'A Boolean value that, if true, indicates that the file system is encrypted.'
-      FileSystemId:
-        $ref: '#/definitions/FileSystemId'
-        description: 'The ID of the file system, assigned by Amazon EFS.'
-      KmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
-      LifeCycleState:
-        $ref: '#/definitions/LifeCycleState'
-        description: The lifecycle phase of the file system.
-      Name:
-        $ref: '#/definitions/TagValue'
-        description: 'You can add tags to a file system, including a <code>Name</code> tag. For more information, see <a>CreateFileSystem</a>. If the file system has a <code>Name</code> tag, Amazon EFS returns the value in this field. '
-      NumberOfMountTargets:
-        $ref: '#/definitions/MountTargetCount'
-        description: 'The current number of mount targets that the file system has. For more information, see <a>CreateMountTarget</a>.'
-      OwnerId:
-        $ref: '#/definitions/AwsAccountId'
-        description: 'The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.'
+        description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
       PerformanceMode:
         $ref: '#/definitions/PerformanceMode'
-        description: The performance mode of the file system.
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: 'The throughput, measured in MiB/s, that you want to provision for a file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The limit on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
-      SizeInBytes:
-        $ref: '#/definitions/FileSystemSize'
-        description: 'The latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. The <code>Timestamp</code> value is the integer number of seconds since 1970-01-01T00:00:00Z. The <code>SizeInBytes</code> value doesn''t represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, <code>SizeInBytes</code> represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. '
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: 'The tags associated with the file system, presented as an array of <code>Tag</code> objects.'
+        description: The performance mode of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
+      Encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don''t specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>'
       ThroughputMode:
         $ref: '#/definitions/ThroughputMode'
-        description: 'The throughput mode for a file system. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. '
-    required:
-      - OwnerId
-      - CreationToken
-      - FileSystemId
-      - CreationTime
-      - LifeCycleState
-      - NumberOfMountTargets
-      - SizeInBytes
-      - PerformanceMode
-      - Tags
-    type: object
-  FileSystemDescriptions:
-    items:
-      $ref: '#/definitions/FileSystemDescription'
-    type: array
+        description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: 'The throughput, measured in MiB/s, that you want to provision for a file system that you''re creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. You can get this limit increased by contacting AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a> in the <i>Amazon EFS User Guide.</i> '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
   FileSystemId:
     type: string
-  FileSystemInUse: {}
-  FileSystemLimitExceeded: {}
-  FileSystemNotFound: {}
-  FileSystemNullableSizeValue:
-    minimum: 0
-    type: integer
-  FileSystemSize:
-    description: 'The latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. The value doesn''t represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value represents the actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not necessarily the exact size the file system was at any instant in time.'
-    properties:
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time at which the size of data, returned in the <code>Value</code> field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.'
-      Value:
-        $ref: '#/definitions/FileSystemSizeValue'
-        description: The latest known metered size (in bytes) of data stored in the file system.
-      ValueInIA:
-        $ref: '#/definitions/FileSystemNullableSizeValue'
-        description: The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
-      ValueInStandard:
-        $ref: '#/definitions/FileSystemNullableSizeValue'
-        description: The latest known metered size (in bytes) of data stored in the Standard storage class.
-    required:
-      - Value
-    type: object
-  FileSystemSizeValue:
-    minimum: 0
-    type: integer
-  IncorrectFileSystemLifeCycleState: {}
-  IncorrectMountTargetState: {}
-  InsufficientThroughputCapacity: {}
-  InternalServerError: {}
+  SubnetId:
+    type: string
   IpAddress:
     type: string
-  IpAddressInUse: {}
-  KmsKeyId:
-    maxLength: 2048
-    minLength: 1
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroup'
+    maxItems: 5
+  CreateMountTargetRequest:
+    type: object
+    required:
+      - FileSystemId
+      - SubnetId
+    properties:
+      FileSystemId:
+        $ref: '#/definitions/FileSystemId'
+        description: The ID of the file system for which to create the mount target.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of the subnet to add the mount target in.
+      IpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: Valid IPv4 address within the address range of the specified subnet.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
+    description: <p/>
+  CreateTagsRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: 'An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair. '
+    description: <p/>
+  DeleteFileSystemRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  MountTargetId:
     type: string
+  DeleteMountTargetRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  DeleteTagsRequest:
+    type: object
+    required:
+      - TagKeys
+    properties:
+      TagKeys:
+        $ref: '#/definitions/TagKeys'
+        description: A list of tag keys to delete.
+    description: <p/>
+  MaxItems:
+    type: integer
+    minimum: 1
+  Marker:
+    type: string
+  DescribeFileSystemsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  FileSystemDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/FileSystemDescription'
+  DescribeLifecycleConfigurationRequest:
+    type: object
+    properties: {}
+  DescribeMountTargetSecurityGroupsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  DescribeMountTargetsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  MountTargetDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/MountTargetDescription'
+  DescribeTagsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  Timestamp:
+    type: string
+    format: date-time
   LifeCycleState:
+    type: string
     enum:
       - creating
       - available
       - updating
       - deleting
       - deleted
+  TagValue:
     type: string
-  LifecycleConfigurationDescription:
-    example:
-      LifecyclePolicies:
-        - TransitionToIA: AFTER_30_DAYS
-    properties:
-      LifecyclePolicies:
-        $ref: '#/definitions/LifecyclePolicies'
-        description: 'An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.'
+    maxLength: 256
+  MountTargetCount:
+    type: integer
+    minimum: 0
+  FileSystemSize:
     type: object
+    required:
+      - Value
+    properties:
+      Value:
+        $ref: '#/definitions/FileSystemSizeValue'
+        description: The latest known metered size (in bytes) of data stored in the file system.
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time at which the size of data, returned in the <code>Value</code> field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.'
+      ValueInIA:
+        $ref: '#/definitions/FileSystemNullableSizeValue'
+        description: The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
+      ValueInStandard:
+        $ref: '#/definitions/FileSystemNullableSizeValue'
+        description: The latest known metered size (in bytes) of data stored in the Standard storage class.
+    description: 'The latest known metered size (in bytes) of data stored in the file system, in its <code>Value</code> field, and the time at which that size was determined in its <code>Timestamp</code> field. The value doesn''t represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, the value represents the actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not necessarily the exact size the file system was at any instant in time.'
+  FileSystemNullableSizeValue:
+    type: integer
+    minimum: 0
+  FileSystemSizeValue:
+    type: integer
+    minimum: 0
   LifecyclePolicies:
+    type: array
     items:
       $ref: '#/definitions/LifecyclePolicy'
-    type: array
-  LifecyclePolicy:
-    description: Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
-    properties:
-      TransitionToIA:
-        $ref: '#/definitions/TransitionToIARules'
-        description: ' A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don''t count as file access events.'
-    type: object
-  Marker:
-    type: string
-  MaxItems:
-    minimum: 1
-    type: integer
-  ModifyMountTargetSecurityGroupsRequest:
-    description: <p/>
-    properties:
-      SecurityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: An array of up to five VPC security group IDs.
-    type: object
-  MountTargetConflict: {}
-  MountTargetCount:
-    minimum: 0
-    type: integer
-  MountTargetDescription:
-    description: Provides a description of a mount target.
-    example:
-      FileSystemId: fs-01234567
-      IpAddress: 192.0.0.2
-      LifeCycleState: creating
-      MountTargetId: fsmt-12340abc
-      NetworkInterfaceId: eni-cedf6789
-      OwnerId: 012345678912
-      SubnetId: subnet-1234abcd
-    properties:
-      FileSystemId:
-        $ref: '#/definitions/FileSystemId'
-        description: The ID of the file system for which the mount target is intended.
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: Address at which the file system can be mounted by using the mount target.
-      LifeCycleState:
-        $ref: '#/definitions/LifeCycleState'
-        description: Lifecycle state of the mount target.
-      MountTargetId:
-        $ref: '#/definitions/MountTargetId'
-        description: System-assigned mount target ID.
-      NetworkInterfaceId:
-        $ref: '#/definitions/NetworkInterfaceId'
-        description: The ID of the network interface that Amazon EFS created when it created the mount target.
-      OwnerId:
-        $ref: '#/definitions/AwsAccountId'
-        description: AWS account ID that owns the resource.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of the mount target's subnet.
-    required:
-      - MountTargetId
-      - FileSystemId
-      - SubnetId
-      - LifeCycleState
-    type: object
-  MountTargetDescriptions:
-    items:
-      $ref: '#/definitions/MountTargetDescription'
-    type: array
-  MountTargetId:
-    type: string
-  MountTargetNotFound: {}
-  NetworkInterfaceId:
-    type: string
-  NetworkInterfaceLimitExceeded: {}
-  NoFreeAddressesInSubnet: {}
-  PerformanceMode:
-    enum:
-      - generalPurpose
-      - maxIO
-    type: string
-  ProvisionedThroughputInMibps:
-    format: double
-    minimum: 1
-    type: number
-  PutLifecycleConfigurationRequest:
-    properties:
-      LifecyclePolicies:
-        $ref: '#/definitions/LifecyclePolicies'
-        description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
-    required:
-      - LifecyclePolicies
-    type: object
-  SecurityGroup:
-    type: string
-  SecurityGroupLimitExceeded: {}
-  SecurityGroupNotFound: {}
-  SecurityGroups:
-    items:
-      $ref: '#/definitions/SecurityGroup'
-    maxItems: 5
-    type: array
-  SubnetId:
-    type: string
-  SubnetNotFound: {}
-  Tag:
-    description: 'A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> '
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: 'The tag key (String). The key can''t start with <code>aws:</code>.'
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value of the tag key.
-    required:
-      - Key
-      - Value
-    type: object
-  TagKey:
-    maxLength: 128
-    minLength: 1
-    type: string
-  TagKeys:
-    items:
-      $ref: '#/definitions/TagKey'
-    type: array
-  TagValue:
-    maxLength: 256
-    type: string
-  Tags:
-    items:
-      $ref: '#/definitions/Tag'
-    type: array
-  ThroughputLimitExceeded: {}
-  ThroughputMode:
-    enum:
-      - bursting
-      - provisioned
-    type: string
-  Timestamp:
-    format: date-time
-    type: string
-  TooManyRequests: {}
   TransitionToIARules:
+    type: string
     enum:
       - AFTER_14_DAYS
       - AFTER_30_DAYS
       - AFTER_60_DAYS
       - AFTER_90_DAYS
-    type: string
-  UnsupportedAvailabilityZone: {}
-  UpdateFileSystemRequest:
+  ModifyMountTargetSecurityGroupsRequest:
+    type: object
     properties:
-      ProvisionedThroughputInMibps:
-        $ref: '#/definitions/ProvisionedThroughputInMibps'
-        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: An array of up to five VPC security group IDs.
+    description: <p/>
+  NetworkInterfaceId:
+    type: string
+  PutLifecycleConfigurationRequest:
+    type: object
+    required:
+      - LifecyclePolicies
+    properties:
+      LifecyclePolicies:
+        $ref: '#/definitions/LifecyclePolicies'
+        description: An array of <code>LifecyclePolicy</code> objects that define the file system's <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+  UpdateFileSystemRequest:
+    type: object
+    properties:
       ThroughputMode:
         $ref: '#/definitions/ThroughputMode'
         description: '(Optional) The throughput mode that you want your file system to use. If you''re not updating your throughput mode, you don''t need to provide this value in your request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.'
-    type: object
-x-servers:
-  - description: The EFS multi-region endpoint
-    url: 'http://elasticfilesystem.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The EFS multi-region endpoint
-    url: 'https://elasticfilesystem.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The EFS endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://elasticfilesystem.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The EFS endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://elasticfilesystem.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+      ProvisionedThroughputInMibps:
+        $ref: '#/definitions/ProvisionedThroughputInMibps'
+        description: '(Optional) The amount of throughput, in MiB/s, that you want to provision for your file system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. If you''re not updating the amount of provisioned throughput for your file system, you don''t need to provide this value in your request. '

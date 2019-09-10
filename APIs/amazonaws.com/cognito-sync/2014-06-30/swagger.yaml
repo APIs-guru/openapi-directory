@@ -1,213 +1,168 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: cognito-sync.amazonaws.com
-basePath: /
 info:
+  version: '2014-06-30'
+  x-release: v4
+  title: Amazon Cognito Sync
+  description: '<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it''s available even if the device is offline. Developer credentials don''t need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p> <p>With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html">Amazon Cognito Identity service</a>.</p> <p>If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href="http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html">Developer Guide for Android</a> and the <a href="http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html">Developer Guide for iOS</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it''s available even if the device is offline. Developer credentials don''t need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p> <p>With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html">Amazon Cognito Identity service</a>.</p> <p>If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href="http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html">Developer Guide for Android</a> and the <a href="http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html">Developer Guide for iOS</a>.</p>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Amazon Cognito Sync
-  version: '2014-06-30'
+  x-providerName: amazonaws.com
+  x-serviceName: cognito-sync
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cognito-sync-2014-06-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cognito-sync-2014-06-30.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: cognito-sync
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/cognito-sync/'
+host: cognito-sync.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://cognito-sync.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Cognito Sync multi-region endpoint
+  - url: 'https://cognito-sync.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Amazon Cognito Sync multi-region endpoint
+  - url: 'http://cognito-sync.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Cognito Sync endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cognito-sync.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Cognito Sync endpoint for China (Beijing) and China (Ningxia)
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
-  /identitypools:
-    get:
-      description: <p>Gets a list of identity pools registered with Cognito.</p> <p>ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.</p>
-      operationId: ListIdentityPoolUsage
-      parameters:
-        - description: A pagination token for obtaining the next page of results.
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: The maximum number of results to be returned.
-          in: query
-          name: maxResults
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListIdentityPoolUsageResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/identitypools/{IdentityPoolId}':
-    get:
-      description: '<p>Gets usage details (for example, data storage) about a particular identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
-      operationId: DescribeIdentityPoolUsage
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeIdentityPoolUsageResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/identitypools/{IdentityPoolId}/bulkpublish':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
       operationId: BulkPublish
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
+      description: '<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
       responses:
         '200':
           description: Success
@@ -215,412 +170,33 @@ paths:
             $ref: '#/definitions/BulkPublishResponse'
         '400':
           description: AlreadyStreamedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/AlreadyStreamedException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-  '/identitypools/{IdentityPoolId}/configuration':
-    get:
-      description: <p>Gets the configuration settings of an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
-      operationId: GetIdentityPoolConfiguration
       parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool for which to return a configuration.'
+        - name: IdentityPoolId
           in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
           pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetIdentityPoolConfigurationResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: <p>Sets the necessary configuration for push sync.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
-      operationId: SetIdentityPoolConfiguration
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool to modify.'
-          in: path
-          maxLength: 55
           minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              CognitoStreams:
-                description: Configuration options for configure Cognito streams.
-                properties:
-                  RoleArn:
-                    $ref: '#/definitions/AssumeRoleArn'
-                    description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
-                  StreamName:
-                    $ref: '#/definitions/StreamName'
-                    description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
-                  StreamingStatus:
-                    $ref: '#/definitions/StreamingStatus'
-                    description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
-                type: object
-              PushSync:
-                description: Configuration options to be applied to the identity pool.
-                properties:
-                  ApplicationArns:
-                    $ref: '#/definitions/ApplicationArnList'
-                    description: List of SNS platform application ARNs that could be used by clients.
-                  RoleArn:
-                    $ref: '#/definitions/AssumeRoleArn'
-                    description: A role configured to allow Cognito to call SNS on behalf of the developer.
-                type: object
-            type: object
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/SetIdentityPoolConfigurationResponse'
-        '400':
-          description: ConcurrentModificationException
-          schema:
-            $ref: '#/definitions/ConcurrentModificationException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-  '/identitypools/{IdentityPoolId}/events':
-    get:
-      description: <p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
-      operationId: GetCognitoEvents
-      parameters:
-        - description: The Cognito Identity Pool ID for the request
-          in: path
           maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetCognitoEventsResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: '<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
-      operationId: SetCognitoEvents
-      parameters:
-        - description: The Cognito Identity Pool to use when configuring Cognito Events
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Events:
-                additionalProperties:
-                  $ref: '#/definitions/LambdaFunctionArn'
-                description: The events to configure
-                maxProperties: 1
-                type: object
-            required:
-              - Events
-            type: object
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-  '/identitypools/{IdentityPoolId}/getBulkPublishDetails':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: <p>Get the status of the last BulkPublish operation for an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
-      operationId: GetBulkPublishDetails
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/GetBulkPublishDetailsResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-  '/identitypools/{IdentityPoolId}/identities/{IdentityId}':
-    get:
-      description: '<p>Gets usage information for an identity, including number of datasets and data usage.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
-      operationId: DescribeIdentityUsage
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeIdentityUsageResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets':
-    get:
-      description: '<p>Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.</p>'
-      operationId: ListDatasets
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: A pagination token for obtaining the next page of results.
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: The maximum number of results to be returned.
-          in: query
-          name: maxResults
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListDatasetsResponse'
-        '400':
-          description: InvalidParameterException
-          schema:
-            $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -631,33 +207,8 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}':
     delete:
-      description: '<p>Deletes the specific dataset. The dataset will be deleted permanently, and the action can''t be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
       operationId: DeleteDataset
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: DatasetName
-          pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
+      description: '<p>Deletes the specific dataset. The dataset will be deleted permanently, and the action can''t be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
       responses:
         '200':
           description: Success
@@ -665,62 +216,70 @@ paths:
             $ref: '#/definitions/DeleteDatasetResponse'
         '400':
           description: InvalidParameterException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
         '409':
           description: ResourceConflictException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceConflictException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    get:
-      description: '<p>Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>'
-      operationId: DescribeDataset
       parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+        - name: IdentityPoolId
           in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
           required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
           type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
           pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-          in: path
-          maxLength: 128
           minLength: 1
-          name: DatasetName
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
           pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
+          minLength: 1
+          maxLength: 128
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDataset
+      description: '<p>Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>'
       responses:
         '200':
           description: Success
@@ -728,29 +287,342 @@ paths:
             $ref: '#/definitions/DescribeDatasetResponse'
         '400':
           description: InvalidParameterException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+    post:
+      operationId: UpdateRecords
+      description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRecordsResponse'
+        '400':
+          description: InvalidLambdaFunctionOutputException
           x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidLambdaFunctionOutputException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '409':
+          description: ResourceConflictException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: x-amz-Client-Context
+          in: header
+          required: false
+          description: Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods. The ClientContext field is not yet implemented.
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - SyncSessionToken
+            properties:
+              DeviceId:
+                description: The unique ID generated for this device by Cognito.
+                type: string
+                minLength: 1
+                maxLength: 256
+              RecordPatches:
+                description: A list of patch operations.
+                type: array
+                items:
+                  $ref: '#/definitions/RecordPatch'
+              SyncSessionToken:
+                description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+                type: string
+  '/identitypools/{IdentityPoolId}':
+    get:
+      operationId: DescribeIdentityPoolUsage
+      description: '<p>Gets usage details (for example, data storage) about a particular identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIdentityPoolUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}':
+    get:
+      operationId: DescribeIdentityUsage
+      description: '<p>Gets usage information for an identity, including number of datasets and data usage.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIdentityUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/getBulkPublishDetails':
+    post:
+      operationId: GetBulkPublishDetails
+      description: <p>Get the status of the last BulkPublish operation for an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBulkPublishDetailsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/events':
+    get:
+      operationId: GetCognitoEvents
+      description: <p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCognitoEventsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: The Cognito Identity Pool ID for the request
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -760,143 +632,297 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
-      operationId: UpdateRecords
+      operationId: SetCognitoEvents
+      description: '<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
       parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+        - name: IdentityPoolId
           in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
+          required: true
+          description: The Cognito Identity Pool to use when configuring Cognito Events
+          type: string
           pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
+          minLength: 1
           maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: DatasetName
-          pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
-        - description: Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods. The ClientContext field is not yet implemented.
-          in: header
-          name: x-amz-Client-Context
-          required: false
-          type: string
-        - in: body
-          name: body
+        - name: body
+          in: body
           required: true
           schema:
-            properties:
-              DeviceId:
-                description: The unique ID generated for this device by Cognito.
-                maxLength: 256
-                minLength: 1
-                type: string
-              RecordPatches:
-                description: A list of patch operations.
-                items:
-                  $ref: '#/definitions/RecordPatch'
-                type: array
-              SyncSessionToken:
-                description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
-                type: string
-            required:
-              - SyncSessionToken
             type: object
+            required:
+              - Events
+            properties:
+              Events:
+                description: The events to configure
+                type: object
+                maxProperties: 1
+                additionalProperties:
+                  $ref: '#/definitions/LambdaFunctionArn'
+  '/identitypools/{IdentityPoolId}/configuration':
+    get:
+      operationId: GetIdentityPoolConfiguration
+      description: <p>Gets the configuration settings of an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/UpdateRecordsResponse'
+            $ref: '#/definitions/GetIdentityPoolConfigurationResponse'
         '400':
-          description: InvalidLambdaFunctionOutputException
-          schema:
-            $ref: '#/definitions/InvalidLambdaFunctionOutputException'
+          description: InvalidParameterException
           x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '409':
-          description: ResourceConflictException
-          schema:
-            $ref: '#/definitions/ResourceConflictException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool for which to return a configuration.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: SetIdentityPoolConfiguration
+      description: <p>Sets the necessary configuration for push sync.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetIdentityPoolConfigurationResponse'
+        '400':
+          description: ConcurrentModificationException
           x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This is the ID of the pool to modify.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              PushSync:
+                description: Configuration options to be applied to the identity pool.
+                type: object
+                properties:
+                  ApplicationArns:
+                    $ref: '#/definitions/ApplicationArnList'
+                    description: List of SNS platform application ARNs that could be used by clients.
+                  RoleArn:
+                    $ref: '#/definitions/AssumeRoleArn'
+                    description: A role configured to allow Cognito to call SNS on behalf of the developer.
+              CognitoStreams:
+                description: Configuration options for configure Cognito streams.
+                type: object
+                properties:
+                  StreamName:
+                    $ref: '#/definitions/StreamName'
+                    description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+                  RoleArn:
+                    $ref: '#/definitions/AssumeRoleArn'
+                    description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+                  StreamingStatus:
+                    $ref: '#/definitions/StreamingStatus'
+                    description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets':
+    get:
+      operationId: ListDatasets
+      description: '<p>Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDatasetsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /identitypools:
+    get:
+      operationId: ListIdentityPoolUsage
+      description: <p>Gets a list of identity pools registered with Cognito.</p> <p>ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListIdentityPoolUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records':
     get:
-      description: '<p>Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>'
       operationId: ListRecords
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: DatasetName
-          pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
-        - description: The last server sync count for this record.
-          in: query
-          name: lastSyncCount
-          required: false
-          type: integer
-        - description: A pagination token for obtaining the next page of results.
-          in: query
-          name: nextToken
-          required: false
-          type: string
-        - description: The maximum number of results to be returned.
-          in: query
-          name: maxResults
-          required: false
-          type: integer
-        - description: 'A token containing a session ID, identity ID, and expiration.'
-          in: query
-          name: syncSessionToken
-          required: false
-          type: string
+      description: '<p>Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>'
       responses:
         '200':
           description: Success
@@ -904,24 +930,148 @@ paths:
             $ref: '#/definitions/ListRecordsResponse'
         '400':
           description: InvalidParameterException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidParameterException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: lastSyncCount
+          in: query
+          required: false
+          description: The last server sync count for this record.
+          type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token for obtaining the next page of results.
+          type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned.
+          type: integer
+        - name: syncSessionToken
+          in: query
+          required: false
+          description: 'A token containing a session ID, identity ID, and expiration.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identity/{IdentityId}/device':
+    post:
+      operationId: RegisterDevice
+      description: <p>Registers a device to receive push sync notifications.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterDeviceResponse'
+        '400':
+          description: InvalidConfigurationException
           x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidConfigurationException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. Here, the ID of the pool that the identity belongs to.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: The unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - Platform
+              - Token
+            properties:
+              Platform:
+                description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
+                type: string
+                enum:
+                  - APNS
+                  - APNS_SANDBOX
+                  - GCM
+                  - ADM
+              Token:
+                description: The push token.
+                type: string
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -931,114 +1081,9 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}':
-    delete:
-      description: <p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
-      operationId: UnsubscribeFromDataset
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which this identity belongs.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: Unique ID for this identity.
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: The name of the dataset from which to unsubcribe.
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: DatasetName
-          pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
-        - description: The unique ID generated for this device by Cognito.
-          in: path
-          maxLength: 256
-          minLength: 1
-          name: DeviceId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UnsubscribeFromDatasetResponse'
-        '400':
-          description: InvalidConfigurationException
-          schema:
-            $ref: '#/definitions/InvalidConfigurationException'
-          x-aws-exception: true
-        '403':
-          description: NotAuthorizedException
-          schema:
-            $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
-        '404':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
-        '429':
-          description: TooManyRequestsException
-          schema:
-            $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
-        '500':
-          description: InternalErrorException
-          schema:
-            $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: <p>Subscribes to receive notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       operationId: SubscribeToDataset
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which the identity belongs.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: Unique ID for this identity.
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: The name of the dataset to subcribe to.
-          in: path
-          maxLength: 128
-          minLength: 1
-          name: DatasetName
-          pattern: '[a-zA-Z0-9_.:-]+'
-          required: true
-          type: string
-        - description: The unique ID generated for this device by Cognito.
-          in: path
-          maxLength: 256
-          minLength: 1
-          name: DeviceId
-          required: true
-          type: string
+      description: <p>Subscribes to receive notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       responses:
         '200':
           description: Success
@@ -1046,30 +1091,61 @@ paths:
             $ref: '#/definitions/SubscribeToDatasetResponse'
         '400':
           description: InvalidConfigurationException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidConfigurationException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
-  '/identitypools/{IdentityPoolId}/identity/{IdentityId}/device':
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which the identity belongs.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: Unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: The name of the dataset to subcribe to.
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: DeviceId
+          in: path
+          required: true
+          description: The unique ID generated for this device by Cognito.
+          type: string
+          minLength: 1
+          maxLength: 256
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1078,457 +1154,259 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      description: <p>Registers a device to receive push sync notifications.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
-      operationId: RegisterDevice
-      parameters:
-        - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. Here, the ID of the pool that the identity belongs to.'
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityPoolId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - description: The unique ID for this identity.
-          in: path
-          maxLength: 55
-          minLength: 1
-          name: IdentityId
-          pattern: '[\w-]+:[0-9a-f-]+'
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              Platform:
-                description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
-                enum:
-                  - APNS
-                  - APNS_SANDBOX
-                  - GCM
-                  - ADM
-                type: string
-              Token:
-                description: The push token.
-                type: string
-            required:
-              - Platform
-              - Token
-            type: object
+    delete:
+      operationId: UnsubscribeFromDataset
+      description: <p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/RegisterDeviceResponse'
+            $ref: '#/definitions/UnsubscribeFromDatasetResponse'
         '400':
           description: InvalidConfigurationException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidConfigurationException'
-          x-aws-exception: true
         '403':
           description: NotAuthorizedException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/NotAuthorizedException'
-          x-aws-exception: true
         '404':
           description: ResourceNotFoundException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-          x-aws-exception: true
         '429':
           description: TooManyRequestsException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-          x-aws-exception: true
         '500':
           description: InternalErrorException
+          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalErrorException'
-          x-aws-exception: true
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which this identity belongs.'
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: IdentityId
+          in: path
+          required: true
+          description: Unique ID for this identity.
+          type: string
+          pattern: '[\w-]+:[0-9a-f-]+'
+          minLength: 1
+          maxLength: 55
+        - name: DatasetName
+          in: path
+          required: true
+          description: The name of the dataset from which to unsubcribe.
+          type: string
+          pattern: '[a-zA-Z0-9_.:-]+'
+          minLength: 1
+          maxLength: 128
+        - name: DeviceId
+          in: path
+          required: true
+          description: The unique ID generated for this device by Cognito.
+          type: string
+          minLength: 1
+          maxLength: 256
 definitions:
-  AlreadyStreamedException:
-    description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The message associated with the AlreadyStreamedException exception.
-    required:
-      - message
-    type: object
-  ApplicationArn:
-    pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
-    type: string
-  ApplicationArnList:
-    items:
-      $ref: '#/definitions/ApplicationArn'
-    type: array
-  AssumeRoleArn:
-    maxLength: 2048
-    minLength: 20
-    pattern: 'arn:aws:iam::\d+:role/.*'
-    type: string
-  Boolean:
-    type: boolean
-  BulkPublishRequest:
-    description: The input for the BulkPublish operation.
-    properties: {}
-    type: object
   BulkPublishResponse:
-    description: The output for the BulkPublish operation.
+    type: object
     properties:
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+    description: The output for the BulkPublish operation.
+  NotAuthorizedException:
     type: object
-  BulkPublishStatus:
-    enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - FAILED
-      - SUCCEEDED
-    type: string
-  ClientContext:
-    type: string
-  CognitoEventType:
-    type: string
-  CognitoStreams:
-    description: Configuration options for configure Cognito streams.
-    properties:
-      RoleArn:
-        $ref: '#/definitions/AssumeRoleArn'
-        description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
-      StreamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
-      StreamingStatus:
-        $ref: '#/definitions/StreamingStatus'
-        description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
-    type: object
-  ConcurrentModificationException:
-    description: Thrown if there are parallel requests to modify a resource.
-    properties:
-      message:
-        $ref: '#/definitions/String'
-        description: The message returned by a ConcurrentModicationException.
     required:
       - message
-    type: object
-  Dataset:
-    description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
     properties:
-      CreationDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the dataset was created.
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Total size in bytes of the records in this dataset.
-      DatasetName:
-        $ref: '#/definitions/DatasetName'
-        description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      LastModifiedBy:
-        $ref: '#/definitions/String'
-        description: The device that made the last change to this dataset.
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date when the dataset was last modified.
-      NumRecords:
-        $ref: '#/definitions/Long'
-        description: Number of records in this dataset.
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message returned by a NotAuthorizedException.
+    description: Thrown when a user is not authorized to access the requested resource.
+  InvalidParameterException:
     type: object
-  DatasetList:
-    items:
-      $ref: '#/definitions/Dataset'
-    type: array
-  DatasetName:
-    maxLength: 128
-    minLength: 1
-    pattern: '[a-zA-Z0-9_.:-]+'
-    type: string
-  Date:
-    format: date-time
-    type: string
-  DeleteDatasetRequest:
-    description: A request to delete the specific dataset.
-    properties: {}
-    type: object
-  DeleteDatasetResponse:
-    description: Response to a successful DeleteDataset request.
+    required:
+      - message
     properties:
-      Dataset:
-        $ref: '#/definitions/Dataset'
-        description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by InvalidParameterException.
+    description: Thrown when a request parameter does not comply with the associated constraints.
+  ResourceNotFoundException:
     type: object
-  DescribeDatasetRequest:
-    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
-    properties: {}
-    type: object
-  DescribeDatasetResponse:
-    description: Response to a successful DescribeDataset request.
+    required:
+      - message
     properties:
-      Dataset:
-        $ref: '#/definitions/Dataset'
-        description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by a ResourceNotFoundException.
+    description: Thrown if the resource doesn't exist.
+  InternalErrorException:
     type: object
-  DescribeIdentityPoolUsageRequest:
-    description: A request for usage information about the identity pool.
-    properties: {}
-    type: object
-  DescribeIdentityPoolUsageResponse:
-    description: Response to a successful DescribeIdentityPoolUsage request.
+    required:
+      - message
     properties:
-      IdentityPoolUsage:
-        $ref: '#/definitions/IdentityPoolUsage'
-        description: Information about the usage of the identity pool.
-    type: object
-  DescribeIdentityUsageRequest:
-    description: A request for information about the usage of an identity pool.
-    properties: {}
-    type: object
-  DescribeIdentityUsageResponse:
-    description: The response to a successful DescribeIdentityUsage request.
-    properties:
-      IdentityUsage:
-        $ref: '#/definitions/IdentityUsage'
-        description: Usage information for the identity.
-    type: object
-  DeviceId:
-    maxLength: 256
-    minLength: 1
-    type: string
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by InternalErrorException.
+    description: Indicates an internal service error.
   DuplicateRequestException:
-    description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
+    type: object
+    required:
+      - message
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
         description: The message associated with the DuplicateRequestException exception.
+    description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
+  AlreadyStreamedException:
+    type: object
     required:
       - message
-    type: object
-  Events:
-    additionalProperties:
-      $ref: '#/definitions/LambdaFunctionArn'
-    maxProperties: 1
-    type: object
-  ExceptionMessage:
-    type: string
-  GetBulkPublishDetailsRequest:
-    description: The input for the GetBulkPublishDetails operation.
-    properties: {}
-    type: object
-  GetBulkPublishDetailsResponse:
-    description: The output for the GetBulkPublishDetails operation.
     properties:
-      BulkPublishCompleteTime:
-        $ref: '#/definitions/Date'
-        description: 'If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed.'
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message associated with the AlreadyStreamedException exception.
+    description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
+  DeleteDatasetResponse:
+    type: object
+    properties:
+      Dataset:
+        $ref: '#/definitions/Dataset'
+        description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+    description: Response to a successful DeleteDataset request.
+  TooManyRequestsException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by a TooManyRequestsException.
+    description: Thrown if the request is throttled.
+  ResourceConflictException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: The message returned by a ResourceConflictException.
+    description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
+  DescribeDatasetResponse:
+    type: object
+    properties:
+      Dataset:
+        $ref: '#/definitions/Dataset'
+        description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+    description: Response to a successful DescribeDataset request.
+  DescribeIdentityPoolUsageResponse:
+    type: object
+    properties:
+      IdentityPoolUsage:
+        $ref: '#/definitions/IdentityPoolUsage'
+        description: Information about the usage of the identity pool.
+    description: Response to a successful DescribeIdentityPoolUsage request.
+  DescribeIdentityUsageResponse:
+    type: object
+    properties:
+      IdentityUsage:
+        $ref: '#/definitions/IdentityUsage'
+        description: Usage information for the identity.
+    description: The response to a successful DescribeIdentityUsage request.
+  GetBulkPublishDetailsResponse:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
       BulkPublishStartTime:
         $ref: '#/definitions/Date'
         description: The date/time at which the last bulk publish was initiated.
+      BulkPublishCompleteTime:
+        $ref: '#/definitions/Date'
+        description: 'If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed.'
       BulkPublishStatus:
         $ref: '#/definitions/BulkPublishStatus'
         description: 'Status of the last bulk publish operation, valid values are: <p>NOT_STARTED - No bulk publish has been requested for this identity pool</p> <p>IN_PROGRESS - Data is being published to the configured stream</p> <p>SUCCEEDED - All data for the identity pool has been published to the configured stream</p> <p>FAILED - Some portion of the data has failed to publish, check FailureMessage for the cause.</p>'
       FailureMessage:
         $ref: '#/definitions/String'
         description: If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-    type: object
-  GetCognitoEventsRequest:
-    description: A request for a list of the configured Cognito Events
-    properties: {}
-    type: object
+    description: The output for the GetBulkPublishDetails operation.
   GetCognitoEventsResponse:
-    description: The response from the GetCognitoEvents request
+    type: object
     properties:
       Events:
         $ref: '#/definitions/Events'
         description: The Cognito Events returned from the GetCognitoEvents request
-    type: object
-  GetIdentityPoolConfigurationRequest:
-    description: The input for the GetIdentityPoolConfiguration operation.
-    properties: {}
-    type: object
+    description: The response from the GetCognitoEvents request
   GetIdentityPoolConfigurationResponse:
-    description: The output for the GetIdentityPoolConfiguration operation.
+    type: object
     properties:
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
       IdentityPoolId:
         $ref: '#/definitions/IdentityPoolId'
         description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
       PushSync:
         $ref: '#/definitions/PushSync'
         description: Options to apply to this identity pool for push synchronization.
-    type: object
-  IdentityId:
-    maxLength: 55
-    minLength: 1
-    pattern: '[\w-]+:[0-9a-f-]+'
-    type: string
-  IdentityPoolId:
-    maxLength: 55
-    minLength: 1
-    pattern: '[\w-]+:[0-9a-f-]+'
-    type: string
-  IdentityPoolUsage:
-    description: Usage information for the identity pool.
-    properties:
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Data storage information for the identity pool.
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the identity pool was last modified.
-      SyncSessionsCount:
-        $ref: '#/definitions/Long'
-        description: Number of sync sessions for the identity pool.
-    type: object
-  IdentityPoolUsageList:
-    items:
-      $ref: '#/definitions/IdentityPoolUsage'
-    type: array
-  IdentityUsage:
-    description: Usage information for the identity.
-    properties:
-      DataStorage:
-        $ref: '#/definitions/Long'
-        description: Total data storage for this identity.
-      DatasetCount:
-        $ref: '#/definitions/Integer'
-        description: Number of datasets for the identity.
-      IdentityId:
-        $ref: '#/definitions/IdentityId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: Date on which the identity was last modified.
-    type: object
-  Integer:
-    type: integer
-  IntegerString:
-    type: integer
-  InternalErrorException:
-    description: Indicates an internal service error.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InternalErrorException.
-    required:
-      - message
-    type: object
-  InvalidConfigurationException:
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InvalidConfigurationException.
-    required:
-      - message
-    type: object
-  InvalidLambdaFunctionOutputException:
-    description: The AWS Lambda function returned invalid output or an exception.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: A message returned when an InvalidLambdaFunctionOutputException occurs
-    required:
-      - message
-    type: object
-  InvalidParameterException:
-    description: Thrown when a request parameter does not comply with the associated constraints.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by InvalidParameterException.
-    required:
-      - message
-    type: object
-  LambdaFunctionArn:
-    type: string
-  LambdaThrottledException:
-    description: 'AWS Lambda throttled your account, please contact AWS Support'
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: A message returned when an LambdaThrottledException is thrown
-    required:
-      - message
-    type: object
-  LimitExceededException:
-    description: Thrown when the limit on the number of objects or operations has been exceeded.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by LimitExceededException.
-    required:
-      - message
-    type: object
-  ListDatasetsRequest:
-    description: Request for a list of datasets for an identity.
-    properties: {}
-    type: object
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
+    description: The output for the GetIdentityPoolConfiguration operation.
   ListDatasetsResponse:
-    description: Returned for a successful ListDatasets request.
+    type: object
     properties:
-      Count:
-        $ref: '#/definitions/Integer'
-        description: Number of datasets returned.
       Datasets:
         $ref: '#/definitions/DatasetList'
         description: A set of datasets.
+      Count:
+        $ref: '#/definitions/Integer'
+        description: Number of datasets returned.
       NextToken:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
-    type: object
-  ListIdentityPoolUsageRequest:
-    description: A request for usage information on an identity pool.
-    properties: {}
-    type: object
+    description: Returned for a successful ListDatasets request.
   ListIdentityPoolUsageResponse:
-    description: Returned for a successful ListIdentityPoolUsage request.
+    type: object
     properties:
-      Count:
-        $ref: '#/definitions/Integer'
-        description: Total number of identities for the identity pool.
       IdentityPoolUsages:
         $ref: '#/definitions/IdentityPoolUsageList'
         description: Usage information for the identity pools.
       MaxResults:
         $ref: '#/definitions/Integer'
         description: The maximum number of results to be returned.
+      Count:
+        $ref: '#/definitions/Integer'
+        description: Total number of identities for the identity pool.
       NextToken:
         $ref: '#/definitions/String'
         description: A pagination token for obtaining the next page of results.
-    type: object
-  ListRecordsRequest:
-    description: A request for a list of records.
-    properties: {}
-    type: object
+    description: Returned for a successful ListIdentityPoolUsage request.
   ListRecordsResponse:
-    description: Returned for a successful ListRecordsRequest.
+    type: object
     properties:
+      Records:
+        $ref: '#/definitions/RecordList'
+        description: A list of all records.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: A pagination token for obtaining the next page of results.
       Count:
         $ref: '#/definitions/Integer'
         description: Total number of records.
-      DatasetDeletedAfterRequestedSyncCount:
-        $ref: '#/definitions/Boolean'
-        description: A boolean value specifying whether to delete the dataset locally.
-      DatasetExists:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the dataset exists.
       DatasetSyncCount:
         $ref: '#/definitions/Long'
         description: Server sync count for this dataset.
@@ -1538,45 +1416,298 @@ definitions:
       MergedDatasetNames:
         $ref: '#/definitions/MergedDatasetNameList'
         description: Names of merged datasets.
-      NextToken:
-        $ref: '#/definitions/String'
-        description: A pagination token for obtaining the next page of results.
-      Records:
-        $ref: '#/definitions/RecordList'
-        description: A list of all records.
+      DatasetExists:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the dataset exists.
+      DatasetDeletedAfterRequestedSyncCount:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value specifying whether to delete the dataset locally.
       SyncSessionToken:
         $ref: '#/definitions/String'
         description: 'A token containing a session ID, identity ID, and expiration.'
+    description: Returned for a successful ListRecordsRequest.
+  RegisterDeviceResponse:
     type: object
-  Long:
-    type: integer
-  MergedDatasetNameList:
-    items:
-      $ref: '#/definitions/String'
-    type: array
-  NotAuthorizedException:
-    description: Thrown when a user is not authorized to access the requested resource.
+    properties:
+      DeviceId:
+        $ref: '#/definitions/DeviceId'
+        description: The unique ID generated for this device by Cognito.
+    description: Response to a RegisterDevice request.
+  InvalidConfigurationException:
+    type: object
+    required:
+      - message
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
-        description: The message returned by a NotAuthorizedException.
+        description: Message returned by InvalidConfigurationException.
+  LambdaFunctionArn:
+    type: string
+  SetIdentityPoolConfigurationResponse:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
+      PushSync:
+        $ref: '#/definitions/PushSync'
+        description: Options to apply to this identity pool for push synchronization.
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
+    description: The output for the SetIdentityPoolConfiguration operation
+  ApplicationArnList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationArn'
+  AssumeRoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d+:role/.*'
+    minLength: 20
+    maxLength: 2048
+  StreamName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  StreamingStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  ConcurrentModificationException:
+    type: object
     required:
       - message
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: The message returned by a ConcurrentModicationException.
+    description: Thrown if there are parallel requests to modify a resource.
+  SubscribeToDatasetResponse:
     type: object
-  Operation:
-    enum:
-      - replace
-      - remove
+    properties: {}
+    description: Response to a SubscribeToDataset request.
+  UnsubscribeFromDatasetResponse:
+    type: object
+    properties: {}
+    description: Response to an UnsubscribeFromDataset request.
+  UpdateRecordsResponse:
+    type: object
+    properties:
+      Records:
+        $ref: '#/definitions/RecordList'
+        description: A list of records that have been updated.
+    description: Returned for a successful UpdateRecordsRequest.
+  RecordPatch:
+    type: object
+    required:
+      - Op
+      - Key
+      - SyncCount
+    properties:
+      Op:
+        $ref: '#/definitions/Operation'
+        description: 'An operation, either replace or remove.'
+      Key:
+        $ref: '#/definitions/RecordKey'
+        description: The key associated with the record patch.
+      Value:
+        $ref: '#/definitions/RecordValue'
+        description: The value associated with the record patch.
+      SyncCount:
+        $ref: '#/definitions/Long'
+        description: Last known server sync count for this record. Set to 0 if unknown.
+      DeviceLastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: The last modified date of the client device.
+    description: An update operation for a record.
+  LimitExceededException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: Message returned by LimitExceededException.
+    description: Thrown when the limit on the number of objects or operations has been exceeded.
+  InvalidLambdaFunctionOutputException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: A message returned when an InvalidLambdaFunctionOutputException occurs
+    description: The AWS Lambda function returned invalid output or an exception.
+  LambdaThrottledException:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: A message returned when an LambdaThrottledException is thrown
+    description: 'AWS Lambda throttled your account, please contact AWS Support'
+  ExceptionMessage:
     type: string
-  Platform:
-    enum:
-      - APNS
-      - APNS_SANDBOX
-      - GCM
-      - ADM
+  ApplicationArn:
     type: string
+    pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
+  Boolean:
+    type: boolean
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  BulkPublishRequest:
+    type: object
+    properties: {}
+    description: The input for the BulkPublish operation.
+  BulkPublishStatus:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FAILED
+      - SUCCEEDED
+  ClientContext:
+    type: string
+  CognitoEventType:
+    type: string
+  CognitoStreams:
+    type: object
+    properties:
+      StreamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+      RoleArn:
+        $ref: '#/definitions/AssumeRoleArn'
+        description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+      StreamingStatus:
+        $ref: '#/definitions/StreamingStatus'
+        description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
+    description: Configuration options for configure Cognito streams.
+  String:
+    type: string
+  IdentityId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  DatasetName:
+    type: string
+    pattern: '[a-zA-Z0-9_.:-]+'
+    minLength: 1
+    maxLength: 128
+  Date:
+    type: string
+    format: date-time
+  Long:
+    type: integer
+  Dataset:
+    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      DatasetName:
+        $ref: '#/definitions/DatasetName'
+        description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+      CreationDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the dataset was created.
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date when the dataset was last modified.
+      LastModifiedBy:
+        $ref: '#/definitions/String'
+        description: The device that made the last change to this dataset.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Total size in bytes of the records in this dataset.
+      NumRecords:
+        $ref: '#/definitions/Long'
+        description: Number of records in this dataset.
+    description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+  DatasetList:
+    type: array
+    items:
+      $ref: '#/definitions/Dataset'
+  DeleteDatasetRequest:
+    type: object
+    properties: {}
+    description: A request to delete the specific dataset.
+  DescribeDatasetRequest:
+    type: object
+    properties: {}
+    description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
+  DescribeIdentityPoolUsageRequest:
+    type: object
+    properties: {}
+    description: A request for usage information about the identity pool.
+  IdentityPoolUsage:
+    type: object
+    properties:
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      SyncSessionsCount:
+        $ref: '#/definitions/Long'
+        description: Number of sync sessions for the identity pool.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Data storage information for the identity pool.
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the identity pool was last modified.
+    description: Usage information for the identity pool.
+  DescribeIdentityUsageRequest:
+    type: object
+    properties: {}
+    description: A request for information about the usage of an identity pool.
+  IdentityUsage:
+    type: object
+    properties:
+      IdentityId:
+        $ref: '#/definitions/IdentityId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      IdentityPoolId:
+        $ref: '#/definitions/IdentityPoolId'
+        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: Date on which the identity was last modified.
+      DatasetCount:
+        $ref: '#/definitions/Integer'
+        description: Number of datasets for the identity.
+      DataStorage:
+        $ref: '#/definitions/Long'
+        description: Total data storage for this identity.
+    description: Usage information for the identity.
+  DeviceId:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Events:
+    type: object
+    maxProperties: 1
+    additionalProperties:
+      $ref: '#/definitions/LambdaFunctionArn'
+  GetBulkPublishDetailsRequest:
+    type: object
+    properties: {}
+    description: The input for the GetBulkPublishDetails operation.
+  GetCognitoEventsRequest:
+    type: object
+    properties: {}
+    description: A request for a list of the configured Cognito Events
+  GetIdentityPoolConfigurationRequest:
+    type: object
+    properties: {}
+    description: The input for the GetIdentityPoolConfiguration operation.
   PushSync:
-    description: Configuration options to be applied to the identity pool.
+    type: object
     properties:
       ApplicationArns:
         $ref: '#/definitions/ApplicationArnList'
@@ -1584,71 +1715,89 @@ definitions:
       RoleArn:
         $ref: '#/definitions/AssumeRoleArn'
         description: A role configured to allow Cognito to call SNS on behalf of the developer.
+    description: Configuration options to be applied to the identity pool.
+  IdentityPoolUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityPoolUsage'
+  Integer:
+    type: integer
+  IntegerString:
+    type: integer
+  ListDatasetsRequest:
     type: object
+    properties: {}
+    description: Request for a list of datasets for an identity.
+  ListIdentityPoolUsageRequest:
+    type: object
+    properties: {}
+    description: A request for usage information on an identity pool.
+  SyncSessionToken:
+    type: string
+  ListRecordsRequest:
+    type: object
+    properties: {}
+    description: A request for a list of records.
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
+  MergedDatasetNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Operation:
+    type: string
+    enum:
+      - replace
+      - remove
+  Platform:
+    type: string
+    enum:
+      - APNS
+      - APNS_SANDBOX
+      - GCM
+      - ADM
   PushToken:
     type: string
+  RecordKey:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  RecordValue:
+    type: string
+    maxLength: 1048575
   Record:
-    description: The basic data structure of a dataset.
+    type: object
     properties:
-      DeviceLastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: The last modified date of the client device.
       Key:
         $ref: '#/definitions/RecordKey'
         description: The key for the record.
-      LastModifiedBy:
-        $ref: '#/definitions/String'
-        description: The user/device that made the last change to this record.
-      LastModifiedDate:
-        $ref: '#/definitions/Date'
-        description: The date on which the record was last modified.
-      SyncCount:
-        $ref: '#/definitions/Long'
-        description: The server sync count for this record.
       Value:
         $ref: '#/definitions/RecordValue'
         description: The value for the record.
-    type: object
-  RecordKey:
-    maxLength: 1024
-    minLength: 1
-    type: string
-  RecordList:
-    items:
-      $ref: '#/definitions/Record'
-    type: array
-  RecordPatch:
-    description: An update operation for a record.
-    properties:
+      SyncCount:
+        $ref: '#/definitions/Long'
+        description: The server sync count for this record.
+      LastModifiedDate:
+        $ref: '#/definitions/Date'
+        description: The date on which the record was last modified.
+      LastModifiedBy:
+        $ref: '#/definitions/String'
+        description: The user/device that made the last change to this record.
       DeviceLastModifiedDate:
         $ref: '#/definitions/Date'
         description: The last modified date of the client device.
-      Key:
-        $ref: '#/definitions/RecordKey'
-        description: The key associated with the record patch.
-      Op:
-        $ref: '#/definitions/Operation'
-        description: 'An operation, either replace or remove.'
-      SyncCount:
-        $ref: '#/definitions/Long'
-        description: Last known server sync count for this record. Set to 0 if unknown.
-      Value:
-        $ref: '#/definitions/RecordValue'
-        description: The value associated with the record patch.
-    required:
-      - Op
-      - Key
-      - SyncCount
-    type: object
+    description: The basic data structure of a dataset.
   RecordPatchList:
+    type: array
     items:
       $ref: '#/definitions/RecordPatch'
-    type: array
-  RecordValue:
-    maxLength: 1048575
-    type: string
   RegisterDeviceRequest:
-    description: A request to RegisterDevice.
+    type: object
+    required:
+      - Platform
+      - Token
     properties:
       Platform:
         $ref: '#/definitions/Platform'
@@ -1656,107 +1805,38 @@ definitions:
       Token:
         $ref: '#/definitions/PushToken'
         description: The push token.
-    required:
-      - Platform
-      - Token
-    type: object
-  RegisterDeviceResponse:
-    description: Response to a RegisterDevice request.
-    properties:
-      DeviceId:
-        $ref: '#/definitions/DeviceId'
-        description: The unique ID generated for this device by Cognito.
-    type: object
-  ResourceConflictException:
-    description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The message returned by a ResourceConflictException.
-    required:
-      - message
-    type: object
-  ResourceNotFoundException:
-    description: Thrown if the resource doesn't exist.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by a ResourceNotFoundException.
-    required:
-      - message
-    type: object
+    description: A request to RegisterDevice.
   SetCognitoEventsRequest:
-    description: <p>A request to configure Cognito Events"</p>"
+    type: object
+    required:
+      - Events
     properties:
       Events:
         $ref: '#/definitions/Events'
         description: The events to configure
-    required:
-      - Events
-    type: object
+    description: <p>A request to configure Cognito Events"</p>"
   SetIdentityPoolConfigurationRequest:
+    type: object
+    properties:
+      PushSync:
+        $ref: '#/definitions/PushSync'
+        description: Options to apply to this identity pool for push synchronization.
+      CognitoStreams:
+        $ref: '#/definitions/CognitoStreams'
+        description: Options to apply to this identity pool for Amazon Cognito streams.
     description: The input for the SetIdentityPoolConfiguration operation.
-    properties:
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
-      PushSync:
-        $ref: '#/definitions/PushSync'
-        description: Options to apply to this identity pool for push synchronization.
-    type: object
-  SetIdentityPoolConfigurationResponse:
-    description: The output for the SetIdentityPoolConfiguration operation
-    properties:
-      CognitoStreams:
-        $ref: '#/definitions/CognitoStreams'
-        description: Options to apply to this identity pool for Amazon Cognito streams.
-      IdentityPoolId:
-        $ref: '#/definitions/IdentityPoolId'
-        description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
-      PushSync:
-        $ref: '#/definitions/PushSync'
-        description: Options to apply to this identity pool for push synchronization.
-    type: object
-  StreamName:
-    maxLength: 128
-    minLength: 1
-    type: string
-  StreamingStatus:
-    enum:
-      - ENABLED
-      - DISABLED
-    type: string
-  String:
-    type: string
   SubscribeToDatasetRequest:
+    type: object
+    properties: {}
     description: A request to SubscribeToDatasetRequest.
-    properties: {}
-    type: object
-  SubscribeToDatasetResponse:
-    description: Response to a SubscribeToDataset request.
-    properties: {}
-    type: object
-  SyncSessionToken:
-    type: string
-  TooManyRequestsException:
-    description: Thrown if the request is throttled.
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: Message returned by a TooManyRequestsException.
-    required:
-      - message
-    type: object
   UnsubscribeFromDatasetRequest:
+    type: object
+    properties: {}
     description: A request to UnsubscribeFromDataset.
-    properties: {}
-    type: object
-  UnsubscribeFromDatasetResponse:
-    description: Response to an UnsubscribeFromDataset request.
-    properties: {}
-    type: object
   UpdateRecordsRequest:
-    description: A request to post updates to records or add and delete records for a dataset and user.
+    type: object
+    required:
+      - SyncSessionToken
     properties:
       DeviceId:
         $ref: '#/definitions/DeviceId'
@@ -1767,84 +1847,4 @@ definitions:
       SyncSessionToken:
         $ref: '#/definitions/SyncSessionToken'
         description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
-    required:
-      - SyncSessionToken
-    type: object
-  UpdateRecordsResponse:
-    description: Returned for a successful UpdateRecordsRequest.
-    properties:
-      Records:
-        $ref: '#/definitions/RecordList'
-        description: A list of records that have been updated.
-    type: object
-x-servers:
-  - description: The Amazon Cognito Sync multi-region endpoint
-    url: 'http://cognito-sync.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Cognito Sync multi-region endpoint
-    url: 'https://cognito-sync.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Amazon Cognito Sync endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://cognito-sync.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Amazon Cognito Sync endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://cognito-sync.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    description: A request to post updates to records or add and delete records for a dataset and user.

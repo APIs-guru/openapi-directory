@@ -1,118 +1,169 @@
 swagger: '2.0'
-schemes:
-  - https
-  - http
-host: servicequotas.amazonaws.com
-basePath: /
-x-hasEquivalentPaths: true
 info:
+  version: '2019-06-24'
+  x-release: v4
+  title: Service Quotas
+  description: '<p> Service Quotas is a web service that you can use to manage many of your AWS service quotas. Quotas, also referred to as limits, are the maximum values for a resource, item, or operation. This guide provide descriptions of the Service Quotas actions that you can call from an API. For the Service Quotas user guide, which explains how to use Service Quotas from the console, see <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">What is Service Quotas</a>. </p> <note> <p>AWS provides SDKs that consist of libraries and sample code for programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc...,). The SDKs provide a convenient way to create programmatic access to Service Quotas and AWS. For information about the AWS SDKs, including how to download and install them, see the <a href="https://docs.aws.amazon.com/aws.amazon.com/tools">Tools for Amazon Web Services</a> page.</p> </note>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
   contact:
-    email: mike.ralphson@gmail.com
     name: Mike Ralphson
+    email: mike.ralphson@gmail.com
     url: 'https://github.com/mermade/aws2openapi'
     x-twitter: PermittedSoc
-  description: '<p> Service Quotas is a web service that you can use to manage many of your AWS service quotas. Quotas, also referred to as limits, are the maximum values for a resource, item, or operation. This guide provide descriptions of the Service Quotas actions that you can call from an API. For the Service Quotas user guide, which explains how to use Service Quotas from the console, see <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">What is Service Quotas</a>. </p> <note> <p>AWS provides SDKs that consist of libraries and sample code for programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc...,). The SDKs provide a convenient way to create programmatic access to Service Quotas and AWS. For information about the AWS SDKs, including how to download and install them, see the <a href="https://docs.aws.amazon.com/aws.amazon.com/tools">Tools for Amazon Web Services</a> page.</p> </note>'
   license:
     name: Apache 2.0 License
     url: 'http://www.apache.org/licenses/'
-  termsOfService: 'https://aws.amazon.com/service-terms/'
-  title: Service Quotas
-  version: '2019-06-24'
+  x-providerName: amazonaws.com
+  x-serviceName: service-quotas
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/service-quotas-2019-06-24.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
   x-apisguru-categories:
     - cloud
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/awscloud/profile_image?size=original'
-  x-origin:
-    - contentType: application/json
-      converter:
-        url: 'https://github.com/mermade/aws2openapi'
-        version: 1.0.0
-      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/service-quotas-2019-06-24.normal.json'
-      x-apisguru-direct: true
   x-preferred: true
-  x-providerName: amazonaws.com
-  x-release: v4
-  x-serviceName: service-quotas
 externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/servicequotas/'
+host: servicequotas.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+x-servers:
+  - url: 'http://servicequotas.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Service Quotas multi-region endpoint
+  - url: 'https://servicequotas.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Service Quotas multi-region endpoint
+  - url: 'http://servicequotas.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Service Quotas endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://servicequotas.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Service Quotas endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
 securityDefinitions:
   hmac:
-    description: Amazon Signature authorization v4
-    in: header
-    name: Authorization
     type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
     x-amazon-apigateway-authtype: awsSigv4
 security:
   - hmac: []
-parameters:
-  X-Amz-Algorithm:
-    in: header
-    name: X-Amz-Algorithm
-    required: false
-    type: string
-  X-Amz-Content-Sha256:
-    in: header
-    name: X-Amz-Content-Sha256
-    required: false
-    type: string
-  X-Amz-Credential:
-    in: header
-    name: X-Amz-Credential
-    required: false
-    type: string
-  X-Amz-Date:
-    in: header
-    name: X-Amz-Date
-    required: false
-    type: string
-  X-Amz-Security-Token:
-    in: header
-    name: X-Amz-Security-Token
-    required: false
-    type: string
-  X-Amz-Signature:
-    in: header
-    name: X-Amz-Signature
-    required: false
-    type: string
-  X-Amz-SignedHeaders:
-    in: header
-    name: X-Amz-SignedHeaders
-    required: false
-    type: string
 paths:
   '/#X-Amz-Target=ServiceQuotasV20190624.AssociateServiceQuotaTemplate':
-    parameters:
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
-      description: 'Associates the Service Quotas template with your organization so that when new accounts are created in your organization, the template submits increase requests for the specified service quotas. Use the Service Quotas template to request an increase for any adjustable quota value. After you define the Service Quotas template, use this operation to associate, or enable, the template. '
       operationId: AssociateServiceQuotaTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/AssociateServiceQuotaTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.AssociateServiceQuotaTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Associates the Service Quotas template with your organization so that when new accounts are created in your organization, the template submits increase requests for the specified service quotas. Use the Service Quotas template to request an increase for any adjustable quota value. After you define the Service Quotas template, use this operation to associate, or enable, the template. '
       responses:
         '200':
           description: Success
@@ -150,7 +201,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateServiceQuotaTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.AssociateServiceQuotaTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -159,21 +221,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate':
     post:
-      description: 'Removes a service quota increase request from the Service Quotas template. '
       operationId: DeleteServiceQuotaIncreaseRequestFromTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeleteServiceQuotaIncreaseRequestFromTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Removes a service quota increase request from the Service Quotas template. '
       responses:
         '200':
           description: Success
@@ -215,7 +266,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteServiceQuotaIncreaseRequestFromTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -224,21 +286,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate':
     post:
-      description: '<p>Disables the Service Quotas template. Once the template is disabled, it does not request quota increases for new accounts in your organization. Disabling the quota template does not apply the quota increase requests from the template. </p> <p> <b>Related operations</b> </p> <ul> <li> <p>To enable the quota template, call <a>AssociateServiceQuotaTemplate</a>. </p> </li> <li> <p>To delete a specific service quota from the template, use <a>DeleteServiceQuotaIncreaseRequestFromTemplate</a>.</p> </li> </ul>'
       operationId: DisassociateServiceQuotaTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DisassociateServiceQuotaTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.DisassociateServiceQuotaTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Disables the Service Quotas template. Once the template is disabled, it does not request quota increases for new accounts in your organization. Disabling the quota template does not apply the quota increase requests from the template. </p> <p> <b>Related operations</b> </p> <ul> <li> <p>To enable the quota template, call <a>AssociateServiceQuotaTemplate</a>. </p> </li> <li> <p>To delete a specific service quota from the template, use <a>DeleteServiceQuotaIncreaseRequestFromTemplate</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -276,7 +327,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateServiceQuotaTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.DisassociateServiceQuotaTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -285,21 +347,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota':
     post:
-      description: 'Retrieves the default service quotas values. The Value returned for each quota is the AWS default value, even if the quotas have been increased.. '
       operationId: GetAWSDefaultServiceQuota
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAWSDefaultServiceQuotaRequest'
-        - enum:
-            - ServiceQuotasV20190624.GetAWSDefaultServiceQuota
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Retrieves the default service quotas values. The Value returned for each quota is the AWS default value, even if the quotas have been increased.. '
       responses:
         '200':
           description: Success
@@ -325,7 +376,18 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAWSDefaultServiceQuotaRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.GetAWSDefaultServiceQuota
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -334,21 +396,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate':
     post:
-      description: 'Retrieves the <code>ServiceQuotaTemplateAssociationStatus</code> value from the service. Use this action to determine if the Service Quota template is associated, or enabled. '
       operationId: GetAssociationForServiceQuotaTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetAssociationForServiceQuotaTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Retrieves the <code>ServiceQuotaTemplateAssociationStatus</code> value from the service. Use this action to determine if the Service Quota template is associated, or enabled. '
       responses:
         '200':
           description: Success
@@ -386,7 +437,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAssociationForServiceQuotaTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -395,21 +457,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange':
     post:
-      description: 'Retrieves the details for a particular increase request. '
       operationId: GetRequestedServiceQuotaChange
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetRequestedServiceQuotaChangeRequest'
-        - enum:
-            - ServiceQuotasV20190624.GetRequestedServiceQuotaChange
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Retrieves the details for a particular increase request. '
       responses:
         '200':
           description: Success
@@ -435,7 +486,18 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRequestedServiceQuotaChangeRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.GetRequestedServiceQuotaChange
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -444,21 +506,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota':
     post:
-      description: 'Returns the details for the specified service quota. This operation provides a different Value than the <code>GetAWSDefaultServiceQuota</code> operation. This operation returns the applied value for each quota. <code>GetAWSDefaultServiceQuota</code> returns the default AWS value for each quota. '
       operationId: GetServiceQuota
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetServiceQuotaRequest'
-        - enum:
-            - ServiceQuotasV20190624.GetServiceQuota
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns the details for the specified service quota. This operation provides a different Value than the <code>GetAWSDefaultServiceQuota</code> operation. This operation returns the applied value for each quota. <code>GetAWSDefaultServiceQuota</code> returns the default AWS value for each quota. '
       responses:
         '200':
           description: Success
@@ -484,7 +535,18 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetServiceQuotaRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.GetServiceQuota
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -493,21 +555,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate':
     post:
-      description: Returns the details of the service quota increase request in your template.
       operationId: GetServiceQuotaIncreaseRequestFromTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GetServiceQuotaIncreaseRequestFromTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Returns the details of the service quota increase request in your template.
       responses:
         '200':
           description: Success
@@ -549,7 +600,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetServiceQuotaIncreaseRequestFromTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -558,31 +620,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas':
     post:
-      description: '<p>Lists all default service quotas for the specified AWS service or all AWS services. ListAWSDefaultServiceQuotas is similar to <a>ListServiceQuotas</a> except for the Value object. The Value object returned by <code>ListAWSDefaultServiceQuotas</code> is the default value assigned by AWS. This request returns a list of all service quotas for the specified service. The listing of each you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
       operationId: ListAWSDefaultServiceQuotas
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAWSDefaultServiceQuotasRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListAWSDefaultServiceQuotas
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Lists all default service quotas for the specified AWS service or all AWS services. ListAWSDefaultServiceQuotas is similar to <a>ListServiceQuotas</a> except for the Value object. The Value object returned by <code>ListAWSDefaultServiceQuotas</code> is the default value assigned by AWS. This request returns a list of all service quotas for the specified service. The listing of each you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
       responses:
         '200':
           description: Success
@@ -612,7 +653,28 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAWSDefaultServiceQuotasRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListAWSDefaultServiceQuotas
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -621,31 +683,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory':
     post:
-      description: Requests a list of the changes to quotas for a service.
       operationId: ListRequestedServiceQuotaChangeHistory
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListRequestedServiceQuotaChangeHistoryRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: Requests a list of the changes to quotas for a service.
       responses:
         '200':
           description: Success
@@ -675,7 +716,28 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListRequestedServiceQuotaChangeHistoryRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -684,31 +746,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota':
     post:
-      description: 'Requests a list of the changes to specific service quotas. This command provides additional granularity over the <code>ListRequestedServiceQuotaChangeHistory</code> command. Once a quota change request has reached <code>CASE_CLOSED, APPROVED,</code> or <code>DENIED</code>, the history has been kept for 90 days.'
       operationId: ListRequestedServiceQuotaChangeHistoryByQuota
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListRequestedServiceQuotaChangeHistoryByQuotaRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Requests a list of the changes to specific service quotas. This command provides additional granularity over the <code>ListRequestedServiceQuotaChangeHistory</code> command. Once a quota change request has reached <code>CASE_CLOSED, APPROVED,</code> or <code>DENIED</code>, the history has been kept for 90 days.'
       responses:
         '200':
           description: Success
@@ -738,7 +779,28 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListRequestedServiceQuotaChangeHistoryByQuotaRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -747,31 +809,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate':
     post:
-      description: 'Returns a list of the quota increase requests in the template. '
       operationId: ListServiceQuotaIncreaseRequestsInTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListServiceQuotaIncreaseRequestsInTemplateRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Returns a list of the quota increase requests in the template. '
       responses:
         '200':
           description: Success
@@ -809,7 +850,28 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServiceQuotaIncreaseRequestsInTemplateRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -818,31 +880,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas':
     post:
-      description: '<p>Lists all service quotas for the specified AWS service. This request returns a list of the service quotas for the specified service. you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
       operationId: ListServiceQuotas
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListServiceQuotasRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListServiceQuotas
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: '<p>Lists all service quotas for the specified AWS service. This request returns a list of the service quotas for the specified service. you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
       responses:
         '200':
           description: Success
@@ -872,7 +913,28 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServices':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServiceQuotasRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListServiceQuotas
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -881,31 +943,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.ListServices':
     post:
-      description: 'Lists the AWS services available in Service Quotas. Not all AWS services are available in Service Quotas. To list the see the list of the service quotas for a specific service, use <a>ListServiceQuotas</a>.'
       operationId: ListServices
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListServicesRequest'
-        - description: Pagination limit
-          in: query
-          name: MaxResults
-          required: false
-          type: string
-        - description: Pagination token
-          in: query
-          name: NextToken
-          required: false
-          type: string
-        - enum:
-            - ServiceQuotasV20190624.ListServices
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Lists the AWS services available in Service Quotas. Not all AWS services are available in Service Quotas. To list the see the list of the service quotas for a specific service, use <a>ListServiceQuotas</a>.'
       responses:
         '200':
           description: Success
@@ -931,7 +972,28 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServicesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.ListServices
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -940,21 +1002,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate':
     post:
-      description: 'Defines and adds a quota to the service quota template. To add a quota to the template, you must provide the <code>ServiceCode</code>, <code>QuotaCode</code>, <code>AwsRegion</code>, and <code>DesiredValue</code>. Once you add a quota to the template, use <a>ListServiceQuotaIncreaseRequestsInTemplate</a> to see the list of quotas in the template.'
       operationId: PutServiceQuotaIncreaseRequestIntoTemplate
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/PutServiceQuotaIncreaseRequestIntoTemplateRequest'
-        - enum:
-            - ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Defines and adds a quota to the service quota template. To add a quota to the template, you must provide the <code>ServiceCode</code>, <code>QuotaCode</code>, <code>AwsRegion</code>, and <code>DesiredValue</code>. Once you add a quota to the template, use <a>ListServiceQuotaIncreaseRequestsInTemplate</a> to see the list of quotas in the template.'
       responses:
         '200':
           description: Success
@@ -1000,7 +1051,18 @@ paths:
           description: NoAvailableOrganizationException
           schema:
             $ref: '#/definitions/NoAvailableOrganizationException'
-  '/#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease':
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutServiceQuotaIncreaseRequestIntoTemplateRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1009,21 +1071,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease':
     post:
-      description: 'Retrieves the details of a service quota increase request. The response to this command provides the details in the <a>RequestedServiceQuotaChange</a> object. '
       operationId: RequestServiceQuotaIncrease
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/RequestServiceQuotaIncreaseRequest'
-        - enum:
-            - ServiceQuotasV20190624.RequestServiceQuotaIncrease
-          in: header
-          name: X-Amz-Target
-          required: true
-          type: string
+      description: 'Retrieves the details of a service quota increase request. The response to this command provides the details in the <a>RequestedServiceQuotaChange</a> object. '
       responses:
         '200':
           description: Success
@@ -1065,171 +1116,152 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RequestServiceQuotaIncreaseRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - ServiceQuotasV20190624.RequestServiceQuotaIncrease
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
-  AWSServiceAccessNotEnabledException: {}
-  AccessDeniedException: {}
-  AssociateServiceQuotaTemplateRequest:
-    properties: {}
-    type: object
   AssociateServiceQuotaTemplateResponse:
-    properties: {}
     type: object
-  AwsRegion:
-    maxLength: 64
-    minLength: 1
-    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,128}'
-    type: string
-  CustomerServiceEngagementId:
-    type: string
-  DateTime:
-    format: date-time
-    type: string
+    properties: {}
+  AssociateServiceQuotaTemplateRequest:
+    type: object
+    properties: {}
+  DependencyAccessDeniedException: {}
+  AccessDeniedException: {}
+  ServiceException: {}
+  TooManyRequestsException: {}
+  AWSServiceAccessNotEnabledException: {}
+  OrganizationNotInAllFeaturesModeException: {}
+  TemplatesNotAvailableInRegionException: {}
+  NoAvailableOrganizationException: {}
+  DeleteServiceQuotaIncreaseRequestFromTemplateResponse:
+    type: object
+    properties: {}
   DeleteServiceQuotaIncreaseRequestFromTemplateRequest:
-    properties:
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: Specifies the AWS Region for the quota that you want to delete.
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Specifies the code for the quota that you want to delete.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the code for the service that you want to delete.
+    type: object
     required:
       - ServiceCode
       - QuotaCode
       - AwsRegion
-    type: object
-  DeleteServiceQuotaIncreaseRequestFromTemplateResponse:
-    properties: {}
-    type: object
-  DependencyAccessDeniedException: {}
-  DisassociateServiceQuotaTemplateRequest:
-    properties: {}
-    type: object
-  DisassociateServiceQuotaTemplateResponse:
-    properties: {}
-    type: object
-  ErrorCode:
-    enum:
-      - DEPENDENCY_ACCESS_DENIED_ERROR
-      - DEPENDENCY_THROTTLING_ERROR
-      - DEPENDENCY_SERVICE_ERROR
-      - SERVICE_QUOTA_NOT_AVAILABLE_ERROR
-    type: string
-  ErrorMessage:
-    type: string
-  ErrorReason:
-    description: Returns an error that explains why the action did not succeed.
     properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: '<p>Service Quotas returns the following error values. </p> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> is returned when the caller does not have permission to call the service or service quota. To resolve the error, you need permission to access the service or service quota.</p> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> is returned when the service being called is throttling Service Quotas.</p> <p> <code>DEPENDENCY_SERVICE_ERROR</code> is returned when the service being called has availability issues.</p> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> is returned when there was an error in Service Quotas.</p>'
-      ErrorMessage:
-        $ref: '#/definitions/ErrorMessage'
-        description: The error message that provides more detail.
-    type: object
-  GetAWSDefaultServiceQuotaRequest:
-    properties:
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Identifies the service quota you want to select.
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
-    required:
-      - ServiceCode
-      - QuotaCode
+        description: Specifies the code for the service that you want to delete.
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Specifies the code for the quota that you want to delete.
+      AwsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: Specifies the AWS Region for the quota that you want to delete.
+  NoSuchResourceException: {}
+  IllegalArgumentException: {}
+  DisassociateServiceQuotaTemplateResponse:
     type: object
+    properties: {}
+  DisassociateServiceQuotaTemplateRequest:
+    type: object
+    properties: {}
+  ServiceQuotaTemplateNotInUseException: {}
   GetAWSDefaultServiceQuotaResponse:
+    type: object
     properties:
       Quota:
         $ref: '#/definitions/ServiceQuota'
         description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
+  GetAWSDefaultServiceQuotaRequest:
     type: object
-  GetAssociationForServiceQuotaTemplateRequest:
-    properties: {}
-    type: object
+    required:
+      - ServiceCode
+      - QuotaCode
+    properties:
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Identifies the service quota you want to select.
   GetAssociationForServiceQuotaTemplateResponse:
+    type: object
     properties:
       ServiceQuotaTemplateAssociationStatus:
         $ref: '#/definitions/ServiceQuotaTemplateAssociationStatus'
         description: 'Specifies whether the template is <code>ASSOCIATED</code> or <code>DISASSOCIATED</code>. If the template is <code>ASSOCIATED</code>, then it requests service quota increases for all new accounts created in your organization. '
+  GetAssociationForServiceQuotaTemplateRequest:
     type: object
-  GetRequestedServiceQuotaChangeRequest:
-    properties:
-      RequestId:
-        $ref: '#/definitions/RequestId'
-        description: Identifies the quota increase request.
-    required:
-      - RequestId
-    type: object
+    properties: {}
   GetRequestedServiceQuotaChangeResponse:
+    type: object
     properties:
       RequestedQuota:
         $ref: '#/definitions/RequestedServiceQuotaChange'
         description: Returns the <code>RequestedServiceQuotaChange</code> object for the specific increase request.
+  GetRequestedServiceQuotaChangeRequest:
     type: object
-  GetServiceQuotaIncreaseRequestFromTemplateRequest:
-    properties:
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: Specifies the AWS Region for the quota that you want to use.
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Specifies the quota you want.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
     required:
-      - ServiceCode
-      - QuotaCode
-      - AwsRegion
-    type: object
-  GetServiceQuotaIncreaseRequestFromTemplateResponse:
+      - RequestId
     properties:
-      ServiceQuotaIncreaseRequestInTemplate:
-        $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
-        description: This object contains the details about the quota increase request.
-    type: object
-  GetServiceQuotaRequest:
-    properties:
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Identifies the service quota you want to select.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
-    required:
-      - ServiceCode
-      - QuotaCode
-    type: object
+      RequestId:
+        $ref: '#/definitions/RequestId'
+        description: Identifies the quota increase request.
   GetServiceQuotaResponse:
+    type: object
     properties:
       Quota:
         $ref: '#/definitions/ServiceQuota'
         description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
+  GetServiceQuotaRequest:
     type: object
-  GlobalQuota:
-    type: boolean
-  IllegalArgumentException: {}
-  InvalidPaginationTokenException: {}
-  InvalidResourceStateException: {}
-  ListAWSDefaultServiceQuotasRequest:
+    required:
+      - ServiceCode
+      - QuotaCode
     properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: Specifies the service that you want to use.
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Identifies the service quota you want to select.
+  GetServiceQuotaIncreaseRequestFromTemplateResponse:
+    type: object
+    properties:
+      ServiceQuotaIncreaseRequestInTemplate:
+        $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
+        description: This object contains the details about the quota increase request.
+  GetServiceQuotaIncreaseRequestFromTemplateRequest:
+    type: object
     required:
       - ServiceCode
-    type: object
+      - QuotaCode
+      - AwsRegion
+    properties:
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Specifies the quota you want.
+      AwsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: Specifies the AWS Region for the quota that you want to use.
   ListAWSDefaultServiceQuotasResponse:
+    type: object
     properties:
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -1237,100 +1269,101 @@ definitions:
       Quotas:
         $ref: '#/definitions/ServiceQuotaListDefinition'
         description: 'A list of the quotas in the account with the AWS default values. '
+  ListAWSDefaultServiceQuotasRequest:
     type: object
-  ListRequestedServiceQuotaChangeHistoryByQuotaRequest:
+    required:
+      - ServiceCode
     properties:
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+  InvalidPaginationTokenException: {}
+  ListRequestedServiceQuotaChangeHistoryResponse:
+    type: object
+    properties:
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Specifies the service quota that you want to use
+        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+      RequestedQuotas:
+        $ref: '#/definitions/RequestedServiceQuotaChangeHistoryListDefinition'
+        description: Returns a list of service quota requests.
+  ListRequestedServiceQuotaChangeHistoryRequest:
+    type: object
+    properties:
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: Specifies the service that you want to use.
       Status:
         $ref: '#/definitions/RequestStatus'
         description: Specifies the status value of the quota increase request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+  ListRequestedServiceQuotaChangeHistoryByQuotaResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+      RequestedQuotas:
+        $ref: '#/definitions/RequestedServiceQuotaChangeHistoryListDefinition'
+        description: Returns a list of service quota requests.
+  ListRequestedServiceQuotaChangeHistoryByQuotaRequest:
+    type: object
     required:
       - ServiceCode
       - QuotaCode
-    type: object
-  ListRequestedServiceQuotaChangeHistoryByQuotaResponse:
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
-      RequestedQuotas:
-        $ref: '#/definitions/RequestedServiceQuotaChangeHistoryListDefinition'
-        description: Returns a list of service quota requests.
-    type: object
-  ListRequestedServiceQuotaChangeHistoryRequest:
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: Specifies the service that you want to use.
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Specifies the service quota that you want to use
       Status:
         $ref: '#/definitions/RequestStatus'
         description: Specifies the status value of the quota increase request.
-    type: object
-  ListRequestedServiceQuotaChangeHistoryResponse:
-    properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
-      RequestedQuotas:
-        $ref: '#/definitions/RequestedServiceQuotaChangeHistoryListDefinition'
-        description: Returns a list of service quota requests.
-    type: object
-  ListServiceQuotaIncreaseRequestsInTemplateRequest:
-    properties:
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: Specifies the AWS Region for the quota that you want to use.
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
-    type: object
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListServiceQuotaIncreaseRequestsInTemplateResponse:
+    type: object
     properties:
-      NextToken:
-        $ref: '#/definitions/NextToken'
-        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
       ServiceQuotaIncreaseRequestInTemplateList:
         $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplateList'
         description: Returns the list of values of the quota increase request in the template.
-    type: object
-  ListServiceQuotasRequest:
-    properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+        description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+  ListServiceQuotaIncreaseRequestsInTemplateRequest:
+    type: object
+    properties:
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
-    required:
-      - ServiceCode
-    type: object
+      AwsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: Specifies the AWS Region for the quota that you want to use.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListServiceQuotasResponse:
+    type: object
     properties:
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -1338,17 +1371,22 @@ definitions:
       Quotas:
         $ref: '#/definitions/ServiceQuotaListDefinition'
         description: 'The response information for a quota lists all attribute information for the quota. '
+  ListServiceQuotasRequest:
     type: object
-  ListServicesRequest:
+    required:
+      - ServiceCode
     properties:
-      MaxResults:
-        $ref: '#/definitions/MaxResults'
-        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
       NextToken:
         $ref: '#/definitions/NextToken'
         description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
-    type: object
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListServicesResponse:
+    type: object
     properties:
       NextToken:
         $ref: '#/definitions/NextToken'
@@ -1356,210 +1394,107 @@ definitions:
       Services:
         $ref: '#/definitions/ServiceInfoListDefinition'
         description: 'Returns a list of services. '
+  ListServicesRequest:
     type: object
-  MaxResults:
-    maximum: 100
-    minimum: 1
-    type: integer
-  MetricDimensionName:
-    type: string
-  MetricDimensionValue:
-    type: string
-  MetricDimensionsMapDefinition:
-    additionalProperties:
-      $ref: '#/definitions/MetricDimensionValue'
-    maxProperties: 10
-    type: object
-  MetricInfo:
-    description: A structure that uses CloudWatch metrics to gather data about the service quota.
     properties:
-      MetricDimensions:
-        $ref: '#/definitions/MetricDimensionsMapDefinition'
-        description: 'A dimension is a name/value pair that is part of the identity of a metric. Every metric has specific characteristics that describe it, and you can think of dimensions as categories for those characteristics. These dimensions are part of the CloudWatch Metric Identity that measures usage against a particular service quota.'
-      MetricName:
-        $ref: '#/definitions/QuotaMetricName'
-        description: The name of the CloudWatch metric that measures usage of a service quota. This is a required field.
-      MetricNamespace:
-        $ref: '#/definitions/QuotaMetricNamespace'
-        description: The namespace of the metric. The namespace is a container for CloudWatch metrics. You can specify a name for the namespace when you create a metric.
-      MetricStatisticRecommendation:
-        $ref: '#/definitions/Statistic'
-        description: Statistics are metric data aggregations over specified periods of time. This is the recommended statistic to use when comparing usage in the CloudWatch Metric against your Service Quota.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+  PutServiceQuotaIncreaseRequestIntoTemplateResponse:
     type: object
-  NextToken:
-    maxLength: 2048
-    pattern: '^[a-zA-Z0-9/+]*={0,2}$'
-    type: string
-  NoAvailableOrganizationException: {}
-  NoSuchResourceException: {}
-  OrganizationNotInAllFeaturesModeException: {}
-  PeriodUnit:
-    enum:
-      - MICROSECOND
-      - MILLISECOND
-      - SECOND
-      - MINUTE
-      - HOUR
-      - DAY
-      - WEEK
-    type: string
-  PeriodValue:
-    type: integer
+    properties:
+      ServiceQuotaIncreaseRequestInTemplate:
+        $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
+        description: A structure that contains information about one service quota increase request.
   PutServiceQuotaIncreaseRequestIntoTemplateRequest:
+    type: object
+    required:
+      - QuotaCode
+      - ServiceCode
+      - AwsRegion
+      - DesiredValue
     properties:
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: Specifies the service quota that you want to use.
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
       AwsRegion:
         $ref: '#/definitions/AwsRegion'
         description: 'Specifies the AWS Region for the quota. '
       DesiredValue:
         $ref: '#/definitions/QuotaValue'
         description: 'Specifies the new, increased value for the quota. '
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Specifies the service quota that you want to use.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
-    required:
-      - QuotaCode
-      - ServiceCode
-      - AwsRegion
-      - DesiredValue
-    type: object
-  PutServiceQuotaIncreaseRequestIntoTemplateResponse:
-    properties:
-      ServiceQuotaIncreaseRequestInTemplate:
-        $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
-        description: A structure that contains information about one service quota increase request.
-    type: object
-  QuotaAdjustable:
-    type: boolean
-  QuotaArn:
-    type: string
-  QuotaCode:
-    maxLength: 128
-    minLength: 1
-    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,128}'
-    type: string
   QuotaExceededException: {}
-  QuotaMetricName:
-    type: string
-  QuotaMetricNamespace:
-    type: string
-  QuotaName:
-    type: string
-  QuotaPeriod:
-    description: A structure that contains information about the quota period.
-    properties:
-      PeriodUnit:
-        $ref: '#/definitions/PeriodUnit'
-        description: The time unit of a period.
-      PeriodValue:
-        $ref: '#/definitions/PeriodValue'
-        description: The value of a period.
-    type: object
-  QuotaUnit:
-    type: string
-  QuotaValue:
-    format: double
-    maximum: 10000000000
-    minimum: 0
-    type: number
-  RequestId:
-    maxLength: 128
-    minLength: 1
-    pattern: '[0-9a-zA-Z][a-zA-Z0-9-]{1,128}'
-    type: string
-  RequestServiceQuotaIncreaseRequest:
-    properties:
-      DesiredValue:
-        $ref: '#/definitions/QuotaValue'
-        description: 'Specifies the value submitted in the service quota increase request. '
-      QuotaCode:
-        $ref: '#/definitions/QuotaCode'
-        description: Specifies the service quota that you want to use.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
-    required:
-      - ServiceCode
-      - QuotaCode
-      - DesiredValue
-    type: object
   RequestServiceQuotaIncreaseResponse:
+    type: object
     properties:
       RequestedQuota:
         $ref: '#/definitions/RequestedServiceQuotaChange'
         description: Returns a list of service quota requests.
+  RequestServiceQuotaIncreaseRequest:
     type: object
-  RequestStatus:
-    enum:
-      - PENDING
-      - CASE_OPENED
-      - APPROVED
-      - DENIED
-      - CASE_CLOSED
-    type: string
-  RequestedServiceQuotaChange:
-    description: A structure that contains information about a requested change for a quota.
+    required:
+      - ServiceCode
+      - QuotaCode
+      - DesiredValue
     properties:
-      CaseId:
-        $ref: '#/definitions/CustomerServiceEngagementId'
-        description: The case Id for the service quota increase request.
-      Created:
-        $ref: '#/definitions/DateTime'
-        description: 'The date and time when the service quota increase request was received and the case Id was created. '
-      DesiredValue:
-        $ref: '#/definitions/QuotaValue'
-        description: New increased value for the service quota.
-      GlobalQuota:
-        $ref: '#/definitions/GlobalQuota'
-        description: Identifies if the quota is global.
-      Id:
-        $ref: '#/definitions/RequestId'
-        description: The unique identifier of a requested service quota change.
-      LastUpdated:
-        $ref: '#/definitions/DateTime'
-        description: The date and time of the most recent change in the service quota increase request.
-      QuotaArn:
-        $ref: '#/definitions/QuotaArn'
-        description: The Amazon Resource Name (ARN) of the service quota.
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
       QuotaCode:
         $ref: '#/definitions/QuotaCode'
         description: Specifies the service quota that you want to use.
-      QuotaName:
-        $ref: '#/definitions/QuotaName'
-        description: Name of the service quota.
-      Requester:
-        $ref: '#/definitions/Requester'
-        description: The IAM identity who submitted the service quota increase request.
-      ServiceCode:
-        $ref: '#/definitions/ServiceCode'
-        description: Specifies the service that you want to use.
-      ServiceName:
-        $ref: '#/definitions/ServiceName'
-        description: 'The name of the AWS service specified in the increase request. '
-      Status:
-        $ref: '#/definitions/RequestStatus'
-        description: State of the service quota increase request.
-      Unit:
-        $ref: '#/definitions/QuotaUnit'
-        description: Specifies the unit used for the quota.
-    type: object
-  RequestedServiceQuotaChangeHistoryListDefinition:
-    items:
-      $ref: '#/definitions/RequestedServiceQuotaChange'
-    type: array
-  Requester:
-    type: string
+      DesiredValue:
+        $ref: '#/definitions/QuotaValue'
+        description: 'Specifies the value submitted in the service quota increase request. '
   ResourceAlreadyExistsException: {}
-  ServiceCode:
-    maxLength: 63
-    minLength: 1
-    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,63}'
+  InvalidResourceStateException: {}
+  AwsRegion:
     type: string
-  ServiceException: {}
-  ServiceInfo:
-    description: 'A structure that contains the <code>ServiceName</code> and <code>ServiceCode</code>. It does not include all details of the service quota. To get those values, use the <a>ListServiceQuotas</a> operation. '
+    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,128}'
+    minLength: 1
+    maxLength: 64
+  CustomerServiceEngagementId:
+    type: string
+  DateTime:
+    type: string
+    format: date-time
+  ServiceCode:
+    type: string
+    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,63}'
+    minLength: 1
+    maxLength: 63
+  QuotaCode:
+    type: string
+    pattern: '[a-zA-Z][a-zA-Z0-9-]{1,128}'
+    minLength: 1
+    maxLength: 128
+  ErrorCode:
+    type: string
+    enum:
+      - DEPENDENCY_ACCESS_DENIED_ERROR
+      - DEPENDENCY_THROTTLING_ERROR
+      - DEPENDENCY_SERVICE_ERROR
+      - SERVICE_QUOTA_NOT_AVAILABLE_ERROR
+  ErrorMessage:
+    type: string
+  ErrorReason:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: '<p>Service Quotas returns the following error values. </p> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> is returned when the caller does not have permission to call the service or service quota. To resolve the error, you need permission to access the service or service quota.</p> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> is returned when the service being called is throttling Service Quotas.</p> <p> <code>DEPENDENCY_SERVICE_ERROR</code> is returned when the service being called has availability issues.</p> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> is returned when there was an error in Service Quotas.</p>'
+      ErrorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: The error message that provides more detail.
+    description: Returns an error that explains why the action did not succeed.
+  ServiceQuota:
+    type: object
     properties:
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
@@ -1567,28 +1502,6 @@ definitions:
       ServiceName:
         $ref: '#/definitions/ServiceName'
         description: 'The name of the AWS service specified in the increase request. '
-    type: object
-  ServiceInfoListDefinition:
-    items:
-      $ref: '#/definitions/ServiceInfo'
-    type: array
-  ServiceName:
-    type: string
-  ServiceQuota:
-    description: A structure that contains the full set of details that define the service quota.
-    properties:
-      Adjustable:
-        $ref: '#/definitions/QuotaAdjustable'
-        description: Specifies if the quota value can be increased.
-      ErrorReason:
-        $ref: '#/definitions/ErrorReason'
-        description: Specifies the <code>ErrorCode</code> and <code>ErrorMessage</code> when success isn't achieved.
-      GlobalQuota:
-        $ref: '#/definitions/GlobalQuota'
-        description: Specifies if the quota is global.
-      Period:
-        $ref: '#/definitions/QuotaPeriod'
-        description: Identifies the unit and value of how time is measured.
       QuotaArn:
         $ref: '#/definitions/QuotaArn'
         description: The Amazon Resource Name (ARN) of the service quota.
@@ -1598,139 +1511,226 @@ definitions:
       QuotaName:
         $ref: '#/definitions/QuotaName'
         description: The name identifier of the service quota.
+      Value:
+        $ref: '#/definitions/QuotaValue'
+        description: The value of service quota.
+      Unit:
+        $ref: '#/definitions/QuotaUnit'
+        description: The unit of measurement for the value of the service quota.
+      Adjustable:
+        $ref: '#/definitions/QuotaAdjustable'
+        description: Specifies if the quota value can be increased.
+      GlobalQuota:
+        $ref: '#/definitions/GlobalQuota'
+        description: Specifies if the quota is global.
+      UsageMetric:
+        $ref: '#/definitions/MetricInfo'
+        description: 'Specifies the details about the measurement. '
+      Period:
+        $ref: '#/definitions/QuotaPeriod'
+        description: Identifies the unit and value of how time is measured.
+      ErrorReason:
+        $ref: '#/definitions/ErrorReason'
+        description: Specifies the <code>ErrorCode</code> and <code>ErrorMessage</code> when success isn't achieved.
+    description: A structure that contains the full set of details that define the service quota.
+  ServiceQuotaTemplateAssociationStatus:
+    type: string
+    enum:
+      - ASSOCIATED
+      - DISASSOCIATED
+  RequestId:
+    type: string
+    pattern: '[0-9a-zA-Z][a-zA-Z0-9-]{1,128}'
+    minLength: 1
+    maxLength: 128
+  RequestedServiceQuotaChange:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/RequestId'
+        description: The unique identifier of a requested service quota change.
+      CaseId:
+        $ref: '#/definitions/CustomerServiceEngagementId'
+        description: The case Id for the service quota increase request.
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: Specifies the service that you want to use.
       ServiceName:
         $ref: '#/definitions/ServiceName'
         description: 'The name of the AWS service specified in the increase request. '
-      Unit:
-        $ref: '#/definitions/QuotaUnit'
-        description: The unit of measurement for the value of the service quota.
-      UsageMetric:
-        $ref: '#/definitions/MetricInfo'
-        description: 'Specifies the details about the measurement. '
-      Value:
-        $ref: '#/definitions/QuotaValue'
-        description: The value of service quota.
-    type: object
-  ServiceQuotaIncreaseRequestInTemplate:
-    description: A structure that contains information about one service quota increase request.
-    properties:
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The AWS Region where the increase request occurs.
-      DesiredValue:
-        $ref: '#/definitions/QuotaValue'
-        description: 'Identifies the new, increased value of the service quota in the increase request. '
-      GlobalQuota:
-        $ref: '#/definitions/GlobalQuota'
-        description: Specifies if the quota is a global quota.
       QuotaCode:
         $ref: '#/definitions/QuotaCode'
-        description: The code identifier for the service quota specified in the increase request.
+        description: Specifies the service quota that you want to use.
       QuotaName:
         $ref: '#/definitions/QuotaName'
-        description: The name of the service quota in the increase request.
+        description: Name of the service quota.
+      DesiredValue:
+        $ref: '#/definitions/QuotaValue'
+        description: New increased value for the service quota.
+      Status:
+        $ref: '#/definitions/RequestStatus'
+        description: State of the service quota increase request.
+      Created:
+        $ref: '#/definitions/DateTime'
+        description: 'The date and time when the service quota increase request was received and the case Id was created. '
+      LastUpdated:
+        $ref: '#/definitions/DateTime'
+        description: The date and time of the most recent change in the service quota increase request.
+      Requester:
+        $ref: '#/definitions/Requester'
+        description: The IAM identity who submitted the service quota increase request.
+      QuotaArn:
+        $ref: '#/definitions/QuotaArn'
+        description: The Amazon Resource Name (ARN) of the service quota.
+      GlobalQuota:
+        $ref: '#/definitions/GlobalQuota'
+        description: Identifies if the quota is global.
+      Unit:
+        $ref: '#/definitions/QuotaUnit'
+        description: Specifies the unit used for the quota.
+    description: A structure that contains information about a requested change for a quota.
+  ServiceQuotaIncreaseRequestInTemplate:
+    type: object
+    properties:
       ServiceCode:
         $ref: '#/definitions/ServiceCode'
         description: The code identifier for the AWS service specified in the increase request.
       ServiceName:
         $ref: '#/definitions/ServiceName'
         description: 'The name of the AWS service specified in the increase request. '
+      QuotaCode:
+        $ref: '#/definitions/QuotaCode'
+        description: The code identifier for the service quota specified in the increase request.
+      QuotaName:
+        $ref: '#/definitions/QuotaName'
+        description: The name of the service quota in the increase request.
+      DesiredValue:
+        $ref: '#/definitions/QuotaValue'
+        description: 'Identifies the new, increased value of the service quota in the increase request. '
+      AwsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: The AWS Region where the increase request occurs.
       Unit:
         $ref: '#/definitions/QuotaUnit'
         description: The unit of measure for the increase request.
-    type: object
-  ServiceQuotaIncreaseRequestInTemplateList:
-    items:
-      $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
-    type: array
+      GlobalQuota:
+        $ref: '#/definitions/GlobalQuota'
+        description: Specifies if the quota is a global quota.
+    description: A structure that contains information about one service quota increase request.
+  GlobalQuota:
+    type: boolean
+  NextToken:
+    type: string
+    pattern: '^[a-zA-Z0-9/+]*={0,2}$'
+    maxLength: 2048
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   ServiceQuotaListDefinition:
+    type: array
     items:
       $ref: '#/definitions/ServiceQuota'
-    type: array
-  ServiceQuotaTemplateAssociationStatus:
+  RequestStatus:
+    type: string
     enum:
-      - ASSOCIATED
-      - DISASSOCIATED
+      - PENDING
+      - CASE_OPENED
+      - APPROVED
+      - DENIED
+      - CASE_CLOSED
+  RequestedServiceQuotaChangeHistoryListDefinition:
+    type: array
+    items:
+      $ref: '#/definitions/RequestedServiceQuotaChange'
+  ServiceQuotaIncreaseRequestInTemplateList:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceQuotaIncreaseRequestInTemplate'
+  ServiceInfoListDefinition:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceInfo'
+  MetricDimensionName:
     type: string
-  ServiceQuotaTemplateNotInUseException: {}
+  MetricDimensionValue:
+    type: string
+  MetricDimensionsMapDefinition:
+    type: object
+    maxProperties: 10
+    additionalProperties:
+      $ref: '#/definitions/MetricDimensionValue'
+  QuotaMetricNamespace:
+    type: string
+  QuotaMetricName:
+    type: string
   Statistic:
-    maxLength: 256
-    minLength: 1
-    pattern: (Sum|Maximum)
     type: string
-  TemplatesNotAvailableInRegionException: {}
-  TooManyRequestsException: {}
-x-servers:
-  - description: The Service Quotas multi-region endpoint
-    url: 'http://servicequotas.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Service Quotas multi-region endpoint
-    url: 'https://servicequotas.{region}.amazonaws.com'
-    variables:
-      region:
-        default: us-east-1
-        description: The AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - us-gov-west-1
-          - us-gov-east-1
-          - ca-central-1
-          - eu-north-1
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-northeast-3
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-  - description: The Service Quotas endpoint for China (Beijing) and China (Ningxia)
-    url: 'http://servicequotas.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-  - description: The Service Quotas endpoint for China (Beijing) and China (Ningxia)
-    url: 'https://servicequotas.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        default: cn-north-1
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
+    pattern: (Sum|Maximum)
+    minLength: 1
+    maxLength: 256
+  MetricInfo:
+    type: object
+    properties:
+      MetricNamespace:
+        $ref: '#/definitions/QuotaMetricNamespace'
+        description: The namespace of the metric. The namespace is a container for CloudWatch metrics. You can specify a name for the namespace when you create a metric.
+      MetricName:
+        $ref: '#/definitions/QuotaMetricName'
+        description: The name of the CloudWatch metric that measures usage of a service quota. This is a required field.
+      MetricDimensions:
+        $ref: '#/definitions/MetricDimensionsMapDefinition'
+        description: 'A dimension is a name/value pair that is part of the identity of a metric. Every metric has specific characteristics that describe it, and you can think of dimensions as categories for those characteristics. These dimensions are part of the CloudWatch Metric Identity that measures usage against a particular service quota.'
+      MetricStatisticRecommendation:
+        $ref: '#/definitions/Statistic'
+        description: Statistics are metric data aggregations over specified periods of time. This is the recommended statistic to use when comparing usage in the CloudWatch Metric against your Service Quota.
+    description: A structure that uses CloudWatch metrics to gather data about the service quota.
+  PeriodUnit:
+    type: string
+    enum:
+      - MICROSECOND
+      - MILLISECOND
+      - SECOND
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+  PeriodValue:
+    type: integer
+  QuotaValue:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 10000000000
+  QuotaAdjustable:
+    type: boolean
+  QuotaArn:
+    type: string
+  QuotaName:
+    type: string
+  QuotaPeriod:
+    type: object
+    properties:
+      PeriodValue:
+        $ref: '#/definitions/PeriodValue'
+        description: The value of a period.
+      PeriodUnit:
+        $ref: '#/definitions/PeriodUnit'
+        description: The time unit of a period.
+    description: A structure that contains information about the quota period.
+  QuotaUnit:
+    type: string
+  ServiceName:
+    type: string
+  Requester:
+    type: string
+  ServiceInfo:
+    type: object
+    properties:
+      ServiceCode:
+        $ref: '#/definitions/ServiceCode'
+        description: Specifies the service that you want to use.
+      ServiceName:
+        $ref: '#/definitions/ServiceName'
+        description: 'The name of the AWS service specified in the increase request. '
+    description: 'A structure that contains the <code>ServiceName</code> and <code>ServiceCode</code>. It does not include all details of the service quota. To get those values, use the <a>ListServiceQuotas</a> operation. '
