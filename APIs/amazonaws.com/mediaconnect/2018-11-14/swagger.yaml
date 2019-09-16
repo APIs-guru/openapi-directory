@@ -301,10 +301,10 @@ paths:
                     description: The port that the flow will be listening on for incoming content.
                   MaxBitrate:
                     $ref: '#/definitions/__integer'
-                    description: The smoothing max bitrate for RTP and RTP-FEC streams.
+                    description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
                   MaxLatency:
                     $ref: '#/definitions/__integer'
-                    description: The maximum latency in milliseconds for Zixi-based streams.
+                    description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
                   Name:
                     $ref: '#/definitions/__string'
                     description: The name of the source.
@@ -806,11 +806,12 @@ paths:
                   - rtp-fec
                   - rtp
                   - zixi-pull
+                  - rist
               remoteId:
                 description: The remote ID for the Zixi-pull stream.
                 type: string
               smoothingLatency:
-                description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+                description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
                 type: integer
               streamId:
                 description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
@@ -1180,10 +1181,10 @@ paths:
                 description: The port that the flow will be listening on for incoming content.
                 type: integer
               maxBitrate:
-                description: The smoothing max bitrate for RTP and RTP-FEC streams.
+                description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
                 type: integer
               maxLatency:
-                description: The maximum latency in milliseconds for Zixi-based streams.
+                description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
                 type: integer
               protocol:
                 description: The protocol that is used by the source.
@@ -1193,6 +1194,7 @@ paths:
                   - rtp-fec
                   - rtp
                   - zixi-pull
+                  - rist
               streamId:
                 description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                 type: string
@@ -1251,7 +1253,7 @@ definitions:
         description: The remote ID for the Zixi-pull output stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
-        description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+        description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
@@ -1331,6 +1333,7 @@ definitions:
       - rtp-fec
       - rtp
       - zixi-pull
+      - rist
   CreateFlow420Exception: {}
   DeleteFlowResponse:
     type: object
@@ -1496,10 +1499,10 @@ definitions:
         description: The port that the flow will be listening on for incoming content.
       MaxBitrate:
         $ref: '#/definitions/__integer'
-        description: The smoothing max bitrate for RTP and RTP-FEC streams.
+        description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
       MaxLatency:
         $ref: '#/definitions/__integer'
-        description: The maximum latency in milliseconds for Zixi-based streams.
+        description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
       Name:
         $ref: '#/definitions/__string'
         description: The name of the source.
@@ -1749,10 +1752,10 @@ definitions:
         description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       MaxBitrate:
         $ref: '#/definitions/__integer'
-        description: The smoothing max bitrate for RTP and RTP-FEC streams.
+        description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
       MaxLatency:
         $ref: '#/definitions/__integer'
-        description: The maximum latency in milliseconds for Zixi-based streams.
+        description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
       Protocol:
         $ref: '#/definitions/Protocol'
         description: The protocol that is used by the source or output.
@@ -1761,7 +1764,7 @@ definitions:
         description: The remote ID for the Zixi-pull stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
-        description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+        description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
@@ -1897,7 +1900,7 @@ definitions:
         description: The remote ID for the Zixi-pull stream.
       SmoothingLatency:
         $ref: '#/definitions/__integer'
-        description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+        description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
       StreamId:
         $ref: '#/definitions/__string'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
@@ -1919,10 +1922,10 @@ definitions:
         description: The port that the flow will be listening on for incoming content.
       MaxBitrate:
         $ref: '#/definitions/__integer'
-        description: The smoothing max bitrate for RTP and RTP-FEC streams.
+        description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
       MaxLatency:
         $ref: '#/definitions/__integer'
-        description: The maximum latency in milliseconds for Zixi-based streams.
+        description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
       Protocol:
         $ref: '#/definitions/Protocol'
         description: The protocol that is used by the source.

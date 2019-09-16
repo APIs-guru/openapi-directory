@@ -1852,7 +1852,7 @@ paths:
         - name: EngineMode
           in: query
           required: false
-          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.'
+          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: query
@@ -2138,7 +2138,7 @@ paths:
         - name: EngineMode
           in: formData
           required: false
-          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.'
+          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: formData
@@ -2255,7 +2255,7 @@ paths:
         - name: EndpointType
           in: query
           required: true
-          description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
           type: string
         - name: StaticMembers
           in: query
@@ -2338,7 +2338,7 @@ paths:
         - name: EndpointType
           in: formData
           required: true
-          description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
           type: string
         - name: StaticMembers
           in: formData
@@ -2760,7 +2760,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
           type: string
         - name: BackupRetentionPeriod
           in: query
@@ -3106,7 +3106,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
           type: string
         - name: BackupRetentionPeriod
           in: formData
@@ -3419,6 +3419,11 @@ paths:
           required: false
           description: 'The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.'
           type: string
+        - name: DBParameterGroupName
+          in: query
+          required: false
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then Amazon RDS uses the <code>DBParameterGroup</code> of source DB instance for a same region Read Replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a cross region Read Replica.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
+          type: string
         - name: PubliclyAccessible
           in: query
           required: false
@@ -3668,6 +3673,11 @@ paths:
           in: formData
           required: false
           description: 'The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.'
+          type: string
+        - name: DBParameterGroupName
+          in: formData
+          required: false
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then Amazon RDS uses the <code>DBParameterGroup</code> of source DB instance for a same region Read Replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a cross region Read Replica.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
           type: string
         - name: PubliclyAccessible
           in: formData
@@ -10491,7 +10501,7 @@ paths:
         - name: EndpointType
           in: query
           required: false
-          description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
           type: string
         - name: StaticMembers
           in: query
@@ -10565,7 +10575,7 @@ paths:
         - name: EndpointType
           in: formData
           required: false
-          description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
           type: string
         - name: StaticMembers
           in: formData
@@ -11466,7 +11476,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: true
-          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
           type: string
         - name: Parameters
           in: query
@@ -11516,7 +11526,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: true
-          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
           type: string
         - name: Parameters
           in: formData
@@ -12278,7 +12288,7 @@ paths:
         - name: BackupRetentionPeriod
           in: query
           required: false
-          description: '<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 8</p> </li> </ul>'
+          description: '<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35.</p> </li> <li> <p>Can''t be set to 0 if the DB instance is a source to Read Replicas.</p> </li> </ul>'
           type: integer
         - name: PreferredBackupWindow
           in: query
@@ -12331,7 +12341,7 @@ paths:
         - name: BackupRetentionPeriod
           in: formData
           required: false
-          description: '<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 8</p> </li> </ul>'
+          description: '<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35.</p> </li> <li> <p>Can''t be set to 0 if the DB instance is a source to Read Replicas.</p> </li> </ul>'
           type: integer
         - name: PreferredBackupWindow
           in: formData
@@ -13253,7 +13263,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: true
-          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
           type: string
         - name: ResetAllParameters
           in: query
@@ -13308,7 +13318,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: true
-          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
           type: string
         - name: ResetAllParameters
           in: formData
@@ -13966,7 +13976,7 @@ paths:
         - name: EngineMode
           in: query
           required: false
-          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
+          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: query
@@ -14201,7 +14211,7 @@ paths:
         - name: EngineMode
           in: formData
           required: false
-          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
+          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
           type: string
         - name: ScalingConfiguration.MinCapacity
           in: formData
@@ -14865,7 +14875,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: DeletionProtection
           in: query
@@ -15123,7 +15133,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: DeletionProtection
           in: formData
@@ -15288,7 +15298,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: false
-          description: 'The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default parameter group for the specified engine is used. '
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p>'
           type: string
         - name: BackupRetentionPeriod
           in: query
@@ -15611,7 +15621,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: false
-          description: 'The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default parameter group for the specified engine is used. '
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p>'
           type: string
         - name: BackupRetentionPeriod
           in: formData
@@ -16032,7 +16042,7 @@ paths:
         - name: DBParameterGroupName
           in: query
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: DeletionProtection
           in: query
@@ -16314,7 +16324,7 @@ paths:
         - name: DBParameterGroupName
           in: formData
           required: false
-          description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           type: string
         - name: DeletionProtection
           in: formData
@@ -17311,7 +17321,7 @@ definitions:
         description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.'
       CustomEndpointType:
         $ref: '#/definitions/String'
-        description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>ANY</code>.'
+        description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
       StaticMembers:
         $ref: '#/definitions/StringList'
         description: List of DB instance identifiers that are part of the custom endpoint group.
@@ -18720,7 +18730,7 @@ definitions:
         description: The identifier to use for the new endpoint. This parameter is stored as a lowercase string.
       EndpointType:
         $ref: '#/definitions/String'
-        description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+        description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
       StaticMembers:
         $ref: '#/definitions/StringList'
         description: List of DB instance identifiers that are part of the custom endpoint group.
@@ -18832,7 +18842,7 @@ definitions:
         description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
@@ -19000,7 +19010,7 @@ definitions:
         description: '<p>The current capacity of an Aurora Serverless DB cluster. The capacity is 0 (zero) when the cluster is paused.</p> <p>For more information about Aurora Serverless, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
       ScalingConfigurationInfo:
         $ref: '#/definitions/ScalingConfigurationInfo'
       DeletionProtection:
@@ -19097,7 +19107,7 @@ definitions:
         description: '<p>The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC). For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance">Amazon RDS Maintenance Window</a>. </p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. </p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> <p>Constraints: Minimum 30-minute window.</p>'
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
+        description: '<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
       BackupRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The retention period for automated backups is managed by the DB cluster.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35</p> </li> <li> <p>Can''t be set to 0 if the DB instance is a source to Read Replicas</p> </li> </ul>'
@@ -19231,6 +19241,9 @@ definitions:
       OptionGroupName:
         $ref: '#/definitions/String'
         description: 'The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.'
+      DBParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then Amazon RDS uses the <code>DBParameterGroup</code> of source DB instance for a same region Read Replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a cross region Read Replica.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
       PubliclyAccessible:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
@@ -19738,7 +19751,7 @@ definitions:
         description: Specifies the instance identifier for this member of the DB cluster.
       IsClusterWriter:
         $ref: '#/definitions/Boolean'
-        description: A value that indicates whehter the cluster member is the primary instance for the DB cluster.
+        description: Value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.
       DBClusterParameterGroupStatus:
         $ref: '#/definitions/String'
         description: Specifies the status of the DB cluster parameter group for this member of the DB cluster.
@@ -20103,7 +20116,7 @@ definitions:
     properties:
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: The name of the DP parameter group.
+        description: The name of the DB parameter group.
       ParameterApplyStatus:
         $ref: '#/definitions/String'
         description: The status of parameter updates.
@@ -21214,7 +21227,7 @@ definitions:
         description: The identifier of the endpoint to modify. This parameter is stored as a lowercase string.
       EndpointType:
         $ref: '#/definitions/String'
-        description: 'The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. '
+        description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
       StaticMembers:
         $ref: '#/definitions/StringList'
         description: List of DB instance identifiers that are part of the custom endpoint group.
@@ -21459,7 +21472,7 @@ definitions:
     properties:
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+        description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
       Parameters:
         $ref: '#/definitions/ParametersList'
         description: '<p>An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters can be modified in a single request.</p> <p>Valid Values (for the application method): <code>immediate | pending-reboot</code> </p> <note> <p>You can use the immediate value with dynamic parameters only. You can use the pending-reboot value for both dynamic and static parameters, and changes are applied when you reboot the DB instance without failover.</p> </note>'
@@ -21907,7 +21920,7 @@ definitions:
         description: '<p>The DB instance identifier. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing Read Replica DB instance.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
       BackupRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 8</p> </li> </ul>'
+        description: '<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35.</p> </li> <li> <p>Can''t be set to 0 if the DB instance is a source to Read Replicas.</p> </li> </ul>'
       PreferredBackupWindow:
         $ref: '#/definitions/String'
         description: '<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html"> Adjusting the Preferred Maintenance Window</a> in the <i>Amazon RDS User Guide.</i> </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
@@ -22151,7 +22164,7 @@ definitions:
     properties:
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DBParameterGroup.</p> </li> </ul>'
+        description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>'
       ResetAllParameters:
         $ref: '#/definitions/Boolean'
         description: ' A value that indicates whether to reset all parameters in the DB parameter group to default values. By default, all parameters in the DB parameter group are reset to default values. '
@@ -22311,7 +22324,7 @@ definitions:
         description: 'The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Aurora User Guide</i>.'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
@@ -22467,7 +22480,7 @@ definitions:
         description: A value that indicates whether the DB instance class of the DB instance uses its default processor features.
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+        description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
@@ -22521,7 +22534,7 @@ definitions:
         description: '<p>The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC). For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance">Amazon RDS Maintenance Window</a> in the <i>Amazon RDS User Guide.</i> </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>ddd:hh24:mi-ddd:hh24:mi</code>.</p> </li> <li> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred backup window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: 'The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default parameter group for the specified engine is used. '
+        description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p>'
       BackupRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: 'The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. For more information, see <code>CreateDBInstance</code>. '
@@ -22702,7 +22715,7 @@ definitions:
         description: A value that indicates whether the DB instance class of the DB instance uses its default processor features.
       DBParameterGroupName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+        description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'A value that indicates whether the DB instance has deletion protection enabled. The database can''t be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '

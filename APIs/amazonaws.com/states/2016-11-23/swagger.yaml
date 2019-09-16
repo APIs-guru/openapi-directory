@@ -2038,17 +2038,17 @@ definitions:
   MapStateStartedEventDetails:
     type: object
     properties:
-      Length:
+      length:
         $ref: '#/definitions/UnsignedInteger'
         description: The size of the array for Map state iterations.
     description: Details about a Map state that was started.
   MapIterationEventDetails:
     type: object
     properties:
-      Name:
+      name:
         $ref: '#/definitions/Name'
         description: The name of the iteration’s parent Map state.
-      Index:
+      index:
         $ref: '#/definitions/UnsignedInteger'
         description: The index of the array belonging to the Map state iteration.
     description: Contains details about an iteration of a Map state.

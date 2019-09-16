@@ -3563,7 +3563,10 @@ definitions:
         description: Specifies the group to which the audio Rendition belongs.
       AudioOnlyImage:
         $ref: '#/definitions/InputLocation'
-        description: 'For use with an audio only Stream. Must be a .jpg or .png file. If given, this image will be used as the cover-art for the audio only output. Ideally, it should be formatted for an iPhone screen for two reasons. The iPhone does not resize the image, it crops a centered image on the top/bottom and left/right. Additionally, this image file gets saved bit-for-bit into every 10-second segment file, so will increase bandwidth by {image file size} * {segment count} * {user count.}.'
+        description: |-
+          Optional. Specifies the .jpg or .png image to use as the cover art for an audio-only output. We recommend a low bit-size file because the image increases the output audio bandwidth.
+
+          The image is attached to the audio as an ID3 tag, frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
       AudioTrackType:
         $ref: '#/definitions/AudioOnlyHlsTrackType'
         description: |-
@@ -4302,6 +4305,10 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A collection of key-value pairs.
     description: Placeholder documentation for ChannelSummary
+  ColorSpacePassthroughSettings:
+    type: object
+    properties: {}
+    description: Passthrough applies no color space conversion to the output
   CreateChannelRequest:
     type: object
     properties:
@@ -5069,6 +5076,24 @@ definitions:
       - IGNORE
       - INSERT
     description: H264 Color Metadata
+  Rec601Settings:
+    type: object
+    properties: {}
+    description: Rec601 Settings
+  Rec709Settings:
+    type: object
+    properties: {}
+    description: Rec709 Settings
+  H264ColorSpaceSettings:
+    type: object
+    properties:
+      ColorSpacePassthroughSettings:
+        $ref: '#/definitions/ColorSpacePassthroughSettings'
+      Rec601Settings:
+        $ref: '#/definitions/Rec601Settings'
+      Rec709Settings:
+        $ref: '#/definitions/Rec709Settings'
+    description: H264 Color Space Settings
   H264EntropyEncoding:
     type: string
     enum:
@@ -5147,6 +5172,7 @@ definitions:
     type: string
     enum:
       - CBR
+      - MULTIPLEX
       - QVBR
       - VBR
     description: H264 Rate Control Mode
@@ -5247,10 +5273,13 @@ definitions:
         description: Percentage of the buffer that should initially be filled (HRD buffer model).
       BufSize:
         $ref: '#/definitions/__integerMin0'
-        description: Size of buffer (HRD buffer model) in bits/second.
+        description: Size of buffer (HRD buffer model) in bits.
       ColorMetadata:
         $ref: '#/definitions/H264ColorMetadata'
         description: Includes colorspace metadata in the output.
+      ColorSpaceSettings:
+        $ref: '#/definitions/H264ColorSpaceSettings'
+        description: Color Space settings
       EntropyEncoding:
         $ref: '#/definitions/H264EntropyEncoding'
         description: Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc.
@@ -5293,7 +5322,7 @@ definitions:
       MaxBitrate:
         $ref: '#/definitions/__integerMin1000'
         description: |-
-          For QVBR: See the tooltip for Quality level 
+          For QVBR: See the tooltip for Quality level
 
           For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
       MinIInterval:
@@ -5324,7 +5353,7 @@ definitions:
       RateControlMode:
         $ref: '#/definitions/H264RateControlMode'
         description: |-
-          Rate control mode. 
+          Rate control mode.
 
           QVBR: Quality will match the specified quality level except when it is constrained by the
           maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
@@ -5371,6 +5400,260 @@ definitions:
           - 'disabled': Do not include timecodes
           - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
     description: H264 Settings
+  H265AdaptiveQuantization:
+    type: string
+    enum:
+      - HIGH
+      - HIGHER
+      - LOW
+      - MAX
+      - MEDIUM
+      - 'OFF'
+    description: H265 Adaptive Quantization
+  H265AlternativeTransferFunction:
+    type: string
+    enum:
+      - INSERT
+      - OMIT
+    description: H265 Alternative Transfer Function
+  H265ColorMetadata:
+    type: string
+    enum:
+      - IGNORE
+      - INSERT
+    description: H265 Color Metadata
+  Hdr10Settings:
+    type: object
+    properties:
+      MaxCll:
+        $ref: '#/definitions/__integerMin0Max32768'
+        description: |-
+          Maximum Content Light Level
+          An integer metadata value defining the maximum light level, in nits,
+          of any single pixel within an encoded HDR video stream or file.
+      MaxFall:
+        $ref: '#/definitions/__integerMin0Max32768'
+        description: |-
+          Maximum Frame Average Light Level
+          An integer metadata value defining the maximum average light level, in nits,
+          for any single frame within an encoded HDR video stream or file.
+    description: Hdr10 Settings
+  H265ColorSpaceSettings:
+    type: object
+    properties:
+      ColorSpacePassthroughSettings:
+        $ref: '#/definitions/ColorSpacePassthroughSettings'
+      Hdr10Settings:
+        $ref: '#/definitions/Hdr10Settings'
+      Rec601Settings:
+        $ref: '#/definitions/Rec601Settings'
+      Rec709Settings:
+        $ref: '#/definitions/Rec709Settings'
+    description: H265 Color Space Settings
+  H265FlickerAq:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: H265 Flicker Aq
+  H265GopSizeUnits:
+    type: string
+    enum:
+      - FRAMES
+      - SECONDS
+    description: H265 Gop Size Units
+  H265Level:
+    type: string
+    enum:
+      - H265_LEVEL_1
+      - H265_LEVEL_2
+      - H265_LEVEL_2_1
+      - H265_LEVEL_3
+      - H265_LEVEL_3_1
+      - H265_LEVEL_4
+      - H265_LEVEL_4_1
+      - H265_LEVEL_5
+      - H265_LEVEL_5_1
+      - H265_LEVEL_5_2
+      - H265_LEVEL_6
+      - H265_LEVEL_6_1
+      - H265_LEVEL_6_2
+      - H265_LEVEL_AUTO
+    description: H265 Level
+  H265LookAheadRateControl:
+    type: string
+    enum:
+      - HIGH
+      - LOW
+      - MEDIUM
+    description: H265 Look Ahead Rate Control
+  H265Profile:
+    type: string
+    enum:
+      - MAIN
+      - MAIN_10BIT
+    description: H265 Profile
+  H265RateControlMode:
+    type: string
+    enum:
+      - CBR
+      - QVBR
+    description: H265 Rate Control Mode
+  H265ScanType:
+    type: string
+    enum:
+      - PROGRESSIVE
+    description: H265 Scan Type
+  H265SceneChangeDetect:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: H265 Scene Change Detect
+  __integerMin100000Max40000000:
+    type: integer
+    description: Placeholder documentation for __integerMin100000Max40000000
+    minimum: 100000
+    maximum: 40000000
+  __integerMin100000Max80000000:
+    type: integer
+    description: Placeholder documentation for __integerMin100000Max80000000
+    minimum: 100000
+    maximum: 80000000
+  __integerMin1Max3003:
+    type: integer
+    description: Placeholder documentation for __integerMin1Max3003
+    minimum: 1
+    maximum: 3003
+  __integerMin1Max16:
+    type: integer
+    description: Placeholder documentation for __integerMin1Max16
+    minimum: 1
+    maximum: 16
+  H265Tier:
+    type: string
+    enum:
+      - HIGH
+      - MAIN
+    description: H265 Tier
+  H265TimecodeInsertionBehavior:
+    type: string
+    enum:
+      - DISABLED
+      - PIC_TIMING_SEI
+    description: H265 Timecode Insertion Behavior
+  H265Settings:
+    type: object
+    required:
+      - FramerateNumerator
+      - FramerateDenominator
+    properties:
+      AdaptiveQuantization:
+        $ref: '#/definitions/H265AdaptiveQuantization'
+        description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      AfdSignaling:
+        $ref: '#/definitions/AfdSignaling'
+        description: 'Indicates that AFD values will be written into the output stream.  If afdSignaling is "auto", the system will try to preserve the input AFD value (in cases where multiple AFD values are valid). If set to "fixed", the AFD value will be the value configured in the fixedAfd parameter.'
+      AlternativeTransferFunction:
+        $ref: '#/definitions/H265AlternativeTransferFunction'
+        description: Whether or not EML should insert an Alternative Transfer Function SEI message to support backwards compatibility with non-HDR decoders and displays.
+      Bitrate:
+        $ref: '#/definitions/__integerMin100000Max40000000'
+        description: 'Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000.'
+      BufSize:
+        $ref: '#/definitions/__integerMin100000Max80000000'
+        description: Size of buffer (HRD buffer model) in bits.
+      ColorMetadata:
+        $ref: '#/definitions/H265ColorMetadata'
+        description: Includes colorspace metadata in the output.
+      ColorSpaceSettings:
+        $ref: '#/definitions/H265ColorSpaceSettings'
+        description: Color Space settings
+      FixedAfd:
+        $ref: '#/definitions/FixedAfd'
+        description: Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
+      FlickerAq:
+        $ref: '#/definitions/H265FlickerAq'
+        description: 'If set to enabled, adjust quantization within each frame to reduce flicker or ''pop'' on I-frames.'
+      FramerateDenominator:
+        $ref: '#/definitions/__integerMin1Max3003'
+        description: Framerate denominator.
+      FramerateNumerator:
+        $ref: '#/definitions/__integerMin1'
+        description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+      GopClosedCadence:
+        $ref: '#/definitions/__integerMin0'
+        description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
+      GopSize:
+        $ref: '#/definitions/__doubleMin1'
+        description: GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+      GopSizeUnits:
+        $ref: '#/definitions/H265GopSizeUnits'
+        description: Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
+      Level:
+        $ref: '#/definitions/H265Level'
+        description: H.265 Level.
+      LookAheadRateControl:
+        $ref: '#/definitions/H265LookAheadRateControl'
+        description: 'Amount of lookahead. A value of low can decrease latency and memory usage, while high can produce better quality for certain content.'
+      MaxBitrate:
+        $ref: '#/definitions/__integerMin100000Max40000000'
+        description: 'For QVBR: See the tooltip for Quality level'
+      MinIInterval:
+        $ref: '#/definitions/__integerMin0Max30'
+        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
+      ParDenominator:
+        $ref: '#/definitions/__integerMin1'
+        description: Pixel Aspect Ratio denominator.
+      ParNumerator:
+        $ref: '#/definitions/__integerMin1'
+        description: Pixel Aspect Ratio numerator.
+      Profile:
+        $ref: '#/definitions/H265Profile'
+        description: H.265 Profile.
+      QvbrQualityLevel:
+        $ref: '#/definitions/__integerMin1Max10'
+        description: |-
+          Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+          - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
+          - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
+          - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+      RateControlMode:
+        $ref: '#/definitions/H265RateControlMode'
+        description: |-
+          Rate control mode.
+
+          QVBR: Quality will match the specified quality level except when it is constrained by the
+          maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
+
+          CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
+          your assets to devices that cannot handle variable bitrates.
+      ScanType:
+        $ref: '#/definitions/H265ScanType'
+        description: Sets the scan type of the output to progressive or top-field-first interlaced.
+      SceneChangeDetect:
+        $ref: '#/definitions/H265SceneChangeDetect'
+        description: Scene change detection.
+      Slices:
+        $ref: '#/definitions/__integerMin1Max16'
+        description: |-
+          Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.
+          This field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.
+      Tier:
+        $ref: '#/definitions/H265Tier'
+        description: H.265 Tier.
+      TimecodeInsertion:
+        $ref: '#/definitions/H265TimecodeInsertionBehavior'
+        description: |-
+          Determines how timecodes should be inserted into the video elementary stream.
+          - 'disabled': Do not include timecodes
+          - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
+    description: H265 Settings
+  __integerMin0Max32768:
+    type: integer
+    description: Placeholder documentation for __integerMin0Max32768
+    minimum: 0
+    maximum: 32768
   HlsAdMarkers:
     type: string
     enum:
@@ -6050,7 +6333,7 @@ definitions:
     properties:
       ColorSpace:
         $ref: '#/definitions/VideoSelectorColorSpace'
-        description: Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion to determine if any conversion will be performed.
+        description: Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed.
       ColorSpaceUsage:
         $ref: '#/definitions/VideoSelectorColorSpaceUsage'
         description: 'Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.'
@@ -6525,9 +6808,20 @@ definitions:
           - useEventStartDate: Use the date the event was started as the offset
           - useConfiguredOffset: Use an explicitly configured date as the offset
     description: Ms Smooth Group Settings
+  MsSmoothH265PackagingType:
+    type: string
+    enum:
+      - HEV1
+      - HVC1
+    description: Ms Smooth H265 Packaging Type
   MsSmoothOutputSettings:
     type: object
     properties:
+      H265PackagingType:
+        $ref: '#/definitions/MsSmoothH265PackagingType'
+        description: |-
+          Only applicable when this output is referencing an H.265 video description.
+          Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
       NameModifier:
         $ref: '#/definitions/__string'
         description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
@@ -6885,11 +7179,6 @@ definitions:
     description: Placeholder documentation for __listOfAudioChannelMapping
     items:
       $ref: '#/definitions/AudioChannelMapping'
-  __integerMin1Max16:
-    type: integer
-    description: Placeholder documentation for __integerMin1Max16
-    minimum: 1
-    maximum: 16
   __integerMin1Max8:
     type: integer
     description: Placeholder documentation for __integerMin1Max8
@@ -7394,6 +7683,8 @@ definitions:
         $ref: '#/definitions/FrameCaptureSettings'
       H264Settings:
         $ref: '#/definitions/H264Settings'
+      H265Settings:
+        $ref: '#/definitions/H265Settings'
     description: Video Codec Settings
   VideoDescriptionRespondToAfd:
     type: string

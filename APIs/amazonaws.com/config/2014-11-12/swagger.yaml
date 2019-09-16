@@ -2825,7 +2825,7 @@ definitions:
       - OrganizationConfigRuleName
     properties:
       OrganizationConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/OrganizationConfigRuleName'
         description: The name of organization config rule that you want to delete.
   NoSuchOrganizationConfigRuleException: {}
   OrganizationAccessDeniedException: {}
@@ -3534,7 +3534,7 @@ definitions:
       - OrganizationConfigRuleName
     properties:
       OrganizationConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/OrganizationConfigRuleName'
         description: The name of organization config rule for which you want status details for member accounts.
       Filters:
         $ref: '#/definitions/StatusDetailFilters'
@@ -3795,7 +3795,7 @@ definitions:
       - OrganizationConfigRuleName
     properties:
       OrganizationConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/OrganizationConfigRuleName'
         description: The name that you assign to an organization config rule.
       OrganizationManagedRuleMetadata:
         $ref: '#/definitions/OrganizationManagedRuleMetadata'
@@ -4937,6 +4937,11 @@ definitions:
     type: integer
     minimum: 0
     maximum: 100
+  OrganizationConfigRuleName:
+    type: string
+    pattern: .*\S.*
+    minLength: 1
+    maxLength: 64
   RemediationExceptionResourceKeys:
     type: array
     items:
@@ -5437,7 +5442,7 @@ definitions:
       - OrganizationConfigRuleArn
     properties:
       OrganizationConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/OrganizationConfigRuleName'
         description: The name that you assign to organization config rule.
       OrganizationConfigRuleArn:
         $ref: '#/definitions/StringWithCharLimit256'
@@ -5474,7 +5479,7 @@ definitions:
       - OrganizationRuleStatus
     properties:
       OrganizationConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/OrganizationConfigRuleName'
         description: The name that you assign to organization config rule.
       OrganizationRuleStatus:
         $ref: '#/definitions/OrganizationRuleStatus'
