@@ -109,6 +109,7 @@ x-servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon EKS endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 consumes:
   - application/json
 produces:
@@ -245,6 +246,13 @@ paths:
               clientRequestToken:
                 description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
+              tags:
+                description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -407,6 +415,74 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: List the tags for an Amazon EKS resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Amazon EKS clusters.'
+          type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon EKS clusters.'
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - tags
+            properties:
+              tags:
+                description: The tags to add to the resource. A tag is an array of key-value pairs.
+                type: object
+                minProperties: 1
+                maxProperties: 50
+                additionalProperties:
+                  $ref: '#/definitions/TagValue'
   '/clusters/{name}/updates':
     get:
       operationId: ListUpdates
@@ -510,6 +586,44 @@ paths:
               clientRequestToken:
                 description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                 type: string
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon EKS clusters.'
+          type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to be removed.
+          type: array
+          items:
+            type: string
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/clusters/{name}/update-config':
     post:
       operationId: UpdateClusterConfig
@@ -607,6 +721,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LogSetup'
+  TagValue:
+    type: string
+    maxLength: 256
   ResourceInUseException: {}
   ResourceLimitExceededException: {}
   InvalidParameterException: {}
@@ -665,6 +782,14 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags for the resource.
+  BadRequestException: {}
+  NotFoundException: {}
   ListUpdatesResponse:
     type: object
     properties:
@@ -674,6 +799,16 @@ definitions:
       nextToken:
         $ref: '#/definitions/String'
         description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  TagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
   UpdateClusterConfigResponse:
     type: object
     properties:
@@ -740,6 +875,12 @@ definitions:
       - ACTIVE
       - DELETING
       - FAILED
+  TagMap:
+    type: object
+    minProperties: 1
+    maxProperties: 50
+    additionalProperties:
+      $ref: '#/definitions/TagValue'
   Cluster:
     type: object
     properties:
@@ -782,6 +923,9 @@ definitions:
       platformVersion:
         $ref: '#/definitions/String'
         description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
     description: An object representing an Amazon EKS cluster.
   ClusterName:
     type: string
@@ -829,6 +973,9 @@ definitions:
       clientRequestToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
   DeleteClusterRequest:
     type: object
     properties: {}
@@ -902,6 +1049,9 @@ definitions:
   ListClustersRequest:
     type: object
     properties: {}
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   ListUpdatesRequestMaxResults:
     type: integer
     minimum: 1
@@ -931,6 +1081,23 @@ definitions:
       - authenticator
       - controllerManager
       - scheduler
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The tags to add to the resource. A tag is an array of key-value pairs.
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateStatus:
     type: string
     enum:

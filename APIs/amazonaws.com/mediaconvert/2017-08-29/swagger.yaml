@@ -2007,7 +2007,7 @@ definitions:
         $ref: '#/definitions/__integerMin0Max15'
         description: Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on all  frames of this video output.
       Height:
-        $ref: '#/definitions/__integerMin32Max2160'
+        $ref: '#/definitions/__integerMin32Max4096'
         description: 'Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don''t provide a value here, the service will use the input height.'
       Position:
         $ref: '#/definitions/Rectangle'
@@ -2346,10 +2346,10 @@ definitions:
     type: integer
     minimum: 16
     maximum: 24
-  __integerMin1Max2:
+  __integerMin1Max64:
     type: integer
     minimum: 1
-    maximum: 2
+    maximum: 64
   __integerMin8000Max192000:
     type: integer
     minimum: 8000
@@ -2361,22 +2361,40 @@ definitions:
         $ref: '#/definitions/__integerMin16Max24'
         description: 'Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.'
       Channels:
-        $ref: '#/definitions/__integerMin1Max2'
-        description: 'Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give you 1 output channel; choosing Stereo will give you 2. In the API, valid values are 1 and 2.'
+        $ref: '#/definitions/__integerMin1Max64'
+        description: 'Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.'
       SampleRate:
         $ref: '#/definitions/__integerMin8000Max192000'
         description: Sample rate in hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AIFF.
+  AncillaryConvert608To708:
+    type: string
+    enum:
+      - UPCONVERT
+      - DISABLED
+    description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
   __integerMin1Max4:
     type: integer
     minimum: 1
     maximum: 4
+  AncillaryTerminateCaptions:
+    type: string
+    enum:
+      - END_OF_INPUT
+      - DISABLED
+    description: 'By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.'
   AncillarySourceSettings:
     type: object
     properties:
+      Convert608To708:
+        $ref: '#/definitions/AncillaryConvert608To708'
+        description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
       SourceAncillaryChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
         description: Specifies the 608 channel number in the ancillary data track from which to extract captions. Unused for passthrough.
+      TerminateCaptions:
+        $ref: '#/definitions/AncillaryTerminateCaptions'
+        description: 'By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.'
     description: Settings for ancillary captions source.
   AntiAlias:
     type: string
@@ -2546,8 +2564,8 @@ definitions:
         $ref: '#/definitions/__integerMin16Max24'
         description: 'Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.'
       Channels:
-        $ref: '#/definitions/__integerMin1Max8'
-        description: 'Set Channels to specify the number of channels in this output audio track. With WAV, valid values 1, 2, 4, and 8. In the console, these values are Mono, Stereo, 4-Channel, and 8-Channel, respectively.'
+        $ref: '#/definitions/__integerMin1Max64'
+        description: 'Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.'
       Format:
         $ref: '#/definitions/WavFormat'
         description: 'The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64.'
@@ -2834,11 +2852,11 @@ definitions:
         $ref: '#/definitions/ChannelMapping'
         description: Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
       ChannelsIn:
-        $ref: '#/definitions/__integerMin1Max16'
+        $ref: '#/definitions/__integerMin1Max64'
         description: 'Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.'
       ChannelsOut:
-        $ref: '#/definitions/__integerMin1Max8'
-        description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8'
+        $ref: '#/definitions/__integerMin1Max64'
+        description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)'
     description: 'Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio channel in each output of your job. With audio remixing, you can output more or fewer audio channels than your input audio source provides.'
   __stringPatternWS:
     type: string
@@ -3138,13 +3156,16 @@ definitions:
         description: Burn-In Destination Settings.
       DestinationType:
         $ref: '#/definitions/CaptionDestinationType'
-        description: 'Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).'
+        description: 'Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).'
       DvbSubDestinationSettings:
         $ref: '#/definitions/DvbSubDestinationSettings'
         description: DVB-Sub Destination Settings
       EmbeddedDestinationSettings:
         $ref: '#/definitions/EmbeddedDestinationSettings'
         description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
+      ImscDestinationSettings:
+        $ref: '#/definitions/ImscDestinationSettings'
+        description: Settings specific to IMSC caption outputs.
       SccDestinationSettings:
         $ref: '#/definitions/SccDestinationSettings'
         description: Settings for SCC caption output.
@@ -3197,6 +3218,7 @@ definitions:
       - DVB_SUB
       - EMBEDDED
       - EMBEDDED_PLUS_SCTE20
+      - IMSC
       - SCTE20_PLUS_EMBEDDED
       - SCC
       - SRT
@@ -3204,7 +3226,7 @@ definitions:
       - TELETEXT
       - TTML
       - WEBVTT
-    description: 'Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).'
+    description: 'Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).'
   DvbSubDestinationSettings:
     type: object
     properties:
@@ -3273,11 +3295,18 @@ definitions:
     properties:
       Destination608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
-        description: 'Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, pick CC numbers that aren''t in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
+        description: 'Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, choose CC numbers that aren''t in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
       Destination708ServiceNumber:
         $ref: '#/definitions/__integerMin1Max6'
-        description: 'Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don''t specify a 708 service number, MediaConvert uses the number you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
+        description: 'Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don''t specify a 708 service number, MediaConvert uses the number that you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.'
     description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
+  ImscDestinationSettings:
+    type: object
+    properties:
+      StylePassthrough:
+        $ref: '#/definitions/ImscStylePassthrough'
+        description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
+    description: Settings specific to IMSC caption outputs.
   SccDestinationSettings:
     type: object
     properties:
@@ -3316,7 +3345,7 @@ definitions:
         description: Settings for embedded captions Source
       FileSourceSettings:
         $ref: '#/definitions/FileSourceSettings'
-        description: Settings for File-based Captions in Source
+        description: 'If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
       SourceType:
         $ref: '#/definitions/CaptionSourceType'
         description: Use Source (SourceType) to identify the format of your input captions.  The service cannot auto-detect caption format.
@@ -3325,8 +3354,8 @@ definitions:
         description: 'Settings specific to Teletext caption sources, including Page number.'
       TrackSourceSettings:
         $ref: '#/definitions/TrackSourceSettings'
-        description: Settings specific to caption sources that are specfied by track number. Sources include IMSC in IMF.
-    description: Source settings (SourceSettings) contains the group of settings for captions in the input.
+        description: 'Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings.'
+    description: 'If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
   CaptionSelector:
     type: object
     properties:
@@ -3338,7 +3367,7 @@ definitions:
         description: 'The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
       SourceSettings:
         $ref: '#/definitions/CaptionSourceSettings'
-        description: Source settings (SourceSettings) contains the group of settings for captions in the input.
+        description: 'If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
     description: Set up captions in your outputs by first selecting them from your input here.
   DvbSubSourceSettings:
     type: object
@@ -3352,27 +3381,30 @@ definitions:
     properties:
       Convert608To708:
         $ref: '#/definitions/EmbeddedConvert608To708'
-        description: 'When set to UPCONVERT, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+        description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
       Source608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
         description: Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
       Source608TrackNumber:
         $ref: '#/definitions/__integerMin1Max1'
         description: 'Specifies the video track index used for extracting captions. The system only supports one input video track, so this should always be set to ''1''.'
+      TerminateCaptions:
+        $ref: '#/definitions/EmbeddedTerminateCaptions'
+        description: 'By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.'
     description: Settings for embedded captions Source
   FileSourceSettings:
     type: object
     properties:
       Convert608To708:
         $ref: '#/definitions/FileSourceConvert608To708'
-        description: 'If set to UPCONVERT, 608 caption data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+        description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
       SourceFile:
-        $ref: '#/definitions/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI'
-        description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', and ''smi''.'
+        $ref: '#/definitions/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI'
+        description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', and ''smi''.'
       TimeDelta:
         $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies a time delta in seconds to offset the captions from the source file.
-    description: Settings for File-based Captions in Source
+    description: 'If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
   CaptionSourceType:
     type: string
     enum:
@@ -3402,7 +3434,7 @@ definitions:
       TrackNumber:
         $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.'
-    description: Settings specific to caption sources that are specfied by track number. Sources include IMSC in IMF.
+    description: 'Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings.'
   __listOfOutputChannelMapping:
     type: array
     items:
@@ -3435,7 +3467,8 @@ definitions:
     type: string
     enum:
       - SAMPLE_AES
-    description: 'For DRM with CMAF, the encryption type is always sample AES.'
+      - AES_CTR
+    description: Specify the encryption scheme that you want the service to use when encrypting your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR).
   CmafInitializationVectorInManifest:
     type: string
     enum:
@@ -3460,7 +3493,7 @@ definitions:
       Url:
         $ref: '#/definitions/__stringPatternHttps'
         description: Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
-    description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead.'
+    description: 'If your output group type is CMAF, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead.'
   StaticKeyProvider:
     type: object
     properties:
@@ -3491,13 +3524,13 @@ definitions:
         description: 'This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.'
       EncryptionMethod:
         $ref: '#/definitions/CmafEncryptionType'
-        description: 'For DRM with CMAF, the encryption type is always sample AES.'
+        description: Specify the encryption scheme that you want the service to use when encrypting your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR).
       InitializationVectorInManifest:
         $ref: '#/definitions/CmafInitializationVectorInManifest'
         description: 'When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests.'
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProviderCmaf'
-        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead.'
+        description: 'If your output group type is CMAF, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead.'
       StaticKeyProvider:
         $ref: '#/definitions/StaticKeyProvider'
         description: Use these settings to set up encryption with a static key provider.
@@ -4392,7 +4425,7 @@ definitions:
       Url:
         $ref: '#/definitions/__stringPatternHttps'
         description: Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
-    description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
+    description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
   DashIsoEncryptionSettings:
     type: object
     properties:
@@ -4401,7 +4434,7 @@ definitions:
         description: 'This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.'
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
+        description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
     description: Specifies DRM settings for DASH outputs.
   DashIsoHbbtvCompliance:
     type: string
@@ -4836,7 +4869,7 @@ definitions:
     enum:
       - UPCONVERT
       - DISABLED
-    description: 'When set to UPCONVERT, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+    description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
   __integerMin1Max6:
     type: integer
     minimum: 1
@@ -4845,6 +4878,12 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1
+  EmbeddedTerminateCaptions:
+    type: string
+    enum:
+      - END_OF_INPUT
+      - DISABLED
+    description: 'By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.'
   Endpoint:
     type: object
     properties:
@@ -4897,10 +4936,10 @@ definitions:
     enum:
       - UPCONVERT
       - DISABLED
-    description: 'If set to UPCONVERT, 608 caption data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
-  __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI:
+    description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
+  __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI:
     type: string
-    pattern: '^(s3:\/\/)(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|smi|SMI)$'
+    pattern: '^(s3:\/\/)(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI)$'
     minLength: 14
   __integerMin1Max10000000:
     type: integer
@@ -5692,7 +5731,7 @@ definitions:
         description: Enable this setting to insert the EXT-X-SESSION-KEY element into the master playlist. This allows for offline Apple HLS FairPlay content protection.
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
+        description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
       StaticKeyProvider:
         $ref: '#/definitions/StaticKeyProvider'
         description: Use these settings to set up encryption with a static key provider.
@@ -5886,6 +5925,12 @@ definitions:
         $ref: '#/definitions/__listOfInsertableImage'
         description: Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
     description: Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default.
+  ImscStylePassthrough:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+    description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
   __mapOfAudioSelectorGroup:
     type: object
     additionalProperties:
@@ -5976,7 +6021,12 @@ definitions:
       - EMBEDDED
       - ZEROBASED
       - SPECIFIEDSTART
-    description: 'Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes.'
+    description: 'Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting Start timecode (timecodeStart). If you don''t specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.'
+  __stringMin11Max11Pattern01D20305D205D:
+    type: string
+    pattern: '^((([0-1]\d)|(2[0-3]))(:[0-5]\d){2}([:;][0-5]\d))$'
+    minLength: 11
+    maxLength: 11
   VideoSelector:
     type: object
     properties:
@@ -6052,7 +6102,10 @@ definitions:
         description: 'Provide a list of any necessary supplemental IMPs. You need supplemental IMPs if the CPL that you''re using for your input is in an incomplete IMP. Specify either the supplemental IMP directories with a trailing slash or the ASSETMAP.xml files. For example ["s3://bucket/ov/", "s3://bucket/vf2/ASSETMAP.xml"]. You don''t need to specify the IMP that contains your input CPL, because the service automatically detects it.'
       TimecodeSource:
         $ref: '#/definitions/InputTimecodeSource'
-        description: 'Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes.'
+        description: 'Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting Start timecode (timecodeStart). If you don''t specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.'
+      TimecodeStart:
+        $ref: '#/definitions/__stringMin11Max11Pattern01D20305D205D'
+        description: 'Specify the timecode that you want the service to use for this input''s initial frame. To use this setting, you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.'
       VideoSelector:
         $ref: '#/definitions/VideoSelector'
         description: Selector for video.
@@ -6135,7 +6188,10 @@ definitions:
         description: Set PSI control (InputPsiControl) for transport stream inputs to specify which data the demux process to scans. * Ignore PSI - Scan all PIDs for audio and video. * Use PSI - Scan only PSI data.
       TimecodeSource:
         $ref: '#/definitions/InputTimecodeSource'
-        description: 'Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes.'
+        description: 'Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting Start timecode (timecodeStart). If you don''t specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.'
+      TimecodeStart:
+        $ref: '#/definitions/__stringMin11Max11Pattern01D20305D205D'
+        description: 'Specify the timecode that you want the service to use for this input''s initial frame. To use this setting, you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.'
       VideoSelector:
         $ref: '#/definitions/VideoSelector'
         description: Selector for video.
@@ -6464,11 +6520,6 @@ definitions:
       - ONCE
       - REPEAT
     description: Specify whether your motion graphic overlay repeats on a loop or plays only once.
-  __stringMin11Max11Pattern01D20305D205D:
-    type: string
-    pattern: '^((([0-1]\d)|(2[0-3]))(:[0-5]\d){2}([:;][0-5]\d))$'
-    minLength: 11
-    maxLength: 11
   __integerMin1Max17895697:
     type: integer
     minimum: 1
@@ -6511,6 +6562,10 @@ definitions:
     type: integer
     minimum: 32000
     maximum: 384000
+  __integerMin1Max2:
+    type: integer
+    minimum: 1
+    maximum: 2
   __integerMin32000Max48000:
     type: integer
     minimum: 32000
@@ -6787,7 +6842,7 @@ definitions:
     properties:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
-        description: 'Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
+        description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
     description: 'If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider.'
   MsSmoothManifestEncoding:
     type: string
@@ -6864,7 +6919,7 @@ definitions:
         description: 'The speed of the filter (higher number is faster). Low setting reduces bit rate at the cost of transcode time, high setting improves transcode time at the cost of bit rate.'
       Strength:
         $ref: '#/definitions/__integerMin0Max16'
-        description: 'Relative strength of noise reducing filter. Higher values produce stronger filtering. Recommended Range: * [0 .. 2] for complexity reduction with minimal sharpness loss * [2 .. 8] for complexity reduction with image preservation * [8 .. 16] for noise reduction. Reduce noise combined high complexity reduction'
+        description: 'Specify the strength of the noise reducing filter on this output. Higher values produce stronger filtering. We recommend the following value ranges, depending on the result that you want: * 0-2 for complexity reduction with minimal sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for a high level of complexity reduction'
     description: Noise reducer filter settings for temporal filter.
   NoiseReducer:
     type: object
@@ -7153,14 +7208,6 @@ definitions:
     type: integer
     minimum: 2
     maximum: 2147483647
-  __integerMin1Max16:
-    type: integer
-    minimum: 1
-    maximum: 16
-  __integerMin1Max8:
-    type: integer
-    minimum: 1
-    maximum: 8
   ReservationPlanStatus:
     type: string
     enum:
@@ -7409,10 +7456,10 @@ definitions:
     type: integer
     minimum: 0
     maximum: 15
-  __integerMin32Max2160:
+  __integerMin32Max4096:
     type: integer
     minimum: 32
-    maximum: 2160
+    maximum: 4096
   VideoTimecodeInsertion:
     type: string
     enum:
@@ -7438,10 +7485,6 @@ definitions:
         $ref: '#/definitions/TimecodeBurnin'
         description: Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output.
     description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
-  __integerMin32Max4096:
-    type: integer
-    minimum: 32
-    maximum: 4096
   WavFormat:
     type: string
     enum:
