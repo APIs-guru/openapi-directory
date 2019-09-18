@@ -324,6 +324,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
       parameters:
         - name: body
           in: body
@@ -1540,6 +1544,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
       parameters:
         - name: body
           in: body
@@ -1813,7 +1821,7 @@ definitions:
         $ref: '#/definitions/Name'
         description: The name for the solution.
       performHPO:
-        $ref: '#/definitions/PerformHPO'
+        $ref: '#/definitions/Boolean'
         description: '<p>Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is <code>false</code>.</p> <p>When performing AutoML, this parameter is always <code>true</code> and you should not set it to <code>false</code>.</p>'
       performAutoML:
         $ref: '#/definitions/PerformAutoML'
@@ -2385,6 +2393,8 @@ definitions:
   AvroSchema:
     type: string
     maxLength: 10000
+  Boolean:
+    type: boolean
   TransactionsPerSecond:
     type: integer
     minimum: 1
@@ -2543,8 +2553,6 @@ definitions:
   TrackingId:
     type: string
     maxLength: 256
-  PerformHPO:
-    type: boolean
   PerformAutoML:
     type: boolean
   EventType:
@@ -2994,6 +3002,9 @@ definitions:
       solutionConfig:
         $ref: '#/definitions/SolutionConfig'
         description: Describes the configuration properties for the solution.
+      trainingHours:
+        $ref: '#/definitions/TrainingHours'
+        description: 'The time used to train the model. '
       status:
         $ref: '#/definitions/Status'
         description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
@@ -3164,6 +3175,8 @@ definitions:
   MetricValue:
     type: number
     format: double
+  PerformHPO:
+    type: boolean
   RecipeType:
     type: string
     maxLength: 256
@@ -3224,3 +3237,7 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time (in Unix time) that the solution was last updated.
     description: 'Provides a summary of the properties of a solution. For a complete listing, call the <a>DescribeSolution</a> API.'
+  TrainingHours:
+    type: number
+    format: double
+    minimum: 0
