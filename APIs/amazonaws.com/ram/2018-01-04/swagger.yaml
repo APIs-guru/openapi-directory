@@ -3,7 +3,7 @@ info:
   version: '2018-01-04'
   x-release: v4
   title: AWS Resource Access Manager
-  description: '<p>Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you create a resource share, associate the resource with the resource share, and specify the principals that can access the resource. The following principals are supported:</p> <ul> <li> <p>The ID of an AWS account</p> </li> <li> <p>The Amazon Resource Name (ARN) of an OU from AWS Organizations</p> </li> <li> <p>The Amazon Resource Name (ARN) of an organization from AWS Organizations</p> </li> </ul> <p>If you specify an AWS account that doesn''t exist in the same organization as the account that owns the resource share, the owner of the specified account receives an invitation to accept the resource share. After the owner accepts the invitation, they can access the resources in the resource share. An administrator of the specified account can use IAM policies to restrict access resources in the resource share.</p>'
+  description: '<p>Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you create a resource share, associate the resource with the resource share, and specify the principals that can access the resources associated with the resource share. The following principals are supported: AWS accounts, organizational units (OU) from AWS Organizations, and organizations from AWS Organizations.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/ram/latest/userguide/">AWS Resource Access Manager User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -200,6 +200,14 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '488':
+          description: InvalidClientTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientTokenException'
+        '489':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
       parameters:
         - name: body
           in: body
@@ -355,10 +363,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceShareLimitExceededException'
         '488':
+          description: TagPolicyViolationException
+          schema:
+            $ref: '#/definitions/TagPolicyViolationException'
+        '489':
           description: ServerInternalException
           schema:
             $ref: '#/definitions/ServerInternalException'
-        '489':
+        '490':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
@@ -390,7 +402,7 @@ paths:
                 items:
                   $ref: '#/definitions/Tag'
               allowExternalPrincipals:
-                description: Indicates whether principals outside your organization can be associated with a resource share.
+                description: Indicates whether principals outside your AWS organization can be associated with a resource share.
                 type: boolean
               clientToken:
                 description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -552,7 +564,7 @@ paths:
   /enablesharingwithawsorganization:
     post:
       operationId: EnableSharingWithAwsOrganization
-      description: Enables resource sharing within your organization.
+      description: <p>Enables resource sharing within your AWS Organization.</p> <p>The caller must be the master account for the AWS Organization.</p>
       responses:
         '200':
           description: Success
@@ -582,7 +594,7 @@ paths:
   /getresourcepolicies:
     post:
       operationId: GetResourcePolicies
-      description: Gets the policies for the specifies resources.
+      description: Gets the policies for the specified resources that you own and have shared.
       responses:
         '200':
           description: Success
@@ -654,7 +666,7 @@ paths:
   /getresourceshareassociations:
     post:
       operationId: GetResourceShareAssociations
-      description: Gets the associations for the specified resource share.
+      description: Gets the resources or principals for the resource shares that you own.
       responses:
         '200':
           description: Success
@@ -709,13 +721,13 @@ paths:
                 items:
                   $ref: '#/definitions/String'
               resourceArn:
-                description: The Amazon Resource Name (ARN) of the resource.
+                description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
                 type: string
               principal:
-                description: The principal.
+                description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
                 type: string
               associationStatus:
-                description: The status of the association.
+                description: The association status.
                 type: string
                 enum:
                   - ASSOCIATING
@@ -752,7 +764,7 @@ paths:
   /getresourceshareinvitations:
     post:
       operationId: GetResourceShareInvitations
-      description: Gets the specified invitations for resource sharing.
+      description: Gets the invitations for resource sharing that you've received.
       responses:
         '200':
           description: Success
@@ -832,7 +844,7 @@ paths:
   /getresourceshares:
     post:
       operationId: GetResourceShares
-      description: Gets the specified resource shares or all of your resource shares.
+      description: Gets the resource shares that you own or the resource shares that are shared with you.
       responses:
         '200':
           description: Success
@@ -925,10 +937,93 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listpendinginvitationresources:
+    post:
+      operationId: ListPendingInvitationResources
+      description: Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPendingInvitationResourcesResponse'
+        '480':
+          description: MalformedArnException
+          schema:
+            $ref: '#/definitions/MalformedArnException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ServerInternalException
+          schema:
+            $ref: '#/definitions/ServerInternalException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ResourceShareInvitationArnNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceShareInvitationArnNotFoundException'
+        '486':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '487':
+          description: ResourceShareInvitationAlreadyRejectedException
+          schema:
+            $ref: '#/definitions/ResourceShareInvitationAlreadyRejectedException'
+        '488':
+          description: ResourceShareInvitationExpiredException
+          schema:
+            $ref: '#/definitions/ResourceShareInvitationExpiredException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - resourceShareInvitationArn
+            properties:
+              resourceShareInvitationArn:
+                description: The Amazon Resource Name (ARN) of the invitation.
+                type: string
+              nextToken:
+                description: The token for the next page of results.
+                type: string
+              maxResults:
+                description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                type: integer
+                minimum: 1
+                maximum: 500
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /listprincipals:
     post:
       operationId: ListPrincipals
-      description: Lists the principals with access to the specified resource.
+      description: Lists the principals that you have shared resources with or the principals that have shared resources with you.
       responses:
         '200':
           description: Success
@@ -982,7 +1077,7 @@ paths:
                 items:
                   $ref: '#/definitions/String'
               resourceType:
-                description: The resource type.
+                description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
                 type: string
               resourceShareArns:
                 description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1018,7 +1113,7 @@ paths:
   /listresources:
     post:
       operationId: ListResources
-      description: Lists the resources that the specified principal can access.
+      description: Lists the resources that you added to a resource shares or the resources that are shared with you.
       responses:
         '200':
           description: Success
@@ -1071,7 +1166,7 @@ paths:
                 description: The principal.
                 type: string
               resourceType:
-                description: The resource type.
+                description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
                 type: string
               resourceArns:
                 description: The Amazon Resource Names (ARN) of the resources.
@@ -1150,6 +1245,14 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '488':
+          description: InvalidClientTokenException
+          schema:
+            $ref: '#/definitions/InvalidClientTokenException'
+        '489':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
       parameters:
         - name: body
           in: body
@@ -1176,7 +1279,7 @@ paths:
   /tagresource:
     post:
       operationId: TagResource
-      description: Adds the specified tags to the specified resource share.
+      description: Adds the specified tags to the specified resource share that you own.
       responses:
         '200':
           description: Success
@@ -1199,10 +1302,14 @@ paths:
           schema:
             $ref: '#/definitions/ResourceArnNotFoundException'
         '484':
+          description: TagPolicyViolationException
+          schema:
+            $ref: '#/definitions/TagPolicyViolationException'
+        '485':
           description: ServerInternalException
           schema:
             $ref: '#/definitions/ServerInternalException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
@@ -1235,7 +1342,7 @@ paths:
   /untagresource:
     post:
       operationId: UntagResource
-      description: Removes the specified tags from the specified resource share.
+      description: Removes the specified tags from the specified resource share that you own.
       responses:
         '200':
           description: Success
@@ -1282,7 +1389,7 @@ paths:
   /updateresourceshare:
     post:
       operationId: UpdateResourceShare
-      description: Updates the specified resource share.
+      description: Updates the specified resource share that you own.
       responses:
         '200':
           description: Success
@@ -1340,7 +1447,7 @@ paths:
                 description: The name of the resource share.
                 type: string
               allowExternalPrincipals:
-                description: Indicates whether principals outside your organization can be associated with a resource share.
+                description: Indicates whether principals outside your AWS organization can be associated with a resource share.
                 type: boolean
               clientToken:
                 description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -1371,6 +1478,8 @@ definitions:
   ResourceShareInvitationExpiredException: {}
   ServerInternalException: {}
   ServiceUnavailableException: {}
+  InvalidClientTokenException: {}
+  IdempotentParameterMismatchException: {}
   AssociateResourceShareResponse:
     type: object
     properties:
@@ -1382,11 +1491,9 @@ definitions:
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   String:
     type: string
-  IdempotentParameterMismatchException: {}
   UnknownResourceException: {}
   InvalidStateTransitionException: {}
   ResourceShareLimitExceededException: {}
-  InvalidClientTokenException: {}
   InvalidParameterException: {}
   CreateResourceShareResponse:
     type: object
@@ -1407,6 +1514,7 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Information about a tag.
+  TagPolicyViolationException: {}
   DeleteResourceShareResponse:
     type: object
     properties:
@@ -1446,7 +1554,7 @@ definitions:
     properties:
       resourceShareAssociations:
         $ref: '#/definitions/ResourceShareAssociationList'
-        description: Information about the association.
+        description: Information about the associations.
       nextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
@@ -1479,6 +1587,16 @@ definitions:
         $ref: '#/definitions/TagValueList'
         description: The tag values.
     description: Used to filter information based on tags.
+  ListPendingInvitationResourcesResponse:
+    type: object
+    properties:
+      resources:
+        $ref: '#/definitions/ResourceList'
+        description: Information about the resources included the resource share.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  MissingRequiredParameterException: {}
   ListPrincipalsResponse:
     type: object
     properties:
@@ -1526,7 +1644,6 @@ definitions:
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-  MissingRequiredParameterException: {}
   AcceptResourceShareInvitationRequest:
     type: object
     required:
@@ -1564,7 +1681,7 @@ definitions:
         description: The status of the invitation.
       resourceShareAssociations:
         $ref: '#/definitions/ResourceShareAssociationList'
-        description: The resources associated with the resource share.
+        description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html">ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
     description: Describes an invitation to join a resource share.
   ResourceArnList:
     type: array
@@ -1620,7 +1737,7 @@ definitions:
         description: One or more tags.
       allowExternalPrincipals:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
+        description: Indicates whether principals outside your AWS organization can be associated with a resource share.
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -1638,7 +1755,7 @@ definitions:
         description: The ID of the AWS account that owns the resource share.
       allowExternalPrincipals:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
+        description: Indicates whether principals outside your AWS organization can be associated with a resource share.
       status:
         $ref: '#/definitions/ResourceShareStatus'
         description: The status of the resource share.
@@ -1736,13 +1853,13 @@ definitions:
         description: The Amazon Resource Names (ARN) of the resource shares.
       resourceArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource.
+        description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
       principal:
         $ref: '#/definitions/String'
-        description: The principal.
+        description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
       associationStatus:
         $ref: '#/definitions/ResourceShareAssociationStatus'
-        description: The status of the association.
+        description: The association status.
       nextToken:
         $ref: '#/definitions/String'
         description: The token for the next page of results.
@@ -1819,6 +1936,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceShare'
+  ListPendingInvitationResourcesRequest:
+    type: object
+    required:
+      - resourceShareInvitationArn
+    properties:
+      resourceShareInvitationArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the invitation.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
   ListPrincipalsRequest:
     type: object
     required:
@@ -1835,7 +1970,7 @@ definitions:
         description: The principals.
       resourceType:
         $ref: '#/definitions/String'
-        description: The resource type.
+        description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
       resourceShareArns:
         $ref: '#/definitions/ResourceShareArnList'
         description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1862,7 +1997,7 @@ definitions:
         description: The principal.
       resourceType:
         $ref: '#/definitions/String'
-        description: The resource type.
+        description: '<p>The resource type.</p> <p>Valid values: <code>route53resolver:ResolverRule</code> | <code>ec2:TransitGateway</code> | <code>ec2:Subnet</code> | <code>license-manager:LicenseConfiguration</code> </p>'
       resourceArns:
         $ref: '#/definitions/ResourceArnList'
         description: The Amazon Resource Names (ARN) of the resources.
@@ -1875,10 +2010,6 @@ definitions:
       maxResults:
         $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
-  ResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
   Policy:
     type: string
   Principal:
@@ -1898,7 +2029,7 @@ definitions:
         description: The time when the association was last updated.
       external:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+        description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
     description: Describes a principal for use with AWS Resource Access Manager.
   RejectResourceShareInvitationRequest:
     type: object
@@ -1918,6 +2049,7 @@ definitions:
       - ZONAL_RESOURCE_INACCESSIBLE
       - LIMIT_EXCEEDED
       - UNAVAILABLE
+      - PENDING
   Resource:
     type: object
     properties:
@@ -1949,6 +2081,9 @@ definitions:
       resourceShareArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
+      resourceShareName:
+        $ref: '#/definitions/String'
+        description: The name of the resource share.
       associatedEntity:
         $ref: '#/definitions/String'
         description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
@@ -1969,7 +2104,7 @@ definitions:
         description: The time when the association was last updated.
       external:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+        description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
     description: Describes an association with a resource share.
   ResourceShareInvitationStatus:
     type: string
@@ -2025,7 +2160,7 @@ definitions:
         description: The name of the resource share.
       allowExternalPrincipals:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
+        description: Indicates whether principals outside your AWS organization can be associated with a resource share.
       clientToken:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
