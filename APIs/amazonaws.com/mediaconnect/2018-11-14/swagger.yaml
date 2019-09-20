@@ -1275,6 +1275,9 @@ definitions:
     required:
       - Subscribers
     properties:
+      DataTransferSubscriberFeePercent:
+        $ref: '#/definitions/__integer'
+        description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
       Description:
         $ref: '#/definitions/__string'
         description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
@@ -1607,6 +1610,9 @@ definitions:
       - Subscribers
       - Name
     properties:
+      DataTransferSubscriberFeePercent:
+        $ref: '#/definitions/__integer'
+        description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
       Description:
         $ref: '#/definitions/__string'
         description: A description of the entitlement.
@@ -1633,6 +1639,9 @@ definitions:
       - SourceArn
       - Name
     properties:
+      DataTransferSubscriberFeePercent:
+        $ref: '#/definitions/__integer'
+        description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
       Decryption:
         $ref: '#/definitions/Encryption'
         description: The type of encryption that is used on the content ingested from this source.
@@ -1701,6 +1710,9 @@ definitions:
       - EntitlementArn
       - EntitlementName
     properties:
+      DataTransferSubscriberFeePercent:
+        $ref: '#/definitions/__integer'
+        description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
       EntitlementArn:
         $ref: '#/definitions/__string'
         description: The ARN of the entitlement.
@@ -1775,6 +1787,9 @@ definitions:
       - OutputArn
       - Name
     properties:
+      DataTransferSubscriberFeePercent:
+        $ref: '#/definitions/__integer'
+        description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
       Description:
         $ref: '#/definitions/__string'
         description: A description of the output.
