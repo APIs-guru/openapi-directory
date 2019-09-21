@@ -855,6 +855,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceSnapshots':
+    post:
+      operationId: DescribeWorkspaceSnapshots
+      description: Describes the snapshots for the specified WorkSpace.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeWorkspaceSnapshotsResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeWorkspaceSnapshotsRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.DescribeWorkspaceSnapshots
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkspacesService.DescribeWorkspaces':
     post:
       operationId: DescribeWorkspaces
@@ -1308,6 +1349,47 @@ paths:
           type: string
           enum:
             - WorkspacesService.RebuildWorkspaces
+    parameters:
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkspacesService.RestoreWorkspace':
+    post:
+      operationId: RestoreWorkspace
+      description: '<p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreWorkspaceResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreWorkspaceRequest'
+        - name: X-Amz-Target
+          in: header
+          required: true
+          type: string
+          enum:
+            - WorkspacesService.RestoreWorkspace
     parameters:
       - $ref: '#/parameters/X-Amz-Content-Sha256'
       - $ref: '#/parameters/X-Amz-Date'
@@ -1794,6 +1876,23 @@ definitions:
       MaxResults:
         $ref: '#/definitions/Limit'
         description: The maximum number of items to return.
+  DescribeWorkspaceSnapshotsResult:
+    type: object
+    properties:
+      RebuildSnapshots:
+        $ref: '#/definitions/SnapshotList'
+        description: Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the root volume.
+      RestoreSnapshots:
+        $ref: '#/definitions/SnapshotList'
+        description: Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.
+  DescribeWorkspaceSnapshotsRequest:
+    type: object
+    required:
+      - WorkspaceId
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The identifier of the WorkSpace.
   DescribeWorkspacesResult:
     type: object
     properties:
@@ -1996,6 +2095,17 @@ definitions:
       RebuildWorkspaceRequests:
         $ref: '#/definitions/RebuildWorkspaceRequests'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
+  RestoreWorkspaceResult:
+    type: object
+    properties: {}
+  RestoreWorkspaceRequest:
+    type: object
+    required:
+      - WorkspaceId
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/WorkspaceId'
+        description: The identifier of the WorkSpace.
   RevokeIpRulesResult:
     type: object
     properties: {}
@@ -2344,6 +2454,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/WorkspaceImage'
+  WorkspaceId:
+    type: string
+    pattern: '^ws-[0-9a-z]{8,63}$'
+  SnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/Snapshot'
   WorkspaceIdList:
     type: array
     items:
@@ -2471,7 +2588,7 @@ definitions:
       ErrorMessage:
         $ref: '#/definitions/Description'
         description: The text of the error message that is returned if the WorkSpace cannot be rebooted.
-    description: 'Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
+    description: 'Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
   FailedRebootWorkspaceRequests:
     type: array
     items:
@@ -2492,9 +2609,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  WorkspaceId:
-    type: string
-    pattern: '^ws-[0-9a-z]{8,63}$'
   WorkspaceImageIngestionProcess:
     type: string
     enum:
@@ -2637,6 +2751,13 @@ definitions:
       - ALWAYS_ON
   RunningModeAutoStopTimeoutInMinutes:
     type: integer
+  Snapshot:
+    type: object
+    properties:
+      SnapshotTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time when the snapshot was created.
+    description: Describes a snapshot.
   StartRequest:
     type: object
     properties:
@@ -2725,6 +2846,7 @@ definitions:
       - REBOOTING
       - STARTING
       - REBUILDING
+      - RESTORING
       - MAINTENANCE
       - ADMIN_MAINTENANCE
       - TERMINATING

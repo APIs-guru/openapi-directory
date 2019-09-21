@@ -2894,7 +2894,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: 'Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.'
+      description: 'Adds tags to a Greengrass resource. Valid resources are ''Group'', ''ConnectorDefinition'', ''CoreDefinition'', ''DeviceDefinition'', ''FunctionDefinition'', ''LoggerDefinition'', ''SubscriptionDefinition'', ''ResourceDefinition'', and ''BulkDeployment''.'
       responses:
         '204':
           description: Success
@@ -3483,6 +3483,9 @@ definitions:
       IotJobId:
         $ref: '#/definitions/__string'
         description: The IoT Job Id corresponding to this update.
+      PlatformSoftwareVersion:
+        $ref: '#/definitions/__string'
+        description: The software version installed on the device or devices after the update.
   CreateSubscriptionDefinitionResponse:
     type: object
     properties:
@@ -3897,10 +3900,10 @@ definitions:
         description: Information about the group version definition.
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the group version.
+        description: The ID of the group that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID for the version of the group.
+        description: The ID of the group version.
   GetLoggerDefinitionResponse:
     type: object
     properties:
@@ -5329,8 +5332,8 @@ definitions:
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
         $ref: '#/definitions/__string'
-        description: The ID of the version.
+        description: The ID of the parent definition that the version is associated with.
       Version:
         $ref: '#/definitions/__string'
-        description: The unique ID of the version.
+        description: The ID of the version.
     description: Information about a version.
